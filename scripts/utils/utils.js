@@ -17,7 +17,7 @@
 * Utils for webclient
 */
 
-function UTILS_OpenXMLFile (Url)
+function UTILS_OpenXMLFile(Url)
 {	
 	var XML, Parser;
 
@@ -40,4 +40,21 @@ function UTILS_OpenXMLFile (Url)
 	XML.load(Url);
 
 	return(XML);
+}
+
+
+/**
+* Return content of param
+*/
+function UTILS_GetParam(XML, ParamName)
+{
+
+}
+
+/**
+* Get param name for any browser
+*/
+function UTLIS_GetNodeText(Node)
+{
+
 }
