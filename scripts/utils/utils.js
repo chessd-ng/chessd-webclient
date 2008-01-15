@@ -17,6 +17,38 @@
 * Utils for webclient
 */
 
+/**
+* Identify client web browser
+*/
+
+function UTILS_IdentifyBrowser()
+{
+	var BrowserValue;
+        var BrowserName=navigator.appName;
+
+        if (BrowserName.match("Netscape"))
+        {
+                BrowserValue = 1; //Firefox, Mozilla, Opera, etc.
+        }
+
+        else if (BrowserName.match("Microsoft Internet Explorer"))
+        {
+                BrowserValue = 0; //Explorer
+        }
+
+        else
+        {
+                alert("Seu navegador pode não funcionar corretamente nesse site");
+                BrowserValue = -1;
+        }
+
+
+	return BrowserValue;
+}
+
+/**
+* Open a XML file and return XML DOM Tree
+*/
 function UTILS_OpenXMLFile(Url)
 {	
 	var XML, Parser;
@@ -48,7 +80,18 @@ function UTILS_OpenXMLFile(Url)
 */
 function UTILS_GetParam(XML, ParamName)
 {
-
+	var Node = XML.getElementeByTagName(ParamName)[0];
+	
+	//Internet Explorer
+	if(MainData.Browser == "0")
+	{
+		return Node.text;
+	}
+	// Mozilla, firefox, galeon
+	else
+	{
+		return Node.textContent;
+	}
 }
 
 /**
@@ -56,5 +99,14 @@ function UTILS_GetParam(XML, ParamName)
 */
 function UTLIS_GetNodeText(Node)
 {
-
+	//Internet Explorer
+	if(MainData.Browser == "0")
+	{
+		return Node.text;
+	}
+	// Mozilla, firefox, galeon
+	else
+	{
+		return Node.textContent;
+	}
 }

@@ -10,4 +10,6 @@ function DATA_ReadParams()
 	MainData.Resource = UTILS_GetParam(Params, "resource");
 	MainData.Xmlns = UTILS_GetParam(Params, "xmlns");
 	MainData.Version = UTILS_GetParam(Params, "version");
+
+	MainData.Browser = UTILS_IdentifyBrowser();
 }
