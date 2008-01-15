@@ -1,0 +1,28 @@
+body {
+	padding			: 10px;
+}
+
+#RegisterDiv h1 {
+	font			: bold 22px Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 20px;
+}
+
+#RegisterDiv label {
+	font			: 12px Trebuchet MS;
+	color			: #216778;
+}
+
+#RegisterDiv input {
+	display			: block;
+	border			: 1px solid #216778;
+	color			: #216778;
+	margin-bottom	: 5px;
+	width			: 300px;
+}
+
+
+#RegisterDiv .botao {
+	margin-top		: 20px;
+	width			: 100px;
+}

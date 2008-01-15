@@ -1,0 +1,126 @@
+#LoginDiv {
+	width			: 720px;
+	height			: 265px;
+	border			: 2px solid #FFA200;
+	position		: relative;
+	top				: 80px;
+	left 			: 50%;
+	margin-left		: -390px;
+	background		: url('../images/login_box_fundo.gif') repeat-x;
+	padding			: 20px 30px;
+}
+
+#LoginDiv #TextDiv {
+	width			: 450px;
+	float			: left;
+}
+
+#LoginDiv #FormDiv {
+	position		: relative;
+	top				: 80px;
+	width			: 250px;
+	float			: right;
+	text-align		: center;
+}
+
+#LoginDiv #FormDiv span {
+	font			: bold 13px Trebuchet MS;
+	color			: #216778;
+}
+
+#LoginDiv #FormDiv label {
+	font			: 10px Trebuchet MS;
+	color			: #216778;
+	margin-left		: 2mm;
+}
+
+#LoginDiv #FormDiv input {
+	border			: 1px solid #216778;
+	font			: 11px Trebuchet MS;
+	padding			: 1px;
+}
+
+#LoginDiv #FormDiv td {
+	padding			: 3px;
+	vertical-align	: top;
+}
+
+#LoginDiv #FormDiv .checkbox {
+	margin-top		: 3mm;
+}
+
+#LoginDiv #FormDiv .entrar {
+	margin-top		: 10px;
+	margin-bottom	: 5mm;
+	background-image: url("../images/login_botao_ok.png");
+	border			: 0px;
+	width			: 30px;
+	cursor			: pointer;
+}
+
+#LoginDiv #FormDiv .entrar:hover {
+	background-image: url("../images/login_botao_ok_selec.png");
+}
+
+#LoginDiv #FormDiv .signin {
+	position		: absolute;
+	top				: -10mm;
+	left			: 23mm;
+}
+
+#LoginDiv #FormDiv .botao {
+	margin-top		: 10px;
+	padding			: 0 0 5px 0;
+	background		: url('../images/fundo_botao.png') no-repeat;
+	border			: 0px;
+	width			: 90px;
+	height			: 17px;
+	font 			: bold 12px Trebuchet MS;
+	color			: #FFF;
+	cursor			: pointer;
+}
+
+#LoginDiv #FormDiv a {
+	display			: block;
+	margin-top		: 2mm;
+	font			: bold 13px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#LoginDiv #FormDiv a:hover {
+	text-decoration	: underline;
+}
+
+#LoginDiv .error_label {
+	color			: #F00 !important;
+}
+
+#LoginDiv h3 {
+	font			: bold 13px Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 20px;
+}
+
+#LoginDiv p {
+	font			: 3mm Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 3mm;
+}
+
+#BannerLogin {
+	position		: relative;
+	left			: 50%;
+	margin-left		: -225px;
+	top			: 100px;
+}
+
+#version
+{
+	position		: absolute;
+	bottom			: 0mm;
+	right			: 1mm;
+	font			: 3mm Trebuchet MS;
+	color			: #D33300;
+	font-weight		: bold;
+}

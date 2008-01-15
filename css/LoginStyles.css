@@ -1,0 +1,36 @@
+body {
+	background			:#02CBFF url("../images/fnd_degrade.jpg") top left repeat-x fixed;
+}
+
+#LoginBoxDiv {
+    width               : 300px;
+    height              : 250px;
+    position			: relative;
+	padding				: 0px;
+	margin				: 0px auto 0px auto;
+    border              : 1px solid #CCC;
+	font				: 12px Verdana;
+	color				: #444;
+	text-align			: center;
+}
+
+#LoginBoxDiv .Title {
+	display				: block;
+	width				: 100%;
+	margin-bottom		: 30px;
+	font 				: bold 14px Verdana;
+	color				: #FFF;
+	background-color	: #66F;
+	text-align			: center;
+}
+
+#LoginBoxDiv input {
+    display             : block;
+    margin		  	 	: 0px auto 20px auto;
+	border				: 1px solid #CCC;
+}
+
+#LoginBoxDiv .ErrorLabel{
+	font				: 11px Verdana;
+	color				: #F00;
+}

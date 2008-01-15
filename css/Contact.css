@@ -1,0 +1,173 @@
+/**
+ *	LISTA DE CONTATOS
+ **/
+#ContactListDiv {
+	position		: absolute;
+	left			: 7mm;
+	top				: 25mm;
+	width			: 29.5mm;
+	height			: 90mm;
+	background-color: white;
+	border			: 2px solid #216778;
+	font			: 3mm Arial;
+	padding			: 0px 2px 0px 4px;
+}
+
+#ContactListDiv .Title {
+	display			: block;
+	position		: relative;
+	top				: -6px;
+	left			: -6px;
+	width			: 122px;
+	height			: 21px;
+	background		: url('../images/contatos_inativo.png') no-repeat;
+	font			: bold 11px Trebuchet MS;
+	color			: #FFF;
+	padding-top		: 2px;
+	text-align		: center;
+}
+
+#ContactListsDiv {
+	overflow 		: auto;
+	height			: 73mm;
+}
+
+#ContactListDiv label {
+	cursor			: pointer;
+}
+
+#ContactListDiv .Title:hover {
+	background		: url('../images/contatos_ativo.png') no-repeat;
+}
+
+#ContactListDiv .user {
+	font			: bold 12px Trebuchet MS;
+	color			: #FFA200;
+	background		: url('../images/seta_contatos.png') no-repeat 100px 7px;
+	cursor			: pointer;
+}
+
+#ContactListDiv p {
+	display			: block;
+	/*text-align		: center;*/
+	font			: 9px Trebuchet MS;
+	color			: #216778;
+}
+
+#ContactListDiv p .status {
+	font-size		: 7px;
+	line-height		: 5px;
+	padding-bottom	: 5px;
+}
+
+#ContactListDiv .ap_rt {
+	height			: 18px;
+	margin-top		: 3px;
+	padding-top		: 2px;
+	background		: url('../images/apelido_rating_ativo.png') no-repeat;
+}
+
+#ContactListDiv p .apelido {
+	margin-left		: 13px;
+	font			: 9px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#ContactListDiv p .apelido_selected {
+	margin-left		: 13px;
+	font			: bold 10px Trebuchet MS;
+	color			: #FFA200;
+	cursor			: pointer;
+}
+#ContactListDiv p .rating {
+	margin-left		: 13px;
+	font			: 9px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#ContactListDiv p .rating_selected {
+	margin-left		: 13px;
+	font			: bold 10px Trebuchet MS;
+	color			: #FFA200;
+	cursor			: pointer;
+}
+
+#ContactListDiv .busca_usuario,
+#ContactListDiv .criar_grupos {
+	cursor			: pointer;
+}
+
+#ContactListDiv .criar_grupos_disable {
+	color:			#AAAAAA;
+	cursor: 		default;
+	font-style:	italic;
+}
+
+#ContactListDiv label {
+	display			: block;
+	margin-top		: 10px;
+	margin-bottom	: 5px;
+	font			: bold 9px Trebuchet MS;
+	color			: #216778;
+}
+
+#ContactListDiv ul {
+	max-height		: 250px;
+	overflow		: auto;
+	padding-bottom	: 5px;
+	border-bottom	: 1px solid #FFA200;
+}
+
+#ContactListDiv ul .sublist{
+	max-height		: 250px;
+	overflow		: hidden;
+	padding-bottom	: 0px;
+	border-bottom	: 0px;
+}
+
+#ContactListDiv  li {
+	height			: 3.6mm;
+	list-style		: none;
+	padding-left	: 15px;
+	cursor			: pointer;
+	font			: 2.4mm Trebuchet MS;
+	color			: #000;
+}
+
+#ContactListDiv  li span {
+	margin-left			: 5px;
+	position			: absolute;
+	/*left				: 23.7mm;*/
+	right				: 1mm;
+}
+
+#ContactListDiv  .disponivel {
+	background		: url('../images/user_disponivel.png') no-repeat;
+}
+
+#ContactListDiv  .ocupado {
+	background		: url('../images/user_ocupado.png') no-repeat;
+}
+
+#ContactListDiv  .jogando {
+	background		: url('../images/user_jogando.png') no-repeat;
+}
+
+#ContactListDiv  .indisponivel {
+	background		: url('../images/user_indisponivel.png') no-repeat;
+}
+
+#ContactListDiv  .ausente {
+	background		: url('../images/user_ausente.png') no-repeat;
+}
+
+#ContactListDiv  .offline {
+	background		: url('../images/user_offline.png') no-repeat;
+}
+
+#ContactListDiv  .observando {
+	background		: url('../images/user_observando.png') no-repeat;
+}
+

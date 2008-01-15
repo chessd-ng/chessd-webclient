@@ -1,0 +1,160 @@
+/**
+* Menu Salas
+*/
+#RoomsPopDownDiv,
+#GameRoomsPopDownDiv {
+	position		: absolute;
+	left			: 50%;
+	margin-left		: 44.2mm;
+	top				: 14.8mm;
+	width			: 162px;
+	height			: 150px;
+	border			: 2px solid #216778;
+	border-top		: 0px;
+	background		: #FFF;
+	z-index			: 5;
+	overflow		: auto;
+	/* Arredondar borda -somente no mozilla- */
+	-moz-border-radius-bottomleft:0.75em;
+	-moz-border-radius-bottomright:0.75em;
+}
+
+#GameRoomsPopDownDiv {
+	margin-left		: -90mm;
+}
+
+#RoomsPopDownDiv p,
+#GameRoomsPopDownDiv p {
+	font			: bold 11px Trebuchet MS;
+	color			: #0F5C81;
+	margin			: 5px 3px 0px 10px;
+	cursor 			: pointer;
+}
+
+#RoomsPopDownDiv p:hover,
+#GameRoomsPopDownDiv p:hover {
+	background-color: #EAF5F4;
+	color			: #FFA200;
+}
+
+#RoomsPopDownDiv .nova_sala {
+	margin-top		: 10px;
+	margin-bottom	: 10px;
+	font			: italic 11px Trebuchet MS;
+}
+
+/**
+* Menu Status do usuario
+*/
+#UserStatusPopDownDiv {
+	position		: absolute;
+	left			: 8.5mm;
+	top				: 36mm;
+	width			: 26.5mm;
+	height			: 28mm;
+	border			: 1px solid #0F5C81;
+	border-top		: 0px;
+	background		: #FFF;
+	z-index			: 5;
+	overflow		: auto;
+	/* Arredondar borda -somente no mozilla- */
+	-moz-border-radius-bottomleft:0.75em;
+	-moz-border-radius-bottomright:0.75em;
+}
+
+#UserStatusPopDownDiv p {
+	font			: 2.5mm Trebuchet MS;
+	color			: #0F5C81;
+	margin			: 0mm 1mm;
+	padding			: 1mm 0;
+	cursor 			: pointer;
+}
+
+#UserStatusPopDownDiv p:hover {
+	background-color: #EAF5F4;
+	color			: #FFA200;
+}
+
+#UserStatusPopDownDiv .opcao {
+	border-top		: 1px solid #FFA200;
+}
+
+#UserStatusPopDownDiv .disponivel {
+	background		: url('../images/status_online.png') no-repeat 0mm 1mm;
+	padding-left	: 4mm;
+}
+
+#UserStatusPopDownDiv .ocupado {
+	background		: url('../images/status_ocupado.png') no-repeat 0mm 1mm;
+	padding-left	: 4mm;
+}
+
+#UserStatusPopDownDiv .indisponivel {
+	background		: url('../images/status_indisponivel.png') no-repeat 0mm 1mm;
+	padding-left	: 4mm;
+}
+
+#UserStatusPopDownDiv .ausente {
+	background		: url('../images/status_ausente.png') no-repeat 0mm 1mm;
+	padding-left	: 4mm;
+}
+
+
+/**
+* Menu do usuario
+* e PopDown dos grupos de contato 
+*/
+#GroupPopDownDiv {
+	position		: absolute;
+	width			: 32mm;
+	height			: 9mm;
+	border			: 1px solid #0F5C81;
+	background		: #FFF;
+	z-index			: 5;
+	overflow		: auto;
+	padding			: 5px 0px 0px 2px;
+}
+
+
+#UserPopDownDiv,
+#UserRoomPopDownDiv {
+	position		: absolute;
+	width			: 32mm;
+	height			: 21.5mm;
+	border			: 1px solid #0F5C81;
+	background		: #FFF;
+	z-index			: 5;
+	overflow		: auto;
+	padding			: 5px 0px 0px 2px;
+}
+
+#UserPopDownDiv p, #GroupPopDownDiv p,
+#UserRoomPopDownDiv p {
+	font			: 2.3mm Trebuchet MS;
+	color			: #0F5C81;
+	margin-bottom	: 5px;
+	cursor			: pointer;
+}
+
+#UserPopDownDiv p:hover, #GroupPopDownDiv p:hover,
+#UserRoomPopDownDiv p:hover {
+	background-color: #EAF5F4;
+}
+
+#UserPopDownDiv .user_disable, #GroupPopDownDiv .user_disable,
+#UserRoomPopDownDiv .user_disable {
+	color			: #AAA;
+	font			: italic 9px Trebuchet MS;
+	cursor			: default;
+}
+
+#UserPopDownDiv .user_disable:hover, #GroupPopDownDiv .user_disable:hover,
+#UserRoomPopDownDiv .user_disable:hover {
+	background-color: #FFF;
+}
+
+#UserRoomPopDownDiv {
+	height			: 13mm;
+	width			: 30mm;
+}
+

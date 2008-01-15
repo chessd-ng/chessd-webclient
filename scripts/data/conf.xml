@@ -1,0 +1,10 @@
+<conf>
+	<general>
+		<version>Alpha 0.5</version>
+	</general>
+	<jabber>
+		<host>shiva</host>
+		<resource>ChessD</resource>
+		<xmlns>http://c3sl.ufpr.br</xmlns>
+	</jabber>
+</conf>

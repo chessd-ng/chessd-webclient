@@ -1,0 +1,196 @@
+/**
+ * TABULEIRO
+ **/
+#BoardDiv {
+	position		: absolute;
+	top				: 100px;
+	left			: 50%;
+	margin-left		: -340px;
+	width			: 532px;
+	height			: 380px;
+}
+
+#BoardDiv .fechar {
+	display			: block;
+	width			: 35px;
+	height			: 13px;
+	margin-left		: 497px;
+	background		: url('../images/fechar.png') no-repeat right 0px;
+	cursor			: pointer;
+}
+
+#BoardDiv #Tboard {
+	float			: left;
+	border			: 12px solid #216778;
+	border-right		: 0px;
+	/* Arredondar borda -somente no mozilla- */
+	-moz-border-radius-topleft:0.75em;
+	-moz-border-radius-bottomleft:0.75em;
+	height			: 304px;
+	width			: 304px;
+}
+
+#BoardDiv #Board {
+	position		: absolute;
+	height			: 304px;
+	width			: 304px;
+}
+
+#BoardDiv #Tboard td {
+	text-align		: center;
+	height			: 38px;
+	width			: 38px;
+}
+
+#BoardDiv #Tboard #Board div.casa_preta {
+	background-image	: url('../images/quadrado_preto.png');
+}
+
+#BoardDiv #Tboard #Board div.casa_branca {
+	background-image	: url('../images/quadrado_branco.png');
+}
+
+#BoardDiv #Tboard #Board div.casa_selec {
+	background-image	: url('../images/quadrado_selec.png');
+}
+
+#BoardDiv #Tboard #Board div:hover {
+	background-image	: url('../images/quadrado_selec.png');
+}
+
+
+/**
+* ESTILOS PARA OS INDICES DO TABULEIRO
+*/
+#BoardDiv .IndexV {
+	position		: absolute;
+	top				: 23px;
+	left			: 50%;
+	margin-left		: -285px;
+}
+ 
+#BoardDiv .IndexVItem {
+	list-style		: none;
+	font			: 18px Trebuchet MS;
+	color			: #216778;
+	width			: 15px;
+	height			: 38px;
+	line-height		: 38px;
+}
+
+
+#BoardDiv .IndexH {
+	position		: absolute;
+	top				: 345px;
+	left			: 25px;
+}
+
+#BoardDiv .IndexHItem {
+	list-style		: none;
+	display			: -moz-inline-box;
+	font			: 18px Trebuchet MS;
+	color			: #216778;
+	width			: 38px;
+	height			: 38px;
+	line-height		: 38px;
+}
+
+
+
+#BoardDiv #GameInfoDiv {
+	float			: right;
+	width			: 192px;
+	height			: 340px;
+	background-color: #FFF;
+	border			: 12px solid #216778;
+	/* Arredondar borda -somente no mozilla- */
+	-moz-border-radius-bottomleft:0.75em;
+	-moz-border-radius-bottomright:0.75em;
+}
+
+#BoardDiv #GameInfoDiv #UserWhite,
+#BoardDiv #GameInfoDiv #UserBlack {
+	width			: 94px;
+	height			: 10px;
+	padding-top		: 50px;
+	text-align		: center;
+	float			: left;
+	margin-bottom	: 10px;
+}
+
+#BoardDiv #GameInfoDiv span {
+	font			: bold 15px Trebuchet MS;
+	color			: #216778;
+	padding			: 0.5mm;
+}
+
+#BoardDiv #GameInfoDiv #UserWhite {
+	background		: url('../images/pecas/peao_branco.png') no-repeat center center;
+}
+
+#BoardDiv #GameInfoDiv #UserBlack {
+	float			: right;
+	background		: url('../images/pecas/peao_preto.png') no-repeat center center;
+}
+
+#BoardDiv #GameInfoDiv #WhiteTime,
+#BoardDiv #GameInfoDiv #BlackTime,
+#BoardDiv #GameInfoDiv .versus {
+	display			: -moz-inline-box;
+}
+
+#BoardDiv #GameInfoDiv #WhiteTime,
+#BoardDiv #GameInfoDiv #BlackTime {
+	border			: 2px solid #FFA200;
+	padding			: 2px 10px;
+	margin-bottom	: 10px;
+	position		: relative;
+	top				: -10px;
+}
+
+#BoardDiv #GameInfoDiv #WhiteTime {
+	margin-left		: 20px;
+}
+
+#BoardDiv #GameInfoDiv .versus {
+	font			: bold 11px Trebuchet MS;
+	margin			: 0px 10px 30px 10px;
+	padding			: 13px 0px 0px 0px;
+}
+
+#BoardDiv #GameInfoDiv p {
+	font			: italic 11px Trebuchet MS;
+	margin-left		: 20px;
+	margin-top		: 3px;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#BoardDiv #GameInfoDiv .promo_peao,
+#BoardDiv #GameInfoDiv .historico_jogadas {
+	font 			: bold 10px Trebuchet MS;
+}
+
+#BoardDiv #GameInfoDiv .historico_jogadas {
+	margin-left		: 48px;
+}
+
+#BoardDiv #GameInfoDiv .promo_peao_select {
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+	margin-left		: 20px;
+	margin-top		: 5px;
+	width			: 80px;
+	border			: 1px solid;
+}
+
+#BoardDiv #GameInfoDiv .pgn_select {
+	font			: 10px Trebuchet MS;
+	color			: #216778;
+	position		: relative;
+	width			: 80px;
+	left			: 50%;
+	margin-left		: -40px;
+	margin-bottom	: 10px;
+	border			: 1px solid;
+}

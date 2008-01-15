@@ -1,0 +1,247 @@
+/**
+ *	SALAS
+ **/
+#Room1Div, 
+#Room2Div,
+#Room3Div,
+#Room4Div,
+#Room5Div {
+	position		: absolute;
+	right			: 120px;
+	top				: 115px;
+	width			: 166px;
+	height			: 350px;
+	background-color: white;
+	border			: 2px solid #216778;
+	font			: 12px Arial;
+	padding			: 0px;
+}
+
+#Room1Div .Title,
+#Room2Div .Title,
+#Room3Div .Title,
+#Room4Div .Title,
+#Room5Div .Title {
+	display			: block;
+	position		: relative;
+	top				: -6px;
+	left			: -2px;
+	width			: 170px;
+	height			: 16px;
+	background		: url('../images/sala_inativa.png') no-repeat;
+	font			: bold 11px Trebuchet MS;
+	padding-left	: 15px;
+	color			: #FFF;
+	cursor			: pointer;
+}
+
+#Room1Div .Title:hover,
+#Room2Div .Title:hover,
+#Room3Div .Title:hover,
+#Room4Div .Title:hover,
+#Room5Div .Title:hover {
+	background		: url('../images/sala_ativa.png') no-repeat;
+}
+
+
+#Room1Div .Close,
+#Room2Div .Close,
+#Room3Div .Close,
+#Room4Div .Close,
+#Room5Div .Close {
+	position		: relative;
+	display			: block;
+	top				: -17px;
+	left			: 150px;
+	width			: 7px;
+	height			: 8px;
+	background		: url('../images/fechar_sala.png') no-repeat;
+	cursor			: pointer;
+}
+
+#Room1Div .RoomList,
+#Room2Div .RoomList,
+#Room3Div .RoomList,
+#Room4Div .RoomList,
+#Room5Div .RoomList {
+	overflow		: auto;
+	border-bottom	: 2px solid #216778;
+	padding			: 0px 2px 0px 4px;
+	height			: 300px;
+}
+
+#Room1Div input,
+#Room2Div input,
+#Room3Div input,
+#Room4Div input,
+#Room5Div input {
+	border			: 0px;
+	width			: 100%;
+	padding-top		: 3px;
+	height			: 20px;
+	font 			: 12px Trebuchet MS;
+}
+
+#Room1Div .RoomList li,
+#Room2Div .RoomList li,
+#Room3Div .RoomList li,
+#Room4Div .RoomList li,
+#Room5Div .RoomList li {
+	font			: 10px Trebuchet MS;
+	color			: #0F5C81;
+	margin-bottom	: 3px;
+}
+
+#Room1Div .RoomList li:hover,
+#Room2Div .RoomList li:hover,
+#Room3Div .RoomList li:hover,
+#Room4Div .RoomList li:hover,
+#Room5Div .RoomList li:hover {
+	background-color: #EAF5F4;
+}
+
+/**
+ *	USUARIOS NA SALA
+ **/
+#Room1UserDiv,
+#Room2UserDiv,
+#Room3UserDiv,
+#Room4UserDiv,
+#Room5UserDiv {
+	position		: relative;
+	left			: 166px;
+	top				: -338px;
+	width			: 105px;
+	height			: 260px;
+	background-color: white;
+	padding-left	: 4px;
+	border			: 2px solid #216778;
+	/* Arredondar borda -somente no mozilla- */
+	-moz-border-radius-topright:0.75em;
+	-moz-border-radius-bottomright:0.75em;
+}
+
+#Room1UserDiv .ap_rt,
+#Room2UserDiv .ap_rt,
+#Room3UserDiv .ap_rt,
+#Room4UserDiv .ap_rt,
+#Room5UserDiv .ap_rt {
+	height			: 16px;
+	margin-top		: 3px;
+	background		: url('../images/apelido_rating_ativo.png') no-repeat;
+}
+
+#Room1UserDiv p .apelido,
+#Room2UserDiv p .apelido,
+#Room3UserDiv p .apelido,
+#Room4UserDiv p .apelido,
+#Room5UserDiv p .apelido {
+	margin-left		: 10px;
+	font			: 9px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#Room1UserDiv p .apelido_selected,
+#Room2UserDiv p .apelido_selected,
+#Room3UserDiv p .apelido_selected,
+#Room4UserDiv p .apelido_selected,
+#Room5UserDiv p .apelido_selected {
+	margin-left		: 10px;
+	font			: bold 10px Trebuchet MS;
+	color			: #FFA200;
+	cursor			: pointer;
+}
+
+#Room1UserDiv p .rating,
+#Room2UserDiv p .rating,
+#Room3UserDiv p .rating,
+#Room4UserDiv p .rating,
+#Room5UserDiv p .rating {
+	margin-left		: 10px;
+	font			: 9px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+}
+
+#Room1UserDiv p .rating_selected,
+#Room2UserDiv p .rating_selected,
+#Room3UserDiv p .rating_selected,
+#Room4UserDiv p .rating_selected,
+#Room5UserDiv p .rating_selected {
+	margin-left		: 10px;
+	font			: bold 10px Trebuchet MS;
+	color			: #FFA200;
+	cursor			: pointer;
+}
+#Room1UserDiv ul,
+#Room2UserDiv ul,
+#Room3UserDiv ul,
+#Room4UserDiv ul,
+#Room5UserDiv ul {
+	margin-top		: 5px;
+	padding			: 2px;
+	height			: 225px;
+	overflow		: auto;
+}
+
+#Room1UserDiv li,
+#Room2UserDiv li,
+#Room3UserDiv li,
+#Room4UserDiv li,
+#Room5UserDiv li{
+	height			: 14px;
+	list-style		: none;
+	padding-left	: 15px;
+	cursor			: pointer;
+	font			: 9px Trebuchet MS;
+	color			: #000;
+}
+
+#Room1UserDiv .disponivel,
+#Room2UserDiv .disponivel,
+#Room3UserDiv .disponivel,
+#Room4UserDiv .disponivel,
+#Room5UserDiv .disponivel {
+	background		: url('../images/user_disponivel.png') no-repeat;
+}
+
+#Room1UserDiv  .ocupado,
+#Room2UserDiv  .ocupado,
+#Room3UserDiv  .ocupado,
+#Room4UserDiv  .ocupado,
+#Room5UserDiv  .ocupado {
+	background		: url('../images/user_ocupado.png') no-repeat;
+}
+
+#Room1UserDiv  .jogando,
+#Room2UserDiv  .jogando,
+#Room3UserDiv  .jogando,
+#Room4UserDiv  .jogando,
+#Room5UserDiv  .jogando {
+	background		: url('../images/user_jogando.png') no-repeat;
+}
+
+#Room1UserDiv  .indisponivel,
+#Room2UserDiv  .indisponivel,
+#Room3UserDiv  .indisponivel,
+#Room4UserDiv  .indisponivel,
+#Room5UserDiv  .indisponivel {
+	background		: url('../images/user_indisponivel.png') no-repeat;
+}
+
+#Room1UserDiv  .ausente,
+#Room2UserDiv  .ausente,
+#Room3UserDiv  .ausente,
+#Room4UserDiv  .ausente,
+#Room5UserDiv  .ausente {
+	background		: url('../images/user_ausente.png') no-repeat;
+}
+
+#Room1UserDiv  .observando,
+#Room2UserDiv  .observando,
+#Room3UserDiv  .observando,
+#Room4UserDiv  .observando,
+#Room5UserDiv  .observando {
+	background		: url('../images/user_observando.png') no-repeat;
+}
