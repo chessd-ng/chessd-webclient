@@ -80,7 +80,7 @@ function UTILS_OpenXMLFile(Url)
 */
 function UTILS_GetParam(XML, ParamName)
 {
-	var Node = XML.getElementeByTagName(ParamName)[0];
+	var Node = XML.getElementsByTagName(ParamName)[0];
 	
 	//Internet Explorer
 	if(MainData.Browser == "0")
