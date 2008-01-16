@@ -11,6 +11,8 @@ function DATA_ReadParams()
 	MainData.Xmlns = UTILS_GetTag(Params, "xmlns");
 	MainData.Version = UTILS_GetTag(Params, "version");
 	MainData.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
+	MainData.RID = 0;
+	MainData.SID = -1;
 
 	/*
 	* State in jabber server

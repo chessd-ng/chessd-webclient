@@ -20,6 +20,7 @@
 * with a Jabber Server
 */
 
+var http_request;
 
 /**
 * Start connection to Jabber server
@@ -27,22 +28,25 @@
 * @return none
 * @public
 */
-function CONNECTION_Connect()
+function CONNECTION_ConnectJabber()
 {
 	switch (MainData.ConnectionStatus)
 	{
 		// Start connection
 		case (1):
-			CONNECTION_SendJabber()
+			CONNECTION_SendJabber(MESSAGE_StartConnection());
 			break;
 
 		case (2):
+			CONNECTION_SendJabber(MESSAGE_SendUsername());
 			break;
 
 		case (3):
+			CONNECTION_SendJabber(MESSAGE_SendPasswd());
 			break;
 
 		case (4):
+			CONNECTION_SendJabber(MESSAGE_OfflineUsers());
 			break;
 
 		case (5):
@@ -71,9 +75,12 @@ function CONNECTION_SendJabber(Post)
 	else if (window.ActiveXObject) 
 	{
 		// Internet Explorer
-		try{
+		try
+		{
 			http_request = new ActiveXObject("Microsoft.XMLHTTP");
-		} catch(e) {
+		}
+		catch(e)
+		{
 			http_request = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 	}
@@ -100,4 +107,80 @@ function CONNECTION_SendJabber(Post)
 
 	// Save last post in Data Struct
 	MainData.LastXML = Post;
+
+	// Increment RID
+	MainData.RID++;
+}
+
+
+/**
+* Receive Connection messages and make all steps to connect user
+*
+* @return none
+* @public
+*/
+function JABBER_ReceiveConnection()
+{
+	var XML;
+
+	if (http_request.readyState == 4 )
+	{
+		if(http_request.status == 200)
+		{
+			XML = http_request.responseXML;
+		
+			switch (MainData.ConnectionStatus)
+			{
+				 case (1):
+					// Get SID from first message
+					try
+					{
+						MainData.SID = XML.getElementsByTagName("body")[0].getAttribute("sid");
+					}
+					catch(e)
+					{
+						LOGIN_LoginFailed();
+						return;
+					}
+					MainData.ConnectionStatus++;
+					CONNECTION_ConnectJabber();
+					break;
+
+			    case(2):
+					MainData.ConnectionStatus++;
+					CONNECTION_ConnectJabber();
+					break;
+
+				case(3):
+					// Check errors in username and passwd
+					Error = XML.getElementsByTagName("error");
+					if (Error.length > 0)
+						PARSER_LoginFailed();
+					else
+					{
+						MainData.ConnectionStatus++;
+						CONNECTION_ConnectJabber();
+					}
+					break;
+			
+			    case(4):
+					MainData.ConnectionStatus++;
+					CONNECTION_ConnectJabber();
+					PARSER_ReceiveXml(XML);
+				break;
+
+				/*
+			    case(5):
+				   	PARSER_ReceiveXml(XmlDoc);
+				    	JABBER_ConnectionStep7();
+				break;
+				*/
+			}
+		}
+		else if (http_request.status == 503)
+		{
+			//PARSER_LoginFailed(2);
+			alert("nham");
+		}
+	}
 }
