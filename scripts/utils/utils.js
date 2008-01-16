@@ -24,7 +24,7 @@
 function UTILS_IdentifyBrowser()
 {
 	var BrowserValue;
-        var BrowserName=navigator.appName;
+	var BrowserName=navigator.appName;
 
         if (BrowserName.match("Netscape"))
         {
@@ -81,9 +81,8 @@ function UTILS_OpenXMLFile(Url)
 function UTILS_GetParam(XML, ParamName)
 {
 	var Node = XML.getElementsByTagName(ParamName)[0];
-	
 	//Internet Explorer
-	if(MainData.Browser == "0")
+	if (MainData.Browser == "0")
 	{
 		return Node.text;
 	}
@@ -100,7 +99,7 @@ function UTILS_GetParam(XML, ParamName)
 function UTLIS_GetNodeText(Node)
 {
 	//Internet Explorer
-	if(MainData.Browser == "0")
+	if (MainData.Browser == "0")
 	{
 		return Node.text;
 	}
