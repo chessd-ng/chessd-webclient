@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <conf>
 	<general>
-		<version>Alpha 1.0.0.0.1</version>
+		<version>Alpha 0.5</version>
+		<cookie-validity>10</cookie-validity>
 	</general>
 	<jabber>
 		<host>shiva</host>
