@@ -17,6 +17,11 @@
 * Utils for webclient
 */
 
+
+/**********************************
+ * FUNCTIONS - XML SEARCH
+ ************************************/
+
 /**
 * Identify client web browser
 */
@@ -26,22 +31,23 @@ function UTILS_IdentifyBrowser()
 	var BrowserValue;
 	var BrowserName=navigator.appName;
 
-        if (BrowserName.match("Netscape"))
-        {
-                BrowserValue = 1; //Firefox, Mozilla, Opera, etc.
-        }
 
-        else if (BrowserName.match("Microsoft Internet Explorer"))
-        {
-                BrowserValue = 0; //Explorer
-        }
-
-        else
-        {
-                alert("Seu navegador pode não funcionar corretamente nesse site");
-                BrowserValue = -1;
-        }
-
+	// Firefox, Mozilla, Opera, etc.
+	if (BrowserName.match("Netscape"))
+	{
+		BrowserValue = 1;
+	}
+	// Explorer
+	else if (BrowserName.match("Microsoft Internet Explorer"))
+	{
+		BrowserValue = 0;
+	}
+	// Other
+	else
+	{
+		alert("Seu navegador pode não funcionar corretamente nesse site");
+		BrowserValue = -1;
+	}
 
 	return BrowserValue;
 }
@@ -78,11 +84,40 @@ function UTILS_OpenXMLFile(Url)
 /**
 * Return content of param
 */
-function UTILS_GetParam(XML, ParamName)
+function UTILS_GetTag(XML, TagName)
 {
-	var Node = XML.getElementsByTagName(ParamName)[0];
+	var Node = XML.getElementsByTagName(TagName);
 
-	//Internet Explorer
+	// If dont find any tag
+	if (Node == null)
+	{
+		return null;
+	}
+	// Return only first match
+	else
+	{
+		Node = Node[0];
+	}
+
+	return UTILS_GetNodeText(Node);
+}
+
+
+/**
+* Get Text for internacionalization
+*/
+function UTILS_GetText(TagName)
+{
+	return UTILS_GetTag(MainData.GetText, TagName);
+}
+
+
+/**
+* Get param name for any browser
+*/
+function UTILS_GetNodeText(Node)
+{
+	// Internet Explorer
 	if (MainData.Browser == "0")
 	{
 		return Node.text;
@@ -94,19 +129,77 @@ function UTILS_GetParam(XML, ParamName)
 	}
 }
 
-/**
-* Get param name for any browser
-*/
-function UTLIS_GetNodeText(Node)
+
+/**********************************
+ * FUNCTIONS - ELEMENT MANIPULATION
+ ************************************/
+
+function UTILS_CreateElement(Element, Id, ClassName, Inner)
 {
-	//Internet Explorer
-	if (MainData.Browser == "0")
+	try
 	{
-		return Node.text;
+		var Node = document.createElement(Element);
 	}
-	// Mozilla, firefox, galeon
-	else
+	catch(e)
 	{
-		return Node.textContent;
+		return null
 	}
+
+	if (Id != null)
+		Node.id = Id;
+
+	if (ClassName != null)
+		Node.className = ClassName;
+
+	if (Inner != null)
+		Node.innerHTML = Inner;
+
+	return Node;
+}
+
+
+/**********************************
+ * FUNCTIONS - COOKIE MANIPULATION
+ ************************************/
+
+/**
+* Create cookies
+*/
+function UTILS_CreateCookie(CookieName,CookieValue,Days)
+{
+	var Expires, Data;
+
+	if (Days)
+	{
+		Data = new Date();
+		Data.setTime(Data.getTime()+(Days*24*60*60*1000));
+		Expires = "; expires="+Data.toGMTString();
+	}
+	else 
+		Expires = "";
+
+	document.cookie = CookieName+"="+CookieValue+Expires;
+}
+
+/**
+* Read cookies
+*/
+function UTILS_ReadCookie(CookieName)
+{
+	var Cookies = document.cookie.split("; ");
+
+	for (var i=0; i<Cookies.length; i++)
+	{
+		if (Cookies[i].search(CookieName) != -1)
+			return Cookies[i].replace(CookieName+"=","");
+	}
+	return "";
+}
+
+/**
+* Erase cookies
+*/
+function UTILS_DeleteCookie(CookieName)
+{
+	UTILS_CreateCookie(CookieName,"",-1);
 }
