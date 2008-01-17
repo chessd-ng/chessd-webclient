@@ -118,7 +118,7 @@ function UTILS_GetText(TagName)
 function UTILS_GetNodeText(Node)
 {
 	// Internet Explorer
-	if (MainData.Browser == "0")
+	if (Node.text)
 	{
 		return Node.text;
 	}

@@ -19,6 +19,7 @@
 * Shows login screen to user
 */
 
+var MainData;
 INTERFACE_StartLogin();
 
 
@@ -40,8 +41,8 @@ function INTERFACE_StartLogin()
 	var Br = document.createElement('br');
 
 
-	// Read xml config files
-	DATA_ReadParams();
+	// Read xml config files and starting data structure
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/language.xml");
 
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
