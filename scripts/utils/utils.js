@@ -117,6 +117,9 @@ function UTILS_GetText(TagName)
 */
 function UTILS_GetNodeText(Node)
 {
+	if (!Node)
+		return null;
+
 	// Internet Explorer
 	if (Node.text)
 	{

@@ -10,6 +10,8 @@
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
 */
 
 
@@ -38,7 +40,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
-	this.RID = 0;
+	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;
 
 	/**
@@ -49,6 +51,7 @@ function DATA(ConfFile, LangFile)
 	this.RoomList = new Array();
 
 	this.GetText = UTILS_OpenXMLFile(LangFile);
+	this.Const = DATA_SetConsts();
 }
 
 // Adding methods
