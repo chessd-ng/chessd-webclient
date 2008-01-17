@@ -203,3 +203,35 @@ function UTILS_DeleteCookie(CookieName)
 {
 	UTILS_CreateCookie(CookieName,"",-1);
 }
+
+/**********************************
+ * FUNCTIONS - Event Listener
+ ************************************/
+
+/**
+* Add a Element event listener 
+* SRC = http://snipplr.com/view/561/add-event-listener/
+*/
+
+// Cross-browser implementation of Element.addEventListener()
+function UTILS_AddListener(Element, Type, Expression, Bubbling)
+{
+	Bubbling = Bubbling || false;
+	
+	if(window.addEventListener) // Standard
+	{
+		Element.addEventListener(Type, Expression, Bubbling);
+		return true;
+	}
+	else if(window.attachEvent) // IE
+	{
+		Element.attachEvent('on' + Type, Expression);
+		Element.cancelBubble = Bubbling;
+		return true;
+	}
+	else
+	{	
+		return false;
+	}
+}
+
