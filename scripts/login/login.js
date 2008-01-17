@@ -28,6 +28,13 @@
 */
 function LOGIN_Login(Username, Passwd, RememberPass)
 {
+	// Pre-validation
+	if (!UTILS_ValidateUsername(Username))
+	{
+		alert ("Invalid username");
+		return;
+	}
+
 	// Store user infomations 
 	MainData.Username = Username;
 	MainData.Password = Passwd;

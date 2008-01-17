@@ -203,3 +203,22 @@ function UTILS_DeleteCookie(CookieName)
 {
 	UTILS_CreateCookie(CookieName,"",-1);
 }
+
+/**********************************
+ * FUNCTIONS - VALIDATION
+ ************************************/
+
+/**
+* Validate username
+*/
+function UTILS_ValidateUsername(Username)
+{
+	if (Username.match(/[^0-9a-z-_.]/))
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
