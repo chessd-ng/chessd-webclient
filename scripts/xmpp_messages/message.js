@@ -120,7 +120,7 @@ function MESSAGE_OfflineUsers()
 {
 	var XMPP;
 
-   	XMPP  = "<iq type='get' id='GetOffline'>";
+   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);

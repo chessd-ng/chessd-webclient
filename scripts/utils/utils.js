@@ -117,8 +117,11 @@ function UTILS_GetText(TagName)
 */
 function UTILS_GetNodeText(Node)
 {
+	if (!Node)
+		return null;
+
 	// Internet Explorer
-	if (MainData.Browser == "0")
+	if (Node.text)
 	{
 		return Node.text;
 	}
@@ -205,33 +208,20 @@ function UTILS_DeleteCookie(CookieName)
 }
 
 /**********************************
- * FUNCTIONS - Event Listener
+ * FUNCTIONS - VALIDATION
  ************************************/
 
 /**
-* Add a Element event listener 
-* SRC = http://snipplr.com/view/561/add-event-listener/
+* Validate username
 */
-
-// Cross-browser implementation of Element.addEventListener()
-function UTILS_AddListener(Element, Type, Expression, Bubbling)
+function UTILS_ValidateUsername(Username)
 {
-	Bubbling = Bubbling || false;
-	
-	if(window.addEventListener) // Standard
+	if (Username.match(/[^0-9a-z-_.]/))
 	{
-		Element.addEventListener(Type, Expression, Bubbling);
-		return true;
-	}
-	else if(window.attachEvent) // IE
-	{
-		Element.attachEvent('on' + Type, Expression);
-		Element.cancelBubble = Bubbling;
-		return true;
-	}
-	else
-	{	
 		return false;
 	}
+	else
+	{
+		return true;
+	}
 }
-

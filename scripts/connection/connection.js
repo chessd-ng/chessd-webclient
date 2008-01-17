@@ -94,12 +94,12 @@ function CONNECTION_SendJabber(Post)
 	// Normal messages
 	if (MainData.ConnectionStatus == 0)
 	{
-		http_request.onreadystatechange = JABBER_ReceiveXml;
+		http_request.onreadystatechange = CONNECTION_ReceiveXml;
 	}
 	// Conection messages
 	else
 	{
-		http_request.onreadystatechange = JABBER_ReceiveConnection;
+		http_request.onreadystatechange = CONNECTION_ReceiveConnection;
 	}
 
 	// Send request to server
@@ -119,7 +119,7 @@ function CONNECTION_SendJabber(Post)
 * @return none
 * @public
 */
-function JABBER_ReceiveConnection()
+function CONNECTION_ReceiveConnection()
 {
 	var XML;
 
@@ -166,13 +166,13 @@ function JABBER_ReceiveConnection()
 			    case(4):
 					MainData.ConnectionStatus++;
 					CONNECTION_ConnectJabber();
-					PARSER_ReceiveXml(XML);
+					PARSER_ParseXml(XML);
 				break;
 
 				/*
 			    case(5):
 				   	PARSER_ReceiveXml(XmlDoc);
-				    	JABBER_ConnectionStep7();
+				    	CONNECTION_ConnectionStep7();
 				break;
 				*/
 			}
