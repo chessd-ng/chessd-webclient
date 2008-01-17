@@ -27,16 +27,16 @@ function PARSER_ParseIq(XML)
 		case "result":
 			switch (ID)
 			{
+				// Receive user list
+				case MainData.Const.IQ_ID_GetUserList:
+					CONTACT_HandleUserList(XML);
+					break;
+					
 				/*
 				case IQ_ID_GetRooms:
 					ROOM_ParseRooms(XML);
 					break;
 
-				//Recebe a lista de usuarios offline
-				case IQ_ID_Offline:
-					CONTACT_HandleOfflineUsers(XML);
-					break;
-					
 				case IQ_ID_Rating:
 					CONTACT_HandleRating(XML);
 					break;
