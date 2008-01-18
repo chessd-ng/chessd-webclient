@@ -34,6 +34,7 @@ function DATA(ConfFile, LangFile)
 	* > 1 -> Connecting
 	*/
 	this.ConnectionStatus = 1;
+	this.HttpRequest = null;
 	this.Browser = UTILS_IdentifyBrowser();
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
@@ -58,6 +59,14 @@ function DATA(ConfFile, LangFile)
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
+
+DATA.prototype.NewGroup = DATA_NewGroup;
+DATA.prototype.FindGroup = DATA_FindGroup;
+
+
+/**********************************
+ * METHODS - USER LIST
+ ************************************/
 
 /**
 * Add user to user list
@@ -111,4 +120,41 @@ function DATA_FindUser(Username)
 			return this.UserList[i];
 	}
 	return null;
+}
+
+
+/**********************************
+ * METHODS - GROUP LIST
+ ************************************/
+
+/**
+* Find group in group list
+*/
+function DATA_FindGroup(GroupName)
+{
+	var i;
+
+	for (i=0; i<this.GroupList.length; i++)
+	{
+		if (this.GroupList[i].Name == GroupName)
+			return this.GroupList[i];
+	}
+	return null;
+}
+
+/**
+* Create new group in group list
+*/
+function DATA_NewGroup(GroupName)
+{
+	// Creating a new object
+	var Group = new Object();
+
+	if (this.FindGroup(GroupName) != null)
+		return null;
+
+	// Setting atributes
+	Group.Name = GroupName;
+
+	this.GroupList[this.GroupList.length] = Group;
 }

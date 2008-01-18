@@ -20,8 +20,6 @@
 * with a Jabber Server
 */
 
-var http_request;
-
 /**
 * Start connection to Jabber server
 *
@@ -68,42 +66,42 @@ function CONNECTION_SendJabber(Post)
 	if (window.XMLHttpRequest) 
 	{
 		// Mozilla, Opera, Galeon
-		http_request = new XMLHttpRequest();
-		if (http_request.overrideMimeType) 
-			http_request.overrideMimeType("text/xml");
+		MainData.HttpRequest = new XMLHttpRequest();
+		if (MainData.HttpRequest.overrideMimeType) 
+			MainData.HttpRequest.overrideMimeType("text/xml");
 	}
 	else if (window.ActiveXObject) 
 	{
 		// Internet Explorer
 		try
 		{
-			http_request = new ActiveXObject("Microsoft.XMLHTTP");
+			MainData.HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		catch(e)
 		{
-			http_request = new ActiveXObject("Microsoft.XMLHTTP");
+			MainData.HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 	}
 
 	// Avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	http_request.open('POST','http://'+MainData.Host+'/jabber?id='+DT , true);
-	http_request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	MainData.HttpRequest.open('POST','http://'+MainData.Host+'/jabber?id='+DT , true);
+	MainData.HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
 	// Normal messages
 	if (MainData.ConnectionStatus == 0)
 	{
-		http_request.onreadystatechange = CONNECTION_ReceiveXml;
+		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveXml;
 	}
 	// Conection messages
 	else
 	{
-		http_request.onreadystatechange = CONNECTION_ReceiveConnection;
+		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveConnection;
 	}
 
 	// Send request to server
-	http_request.send(Post);
+	MainData.HttpRequest.send(Post);
 
 	// Save last post in Data Struct
 	MainData.LastXML = Post;
@@ -123,11 +121,11 @@ function CONNECTION_ReceiveConnection()
 {
 	var XML;
 
-	if (http_request.readyState == 4 )
+	if (MainData.HttpRequest.readyState == 4 )
 	{
-		if(http_request.status == 200)
+		if(MainData.HttpRequest.status == 200)
 		{
-			XML = http_request.responseXML;
+			XML = MainData.HttpRequest.responseXML;
 		
 			switch (MainData.ConnectionStatus)
 			{
@@ -177,7 +175,7 @@ function CONNECTION_ReceiveConnection()
 				*/
 			}
 		}
-		else if (http_request.status == 503)
+		else if (MainData.HttpRequest.status == 503)
 		{
 			//PARSER_LoginFailed(2);
 			alert("nham");

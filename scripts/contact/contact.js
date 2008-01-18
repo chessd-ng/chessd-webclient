@@ -21,65 +21,67 @@
 
 
 /**
-*
+* Handle user list received from jabber server
+* during connection
 */
 function CONTACT_HandleUserList(XML)
 {
-	var i, Item, User, Group, Ask, Subs, j=0;
-	var NotOnListUsers = new Array();
-	var NotOnListSubs = new Array();
+	var Users, Jid, Subs, Group, i, Pending = "";
 
 
-
-	var Users, Jid, Ask, Subs, Group, i;
-	
 	Users = XML.getElementsByTagName("item");
 
 	for (i=0; i < Users.length; i++)
 	{
 		Jid = Users[i].getAttribute("jid").match(/[^@]+/)[0];
-		Ask = Users[i].getAttribute ("ask"); 
 		Subs = Users[i].getAttribute ("subscription"); 
 		
 		// If contact belong to a group
 		if (Users[i].getElementsByTagName("group").length > 0)
 		{
 			Group = UTILS_GetTag(Users[i], "group")
-			//Group = Users[i].firstChild.textContent;
 		}
 		// buscar amigos no xml
 		else
-			Group = "amigos";
-		
-		alert(Group);
+			Group = UTILS_GetText("groups_default");
 
-		/*
-		// Lista de usuarios com convite pendente
-		if (Subs != "both")
+		// Check subscription state of users
+		switch (Subs)
 		{
-			NotOnListUsers[j] = User;
-			NotOnListSubs[j] = Subs;
-			j++;
+			// Store xml pending messages
+			case("to"):
+				//Pending += CONTACT_HandlePendingInvite(Jid);
+
+			// Insert users and group in data structure
+			case("both"):
+				if (MainData.Username != Jid)
+				{
+					CONTACT_InsertUser(Jid, "offline", "0", Subs, Group);
+					CONTACT_InsertGroup(Group);
+				}
+				break;
+
+			// Do nothing =)
+			case("from"):
+				break;
 		}
-		
-		else 
-		{
-			// Chama a funcao que insere o usuario na lista de contatos
-			if (MainData.Username != User)
-			{
-				CONTACT_InsertUser(User, "offline", "0", Group, Subs);
-			}
-		}*/
- 	}
-	/*
-	DATA_Contact_OrderContactGroups();
-	INTERFACE_CreateContactGroups();
-	INTERFACE_InsertContactList();
-	INTERFACE_CreateGroupOption();
+	}
 
-	// Trata os usuarios com convite pendente
-	for (j=0 ; j<NotOnListUsers.length ; j++)
-	{
-		CONTACT_HandlePendingInvite(NotOnListUsers[j], NotOnListSubs[j]);
-	}*/
+	// Send pending invites.. TODO TODO TODO TODO
+}
+
+/**
+* Insert user in data structure
+*/
+function CONTACT_InsertUser(User, Status, Rating, Subs, Group)
+{
+	MainData.AddUser(User, Status, Rating, Subs, Group);
+}
+
+/**
+* Create groups in data structure
+*/
+function CONTACT_InsertGroup(GroupName)
+{
+	MainData.NewGroup(GroupName);
 }
