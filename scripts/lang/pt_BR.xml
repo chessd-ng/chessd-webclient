@@ -13,7 +13,7 @@
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor jabber indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
-		<login_invalid_user>Usuário ou senha inválido.</login_invalid_user>
+		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
 	</login>
 	<group>
 		<group_default>Amigos</group_default>
@@ -22,6 +22,6 @@
 		<room_default>geral</room_default>
 	</room>
 	<error>
-		<error_disconneted>Perdeu contato com o servidor. Favor reconectar.</error_disconneted>
+		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>
 	</error>
 </language>
