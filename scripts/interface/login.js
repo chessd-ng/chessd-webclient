@@ -42,7 +42,7 @@ function INTERFACE_StartLogin()
 
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/language.xml");
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/pt_BR.xml");
 
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");

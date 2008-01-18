@@ -92,15 +92,20 @@ function LOGIN_EndLogin()
 * @return none
 * @public
 */
-function LOGIN_LoginFailed(num)
+function LOGIN_LoginFailed(Code)
 {
-	switch(num)
+	switch (Code)
 	{
-		case(1):
-			document.getElementById("ErrorLabel").innerHTML = "Usuário ou Senha inválidos";
+		case (MainData.Const.LOGIN_ServerDown):
+			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_server_down");
 			break;
-		case(2):
-			document.getElementById("ErrorLabel").innerHTML = "Servidor fora do ar";
+
+		case (MainData.Const.LOGIN_ConnectionRefused):
+			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_connection_refused");
+			break;
+
+		case (MainData.Const.LOGIN_InvalidUser):
+			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_invalid_user");
 			break;
 	}
 }

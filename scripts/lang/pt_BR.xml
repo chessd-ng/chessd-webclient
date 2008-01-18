@@ -4,15 +4,24 @@
 		<general_title>Cliente Web ChessD</general_title>
 	</general>
 	<login>
-		<login_title>Seja bem vindo à nova interface de ChessD!</login_title>
+		<login_title>Seja bem vindo à nova interface do ChessD!</login_title>
 		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha?</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
 		<login_user>Usuário</login_user>
 		<login_passwd>Senha</login_passwd>
+		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
+		<login_connection_refused>Servidor jabber indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
+		<login_invalid_user>Usuário ou senha inválido.</login_invalid_user>
 	</login>
-	<groups>
-		<groups_default>Amigos</groups_default>
-	</groups>
+	<group>
+		<group_default>Amigos</group_default>
+	</group>
+	<room>
+		<room_default>geral</room_default>
+	</room>
+	<error>
+		<error_disconneted>Perdeu contato com o servidor. Favor reconectar.</error_disconneted>
+	</error>
 </language>

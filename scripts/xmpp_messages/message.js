@@ -27,6 +27,7 @@ function MESSAGE_MakeXMPP(Msg)
 {
 	var XMPP;
 	
+
 	if (Msg != "")
 	{
 		XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
@@ -58,6 +59,9 @@ function MESSAGE_MergeMessages(Msgs)
 
 	for (i=0; i<Msgs.length; i++)
 	{
+		if (Msgs[i] == "")
+			continue;
+
 		Msg = Msgs[i].replace(/<body .*?>/,"");
 		Msg = Msg.replace("</body>","");
 
@@ -124,4 +128,93 @@ function MESSAGE_OfflineUsers()
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);
+}
+
+
+/**********************************
+ * MESSAGES - PRESENCE
+ ************************************/
+
+/**
+* If 'To' isn't passed, send your presence to jabber,
+* otherwise send presence to 'To'
+*/
+function MESSAGE_MakePresence(To)
+{
+	if (To == null)
+	{
+		return MESSAGE_MakeXMPP('<presence from="'+MainData.Username+'@'+MainData.Host+'"/>');
+	}
+	else
+	{
+		return MESSAGE_MakeXMPP('<presence to="'+To+'"/>');
+	}
+}
+
+
+/**********************************
+ * MESSAGES - RATING
+ ************************************/
+
+/**
+* Message to get users ratings
+*/
+function MESSAGE_MakeRating(UserList, RatingType)
+{
+	var XML, action;
+	var ratingList='';
+	var jidTmp;
+
+	
+	if (UserList == null)
+	{
+		UserList = new Array();
+
+		for (var i=0; i < MainData.UserList.length; i++)
+			UserList[i] = MainData.UserList[i].Username;
+	}
+
+	// Search user rating too
+	UserList[UserList.length] = MainData.Username
+
+	// Create message to get rating of users
+	XML  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
+	XML += "<query xmlns='"+MainData.Xmlns+"/chessd#rating' action='fetch'>";
+
+	for (i=0; i < UserList.length; i++)
+	{
+		XML += "<rating jid='"+UserList[i]+"@"+MainData.Host+"/"+MainData.Resource+"' category='"+RatingType+"' />";
+	}
+	XML += "</query></iq>";
+
+	return MESSAGE_MakeXMPP(XML);
+}
+
+
+/**********************************
+ * MESSAGES - INVITE
+ ************************************/
+
+/**
+* Send a invite to user
+*/
+function MAKER_MakeInvite(To)
+{
+	 return MAKER_MakeXMPP("<presence type='subscribe' to='"+To+"@"+MainData.Host+"' />"); 
+}
+
+/**
+* Send a subscribed to user
+*/
+function MAKER_MakeInviteAccept(To)
+{
+	return MAKER_MakeXMPP ("<presence type='subscribed' to='"+To+"@"+MainData.Host+"' />");
+}
+
+/**
+* Send a unsubscribed to user
+*/
+function MAKER_MakeInviteDeny(To)
+{
+	return MAKER_MakeXMPP ("<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />");
 }

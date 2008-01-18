@@ -26,7 +26,7 @@
 * @return none
 * @public
 */
-function CONNECTION_ConnectJabber()
+function CONNECTION_ConnectJabber(XML)
 {
 	switch (MainData.ConnectionStatus)
 	{
@@ -35,19 +35,33 @@ function CONNECTION_ConnectJabber()
 			CONNECTION_SendJabber(MESSAGE_StartConnection());
 			break;
 
+		// Send Username
 		case (2):
 			CONNECTION_SendJabber(MESSAGE_SendUsername());
 			break;
 
+		// Send password and resource
 		case (3):
 			CONNECTION_SendJabber(MESSAGE_SendPasswd());
 			break;
 
+		// Get user list
 		case (4):
 			CONNECTION_SendJabber(MESSAGE_OfflineUsers());
 			break;
 
+		// Send presence, enter in 'default_room', 
+		// presence to match manager and get ratings
 		case (5):
+			// Set interface as 'connected'
+			MainData.ConnectionStatus = 0;
+			CONNECTION_SendJabber(	
+				MESSAGE_MakePresence(), 
+				MESSAGE_MakePresence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
+				MESSAGE_MakePresence("match."+MainData.Host),
+				MESSAGE_MakeRating(null, "blitz"),
+				XML
+				);
 			break;
 	}
 }
@@ -58,9 +72,20 @@ function CONNECTION_ConnectJabber()
 * @return none
 * @public
 */
-function CONNECTION_SendJabber(Post)
+function CONNECTION_SendJabber()
 {
-	var DT;
+	var Post, DT;
+
+
+	// If receive too many parameters, merge then
+	if (arguments.length > 1)
+	{
+		Post = MESSAGE_MergeMessages(arguments);
+	}
+	else
+	{
+		Post = arguments[0];
+	}
 
 	// Create XMLHttpRequest
 	if (window.XMLHttpRequest) 
@@ -119,7 +144,7 @@ function CONNECTION_SendJabber(Post)
 */
 function CONNECTION_ReceiveConnection()
 {
-	var XML;
+	var XML, XMLBuffer;
 
 	if (MainData.HttpRequest.readyState == 4 )
 	{
@@ -137,7 +162,7 @@ function CONNECTION_ReceiveConnection()
 					}
 					catch(e)
 					{
-						LOGIN_LoginFailed();
+						LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionRefused);
 						return;
 					}
 					MainData.ConnectionStatus++;
@@ -153,7 +178,7 @@ function CONNECTION_ReceiveConnection()
 					// Check errors in username and passwd
 					Error = XML.getElementsByTagName("error");
 					if (Error.length > 0)
-						PARSER_LoginFailed();
+						LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
 					else
 					{
 						MainData.ConnectionStatus++;
@@ -163,22 +188,61 @@ function CONNECTION_ReceiveConnection()
 			
 			    case(4):
 					MainData.ConnectionStatus++;
-					CONNECTION_ConnectJabber();
-					PARSER_ParseXml(XML);
+					XMLBuffer = PARSER_ParseXml(XML);
+					CONNECTION_ConnectJabber(XMLBuffer);
 				break;
-
-				/*
-			    case(5):
-				   	PARSER_ReceiveXml(XmlDoc);
-				    	CONNECTION_ConnectionStep7();
-				break;
-				*/
 			}
 		}
 		else if (MainData.HttpRequest.status == 503)
 		{
-			//PARSER_LoginFailed(2);
-			alert("nham");
+			LOGIN_LoginFailed(MainData.Const.LOGIN_ServerDown);
 		}
 	}
+}
+
+
+/**
+* Receive a Jabber message when user is already connected
+*
+* @return none
+* @public
+*/
+function CONNECTION_ReceiveXml()
+{
+	var XML, Buffer = "";
+	
+	if (MainData.HttpRequest.readyState == 4)
+	{
+		if (MainData.HttpRequest.status == 200)
+		{
+			// Get Xml response
+			XML = MainData.HttpRequest.responseXML;
+
+		    // Forward XML to parser
+			Buffer = PARSER_ParseXml(XML);
+			
+			// Parser returned some xml: send it
+			if (Buffer != "" && Buffer != null)
+			{
+				CONNECTION_SendJabber(Buffer);
+			}
+			// Send a wait message to jabber
+			else
+			{
+				CONNECTION_SendJabber(MESSAGE_MakeWait());
+			}
+		}
+
+		// Re-send last XML
+		else if (MainData.HttpRequest.status == 502)
+		{
+			CONNECTION_SendJabber(MainData.LastXML);
+		}
+
+		// Server down
+		else if (MainData.HttpRequest.status == 503)
+		{
+			alert(UTILS_GetText("error_diconnected"));
+		}
+    }
 }

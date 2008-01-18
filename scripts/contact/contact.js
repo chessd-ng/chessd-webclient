@@ -23,6 +23,8 @@
 /**
 * Handle user list received from jabber server
 * during connection
+*
+* @return string
 */
 function CONTACT_HandleUserList(XML)
 {
@@ -43,14 +45,15 @@ function CONTACT_HandleUserList(XML)
 		}
 		// buscar amigos no xml
 		else
-			Group = UTILS_GetText("groups_default");
+			Group = UTILS_GetText("group_default");
 
 		// Check subscription state of users
 		switch (Subs)
 		{
 			// Store xml pending messages
 			case("to"):
-				//Pending += CONTACT_HandlePendingInvite(Jid);
+				// If there's a pending invite send a accept
+				Pending += MAKER_MakeInviteAccept(Jid);
 
 			// Insert users and group in data structure
 			case("both"):
@@ -67,7 +70,12 @@ function CONTACT_HandleUserList(XML)
 		}
 	}
 
-	// Send pending invites.. TODO TODO TODO TODO
+	// two eggs
+	// a cup of milk 
+	// a spoon of sugar
+	// a 'tea spoon' of yeast
+	// two cups of flour
+	return Pending;
 }
 
 /**

@@ -16,24 +16,12 @@
 
 
 /**
-* Constants definition
+* Parse presence messges received from jabber
 */
 
-function DATA_SetConsts()
+
+function PARSER_ParsePresence(XML)
 {
-	var Const = new Object();
 
-	// Adicionar o resto neste padrao..
-	
-	// Iq id's
-	Const.IQ_ID_GetUserList = "GetUserList";
-	Const.IQ_ID_GetRating = "GetRating";
-	Const.IQ_ID_GetRooms = "GetRoomList";
-
-	// Login errors
-	Const.LOGIN_ServerDown = 1;
-	Const.LOGIN_ConnectionRefused = 2;
-	Const.LOGIN_InvalidUser = 3;
-
-	return Const;
+	return "";
 }

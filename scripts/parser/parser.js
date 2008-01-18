@@ -24,6 +24,7 @@
 function PARSER_ParseXml(XML)
 {
 	var XMLTag, Body, i;
+	var Buffer = "";
 
 
 	MainData.SendWait = 1;
@@ -49,23 +50,24 @@ function PARSER_ParseXml(XML)
 				break;
 
 			case "error": 
-				PARSER_ParseError(XMLTag);
+				Buffer += PARSER_ParseError(XMLTag);
 				break;
 
 			case "presence": 
-				PARSER_ParsePresence(XMLTag);
+				Buffer += PARSER_ParsePresence(XMLTag);
 				break;
 
 			case "message": 
-				PARSER_ParseChat(XMLTag);
+				Buffer += PARSER_ParseChat(XMLTag);
 				break;
 
 			case "iq": 
-				PARSER_ParseIq(XMLTag);
+				Buffer += PARSER_ParseIq(XMLTag);
 				break;
 
 			default: break;
 		}
 	}
+	return Buffer;
 }
 

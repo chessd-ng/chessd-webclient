@@ -15,12 +15,14 @@
 
 /**
 * Parse Iq's received from jabber
+*
+* @return string
 */
 function PARSER_ParseIq(XML)
 {
 	var Type = XML.getAttribute("type");
 	var ID = XML.getAttribute("id");
-
+	var Buffer = "";
 
 	switch (Type)
 	{
@@ -29,7 +31,7 @@ function PARSER_ParseIq(XML)
 			{
 				// Receive user list
 				case MainData.Const.IQ_ID_GetUserList:
-					CONTACT_HandleUserList(XML);
+					Buffer += CONTACT_HandleUserList(XML);
 					break;
 					
 				/*
@@ -165,4 +167,5 @@ function PARSER_ParseIq(XML)
 		    
 		default: break;
 	}
+	return Buffer;
 }
