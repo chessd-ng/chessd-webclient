@@ -216,7 +216,7 @@ function UTILS_DeleteCookie(CookieName)
 */
 function UTILS_ValidateUsername(Username)
 {
-	if (Username.match(/[^0-9a-z-_.]/))
+	if (Username.match(/[^0-9a-z-_.]{1,}/))
 	{
 		return false;
 	}
@@ -257,3 +257,19 @@ function UTILS_AddListener(Element, Type, Expression, Bubbling)
         }
 }
 
+
+/**********************************
+ * FUNCTIONS - CROSS BROWSER EVENT
+ ************************************/
+
+function UTILS_ReturnEvent(event)
+{
+	if(MainData.Browser == 1) // Firefox
+	{
+		return event;
+	}
+	else //IE
+	{
+		return window.event;
+	}
+}

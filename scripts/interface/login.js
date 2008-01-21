@@ -34,12 +34,15 @@ function INTERFACE_StartLogin()
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
 	var Title, TitleEnd, Text, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
+	var ev; //Temp event
 
 	var Table = document.createElement('table');
 	var Tr = document.createElement('tr');
 	var Td = document.createElement('td');
 	var Br = document.createElement('br');
 
+	//Internet Explorer Table
+	var TBody = document.createElement('tbody');
 
 	// Read xml config files and starting data structure
 	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/pt_BR.xml");
@@ -75,11 +78,19 @@ function INTERFACE_StartLogin()
 		CheckBox.checked = true;
 
 	// Event listeners
-	InputSubmit.onclick = function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	InputLogin.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	InputPasswd.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	SignIn.onclick = function() { window.open("cadastro.html","", "height=300,width=350,left=100,top=100,menubar=0,location=0,resizable=0,scrollbars=0"); };
+	//InputSubmit.onclick = function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
+	//InputLogin.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
+	//InputPasswd.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
+	//SignIn.onclick = function() { window.open("cadastro.html","", "height=300,width=350,left=100,top=100,menubar=0,location=0,resizable=0,scrollbars=0"); };
 
+	UTILS_AddListener(InputSubmit, "click", function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); } , false);
+
+	UTILS_AddListener(InputLogin, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
+
+	UTILS_AddListener(InputPasswd, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
+
+	UTILS_AddListener(SignIn, "click", function() { window.open("cadastro.html","", "height=300,width=350,left=100,top=100,menubar=0,location=0,resizable=0,scrollbars=0"); }, false)
+	
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
 	LoginTextBoxDiv.appendChild(Text);
@@ -91,7 +102,7 @@ function INTERFACE_StartLogin()
 	Td = document.createElement('td');
 	Td.appendChild(InputLogin);
 	Tr.appendChild(Td);
-	Table.appendChild(Tr);
+	TBody.appendChild(Tr);
 
 	Tr = document.createElement('tr');
 	Td = document.createElement('td');
@@ -103,7 +114,9 @@ function INTERFACE_StartLogin()
 	Td.appendChild(CheckBox);
 	Td.appendChild(CheckBoxLabel);
 	Tr.appendChild(Td);
-	Table.appendChild(Tr);
+	TBody.appendChild(Tr);
+
+	Table.appendChild(TBody);
 
 	Br = document.createElement('br');
 	LoginFormBoxDiv.appendChild(Table);

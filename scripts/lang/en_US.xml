@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language name="en_US">
+	<general>
+		<general_title>Web ChessD Client</general_title>
+	</general>
+	<login>
+		<login_title>Welcome to new ChessD Web Interface!</login_title>
+		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
+		<login_footer>Have fun!</login_footer>
+		<login_remember_pass>Remember password?</login_remember_pass>
+		<login_signin>Quick register</login_signin>
+		<login_user>User</login_user>
+		<login_passwd>Password</login_passwd>
+		<login_server_down>Server off-line. Try again later.</login_server_down>
+		<login_connection_refused>Jabber server off-line. Try again later.</login_connection_refused>
+		<login_invalid_user>User or password incorrect.</login_invalid_user>
+	</login>
+	<group>
+		<group_default>Friends</group_default>
+	</group>
+	<room>
+		<room_default>main</room_default>
+	</room>
+	<error>
+		<error_disconnected>Lost connection with server. Reconnect please.</error_disconnected>
+	</error>
+</language>
