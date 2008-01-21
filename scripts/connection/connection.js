@@ -50,19 +50,22 @@ function CONNECTION_ConnectJabber(XML)
 			CONNECTION_SendJabber(MESSAGE_OfflineUsers());
 			break;
 
-		// Send presence, enter in 'default_room', 
-		// presence to match manager and get ratings
+		// Send presence, enter in 'default_room' and
+		// presence to match manager
 		case (5):
 			// Set interface as 'connected'
-			MainData.ConnectionStatus = 0;
 			CONNECTION_SendJabber(	
 				MESSAGE_MakePresence(), 
 				MESSAGE_MakePresence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
 				MESSAGE_MakePresence("match."+MainData.Host),
-				MESSAGE_MakeRating(null, "blitz"),
 				XML
 				);
 			break;
+	
+		// Get ratings
+		case (6):
+			MainData.ConnectionStatus = 0;
+			CONNECTION_SendJabber(MESSAGE_MakeRating(null, "blitz"));
 	}
 }
 
@@ -187,6 +190,12 @@ function CONNECTION_ReceiveConnection()
 					break;
 			
 			    case(4):
+					MainData.ConnectionStatus++;
+					XMLBuffer = PARSER_ParseXml(XML);
+					CONNECTION_ConnectJabber(XMLBuffer);
+				break;
+				
+			    case(5):
 					MainData.ConnectionStatus++;
 					XMLBuffer = PARSER_ParseXml(XML);
 					CONNECTION_ConnectJabber(XMLBuffer);

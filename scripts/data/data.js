@@ -133,45 +133,31 @@ function DATA_FindUser(Username)
 */
 function DATA_SetRating (Username, Category, Rating)
 {
-	var UserPos;
+	var UserPos, Obj;
 
-	alert (Username);
-	// Set user's own rating type
+
+	// Set correct object to append rating
 	if (MainData.Username == Username)
+		Obj = MainData;
+	else
 	{
-		switch (Category)
-		{
-		case('blitz'):
-			MainData.RatingBlitz = Rating;
-			break;
-		case('standart'):
-			MainData.RatingStandart = Rating;
-			break;
-		case('lightning'):
-			MainData.RatingLightning = Rating;
-			break;
-		}
-
-	}
-
-	// User list rating 
-	else 
-	{
-		// Find the user position's 
 		UserPos = MainData.FindUser(Username);
-
-		switch (Category)
-		{
+		Obj = MainData.UserList[UserPos];
+	}
+		
+	switch (Category)
+	{
 		case('blitz'):
-			MainData.UserList[UserPos].RatingBlitz = Rating;
+			Obj.RatingBlitz = Rating;
 			break;
+
 		case('standart'):
-			MainData.UserList[UserPos].RatingStandart = Rating;
+			Obj.RatingStandart = Rating;
 			break;
+
 		case('lightning'):
-			MainData.UserList[UserPos].RatingLightning = Rating;
+			Obj.RatingLightning = Rating;
 			break;
-		}
 	}
 }
 
