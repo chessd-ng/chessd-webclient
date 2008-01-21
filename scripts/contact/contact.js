@@ -59,7 +59,7 @@ function CONTACT_HandleUserList(XML)
 			case("both"):
 				if (MainData.Username != Jid)
 				{
-					CONTACT_InsertUser(Jid, "offline", "0", Subs, Group);
+					CONTACT_InsertUser(Jid, "offline", Subs, Group);
 					CONTACT_InsertGroup(Group);
 				}
 				break;
@@ -81,9 +81,9 @@ function CONTACT_HandleUserList(XML)
 /**
 * Insert user in data structure
 */
-function CONTACT_InsertUser(User, Status, Rating, Subs, Group)
+function CONTACT_InsertUser(User, Status, Subs, Group)
 {
-	MainData.AddUser(User, Status, Rating, Subs, Group);
+	MainData.AddUser(User, Status, Subs, Group);
 }
 
 /**
@@ -92,4 +92,33 @@ function CONTACT_InsertUser(User, Status, Rating, Subs, Group)
 function CONTACT_InsertGroup(GroupName)
 {
 	MainData.NewGroup(GroupName);
+}
+
+
+/**
+* Receive the rating massege and set it in user list
+*/
+function CONTACT_HandleRating(Xml)
+{
+	var Nodes = Xml.getElementsByTagName('rating');
+	var Jid, Rating, Category, i;
+	
+	for (i=0 ; i<Nodes.length ; i++)
+	{
+		// Try to get the user name, rating and category of rating
+		try 
+		{
+			Jid = Nodes[i].getAttribute('jid').replace(/@.*/,"");
+			Category = Nodes[i].getAttribute('category');
+			Rating = Nodes[i].getAttribute('rating');
+		}
+		catch (e)
+		{
+			continue;
+		}
+		
+		// Set user's rating on structure
+		MainData.SetRating(Jid, Category, Rating);
+		
+	}
 }

@@ -33,14 +33,15 @@ function PARSER_ParseIq(XML)
 				case MainData.Const.IQ_ID_GetUserList:
 					Buffer += CONTACT_HandleUserList(XML);
 					break;
+
+				// Receive Rating list
+				case MainData.Const.IQ_ID_GetRating:
+					CONTACT_HandleRating(XML);
+					break;
 					
 				/*
 				case IQ_ID_GetRooms:
 					ROOM_ParseRooms(XML);
-					break;
-
-				case IQ_ID_Rating:
-					CONTACT_HandleRating(XML);
 					break;
 
 				case IQ_ID_CreateRoom:

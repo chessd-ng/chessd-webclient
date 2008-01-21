@@ -183,7 +183,7 @@ function MESSAGE_MakeRating(UserList, RatingType)
 
 	for (i=0; i < UserList.length; i++)
 	{
-		XML += "<rating jid='"+UserList[i]+"@"+MainData.Host+"/"+MainData.Resource+"' category='"+RatingType+"' />";
+		XML += "<rating jid='"+UserList[i]+"@"+MainData.Host+"' category='"+RatingType+"' />";
 	}
 	XML += "</query></iq>";
 

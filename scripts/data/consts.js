@@ -29,7 +29,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetUserList = "GetUserList";
 	Const.IQ_ID_GetRating = "GetRating";
 	Const.IQ_ID_GetRooms = "GetRoomList";
-
+	
 	// Login errors
 	Const.LOGIN_ServerDown = 1;
 	Const.LOGIN_ConnectionRefused = 2;

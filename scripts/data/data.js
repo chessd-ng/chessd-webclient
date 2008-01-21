@@ -50,7 +50,11 @@ function DATA(ConfFile, LangFile)
 	this.UserList = new Array();
 	this.GroupList = new Array();
 	this.RoomList = new Array();
-
+	this.RatingLightning =  0;
+	this.RatingBlitz =  0;
+	this.RatingStandart = 0;
+	
+	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
 }
@@ -59,6 +63,7 @@ function DATA(ConfFile, LangFile)
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
+DATA.prototype.SetRating = DATA_SetRating;
 
 DATA.prototype.NewGroup = DATA_NewGroup;
 DATA.prototype.FindGroup = DATA_FindGroup;
@@ -71,7 +76,7 @@ DATA.prototype.FindGroup = DATA_FindGroup;
 /**
 * Add user to user list
 */
-function DATA_AddUser(Username, Status, Rating, Subs, Group)
+function DATA_AddUser(Username, Status, Subs, Group)
 {
 	// Creating a new object
 	var User = new Object();
@@ -80,9 +85,9 @@ function DATA_AddUser(Username, Status, Rating, Subs, Group)
 		return null;
 
 	// Setting atributes
+	// The user's rating will be seted after
 	User.Username = Username;
 	User.Status = Status;
-	User.Rating = Rating;
 	User.Subs = Subs;
 	User.Group = Group;
 
@@ -117,15 +122,62 @@ function DATA_FindUser(Username)
 	for (i=0; i<this.UserList.length; i++)
 	{
 		if (this.UserList[i].Username == Username)
-			return this.UserList[i];
+			return i;
 	}
 	return null;
 }
 
 
+/**
+* Set user's rating 
+*/
+function DATA_SetRating (Username, Category, Rating)
+{
+	var UserPos;
+
+	alert (Username);
+	// Set user's own rating type
+	if (MainData.Username == Username)
+	{
+		switch (Category)
+		{
+		case('blitz'):
+			MainData.RatingBlitz = Rating;
+			break;
+		case('standart'):
+			MainData.RatingStandart = Rating;
+			break;
+		case('lightning'):
+			MainData.RatingLightning = Rating;
+			break;
+		}
+
+	}
+
+	// User list rating 
+	else 
+	{
+		// Find the user position's 
+		UserPos = MainData.FindUser(Username);
+
+		switch (Category)
+		{
+		case('blitz'):
+			MainData.UserList[UserPos].RatingBlitz = Rating;
+			break;
+		case('standart'):
+			MainData.UserList[UserPos].RatingStandart = Rating;
+			break;
+		case('lightning'):
+			MainData.UserList[UserPos].RatingLightning = Rating;
+			break;
+		}
+	}
+}
+
 /**********************************
- * METHODS - GROUP LIST
- ************************************/
+ * METHODS - GROUP LIST           *
+ **********************************/
 
 /**
 * Find group in group list
