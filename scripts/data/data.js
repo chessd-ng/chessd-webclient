@@ -67,6 +67,7 @@ DATA.prototype.SetRating = DATA_SetRating;
 
 DATA.prototype.NewGroup = DATA_NewGroup;
 DATA.prototype.FindGroup = DATA_FindGroup;
+DATA.prototype.SortGroup = DATA_SortGroup;
 
 
 /**********************************
@@ -195,4 +196,23 @@ function DATA_NewGroup(GroupName)
 	Group.Name = GroupName;
 
 	this.GroupList[this.GroupList.length] = Group;
+}
+
+/**
+* Sort groups by name
+*/
+function DATA_SortGroup()
+{
+	this.sort(SortByGroupNameAsc);
+}
+
+/**
+* Return -1 if A < B, 1 if A > B or 0 if A = B.
+* Used to sort the group list by name.
+*/
+function SortByGroupNameAsc(A, B) 
+{
+	var X = A.Name.toLowerCase();
+	var Y = B.Name.toLowerCase();
+	return ((X < Y) ? -1 : ((X > Y) ? 1 : 0));
 }
