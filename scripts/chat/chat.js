@@ -16,27 +16,16 @@
 
 
 /**
-* Parse chat messages received from jabber
+* Control chat messages
 */
 
 
-function PARSER_ParseChat(XML)
+function CHAT_HandleChatMessage(XML)
 {
-	var Type = XML.getAttribute("type");
+	return "";
+}
 
-	// Chat message
-	if (Type == "chat")
-	{
-		return CHAT_HandleChatMessage(XML);
-	}
-	// Groupchat message
-	else if (Type == "groupchat")
-	{
-		return CHAT_HandleGroupChatMessage(XML);
-	}
-	// Other type
-	else
-	{
-		return "";
-	}
+function CHAT_HandleGroupChatMessage(XML)
+{
+	return "";
 }
