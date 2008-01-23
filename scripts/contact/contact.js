@@ -43,7 +43,7 @@ function CONTACT_HandleUserList(XML)
 		{
 			Group = UTILS_GetTag(Users[i], "group")
 		}
-		// buscar amigos no xml
+		// Search friends on XML
 		else
 			Group = UTILS_GetText("group_default");
 
@@ -198,9 +198,27 @@ function CONTACT_HandleRoomPresence(XML)
 	RoomName = From.replace(/@.*/,"");
 	Jid = From.replace(/.*\//,"");
 
-	Role = Item[0].getAttribute("role");
-	Affiliation = Item[0].getAttribute("affiliation");
-	
+	// Check if the type is error
+	if (Type == "error")
+		return "";
+
+	try 
+	{
+		Role = Item[0].getAttribute("role");
+	}
+	catch (e)
+	{
+		Role = "participant";
+	}
+
+	try
+	{
+		Affiliation = Item[0].getAttribute("affiliation");
+	}
+	catch (e)
+	{
+		Affiliation = "none";
+	}
 
 	// Status of user
 	if (Show.length > 0)
