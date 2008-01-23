@@ -18,6 +18,14 @@
 	<group>
 		<group_default>Amigos</group_default>
 	</group>
+	<status>
+		<status_offline>offline</status_offline>
+		<status_available>disponível</status_available>
+		<status_unavailable>indisponível</status_unavailable>
+		<status_busy>ocupado</status_busy>
+		<status_away>ausente</status_away>
+		<status_playing>jogando</status_playing>
+	</status>
 	<room>
 		<room_default>geral</room_default>
 	</room>

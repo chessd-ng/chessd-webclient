@@ -65,7 +65,11 @@ function CONNECTION_ConnectJabber(XML)
 		// Get ratings
 		case (6):
 			MainData.ConnectionStatus = 0;
-			CONNECTION_SendJabber(MESSAGE_MakeRating(null, "blitz"));
+			CONNECTION_SendJabber(
+				MESSAGE_MakeRating(null, "lightning"), 
+				MESSAGE_MakeRating(null, "blitz"),
+				MESSAGE_MakeRating(null, "standard")
+				);
 	}
 }
 

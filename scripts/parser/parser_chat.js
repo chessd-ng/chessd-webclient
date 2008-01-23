@@ -16,33 +16,27 @@
 
 
 /**
-* Parse presence messages received from jabber
+* Parse chat messages received from jabber
 */
 
 
-function PARSER_ParsePresence(XML)
+function PARSER_ParseChat(XML)
 {
-	var Jid, Type, Show, NewStatus;
+	var Type = XML.getAttribute("type");
 
-
-	// Get Jid
-	try 
+	// Chat message
+	if (Type == "chat")
 	{
-		Jid = XML.getAttribute('from');
+		return CHAT_HandleChatMessage(XML);
 	}
-	catch(e)
+	// Groupchat message
+	else if (Type == "groupchat")
 	{
-		return;
+		return CHAT_HandleGroupChatMessage(XML);
 	}
-
-	// Room presence
-	if (Jid.match(/.*conference.*/))
-	{
-		return CONTACT_HandleRoomPresence(XML);
-	}
-	// User presence
+	// Other type
 	else
 	{
-		return CONTACT_HandleUserPresence(XML);
+		return "";
 	}
 }
