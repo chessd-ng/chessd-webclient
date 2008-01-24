@@ -263,9 +263,9 @@ function DATA_DelRoom(RoomName)
 	return true;
 }
 
-/*
+/**
 * Find room in room list
-**/
+*/
 function DATA_FindRoom(RoomName)
 {
 	var i;
@@ -279,7 +279,7 @@ function DATA_FindRoom(RoomName)
 }
 
 /**
- * Add user in room
+* Add user in user list of a room
 */
 function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 {

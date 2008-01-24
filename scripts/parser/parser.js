@@ -17,7 +17,6 @@
 * Parse XMPP received from jabber
 */
 
-
 /**
 * Receive and forward XML to controllers
 */
@@ -27,8 +26,6 @@ function PARSER_ParseXml(XML)
 	var Buffer = "";
 
 
-	MainData.SendWait = 1;
-	
 	// Find bind body
 	try 
 	{

@@ -19,7 +19,6 @@
 * Parse presence messages received from jabber
 */
 
-
 function PARSER_ParsePresence(XML)
 {
 	var Jid, Type, Show, NewStatus;

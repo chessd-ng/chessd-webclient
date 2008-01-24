@@ -189,7 +189,11 @@ function CONNECTION_ReceiveConnection()
 					else
 					{
 						MainData.ConnectionStatus++;
-						CONNECTION_ConnectJabber();
+						LOGIN_Load();
+
+						// Send a wait message to bind, to
+						// wait while loading scripts, css and images
+						CONNECTION_SendJabber(MESSAGE_MakeWait());
 					}
 					break;
 			

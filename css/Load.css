@@ -1,0 +1,58 @@
+#LoadDiv {
+	width			: 80mm;
+	height			: 265px;
+	border			: 2px solid #FFA200;
+	position		: relative;
+	top				: 80px;
+	left 			: 50%;
+	margin-left		: -40mm;
+	background		: url('../images/login_box_fundo.gif') repeat-x;
+	padding			: 20px 30px;
+	text-align		: center;
+}
+
+/* Logo chessd */
+#LoadDiv h1 {
+	width			: 213px;
+	height			: 71px;
+	text-indent		: -9999px;
+	overflow		: hidden;
+	background		: url('../images/logo_chessd.png') no-repeat;
+	margin			: 3mm 0mm 9mm 11mm;
+}
+
+#LoadDiv h3 {
+	font			: bold 14px Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 10mm;
+}
+
+#LoadDiv p {
+	font			: italic 12px Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 5mm;
+}
+
+#LoadDiv ul {
+	margin-left		: 21mm;
+}
+
+/* Gray Ball */
+#LoadDiv .grey_ball {
+	float			: left;
+	list-style		: none;	
+	width			: 9px;
+	height			: 9px;
+	background		: url('../images/bola_cinza.png') no-repeat;
+	margin			: 10px;
+}
+
+/* Green Ball */
+#LoadDiv .green_ball {
+	float			: left;
+	list-style		: none;	
+	width			: 9px;
+	height			: 9px;
+	background		: url('../images/bola_verde.png') no-repeat;
+	margin			: 10px;
+}
