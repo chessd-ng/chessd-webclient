@@ -80,7 +80,7 @@ function PARSER_ParseIq(XML)
 				case IQ_ID_ChessdDisconnected:
 		//			INTERFACE_ShowInformation("Reconectando ao servidor de xadrez...");
 					// TODO -> Se o usuario estiver jogando?
-					PARSER_SendXml(MAKER_MakeChessdPresence(1));
+					PARSER_SendXml(MESSAGE_MakeChessdPresence(1));
 					break;
 
 				case IQ_ID_SearchUserSet:
