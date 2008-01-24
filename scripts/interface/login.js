@@ -141,3 +141,22 @@ function INTERFACE_StartLogin()
 	// Block context menu
 	document.oncontextmenu = function() { return false; };
 }
+
+/**
+* Remove login screen
+*
+* @return void
+* @public
+*/
+function INTERFACE_EndLogin()
+{
+	var Div = document.getElementById("LoginDiv");
+	var Banner = document.getElementById("BannerLogin");
+
+	// If login div is on screen
+	if (Div)
+		Div.parentNode.removeChild(Div);
+
+	if (Banner)
+		Banner.parentNode.removeChild(Banner);
+}

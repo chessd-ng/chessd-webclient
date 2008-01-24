@@ -44,7 +44,7 @@ function MESSAGE_MakeXMPP(Msg)
 /**
 * Make a wait message
 */
-function MESSAGE_MakeWait()
+function MESSAGE_Wait()
 {
     return MESSAGE_MakeXMPP("");
 }
@@ -74,7 +74,7 @@ function MESSAGE_MergeMessages(Msgs)
 
 /**********************************
  * MESSAGES - CONNECTION 
- ************************************/
+ **********************************/
 
 /**
 * Get an SID from bind
@@ -133,13 +133,13 @@ function MESSAGE_OfflineUsers()
 
 /**********************************
  * MESSAGES - PRESENCE
- ************************************/
+ **********************************/
 
 /**
 * If 'To' isn't passed, send your presence to jabber,
 * otherwise send presence to 'To'
 */
-function MESSAGE_MakePresence(To)
+function MESSAGE_Presence(To)
 {
 	if (To == null)
 	{
@@ -154,14 +154,14 @@ function MESSAGE_MakePresence(To)
 
 /**********************************
  * MESSAGES - RATING
- ************************************/
+ **********************************/
 
 /**
 * Message to get users ratings
 */
-function MESSAGE_MakeRating(UserList, RatingType)
+function MESSAGE_Rating(UserList, RatingType)
 {
-	var XML, action;
+	var XMPP, action;
 	var ratingList='';
 	var jidTmp;
 
@@ -178,14 +178,14 @@ function MESSAGE_MakeRating(UserList, RatingType)
 	UserList[UserList.length] = MainData.Username
 
 	// Create message to get rating of users
-	XML  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
-	XML += "<query xmlns='"+MainData.Xmlns+"/chessd#rating' action='fetch'>";
+	XMPP  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#rating' action='fetch'>";
 
 	for (i=0; i < UserList.length; i++)
 	{
-		XML += "<rating jid='"+UserList[i]+"@"+MainData.Host+"' category='"+RatingType+"' />";
+		XMPP += "<rating jid='"+UserList[i]+"@"+MainData.Host+"' category='"+RatingType+"' />";
 	}
-	XML += "</query></iq>";
+	XMPP += "</query></iq>";
 
 	return MESSAGE_MakeXMPP(XML);
 }
@@ -193,28 +193,93 @@ function MESSAGE_MakeRating(UserList, RatingType)
 
 /**********************************
  * MESSAGES - INVITE
- ************************************/
+ **********************************/
 
 /**
 * Send a invite to user
 */
-function MAKER_MakeInvite(To)
+function MESSAGE_Invite(To)
 {
-	 return MAKER_MakeXMPP("<presence type='subscribe' to='"+To+"@"+MainData.Host+"' />"); 
+	 return MESSAGE_MakeXMPP("<presence type='subscribe' to='"+To+"@"+MainData.Host+"' />"); 
 }
 
 /**
 * Send a subscribed to user
 */
-function MAKER_MakeInviteAccept(To)
+function MESSAGE_InviteAccept(To)
 {
-	return MAKER_MakeXMPP ("<presence type='subscribed' to='"+To+"@"+MainData.Host+"' />");
+	return MESSAGE_MakeXMPP ("<presence type='subscribed' to='"+To+"@"+MainData.Host+"' />");
 }
 
 /**
 * Send a unsubscribed to user
 */
-function MAKER_MakeInviteDeny(To)
+function MESSAGE_InviteDeny(To)
 {
-	return MAKER_MakeXMPP ("<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />");
+	return MESSAGE_MakeXMPP ("<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />");
+}
+
+
+/**********************************
+ * MESSAGES - CHALLENGE
+ **********************************/
+
+/**
+* Send a Challenge message
+*/
+function MESSAGE_Challenge (Category, Player1, Player2)
+{
+	/** 
+	* Should be extended to support Bughouse with more two players.
+	* The Player's structure has the following fields:
+	*  - Name
+	*  - Color
+	*  - Inc
+	*  - Time
+	*
+	* The 'Color' field must content just the first letter
+	*/
+	
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
+	XMPP += "<match category='"+Category+"' >";
+	XMPP += "<player jid='"+Player1.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player1.Time+"' inc='"+Player1.Inc+"' color='"+Player1.Color+"' />";
+	XMPP += "<player jid='"+Player2.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player2.Time+"' inc='"+Player2.Inc+"' color='"+Player2.Color+"' />";
+	XMPP += "</match></query></iq>";
+	
+	return MESSAGE_MakeXMPP (XMPP);
+}
+
+
+/**
+* Accept a challange 
+*/
+function MESSAGE_Accept (ChallangeID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#accept'>";
+	XMPP += "<match id='"+ChallengeID+"'>";
+	XMPP += "</match></query></iq>";
+
+	return MESSAGE_MakeXMPP (XMPP);
+}
+
+
+/**
+* Decline a challange 
+*/
+function MESSAGE_Decline (ChallangeID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#decline'>";
+	XMPP += "<match id='"+ChallengeID+"'>";
+	XMPP += "</match></query></iq>";
+
+	return MESSAGE_MakeXMPP (XMPP);
 }

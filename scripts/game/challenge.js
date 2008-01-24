@@ -14,34 +14,3 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
-
-/**
-* Parse presence messages received from jabber
-*/
-
-function PARSER_ParsePresence(XML)
-{
-	var Jid, Type, Show, NewStatus;
-
-
-	// Get Jid
-	try 
-	{
-		Jid = XML.getAttribute('from');
-	}
-	catch(e)
-	{
-		return;
-	}
-
-	// Room presence
-	if (Jid.match(/.*conference.*/))
-	{
-		return CONTACT_HandleRoomPresence(XML);
-	}
-	// User presence
-	else
-	{
-		return CONTACT_HandleUserPresence(XML);
-	}
-}

@@ -55,9 +55,9 @@ function CONNECTION_ConnectJabber(XML)
 		case (5):
 			// Set interface as 'connected'
 			CONNECTION_SendJabber(	
-				MESSAGE_MakePresence(), 
-				MESSAGE_MakePresence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
-				MESSAGE_MakePresence("match."+MainData.Host),
+				MESSAGE_Presence(), 
+				MESSAGE_Presence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
+				MESSAGE_Presence("match."+MainData.Host),
 				XML
 				);
 			break;
@@ -66,9 +66,9 @@ function CONNECTION_ConnectJabber(XML)
 		case (6):
 			MainData.ConnectionStatus = 0;
 			CONNECTION_SendJabber(
-				MESSAGE_MakeRating(null, "lightning"), 
-				MESSAGE_MakeRating(null, "blitz"),
-				MESSAGE_MakeRating(null, "standard")
+				MESSAGE_Rating(null, "lightning"), 
+				MESSAGE_Rating(null, "blitz"),
+				MESSAGE_Rating(null, "standard")
 				);
 	}
 }
@@ -189,7 +189,11 @@ function CONNECTION_ReceiveConnection()
 					else
 					{
 						MainData.ConnectionStatus++;
-						CONNECTION_ConnectJabber();
+						LOGIN_Load();
+
+						// Send a wait message to bind, to
+						// wait while loading scripts, css and images
+						CONNECTION_SendJabber(MESSAGE_Wait());
 					}
 					break;
 			
@@ -242,7 +246,7 @@ function CONNECTION_ReceiveXml()
 			// Send a wait message to jabber
 			else
 			{
-				CONNECTION_SendJabber(MESSAGE_MakeWait());
+				CONNECTION_SendJabber(MESSAGE_Wait());
 			}
 		}
 
