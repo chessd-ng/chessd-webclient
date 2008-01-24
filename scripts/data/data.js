@@ -49,7 +49,6 @@ function DATA(ConfFile, LangFile)
 	* DATA STRUCTURE
 	*/
 	this.UserList = new Array();
-	this.GroupList = new Array();
 	this.RoomList = new Array();
 	this.RatingLightning =  0;
 	this.RatingBlitz =  0;
@@ -67,10 +66,6 @@ DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetRating = DATA_SetRating;
 
-DATA.prototype.NewGroup = DATA_NewGroup;
-DATA.prototype.FindGroup = DATA_FindGroup;
-DATA.prototype.SortGroup = DATA_SortGroup;
-
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
 DATA.prototype.FindRoom = DATA_FindRoom;
@@ -85,7 +80,7 @@ DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 /**
 * Add user to user list
 */
-function DATA_AddUser(Username, Status, Subs, Group)
+function DATA_AddUser(Username, Status, Subs)
 {
 	// Creating a new object
 	var User = new Object();
@@ -98,7 +93,6 @@ function DATA_AddUser(Username, Status, Subs, Group)
 	User.Username = Username;
 	User.Status = Status;
 	User.Subs = Subs;
-	User.Group = Group;
 
 	this.UserList[this.UserList.length] = User;
 }
@@ -186,41 +180,6 @@ function DATA_SetRating(Username, Category, Rating)
 	}
 }
 
-/**********************************
- * METHODS - GROUP LIST           *
- **********************************/
-
-/**
-* Find group in group list
-*/
-function DATA_FindGroup(GroupName)
-{
-	var i;
-
-	for (i=0; i<this.GroupList.length; i++)
-	{
-		if (this.GroupList[i].Name == GroupName)
-			return this.GroupList[i];
-	}
-	return null;
-}
-
-/**
-* Create new group in group list
-*/
-function DATA_NewGroup(GroupName)
-{
-	// Creating a new object
-	var Group = new Object();
-
-	if (this.FindGroup(GroupName) != null)
-		return null;
-
-	// Setting atributes
-	Group.Name = GroupName;
-
-	this.GroupList[this.GroupList.length] = Group;
-}
 
 /**********************************
  * METHODS - ROOM LIST            *
@@ -322,23 +281,4 @@ function DATA_DelUserInRoom(RoomName, Username)
 		}
 	}
 	return false;	
-}
-
-/**
-* Sort groups by name
-*/
-function DATA_SortGroup()
-{
-	this.sort(SortByGroupNameAsc);
-}
-
-/**
-* Return -1 if A < B, 1 if A > B or 0 if A = B.
-* Used to sort the group list by name.
-*/
-function SortByGroupNameAsc(A, B) 
-{
-	var X = A.Name.toLowerCase();
-	var Y = B.Name.toLowerCase();
-	return ((X < Y) ? -1 : ((X > Y) ? 1 : 0));
 }
