@@ -2,6 +2,7 @@
 <language name="pt_BR">
 	<general>
 		<general_title>Cliente Web ChessD</general_title>
+		<general_name>ChessD</general_name>
 	</general>
 	<login>
 		<login_title>Seja bem vindo à nova interface do ChessD!</login_title>
@@ -14,6 +15,12 @@
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor jabber indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
+		<login_load_wait>Aguarde...</login_load_wait>
+		<login_load_start>Iniciando carregador...</login_load_start>
+		<login_load_scripts>Carregando scripts...</login_load_scripts>
+		<login_load_css>Carregando css...</login_load_css>
+		<login_load_images>Carregando imagens...</login_load_images>
+		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 	</login>
 	<group>
 		<group_default>Amigos</group_default>

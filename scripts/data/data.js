@@ -222,9 +222,6 @@ function DATA_NewGroup(GroupName)
 	this.GroupList[this.GroupList.length] = Group;
 }
 
-<<<<<<< HEAD:scripts/data/data.js
-=======
-
 /**********************************
  * METHODS - ROOM LIST            *
  **********************************/
@@ -266,9 +263,9 @@ function DATA_DelRoom(RoomName)
 	return true;
 }
 
-/*
+/**
 * Find room in room list
-**/
+*/
 function DATA_FindRoom(RoomName)
 {
 	var i;
@@ -282,8 +279,10 @@ function DATA_FindRoom(RoomName)
 }
 
 /**
+* Add user in user list of a room
 */
 function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
+{
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
 

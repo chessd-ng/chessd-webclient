@@ -82,7 +82,6 @@ function LOGIN_Logout()
 function LOGIN_EndLogin()
 {
 	INTERFACE_EndLogin();
-	INTERFACE_StartInterface();
 }
 
 
