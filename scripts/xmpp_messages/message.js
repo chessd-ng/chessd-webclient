@@ -229,15 +229,16 @@ function MESSAGE_InviteDeny(To)
 */
 function MESSAGE_Challenge (Category, Player1, Player2)
 {
-	// Should be extended to support Bughouse with more two players
-	
-	// The Player's structure has the following fields:
-	//  - Name
-	//  - Color
-	//  - Inc
-	//  - Time
-	
-	// The 'Color' field must content just the first letter
+	/** 
+	* Should be extended to support Bughouse with more two players.
+	* The Player's structure has the following fields:
+	*  - Name
+	*  - Color
+	*  - Inc
+	*  - Time
+	*
+	* The 'Color' field must content just the first letter
+	*/
 	
 	var XMPP="";
 
@@ -248,4 +249,37 @@ function MESSAGE_Challenge (Category, Player1, Player2)
 	XMPP += "<player jid='"+Player2.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player2.Time+"' inc='"+Player2.Inc+"' color='"+Player2.Color+"' />";
 	XMPP += "</match></query></iq>";
 	
+	return MESSAGE_MakeXMPP (XMPP);
+}
+
+
+/**
+* Accept a challange 
+*/
+function MESSAGE_Accept (ChallangeID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#accept'>";
+	XMPP += "<match id='"+ChallengeID+"'>";
+	XMPP += "</match></query></iq>";
+
+	return MESSAGE_MakeXMPP (XMPP);
+}
+
+
+/**
+* Decline a challange 
+*/
+function MESSAGE_Decline (ChallangeID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#decline'>";
+	XMPP += "<match id='"+ChallengeID+"'>";
+	XMPP += "</match></query></iq>";
+
+	return MESSAGE_MakeXMPP (XMPP);
 }
