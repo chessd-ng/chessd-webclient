@@ -53,7 +53,7 @@ function CONTACT_HandleUserList(XML)
 			// Store xml pending messages
 			case("to"):
 				// If there's a pending invite send a accept
-				Pending += MAKER_MakeInviteAccept(Jid);
+				Pending += MESSAGE_InviteAccept(Jid);
 
 			// Insert users and group in data structure
 			case("both"):
