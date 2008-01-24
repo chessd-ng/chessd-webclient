@@ -28,7 +28,7 @@
 */
 function CONTACT_HandleUserList(XML)
 {
-	var Users, Jid, Subs, Group, i, Pending = "";
+	var Users, Jid, Subs, i, Pending = "";
 
 
 	Users = XML.getElementsByTagName("item");
@@ -38,14 +38,6 @@ function CONTACT_HandleUserList(XML)
 		Jid = Users[i].getAttribute("jid").match(/[^@]+/)[0];
 		Subs = Users[i].getAttribute ("subscription"); 
 		
-		// If contact belong to a group
-		if (Users[i].getElementsByTagName("group").length > 0)
-		{
-			Group = UTILS_GetTag(Users[i], "group")
-		}
-		// Search friends on XML
-		else
-			Group = UTILS_GetText("group_default");
 
 		// Check subscription state of users
 		switch (Subs)
@@ -53,14 +45,13 @@ function CONTACT_HandleUserList(XML)
 			// Store xml pending messages
 			case("to"):
 				// If there's a pending invite send a accept
-				Pending += MAKER_MakeInviteAccept(Jid);
+				Pending += MESSAGE_InviteAccept(Jid);
 
 			// Insert users and group in data structure
 			case("both"):
 				if (MainData.Username != Jid)
 				{
-					CONTACT_InsertUser(Jid, "offline", Subs, Group);
-					CONTACT_InsertGroup(Group);
+					CONTACT_InsertUser(Jid, "offline", Subs);
 				}
 				break;
 
@@ -81,17 +72,9 @@ function CONTACT_HandleUserList(XML)
 /**
 * Insert user in data structure
 */
-function CONTACT_InsertUser(User, Status, Subs, Group)
+function CONTACT_InsertUser(User, Status, Subs)
 {
-	MainData.AddUser(User, Status, Subs, Group);
-}
-
-/**
-* Create groups in data structure
-*/
-function CONTACT_InsertGroup(GroupName)
-{
-	MainData.NewGroup(GroupName);
+	MainData.AddUser(User, Status, Subs);
 }
 
 
