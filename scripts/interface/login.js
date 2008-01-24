@@ -45,7 +45,7 @@ function INTERFACE_StartLogin()
 	var TBody = document.createElement('tbody');
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/pt_BR.xml");
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/en_US.xml");
 
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
