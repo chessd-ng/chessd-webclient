@@ -248,7 +248,7 @@ function UTILS_AddListener(Element, Type, Expression, Bubbling)
         else if(window.attachEvent) // IE
         {
                 Element.attachEvent('on' + Type, Expression);
-                Element.cancelBubble = not(Bubbling);
+                Element.cancelBubble = !(Bubbling);
                 return true;
         } 
         else
