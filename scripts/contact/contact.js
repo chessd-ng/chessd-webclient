@@ -104,6 +104,8 @@ function CONTACT_HandleRating(Xml)
 		MainData.SetRating(Jid, Category, Rating);
 		
 	}
+	
+	return "";
 }
 
 

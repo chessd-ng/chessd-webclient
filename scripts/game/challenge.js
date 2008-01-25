@@ -19,26 +19,64 @@
 */
 function GAME_HandleChallenge (XML)
 {
-	var Players, Player1, Player2, Match, MatchID, Category;
+	var Players, Match, MatchID, Category;
+	var Player1 = new Object();
+	var Player2 = new Object();
 	
-	Match = XML.getElementByTagName('match')[0];
-	MatchID = XML.getAttribute('id');
-	Category = XML.getAttribute('category');
+	// If there's no match, there's nothing to do
+	try 
+	{
+		Match = XML.getElementsByTagName('match')[0];
+	}
+	catch (e)
+	{
+		return "";
+	}
+	
+	MatchID = Match.getAttribute('id');
+	Category = Match.getAttribute('category');
+	Players = XML.getElementsByTagName('player');
 
-	// Get information of player one
-	Players = XML.getElementByTagName('match');
-	Player1.Name = Players[0].XML.getAttribute('jid').replace(/@.*/,"");
-	Player1.Inc = Players[0].XML.getAttribute('inc');
-	Player1.Color = Players[0].XML.getAttribute('color');
-	Player1.Time = Players[0].XML.getAttribute('time');
+	//  Player is challenged
+	if (Players.length > 0)
+	{
+		// Get information of player one
+		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
+		Player1.Inc = Players[0].getAttribute('inc');
+		Player1.Color = Players[0].getAttribute('color');
+		Player1.Time = Players[0].getAttribute('time');
+		
+		// Get information of player two
+		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
+		Player2.Inc = Players[1].getAttribute('inc');
+		Player2.Color = Players[1].getAttribute('color');
+		Player2.Time = Players[1].getAttribute('time');
+
+		// Add the challenge in structure
+		if (Player1 != MainData.Username)
+		{
+			MainData.AddChallenge (Player1.Name, MatchID, Player1.Name);
+		}
+		else 
+		{
+			MainData.AddChallenge (Player2.Name, MatchID, Player2.Name);
+		}
+	}
+	
+	// Player received a challenge confirm
+	else 
+	{
+		// Get the challenged name
+		Player1.Name = XML.getAttribute('id').replace(/.*_/,"");
+		
+		// Add the challenge in structure
+		MainData.AddChallenge (Player1.Name, MatchID, MainData.Username);
+	}
 
 
-	// Get information of player two
-	Player2.Name = Players[0].XML.getAttribute('jid').replace(/@.*/,"");
-	Player2.Inc = Players[0].XML.getAttribute('inc');
-	Player2.Color = Players[0].XML.getAttribute('color');
-	Player2.Time = Players[0].XML.getAttribute('time');
-
-	// TODO
+ 	// TODO
 	// Interface functions should be inserted here
+
+
+	return "";
 }

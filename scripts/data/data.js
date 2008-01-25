@@ -74,7 +74,7 @@ DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
-
+DATA.prototype.FindChallenge = DATA_FindChallenge;
 
 /**********************************
  * METHODS - USER LIST
@@ -299,6 +299,8 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	var Challenge = new Object();
 	var i;
 
+	alert ("Username: "+Username+"\nID: "+Id+"\nChallenger :"+Challenger);
+	
 	i = this.FindChallenge(Username);
 	if (i != null)
 	{
@@ -307,10 +309,34 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	}
 
 	// Setting atributes
-	Challenge.Usename = Username;
-	Challenge.Id = Id
+	Challenge.Username = Username;
+	Challenge.Id = Id;
 	Challenge.Challenger = Challenger;
 
 	this.ChallengeList[this.ChallengeList.length] = Challenge;
+
 	return true;
 }	
+
+
+
+/**
+* Find a challenge in 'ChallengeList'
+*/
+function DATA_FindChallenge(Username)
+{
+	var i;
+	
+	for (i=0 ; i < this.ChallengeList.length ; i++)
+	{
+		// A challenge with the username given already exist on structure
+		if (this.ChallengeList[i].Username == Username)
+		{
+			return i;
+		}
+	}
+	
+	// User not found
+	return null;
+	
+}

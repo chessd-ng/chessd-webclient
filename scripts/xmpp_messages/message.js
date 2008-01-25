@@ -186,8 +186,8 @@ function MESSAGE_Rating(UserList, RatingType)
 		XMPP += "<rating jid='"+UserList[i]+"@"+MainData.Host+"' category='"+RatingType+"' />";
 	}
 	XMPP += "</query></iq>";
-
-	return MESSAGE_MakeXMPP(XML);
+	
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 
@@ -227,7 +227,7 @@ function MESSAGE_InviteDeny(To)
 /**
 * Send a Challenge message
 */
-function MESSAGE_Challenge(Category, Player1, Player2)
+function MESSAGE_Challenge(Category, Player)
 {
 	/** 
 	* Should be extended to support Bughouse with more two players.
@@ -242,7 +242,9 @@ function MESSAGE_Challenge(Category, Player1, Player2)
 	
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
+	// Tag the id with the challenged player's name
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"_"+Player.Name+"'>";
+
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
 	XMPP += "<match category='"+Category+"' >";
 	XMPP += "<player jid='"+Player1.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player1.Time+"' inc='"+Player1.Inc+"' color='"+Player1.Color+"' />";

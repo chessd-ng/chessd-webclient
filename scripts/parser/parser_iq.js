@@ -59,5 +59,6 @@ function PARSER_ParseIq(XML)
 		    
 		default: break;
 	}
+
 	return Buffer;
 }
