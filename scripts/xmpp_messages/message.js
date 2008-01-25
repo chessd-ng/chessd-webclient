@@ -227,7 +227,7 @@ function MESSAGE_InviteDeny(To)
 /**
 * Send a Challenge message
 */
-function MESSAGE_Challenge (Category, Player1, Player2)
+function MESSAGE_Challenge(Category, Player1, Player2)
 {
 	/** 
 	* Should be extended to support Bughouse with more two players.
@@ -242,44 +242,44 @@ function MESSAGE_Challenge (Category, Player1, Player2)
 	
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
 	XMPP += "<match category='"+Category+"' >";
 	XMPP += "<player jid='"+Player1.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player1.Time+"' inc='"+Player1.Inc+"' color='"+Player1.Color+"' />";
 	XMPP += "<player jid='"+Player2.Name+"@"+MainData.Host+"/"+MainData.Resorce+"' time='"+Player2.Time+"' inc='"+Player2.Inc+"' color='"+Player2.Color+"' />";
 	XMPP += "</match></query></iq>";
 	
-	return MESSAGE_MakeXMPP (XMPP);
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 
 /**
 * Accept a challange 
 */
-function MESSAGE_Accept (ChallangeID)
+function MESSAGE_Accept(ChallangeID)
 {
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#accept'>";
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
 
-	return MESSAGE_MakeXMPP (XMPP);
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 
 /**
 * Decline a challange 
 */
-function MESSAGE_Decline (ChallangeID)
+function MESSAGE_Decline(ChallangeID)
 {
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='match'>";
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#decline'>";
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
 
-	return MESSAGE_MakeXMPP (XMPP);
+	return MESSAGE_MakeXMPP(XMPP);
 }
