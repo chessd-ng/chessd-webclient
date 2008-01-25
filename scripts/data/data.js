@@ -50,6 +50,7 @@ function DATA(ConfFile, LangFile)
 	*/
 	this.UserList = new Array();
 	this.RoomList = new Array();
+	this.ChallengeList = new Array();
 	this.RatingLightning =  0;
 	this.RatingBlitz =  0;
 	this.RatingStandart = 0;
@@ -71,6 +72,8 @@ DATA.prototype.DelRoom = DATA_DelRoom;
 DATA.prototype.FindRoom = DATA_FindRoom;
 DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+
+DATA.prototype.AddChallenge = DATA_AddChallenge;
 
 
 /**********************************
@@ -282,3 +285,32 @@ function DATA_DelUserInRoom(RoomName, Username)
 	}
 	return false;	
 }
+
+/**********************************
+ * METHODS - CHALLENGES           *
+ **********************************/
+
+/**
+* Add a challenge in 'ChallengeList'
+*/
+function DATA_AddChallenge(Username, Id, Challenger)
+{
+	// Creating a new object
+	var Challenge = new Object();
+	var i;
+
+	i = this.FindChallenge(Username);
+	if (i != null)
+	{
+		if (this.ChallengeList[i].Challenger == Challenger)
+			return null;
+	}
+
+	// Setting atributes
+	Challenge.Usename = Username;
+	Challenge.Id = Id
+	Challenge.Challenger = Challenger;
+
+	this.ChallengeList[this.ChallengeList.length] = Challenge;
+	return true;
+}	
