@@ -53,7 +53,7 @@ function GAME_HandleChallenge (XML)
 		Player2.Time = Players[1].getAttribute('time');
 
 		// Add the challenge in structure
-		if (Player1 != MainData.Username)
+		if (Player1.Name != MainData.Username)
 		{
 			MainData.AddChallenge (Player1.Name, MatchID, Player1.Name);
 		}
