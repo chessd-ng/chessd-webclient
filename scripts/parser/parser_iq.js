@@ -56,8 +56,14 @@ function PARSER_ParseIq(XML)
 				Buffer += GAME_HandleChallenge(XML);
 			}
 
+		case "error": 
+			if (Xmlns.match(/.*\/chessd#match#offer/))
+			{
+				Buffer += GAME_ChallengeError(XML);
+			}
 		    
 		default: break;
 	}
+
 	return Buffer;
 }

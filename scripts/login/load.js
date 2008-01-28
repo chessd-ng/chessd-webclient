@@ -62,6 +62,7 @@ function LOGIN_LoadScripts()
 	Scripts[3] = "scripts/parser/parser_chat.js";
 	Scripts[4] = "scripts/contact/contact.js";
 	Scripts[5] = "scripts/chat/chat.js";
+	Scripts[6] = "scripts/game/challenge.js";
 
 	// Carregando arquivos
 	for (i=0; i<Scripts.length; i++)

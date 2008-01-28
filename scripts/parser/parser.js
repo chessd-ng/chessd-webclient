@@ -27,11 +27,12 @@ function PARSER_ParseXml(XML)
 
 
 	// Find bind body
-	try 
+	Body = XML.getElementsByTagName("body");
+	if (Body.length > 0)
 	{
 		Body = XML.getElementsByTagName("body")[0];
 	}
-	catch(e)
+	else 
 	{
 		return 0;
 	}
