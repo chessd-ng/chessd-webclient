@@ -80,3 +80,14 @@ function GAME_HandleChallenge (XML)
 
 	return "";
 }
+
+
+/**
+* Handle errors on challenge
+*/
+
+function GAME_ChallengeError (XML)
+{
+	// TODO
+	return "";
+}

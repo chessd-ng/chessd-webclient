@@ -299,8 +299,6 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	var Challenge = new Object();
 	var i;
 
-	alert ("Username: "+Username+"\nID: "+Id+"\nChallenger :"+Challenger);
-	
 	i = this.FindChallenge(Username);
 	if (i != null)
 	{
