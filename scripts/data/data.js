@@ -75,6 +75,7 @@ DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
+DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
 
 /**********************************
  * METHODS - USER LIST
@@ -316,6 +317,31 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	return true;
 }	
 
+
+/**
+* Remove a challenge in 'ChallengeList'
+*/
+function DATA_RemoveChallenge(Username)
+{
+	var i;
+
+	// Try to find Username on ChallengeList
+	i = this.FindChallenge(Username);
+
+	// No challenge with the user given
+	if (i == null)
+	{
+		return null;
+	}
+
+	else 
+	{
+		// Remove from the list the position of the challenge
+		this.ChallengeList.splice(i, 1);
+	}
+
+	return "";
+}	
 
 
 /**
