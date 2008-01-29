@@ -248,7 +248,11 @@ function CONTACT_HandleRoomPresence(XML)
 		}
 		else
 		{
-			MainData.AddRoom(RoomName, From, Role, Affiliation);
+			// Insert in structure and show in the screen
+			if (MainData.AddRoom(RoomName, From, Role, Affiliation))
+			{
+				INTERFACE_AddRoom(RoomName);
+			}
 		}
 	}
 	// Presence of others users
@@ -261,7 +265,10 @@ function CONTACT_HandleRoomPresence(XML)
 		}
 		else
 		{
-			MainData.AddUserInRoom(RoomName, Jid, NewStatus, Role, Affiliation);
+			if (MainData.AddUserInRoom(RoomName, Jid, NewStatus, Role, Affiliation))
+			{
+				INTERFACE_AddContact(Jid, NewStatus, RoomName);
+			}
 		}
 	}
 	return "";

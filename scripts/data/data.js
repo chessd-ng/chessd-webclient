@@ -50,6 +50,7 @@ function DATA(ConfFile, LangFile)
 	*/
 	this.UserList = new Array();
 	this.RoomList = new Array();
+	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
 	this.RatingLightning =  0;
 	this.RatingBlitz =  0;
@@ -72,6 +73,7 @@ DATA.prototype.DelRoom = DATA_DelRoom;
 DATA.prototype.FindRoom = DATA_FindRoom;
 DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
@@ -211,6 +213,7 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation)
 	Room.Affiliation = Affiliation;
 
 	this.RoomList[this.RoomList.length] = Room;
+	return true;
 }
 
 /**
@@ -255,6 +258,12 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
+	{
+		this.AddRoom(RoomName);
+		RoomPos = this.FindRoom(RoomName);
+	}
+
+	if (this.FindUserInRoom(RoomName, Username) != null)
 		return false;
 
 	User.Username = Username;
@@ -264,6 +273,30 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 
 	// Insert user in room's user list
 	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;
+	return true;
+}
+
+/**
+* Find user in user list of a room
+*/
+function DATA_FindUserInRoom(RoomName, Username)
+{
+	var j, i = this.FindRoom(RoomName);
+
+
+	// If room doesnt exists in data structure
+	if (i == null)
+		return null;
+
+	// Search user in room user list
+	for (j=0; j<this.RoomList[i].UserList.length; j++)
+	{
+		if (this.RoomList[i].UserList[j].Username == Username)
+		{
+			return j;
+		}
+	}
+	return null;
 }
 
 /**
@@ -271,23 +304,14 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 */
 function DATA_DelUserInRoom(RoomName, Username)
 {
-	var j, i = this.FindRoom(RoomName);
+	var j = this.FindRoom(RoomName)
+	var i = this.FindUserInRoom(RoomName, Username)
 
-
-	// If room do not exist
-	if (i == null)
+	if (i == null || j == null)
 		return false;
 
-	// Search user in room user list
-	for (j=0; j<this.RoomList[i].UserList.length; j++)
-	{
-		if (this.RoomList[i].UserList[j].Username == Username)
-		{
-			this.RoomList[i].UserList.splice(j, 1);
-			return true;
-		}
-	}
-	return false;	
+	this.RoomList[j].UserList.splice(i, 1);
+	return true;
 }
 
 /**********************************

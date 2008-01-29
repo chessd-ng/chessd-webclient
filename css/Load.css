@@ -6,7 +6,7 @@
 	top				: 80px;
 	left 			: 50%;
 	margin-left		: -40mm;
-	background		: url('../images/login_box_fundo.gif') repeat-x;
+	background		: url('../images/login/login_box_fundo.gif') repeat-x;
 	padding			: 20px 30px;
 	text-align		: center;
 }
@@ -17,7 +17,7 @@
 	height			: 71px;
 	text-indent		: -9999px;
 	overflow		: hidden;
-	background		: url('../images/logo_chessd.png') no-repeat;
+	background		: url('../images/login/logo_chessd.png') no-repeat;
 	margin			: 3mm 0mm 9mm 11mm;
 }
 
@@ -43,7 +43,7 @@
 	list-style		: none;	
 	width			: 9px;
 	height			: 9px;
-	background		: url('../images/bola_cinza.png') no-repeat;
+	background		: url('../images/login/bola_cinza.png') no-repeat;
 	margin			: 10px;
 }
 
@@ -53,6 +53,6 @@
 	list-style		: none;	
 	width			: 9px;
 	height			: 9px;
-	background		: url('../images/bola_verde.png') no-repeat;
+	background		: url('../images/login/bola_verde.png') no-repeat;
 	margin			: 10px;
 }

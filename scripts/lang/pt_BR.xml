@@ -22,6 +22,25 @@
 		<login_load_images>Carregando imagens...</login_load_images>
 		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 	</login>
+	<menu>
+		<menu_search_game>Buscar Partida</menu_search_game>
+		<menu_search_user>Buscar Usuário</menu_search_user>
+		<menu_news>Notícias</menu_news>
+		<menu_preferences>Preferências</menu_preferences>
+		<menu_help>Ajuda</menu_help>
+		<menu_exit>Sair</menu_exit>
+		<menu_current_game>Partidas em Andamento</menu_current_game>
+		<menu_challenges>Desafios</menu_challenges>
+		<menu_tourneys>Torneios</menu_tourneys>
+		<menu_rooms>Salas</menu_rooms>
+		<menu_history>Histórico</menu_history>
+	</menu>
+	<room>
+		<room_contacts>Contatos</room_contacts>
+		<room_all>Online</room_all>
+		<room_order_nick>Apelido</room_order_nick>
+		<room_order_rating>Rating</room_order_rating>
+	</room>
 	<group>
 		<group_default>Amigos</group_default>
 	</group>

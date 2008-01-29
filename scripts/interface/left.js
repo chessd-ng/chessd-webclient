@@ -1,0 +1,74 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+
+/**
+* Create elements of the left side
+* of screen
+*/
+function INTERFACE_CreateLeft()
+{
+	var Left, UserBox, Rooms;
+
+	Left = UTILS_CreateElement("div", "Left");
+	UserBox = INTERFACE_CreateUserBox();
+	Rooms = UTILS_CreateElement("div", "Rooms");
+
+	Left.appendChild(UserBox);
+	Left.appendChild(Rooms);
+
+	return Left;
+}
+
+/**
+* Create user box (left side of the screen)
+*/
+function INTERFACE_CreateUserBox()
+{
+	var UserDiv, UserImg, UserInf, Name, Status, StatusItem;
+
+	UserDiv = UTILS_CreateElement("div", "User");
+	UserImg = UTILS_CreateElement("img");
+	UserImg.title = MainData.Username;
+	UserImg.src = "images/avatar_tmp.jpg";
+	UserInf = UTILS_CreateElement("div", "UserInf");
+	Name = UTILS_CreateElement("h2", null, null, MainData.Username);
+	Status = UTILS_CreateElement("select");
+
+	// Available
+	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_available"));
+	Status.appendChild(StatusItem);
+
+	// Unavailable
+	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_unavailable"));
+	Status.appendChild(StatusItem);
+
+	// Busy
+	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_busy"));
+	Status.appendChild(StatusItem);
+
+	// Away
+	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_away"));
+	Status.appendChild(StatusItem);
+
+
+	UserInf.appendChild(Name);
+	UserInf.appendChild(Status);
+	UserDiv.appendChild(UserImg);
+	UserDiv.appendChild(UserInf);
+
+	return UserDiv;
+}

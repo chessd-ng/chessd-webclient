@@ -1,0 +1,91 @@
+#Top {
+	display			: table;
+	width			: 100%;
+}
+
+#Top h1 {
+	float			: left;
+	margin			: 1mm;
+	width			: 213px;
+	height			: 71px;
+	background		: url('../images/logochessd.png') no-repeat;
+	text-indent		: -9999px;
+	overflow		: hidden;
+}
+
+#Top #TopMenu {
+	float			: right;
+}
+
+#Top ul {
+	display			: table;
+}
+
+#Top li {
+	float 			: left;
+	list-style		: none;
+	cursor			: pointer;
+}
+
+/* icons menu */
+#Top .icons {
+	position		: relative;
+	left			: 25mm;
+	height			: 15mm;
+}
+
+#Top .icons li {
+	text-indent		: -9999px;
+	overflow		: hidden;
+	width			: 35px;
+	height			: 26px;
+	margin			: 1mm;
+}
+
+/* setting icons */
+#Top .icons .search_game {
+	background		: url('../images/search_game.png') no-repeat;
+}
+
+#Top .icons .search_user {
+	background		: url('../images/search_user.png') no-repeat;
+}
+
+#Top .icons .news {
+	background		: url('../images/news.png') no-repeat;
+}
+
+#Top .icons .preferences {
+	background		: url('../images/preferences.png') no-repeat;
+}
+
+#Top .icons .help {
+	background		: url('../images/help.png') no-repeat;
+	width			: 25px;
+}
+
+#Top .icons .exit {
+	background		: url('../images/exit.png') no-repeat;
+	width			: 40px;
+}
+
+#Top .icons .exit:hover {
+	background		: url('../images/exit_selec.png') no-repeat;
+}
+
+/* menu */
+#Top .menu {
+	position		: relative;
+	right			: 0mm;
+}
+
+#Top .menu li {
+	font			: bold 14px Trebuchet MS;
+	color			: #216778;
+	border-right	: 1px solid #216778;
+	padding			: 0mm 5mm;
+}
+
+#Top .menu li:hover {
+	color			: #FFA200;
+}
