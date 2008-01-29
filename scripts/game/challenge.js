@@ -52,6 +52,7 @@ function GAME_HandleChallenge (XML)
 		Buffer = GAME_HandleError(XML);
 	}
 
+		
 	return Buffer;
 }
 
@@ -125,14 +126,33 @@ function GAME_HandleOffer (XML)
 
 
 /**
-* Handle Accept - TODO
+* Handle Accept 
 */
 function GAME_HandleAccept (XML)
 {
-	// Remove all challanges
+	var Match, GameRoom;
+
+	// Try to get the Match tag
+	try 
+	{
+		Match = XML.getElementsByTagName('match')[0]
+	}
+	catch (e)
+	{
+		return "";
+	}
+		
+	// Get the game room name
+	GameRoom = Match.getAttribute('room');
+
+	// Remove all challanges on structure
 	MainData.ClearChallenges();
 
-	return "";
+	// TODO
+	// Warn the player's interface
+
+	// Send a presence to GameRoom
+	return (MESSAGE_Presence (GameRoom+"/"+MainData.Username));	
 }
 
 
