@@ -56,6 +56,12 @@ function PARSER_ParseIq(XML)
 				Buffer += GAME_HandleChallenge(XML);
 			}
 
+			// Game messages
+			if (Xmlns.match(/\/chessd#game/))
+			{
+				Buffer += GAME_HandleGame(XML);
+			}
+
 		case "error": 
 			// Challenge messages
 			if (Xmlns.match(/\/chessd#match/))
