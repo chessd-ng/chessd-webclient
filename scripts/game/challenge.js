@@ -14,15 +14,57 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+
 /**
-* Handle Challenge 
+* Handle Challenge
 */
+
 function GAME_HandleChallenge (XML)
+{
+	var Query = XML.getElementsByTagName("query");
+	var Xmlns;
+	var Buffer = "";
+
+	// Getting query xmlns
+	if (Query.length > 0)
+	{
+		Xmlns = Query[0].getAttribute("xmlns");
+	}
+	else 
+	{
+		return "";
+	}
+
+	if (Xmlns.match(/\/chessd#match#offer/))
+	{ 
+		Buffer = GAME_HandleOffer(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#accept/))
+	{
+		Buffer = GAME_HandleAccept(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#decline/))
+	{
+		Buffer = GAME_HandleDecline(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#error/))
+	{
+		Buffer = GAME_HandleError(XML);
+	}
+
+	return Buffer;
+}
+
+
+/**
+* Handle Offer
+*/
+function GAME_HandleOffer (XML)
 {
 	var Players, Match, MatchID, Category;
 	var Player1 = new Object();
 	var Player2 = new Object();
-	
+
 	// If there's no match, there's nothing to do
 	try 
 	{
@@ -78,6 +120,47 @@ function GAME_HandleChallenge (XML)
 	// Interface functions should be inserted here
 
 
+	return "";
+}
+
+
+/**
+* Handle Accept - TODO
+*/
+function GAME_HandleAccept (XML)
+{
+	// Remove all challanges
+	MainData.ClearChallenges();
+
+	return "";
+}
+
+
+/**
+* Handle Decline
+*/
+function GAME_HandleDecline (XML)
+{
+	var Match, MatchID;
+
+	// If there's no match, there's nothing to do (again)
+	try 
+	{
+		Match = XML.getElementsByTagName('match')[0];
+	}
+	catch (e)
+	{
+		return "";
+	}
+	
+	MatchID = Match.getAttribute('id');
+
+	// Remove the ID from 'ChallengeList'
+	MainData.RemoveChallengeById(MatchID);
+
+	// TODO
+	// Warn the interface that the challenge was declined
+	
 	return "";
 }
 

@@ -50,16 +50,17 @@ function PARSER_ParseIq(XML)
 			}
 
 		case "set":
-			// Challenge offer
-			if (Xmlns.match(/.*\/chessd#match#offer/))
+			// Challenge messages
+			if (Xmlns.match(/\/chessd#match/))
 			{
 				Buffer += GAME_HandleChallenge(XML);
 			}
 
 		case "error": 
-			if (Xmlns.match(/.*\/chessd#match#offer/))
+			// Challenge messages
+			if (Xmlns.match(/\/chessd#match/))
 			{
-				Buffer += GAME_ChallengeError(XML);
+				Buffer += GAME_HandleChallenge(XML);
 			}
 		    
 		default: break;
