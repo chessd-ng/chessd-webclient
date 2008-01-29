@@ -63,9 +63,9 @@ function CONNECTION_ConnectJabber(XML)
 			break;
 	
 		// Get ratings
-	case (6): 
+	case (6):
 			MainData.ConnectionStatus = 0;
-			CONNECTION_SendJabber(
+			CONNECTION_SendJabber(	
 				MESSAGE_Rating(null, "lightning"), 
 				MESSAGE_Rating(null, "blitz"),
 				MESSAGE_Rating(null, "standard")

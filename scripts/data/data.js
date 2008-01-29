@@ -74,11 +74,15 @@ DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
+DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
+DATA.prototype.RemoveChallengeById = DATA_RemoveChallengeById;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
+DATA.prototype.FindChallengeById = DATA_FindChallengeById;
+DATA.prototype.ClearChallenges = DATA_ClearChallenges;
 
 /**********************************
- * METHODS - USER LIST
- ************************************/
+ * METHODS - USER LIST            *
+ **********************************/
 
 /**
 * Add user to user list
@@ -300,6 +304,8 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	var i;
 
 	i = this.FindChallenge(Username);
+	
+	// Challenge already exist on structure
 	if (i != null)
 	{
 		if (this.ChallengeList[i].Challenger == Challenger)
@@ -317,6 +323,69 @@ function DATA_AddChallenge(Username, Id, Challenger)
 }	
 
 
+/**
+* Remove a challenge in 'ChallengeList'
+*/
+function DATA_RemoveChallenge(Username)
+{
+	var i;
+
+	// Try to find Username on ChallengeList
+	i = this.FindChallenge(Username);
+
+	// No challenge with the user given
+	if (i == null)
+	{
+		return null;
+	}
+
+	else 
+	{
+		// Remove from the list the position of the challenge
+		this.ChallengeList.splice(i, 1);
+	}
+
+	return "";
+}	
+
+
+/**
+* Remove a challenge by ID in 'ChallengeList'
+*/
+function DATA_RemoveChallengeById(ID)
+{
+	var i;
+
+	// Try to find ID on ChallengeList
+	i = this.FindChallengeById(ID);
+
+	// No challenge with the user given
+	if (i == null)
+	{
+		return null;
+	}
+
+	else 
+	{
+		// Remove from the list the position of the challenge
+		this.ChallengeList.splice(i, 1);
+	}
+
+	return "";
+}	
+
+
+/**
+* Remove all challenges in 'ChallengeList'
+*/
+function DATA_ClearChallenges()
+{
+	var size = this.ChallengeList.length;
+	
+	this.ChallengeList.splice(0, size);
+
+	return "";
+}
 
 /**
 * Find a challenge in 'ChallengeList'
@@ -337,4 +406,24 @@ function DATA_FindChallenge(Username)
 	// User not found
 	return null;
 	
+}
+
+
+/**
+* Find a challenge in 'ChallengeList'
+*/
+function DATA_FindChallengeById(ID)
+{
+	var i;
+	
+	for (i=0 ; i < this.ChallengeList.length ; i++)
+	{
+		if (this.ChallengeList[i].Id == ID)
+		{
+			return i;
+		}
+	}
+	
+	// ID not found
+	return null;
 }
