@@ -7,17 +7,6 @@ body {
 	background		: url('../images/fundo_interface.png') repeat-X;
 }
 
-#Exit {
-	position		: absolute;
-	height			: 18px;
-	width			: 40px;
-	top				: 10px;
-	right			: 20px;
-	text-indent		: -9999px;
-	background		: url('../images/sair.png') no-repeat;
-	cursor			: pointer;
-}
-
-#Exit:hover {
-	background		: url('../images/sair_selec.png') no-repeat;
+#Page {
+	min-width		: 780px;
 }

@@ -19,9 +19,11 @@
 * Shows login screen to user
 */
 
+/**
+* Global object that stores all data needed
+* by interface
+*/
 var MainData;
-INTERFACE_StartLogin();
-
 
 /**
 * Create elements and show login screen to user
@@ -45,7 +47,7 @@ function INTERFACE_StartLogin()
 	var TBody = document.createElement('tbody');
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/en_US.xml");
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/pt_BR.xml");
 
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
@@ -72,7 +74,7 @@ function INTERFACE_StartLogin()
 	ErrorLabel = UTILS_CreateElement("span", "ErrorLabel", "error_label");
 	SignIn = UTILS_CreateElement("a", null, null, UTILS_GetText("login_signin"));
 	Banner = UTILS_CreateElement("img", "BannerLogin");
-	Banner.src = "images/banner_login.gif";
+	Banner.src = "images/login/banner_login.gif";
 
 	if (UTILS_ReadCookie("RememberPass") == "true")
 		CheckBox.checked = true;
@@ -130,7 +132,7 @@ function INTERFACE_StartLogin()
 
 	document.body.appendChild(LoginBoxDiv);
 	document.body.appendChild(Banner);
-	document.body.appendChild(Version);
+	//document.body.appendChild(Version);
 
 	// Setting document title
 	document.title = UTILS_GetText("general_title");

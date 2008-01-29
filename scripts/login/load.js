@@ -48,12 +48,31 @@ function LOGIN_Load()
 }
 
 /**
+* Remove load box from screen
+*/
+function LOGIN_EndLoad()
+{
+	INTERFACE_EndLoad();
+}
+
+/**
 * Load scripts files while interface is loading
 */
 function LOGIN_LoadScripts()
 {
-	var Tag, i;
+	var Tag, i, Head;
 	var Scripts = new Array();
+
+	// Searching head of document
+	Head = document.getElementsByTagName("head");
+	if (Head)
+	{
+		Head = Head[0];
+	}
+	else
+	{
+		return null;
+	}
 
 	// Files to be loaded
 	Scripts[0] = "scripts/parser/parser.js";
@@ -63,6 +82,10 @@ function LOGIN_LoadScripts()
 	Scripts[4] = "scripts/contact/contact.js";
 	Scripts[5] = "scripts/chat/chat.js";
 	Scripts[6] = "scripts/game/challenge.js";
+	Scripts[7] = "scripts/interface/interface.js";
+	Scripts[8] = "scripts/interface/top.js";
+	Scripts[9] = "scripts/interface/left.js";
+	Scripts[10] = "scripts/interface/room.js";
 
 	// Carregando arquivos
 	for (i=0; i<Scripts.length; i++)
@@ -70,7 +93,7 @@ function LOGIN_LoadScripts()
 		Tag = document.createElement("script");
 		Tag.src = Scripts[i];
 
-		document.body.appendChild(Tag);
+		Head.appendChild(Tag);
 	}
 }
 
@@ -79,19 +102,33 @@ function LOGIN_LoadScripts()
 */
 function LOGIN_LoadCss()
 {
-	var Tag, i;
+	var Tag, i, Head;
 	var Files = new Array();
 
+	// Searching head of document
+	Head = document.getElementsByTagName("head");
+	if (Head)
+	{
+		Head = Head[0];
+	}
+	else
+	{
+		return null;
+	}
+
 	// Files to be loaded
-	//Files[0] = "css/";
+	Files[0] = "css/Top.css";
+	Files[1] = "css/Left.css";
 
 	for (i=0; i<Files.length; i++)
 	{
 		Tag = document.createElement("link");
 		Tag.href = Files[i];
+		Tag.type = "text/css";
+		Tag.rel = "stylesheet";
 
-		// XXX XXX Grudar ne HEAD TODO TODO
-		//document.body.appendChild(Tag);
+		// Appending to head of document
+		Head.appendChild(Tag);
 	}
 }
 
@@ -104,7 +141,14 @@ function LOGIN_LoadImages()
 	var Images = new Array();
 
 	// Images to be loaded
-	//Images[0] = "images/imagem.jpg";
+	Images[0] = "images/logochessd.png";
+	Images[1] = "images/search_game.png";
+	Images[2] = "images/search_user.png";
+	Images[3] = "images/news.png";
+	Images[4] = "images/preferences.png";
+	Images[5] = "images/help.png";
+	Images[6] = "images/exit.png";
+	Images[7] = "images/exit_selec.png";
 
 	for (i=0; i<Images.length; i++)
 	{

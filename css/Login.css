@@ -6,7 +6,7 @@
 	top				: 80px;
 	left 			: 50%;
 	margin-left		: -390px;
-	background		: url('../images/login_box_fundo.gif') repeat-x;
+	background		: url('../images/login/login_box_fundo.gif') repeat-x;
 	padding			: 20px 30px;
 }
 
@@ -52,14 +52,14 @@
 #LoginDiv #FormDiv .entrar {
 	margin-top		: 10px;
 	margin-bottom	: 5mm;
-	background-image: url("../images/login_botao_ok.png");
+	background-image: url("../images/login/login_botao_ok.png");
 	border			: 0px;
 	width			: 30px;
 	cursor			: pointer;
 }
 
 #LoginDiv #FormDiv .entrar:hover {
-	background-image: url("../images/login_botao_ok_selec.png");
+	background-image: url("../images/login/login_botao_ok_selec.png");
 }
 
 #LoginDiv #FormDiv .signin {
@@ -71,7 +71,7 @@
 #LoginDiv #FormDiv .botao {
 	margin-top		: 10px;
 	padding			: 0 0 5px 0;
-	background		: url('../images/fundo_botao.png') no-repeat;
+	background		: url('../images/login/fundo_botao.png') no-repeat;
 	border			: 0px;
 	width			: 90px;
 	height			: 17px;
@@ -115,6 +115,7 @@
 	top			: 100px;
 }
 
+/*
 #version
 {
 	position		: absolute;
@@ -124,3 +125,4 @@
 	color			: #D33300;
 	font-weight		: bold;
 }
+*/

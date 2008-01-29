@@ -86,6 +86,21 @@ function LOGIN_EndLogin()
 
 
 /**
+* Clear Login window and start interface 
+*
+* @return none
+* @public
+*/
+function LOGIN_Interface()
+{
+	var All = INTERFACE_CreateInterface();
+
+	LOGIN_EndLoad();
+	INTERFACE_ShowInterface(All);
+}
+
+
+/**
 * Show a error message on login
 *
 * @return none
