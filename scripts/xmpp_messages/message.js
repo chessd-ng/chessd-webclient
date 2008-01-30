@@ -124,7 +124,7 @@ function MESSAGE_OfflineUsers()
 {
 	var XMPP;
 
-   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"'>";
+   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"' to='"+MainData.Host+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);
@@ -151,6 +151,38 @@ function MESSAGE_Presence(To)
 	}
 }
 
+
+/**********************************
+ * MESSAGES - CHAT AND GROUPCHAT
+ **********************************/
+
+/**
+* Create a chat message
+*/
+function MESSAGE_Chat(To, Message)
+{
+	var XMPP;
+
+	XMPP  = "<message to='"+To+"' type='chat'>"
+	XMPP += "<body>"+Message+"</body>";
+	XMPP += "</message>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+* Create a groupchat message
+*/
+function MESSAGE_GroupChat(To, Message)
+{
+	var XMPP;
+
+	XMPP  = "<message to='"+To+"' type='groupchat'>"
+	XMPP += "<body>"+Message+"</body>";
+	XMPP += "</message>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
 
 /**********************************
  * MESSAGES - RATING

@@ -60,6 +60,7 @@ function CONNECTION_ConnectJabber(XML)
 				MESSAGE_Presence("match."+MainData.Host),
 				XML
 				);
+			LOGIN_Interface();
 			break;
 	
 		// Get ratings
@@ -70,7 +71,6 @@ function CONNECTION_ConnectJabber(XML)
 				MESSAGE_Rating(null, "blitz"),
 				MESSAGE_Rating(null, "standard")
 				);
-			LOGIN_Interface();
 	}
 }
 
@@ -190,11 +190,13 @@ function CONNECTION_ReceiveConnection()
 					else
 					{
 						MainData.ConnectionStatus++;
-						LOGIN_Load();
 
 						// Send a wait message to bind, to
 						// wait while loading scripts, css and images
 						CONNECTION_SendJabber(MESSAGE_Wait());
+
+						// Load scripts, css and images
+						LOGIN_Load();
 					}
 					break;
 			
@@ -229,6 +231,7 @@ function CONNECTION_ReceiveXml()
 {
 	var XML, Buffer = "";
 	
+
 	if (MainData.HttpRequest.readyState == 4)
 	{
 		if (MainData.HttpRequest.status == 200)
@@ -238,7 +241,7 @@ function CONNECTION_ReceiveXml()
 
 		    // Forward XML to parser
 			Buffer = PARSER_ParseXml(XML);
-			
+				
 			// Parser returned some xml: send it
 			if (Buffer != "" && Buffer != null)
 			{
@@ -262,5 +265,5 @@ function CONNECTION_ReceiveXml()
 		{
 			alert(UTILS_GetText("error_disconnected"));
 		}
-    }
+   	}
 }

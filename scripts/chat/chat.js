@@ -23,7 +23,7 @@
 /**
 * Show ordinary users messages
 */
-function CHAT_HandleChatMessage(XML)
+function CHAT_HandleMessage(XML)
 {
 	var From, Message, Body;
 
@@ -42,34 +42,5 @@ function CHAT_HandleChatMessage(XML)
 	// TODO 
 	// Show the message on interface
 
-	return "";
-}
-
-
-/**
-* Show chat messages
-*/
-function CHAT_HandleGroupChatMessage(XML)
-{
-	var From, ChatRoom, Message, Body;
-
-	// Get the Chat Room name
-	ChatRoom = XML.getAttribute('from').replace(/@.*/,"");
-
-	// Get the message sender
-	From = XML.getAttribute('from').replace(/.*\//,"");
-
-	Body = XML.getElementsByTagName("body");
-
-	// If there is a body
-	if (Body.length > 0)
-	{
-		// Get the message
-		Message = UTILS_GetNodeText(Body[0]);
-	}
-
-	// TODO
-	// Show message on interface
-	
 	return "";
 }

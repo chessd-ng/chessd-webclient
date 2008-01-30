@@ -27,12 +27,12 @@ function PARSER_ParseChat(XML)
 	// Chat message
 	if (Type == "chat")
 	{
-		return CHAT_HandleChatMessage(XML);
+		return CHAT_HandleMessage(XML);
 	}
 	// Groupchat message
 	else if (Type == "groupchat")
 	{
-		return CHAT_HandleGroupChatMessage(XML);
+		return ROOM_HandleMessage(XML);
 	}
 	// Other type
 	else
