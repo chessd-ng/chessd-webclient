@@ -20,6 +20,101 @@
 */
 
 
+
+/**********************************
+ * FUNCTIONS - USERS IN ROOMS
+ *************************************/
+
+/**
+* Add user in contact list of 'RoomName'
+*
+* @public
+*/
+function INTERFACE_AddContact(Username, Status, RoomName)
+{
+	var User, Node = document.getElementById(RoomName+"_Contacts");
+
+	if (!Node)
+	{
+		return false;
+	}
+
+	User = UTILS_CreateElement("li", RoomName+"_"+Username, Status, Username);
+	Node.appendChild(User);
+	return true;
+}
+
+
+/**
+* Update status of 'Username' in 'RoomName'
+*
+* @public
+*/
+function INTERFACE_UpdateStatus(Username, Status, RoomName)
+{
+	var Node = document.getElementById(RoomName+"_"+Username);
+
+	if (!Node)
+	{
+		return false;
+	}
+
+	Node.className = Status;
+	return true;
+}
+
+
+/**
+* Del user from  a Room
+*
+* @public
+*/
+function INTERFACE_DelUser(RoomName, Username)
+{
+	var Node = document.getElementById(RoomName+"_"+Username);
+
+	if (!Node)
+	{
+		return false;
+	}
+
+	Node.parentNode.removeChild(Node);
+	return true;
+}
+
+
+/**********************************
+ * FUNCTIONS - MESSAGE IN ROOMS
+ *************************************/
+
+/**
+* Show message in 'RoomName' message list
+*
+* @public
+*/
+function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
+{
+	var Item, Node = document.getElementById(RoomName+"_Messages");
+	var Message;
+
+	if (!Node)
+	{
+		return false;
+	}
+	
+	// Get time from a fiven timestamp
+	Time = UTILS_GetTime(Timestamp);
+
+	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
+	Item = UTILS_CreateElement("li", null, null, Message);
+	Node.appendChild(Item);
+	return true;
+}
+
+/**********************************
+ * FUNCTIONS - ROOMS
+ *************************************/
+
 /**
 * Create a new room and set it as 'CurrentRoom'
 *
@@ -37,28 +132,6 @@ function INTERFACE_AddRoom(RoomName)
 	INTERFACE_CreateRoom(RoomName);
 	MainData.CurrentRoom = RoomName;
 }
-
-
-/**
-* Add user in contact list of 'RoomName'
-*
-* @public
-*/
-function INTERFACE_AddContact(Username, Status, RoomName)
-{
-	var User = UTILS_CreateElement("li", null, Status, Username);
-	var Node = document.getElementById(RoomName+"_Contacts");
-
-	if (!Node)
-	{
-		return false;
-	}
-
-	Node.appendChild(User);
-	return true;
-}
-
-
 
 /**
 * Bring 'RoomName' to front
@@ -134,6 +207,14 @@ function INTERFACE_CreateRoom(RoomName)
 	// Input
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
+	Input.onkeypress = function(event) {
+		if ((event.keyCode == 13) && (Input.value != ""))
+		{
+			// Send message to room
+			ROOM_SendMessage(RoomName, Input.value);
+			Input.value = "";
+		}
+	}
 
 	RoomInside.appendChild(OrderNick);
 	RoomInside.appendChild(OrderRating);

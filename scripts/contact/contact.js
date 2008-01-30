@@ -116,9 +116,9 @@ function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
 
-
+	/*
 	// Get Jid
-	Jid = XML.getAttribute('from').replace(/@.*/,"");
+	Jid = XML.getAttribute('from').replace(/@.*,"");
 
 	// User is offline
 	Type = XML.getAttribute('type');
@@ -162,7 +162,7 @@ function CONTACT_HandleUserPresence(XML)
 	{
 		MainData.SetUserStatus(Jid, UTILS_GetText("status_available"));
 	}
-	
+	*/
 	return "";
 }
 
@@ -172,7 +172,7 @@ function CONTACT_HandleUserPresence(XML)
 */
 function CONTACT_HandleRoomPresence(XML)
 {
-	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, NewStatus;
+	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status;
 
 
 	// Get Attributes
@@ -180,8 +180,9 @@ function CONTACT_HandleRoomPresence(XML)
 	Show = XML.getElementsByTagName("show");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
-	RoomName = From.replace(/@.*/,"");
-	Jid = From.replace(/.*\//,"");
+	RoomName = From.replace(/@.*/, "");
+	Jid = From.replace(/.*\//, "");
+	MsgTo = From.replace(/\/.*/, "");
 
 	// Check if the type is error
 	if (Type == "error")
@@ -209,34 +210,25 @@ function CONTACT_HandleRoomPresence(XML)
 	if (Show.length > 0)
 	{
 		// Get status name
-		NewStatus = UTILS_GetNodeText(Show[0]);
+		Status = UTILS_GetNodeText(Show[0]);
 
-		// Wich status
-		switch (NewStatus)
+		// Any different status, status = away
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable"))
 		{
-			// Default: away
-			default:
-
-			// Away
-			case (UTILS_GetText("status_away")):
-				NewStatus = UTILS_GetText("status_away");
-				break;
-
-			// Busy
-			case (UTILS_GetText("status_busy")):
-				NewStatus = UTILS_GetText("status_busy");
-				break;
-
-			// Playing
-			case (UTILS_GetText("status_playing")):
-				NewStatus = UTILS_GetText("status_playing");
-				break;
+			Status = "away";
 		}
 	}
 	// If tag 'show' doesnt exists, status online
 	else
 	{
-		NewStatus = UTILS_GetText("status_available");
+		Status = "available";
+	}
+
+	// If 'RoomName' doesnt exists, insert it in strucutre
+	// and show on the interface
+	if (MainData.AddRoom(RoomName))
+	{
+		INTERFACE_AddRoom(RoomName);
 	}
 
 	// If its your presence
@@ -248,11 +240,8 @@ function CONTACT_HandleRoomPresence(XML)
 		}
 		else
 		{
-			// Insert in structure and show in the screen
-			if (MainData.AddRoom(RoomName, From, Role, Affiliation))
-			{
-				INTERFACE_AddRoom(RoomName);
-			}
+			// Set your role and affiliation
+			MainData.SetRoom(RoomName, MsgTo, Role, Affiliation);
 		}
 	}
 	// Presence of others users
@@ -262,12 +251,20 @@ function CONTACT_HandleRoomPresence(XML)
 		{
 			// 666 the number of the beast!
 			MainData.DelUserInRoom(RoomName, Jid);
+			INTERFACE_DelUser(RoomName, Jid);
 		}
 		else
 		{
-			if (MainData.AddUserInRoom(RoomName, Jid, NewStatus, Role, Affiliation))
+			// Try to insert user in 'RoomName' structure
+			if (MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation))
 			{
-				INTERFACE_AddContact(Jid, NewStatus, RoomName);
+				INTERFACE_AddContact(Jid, Status, RoomName);
+			}
+			// If user already exists in 'RoomName' user list
+			else
+			{
+				MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
+				INTERFACE_UpdateStatus(Jid, Status, RoomName);
 			}
 		}
 	}
