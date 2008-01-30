@@ -25,7 +25,7 @@
 */
 function INTERFACE_CreateInterface()
 {
-	var Page, Main, Top;
+	var Page, Main, Top, Left;
 	
 	Page = UTILS_CreateElement("div", "Page");
 	Main = UTILS_CreateElement("div", "Main");

@@ -273,3 +273,46 @@ function UTILS_ReturnEvent(event)
 		return window.event;
 	}
 }
+
+
+/**********************************
+ * FUNCTIONS - TIME CONVERSION
+ ************************************/
+
+/**
+* Return time in format (XXhXX) from a given timestamp
+* If timestamp is null, return current time
+*/
+function UTILS_GetTime(Timestamp)
+{
+	var Offset, Time, Hour, Min, Now, NewTime;
+
+
+	Now = new Date();
+
+	if (Timestamp)
+	{
+		Offset = Now.getTimezoneOffset()/60;
+		Time = Timestamp.split("T")[1];
+		Hour = (Time.split(":")[0] - Offset + 24) % 24;
+		Min = Time.split(":")[1];
+
+		NewTime = "("+Hour+"h"+Min+")";
+	}
+	else
+	{
+		NewTime = "("+Now.getHours()+"h";
+
+		// Insert zero before minutes < 10
+		if (Now.getMinutes() < 10)
+		{
+			NewTime += "0"+Now.getMinutes();
+		}
+		else
+		{
+			NewTime += Now.getMinutes();
+		}
+		NewTime += ")";
+	}
+	return NewTime;
+}

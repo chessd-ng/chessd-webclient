@@ -86,6 +86,7 @@ function LOGIN_LoadScripts()
 	Scripts[8] = "scripts/interface/top.js";
 	Scripts[9] = "scripts/interface/left.js";
 	Scripts[10] = "scripts/interface/room.js";
+	Scripts[11] = "scripts/room/room.js";
 
 	// Carregando arquivos
 	for (i=0; i<Scripts.length; i++)
@@ -149,6 +150,10 @@ function LOGIN_LoadImages()
 	Images[5] = "images/help.png";
 	Images[6] = "images/exit.png";
 	Images[7] = "images/exit_selec.png";
+	Images[8] = "images/available.png";
+	Images[9] = "images/unavailable.png";
+	Images[10] = "images/away.png";
+	Images[11] = "images/busy.png";
 
 	for (i=0; i<Images.length; i++)
 	{

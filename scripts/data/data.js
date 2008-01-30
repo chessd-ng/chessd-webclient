@@ -78,9 +78,11 @@ DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
 DATA.prototype.FindRoom = DATA_FindRoom;
+DATA.prototype.SetRoom = DATA_SetRoom;
 DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
-DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
+DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
+DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
@@ -267,6 +269,27 @@ function DATA_FindRoom(RoomName)
 }
 
 /**
+* Set from, affiliation and role in 'RoomName'
+* structure.
+* Only for interface user
+*/
+function DATA_SetRoom(RoomName, From, Affiliation, Role)
+{
+	var i = this.FindRoom(RoomName);
+
+	if (i == null)
+	{
+		return null;
+	}
+
+	MainData.RoomList[i].MsgTo = From;
+	MainData.RoomList[i].Affiliation = Affiliation;
+	MainData.RoomList[i].Role = Role;
+
+	return true;
+}
+
+/**
 * Add user in user list of a room
 */
 function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
@@ -278,12 +301,13 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
 	{
-		this.AddRoom(RoomName);
-		RoomPos = this.FindRoom(RoomName);
+		return false;
 	}
 
 	if (this.FindUserInRoom(RoomName, Username) != null)
+	{
 		return false;
+	}
 
 	User.Username = Username;
 	User.Status = Status;
@@ -316,6 +340,23 @@ function DATA_FindUserInRoom(RoomName, Username)
 		}
 	}
 	return null;
+}
+
+/**
+* Set user attibutes in 'RoomName'
+*/
+function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
+{
+	var j = this.FindRoom(RoomName)
+	var i = this.FindUserInRoom(RoomName, Username)
+
+	if (i == null || j == null)
+		return false;
+
+	this.RoomList[j].UserList[i].Status = Status;
+	this.RoomList[j].UserList[i].Role = Role;
+	this.RoomList[j].UserList[i].Affiliation = Affiliation;
+	return true;
 }
 
 /**
