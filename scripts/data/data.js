@@ -52,6 +52,13 @@ function DATA(ConfFile, LangFile)
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
+
+	this.CurrentGame = "";
+	this.GameList = new Array();
+
+	this.CurrentOldGame = "";
+	this.OldGameList = new Array();
+
 	this.RatingLightning =  0;
 	this.RatingBlitz =  0;
 	this.RatingStandart = 0;
@@ -81,6 +88,18 @@ DATA.prototype.RemoveChallengeById = DATA_RemoveChallengeById;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
 DATA.prototype.FindChallengeById = DATA_FindChallengeById;
 DATA.prototype.ClearChallenges = DATA_ClearChallenges;
+
+DATA.prototype.AddGame = DATA_AddGame;
+DATA.prototype.RemoveGameById = DATA_RemoveGame;
+DATA.prototype.FindGameById = DATA_FindGame;
+DATA.prototype.AddGameMove = DATA_AddGameMove;
+DATA.prototype.SetCurrentGame = DATA_SetCurrentGame;
+DATA.prototype.SetIsYourTurn = DATA_SetIsYourTurnGame;
+
+DATA.prototype.AddOldGame = DATA_AddOldGame;
+DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
+DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
+DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
 
 /**********************************
  * METHODS - USER LIST            *
@@ -451,3 +470,247 @@ function DATA_FindChallengeById(ID)
 	// ID not found
 	return null;
 }
+
+
+/**********************************
+ * METHODS - GAME                 *
+ **********************************/
+
+/**
+* Set current game 
+*/
+function DATA_SetCurrentGame(Game)
+{
+	if(Game != undefined)
+	{
+		this.CurrentGame = Game;
+	}
+	else
+	{
+		this.CurrentGame = null;
+	}
+}
+
+/**
+* Add a game in 'GameList'
+*/
+function DATA_AddGame(Id, P1Name, P2Name, Color)
+{
+	var NewGame = new Object();
+	
+	if(this.GameList.length == 0)
+	{
+		MainData.SetCurrentGame(NewGame);
+	}
+
+	NewGame.Id = Id;
+	NewGame.P1 = P1Name;
+	NewGame.P2 = P2Name;
+	NewGame.YouColor = Color;
+	NewGame.IsYourTurn = false;
+	NewGame.Moves = new Array();
+
+	this.GameList.push(NewGame);
+}
+
+
+/**
+* Remove a game in 'GameList' by game id
+*/
+function DATA_RemoveGame(Id)
+{
+	var GamePosition = MainData.FindGame(Id);
+	var RemovedGame;
+
+	if(GamePosition == null)
+	{
+		alert("Erro: Jogo nao existente - remover");
+	}
+	else //Remove
+	{
+		RemovedGame = this.GameList[GamePosition];
+		this.GameList.splice(GamePosition, 1);
+
+		//Set next game on GameList to current game
+		MainData.SetCurrentGame(this.GameList[GamePosition]);
+		//If next game is null, set previous game to current game, else
+		//there is no game on GameList
+		if(MainData.CurrentGame == null)
+		{
+			MainData.SetCurrentGame(this.GameList[GamePosition-1]);
+		}
+
+		return RemovedGame;
+	}
+	
+}
+
+/**
+* Find game in 'GameList' by game id
+*/
+function DATA_FindGame(Id)
+{
+	var i;
+	var GameListLen = this.GameList.length;
+
+	for(i=0; i<GameListLen; i++)
+	{
+		if(this.GameList[i].Id == Id)
+		{
+			return i;
+		}
+	}
+
+	//If game Id is not found
+	return null
+}
+
+/**
+* Add a move in 'GameList[x].Moves' 
+*/
+function DATA_AddGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+{
+	var GamePosition = MainData.FindGame(Id);
+	var NewMove = new Object();
+
+	if(GamePosition == null)
+	{
+		return null;
+	}
+	else
+	{
+		NewMove.Board = UTILS_String2Board(Board);
+		NewMove.Move = Move;
+		NewMove.P1Time = P1Time;
+		NewMove.P2Time = P2Time;
+		NewMove.Turn = Turn;
+
+		this.GameList[GamePosition].Moves.push(NewMove);
+	}
+}
+
+/**
+* Set true, if is the player's turn
+*/
+function DATA_SetIsYourTurnGame(Id,P1Name,P2Name,P1Color,Turn)
+{
+	if(this.GameList[Id] == undefined)
+	{
+		return;
+	}
+
+	if((MainData.UserName == P1Name) && (P1Color == Turn))
+	{
+		this.GameList[Id].IsYourTurn = true;
+	}
+	else if((MainData.UserName == P2Name) && (P1Color != Turn))
+	{
+		this.GameList[Id].IsYourTurn = true;
+	}
+	else
+	{
+		this.GameList[Id].IsYourTurn = false;
+	}
+}
+
+/**********************************
+ * METHODS - OLDGAME              *
+ **********************************/
+
+
+/**
+* Set current oldgame 
+*/
+function DATA_SetCurrentOldGame(Game)
+{
+	if(Game != undefined)
+	{
+		this.CurrentOldGame = Game;
+	}
+	else
+	{
+		this.CurrentOldGame = null;
+	}
+}
+
+/**
+* Add a oldgame in 'OldGameList'
+*/
+function DATA_AddOldGame(Id, P1Name, P2Name, Color)
+{
+	var NewOldGame = new Object();
+
+	if(this.OldGameList.length == 0)
+	{
+		MainData.SetCurrentGame(NewOldGame);
+	}
+
+	NewOldGame.Id = this.OldGameList.length;
+	NewOldGame.P1 = P1Name;
+	NewOldGame.P2 = P2Name;
+	NewOldGame.YouColor = Color;
+	NewOldGame.IsYourTurn = false;
+	NewOldGame.Moves = new Array();
+
+	this.OldGameList.push(NewOldGame);
+}
+
+
+/**
+* Remove a game in 'OldGameList' by game id
+*/
+function DATA_RemoveOldGame(Id)
+{
+	var GamePosition = Id;
+	var RemovedGame;
+
+	if(this.OldGameList[GamePosition] == undefined)
+	{
+		return;
+	}
+	else //Remove
+	{
+		RemovedOldGame = this.OldGameList[GamePosition];
+		this.OldGameList.splice(GamePosition, 1);
+
+		//Set next game on GameList to current game
+		MainData.SetCurrentOldGame(this.OldGameList[GamePosition]);
+		//If next game is null, set previous game to current game, else
+		//there is no game on GameList
+		if(MainData.CurrentOldGame == null)
+		{
+			MainData.SetCurrentOldGame(this.OldGameList[GamePosition-1]);
+		}
+
+		return RemovedOldGame;
+	}
+	
+}
+
+
+/**
+* Add a move in 'OldGameList[x].Moves' 
+*/
+function DATA_AddOldGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+{
+	var GamePosition = Id;
+	var NewMove = new Object();
+
+	if(this.OldGameList[GamePosition] == null)
+	{
+		return;
+	}
+	else
+	{
+		//Convert board string to board array of array
+		NewMove.Board = UTILS_String2Board(Board);
+
+		NewMove.Move = Move;
+		NewMove.P1Time = P1Time;
+		NewMove.P2Time = P2Time;
+		NewMove.Turn = Turn;
+
+		this.OldGameList[GamePosition].Moves.push(NewMove);
+	}
+}
+
