@@ -72,6 +72,7 @@ function DATA(ConfFile, LangFile)
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
+DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetRating = DATA_SetRating;
 
@@ -116,7 +117,7 @@ function DATA_AddUser(Username, Status, Subs)
 	var User = new Object();
 
 	if (this.FindUser(Username) != null)
-		return null;
+		return false;
 
 	// Setting atributes
 	// The user's rating will be seted after
@@ -125,6 +126,8 @@ function DATA_AddUser(Username, Status, Subs)
 	User.Subs = Subs;
 
 	this.UserList[this.UserList.length] = User;
+
+	return true;
 }
 
 /**
@@ -161,6 +164,25 @@ function DATA_FindUser(Username)
 	return null;
 }
 
+
+/**
+* Is 'Username' in your contact list?
+*/
+function DATA_IsContact(Username)
+{
+	var i;
+
+	i = this.FindUser(Username);
+
+	if (i == null)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
 
 /**
 * Set user's status
@@ -301,12 +323,12 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
 	{
-		return false;
+		throw "RoomNotCreatedException";
 	}
 
 	if (this.FindUserInRoom(RoomName, Username) != null)
 	{
-		return false;
+		throw "UserAlreadyInRoomException";
 	}
 
 	User.Username = Username;

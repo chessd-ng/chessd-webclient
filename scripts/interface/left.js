@@ -21,13 +21,15 @@
 */
 function INTERFACE_CreateLeft()
 {
-	var Left, UserBox, Rooms;
+	var Left, UserBox, Rooms, ContactList;
 
 	Left = UTILS_CreateElement("div", "Left");
 	UserBox = INTERFACE_CreateUserBox();
-	Rooms = UTILS_CreateElement("div", "Rooms");
+	ContactList = INTERFACE_CreateContactList();
+	Rooms = INTERFACE_CreateRooms();
 
 	Left.appendChild(UserBox);
+	Left.appendChild(ContactList);
 	Left.appendChild(Rooms);
 
 	return Left;

@@ -35,7 +35,15 @@
 		<menu_rooms>Salas</menu_rooms>
 		<menu_history>Histórico</menu_history>
 	</menu>
+	<contact>
+		<contact_contacts>Contatos</contact_contacts>
+		<contact_online>Online</contact_online>
+		<contact_offline>Offline</contact_offline>
+		<contact_order_nick>Apelido</contact_order_nick>
+		<contact_order_rating>Rating</contact_order_rating>
+	</contact>
 	<room>
+		<room_default>geral</room_default>
 		<room_contacts>Contatos</room_contacts>
 		<room_all>Online</room_all>
 		<room_order_nick>Apelido</room_order_nick>
@@ -52,9 +60,6 @@
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
 	</status>
-	<room>
-		<room_default>geral</room_default>
-	</room>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>
 	</error>

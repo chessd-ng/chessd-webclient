@@ -6,7 +6,7 @@
 
 /* User information div */
 #Main #Left #User {
-	width			: 98%;
+	width			: 100%;
 	border			: 2px solid #216778;
 	background-color: #FFF;
 	display			: table;
@@ -35,142 +35,31 @@
 	border			: 0px;
 }
 
-/* Rooms */
-#Main #Left #Rooms {
-	margin-top		: 0.5mm;
-}
-
-#Main #Left #Rooms .Room {
-	position		: relative;
-	border			: 2px solid #216778;
-	background-color: #FFF;
-}
-
-#Main #Left #Rooms .RoomInative .title,
-#Main #Left #Rooms .Room .title {
-	padding			: 2px;
-	padding-left	: 3mm;
-	font			: bold 11px Trebuchet MS;
-	color			: #FFF;
-	background-color: #216778;
-	margin-bottom	: 0.5mm;
-	cursor			: pointer;
-}
-
-#Main #Left #Rooms .RoomInside {
-	padding			: 0mm 3mm;
-}
-
-#Main #Left #Rooms .RoomInsideHidden {
-	padding			: 0mm;
-}
-
 /* order by rating or nick */
-#Main #Left #Rooms .Room #order_nick, 
-#Main #Left #Rooms .Room #order_rating {
+#Main #Left #order_nick, 
+#Main #Left #order_rating {
 	font			: 11px Trebuchet MS;
 	color			: #216778;
 	cursor			: pointer;
 }
 
-#Main #Left #Rooms .Room #order_rating {
+#Main #Left #order_rating {
 	position		: absolute;
 	right			: 4mm;
 }
 
-#Main #Left #Rooms .Room .order_selec {
+#Main #Left .order_selec {
 	font-weight		: bold !important;
 	color			: #FFA200 !important;
 }
 
+
 /* Group names */
-#Main #Left #Rooms .Room label {
+#Main #Left label {
 	display			: block;
 	font			: bold 12px Trebuchet MS;
 	color			: #216778;
 	margin			: 1mm 0mm 0.5mm 0mm;
 }
 
-/* User list */
-#Main #Left #Rooms .Room #RoomUsers {
-	height			: 50mm;
-	overflow		: auto;
-}
-
-#Main #Left #Rooms .Room #RoomUsers ul {
-	padding-bottom	: 1mm;
-	border-bottom	: 1px solid #FFA200;
-	text-indent		: 5mm;
-}
-
-#Main #Left #Rooms .Room #RoomUsers li {
-	margin			: 1px 0px;
-	height			: 16px;
-	list-style		: none;
-	font			: 11px Trebuchet MS;
-}
-
-/* available */
-#Main #Left #Rooms .Room .available {
-	background		: url('../images/available.png') no-repeat;
-}
-
-/* unavailable */
-#Main #Left #Rooms .Room .unavailable {
-	background		: url('../images/unavailable.png') no-repeat;
-}
-
-/* away */
-#Main #Left #Rooms .Room .away {
-	background		: url('../images/away.png') no-repeat;
-}
-
-/* busy */
-#Main #Left #Rooms .Room .busy {
-	background		: url('../images/busy.png') no-repeat;
-}
-
-/* offline */
-#Main #Left #Rooms .Room .offline {
-	background		: url('../images/offline.png') no-repeat;
-}
-
-#Main #Left #Rooms .Room .rating {
-	position		: absolute;
-	right			: 4mm;
-}
-
-/* Search user */
-#Main #Left #Rooms .Room a {
-	display			: block;
-	margin			: 2mm 0mm 2mm 13mm;
-	text-decoration	: none;
-	font			: bold 11px Trebuchet MS;
-	color			: #216778;
-}
-
-/* Room messages */
-#Main #Left #Rooms .Room .MessageList {
-	height			: 35mm;
-	border			: 1px solid #216778;
-	border-bottom	: 0px;
-	padding			: 2px;
-	overflow		: auto;
-}
-
-#Main #Left #Rooms .Room .MessageList li {
-	list-style		: none;
-	font			: 11px Trebuchet MS;
-	color			: #216778;
-}
-
-/* input box */
-#Main #Left #Rooms .Room input {
-	border			: 1px solid #216778;
-	width			: 44.3mm;
-	padding			: 2px;
-	font			: 12px Trebuchet MS;
-	color			: #216778;
-	margin-bottom	: 5mm;
-}
 

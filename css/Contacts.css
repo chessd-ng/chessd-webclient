@@ -1,0 +1,106 @@
+#Main #Left #Contact {
+	height			: 50mm;
+	border			: 2px solid #216778;
+	background-color: #FFF;
+	margin-top		: 0.5mm;
+	position		: relative;
+}
+
+#Main #Left #Contact .title {
+	padding			: 2px;
+	padding-left	: 3mm;
+	font			: bold 11px Trebuchet MS;
+	color			: #FFF;
+	background-color: #216778;
+	margin-bottom	: 1mm;
+	cursor			: pointer;
+}
+
+#Main #Left #Contact #ContactInside {
+	padding-left	: 3mm;
+}
+
+/* User list */
+#Main #Left #Contact #Contacts {
+	display			: block;
+	height			: 33mm;
+	padding-bottom	: 1mm;
+	overflow		: auto;
+	width			: 100%;
+}
+
+#Main #Left #Contact #Contacts table {
+	border-spacing	: 0px;
+}
+
+#Main #Left #Contact label {
+	display			: block;
+	font			: bold 12px Trebuchet MS;
+	color			: #216778;
+	margin			: 1mm 0mm 0.5mm 0mm;
+	cursor			: pointer;
+}
+
+#Main #Left #Contact tr {
+	text-indent		: 5mm;
+	margin			: 1px 0px;
+	height			: 4.3mm;
+	font			: 11px Trebuchet MS;
+	color			: #000;
+}
+
+#Main #Left #Contact td {
+	width			: 31mm;
+}
+
+#Main #Left #Contact .rating {
+	width			: 2mm;
+}
+
+
+#Main #Left #Contact td:hover {
+	background-color: #EAF5F4;
+	cursor			: pointer;
+}
+
+#Main #Left #Contact hr {
+	height			: 1px;
+	margin			: 0.5mm 4mm 0mm 0mm;
+	background-color: #FFA200;
+	border			: 0px;
+}
+
+
+/* available */
+#Main #Left .available {
+	background		: url('../images/available.png') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .unavailable {
+	background		: url('../images/unavailable.png') no-repeat;
+}
+
+/* away */
+#Main #Left .away {
+	background		: url('../images/away.png') no-repeat;
+}
+
+/* busy */
+#Main #Left .busy {
+	background		: url('../images/busy.png') no-repeat;
+}
+
+/* offline */
+#Main #Left .offline {
+	background		: url('../images/offline.png') no-repeat;
+}
+
+/* Search user */
+#Main #Left #Contact a {
+	display			: block;
+	margin			: 1mm 0mm 1mm 13mm;
+	text-decoration	: none;
+	font			: bold 11px Trebuchet MS;
+	color			: #216778;
+}
