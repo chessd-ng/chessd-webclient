@@ -29,46 +29,47 @@
 * Add user in contact list of 'RoomName'
 *
 * @public
-*
-function INTERFACE_AddContact(Username, Status, RoomName)
+*/
+function INTERFACE_AddUserInRoom(RoomName, Username, Status)
 {
-	var User, Node = document.getElementById(RoomName+"_Contacts");
+	var User, Node = document.getElementById(RoomName+"UserList");
 
 	if (!Node)
 	{
 		return false;
 	}
 
-	User = UTILS_CreateElement("li", RoomName+"_"+Username, Status, Username);
+	User = INTERFACE_CreateContact(Username, Status, null, RoomName);
 	Node.appendChild(User);
 	return true;
 }
-*/
+
 /**
-* Add user in online list of 'RoomName'
+* Del user from a Room
 *
 * @public
 */
-function INTERFACE_AddGeneral(Username, Status, RoomName)
+function INTERFACE_DelUserInRoom(RoomName, Username)
 {
-	var User, Node = document.getElementById(RoomName+"_All");
+	var Node = document.getElementById(RoomName+"_"+Username);
 
 	if (!Node)
 	{
 		return false;
 	}
 
-	User = UTILS_CreateElement("li", RoomName+"_"+Username, Status, Username);
-	Node.appendChild(User);
+	Node = Node.parentNode;
+	Node.parentNode.removeChild(Node);
 	return true;
 }
+
 
 /**
 * Update status of 'Username' in 'RoomName'
 *
 * @public
 */
-function INTERFACE_UpdateStatus(Username, Status, RoomName)
+function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus)
 {
 	var Node = document.getElementById(RoomName+"_"+Username);
 
@@ -77,28 +78,10 @@ function INTERFACE_UpdateStatus(Username, Status, RoomName)
 		return false;
 	}
 
-	Node.className = Status;
+	Node.className = NewStatus;
 	return true;
 }
 
-
-/**
-* Del user from  a Room
-*
-* @public
-*/
-function INTERFACE_DelUser(RoomName, Username)
-{
-	var Node = document.getElementById(RoomName+"_"+Username);
-
-	if (!Node)
-	{
-		return false;
-	}
-
-	Node.parentNode.removeChild(Node);
-	return true;
-}
 
 
 /**********************************
@@ -132,12 +115,12 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 /**********************************
  * FUNCTIONS - ROOMS
  *************************************/
-
+/*
 /**
 * Create a new room and set it as 'CurrentRoom'
 *
 * @public
-*/
+*
 function INTERFACE_AddRoom(RoomName)
 {
 	// Push back current room
@@ -155,7 +138,7 @@ function INTERFACE_AddRoom(RoomName)
 * Bring 'RoomName' to front
 *
 * @public
-*/
+*
 function INTERFACE_FocusRoom(RoomName)
 {
 	var Node;
@@ -186,7 +169,7 @@ function INTERFACE_FocusRoom(RoomName)
 * Create a new room
 *
 * @private
-*/
+*
 function INTERFACE_CreateRoom(RoomName)
 {
 	var RoomDiv, RoomTitle, RoomInside, RoomUsers, UsersLabel, UsersList, MessageList;
@@ -245,7 +228,7 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomDiv.appendChild(RoomInside);
 
 	document.getElementById("Rooms").appendChild(RoomDiv);
-}
+}*/
 
 /**
 * Create rooms div
@@ -287,6 +270,14 @@ function INTERFACE_CreateRooms()
 	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
+	Input.onkeypress = function(event) {
+		if ((event.keyCode == 13) && (Input.value != ""))
+		{
+			// Send message to room
+			ROOM_SendMessage(RoomName, Input.value);
+			Input.value = "";
+		}
+	}
 
 
 	RoomsListArrow.appendChild(Arrow);

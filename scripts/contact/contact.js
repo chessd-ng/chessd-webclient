@@ -108,7 +108,6 @@ function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
 
-	
 	// Get Jid
 	Jid = XML.getAttribute('from').replace(/@.*/,"");
 
@@ -228,32 +227,30 @@ function CONTACT_HandleRoomPresence(XML)
 		{
 			// 666 the number of the beast!
 			MainData.DelUserInRoom(RoomName, Jid);
-			INTERFACE_DelUser(RoomName, Jid);
+			INTERFACE_DelUserInRoom(RoomName, Jid);
 		}
 		else
 		{
 			// Try to insert user in 'RoomName' structure
-			if (MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation))
+			try
 			{
+				MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 				INTERFACE_AddUserInRoom(RoomName, Jid, Status);
-				/*
-				if (MainData.IsContact(Jid))
-				{
-					// Add user in your contact list
-					INTERFACE_AddContact(Jid, Status, RoomName);
-				}
-				else
-				{
-					// Add user in online list
-					INTERFACE_AddGeneral(Jid, Status, RoomName);
-				}
-				*/
 			}
-			// If user already exists in 'RoomName' user list
-			else
+
+			catch (e)
 			{
-				MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
-				INTERFACE_UpdateStatus(Jid, Status, RoomName);
+				// If user already exists in 'RoomName' user list
+				if (e == "UserAlreadyInRoomException")
+				{
+					MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
+					INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
+				}
+				// This should NOT EVER happen
+				else if (e == "RoomNotCreatedException")
+				{
+					throw "UnexpectedEvilException"
+				}
 			}
 		}
 	}

@@ -1,0 +1,152 @@
+
+/* Rooms */
+#Main #Left #Rooms {
+	margin-top		: 0.5mm;
+	position		: relative
+}
+
+#Main #Left #Rooms .Room {
+	border			: 2px solid #216778;
+	border-top		: 0px;
+	background-color: #FFF;
+	height			: 84mm;
+}
+
+/* Room title list */
+#Main #Left #Rooms #RoomList {
+	width			: 100%;
+	display			: table;
+	position		: relative;
+	background-color: #216778;
+}
+
+#Main #Left #Rooms #RoomList li {
+	width			: 19.9mm;
+	height			: 14px;
+	float 			: left;
+	list-style		: none;
+	padding			: 2px;
+	padding-left	: 3mm;
+	font			: bold 11px Trebuchet MS;
+	color			: #FFF;
+	background-color: #216778;
+	border-right	: 1px solid #FFF;
+	margin-right	: 1px;
+}
+
+#Main #Left #Rooms #RoomList .room_selec {
+	background-color: #FFA200;
+}
+
+#Main #Left #Rooms #RoomList .room_arrow {
+	width			: 18px;
+	height			: 4.8mm;
+	padding			: 0px;
+	position		: absolute;
+	right			: 2px;
+	overflow		: hidden;
+	border			: 0px;
+	border-left		: 1px solid #FFF;
+	cursor			: pointer;
+}
+
+#Main #Left #Rooms .RoomInside {
+	padding-left	: 3mm;
+}
+
+/* Room List menu */
+#Main #Left #Rooms #RoomListMenu {
+	position		: absolute;
+	left			: 53mm;
+	width			: 28mm;
+	height			: 35mm;
+	border			: 2px solid #216778;
+	background-color: #EAF5F4;
+	cursor			: pointer;
+}
+
+#Main #Left #Rooms #RoomListMenu li:hover {
+	background-color: #FFF;
+}
+
+#Main #Left #Rooms #RoomListMenu ul {
+	padding			: 5px 10px;
+	height			: 32mm;
+	overflow		: auto;
+}
+
+#Main #Left #Rooms #RoomListMenu li {
+	list-style		: none;
+	margin-bottom	: 1mm;
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+}
+
+/* User list */
+#Main #Left #Rooms .Room table {
+	display			: block;
+	height			: 25mm;
+	margin-top		: 2mm;
+	border-spacing	: 0px;
+	overflow		: auto;
+}
+
+#Main #Left #Rooms .Room #RoomUsers ul {
+	padding-bottom	: 1mm;
+	border-bottom	: 1px solid #FFA200;
+	text-indent		: 5mm;
+}
+
+#Main #Left #Rooms .Room #RoomUsers tr {
+	text-indent		: 5mm;
+	margin			: 1px 0px;
+	height			: 16px;
+	list-style		: none;
+	font			: 11px Trebuchet MS;
+}
+
+#Main #Left #Rooms .Room #RoomUsers td:hover {
+	background-color: #EAF5F4;
+	cursor			: pointer;
+}
+
+#Main #Left #Rooms td {
+	width			: 31mm;
+}
+
+#Main #Left #Rooms .rating {
+	width			: 2mm;
+}
+
+#Main #Left #Rooms hr {
+	height			: 1px;
+	margin			: 0.5mm 4mm 2mm 0mm;
+	background-color: #FFA200;
+	border			: 0px;
+}
+
+/* Room messages */
+#Main #Left #Rooms .Room .MessageList {
+	height			: 35mm;
+	border			: 1px solid #216778;
+	border-bottom	: 0px;
+	padding			: 2px;
+	margin-right	: 3mm;
+}
+
+#Main #Left #Rooms .Room .MessageList li {
+	list-style		: none;
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+}
+
+/* input box */
+#Main #Left #Rooms .Room input {
+	border			: 1px solid #216778;
+	width			: 44.3mm;
+	padding			: 2px;
+	font			: 12px Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 5mm;
+}
+
