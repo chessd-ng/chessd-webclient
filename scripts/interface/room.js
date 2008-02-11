@@ -29,7 +29,7 @@
 * Add user in contact list of 'RoomName'
 *
 * @public
-*/
+*
 function INTERFACE_AddContact(Username, Status, RoomName)
 {
 	var User, Node = document.getElementById(RoomName+"_Contacts");
@@ -43,7 +43,25 @@ function INTERFACE_AddContact(Username, Status, RoomName)
 	Node.appendChild(User);
 	return true;
 }
+*/
+/**
+* Add user in online list of 'RoomName'
+*
+* @public
+*/
+function INTERFACE_AddGeneral(Username, Status, RoomName)
+{
+	var User, Node = document.getElementById(RoomName+"_All");
 
+	if (!Node)
+	{
+		return false;
+	}
+
+	User = UTILS_CreateElement("li", RoomName+"_"+Username, Status, Username);
+	Node.appendChild(User);
+	return true;
+}
 
 /**
 * Update status of 'Username' in 'RoomName'
@@ -95,7 +113,7 @@ function INTERFACE_DelUser(RoomName, Username)
 function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 {
 	var Item, Node = document.getElementById(RoomName+"_Messages");
-	var Message;
+	var Message, Time;
 
 	if (!Node)
 	{
@@ -227,4 +245,68 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomDiv.appendChild(RoomInside);
 
 	document.getElementById("Rooms").appendChild(RoomDiv);
+}
+
+/**
+* Create rooms div
+*
+* @private
+*/
+function INTERFACE_CreateRooms()
+{
+	var RoomsDiv, RoomList, RoomListGeneral, RoomListArrow, Arrow;
+	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
+	var Hr, MessageList;
+	var OrderNick, OrderRating, Input;
+
+
+	// Room list
+	RoomsDiv = UTILS_CreateElement("div", "Rooms");
+	RoomsList = UTILS_CreateElement("ul", "RoomList");
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_GetText("room_default"));
+	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
+	Arrow = UTILS_CreateElement("img");
+	Arrow.src = "images/room_arrow.png";
+
+	// General room
+	RoomName = UTILS_GetText("room_default");
+	RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
+	RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
+	
+	// Order
+	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
+	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("room_order_rating"));
+
+	// Room user list
+	RoomUsers = UTILS_CreateElement("div", "RoomUsers");
+	RoomTable = UTILS_CreateElement("table");
+	RoomTbody = UTILS_CreateElement("tbody", RoomName+"UserList");
+	Hr = UTILS_CreateElement("hr");
+	
+	// MessageList
+	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
+	Input = UTILS_CreateElement("input");
+	Input.type = "text";
+
+
+	RoomsListArrow.appendChild(Arrow);
+	RoomsList.appendChild(RoomsListGeneral);
+	RoomsList.appendChild(RoomsListArrow);
+
+	RoomTable.appendChild(RoomTbody);
+	RoomUsers.appendChild(RoomTable);
+
+	RoomInside.appendChild(OrderNick);
+	RoomInside.appendChild(OrderRating);
+	RoomInside.appendChild(RoomUsers);
+	RoomInside.appendChild(Hr);
+	RoomInside.appendChild(MessageList);
+	RoomInside.appendChild(Input);
+
+	RoomDiv.appendChild(RoomInside);
+
+	RoomsDiv.appendChild(RoomsList);
+	RoomsDiv.appendChild(RoomDiv);
+
+	return RoomsDiv;
 }

@@ -69,14 +69,6 @@ function CONTACT_HandleUserList(XML)
 	return Pending;
 }
 
-/**
-* Insert user in data structure
-*/
-function CONTACT_InsertUser(User, Status, Subs)
-{
-	MainData.AddUser(User, Status, Subs);
-}
-
 
 /**
 * Receive the rating massege and set it in user list
@@ -116,15 +108,15 @@ function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
 
-	/*
+	
 	// Get Jid
-	Jid = XML.getAttribute('from').replace(/@.*,"");
+	Jid = XML.getAttribute('from').replace(/@.*/,"");
 
 	// User is offline
 	Type = XML.getAttribute('type');
 	if (Type == "unavailable")
 	{
-		MainData.SetUserStatus(Jid, UTILS_GetText("status_offline"));
+		CONTACT_SetUserStatus(Jid, "offline");
 		return "";
 	}
 
@@ -135,44 +127,26 @@ function CONTACT_HandleUserPresence(XML)
 		// Get status name
 		NewStatus = UTILS_GetNodeText(Show[0]);
 
-		// Wich status
-		switch (NewStatus)
+		if ((NewStatus == "busy") || (NewStatus == "away") || (NewStatus == "unavailable") || (NewStatus == "playing"))
 		{
-			// Default: away
-			default:
-
-			// Away
-			case (UTILS_GetText("status_away")):
-				MainData.SetUserStatus(Jid, UTILS_GetText("status_away"));
-				break;
-
-			// Busy
-			case (UTILS_GetText("status_busy")):
-				MainData.SetUserStatus(Jid, UTILS_GetText("status_busy"));
-				break;
-
-			// Playing
-			case (UTILS_GetText("status_playing")):
-				MainData.SetUserStatus(Jid, UTILS_GetText("status_playing"));
-				break;
+			CONTACT_SetUserStatus(Jid, NewStatus);
 		}
 	}
 	// If tag 'show' doesnt exists, status online
 	else
 	{
-		MainData.SetUserStatus(Jid, UTILS_GetText("status_available"));
+		CONTACT_SetUserStatus(Jid, "available");
 	}
-	*/
+	
 	return "";
 }
-
 
 /**
 * Parse user presence in rooms
 */
 function CONTACT_HandleRoomPresence(XML)
 {
-	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status;
+	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo;
 
 
 	// Get Attributes
@@ -228,7 +202,10 @@ function CONTACT_HandleRoomPresence(XML)
 	// and show on the interface
 	if (MainData.AddRoom(RoomName))
 	{
-		INTERFACE_AddRoom(RoomName);
+		if (RoomName != UTILS_GetText("room_default"))
+		{
+			INTERFACE_AddRoom(RoomName);
+		}
 	}
 
 	// If its your presence
@@ -258,7 +235,19 @@ function CONTACT_HandleRoomPresence(XML)
 			// Try to insert user in 'RoomName' structure
 			if (MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation))
 			{
-				INTERFACE_AddContact(Jid, Status, RoomName);
+				INTERFACE_AddUserInRoom(RoomName, Jid, Status);
+				/*
+				if (MainData.IsContact(Jid))
+				{
+					// Add user in your contact list
+					INTERFACE_AddContact(Jid, Status, RoomName);
+				}
+				else
+				{
+					// Add user in online list
+					INTERFACE_AddGeneral(Jid, Status, RoomName);
+				}
+				*/
 			}
 			// If user already exists in 'RoomName' user list
 			else
@@ -269,4 +258,31 @@ function CONTACT_HandleRoomPresence(XML)
 		}
 	}
 	return "";
+}
+
+
+/**
+* Insert user in data structure
+*/
+function CONTACT_InsertUser(User, Status, Subs)
+{
+	if (MainData.AddUser(User, Status, Subs))
+	{
+		INTERFACE_AddContact(User, Status);
+		MainData.AddUser(User, Status, Subs);
+	}
+}
+
+
+/**
+* Change status of 'Username' in structure and interface
+*/
+function CONTACT_SetUserStatus(Username, NewStatus)
+{
+	if (MainData.SetUserStatus(Username, NewStatus))
+	{
+		INTERFACE_SetUserStatus(Username, NewStatus)	
+		return true;
+	}
+	return false;
 }
