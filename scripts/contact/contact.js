@@ -116,9 +116,8 @@ function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
 
-	/*
 	// Get Jid
-	Jid = XML.getAttribute('from').replace(/@.*,"");
+	Jid = XML.getAttribute('from').replace(/@.*/,"");
 
 	// User is offline
 	Type = XML.getAttribute('type');
@@ -162,7 +161,7 @@ function CONTACT_HandleUserPresence(XML)
 	{
 		MainData.SetUserStatus(Jid, UTILS_GetText("status_available"));
 	}
-	*/
+	
 	return "";
 }
 
@@ -256,15 +255,25 @@ function CONTACT_HandleRoomPresence(XML)
 		else
 		{
 			// Try to insert user in 'RoomName' structure
-			if (MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation))
+			try
 			{
+				MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 				INTERFACE_AddContact(Jid, Status, RoomName);
 			}
-			// If user already exists in 'RoomName' user list
-			else
+
+			catch (e)
 			{
-				MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
-				INTERFACE_UpdateStatus(Jid, Status, RoomName);
+				// If user already exists in 'RoomName' user list
+				if (e == "UserAlreadyInRoomException")
+				{
+					MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
+					INTERFACE_UpdateStatus(Jid, Status, RoomName);					
+				}
+				// This should NOT EVER happen
+				else if (e == "RoomNotCreatedException")
+				{
+					throw "UnexpectedEvilException"
+				}
 			}
 		}
 	}

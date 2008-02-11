@@ -301,12 +301,12 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
 	{
-		return false;
+		throw "RoomNotCreatedException";
 	}
 
 	if (this.FindUserInRoom(RoomName, Username) != null)
 	{
-		return false;
+		throw "UserAlreadyInRoomException";
 	}
 
 	User.Username = Username;
