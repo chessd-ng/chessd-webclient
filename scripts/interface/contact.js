@@ -178,7 +178,7 @@ function INTERFACE_CreateContactList()
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
-	var OrderNIck, OrderRating, Search, Hr;
+	var OrderNick, OrderRating, Search, Hr, i;
 
 	// Main div
 	ContactDiv = UTILS_CreateElement("div", "Contact");

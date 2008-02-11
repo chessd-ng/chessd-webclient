@@ -21,7 +21,7 @@
 */
 function INTERFACE_CreateLeft()
 {
-	var Left, UserBox, Rooms;
+	var Left, UserBox, Rooms, ContactList;
 
 	Left = UTILS_CreateElement("div", "Left");
 	UserBox = INTERFACE_CreateUserBox();

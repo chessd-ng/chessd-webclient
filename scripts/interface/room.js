@@ -230,6 +230,53 @@ function INTERFACE_CreateRoom(RoomName)
 	document.getElementById("Rooms").appendChild(RoomDiv);
 }*/
 
+
+/**
+* Show or hide list of user's rooms
+*
+* @public
+*/
+function INTERFACE_ChangeRoomListVisibility()
+{
+	var Div, List, Node, Item, i;
+	var Menu = document.getElementById('RoomListMenu');
+	var Node = document.getElementById('RoomList');
+
+	// If already exists room list menu, hide it
+	if (Menu)
+	{
+		Menu.parentNode.removeChild(Menu);
+		return;
+	}
+
+	// Creating menu
+	Div = UTILS_CreateElement("div", "RoomListMenu");
+	List = UTILS_CreateElement('ul');
+
+	Div.style.position = "absolute";
+	
+	// Population list with user's rooms
+	for (i=0; i < MainData.RoomList.length; i++)
+	{
+		Item = document.createElement('li');
+		Item.innerHTML = MainData.RoomList[i].Name;
+		List.appendChild(Item);
+	}
+
+	Div.appendChild(List);
+
+	try
+	{
+		document.getElementById('Rooms').insertBefore(Div, Node);
+	}
+	catch(e)
+	{
+		return false;
+	}
+	return true;
+}
+
+
 /**
 * Create rooms div
 *
@@ -237,7 +284,7 @@ function INTERFACE_CreateRoom(RoomName)
 */
 function INTERFACE_CreateRooms()
 {
-	var RoomsDiv, RoomList, RoomListGeneral, RoomListArrow, Arrow;
+	var RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
 	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
 	var Hr, MessageList;
 	var OrderNick, OrderRating, Input;
@@ -248,6 +295,7 @@ function INTERFACE_CreateRooms()
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
 	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_GetText("room_default"));
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
+	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
 	Arrow.src = "images/room_arrow.png";
 
