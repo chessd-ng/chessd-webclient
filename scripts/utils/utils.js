@@ -231,30 +231,54 @@ function UTILS_ValidateUsername(Username)
  * FUNCTIONS - EVENT LISTENERS
  ************************************/
 
-/* Add a Element event listener
+/**
+* Add a Element event listener
 * SRC = http://snipplr.com/view/561/add-event-listener/
+* Cross-browser implementation of Element.addEventListener()
 */
-
-// Cross-browser implementation of Element.addEventListener()
 function UTILS_AddListener(Element, Type, Expression, Bubbling)
 {
-        Bubbling = Bubbling || false;
+	Bubbling = Bubbling || false;
 
-        if(window.addEventListener) // Standard
-        {
-                Element.addEventListener(Type, Expression, Bubbling);
-                return true;
-        } 
-        else if(window.attachEvent) // IE
-        {
-                Element.attachEvent('on' + Type, Expression);
-                Element.cancelBubble = !(Bubbling);
-                return true;
-        } 
-        else
-        { 
-                return false;
-        }
+	if (window.addEventListener) // Standard
+	{
+		Element.addEventListener(Type, Expression, Bubbling);
+		return true;
+	} 
+	else if(window.attachEvent) // IE
+	{
+		Element.attachEvent('on' + Type, Expression);
+		Element.cancelBubble = !(Bubbling);
+		return true;
+	} 
+	else
+	{ 
+		return false;
+	}
+}
+
+/**
+* Remove an event listener
+*/
+function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
+{
+	Bubbling = Bubbling || false;
+
+	if (window.addEventListener) // Standard
+	{
+		Element.removeEventListener(Type, Expression, Bubbling);
+		return true;
+	} 
+	else if(window.attachEvent) // IE
+	{
+		Element.detachEvent('on' + Type, Expression);
+		Element.cancelBubble = !(Bubbling); // ??? TODO -> precisa tirar isso?
+		return true;
+	} 
+	else
+	{ 
+		return false;
+	}
 }
 
 
@@ -316,6 +340,28 @@ function UTILS_GetTime(Timestamp)
 	}
 	return NewTime;
 }
+/************************************
+ * FUNCTIONS - OBJECT OFFSETS       *
+ ************************************/
+/*
+* Return object offsets (top and left)
+*/
+function UTILS_GetOffset(Obj)
+{
+	var Curleft, Curtop;
+
+	if (Obj.offsetParent) 
+	{
+		Curleft = Obj.offsetLeft;
+		Curtop = Obj.offsetTop;
+		while (Obj = Obj.offsetParent)
+		{
+			Curleft += Obj.offsetLeft
+			Curtop += Obj.offsetTop
+		}
+	return {X:Curleft, Y:Curtop};
+	}
+}
 
 
 /**********************************
@@ -324,6 +370,7 @@ function UTILS_GetTime(Timestamp)
 //TODO TODO TODO TODO TODO TODO
 // SUBSTITUIR ESSAS FUNCOES DE DRAG AND DROPS
 //TODO TODO TODO TODO TODO TODO
+
 /**
 *
 * DRAG AND DROP DAS PEÇAS
@@ -363,7 +410,8 @@ function UTILS_DropObject(Obj)
 	var Move;
 	//var CurrentGame = GAME_Game_FindGameByGameId(MainData.CurrentGame);
 	var CurrentGamePos = MainData.CurrentGame; //Posicao do jogo na estrutura de jogos
-
+	var Curleft = 0;
+	var Curtop = 0;
 	//MODO TUTOR
 	var TUTOR_MODE = 0;
 	//var Color = MainData.BoardList[CurrentGame].Color;
@@ -391,7 +439,6 @@ function UTILS_DropObject(Obj)
 			return;
 		}
 		
-
 		// Atualiza o tabuleiro armazenado
 		//UTILS_UpdateBoard(Turn);
 		/*

@@ -88,8 +88,11 @@ function LOGIN_LoadScripts()
 	Scripts[10] = "scripts/interface/room.js";
 	Scripts[11] = "scripts/interface/contact.js";
 	Scripts[12] = "scripts/room/room.js";
+
 	Scripts[13] = "scripts/window/window.js";
 	Scripts[14] = "scripts/interface/window.js";
+
+	Scripts[15] = "scripts/contact/status.js";
 
 	// Carregando arquivos
 	for (i=0; i<Scripts.length; i++)

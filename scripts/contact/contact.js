@@ -283,3 +283,72 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 	}
 	return false;
 }
+
+
+/**
+* Create and set options for user menu
+*/
+function CONTACT_ShowUserMenu(Obj, Username)
+{
+	var Func, Options = new Array();
+	var i = 0, Hide = 0;
+
+	Func = function () {
+		Hide += 1;
+		
+		if (Hide == 2)
+		{
+			UTILS_RemoveListener(document, "mousedown", Func, false);
+
+			// Remove menu from screen
+			INTERFACE_HideUserMenu();
+		}
+	};
+
+	/**
+	* Setting options
+	*/
+	
+	// Send message
+	Options[i] = new Object();
+	Options[i].Name = UTILS_GetText("usermenu_send_message");
+	Options[i].Func = function () {
+		alert("manda mensges");
+	}
+	i += 1;
+	
+	// Match user
+	if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
+	{
+		Options[i] = new Object();
+		Options[i].Name = UTILS_GetText("usermenu_match");
+		Options[i].Func = function () { };
+		i += 1;
+	}
+
+	// Add or remove contact
+	if (MainData.IsContact(Username))
+	{
+		Options[i] = new Object();
+		Options[i].Name = UTILS_GetText("usermenu_remove_contact");
+		Options[i].Func = function () { };
+		i += 1;
+	}
+	else
+	{
+		Options[i] = new Object();
+		Options[i].Name = UTILS_GetText("usermenu_add_contact");
+		Options[i].Func = function () { };
+		i += 1;
+	}
+
+	// View user's profile
+	Options[i] = new Object();
+	Options[i].Name = UTILS_GetText("usermenu_view_profile");
+	Options[i].Func = function () { };
+
+	// Show menu in user's screen
+	INTERFACE_ShowUserMenu(Obj, Options);
+	
+	UTILS_AddListener(document, "click", Func, false);
+}
