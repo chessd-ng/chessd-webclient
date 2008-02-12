@@ -159,7 +159,7 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 	// Message to room
 	if (RoomName)
 	{
-		return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'" ><show>'+NewStatus+'</show></presence>');
+		return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" ><show>'+NewStatus+'</show></presence>');
 	}
 	
 	// General status change
