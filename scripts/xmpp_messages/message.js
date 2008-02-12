@@ -151,6 +151,42 @@ function MESSAGE_Presence(To)
 	}
 }
 
+/**
+* Change Status
+*/
+function MESSAGE_ChangeStatus(NewStatus, RoomName)
+{
+	// Message to room
+	if (RoomName)
+	{
+		return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'" ><show>'+NewStatus+'</show></presence>');
+	}
+	
+	// General status change
+	else
+	{
+		return MESSAGE_MakeXMPP('<presence xmlns="jabber:client"><show>'+NewStatus+'</show></presence>');
+	}
+}
+
+
+/**
+* Set offline on jabber or exit on a room
+*/
+function MESSAGE_Unavailable (RoomName)
+{
+	// Exit from a room
+	if (RoomName)
+	{
+		return MESSAGE_MakeXMPP('<presence to="'+RoomName+'" xmlns="jabber:client" type="unavailable"></presence>');
+	}
+
+	// If 'RoomName' is null then user logged out
+	else
+	{
+		return MESSAGE_MakeXMPP(Presence ='<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>');
+	}
+}
 
 /**********************************
  * MESSAGES - CHAT AND GROUPCHAT
