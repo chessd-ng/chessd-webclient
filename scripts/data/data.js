@@ -73,6 +73,7 @@ DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
+DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetRating = DATA_SetRating;
 
@@ -185,16 +186,43 @@ function DATA_IsContact(Username)
 }
 
 /**
+* Get user status 
+*/
+function DATA_GetStatus(Username)
+{
+	var i;
+	var UserPos = this.FindUser(Username);
+
+	// If user not in your list
+	if (UserPos == null)
+	{
+		for (i=0; i < this.RoomList.length; i++)
+		{
+			UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+			if (UserPos != null)
+			{
+				return this.RoomList[i].UserList[UserPos].Status;
+			}
+		}
+		return false;
+	}
+		
+	return this.UserList[UserPos].Status;
+}
+
+
+/**
 * Set user's status
 */
 function DATA_SetUserStatus(Username, NewStatus)
 {
-	var UserPos = MainData.FindUser(Username);
+	var UserPos = this.FindUser(Username);
 
 	if (UserPos == null)
 		return false;
 		
-	MainData.UserList[UserPos].Status = NewStatus;
+	this.UserList[UserPos].Status = NewStatus;
 	return true;
 }
 
