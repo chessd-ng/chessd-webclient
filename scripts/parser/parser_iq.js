@@ -24,7 +24,7 @@ function PARSER_ParseIq(XML)
 	var ID = XML.getAttribute("id");
 	var Query = XML.getElementsByTagName("query");
 	var Buffer = "";
-	var Xmlns;
+	var Xmlns = "";
 
 
 	// Getting query xmlns

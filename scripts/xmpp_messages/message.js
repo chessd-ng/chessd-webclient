@@ -159,13 +159,27 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 	// Message to room
 	if (RoomName)
 	{
-		return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" ><show>'+NewStatus+'</show></presence>');
+		if (NewStatus == "available")
+		{
+			return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" />');
+		}
+		else
+		{
+			return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" ><show>'+NewStatus+'</show></presence>');
+		}
 	}
 	
 	// General status change
 	else
 	{
-		return MESSAGE_MakeXMPP('<presence xmlns="jabber:client"><show>'+NewStatus+'</show></presence>');
+		if (NewStatus == "available")
+		{
+			return MESSAGE_MakeXMPP('<presence xmlns="jabber:client" />');
+		}
+		else
+		{
+			return MESSAGE_MakeXMPP('<presence xmlns="jabber:client"><show>'+NewStatus+'</show></presence>');
+		}
 	}
 }
 
@@ -287,6 +301,21 @@ function MESSAGE_InviteDeny(To)
 	return MESSAGE_MakeXMPP ("<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />");
 }
 
+/**
+* Remove user from yout contact list
+*/
+function MESSAGE_RemoveContact(User)
+{
+	var XML;
+
+	XML  = "<iq type='set' id='RemoveUser'>";
+	XML += "<query xmlns='jabber:iq:roster'>";
+	XML += "<item subscription='remove' jid='"+User+"@"+MainData.Host+"' />";
+	XML += "</query></iq>";
+
+	return MESSAGE_MakeXMPP(XML);
+}
+
 
 /**********************************
  * MESSAGES - CHALLENGE
@@ -327,7 +356,7 @@ function MESSAGE_Challenge(Category, Player)
 /**
 * Accept a challange 
 */
-function MESSAGE_Accept(ChallangeID)
+function MESSAGE_ChallengeAccept(ChallangeID)
 {
 	var XMPP="";
 
@@ -343,7 +372,7 @@ function MESSAGE_Accept(ChallangeID)
 /**
 * Decline a challange 
 */
-function MESSAGE_Decline(ChallangeID)
+function MESSAGE_ChallengeDecline(ChallangeID)
 {
 	var XMPP="";
 

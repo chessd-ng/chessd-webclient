@@ -226,6 +226,14 @@ function UTILS_ValidateUsername(Username)
 	}
 }
 
+/**
+* Capitalize a word
+*/
+function UTILS_Capitalize(Word)
+{
+	return Word[0].toUpperCase() + Word.slice(1);
+}
+
 
 /**********************************
  * FUNCTIONS - EVENT LISTENERS

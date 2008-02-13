@@ -69,7 +69,8 @@ function CONNECTION_ConnectJabber(XML)
 			CONNECTION_SendJabber(	
 				MESSAGE_Rating(null, "lightning"), 
 				MESSAGE_Rating(null, "blitz"),
-				MESSAGE_Rating(null, "standard")
+				MESSAGE_Rating(null, "standard"), 
+				XML
 				);
 	}
 }

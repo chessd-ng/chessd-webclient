@@ -51,7 +51,6 @@ function GAME_HandleChallenge (XML)
 	{
 		Buffer = GAME_HandleError(XML);
 	}
-
 		
 	return Buffer;
 }
@@ -188,9 +187,33 @@ function GAME_HandleDecline (XML)
 /**
 * Handle errors on challenge
 */
-
 function GAME_ChallengeError (XML)
 {
 	// TODO
 	return "";
+}
+
+/**
+* Send a challenge message to 'Username'
+*/
+function GAME_SendChallenge(User, Color, Time, Inc)
+{
+	var XML;
+	var Player = new Object();
+
+	alert(To);
+
+	Player.Name = User;
+
+	//Player.Color = Color;
+	//Player.Time = Time;
+	//Player.Inc = Inc;
+
+	// Only for testing
+	Player.Color = "black";
+	Player.Time = 30;
+	Player.Inc = 5;
+
+	XML = MESSAGE_Challenge("standard", Player);
+	CONNECTION_SendJabber(XML);
 }

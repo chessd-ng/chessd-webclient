@@ -28,6 +28,7 @@
 function INTERFACE_AddContact(Username, Status, Rating)
 {
 	var Node = document.getElementById("ContactOnlineList");
+	var Search = document.getElementById("contact-"+Username);
 	var Contact;
 
 	if (!Node)
@@ -35,8 +36,37 @@ function INTERFACE_AddContact(Username, Status, Rating)
 		return false;
 	}
 	
+	// If user already exists in interface
+	if (Search != null)
+	{
+		INTERFACE_SetUserStatus(Username, Status);
+		return true;
+	}
+
+
 	Contact = INTERFACE_CreateContact(Username, Status, Rating)
 	Node.appendChild(Contact);
+
+	return true;
+}
+
+/**
+* Remove user in contact list
+*
+* @public
+*/
+function INTERFACE_RemoveContact(Username)
+{
+	var Node = document.getElementById("contact-"+Username);
+
+	if (!Node)
+	{
+		return false;
+	}
+	
+	// Remove node
+	Node = Node.parentNode;
+	Node.parentNode.removeChild(Node);
 
 	return true;
 }

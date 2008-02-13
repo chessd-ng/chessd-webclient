@@ -293,7 +293,7 @@ function INTERFACE_CreateRooms()
 	// Room list
 	RoomsDiv = UTILS_CreateElement("div", "Rooms");
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_GetText("room_default"));
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(UTILS_GetText("room_default")));
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
