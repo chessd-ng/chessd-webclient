@@ -36,18 +36,24 @@ function PARSER_ParseIq(XML)
 	switch (Type)
 	{
 		case "result":
-			switch (ID)
+			// Receive user list
+			if (Xmlns.match(/jabber:iq:roster/))
 			{
-				// Receive user list
-				case MainData.Const.IQ_ID_GetUserList:
-					Buffer += CONTACT_HandleUserList(XML);
-					break;
-
-				// Receive Rating list
-				case MainData.Const.IQ_ID_GetRating:
-					Buffer += CONTACT_HandleRating(XML);
-					break;
+				Buffer += CONTACT_HandleUserList(XML);
 			}
+
+			// Receive Rating list
+			else if (Xmlns.match(/\/chessd#rating/))
+			{
+				Buffer += CONTACT_HandleRating(XML);
+			}
+
+			// Challenge accept confirmation
+			else if (Xmlns.match(/\/chessd#match/))
+			{
+				Buffer += GAME_HandleChallenge(XML);
+			}
+			break;
 
 		case "set":
 			// Challenge messages
@@ -61,6 +67,7 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleGame(XML);
 			}
+			break;
 
 		case "error": 
 			// Challenge messages
@@ -68,6 +75,7 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleChallenge(XML);
 			}
+			break;
 		    
 		default: break;
 	}

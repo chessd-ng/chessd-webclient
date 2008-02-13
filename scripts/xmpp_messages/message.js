@@ -356,7 +356,7 @@ function MESSAGE_Challenge(Category, Player)
 /**
 * Accept a challange 
 */
-function MESSAGE_ChallengeAccept(ChallangeID)
+function MESSAGE_ChallengeAccept(ChallengeID)
 {
 	var XMPP="";
 

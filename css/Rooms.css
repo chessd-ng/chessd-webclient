@@ -132,6 +132,7 @@
 	border-bottom	: 0px;
 	padding			: 2px;
 	margin-right	: 3mm;
+	overflow		: auto;
 }
 
 #Main #Left #Rooms .Room .MessageList li {

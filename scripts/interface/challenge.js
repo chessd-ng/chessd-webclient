@@ -21,6 +21,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 {
 	var Div, Title, Close,
 
+	/*
 	Div = UTILS_CreateElement('div','ChallengeDiv');
 	Title = UTILS_CreateElement('span','title');
 	Close = UTILS_CreateElement('span','window_close');
@@ -28,5 +29,5 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 	 = UTILS_CreateElement('','');
 	 = UTILS_CreateElement('','');
 	 = UTILS_CreateElement('','');
-
+	*/
 }
