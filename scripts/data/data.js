@@ -66,6 +66,11 @@ function DATA(ConfFile, LangFile)
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
+
+	this.Windows = new Object();
+	this.Windows.Focus = null;
+	this.Windows.WindowList = new Array();
+
 }
 
 // Adding methods
@@ -73,6 +78,7 @@ DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
+DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetRating = DATA_SetRating;
 
@@ -104,6 +110,10 @@ DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
 
+DATA.prototype.AddWindow = DATA_AddWindow;
+DATA.prototype.RemoveWindow = DATA_RemoveWindow;
+DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
+DATA.prototype.FindWindow = DATA_FindWindow;
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -185,16 +195,43 @@ function DATA_IsContact(Username)
 }
 
 /**
+* Get user status 
+*/
+function DATA_GetStatus(Username)
+{
+	var i;
+	var UserPos = this.FindUser(Username);
+
+	// If user not in your list
+	if (UserPos == null)
+	{
+		for (i=0; i < this.RoomList.length; i++)
+		{
+			UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+			if (UserPos != null)
+			{
+				return this.RoomList[i].UserList[UserPos].Status;
+			}
+		}
+		return false;
+	}
+		
+	return this.UserList[UserPos].Status;
+}
+
+
+/**
 * Set user's status
 */
 function DATA_SetUserStatus(Username, NewStatus)
 {
-	var UserPos = MainData.FindUser(Username);
+	var UserPos = this.FindUser(Username);
 
 	if (UserPos == null)
 		return false;
 		
-	MainData.UserList[UserPos].Status = NewStatus;
+	this.UserList[UserPos].Status = NewStatus;
 	return true;
 }
 
@@ -777,3 +814,72 @@ function DATA_AddOldGameMove(Id, Board, Move, P1Time, P2Time, Turn)
 	}
 }
 
+
+
+/**********************************
+ * METHODS - WINDOWS              *
+ **********************************/
+/**
+* Add a WindowObject in WindowList
+*/
+function DATA_AddWindow(WindowObj)
+{
+	var WindowListLen = this.Windows.WindowList.length;
+
+	this.Windows.WindowList.push(WindowObj);
+	this.Windows.Focus = WindowObj;
+
+}
+
+/**
+* Set Window Object Focus
+*/
+function DATA_ChangeWindowFocus(WindowObj)
+{
+	var i;
+
+	if(this.Windows.Focus == WindowObj)
+	{
+		return null;
+	}
+
+	//Set new top window
+	this.Windows.Focus = WindowObj;
+}
+
+/**
+* Remove a Window Object from WindowList
+*/
+function DATA_RemoveWindow(WindowObj)
+{
+	var i;
+	var WindowIndex = this.FindWindow(WindowObj);
+	var WindowListLen = this.Windows.WindowList.length;
+
+	if (WindowListLen == WindowIndex)
+	{
+		return
+	}
+
+	//Remove Window from WindowList
+	this.Windows.WindowList.splice(WindowIndex,1);
+
+}
+
+/**
+* Private method used to find Window Object posiiton in WindowList
+*/
+function DATA_FindWindow(WindowObj)
+{
+	var i=0;
+
+	while(i<this.Windows.WindowList.length)
+	{
+		if(WindowObj == this.Windows.WindowList[i])
+		{
+			return i;
+		}
+		i++;
+	}
+	return null;
+}

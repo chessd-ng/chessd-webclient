@@ -231,30 +231,54 @@ function UTILS_ValidateUsername(Username)
  * FUNCTIONS - EVENT LISTENERS
  ************************************/
 
-/* Add a Element event listener
+/**
+* Add a Element event listener
 * SRC = http://snipplr.com/view/561/add-event-listener/
+* Cross-browser implementation of Element.addEventListener()
 */
-
-// Cross-browser implementation of Element.addEventListener()
 function UTILS_AddListener(Element, Type, Expression, Bubbling)
 {
-        Bubbling = Bubbling || false;
+	Bubbling = Bubbling || false;
 
-        if(window.addEventListener) // Standard
-        {
-                Element.addEventListener(Type, Expression, Bubbling);
-                return true;
-        } 
-        else if(window.attachEvent) // IE
-        {
-                Element.attachEvent('on' + Type, Expression);
-                Element.cancelBubble = !(Bubbling);
-                return true;
-        } 
-        else
-        { 
-                return false;
-        }
+	if (window.addEventListener) // Standard
+	{
+		Element.addEventListener(Type, Expression, Bubbling);
+		return true;
+	} 
+	else if(window.attachEvent) // IE
+	{
+		Element.attachEvent('on' + Type, Expression);
+		Element.cancelBubble = !(Bubbling);
+		return true;
+	} 
+	else
+	{ 
+		return false;
+	}
+}
+
+/**
+* Remove an event listener
+*/
+function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
+{
+	Bubbling = Bubbling || false;
+
+	if (window.addEventListener) // Standard
+	{
+		Element.removeEventListener(Type, Expression, Bubbling);
+		return true;
+	} 
+	else if(window.attachEvent) // IE
+	{
+		Element.detachEvent('on' + Type, Expression);
+		Element.cancelBubble = !(Bubbling); // ??? TODO -> precisa tirar isso?
+		return true;
+	} 
+	else
+	{ 
+		return false;
+	}
 }
 
 
@@ -316,3 +340,161 @@ function UTILS_GetTime(Timestamp)
 	}
 	return NewTime;
 }
+/************************************
+ * FUNCTIONS - OBJECT OFFSETS       *
+ ************************************/
+/*
+* Return object offsets (top and left)
+*/
+function UTILS_GetOffset(Obj)
+{
+	var Curleft, Curtop;
+
+	if (Obj.offsetParent) 
+	{
+		Curleft = Obj.offsetLeft;
+		Curtop = Obj.offsetTop;
+		while (Obj = Obj.offsetParent)
+		{
+			Curleft += Obj.offsetLeft
+			Curtop += Obj.offsetTop
+		}
+	return {X:Curleft, Y:Curtop};
+	}
+}
+
+
+/**********************************
+ * FUNCTIONS - DRAG AND DROP
+ ************************************/
+//TODO TODO TODO TODO TODO TODO
+// SUBSTITUIR ESSAS FUNCOES DE DRAG AND DROPS
+//TODO TODO TODO TODO TODO TODO
+
+/**
+*
+* DRAG AND DROP DAS PEÇAS
+*
+* @private
+*/
+
+var SQUARE_OVER = false;
+
+
+function UTILS_DragPiece(event,Obj,OffsetX,OffsetY)
+{
+	var X = event.pageX - OffsetX;
+	var Y = event.pageY - OffsetY;
+	if (Obj)
+	{
+		Obj.style.top = Y + "px";
+		Obj.style.left = X + "px";
+	}
+}
+
+function UTILS_StartDragPiece(Obj)
+{
+//	if (!TURN)
+///		return;
+
+	Obj.style.position = "absolute";
+	OffsetX = Obj.offsetParent.offsetLeft - 1;
+	OffsetY = Obj.offsetParent.offsetTop + 10;
+	document.onmousemove = function(event) { UTILS_DragPiece(event,Obj,OffsetX,OffsetY); };
+	document.onmouseup = function() { document.onmousemove = false; document.onmouseup = false; UTILS_DropObject(Obj); };
+}
+
+function UTILS_DropObject(Obj)
+{
+	//ARRUMAR ISSO AKI!!!
+	var Move;
+	//var CurrentGame = GAME_Game_FindGameByGameId(MainData.CurrentGame);
+	var CurrentGamePos = MainData.CurrentGame; //Posicao do jogo na estrutura de jogos
+	var Curleft = 0;
+	var Curtop = 0;
+	//MODO TUTOR
+	var TUTOR_MODE = 0;
+	//var Color = MainData.BoardList[CurrentGame].Color;
+	var Turn;
+
+	if(MainData.Turn=='w')
+		Turn = 0;
+	else
+		Turn = 1;
+
+	Img = document.createElement('img');
+	Img.src = Obj.src;
+	Img.onmousedown = function() { UTILS_StartDragPiece(this); return false; };
+	
+	// Se arrastar a peca em cima de uma casa
+	if (SQUARE_OVER)
+	{	
+		//Pega as posicoes de origem e destino do movimento
+		Move = Obj.parentNode.id + SQUARE_OVER.id;
+
+		// Faz a pre-validacao da jogada antes de enviar ao servidor
+		if (!GAME_MovePreValidate(MainData.BoardList[CurrentGamePos].Board,MainData.BoardList[CurrentGamePos].Color,MainData.BoardList[CurrentGamePos].Turn,Move,MainData.BoardList[CurrentGamePos].Hook))
+		{
+			Obj.style.position = "static";
+			return;
+		}
+		
+		// Atualiza o tabuleiro armazenado
+		//UTILS_UpdateBoard(Turn);
+		/*
+		if (TUTOR_MODE == 1)
+		{
+			Obj.parentNode.removeChild(Obj);
+			SQUARE_OVER.innerHTML = "";
+ 			SQUARE_OVER.appendChild(Img);
+			//MUDAR O TABULEIRO
+		}
+		*/
+		else
+		{
+			//Obj.style.position = "static";
+			// Deixa a peca mesmo que o movimento seja invalido
+			Obj.style.position = "static";
+			//Obj.parentNode.removeChild(Obj);
+			//SQUARE_OVER.appendChild(Obj);
+
+			GAME_SendMove(Move);
+		}
+
+		// Envia a jogada ao servidor
+		//Move = false;
+	}
+	else
+	{
+		// retorna a posicao original
+		Obj.style.position = "static";
+	}
+}
+
+function UTILS_OnOverSquare(Obj)
+{
+	SQUARE_OVER = Obj;
+}
+
+function UTILS_OnOutSquare()
+{
+	SQUARE_OVER = false;
+}
+
+
+function UTILS_DragWindow(Obj)
+{
+	Obj.style.position = "absolute";
+	OffsetX = Obj.offsetParent.offsetLeft;
+	OffsetY = Obj.offsetParent.offsetTop;
+	document.onmousemove = function(event) { UTILS_DragPiece(event,Obj,OffsetX,OffsetY); };
+	document.onmouseup = function() { 
+		document.onmousemove = false;
+		document.onmouseup = false;
+		
+	};
+}
+
+//TODO TODO TODO TODO TODO TODO
+// SUBSTITUIR ESSAS FUNCOES DE DRAG AND DROPS
+//TODO TODO TODO TODO TODO TODO

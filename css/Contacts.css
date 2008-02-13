@@ -70,6 +70,9 @@
 	border			: 0px;
 }
 
+/**
+* USER STATUS
+*/
 
 /* available */
 #Main #Left .available {
@@ -91,6 +94,11 @@
 	background		: url('../images/busy.png') no-repeat;
 }
 
+/* playing */
+#Main #Left .playing {
+	background		: url('../images/playing.png') no-repeat;
+}
+
 /* offline */
 #Main #Left .offline {
 	background		: url('../images/offline.png') no-repeat;
@@ -103,4 +111,26 @@
 	text-decoration	: none;
 	font			: bold 11px Trebuchet MS;
 	color			: #216778;
+}
+
+/**
+* USER MENU
+*/
+#UserMenuDiv {
+	position		: absolute;
+	width			: 35mm;
+	padding			: 1mm;
+	background-color: #FFF;
+	border			: 1px solid #216778;
+}
+
+#UserMenuDiv p {
+	font			: italic 10px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+	margin-bottom	: 1px;
+}
+
+#UserMenuDiv p:hover {
+	background-color: #EAF5F4;
 }

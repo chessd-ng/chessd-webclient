@@ -60,6 +60,13 @@
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
 	</status>
+	<usermenu>
+		<usermenu_send_message>Enviar mensagem</usermenu_send_message>
+		<usermenu_match>Convidar para jogar</usermenu_match>
+		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
+		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
+		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
+	</usermenu>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>
 	</error>

@@ -120,6 +120,7 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 * Create a contact node
 *
 * @private
+* @return DOM object
 */
 function INTERFACE_CreateContact(Username, Status, Rating, RoomName)
 {
@@ -135,11 +136,61 @@ function INTERFACE_CreateContact(Username, Status, Rating, RoomName)
 	{
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Status, Username);
 	}
+	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
 	return Tr;
+}
+
+
+/**
+* Show user menu
+*
+* @private
+*/
+function INTERFACE_ShowUserMenu(Obj, Options)
+{
+	var Menu, Option, Pos, i;
+
+	Menu = UTILS_CreateElement("div", "UserMenuDiv");
+
+	// Creating options
+	for (i=0; i < Options.length; i++)
+	{
+		// Create element
+		Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+
+		// Setting function
+		Option.onclick = Options[i].Func;
+
+		Menu.appendChild(Option);
+	}
+	Pos = UTILS_GetOffset(Obj);
+
+	Menu.style.top = (Pos.Y+18)+"px";
+	Menu.style.left = Pos.X+"px";
+
+	document.body.appendChild(Menu);
+}
+
+
+/**
+* Hide user menu from screen
+*
+* @private
+*/
+function INTERFACE_HideUserMenu()
+{
+	var Menu = document.getElementById("UserMenuDiv");
+
+	if (!Menu)
+	{
+		return false;
+	}
+	Menu.parentNode.removeChild(Menu);
+	return true;
 }
 
 

@@ -52,20 +52,25 @@ function INTERFACE_CreateUserBox()
 
 	// Available
 	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_available"));
+	StatusItem.value = "available";
 	Status.appendChild(StatusItem);
 
 	// Unavailable
 	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_unavailable"));
+	StatusItem.value = "unavailable";
 	Status.appendChild(StatusItem);
 
 	// Busy
 	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_busy"));
+	StatusItem.value = "busy";
 	Status.appendChild(StatusItem);
 
 	// Away
 	StatusItem = UTILS_CreateElement("option", null, null, UTILS_GetText("status_away"));
+	StatusItem.value = "away";
 	Status.appendChild(StatusItem);
 
+	Status.onchange = function () { CONTACT_ChangeStatus(this.value) };
 
 	UserInf.appendChild(Name);
 	UserInf.appendChild(Status);
