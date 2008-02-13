@@ -116,6 +116,8 @@ function GAME_HandleOffer (XML)
 		MainData.AddChallenge (Player1.Name, MatchID, MainData.Username);
 	}
 
+	// TODO
+	// Get the oponent rating
 
  	// TODO
 	// Interface functions should be inserted here

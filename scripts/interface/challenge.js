@@ -19,14 +19,18 @@
 */
 function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 {
-	var Div, Title, Close,
+	var Div, Title, Close;
+	var Username, Label;
+	var ChalLeftDiv;
+	var ColorLabel, ColorOptW, ColorOptWImg, Color;
+	var ChalRightDiv;
 
 	Div = UTILS_CreateElement('div','ChallengeDiv');
 	Title = UTILS_CreateElement('span','title');
 	Close = UTILS_CreateElement('span','window_close');
-	 = UTILS_CreateElement('','');
-	 = UTILS_CreateElement('','');
-	 = UTILS_CreateElement('','');
-	 = UTILS_CreateElement('','');
+	Username = UTILS_CreateElement('h3');
+	Label = UTILS_CreateElement('p',null,'label_information');
+	ChalLeftDiv = UTILS_CreateElement('div','ChalLeftDiv');
+	ChalRightDiv = UTILS_CreateElement('div','ChalRightDiv');
 
 }
