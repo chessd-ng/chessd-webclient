@@ -80,6 +80,7 @@ DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
+DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
@@ -232,6 +233,21 @@ function DATA_SetUserStatus(Username, NewStatus)
 		return false;
 		
 	this.UserList[UserPos].Status = NewStatus;
+	return true;
+}
+
+
+/**
+* Set user's subscription state
+*/
+function DATA_SetSubs(Username, NewSubs)
+{
+	var UserPos = this.FindUser(Username);
+
+	if (UserPos == null)
+		return false;
+		
+	this.UserList[UserPos].Subs = NewSubs;
 	return true;
 }
 

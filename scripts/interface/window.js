@@ -1,7 +1,10 @@
 function WindowObj(Height, Width, Div, Title, CloseCommands)
 {
 	//Constructor and attribute
-	this.window = WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands);
+	var tmp = WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands);
+
+	this.window = tmp.Div; //WindowObject;
+	this.eventButtons = tmp.Close; //Event buttons;
 
 	//Methods
 	this.show = WINDOW_ShowWindow;
@@ -13,6 +16,7 @@ function WindowObj(Height, Width, Div, Title, CloseCommands)
 	this.blur = WINDOW_SetBlur;
 	this.setZIndex = WINDOW_SetZIndex;
 	this.getZIndex = WINDOW_GetZIndex;
+	this.pushEventButtons = WINDOW_ConcatEventButtons;
 }
 
 
@@ -76,11 +80,18 @@ function WINDOW_GetZIndex()
 	return this.window.style.zIndex;
 }
 
+function WINDOW_ConcatEventButtons(ButtonsList)
+{
+	var i;
+
+	for(i=0; i<ButtonsList.length; i++)
+	{
+		this.eventButtons.push(ButtonsList[i]);
+	}
+}
+
 /***************************************************/
-/***************************************************/
-/***************************************************/
-/***************************************************/
-function WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands)
+function WINDOW_CreateWindow(Height, Width, Div, Title)
 {
 	var WindowBox = document.createElement("div");
 	var SubWindowBox     = document.createElement("div");
@@ -90,6 +101,9 @@ function WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands)
 	var TmpTitle = document.createElement("span");
 
 	var TmpClose = document.createElement("span");
+
+	//Array of buttons;
+	var Close = new Array();
 
 	var i;
 
@@ -115,14 +129,16 @@ function WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands)
 	TmpClose.innerHTML = "X";
 	TmpClose.id = "Close";
 
+	Close.push(TmpClose);
+
 	//Additional Commands when close a window
+	/*
 	if(CloseCommands != null)
 	{
 		UTILS_AddListener(TmpClose, "click", CloseCommands ,false);
 	}
-
+	*/
 	Div.style.width = Width - 10;
-
 
 
 	TitleBar.appendChild(TmpTitle);
@@ -133,6 +149,59 @@ function WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands)
 	WindowBox.appendChild(TitleBar);
 	WindowBox.appendChild(SubWindowBox);
 
-	return WindowBox;
+	return {Div:WindowBox, Close:Close}
 }
 
+
+/******************************************************
+*******************************************************
+*******************************************************
+*******************************************************
+*******************************************************
+******************************************************/
+
+
+function WINDOW_CreateAlert(str)
+{
+        var Div = UTILS_CreateElement("div","window_alert",null,null);
+        var Buttons = new Array();
+
+        var Span = UTILS_CreateElement("span",null,null,str);
+
+        var Ok = UTILS_CreateElement("input", null,null,null);
+	Ok.type = "submit";
+        Ok.value = "ok";
+
+	Buttons.push(Ok);
+
+        Div.appendChild(Span);
+        Div.appendChild(Ok);
+
+        return {Div:Div, Buttons:Buttons};
+}
+
+
+function WINDOW_CreateConfirm(str)
+{
+        var Div = UTILS_CreateElement("div","window_confirm",null,null);
+        var Buttons = new Array();
+
+        var Span = UTILS_CreateElement("span",null,null,str);
+
+        var Ok = UTILS_CreateElement("input", null,null,null);
+	Ok.type = "submit";
+        Ok.value = "ok";
+
+        var Cancel = UTILS_CreateElement("input", null,null,null);
+	Cancel.type = "submit";
+        Cancel.value = "cancelar";
+
+	Buttons.push(Ok);
+	Buttons.push(Cancel);
+
+        Div.appendChild(Span);
+        Div.appendChild(Ok);
+        Div.appendChild(Cancel);
+
+        return {Div:Div, Buttons:Buttons};
+}

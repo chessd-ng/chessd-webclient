@@ -29,10 +29,16 @@
 }
 
 #Main #Left #User select {
-	width			: 20mm;
+	width			: 22mm;
 	font			: 10px Trebuchet MS;
 	color			: #FFA200;
 	border			: 0px;
+}
+
+#Main #Left #User option {
+	text-indent		: 18px;
+	margin			: 1px;
+	height			: 15px;
 }
 
 /* order by rating or nick */

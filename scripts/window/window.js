@@ -24,7 +24,7 @@
 /**
 * 
 */
-function WINDOW_NewWindow(WinSize, Div, Title, CloseCommands)
+function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 {
 	var Height, Width;
 	var Win;
@@ -35,10 +35,7 @@ function WINDOW_NewWindow(WinSize, Div, Title, CloseCommands)
 	Height = ""; //auto
 
 	//Create Window Object
-	Win = new WindowObj(Height, Width, Div, Title, CloseCommands);
-
-	//Close Button event
-	UTILS_AddListener(Win.window.getElementsByTagName("span")[1], "click", function(){ WINDOW_RemoveWindow(Win) }, false);
+	Win = new WindowObj(Height, Width, Div, Title);
 
 	//Window Focus Event
 	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_ChangeFocus(Win)},false);
@@ -55,8 +52,11 @@ function WINDOW_NewWindow(WinSize, Div, Title, CloseCommands)
 	Win.focus();
 	Win.setZIndex(zIndex);
 
+	Win.pushEventButtons(DivButtons);
 	//Add Window on WindowList 
 	MainData.AddWindow(Win);
+
+	return Win; //WindowObj
 }
 
 function WINDOW_ChangeFocus(WindowObj)
@@ -101,13 +101,37 @@ function WINDOW_RemoveWindow(WindowObj)
 	WindowObj.close();
 }
 
-function teste(str)
+/*************************************************
+**************************************************
+**************************************************
+*************************************************/
+
+function WINDOW_Alert(str)
 {
-	var Div = UTILS_CreateElement("div",null,null,null);
+	//Return Div and Buttons;
+	var Div = WINDOW_CreateAlert(str);
 
-	var p = UTILS_CreateElement("span",null,null,str);
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Alert");
 
-	Div.appendChild(p);
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	//Ok Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
 
-	return Div;
+function WINDOW_Confirm(str)
+{
+	//Return Div and Buttons;
+	var Div = WINDOW_CreateConfirm(str);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Confirm");
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	//Ok Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	//Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }

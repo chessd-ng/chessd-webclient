@@ -46,6 +46,7 @@ function CONTACT_HandleUserList(XML)
 			case("to"):
 				// If there's a pending invite send a accept
 				Pending += MESSAGE_InviteAccept(Jid);
+				CONTACT_InsertUser(Jid, "offline", "both");
 
 			// Insert users and group in data structure
 			case("both"):
@@ -107,16 +108,36 @@ function CONTACT_HandleRating(Xml)
 function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
+	var Buffer = "";
 
 	// Get Jid
 	Jid = XML.getAttribute('from').replace(/@.*/,"");
 
-	// User is offline
 	Type = XML.getAttribute('type');
+
+	// User is offline
 	if (Type == "unavailable")
 	{
 		CONTACT_SetUserStatus(Jid, "offline");
 		return "";
+	}
+	// Receive a invite message
+	else if (Type == "subscribe")
+	{
+		Buffer += CONTACT_ReceiveSubscribe(Jid);
+		return Buffer;
+	}
+	// User is allowed
+	else if (Type == "subscribed")
+	{
+		Buffer += CONTACT_ReceiveSubscribed(Jid);
+		return Buffer;
+	}
+	// User is not allowed
+	else if (Type == "unsubscribed")
+	{
+		Buffer += CONTACT_ReceiveUnsubscribed(Jid);
+		return Buffer;
 	}
 
 	// Searching for the user status
@@ -137,7 +158,7 @@ function CONTACT_HandleUserPresence(XML)
 		CONTACT_SetUserStatus(Jid, "available");
 	}
 	
-	return "";
+	return Buffer;
 }
 
 /**
@@ -322,7 +343,9 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	{
 		Options[i] = new Object();
 		Options[i].Name = UTILS_GetText("usermenu_match");
-		Options[i].Func = function () { };
+		Options[i].Func = function () { 
+			GAME_SendChallenge(Username);
+		};
 		i += 1;
 	}
 
@@ -331,14 +354,18 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	{
 		Options[i] = new Object();
 		Options[i].Name = UTILS_GetText("usermenu_remove_contact");
-		Options[i].Func = function () { };
+		Options[i].Func = function () { 
+			CONTACT_RemoveUser(Username);
+		};
 		i += 1;
 	}
 	else
 	{
 		Options[i] = new Object();
 		Options[i].Name = UTILS_GetText("usermenu_add_contact");
-		Options[i].Func = function () { };
+		Options[i].Func = function () { 
+			CONTACT_InviteUser(Username);
+		};
 		i += 1;
 	}
 

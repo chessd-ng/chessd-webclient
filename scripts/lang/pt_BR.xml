@@ -61,7 +61,7 @@
 		<status_playing>jogando</status_playing>
 	</status>
 	<usermenu>
-		<usermenu_send_message>Enviar mensagem</usermenu_send_message>
+		<usermenu_send_message>Conversar</usermenu_send_message>
 		<usermenu_match>Convidar para jogar</usermenu_match>
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
