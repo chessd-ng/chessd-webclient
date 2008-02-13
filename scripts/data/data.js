@@ -66,6 +66,11 @@ function DATA(ConfFile, LangFile)
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
+
+	this.Windows = new Object();
+	this.Windows.Focus = null;
+	this.Windows.WindowList = new Array();
+
 }
 
 // Adding methods
@@ -106,6 +111,10 @@ DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
 
+DATA.prototype.AddWindow = DATA_AddWindow;
+DATA.prototype.RemoveWindow = DATA_RemoveWindow;
+DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
+DATA.prototype.FindWindow = DATA_FindWindow;
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -821,3 +830,72 @@ function DATA_AddOldGameMove(Id, Board, Move, P1Time, P2Time, Turn)
 	}
 }
 
+
+
+/**********************************
+ * METHODS - WINDOWS              *
+ **********************************/
+/**
+* Add a WindowObject in WindowList
+*/
+function DATA_AddWindow(WindowObj)
+{
+	var WindowListLen = this.Windows.WindowList.length;
+
+	this.Windows.WindowList.push(WindowObj);
+	this.Windows.Focus = WindowObj;
+
+}
+
+/**
+* Set Window Object Focus
+*/
+function DATA_ChangeWindowFocus(WindowObj)
+{
+	var i;
+
+	if(this.Windows.Focus == WindowObj)
+	{
+		return null;
+	}
+
+	//Set new top window
+	this.Windows.Focus = WindowObj;
+}
+
+/**
+* Remove a Window Object from WindowList
+*/
+function DATA_RemoveWindow(WindowObj)
+{
+	var i;
+	var WindowIndex = this.FindWindow(WindowObj);
+	var WindowListLen = this.Windows.WindowList.length;
+
+	if (WindowListLen == WindowIndex)
+	{
+		return
+	}
+
+	//Remove Window from WindowList
+	this.Windows.WindowList.splice(WindowIndex,1);
+
+}
+
+/**
+* Private method used to find Window Object posiiton in WindowList
+*/
+function DATA_FindWindow(WindowObj)
+{
+	var i=0;
+
+	while(i<this.Windows.WindowList.length)
+	{
+		if(WindowObj == this.Windows.WindowList[i])
+		{
+			return i;
+		}
+		i++;
+	}
+	return null;
+}

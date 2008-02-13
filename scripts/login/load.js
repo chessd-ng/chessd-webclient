@@ -90,6 +90,9 @@ function LOGIN_LoadScripts()
 	Scripts[12] = "scripts/room/room.js";
 	Scripts[13] = "scripts/contact/status.js";
 	Scripts[14] = "scripts/contact/invite.js";
+	Scripts[15] = "scripts/window/window.js";
+	Scripts[16] = "scripts/interface/window.js";
+
 
 	// Carregando arquivos
 	for (i=0; i<Scripts.length; i++)
@@ -125,6 +128,7 @@ function LOGIN_LoadCss()
 	Files[1] = "css/Left.css";
 	Files[2] = "css/Contacts.css";
 	Files[3] = "css/Rooms.css";
+	Files[4] = "css/Window.css";
 
 	for (i=0; i<Files.length; i++)
 	{

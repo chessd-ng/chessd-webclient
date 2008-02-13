@@ -141,6 +141,10 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 }
 
 
+/**
+* Change user's status
+*/
+
 
 /**
 * Create a contact node
