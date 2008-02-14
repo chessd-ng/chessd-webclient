@@ -92,6 +92,7 @@ function LOGIN_LoadScripts()
 	Scripts[14] = "scripts/contact/invite.js";
 	Scripts[15] = "scripts/window/window.js";
 	Scripts[16] = "scripts/interface/window.js";
+	Scripts[17] = "scripts/interface/challenge.js";
 
 
 	// Carregando arquivos
@@ -129,6 +130,7 @@ function LOGIN_LoadCss()
 	Files[2] = "css/Contacts.css";
 	Files[3] = "css/Rooms.css";
 	Files[4] = "css/Window.css";
+	Files[5] = "css/Challenge.css";
 
 	for (i=0; i<Files.length; i++)
 	{
@@ -163,6 +165,8 @@ function LOGIN_LoadImages()
 	Images[9] = "images/unavailable.png";
 	Images[10] = "images/away.png";
 	Images[11] = "images/busy.png";
+	Images[12] = "images/invite_black_pawn.png";
+	Images[13] = "images/invite_white_pawn.png";
 
 	for (i=0; i<Images.length; i++)
 	{

@@ -1,4 +1,8 @@
 #WindowBox{
+	left			: 40%;
+	float			: left;
+	top				: 50mm;
+	padding			: 0 5mm 6mm 5mm;
 	position	: absolute;	
 }
 
@@ -20,16 +24,21 @@
 	border-width	: 0px 2px 0px 2px;
 	border-color	: #216778;
 
+	font 			: bold 13px Trebuchet MS;
+	color			: #FFF;
 }
 
 #TitleBar #Close{
 	position	: absolute;
 	right		: 5px;
+	top				: 2px;
+	cursor	: pointer;
 }
 
 #TitleBar #Title{
 	position	: absolute;
 	left		: 5px;
+	top				: 2px;
 }
 
 
@@ -38,6 +47,7 @@
 }
 
 #SubWindowBox{
+	background-color: #FFFFFF;
 	border-style	: solid;
 	border-width	: 0px 2px 2px 2px;
 	border-color	: #216778;
@@ -49,3 +59,21 @@
 	position	: relative;
 }
 
+#WindowBox .button65,
+#WindowBox .button90 {
+	padding-bottom	: 5px;
+	border			: 0px;
+	height			: 17px;
+	font 			: bold 12px Trebuchet MS;
+	color			: #FFF;
+	cursor			: pointer;
+	margin-top		: 8mm;
+	position	:	relative;
+	bottom		:	10px;
+	background	: #216778;
+}
+
+#WindowBox .button65:hover, 
+#WindowBox .button90:hover {
+	background			: #FFA200;
+}

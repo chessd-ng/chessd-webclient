@@ -135,3 +135,43 @@ function WINDOW_Confirm(str)
 	//Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+function WINDOW_Challenge(User,GameParameters)
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowChallengeWindow(User,GameParameters);
+	var Title;
+
+	if (GameParameters)
+	{
+		Title = UTILS_GetText('challenge_title_invite');
+	}
+	else
+	{
+		Title = UTILS_GetText('challenge_offer');
+	}
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(330, Div.Div, Div.Buttons, Title);
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	if (GameParameters != undefined)
+	{
+		// Accept Button
+		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		// NewParameters Button
+		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		// Chat Button
+		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		// Decline Button
+		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	}
+	else
+	{
+		// Invite Button
+		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		// Cancel Button
+		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	}
+}

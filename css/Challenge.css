@@ -1,0 +1,92 @@
+
+/***
+ * Janela de desafio
+ */
+#ChallengeDiv #ChalLeftDiv {
+	float			: left;
+	width			: 170px;
+}
+
+#ChallengeDiv p {
+	margin-top		: 5mm;
+	font 			: bold 12px Trebuchet MS;
+	color			: #216778;
+}
+
+#ChallengeDiv .rating {
+	margin-left		: 4mm;
+}
+
+#ChallengeDiv img {
+	margin-right	: 7mm;
+	margin-left		: 2mm;
+}
+
+#ChallengeDiv .label_information {
+	text-align		: center;
+	font-weight		: normal;
+	margin			: 0;
+	font-size		: 2.6mm;
+	position		: relative;
+	left				:	-12px;
+}
+
+#ChallengeDiv .time_select {
+	margin-top		: 1mm;
+	margin-right	: 2mm;
+}
+
+#ChallengeDiv .rating_radio {
+	margin-top		: 8mm;
+	margin-right	: 1.5mm;
+}
+
+#ChallengeDiv .button65 {
+//	background		: url('../images/button65.png') no-repeat;
+	margin-right	: 3mm;
+}
+
+#ChallengeDiv .button90 {
+	margin-right	: 5mm;
+//	background		: url('../images/button90.png') no-repeat;
+}
+
+#ChallengeDiv .italic {
+		font-style		: italic;
+}
+
+#ChallengeDiv .invite {
+	position	:	relative;
+	left			:	18mm;
+}
+
+#ChallengeDiv .offer {
+	position	:	relative;
+	left			:	2mm;
+}
+
+#ChallengeDiv h3 {
+	font 				: bold 7mm Trebuchet MS;
+	color				: #216778;
+	text-align	: center;
+	position		:	relative;
+	left				:	-22px;
+}
+
+#ChallengeDiv {
+	padding-left			: 28px;
+}
+
+#ChallengeDiv input,
+#ChallengeDiv textarea,
+#ChallengeDiv select {
+	font 			: 12px Trebuchet MS;
+	border			: 1px solid #216778;
+	color			: #216778;
+}
+
+#ChallengeDiv span {
+	font 			: 12px Trebuchet MS;
+	color			: #216778;
+}
+
