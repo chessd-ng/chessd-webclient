@@ -131,3 +131,22 @@ function ROOM_EnterRoom(RoomName)
 
 	return true;
 }
+
+/**
+* Exit a room
+*/
+function ROOM_ExitRoom()
+{
+	var XML, RoomName;
+
+	// Close room on the interface
+	// Interface tells what room to close
+	// ps: default room cannot be closed
+	RoomName = INTERFACE_CloseRoom();
+
+	// Exit room in jabber server
+	XML = MESSAGE_Unavailable(RoomName);
+	CONNECTION_SendJabber(XML);
+
+	return true;
+}

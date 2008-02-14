@@ -164,6 +164,7 @@ function LOGIN_LoadImages()
 	Images[9] = "images/unavailable.png";
 	Images[10] = "images/away.png";
 	Images[11] = "images/busy.png";
+	Images[12] = "images/close.png";
 
 	for (i=0; i<Images.length; i++)
 	{

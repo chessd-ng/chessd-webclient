@@ -192,6 +192,61 @@ function INTERFACE_AddRoom(RoomName)
 	INTERFACE_FocusRoom(RoomName);
 }
 
+
+/**
+* Close the room that are displayed
+* as a secondary room 
+*
+* @public
+*/
+function INTERFACE_CloseRoom()
+{
+	var RoomName, Room, NextRoom = null, Node, i;
+	
+	Node = document.getElementById("RoomSecondary");
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	// Getting room name
+	RoomName = Node.innerHTML;
+	Room = document.getElementById("Room_"+RoomName);
+
+	if (!Room)
+	{
+		return null;
+	}
+
+	// Removing room of screen
+	Room.parentNode.removeChild(Room);
+
+	// Search for the next room to replace
+	for (i=0; i < MainData.RoomList.length; i++)
+	{
+		if ((MainData.RoomList[i].Name != RoomName) && (MainData.RoomList[i].Name != UTILS_GetText("room_default")))
+		{
+			NextRoom = MainData.RoomList[i].Name;
+			break;
+		}
+	}
+
+	// Show next room in place of it
+	if (NextRoom)
+	{
+		INTERFACE_FocusRoom(NextRoom);
+	}
+	else
+	{
+		Node = Node.parentNode;
+		Node.parentNode.removeChild(Node);
+		INTERFACE_FocusRoom(UTILS_GetText("room_default"));
+	}
+	
+	return RoomName;
+}
+
 /**
 * Give focus to a room
 *
@@ -200,7 +255,7 @@ function INTERFACE_AddRoom(RoomName)
 function INTERFACE_FocusRoom(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
-	var RoomItem, Current, NewRoom;
+	var RoomItem, RoomClose, Current, NewRoom, Node;
 
 	if (!RoomList)
 		return null;
@@ -230,22 +285,30 @@ function INTERFACE_FocusRoom(RoomName)
 	// Already have 2 opened rooms
 	else if (RoomList.childNodes.length > 2)
 	{
+		Node = document.getElementById("RoomSecondary");
+		if (!Node)
+			return null;
+
 		RoomList.childNodes[1].onclick = function () {
 			INTERFACE_FocusRoom(RoomName);
 		}
-		RoomList.childNodes[1].innerHTML = RoomName;
+		Node.innerHTML = RoomName;
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
 	}
 	else
 	{
 		// Create a item and set focus to it
-		RoomItem = UTILS_CreateElement("li", null, "room_selec", RoomName);
+		RoomItem = UTILS_CreateElement("li", null, "room_selec", "<span id='RoomSecondary'>"+RoomName+"</span>");
 		RoomItem.onclick = function () {
 			INTERFACE_FocusRoom(RoomName);
 		}
-		RoomList.childNodes[0].className = "";
+		RoomClose = UTILS_CreateElement("img", null, "close");
+		RoomClose.src = "./images/close.png";
+		RoomClose.onclick = ROOM_ExitRoom;
+		RoomItem.appendChild(RoomClose);
 
+		RoomList.childNodes[0].className = "";
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[1]);
 	}
 

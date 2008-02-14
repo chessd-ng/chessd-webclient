@@ -21,6 +21,7 @@
 }
 
 #Main #Left #Rooms #RoomList li {
+	position		: relative;
 	width			: 19.9mm;
 	height			: 14px;
 	float 			: left;
@@ -32,6 +33,14 @@
 	background-color: #216778;
 	border-right	: 1px solid #FFF;
 	margin-right	: 1px;
+	cursor			: pointer;
+}
+
+
+#Main #Left #Rooms #RoomList .close {
+	position		: absolute;
+	right			: 5px;
+	top				: 6px;
 	cursor			: pointer;
 }
 

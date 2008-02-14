@@ -216,7 +216,7 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 /**
 * Set offline on jabber or exit on a room
 */
-function MESSAGE_Unavailable (RoomName)
+function MESSAGE_Unavailable(RoomName)
 {
 	var XMPP = "";
 	var Type = null;
@@ -224,7 +224,7 @@ function MESSAGE_Unavailable (RoomName)
 	// Exit from a room
 	if (RoomName)
 	{
-		XMPP = '<presence to="'+RoomName+'" xmlns="jabber:client" type="unavailable"></presence>';
+		XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' xmlns='jabber:client' type='unavailable'></presence>";
 	}
 
 	// If 'RoomName' is null then user logged out
