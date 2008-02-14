@@ -23,14 +23,22 @@
 /**
 * Append xmpp body to messages
 */
-function MESSAGE_MakeXMPP(Msg)
+function MESSAGE_MakeXMPP(Msg, Type)
 {
 	var XMPP;
 	
 
 	if (Msg != "")
 	{
-		XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		if (Type == null)
+		{
+			XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		}
+		// Disconnecting
+		else 
+		{
+			XMPP = "<body type='"+Type+"' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		}
 	}
 	else
 	{
@@ -117,15 +125,33 @@ function MESSAGE_SendPasswd()
 	return MESSAGE_MakeXMPP(XMPP);
 }
 
+
+/**********************************
+ * MESSAGES - USER AND ROOM LIST
+ **********************************/
+
 /**
-* Ask friend list to jabber
+* Ask contact list to jabber
 */
-function MESSAGE_OfflineUsers()
+function MESSAGE_UserList()
 {
 	var XMPP;
 
    	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+* Ask room list to jabber
+*/
+function MESSAGE_RoomList()
+{
+	var XMPP;
+
+   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetRoomList+"' to='conference."+MainData.Host+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);
 }
@@ -141,14 +167,17 @@ function MESSAGE_OfflineUsers()
 */
 function MESSAGE_Presence(To)
 {
+	var XMPP;
+
 	if (To == null)
 	{
-		return MESSAGE_MakeXMPP('<presence from="'+MainData.Username+'@'+MainData.Host+'"/>');
+		XMPP = "<presence from='"+MainData.Username+"@"+MainData.Host+"'/>";
 	}
 	else
 	{
-		return MESSAGE_MakeXMPP('<presence to="'+To+'"/>');
+		XMPP = "<presence to='"+To+"'/>";
 	}
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 /**
@@ -187,19 +216,25 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 /**
 * Set offline on jabber or exit on a room
 */
-function MESSAGE_Unavailable (RoomName)
+function MESSAGE_Unavailable(RoomName)
 {
+	var XMPP = "";
+	var Type = null;
+
 	// Exit from a room
 	if (RoomName)
 	{
-		return MESSAGE_MakeXMPP('<presence to="'+RoomName+'" xmlns="jabber:client" type="unavailable"></presence>');
+		XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' xmlns='jabber:client' type='unavailable'></presence>";
 	}
 
 	// If 'RoomName' is null then user logged out
 	else
 	{
-		return MESSAGE_MakeXMPP(Presence ='<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>');
+		XMPP = '<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>';
+		Type = "terminate";
 	}
+
+	return MESSAGE_MakeXMPP(XMPP, Type);
 }
 
 /**********************************
@@ -356,7 +391,7 @@ function MESSAGE_Challenge(Category, Player)
 /**
 * Accept a challange 
 */
-function MESSAGE_ChallengeAccept(ChallangeID)
+function MESSAGE_ChallengeAccept(ChallengeID)
 {
 	var XMPP="";
 
@@ -380,6 +415,165 @@ function MESSAGE_ChallengeDecline(ChallangeID)
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#decline'>";
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+
+/**********************************
+ * MESSAGES - GAME
+ **********************************/
+
+/**
+* Send a game moviment
+*/
+function MESSAGE_GameMove(Move, RoomID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
+	XMPP += "<move long='"+Move+"'>";
+	XMPP += "</move></query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+* Make a draw request
+*/
+function MESSAGE_GameRequestDraw (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID));
+}
+
+/**
+* Make a cancel request
+*/
+function MESSAGE_GameRequestCancel (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID));
+}
+
+/**
+* Make a adjourn request
+*/
+function MESSAGE_GameRequestAdjourn (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID));
+}
+
+/**
+* Create the game requests messages
+*/
+function MESSAGE_GameRequests(Action, RoomID)
+{
+	var XMPP="";
+
+	switch (Action) 
+	{
+	case "Draw":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
+		break;
+
+	case "Cancel":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
+		break;
+
+	case "Adjourn":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
+		break;
+	
+	default:
+		break;
+	}
+
+	XMPP += "</query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+
+/**
+* Make a draw accept
+*/
+function MESSAGE_GameDrawAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID, ""));
+}
+
+/**
+* Make a draw deny
+*/
+function MESSAGE_GameDrawDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID, "-decline"));
+}
+
+/**
+* Make a cancel accept
+*/
+function MESSAGE_GameCancelAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID, ""));
+}
+
+/**
+* Make a cancel deny
+*/
+function MESSAGE_GameCancelDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID, "-decline"));
+}
+
+/**
+* Make a adjourn accept
+*/
+function MESSAGE_GameAdjournAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID, ""));
+}
+
+/**
+* Make a adjourn deny
+*/
+function MESSAGE_GameAdjournDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID, "-decline"));
+}
+
+/**
+* Create the game response messages
+*/
+	function MESSAGE_GameResponse(Action, RoomID, Response)
+{
+	var XMPP="";
+
+	switch (Action) 
+	{
+	case "Draw":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw"+Response+"'>";
+		break;
+
+	case "Cancel":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel"+Response+"'>";
+		break;
+
+	case "Adjourn":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn"+Response+"'>";
+		break;
+	
+	default:
+		break;
+	}
+
+	XMPP += "</query></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);
 }

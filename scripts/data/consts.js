@@ -27,9 +27,14 @@ function DATA_SetConsts()
 	
 	// Iq id's
 	Const.IQ_ID_GetUserList = "GetUserList";
+	Const.IQ_ID_GetRoomList = "GetRoomList";
 	Const.IQ_ID_GetRating = "GetRating";
 	Const.IQ_ID_GetRooms = "GetRoomList";
 	Const.IQ_ID_Challenge = "Challenge";
+	Const.IQ_ID_Draw = "Draw";
+	Const.IQ_ID_GameCancel = "Cancel";
+	Const.IQ_ID_Adjourn = "Adjourn";
+	
 	
 	// Login errors
 	Const.LOGIN_ServerDown = 1;

@@ -319,7 +319,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		
 		if (Hide == 2)
 		{
-			UTILS_RemoveListener(document, "mousedown", Func, false);
+			UTILS_RemoveListener(document, "click", Func, false);
 
 			// Remove menu from screen
 			INTERFACE_HideUserMenu();

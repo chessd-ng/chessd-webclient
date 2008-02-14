@@ -48,6 +48,7 @@
 		<room_all>Online</room_all>
 		<room_order_nick>Apelido</room_order_nick>
 		<room_order_rating>Rating</room_order_rating>
+		<room_create>Criar sala</room_create>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>

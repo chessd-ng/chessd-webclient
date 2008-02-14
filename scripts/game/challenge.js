@@ -1,4 +1,5 @@
 /**
+* 3C
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -59,11 +60,12 @@ function GAME_HandleChallenge (XML)
 /**
 * Handle Offer
 */
-function GAME_HandleOffer (XML)
+function GAME_HandleOffer(XML)
 {
 	var Players, Match, MatchID, Category;
 	var Player1 = new Object();
 	var Player2 = new Object();
+	var Buffer = "";
 
 	// If there's no match, there's nothing to do
 	try 
@@ -97,12 +99,23 @@ function GAME_HandleOffer (XML)
 		// Add the challenge in structure
 		if (Player1.Name != MainData.Username)
 		{
-			MainData.AddChallenge (Player1.Name, MatchID, Player1.Name);
+			MainData.AddChallenge(Player1.Name, MatchID, Player1.Name);
+
+			// TODO TODO provisorio!
+			if (confirm(Player1.Name+" esta te desafiando, deseja aceitar?"))
+			{	
+				Buffer += MESSAGE_ChallengeAccept(MatchID);
+			}
+			else
+			{
+				Buffer += MESSAGE_ChallengeDecline(MatchID);
+			}
 		}
 		else 
 		{
-			MainData.AddChallenge (Player2.Name, MatchID, Player2.Name);
+			MainData.AddChallenge(Player2.Name, MatchID, Player2.Name);
 		}
+
 	}
 	
 	// Player received a challenge confirm
@@ -121,8 +134,7 @@ function GAME_HandleOffer (XML)
  	// TODO
 	// Interface functions should be inserted here
 
-
-	return "";
+	return Buffer;
 }
 
 
@@ -153,7 +165,7 @@ function GAME_HandleAccept (XML)
 	// Warn the player's interface
 
 	// Send a presence to GameRoom
-	return (MESSAGE_Presence (GameRoom+"/"+MainData.Username));	
+	return (MESSAGE_Presence(GameRoom+"/"+MainData.Username));	
 }
 
 
@@ -202,8 +214,6 @@ function GAME_SendChallenge(User, Color, Time, Inc)
 {
 	var XML;
 	var Player = new Object();
-
-	alert(To);
 
 	Player.Name = User;
 
