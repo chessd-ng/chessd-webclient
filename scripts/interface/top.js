@@ -61,8 +61,11 @@ function INTERFACE_CreateTop()
 	IconsList.appendChild(Item);
 
 	// Exit
-	ItemTitle = UTILS_GetText("menu_exit")
+	ItemTitle = UTILS_GetText("menu_exit");
 	Item = UTILS_CreateElement("li", null, "exit", ItemTitle);
+	Item.onclick = function () { 
+		LOGIN_Logout();
+	}
 	Item.title = ItemTitle;
 	IconsList.appendChild(Item);
 
