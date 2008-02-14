@@ -61,12 +61,10 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 */
 function LOGIN_Logout()
 {
-	PARSER_Logout(MainData.Username);
+	// Logout from jabber
+	CONNECTION_SendJabber(MESSAGE_Unavailable());
 
 	INTERFACE_StopInterface();
-
-	// TODO recolocar a msg bonitinha =)
-	//alert("Obrigado por usar o ChessD!!!");
 
 	// Show Login interface
 	INTERFACE_StartLogin();

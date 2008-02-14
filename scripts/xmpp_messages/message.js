@@ -23,14 +23,22 @@
 /**
 * Append xmpp body to messages
 */
-function MESSAGE_MakeXMPP(Msg)
+function MESSAGE_MakeXMPP(Msg, Type)
 {
 	var XMPP;
 	
 
 	if (Msg != "")
 	{
-		XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		if (Type == null)
+		{
+			XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		}
+		// Disconnecting
+		else 
+		{
+			XMPP = "<body type='"+Type+"' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		}
 	}
 	else
 	{
@@ -210,17 +218,23 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 */
 function MESSAGE_Unavailable (RoomName)
 {
+	var XMPP = "";
+	var Type = null;
+
 	// Exit from a room
 	if (RoomName)
 	{
-		return MESSAGE_MakeXMPP('<presence to="'+RoomName+'" xmlns="jabber:client" type="unavailable"></presence>');
+		XMPP = '<presence to="'+RoomName+'" xmlns="jabber:client" type="unavailable"></presence>';
 	}
 
 	// If 'RoomName' is null then user logged out
 	else
 	{
-		return MESSAGE_MakeXMPP(Presence ='<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>');
+		XMPP = '<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>';
+		Type = "terminate";
 	}
+
+	return MESSAGE_MakeXMPP(XMPP, Type);
 }
 
 /**********************************
