@@ -32,6 +32,7 @@
 	background-color: #216778;
 	border-right	: 1px solid #FFF;
 	margin-right	: 1px;
+	cursor			: pointer;
 }
 
 #Main #Left #Rooms #RoomList .room_selec {
@@ -47,7 +48,6 @@
 	overflow		: hidden;
 	border			: 0px;
 	border-left		: 1px solid #FFF;
-	cursor			: pointer;
 }
 
 #Main #Left #Rooms .RoomInside {

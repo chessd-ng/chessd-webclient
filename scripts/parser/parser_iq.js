@@ -42,6 +42,12 @@ function PARSER_ParseIq(XML)
 				Buffer += CONTACT_HandleUserList(XML);
 			}
 
+			// Receive room list
+			else if (Xmlns.match(/disco#items/))
+			{
+				Buffer += ROOM_HandleRoomList(XML);
+			}
+
 			// Receive Rating list
 			else if (Xmlns.match(/\/chessd#rating/))
 			{

@@ -9,4 +9,5 @@ body {
 
 #Page {
 	min-width		: 780px;
+	position		: relative;
 }

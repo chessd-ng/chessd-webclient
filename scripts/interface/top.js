@@ -81,6 +81,9 @@ function INTERFACE_CreateTop()
 	
 	// Rooms
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_rooms"));
+	Item.onclick = function () {
+		ROOM_ShowRoomList();
+	}
 	MenuList.appendChild(Item);
 	
 	// History
@@ -93,4 +96,46 @@ function INTERFACE_CreateTop()
 	MainDiv.appendChild(MenuDiv);
 
 	return MainDiv;
+}
+
+/**
+* Show rooms menu
+*/
+function INTERFACE_ShowRoomMenu()
+{
+	var MenuDiv, RoomList, RoomItem, Create;
+	var Node, Menu, Func, i, Hide = 0;
+
+	Node = document.getElementById("Page");
+	Menu = document.getElementById("RoomMenuDiv");
+
+	if (!Node || Menu)
+	{
+		return null;
+	}
+
+	Func = function () {
+		Hide += 1;
+		
+		if (Hide == 2)
+		{
+			UTILS_RemoveListener(document, "click", Func, false);
+
+			// Remove menu from screen
+			INTERFACE_HideRoomList();
+		}
+	};
+
+	// Creating elements
+	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
+	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
+	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
+
+	MenuDiv.appendChild(Create);
+	MenuDiv.appendChild(RoomList);
+	Node.appendChild(MenuDiv);
+
+	UTILS_AddListener(document, "click", Func, false);
+
+	return true;
 }

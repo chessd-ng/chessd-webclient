@@ -57,6 +57,28 @@ function ROOM_HandleMessage(XML)
 	return "";
 }
 
+/**
+* Handle room list
+*/
+function ROOM_HandleRoomList(XML)
+{
+	var Items, Rooms, RoomName, i;
+
+	Rooms = new Array();
+
+	// Get items in XML
+	Items = XML.getElementsByTagName("item");
+
+	// Find room names
+	for (i=0; i < Items.length; i++)
+	{
+		Rooms[i] = Items[i].getAttribute("name").replace(/ (.*)/, "");
+	}
+	INTERFACE_ShowRoomList(Rooms);
+
+	return "";
+}
+
 
 /**
 * Handle group chat messages
@@ -77,5 +99,35 @@ function ROOM_SendMessage(RoomName, Message)
 	// Send message to room
 	To = MainData.RoomList[i].MsgTo;
 	CONNECTION_SendJabber(MESSAGE_GroupChat(To, Message));
+	return true;
+}
+
+/**
+* Get Room list from server and show in pop down menu
+*/
+function ROOM_ShowRoomList()
+{
+	var XML = MESSAGE_RoomList();
+
+	// Ask room list for jabber
+	CONNECTION_SendJabber(XML);
+
+	// Show menu on interface
+	INTERFACE_ShowRoomMenu();
+}
+
+/**
+* Send presence to a room (enter room)
+*/
+function ROOM_EnterRoom(RoomName)
+{
+	var XML, To;
+
+	To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+
+	XML = MESSAGE_Presence(To);
+
+	CONNECTION_SendJabber(XML);
+
 	return true;
 }

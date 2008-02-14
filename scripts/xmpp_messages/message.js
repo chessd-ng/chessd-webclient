@@ -117,15 +117,33 @@ function MESSAGE_SendPasswd()
 	return MESSAGE_MakeXMPP(XMPP);
 }
 
+
+/**********************************
+ * MESSAGES - USER AND ROOM LIST
+ **********************************/
+
 /**
-* Ask friend list to jabber
+* Ask contact list to jabber
 */
-function MESSAGE_OfflineUsers()
+function MESSAGE_UserList()
 {
 	var XMPP;
 
    	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+* Ask room list to jabber
+*/
+function MESSAGE_RoomList()
+{
+	var XMPP;
+
+   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetRoomList+"' to='conference."+MainData.Host+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return MESSAGE_MakeXMPP(XMPP);
 }
@@ -141,14 +159,17 @@ function MESSAGE_OfflineUsers()
 */
 function MESSAGE_Presence(To)
 {
+	var XMPP;
+
 	if (To == null)
 	{
-		return MESSAGE_MakeXMPP('<presence from="'+MainData.Username+'@'+MainData.Host+'"/>');
+		XMPP = "<presence from='"+MainData.Username+"@"+MainData.Host+"'/>";
 	}
 	else
 	{
-		return MESSAGE_MakeXMPP('<presence to="'+To+'"/>');
+		XMPP = "<presence to='"+To+"'/>";
 	}
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 /**

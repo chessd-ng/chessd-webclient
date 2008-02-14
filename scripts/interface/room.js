@@ -83,7 +83,6 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus)
 }
 
 
-
 /**********************************
  * FUNCTIONS - MESSAGE IN ROOMS
  *************************************/
@@ -113,122 +112,151 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 }
 
 /**********************************
- * FUNCTIONS - ROOMS
+ * FUNCTIONS - ROOM LIST MENU
  *************************************/
-/*
+
 /**
-* Create a new room and set it as 'CurrentRoom'
+* Show room list in the room menu, if it exists
 *
 * @public
-*
-function INTERFACE_AddRoom(RoomName)
+*/
+function INTERFACE_ShowRoomList(Rooms)
 {
-	// Push back current room
-	if (MainData.CurrentRoom != "")
+	var Node = document.getElementById("RoomMenuList");
+	var Room, i;
+
+	// If menu is not on screen
+	if (!Node)
 	{
-		document.getElementById("RoomInside_"+MainData.CurrentRoom).style.display = "none";
-		document.getElementById("Room_"+MainData.CurrentRoom).className = "RoomInative";
+		return null;
+	}
+	// If rooms was already been inserted
+	else if (Node.childNodes.length > 0)
+	{
+		return null;
 	}
 
-	INTERFACE_CreateRoom(RoomName);
-	MainData.CurrentRoom = RoomName;
+	// Create elements and insert rooms
+	for (i=0; i < Rooms.length; i++)
+	{
+		Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+		Room.onclick = function () {
+			ROOM_EnterRoom(this.innerHTML);
+		}
+		Node.appendChild(Room);
+	}
+	return true;
 }
 
 /**
-* Bring 'RoomName' to front
+* Hide room list menu
 *
 * @public
-*
-function INTERFACE_FocusRoom(RoomName)
+*/
+function INTERFACE_HideRoomList(Rooms)
 {
-	var Node;
+	var Node = document.getElementById("RoomMenuDiv");
 	
-	// If its already current room
-	if (MainData.CurrentRoom == RoomName || MainData.CurrentRoom == "")
+	if (!Node)
 	{
 		return false;
 	}
-
-	// Hiding current room
-	document.getElementById("RoomInside_"+MainData.CurrentRoom).style.display = "none";
-	document.getElementById("Room_"+MainData.CurrentRoom).className = "RoomInative";
-
-	// Bringing room to front
-	Node = document.getElementById("Room_"+RoomName);
 	Node.parentNode.removeChild(Node);
-	Node.className = "Room";
-	document.getElementById("Rooms").appendChild(Node);
-	document.getElementById("RoomInside_"+RoomName).style.display = "block";
+}
 
-	// Updating current room
-	MainData.CurrentRoom = RoomName;
-	return true;	
+/**********************************
+ * FUNCTIONS - ROOMS
+ *************************************/
+
+/**
+* Create a new room in interface
+*
+* @public
+*/
+function INTERFACE_AddRoom(RoomName)
+{
+	var NewRoom, Node = document.getElementById("Rooms");
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	// Create a new room
+	NewRoom = INTERFACE_CreateRoom(RoomName);
+
+	// Insert it on document
+	Node.appendChild(NewRoom);
+
+	// Give focus
+	INTERFACE_FocusRoom(RoomName);
 }
 
 /**
-* Create a new room
+* Give focus to a room
 *
-* @private
-*
-function INTERFACE_CreateRoom(RoomName)
+* @public
+*/
+function INTERFACE_FocusRoom(RoomName)
 {
-	var RoomDiv, RoomTitle, RoomInside, RoomUsers, UsersLabel, UsersList, MessageList;
-	var OrderNick, OrderRating, Search, Input;
+	var RoomList = document.getElementById("RoomList");
+	var RoomItem, Current, NewRoom;
 
-	RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
-	RoomTitle = UTILS_CreateElement("h3", null, "title", RoomName);
-	RoomTitle.onclick = function() { INTERFACE_FocusRoom(RoomName) };
+	if (!RoomList)
+		return null;
 
-	// Order
-	RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
-	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
-	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("room_order_rating"));
+	// Hide current room from screen
+	Current = document.getElementById("Room_"+MainData.CurrentRoom);
 
-	// Contacts
-	RoomUsers = UTILS_CreateElement("div", "RoomUsers");
-	UsersLabel = UTILS_CreateElement("label", null, null, UTILS_GetText("room_contacts"));
-	UsersList = UTILS_CreateElement("ul", RoomName+"_Contacts");
-
-	RoomUsers.appendChild(UsersLabel);
-	RoomUsers.appendChild(UsersList);
-	
-	// Online Users
-	UsersLabel = UTILS_CreateElement("label", null, null, UTILS_GetText("room_all"));
-	UsersList = UTILS_CreateElement("ul", RoomName+"_All");
-
-	RoomUsers.appendChild(UsersLabel);
-	RoomUsers.appendChild(UsersList);
-
-	// Search user
-	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
-	
-	// Message
-	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
-	
-	// Input
-	Input = UTILS_CreateElement("input");
-	Input.type = "text";
-	Input.onkeypress = function(event) {
-		if ((event.keyCode == 13) && (Input.value != ""))
-		{
-			// Send message to room
-			ROOM_SendMessage(RoomName, Input.value);
-			Input.value = "";
-		}
+	if (Current)
+	{
+		Current.style.display = "none";
 	}
 
-	RoomInside.appendChild(OrderNick);
-	RoomInside.appendChild(OrderRating);
-	RoomInside.appendChild(RoomUsers);
-	RoomInside.appendChild(Search);
-	RoomInside.appendChild(MessageList);
-	RoomInside.appendChild(Input);
+	// Update current room
+	MainData.CurrentRoom = RoomName;
 
-	RoomDiv.appendChild(RoomTitle);
-	RoomDiv.appendChild(RoomInside);
+	// Focus to default room
+	if (RoomName == UTILS_GetText("room_default"))
+	{
+		RoomList.childNodes[0].className = "room_selec";
 
-	document.getElementById("Rooms").appendChild(RoomDiv);
-}*/
+		// If exists other rooms, remove focus
+		if (RoomList.childNodes.length > 2)
+		{
+			RoomList.childNodes[1].className = "";
+		}
+	}
+	// Already have 2 opened rooms
+	else if (RoomList.childNodes.length > 2)
+	{
+		RoomList.childNodes[1].onclick = function () {
+			INTERFACE_FocusRoom(RoomName);
+		}
+		RoomList.childNodes[1].innerHTML = RoomName;
+		RoomList.childNodes[1].className = "room_selec";
+		RoomList.childNodes[0].className = "";
+	}
+	else
+	{
+		// Create a item and set focus to it
+		RoomItem = UTILS_CreateElement("li", null, "room_selec", RoomName);
+		RoomItem.onclick = function () {
+			INTERFACE_FocusRoom(RoomName);
+		}
+		RoomList.childNodes[0].className = "";
+
+		RoomList.insertBefore(RoomItem, RoomList.childNodes[1]);
+	}
+
+	// Show new room on interface
+	NewRoom = document.getElementById("Room_"+RoomName);
+	if (NewRoom)
+	{
+		NewRoom.style.display = "block";
+	}
+	return true;
+}
 
 
 /**
@@ -260,6 +288,10 @@ function INTERFACE_ChangeRoomListVisibility()
 	{
 		Item = document.createElement('li');
 		Item.innerHTML = MainData.RoomList[i].Name;
+		Item.onclick = function () {
+			INTERFACE_FocusRoom(this.innerHTML);
+			INTERFACE_ChangeRoomListVisibility();
+		}
 		List.appendChild(Item);
 	}
 
@@ -276,32 +308,20 @@ function INTERFACE_ChangeRoomListVisibility()
 	return true;
 }
 
-
 /**
-* Create rooms div
+* Create a room
 *
 * @private
 */
-function INTERFACE_CreateRooms()
+function INTERFACE_CreateRoom(RoomName)
 {
-	var RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
 	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
 	var Hr, MessageList;
 	var OrderNick, OrderRating, Input;
 
-
-	// Room list
-	RoomsDiv = UTILS_CreateElement("div", "Rooms");
-	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(UTILS_GetText("room_default")));
-	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
-	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
-	Arrow = UTILS_CreateElement("img");
-	Arrow.src = "images/room_arrow.png";
-
 	// General room
-	RoomName = UTILS_GetText("room_default");
 	RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
+	RoomDiv.style.display = "none";
 	RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
 	
 	// Order
@@ -327,11 +347,6 @@ function INTERFACE_CreateRooms()
 		}
 	}
 
-
-	RoomsListArrow.appendChild(Arrow);
-	RoomsList.appendChild(RoomsListGeneral);
-	RoomsList.appendChild(RoomsListArrow);
-
 	RoomTable.appendChild(RoomTbody);
 	RoomUsers.appendChild(RoomTable);
 
@@ -343,6 +358,44 @@ function INTERFACE_CreateRooms()
 	RoomInside.appendChild(Input);
 
 	RoomDiv.appendChild(RoomInside);
+
+	return RoomDiv;
+}
+
+/**
+* Create rooms div
+*
+* @private
+*/
+function INTERFACE_CreateRooms()
+{
+	var RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
+
+
+	// Room list
+	RoomsDiv = UTILS_CreateElement("div", "Rooms");
+	RoomsList = UTILS_CreateElement("ul", "RoomList");
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(UTILS_GetText("room_default")));
+	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
+	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
+	Arrow = UTILS_CreateElement("img");
+	Arrow.src = "images/room_arrow.png";
+
+	// General room
+	RoomName = UTILS_GetText("room_default");
+	RoomsListGeneral.onclick = function () {
+		INTERFACE_FocusRoom(RoomName);
+	}
+
+	// Create general room
+	RoomDiv = INTERFACE_CreateRoom(RoomName);
+	RoomDiv.style.display = "block";
+	MainData.CurrentRoom = RoomName;
+
+	// Creating DOM tree
+	RoomsListArrow.appendChild(Arrow);
+	RoomsList.appendChild(RoomsListGeneral);
+	RoomsList.appendChild(RoomsListArrow);
 
 	RoomsDiv.appendChild(RoomsList);
 	RoomsDiv.appendChild(RoomDiv);

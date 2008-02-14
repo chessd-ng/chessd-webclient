@@ -53,6 +53,8 @@ function DATA(ConfFile, LangFile)
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
 
+	this.CurrentRoom = "";
+
 	this.CurrentGame = "";
 	this.GameList = new Array();
 

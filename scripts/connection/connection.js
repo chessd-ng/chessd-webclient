@@ -47,7 +47,7 @@ function CONNECTION_ConnectJabber(XML)
 
 		// Get user list
 		case (4):
-			CONNECTION_SendJabber(MESSAGE_OfflineUsers());
+			CONNECTION_SendJabber(MESSAGE_UserList());
 			break;
 
 		// Send presence, enter in 'default_room' and
