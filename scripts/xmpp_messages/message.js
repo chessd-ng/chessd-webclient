@@ -418,3 +418,162 @@ function MESSAGE_ChallengeDecline(ChallangeID)
 
 	return MESSAGE_MakeXMPP(XMPP);
 }
+
+
+/**********************************
+ * MESSAGES - GAME
+ **********************************/
+
+/**
+* Send a game moviment
+*/
+function MESSAGE_GameMove(Move, RoomID)
+{
+	var XMPP="";
+
+	XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
+	XMPP += "<move long='"+Move+"'>";
+	XMPP += "</move></query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+* Make a draw request
+*/
+function MESSAGE_GameRequestDraw (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID));
+}
+
+/**
+* Make a cancel request
+*/
+function MESSAGE_GameRequestCancel (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID));
+}
+
+/**
+* Make a adjourn request
+*/
+function MESSAGE_GameRequestAdjourn (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID));
+}
+
+/**
+* Create the game requests messages
+*/
+function MESSAGE_GameRequests(Action, RoomID)
+{
+	var XMPP="";
+
+	switch (Action) 
+	{
+	case "Draw":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
+		break;
+
+	case "Cancel":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
+		break;
+
+	case "Adjourn":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
+		break;
+	
+	default:
+		break;
+	}
+
+	XMPP += "</query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+
+/**
+* Make a draw accept
+*/
+function MESSAGE_GameDrawAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID, ""));
+}
+
+/**
+* Make a draw deny
+*/
+function MESSAGE_GameDrawDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Draw", RoomID, "-decline"));
+}
+
+/**
+* Make a cancel accept
+*/
+function MESSAGE_GameCancelAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID, ""));
+}
+
+/**
+* Make a cancel deny
+*/
+function MESSAGE_GameCancelDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Cancel", RoomID, "-decline"));
+}
+
+/**
+* Make a adjourn accept
+*/
+function MESSAGE_GameAdjournAccept (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID, ""));
+}
+
+/**
+* Make a adjourn deny
+*/
+function MESSAGE_GameAdjournDeny (RoomID)
+{
+	return (MESSAGE_GameRequests("Adjourn", RoomID, "-decline"));
+}
+
+/**
+* Create the game response messages
+*/
+	function MESSAGE_GameResponse(Action, RoomID, Response)
+{
+	var XMPP="";
+
+	switch (Action) 
+	{
+	case "Draw":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw"+Response+"'>";
+		break;
+
+	case "Cancel":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel"+Response+"'>";
+		break;
+
+	case "Adjourn":
+		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn"+Response+"'>";
+		break;
+	
+	default:
+		break;
+	}
+
+	XMPP += "</query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
