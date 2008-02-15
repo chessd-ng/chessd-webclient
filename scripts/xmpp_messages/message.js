@@ -369,7 +369,7 @@ function MESSAGE_RemoveContact(User)
 /**
 * Send a Challenge message
 */
-function MESSAGE_Challenge(Category, Player)
+function MESSAGE_Challenge(Category, Players)
 {
 	/** 
 	* Should be extended to support Bughouse with more two players.
@@ -381,17 +381,29 @@ function MESSAGE_Challenge(Category, Player)
 	*
 	* The 'Color' field must content just the first letter
 	*/
-	
-	var XMPP="";
+	var i, Id, XMPP = "";
+
+	// Setting iq's id
+	Id = MainData.Const.IQ_ID_Challenge;
+	for (i=0; i < Players.length; i++)
+	{
+		if (Players[i].Name == MainData.Username)
+		{
+			continue;
+		}
+		Id += "_"+Players[i].Name;
+	}
 
 	// Tag the id with the challenged player's name
-	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"_"+Player.Name+"'>";
-
+	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
 	XMPP += "<match category='"+Category+"' >";
-	XMPP += "<player jid='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Player.Time+"' inc='"+Player.Inc+"' color='"+Player.Color+"' />";
-	XMPP += "<player jid='"+Player.Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Player.Time+"' inc='"+Player.Inc+"' color='"+Player.Color+"' />";
 
+	// Creating players tags
+	for (i=0; i < Players.length; i++)
+	{
+		XMPP += "<player jid='"+Players[i].Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Players[i].Time+"' inc='"+Players[i].Inc+"' color='"+Players[i].Color+"' />";
+	}
 	XMPP += "</match></query></iq>";
 	
 	return MESSAGE_MakeXMPP(XMPP);
@@ -417,7 +429,7 @@ function MESSAGE_ChallengeAccept(ChallengeID)
 /**
 * Decline a challange 
 */
-function MESSAGE_ChallengeDecline(ChallangeID)
+function MESSAGE_ChallengeDecline(ChallengeID)
 {
 	var XMPP="";
 

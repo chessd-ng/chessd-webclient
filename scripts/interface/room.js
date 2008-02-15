@@ -432,7 +432,7 @@ function INTERFACE_CreateRoom(RoomName)
 */
 function INTERFACE_CreateRooms()
 {
-	var RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
+	var RoomDiv, RoomsDiv, RoomsList, RoomName, RoomsListGeneral, RoomsListArrow, Arrow;
 
 
 	// Room list

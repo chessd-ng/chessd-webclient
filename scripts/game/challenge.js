@@ -88,28 +88,21 @@ function GAME_HandleOffer(XML)
 		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
 		Player1.Inc = Players[0].getAttribute('inc');
 		Player1.Color = Players[0].getAttribute('color');
-		Player1.Time = Players[0].getAttribute('time');
+		Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
 		
 		// Get information of player two
 		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
 		Player2.Inc = Players[1].getAttribute('inc');
 		Player2.Color = Players[1].getAttribute('color');
-		Player2.Time = Players[1].getAttribute('time');
+		Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
 
 		// Add the challenge in structure
 		if (Player1.Name != MainData.Username)
 		{
 			MainData.AddChallenge(Player1.Name, MatchID, Player1.Name);
 
-			// TODO TODO provisorio!
-			if (confirm(Player1.Name+" esta te desafiando, deseja aceitar?"))
-			{	
-				Buffer += MESSAGE_ChallengeAccept(MatchID);
-			}
-			else
-			{
-				Buffer += MESSAGE_ChallengeDecline(MatchID);
-			}
+			// Show challenge window for user
+			WINDOW_Challenge(Player1.Name, Player1, MatchID);
 		}
 		else 
 		{
@@ -130,9 +123,6 @@ function GAME_HandleOffer(XML)
 
 	// TODO
 	// Get the oponent rating
-
- 	// TODO
-	// Interface functions should be inserted here
 
 	return Buffer;
 }
@@ -210,22 +200,84 @@ function GAME_ChallengeError (XML)
 /**
 * Send a challenge message to 'Username'
 */
-function GAME_SendChallenge(User, Color, Time, Inc)
+function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
+{
+	var XML, Player1, Player2, OpColor;
+	var Players = new Array();
+
+	Player1 = new Object();
+	Player2 = new Object();
+
+	// Setting oponent's color
+	if (Color == "white")
+	{
+		OpColor = "black";
+	}
+	else if (Color == "black")
+	{
+		OpColor = "white";
+	}
+	else 
+	{
+		OpColor = "";
+	}
+
+	// Convert time in seconds
+	Time *= 60;
+
+	// Setting attributes
+	Player1.Name = MainData.Username;
+	Player1.Color = Color;
+	Player1.Time = Time;
+	Player1.Inc = Inc;
+	Player1.Rated = Rated;
+
+	Player2.Name = Oponent;
+	Player2.Color = OpColor;
+	Player2.Time = Time;
+	Player2.Inc = Inc;
+	Player2.Rated = Rated;
+
+	Players[0] = Player1;
+	Players[1] = Player2;
+
+	// Create message
+	XML = MESSAGE_Challenge(Category, Players);
+
+	// Sending message
+	CONNECTION_SendJabber(XML);
+}
+
+/**
+* Accept the challenge with the specified MatchID
+*
+* @param	MatchID 	Id of the match to be accepted
+* @return 	void
+* @author 	Pedro
+*/
+function GAME_AcceptChallenge(MatchID)
 {
 	var XML;
-	var Player = new Object();
 
-	Player.Name = User;
+	// Create accept message
+	XML = MESSAGE_ChallengeAccept(MatchID);
 
-	//Player.Color = Color;
-	//Player.Time = Time;
-	//Player.Inc = Inc;
+	CONNECTION_SendJabber(XML);
+}
 
-	// Only for testing
-	Player.Color = "black";
-	Player.Time = 30;
-	Player.Inc = 5;
+/**
+* Decline the challenge with the specified MatchID
+*
+* @param	MatchID 	Id of the match to be declined
+* @return 	void
+* @author 	Pedro
+*/
+function GAME_DeclineChallenge(MatchID)
+{
+	var XML;
 
-	XML = MESSAGE_Challenge("standard", Player);
+	// Create accept message
+	XML = MESSAGE_ChallengeDecline(MatchID);
+
 	CONNECTION_SendJabber(XML);
 }
