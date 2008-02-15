@@ -51,5 +51,34 @@ function GAME_HandleGame (XML)
 */
 function GAME_State (XML)
 {
+	var StateTag, Category;
+	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
+	var PlayerTag;
+	var Player1 = new Object();
+	var Player2 = new Object();
+
+	StateTag = XML.getElementsByTagName("state");
+	BoardTag = XML.getElementsByTagName("board");
+	PlayerTag = XML.getElementsByTagName("player");
+
+	Category = StateTag[0].getAttribute("category");
+
+	FullMoves = BoardTag[0].getAttribute("fullmoves");
+	Enpassant = BoardTag[0].getAttribute("enpassant");
+	Castle = BoardTag[0].getAttribute("castle");
+	Halfmoves = BoardTag[0].getAttribute("halfmoves");
+	Board = BoardTag[0].getAttribute("state");
+	Turn = BoardTag[0].getAttribute("turn");
+
+	Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Inc = Players[0].getAttribute('inc');
+	Player1.Color = Players[0].getAttribute('color');
+	Player1.Time = Players[0].getAttribute('time');
+	
+	Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Inc = Players[1].getAttribute('inc');
+	Player2.Color = Players[1].getAttribute('color');
+	Player2.Time = Players[1].getAttribute('time');
+
 	return "";
 }
