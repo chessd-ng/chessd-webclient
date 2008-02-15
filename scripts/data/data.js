@@ -38,6 +38,7 @@ function DATA(ConfFile, LangFile)
 	this.Browser = UTILS_IdentifyBrowser();
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
+	this.Status = "available";
 	this.Xmlns = UTILS_GetTag(Params, "xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");

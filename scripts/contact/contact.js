@@ -237,6 +237,17 @@ function CONTACT_HandleRoomPresence(XML)
 		}
 		else
 		{
+			// Insert you in room user list
+			try
+			{
+				MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation)
+				INTERFACE_AddUserInRoom(RoomName, Jid, Status);
+			}
+			catch (e)
+			{
+				MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
+				INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
+			}
 			// Set your role and affiliation
 			MainData.SetRoom(RoomName, MsgTo, Role, Affiliation);
 		}

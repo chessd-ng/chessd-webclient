@@ -160,7 +160,7 @@ function MESSAGE_RoomList()
 /**********************************
  * MESSAGES - PRESENCE
  **********************************/
-
+	
 /**
 * If 'To' isn't passed, send your presence to jabber,
 * otherwise send presence to 'To'
@@ -175,7 +175,14 @@ function MESSAGE_Presence(To)
 	}
 	else
 	{
-		XMPP = "<presence to='"+To+"'/>";
+		if (MainData.Status == "available")
+		{
+			XMPP = "<presence to='"+To+"'/>";
+		}
+		else
+		{
+			XMPP = "<presence to='"+To+"'><show>"+MainData.Status+"</show></presence>";
+		}
 	}
 	return MESSAGE_MakeXMPP(XMPP);
 }
@@ -185,16 +192,18 @@ function MESSAGE_Presence(To)
 */
 function MESSAGE_ChangeStatus(NewStatus, RoomName)
 {
+	var XMPP;
+
 	// Message to room
 	if (RoomName)
 	{
 		if (NewStatus == "available")
 		{
-			return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" />');
+			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' />";
 		}
 		else
 		{
-			return MESSAGE_MakeXMPP ('<presence to="'+RoomName+'@conference.shiva" ><show>'+NewStatus+'</show></presence>');
+			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' ><show>"+NewStatus+"</show></presence>";
 		}
 	}
 	
@@ -203,13 +212,14 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 	{
 		if (NewStatus == "available")
 		{
-			return MESSAGE_MakeXMPP('<presence xmlns="jabber:client" />');
+			XMPP = "<presence xmlns='jabber:client' />";
 		}
 		else
 		{
-			return MESSAGE_MakeXMPP('<presence xmlns="jabber:client"><show>'+NewStatus+'</show></presence>');
+			XMPP = "<presence xmlns='jabber:client'><show>"+NewStatus+"</show></presence>";
 		}
 	}
+	return MESSAGE_MakeXMPP(XMPP);
 }
 
 

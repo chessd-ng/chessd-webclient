@@ -36,6 +36,9 @@ function CONTACT_ChangeStatus(NewStatus)
 		XML[i+1] = MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].Name);
 	}
 	
+	// Update your status instructure
+	MainData.Status = NewStatus;
+
 	CONNECTION_SendJabber(MESSAGE_MergeMessages(XML));	
 }
 
