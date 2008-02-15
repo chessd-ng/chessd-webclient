@@ -210,22 +210,50 @@ function GAME_ChallengeError (XML)
 /**
 * Send a challenge message to 'Username'
 */
-function GAME_SendChallenge(User, Color, Time, Inc)
+function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 {
-	var XML;
-	var Player = new Object();
+	var XML, Player1, Player2, OpColor;
+	var Players = new Array();
 
-	Player.Name = User;
+	Player1 = new Object();
+	Player2 = new Object();
 
-	//Player.Color = Color;
-	//Player.Time = Time;
-	//Player.Inc = Inc;
+	// Setting oponent's color
+	if (Color == "white")
+	{
+		OpColor = "black";
+	}
+	else if (Color == "black")
+	{
+		OpColor = "white";
+	}
+	else 
+	{
+		OpColor = "";
+	}
 
-	// Only for testing
-	Player.Color = "black";
-	Player.Time = 30;
-	Player.Inc = 5;
+	// Convert time in seconds
+	Time *= 60;
 
-	XML = MESSAGE_Challenge("standard", Player);
+	// Setting attributes
+	Player1.Name = MainData.Username;
+	Player1.Color = Color;
+	Player1.Time = Time;
+	Player1.Inc = Inc;
+	Player1.Rated = Rated;
+
+	Player2.Name = Oponent;
+	Player2.Color = OpColor;
+	Player2.Time = Time;
+	Player2.Inc = Inc;
+	Player2.Rated = Rated;
+
+	Players[0] = Player1;
+	Players[1] = Player2;
+
+	// Create message
+	XML = MESSAGE_Challenge(Category, Players);
+
+	// Sending message
 	CONNECTION_SendJabber(XML);
 }

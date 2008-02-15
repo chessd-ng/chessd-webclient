@@ -354,8 +354,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	{
 		Options[i] = new Object();
 		Options[i].Name = UTILS_GetText("usermenu_match");
-		Options[i].Func = function () { 
-			GAME_SendChallenge(Username);
+		Options[i].Func = function () {
+			WINDOW_Challenge(Username);
 		};
 		i += 1;
 	}

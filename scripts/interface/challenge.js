@@ -39,28 +39,28 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 	var Invite, Accept, Decline, NewParameters, Cancel, Chat;
 	var Buttons = new Array();
 
-	var Type;
+	var Type, Color, Rated;
 	var i;
 
 	// Main Div
-	Div = UTILS_CreateElement('div','ChallengeDiv');
+	Div = UTILS_CreateElement('div', 'ChallengeDiv');
 	
 	// Top Elments
-	Username = UTILS_CreateElement('h3',null,null,Oponent);
-	Label = UTILS_CreateElement('p',null,'label_information',UTILS_GetText('challenge_information'));
+	Username = UTILS_CreateElement('h3', null, null, Oponent);
+	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
 	
 	// Right Elements
 
-	ChalRightDiv = UTILS_CreateElement('div','ChalRightDiv');
+	ChalRightDiv = UTILS_CreateElement('div', 'ChalRightDiv');
 
-	CatLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_category'));
-	CatOptLi = UTILS_CreateElement('option',null,null,'Lightning');
-	CatOptLi.value = "Lightning";
-	CatOptBl = UTILS_CreateElement('option',null,null,'Blitz');
-	CatOptBl.value = "Blitz";
-	CatOptSt = UTILS_CreateElement('option',null,null,'Stardard');
-	CatOptSt.value = "Stardarid";
-	CatSelect =	UTILS_CreateElement('select','');
+	CatLabel = UTILS_CreateElement('p', null, null, UTILS_GetText('challenge_category'));
+	CatOptLi = UTILS_CreateElement('option', null, null, 'Lightning');
+	CatOptLi.value = "lightning";
+	CatOptBl = UTILS_CreateElement('option', null, null, 'Blitz');
+	CatOptBl.value = "blitz";
+	CatOptSt = UTILS_CreateElement('option', null, null, 'Standard');
+	CatOptSt.value = "standard";
+	CatSelect =	UTILS_CreateElement('select');
 
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
@@ -128,21 +128,20 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 		}
 	}
 
-
-	IncLabel =	UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_inc_label'));
-	IncSelect = UTILS_CreateElement('select',null,'time_select');
-	IncLabelSeg =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_inc_label_seg'));
+	IncLabel =	UTILS_CreateElement('p', null, null, UTILS_GetText('challenge_inc_label'));
+	IncSelect = UTILS_CreateElement('select', null, 'time_select');
+	IncLabelSeg =	UTILS_CreateElement('span', null, 'italic', UTILS_GetText('challenge_inc_label_seg'));
 	IncBr = UTILS_CreateElement('br');
 	
 	for (i=0; i < 30; i++)
 	{
-		IncOpt = UTILS_CreateElement("option",null,null,i);
+		IncOpt = UTILS_CreateElement("option", null, null, i);
 		IncOpt.value = i;
 
 		IncSelect.appendChild(IncOpt);
 	}
 
-	PrivateCheckbox =	UTILS_CreateElement('input',null,'rating_radio');
+	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
 	PrivateCheckbox.type = "checkbox";
 	PrivateCheckbox.name = "private";
 	PrivateLabel = UTILS_CreateElement('span',null,null,UTILS_GetText('challenge_private'));
@@ -308,39 +307,60 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 	}
 
 	// Bottom Elements
-
 	Br = UTILS_CreateElement('br');
 
-	if (GameParameters != undefined)
-	{
-		ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv',"offer");
-	}
-	else
-	{
-		ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv',"invite");
-	}
+	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
-	Invite = UTILS_CreateElement('input',null,'button90');
-	Invite.value= UTILS_GetText('challenge_invite');
+	// Submit the challenge
+	Invite = UTILS_CreateElement('input', null, 'button');
+	Invite.value = UTILS_GetText('challenge_invite');
 	Invite.type = "button";
+	Invite.onclick = function () {
+		// Checking the color
+		if (ColorOptW.checked)
+		{
+			Color = "white";
+		}
+		else if (ColorOptB.checked)
+		{
+			Color = "black";
+		}
+		else
+		{
+			Color = "";
+		}
 
-	Accept = UTILS_CreateElement('input',null,'button65');
+		// Rated or unrated?
+		if (RatingCheckbox.checked)
+		{
+			Rated = 1;
+		}
+		else
+		{
+			Rated = 0;
+		}
+
+		// Create and send the chellenge message
+		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
+	}
+
+	Accept = UTILS_CreateElement('input',null,'button');
 	Accept.value = UTILS_GetText('challenge_accept');
 	Accept.type = "button";
 
-	NewParameters = UTILS_CreateElement('input',null,'button65');
+	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
 	NewParameters.type = "button";
 
-	Cancel = UTILS_CreateElement('input',null,'button90');
+	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('challenge_cancel');
 	Cancel.type = "button";
 
-	Chat = UTILS_CreateElement('input',null,'button65');
+	Chat = UTILS_CreateElement('input',null,'button');
 	Chat.value = UTILS_GetText('challenge_chat');
 	Chat.type = "button";
 
-	Decline = UTILS_CreateElement('input',null,'button65');
+	Decline = UTILS_CreateElement('input',null,'button');
 	Decline.value = UTILS_GetText('challenge_decline');
 	Decline.type = "button";
 

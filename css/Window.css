@@ -47,33 +47,30 @@
 }
 
 #SubWindowBox{
-	background-color: #FFFFFF;
 	border-style	: solid;
 	border-width	: 0px 2px 2px 2px;
 	border-color	: #216778;
-	background-image: url('../images/window_content_bg.png');
-	background-repeat: repeat-x;
+	background		: url('../images/window_content_bg.png') repeat-X;
+	background-color: #FFFFFF;
 }
 
 #SubWindowBox #Content{
-	position	: relative;
+	position		: relative;
 }
 
-#WindowBox .button65,
-#WindowBox .button90 {
+#WindowBox .button {
 	padding-bottom	: 5px;
 	border			: 0px;
-	height			: 17px;
 	font 			: bold 12px Trebuchet MS;
 	color			: #FFF;
 	cursor			: pointer;
-	margin-top		: 8mm;
-	position	:	relative;
-	bottom		:	10px;
-	background	: #216778;
+	margin			: 0px 0px 5px 2px;
+	padding			: 1px 2px;
+	position		: relative;
+	bottom			: 10px;
+	background		: #216778;
 }
 
-#WindowBox .button65:hover, 
-#WindowBox .button90:hover {
-	background			: #FFA200;
+#WindowBox .button:hover {
+	background		: #FFA200;
 }

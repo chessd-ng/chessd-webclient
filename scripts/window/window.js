@@ -34,10 +34,10 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 	Width = WinSize;
 	Height = ""; //auto
 
-	//Create Window Object
+	// Create Window Object
 	Win = new WindowObj(Height, Width, Div, Title);
 
-	//Window Focus Event
+	// Window Focus Event
 	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_ChangeFocus(Win)},false);
 
 	//Show Windows on browser
@@ -48,15 +48,16 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 		MainData.Windows.Focus.blur();
 	}
 
-	//Set focus on Browser
+	// Set focus on Browser
 	Win.focus();
 	Win.setZIndex(zIndex);
 
 	Win.pushEventButtons(DivButtons);
-	//Add Window on WindowList 
+
+	// Add Window on WindowList 
 	MainData.AddWindow(Win);
 
-	return Win; //WindowObj
+	return Win; // WindowObj
 }
 
 function WINDOW_ChangeFocus(WindowObj)
@@ -89,7 +90,7 @@ function WINDOW_RemoveWindow(WindowObj)
 
 	MainData.RemoveWindow(WindowObj);
 
-	//Reset zIndex of others windows
+	// Reset zIndex of others windows
 	for(i=0; i<MainData.Windows.WindowList.length; i++)
 	{
 		WindowTmp = MainData.Windows.WindowList[i]
@@ -108,37 +109,38 @@ function WINDOW_RemoveWindow(WindowObj)
 
 function WINDOW_Alert(str)
 {
-	//Return Div and Buttons;
+	// Return Div and Buttons;
 	var Div = WINDOW_CreateAlert(str);
 
-	//Create New Window
+	// Create New Window
 	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Alert");
 
-	//Close Button (X)
+	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	//Ok Button
+
+	// Ok Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
 function WINDOW_Confirm(str)
 {
-	//Return Div and Buttons;
+	// Return Div and Buttons;
 	var Div = WINDOW_CreateConfirm(str);
 
-	//Create New Window
+	// Create New Window
 	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Confirm");
 
-	//Close Button (X)
+	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	//Ok Button
+	// Ok Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	//Cancel Button
+	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
 function WINDOW_Challenge(User,GameParameters)
 {
-	//Return Div and Buttons;
+	// Return Div and Buttons;
 	var Div = INTERFACE_ShowChallengeWindow(User,GameParameters);
 	var Title;
 
@@ -148,15 +150,17 @@ function WINDOW_Challenge(User,GameParameters)
 	}
 	else
 	{
-		Title = UTILS_GetText('challenge_offer');
+		Title = UTILS_GetText('challenge_title_offer');
 	}
 
-	//Create New Window
+	// Create New Window
 	var WindowObj = WINDOW_NewWindow(330, Div.Div, Div.Buttons, Title);
 
-	//Close Button (X)
+	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	if (GameParameters != undefined)
+
+	// If you receive a challenge
+	if (GameParameters != null)
 	{
 		// Accept Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -167,10 +171,12 @@ function WINDOW_Challenge(User,GameParameters)
 		// Decline Button
 		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	}
+	// If you are the challenger
 	else
 	{
 		// Invite Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+
 		// Cancel Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	}

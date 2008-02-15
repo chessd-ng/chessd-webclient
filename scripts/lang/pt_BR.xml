@@ -73,15 +73,15 @@
 	</error>
 	<challenge>
 		<challenge_title_invite>Convidar para jogar</challenge_title_invite>
-		<challenge_offer>Convite para jogar</challenge_offer>
-		<challenge_pieces>Pecas:</challenge_pieces>
+		<challenge_title_offer>Convite para jogar</challenge_title_offer>
 		<challenge_information>convidou para jogar uma partida com as seguintes caracteristicas:</challenge_information>
+		<challenge_pieces>Pecas:</challenge_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
-		<challenge_time_label_min>min</challenge_time_label_min>
-		<challenge_rating>Valendo rating</challenge_rating>
 		<challenge_category>Categoria de jogo:</challenge_category>
 		<challenge_inc_label>Incremento:</challenge_inc_label>
+		<challenge_time_label_min>min</challenge_time_label_min>
 		<challenge_inc_label_seg>seg</challenge_inc_label_seg>
+		<challenge_rating>Valendo rating</challenge_rating>
 		<challenge_private>Partida privada</challenge_private>
 		<challenge_invite>Convidar</challenge_invite>
 		<challenge_cancel>Cancelar</challenge_cancel>
