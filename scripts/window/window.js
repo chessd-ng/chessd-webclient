@@ -175,3 +175,17 @@ function WINDOW_Challenge(User,GameParameters)
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	}
 }
+
+function WINDOW_CreateRoom()
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowCreateRoomWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create'));
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Create Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

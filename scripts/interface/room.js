@@ -349,7 +349,7 @@ function INTERFACE_ChangeRoomListVisibility()
 	// Population list with user's rooms
 	for (i=0; i < MainData.RoomList.length; i++)
 	{
-		Item = document.createElement('li');
+		Item = UTILS_CreateElement('li');
 		Item.innerHTML = MainData.RoomList[i].Name;
 		Item.onclick = function () {
 			INTERFACE_FocusRoom(this.innerHTML);
@@ -464,4 +464,99 @@ function INTERFACE_CreateRooms()
 	RoomsDiv.appendChild(RoomDiv);
 
 	return RoomsDiv;
+}
+
+/**
+ * Description
+ *
+ * @ param
+ * @ param
+ * @ return
+ * @ see
+ * @ author
+ */
+
+function INTERFACE_ShowCreateRoomWindow()
+{
+	var Div;
+
+	var Label, Input, Br;
+
+	var Create;
+
+	var RoomName;
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'CreateRoomDiv');
+	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_name'));
+	Input = UTILS_CreateElement('input');
+	Br = UTILS_CreateElement('br');
+	Create = UTILS_CreateElement('input',null,'button');
+
+	Input.type = "text";
+	Input.onkeypress = function(event) { 
+		if (event.keyCode == 13) 
+		{
+			if (Input.value == '' || Input.value == null)
+			{
+				return;
+			}
+
+			RoomName = Input.value.replace(/ /g,"_");
+			if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
+			{
+				WINDOW_Alert("Nome invalido para sala");
+				return;
+			}
+			if (RoomName.length > 50)
+			{
+				WINDOW_Alert("Tamanho maximo de 50 caracteres");
+				Input.value = "";
+				return;
+			}
+			
+			// TODO
+			// message to create room
+
+		}
+	};
+
+	Create.type = "button";
+	Create.value = UTILS_GetText('room_create');
+
+	Create.onclick = function() {
+		if (Input.value == '' || Input.value == null)
+		{
+			return;
+		}
+
+		RoomName = Input.value.replace(/ /g,"_");
+		if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
+		{
+			alert("Nome invalido para sala");
+			return;
+		}
+		if (RoomName.length > 50)
+		{
+			alert("Tamanho maximo de 50 caracteres");
+			Create.value = "";
+			return;
+		}
+		
+		// TODO
+		// message to create room
+	};
+
+	// Mount elements tree
+	Div.appendChild(Label);
+	Div.appendChild(Input);
+	Div.appendChild(Br);
+	Div.appendChild(Create);
+
+	Buttons.push(Create);
+
+	// Set focus on input
+	Input.focus();
+
+	return {Div:Div, Buttons:Buttons};
 }
