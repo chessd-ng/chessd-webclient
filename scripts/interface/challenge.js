@@ -17,7 +17,7 @@
 /**
 * 
 */
-function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
+function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 {
 	var Div;
 
@@ -139,6 +139,12 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 		IncOpt.value = i;
 
 		IncSelect.appendChild(IncOpt);
+	}
+
+	// Setting the inc received
+	if (GameParameters != null)
+	{
+		IncSelect.selectedIndex = GameParameters.Inc;
 	}
 
 	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
@@ -344,9 +350,14 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
 	}
 
+	// Accept challenge
+	// Only if you receive a challenge
 	Accept = UTILS_CreateElement('input',null,'button');
 	Accept.value = UTILS_GetText('challenge_accept');
 	Accept.type = "button";
+	Accept.onclick = function () {
+		GAME_AcceptChallenge(MatchId);
+	}	
 
 	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
@@ -363,6 +374,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters)
 	Decline = UTILS_CreateElement('input',null,'button');
 	Decline.value = UTILS_GetText('challenge_decline');
 	Decline.type = "button";
+	Decline.onclick = function () {
+		GAME_DeclineChallenge(MatchId);
+	}	
 
 	// Appending childs
 	// Left

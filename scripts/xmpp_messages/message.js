@@ -429,7 +429,7 @@ function MESSAGE_ChallengeAccept(ChallengeID)
 /**
 * Decline a challange 
 */
-function MESSAGE_ChallengeDecline(ChallangeID)
+function MESSAGE_ChallengeDecline(ChallengeID)
 {
 	var XMPP="";
 
