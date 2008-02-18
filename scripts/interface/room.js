@@ -30,7 +30,7 @@
 *
 * @public
 */
-function INTERFACE_AddUserInRoom(RoomName, Username, Status)
+function INTERFACE_AddUserInRoom(RoomName, Username, Status, Type, Rating)
 {
 	var User, Node = document.getElementById(RoomName+"UserList");
 
@@ -39,7 +39,7 @@ function INTERFACE_AddUserInRoom(RoomName, Username, Status)
 		return false;
 	}
 
-	User = INTERFACE_CreateContact(Username, Status, null, RoomName);
+	User = INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName);
 	Node.appendChild(User);
 	return true;
 }
@@ -69,7 +69,7 @@ function INTERFACE_DelUserInRoom(RoomName, Username)
 *
 * @public
 */
-function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus)
+function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 {
 	var Node = document.getElementById(RoomName+"_"+Username);
 
@@ -78,7 +78,7 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus)
 		return false;
 	}
 
-	Node.className = NewStatus;
+	Node.className = NewType+"_"+NewStatus;
 	return true;
 }
 

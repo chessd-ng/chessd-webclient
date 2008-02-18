@@ -74,34 +74,112 @@
 * USER STATUS
 */
 
+/* normal user */
+
 /* available */
-#Main #Left .available {
-	background		: url('../images/available.png') no-repeat;
+#Main #Left .user_available {
+	background		: url('../images/user_available.png') no-repeat;
 }
 
 /* unavailable */
-#Main #Left .unavailable {
-	background		: url('../images/unavailable.png') no-repeat;
+#Main #Left .user_unavailable {
+	background		: url('../images/user_unavailable.png') no-repeat;
 }
 
 /* away */
-#Main #Left .away {
-	background		: url('../images/away.png') no-repeat;
+#Main #Left .user_away {
+	background		: url('../images/user_away.png') no-repeat;
 }
 
 /* busy */
-#Main #Left .busy {
-	background		: url('../images/busy.png') no-repeat;
+#Main #Left .user_busy {
+	background		: url('../images/user_busy.png') no-repeat;
 }
 
 /* playing */
-#Main #Left .playing {
-	background		: url('../images/playing.png') no-repeat;
+#Main #Left .user_playing {
+	background		: url('../images/user_playing.png') no-repeat;
 }
 
 /* offline */
-#Main #Left .offline {
-	background		: url('../images/offline.png') no-repeat;
+#Main #Left .user_offline {
+	background		: url('../images/user_offline.png') no-repeat;
+}
+
+/* admin */
+
+/* available */
+#Main #Left .admin_available {
+	background		: url('../images/admin_available.png') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .admin_unavailable {
+	background		: url('../images/admin_unavailable.png') no-repeat;
+}
+
+/* away */
+#Main #Left .admin_away {
+	background		: url('../images/admin_away.png') no-repeat;
+}
+
+/* busy */
+#Main #Left .admin_busy {
+	background		: url('../images/admin_busy.png') no-repeat;
+}
+
+/* playing */
+#Main #Left .admin_playing {
+	background		: url('../images/admin_playing.png') no-repeat;
+}
+
+/* offline */
+#Main #Left .admin_offline {
+	background		: url('../images/admin_offline.png') no-repeat;
+}
+
+/* teacher */
+
+/* available */
+#Main #Left .teacher_available {
+	background		: url('../images/teacher_available.png') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .teacher_unavailable {
+	background		: url('../images/teacher_unavailable.png') no-repeat;
+}
+
+/* away */
+#Main #Left .teacher_away {
+	background		: url('../images/teacher_away.png') no-repeat;
+}
+
+/* busy */
+#Main #Left .teacher_busy {
+	background		: url('../images/teacher_busy.png') no-repeat;
+}
+
+/* playing */
+#Main #Left .teacher_playing {
+	background		: url('../images/teacher_playing.png') no-repeat;
+}
+
+/* offline */
+#Main #Left .teacher_offline {
+	background		: url('../images/teacher_offline.png') no-repeat;
+}
+
+/* robot */
+
+/* available */
+#Main #Left .robot_available {
+	background		: url('../images/robot_available.png') no-repeat;
+}
+
+/* offline */
+#Main #Left .robot_offline {
+	background		: url('../images/robot_offline.png') no-repeat;
 }
 
 /* Search user */

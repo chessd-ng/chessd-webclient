@@ -74,28 +74,50 @@ function CONTACT_HandleUserList(XML)
 /**
 * Receive the rating massege and set it in user list
 */
-function CONTACT_HandleRating(Xml)
+function CONTACT_HandleInfo(XML)
 {
-	var Nodes = Xml.getElementsByTagName('rating');
+	var RatingNodes, TypeNodes, Type, Node;
 	var Jid, Rating, Category, i;
 	
-	for (i=0 ; i<Nodes.length ; i++)
+
+	RatingNodes = XML.getElementsByTagName('rating');
+	TypeNodes = XML.getElementsByTagName('type');
+
+	// Getting ratings
+	for (i=0 ; i<RatingNodes.length ; i++)
 	{
 		// Try to get the user name, rating and category of rating
 		try 
 		{
-			Jid = Nodes[i].getAttribute('jid').replace(/@.*/,"");
-			Category = Nodes[i].getAttribute('category');
-			Rating = Nodes[i].getAttribute('rating');
+			Jid = RatingNodes[i].getAttribute('jid').replace(/@.*/,"");
+			Category = RatingNodes[i].getAttribute('category');
+			Rating = RatingNodes[i].getAttribute('rating');
 		}
 		catch (e)
 		{
 			continue;
 		}
 		
-		// Set user's rating on structure
+		// Set rating on structure
 		MainData.SetRating(Jid, Category, Rating);
+	}
+
+	// Getting user type
+	for (i=0 ; i<TypeNodes.length ; i++)
+	{
+		// Try to get the user name, rating and category of rating
+		try 
+		{
+			Jid = TypeNodes[i].getAttribute('jid').replace(/@.*/,"");
+			Type = TypeNodes[i].getAttribute('type');
+		}
+		catch (e)
+		{
+			continue;
+		}
 		
+		// Set type on sctructure
+		MainData.SetType(Jid, Type);
 	}
 	
 	return "";
@@ -107,7 +129,7 @@ function CONTACT_HandleRating(Xml)
 */
 function CONTACT_HandleUserPresence(XML)
 {
-	var Jid, Type, Show, NewStatus;
+	var Jid, Type, UserType, TypeNode, Show, NewStatus;
 	var Buffer = "";
 
 	// Get Jid
@@ -157,6 +179,15 @@ function CONTACT_HandleUserPresence(XML)
 	{
 		CONTACT_SetUserStatus(Jid, "available");
 	}
+
+	// Searching for the user type
+	TypeNode = XML.getElementsByTagName('type');
+	if (TypeNode.length > 0)
+	{
+		// Get status name
+		UserType = UTILS_GetNodeText(TypeNode[0]);
+		CONTACT_SetUserType(Jid, UserType);
+	}
 	
 	return Buffer;
 }
@@ -167,11 +198,12 @@ function CONTACT_HandleUserPresence(XML)
 function CONTACT_HandleRoomPresence(XML)
 {
 	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo;
-
+	var UserType, TypeNode;
 
 	// Get Attributes
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
+	TypeNode = XML.getElementsByTagName("type");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
 	RoomName = From.replace(/@.*/, "");
@@ -198,6 +230,16 @@ function CONTACT_HandleRoomPresence(XML)
 	catch (e)
 	{
 		Affiliation = "none";
+	}
+
+	// Type of user
+	if (TypeNode.length > 0)
+	{
+		UserType = UTILS_GetNodeText(TypeNode[0]);
+	}
+	else
+	{
+		UserType = "user";
 	}
 
 	// Status of user
@@ -240,13 +282,13 @@ function CONTACT_HandleRoomPresence(XML)
 			// Insert you in room user list
 			try
 			{
-				MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation)
-				INTERFACE_AddUserInRoom(RoomName, Jid, Status);
+				MainData.AddUserInRoom(RoomName, Jid, Status, UserType, Role, Affiliation)
+				INTERFACE_AddUserInRoom(RoomName, Jid, Status, UserType, null);
 			}
 			catch (e)
 			{
 				MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
-				INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
+				INTERFACE_UpdateUserInRoom(RoomName, Jid, Status, null, UserType);
 			}
 			// Set your role and affiliation
 			MainData.SetRoom(RoomName, MsgTo, Role, Affiliation);
@@ -266,8 +308,8 @@ function CONTACT_HandleRoomPresence(XML)
 			// Try to insert user in 'RoomName' structure
 			try
 			{
-				MainData.AddUserInRoom(RoomName, Jid, Status, Role, Affiliation)
-				INTERFACE_AddUserInRoom(RoomName, Jid, Status);
+				MainData.AddUserInRoom(RoomName, Jid, Status, UserType, Role, Affiliation)
+				INTERFACE_AddUserInRoom(RoomName, Jid, Status, UserType, null);
 			}
 
 			catch (e)
@@ -275,8 +317,8 @@ function CONTACT_HandleRoomPresence(XML)
 				// If user already exists in 'RoomName' user list
 				if (e == "UserAlreadyInRoomException")
 				{
-					MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
-					INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
+					MainData.SetUserAttrInRoom(RoomName, Jid, Status, UserType, Role, Affiliation)
+					INTERFACE_UpdateUserInRoom(RoomName, Jid, Status, UserType);
 				}
 				// This should NOT EVER happen
 				else if (e == "RoomNotCreatedException")
@@ -316,6 +358,19 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 	return false;
 }
 
+
+/**
+* Change type of 'Username' in structure and interface
+*/
+function CONTACT_SetUserType(Username, NewType)
+{
+	if (MainData.SetType(Username, NewType))
+	{
+		INTERFACE_SetUserType(Username, NewType)	
+		return true;
+	}
+	return false;
+}
 
 /**
 * Create and set options for user menu

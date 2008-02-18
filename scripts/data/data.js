@@ -39,6 +39,7 @@ function DATA(ConfFile, LangFile)
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
 	this.Status = "available";
+	this.Type = null;
 	this.Xmlns = UTILS_GetTag(Params, "xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
@@ -62,9 +63,9 @@ function DATA(ConfFile, LangFile)
 	this.CurrentOldGame = "";
 	this.OldGameList = new Array();
 
-	this.RatingLightning =  0;
-	this.RatingBlitz =  0;
-	this.RatingStandart = 0;
+	this.RatingLightning =  "0";
+	this.RatingBlitz =  "0";
+	this.RatingStandard = "0";
 	
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
@@ -82,9 +83,11 @@ DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
+DATA.prototype.SetDefault = DATA_SetDefault;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
+DATA.prototype.SetType = DATA_SetType;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -118,6 +121,7 @@ DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
 DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
 DATA.prototype.FindWindow = DATA_FindWindow;
+
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -226,6 +230,17 @@ function DATA_GetStatus(Username)
 
 
 /**
+* Set default values to use
+*/
+function DATA_SetDefault(Username)
+{
+	this.Type = "user";
+	this.RatingBlitz = "0";
+	this.RatingStandard = "0";
+	this.RatingLightning = "0";
+}
+
+/**
 * Set user's status
 */
 function DATA_SetUserStatus(Username, NewStatus)
@@ -251,6 +266,29 @@ function DATA_SetSubs(Username, NewSubs)
 		return false;
 		
 	this.UserList[UserPos].Subs = NewSubs;
+	return true;
+}
+
+/**
+* Set user's type
+*/
+function DATA_SetType(Username, NewType)
+{
+	var UserPos = this.FindUser(Username);
+
+	// If it's your type
+	if (Username == MainData.Username)
+	{
+		MainData.Type = NewType;
+		return true;
+	}
+
+	if (UserPos == null)
+	{
+		return false;
+	}
+		
+	this.UserList[UserPos].Type = NewType;
 	return true;
 }
 
@@ -370,7 +408,7 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 /**
 * Add user in user list of a room
 */
-function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
+function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
@@ -389,6 +427,7 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 
 	User.Username = Username;
 	User.Status = Status;
+	User.Type = Type;
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 
@@ -423,7 +462,7 @@ function DATA_FindUserInRoom(RoomName, Username)
 /**
 * Set user attibutes in 'RoomName'
 */
-function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
+function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
 	var j = this.FindRoom(RoomName)
 	var i = this.FindUserInRoom(RoomName, Username)
@@ -432,6 +471,7 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 		return false;
 
 	this.RoomList[j].UserList[i].Status = Status;
+	this.RoomList[j].UserList[i].Type = Type;
 	this.RoomList[j].UserList[i].Role = Role;
 	this.RoomList[j].UserList[i].Affiliation = Affiliation;
 	return true;
