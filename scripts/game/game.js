@@ -22,6 +22,11 @@
 
 /**
 * Handle Game Messages
+*
+* @param 	XML The xml that contains the string 'match' in xmlns attribute
+* @return 	Buffer with the messages that must be send
+* @author 	Ulysses
+*/
 */
 function GAME_HandleGame (XML)
 {
@@ -43,11 +48,37 @@ function GAME_HandleGame (XML)
 	{
 		Buffer = GAME_State(XML);
 	}
+	else if (Xmlns.match(/\/chessd#game#cancel/))
+	{
+		Buffer = GAME_HandleCancel(XML);
+	}
+	else if (Xmlns.match(/\/chessd#game#draw/))
+	{
+		Buffer = GAME_HandleDraw (XML);
+	}
+	else if (Xmlns.match(/\/chessd#game#adjourn/))
+	{
+		Buffer = GAME_HandleAdjourn(XML);
+	}
+	else if (Xmlns.match(/\/chessd#game#end/))
+	{
+		Buffer = GAME_End(XML);
+	}
+	else if (Xmlns.match(/\/chessd#game#error/))
+	{
+		Buffer = GAME_HandleError(XML);
+	}
+	
+	return Buffer;
 }
 
 
 /**
 * Handle Game State
+*
+* @param 	XML The xml that contains the game state
+* @return 	void
+* @author 	Ulysses
 */
 function GAME_State (XML)
 {
@@ -80,5 +111,132 @@ function GAME_State (XML)
 	Player2.Color = Players[1].getAttribute('color');
 	Player2.Time = Players[1].getAttribute('time');
 
+	// TODO TODO TODO
+	// Warn the interface
+	
+	return "";
+}
+
+/**
+* Handle Draw Request
+*
+* @param 	XML The xml that contains the draw message
+* @return 	The message to accept or deny the draw request
+* @author 	Ulysses
+*/
+function GAME_HandleDraw (XML)
+{
+	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
+ 
+	// TODO TODO TODO
+	if (confirm("O adversario esta requisitando empate."))
+	{
+		return GameDrawAccept (RoomID);
+	}	
+	else 
+	{
+		return GameDrawDeny (RoomID);
+	}
+}
+
+/**
+* Handle Cancel Request
+*
+* @param 	XML The xml that contains the cancel message
+* @return 	The XML to accept or deny the cancel request
+* @author 	Ulysses
+*/
+function GAME_HandleAdjourn (XML)
+{
+	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
+ 
+	// TODO TODO TODO
+	if (confirm("O adversario esta requisitando cancelamento da partida."))
+	{
+		return GameCancelAccept (RoomID);
+	}	
+	else 
+	{
+		return GameCancelDeny (RoomID);
+	}
+}
+
+/**
+* Handle Adjourn Request
+*
+* @param 	XML The xml that contains the adjourn message
+* @return 	The XML to accept or deny the adjourn request
+* @author 	Ulysses
+*/
+function GAME_HandleAdjourn (XML)
+{
+	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
+ 
+	// TODO TODO TODO
+	if (confirm("O adversario esta requisitando o adiamento da partida."))
+	{
+		return GameAdjournAccept (RoomID);
+	}	
+	else 
+	{
+		return GameAdjournDeny (RoomID);
+	}
+}
+
+
+/**
+* Game Over
+*
+* @param 	XML The xml that contains the ending game message
+* @return 	void
+* @author 	Ulysses
+*/
+function GAME_End (XML)
+{
+	var PlayerTag, ReasonTag;
+	var RoomID, Reason, Player, WinnerID;
+
+	// Get the room name
+	RoomID = XML.getAttribute("from").replace(/@.*/,"");
+
+	// Get the reason 
+	ReasonTag = XML.getElementsByTagName("reason");
+	if (ReasonTag)
+	{
+		// Get the reason from tag 'reason'
+		Reason = UTILS_GetNodeText(ReasonTag[0]);
+	}
+	
+	// Get the winner player
+	PlayerTag = XML.getElementsByTagName("player");
+	if (PlayerTag[0].getAttribute("result") == "winner")
+	{
+		// Winner JID
+		WinnerID = PlayerTag[0].getAttribute("jid").replace(/@.*/,"");
+	}
+	else 
+	{
+		WinnerID = PlayerTag[1].getAttribute("jid").replace(/@.*/,"");
+	}
+	
+	// TODO TODO TODO
+	alert ("Fim de jogo\nVencedor:"+WinnerID+"Razao: "+Reason);
+	
+	return "";
+}
+
+
+/**
+* Handle Game Error
+*
+* @param 	XML The xml that contains the error message
+* @return 	void
+* @author 	Ulysses
+*/
+function GAME_HandleError (XML)
+{
+	// TODO TODO TODO 
+	alert ("Ultima jogada invalida");
+	
 	return "";
 }
