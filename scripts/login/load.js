@@ -95,7 +95,7 @@ function LOGIN_LoadScripts()
 	Scripts[17] = "scripts/interface/challenge.js";
 	Scripts[18] = "scripts/interface/game.js";
 	Scripts[19] = "scripts/game/game.js";
-	Scripts[19] = "scripts/utils/dragpiece.js";
+	Scripts[20] = "scripts/utils/dragpiece.js";
 
 
 	// Carregando arquivos

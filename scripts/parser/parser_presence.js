@@ -35,7 +35,7 @@ function PARSER_ParsePresence(XML)
 	}
 
 	// Room presence
-	if (Jid.match(/.*conference.*/))
+	if (Jid.match(/.*conference.*/) || (Jid.match(/.*games.*/)))
 	{
 		return CONTACT_HandleRoomPresence(XML);
 	}

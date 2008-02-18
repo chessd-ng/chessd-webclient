@@ -57,7 +57,7 @@ function DATA(ConfFile, LangFile)
 
 	this.CurrentRoom = "";
 
-	this.CurrentGame = "";
+	this.CurrentGame = null;
 	this.GameList = new Array();
 
 	this.CurrentOldGame = "";
@@ -107,7 +107,7 @@ DATA.prototype.ClearChallenges = DATA_ClearChallenges;
 
 DATA.prototype.AddGame = DATA_AddGame;
 DATA.prototype.RemoveGameById = DATA_RemoveGame;
-DATA.prototype.FindGameById = DATA_FindGame;
+DATA.prototype.FindGame = DATA_FindGame;
 DATA.prototype.AddGameMove = DATA_AddGameMove;
 DATA.prototype.SetCurrentGame = DATA_SetCurrentGame;
 DATA.prototype.SetIsYourTurn = DATA_SetIsYourTurnGame;
@@ -672,8 +672,8 @@ function DATA_AddGame(Id, PWJID, PBJID, PWName, PBName, Color, GameDiv)
 	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();
 
-	NewGame.SetIsYourTurn = DATA_SetIsYourTurn;
-	NewGame.AddMove = DATA_AddGameMove;
+	NewGame.SetIsYourTurn = this.SetIsYourTurn;
+	NewGame.AddMove = this.AddGameMove;
 
 	this.GameList.push(NewGame);
 

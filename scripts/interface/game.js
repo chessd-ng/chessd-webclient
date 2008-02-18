@@ -1,3 +1,23 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+/**
+* Interface functions that control game
+*/ 
+
 /***************************
 ** GAME BOARD OBJECT
 *****************************/
@@ -42,14 +62,14 @@ function INTERFACE_GameBoardObj(PWName, PBName, PlayerColor, Size)
 
 function INTERFACE_ShowGame(Div)
 {
-	if(Div == null)
-	{
-		document.body.appendChild(this.game);
-	}
-	else
+	var Div = document.getElementById("Main");
+
+	if (Div)
 	{
 		Div.appendChild(this.game);
+		return true;
 	}
+	return false;
 }
 
 function INTERFACE_HideGame()
@@ -386,7 +406,6 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 		Col[7] = 'b';
 		Col[8] = 'a';
 */
-
 	// Criando os indices do tabuleiro
 	/* 
 	var IndexH = document.createElement("ul");
