@@ -506,3 +506,85 @@ function UTILS_DragWindow(Obj)
 //TODO TODO TODO TODO TODO TODO
 // SUBSTITUIR ESSAS FUNCOES DE DRAG AND DROPS
 //TODO TODO TODO TODO TODO TODO
+
+
+////HORIZONTAL INDEX CONVERT
+//If CharNum is char return respective number
+//If CharNum is number return respective char
+function UTILS_HorizontalIndex(CharNum)
+{
+        var Row = new Array();
+        var i=1;
+
+        Row[1] = 'h';
+        Row[2] = 'g';
+        Row[3] = 'f';
+        Row[4] = 'e';
+        Row[5] = 'd';
+        Row[6] = 'c';
+        Row[7] = 'b';
+        Row[8] = 'a';
+
+        if(isNaN(CharNum)) //Char
+        {
+                while(i < 9)
+                {
+                        if(Row[i] == CharNum)
+                        {
+                                return i;
+                        }
+                        i++;
+                }
+                return null;
+        }
+        else //number
+        {
+                if(( CharNum > 0) && (CharNum < 9) )
+                {
+                        return Row[CharNum];
+                }
+                else
+                {
+                        return null;
+                }
+        }
+}
+
+
+/**
+* Convert a string board to a array (8x8) board
+*
+* @return Array x Array (8x8) of char
+* @private
+*/
+function UTILS_String2Board(BoardString)
+//BoardString is a array of char that contains chess board
+{
+        var Lin1, Lin2, Lin3, Lin4, Lin5, Lin6, Lin7, Lin8;
+        var tmpArray;
+
+        BoardString = BoardString.replace(/1/g,"-");
+        BoardString = BoardString.replace(/2/g,"--");
+        BoardString = BoardString.replace(/3/g,"---");
+        BoardString = BoardString.replace(/4/g,"----");
+        BoardString = BoardString.replace(/5/g,"-----");
+        BoardString = BoardString.replace(/6/g,"------");
+        BoardString = BoardString.replace(/7/g,"-------");
+        BoardString = BoardString.replace(/8/g,"--------");
+
+        tmpArray = BoardString.split("/",8);
+
+        Lin1 = tmpArray[0];
+        Lin2 = tmpArray[1];
+        Lin3 = tmpArray[2];
+        Lin4 = tmpArray[3];
+        Lin5 = tmpArray[4];
+        Lin6 = tmpArray[5];
+        Lin7 = tmpArray[6];
+        Lin8 = tmpArray[7];
+
+        var Board = new Array(Lin1, Lin2, Lin3, Lin4, Lin5, Lin6, Lin7, Lin8);
+
+        return Board;
+}
+
