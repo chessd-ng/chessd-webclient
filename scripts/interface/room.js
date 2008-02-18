@@ -466,14 +466,17 @@ function INTERFACE_CreateRooms()
 	return RoomsDiv;
 }
 
+/**********************************
+ * FUNCTIONS - WINDOWS
+ *************************************/
+
+
 /**
- * Description
+ * Create elements to create room window and return divs and array of buttons
  *
- * @ param
- * @ param
- * @ return
- * @ see
- * @ author
+ * @ return	Div, Array 
+ * @ see		WINDOW_CreateRoom();
+ * @ author	Danilo Kiyoshi Simizu Yorinori
  */
 
 function INTERFACE_ShowCreateRoomWindow()

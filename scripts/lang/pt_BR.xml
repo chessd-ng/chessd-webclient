@@ -41,6 +41,11 @@
 		<contact_offline>Offline</contact_offline>
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
+		<contact_invite>Adicionar usuario</contact_invite>
+		<contact_invite_text>Deseja adicionar o usuario </contact_invite_text>
+		<contact_invite_text2>?</contact_invite_text2>
+		<contact_auth>Adicionar</contact_auth>
+		<contact_decline>Recusar</contact_decline>
 	</contact>
 	<room>
 		<room_default>geral</room_default>

@@ -15,7 +15,14 @@
 */
 
 /**
-* 
+* Create elements to challenge invite or challenge offer
+*
+* @param Oponent					Oponent's nickname 
+* @param GameParameters		Object that contains the game parameters of a received challenge
+* @param MatchId					Id of Match 
+* @return									Div; Array
+* @see										WINDOW_Challenge();
+* @author									Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 {

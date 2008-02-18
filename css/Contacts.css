@@ -212,3 +212,29 @@
 #UserMenuDiv p:hover {
 	background-color: #EAF5F4;
 }
+
+/**
+*	Invite window
+*/
+
+#InviteDiv {
+	padding-top	:	10px;
+}
+
+#InviteDiv #TextDiv span {
+	font-size 	: 15px;
+	font-weight	:	bold;
+	color				: #216778;
+}
+
+#InviteDiv #ButtonsDiv {
+	padding-top : 20px;
+	text-align	: center;
+	position		: relative;
+}
+
+#InviteDiv #TextDiv {
+	text-align	: center;
+	position		: relative;
+}
+
