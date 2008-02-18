@@ -326,3 +326,57 @@ function INTERFACE_CreateContactList()
 
 	return ContactDiv;
 }
+
+/*****************************
+*	FUNCTIONS - WINDOW
+******************************/
+
+/**
+*	Create elements of invite window and returns div
+*
+* @param	User	User's nickname that sent the invitation
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowInviteWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Auth, Decline;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'InviteDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Auth = UTILS_CreateElement('input',null,'button');
+	Auth.type = "button";
+	Auth.value = UTILS_GetText("contact_auth");
+	Buttons.push(Auth);
+
+	Decline = UTILS_CreateElement('input',null,'button');
+	Decline.type = "button";
+	Decline.value = UTILS_GetText("contact_decline");
+	Buttons.push(Decline);
+
+	ButtonsDiv.appendChild(Auth);
+	ButtonsDiv.appendChild(Decline);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
