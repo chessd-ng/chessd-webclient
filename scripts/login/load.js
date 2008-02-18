@@ -136,6 +136,7 @@ function LOGIN_LoadCss()
 	Files[5] = "css/TopMenus.css";
 	Files[6] = "css/Challenge.css";
 	Files[7] = "css/Board.css";
+	Files[7] = "css/Game.css";
 
 	for (i=0; i<Files.length; i++)
 	{
