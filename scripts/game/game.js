@@ -27,8 +27,7 @@
 * @return 	Buffer with the messages that must be send
 * @author 	Ulysses
 */
-*/
-function GAME_HandleGame (XML)
+function GAME_HandleGame(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
@@ -101,15 +100,16 @@ function GAME_State (XML)
 	Board = BoardTag[0].getAttribute("state");
 	Turn = BoardTag[0].getAttribute("turn");
 
-	Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
-	Player1.Inc = Players[0].getAttribute('inc');
-	Player1.Color = Players[0].getAttribute('color');
-	Player1.Time = Players[0].getAttribute('time');
+	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Inc = PlayerTag[0].getAttribute('inc');
+	Player1.Color = PlayerTag[0].getAttribute('color');
+	Player1.Time = PlayerTag[0].getAttribute('time');
 	
-	Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
-	Player2.Inc = Players[1].getAttribute('inc');
-	Player2.Color = Players[1].getAttribute('color');
-	Player2.Time = Players[1].getAttribute('time');
+	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Inc = PlayerTag[1].getAttribute('inc');
+	Player2.Color = PlayerTag[1].getAttribute('color');
+	Player2.Time = PlayerTag[1].getAttribute('time');
+
 
 	// TODO TODO TODO
 	// Warn the interface

@@ -93,6 +93,7 @@ function LOGIN_LoadScripts()
 	Scripts[15] = "scripts/window/window.js";
 	Scripts[16] = "scripts/interface/window.js";
 	Scripts[17] = "scripts/interface/challenge.js";
+	Scripts[18] = "scripts/game/game.js";
 
 
 	// Carregando arquivos
