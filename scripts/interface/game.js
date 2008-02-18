@@ -601,9 +601,8 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	var PieceImg;
 	var PieceName, PieceTitle;
 	var DragPieceW, DrawPieceB;
-	var PieceDir;
+	var PieceDir = "images/pieces";
 
-	//TODO Colocar as funcoes de drag drop para as peças
 	if(PlayerColor == "w")
 	{
 		DragPieceW = function(event){ UTILS_StartDragPiece(this, Size); return false;};
@@ -615,52 +614,52 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 		DragPieceB = function(event){ UTILS_StartDragPiece(this, Size); return false;};
 	}
 
-
+/*
 	if(Size == null)
 	{
-		PieceDir = 38;
+		PieceDir += 38;
 	}
 	else
 	{
 		PieceDir = Size;
 	}
-
+*/
 	//TODO Mudar as strings do PieceTitle para o formato internacionalizado
 	PieceImg = UTILS_CreateElement("img",null, null, null);
 	switch(Piece)
 	{
                 case 'R':
-	                PieceImg.src = "images/pecas/"+PieceDir+"/torre_branco.png";
+	                PieceImg.src = PieceDir+"/wtower.png";
         	        PieceImg.title = "Torre Branca";
                         PieceImg.onmousedown = DragPieceW;
                         break;
                 //Cavalos
                 case 'N':
-        	        PieceImg.src = "images/pecas/"+PieceDir+"/cavalo_branco.png";
+        	        PieceImg.src = PieceDir+"/wknight.png";
 	                PieceImg.title = "Cavalo Branco";
                         PieceImg.onmousedown = DragPieceW;
                         break;
                 //Bispos        
                 case 'B':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/bispo_branco.png";
+                        PieceImg.src = PieceDir+"/wbishop.png";
         	        PieceImg.title = "Bispo Branco";
                         PieceImg.onmousedown = DragPieceW;
                         break;
                 //Dama
                 case 'Q':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/rainha_branco.png";
+                        PieceImg.src = PieceDir+"/wqueen.png";
 	                PieceImg.title = "Rainha Branca";
                         PieceImg.onmousedown = DragPieceW;
                         break;
                 //Rei
                 case 'K':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/rei_branco.png";
+                        PieceImg.src = PieceDir+"/wking.png";
         	        PieceImg.title = "Rei Branco";
                         PieceImg.onmousedown = DragPieceW;
                         break;
                 //Peoes
                 case 'P':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/peao_branco.png";
+                        PieceImg.src = PieceDir+"/wpawn.png";
 	                PieceImg.title = "Peão Branco";
                         PieceImg.onmousedown = DragPieceW;
                         break;
@@ -668,37 +667,37 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
                 //PRETAS
                 //Torres
                 case 'r':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/torre_preto.png";
+                        PieceImg.src = PieceDir+"/btower.png";
               		PieceImg.title = "Torre Preta";
                         PieceImg.onmousedown = DragPieceB;
                         break;
                 //Cavalos
                 case 'n':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/cavalo_preto.png";
+                        PieceImg.src = PieceDir+"/bknight.png";
                 	PieceImg.title = "Cavalo Preto";
                         PieceImg.onmousedown = DragPieceB;
                         break;
                 //Bispos
                 case 'b':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/bispo_preto.png";
+                        PieceImg.src = PieceDir+"/bbishop.png";
                 	PieceImg.title = "Bispo Preto";
                         PieceImg.onmousedown = DragPieceB;
                         break;
                 //Rei
                 case 'q':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/rainha_preto.png";
+                        PieceImg.src = PieceDir+"/bqueen.png";
                 	PieceImg.title = "Rei Preto";
                         PieceImg.onmousedown = DragPieceB;
                         break;
                 //Damas
                 case 'k':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/rei_preto.png";
+                        PieceImg.src = PieceDir+"/bking.png";
                 	PieceImg.title = "Rainha Preta";
                         PieceImg.onmousedown = DragPieceB;
                         break;
                 //Peoes
                 case 'p':
-                        PieceImg.src = "images/pecas/"+PieceDir+"/peao_preto.png";
+                        PieceImg.src = PieceDir+"/bpawn.png";
                 	PieceImg.title = "Peão Preto";
                         PieceImg.onmousedown = DragPieceB;
                         break;
@@ -755,13 +754,13 @@ function INTERFACE_DisplayPiece(Piece, Line, Col, PlayerColor, Size)
 
 	if(PlayerColor == "w")
 	{
-		PieceImg.style.left = ((8-Col) * Size + BorderOffSet)+"px";
-		PieceImg.style.top = ((Line) * Size + BorderOffSet)+"px";
+		PieceImg.style.left = (Col*Size + BorderOffSet)+"px";
+		PieceImg.style.top = ((Line)*Size + BorderOffSet)+"px";
 	}
 	else
 	{
-		PieceImg.style.left = (Col*Size + BorderOffSet)+"px";
-		PieceImg.style.top = ((Line)*Size + BorderOffSet)+"px";
+		PieceImg.style.left = ((7*Size) - (Line*Size) + BorderOffSet)+"px";
+		PieceImg.style.top  = ((7*Size) - (Col*Size) + BorderOffSet)+"px";
 	}
 
 	PieceImg.id = UTILS_HorizontalIndex(Col+1)+(Line+1);

@@ -42,19 +42,19 @@
 }
 
 #Board .black {
-	background-image	: url('quadrado_preto.png');
+	background-image	: url('../images/board/square_black.png');
 }
 
 #Board .white {
-	background-image	: url('quadrado_branco.png');
+	background-image	: url('../images/board/square_white.png');
 }
 
 #Board .select {
-	background-image	: url('quadrado_selec.png');
+	background-image	: url('../images/board/square_select.png');
 }
 
 #Board div:hover {
-	background-image	: url('quadrado_selec.png');
+	background-image	: url('../images/board/square_select.png');
 }
 
 
@@ -185,7 +185,7 @@
 
 #PhotoDiv #PWPawn
 {
-	background-image	: url("images/pecas/peao_branco.png");
+	background-image	: url("../images/pieces/wpawn.png");
 
 	position		: absolute;
 	top			: 13.5mm;
@@ -196,7 +196,7 @@
 }
 #PhotoDiv #PBPawn
 {
-	background-image	: url("images/pecas/peao_preto.png");
+	background-image	: url("../images/pieces/bpawn.png");
 
 	position		: absolute;
 	top			: 13.5mm;
@@ -206,7 +206,7 @@
 	height			: 35px;
 }
 
-#PhotoDiv #VS
+#PhotoDiv #vs
 {
 	position		: absolute;
 	right			: 50%;

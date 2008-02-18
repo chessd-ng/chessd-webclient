@@ -115,6 +115,11 @@ function GAME_State (XML)
 	if (MainData.FindGame(GameID) == null)
 	{
 		GAME_StartGame(GameID, Player1, Player2);
+		GAME_UpdateBoardMove(GameID, Board, FullMoves, Player1, Player2, Turn)
+	}
+	else
+	{
+		GAME_UpdateBoardMove(GameID, Board, FullMoves, Player1, Player2, Turn)
 	}
 
 	// TODO TODO TODO
@@ -251,8 +256,8 @@ function GAME_HandleError (XML)
 * Start Game
 *
 * @param 	GameId = Game number
-* @param 	P1JID, P2JID = Players Jabber Id
-* @param 	P1Color, P2Color = Players Colors ("w"/"b")
+* @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
+* @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
 * @return 	void
 * @author 	Rubens
 */
@@ -277,6 +282,15 @@ function GAME_StartGame(GameId, P1, P2)
 		YourColor = P2.Color;
 	}
 
+	if(YourColor == "white")
+	{
+		YourColor = "w";
+	}
+	else
+	{
+		YourColor = "b";
+	}
+
 	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor, 38);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
@@ -288,14 +302,15 @@ function GAME_StartGame(GameId, P1, P2)
 * Start Game
 *
 * @param 	GameId = Game number
-* @param 	PWTime, PBTime = Players timer when move is done
-* @param 	Move = Chess Move (Piece/Orig-Dest)
 * @param 	BoardStr = Board status in a string
+* @param 	Move = Chess Move (Piece/Orig-Dest)
+* @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
+* @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
 * @param 	TurnColor = color ("w"/"b")
 * @return 	void
 * @author 	Rubens
 */
-function GAME_UpdateBoardMove(GameId, BoardStr, Move, PWTime, PBTime, TurnColor)
+function GAME_UpdateBoardMove(GameId, BoardStr, Move, P1, P2, TurnColor)
 {
 	var NewBoardArray = UTILS_String2Board(BoardStr);
 	var Game = MainData.GetGame(GameId); //Get Game from GameList
@@ -313,12 +328,19 @@ function GAME_UpdateBoardMove(GameId, BoardStr, Move, PWTime, PBTime, TurnColor)
 	
 
 	//DATA STRUCT
-	Game.AddMove(NewBoardArray, Move, PWTime, PBTime, TurnColor);
+	if(P1.Color == "w")
+	{
+		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
+	}
+	else
+	{
+		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
+	}
 	Game.SetIsYourTurn(TurnColor)
 
 	//INTERFACE
 	Game.Game.updateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor, 38);
-	Game.Game.addMove(Game.Moves.length, Move, PWTime, PBTime);
-	Game.Game.setWTimer(PWTime);
-	Game.Game.setBTimer(PBTime);
+	Game.Game.addMove(Game.Moves.length, Move, P1.Time, P2.Time);
+	Game.Game.setWTimer(P1.Time);
+	Game.Game.setBTimer(P2.Time);
 }

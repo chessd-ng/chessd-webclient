@@ -654,7 +654,7 @@ function DATA_SetCurrentGame(Game)
 /**
 * Add a game in 'GameList'
 */
-function DATA_AddGame(Id, PWJID, PBJID, PWName, PBName, Color, GameDiv)
+function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 {
 	var NewGame = new Object();
 
@@ -754,24 +754,15 @@ function DATA_AddGameMove(BoardArray, Move, PWTime, PBTime, Turn)
 /**
 * Set true, if is the player's turn
 */
-function DATA_SetIsYourTurnGame(Id,P1Name,P2Name,P1Color,Turn)
+function DATA_SetIsYourTurnGame(TurnColor)
 {
-	if(this.GameList[Id] == undefined)
+	if((this.YourColor == TurnColor))
 	{
-		return;
-	}
-
-	if((MainData.UserName == P1Name) && (P1Color == Turn))
-	{
-		this.GameList[Id].IsYourTurn = true;
-	}
-	else if((MainData.UserName == P2Name) && (P1Color != Turn))
-	{
-		this.GameList[Id].IsYourTurn = true;
+		this.IsYourTurn = true;
 	}
 	else
 	{
-		this.GameList[Id].IsYourTurn = false;
+		this.IsYourTurn = false;
 	}
 }
 
