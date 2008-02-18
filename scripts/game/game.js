@@ -27,11 +27,7 @@
 * @return 	Buffer with the messages that must be send
 * @author 	Ulysses
 */
-<<<<<<< HEAD:scripts/game/game.js
 function GAME_HandleGame(XML)
-=======
-function GAME_HandleGame (XML)
->>>>>>> 7df20ba20fd2387b7e0f7f6d1215e7ce30cd55b4:scripts/game/game.js
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
