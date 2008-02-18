@@ -116,6 +116,7 @@ DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
+DATA.prototype.GetGame = DATA_GetGameById;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -653,23 +654,31 @@ function DATA_SetCurrentGame(Game)
 /**
 * Add a game in 'GameList'
 */
-function DATA_AddGame(Id, P1Name, P2Name, Color)
+function DATA_AddGame(Id, PWJID, PBJID, PWName, PBName, Color, GameDiv)
 {
 	var NewGame = new Object();
-	
+
 	if(this.GameList.length == 0)
 	{
 		MainData.SetCurrentGame(NewGame);
 	}
 
 	NewGame.Id = Id;
-	NewGame.P1 = P1Name;
-	NewGame.P2 = P2Name;
-	NewGame.YouColor = Color;
+	NewGame.PW = PWName;
+	NewGame.PB = PBName;
+	NewGame.Game = GameDiv;
+	NewGame.YourColor = Color;
 	NewGame.IsYourTurn = false;
+	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();
 
+	NewGame.SetIsYourTurn = DATA_SetIsYourTurn;
+	NewGame.AddMove = DATA_AddGameMove;
+
 	this.GameList.push(NewGame);
+
+	return NewGame;
+
 }
 
 
@@ -727,25 +736,19 @@ function DATA_FindGame(Id)
 /**
 * Add a move in 'GameList[x].Moves' 
 */
-function DATA_AddGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+function DATA_AddGameMove(BoardArray, Move, PWTime, PBTime, Turn)
 {
-	var GamePosition = MainData.FindGame(Id);
 	var NewMove = new Object();
 
-	if(GamePosition == null)
-	{
-		return null;
-	}
-	else
-	{
-		NewMove.Board = UTILS_String2Board(Board);
-		NewMove.Move = Move;
-		NewMove.P1Time = P1Time;
-		NewMove.P2Time = P2Time;
-		NewMove.Turn = Turn;
+	NewMove.Board = BoardArray;
+	NewMove.Move = Move;
+	NewMove.PWTime = PWTime;
+	NewMove.PBTime = PBTime;
+	NewMove.Turn = Turn;
 
-		this.GameList[GamePosition].Moves.push(NewMove);
-	}
+	this.CurrentMove = this.Moves.length;
+	this.Moves.push(NewMove);
+
 }
 
 /**
@@ -771,6 +774,21 @@ function DATA_SetIsYourTurnGame(Id,P1Name,P2Name,P1Color,Turn)
 		this.GameList[Id].IsYourTurn = false;
 	}
 }
+
+function DATA_GetGameById(Id)
+{
+	var i=0;
+	while(i<this.GameList.length)
+	{
+		if(this.GameList[i].Id == Id)
+		{
+			return(this.GameList[i])
+		}
+		i++;
+	}
+	return null;
+}
+
 
 /**********************************
  * METHODS - OLDGAME              *

@@ -1,0 +1,434 @@
+/**
+* ESTILOS PARA O DIV DE JOGOS
+*/
+#GameDiv
+{
+	position		: absolute;
+	/*
+	border-style		: solid;
+	border-color		: #216778;
+	border-width		: 1mm;
+	/*width			: 135mm;*/
+
+	left			: 30mm;
+
+	display			: table;
+}
+
+/**
+* ESTILOS DO TABULEIRO
+*/
+
+#TBoard{
+	position		: relative;
+	float			: left;
+}
+
+#Board {
+	position		: relative;
+
+	height			: 80.5mm;
+	width			: 80.5mm;
+
+	border-style		: solid;
+	border-width		: 1mm;
+	border-color		: #216778;
+
+	display			: table;
+}
+
+#Board div{
+	float			: left;
+}
+
+#Board .black {
+	background-image	: url('quadrado_preto.png');
+}
+
+#Board .white {
+	background-image	: url('quadrado_branco.png');
+}
+
+#Board .select {
+	background-image	: url('quadrado_selec.png');
+}
+
+#Board div:hover {
+	background-image	: url('quadrado_selec.png');
+}
+
+
+/**
+* ESTILOS PARA OS INDICES DO TABULEIRO
+*/
+#IndexV {
+	position		: absolute;
+	top			: 1mm;
+	left			: -8mm;
+	margin-left		: 0px;
+	list-style		: none;
+}
+ 
+#IndexV li {
+	font			: 18px Trebuchet MS;
+	color			: #216778;
+	width			: 15px;
+	height			: 38px;
+	line-height		: 38px;
+
+	text-align		: center;
+}
+
+
+#IndexH {
+	list-style		: none;
+	/*
+	position		: absolute;
+	top			: 80mm;
+	*/
+	left			: 1mm;
+}
+
+#IndexH li {
+	list-style		: none;
+	float			: left;
+	font			: 18px Trebuchet MS;
+	color			: #216778;
+	width			: 38px;
+	height			: 38px;
+
+	text-align		: center;
+	/*
+	line-height		: 38px;
+	*/
+}
+
+/*
+ * GAMINFO STYLES
+ */
+
+#GameInfoDiv
+{
+	position		: relative;
+
+	width			: 195px;
+	height			: 304px;
+
+	float			: left;
+
+	border-style		: solid;
+	border-width		: 1mm;
+	border-color		: #216778;
+
+}
+
+#PhotoDiv
+{
+	position		: relative;
+
+	width			: 53mm;
+	height			: 30mm;
+/*
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+*/
+	font			: 14px Trebuchet MS;
+	font-weight		: bold;		
+	color			: #216778;
+}
+
+#PhotoDiv #PWPhoto
+{
+	background-color	: #fff;
+	
+	position		: absolute;
+	left			: 8mm;
+	top			: 5mm;
+
+	width			: 12mm;
+	height			: 15mm;
+
+	border-style		: solid;
+	border-width		: 1px;
+}
+
+#PhotoDiv #PBPhoto
+{
+	background-color	: #fff;
+
+	position		: absolute;
+	right			: 8mm;
+	top			: 5mm;
+
+	width			: 12mm;
+	height			: 15mm;
+
+	border-style		: solid;
+	border-width		: 1px;
+}
+
+
+#PhotoDiv #PWName
+{
+	position		: absolute;
+	left			: 5mm;
+	top			: 25mm;
+}
+
+#PhotoDiv #PBName
+{
+	position		: absolute;
+	right			: 5mm;
+	top			: 25mm;
+}
+
+#PhotoDiv #PWPawn
+{
+	background-image	: url("images/pecas/peao_branco.png");
+
+	position		: absolute;
+	top			: 13.5mm;
+	left			: 3.5mm;
+
+	width			: 35px;
+	height			: 35px;
+}
+#PhotoDiv #PBPawn
+{
+	background-image	: url("images/pecas/peao_preto.png");
+
+	position		: absolute;
+	top			: 13.5mm;
+	right			: 3.5mm;
+
+	width			: 35px;
+	height			: 35px;
+}
+
+#PhotoDiv #VS
+{
+	position		: absolute;
+	right			: 50%;
+	left			: 50%;
+	top			: 10mm;
+}
+
+/*Timers*/
+#TimerDiv
+{
+
+	position		: relative;
+
+	width			: 53mm;
+	height			: 10mm;
+/*
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+*/
+	font			: 14px Trebuchet MS;
+	font-weight		: bold;
+	color			: #216778;
+}
+
+#PWTimer
+{
+	background-color	: #ffeed1;
+	width			: 15mm;
+
+	position		: absolute;
+	left			: 6.5mm;
+	top			: 1mm;
+
+	text-align		: center;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #ffa200;
+}
+
+#PBTimer
+{
+	background-color	: #ffeed1;
+
+	width			: 15mm;
+
+	position		: absolute;
+	right			: 6.5mm;
+	top			: 1mm;
+
+	text-align		: center;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #ffa200;
+}
+
+/*GameOptions*/
+#GameOptionDiv, #MoveListDiv
+{
+	background-color	: #FFF;
+	
+	position		: absolute;
+	top			: 5mm;
+	left			: -1px;
+
+	width			: 46mm;
+	height			: 30mm;
+
+	border-style		: solid;
+	border-width		: 0px 1px 1px 1px;
+	border-color		: #216778;
+
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+}
+
+#MoveListDiv{
+	position		: relative;
+}
+
+#MoveList{
+	list-style		: none;
+}
+
+#MoveList .black{
+	background-color	: #216778;
+	color			: #FFF;
+}
+
+#MoveList span{
+	margin-left		: 3mm;
+}
+
+#GameOptionDiv ul
+{
+	position		: relative;
+	top			: 1mm;
+	left			: 2mm;
+	bottom			: 1mm;
+	list-style		: none;
+}
+
+#GameOptionDiv li
+{
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #FFF;
+
+	width			: 41mm;
+}
+
+#GameOptionDiv li:hover
+{
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+
+	cursor			: pointer;
+}
+
+#GameOptionDiv li.promotion
+{
+	width			: 44mm;
+	border-style		: solid;
+	border-color		: #fff;
+	border-width		: 0px;
+}
+
+#GameOptionDiv li.promotion:hover
+{	
+	border-style		: solid;
+	border-color		: #fff;
+	border-width		: 0px;
+
+	cursor			: none;
+}
+
+#GameOptionDiv select
+{
+	margin-left		: 3mm;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+
+	font			: 10px Trebuchet MS;
+	color			: #216778;
+	width			: 15mm;
+}
+
+/*GameTabs*/
+
+#GameInfoTab
+{
+	position		: relative;
+	left			: 2mm;
+	right			: 2mm;
+/*
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+*/
+}
+
+#InfoTab
+{
+	position		: relative;
+	top			: 0px;
+	left			: 0px;
+
+	width			: 46mm;
+
+	font			: 12px Trebuchet MS;
+	font-weight		: bold;
+	color			: #216778;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+}
+
+#InfoTab1
+{
+	position		: absolute;
+	left			: -1px;
+	top			: -1px;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+
+	width			: 23mm;
+	height			: 4.7mm;
+
+	text-align		: center;
+}
+
+#InfoTab2
+{
+	position		: absolute;
+	right			: -1px;
+	top			: -1px;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #216778;
+
+	width			: 22.5mm;
+	height			: 4.7mm;
+
+	text-align		: center;
+}
+
+#InfoTab1.active, #InfoTab2.active
+{
+	background-color	: #ffeed1;
+
+	border-style		: solid;
+	border-width		: 1px;
+	border-color		: #ffa200;
+
+	color		: #ffa200;
+}
