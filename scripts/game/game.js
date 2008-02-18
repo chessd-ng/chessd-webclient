@@ -81,7 +81,7 @@ function GAME_HandleGame(XML)
 */
 function GAME_State (XML)
 {
-	var StateTag, Category;
+	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
 	var PlayerTag;
 	var Player1 = new Object();
@@ -90,6 +90,7 @@ function GAME_State (XML)
 	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
 	PlayerTag = XML.getElementsByTagName("player");
+	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	Category = StateTag[0].getAttribute("category");
 
@@ -110,6 +111,11 @@ function GAME_State (XML)
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
+	// If it's the first board of the game
+	if (MainData.FindGame(GameID) == null)
+	{
+		GAME_StartGame(GameID, Player1, Player2);
+	}
 
 	// TODO TODO TODO
 	// Warn the interface
@@ -250,54 +256,32 @@ function GAME_HandleError (XML)
 * @return 	void
 * @author 	Rubens
 */
-function GAME_StartGame(GameId, P1JID, P2JID, P1Color, P2Color)
+function GAME_StartGame(GameId, P1, P2)
 {
 	var P1Name, P2Name;
 	var GameDiv;
 	var YourColor;
 
-	P1Name = P1JID.split("@",1)[0];
-	P2Name = P2JID.split("@",1)[0];
-	
-	//Hide current game
-	if(MainData.CurrentGame != null)
+	// Hide current game
+	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.hide();
 	}
 
-	if(P1Name == MainData.UserName)
+	if (P1.Name == MainData.Username)
 	{
-		YourColor = P1Color;
-		if(YourColor == "w")
-		{
-			GameDiv = new INTERFACE_GameBoardObj(P1Name, P2Name, YourColor, 38);
-			MainData.AddGame(GameId, P1JID, P2JID, P1Name, P2Name, YourColor, GameDiv);
-		}
-		else
-		{
-			GameDiv = new INTERFACE_GameBoardObj(P2Name, P1Name, YourColor, 38);
-			MainData.AddGame(GameId, P2JID, P1JID, P2Name, P1Name, YourColor, GameDiv);
-		}
-
+		YourColor = P1.Color;
 	}
 	else
 	{
-		YourColor = P2Color;
-		if(YourColor == "w")
-		{
-			GameDiv = new INTERFACE_GameBoardObj(P2Name, P1Name, YourColor, 38);
-			MainData.AddGame(GameId, P2JID, P1JID, P2Name, P1Name, YourColor, GameDiv);
-		}
-		else
-		{
-			GameDiv = new INTERFACE_GameBoardObj(P1Name, P2Name, YourColor, 38);
-			MainData.AddGame(GameId, P1JID, P2JID, P1Name, P2Name, YourColor, GameDiv);
-		}
+		YourColor = P2.Color;
 	}
 
-	//Show New Game
-	GameDiv.show();
+	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor, 38);
+	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
+	// Show New Game
+	GameDiv.show();
 }
 
 /**

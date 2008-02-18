@@ -1,4 +1,3 @@
-<<<<<<< HEAD:scripts/interface/game.js
 /**
 * CHESSD - WebClient
 *
@@ -13,7 +12,12 @@
 * GNU General Public License for more details.
 *
 * C3SL - Center for Scientific Computing and Free Software
-=======
+*/
+
+/**
+* Interface functions that control game
+*/ 
+
 /***************************
 ** GAME BOARD OBJECT
 *****************************/
@@ -58,14 +62,14 @@ function INTERFACE_GameBoardObj(PWName, PBName, PlayerColor, Size)
 
 function INTERFACE_ShowGame(Div)
 {
-	if(Div == null)
-	{
-		document.body.appendChild(this.game);
-	}
-	else
+	var Div = document.getElementById("Main");
+
+	if (Div)
 	{
 		Div.appendChild(this.game);
+		return true;
 	}
+	return false;
 }
 
 function INTERFACE_HideGame()
@@ -401,14 +405,7 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 		Col[6] = 'c';
 		Col[7] = 'b';
 		Col[8] = 'a';
->>>>>>> 7df20ba20fd2387b7e0f7f6d1215e7ce30cd55b4:scripts/interface/game.js
 */
-
-<<<<<<< HEAD:scripts/interface/game.js
-/**
-* Interface functions that control game
-*/ 
-=======
 	// Criando os indices do tabuleiro
 	/* 
 	var IndexH = document.createElement("ul");
@@ -837,4 +834,3 @@ function INTERFACE_DisplayBoard(BoardArray, PlayerColor, Size)
 		}
 	}
 }
->>>>>>> 7df20ba20fd2387b7e0f7f6d1215e7ce30cd55b4:scripts/interface/game.js
