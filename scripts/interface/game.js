@@ -833,3 +833,382 @@ function INTERFACE_DisplayBoard(BoardArray, PlayerColor, Size)
 		}
 	}
 }
+
+/*****************************
+*	FUNCTIONS - WINDOW
+******************************/
+
+/**
+*	Create elements of draw game request window and return div
+*
+* @param	User	User's nickname that sent the request
+* @return	Div; Array
+* @see		WINDOW_DrawGame();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowDrawGameWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Accept, Decline;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'DrawDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.type = "button";
+	Accept.value = UTILS_GetText("game_accept");
+	Buttons.push(Accept);
+
+	Decline = UTILS_CreateElement('input',null,'button');
+	Decline.type = "button";
+	Decline.value = UTILS_GetText("game_decline");
+	Buttons.push(Decline);
+
+	ButtonsDiv.appendChild(Accept);
+	ButtonsDiv.appendChild(Decline);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of resign window and return div
+*
+* @param	User	User's nickname that resigned the game
+* @return	Div; Array
+* @see		WINDOW_ResignGame();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowResignGameWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'ResignDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of adjourn game request window and returns div
+*
+* @param	User	User's nickname that sent the request
+* @return	Div; Array
+* @see		WINDOW_PauseGame();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowAdjournGameWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Accept, Decline;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'AdjournDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.type = "button";
+	Accept.value = UTILS_GetText("game_accept");
+	Buttons.push(Accept);
+
+	Decline = UTILS_CreateElement('input',null,'button');
+	Decline.type = "button";
+	Decline.value = UTILS_GetText("game_decline");
+	Buttons.push(Decline);
+
+	ButtonsDiv.appendChild(Accept);
+	ButtonsDiv.appendChild(Decline);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of abort game request window and returns div
+*
+* @param	User	User's nickname that sent the request
+* @return	Div; Array
+* @see		WINDOW_AbortGame();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowAbortGameWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Accept, Decline;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'AbortDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.type = "button";
+	Accept.value = UTILS_GetText("game_accept");
+	Buttons.push(Accept);
+
+	Decline = UTILS_CreateElement('input',null,'button');
+	Decline.type = "button";
+	Decline.value = UTILS_GetText("game_decline");
+	Buttons.push(Decline);
+
+	ButtonsDiv.appendChild(Accept);
+	ButtonsDiv.appendChild(Decline);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of checkmate winner window and return div
+*
+* @param	User	User's nickname that won the game by checkmate
+* @return	Div; Array
+* @see		WINDOW_CheckmateWin();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowCheckmateWinWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'CheckmateDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of checkmate looser window and return duv
+*
+* @param	User	User's nickname that lost the game by checkmate
+* @return	Div; Array
+* @see		WINDOW_CheckmateLose();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowCheckmateLoseWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'CheckmateDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of time winner window and return div
+*
+* @param	User	User's nickname that won the game by time
+* @return	Div; Array
+* @see		WINDOW_TimeWin();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowTimeWinWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'TimeDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of time looser window and return duv
+*
+* @param	User	User's nickname that lost the game by time
+* @return	Div; Array
+* @see		WINDOW_TimeLose();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowTimeLoseWindow(User)
+{
+	var Div;
+
+	var TextDiv, Label, Username, Label2;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'TimeDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text"));
+	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
+	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text2"));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+	
+	TextDiv.appendChild(Label);
+	TextDiv.appendChild(Username);
+	TextDiv.appendChild(Label2);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
