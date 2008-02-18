@@ -65,6 +65,7 @@ function MESSAGE_MergeMessages(Msgs)
 {
 	var Msg, i, XML = "";
 
+
 	for (i=0; i<Msgs.length; i++)
 	{
 		if (Msgs[i] == "")
@@ -169,21 +170,53 @@ function MESSAGE_Presence(To)
 {
 	var XMPP;
 
-	if (To == null)
+	XMPP = "<presence from='"+MainData.Username+"@"+MainData.Host+"' ";
+
+	// Presence to someone
+	if (To != null)
 	{
-		XMPP = "<presence from='"+MainData.Username+"@"+MainData.Host+"'/>";
+		XMPP += "to='"+To+"' ";
 	}
-	else
+	XMPP += ">";
+
+	// Setting user status
+	if (MainData.Status != "available")
 	{
-		if (MainData.Status == "available")
-		{
-			XMPP = "<presence to='"+To+"'/>";
-		}
-		else
-		{
-			XMPP = "<presence to='"+To+"'><show>"+MainData.Status+"</show></presence>";
-		}
+		XMPP += "<show>"+MainData.Status+"</show>";
 	}
+
+	// Setting user type
+	if ((MainData.Type != null) && (MainData.Type != "user"))
+	{
+		XMPP += "<type>"+MainData.Type+"</type>";
+	}
+
+	// Setting rating
+	if ((MainData.RatingBlitz != "0") || (MainData.RatingLightning != "0") || (MainData.RatingStandard != "0"))
+	{
+		XMPP += "<rating ";
+
+		// Bllitz rating
+		if (MainData.RatingBlitz != "0")
+		{
+			XMPP += "blitz='"+MainData.RatingBlitz+"' ";
+		}
+		// Lightning rating
+		if (MainData.RatingLightning != "0")
+		{
+			XMPP += "lightning='"+MainData.RatingLightning+"' ";
+		}
+		// Standard rating
+		if (MainData.RatingStandard != "0")
+		{
+			XMPP += "standard='"+MainData.RatingStandard+"' ";
+		}
+
+		XMPP += "/>";
+	}
+
+	XMPP += "</presence>";
+
 	return MESSAGE_MakeXMPP(XMPP);
 }
 
@@ -280,17 +313,17 @@ function MESSAGE_GroupChat(To, Message)
 }
 
 /**********************************
- * MESSAGES - RATING
+ * MESSAGES - RATING AND USER TYPE
  **********************************/
 
 /**
 * Message to get users ratings
+*
+* @deprecated
 */
 function MESSAGE_Rating(UserList, RatingType)
 {
-	var XMPP, action;
-	var ratingList='';
-	var jidTmp;
+	var XMPP;
 
 	
 	if (UserList == null)
@@ -306,7 +339,7 @@ function MESSAGE_Rating(UserList, RatingType)
 
 	// Create message to get rating of users
 	XMPP  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#rating' action='fetch'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info' action='fetch'>";
 
 	for (i=0; i < UserList.length; i++)
 	{
@@ -317,6 +350,29 @@ function MESSAGE_Rating(UserList, RatingType)
 	return MESSAGE_MakeXMPP(XMPP);
 }
 
+/**
+* Message to get users ratings
+*/
+function MESSAGE_UserListInfo()
+{
+	var XMPP, i;
+
+
+	XMPP  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info' action='fetch'>";
+	XMPP += "<rating jid='"+MainData.Username+"@"+MainData.Host+"' category='blitz' />";
+	XMPP += "<type jid='"+MainData.Username+"@"+MainData.Host+"' />";
+
+	// Ask for all contact list
+	for (i=0; i<MainData.UserList.length; i++)
+	{
+		XMPP += "<rating jid='"+MainData.UserList[i].Username+"@"+MainData.Host+"' category='blitz' />";
+		XMPP += "<type jid='"+MainData.UserList[i].Username+"@"+MainData.Host+"' />";
+	}
+	XMPP += "</query></iq>"
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
 
 /**********************************
  * MESSAGES - INVITE

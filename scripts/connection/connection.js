@@ -50,10 +50,16 @@ function CONNECTION_ConnectJabber(XML)
 			CONNECTION_SendJabber(MESSAGE_UserList());
 			break;
 
+		// Get user information
+		case (5):
+			CONNECTION_SendJabber(MESSAGE_UserListInfo());
+			break;
+
 		// Send presence, enter in 'default_room' and
 		// presence to match manager
-		case (5):
+		case (6):
 			// Set interface as 'connected'
+			MainData.ConnectionStatus = 0;
 			CONNECTION_SendJabber(	
 				MESSAGE_Presence(), 
 				MESSAGE_Presence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
@@ -62,16 +68,6 @@ function CONNECTION_ConnectJabber(XML)
 				);
 			LOGIN_Interface();
 			break;
-	
-		// Get ratings
-		case (6):
-			MainData.ConnectionStatus = 0;
-			CONNECTION_SendJabber(	
-				MESSAGE_Rating(null, "lightning"), 
-				MESSAGE_Rating(null, "blitz"),
-				MESSAGE_Rating(null, "standard"), 
-				XML
-				);
 	}
 }
 
@@ -84,7 +80,6 @@ function CONNECTION_ConnectJabber(XML)
 function CONNECTION_SendJabber()
 {
 	var Post, DT;
-
 
 	// If receive too many parameters, merge then
 	if (arguments.length > 1)
@@ -200,14 +195,8 @@ function CONNECTION_ReceiveConnection()
 						LOGIN_Load();
 					}
 					break;
-			
-			    case(4):
-					MainData.ConnectionStatus++;
-					XMLBuffer = PARSER_ParseXml(XML);
-					CONNECTION_ConnectJabber(XMLBuffer);
-				break;
-				
-			    case(5):
+
+			    default:
 					MainData.ConnectionStatus++;
 					XMLBuffer = PARSER_ParseXml(XML);
 					CONNECTION_ConnectJabber(XMLBuffer);

@@ -27,7 +27,6 @@
 * @return 	Buffer with the messages that must be send
 * @author 	Ulysses
 */
-*/
 function GAME_HandleGame (XML)
 {
 	var Query = XML.getElementsByTagName("query");
@@ -239,4 +238,102 @@ function GAME_HandleError (XML)
 	alert ("Ultima jogada invalida");
 	
 	return "";
+}
+
+/**
+* Start Game
+*
+* @param 	GameId = Game number
+* @param 	P1JID, P2JID = Players Jabber Id
+* @param 	P1Color, P2Color = Players Colors ("w"/"b")
+* @return 	void
+* @author 	Rubens
+*/
+function GAME_StartGame(GameId, P1JID, P2JID, P1Color, P2Color)
+{
+	var P1Name, P2Name;
+	var GameDiv;
+	var YourColor;
+
+	P1Name = P1JID.split("@",1)[0];
+	P2Name = P2JID.split("@",1)[0];
+	
+	//Hide current game
+	if(MainData.CurrentGame != null)
+	{
+		MainData.CurrentGame.Game.hide();
+	}
+
+	if(P1Name == MainData.UserName)
+	{
+		YourColor = P1Color;
+		if(YourColor == "w")
+		{
+			GameDiv = new INTERFACE_GameBoardObj(P1Name, P2Name, YourColor, 38);
+			MainData.AddGame(GameId, P1JID, P2JID, P1Name, P2Name, YourColor, GameDiv);
+		}
+		else
+		{
+			GameDiv = new INTERFACE_GameBoardObj(P2Name, P1Name, YourColor, 38);
+			MainData.AddGame(GameId, P2JID, P1JID, P2Name, P1Name, YourColor, GameDiv);
+		}
+
+	}
+	else
+	{
+		YourColor = P2Color;
+		if(YourColor == "w")
+		{
+			GameDiv = new INTERFACE_GameBoardObj(P2Name, P1Name, YourColor, 38);
+			MainData.AddGame(GameId, P2JID, P1JID, P2Name, P1Name, YourColor, GameDiv);
+		}
+		else
+		{
+			GameDiv = new INTERFACE_GameBoardObj(P1Name, P2Name, YourColor, 38);
+			MainData.AddGame(GameId, P1JID, P2JID, P1Name, P2Name, YourColor, GameDiv);
+		}
+	}
+
+	//Show New Game
+	GameDiv.show();
+
+}
+
+/**
+* Start Game
+*
+* @param 	GameId = Game number
+* @param 	PWTime, PBTime = Players timer when move is done
+* @param 	Move = Chess Move (Piece/Orig-Dest)
+* @param 	BoardStr = Board status in a string
+* @param 	TurnColor = color ("w"/"b")
+* @return 	void
+* @author 	Rubens
+*/
+function GAME_UpdateBoardMove(GameId, BoardStr, Move, PWTime, PBTime, TurnColor)
+{
+	var NewBoardArray = UTILS_String2Board(BoardStr);
+	var Game = MainData.GetGame(GameId); //Get Game from GameList
+
+	var CurrentBoardArray;
+	if(Game.CurrentMove != null)
+	{
+		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
+//		alert(Game.CurrentMove +" - "+ CurrentBoardArray);
+	}
+	else
+	{
+		CurrentBoardArray = new Array("--------","--------","--------","--------","--------","--------","--------","--------");
+	}
+	
+
+	//DATA STRUCT
+	Game.AddMove(NewBoardArray, Move, PWTime, PBTime, TurnColor);
+	Game.SetIsYourTurn(TurnColor)
+
+	//INTERFACE
+	Game.Game.updateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor, 38);
+	Game.Game.addMove(Game.Moves.length, Move, PWTime, PBTime);
+	Game.Game.setWTimer(PWTime);
+	Game.Game.setBTimer(PBTime);
 }

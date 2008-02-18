@@ -48,10 +48,10 @@ function PARSER_ParseIq(XML)
 				Buffer += ROOM_HandleRoomList(XML);
 			}
 
-			// Receive Rating list
-			else if (Xmlns.match(/\/chessd#rating/))
+			// Receive information of user list
+			else if (Xmlns.match(/\/chessd#info/))
 			{
-				Buffer += CONTACT_HandleRating(XML);
+				Buffer += CONTACT_HandleInfo(XML);
 			}
 
 			// Challenge accept confirmation

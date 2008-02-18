@@ -93,6 +93,9 @@ function LOGIN_LoadScripts()
 	Scripts[15] = "scripts/window/window.js";
 	Scripts[16] = "scripts/interface/window.js";
 	Scripts[17] = "scripts/interface/challenge.js";
+	Scripts[18] = "scripts/interface/game.js";
+	Scripts[19] = "scripts/game/game.js";
+	Scripts[19] = "scripts/utils/dragpiece.js";
 
 
 	// Carregando arquivos
@@ -132,6 +135,7 @@ function LOGIN_LoadCss()
 	Files[4] = "css/Window.css";
 	Files[5] = "css/TopMenus.css";
 	Files[6] = "css/Challenge.css";
+	Files[7] = "css/Board.css";
 
 	for (i=0; i<Files.length; i++)
 	{

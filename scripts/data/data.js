@@ -39,6 +39,7 @@ function DATA(ConfFile, LangFile)
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
 	this.Status = "available";
+	this.Type = null;
 	this.Xmlns = UTILS_GetTag(Params, "xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
@@ -62,9 +63,9 @@ function DATA(ConfFile, LangFile)
 	this.CurrentOldGame = "";
 	this.OldGameList = new Array();
 
-	this.RatingLightning =  0;
-	this.RatingBlitz =  0;
-	this.RatingStandart = 0;
+	this.RatingLightning =  "0";
+	this.RatingBlitz =  "0";
+	this.RatingStandard = "0";
 	
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
@@ -82,9 +83,11 @@ DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
+DATA.prototype.SetDefault = DATA_SetDefault;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
+DATA.prototype.SetType = DATA_SetType;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -113,11 +116,13 @@ DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
+DATA.prototype.GetGame = DATA_GetGameById;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
 DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
 DATA.prototype.FindWindow = DATA_FindWindow;
+
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -226,6 +231,17 @@ function DATA_GetStatus(Username)
 
 
 /**
+* Set default values to use
+*/
+function DATA_SetDefault(Username)
+{
+	this.Type = "user";
+	this.RatingBlitz = "0";
+	this.RatingStandard = "0";
+	this.RatingLightning = "0";
+}
+
+/**
 * Set user's status
 */
 function DATA_SetUserStatus(Username, NewStatus)
@@ -251,6 +267,29 @@ function DATA_SetSubs(Username, NewSubs)
 		return false;
 		
 	this.UserList[UserPos].Subs = NewSubs;
+	return true;
+}
+
+/**
+* Set user's type
+*/
+function DATA_SetType(Username, NewType)
+{
+	var UserPos = this.FindUser(Username);
+
+	// If it's your type
+	if (Username == MainData.Username)
+	{
+		MainData.Type = NewType;
+		return true;
+	}
+
+	if (UserPos == null)
+	{
+		return false;
+	}
+		
+	this.UserList[UserPos].Type = NewType;
 	return true;
 }
 
@@ -370,7 +409,7 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 /**
 * Add user in user list of a room
 */
-function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
+function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
@@ -389,6 +428,7 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Role, Affiliation)
 
 	User.Username = Username;
 	User.Status = Status;
+	User.Type = Type;
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 
@@ -423,7 +463,7 @@ function DATA_FindUserInRoom(RoomName, Username)
 /**
 * Set user attibutes in 'RoomName'
 */
-function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
+function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
 	var j = this.FindRoom(RoomName)
 	var i = this.FindUserInRoom(RoomName, Username)
@@ -432,6 +472,7 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 		return false;
 
 	this.RoomList[j].UserList[i].Status = Status;
+	this.RoomList[j].UserList[i].Type = Type;
 	this.RoomList[j].UserList[i].Role = Role;
 	this.RoomList[j].UserList[i].Affiliation = Affiliation;
 	return true;
@@ -613,23 +654,31 @@ function DATA_SetCurrentGame(Game)
 /**
 * Add a game in 'GameList'
 */
-function DATA_AddGame(Id, P1Name, P2Name, Color)
+function DATA_AddGame(Id, PWJID, PBJID, PWName, PBName, Color, GameDiv)
 {
 	var NewGame = new Object();
-	
+
 	if(this.GameList.length == 0)
 	{
 		MainData.SetCurrentGame(NewGame);
 	}
 
 	NewGame.Id = Id;
-	NewGame.P1 = P1Name;
-	NewGame.P2 = P2Name;
-	NewGame.YouColor = Color;
+	NewGame.PW = PWName;
+	NewGame.PB = PBName;
+	NewGame.Game = GameDiv;
+	NewGame.YourColor = Color;
 	NewGame.IsYourTurn = false;
+	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();
 
+	NewGame.SetIsYourTurn = DATA_SetIsYourTurn;
+	NewGame.AddMove = DATA_AddGameMove;
+
 	this.GameList.push(NewGame);
+
+	return NewGame;
+
 }
 
 
@@ -687,25 +736,19 @@ function DATA_FindGame(Id)
 /**
 * Add a move in 'GameList[x].Moves' 
 */
-function DATA_AddGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+function DATA_AddGameMove(BoardArray, Move, PWTime, PBTime, Turn)
 {
-	var GamePosition = MainData.FindGame(Id);
 	var NewMove = new Object();
 
-	if(GamePosition == null)
-	{
-		return null;
-	}
-	else
-	{
-		NewMove.Board = UTILS_String2Board(Board);
-		NewMove.Move = Move;
-		NewMove.P1Time = P1Time;
-		NewMove.P2Time = P2Time;
-		NewMove.Turn = Turn;
+	NewMove.Board = BoardArray;
+	NewMove.Move = Move;
+	NewMove.PWTime = PWTime;
+	NewMove.PBTime = PBTime;
+	NewMove.Turn = Turn;
 
-		this.GameList[GamePosition].Moves.push(NewMove);
-	}
+	this.CurrentMove = this.Moves.length;
+	this.Moves.push(NewMove);
+
 }
 
 /**
@@ -731,6 +774,21 @@ function DATA_SetIsYourTurnGame(Id,P1Name,P2Name,P1Color,Turn)
 		this.GameList[Id].IsYourTurn = false;
 	}
 }
+
+function DATA_GetGameById(Id)
+{
+	var i=0;
+	while(i<this.GameList.length)
+	{
+		if(this.GameList[i].Id == Id)
+		{
+			return(this.GameList[i])
+		}
+		i++;
+	}
+	return null;
+}
+
 
 /**********************************
  * METHODS - OLDGAME              *

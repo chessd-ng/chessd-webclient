@@ -25,7 +25,7 @@
 *
 * @public
 */
-function INTERFACE_AddContact(Username, Status, Rating)
+function INTERFACE_AddContact(Username, Status, Rating, Type)
 {
 	var Node = document.getElementById("ContactOnlineList");
 	var Search = document.getElementById("contact-"+Username);
@@ -44,7 +44,7 @@ function INTERFACE_AddContact(Username, Status, Rating)
 	}
 
 
-	Contact = INTERFACE_CreateContact(Username, Status, Rating)
+	Contact = INTERFACE_CreateContact(Username, Status, Rating, Type)
 	Node.appendChild(Contact);
 
 	return true;
@@ -88,7 +88,7 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	}
 
 	// User were offline
-	if ((User.className == "offline") && (NewStatus != "offline"))
+	if ((User.className.match(/offline/)) && (NewStatus != "offline"))
 	{
 		List = document.getElementById("ContactOnlineList");
 
@@ -97,7 +97,7 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 			return false;
 		}
 		// Updating status
-		User.className = NewStatus;
+		User.className = User.className.replace(/_.*/, "_"+NewStatus);
 
 		// Up to 'tr'
 		User = User.parentNode;
@@ -109,7 +109,7 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 		List.appendChild(User);
 	}
 	// User disconnected
-	else if ((User.className != "offline") && (NewStatus == "offline"))
+	else if ((!User.className.match(/offline/)) && (NewStatus == "offline"))
 	{
 		List = document.getElementById("ContactOfflineList");
 
@@ -118,7 +118,7 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 			return false;
 		}
 		// Updating status
-		User.className = NewStatus;
+		User.className = User.className.replace(/_.*/, "_"+NewStatus);
 
 		// Up to 'tr'
 		User = User.parentNode;
@@ -134,12 +134,34 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	else
 	{
 		// Updating status
-		User.className = NewStatus;
+		User.className = User.className.replace(/_.*/, "_"+NewStatus);
 	}
 
 	return true;
 }
 
+
+/**
+* Set type of user in interface
+*
+* @public
+*/
+function INTERFACE_SetUserType(Username, NewType)
+{
+	var User = document.getElementById("contact-"+Username);
+	var List;
+
+
+	if (!User)
+	{
+		return false;
+	}
+
+	// Updating user's type
+	User.className = User.className.replace(/.*_/, NewType+"_");
+
+	return true;
+}
 
 /**
 * Change user's status
@@ -152,19 +174,25 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 * @private
 * @return DOM object
 */
-function INTERFACE_CreateContact(Username, Status, Rating, RoomName)
+function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 {
 	var Tr, Td1, Td2;
 
 	Tr = UTILS_CreateElement("tr");
 
+	// Default type
+	if (Type == null)
+	{
+		Type = "user";
+	}
+
 	if (RoomName == null)
 	{
-		Td1 = UTILS_CreateElement("td", "contact-"+Username, Status, Username);
+		Td1 = UTILS_CreateElement("td", "contact-"+Username, Type+"_"+Status, Username);
 	}
 	else
 	{
-		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Status, Username);
+		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
@@ -292,12 +320,20 @@ function INTERFACE_CreateContactList()
 	{
 		if (MainData.UserList[i].Status != "offline")
 		{
-			ContactsOnline = INTERFACE_CreateContact(MainData.UserList[i].Username, MainData.UserList[i].Status);
+			ContactsOnline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
+														MainData.UserList[i].Status,
+														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Type
+													);
 			OnlineTbody.appendChild(ContactsOnline);
 		}
 		else
 		{
-			ContactsOffline = INTERFACE_CreateContact(MainData.UserList[i].Username, MainData.UserList[i].Status);
+			ContactsOffline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
+														MainData.UserList[i].Status,
+														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Type
+													);
 			OfflineTbody.appendChild(ContactsOffline);
 		}
 	}
