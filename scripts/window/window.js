@@ -28,11 +28,10 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 {
 	var Height, Width;
 	var Win;
-
+	
 	var zIndex = MainData.Windows.WindowList.length;
-
 	Width = WinSize;
-	Height = ""; //auto
+	Height = null; //auto
 
 	// Create Window Object
 	Win = new WindowObj(Height, Width, Div, Title);

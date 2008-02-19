@@ -402,7 +402,7 @@ function INTERFACE_CreateRoom(RoomName)
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
 	Input.onkeypress = function(event) {
-		if ((event.keyCode == 13) && (Input.value != ""))
+		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
 			// Send message to room
 			ROOM_SendMessage(RoomName, Input.value);

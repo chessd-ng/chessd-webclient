@@ -509,7 +509,7 @@ function INTERFACE_CreateGameOptions()
 	var OptionFinish = UTILS_CreateElement("li","GameOptionFinish", null,"Encerrar");
 	var OptionStop = UTILS_CreateElement("li","GameOptionStop", null,"Pausar/adiar");
 	var OptionGiveTime = UTILS_CreateElement("li","GameOptionGiveTime", null,"Dar tempo ao adversário");
-	var OptionPromotion = UTILS_CreateElement("li","GameOptionPromotion", "promotion","Promoção do Peão");
+	var OptionPromotion = UTILS_CreateElement("li","GameOptionPromotion", "promotion","Promocao do Peao");
 
 	var OptionSelectPromotion = UTILS_CreateElement("select", "GameSelectPromotion", null,null);
 	var OptionSelectQ = UTILS_CreateElement("option", "GameSelectQ", null,"Rainha");

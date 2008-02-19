@@ -52,6 +52,7 @@
 	border-color	: #216778;
 	background		: url('../images/window_content_bg.png') repeat-X;
 	background-color: #FFFFFF;
+	.overflow	: hidden;
 }
 
 #SubWindowBox #Content{
