@@ -29,7 +29,7 @@
 		<menu_preferences>Preferências</menu_preferences>
 		<menu_help>Ajuda</menu_help>
 		<menu_exit>Sair</menu_exit>
-		<menu_current_game>Partidas em Andamento</menu_current_game>
+		<menu_current_games>Partidas em Andamento</menu_current_games>
 		<menu_challenges>Desafios</menu_challenges>
 		<menu_tourneys>Torneios</menu_tourneys>
 		<menu_rooms>Salas</menu_rooms>
@@ -102,24 +102,44 @@
 		<game_decline>Recusar</game_decline>
 		<game_ok>Ok</game_ok>
 		<game_draw>Requisicao de empate</game_draw>
-		<game_draw_text>O usuario </game_draw_text>
-		<game_draw_text2> requisitou empate. Deseja aceitar?</game_draw_text2>
+		<game_draw_text>O usuario %s requisitou empate. Deseja aceitar?</game_draw_text>
 		<game_end>Fim de jogo</game_end>
-		<game_resign_text>O usuario </game_resign_text>
-		<game_resign_text2> desistiu da partida.</game_resign_text2>
+		<game_resign_text>O usuario %s desistiu da partida.</game_resign_text>
 		<game_adjourn>Adiar partida</game_adjourn>
-		<game_adjourn_text>O usuario </game_adjourn_text>
-		<game_adjourn_text2> deseja adiar a partida. Deseja aceitar?</game_adjourn_text2>
-		<game_resign_text>O usuario </game_resign_text>
-		<game_resign_text2> desistiu da partida.</game_resign_text2>
+		<game_adjourn_text>O usuario %s deseja adiar a partida. Deseja aceitar?</game_adjourn_text>
+		<game_resign_text>O usuario %s desistiu da partida.</game_resign_text>
 		<game_abort>Encerrar partida</game_abort>
-		<game_checkmatew_text>Parabens! Voce ganhou do usuario </game_checkmatew_text>
-		<game_checkmatew_text2> por xeque-mate.</game_checkmatew_text2>
-		<game_checkmatel_text>Voce perdeu para o usuario </game_checkmatel_text>
-		<game_checkmatel_text2> por xeque-mate.</game_checkmatel_text2>
-		<game_timew_text>Voce ganhou do usuario </game_timew_text>
-		<game_timew_text2> por tempo.</game_timew_text2>
-		<game_timel_text>O seu tempo acabou. Voce perdeu para o usuario </game_timel_text>
-		<game_timel_text2>.</game_timel_text2>
+		<game_abort_text>O usuario %s deseja encerrar a partida. Deseja aceitar?</game_abort_text>
+		<game_checkmatew_text>Parabens! Voce ganhou do usuario %s por xeque-mate.</game_checkmatew_text>
+		<game_checkmatel_text>Voce perdeu para o usuario %s por xeque-mate.</game_checkmatel_text>
+		<game_timew_text>Voce ganhou do usuario %s por tempo.</game_timew_text>
+		<game_timel_text>O seu tempo acabou. Voce perdeu para o usuario %s.</game_timel_text>
+
+		<game_options>Opções</game_options>
+		<game_moves>Lances</game_moves>
+		<game_send_draw>Empate</game_send_draw>
+		<game_send_resign>Desistir</game_send_resign>
+		<game_send_terminate>Encerrar</game_send_terminate>
+		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
+		<game_give_time>Dar tempo ao adversário</game_give_time>
+		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
+		<game_promotion_queen>Rainha</game_promotion_queen>
+		<game_promotion_rook>Torre</game_promotion_rook>
+		<game_promotion_bishop>Bispo</game_promotion_bishop>
+		<game_promotion_knight>Cavalo</game_promotion_knight>
+
+		<game_white_pawn>Peão Branco</game_white_pawn>
+		<game_white_rook>Torre Branca</game_white_rook>
+		<game_white_knight>Cavalo Branco</game_white_knight>
+		<game_white_bishop>Bispo Branco</game_white_bishop>
+		<game_white_queen>Rainha Branca</game_white_queen>
+		<game_white_king>Rei Branco</game_white_king>
+
+		<game_black_pawn>Peão Preto</game_black_pawn>
+		<game_black_rook>Torre Preta</game_black_rook>
+		<game_black_knight>Cavalo Preto</game_black_knight>
+		<game_black_bishop>Bispo Preto</game_black_bishop>
+		<game_black_queen>Rainha Preta</game_black_queen>
+		<game_black_king>Rei Preto</game_black_king>
 	</game>
 </language>

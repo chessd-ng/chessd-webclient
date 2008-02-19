@@ -217,7 +217,7 @@ function WINDOW_DrawGame(User)
 	var Div = INTERFACE_ShowDrawGameWindow(User);
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_draw'));
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_draw_requisitoon'));
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);

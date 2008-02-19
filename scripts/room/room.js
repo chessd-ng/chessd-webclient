@@ -62,22 +62,65 @@ function ROOM_HandleMessage(XML)
 */
 function ROOM_HandleRoomList(XML)
 {
-	var Items, Rooms, RoomName, i;
+	var Items, Rooms, RoomName, ID,  i;
+
+	Rooms = new Array();
+
+	// Get the ID 
+	ID = XML.getAttribute("id");
+	
+	// XML with all games rooms
+	if (ID == MainData.Const.IQ_ID_GetGamesList)
+	{
+		ROOM_HandleGameRoomList(XML);
+	}
+	
+	// Chat Room List
+	else
+	{
+		// Get items in XML
+		Items = XML.getElementsByTagName("item");
+		
+		// Find room names
+		for (i=0; i < Items.length; i++)
+		{
+			Rooms[i] = Items[i].getAttribute("name").replace(/ (.*)/, "");
+		}
+		INTERFACE_ShowRoomList(Rooms);
+	}
+		return "";
+}
+
+/**
+* Handle game room list.
+* Calls the interface to show the games that's been played.
+*
+* @param 	XML The xml that the server send's
+* @return 	void
+* @author 	Ulysses
+*/
+function ROOM_HandleGameRoomList(XML)
+{
+	var Items, Rooms, RoomName, ID,  i;
 
 	Rooms = new Array();
 
 	// Get items in XML
 	Items = XML.getElementsByTagName("item");
 
-	// Find room names
+	// Get the player's names
 	for (i=0; i < Items.length; i++)
 	{
-		Rooms[i] = Items[i].getAttribute("name").replace(/ (.*)/, "");
+		// Remove the server name of the player's ID
+		// and replace ' x ' to ' X '
+		Rooms[i] = Items[i].getAttribute("name").replace(/@shiva/g, "").replace(/ x /, " X ");
 	}
-	INTERFACE_ShowRoomList(Rooms);
+
+	INTERFACE_ShowGameRoomList(Rooms);
 
 	return "";
 }
+
 
 
 /**
@@ -115,6 +158,24 @@ function ROOM_ShowRoomList()
 	// Show menu on interface
 	INTERFACE_ShowRoomMenu();
 }
+
+/**
+* Get Game Room list from server and show in pop down menu
+*
+* @return 	void
+* @author 	Ulysses
+*/
+function ROOM_ShowGameRoomList()
+{
+	var XML = MESSAGE_GameRoomList();
+
+	// Ask room list for jabber
+	CONNECTION_SendJabber(XML);
+
+	// Show menu on interface
+	INTERFACE_ShowGameRoomMenu();
+}
+
 
 /**
 * Send presence to a room (enter room)

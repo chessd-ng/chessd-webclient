@@ -72,6 +72,9 @@ function INTERFACE_CreateTop()
 	// Appending itens to menu
 	// Current games
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_current_games"));
+	Item.onclick = function () {
+		ROOM_ShowGameRoomList();
+	}
 	MenuList.appendChild(Item);
 	
 	// Challenges
@@ -135,6 +138,50 @@ function INTERFACE_ShowRoomMenu()
 	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
 
 	MenuDiv.appendChild(Create);
+	MenuDiv.appendChild(RoomList);
+	Node.appendChild(MenuDiv);
+
+	UTILS_AddListener(document, "click", Func, false);
+
+	return true;
+}
+
+
+/**
+* Show rooms menu
+*
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_ShowGameRoomMenu()
+{
+	var MenuDiv, RoomList, RoomItem;
+	var Node, Menu, Func, i, Hide = 0;
+
+	Node = document.getElementById("Page");
+	Menu = document.getElementById("GameRoomMenuDiv");
+
+	if (!Node || Menu)
+	{
+		return null;
+	}
+
+	Func = function () {
+		Hide += 1;
+		
+		if (Hide == 2)
+		{
+			UTILS_RemoveListener(document, "click", Func, false);
+
+			// Remove menu from screen
+			INTERFACE_HideGameRoomList();
+		}
+	};
+
+	// Creating elements
+	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
+	RoomList = UTILS_CreateElement("ul", "GameRoomMenuList");
+
 	MenuDiv.appendChild(RoomList);
 	Node.appendChild(MenuDiv);
 

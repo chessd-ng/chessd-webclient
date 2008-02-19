@@ -47,6 +47,10 @@ function GAME_HandleGame(XML)
 	{
 		Buffer = GAME_State(XML);
 	}
+	else if (Xmlns.match(/\/chessd#game#move/))
+	{
+		Buffer = GAME_State(XML);
+	}
 	else if (Xmlns.match(/\/chessd#game#cancel/))
 	{
 		Buffer = GAME_HandleCancel(XML);
@@ -74,25 +78,30 @@ function GAME_HandleGame(XML)
 
 /**
 * Handle Game State
+* It's a good ideia to read the server's documentation before reading the code above
 *
 * @param 	XML The xml that contains the game state
 * @return 	void
 * @author 	Ulysses
 */
-function GAME_State (XML)
+function GAME_State(XML)
 {
 	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
-	var PlayerTag;
+	var PlayerTag, MoveTag, Move;
 	var Player1 = new Object();
 	var Player2 = new Object();
 
 	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
 	PlayerTag = XML.getElementsByTagName("player");
+	MoveTag = XML.getElementsByTagName("move");
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	Category = StateTag[0].getAttribute("category");
+
+	// Get the pgn of the last move
+	Move = MoveTag[0].getAttribute("long");
 
 	FullMoves = BoardTag[0].getAttribute("fullmoves");
 	Enpassant = BoardTag[0].getAttribute("enpassant");
@@ -115,16 +124,13 @@ function GAME_State (XML)
 	if (MainData.FindGame(GameID) == null)
 	{
 		GAME_StartGame(GameID, Player1, Player2);
-		GAME_UpdateBoardMove(GameID, Board, FullMoves, Player1, Player2, Turn)
+		GAME_UpdateBoard(GameID, Board, FullMoves, Player1, Player2, Turn)
 	}
 	else
 	{
-		GAME_UpdateBoardMove(GameID, Board, FullMoves, Player1, Player2, Turn)
+		GAME_UpdateBoard(GameID, Board, FullMoves, Player1, Player2, Turn)
 	}
 
-	// TODO TODO TODO
-	// Warn the interface
-	
 	return "";
 }
 
@@ -202,7 +208,7 @@ function GAME_HandleAdjourn (XML)
 * @return 	void
 * @author 	Ulysses
 */
-function GAME_End (XML)
+function GAME_End(XML)
 {
 	var PlayerTag, ReasonTag;
 	var RoomID, Reason, Player, WinnerID;
@@ -281,21 +287,12 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 		YourColor = P2.Color;
 	}
-
-	if(YourColor == "white")
-	{
-		YourColor = "w";
-	}
-	else
-	{
-		YourColor = "b";
-	}
-
-	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor, 38);
+	// 38 -> default piece size
+	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
-	GameDiv.show();
+	GameDiv.Show();
 }
 
 /**
@@ -310,25 +307,27 @@ function GAME_StartGame(GameId, P1, P2)
 * @return 	void
 * @author 	Rubens
 */
-function GAME_UpdateBoardMove(GameId, BoardStr, Move, P1, P2, TurnColor)
+function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 {
 	var NewBoardArray = UTILS_String2Board(BoardStr);
-	var Game = MainData.GetGame(GameId); //Get Game from GameList
-
 	var CurrentBoardArray;
-	if(Game.CurrentMove != null)
+	var Game;
+
+	// Get game from GameList
+	Game = MainData.GetGame(GameId);
+
+	if (Game.CurrentMove != null)
 	{
 		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
-//		alert(Game.CurrentMove +" - "+ CurrentBoardArray);
 	}
+	// If there's no previous moves
 	else
 	{
 		CurrentBoardArray = new Array("--------","--------","--------","--------","--------","--------","--------","--------");
 	}
-	
 
-	//DATA STRUCT
-	if(P1.Color == "w")
+	// Update data sctructure
+	if (P1.Color == "white")
 	{
 		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
 	}
@@ -336,11 +335,37 @@ function GAME_UpdateBoardMove(GameId, BoardStr, Move, P1, P2, TurnColor)
 	{
 		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
 	}
-	Game.SetIsYourTurn(TurnColor)
 
-	//INTERFACE
-	Game.Game.updateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor, 38);
-	Game.Game.addMove(Game.Moves.length, Move, P1.Time, P2.Time);
-	Game.Game.setWTimer(P1.Time);
-	Game.Game.setBTimer(P2.Time);
+	// Update turn
+	Game.SetTurn(TurnColor)
+
+	// Update interface
+	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
+	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
+	Game.Game.SetWTimer(P1.Time);
+	Game.Game.SetBTimer(P2.Time);
+}
+
+/**
+* Send a movement to server
+*
+* @author	Pedro
+*/
+function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
+{
+	var GameID = MainData.CurrentGame.Id;
+	var Move;
+
+	// Create long notation
+	if (MainData.CurrentGame.YourColor == "white")
+	{
+		Move = UTILS_HorizontalIndex(OldCol)+OldLine+UTILS_HorizontalIndex(NewCol)+NewLine;
+	}
+	else
+	{
+		Move = UTILS_HorizontalIndex(9-OldCol)+(9-OldLine)+UTILS_HorizontalIndex(9-NewCol)+(9-NewLine);
+	}
+
+	// Send move for the current game
+	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id));
 }
