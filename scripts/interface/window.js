@@ -3,6 +3,7 @@ function WindowObj(Height, Width, Div, Title, CloseCommands)
 	//Constructor and attribute
 	var tmp = WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands);
 
+
 	this.window = tmp.Div; //WindowObject;
 	this.eventButtons = tmp.Close; //Event buttons;
 
@@ -106,15 +107,20 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 	var Close = new Array();
 
 	var i;
-
-
+	
 	WindowBox.id ="WindowBox";
 	WindowBox.style.width = Width+"px";
-	WindowBox.style.height= Height+"px";
+	if(Height != null)
+	{
+		WindowBox.style.height= Height+"px";
+	}
 
 	SubWindowBox.id ="SubWindowBox";
-	SubWindowBox.style.height =(Height - 21)+"px";
 	SubWindowBox.style.width = Width +"px";
+	if(Height != null)
+	{
+		SubWindowBox.style.height =(Height - 21)+"px";
+	}
 
 	TitleBar.id = "TitleBar";
 	TitleBar.style.width = Width+"px";

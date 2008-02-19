@@ -95,6 +95,7 @@
 #Main #Left #Rooms .Room table {
 	display			: block;
 	height			: 25mm;
+	width			: 46mm;
 	margin-top		: 2mm;
 	border-spacing	: 0px;
 	overflow		: auto;
@@ -137,6 +138,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
+	width			: 44mm;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;

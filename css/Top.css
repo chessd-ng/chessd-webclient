@@ -11,6 +11,8 @@
 	background		: url('../images/logochessd.png') no-repeat;
 	text-indent		: -9999px;
 	overflow		: hidden;
+
+	.margin			: 0.5mm;
 }
 
 #Top #TopMenu {
@@ -30,8 +32,9 @@
 /* icons menu */
 #Top .icons {
 	position		: relative;
-	left			: 25mm;
+	left			: 76mm;
 	height			: 15mm;
+	.left			: 33mm;
 }
 
 #Top .icons li {

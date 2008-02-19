@@ -231,7 +231,7 @@ function UTILS_ValidateUsername(Username)
 */
 function UTILS_Capitalize(Word)
 {
-	return Word[0].toUpperCase() + Word.slice(1);
+	return Word.charAt(0).toUpperCase() + Word.slice(1);
 }
 
 
@@ -306,6 +306,20 @@ function UTILS_ReturnEvent(event)
 	}
 }
 
+function UTILS_ReturnKeyCode(event)
+{
+	var KeyNum;
+
+	if(MainData.Browser != 1) // IE
+	{
+		KeyNum = window.event.keyCode;
+	}
+	else // Netscape/Firefox/Opera
+	{
+		KeyNum = event.which;
+	}
+	return KeyNum;
+}
 
 /**********************************
  * FUNCTIONS - TIME CONVERSION
@@ -513,41 +527,41 @@ function UTILS_DragWindow(Obj)
 //If CharNum is number return respective char
 function UTILS_HorizontalIndex(CharNum)
 {
-        var Row = new Array();
-        var i=1;
+	var Row = new Array();
+	var i=1;
 
-        Row[1] = 'h';
-        Row[2] = 'g';
-        Row[3] = 'f';
-        Row[4] = 'e';
-        Row[5] = 'd';
-        Row[6] = 'c';
-        Row[7] = 'b';
-        Row[8] = 'a';
+	Row[1] = 'a';
+	Row[2] = 'b';
+	Row[3] = 'c';
+	Row[4] = 'd';
+	Row[5] = 'e';
+	Row[6] = 'f';
+	Row[7] = 'g';
+	Row[8] = 'h';
 
-        if(isNaN(CharNum)) //Char
-        {
-                while(i < 9)
-                {
-                        if(Row[i] == CharNum)
-                        {
-                                return i;
-                        }
-                        i++;
-                }
-                return null;
-        }
-        else //number
-        {
-                if(( CharNum > 0) && (CharNum < 9) )
-                {
-                        return Row[CharNum];
-                }
-                else
-                {
-                        return null;
-                }
-        }
+	if(isNaN(CharNum)) //Char
+	{
+		while(i < 9)
+		{
+			if(Row[i] == CharNum)
+			{
+				return i;
+			}
+			i++;
+		}
+		return null;
+	}
+	else //number
+	{
+		if(( CharNum > 0) && (CharNum < 9) )
+		{
+			return Row[CharNum];
+		}
+		else
+		{
+			return null;
+		}
+	}
 }
 
 

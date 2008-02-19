@@ -265,11 +265,10 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 	{
 		return false;
 	}
-
 	// Changing node visibilty
 	if (Node.style.display == "none")
 	{
-		Node.style.display = "table-row-group";
+		Node.style.display = "list-item";
 		Obj.innerHTML = Obj.innerHTML.replace("+", "-");
 	}
 	else

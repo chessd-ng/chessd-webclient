@@ -164,6 +164,62 @@ function INTERFACE_HideRoomList(Rooms)
 	Node.parentNode.removeChild(Node);
 }
 
+/**
+* Show game room list in the room menu
+*
+* @param 	Rooms An Array with game rooms
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_ShowGameRoomList(Rooms)
+{
+	var Node = document.getElementById("GameRoomMenuList");
+	var Room, i;
+
+	// If menu is not on screen
+	if (!Node)
+	{
+		return null;
+	}
+	// If rooms was already been inserted
+	else if (Node.childNodes.length > 0)
+	{
+		return null;
+	}
+
+	// Create elements and insert rooms
+	for (i=0; i < Rooms.length; i++)
+	{
+		Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+		Room.onclick = function () {
+			ROOM_EnterRoom(this.innerHTML);
+		}
+		Node.appendChild(Room);
+	}
+	return true;
+}
+
+/**
+* Hide game room list menu
+*
+* @public
+* @param 	Rooms An Array with game rooms
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_HideGameRoomList(Rooms)
+{
+	var Node = document.getElementById("GameRoomMenuDiv");
+	
+	if (!Node)
+	{
+		return false;
+	}
+	Node.parentNode.removeChild(Node);
+	
+	return true;
+}
+
 /**********************************
  * FUNCTIONS - ROOMS
  *************************************/
@@ -402,7 +458,7 @@ function INTERFACE_CreateRoom(RoomName)
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
 	Input.onkeypress = function(event) {
-		if ((event.keyCode == 13) && (Input.value != ""))
+		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
 			// Send message to room
 			ROOM_SendMessage(RoomName, Input.value);

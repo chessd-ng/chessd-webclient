@@ -110,7 +110,7 @@ DATA.prototype.RemoveGameById = DATA_RemoveGame;
 DATA.prototype.FindGame = DATA_FindGame;
 DATA.prototype.AddGameMove = DATA_AddGameMove;
 DATA.prototype.SetCurrentGame = DATA_SetCurrentGame;
-DATA.prototype.SetIsYourTurn = DATA_SetIsYourTurnGame;
+DATA.prototype.SetTurn = DATA_SetTurnGame;
 
 DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
@@ -660,7 +660,7 @@ function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 
 	if(this.GameList.length == 0)
 	{
-		MainData.SetCurrentGame(NewGame);
+		this.SetCurrentGame(NewGame);
 	}
 
 	NewGame.Id = Id;
@@ -672,7 +672,7 @@ function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();
 
-	NewGame.SetIsYourTurn = this.SetIsYourTurn;
+	NewGame.SetTurn = this.SetTurn;
 	NewGame.AddMove = this.AddGameMove;
 
 	this.GameList.push(NewGame);
@@ -754,7 +754,7 @@ function DATA_AddGameMove(BoardArray, Move, PWTime, PBTime, Turn)
 /**
 * Set true, if is the player's turn
 */
-function DATA_SetIsYourTurnGame(TurnColor)
+function DATA_SetTurnGame(TurnColor)
 {
 	if((this.YourColor == TurnColor))
 	{
