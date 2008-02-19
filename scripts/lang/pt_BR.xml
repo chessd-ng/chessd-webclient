@@ -101,26 +101,19 @@
 		<game_accept>Aceitar</game_accept>
 		<game_decline>Recusar</game_decline>
 		<game_ok>Ok</game_ok>
-		<game_draw_requisition>Requisicao de empate</game_draw_requisition>
-		<game_draw_text>O usuario </game_draw_text>
-		<game_draw_text2> requisitou empate. Deseja aceitar?</game_draw_text2>
+		<game_draw>Requisicao de empate</game_draw>
+		<game_draw_text>O usuario %s requisitou empate. Deseja aceitar?</game_draw_text>
 		<game_end>Fim de jogo</game_end>
-		<game_resign_text>O usuario </game_resign_text>
-		<game_resign_text2> desistiu da partida.</game_resign_text2>
+		<game_resign_text>O usuario %s desistiu da partida.</game_resign_text>
 		<game_adjourn>Adiar partida</game_adjourn>
-		<game_adjourn_text>O usuario </game_adjourn_text>
-		<game_adjourn_text2> deseja adiar a partida. Deseja aceitar?</game_adjourn_text2>
-		<game_resign_text>O usuario </game_resign_text>
-		<game_resign_text2> desistiu da partida.</game_resign_text2>
+		<game_adjourn_text>O usuario %s deseja adiar a partida. Deseja aceitar?</game_adjourn_text>
+		<game_resign_text>O usuario %s desistiu da partida.</game_resign_text>
 		<game_abort>Encerrar partida</game_abort>
-		<game_checkmatew_text>Parabens! Voce ganhou do usuario </game_checkmatew_text>
-		<game_checkmatew_text2> por xeque-mate.</game_checkmatew_text2>
-		<game_checkmatel_text>Voce perdeu para o usuario </game_checkmatel_text>
-		<game_checkmatel_text2> por xeque-mate.</game_checkmatel_text2>
-		<game_timew_text>Voce ganhou do usuario </game_timew_text>
-		<game_timew_text2> por tempo.</game_timew_text2>
-		<game_timel_text>O seu tempo acabou. Voce perdeu para o usuario </game_timel_text>
-		<game_timel_text2>.</game_timel_text2>
+		<game_abort_text>O usuario %s deseja encerrar a partida. Deseja aceitar?</game_abort_text>
+		<game_checkmatew_text>Parabens! Voce ganhou do usuario %s por xeque-mate.</game_checkmatew_text>
+		<game_checkmatel_text>Voce perdeu para o usuario %s por xeque-mate.</game_checkmatel_text>
+		<game_timew_text>Voce ganhou do usuario %s por tempo.</game_timew_text>
+		<game_timel_text>O seu tempo acabou. Voce perdeu para o usuario %s.</game_timel_text>
 
 		<game_options>Opções</game_options>
 		<game_moves>Lances</game_moves>
