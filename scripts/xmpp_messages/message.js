@@ -503,6 +503,22 @@ function MESSAGE_ChallengeDecline(ChallengeID)
  **********************************/
 
 /**
+* Get the list of all games been played
+* 
+* @return 	XMPP with iq to get all games been played
+* @author 	Ulysses
+*/
+function MESSAGE_GameRoomList()
+{
+	var XMPP;
+
+   	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetGamesList+"' to='games."+MainData.Host+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
 * Send a game moviment
 */
 function MESSAGE_GameMove(Move, RoomID)

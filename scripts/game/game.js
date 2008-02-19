@@ -74,6 +74,7 @@ function GAME_HandleGame(XML)
 
 /**
 * Handle Game State
+* It's a good ideia to read the server's documentation before reading the code above
 *
 * @param 	XML The xml that contains the game state
 * @return 	void
@@ -83,16 +84,20 @@ function GAME_State (XML)
 {
 	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
-	var PlayerTag;
+	var PlayerTag, MoveTag, Move;
 	var Player1 = new Object();
 	var Player2 = new Object();
 
 	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
 	PlayerTag = XML.getElementsByTagName("player");
+	MoveTag = XML.getElementsByTagName("move");
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	Category = StateTag[0].getAttribute("category");
+
+	// Get the pgn of the last move
+	Move = MoveTag[0].getAttribute("long");
 
 	FullMoves = BoardTag[0].getAttribute("fullmoves");
 	Enpassant = BoardTag[0].getAttribute("enpassant");
