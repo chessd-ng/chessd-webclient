@@ -164,6 +164,39 @@
 	text-align	: center;
 }
 
-#CreateRoomDiv p {
-	padding-top	: 10px;
+#CancelRoomDiv #TextDiv{
+	padding-top		:	30px;
+	position			:	relative;
+	text-align		: center;
+}
+
+#CancelRoomDiv #TextDiv p {
+	font-weight	:	normal;
+	font-size		:	13px;
+}
+
+#CreateRoomDiv #OptionsDiv {
+	padding-top		:	10px;
+	position			:	relative;
+	text-align		: left;
+	padding-left	:	26px;
+}
+
+#CreateRoomDiv #OptionsDiv p{
+	padding-top		:	10px;
+	padding-bottom	: 3px;
+}
+
+#CreateRoomDiv #ButtonsDiv {
+	position		:	relative;
+	padding-top	: 30px;
+	padding-bottom	: 5px;
+	text-align	: center;
+}
+
+#CancelRoomDiv #ButtonsDiv {
+	position		:	relative;
+	padding-top	: 40px;
+	padding-bottom	: 20px;
+	text-align	: center;
 }
