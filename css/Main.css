@@ -11,3 +11,8 @@ body {
 	min-width		: 780px;
 	position		: relative;
 }
+
+#Main #Center {
+	margin-left		: 55mm;
+	height			: 150mm;
+}

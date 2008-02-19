@@ -281,21 +281,12 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 		YourColor = P2.Color;
 	}
-
-	if(YourColor == "white")
-	{
-		YourColor = "w";
-	}
-	else
-	{
-		YourColor = "b";
-	}
-
-	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor, 38);
+	// 38 -> default piece size
+	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
-	GameDiv.show();
+	GameDiv.Show();
 }
 
 /**
@@ -328,7 +319,7 @@ function GAME_UpdateBoardMove(GameId, BoardStr, Move, P1, P2, TurnColor)
 	
 
 	//DATA STRUCT
-	if(P1.Color == "w")
+	if (P1.Color == "w")
 	{
 		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
 	}
@@ -343,4 +334,16 @@ function GAME_UpdateBoardMove(GameId, BoardStr, Move, P1, P2, TurnColor)
 	Game.Game.addMove(Game.Moves.length, Move, P1.Time, P2.Time);
 	Game.Game.setWTimer(P1.Time);
 	Game.Game.setBTimer(P2.Time);
+}
+
+/**
+* Send a movement to server
+*
+* @author	Pedro
+*/
+function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
+{
+	var GameID = MainData.CurrentGame.Id;
+
+	alert(OldLine+" "+OldCol+" "+NewLine+" "+NewCol);
 }
