@@ -867,7 +867,7 @@ function INTERFACE_ShowDrawGameWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Accept, Decline;
 
@@ -877,9 +877,7 @@ function INTERFACE_ShowDrawGameWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 	Accept = UTILS_CreateElement('input',null,'button');
@@ -894,10 +892,8 @@ function INTERFACE_ShowDrawGameWindow(User)
 
 	ButtonsDiv.appendChild(Accept);
 	ButtonsDiv.appendChild(Decline);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -917,7 +913,7 @@ function INTERFACE_ShowResignGameWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Ok;
 
@@ -927,9 +923,7 @@ function INTERFACE_ShowResignGameWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 
@@ -939,10 +933,8 @@ function INTERFACE_ShowResignGameWindow(User)
 	Buttons.push(Ok);
 
 	ButtonsDiv.appendChild(Ok);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -962,7 +954,7 @@ function INTERFACE_ShowAdjournGameWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Accept, Decline;
 
@@ -972,9 +964,7 @@ function INTERFACE_ShowAdjournGameWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 	Accept = UTILS_CreateElement('input',null,'button');
@@ -989,10 +979,8 @@ function INTERFACE_ShowAdjournGameWindow(User)
 
 	ButtonsDiv.appendChild(Accept);
 	ButtonsDiv.appendChild(Decline);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -1012,7 +1000,7 @@ function INTERFACE_ShowAbortGameWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Accept, Decline;
 
@@ -1022,9 +1010,7 @@ function INTERFACE_ShowAbortGameWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 	Accept = UTILS_CreateElement('input',null,'button');
@@ -1039,10 +1025,8 @@ function INTERFACE_ShowAbortGameWindow(User)
 
 	ButtonsDiv.appendChild(Accept);
 	ButtonsDiv.appendChild(Decline);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -1062,7 +1046,7 @@ function INTERFACE_ShowCheckmateWinWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Ok;
 
@@ -1072,9 +1056,7 @@ function INTERFACE_ShowCheckmateWinWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 
@@ -1084,10 +1066,8 @@ function INTERFACE_ShowCheckmateWinWindow(User)
 	Buttons.push(Ok);
 
 	ButtonsDiv.appendChild(Ok);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -1107,7 +1087,7 @@ function INTERFACE_ShowCheckmateLoseWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Ok;
 
@@ -1117,9 +1097,7 @@ function INTERFACE_ShowCheckmateLoseWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 
@@ -1129,10 +1107,8 @@ function INTERFACE_ShowCheckmateLoseWindow(User)
 	Buttons.push(Ok);
 
 	ButtonsDiv.appendChild(Ok);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -1152,7 +1128,7 @@ function INTERFACE_ShowTimeWinWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Ok;
 
@@ -1162,9 +1138,7 @@ function INTERFACE_ShowTimeWinWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 
@@ -1174,10 +1148,8 @@ function INTERFACE_ShowTimeWinWindow(User)
 	Buttons.push(Ok);
 
 	ButtonsDiv.appendChild(Ok);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
@@ -1197,7 +1169,7 @@ function INTERFACE_ShowTimeLoseWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Label;
 
 	var ButtonsDiv, Ok;
 
@@ -1207,9 +1179,7 @@ function INTERFACE_ShowTimeLoseWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text2"));
+	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text").replace(/%s/,UTILS_Capitalize(User)));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 
@@ -1219,10 +1189,8 @@ function INTERFACE_ShowTimeLoseWindow(User)
 	Buttons.push(Ok);
 
 	ButtonsDiv.appendChild(Ok);
-	
+
 	TextDiv.appendChild(Label);
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);

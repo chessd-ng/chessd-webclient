@@ -106,13 +106,13 @@ function WINDOW_RemoveWindow(WindowObj)
 **************************************************
 *************************************************/
 
-function WINDOW_Alert(str)
+function WINDOW_Alert(Title,Text)
 {
 	// Return Div and Buttons;
-	var Div = WINDOW_CreateAlert(str);
+	var Div = WINDOW_CreateAlert(Text);
 
 	// Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Alert");
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_Capitalize(Title));
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -121,13 +121,28 @@ function WINDOW_Alert(str)
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-function WINDOW_Confirm(str)
+function WINDOW_GameAlert(Title,Text,User)
 {
 	// Return Div and Buttons;
-	var Div = WINDOW_CreateConfirm(str);
+	var Div = WINDOW_CreateGameAlert(Text, User);
 
 	// Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, "Confirm");
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText(Title));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+
+	// Ok Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_Confirm(Title,Text)
+{
+	// Return Div and Buttons;
+	var Div = WINDOW_CreateConfirm(Text);
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_Capitalize(Title));
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -135,6 +150,22 @@ function WINDOW_Confirm(str)
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_GameConfirm(Title, Text, User)
+{
+	// Return Div and Buttons;
+	var Div = WINDOW_CreateGameConfirm(Text, User);
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText(Title));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Ok Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+//	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
 function WINDOW_Challenge(User,GameParameters, MatchId)
@@ -228,7 +259,7 @@ function WINDOW_Invite(User)
 	// Decline Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
-
+/*
 function WINDOW_DrawGame(User)
 {
 	//Return Div and Buttons;
@@ -342,3 +373,4 @@ function WINDOW_TimeLose(User)
 	// Ok Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+*/

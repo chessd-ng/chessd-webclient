@@ -167,47 +167,167 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 ******************************************************/
 
 
-function WINDOW_CreateAlert(str)
+function WINDOW_CreateAlert(Text)
 {
-        var Div = UTILS_CreateElement("div","window_alert",null,null);
-        var Buttons = new Array();
+	var Div;
 
-        var Span = UTILS_CreateElement("span",null,null,str);
+	var TextDiv;
+	var Span;
 
-        var Ok = UTILS_CreateElement("input", null,null,null);
-	Ok.type = "submit";
-        Ok.value = "ok";
+	var ButtonsDiv;
+	var Ok;
+	
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement("div","AlertDiv");
+
+	TextDiv = UTILS_CreateElement("div","TextDiv");
+	Span = UTILS_CreateElement("p",null,null,Text);
+
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+	Ok = UTILS_CreateElement("input", null,"button");
+	Ok.type = "button";
+	Ok.value = "Ok";
 
 	Buttons.push(Ok);
 
-        Div.appendChild(Span);
-        Div.appendChild(Ok);
+	TextDiv.appendChild(Span);
 
-        return {Div:Div, Buttons:Buttons};
+	ButtonsDiv.appendChild(Ok);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
 }
 
 
-function WINDOW_CreateConfirm(str)
+function WINDOW_CreateConfirm(Text)
 {
-        var Div = UTILS_CreateElement("div","window_confirm",null,null);
-        var Buttons = new Array();
+	var Div;
 
-        var Span = UTILS_CreateElement("span",null,null,str);
+	var Buttons = new Array();
 
-        var Ok = UTILS_CreateElement("input", null,null,null);
-	Ok.type = "submit";
-        Ok.value = "ok";
+	var TextDiv;
+	var Label;
 
-        var Cancel = UTILS_CreateElement("input", null,null,null);
-	Cancel.type = "submit";
-        Cancel.value = "cancelar";
+	var ButtonsDiv;
+	var Ok;
+	var Cancel;
+
+	Div = UTILS_CreateElement("div","ConfirmDiv");
+
+	TextDiv = UTILS_CreateElement("div","TextDiv");
+	Label = UTILS_CreateElement("p",null,null,Text);
+
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+	Ok = UTILS_CreateElement("input", null,"button");
+	Ok.type = "button";
+	Ok.value = "ok";
+
+	Cancel = UTILS_CreateElement("input", null,"button");
+	Cancel.type = "button";
+	Cancel.value = "cancelar";
 
 	Buttons.push(Ok);
 	Buttons.push(Cancel);
 
-        Div.appendChild(Span);
-        Div.appendChild(Ok);
-        Div.appendChild(Cancel);
+	ButtonsDiv.appendChild(Ok);
+	ButtonsDiv.appendChild(Cancel);
 
-        return {Div:Div, Buttons:Buttons};
+	TextDiv.appendChild(Label);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of game alert window and returns div
+*
+* @param	Text	Text to display in confirm box
+* @param	User	User's nickname that sent the request
+* @return	Div; Array
+* @see		WINDOW_GameAlert();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function WINDOW_CreateGameAlert(Text, User)
+{
+	var Div;
+
+	var TextDiv, Label;
+
+	var ButtonsDiv, Ok;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'GameAlertDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('p', null, null, UTILS_GetText(Text).replace(/%s/,UTILS_Capitalize(User)));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Ok = UTILS_CreateElement('input',null,'button');
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("game_ok");
+	Buttons.push(Ok);
+
+	ButtonsDiv.appendChild(Ok);
+
+	TextDiv.appendChild(Label);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of confirm request window and returns div
+*
+* @param	Text	Text to display in confirm box
+* @param	User	User's nickname that sent the request
+* @return	Div; Array
+* @see		WINDOW_GameConfirm();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function WINDOW_CreateGameConfirm(Text, User)
+{
+	var Div;
+
+	var TextDiv, Label;
+
+	var ButtonsDiv, Accept, Decline;
+
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'GameConfirmDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+
+	Label = UTILS_CreateElement('p', null, null, UTILS_GetText(Text).replace(/%s/,UTILS_Capitalize(User)));
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.type = "button";
+	Accept.value = UTILS_GetText("game_accept");
+	Buttons.push(Accept);
+
+	Decline = UTILS_CreateElement('input',null,'button');
+	Decline.type = "button";
+	Decline.value = UTILS_GetText("game_decline");
+	Buttons.push(Decline);
+
+	ButtonsDiv.appendChild(Accept);
+	ButtonsDiv.appendChild(Decline);
+
+	TextDiv.appendChild(Label);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
 }
