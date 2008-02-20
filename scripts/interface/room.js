@@ -154,7 +154,7 @@ function INTERFACE_ShowRoomList(Rooms)
 *
 * @public
 */
-function INTERFACE_HideRoomList(Rooms)
+function INTERFACE_HideRoomList()
 {
 	var Node = document.getElementById("RoomMenuDiv");
 	
@@ -201,11 +201,10 @@ function INTERFACE_ShowGameRoomList(Rooms)
 * Hide game room list menu
 *
 * @public
-* @param 	Rooms An Array with game rooms
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_HideGameRoomList(Rooms)
+function INTERFACE_HideGameRoomList()
 {
 	var Node = document.getElementById("GameRoomMenuDiv");
 	

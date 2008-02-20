@@ -446,3 +446,23 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 
 	return {Div:Div, Buttons:Buttons}
 }
+
+/**
+* Hide challenge list menu
+*
+* @public
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_HideChallengeList()
+{
+	var Node = document.getElementById("ChallengeMenuDiv");
+	
+	if (!Node)
+	{
+		return false;
+	}
+	Node.parentNode.removeChild(Node);
+	
+	return true;
+}
