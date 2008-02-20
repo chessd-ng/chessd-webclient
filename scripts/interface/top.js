@@ -80,7 +80,11 @@ function INTERFACE_CreateTop()
 	// Challenges
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_challenges"));
 	MenuList.appendChild(Item);
-	
+		Item.onclick = function () {
+		INTERFACE_ShowChallengeMenu();
+	}
+
+	MenuList.appendChild(Item);
 	// Tourneys
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_tourneys"));
 	MenuList.appendChild(Item);
@@ -135,8 +139,13 @@ function INTERFACE_ShowRoomMenu()
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
 
+	// Show the create room window
+	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
+	Create.onclick = function () {
+		WINDOW_CreateRoom();
+	}
+	
 	MenuDiv.appendChild(Create);
 	MenuDiv.appendChild(RoomList);
 	Node.appendChild(MenuDiv);
@@ -155,7 +164,7 @@ function INTERFACE_ShowRoomMenu()
 */
 function INTERFACE_ShowGameRoomMenu()
 {
-	var MenuDiv, RoomList, RoomItem;
+	var MenuDiv, GameRoomList, RoomItem;
 	var Node, Menu, Func, i, Hide = 0;
 
 	Node = document.getElementById("Page");
@@ -180,9 +189,59 @@ function INTERFACE_ShowGameRoomMenu()
 
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
-	RoomList = UTILS_CreateElement("ul", "GameRoomMenuList");
+	GameRoomList = UTILS_CreateElement("ul", "GameRoomMenuList");
 
-	MenuDiv.appendChild(RoomList);
+	MenuDiv.appendChild(GameRoomList);
+	Node.appendChild(MenuDiv);
+
+	UTILS_AddListener(document, "click", Func, false);
+
+	return true;
+}
+
+/**
+* Show challange menu
+*
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_ShowChallengeMenu()
+{
+	var Challenge, MenuDiv, ChallengeList, RoomItem;
+	var Node, Menu, Func, i, Hide = 0;
+
+	Node = document.getElementById("Page");
+	Menu = document.getElementById("ChallengeMenuDiv");
+
+	if (!Node || Menu)
+	{
+		return null;
+	}
+
+	Func = function () {
+		Hide += 1;
+		
+		if (Hide == 2)
+		{
+			UTILS_RemoveListener(document, "click", Func, false);
+
+			// Remove menu from screen
+			INTERFACE_HideChallengeList();
+		}
+	};
+
+	// Creating elements
+	MenuDiv = UTILS_CreateElement("div", "ChallengeMenuDiv");
+	ChallengeList = UTILS_CreateElement("ul", "ChallengeMenuList");
+
+	// Create elements and insert challenges
+	for (i=0; i < MainData.ChallengeList.length; i++)
+	{
+		Challenge = UTILS_CreateElement("li", null, null, MainData.ChallengeList[i].Username); 
+		ChallengeList.appendChild(Challenge);
+	}
+
+	MenuDiv.appendChild(ChallengeList);
 	Node.appendChild(MenuDiv);
 
 	UTILS_AddListener(document, "click", Func, false);
