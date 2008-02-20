@@ -265,11 +265,10 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 	{
 		return false;
 	}
-
 	// Changing node visibilty
 	if (Node.style.display == "none")
 	{
-		Node.style.display = "table-row-group";
+		Node.style.display = "list-item";
 		Obj.innerHTML = Obj.innerHTML.replace("+", "-");
 	}
 	else
@@ -379,7 +378,7 @@ function INTERFACE_ShowInviteWindow(User)
 {
 	var Div;
 
-	var TextDiv, Label, Username, Label2;
+	var TextDiv, Username, Label;
 
 	var ButtonsDiv, Auth, Decline;
 
@@ -389,9 +388,8 @@ function INTERFACE_ShowInviteWindow(User)
 
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
+	Username = UTILS_CreateElement('span',null,'username',UTILS_Capitalize(User));
 	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text"));
-	Username = UTILS_CreateElement('span', null, null, UTILS_Capitalize(User));
-	Label2 = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text2"));
 
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 	Auth = UTILS_CreateElement('input',null,'button');
@@ -407,9 +405,8 @@ function INTERFACE_ShowInviteWindow(User)
 	ButtonsDiv.appendChild(Auth);
 	ButtonsDiv.appendChild(Decline);
 	
-	TextDiv.appendChild(Label);
 	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label2);
+	TextDiv.appendChild(Label);
 
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);

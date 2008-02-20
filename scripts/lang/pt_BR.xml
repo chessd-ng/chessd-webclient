@@ -42,10 +42,9 @@
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Adicionar usuario</contact_invite>
-		<contact_invite_text>Deseja adicionar o usuario </contact_invite_text>
-		<contact_invite_text2>?</contact_invite_text2>
-		<contact_auth>Adicionar</contact_auth>
-		<contact_decline>Recusar</contact_decline>
+		<contact_invite_text> adicionou voce como contato, deseja aceitar?</contact_invite_text>
+		<contact_auth>Aceitar</contact_auth>
+		<contact_decline>Cancelar</contact_decline>
 	</contact>
 	<room>
 		<room_default>geral</room_default>
@@ -53,8 +52,15 @@
 		<room_all>Online</room_all>
 		<room_order_nick>Apelido</room_order_nick>
 		<room_order_rating>Rating</room_order_rating>
-		<room_create>Criar sala</room_create>
-		<room_name>Nome da sala: </room_name>
+		<room_create_room>Criar sala</room_create_room>
+		<room_cancel_room>Cancelar sala</room_cancel_room>
+		<room_name>Nome: </room_name>
+		<room_description>Descricao: </room_description>
+		<room_create>Criar</room_create>
+		<room_cancel>Cancelar</room_cancel>
+		<room_cancel_text>Realmente deseja cancelar a criacao desta sala?</room_cancel_text>
+		<room_yes>Sim</room_yes>
+		<room_no>Nao</room_no>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>

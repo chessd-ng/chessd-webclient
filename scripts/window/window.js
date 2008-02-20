@@ -28,11 +28,10 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 {
 	var Height, Width;
 	var Win;
-
+	
 	var zIndex = MainData.Windows.WindowList.length;
-
 	Width = WinSize;
-	Height = ""; //auto
+	Height = null; //auto
 
 	// Create Window Object
 	Win = new WindowObj(Height, Width, Div, Title);
@@ -188,12 +187,30 @@ function WINDOW_CreateRoom()
 	var Div = INTERFACE_ShowCreateRoomWindow();
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create'));
+	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create_room'));
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Create Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_CancelRoom()
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowCancelRoomWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('room_cancel_room'));
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Yes Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// No Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
 function WINDOW_Invite(User)
@@ -202,7 +219,7 @@ function WINDOW_Invite(User)
 	var Div = INTERFACE_ShowInviteWindow(User);
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('contact_invite'));
+	var WindowObj = WINDOW_NewWindow(310, Div.Div, Div.Buttons, UTILS_GetText('contact_invite'));
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
