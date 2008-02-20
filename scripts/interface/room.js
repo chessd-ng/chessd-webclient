@@ -1,3 +1,4 @@
+
 /**
 * CHESSD - WebClient
 *
@@ -153,7 +154,7 @@ function INTERFACE_ShowRoomList(Rooms)
 *
 * @public
 */
-function INTERFACE_HideRoomList(Rooms)
+function INTERFACE_HideRoomList()
 {
 	var Node = document.getElementById("RoomMenuDiv");
 	
@@ -191,9 +192,6 @@ function INTERFACE_ShowGameRoomList(Rooms)
 	for (i=0; i < Rooms.length; i++)
 	{
 		Room = UTILS_CreateElement("li", null, null, Rooms[i]);
-		Room.onclick = function () {
-			ROOM_EnterRoom(this.innerHTML);
-		}
 		Node.appendChild(Room);
 	}
 	return true;
@@ -203,11 +201,10 @@ function INTERFACE_ShowGameRoomList(Rooms)
 * Hide game room list menu
 *
 * @public
-* @param 	Rooms An Array with game rooms
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_HideGameRoomList(Rooms)
+function INTERFACE_HideGameRoomList()
 {
 	var Node = document.getElementById("GameRoomMenuDiv");
 	
@@ -609,15 +606,17 @@ function INTERFACE_ShowCreateRoomWindow()
 			alert("Nome invalido para sala");
 			return;
 		}
-		if (RoomName.length > 50)
+		else if (RoomName.length > 50)
 		{
 			alert("Tamanho maximo de 50 caracteres");
 			Create.value = "";
 			return;
 		}
-		
-		// TODO
-		// message to create room
+		// Send a message to create room
+		else 
+		{
+			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.Host+"/"+MainData.Username));
+		}
 	};
 	
 	Cancel = UTILS_CreateElement('input',null,'button');

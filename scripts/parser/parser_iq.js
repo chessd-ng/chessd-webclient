@@ -26,7 +26,6 @@ function PARSER_ParseIq(XML)
 	var Buffer = "";
 	var Xmlns = "";
 
-
 	// Getting query xmlns
 	if (Query.length > 0)
 	{

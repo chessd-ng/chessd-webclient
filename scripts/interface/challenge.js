@@ -229,7 +229,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 
 				CatSelect.options.selectedIndex = 1;
 
-				TimeSelect.options.selectedIndex = Time - 3;
+				TimeSelect.options.selectedIndex = GameParameters.Time - 3;
 			}
 
 			// Standart
@@ -445,4 +445,24 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons}
+}
+
+/**
+* Hide challenge list menu
+*
+* @public
+* @return 	bool
+* @author 	Ulysses
+*/
+function INTERFACE_HideChallengeList()
+{
+	var Node = document.getElementById("ChallengeMenuDiv");
+	
+	if (!Node)
+	{
+		return false;
+	}
+	Node.parentNode.removeChild(Node);
+	
+	return true;
 }
