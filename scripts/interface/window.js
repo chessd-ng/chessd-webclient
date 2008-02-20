@@ -126,7 +126,7 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 	TitleBar.style.width = Width+"px";
 
 	//Drag and Drop Window
-	UTILS_AddListener(TitleBar, "mousedown", function(){ UTILS_DragWindow(WindowBox); }, false);
+	UTILS_AddListener(TitleBar, "mousedown", function(event){ UTILS_StartDragWindow(event, WindowBox); }, false);
 
 
 	TmpTitle.innerHTML = Title;

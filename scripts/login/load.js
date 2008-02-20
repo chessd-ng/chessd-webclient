@@ -97,6 +97,7 @@ function LOGIN_LoadScripts()
 	Scripts[19] = "scripts/game/game.js";
 	Scripts[20] = "scripts/utils/dragpiece.js";
 	Scripts[21] = "scripts/interface/piece.js";
+	Scripts[22] = "scripts/utils/dragwindow.js";
 
 
 	// Carregando arquivos
