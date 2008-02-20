@@ -413,3 +413,136 @@ function INTERFACE_ShowInviteWindow(User)
 
 	return {Div:Div, Buttons:Buttons};
 }
+
+/**
+*	Create elements of search user window and returns div
+*
+* @param	User	User's nickname that sent the invitation
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserWindow()
+{
+	var Div;
+
+	var FormDiv, Username, Nickname, Input, Br;
+
+	var ButtonsDiv, Search, Cancel;
+
+	var Buttons = new Array();
+	var Item = 1;
+
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	FormDiv = UTILS_CreateElement('div', 'FormDiv');
+
+	Username = UTILS_CreateElement('span', null, 'option_marked', UTILS_GetText("contact_search_name"));
+	Username.onclick = function() {
+		Username.className = 'option_marked';
+		Nickname.className = 'option';
+		Item = 1;
+	}
+	Nickname = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_search_nick"));
+	Nickname.onclick = function() {
+		Nickname.className = 'option_marked';
+		Username.className = 'option';
+		Item = 2;
+	}
+	Br = UTILS_CreateElement('br');
+	Input = UTILS_CreateElement('input', "SearchUserInput");
+	Input.size = "23";
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Search = UTILS_CreateElement('input',null,'button');
+	Search.type = "button";
+	Search.value = UTILS_GetText("contact_search");
+	Buttons.push(Search);
+
+	Cancel = UTILS_CreateElement('input',null,'button');
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText("contact_cancel");
+	Buttons.push(Cancel);
+
+	ButtonsDiv.appendChild(Search);
+	ButtonsDiv.appendChild(Cancel);
+	
+	FormDiv.appendChild(Username);
+	FormDiv.appendChild(Nickname);
+	FormDiv.appendChild(Br);
+	FormDiv.appendChild(Input);
+
+	Div.appendChild(FormDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of search user result window and returns div
+*
+* @param	UserList	List of users founded
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserResultWindow(UserList)
+{
+	var Div;
+
+	var ListDiv, Label, Table, Tr, List, Item, Br;
+
+	var ButtonsDiv, Add;
+
+	var Buttons = new Array();
+	var i;
+
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	ListDiv = UTILS_CreateElement('div', 'ListDiv');
+
+	List = UTILS_CreateElement('ul');
+	Table = UTILS_CreateElement('tbody');
+
+	if (UserList == null)
+	{
+		Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_no_user_found"));
+	}
+	else
+	{
+		Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_user_found"));
+		
+		for (i=0; i< UserList.length; i++)
+		{
+			Tr = UTILS_CreateElement('tr');
+
+			Item = UTILS_CreateElement('td',null,null,UserList[i]);
+			Tr.appendChild(Item);
+
+			Table.appendChild(Tr);
+		}
+	}
+
+	Br = UTILS_CreateElement('br');
+
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Add = UTILS_CreateElement('input',null,'button');
+	Add.type = "button";
+	Add.value = UTILS_GetText("contact_add");
+	Buttons.push(Add);
+
+	ButtonsDiv.appendChild(Add);
+	
+	ListDiv.appendChild(Label);
+	ListDiv.appendChild(Br);
+	if (UserList != null)
+	{
+		ListDiv.appendChild(Table);
+	}
+
+	Div.appendChild(ListDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}

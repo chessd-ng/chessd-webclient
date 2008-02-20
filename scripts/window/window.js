@@ -228,6 +228,37 @@ function WINDOW_Invite(User)
 	// Decline Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+function WINDOW_SearchUser()
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowSearchUserWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Search Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_SearchUserResult(UserList)
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowSearchUserResultWindow(UserList);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+
+	//Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Add Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
 /*
 function WINDOW_DrawGame(User)
 {
