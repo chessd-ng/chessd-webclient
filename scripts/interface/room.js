@@ -458,7 +458,7 @@ function INTERFACE_CreateRoom(RoomName)
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
 	Input.onkeypress = function(event) {
-		if ((event.keyCode == 13) && (Input.value != ""))
+		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
 			// Send message to room
 			ROOM_SendMessage(RoomName, Input.value);
@@ -539,21 +539,27 @@ function INTERFACE_ShowCreateRoomWindow()
 {
 	var Div;
 
+	var OptionsDiv;
 	var Label, Input, Br;
+	var Description, Textarea;
 
-	var Create;
+	var ButtonsDiv;
+	var Create, Cancel;
 
 	var RoomName;
 	var Buttons = new Array();
 
 	Div = UTILS_CreateElement('div', 'CreateRoomDiv');
+
+	OptionsDiv = UTILS_CreateElement('div', 'OptionsDiv');
 	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_name'));
 	Input = UTILS_CreateElement('input');
 	Br = UTILS_CreateElement('br');
-	Create = UTILS_CreateElement('input',null,'button');
 
 	Input.type = "text";
+	Input.size = "22";
 	Input.onkeypress = function(event) { 
+
 		if (event.keyCode == 13) 
 		{
 			if (Input.value == '' || Input.value == null)
@@ -580,6 +586,14 @@ function INTERFACE_ShowCreateRoomWindow()
 		}
 	};
 
+	Description = UTILS_CreateElement('p',null,null,UTILS_GetText('room_description'));
+	Textarea = UTILS_CreateElement('textarea','CreateRoomTextarea');
+	Textarea.rows = "3";
+	Textarea.cols = "20";
+
+	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
+
+	Create = UTILS_CreateElement('input',null,'button');
 	Create.type = "button";
 	Create.value = UTILS_GetText('room_create');
 
@@ -605,17 +619,79 @@ function INTERFACE_ShowCreateRoomWindow()
 		// TODO
 		// message to create room
 	};
-
+	
+	Cancel = UTILS_CreateElement('input',null,'button');
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText('room_cancel');
+	
 	// Mount elements tree
-	Div.appendChild(Label);
-	Div.appendChild(Input);
-	Div.appendChild(Br);
-	Div.appendChild(Create);
+	OptionsDiv.appendChild(Label);
+	OptionsDiv.appendChild(Input);
+	OptionsDiv.appendChild(Br);
+	OptionsDiv.appendChild(Description);
+	OptionsDiv.appendChild(Textarea);
+
+	ButtonsDiv.appendChild(Create);
+	ButtonsDiv.appendChild(Cancel);
+
+	Div.appendChild(OptionsDiv);
+	Div.appendChild(ButtonsDiv);
 
 	Buttons.push(Create);
+	Buttons.push(Cancel);
 
 	// Set focus on input
 	Input.focus();
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+ * Create elements to cancel room creation window and return divs and array of buttons
+ *
+ * @ return	Div, Array 
+ * @ see		WINDOW_CancelRoom();
+ * @ author	Danilo Kiyoshi Simizu Yorinori
+ */
+function INTERFACE_ShowCancelRoomWindow()
+{
+	var Div;
+
+	var TextDiv;
+	var Label;
+
+	var ButtonsDiv;
+	var Yes, No;
+
+	var RoomName;
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement('div', 'CancelRoomDiv');
+
+	TextDiv = UTILS_CreateElement('div', 'TextDiv');
+	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_cancel_text'));
+
+	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
+
+	Yes = UTILS_CreateElement('input',null,'button');
+	Yes.type = "button";
+	Yes.value = UTILS_GetText('room_yes');
+
+	No = UTILS_CreateElement('input',null,'button');
+	No.type = "button";
+	No.value = UTILS_GetText('room_no');
+	
+	// Mount elements tree
+	TextDiv.appendChild(Label);
+
+	ButtonsDiv.appendChild(Yes);
+	ButtonsDiv.appendChild(No);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	Buttons.push(Yes);
+	Buttons.push(No);
 
 	return {Div:Div, Buttons:Buttons};
 }

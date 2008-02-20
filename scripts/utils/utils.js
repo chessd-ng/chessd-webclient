@@ -231,7 +231,7 @@ function UTILS_ValidateUsername(Username)
 */
 function UTILS_Capitalize(Word)
 {
-	return Word[0].toUpperCase() + Word.slice(1);
+	return Word.charAt(0).toUpperCase() + Word.slice(1);
 }
 
 
@@ -306,6 +306,20 @@ function UTILS_ReturnEvent(event)
 	}
 }
 
+function UTILS_ReturnKeyCode(event)
+{
+	var KeyNum;
+
+	if(MainData.Browser != 1) // IE
+	{
+		KeyNum = window.event.keyCode;
+	}
+	else // Netscape/Firefox/Opera
+	{
+		KeyNum = event.which;
+	}
+	return KeyNum;
+}
 
 /**********************************
  * FUNCTIONS - TIME CONVERSION
