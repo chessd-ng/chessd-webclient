@@ -101,7 +101,14 @@ function GAME_State(XML)
 	Category = StateTag[0].getAttribute("category");
 
 	// Get the pgn of the last move
-	Move = MoveTag[0].getAttribute("long");
+	try 
+	{
+		Move = MoveTag[0].getAttribute("long");
+	}
+	catch(e)
+	{
+		Move = "------";
+	}
 
 	FullMoves = BoardTag[0].getAttribute("fullmoves");
 	Enpassant = BoardTag[0].getAttribute("enpassant");
@@ -124,11 +131,11 @@ function GAME_State(XML)
 	if (MainData.FindGame(GameID) == null)
 	{
 		GAME_StartGame(GameID, Player1, Player2);
-		GAME_UpdateBoard(GameID, Board, FullMoves, Player1, Player2, Turn)
+		GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 	else
 	{
-		GAME_UpdateBoard(GameID, Board, FullMoves, Player1, Player2, Turn)
+		GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 
 	return "";
@@ -288,7 +295,7 @@ function GAME_StartGame(GameId, P1, P2)
 		YourColor = P2.Color;
 	}
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(P1.Name, P2.Name, YourColor);
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1.Name, P2.Name, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
@@ -336,8 +343,9 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
 	}
 
-	// Update turn
-	Game.SetTurn(TurnColor)
+	// Update turn in structure and interface
+	Game.SetTurn(TurnColor);
+	Game.Game.SetTurn(TurnColor);
 
 	// Update interface
 	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
