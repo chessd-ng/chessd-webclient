@@ -30,13 +30,14 @@ function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, Pie
 	this.timer = new Object();
 	this.name = new Object();
 	this.photo = new Object();
-	this.moveList = null;
+	this.MoveList = null;
 	this.eventButtons = null;
 
 	this.WhitePlayer = WhitePlayer;
 	this.BlackPlayer = BlackPlayer;
 	this.MyColor = YourColor;
 	this.Id = GameID;
+	this.Finished = false;
 
 	if (PieceSize == null)
 	{
@@ -47,16 +48,14 @@ function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, Pie
 		this.PieceSize = PieceSize;
 	}
 	
-	// Constructor
-	this.constructor = INTERFACE_CreateGame;
-	this.constructor();
-
 	// Public methods
 	this.Show = INTERFACE_ShowGame;
+	this.Finish = INTERFACE_FinishGame;
 	this.Hide = INTERFACE_HideGame;
 	this.Remove = INTERFACE_RemoveGame;
 
 	this.UpdateBoard = INTERFACE_UpdateBoard;
+	this.UndoMove = INTERFACE_UndoMove;
 	this.AddMove = INTERFACE_AddMove;
 
 	this.SetTurn = INTERFACE_SetTurn;
@@ -66,17 +65,19 @@ function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, Pie
 	this.RemovePiece = INTERFACE_RemovePiece;
 	this.InsertPiece = INTERFACE_InsertPiece;
 
-
-	this.removeGame = INTERFACE_RemoveGame;
-
-	this.setBoard = INTERFACE_DisplayBoard;
-	this.clearBoard = INTERFACE_ClearBoard
-
+	this.SetBoard = INTERFACE_SetBoard;
+	this.ClearBoard = INTERFACE_ClearBoard
 
 	this.setWPhoto = INTERFACE_SetWPhoto;
 	this.setBPhoto = INTERFACE_SetBPhoto;
 
 	this.removeMove = INTERFACE_RemoveMove;
+
+
+	// Constructor
+	this.constructor = INTERFACE_CreateGame;
+	this.constructor();
+
 }
 
 
@@ -95,7 +96,9 @@ function INTERFACE_CreateGame()
 	var GameInfo = UTILS_CreateElement("div","GameInfoDiv");
 	var GameTab = UTILS_CreateElement("div","GameInfoTab");
 	var Board = UTILS_CreateElement("div","TBoard");
-
+	var GameClose = UTILS_CreateElement("p", "GameClose", null, "X");
+	var GameID = this.Id;
+	
 	// Creating board
 	var BoardBlocks = INTERFACE_CreateBoard(this.MyColor, this.PieceSize);
 	
@@ -114,6 +117,11 @@ function INTERFACE_CreateGame()
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
 
+	// Close board function
+	GameClose.onclick = function () {
+		GAME_RemoveGame(GameID);
+	};
+
 	// Creating tree
 	Board.appendChild(BoardBlocks);
 	Board.appendChild(INTERFACE_CreateVerticalIndex(this.MyColor, this.PieceSize));
@@ -124,6 +132,8 @@ function INTERFACE_CreateGame()
 	GameInfo.appendChild(Timer.Div);
 	GameTab.appendChild(INTERFACE_CreateTab(Options.Div, MoveList.Div));
 	GameInfo.appendChild(GameTab);
+	GameInfo.appendChild(GameClose);
+
 
 	GameDiv.appendChild(GameInfo);
 
@@ -135,7 +145,7 @@ function INTERFACE_CreateGame()
 	this.timer.btimer = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
-	this.moveList = MoveList.List;
+	this.MoveList = MoveList.List;
 	this.eventButtons = Options.ButtonList;
 }
 
@@ -169,6 +179,18 @@ function INTERFACE_HideGame()
 	ParentGame.removeChild(this.Game);
 }
 
+
+/**
+* Disable options and drag pieces
+*
+* @public
+*/
+function INTERFACE_FinishGame()
+{
+	this.Finished = true;
+}
+
+
 /**
 * Remove this game
 *
@@ -176,8 +198,63 @@ function INTERFACE_HideGame()
 */
 function INTERFACE_RemoveGame()
 {
-	this.HideGame();
-	delete(this);
+	var Game = MainData.GetGame(this.Id);
+	var Node = document.getElementById("GameDiv");
+
+	if (!Game || !Node)
+	{
+		return false;
+	}
+
+	if (Game.Finished)
+	{
+		Node.parentNode.removeChild(Node);
+	}
+	else
+	{
+		// TODO TODO TODO
+		WINDOW_Alert("Voce nao pode fechar um jogo em andamento");
+	}
+}
+
+
+/**
+* Clean all pieces of a board
+*/
+function INTERFACE_ClearBoard()
+{
+	var i,j;
+
+	for(i=0 ; i<8 ; i++)
+	{
+		for(j=0 ; j<8 ; j++)
+		{
+			this.RemovePiece(i+1 ,j+1);
+		}
+	}
+}
+
+/**
+* Clean the board and show 'BoardArray' in the screen
+*/
+function INTERFACE_SetBoard(BoardArray)
+{
+	var i,j;	
+	var Piece;
+
+	this.ClearBoard();
+
+	for(i=0 ; i<8 ; i++)
+	{
+		for(j=0 ; j<8 ; j++)
+		{
+			Piece = BoardArray[i].charAt(j);
+			if (Piece != "-")
+			{
+				this.InsertPiece(Piece, i+1, j+1, this.MyColor);
+			}
+		}
+	}
 }
 
 
@@ -255,6 +332,28 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 	}
 }
 
+/**
+* Undo the last move done by the user
+*/
+function INTERFACE_UndoMove(Long)
+{
+	var Game = MainData.GetGame(this.Id);
+
+	if (Game == null)
+	{
+		return false;
+	}
+
+	try
+	{
+		this.SetBoard(Game.Moves[Game.Moves.length-1].Board);
+	}
+	catch(e)
+	{
+		return false;
+	}
+	return true;
+}
 
 /**
 * Show turn info to user
@@ -425,50 +524,14 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(WTimerSpan);
 	Item.appendChild(BTimerSpan);
 
-	this.moveList.appendChild(Item);
+	this.MoveList.appendChild(Item);
 }
 
 function INTERFACE_RemoveMove()
 {
-	this.moveList.removeChild(this.moveList.lastChild);
+	this.MoveList.removeChild(this.MoveList.lastChild);
 }
 
-
-
-//Public
-function INTERFACE_ClearBoard()
-{
-	var i,j;
-
-	for(i=0 ; i<8 ; i++)
-	{
-		for(j=0 ; j<8 ; j++)
-		{
-			this.RemovePiece(i,j);
-		}
-	}
-}
-
-//Public
-function INTERFACE_DisplayBoard(BoardArray, PlayerColor, Size)
-{
-	var i,j;	
-	var Piece;
-
-	this.clearBoard();
-
-	for(i=0 ; i<8 ; i++)
-	{
-		for(j=0 ; j<8 ; j++)
-		{
-			Piece = BoardArray[i].charAt(j);
-			if(Piece != "-")
-			{
-				this.insertPiece(Piece, i,j, PlayerColor, Size);
-			}
-		}
-	}
-}
 
 
 /***************************
@@ -756,7 +819,7 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	{
 		// White Rook
 		case 'R':
-			PieceImg.src = PieceDir+"/wtower.png";
+			PieceImg.src = PieceDir+"/wrook.png";
 			PieceImg.title = UTILS_GetText("game_white_rook");
 			PieceImg.onmousedown = DragPieceW;
 			break;
@@ -798,7 +861,7 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 
 		// Black Rook
 		case 'r':
-			PieceImg.src = PieceDir+"/btower.png";
+			PieceImg.src = PieceDir+"/brook.png";
 			PieceImg.title = UTILS_GetText("game_black_rook");
 			PieceImg.onmousedown = DragPieceB;
 			break;

@@ -157,7 +157,6 @@ function MESSAGE_RoomList()
 	return MESSAGE_MakeXMPP(XMPP);
 }
 
-
 /**********************************
  * MESSAGES - PRESENCE
  **********************************/

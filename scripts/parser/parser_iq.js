@@ -26,7 +26,6 @@ function PARSER_ParseIq(XML)
 	var Buffer = "";
 	var Xmlns = "";
 
-
 	// Getting query xmlns
 	if (Query.length > 0)
 	{
@@ -80,6 +79,11 @@ function PARSER_ParseIq(XML)
 			if (Xmlns.match(/\/chessd#match/))
 			{
 				Buffer += GAME_HandleChallenge(XML);
+			}
+			// Game messages
+			else if (Xmlns.match(/\/chessd#game/))
+			{
+				Buffer += GAME_HandleGame(XML);
 			}
 			break;
 		    

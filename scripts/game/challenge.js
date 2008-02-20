@@ -62,10 +62,18 @@ function GAME_HandleChallenge (XML)
 */
 function GAME_HandleOffer(XML)
 {
-	var Players, Match, MatchID, Category;
+	var Players, Match, MatchID, Category, Type;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
+	
+	Type = XML.getAttribute("type");
+	
+	if (Type == "error")
+	{
+		GAME_ChallengeError (XML);
+		return "";
+	}
 
 	// If there's no match, there's nothing to do
 	try 

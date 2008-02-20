@@ -106,7 +106,7 @@ DATA.prototype.FindChallengeById = DATA_FindChallengeById;
 DATA.prototype.ClearChallenges = DATA_ClearChallenges;
 
 DATA.prototype.AddGame = DATA_AddGame;
-DATA.prototype.RemoveGameById = DATA_RemoveGame;
+DATA.prototype.RemoveGame = DATA_RemoveGame;
 DATA.prototype.FindGame = DATA_FindGame;
 DATA.prototype.AddGameMove = DATA_AddGameMove;
 DATA.prototype.SetCurrentGame = DATA_SetCurrentGame;
@@ -668,6 +668,7 @@ function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 	NewGame.PB = PBName;
 	NewGame.Game = GameDiv;
 	NewGame.YourColor = Color;
+	NewGame.Finished = false;
 	NewGame.IsYourTurn = false;
 	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();

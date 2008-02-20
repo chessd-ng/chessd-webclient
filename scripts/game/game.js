@@ -45,31 +45,27 @@ function GAME_HandleGame(XML)
 
 	if (Xmlns.match(/\/chessd#game#state/))
 	{
-		Buffer = GAME_State(XML);
+		Buffer += GAME_State(XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#move/))
 	{
-		Buffer = GAME_State(XML);
+		Buffer += GAME_State(XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#cancel/))
 	{
-		Buffer = GAME_HandleCancel(XML);
+		Buffer += GAME_HandleCancel(XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#draw/))
 	{
-		Buffer = GAME_HandleDraw (XML);
+		Buffer += GAME_HandleDraw (XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#adjourn/))
 	{
-		Buffer = GAME_HandleAdjourn(XML);
+		Buffer += GAME_HandleAdjourn(XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#end/))
 	{
-		Buffer = GAME_End(XML);
-	}
-	else if (Xmlns.match(/\/chessd#game#error/))
-	{
-		Buffer = GAME_HandleError(XML);
+		Buffer += GAME_End(XML);
 	}
 	
 	return Buffer;
@@ -88,15 +84,24 @@ function GAME_State(XML)
 {
 	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
-	var PlayerTag, MoveTag, Move;
+	var PlayerTag, MoveTag, Move, Type;
 	var Player1 = new Object();
 	var Player2 = new Object();
+
+	Type = XML.getAttribute('type');
+	GameID = XML.getAttribute("from").replace(/@.*/,"");
+
+	// Server return error
+	if (Type == "error")
+	{
+		GAME_HandleError(XML, GameID);
+		return "";
+	}
 
 	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
 	PlayerTag = XML.getElementsByTagName("player");
 	MoveTag = XML.getElementsByTagName("move");
-	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	Category = StateTag[0].getAttribute("category");
 
@@ -218,10 +223,10 @@ function GAME_HandleAdjourn (XML)
 function GAME_End(XML)
 {
 	var PlayerTag, ReasonTag;
-	var RoomID, Reason, Player, WinnerID;
+	var GameID, Reason, Player, Winner;
 
 	// Get the room name
-	RoomID = XML.getAttribute("from").replace(/@.*/,"");
+	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	// Get the reason 
 	ReasonTag = XML.getElementsByTagName("reason");
@@ -236,16 +241,23 @@ function GAME_End(XML)
 	if (PlayerTag[0].getAttribute("result") == "winner")
 	{
 		// Winner JID
-		WinnerID = PlayerTag[0].getAttribute("jid").replace(/@.*/,"");
+		Winner = PlayerTag[0].getAttribute("jid").replace(/@.*/,"");
 	}
 	else 
 	{
-		WinnerID = PlayerTag[1].getAttribute("jid").replace(/@.*/,"");
+		Winner = PlayerTag[1].getAttribute("jid").replace(/@.*/,"");
 	}
 	
-	// TODO TODO TODO
-	alert ("Fim de jogo\nVencedor:"+WinnerID+"Razao: "+Reason);
+	// TODO TODO ver msg e arrumar alert
+	WINDOW_Alert("Fim de jogo\nVencedor:"+Winner+"Razao: "+Reason);
 	
+	Game = MainData.GetGame(GameID);
+
+	if (Game)
+	{
+		Game.Finished = true;
+	}
+
 	return "";
 }
 
@@ -254,15 +266,39 @@ function GAME_End(XML)
 * Handle Game Error
 *
 * @param 	XML The xml that contains the error message
+* @param	GameID - Id of the game that receives the message
 * @return 	void
-* @author 	Ulysses
+* @author 	Pedro
 */
-function GAME_HandleError (XML)
+function GAME_HandleError(XML, GameID)
 {
-	// TODO TODO TODO 
-	alert ("Ultima jogada invalida");
+	var Game, Move, Long;
+	var Type;
 	
-	return "";
+	Type = XML.getElementsByTagName('invalid-move');
+
+	if (Type.length > 0)
+	{
+		Move = XML.getElementsByTagName('move');
+
+		try 
+		{
+			Long = Move[0].getAttribute('long');
+		}
+		catch(e)
+		{
+			return false;
+		}
+
+		// Get game from GameList
+		Game = MainData.GetGame(GameID);
+
+		// Undo last move
+		Game.Game.UndoMove(Long);
+	}
+	// TODO TODO TODO
+	else
+		alert("erro estranho nao tratado ainda..")
 }
 
 /**
@@ -352,6 +388,28 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
 	Game.Game.SetWTimer(P1.Time);
 	Game.Game.SetBTimer(P2.Time);
+}
+
+/**
+* Remove a game
+*/
+function GAME_RemoveGame(GameID)
+{
+	var Game = MainData.GetGame(GameID);
+
+	if (Game)
+	{
+		if (Game.Finished)
+		{
+			Game.Game.Remove();
+			MainData.RemoveGame(GameID);
+		}
+		else
+		{
+			// TODO TODO TODO
+			WINDOW_Alert("Voce nao pode fechar um jogo em andamento");
+		}
+	}
 }
 
 /**
