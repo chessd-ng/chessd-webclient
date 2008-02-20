@@ -135,8 +135,13 @@ function INTERFACE_ShowRoomMenu()
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
 
+	// Show the create room window
+	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
+	Create.onclick = function () {
+		WINDOW_CreateRoom();
+	}
+	
 	MenuDiv.appendChild(Create);
 	MenuDiv.appendChild(RoomList);
 	Node.appendChild(MenuDiv);

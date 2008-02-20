@@ -593,15 +593,17 @@ function INTERFACE_ShowCreateRoomWindow()
 			alert("Nome invalido para sala");
 			return;
 		}
-		if (RoomName.length > 50)
+		else if (RoomName.length > 50)
 		{
 			alert("Tamanho maximo de 50 caracteres");
 			Create.value = "";
 			return;
 		}
-		
-		// TODO
-		// message to create room
+		// Send a message to create room
+		else 
+		{
+			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.Host+"/"+MainData.Username));
+		}
 	};
 
 	// Mount elements tree
