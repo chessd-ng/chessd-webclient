@@ -1,3 +1,4 @@
+
 /**
 * CHESSD - WebClient
 *
@@ -191,9 +192,6 @@ function INTERFACE_ShowGameRoomList(Rooms)
 	for (i=0; i < Rooms.length; i++)
 	{
 		Room = UTILS_CreateElement("li", null, null, Rooms[i]);
-		Room.onclick = function () {
-			ROOM_EnterRoom(this.innerHTML);
-		}
 		Node.appendChild(Room);
 	}
 	return true;

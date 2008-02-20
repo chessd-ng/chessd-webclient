@@ -229,7 +229,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 
 				CatSelect.options.selectedIndex = 1;
 
-				TimeSelect.options.selectedIndex = Time - 3;
+				TimeSelect.options.selectedIndex = GameParameters.Time - 3;
 			}
 
 			// Standart
