@@ -153,10 +153,15 @@ function GAME_State(XML)
 * @return 	The message to accept or deny the draw request
 * @author 	Ulysses
 */
-function GAME_HandleDraw (XML)
+function GAME_HandleDraw(XML)
 {
-	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
- 
+	var GameID = XML.getAttribute("from").replace(/@.*/,"");
+	var Title = UTILS_GetText("game_draw");
+	var Text = UTILS_GetText("game_draw_text");
+
+
+	WINDOW_Confirm(Title, Text);
+ 	/*
 	// TODO TODO TODO
 	if (confirm("O adversario esta requisitando empate."))
 	{
@@ -166,6 +171,7 @@ function GAME_HandleDraw (XML)
 	{
 		return GameDrawDeny (RoomID);
 	}
+	*/
 }
 
 /**
@@ -434,4 +440,14 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 
 	// Send move for the current game
 	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id));
+}
+
+/**
+* Send a draw message to oponent
+*
+* @author	Pedro
+*/
+function GAME_SendDraw(GameID)
+{
+	CONNECTION_SendJabber(MESSAGE_GameRequestDraw(GameID));
 }

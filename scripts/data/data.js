@@ -116,7 +116,8 @@ DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
-DATA.prototype.GetGame = DATA_GetGameById;
+DATA.prototype.GetGame = DATA_GetGame;
+DATA.prototype.GetOponent = DATA_GetOponent;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -767,7 +768,7 @@ function DATA_SetTurnGame(TurnColor)
 	}
 }
 
-function DATA_GetGameById(Id)
+function DATA_GetGame(Id)
 {
 	var i=0;
 	while(i<this.GameList.length)
@@ -779,6 +780,28 @@ function DATA_GetGameById(Id)
 		i++;
 	}
 	return null;
+}
+
+/**
+* Return the oponent's name
+*/
+function DATA_GetOponent(GameID)
+{
+	var Game = this.GetGame(GameID);
+
+	if (Game == null)
+	{
+		return null;
+	}
+
+	if (Game.YourColor == "white")
+	{
+		return Game.PB;
+	}
+	else
+	{
+		return Game.PW;
+	}
 }
 
 

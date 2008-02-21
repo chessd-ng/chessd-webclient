@@ -535,53 +535,53 @@ function MESSAGE_GameMove(Move, GameID)
 /**
 * Make a draw request
 */
-function MESSAGE_GameRequestDraw (RoomID)
+function MESSAGE_GameRequestDraw (GameID)
 {
-	return (MESSAGE_GameRequests("Draw", RoomID));
+	return (MESSAGE_GameRequests("Draw", GameID));
 }
 
 /**
 * Make a cancel request
 */
-function MESSAGE_GameRequestCancel (RoomID)
+function MESSAGE_GameRequestCancel (GameID)
 {
-	return (MESSAGE_GameRequests("Cancel", RoomID));
+	return (MESSAGE_GameRequests("Cancel", GameID));
 }
 
 /**
 * Make a adjourn request
 */
-function MESSAGE_GameRequestAdjourn (RoomID)
+function MESSAGE_GameRequestAdjourn (GameID)
 {
-	return (MESSAGE_GameRequests("Adjourn", RoomID));
+	return (MESSAGE_GameRequests("Adjourn", GameID));
 }
 
 /**
 * Create the game requests messages
 */
-function MESSAGE_GameRequests(Action, RoomID)
+function MESSAGE_GameRequests(Action, GameID)
 {
-	var XMPP="";
+	var XMPP = "";
 
 	switch (Action) 
 	{
-	case "Draw":
-		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
-		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
-		break;
+		case "Draw":
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
+			break;
 
-	case "Cancel":
-		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
-		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
-		break;
+		case "Cancel":
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
+			break;
 
-	case "Adjourn":
-		XMPP  = "<iq type='set' to='"+RoomID+"@game."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
-		XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
-		break;
+		case "Adjourn":
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
+			break;
 	
-	default:
-		break;
+		default:
+			break;
 	}
 
 	XMPP += "</query></iq>";

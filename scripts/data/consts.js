@@ -32,9 +32,9 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetRating = "GetRating";
 	Const.IQ_ID_GetRooms = "GetRoomList";
 	Const.IQ_ID_Challenge = "Challenge";
-	Const.IQ_ID_Draw = "Draw";
-	Const.IQ_ID_GameCancel = "Cancel";
-	Const.IQ_ID_Adjourn = "Adjourn";
+	Const.IQ_ID_Draw = "GameDraw";
+	Const.IQ_ID_GameCancel = "GameCancel";
+	Const.IQ_ID_Adjourn = "GameAdjourn";
 	
 	
 	// Login errors

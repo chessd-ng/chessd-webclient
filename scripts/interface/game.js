@@ -22,7 +22,7 @@
 ** GAME BOARD OBJECT
 *****************************/
 
-function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, PieceSize)
+function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 {
 	// Attributes
 	this.Game = null;
@@ -31,13 +31,39 @@ function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, Pie
 	this.name = new Object();
 	this.photo = new Object();
 	this.MoveList = null;
-	this.eventButtons = null;
+	this.EventButtons = null;
 
-	this.WhitePlayer = WhitePlayer;
-	this.BlackPlayer = BlackPlayer;
 	this.MyColor = YourColor;
 	this.Id = GameID;
 	this.Finished = false;
+
+	// Setting white and black players
+	if (this.MyColor == "white")
+	{
+		if (Player1 == MainData.Username)
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+		else
+		{
+			this.WhitePlayer = Player2;
+			this.BlackPlayer = Player1;
+		}
+	}
+	else
+	{
+		if (Player1 == MainData.Username)
+		{
+			this.WhitePlayer = Player2;
+			this.BlackPlayer = Player1;
+		}
+		else
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+	}
 
 	if (PieceSize == null)
 	{
@@ -106,7 +132,7 @@ function INTERFACE_CreateGame()
 	var Timer = INTERFACE_CreateTimer();
 
 	// Game options
-	var Options = INTERFACE_CreateGameOptions();
+	var Options = INTERFACE_CreateGameOptions(this.Id);
 	
 	// Move list
 	var MoveList = INTERFACE_CreateMoveList();
@@ -146,7 +172,7 @@ function INTERFACE_CreateGame()
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
 	this.MoveList = MoveList.List;
-	this.eventButtons = Options.ButtonList;
+	this.EventButtons = Options.ButtonList;
 }
 
 /**
@@ -611,7 +637,7 @@ function INTERFACE_CreateTimer()
 /**
 * Create game options
 */
-function INTERFACE_CreateGameOptions()
+function INTERFACE_CreateGameOptions(GameID)
 {
 	var GameOptionDiv = UTILS_CreateElement("div", "GameOptionDiv");
 	var OptionList = UTILS_CreateElement("ul", "GameOptionList");
@@ -627,6 +653,12 @@ function INTERFACE_CreateGameOptions()
 	var OptionSelectR = UTILS_CreateElement("option", "GameSelectT", null, UTILS_GetText("game_promotion_rook"));
 	var OptionSelectB = UTILS_CreateElement("option", "GameSelectB", null, UTILS_GetText("game_promotion_bishop"));
 	var OptionSelectN = UTILS_CreateElement("option", "GameSelectN", null, UTILS_GetText("game_promotion_knight"));
+
+	// Add listeners
+	UTILS_AddListener(OptionDraw, "click", function() {GAME_SendDraw(GameID);}, false);
+	UTILS_AddListener(OptionResign, "click", function() {GAME_SendResign(GameID);}, false);
+	UTILS_AddListener(OptionFinish, "click", function() {GAME_SendCancel(GameID);}, false);
+	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
 
 	var ButtonList = new Array();
 

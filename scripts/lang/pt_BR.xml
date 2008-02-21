@@ -107,7 +107,7 @@
 		<game_accept>Aceitar</game_accept>
 		<game_decline>Recusar</game_decline>
 		<game_ok>Ok</game_ok>
-		<game_draw>Requisicao de empate</game_draw>
+		<game_draw>Requisição de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
 		<game_end>Fim de jogo</game_end>
 		<game_resign_text>%s desistiu da partida.</game_resign_text>
