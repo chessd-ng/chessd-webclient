@@ -58,6 +58,11 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleChallenge(XML);
 			}
+			// Search user request
+			else if (Xmlns.match(/jabber:iq:search/))
+			{
+				Buffer += CONTACT_HandleSearchUser(XML);
+			}
 			break;
 
 		case "set":
@@ -68,7 +73,7 @@ function PARSER_ParseIq(XML)
 			}
 
 			// Game messages
-			if (Xmlns.match(/\/chessd#game/))
+			else if (Xmlns.match(/\/chessd#game/))
 			{
 				Buffer += GAME_HandleGame(XML);
 			}
@@ -83,7 +88,7 @@ function PARSER_ParseIq(XML)
 			// Game messages
 			else if (Xmlns.match(/\/chessd#game/))
 			{
-				Buffer += GAME_HandleGame(XML);
+				Buffer += GAME_HandleGameError(XML);
 			}
 			break;
 		    

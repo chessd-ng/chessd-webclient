@@ -149,16 +149,28 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 function INTERFACE_SetUserType(Username, NewType)
 {
 	var User = document.getElementById("contact-"+Username);
-	var List;
-
-
-	if (!User)
-	{
-		return false;
-	}
+	var List, Node, i;
 
 	// Updating user's type
-	User.className = User.className.replace(/.*_/, NewType+"_");
+	if (User)
+	{
+		User.className = User.className.replace(/.*_/, NewType+"_");
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username);
+
+			if (Node)
+			{
+				Node.className = Node.className.replace(/.*_/, NewType+"_");
+			}
+		}
+	}
 
 	return true;
 }
@@ -339,6 +351,7 @@ function INTERFACE_CreateContactList()
 
 	// Search user
 	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
+	UTILS_AddListener(Search,"click",function() { WINDOW_SearchUser(); }, "false");
 	Hr = UTILS_CreateElement("hr");
 	
 	// Creating DOM tree
@@ -376,6 +389,7 @@ function INTERFACE_CreateContactList()
 */
 function INTERFACE_ShowInviteWindow(User)
 {
+	// Variables
 	var Div;
 
 	var TextDiv, Username, Label;
@@ -384,13 +398,16 @@ function INTERFACE_ShowInviteWindow(User)
 
 	var Buttons = new Array();
 
+	// Main Div
 	Div = UTILS_CreateElement('div', 'InviteDiv');
 
+	// Text Div Elements
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 
 	Username = UTILS_CreateElement('span',null,'username',UTILS_Capitalize(User));
 	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text"));
 
+	// Buttons Div Elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
 	Auth = UTILS_CreateElement('input',null,'button');
 	Auth.type = "button";
@@ -402,13 +419,180 @@ function INTERFACE_ShowInviteWindow(User)
 	Decline.value = UTILS_GetText("contact_decline");
 	Buttons.push(Decline);
 
+	// Mount elements tree
+	// ButtonsDiv elements
 	ButtonsDiv.appendChild(Auth);
 	ButtonsDiv.appendChild(Decline);
 	
+	// TextDiv elements
 	TextDiv.appendChild(Username);
 	TextDiv.appendChild(Label);
 
+	// Main div elements
 	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of search user window and returns div
+*
+* @param	User	User's nickname that sent the invitation
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserWindow()
+{
+	// Variables
+	var Div;
+
+	var FormDiv, Username, Nickname, Input, Br;
+
+	var ButtonsDiv, Search, Cancel;
+
+	var Buttons = new Array();
+	var Item = 1; // Option choose (1 - name, 2 - username)
+
+	// Main div
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	// FormDiv elements
+	FormDiv = UTILS_CreateElement('div', 'FormDiv');
+
+	Username = UTILS_CreateElement('span', null, 'option_marked', UTILS_GetText("contact_search_name"));
+	Username.onclick = function() {
+		Username.className = 'option_marked';
+		Nickname.className = 'option';
+		Item = 1;
+	}
+	Nickname = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_search_nick"));
+	Nickname.onclick = function() {
+		Nickname.className = 'option_marked';
+		Username.className = 'option';
+		Item = 2;
+	}
+	Br = UTILS_CreateElement('br');
+	Input = UTILS_CreateElement('input', "SearchUserInput");
+	Input.size = "23";
+
+	// ButtonsDiv elements
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+	Search = UTILS_CreateElement('input',null,'button');
+	Search.type = "button";
+	Search.value = UTILS_GetText("contact_search");
+	Search.onclick = function() {
+		if (Item == 1)
+		{
+			CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,null));
+		}
+		else if (Item == 2)
+		{
+			CONNECTION_SendJabber(MESSAGE_SearchUser(null,Input.value));
+		}
+	}
+	Buttons.push(Search);
+
+	Cancel = UTILS_CreateElement('input',null,'button');
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText("contact_cancel");
+	Buttons.push(Cancel);
+
+	// Mount elements tree
+	// ButtonsDiv elements
+	ButtonsDiv.appendChild(Search);
+	ButtonsDiv.appendChild(Cancel);
+	
+	// FormDiv elements
+	FormDiv.appendChild(Username);
+	FormDiv.appendChild(Nickname);
+	FormDiv.appendChild(Br);
+	FormDiv.appendChild(Input);
+
+	// Main div elements
+	Div.appendChild(FormDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Create elements of search user result window and returns div
+*
+* @param	UserList	List of users founded
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserResultWindow(UserList)
+{
+	// Variables
+	var Div;
+
+	var ListDiv, Label, Table, Tr, Item, Br;
+
+	var ButtonsDiv, Button;
+
+	var Buttons = new Array();
+	var i;
+
+	// Main Div
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	// Div of results
+	ListDiv = UTILS_CreateElement('div', 'ListDiv');
+
+	Table = UTILS_CreateElement('tbody');
+
+	if (UserList == null)
+	{
+		Label = UTILS_CreateElement('span', null, 'no_found', UTILS_GetText("contact_no_user_found"));
+	}
+	else
+	{
+		Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_user_found"));
+		
+		for (i=0; i< UserList.length; i++)
+		{
+			Tr = UTILS_CreateElement('tr');
+
+			Item = UTILS_CreateElement('td',null,null,UserList[i]);
+			Tr.appendChild(Item);
+
+			Table.appendChild(Tr);
+		}
+	}
+
+	Br = UTILS_CreateElement('br');
+
+	// ButtonsDiv
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Button = UTILS_CreateElement('input',null,'button');
+	Button.type = "button";
+	if (UserList != null)
+	{
+		Button.value = UTILS_GetText("contact_add");
+	}
+	else
+	{
+		Button.value = UTILS_GetText("contact_close");
+	}
+	Buttons.push(Button);
+
+	// Mount tree elements
+	// ButtonsDiv elements
+	ButtonsDiv.appendChild(Button);
+	
+	// Main div and result div elements
+	Div.appendChild(Label);
+	Div.appendChild(Br);
+	if (UserList != null)
+	{
+		ListDiv.appendChild(Table);
+		Div.appendChild(ListDiv);
+	}
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons};

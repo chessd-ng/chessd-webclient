@@ -167,12 +167,20 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 ******************************************************/
 
 
+/**
+*	Create elements of game alert window and returns div
+*
+* @param	Text	Text to display in confirm box
+* @return	Div; Array
+* @see		WINDOW_Alert();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
 function WINDOW_CreateAlert(Text)
 {
 	var Div;
 
 	var TextDiv;
-	var Span;
+	var Label;
 
 	var ButtonsDiv;
 	var Ok;
@@ -182,7 +190,7 @@ function WINDOW_CreateAlert(Text)
 	Div = UTILS_CreateElement("div","AlertDiv");
 
 	TextDiv = UTILS_CreateElement("div","TextDiv");
-	Span = UTILS_CreateElement("p",null,null,Text);
+	Label = UTILS_CreateElement("p",null,null,Text);
 
 	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
 	Ok = UTILS_CreateElement("input", null,"button");
@@ -191,7 +199,7 @@ function WINDOW_CreateAlert(Text)
 
 	Buttons.push(Ok);
 
-	TextDiv.appendChild(Span);
+	TextDiv.appendChild(Label);
 
 	ButtonsDiv.appendChild(Ok);
 
@@ -201,8 +209,17 @@ function WINDOW_CreateAlert(Text)
 	return {Div:Div, Buttons:Buttons};
 }
 
-
-function WINDOW_CreateConfirm(Text)
+/**
+*	Create elements of confirm request window and returns div
+*
+* @param	Text		Text to display in confirm box
+* @param 	Button1	Value and Fuction of Button1
+* @param 	Button2	Value and Fuction of Button2
+* @return	Div; Array
+* @see		WINDOW_Confirm();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function WINDOW_CreateConfirm(Text, Button1, Button2)
 {
 	var Div;
 
@@ -223,106 +240,27 @@ function WINDOW_CreateConfirm(Text)
 	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
 	Ok = UTILS_CreateElement("input", null,"button");
 	Ok.type = "button";
-	Ok.value = "ok";
+	Ok.value = Button1.Name;
+
+	if (Button1.Func)
+	{
+		UTILS_AddListener(Ok,"click", Button1.Func, false);
+	}
 
 	Cancel = UTILS_CreateElement("input", null,"button");
 	Cancel.type = "button";
-	Cancel.value = "cancelar";
+	Cancel.value = Button2.Name;
+
+	if (Button2.Func)
+	{
+		UTILS_AddListener(Cancel,"click", Button2.Func, false);
+	}
 
 	Buttons.push(Ok);
 	Buttons.push(Cancel);
 
 	ButtonsDiv.appendChild(Ok);
 	ButtonsDiv.appendChild(Cancel);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of game alert window and returns div
-*
-* @param	Text	Text to display in confirm box
-* @param	User	User's nickname that sent the request
-* @return	Div; Array
-* @see		WINDOW_GameAlert();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function WINDOW_CreateGameAlert(Text, User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'GameAlertDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('p', null, null, UTILS_GetText(Text).replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of confirm request window and returns div
-*
-* @param	Text	Text to display in confirm box
-* @param	User	User's nickname that sent the request
-* @return	Div; Array
-* @see		WINDOW_GameConfirm();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function WINDOW_CreateGameConfirm(Text, User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Accept, Decline;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'GameConfirmDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('p', null, null, UTILS_GetText(Text).replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.type = "button";
-	Accept.value = UTILS_GetText("game_accept");
-	Buttons.push(Accept);
-
-	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.type = "button";
-	Decline.value = UTILS_GetText("game_decline");
-	Buttons.push(Decline);
-
-	ButtonsDiv.appendChild(Accept);
-	ButtonsDiv.appendChild(Decline);
 
 	TextDiv.appendChild(Label);
 

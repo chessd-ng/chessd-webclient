@@ -22,7 +22,7 @@
 ** GAME BOARD OBJECT
 *****************************/
 
-function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, PieceSize)
+function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 {
 	// Attributes
 	this.Game = null;
@@ -31,13 +31,39 @@ function INTERFACE_GameBoardObj(GameID, WhitePlayer, BlackPlayer, YourColor, Pie
 	this.name = new Object();
 	this.photo = new Object();
 	this.MoveList = null;
-	this.eventButtons = null;
+	this.EventButtons = null;
 
-	this.WhitePlayer = WhitePlayer;
-	this.BlackPlayer = BlackPlayer;
 	this.MyColor = YourColor;
 	this.Id = GameID;
 	this.Finished = false;
+
+	// Setting white and black players
+	if (this.MyColor == "white")
+	{
+		if (Player1 == MainData.Username)
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+		else
+		{
+			this.WhitePlayer = Player2;
+			this.BlackPlayer = Player1;
+		}
+	}
+	else
+	{
+		if (Player1 == MainData.Username)
+		{
+			this.WhitePlayer = Player2;
+			this.BlackPlayer = Player1;
+		}
+		else
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+	}
 
 	if (PieceSize == null)
 	{
@@ -109,7 +135,7 @@ function INTERFACE_CreateGame()
 	var Timer = INTERFACE_CreateTimer();
 
 	// Game options
-	var Options = INTERFACE_CreateGameOptions();
+	var Options = INTERFACE_CreateGameOptions(this.Id);
 	
 	// Move list
 	var MoveList = INTERFACE_CreateMoveList();
@@ -150,7 +176,7 @@ function INTERFACE_CreateGame()
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
 	this.MoveList = MoveList.List;
-	this.eventButtons = Options.ButtonList;
+	this.EventButtons = Options.ButtonList;
 }
 
 /**
@@ -341,7 +367,7 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 /**
 * Undo the last move done by the user
 */
-function INTERFACE_UndoMove(Long)
+function INTERFACE_UndoMove()
 {
 	var Game = MainData.GetGame(this.Id);
 
@@ -617,7 +643,7 @@ function INTERFACE_CreateTimer()
 /**
 * Create game options
 */
-function INTERFACE_CreateGameOptions()
+function INTERFACE_CreateGameOptions(GameID)
 {
 	var GameOptionDiv = UTILS_CreateElement("div", "GameOptionDiv");
 	var OptionList = UTILS_CreateElement("ul", "GameOptionList");
@@ -633,6 +659,12 @@ function INTERFACE_CreateGameOptions()
 	var OptionSelectR = UTILS_CreateElement("option", "GameSelectT", null, UTILS_GetText("game_promotion_rook"));
 	var OptionSelectB = UTILS_CreateElement("option", "GameSelectB", null, UTILS_GetText("game_promotion_bishop"));
 	var OptionSelectN = UTILS_CreateElement("option", "GameSelectN", null, UTILS_GetText("game_promotion_knight"));
+
+	// Add listeners
+	UTILS_AddListener(OptionDraw, "click", function() {GAME_SendDraw(GameID);}, false);
+	UTILS_AddListener(OptionResign, "click", function() {GAME_SendResign(GameID);}, false);
+	UTILS_AddListener(OptionFinish, "click", function() {GAME_SendCancel(GameID);}, false);
+	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
 
 	var ButtonList = new Array();
 
@@ -691,6 +723,9 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	var PWPawn = UTILS_CreateElement("div", "PWPawn");
 	var PBPawn = UTILS_CreateElement("div", "PBPawn");
 	
+	PWPhoto.src = "./images/no_photo.png";
+	PBPhoto.src = "./images/no_photo.png";
+
 	PhotoDiv.appendChild(PWPhoto);
 	PhotoDiv.appendChild(VS);
 	PhotoDiv.appendChild(PBPhoto);
@@ -929,351 +964,3 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 
 	return PieceImg;
 }
-
-/*****************************
-*	FUNCTIONS - WINDOW
-******************************/
-
-/**
-*	Create elements of draw game request window and return div
-*
-* @param	User	User's nickname that sent the request
-* @return	Div; Array
-* @see		WINDOW_DrawGame();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowDrawGameWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Accept, Decline;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'DrawDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_draw_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.type = "button";
-	Accept.value = UTILS_GetText("game_accept");
-	Buttons.push(Accept);
-
-	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.type = "button";
-	Decline.value = UTILS_GetText("game_decline");
-	Buttons.push(Decline);
-
-	ButtonsDiv.appendChild(Accept);
-	ButtonsDiv.appendChild(Decline);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of resign window and return div
-*
-* @param	User	User's nickname that resigned the game
-* @return	Div; Array
-* @see		WINDOW_ResignGame();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowResignGameWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'ResignDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_resign_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of adjourn game request window and returns div
-*
-* @param	User	User's nickname that sent the request
-* @return	Div; Array
-* @see		WINDOW_PauseGame();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowAdjournGameWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Accept, Decline;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'AdjournDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_adjourn_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.type = "button";
-	Accept.value = UTILS_GetText("game_accept");
-	Buttons.push(Accept);
-
-	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.type = "button";
-	Decline.value = UTILS_GetText("game_decline");
-	Buttons.push(Decline);
-
-	ButtonsDiv.appendChild(Accept);
-	ButtonsDiv.appendChild(Decline);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of abort game request window and returns div
-*
-* @param	User	User's nickname that sent the request
-* @return	Div; Array
-* @see		WINDOW_AbortGame();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowAbortGameWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Accept, Decline;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'AbortDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_abort_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.type = "button";
-	Accept.value = UTILS_GetText("game_accept");
-	Buttons.push(Accept);
-
-	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.type = "button";
-	Decline.value = UTILS_GetText("game_decline");
-	Buttons.push(Decline);
-
-	ButtonsDiv.appendChild(Accept);
-	ButtonsDiv.appendChild(Decline);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of checkmate winner window and return div
-*
-* @param	User	User's nickname that won the game by checkmate
-* @return	Div; Array
-* @see		WINDOW_CheckmateWin();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowCheckmateWinWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'CheckmateDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatew_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of checkmate looser window and return duv
-*
-* @param	User	User's nickname that lost the game by checkmate
-* @return	Div; Array
-* @see		WINDOW_CheckmateLose();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowCheckmateLoseWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'CheckmateDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_checkmatel_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of time winner window and return div
-*
-* @param	User	User's nickname that won the game by time
-* @return	Div; Array
-* @see		WINDOW_TimeWin();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowTimeWinWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'TimeDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timew_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of time looser window and return duv
-*
-* @param	User	User's nickname that lost the game by time
-* @return	Div; Array
-* @see		WINDOW_TimeLose();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowTimeLoseWindow(User)
-{
-	var Div;
-
-	var TextDiv, Label;
-
-	var ButtonsDiv, Ok;
-
-	var Buttons = new Array();
-
-	Div = UTILS_CreateElement('div', 'TimeDiv');
-
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("game_timel_text").replace(/%s/,UTILS_Capitalize(User)));
-
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Ok = UTILS_CreateElement('input',null,'button');
-	Ok.type = "button";
-	Ok.value = UTILS_GetText("game_ok");
-	Buttons.push(Ok);
-
-	ButtonsDiv.appendChild(Ok);
-
-	TextDiv.appendChild(Label);
-
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-

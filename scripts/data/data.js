@@ -43,6 +43,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
+	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;
@@ -116,7 +117,8 @@ DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
-DATA.prototype.GetGame = DATA_GetGameById;
+DATA.prototype.GetGame = DATA_GetGame;
+DATA.prototype.GetOponent = DATA_GetOponent;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -276,6 +278,7 @@ function DATA_SetSubs(Username, NewSubs)
 function DATA_SetType(Username, NewType)
 {
 	var UserPos = this.FindUser(Username);
+	var i, RoomPos;
 
 	// If it's your type
 	if (Username == MainData.Username)
@@ -284,12 +287,23 @@ function DATA_SetType(Username, NewType)
 		return true;
 	}
 
-	if (UserPos == null)
+	// Update in contact list
+	if (UserPos != null)
 	{
-		return false;
+		this.UserList[UserPos].Type = NewType;
 	}
-		
-	this.UserList[UserPos].Type = NewType;
+
+	// Update in room user list
+	for (i=0; i<this.RoomList.length; i++)
+	{
+		RoomPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+		if (RoomPos != null)
+		{
+			this.RoomList[i].UserList[RoomPos].Type = NewType;
+		}
+	}
+
 	return true;
 }
 
@@ -414,7 +428,6 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
 
-
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
 	{
@@ -428,9 +441,9 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 
 	User.Username = Username;
 	User.Status = Status;
-	User.Type = Type;
 	User.Role = Role;
 	User.Affiliation = Affiliation;
+	User.Type = Type;
 
 	// Insert user in room's user list
 	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;
@@ -463,7 +476,7 @@ function DATA_FindUserInRoom(RoomName, Username)
 /**
 * Set user attibutes in 'RoomName'
 */
-function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliation)
+function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 {
 	var j = this.FindRoom(RoomName)
 	var i = this.FindUserInRoom(RoomName, Username)
@@ -472,7 +485,6 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliat
 		return false;
 
 	this.RoomList[j].UserList[i].Status = Status;
-	this.RoomList[j].UserList[i].Type = Type;
 	this.RoomList[j].UserList[i].Role = Role;
 	this.RoomList[j].UserList[i].Affiliation = Affiliation;
 	return true;
@@ -654,7 +666,7 @@ function DATA_SetCurrentGame(Game)
 /**
 * Add a game in 'GameList'
 */
-function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
+function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 {
 	var NewGame = new Object();
 
@@ -664,10 +676,37 @@ function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 	}
 
 	NewGame.Id = Id;
-	NewGame.PW = PWName;
-	NewGame.PB = PBName;
-	NewGame.Game = GameDiv;
 	NewGame.YourColor = Color;
+	
+	// Setting users colors
+	if (Color == "white")
+	{
+		if (Player1 == this.Username)
+		{
+			NewGame.PW = Player1;
+			NewGame.PB = Player2;
+		}
+		else
+		{
+			NewGame.PW = Player2;
+			NewGame.PB = Player1;
+		}
+	}
+	else
+	{
+		if (Player1 == this.Username)
+		{
+			NewGame.PW = Player2;
+			NewGame.PB = Player1;
+		}
+		else
+		{
+			NewGame.PW = Player1;
+			NewGame.PB = Player2;
+		}
+	}
+
+	NewGame.Game = GameDiv;
 	NewGame.Finished = false;
 	NewGame.IsYourTurn = false;
 	NewGame.CurrentMove = null;
@@ -767,7 +806,7 @@ function DATA_SetTurnGame(TurnColor)
 	}
 }
 
-function DATA_GetGameById(Id)
+function DATA_GetGame(Id)
 {
 	var i=0;
 	while(i<this.GameList.length)
@@ -779,6 +818,28 @@ function DATA_GetGameById(Id)
 		i++;
 	}
 	return null;
+}
+
+/**
+* Return the oponent's name
+*/
+function DATA_GetOponent(GameID)
+{
+	var Game = this.GetGame(GameID);
+
+	if (Game == null)
+	{
+		return null;
+	}
+
+	if (Game.YourColor == "white")
+	{
+		return Game.PB;
+	}
+	else
+	{
+		return Game.PW;
+	}
 }
 
 
