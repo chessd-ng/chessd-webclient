@@ -149,16 +149,28 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 function INTERFACE_SetUserType(Username, NewType)
 {
 	var User = document.getElementById("contact-"+Username);
-	var List;
-
-
-	if (!User)
-	{
-		return false;
-	}
+	var List, Node, i;
 
 	// Updating user's type
-	User.className = User.className.replace(/.*_/, NewType+"_");
+	if (User)
+	{
+		User.className = User.className.replace(/.*_/, NewType+"_");
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username);
+
+			if (Node)
+			{
+				Node.className = Node.className.replace(/.*_/, NewType+"_");
+			}
+		}
+	}
 
 	return true;
 }

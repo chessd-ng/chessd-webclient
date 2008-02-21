@@ -278,6 +278,7 @@ function DATA_SetSubs(Username, NewSubs)
 function DATA_SetType(Username, NewType)
 {
 	var UserPos = this.FindUser(Username);
+	var i, RoomPos;
 
 	// If it's your type
 	if (Username == MainData.Username)
@@ -286,12 +287,23 @@ function DATA_SetType(Username, NewType)
 		return true;
 	}
 
-	if (UserPos == null)
+	// Update in contact list
+	if (UserPos != null)
 	{
-		return false;
+		this.UserList[UserPos].Type = NewType;
 	}
-		
-	this.UserList[UserPos].Type = NewType;
+
+	// Update in room user list
+	for (i=0; i<this.RoomList.length; i++)
+	{
+		RoomPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+		if (RoomPos != null)
+		{
+			this.RoomList[i].UserList[RoomPos].Type = NewType;
+		}
+	}
+
 	return true;
 }
 
@@ -416,7 +428,6 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
 
-
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
 	{
@@ -430,9 +441,9 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 
 	User.Username = Username;
 	User.Status = Status;
-	User.Type = Type;
 	User.Role = Role;
 	User.Affiliation = Affiliation;
+	User.Type = Type;
 
 	// Insert user in room's user list
 	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;
@@ -465,7 +476,7 @@ function DATA_FindUserInRoom(RoomName, Username)
 /**
 * Set user attibutes in 'RoomName'
 */
-function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliation)
+function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 {
 	var j = this.FindRoom(RoomName)
 	var i = this.FindUserInRoom(RoomName, Username)
@@ -474,7 +485,6 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Type, Role, Affiliat
 		return false;
 
 	this.RoomList[j].UserList[i].Status = Status;
-	this.RoomList[j].UserList[i].Type = Type;
 	this.RoomList[j].UserList[i].Role = Role;
 	this.RoomList[j].UserList[i].Affiliation = Affiliation;
 	return true;
