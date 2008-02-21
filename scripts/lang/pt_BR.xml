@@ -53,7 +53,7 @@
 		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
 		<contact_user_found>Usuarios encontrados:</contact_user_found>
 		<contact_add>Adicionar</contact_add>
-
+		<contact_close>Fechar</contact_close>
 	</contact>
 	<room>
 		<room_default>geral</room_default>

@@ -58,6 +58,11 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleChallenge(XML);
 			}
+			// Search user request
+			else if (Xmlns.match(/jabber:iq:search/))
+			{
+				Buffer += CONTACT_HandleSearchUser(XML);
+			}
 			break;
 
 		case "set":
