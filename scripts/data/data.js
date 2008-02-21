@@ -40,7 +40,7 @@ function DATA(ConfFile, LangFile)
 	this.Resource = UTILS_GetTag(Params, "resource");
 	this.Status = "available";
 	this.Type = null;
-	this.Xmlns = UTILS_GetTag(Params, "xmlns");
+	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");

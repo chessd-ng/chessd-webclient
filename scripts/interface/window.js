@@ -36,7 +36,7 @@ function WINDOW_ShowWindow(Element)
 function WINDOW_CloseWindow()
 {
 	this.window.parentNode.removeChild(this.window);
-	delete this;
+	//delete this;
 }
 
 function WINDOW_SetId(Id)

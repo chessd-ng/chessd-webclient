@@ -7,7 +7,7 @@
 	</general>
 	<jabber>
 		<host>shiva</host>
+		<Xmlns>http://c3sl.ufpr.br</Xmlns>
 		<resource>ChessD</resource>
-		<xmlns>http://c3sl.ufpr.br</xmlns>
 	</jabber>
 </conf>

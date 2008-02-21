@@ -101,7 +101,10 @@ function INTERFACE_CreateGame()
 	
 	// Creating board
 	var BoardBlocks = INTERFACE_CreateBoard(this.MyColor, this.PieceSize);
-	
+
+	// Create div for pieces
+	var BoardPiece = UTILS_CreateElement("div","BoardPiece",null,null);
+
 	// Timers for both players
 	var Timer = INTERFACE_CreateTimer();
 
@@ -127,6 +130,7 @@ function INTERFACE_CreateGame()
 	Board.appendChild(INTERFACE_CreateVerticalIndex(this.MyColor, this.PieceSize));
 	Board.appendChild(INTERFACE_CreateHorizontalIndex(this.MyColor, this.PieceSize));
 	GameDiv.appendChild(Board);
+	Board.appendChild(BoardPiece);
 
 	GameInfo.appendChild(Photo.Div);
 	GameInfo.appendChild(Timer.Div);
@@ -140,7 +144,7 @@ function INTERFACE_CreateGame()
 	// Setting attributes
 	this.Game = GameDiv;
 
-	this.Board = BoardBlocks;
+	this.Board = BoardPiece;
 	this.timer.wtimer = Timer.WTimer;
 	this.timer.btimer = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
@@ -269,17 +273,19 @@ function INTERFACE_InsertPiece(Piece, Line, Col)
 	// If it's a white player
 	if (this.MyColor == "white")
 	{
-		PieceImg.style.left = ((Col-1) * this.PieceSize) + "px";
-		PieceImg.style.top = ((Line-1) * this.PieceSize) + "px";
+		PieceImg.style.left = ((Col-1) * this.PieceSize)  +"px";
+		PieceImg.style.top  = ((Line-1) * this.PieceSize) +"px";
 	}
 	// Black player
 	else
 	{
-		PieceImg.style.left = ((8 - Col) * this.PieceSize)+"px";
+		PieceImg.style.left = ((8 - Col) * this.PieceSize) +"px";
 		PieceImg.style.top  = ((8 - Line) * this.PieceSize)+"px";
 	}
 	PieceImg.id = this.Id+"_piece_"+UTILS_HorizontalIndex(Col)+(9-Line);
 	
+
+	//alert(Line+","+Col +"///"+ PieceImg.style.top +" - "+ PieceImg.style.left);
 	Board.appendChild(PieceImg);
 }
 
@@ -801,8 +807,18 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	var PieceImg;
 	var PieceName, PieceTitle;
 	var DragPieceW, DrawPieceB;
-	var PieceDir = "images/pieces";
+	var PieceDir, Extension;
 
+	if(MainData.Browser != 1) //IE
+	{
+		PieceDir = "images/ie/pieces";
+		Extension = ".gif";
+	}
+	else
+	{
+		PieceDir = "images/pieces";
+		Extension = ".png";
+	}
 	if (PlayerColor == "white")
 	{
 		DragPieceW = function (event) { UTILS_StartDragPiece(this, Size); return false; };
@@ -819,84 +835,84 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	{
 		// White Rook
 		case 'R':
-			PieceImg.src = PieceDir+"/wrook.png";
+			PieceImg.src = PieceDir+"/wrook"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_rook");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Knight
 		case 'N':
-			PieceImg.src = PieceDir+"/wknight.png";
+			PieceImg.src = PieceDir+"/wknight"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_knight");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Bishop  
 		case 'B':
-			PieceImg.src = PieceDir+"/wbishop.png";
+			PieceImg.src = PieceDir+"/wbishop"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_bishop");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Queen
 		case 'Q':
-			PieceImg.src = PieceDir+"/wqueen.png";
+			PieceImg.src = PieceDir+"/wqueen"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_queen");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White King
 		case 'K':
-			PieceImg.src = PieceDir+"/wking.png";
+			PieceImg.src = PieceDir+"/wking"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_king");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Pawn
 		case 'P':
-			PieceImg.src = PieceDir+"/wpawn.png";	
+			PieceImg.src = PieceDir+"/wpawn"+Extension;	
 			PieceImg.title = UTILS_GetText("game_white_pawn");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// Black Rook
 		case 'r':
-			PieceImg.src = PieceDir+"/brook.png";
+			PieceImg.src = PieceDir+"/brook"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_rook");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Knight
 		case 'n':
-			PieceImg.src = PieceDir+"/bknight.png";
+			PieceImg.src = PieceDir+"/bknight"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_knight");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Bishop
 		case 'b':
-			PieceImg.src = PieceDir+"/bbishop.png";
+			PieceImg.src = PieceDir+"/bbishop"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_bishop");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black King
 		case 'q':
-			PieceImg.src = PieceDir+"/bqueen.png";
+			PieceImg.src = PieceDir+"/bqueen"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_queen");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Queen
 		case 'k':
-			PieceImg.src = PieceDir+"/bking.png";
+			PieceImg.src = PieceDir+"/bking"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_king");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Pawn
 		case 'p':
-			PieceImg.src = PieceDir+"/bpawn.png";
+			PieceImg.src = PieceDir+"/bpawn"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_pawn");
 			PieceImg.onmousedown = DragPieceB;
 			break;

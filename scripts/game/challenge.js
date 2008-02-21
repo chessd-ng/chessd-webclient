@@ -225,7 +225,7 @@ function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	{
 		OpColor = "white";
 	}
-	else 
+	else //this case should never happen 
 	{
 		OpColor = "";
 	}

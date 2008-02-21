@@ -140,6 +140,12 @@ function LOGIN_LoadCss()
 	Files[7] = "css/Board.css";
 	Files[8] = "css/Game.css";
 
+
+	if(MainData.Browser != 1) //IE
+	{
+		Files.push("css/IEFix.css");
+	}
+
 	for (i=0; i<Files.length; i++)
 	{
 		Tag = document.createElement("link");
