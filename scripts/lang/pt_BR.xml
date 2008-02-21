@@ -45,6 +45,15 @@
 		<contact_invite_text> adicionou voce como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
+		<contact_search_user>Buscar usuario</contact_search_user>
+		<contact_search>Buscar</contact_search>
+		<contact_search_name>Nome</contact_search_name>
+		<contact_search_nick>Apelido</contact_search_nick>
+		<contact_cancel>Cancelar</contact_cancel>
+		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
+		<contact_user_found>Usuarios encontrados:</contact_user_found>
+		<contact_add>Adicionar</contact_add>
+
 	</contact>
 	<room>
 		<room_default>geral</room_default>
