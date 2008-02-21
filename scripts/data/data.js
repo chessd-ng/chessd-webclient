@@ -117,7 +117,8 @@ DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
-DATA.prototype.GetGame = DATA_GetGameById;
+DATA.prototype.GetGame = DATA_GetGame;
+DATA.prototype.GetOponent = DATA_GetOponent;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -655,7 +656,7 @@ function DATA_SetCurrentGame(Game)
 /**
 * Add a game in 'GameList'
 */
-function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
+function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 {
 	var NewGame = new Object();
 
@@ -665,10 +666,37 @@ function DATA_AddGame(Id, PWName, PBName, Color, GameDiv)
 	}
 
 	NewGame.Id = Id;
-	NewGame.PW = PWName;
-	NewGame.PB = PBName;
-	NewGame.Game = GameDiv;
 	NewGame.YourColor = Color;
+	
+	// Setting users colors
+	if (Color == "white")
+	{
+		if (Player1 == this.Username)
+		{
+			NewGame.PW = Player1;
+			NewGame.PB = Player2;
+		}
+		else
+		{
+			NewGame.PW = Player2;
+			NewGame.PB = Player1;
+		}
+	}
+	else
+	{
+		if (Player1 == this.Username)
+		{
+			NewGame.PW = Player2;
+			NewGame.PB = Player1;
+		}
+		else
+		{
+			NewGame.PW = Player1;
+			NewGame.PB = Player2;
+		}
+	}
+
+	NewGame.Game = GameDiv;
 	NewGame.Finished = false;
 	NewGame.IsYourTurn = false;
 	NewGame.CurrentMove = null;
@@ -768,7 +796,7 @@ function DATA_SetTurnGame(TurnColor)
 	}
 }
 
-function DATA_GetGameById(Id)
+function DATA_GetGame(Id)
 {
 	var i=0;
 	while(i<this.GameList.length)
@@ -780,6 +808,28 @@ function DATA_GetGameById(Id)
 		i++;
 	}
 	return null;
+}
+
+/**
+* Return the oponent's name
+*/
+function DATA_GetOponent(GameID)
+{
+	var Game = this.GetGame(GameID);
+
+	if (Game == null)
+	{
+		return null;
+	}
+
+	if (Game.YourColor == "white")
+	{
+		return Game.PB;
+	}
+	else
+	{
+		return Game.PW;
+	}
 }
 
 

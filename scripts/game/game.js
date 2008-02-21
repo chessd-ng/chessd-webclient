@@ -53,15 +53,15 @@ function GAME_HandleGame(XML)
 	}
 	else if (Xmlns.match(/\/chessd#game#cancel/))
 	{
-		Buffer += GAME_HandleCancel(XML);
+		Buffer += GAME_HandleCancel(XML, Xmlns);
 	}
 	else if (Xmlns.match(/\/chessd#game#draw/))
 	{
-		Buffer += GAME_HandleDraw (XML);
+		Buffer += GAME_HandleDraw (XML, Xmlns);
 	}
 	else if (Xmlns.match(/\/chessd#game#adjourn/))
 	{
-		Buffer += GAME_HandleAdjourn(XML);
+		Buffer += GAME_HandleAdjourn(XML, Xmlns);
 	}
 	else if (Xmlns.match(/\/chessd#game#end/))
 	{
@@ -90,13 +90,6 @@ function GAME_State(XML)
 
 	Type = XML.getAttribute('type');
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
-
-	// Server return error
-	if (Type == "error")
-	{
-		GAME_HandleError(XML, GameID);
-		return "";
-	}
 
 	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
@@ -153,19 +146,47 @@ function GAME_State(XML)
 * @return 	The message to accept or deny the draw request
 * @author 	Ulysses
 */
-function GAME_HandleDraw (XML)
+function GAME_HandleDraw(XML, Xmlns)
 {
-	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
- 
-	// TODO TODO TODO
-	if (confirm("O adversario esta requisitando empate."))
+	var GameID = XML.getAttribute("from").replace(/@.*/,"");
+	var Oponent = MainData.GetOponent(GameID);
+	var Title = UTILS_GetText("game_draw");
+	var Text;
+	var Button1, Button2;
+
+	// If receive a draw decline message
+	if (Xmlns.match(/-decline/))
 	{
-		return GameDrawAccept (RoomID);
-	}	
-	else 
-	{
-		return GameDrawDeny (RoomID);
+		Text = UTILS_GetText("game_draw_denied");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+
+		// Show message as a default alert window
+		WINDOW_Alert(Title, Text);
 	}
+	// User send a draw request
+	else
+	{
+		Text = UTILS_GetText("game_draw_text");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Button1 = new Object();
+		Button2 = new Object();
+
+		// Ok button
+		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameDrawAccept(GameID));
+		}
+
+		// Cancel button
+		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameDrawDeny(GameID));
+		}
+
+		// Show message as a default confirm window
+		WINDOW_Confirm(Title, Text, Button1, Button2);
+	}
+	return "";
 }
 
 /**
@@ -175,19 +196,47 @@ function GAME_HandleDraw (XML)
 * @return 	The XML to accept or deny the cancel request
 * @author 	Ulysses
 */
-function GAME_HandleAdjourn (XML)
+function GAME_HandleCancel(XML, Xmlns)
 {
-	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
- 
-	// TODO TODO TODO
-	if (confirm("O adversario esta requisitando cancelamento da partida."))
+	var GameID = XML.getAttribute("from").replace(/@.*/,"");
+	var Oponent = MainData.GetOponent(GameID);
+	var Title = UTILS_GetText("game_abort");
+	var Text;
+	var Button1, Button2;
+
+	// If receive a draw decline message
+	if (Xmlns.match(/-decline/))
 	{
-		return GameCancelAccept (RoomID);
-	}	
-	else 
-	{
-		return GameCancelDeny (RoomID);
+		Text = UTILS_GetText("game_abort_denied");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+
+		// Show message as a default alert window
+		WINDOW_Alert(Title, Text);
 	}
+	// User send a draw request
+	else
+	{
+		Text = UTILS_GetText("game_abort_text");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Button1 = new Object();
+		Button2 = new Object();
+
+		// Ok button
+		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameCancelAccept(GameID));
+		}
+
+		// Cancel button
+		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameCancelDeny(GameID));
+		}
+
+		// Show message as a default confirm window
+		WINDOW_Confirm(Title, Text, Button1, Button2);
+	}
+	return "";
 }
 
 /**
@@ -197,19 +246,47 @@ function GAME_HandleAdjourn (XML)
 * @return 	The XML to accept or deny the adjourn request
 * @author 	Ulysses
 */
-function GAME_HandleAdjourn (XML)
+function GAME_HandleAdjourn(XML, Xmlns)
 {
-	var RoomID = XML.getAttribute("from").replace(/@.*/,"");
- 
-	// TODO TODO TODO
-	if (confirm("O adversario esta requisitando o adiamento da partida."))
+	var GameID = XML.getAttribute("from").replace(/@.*/,"");
+	var Oponent = MainData.GetOponent(GameID);
+	var Title = UTILS_GetText("game_adjourn");
+	var Text;
+	var Button1, Button2;
+
+	// If receive a draw decline message
+	if (Xmlns.match(/-decline/))
 	{
-		return GameAdjournAccept (RoomID);
-	}	
-	else 
-	{
-		return GameAdjournDeny (RoomID);
+		Text = UTILS_GetText("game_adjourn_denied");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+
+		// Show message as a default alert window
+		WINDOW_Alert(Title, Text);
 	}
+	// User send a draw request
+	else
+	{
+		Text = UTILS_GetText("game_adjourn_text");
+		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Button1 = new Object();
+		Button2 = new Object();
+
+		// Ok button
+		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameAdjournAccept(GameID));
+		}
+
+		// Cancel button
+		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Func = function () {
+			CONNECTION_SendJabber(MESSAGE_GameAdjournDeny(GameID));
+		}
+
+		// Show message as a default confirm window
+		WINDOW_Confirm(Title, Text, Button1, Button2);
+	}
+	return "";
 }
 
 
@@ -224,6 +301,8 @@ function GAME_End(XML)
 {
 	var PlayerTag, ReasonTag;
 	var GameID, Reason, Player, Winner;
+	var Title = UTILS_GetText("game_end_game");
+	var Text;
 
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
@@ -236,23 +315,32 @@ function GAME_End(XML)
 		Reason = UTILS_GetNodeText(ReasonTag[0]);
 	}
 	
-	// Get the winner player
+	/* Get the winner player
 	PlayerTag = XML.getElementsByTagName("player");
-	if (PlayerTag[0].getAttribute("result") == "winner")
-	{
-		// Winner JID
-		Winner = PlayerTag[0].getAttribute("jid").replace(/@.*/,"");
-	}
-	else 
-	{
-		Winner = PlayerTag[1].getAttribute("jid").replace(/@.*/,"");
-	}
-	
-	// TODO TODO ver msg e arrumar alert
-	WINDOW_Alert("Fim de jogo\nVencedor:"+Winner+"Razao: "+Reason);
-	
-	Game = MainData.GetGame(GameID);
 
+	if (PlayerTag.length > 0)
+	{
+		if (PlayerTag[0].getAttribute("result") == "winner")
+		{
+			// Winner JID
+			Winner = PlayerTag[0].getAttribute("jid").replace(/@.*,"");
+		}
+		else 
+		{
+			Winner = PlayerTag[1].getAttribute("jid").replace(/@.*,"");
+		}
+		Text = "Vencedor:"+Winner+"<br />Razao: "+Reason;
+	}
+	else
+	{
+		Text = Reason;
+	}
+	*/
+	// Show end game message to user
+	WINDOW_Alert(Title, Reason);
+	
+	// FInish game in structure
+	Game = MainData.GetGame(GameID);
 	if (Game)
 	{
 		Game.Finished = true;
@@ -270,35 +358,43 @@ function GAME_End(XML)
 * @return 	void
 * @author 	Pedro
 */
-function GAME_HandleError(XML, GameID)
+function GAME_HandleGameError(XML)
 {
-	var Game, Move, Long;
+	var Query = XML.getElementsByTagName("query");
+	var Xmlns;
+	var Buffer = "";
+	var Game, GameID, Move;
 	var Type;
-	
-	Type = XML.getElementsByTagName('invalid-move');
 
-	if (Type.length > 0)
+	// Getting query xmlns
+	if (Query.length > 0)
 	{
-		Move = XML.getElementsByTagName('move');
-
-		try 
-		{
-			Long = Move[0].getAttribute('long');
-		}
-		catch(e)
-		{
-			return false;
-		}
-
-		// Get game from GameList
-		Game = MainData.GetGame(GameID);
-
-		// Undo last move
-		Game.Game.UndoMove(Long);
+		Xmlns = Query[0].getAttribute("xmlns");
 	}
-	// TODO TODO TODO
-	else
-		alert("erro estranho nao tratado ainda..")
+	else 
+	{
+		return "";
+	}
+
+	// Getting game id
+	GameID = XML.getAttribute("from").replace(/@.*/,"");
+
+	if (Xmlns.match(/\/chessd#game#move/))
+	{
+		// If it's a invalid move
+		Type = XML.getElementsByTagName('invalid-move');
+		if (Type.length > 0)
+		{
+			// Get game from GameList
+			Game = MainData.GetGame(GameID);
+
+			// Undo last move
+			Game.Game.UndoMove();
+		}
+		// TODO TODO TODO
+		else
+			alert("erro estranho nao tratado ainda..");
+	}
 }
 
 /**
@@ -319,7 +415,7 @@ function GAME_StartGame(GameId, P1, P2)
 	// Hide current game
 	if (MainData.CurrentGame != null)
 	{
-		MainData.CurrentGame.Game.hide();
+		MainData.CurrentGame.Game.Hide();
 	}
 
 	if (P1.Name == MainData.Username)
@@ -434,4 +530,62 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 
 	// Send move for the current game
 	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id));
+}
+
+/**
+* Send a draw message to oponent
+*
+* @author	Pedro
+*/
+function GAME_SendDraw(GameID)
+{
+	CONNECTION_SendJabber(MESSAGE_GameRequestDraw(GameID));
+}
+
+/**
+* Send a adjourn message to oponent
+*
+* @author	Pedro
+*/
+function GAME_SendCancel(GameID)
+{
+	CONNECTION_SendJabber(MESSAGE_GameRequestCancel(GameID));
+}
+
+/**
+* Send a adjourn message to oponent
+*
+* @author	Pedro
+*/
+function GAME_SendAdjourn(GameID)
+{
+	CONNECTION_SendJabber(MESSAGE_GameRequestAdjourn(GameID));
+}
+
+/**
+* Send a resign message to oponent
+*
+* @author	Pedro
+*/
+function GAME_SendResign(GameID)
+{
+	var Title = UTILS_GetText("game_resign");
+	var Text;
+	var Button1, Button2;
+
+	Text = UTILS_GetText("game_resign_confirm");
+	Button1 = new Object();
+	Button2 = new Object();
+
+	// Ok button
+	Button1.Name = UTILS_GetText("game_ok");
+	Button1.Func = function () {
+		CONNECTION_SendJabber(MESSAGE_GameResign(GameID));
+	}
+
+	// Cancel button
+	Button2.Name = UTILS_GetText("game_cancel");
+	
+	// Show message as a default confirm window
+	WINDOW_Confirm(Title, Text, Button1, Button2);
 }

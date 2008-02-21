@@ -73,7 +73,7 @@ function PARSER_ParseIq(XML)
 			}
 
 			// Game messages
-			if (Xmlns.match(/\/chessd#game/))
+			else if (Xmlns.match(/\/chessd#game/))
 			{
 				Buffer += GAME_HandleGame(XML);
 			}
@@ -88,7 +88,7 @@ function PARSER_ParseIq(XML)
 			// Game messages
 			else if (Xmlns.match(/\/chessd#game/))
 			{
-				Buffer += GAME_HandleGame(XML);
+				Buffer += GAME_HandleGameError(XML);
 			}
 			break;
 		    

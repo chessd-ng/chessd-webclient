@@ -45,7 +45,7 @@ function INTERFACE_CreateUserBox()
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img");
 	UserImg.title = MainData.Username;
-	UserImg.src = "images/avatar_tmp.jpg";
+	UserImg.src = "images/no_photo.png";
 	UserInf = UTILS_CreateElement("div", "UserInf");
 	Name = UTILS_CreateElement("h2", null, null, UTILS_Capitalize(MainData.Username));
 	Status = UTILS_CreateElement("select");
