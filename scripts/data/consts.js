@@ -35,6 +35,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_Draw = "Draw";
 	Const.IQ_ID_GameCancel = "Cancel";
 	Const.IQ_ID_Adjourn = "Adjourn";
+	Const.IQ_ID_SearchUser = "SearchUser";
 	
 	
 	// Login errors

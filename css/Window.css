@@ -78,7 +78,7 @@
 }
 
 #WindowBox p {
-	font 			: bold 12px Trebuchet MS;
+	font 			: 12px Trebuchet MS;
 	color			: #216778;
 }
 
@@ -100,17 +100,11 @@
 	text-align		: center;
 }
 
-#AlertDiv #TextDiv p {
-	color				: #216778;
-	font-size		:	14px;
-}
-
 #AlertDiv #ButtonsDiv {
 	position		:	relative;
 	padding-top	: 40px;
 	padding-bottom	: 5px;
 	text-align	: center;
-	
 }
 
 #ConfirmDiv {
@@ -119,16 +113,10 @@
 	position		: relative;
 }
 
-#ConfirmDiv #TextDiv {,
+#ConfirmDiv #TextDiv {
 	padding-top		:	30px;
 	position			:	relative;
 	text-align		: center;
-}
-
-#ConfirmDiv #TextDiv p {
-	font-size 	: 12px;
-	font-weight	:	bold;
-	color				: #216778;
 }
 
 #ConfirmDiv #ButtonsDiv {

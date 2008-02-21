@@ -278,13 +278,22 @@
 	border-bottom	:	2px solid #FFA200;
 }
 
+#SearchUserDiv .no_found {
+	padding-left	:	10px;
+}
+
 #SearchUserDiv #FormDiv {
 	text-align 	:	center;
 }
 
 #SearchUserDiv #ListDiv {
 	text-align 	:	left;
-	padding-left	:	20px;
+	padding-left	:	22px;
+	width					:	140px;
+	display				:	block;
+	overflow			:	auto;
+	height				:	45px;
+	margin-top		:	15px
 }
 
 #SearchUserDiv #FormDiv input{
@@ -302,4 +311,3 @@
 	text-align	: center;
 	position		: relative;
 }
-

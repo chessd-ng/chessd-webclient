@@ -43,6 +43,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
+	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;

@@ -9,5 +9,6 @@
 		<host>shiva</host>
 		<resource>ChessD</resource>
 		<xmlns>http://c3sl.ufpr.br</xmlns>
+		<search-component>vjud</search-component>
 	</jabber>
 </conf>

@@ -670,3 +670,89 @@ function MESSAGE_GameAdjournDeny (RoomID)
 
 	return MESSAGE_MakeXMPP(XMPP);
 }
+
+/**********************************
+ * MESSAGES - SEARCH USER
+ **********************************/
+
+/**
+*
+*	Make search user message
+*
+*	@return	String with search user message
+*	@author	Danilo Kiyoshi Simizu Yorinori
+
+function MESSAGE_SearchUser()
+{
+	var XMPP;
+	
+	XMPP = "<iq type='get' to='"+MainData.SearchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchUser+"'><query xmlns='jabber:iq:search'/></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
+
+/**
+*
+*	Make search user message
+*
+*	@return	String with search user message
+*	@author	Danilo Kiyoshi Simizu Yorinori
+*/
+function MESSAGE_SearchUser(Name, Username)
+{
+	var XMPP="";
+	
+	XMPP 	= "<iq type='set' to='"+MainData.SearchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchUser+"' >";
+	XMPP +=	"<query xmlns='jabber:iq:search'>";
+	XMPP += "<x xmlns='jabber:x:data' type='submit' >";
+
+	// Username field
+	if (Username != null)
+	{
+		XMPP += "<field type='text-single' var='user' >";
+		XMPP += "<value>"+Username+"*</value>";
+		XMPP += "</field>";
+	}
+	// Name field
+	else if (Name != null)
+	{
+		XMPP +=	"<field type='text-single' var='fn' >";
+		XMPP +=	"<value>"+Name+"*</value>";
+		XMPP += "</field>";
+	}
+	/* Fields that could be use
+		<field type="text-single" var="given" >
+		<value></value>
+		</field>
+		<field type="text-single" var="middle" >
+		<value></value>
+		</field>
+		<field type="text-single" var="family" >
+		<value></value>
+		</field>
+		<field type="text-single" var="nickname" >
+		<value></value>
+		</field>
+		<field type="text-single" var="bday" >
+		<value></value>
+		</field>
+		<field type="text-single" var="ctry" >
+		<value></value>
+		</field>
+		<field type="text-single" var="locality" >
+		<value></value>
+		</field>
+		<field type="text-single" var="email" >
+		<value></value>
+		</field>
+		<field type="text-single" var="orgname" >
+		<value></value>
+		</field>
+		<field type="text-single" var="orgunit" >
+		<value></value>
+		</field>
+	*/
+	XMPP +=	"</x></query></iq>";
+
+	return MESSAGE_MakeXMPP(XMPP);
+}
