@@ -241,12 +241,20 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 	Ok = UTILS_CreateElement("input", null,"button");
 	Ok.type = "button";
 	Ok.value = Button1.Name;
-	UTILS_AddListener(Ok,"click", Button1.Func, false);
+
+	if (Button1.Func)
+	{
+		UTILS_AddListener(Ok,"click", Button1.Func, false);
+	}
 
 	Cancel = UTILS_CreateElement("input", null,"button");
 	Cancel.type = "button";
 	Cancel.value = Button2.Name;
-	UTILS_AddListener(Cancel,"click", Button2.Func, false);
+
+	if (Button2.Func)
+	{
+		UTILS_AddListener(Cancel,"click", Button2.Func, false);
+	}
 
 	Buttons.push(Ok);
 	Buttons.push(Cancel);

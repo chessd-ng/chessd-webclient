@@ -361,7 +361,7 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 /**
 * Undo the last move done by the user
 */
-function INTERFACE_UndoMove(Long)
+function INTERFACE_UndoMove()
 {
 	var Game = MainData.GetGame(this.Id);
 
@@ -717,6 +717,9 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	var PWPawn = UTILS_CreateElement("div", "PWPawn");
 	var PBPawn = UTILS_CreateElement("div", "PBPawn");
 	
+	PWPhoto.src = "./images/no_photo.png";
+	PBPhoto.src = "./images/no_photo.png";
+
 	PhotoDiv.appendChild(PWPhoto);
 	PhotoDiv.appendChild(VS);
 	PhotoDiv.appendChild(PBPhoto);

@@ -116,14 +116,20 @@
 		<game_accept>Aceitar</game_accept>
 		<game_decline>Recusar</game_decline>
 		<game_ok>Ok</game_ok>
+		<game_cancel>Cancelar</game_cancel>
 		<game_draw>Requisição de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
-		<game_end>Fim de jogo</game_end>
+		<game_draw_denied>%s recusou sua requisição de empate.</game_draw_denied>
+		<game_end_game>Fim de jogo</game_end_game>
 		<game_resign_text>%s desistiu da partida.</game_resign_text>
 		<game_adjourn>Adiar partida</game_adjourn>
 		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
+		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
 		<game_abort>Encerrar partida</game_abort>
 		<game_abort_text>%s deseja encerrar a partida, deseja aceitar?</game_abort_text>
+		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
+		<game_resign>Desistir da partida</game_resign>
+		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
 		<game_checkmatew_text>Parabens! Voce ganhou de %s por xeque-mate.</game_checkmatew_text>
 		<game_checkmatel_text>Voce perdeu para %s por xeque-mate.</game_checkmatel_text>
 		<game_timew_text>Voce ganhou de %s por tempo.</game_timew_text>
@@ -131,7 +137,7 @@
 
 		<game_options>Opções</game_options>
 		<game_moves>Lances</game_moves>
-		<game_send_draw>Empate</game_send_draw>
+		<game_send_draw>Empatar</game_send_draw>
 		<game_send_resign>Desistir</game_send_resign>
 		<game_send_terminate>Encerrar</game_send_terminate>
 		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
