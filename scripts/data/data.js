@@ -67,6 +67,7 @@ function DATA(ConfFile, LangFile)
 	this.RatingLightning =  "0";
 	this.RatingBlitz =  "0";
 	this.RatingStandard = "0";
+	this.CurrentRating = "blitz";
 	
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
