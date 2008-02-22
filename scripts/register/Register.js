@@ -1,4 +1,3 @@
-	
 var HttpRequest;
 
 function post()
