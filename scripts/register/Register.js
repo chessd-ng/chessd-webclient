@@ -132,3 +132,19 @@ function getDatabaseError(msg, usr)
 }
 
 
+function msgBox(msg){
+/*
+	var div, label, bt, body;
+	body = document.getElementsByTag
+	div = document.createElement("div");
+	label = document.createElement("p");
+	bt = document.createElement("input");
+	label.innerHTML = msg;
+	bt.value="Ok";
+	div.appendChild(label);
+	div.appendChild(bt);
+*/
+}
+
+
+
