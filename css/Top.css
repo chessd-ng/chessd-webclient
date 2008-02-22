@@ -12,7 +12,6 @@
 	text-indent		: -9999px;
 	overflow		: hidden;
 
-	.margin			: 0.5mm;
 }
 
 #Top #TopMenu {
@@ -34,7 +33,6 @@
 	position		: relative;
 	left			: 73mm;
 	height			: 15mm;
-	.left			: 33mm;
 }
 
 #Top .icons li {

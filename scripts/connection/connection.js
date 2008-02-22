@@ -233,7 +233,7 @@ function CONNECTION_ReceiveXml()
 			Buffer = PARSER_ParseXml(XML);
 				
 			// Parser returned some xml: send it
-			if (Buffer != "" && Buffer != null)
+			if ((Buffer != "") && (Buffer != null) && (Buffer != undefined))
 			{
 				CONNECTION_SendJabber(Buffer);
 			}

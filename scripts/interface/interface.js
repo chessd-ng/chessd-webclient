@@ -48,3 +48,18 @@ function INTERFACE_ShowInterface(Tree)
 {
 	document.body.appendChild(Tree);
 }
+
+
+/**
+* Show interface in the user screen
+*/
+function INTERFACE_StopInterface()
+{
+	var Page = document.getElementById("Page");
+
+	// Remove the interface div
+	if (Page)
+	{
+		Page.parentNode.removeChild(Page);
+	}
+}

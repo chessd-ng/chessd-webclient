@@ -113,7 +113,7 @@ function ROOM_HandleGameRoomList(XML)
 	{
 		// Remove the server name of the player's ID
 		// and replace ' x ' to ' X '
-		Rooms[i] = Items[i].getAttribute("name").replace(/@shiva/g, "").replace(/ x /, " X ");
+		Rooms[i] = Items[i].getAttribute("name");
 	}
 
 	INTERFACE_ShowGameRoomList(Rooms);

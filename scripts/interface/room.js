@@ -79,7 +79,15 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 		return false;
 	}
 
-	Node.className = NewType+"_"+NewStatus;
+	// If 'NewType' is not passed
+	if (NewType == null)
+	{
+		Node.className = Node.className.replace(/_.*/, "_"+NewStatus);
+	}
+	else
+	{
+		Node.className = NewType+"_"+NewStatus;
+	}
 	return true;
 }
 
@@ -567,12 +575,12 @@ function INTERFACE_ShowCreateRoomWindow()
 			RoomName = Input.value.replace(/ /g,"_");
 			if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
 			{
-				WINDOW_Alert("Nome invalido para sala");
+				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 				return;
 			}
 			if (RoomName.length > 50)
 			{
-				WINDOW_Alert("Tamanho maximo de 50 caracteres");
+				WINDOW_Alert(UTILS_GetText('room_invalid_length'));
 				Input.value = "";
 				return;
 			}
@@ -603,12 +611,12 @@ function INTERFACE_ShowCreateRoomWindow()
 		RoomName = Input.value.replace(/ /g,"_");
 		if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
 		{
-			alert("Nome invalido para sala");
+			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 			return;
 		}
 		else if (RoomName.length > 50)
 		{
-			alert("Tamanho maximo de 50 caracteres");
+			WINDOW_Alert(UTILS_GetText('room_invalid_length'));
 			Create.value = "";
 			return;
 		}

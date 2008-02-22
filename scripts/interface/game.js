@@ -27,11 +27,13 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Attributes
 	this.Game = null;
 	this.Board = null;
-	this.timer = new Object();
+	this.Time = new Object();
 	this.name = new Object();
 	this.photo = new Object();
 	this.MoveList = null;
 	this.EventButtons = null;
+	this.Timer = null;
+	this.Turn = "white";
 
 	this.MyColor = YourColor;
 	this.Id = GameID;
@@ -40,7 +42,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Setting white and black players
 	if (this.MyColor == "white")
 	{
-		if (Player1 == MainData.Username)
+		if (Player1.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
@@ -53,7 +55,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 	else
 	{
-		if (Player1 == MainData.Username)
+		if (Player1.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
@@ -85,8 +87,13 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.AddMove = INTERFACE_AddMove;
 
 	this.SetTurn = INTERFACE_SetTurn;
-	this.SetWTimer = INTERFACE_SetWTimer;
-	this.SetBTimer = INTERFACE_SetBTimer;
+	this.SetWTime = INTERFACE_SetWTime;
+	this.SetBTime = INTERFACE_SetBTime;
+
+	this.UpdateWTime = INTERFACE_UpdateWTime;
+	this.UpdateBTime = INTERFACE_UpdateBTime;
+
+	this.DecreaseTime = INTERFACE_DecreaseTime;
 
 	this.RemovePiece = INTERFACE_RemovePiece;
 	this.InsertPiece = INTERFACE_InsertPiece;
@@ -127,7 +134,10 @@ function INTERFACE_CreateGame()
 	
 	// Creating board
 	var BoardBlocks = INTERFACE_CreateBoard(this.MyColor, this.PieceSize);
-	
+
+	// Create div for pieces
+	var BoardPiece = UTILS_CreateElement("div","BoardPiece",null,null);
+
 	// Timers for both players
 	var Timer = INTERFACE_CreateTimer();
 
@@ -138,7 +148,7 @@ function INTERFACE_CreateGame()
 	var MoveList = INTERFACE_CreateMoveList();
 
 	// Players photos
-	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer, this.BlackPlayer);
+	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer.Name, this.BlackPlayer.Name);
 
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
@@ -153,6 +163,7 @@ function INTERFACE_CreateGame()
 	Board.appendChild(INTERFACE_CreateVerticalIndex(this.MyColor, this.PieceSize));
 	Board.appendChild(INTERFACE_CreateHorizontalIndex(this.MyColor, this.PieceSize));
 	GameDiv.appendChild(Board);
+	Board.appendChild(BoardPiece);
 
 	GameInfo.appendChild(Photo.Div);
 	GameInfo.appendChild(Timer.Div);
@@ -166,13 +177,18 @@ function INTERFACE_CreateGame()
 	// Setting attributes
 	this.Game = GameDiv;
 
-	this.Board = BoardBlocks;
-	this.timer.wtimer = Timer.WTimer;
-	this.timer.btimer = Timer.BTimer;
+	this.Board = BoardPiece;
+	this.Time.WTime = Timer.WTimer;
+	this.Time.BTime = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
+
+	this.Timer = setInterval(this.DecreaseTime, 1000);
+
+	this.SetWTime();
+	this.SetBTime();
 }
 
 /**
@@ -295,17 +311,19 @@ function INTERFACE_InsertPiece(Piece, Line, Col)
 	// If it's a white player
 	if (this.MyColor == "white")
 	{
-		PieceImg.style.left = ((Col-1) * this.PieceSize) + "px";
-		PieceImg.style.top = ((Line-1) * this.PieceSize) + "px";
+		PieceImg.style.left = ((Col-1) * this.PieceSize)  +"px";
+		PieceImg.style.top  = ((Line-1) * this.PieceSize) +"px";
 	}
 	// Black player
 	else
 	{
-		PieceImg.style.left = ((8 - Col) * this.PieceSize)+"px";
+		PieceImg.style.left = ((8 - Col) * this.PieceSize) +"px";
 		PieceImg.style.top  = ((8 - Line) * this.PieceSize)+"px";
 	}
 	PieceImg.id = this.Id+"_piece_"+UTILS_HorizontalIndex(Col)+(9-Line);
 	
+
+	//alert(Line+","+Col +"///"+ PieceImg.style.top +" - "+ PieceImg.style.left);
 	Board.appendChild(PieceImg);
 }
 
@@ -410,46 +428,49 @@ function INTERFACE_SetTurn(Color)
 	// Set other player to normal
 	OtherNode.style.fontWeight = "normal";
 	OtherNode.style.textDecoration = "none";
+
+	this.Turn = Color;
 	return true;
 }
 
-
-function INTERFACE_SetWTimer(TimeSec)
+/**
+* Decrease user time. Executed each second
+*/
+function INTERFACE_DecreaseTime()
 {
-	var min, sec;
-	var minStr, secStr;
-
-	min = Math.round(TimeSec / 60);
-	sec = TimeSec % 60;
-
-	if(min < 10)
+	if (MainData.CurrentGame.Game.Turn == "white")
 	{
-		minStr = "0"+min;
+		MainData.CurrentGame.Game.WhitePlayer.Time -= 1;
+		MainData.CurrentGame.Game.SetWTime();
 	}
 	else
 	{
-		minStr = min;
+		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
+		MainData.CurrentGame.Game.SetBTime();
 	}
-
-	if(sec < 10)
-	{
-		secStr = "0"+sec;
-	}
-	else
-	{
-		secStr = sec;
-	}
-
-	this.timer.wtimer.innerHTML = minStr+":"+secStr;
 }
 
-function INTERFACE_SetBTimer(TimeSec)
+
+function INTERFACE_UpdateWTime(NewTime)
+{
+	this.WhitePlayer.Time = NewTime;
+}
+
+function INTERFACE_UpdateBTime(NewTime)
+{
+	this.BlackPlayer.Time = NewTime;
+}
+
+function INTERFACE_SetWTime()
 {
 	var min, sec;
 	var minStr, secStr;
 
-	min = Math.round(TimeSec / 60);
-	sec = TimeSec % 60;
+	if (this.WhitePlayer.Time <= 0)
+		clearInterval(this.Timer);
+
+	min = Math.floor(this.WhitePlayer.Time / 60);
+	sec = this.WhitePlayer.Time % 60;
 
 	if(min < 10)
 	{
@@ -469,7 +490,39 @@ function INTERFACE_SetBTimer(TimeSec)
 		secStr = sec;
 	}
 
-	this.timer.btimer.innerHTML = minStr+":"+secStr;
+	this.Time.WTime.innerHTML = minStr+":"+secStr;
+}
+
+function INTERFACE_SetBTime()
+{
+	var min, sec;
+	var minStr, secStr;
+
+	if (this.BlackPlayer.Time <= 0)
+		clearInterval(this.Timer);
+
+	min = Math.floor(this.BlackPlayer.Time / 60);
+	sec = this.BlackPlayer.Time % 60;
+
+	if(min < 10)
+	{
+		minStr = "0"+min;
+	}
+	else
+	{
+		minStr = min;
+	}
+
+	if(sec < 10)
+	{
+		secStr = "0"+sec;
+	}
+	else
+	{
+		secStr = sec;
+	}
+
+	this.Time.BTime.innerHTML = minStr+":"+secStr;
 }
 
 function INTERFACE_SetWPhoto(PhotoType, PhotoStr)
@@ -836,8 +889,18 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	var PieceImg;
 	var PieceName, PieceTitle;
 	var DragPieceW, DrawPieceB;
-	var PieceDir = "images/pieces";
+	var PieceDir, Extension;
 
+	if(MainData.Browser != 1) //IE
+	{
+		PieceDir = "images/ie/pieces";
+		Extension = ".gif";
+	}
+	else
+	{
+		PieceDir = "images/pieces";
+		Extension = ".png";
+	}
 	if (PlayerColor == "white")
 	{
 		DragPieceW = function (event) { UTILS_StartDragPiece(this, Size); return false; };
@@ -854,84 +917,84 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	{
 		// White Rook
 		case 'R':
-			PieceImg.src = PieceDir+"/wrook.png";
+			PieceImg.src = PieceDir+"/wrook"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_rook");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Knight
 		case 'N':
-			PieceImg.src = PieceDir+"/wknight.png";
+			PieceImg.src = PieceDir+"/wknight"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_knight");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Bishop  
 		case 'B':
-			PieceImg.src = PieceDir+"/wbishop.png";
+			PieceImg.src = PieceDir+"/wbishop"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_bishop");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Queen
 		case 'Q':
-			PieceImg.src = PieceDir+"/wqueen.png";
+			PieceImg.src = PieceDir+"/wqueen"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_queen");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White King
 		case 'K':
-			PieceImg.src = PieceDir+"/wking.png";
+			PieceImg.src = PieceDir+"/wking"+Extension;
 			PieceImg.title = UTILS_GetText("game_white_king");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Pawn
 		case 'P':
-			PieceImg.src = PieceDir+"/wpawn.png";	
+			PieceImg.src = PieceDir+"/wpawn"+Extension;	
 			PieceImg.title = UTILS_GetText("game_white_pawn");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// Black Rook
 		case 'r':
-			PieceImg.src = PieceDir+"/brook.png";
+			PieceImg.src = PieceDir+"/brook"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_rook");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Knight
 		case 'n':
-			PieceImg.src = PieceDir+"/bknight.png";
+			PieceImg.src = PieceDir+"/bknight"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_knight");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Bishop
 		case 'b':
-			PieceImg.src = PieceDir+"/bbishop.png";
+			PieceImg.src = PieceDir+"/bbishop"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_bishop");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black King
 		case 'q':
-			PieceImg.src = PieceDir+"/bqueen.png";
+			PieceImg.src = PieceDir+"/bqueen"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_queen");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Queen
 		case 'k':
-			PieceImg.src = PieceDir+"/bking.png";
+			PieceImg.src = PieceDir+"/bking"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_king");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Pawn
 		case 'p':
-			PieceImg.src = PieceDir+"/bpawn.png";
+			PieceImg.src = PieceDir+"/bpawn"+Extension;
 			PieceImg.title = UTILS_GetText("game_black_pawn");
 			PieceImg.onmousedown = DragPieceB;
 			break;

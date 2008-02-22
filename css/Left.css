@@ -11,14 +11,11 @@
 	background-color: #FFF;
 	display			: table;
 	height			: 15mm;	
-	.margin-left		: 0.5mm;
-	.margin-top		: 0.5mm;
 }
 
 #Main #Left #User img {
 	float			: left;
 	margin			: 1mm;
-	.margin			: 0.5mm;
 }
 
 #Main #Left #User #UserInf {

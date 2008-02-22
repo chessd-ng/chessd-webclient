@@ -50,6 +50,10 @@
 }
 
 
+#BoardPiece{
+	position		: static;
+}
+
 /**
 * ESTILOS PARA OS INDICES DO TABULEIRO
 */

@@ -32,7 +32,6 @@
 #Main #Left #Contact #Contacts table {
 	border-spacing	: 0px;
 	width			: 44mm;
-	.width			: 43.5mm;
 }
 
 #Main #Left #Contact label {
@@ -193,6 +192,7 @@
 	text-decoration	: none;
 	font			: bold 11px Trebuchet MS;
 	color			: #216778;
+	cursor			: pointer;
 }
 
 /**
@@ -255,7 +255,6 @@
 
 #SearchUserDiv span {
 	padding-top	:	20px;
-	cursor			:	pointer;
 	margin-right: 10px;
 	font-size 	: 13px;
 	margin-right: 10px;
@@ -269,13 +268,23 @@
 	color				: #216778;
 }
 
-#SearchUserDiv .option {
-	color				: #216778;
+#SearchUserDiv td {
+	padding-left	:	10px;
+	width					:	130px;
 }
 
-#SearchUserDiv .option_marked {
-	color: #FFA200;
-	border-bottom	:	2px solid #FFA200;
+#SearchUserDiv td:hover {
+	background-color	: #EAF5F4;
+	border			: 0px solid #216778;
+}
+
+#SearchUserDiv .option {
+	color				: #216778;
+	border-bottom	:	2px solid #216778;
+}
+
+#SearchUserDiv .no_found {
+	padding-left	:	10px;
 }
 
 #SearchUserDiv #FormDiv {
@@ -284,7 +293,12 @@
 
 #SearchUserDiv #ListDiv {
 	text-align 	:	left;
-	padding-left	:	20px;
+	padding-left	:	12px;
+	width					:	150px;
+	display				:	block;
+	overflow			:	auto;
+	height				:	58px;
+	margin-top		:	15px
 }
 
 #SearchUserDiv #FormDiv input{
@@ -297,9 +311,7 @@
 
 #SearchUserDiv #ButtonsDiv {
 	padding-top : 30px;
-	padding-bottom : 5px;
 	padding-right	:	10px;
 	text-align	: center;
 	position		: relative;
 }
-

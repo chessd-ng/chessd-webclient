@@ -1,0 +1,177 @@
+/*Left.css*/
+#Main #Left #User{
+	margin-left		: 0.5mm;
+	margin-top		: 0.5mm;
+}
+
+#Main #Left #User img{
+	margin			: 0.5mm;
+}
+
+
+
+
+/*Top.css*/
+
+#Top h1{
+	margin			: 0.5mm;
+	background		: url("../images/ie/logochessd.gif") no-repeat;
+}
+
+#Top .icons{
+	left			: 33mm;
+}
+
+
+
+
+/*Contacts.css*/
+#Main #Left #Contact #Contacts table{
+	width			: 43.5mm;
+}
+
+#Top .icons .search_game {
+	background              : url('../images/ie/search_game.gif') no-repeat;
+}
+
+#Top .icons .search_user {
+	background              : url('../images/ie/search_user.gif') no-repeat;
+}
+
+#Top .icons .news {
+	background              : url('../images/ie/news.gif') no-repeat;
+}
+
+#Top .icons .preferences {
+	background              : url('../images/ie/preferences.gif') no-repeat;
+}
+
+#Top .icons .help {
+	background              : url('../images/ie/help.gif') no-repeat;
+}
+
+#Top .icons .exit {
+	background              : url('../images/ie/exit.gif') no-repeat;
+}
+
+/* available */
+#Main #Left .user_available {
+	background              : url('../images/ie/user_available.gif') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .user_unavailable {
+	background              : url('../images/ie/user_unavailable.gif') no-repeat;
+}
+
+/* away */
+#Main #Left .user_away {
+	background              : url('../images/ie/user_away.gif') no-repeat;
+}
+
+/* busy */
+#Main #Left .user_busy {
+	background              : url('../images/ie/user_busy.gif') no-repeat;
+}
+
+/* playing */
+#Main #Left .user_playing {
+	background              : url('../images/ie/user_playing.gif') no-repeat;
+}
+
+/* offline */
+#Main #Left .user_offline {
+	background              : url('../images/ie/user_offline.gif') no-repeat;
+}
+
+/* admin */
+
+/* available */
+#Main #Left .admin_available {
+	background              : url('../images/ie/admin_available.gif') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .admin_unavailable {
+	background              : url('../images/ie/admin_unavailable.gif') no-repeat;
+}
+
+/* away */
+#Main #Left .admin_away {
+	background              : url('../images/ie/admin_away.gif') no-repeat;
+}
+
+/* busy */
+#Main #Left .admin_busy {
+	background              : url('../images/ie/admin_busy.gif') no-repeat;
+}
+
+/* playing */
+#Main #Left .admin_playing {
+	background              : url('../images/ie/admin_playing.gif') no-repeat;
+}
+
+/* offline */
+#Main #Left .admin_offline {
+	background              : url('../images/ie/admin_offline.gif') no-repeat;
+}
+
+/* teacher */
+
+/* available */
+#Main #Left .teacher_available {
+	background              : url('../images/ie/teacher_available.gif') no-repeat;
+}
+
+/* unavailable */
+#Main #Left .teacher_unavailable {
+	background              : url('../images/ie/teacher_unavailable.gif') no-repeat;
+}
+
+/* away */
+#Main #Left .teacher_away {
+	background              : url('../images/ie/teacher_away.gif') no-repeat;
+}
+
+/* busy */
+#Main #Left .teacher_busy {
+	background              : url('../images/ie/teacher_busy.gif') no-repeat;
+}
+
+/* playing */
+#Main #Left .teacher_playing {
+	background              : url('../images/ie/teacher_playing.gif') no-repeat;
+}
+
+/* offline */
+#Main #Left .teacher_offline {
+	background              : url('../images/ie/teacher_offline.gif') no-repeat;
+}
+
+/* robot */
+
+/* available */
+#Main #Left .robot_available {
+	background              : url('../images/robot_available.gif') no-repeat;
+}
+
+/* offline */
+#Main #Left .robot_offline {
+	background              : url('../images/robot_offline.gif') no-repeat;
+}
+
+
+
+
+/*Board.css*/
+
+#PhotoDiv #PWPawn{
+	background-image	: url("../images/ie/pieces/wpawn.gif");
+}
+
+#PhotoDiv #PBPawn{
+	background-image	: url("../images/ie/pieces/bpawn.gif");
+}
+
+
+

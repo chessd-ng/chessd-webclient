@@ -164,20 +164,34 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	ChalLeftDiv = UTILS_CreateElement('div','ChalLeftDiv');
 
 	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_pieces'));
-	ColorOptW =	UTILS_CreateElement('input','');
+	ColorOptW =	UTILS_CreateElement('input');
 	ColorOptW.type = "radio";
 	ColorOptW.name = "color";
-	ColorOptW.value = "color";
+	ColorOptW.value = "colorW";
 
-	ColorOptWImg = UTILS_CreateElement('img','');
+	
+
+	ColorOptWImg = UTILS_CreateElement('img');
 	ColorOptWImg.src = "images/invite_white_pawn.png"
 	
-	ColorOptB =	UTILS_CreateElement('input','');
+	ColorOptB =	UTILS_CreateElement('input');
 	ColorOptB.type = "radio";
 	ColorOptB.name = "color";
-	ColorOptB.value = "color";
+	ColorOptB.value = "colorB";
 
-	ColorOptBImg = UTILS_CreateElement('img','');
+	// Quick fix for IE radio buttons
+	ColorOptW.onclick = function(){
+		ColorOptW.checked = true;
+		ColorOptB.checked = false;
+	};
+
+	ColorOptB.onclick = function(){
+		ColorOptW.checked = false;
+		ColorOptB.checked = true;
+	}
+	/////////////////////////////////
+
+	ColorOptBImg = UTILS_CreateElement('img');
 	ColorOptBImg.src = "images/invite_black_pawn.png"
 	
 	// Marca o radio referente a cor
@@ -196,7 +210,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	TimeLabel =	UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_time_label'));
 	TimeLabelMin =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_time_label_min'));
 	TimeBr = UTILS_CreateElement('br');
-	TimeSelect = UTILS_CreateElement('select','','time_select');
+	TimeSelect = UTILS_CreateElement('select',null,'time_select');
 	
 	if (GameParameters != undefined)
 	{
@@ -340,7 +354,15 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 		}
 		else
 		{
-			Color = "";
+			//Random Color
+			if (Math.round(Math.random()) % 2 == 0)
+			{
+				Color = "white";
+			}
+			else
+			{
+				Color = "black";
+			}
 		}
 
 		// Rated or unrated?
