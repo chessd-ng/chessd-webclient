@@ -785,7 +785,7 @@ function DATA_RemoveGame(Id)
 
 	if(GamePosition == null)
 	{
-		alert("Erro: Jogo nao existente - remover");
+		return null;
 	}
 	else //Remove
 	{
