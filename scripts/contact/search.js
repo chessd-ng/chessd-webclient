@@ -50,7 +50,7 @@ function CONTACT_HandleSearchUser(XML)
 			{
 				if (Fields[j].getAttribute("var") == "jid")
 				{
-					Result.push(UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@shiva/,""));
+					Result.push(UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@.*/,""));
 				}
 			}
 		}
