@@ -64,9 +64,7 @@ function DATA(ConfFile, LangFile)
 	this.CurrentOldGame = "";
 	this.OldGameList = new Array();
 
-	this.RatingLightning =  "0";
-	this.RatingBlitz =  "0";
-	this.RatingStandard = "0";
+	this.Rating = new Object();
 	this.CurrentRating = "blitz";
 	
 	
@@ -85,6 +83,7 @@ DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
+DATA.prototype.GetRating = DATA_GetRating;
 DATA.prototype.SetDefault = DATA_SetDefault;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
@@ -146,6 +145,7 @@ function DATA_AddUser(Username, Status, Subs)
 	User.Username = Username;
 	User.Status = Status;
 	User.Subs = Subs;
+	User.Rating = new Object();;
 
 	this.UserList[this.UserList.length] = User;
 
@@ -232,6 +232,31 @@ function DATA_GetStatus(Username)
 	return this.UserList[UserPos].Status;
 }
 
+/**
+* Return Username Rating object
+*/
+function DATA_GetRating(Username)
+{
+	var UserPos = this.FindUser(Username);
+	var i;
+
+	if (UserPos)
+	{
+		return this.UserList[UserPos].Rating;
+	}
+
+	// Update rating in room user lists
+	for (i=0; i<this.RoomList.length; i++)
+	{
+		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+		if (UserPos)
+		{
+			return this.RoomList[i].UserList[UserPos].Rating;
+		}
+	}
+	return null;
+}
 
 /**
 * Set default values to use
@@ -314,12 +339,13 @@ function DATA_SetType(Username, NewType)
 */
 function DATA_SetRating(Username, Category, Rating)
 {
-	var UserPos, Obj;
-
+	var UserPos, Obj, i;
 
 	// Set correct object to append rating
 	if (MainData.Username == Username)
+	{
 		Obj = MainData;
+	}
 	else
 	{
 		UserPos = MainData.FindUser(Username);
@@ -329,17 +355,42 @@ function DATA_SetRating(Username, Category, Rating)
 	switch (Category)
 	{
 		case('blitz'):
-			Obj.RatingBlitz = Rating;
+			Obj.Rating.Blitz = Rating;
 			break;
 
 		case('standard'):
-			Obj.RatingStandard = Rating;
+			Obj.Rating.Standard = Rating;
 			break;
 
 		case('lightning'):
-			Obj.RatingLightning = Rating;
+			Obj.Rating.Lightning = Rating;
 			break;
 	}
+	
+	// Update rating in room user lists
+	for (i=0; i<this.RoomList.length; i++)
+	{
+		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+		if (UserPos)
+		{
+			switch (Category)
+			{
+				case('blitz'):
+					this.RoomList[i].UserList[UserPos].Rating.Blitz = Rating
+					break;
+
+				case('standard'):
+					this.RoomList[i].UserList[UserPos].Rating.Standard = Rating
+					break;
+
+				case('lightning'):
+					this.RoomList[i].UserList[UserPos].Rating.Lightning = Rating
+					break;
+			}
+		}
+	}
+	return true;
 }
 
 
@@ -445,6 +496,7 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 	User.Type = Type;
+	User.Rating = new Object();
 
 	// Insert user in room's user list
 	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;

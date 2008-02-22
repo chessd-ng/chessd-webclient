@@ -40,7 +40,6 @@ function DATA_SetConsts()
 	Const.IQ_ID_SearchUser = "SearchUser";
 	Const.IQ_ID_SearchUser = "SearchUser";
 	
-	
 	// Login errors
 	Const.LOGIN_ServerDown = 1;
 	Const.LOGIN_ConnectionRefused = 2;

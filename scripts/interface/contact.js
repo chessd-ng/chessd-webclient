@@ -25,11 +25,12 @@
 *
 * @public
 */
-function INTERFACE_AddContact(Username, Status, Rating, Type)
+function INTERFACE_AddContact(Username, Status)
 {
 	var Node = document.getElementById("ContactOnlineList");
 	var Search = document.getElementById("contact-"+Username);
 	var Contact;
+
 
 	if (!Node)
 	{
@@ -43,8 +44,7 @@ function INTERFACE_AddContact(Username, Status, Rating, Type)
 		return true;
 	}
 
-
-	Contact = INTERFACE_CreateContact(Username, Status, Rating, Type)
+	Contact = INTERFACE_CreateContact(Username, Status, Rating)
 	Node.appendChild(Contact);
 
 	return true;
@@ -140,6 +140,39 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	return true;
 }
 
+/**
+* Set rating of user in interface
+*
+* @public
+*/
+function INTERFACE_SetUserRating(Username, Category, Rating)
+{
+	var User = document.getElementById("contact-"+Username+"-rating");
+	var List, Node, i;
+
+	// Updating user's type
+	if (User)
+	{
+		User.innerHTML = Rating;
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username+"-rating");
+
+			if (Node)
+			{
+				Node.innerHTML = Rating;
+			}
+		}
+	}
+
+	return true;
+}
 
 /**
 * Set type of user in interface
@@ -207,7 +240,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
-	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
+	Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
@@ -335,7 +368,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOnline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OnlineTbody.appendChild(ContactsOnline);
@@ -344,7 +377,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOffline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OfflineTbody.appendChild(ContactsOffline);

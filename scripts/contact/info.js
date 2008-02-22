@@ -48,7 +48,7 @@ function CONTACT_HandleRating(NodeList)
 		try 
 		{
 			Jid = NodeList[i].getAttribute('jid').replace(/@.*/,"");
-			Category = NodesList[i].getAttribute('category');
+			Category = NodeList[i].getAttribute('category');
 			Rating = NodeList[i].getAttribute('rating');
 		}
 		catch (e)
