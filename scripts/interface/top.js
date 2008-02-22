@@ -40,6 +40,7 @@ function INTERFACE_CreateTop()
 	ItemTitle = UTILS_GetText("menu_search_user")
 	Item = UTILS_CreateElement("li", null, "search_user", ItemTitle);
 	Item.title = ItemTitle;
+	UTILS_AddListener(Item,"click",function() { WINDOW_SearchUser(); }, "false");
 	IconsList.appendChild(Item);
 
 	// News
