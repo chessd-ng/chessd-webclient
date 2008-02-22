@@ -516,7 +516,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	var ButtonsDiv, Button;
 
 	var Buttons = new Array();
-	var i;
+	var i, User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -539,7 +539,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 			Tr = UTILS_CreateElement('tr');
 
 			Item = UTILS_CreateElement('td',null,null,UserList[i]);
-			UTILS_AddListener(Item,"click",function() { CONTACT_ShowUserMenu(this, UserList[i]); }, "false");
+			User = UserList[i];
+			UTILS_AddListener(Item,"click",function() { CONTACT_ShowUserMenu(this, User); }, "false");
 			Tr.appendChild(Item);
 
 			Table.appendChild(Tr);
