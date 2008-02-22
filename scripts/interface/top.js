@@ -40,6 +40,9 @@ function INTERFACE_CreateTop()
 	ItemTitle = UTILS_GetText("menu_search_user")
 	Item = UTILS_CreateElement("li", null, "search_user", ItemTitle);
 	Item.title = ItemTitle;
+	Item.onclick = function () {
+		WINDOW_SearchUser();
+	}
 	IconsList.appendChild(Item);
 
 	// News
@@ -141,7 +144,7 @@ function INTERFACE_ShowRoomMenu()
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
 
 	// Show the create room window
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
+	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create_room"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
 	}

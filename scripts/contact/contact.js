@@ -177,7 +177,7 @@ function CONTACT_HandleRoomPresence(XML)
 		Status = UTILS_GetNodeText(Show[0]);
 
 		// Any different status, status = away
-		if ((Status != "busy") && (Status != "away") && (Status != "unavailable"))
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
 		{
 			Status = "away";
 		}
@@ -282,27 +282,8 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 			MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
 			INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
 		}
-		// This should NOT EVER happen
-		else if (e == "RoomNotCreatedException")
-		{
-			throw "UnexpectedEvilException"
-		}
 	}
 	return Buffer;
-}
-
-
-/**
-* Change status of 'Username' in structure and interface
-*/
-function CONTACT_SetUserStatus(Username, NewStatus)
-{
-	if (MainData.SetUserStatus(Username, NewStatus))
-	{
-		INTERFACE_SetUserStatus(Username, NewStatus)	
-		return true;
-	}
-	return false;
 }
 
 /**
@@ -333,7 +314,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	Options[i] = new Object();
 	Options[i].Name = UTILS_GetText("usermenu_send_message");
 	Options[i].Func = function () {
-		alert("manda mensges");
 	}
 	i += 1;
 	

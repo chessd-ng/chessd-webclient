@@ -42,3 +42,17 @@ function CONTACT_ChangeStatus(NewStatus)
 	CONNECTION_SendJabber(MESSAGE_MergeMessages(XML));	
 }
 
+/**
+* Change status of 'Username' in structure and interface
+*/
+function CONTACT_SetUserStatus(Username, NewStatus)
+{
+	if (MainData.SetUserStatus(Username, NewStatus))
+	{
+		INTERFACE_SetUserStatus(Username, NewStatus)	
+		return true;
+	}
+	return false;
+}
+
+

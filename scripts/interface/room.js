@@ -79,7 +79,15 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 		return false;
 	}
 
-	Node.className = NewType+"_"+NewStatus;
+	// If 'NewType' is not passed
+	if (NewType == null)
+	{
+		Node.className = Node.className.replace(/_.*/, "_"+NewStatus);
+	}
+	else
+	{
+		Node.className = NewType+"_"+NewStatus;
+	}
 	return true;
 }
 
