@@ -309,7 +309,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	/**
 	* Setting options
 	*/
-	
+
 	// If isn't your name
 	if (MainData.Username != Username)
 	{

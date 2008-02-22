@@ -498,6 +498,33 @@ function INTERFACE_ShowSearchUserWindow()
 	return {Div:Div, Buttons:Buttons};
 }
 
+
+
+/**
+*	Create elements of an user 
+*
+* @param	Username	User that will be inserted
+* @return	Tr
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_CreateUserElement(Username)
+{
+	var Tr, Td;
+
+	Tr = UTILS_CreateElement("tr");
+
+	Td = UTILS_CreateElement("td", null, null, Username);
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+	Tr.appendChild(Td);
+
+	return Tr;
+}
+
+
+
+
+
 /**
 *	Create elements of search user result window and returns div
 *
@@ -510,13 +537,11 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 {
 	// Variables
 	var Div;
-
 	var ListDiv, Label, Table, Tr, Item, Br;
-
 	var ButtonsDiv, Button;
-
 	var Buttons = new Array();
-	var i, User;
+	var i;
+	this.User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -536,13 +561,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 		
 		for (i=0; i< UserList.length; i++)
 		{
-			Tr = UTILS_CreateElement('tr');
-
-			Item = UTILS_CreateElement('td',null,null,UserList[i]);
-			User = UserList[i];
-			UTILS_AddListener(Item,"click",function() { CONTACT_ShowUserMenu(this, User); }, "false");
-			Tr.appendChild(Item);
-
+			// Insert each item of the user founded list in interface
+			Tr = INTERFACE_CreateUserElement(UserList[i]);
 			Table.appendChild(Tr);
 		}
 	}
