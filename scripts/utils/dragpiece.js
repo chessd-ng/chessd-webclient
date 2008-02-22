@@ -28,7 +28,7 @@ function UTILS_StartDragPiece(Obj, Size)
 	var BoardPieceOffset;
 
 	// If ut's not your turn, don't drag
-	if (!MainData.CurrentGame.IsYourTurn)
+	if ((!MainData.CurrentGame.IsYourTurn) || (MainData.CurrentGame.Finished))
 	{
 		return false
 	}
