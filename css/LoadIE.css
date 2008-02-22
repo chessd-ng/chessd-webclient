@@ -1,0 +1,11 @@
+#LoadDiv h1{
+	background		: url("../images/ie/login/logo_chessd.gif") no-repeat;
+}
+
+#LoadDiv .grey_ball{
+	background		: url("../images/ie/login/bola_cinza.gif") no-repeat;
+}
+
+#LoadDiv .green_ball{
+	background		: url("../images/ie/login/bola_verde.gif") no-repeat;
+}

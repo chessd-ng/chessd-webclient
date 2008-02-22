@@ -142,7 +142,7 @@ function INTERFACE_ShowRoomMenu()
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
 
 	// Show the create room window
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create"));
+	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create_room"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
 	}

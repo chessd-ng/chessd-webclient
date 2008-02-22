@@ -149,16 +149,28 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 function INTERFACE_SetUserType(Username, NewType)
 {
 	var User = document.getElementById("contact-"+Username);
-	var List;
-
-
-	if (!User)
-	{
-		return false;
-	}
+	var List, Node, i;
 
 	// Updating user's type
-	User.className = User.className.replace(/.*_/, NewType+"_");
+	if (User)
+	{
+		User.className = User.className.replace(/.*_/, NewType+"_");
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username);
+
+			if (Node)
+			{
+				Node.className = Node.className.replace(/.*_/, NewType+"_");
+			}
+		}
+	}
 
 	return true;
 }
@@ -210,7 +222,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 */
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
-	var Menu, Option, Pos, i;
+	var Menu, Option, ParentDiv, Pos, i;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -225,9 +237,11 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 
 		Menu.appendChild(Option);
 	}
+	// Get parent scrolling
+	ParentDiv = UTILS_GetParentDiv(Obj);
 	Pos = UTILS_GetOffset(Obj);
 
-	Menu.style.top = (Pos.Y+18)+"px";
+	Menu.style.top = (Pos.Y+18-ParentDiv.scrollTop)+"px";
 	Menu.style.left = Pos.X+"px";
 
 	document.body.appendChild(Menu);
@@ -339,7 +353,7 @@ function INTERFACE_CreateContactList()
 
 	// Search user
 	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
-	UTILS_AddListener(Search,"click",function() { WINDOW_SearchUser(); }, "false");
+	UTILS_AddListener(Search, "click", function() { WINDOW_SearchUser(); }, "false");
 	Hr = UTILS_CreateElement("hr");
 	
 	// Creating DOM tree

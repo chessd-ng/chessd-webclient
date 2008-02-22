@@ -430,6 +430,9 @@ function GAME_StartGame(GameId, P1, P2)
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1.Name, P2.Name, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
+	// Set status to playing
+	CONTACT_ChangeStatus("playing");
+
 	// Show New Game
 	GameDiv.Show();
 }

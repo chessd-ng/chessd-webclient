@@ -24,6 +24,8 @@ function UTILS_StartDragPiece(Obj, Size)
 {
 	var MousePos, OldPos;
 	var Offset, OffsetLeft, OffsetTop, OffsetBoard;
+	
+	var BoardPieceOffset;
 
 	// If ut's not your turn, don't drag
 	if (!MainData.CurrentGame.IsYourTurn)
@@ -31,31 +33,45 @@ function UTILS_StartDragPiece(Obj, Size)
 		return false
 	}
 
-	Obj.style.position = "absolute";
+	//Obj.style.position = "absolute";
 
 	// Get Obj position
 	OldPos = new Object();
 	OldPos.x = Obj.style.left.replace(/px/, "");
 	OldPos.y = Obj.style.top.replace(/px/, "");
 
+	// Set BoardPiece OffSet
+	BoardPieceOffset = new Object;
+	if(MainData.Browser != 1) //IE
+	{
+		BoardPieceOffset.y = -335;
+		BoardPieceOffset.x = 260;
+	}
+	else
+	{
+		BoardPieceOffset.y = -300;
+		BoardPieceOffset.x = 0;
+	}
+
 	// Getting offsets
 	Offset = Size / 2;
 	OffsetBoard = UTILS_GetOffset(MainData.CurrentGame.Game.Board);
 
 	// Add half of the piece size and others elements margin and borders
-	OffsetTop = OffsetBoard.Y + Offset + 38;
-	OffsetLeft = OffsetBoard.X + Offset - 257;
+	OffsetTop = OffsetBoard.Y + Offset + 38 + BoardPieceOffset.y;
+	OffsetLeft = OffsetBoard.X + Offset - 257 + BoardPieceOffset.x;
 	
 	// Drag piece
-	document.onmousemove = function (ev) {
+	document.body.onmousemove = function (ev) {
 		MousePos = UTILS_GetMouseCoords(ev);
 
 		Obj.style.top = (MousePos.y-OffsetTop)+"px";
 		Obj.style.left = (MousePos.x-OffsetLeft)+"px";
+		return false;
 	};
 
 	// Stop drag
-	document.onmouseup = function(ev) {	
+	document.body.onmouseup = function(ev) {	
 		var NewPos = new Object();
 		var NewCol, NewLine, OldCol, OldLine;
 
@@ -90,8 +106,8 @@ function UTILS_StartDragPiece(Obj, Size)
 		Obj.style.left = NewPos.x +"px";
 
 		// Remove listener
-		document.onmousemove = null;
-		document.onmouseup = null;
+		document.body.onmousemove = null;
+		document.body.onmouseup = null;
 
 		// If piece has been moved
 		if ((NewCol != OldCol) || (NewLine != OldLine))
@@ -99,7 +115,8 @@ function UTILS_StartDragPiece(Obj, Size)
 			// Send movement
 			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 		}
-	}	
+		return false;
+	}
 }
 
 

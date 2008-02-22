@@ -184,36 +184,6 @@ function MESSAGE_Presence(To)
 		XMPP += "<show>"+MainData.Status+"</show>";
 	}
 
-	// Setting user type
-	if ((MainData.Type != null) && (MainData.Type != "user"))
-	{
-		XMPP += "<type>"+MainData.Type+"</type>";
-	}
-
-	// Setting rating
-	if ((MainData.RatingBlitz != "0") || (MainData.RatingLightning != "0") || (MainData.RatingStandard != "0"))
-	{
-		XMPP += "<rating ";
-
-		// Bllitz rating
-		if (MainData.RatingBlitz != "0")
-		{
-			XMPP += "blitz='"+MainData.RatingBlitz+"' ";
-		}
-		// Lightning rating
-		if (MainData.RatingLightning != "0")
-		{
-			XMPP += "lightning='"+MainData.RatingLightning+"' ";
-		}
-		// Standard rating
-		if (MainData.RatingStandard != "0")
-		{
-			XMPP += "standard='"+MainData.RatingStandard+"' ";
-		}
-
-		XMPP += "/>";
-	}
-
 	XMPP += "</presence>";
 
 	return MESSAGE_MakeXMPP(XMPP);
@@ -320,30 +290,14 @@ function MESSAGE_GroupChat(To, Message)
 *
 * @deprecated
 */
-function MESSAGE_Rating(UserList, RatingType)
+function MESSAGE_Info(User)
 {
 	var XMPP;
 
-	
-	if (UserList == null)
-	{
-		UserList = new Array();
-
-		for (var i=0; i < MainData.UserList.length; i++)
-			UserList[i] = MainData.UserList[i].Username;
-	}
-
-	// Search user rating too
-	UserList[UserList.length] = MainData.Username
-
-	// Create message to get rating of users
 	XMPP  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info' action='fetch'>";
-
-	for (i=0; i < UserList.length; i++)
-	{
-		XMPP += "<rating jid='"+UserList[i]+"@"+MainData.Host+"' category='"+RatingType+"' />";
-	}
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info'>";
+	XMPP += "<rating jid='"+User+"@"+MainData.Host+"' />";
+	XMPP += "<type jid='"+User+"@"+MainData.Host+"' />";
 	XMPP += "</query></iq>";
 	
 	return MESSAGE_MakeXMPP(XMPP);
@@ -356,16 +310,15 @@ function MESSAGE_UserListInfo()
 {
 	var XMPP, i;
 
-
 	XMPP  = "<iq type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info' action='fetch'>";
-	XMPP += "<rating jid='"+MainData.Username+"@"+MainData.Host+"' category='blitz' />";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#info'>";
+	XMPP += "<rating jid='"+MainData.Username+"@"+MainData.Host+"' />";
 	XMPP += "<type jid='"+MainData.Username+"@"+MainData.Host+"' />";
 
 	// Ask for all contact list
 	for (i=0; i<MainData.UserList.length; i++)
 	{
-		XMPP += "<rating jid='"+MainData.UserList[i].Username+"@"+MainData.Host+"' category='blitz' />";
+		XMPP += "<rating jid='"+MainData.UserList[i].Username+"@"+MainData.Host+"' />";
 		XMPP += "<type jid='"+MainData.UserList[i].Username+"@"+MainData.Host+"' />";
 	}
 	XMPP += "</query></iq>"
@@ -524,7 +477,7 @@ function MESSAGE_GameMove(Move, GameID)
 {
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
+	XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameMove+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
 	XMPP += "<move long='"+Move+"'>";
 	XMPP += "</move></query></iq>";

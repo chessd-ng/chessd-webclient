@@ -8,6 +8,7 @@
 	margin-left		: -390px;
 	background		: url('../images/login/login_box_fundo.gif') repeat-x;
 	padding			: 20px 30px;
+	overflow		: hidden;
 }
 
 #LoginDiv #TextDiv {
@@ -55,6 +56,7 @@
 	background-image: url("../images/login/login_botao_ok.png");
 	border			: 0px;
 	width			: 30px;
+	height			: 18px;
 	cursor			: pointer;
 }
 
