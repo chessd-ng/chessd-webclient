@@ -293,7 +293,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 {
 	var Func, Options = new Array();
 	var i = 0, Hide = 0;
-
+	
 	Func = function () {
 		Hide += 1;
 		

@@ -231,6 +231,10 @@ function WINDOW_Invite(User)
 
 function WINDOW_SearchUser()
 {
+	// If another search user window is opened, return
+	if (document.getElementById("SearchUserDiv"))
+		return;
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowSearchUserWindow();
 
