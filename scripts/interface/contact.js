@@ -450,12 +450,11 @@ function INTERFACE_ShowSearchUserWindow()
 	// Variables
 	var Div;
 
-	var FormDiv, Username, Nickname, Input, Br;
+	var FormDiv, Username,Input, Br;
 
 	var ButtonsDiv, Search, Cancel;
 
 	var Buttons = new Array();
-	var Item = 1; // Option choose (1 - name, 2 - username)
 
 	// Main div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -463,37 +462,18 @@ function INTERFACE_ShowSearchUserWindow()
 	// FormDiv elements
 	FormDiv = UTILS_CreateElement('div', 'FormDiv');
 
-	Username = UTILS_CreateElement('span', null, 'option_marked', UTILS_GetText("contact_search_name"));
-	Username.onclick = function() {
-		Username.className = 'option_marked';
-		Nickname.className = 'option';
-		Item = 1;
-	}
-	Nickname = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_search_nick"));
-	Nickname.onclick = function() {
-		Nickname.className = 'option_marked';
-		Username.className = 'option';
-		Item = 2;
-	}
+	Username = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_user"));
 	Br = UTILS_CreateElement('br');
 	Input = UTILS_CreateElement('input', "SearchUserInput");
 	Input.size = "23";
 
 	// ButtonsDiv elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
 	Search = UTILS_CreateElement('input',null,'button');
 	Search.type = "button";
 	Search.value = UTILS_GetText("contact_search");
-	Search.onclick = function() {
-		if (Item == 1)
-		{
-			CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,null));
-		}
-		else if (Item == 2)
-		{
-			CONNECTION_SendJabber(MESSAGE_SearchUser(null,Input.value));
-		}
-	}
+	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value)); }, "false");
 	Buttons.push(Search);
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -508,7 +488,6 @@ function INTERFACE_ShowSearchUserWindow()
 	
 	// FormDiv elements
 	FormDiv.appendChild(Username);
-	FormDiv.appendChild(Nickname);
 	FormDiv.appendChild(Br);
 	FormDiv.appendChild(Input);
 
@@ -537,7 +516,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	var ButtonsDiv, Button;
 
 	var Buttons = new Array();
-	var i;
+	var i, User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -560,6 +539,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 			Tr = UTILS_CreateElement('tr');
 
 			Item = UTILS_CreateElement('td',null,null,UserList[i]);
+			User = UserList[i];
+			UTILS_AddListener(Item,"click",function() { CONTACT_ShowUserMenu(this, User); }, "false");
 			Tr.appendChild(Item);
 
 			Table.appendChild(Tr);
@@ -573,14 +554,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	Button = UTILS_CreateElement('input',null,'button');
 	Button.type = "button";
-	if (UserList != null)
-	{
-		Button.value = UTILS_GetText("contact_add");
-	}
-	else
-	{
-		Button.value = UTILS_GetText("contact_close");
-	}
+	Button.value = UTILS_GetText("contact_close");
 	Buttons.push(Button);
 
 	// Mount tree elements

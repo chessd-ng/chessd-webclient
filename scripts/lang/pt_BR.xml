@@ -47,12 +47,10 @@
 		<contact_decline>Cancelar</contact_decline>
 		<contact_search_user>Buscar usuario</contact_search_user>
 		<contact_search>Buscar</contact_search>
-		<contact_search_name>Nome</contact_search_name>
-		<contact_search_nick>Apelido</contact_search_nick>
+		<contact_user>Usuario</contact_user>
 		<contact_cancel>Cancelar</contact_cancel>
 		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
 		<contact_user_found>Usuarios encontrados:</contact_user_found>
-		<contact_add>Adicionar</contact_add>
 		<contact_close>Fechar</contact_close>
 	</contact>
 	<room>
