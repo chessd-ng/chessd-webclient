@@ -201,11 +201,11 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 	{
 		if (NewStatus == "available")
 		{
-			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' />";
+			XMPP = "<presence to='"+RoomName+"/"+MainData.Username+"' />";
 		}
 		else
 		{
-			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' ><show>"+NewStatus+"</show></presence>";
+			XMPP = "<presence to='"+RoomName+"/"+MainData.Username+"' ><show>"+NewStatus+"</show></presence>";
 		}
 	}
 	
@@ -527,22 +527,22 @@ function MESSAGE_GameRequests(Action, GameID)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
 			break;
 	
 		case "Resign":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameResign+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#resign'>";
 			break;
 	
@@ -614,17 +614,17 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw"+Response+"'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel"+Response+"'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn"+Response+"'>";
 			break;
 	

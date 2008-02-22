@@ -309,43 +309,55 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	/**
 	* Setting options
 	*/
-	
-	// Send message
-	Options[i] = new Object();
-	Options[i].Name = UTILS_GetText("usermenu_send_message");
-	Options[i].Func = function () {
-	}
-	i += 1;
-	
-	// Match user
-	if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
-	{
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_match");
-		Options[i].Func = function () {
-			WINDOW_Challenge(Username);
-		};
-		i += 1;
-	}
 
-	// Add or remove contact
-	if (MainData.IsContact(Username))
+	// If isn't your name
+	if (MainData.Username != Username)
 	{
+		// Send message
 		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_remove_contact");
-		Options[i].Func = function () { 
-			CONTACT_RemoveUser(Username);
-		};
+		if (MainData.GetStatus(Username) != "offline")
+		{
+			Options[i].Name = UTILS_GetText("usermenu_send_message");
+		}
+		// Send a offline message (scrap)
+		else 
+		{
+			Options[i].Name = UTILS_GetText("usermenu_send_offlinemessage");
+		}
+		Options[i].Func = function () {
+		}
 		i += 1;
-	}
-	else
-	{
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_add_contact");
-		Options[i].Func = function () { 
-			CONTACT_InviteUser(Username);
-		};
-		i += 1;
+
+		// Match user
+		if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_match");
+			Options[i].Func = function () {
+				WINDOW_Challenge(Username);
+			};
+			i += 1;
+		}
+
+		// Add or remove contact
+		if (MainData.IsContact(Username))
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
+			Options[i].Func = function () { 
+				CONTACT_RemoveUser(Username);
+			};
+			i += 1;
+		}
+		else
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_add_contact");
+			Options[i].Func = function () { 
+				CONTACT_InviteUser(Username);
+			};
+			i += 1;
+		}
 	}
 
 	// View user's profile

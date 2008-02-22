@@ -25,11 +25,12 @@
 *
 * @public
 */
-function INTERFACE_AddContact(Username, Status, Rating, Type)
+function INTERFACE_AddContact(Username, Status)
 {
 	var Node = document.getElementById("ContactOnlineList");
 	var Search = document.getElementById("contact-"+Username);
 	var Contact;
+
 
 	if (!Node)
 	{
@@ -43,8 +44,7 @@ function INTERFACE_AddContact(Username, Status, Rating, Type)
 		return true;
 	}
 
-
-	Contact = INTERFACE_CreateContact(Username, Status, Rating, Type)
+	Contact = INTERFACE_CreateContact(Username, Status, Rating)
 	Node.appendChild(Contact);
 
 	return true;
@@ -140,6 +140,39 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	return true;
 }
 
+/**
+* Set rating of user in interface
+*
+* @public
+*/
+function INTERFACE_SetUserRating(Username, Category, Rating)
+{
+	var User = document.getElementById("contact-"+Username+"-rating");
+	var List, Node, i;
+
+	// Updating user's type
+	if (User)
+	{
+		User.innerHTML = Rating;
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username+"-rating");
+
+			if (Node)
+			{
+				Node.innerHTML = Rating;
+			}
+		}
+	}
+
+	return true;
+}
 
 /**
 * Set type of user in interface
@@ -207,7 +240,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
-	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
+	Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
@@ -335,7 +368,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOnline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OnlineTbody.appendChild(ContactsOnline);
@@ -344,7 +377,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOffline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OfflineTbody.appendChild(ContactsOffline);
@@ -500,6 +533,33 @@ function INTERFACE_ShowSearchUserWindow()
 	return {Div:Div, Buttons:Buttons};
 }
 
+
+
+/**
+*	Create elements of an user 
+*
+* @param	Username	User that will be inserted
+* @return	Tr
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_CreateUserElement(Username)
+{
+	var Tr, Td;
+
+	Tr = UTILS_CreateElement("tr");
+
+	Td = UTILS_CreateElement("td", null, null, Username);
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+	Tr.appendChild(Td);
+
+	return Tr;
+}
+
+
+
+
+
 /**
 *	Create elements of search user result window and returns div
 *
@@ -512,13 +572,11 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 {
 	// Variables
 	var Div;
-
 	var ListDiv, Label, Table, Tr, Item, Br;
-
 	var ButtonsDiv, Button;
-
 	var Buttons = new Array();
-	var i, User;
+	var i;
+	this.User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -538,13 +596,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 		
 		for (i=0; i< UserList.length; i++)
 		{
-			Tr = UTILS_CreateElement('tr');
-
-			Item = UTILS_CreateElement('td',null,null,UserList[i]);
-			User = UserList[i];
-			UTILS_AddListener(Item,"click",function() { CONTACT_ShowUserMenu(this, User); }, "false");
-			Tr.appendChild(Item);
-
+			// Insert each item of the user founded list in interface
+			Tr = INTERFACE_CreateUserElement(UserList[i]);
 			Table.appendChild(Tr);
 		}
 	}

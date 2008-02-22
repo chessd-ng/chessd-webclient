@@ -33,12 +33,12 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetRooms = "GetRoomList";
 	Const.IQ_ID_Challenge = "Challenge";
 	Const.IQ_ID_GameMove = "GameMove";
-	Const.IQ_ID_Draw = "GameDraw";
+	Const.IQ_ID_GameDraw = "GameDraw";
 	Const.IQ_ID_GameCancel = "GameCancel";
-	Const.IQ_ID_Adjourn = "GameAdjourn";
+	Const.IQ_ID_GameAdjourn = "GameAdjourn";
+	Const.IQ_ID_GameResign = "GameResign";
 	Const.IQ_ID_SearchUser = "SearchUser";
 	Const.IQ_ID_SearchUser = "SearchUser";
-	
 	
 	// Login errors
 	Const.LOGIN_ServerDown = 1;

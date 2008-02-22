@@ -275,7 +275,7 @@
 
 #SearchUserDiv td:hover {
 	background-color	: #EAF5F4;
-	border			: 1px solid #216778;
+	border			: 0px solid #216778;
 }
 
 #SearchUserDiv .option {
