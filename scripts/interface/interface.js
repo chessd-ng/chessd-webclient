@@ -62,4 +62,5 @@ function INTERFACE_StopInterface()
 	{
 		Page.parentNode.removeChild(Page);
 	}
+
 }
