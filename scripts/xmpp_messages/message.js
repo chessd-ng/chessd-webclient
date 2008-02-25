@@ -260,7 +260,7 @@ function MESSAGE_Chat(To, Message)
 {
 	var XMPP;
 
-	XMPP  = "<message to='"+To+"' type='chat'>"
+	XMPP  = "<message to='"+To+"@"+MainData.Host+"/"+MainData.Resource+"' type='chat'>"
 	XMPP += "<body>"+Message+"</body>";
 	XMPP += "</message>";
 

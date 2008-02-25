@@ -325,6 +325,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i].Name = UTILS_GetText("usermenu_send_offlinemessage");
 		}
 		Options[i].Func = function () {
+			CHAT_OpenChat(Username);
 		}
 		i += 1;
 

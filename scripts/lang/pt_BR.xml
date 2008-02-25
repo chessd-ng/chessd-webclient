@@ -53,6 +53,10 @@
 		<contact_user_found>Usuarios encontrados:</contact_user_found>
 		<contact_close>Fechar</contact_close>
 	</contact>
+	<chat>
+		<chat_warning>Atenção</chat_warning>
+		<chat_max_exceeded>Máximo %i chats abertos</chat_max_exceeded>
+	</chat>
 	<room>
 		<room_default>geral</room_default>
 		<room_contacts>Contatos</room_contacts>

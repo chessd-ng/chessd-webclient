@@ -3,7 +3,8 @@
 	<general>
 		<version>Alpha 0.5</version>
 		<cookie-validity>10</cookie-validity>
-		<max-rooms>3</max-rooms>
+		<max-rooms>5</max-rooms>
+		<max-chats>4</max-chats>
 	</general>
 	<jabber>
 		<host>shiva</host>
