@@ -1,0 +1,104 @@
+body {
+	background		:transparent url(../images/fundo_interface.png) repeat-x scroll 0%;
+}
+
+#MainDiv {
+	background		:transparent url(../images/register/register_box_fundo.png) repeat-x scroll 0% 50%;
+	width			:550px;
+	height			:350px;
+	border			:2px solid  #FFA200;
+	padding			:120 0 0 150;
+	position		:relative;
+	top				:80px;
+	left			:50%;
+	margin-left		:-330px;
+}
+
+#MainDiv p{
+	color			:#216778;
+	font-family		:Trebuchet MS;
+	font-size		:13px;
+	font-size-adjust:none;
+	font-stretch	:normal;
+	font-variant	:normal;
+	line-height		:normal;
+	height			:10px;
+
+}
+
+#MainDiv h1{
+	color			:#216778;
+	font-family		:Trebuchet MS;
+	font-size		:17px;
+	height			:20px;
+	font-size-adjust:none;
+	font-stretch	:normal;
+	font-variant	:normal;
+	line-height		:normal;
+
+}
+
+b{
+	width			:150px;
+	font-family		:verdana;
+	font-weight     :normal;
+	font-size		:10px;
+	border          :1px ;
+	float			:left;
+}
+
+input {
+	font-family:Trebuchet MS;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	padding:1px;
+}
+
+.enter {
+	cursor			:pointer;
+	width			:70px;
+	height			:18px;
+	color			:#FFF;
+	border 			:0px;
+	font-style		:bold;
+	background-image: url(../images/register/botaoconfirmar.png) ;
+}
+
+.name{
+	width           :300px;
+	border:1px solid #216778;
+}
+
+.nik{
+
+	width           :200px;
+	border:1px solid #216778;
+}
+
+.mail{
+	width           :150px;
+	border:1px solid #216778;
+}
+
+.pwd{
+	width           :150px;
+	border:1px solid #216778;
+}
+
+.italic{
+	font-style		:italic;
+	padding			:0 0 10 0;
+}
+
+.special{
+	height			:20px;	
+	float           :left;
+	position		:relative;
+	left			:150px;
+
+}

@@ -1,0 +1,22 @@
+<html>
+
+<link rel="stylesheet" type="text/css" href="css/Register.css" />
+
+<script type="text/javascript" src="scripts/register/Register.js"></script>
+<body>
+	<div id="mainDiv">
+		<h1>Cadastro</h1>
+		<p class="italic">Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre (se nao cadastrar e-mail nao sera possivel recuperar sua senha caso a perca)</p>
+		<p><b>Nome de Usuario:</b><input type="text" class="nik" id="username"></p>
+		<p><b>E-mail (nao obrigatorio):</b><input type="text" class="mail" id="mail"></p>
+		<p><b>Senha:</b><input type="password" class="pwd" id="pwd"></p>
+		<p><b>Senha(confirmacao):</b><input type="password" class="pwd" id="confpwd"></p>
+		<p class="special">
+		<input type="button" class="enter" value="Cadastrar" id="register" onclick="post()">
+		<input type="button" class="enter" value="Cancelar" id="cancel" onclick="post()">
+		</p>
+
+	</div>
+
+</body>
+</html>
