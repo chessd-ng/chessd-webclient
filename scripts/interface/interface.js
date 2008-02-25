@@ -25,18 +25,20 @@
 */
 function INTERFACE_CreateInterface()
 {
-	var Page, Main, Top, Left, Center;
+	var Page, Main, Chat, Top, Left, Center;
 	
 	Page = UTILS_CreateElement("div", "Page");
 	Main = UTILS_CreateElement("div", "Main");
 	Center = UTILS_CreateElement("div", "Center");
 	Top = INTERFACE_CreateTop();
 	Left = INTERFACE_CreateLeft();
+	Chat = INTERFACE_CreateChatList();
 
 	Main.appendChild(Left);
 	Main.appendChild(Center);
 	Page.appendChild(Top);
 	Page.appendChild(Main);
+	Page.appendChild(Chat);
 
 	return Page;
 }

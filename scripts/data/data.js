@@ -52,6 +52,7 @@ function DATA(ConfFile, LangFile)
 	* DATA STRUCTURE
 	*/
 	this.UserList = new Array();
+	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();

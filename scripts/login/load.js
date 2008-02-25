@@ -100,6 +100,7 @@ function LOGIN_LoadScripts()
 	Scripts[22] = "scripts/utils/dragwindow.js";
 	Scripts[23] = "scripts/contact/info.js";
 	Scripts[24] = "scripts/contact/search.js";
+	Scripts[25] = "scripts/interface/chat.js";
 
 
 	// Carregando arquivos
@@ -141,6 +142,7 @@ function LOGIN_LoadCss()
 	Files[6] = "css/Challenge.css";
 	Files[7] = "css/Board.css";
 	Files[8] = "css/Game.css";
+	Files[9] = "css/Chat.css";
 
 
 	if(MainData.Browser != 1) //IE

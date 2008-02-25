@@ -39,8 +39,42 @@ function CHAT_HandleMessage(XML)
 		Message = UTILS_GetNodeText(Body[0]);
 	}
 
-	// TODO 
 	// Show the message on interface
+	CHAT_ReceiveMessage(From, Message);
 
 	return "";
+}
+
+/**
+* Open a chat
+*/
+function CHAT_OpenChat(Username)
+{
+	if (!MainData.AddChat(Username))
+	{
+		return false;
+	}
+	INTERFACE_OpenChat(Username);
+}
+
+/**
+* Show a message received on interface
+*/
+function CHAT_ReceiveMessage(Username, Message)
+{
+	// Do not exists a opened chat session
+	if (MainData.FindChat(Username) == null)
+	{
+		if (MainData.AddChat(Username))
+		{
+			INTERFACE_OpenChat(Username);
+		}
+		else
+			return false;
+	}
+
+	// Show message in chat list
+	INTERFACE_ShowChatMessage(Username, Message);
+
+	return true;
 }
