@@ -5,10 +5,10 @@ class db{
 
 	function dbConnect(){
 		$HOST="localhost";
-		$DEFAULTPORT=5432;
-		$USERNAME="fabianok";
-		$PASSWD="fsk";
-		$DBNAME="chessd-dev-teste";
+		$DEFAULTPORT=5444;
+		$USERNAME="chessd";
+		$PASSWD="kct9#1";
+		$DBNAME="chessd";
 		$connstring = "host=".$HOST." port=".$DEFAULTPORT." dbname=".$DBNAME." user=".$USERNAME." password=".$PASSWD;
 		$dbconn = pg_connect($connstring);
 		return $dbconn;
