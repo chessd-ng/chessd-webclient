@@ -1,5 +1,4 @@
 <?
-
 ###########################################################
 #
 # Written in PHP by Jure Koren <jure@kiss.uni-lj.si>, based
@@ -111,5 +110,6 @@ function md5crypt($pw, $salt, $magic="") {
   return "$magic$salt\$$passwd";
 
 }
+
 
 ?>
