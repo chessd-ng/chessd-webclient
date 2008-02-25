@@ -101,9 +101,9 @@ function ROOM_HandleRoomList(XML)
 */
 function ROOM_HandleGameRoomList(XML)
 {
-	var Items, Rooms, RoomName, ID,  i;
-
-	Rooms = new Array();
+	var Items, i;
+	var Rooms = new Array();
+	var OnGame;
 
 	// Get items in XML
 	Items = XML.getElementsByTagName("item");
@@ -111,9 +111,12 @@ function ROOM_HandleGameRoomList(XML)
 	// Get the player's names
 	for (i=0; i < Items.length; i++)
 	{
-		// Remove the server name of the player's ID
-		// and replace ' x ' to ' X '
-		Rooms[i] = Items[i].getAttribute("name");
+		OnGame = new Object();
+
+		OnGame.Name = Items[i].getAttribute("name");
+		OnGame.Jid = Items[i].getAttribute("jid").split("@")[0];
+
+		Rooms.push(OnGame);
 	}
 
 	INTERFACE_ShowGameRoomList(Rooms);

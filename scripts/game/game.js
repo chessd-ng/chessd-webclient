@@ -348,9 +348,10 @@ function GAME_End(XML)
 	*/
 	// Show end game message to user
 	WINDOW_Alert(Title, Reason);
-	
+
 	// FInish game in structure
 	Game = MainData.GetGame(GameID);
+	Game.Game.StopTimer();
 	if (Game)
 	{
 		Game.Finished = true;

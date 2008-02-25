@@ -162,5 +162,10 @@
 		<game_black_bishop>Bispo Preto</game_black_bishop>
 		<game_black_queen>Rainha Preta</game_black_queen>
 		<game_black_king>Rei Preto</game_black_king>
+
+		<game_button_first>Início</game_button_first>
+		<game_button_prev>Anterior</game_button_prev>
+		<game_button_next>Próximo</game_button_next>
+		<game_button_last>Último</game_button_last>
 	</game>
 </language>

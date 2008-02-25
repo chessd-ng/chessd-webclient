@@ -94,6 +94,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.UpdateBTime = INTERFACE_UpdateBTime;
 
 	this.DecreaseTime = INTERFACE_DecreaseTime;
+	this.StartTimer = INTERFACE_StartTimer;
+	this.StopTimer = INTERFACE_StopTimer;
 
 	this.RemovePiece = INTERFACE_RemovePiece;
 	this.InsertPiece = INTERFACE_InsertPiece;
@@ -191,7 +193,7 @@ function INTERFACE_CreateGame()
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
 
-	this.Timer = setInterval(this.DecreaseTime, 1000);
+	this.StartTimer();
 
 	this.SetWTime();
 	this.SetBTime();
@@ -279,6 +281,8 @@ function INTERFACE_ObserverMode()
 
 	TabParent.removeChild(this.Tab);
 	TabParent.appendChild(NewTab);
+
+	this.MoveList = MoveList.List;
 }
 
 /*
@@ -291,10 +295,12 @@ function INTERFACE_OldGameMode()
 	var MoveList = INTERFACE_CreateOldGameMoveList();
 	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
 
-	var TabParent = this.Tab.parentNode;
+	var TabParent = this.tab.parentNode;
 
-	TabParent.removeChild(this.Tab);
+	TabParent.removeChild(this.tab);
 	TabParent.appendChild(NewTab);
+
+	this.MoveList = MoveList.List;
 }
 
 /**
@@ -485,6 +491,16 @@ function INTERFACE_DecreaseTime()
 		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
 		MainData.CurrentGame.Game.SetBTime();
 	}
+}
+
+function INTERFACE_StartTimer()
+{
+	this.Timer = setInterval(this.DecreaseTime, 1000);
+}
+
+function INTERFACE_StopTimer()
+{
+	this.Timer = window.clearInterval(this.Timer);
 }
 
 
@@ -1064,20 +1080,22 @@ function INTERFACE_CreateOldGameMoveList()
 	var ButtonNext = UTILS_CreateElement("input", "MoveListNext");
 	var ButtonPrev = UTILS_CreateElement("input", "MoveListPrev");
 
-	ButtonFirst.title = "Início";
-	ButtonPrev.title = "Anterior";
-	ButtonNext.title = "Próximo";
-	ButtonLast.title = "Último";
+	ButtonFirst.title =UTILS_GetText("game_button_first");
+	ButtonPrev.title = UTILS_GetText("game_button_prev");
+	ButtonNext.title = UTILS_GetText("game_button_next");
+	ButtonLast.title = UTILS_GetText("game_button_last");
 
-	ButtonFirst.type = "submit";
-	ButtonPrev.type = "submit";
-	ButtonNext.type = "submit";
-	ButtonLast.type = "submit";
-
+	ButtonFirst.type = "button";
+	ButtonPrev.type = "button";
+	ButtonNext.type = "button";
+	ButtonLast.type = "button";
+	
+	/*
 	ButtonFirst.value = "|<";
 	ButtonPrev.value = "<";
 	ButtonNext.value = ">";
 	ButtonLast.value = ">|";
+	*/
 
 	/***********************************/
 	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();}
