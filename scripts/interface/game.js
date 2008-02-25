@@ -99,6 +99,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 
 	this.removeMove = INTERFACE_RemoveMove;
 
+	this.ObserverMode = INTERFACE_ObserverMode;
+	this.OldGameMode = INTERFACE_OldGameMode;
 
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
@@ -143,6 +145,9 @@ function INTERFACE_CreateGame()
 	// Players photos
 	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer, this.BlackPlayer);
 
+	// Options and Move list Tab
+	var Tab = INTERFACE_CreateTab(Options.Div, MoveList.Div);
+
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
 
@@ -160,7 +165,7 @@ function INTERFACE_CreateGame()
 
 	GameInfo.appendChild(Photo.Div);
 	GameInfo.appendChild(Timer.Div);
-	GameTab.appendChild(INTERFACE_CreateTab(Options.Div, MoveList.Div));
+	GameTab.appendChild(Tab);
 	GameInfo.appendChild(GameTab);
 	GameInfo.appendChild(GameClose);
 
@@ -175,6 +180,7 @@ function INTERFACE_CreateGame()
 	this.timer.btimer = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
+	this.tab = Tab;
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
 }
@@ -247,6 +253,37 @@ function INTERFACE_RemoveGame()
 	}
 }
 
+/*
+* Set game interface to observer mode (Move list without options)
+*
+* @public
+*/
+function INTERFACE_ObserverMode()
+{
+	var MoveList = INTERFACE_CreateMoveList();
+	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
+
+	var TabParent = this.Tab.parentNode;
+
+	TabParent.removeChild(this.Tab);
+	TabParent.appendChild(NewTab);
+}
+
+/*
+* Set game interface to oldgame mode(Observer mode with buttons to review(?) game)
+*
+* @public
+*/
+function INTERFACE_OldGameMode()
+{
+	var MoveList = INTERFACE_CreateOldGameMoveList();
+	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
+
+	var TabParent = this.Tab.parentNode;
+
+	TabParent.removeChild(this.Tab);
+	TabParent.appendChild(NewTab);
+}
 
 /**
 * Clean all pieces of a board
@@ -964,3 +1001,64 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 
 	return PieceImg;
 }
+
+/***********************************************
+ * OLD GAME MOVE LIST
+***********************************************/
+//Private
+function INTERFACE_CreateOldGameMoveList()
+{
+	var MoveListDiv = UTILS_CreateElement("div", "MoveListDiv", null, null);
+	var MoveList = UTILS_CreateElement("ul", "MoveList", "oldgame", null);
+	var MoveListButtons = UTILS_CreateElement("div", "MoveListButtons", null, null);
+
+	var ButtonFirst = UTILS_CreateElement("input", "MoveListFirst");
+	var ButtonLast = UTILS_CreateElement("input", "MoveListLast");
+	var ButtonNext = UTILS_CreateElement("input", "MoveListNext");
+	var ButtonPrev = UTILS_CreateElement("input", "MoveListPrev");
+
+	ButtonFirst.title = "Início";
+	ButtonPrev.title = "Anterior";
+	ButtonNext.title = "Próximo";
+	ButtonLast.title = "Último";
+
+	ButtonFirst.type = "submit";
+	ButtonPrev.type = "submit";
+	ButtonNext.type = "submit";
+	ButtonLast.type = "submit";
+
+	ButtonFirst.value = "|<";
+	ButtonPrev.value = "<";
+	ButtonNext.value = ">";
+	ButtonLast.value = ">|";
+
+	/***********************************/
+	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();}
+	ButtonPrev.onclick  = function(){OLDGAME_PrevBoard(); }
+	ButtonNext.onclick  = function(){OLDGAME_NextBoard(); }
+	ButtonLast.onclick  = function(){OLDGAME_LastBoard(); }
+	/***********************************/
+
+	MoveListButtons.appendChild(ButtonFirst);
+	MoveListButtons.appendChild(ButtonPrev);
+	MoveListButtons.appendChild(ButtonNext);
+	MoveListButtons.appendChild(ButtonLast);
+
+	MoveListDiv.appendChild(MoveList);
+	MoveListDiv.appendChild(MoveListButtons);
+
+	return {Div:MoveListDiv, List:MoveList};
+}
+//Private
+function INTERFACE_CreateOldGameTab(DivMoves)
+{
+	var Tab = UTILS_CreateElement("div", "InfoTab", null, null);
+
+	var TabMove = UTILS_CreateElement("span", "InfoTab1", "oldgame", "Lances");
+
+	Tab.appendChild(TabMove);
+	Tab.appendChild(DivMoves);
+
+	return Tab;
+}
+

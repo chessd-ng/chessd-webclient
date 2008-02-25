@@ -115,8 +115,9 @@ DATA.prototype.SetTurn = DATA_SetTurnGame;
 
 DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
-DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
+DATA.prototype.PushOldGame = DATA_PushGameToOldGame;
+
 DATA.prototype.GetGame = DATA_GetGame;
 DATA.prototype.GetOponent = DATA_GetOponent;
 
@@ -677,6 +678,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 
 	NewGame.Id = Id;
 	NewGame.YourColor = Color;
+	NewGame.BoardColor = Color;
 	
 	// Setting users colors
 	if (Color == "white")
@@ -866,7 +868,7 @@ function DATA_SetCurrentOldGame(Game)
 /**
 * Add a oldgame in 'OldGameList'
 */
-function DATA_AddOldGame(Id, P1Name, P2Name, Color)
+function DATA_AddOldGame(GameId, PWName, PBName, Color)
 {
 	var NewOldGame = new Object();
 
@@ -875,14 +877,19 @@ function DATA_AddOldGame(Id, P1Name, P2Name, Color)
 		MainData.SetCurrentGame(NewOldGame);
 	}
 
-	NewOldGame.Id = this.OldGameList.length;
-	NewOldGame.P1 = P1Name;
-	NewOldGame.P2 = P2Name;
-	NewOldGame.YouColor = Color;
+	NewOldGame.Id = GameId;
+	NewOldGame.PW = PWName;
+	NewOldGame.PB = PBName;
+	NewOldGame.Color = "none";
+	NewOldGame.BoardColor = Color
 	NewOldGame.IsYourTurn = false;
 	NewOldGame.Moves = new Array();
 
+	NewOldGame.AddMove = this.AddGameMove;
+
 	this.OldGameList.push(NewOldGame);
+
+	return NewOldGame;
 }
 
 
@@ -917,34 +924,11 @@ function DATA_RemoveOldGame(Id)
 	
 }
 
-
-/**
-* Add a move in 'OldGameList[x].Moves' 
-*/
-function DATA_AddOldGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+function DATA_PushGameToOldGame(GameObj)
 {
-	var GamePosition = Id;
-	var NewMove = new Object();
-
-	if(this.OldGameList[GamePosition] == null)
-	{
-		return;
-	}
-	else
-	{
-		//Convert board string to board array of array
-		NewMove.Board = UTILS_String2Board(Board);
-
-		NewMove.Move = Move;
-		NewMove.P1Time = P1Time;
-		NewMove.P2Time = P2Time;
-		NewMove.Turn = Turn;
-
-		this.OldGameList[GamePosition].Moves.push(NewMove);
-	}
+	this.OldGameList.push(GameObj);
+	MainData.SetCurrentOldGame(GameObj);
 }
-
-
 
 /**********************************
  * METHODS - WINDOWS              *

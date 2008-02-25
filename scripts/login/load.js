@@ -100,6 +100,8 @@ function LOGIN_LoadScripts()
 	Scripts[22] = "scripts/utils/dragwindow.js";
 	Scripts[23] = "scripts/contact/info.js";
 	Scripts[24] = "scripts/contact/search.js";
+	Scripts[25] = "scripts/game/oldgame.js";
+	Scripts[26] = "scripts/interface/oldgame.js";
 
 
 	// Carregando arquivos

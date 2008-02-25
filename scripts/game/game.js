@@ -346,6 +346,8 @@ function GAME_End(XML)
 		Game.Finished = true;
 	}
 
+	OLDGAME_EndGame(GameID);
+
 	return "";
 }
 
@@ -432,6 +434,38 @@ function GAME_StartGame(GameId, P1, P2)
 
 	// Show New Game
 	GameDiv.Show();
+}
+
+/**
+* Start Game in Observer Mode
+*
+* @param 	GameId = Game number
+* @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
+* @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
+* @return 	void
+* @author 	Rubens
+*/
+function GAME_StartObserverGame(GameId, P1, P2)
+{
+	var GameDiv;
+
+	// Hide current game
+	if (MainData.CurrentGame != null)
+	{
+		MainData.CurrentGame.Game.Hide();
+	}
+
+	// 38 -> default piece size
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1.Name, P2.Name, "w");
+	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
+
+	// Show New Game
+	GameDiv.Show();
+	// Set Observer Mode
+	GameDiv.ObserverMode();
+
+	// Send a message to get game moves
+	// TODO TODO TODO
 }
 
 /**
