@@ -1,5 +1,4 @@
 #Chat {
-	border			: 1px solid;
 	position		: absolute;
 	bottom			: 0px;
 	right			: 0px;
@@ -11,7 +10,7 @@
 #Chat #ChatList {	
 	list-style		: none;
 	height			: 100%;
-	margin-left		: 54mm;
+	margin-left		: 55mm;
 }
 
 #Chat #ChatList li {
@@ -53,6 +52,7 @@
 #Chat #ChatList li ul {
 	border			: 1px solid #216778;
 	height			: 31mm;
+	overflow		: auto;
 }
 
 #Chat #ChatList li ul li {

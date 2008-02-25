@@ -634,7 +634,7 @@ function DATA_RemoveChat(Username)
 		this.ChatList.splice(i, 1);
 	}
 
-	return "";
+	return true;
 }	
 
 

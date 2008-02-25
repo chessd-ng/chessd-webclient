@@ -55,6 +55,34 @@ function CHAT_OpenChat(Username)
 		return false;
 	}
 	INTERFACE_OpenChat(Username);
+	return true;
+}
+
+/**
+* Close a chat
+*/
+function CHAT_CloseChat(Username)
+{
+	if (!MainData.RemoveChat(Username))
+	{
+		return false;
+	}
+	INTERFACE_CloseChat(Username);
+	return true;
+}
+
+/**
+* Send a chat message
+* 5C
+*/
+function CHAT_SendMessage(Username, Message)
+{
+	var XML = MESSAGE_Chat(Username, Message);
+
+	CONNECTION_SendJabber(XML);
+
+	// Show message in chat list
+	INTERFACE_ShowChatMessage(Username, Message);
 }
 
 /**

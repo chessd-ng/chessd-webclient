@@ -8,8 +8,9 @@ body {
 }
 
 #Page {
+	position		: relative;
 	min-width		: 780px;
-	height			: 228mm;
+	height			: 185mm;
 }
 
 #Main #Center {

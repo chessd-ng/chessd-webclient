@@ -114,12 +114,22 @@ function INTERFACE_CreateChat(Username)
 
 	// Close chat
 	Close.onclick = function () {
-		INTERFACE_CloseChat(Username);
+		CHAT_CloseChat(Username);
 	}
 
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
 	
+	// Send message
+	Input.onkeypress = function (event) {
+		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
+		{
+			// Send chat message
+			CHAT_SendMessage(Username, Input.value);
+			Input.value = "";
+		}
+	}
+
 	ChatTitle.appendChild(Close);
 
 	ChatInner.appendChild(ChatMessages);
@@ -139,10 +149,12 @@ function INTERFACE_CreateChat(Username)
 function INTERFACE_CreateChatList()
 {
 	var ChatDiv, ChatList;
+	var ScreenHeight = document.documentElement.clientHeight;
 
 	ChatDiv = UTILS_CreateElement("div", "Chat");
 	ChatList = UTILS_CreateElement("ul", "ChatList");
 
+	ChatDiv.style.top = (ScreenHeight-20)+"px";
 	ChatDiv.appendChild(ChatList);
 
 	return ChatDiv;
