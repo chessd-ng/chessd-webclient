@@ -109,7 +109,6 @@ function md5crypt($pw, $salt, $magic="") {
   $passwd .= to64( ord($final[11]), 2);
 
   return "$magic$salt\$$passwd";
-
 }
 
 ?>
