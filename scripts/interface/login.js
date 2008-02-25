@@ -91,7 +91,7 @@ function INTERFACE_StartLogin()
 
 	UTILS_AddListener(InputPasswd, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
 
-	UTILS_AddListener(SignIn, "click", function() { window.open("cadastro.html","", "height=300,width=350,left=100,top=100,menubar=0,location=0,resizable=0,scrollbars=0"); }, false)
+	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html"})
 	
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);

@@ -56,6 +56,7 @@ function DATA(ConfFile, LangFile)
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
+	this.ChatList = new Array();
 
 	this.CurrentRoom = "";
 
@@ -99,6 +100,10 @@ DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+
+DATA.prototype.AddChat = DATA_AddChat;
+DATA.prototype.RemoveChat = DATA_RemoveChat;
+DATA.prototype.FindChat = DATA_FindChat;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
@@ -558,6 +563,107 @@ function DATA_DelUserInRoom(RoomName, Username)
 	this.RoomList[j].UserList.splice(i, 1);
 	return true;
 }
+
+
+/**********************************
+ * METHODS - CHAT  *
+ **********************************/
+
+/**
+* Add a chat in interface structure, with the other user name and his status
+*
+* @param 	Username The user that you are chating with
+* @param 	Status User's current status
+* @return 	bool
+* @author 	Ulysses
+*/
+function DATA_AddChat (Username, Status)
+{
+	var Chat = new Object();
+	var i;
+
+	i = this.FindChat(Username);
+	
+	// Try to find the same chat in structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Chat.Username = Username;
+	
+	if (Status == null)
+	{
+		Chat.Status = "available"
+	}
+	else 
+	{
+		Chat.Status = Status;
+	}
+
+	this.ChatList[this.ChatList.length] = Chat;
+
+	return true;
+}
+
+
+/**
+* Remove a chat with the user given from the structure
+*
+* @param 	User The user that the chat will be removed
+* @return 	void
+* @author 	Ulysses
+*/
+function DATA_RemoveChat(Username)
+{
+	var i;
+
+	// Try to find Username on ChatList
+	i = this.FindChat(Username);
+
+	// No chat with the user given
+	if (i == null)
+	{
+		return null;
+	}
+
+	else 
+	{
+		// Remove from the list the chat with the user
+		this.ChatList.splice(i, 1);
+	}
+
+	return "";
+}	
+
+
+
+/**
+* Find a chat with the user's name
+*
+* @param 	User The user that you are chating with
+* @return 	interger The position of the chat in structure
+* @author 	Ulysses
+*/
+function DATA_FindChat(Username)
+{
+	var i;
+	
+	for (i=0 ; i < this.ChatList.length ; i++)
+	{
+		// A chat with the username given already exist on structure
+		if (this.ChatList[i].Username == Username)
+		{
+			return i;
+		}
+	}
+	
+	// User not found
+	return null;
+	
+}
+
 
 /**********************************
  * METHODS - CHALLENGES           *
