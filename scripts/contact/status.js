@@ -23,7 +23,7 @@
 /**
 * Change User Status 
 */
-function CONTACT_ChangeStatus(NewStatus)
+function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
 	var i, XML= new Array();
 		
@@ -33,12 +33,37 @@ function CONTACT_ChangeStatus(NewStatus)
 	// Change user status for rooms
 	for (i=0 ; i<MainData.RoomList.length ; i++)
 	{
-		XML[i+1] = MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].Name);
+		XML[i+1] = MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
 	}
 	
 	// Update your status instructure
 	MainData.Status = NewStatus;
 
-	CONNECTION_SendJabber(MESSAGE_MergeMessages(XML));	
+	XML = MESSAGE_MergeMessages(XML);
+
+	// Send to jabber or return the message
+	if (DontSend == null)
+	{
+		CONNECTION_SendJabber(XML);
+		return null;
+	}
+	else
+	{
+		return XML;
+	}
 }
+
+/**
+* Change status of 'Username' in structure and interface
+*/
+function CONTACT_SetUserStatus(Username, NewStatus)
+{
+	if (MainData.SetUserStatus(Username, NewStatus))
+	{
+		INTERFACE_SetUserStatus(Username, NewStatus)	
+		return true;
+	}
+	return false;
+}
+
 

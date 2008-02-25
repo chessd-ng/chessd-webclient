@@ -51,6 +51,14 @@ function GAME_HandleGame(XML)
 	{
 		Buffer += GAME_State(XML);
 	}
+	else if (Xmlns.match(/\/chessd#game#canceled/))
+	{
+		Buffer += GAME_End(XML);
+	}
+	else if (Xmlns.match(/\/chessd#game#end/))
+	{
+		Buffer += GAME_End(XML);
+	}
 	else if (Xmlns.match(/\/chessd#game#cancel/))
 	{
 		Buffer += GAME_HandleCancel(XML, Xmlns);
@@ -62,10 +70,6 @@ function GAME_HandleGame(XML)
 	else if (Xmlns.match(/\/chessd#game#adjourn/))
 	{
 		Buffer += GAME_HandleAdjourn(XML, Xmlns);
-	}
-	else if (Xmlns.match(/\/chessd#game#end/))
-	{
-		Buffer += GAME_End(XML);
 	}
 	
 	return Buffer;
@@ -87,6 +91,7 @@ function GAME_State(XML)
 	var PlayerTag, MoveTag, Move, Type;
 	var Player1 = new Object();
 	var Player2 = new Object();
+	var Buffer = "";
 
 	Type = XML.getAttribute('type');
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
@@ -128,15 +133,15 @@ function GAME_State(XML)
 	// If it's the first board of the game
 	if (MainData.FindGame(GameID) == null)
 	{
-		GAME_StartGame(GameID, Player1, Player2);
-		GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
+		Buffer += GAME_StartGame(GameID, Player1, Player2);
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 	else
 	{
-		GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 
-	return "";
+	return Buffer;
 }
 
 /**
@@ -300,7 +305,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 function GAME_End(XML)
 {
 	var PlayerTag, ReasonTag;
-	var GameID, Reason, Player, Winner;
+	var Game, GameID, Reason, Player, Winner;
 	var Title = UTILS_GetText("game_end_game");
 	var Text;
 
@@ -309,10 +314,15 @@ function GAME_End(XML)
 
 	// Get the reason 
 	ReasonTag = XML.getElementsByTagName("reason");
-	if (ReasonTag)
+	if (ReasonTag.length > 0)
 	{
 		// Get the reason from tag 'reason'
 		Reason = UTILS_GetNodeText(ReasonTag[0]);
+	}
+	else
+	{
+		// Internacionalizar TODO TODO
+		Reason = "O jogo foi cancelado.";
 	}
 	
 	/* Get the winner player
@@ -348,7 +358,8 @@ function GAME_End(XML)
 
 	OLDGAME_EndGame(GameID);
 
-	return "";
+	// Set status to playing
+	return CONTACT_ChangeStatus("available", "return");
 }
 
 
@@ -397,6 +408,7 @@ function GAME_HandleGameError(XML)
 		else
 			alert("erro estranho nao tratado ainda..");
 	}
+	return "";
 }
 
 /**
@@ -429,11 +441,15 @@ function GAME_StartGame(GameId, P1, P2)
 		YourColor = P2.Color;
 	}
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(GameId, P1.Name, P2.Name, YourColor);
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
 	GameDiv.Show();
+
+	// Set status to playing
+	return CONTACT_ChangeStatus("playing", "return");
+
 }
 
 /**
@@ -503,10 +519,14 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	if (P1.Color == "white")
 	{
 		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
+		Game.Game.UpdateWTime(P1.Time);
+		Game.Game.UpdateBTime(P2.Time);
 	}
 	else
 	{
 		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
+		Game.Game.UpdateWTime(P2.Time);
+		Game.Game.UpdateBTime(P1.Time);
 	}
 
 	// Update turn in structure and interface
@@ -516,8 +536,8 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	// Update interface
 	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
 	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
-	Game.Game.SetWTimer(P1.Time);
-	Game.Game.SetBTimer(P2.Time);
+
+	return "";
 }
 
 /**

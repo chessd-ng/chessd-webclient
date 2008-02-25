@@ -201,11 +201,11 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 	{
 		if (NewStatus == "available")
 		{
-			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' />";
+			XMPP = "<presence to='"+RoomName+"/"+MainData.Username+"' />";
 		}
 		else
 		{
-			XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' ><show>"+NewStatus+"</show></presence>";
+			XMPP = "<presence to='"+RoomName+"/"+MainData.Username+"' ><show>"+NewStatus+"</show></presence>";
 		}
 	}
 	
@@ -477,7 +477,7 @@ function MESSAGE_GameMove(Move, GameID)
 {
 	var XMPP="";
 
-	XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Challenge+"'>";
+	XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameMove+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
 	XMPP += "<move long='"+Move+"'>";
 	XMPP += "</move></query></iq>";
@@ -527,22 +527,22 @@ function MESSAGE_GameRequests(Action, GameID)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
 			break;
 	
 		case "Resign":
-			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameResign+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#resign'>";
 			break;
 	
@@ -614,17 +614,17 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Draw+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw"+Response+"'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Cancel+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel"+Response+"'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_Adjourn+"'>";
+			XMPP  = "<iq type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn"+Response+"'>";
 			break;
 	
@@ -664,29 +664,20 @@ function MESSAGE_SearchUser()
 *	@return	String with search user message
 *	@author	Danilo Kiyoshi Simizu Yorinori
 */
-function MESSAGE_SearchUser(Name, Username)
+function MESSAGE_SearchUser(Username)
 {
 	var XMPP="";
 	
 	XMPP 	= "<iq type='set' to='"+MainData.SearchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchUser+"' >";
 	XMPP +=	"<query xmlns='jabber:iq:search'>";
 	XMPP += "<x xmlns='jabber:x:data' type='submit' >";
-
-	// Username field
-	if (Username != null)
-	{
-		XMPP += "<field type='text-single' var='user' >";
-		XMPP += "<value>"+Username+"*</value>";
-		XMPP += "</field>";
-	}
-	// Name field
-	else if (Name != null)
-	{
-		XMPP +=	"<field type='text-single' var='fn' >";
-		XMPP +=	"<value>"+Name+"*</value>";
-		XMPP += "</field>";
-	}
+	XMPP += "<field type='text-single' var='user' >";
+	XMPP += "<value>"+Username+"*</value>";
+	XMPP += "</field>";
 	/* Fields that could be use
+		<field type='text-single' var='fn' >
+		<value></value>
+		</field>
 		<field type="text-single" var="given" >
 		<value></value>
 		</field>

@@ -25,11 +25,12 @@
 *
 * @public
 */
-function INTERFACE_AddContact(Username, Status, Rating, Type)
+function INTERFACE_AddContact(Username, Status)
 {
 	var Node = document.getElementById("ContactOnlineList");
 	var Search = document.getElementById("contact-"+Username);
 	var Contact;
+
 
 	if (!Node)
 	{
@@ -43,8 +44,7 @@ function INTERFACE_AddContact(Username, Status, Rating, Type)
 		return true;
 	}
 
-
-	Contact = INTERFACE_CreateContact(Username, Status, Rating, Type)
+	Contact = INTERFACE_CreateContact(Username, Status, Rating)
 	Node.appendChild(Contact);
 
 	return true;
@@ -140,6 +140,39 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	return true;
 }
 
+/**
+* Set rating of user in interface
+*
+* @public
+*/
+function INTERFACE_SetUserRating(Username, Category, Rating)
+{
+	var User = document.getElementById("contact-"+Username+"-rating");
+	var List, Node, i;
+
+	// Updating user's type
+	if (User)
+	{
+		User.innerHTML = Rating;
+	}
+
+	// Updating in room lists
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
+		{
+			// Search user node in room user list
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username+"-rating");
+
+			if (Node)
+			{
+				Node.innerHTML = Rating;
+			}
+		}
+	}
+
+	return true;
+}
 
 /**
 * Set type of user in interface
@@ -207,7 +240,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
-	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
+	Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
@@ -222,7 +255,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 */
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
-	var Menu, Option, Pos, i;
+	var Menu, Option, ParentDiv, Pos, i;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -237,9 +270,11 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 
 		Menu.appendChild(Option);
 	}
+	// Get parent scrolling
+	ParentDiv = UTILS_GetParentDiv(Obj);
 	Pos = UTILS_GetOffset(Obj);
 
-	Menu.style.top = (Pos.Y+18)+"px";
+	Menu.style.top = (Pos.Y+18-ParentDiv.scrollTop)+"px";
 	Menu.style.left = Pos.X+"px";
 
 	document.body.appendChild(Menu);
@@ -333,7 +368,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOnline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OnlineTbody.appendChild(ContactsOnline);
@@ -342,7 +377,7 @@ function INTERFACE_CreateContactList()
 		{
 			ContactsOffline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
 														MainData.UserList[i].Status,
-														MainData.UserList[i].RatingBlitz,
+														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
 			OfflineTbody.appendChild(ContactsOffline);
@@ -351,7 +386,7 @@ function INTERFACE_CreateContactList()
 
 	// Search user
 	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
-	UTILS_AddListener(Search,"click",function() { WINDOW_SearchUser(); }, "false");
+	UTILS_AddListener(Search, "click", function() { WINDOW_SearchUser(); }, "false");
 	Hr = UTILS_CreateElement("hr");
 	
 	// Creating DOM tree
@@ -448,12 +483,11 @@ function INTERFACE_ShowSearchUserWindow()
 	// Variables
 	var Div;
 
-	var FormDiv, Username, Nickname, Input, Br;
+	var FormDiv, Username,Input, Br;
 
 	var ButtonsDiv, Search, Cancel;
 
 	var Buttons = new Array();
-	var Item = 1; // Option choose (1 - name, 2 - username)
 
 	// Main div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -461,37 +495,18 @@ function INTERFACE_ShowSearchUserWindow()
 	// FormDiv elements
 	FormDiv = UTILS_CreateElement('div', 'FormDiv');
 
-	Username = UTILS_CreateElement('span', null, 'option_marked', UTILS_GetText("contact_search_name"));
-	Username.onclick = function() {
-		Username.className = 'option_marked';
-		Nickname.className = 'option';
-		Item = 1;
-	}
-	Nickname = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_search_nick"));
-	Nickname.onclick = function() {
-		Nickname.className = 'option_marked';
-		Username.className = 'option';
-		Item = 2;
-	}
+	Username = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_user"));
 	Br = UTILS_CreateElement('br');
 	Input = UTILS_CreateElement('input', "SearchUserInput");
 	Input.size = "23";
 
 	// ButtonsDiv elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
 	Search = UTILS_CreateElement('input',null,'button');
 	Search.type = "button";
 	Search.value = UTILS_GetText("contact_search");
-	Search.onclick = function() {
-		if (Item == 1)
-		{
-			CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,null));
-		}
-		else if (Item == 2)
-		{
-			CONNECTION_SendJabber(MESSAGE_SearchUser(null,Input.value));
-		}
-	}
+	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value)); }, "false");
 	Buttons.push(Search);
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -506,7 +521,6 @@ function INTERFACE_ShowSearchUserWindow()
 	
 	// FormDiv elements
 	FormDiv.appendChild(Username);
-	FormDiv.appendChild(Nickname);
 	FormDiv.appendChild(Br);
 	FormDiv.appendChild(Input);
 
@@ -516,6 +530,33 @@ function INTERFACE_ShowSearchUserWindow()
 
 	return {Div:Div, Buttons:Buttons};
 }
+
+
+
+/**
+*	Create elements of an user 
+*
+* @param	Username	User that will be inserted
+* @return	Tr
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_CreateUserElement(Username)
+{
+	var Tr, Td;
+
+	Tr = UTILS_CreateElement("tr");
+
+	Td = UTILS_CreateElement("td", null, null, Username);
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+	Tr.appendChild(Td);
+
+	return Tr;
+}
+
+
+
+
 
 /**
 *	Create elements of search user result window and returns div
@@ -529,13 +570,11 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 {
 	// Variables
 	var Div;
-
 	var ListDiv, Label, Table, Tr, Item, Br;
-
 	var ButtonsDiv, Button;
-
 	var Buttons = new Array();
 	var i;
+	this.User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -555,11 +594,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 		
 		for (i=0; i< UserList.length; i++)
 		{
-			Tr = UTILS_CreateElement('tr');
-
-			Item = UTILS_CreateElement('td',null,null,UserList[i]);
-			Tr.appendChild(Item);
-
+			// Insert each item of the user founded list in interface
+			Tr = INTERFACE_CreateUserElement(UserList[i]);
 			Table.appendChild(Tr);
 		}
 	}
@@ -571,14 +607,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	Button = UTILS_CreateElement('input',null,'button');
 	Button.type = "button";
-	if (UserList != null)
-	{
-		Button.value = UTILS_GetText("contact_add");
-	}
-	else
-	{
-		Button.value = UTILS_GetText("contact_close");
-	}
+	Button.value = UTILS_GetText("contact_close");
 	Buttons.push(Button);
 
 	// Mount tree elements

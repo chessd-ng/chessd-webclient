@@ -177,7 +177,7 @@ function CONTACT_HandleRoomPresence(XML)
 		Status = UTILS_GetNodeText(Show[0]);
 
 		// Any different status, status = away
-		if ((Status != "busy") && (Status != "away") && (Status != "unavailable"))
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
 		{
 			Status = "away";
 		}
@@ -282,27 +282,8 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 			MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation)
 			INTERFACE_UpdateUserInRoom(RoomName, Jid, Status);
 		}
-		// This should NOT EVER happen
-		else if (e == "RoomNotCreatedException")
-		{
-			throw "UnexpectedEvilException"
-		}
 	}
 	return Buffer;
-}
-
-
-/**
-* Change status of 'Username' in structure and interface
-*/
-function CONTACT_SetUserStatus(Username, NewStatus)
-{
-	if (MainData.SetUserStatus(Username, NewStatus))
-	{
-		INTERFACE_SetUserStatus(Username, NewStatus)	
-		return true;
-	}
-	return false;
 }
 
 /**
@@ -312,7 +293,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 {
 	var Func, Options = new Array();
 	var i = 0, Hide = 0;
-
+	
 	Func = function () {
 		Hide += 1;
 		
@@ -328,44 +309,55 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	/**
 	* Setting options
 	*/
-	
-	// Send message
-	Options[i] = new Object();
-	Options[i].Name = UTILS_GetText("usermenu_send_message");
-	Options[i].Func = function () {
-		alert("manda mensges");
-	}
-	i += 1;
-	
-	// Match user
-	if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
-	{
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_match");
-		Options[i].Func = function () {
-			WINDOW_Challenge(Username);
-		};
-		i += 1;
-	}
 
-	// Add or remove contact
-	if (MainData.IsContact(Username))
+	// If isn't your name
+	if (MainData.Username != Username)
 	{
+		// Send message
 		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_remove_contact");
-		Options[i].Func = function () { 
-			CONTACT_RemoveUser(Username);
-		};
+		if (MainData.GetStatus(Username) != "offline")
+		{
+			Options[i].Name = UTILS_GetText("usermenu_send_message");
+		}
+		// Send a offline message (scrap)
+		else 
+		{
+			Options[i].Name = UTILS_GetText("usermenu_send_offlinemessage");
+		}
+		Options[i].Func = function () {
+		}
 		i += 1;
-	}
-	else
-	{
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_add_contact");
-		Options[i].Func = function () { 
-			CONTACT_InviteUser(Username);
-		};
-		i += 1;
+
+		// Match user
+		if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_match");
+			Options[i].Func = function () {
+				WINDOW_Challenge(Username);
+			};
+			i += 1;
+		}
+
+		// Add or remove contact
+		if (MainData.IsContact(Username))
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
+			Options[i].Func = function () { 
+				CONTACT_RemoveUser(Username);
+			};
+			i += 1;
+		}
+		else
+		{
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_add_contact");
+			Options[i].Func = function () { 
+				CONTACT_InviteUser(Username);
+			};
+			i += 1;
+		}
 	}
 
 	// View user's profile

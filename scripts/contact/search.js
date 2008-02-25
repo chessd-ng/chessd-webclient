@@ -30,7 +30,7 @@
 function CONTACT_HandleSearchUser(XML)
 {
 	var Itens;
-	var Result, Field;
+	var Result, Fields;
 	var i,j;
 
 	Itens = XML.getElementsByTagName("item");
@@ -43,14 +43,14 @@ function CONTACT_HandleSearchUser(XML)
 	else
 	{
 		// Search jid field in itens and get the value and insert it in array
-		for (i=0; i<Itens.length; i++)
+		for (i=0; i < Itens.length; i++)
 		{
-			Fields = Itens[0].getElementsByTagName("field");
-			for (j=0; j< Fields.length; j++)
+			Fields = Itens[i].getElementsByTagName("field");
+			for (j=0; j < Fields.length; j++)
 			{
 				if (Fields[j].getAttribute("var") == "jid")
 				{
-					Result.push(UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@shiva/,""));
+					Result.push(UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@.*/,""));
 				}
 			}
 		}

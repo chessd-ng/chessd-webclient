@@ -231,6 +231,10 @@ function WINDOW_Invite(User)
 
 function WINDOW_SearchUser()
 {
+	// If another search user window is opened, return
+	if (document.getElementById("SearchUserDiv"))
+		return;
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowSearchUserWindow();
 
@@ -258,119 +262,3 @@ function WINDOW_SearchUserResult(UserList)
 	// Add Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
-
-/*
-function WINDOW_DrawGame(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowDrawGameWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_draw_requisitoon'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Auth Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Decline Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_ResignGame(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowResignGameWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_end'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_AdjournGame(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowAdjournGameWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_adjourn'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_AbortGame(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowAbortGameWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_abort'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_CheckmateWin(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowCheckmateWinWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_end'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_CheckmateLose(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowCheckmateLoseWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_end'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_TimeWin(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowTimeWinWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_end'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-function WINDOW_TimeLose(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowTimeLoseWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(300, Div.Div, Div.Buttons, UTILS_GetText('game_end'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-*/

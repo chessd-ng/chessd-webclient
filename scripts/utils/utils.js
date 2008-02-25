@@ -385,6 +385,20 @@ function UTILS_GetOffset(Obj)
 	}
 }
 
+/**
+* Get the first parent div in DOM tree
+*/
+function UTILS_GetParentDiv(Obj)
+{
+	do
+	{
+		if (Obj.tagName == "DIV")
+			return Obj;
+	}
+	while(Obj = Obj.parentNode);
+	return null
+}
+
 
 ////HORIZONTAL INDEX CONVERT
 //If CharNum is char return respective number

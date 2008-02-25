@@ -47,12 +47,10 @@
 		<contact_decline>Cancelar</contact_decline>
 		<contact_search_user>Buscar usuario</contact_search_user>
 		<contact_search>Buscar</contact_search>
-		<contact_search_name>Nome</contact_search_name>
-		<contact_search_nick>Apelido</contact_search_nick>
+		<contact_user>Usuario</contact_user>
 		<contact_cancel>Cancelar</contact_cancel>
 		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
 		<contact_user_found>Usuarios encontrados:</contact_user_found>
-		<contact_add>Adicionar</contact_add>
 		<contact_close>Fechar</contact_close>
 	</contact>
 	<room>
@@ -68,6 +66,8 @@
 		<room_create>Criar</room_create>
 		<room_cancel>Cancelar</room_cancel>
 		<room_cancel_text>Realmente deseja cancelar a criacao desta sala?</room_cancel_text>
+		<room_invalid_name>Nome inválido para sala</room_invalid_name>
+		<room_invalid_length>Tamanho máximo de 50 caracteres</room_invalid_length>
 		<room_yes>Sim</room_yes>
 		<room_no>Nao</room_no>
 	</room>
@@ -84,6 +84,7 @@
 	</status>
 	<usermenu>
 		<usermenu_send_message>Conversar</usermenu_send_message>
+		<usermenu_send_offlinemessage>Deixar recado</usermenu_send_offlinemessage>
 		<usermenu_match>Convidar para jogar</usermenu_match>
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>

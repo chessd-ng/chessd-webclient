@@ -27,11 +27,13 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Attributes
 	this.Game = null;
 	this.Board = null;
-	this.timer = new Object();
+	this.Time = new Object();
 	this.name = new Object();
 	this.photo = new Object();
 	this.MoveList = null;
 	this.EventButtons = null;
+	this.Timer = null;
+	this.Turn = "white";
 
 	this.MyColor = YourColor;
 	this.Id = GameID;
@@ -40,7 +42,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Setting white and black players
 	if (this.MyColor == "white")
 	{
-		if (Player1 == MainData.Username)
+		if (Player1.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
@@ -53,7 +55,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 	else
 	{
-		if (Player1 == MainData.Username)
+		if (Player1.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
@@ -85,8 +87,13 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.AddMove = INTERFACE_AddMove;
 
 	this.SetTurn = INTERFACE_SetTurn;
-	this.SetWTimer = INTERFACE_SetWTimer;
-	this.SetBTimer = INTERFACE_SetBTimer;
+	this.SetWTime = INTERFACE_SetWTime;
+	this.SetBTime = INTERFACE_SetBTime;
+
+	this.UpdateWTime = INTERFACE_UpdateWTime;
+	this.UpdateBTime = INTERFACE_UpdateBTime;
+
+	this.DecreaseTime = INTERFACE_DecreaseTime;
 
 	this.RemovePiece = INTERFACE_RemovePiece;
 	this.InsertPiece = INTERFACE_InsertPiece;
@@ -143,7 +150,7 @@ function INTERFACE_CreateGame()
 	var MoveList = INTERFACE_CreateMoveList();
 
 	// Players photos
-	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer, this.BlackPlayer);
+	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer.Name, this.BlackPlayer.Name);
 
 	// Options and Move list Tab
 	var Tab = INTERFACE_CreateTab(Options.Div, MoveList.Div);
@@ -176,13 +183,18 @@ function INTERFACE_CreateGame()
 	this.Game = GameDiv;
 
 	this.Board = BoardPiece;
-	this.timer.wtimer = Timer.WTimer;
-	this.timer.btimer = Timer.BTimer;
+	this.Time.WTime = Timer.WTimer;
+	this.Time.BTime = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
 	this.tab = Tab;
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
+
+	this.Timer = setInterval(this.DecreaseTime, 1000);
+
+	this.SetWTime();
+	this.SetBTime();
 }
 
 /**
@@ -453,46 +465,49 @@ function INTERFACE_SetTurn(Color)
 	// Set other player to normal
 	OtherNode.style.fontWeight = "normal";
 	OtherNode.style.textDecoration = "none";
+
+	this.Turn = Color;
 	return true;
 }
 
-
-function INTERFACE_SetWTimer(TimeSec)
+/**
+* Decrease user time. Executed each second
+*/
+function INTERFACE_DecreaseTime()
 {
-	var min, sec;
-	var minStr, secStr;
-
-	min = Math.round(TimeSec / 60);
-	sec = TimeSec % 60;
-
-	if(min < 10)
+	if (MainData.CurrentGame.Game.Turn == "white")
 	{
-		minStr = "0"+min;
+		MainData.CurrentGame.Game.WhitePlayer.Time -= 1;
+		MainData.CurrentGame.Game.SetWTime();
 	}
 	else
 	{
-		minStr = min;
+		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
+		MainData.CurrentGame.Game.SetBTime();
 	}
-
-	if(sec < 10)
-	{
-		secStr = "0"+sec;
-	}
-	else
-	{
-		secStr = sec;
-	}
-
-	this.timer.wtimer.innerHTML = minStr+":"+secStr;
 }
 
-function INTERFACE_SetBTimer(TimeSec)
+
+function INTERFACE_UpdateWTime(NewTime)
+{
+	this.WhitePlayer.Time = NewTime;
+}
+
+function INTERFACE_UpdateBTime(NewTime)
+{
+	this.BlackPlayer.Time = NewTime;
+}
+
+function INTERFACE_SetWTime()
 {
 	var min, sec;
 	var minStr, secStr;
 
-	min = Math.round(TimeSec / 60);
-	sec = TimeSec % 60;
+	if (this.WhitePlayer.Time <= 0)
+		clearInterval(this.Timer);
+
+	min = Math.floor(this.WhitePlayer.Time / 60);
+	sec = this.WhitePlayer.Time % 60;
 
 	if(min < 10)
 	{
@@ -512,7 +527,39 @@ function INTERFACE_SetBTimer(TimeSec)
 		secStr = sec;
 	}
 
-	this.timer.btimer.innerHTML = minStr+":"+secStr;
+	this.Time.WTime.innerHTML = minStr+":"+secStr;
+}
+
+function INTERFACE_SetBTime()
+{
+	var min, sec;
+	var minStr, secStr;
+
+	if (this.BlackPlayer.Time <= 0)
+		clearInterval(this.Timer);
+
+	min = Math.floor(this.BlackPlayer.Time / 60);
+	sec = this.BlackPlayer.Time % 60;
+
+	if(min < 10)
+	{
+		minStr = "0"+min;
+	}
+	else
+	{
+		minStr = min;
+	}
+
+	if(sec < 10)
+	{
+		secStr = "0"+sec;
+	}
+	else
+	{
+		secStr = sec;
+	}
+
+	this.Time.BTime.innerHTML = minStr+":"+secStr;
 }
 
 function INTERFACE_SetWPhoto(PhotoType, PhotoStr)
