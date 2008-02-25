@@ -29,12 +29,23 @@
 	position		: relative;
 }
 
+#Chat #ChatList .title_selec {
+	height			: 4mm;
+	background-color: #FFA200;
+	font			: bold 12px Trebuchet MS;
+	color 			: #FFF;
+	text-indent		: 3mm;
+	position		: relative;
+}
+
 #Chat #ChatInner {
 	padding			: 3px;
+	border			: 1px solid #216778;
 }
 
 /* chat icons */
-#Chat #ChatList .title img {
+#Chat #ChatList .title img,
+#Chat #ChatList .title_selec img {
 	position		: absolute;
 	right			: 1mm;
 	top				: 4px;
@@ -43,10 +54,8 @@
 
 /* chat box */
 #Chat #ChatList .ChatInside {
-	border			: 1px solid #216778;
 	background-color: #FFF;
 	margin-right	: 2px;
-	height			: 43.9mm;
 }
 
 #Chat #ChatList li ul {

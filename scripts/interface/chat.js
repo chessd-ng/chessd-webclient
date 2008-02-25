@@ -22,19 +22,30 @@
 /**
 * Show a message in a open chat
 */
-function INTERFACE_ShowChatMessage(Username, Message)
+function INTERFACE_ShowChatMessage(Username, Message, YourMessage)
 {
 	var Node = document.getElementById("ChatMessages_"+Username);
-	var Item;
+	var Item, Time, NewMessage;
 
 	if (!Node)
 	{
 		return false;
 	}
 
-	Item = UTILS_CreateElement("li", null, null, Message);
-	Node.appendChild(Item);
+	// Get current time
+	Time = UTILS_GetTime();
 
+	if (YourMessage)
+	{
+		NewMessage = "<strong>"+Time+" "+MainData.Username+"</strong>: "+Message;
+	}
+	else
+	{
+		NewMessage = "<strong>"+Time+" "+Username+"</strong>: "+Message;
+	}
+
+	Item = UTILS_CreateElement("li", null, null, NewMessage);
+	Node.appendChild(Item);
 	return true;
 }
 
@@ -57,23 +68,25 @@ function INTERFACE_OpenChat(Username)
 	// Create chat elements
 	Chat = INTERFACE_CreateChat(Username);
 	Node.appendChild(Chat);
+
 }
 
 /**
-* Create chat elements
+* Show chat window
 */
-function INTERFACE_ChangeChatVisibility(Item)
+function INTERFACE_ShowChat(Item, Hide)
 {
-	var Top = Item.style.top;
+	Item.style.top = "-40mm";
+	Hide.style.display = "block";
+}
 
-	if (parseInt(Top) < 0)
-	{
-		Item.style.top = "0mm";
-	}
-	else
-	{
-		Item.style.top = "-40mm";
-	}
+/**
+* Hide chat window
+*/
+function INTERFACE_HideChat(Item, Hide)
+{
+	Item.style.top = "0mm";
+	Hide.style.display = "none";
 }
 
 /**
@@ -92,6 +105,47 @@ function INTERFACE_CloseChat(Username)
 }
 
 /**
+* Giving focus to a chat window
+*/
+function INTERFACE_FocusChat(Username)
+{
+	var Node = document.getElementById("Chat_"+Username);
+	var Title;
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	Title = Node.getElementsByTagName("h3");
+
+	if (Title.length <= 0)
+	{
+		return null;
+	}
+
+	Title[0].className = "title_selec";
+	return true;
+}
+
+/**
+* Positioning chat list
+*/
+function INTERFACE_ChatListPositioning()
+{
+	var Node = document.getElementById("Chat");
+	var ScreenHeight, ScreenScroll;
+	
+	if (!Node)
+	{
+		return false;
+	}
+	ScreenHeight = document.documentElement.clientHeight;
+	ScreenScroll = document.documentElement.scrollTop;
+	Node.style.top = (ScreenHeight+ScreenScroll-20)+"px";
+}
+
+/**
 * Create chat elements
 */
 function INTERFACE_CreateChat(Username)
@@ -101,15 +155,18 @@ function INTERFACE_CreateChat(Username)
 
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
-	ChatInner = UTILS_CreateElement("div", "ChatInner");
 	ChatTitle = UTILS_CreateElement("h3", null, "title", Username);
 	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
+	ChatInner = UTILS_CreateElement("div", "ChatInner");
+	ChatInner.style.display = "none";
 	Close = UTILS_CreateElement("img");
 	Close.src = "./images/close_chat.png";
 
+
 	// Show/hide chat
 	ChatTitle.onclick = function () {
-		INTERFACE_ChangeChatVisibility(ChatItem);
+		//INTERFACE_ChangeChatVisibility(ChatItem, ChatInner);
+		CHAT_ChangeChatState(Username, ChatItem, ChatInner);
 	}
 
 	// Close chat
@@ -156,6 +213,9 @@ function INTERFACE_CreateChatList()
 
 	ChatDiv.style.top = (ScreenHeight-20)+"px";
 	ChatDiv.appendChild(ChatList);
+
+	window.onresize = function() { INTERFACE_ChatListPositioning(); };
+	window.onscroll = function() { INTERFACE_ChatListPositioning(); };
 
 	return ChatDiv;
 }

@@ -43,6 +43,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
+	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
@@ -357,20 +358,23 @@ function DATA_SetRating(Username, Category, Rating)
 		UserPos = MainData.FindUser(Username);
 		Obj = MainData.UserList[UserPos];
 	}
-		
-	switch (Category)
+	
+	if (Obj)
 	{
-		case('blitz'):
-			Obj.Rating.Blitz = Rating;
-			break;
+		switch (Category)
+		{
+			case('blitz'):
+				Obj.Rating.Blitz = Rating;
+				break;
 
-		case('standard'):
-			Obj.Rating.Standard = Rating;
-			break;
-
-		case('lightning'):
-			Obj.Rating.Lightning = Rating;
-			break;
+			case('standard'):
+				Obj.Rating.Standard = Rating;
+				break;
+		
+			case('lightning'):
+				Obj.Rating.Lightning = Rating;
+				break;
+		}
 	}
 	
 	// Update rating in room user lists
@@ -582,6 +586,13 @@ function DATA_AddChat (Username, Status)
 	var Chat = new Object();
 	var i;
 
+
+	// Limit chat number
+	if (this.MaxChats <= this.ChatList.length)
+	{
+		throw "MaxChatExceeded";
+	}
+
 	i = this.FindChat(Username);
 	
 	// Try to find the same chat in structure
@@ -592,10 +603,11 @@ function DATA_AddChat (Username, Status)
 
 	// Setting atributes
 	Chat.Username = Username;
+	Chat.State = "hidden";
 	
 	if (Status == null)
 	{
-		Chat.Status = "available"
+		Chat.Status = "available";
 	}
 	else 
 	{
