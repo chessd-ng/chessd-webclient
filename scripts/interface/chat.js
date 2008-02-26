@@ -129,6 +129,30 @@ function INTERFACE_FocusChat(Username)
 }
 
 /**
+* Remove focus of a chat window
+*/
+function INTERFACE_UnfocusChat(Username)
+{
+	var Node = document.getElementById("Chat_"+Username);
+	var Title;
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	Title = Node.getElementsByTagName("h3");
+
+	if (Title.length <= 0)
+	{
+		return null;
+	}
+
+	Title[0].className = "title";
+	return true;
+}
+
+/**
 * Positioning chat list
 */
 function INTERFACE_ChatListPositioning()

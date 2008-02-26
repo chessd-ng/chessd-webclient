@@ -108,6 +108,7 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2)
 	{
 		INTERFACE_ShowChat(Obj1, Obj2);
 		MainData.ChatList[i].State = "show";
+		INTERFACE_UnfocusChat(Username);
 	}
 	else
 	{
@@ -146,9 +147,17 @@ function CHAT_ReceiveMessage(Username, Message)
 		}
 		else
 			return false;
+
+		INTERFACE_FocusChat(Username);
 	}
-	// Set chat with focus
-	INTERFACE_FocusChat(Username);
+	else
+	{
+		// Set chat with focus
+		if (MainData.ChatList[ChatPos].State == "hidden")
+		{
+			INTERFACE_FocusChat(Username);
+		}
+	}
 
 	// Show message in chat list
 	INTERFACE_ShowChatMessage(Username, Message);
