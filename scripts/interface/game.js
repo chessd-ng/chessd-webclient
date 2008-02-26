@@ -94,6 +94,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.UpdateBTime = INTERFACE_UpdateBTime;
 
 	this.DecreaseTime = INTERFACE_DecreaseTime;
+	this.StartTimer = INTERFACE_StartTimer;
+	this.StopTimer = INTERFACE_StopTimer;
 
 	this.RemovePiece = INTERFACE_RemovePiece;
 	this.InsertPiece = INTERFACE_InsertPiece;
@@ -106,6 +108,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 
 	this.removeMove = INTERFACE_RemoveMove;
 
+	this.ObserverMode = INTERFACE_ObserverMode;
+	this.OldGameMode = INTERFACE_OldGameMode;
 
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
@@ -150,6 +154,9 @@ function INTERFACE_CreateGame()
 	// Players photos
 	var Photo = INTERFACE_CreatePhoto(this.WhitePlayer.Name, this.BlackPlayer.Name);
 
+	// Options and Move list Tab
+	var Tab = INTERFACE_CreateTab(Options.Div, MoveList.Div);
+
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
 
@@ -167,7 +174,7 @@ function INTERFACE_CreateGame()
 
 	GameInfo.appendChild(Photo.Div);
 	GameInfo.appendChild(Timer.Div);
-	GameTab.appendChild(INTERFACE_CreateTab(Options.Div, MoveList.Div));
+	GameTab.appendChild(Tab);
 	GameInfo.appendChild(GameTab);
 	GameInfo.appendChild(GameClose);
 
@@ -182,10 +189,11 @@ function INTERFACE_CreateGame()
 	this.Time.BTime = Timer.BTimer;
 	this.photo.wphoto = Photo.WPhoto;
 	this.photo.bphoto = Photo.BPhoto;
+	this.tab = Tab;
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
 
-	this.Timer = setInterval(this.DecreaseTime, 1000);
+	this.StartTimer();
 
 	this.SetWTime();
 	this.SetBTime();
@@ -259,6 +267,41 @@ function INTERFACE_RemoveGame()
 	}
 }
 
+/*
+* Set game interface to observer mode (Move list without options)
+*
+* @public
+*/
+function INTERFACE_ObserverMode()
+{
+	var MoveList = INTERFACE_CreateMoveList();
+	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
+
+	var TabParent = this.Tab.parentNode;
+
+	TabParent.removeChild(this.Tab);
+	TabParent.appendChild(NewTab);
+
+	this.MoveList = MoveList.List;
+}
+
+/*
+* Set game interface to oldgame mode(Observer mode with buttons to review(?) game)
+*
+* @public
+*/
+function INTERFACE_OldGameMode()
+{
+	var MoveList = INTERFACE_CreateOldGameMoveList();
+	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
+
+	var TabParent = this.tab.parentNode;
+
+	TabParent.removeChild(this.tab);
+	TabParent.appendChild(NewTab);
+
+	this.MoveList = MoveList.List;
+}
 
 /**
 * Clean all pieces of a board
@@ -448,6 +491,16 @@ function INTERFACE_DecreaseTime()
 		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
 		MainData.CurrentGame.Game.SetBTime();
 	}
+}
+
+function INTERFACE_StartTimer()
+{
+	this.Timer = setInterval(this.DecreaseTime, 1000);
+}
+
+function INTERFACE_StopTimer()
+{
+	this.Timer = window.clearInterval(this.Timer);
 }
 
 
@@ -1011,3 +1064,66 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 
 	return PieceImg;
 }
+
+/***********************************************
+ * OLD GAME MOVE LIST
+***********************************************/
+//Private
+function INTERFACE_CreateOldGameMoveList()
+{
+	var MoveListDiv = UTILS_CreateElement("div", "MoveListDiv", null, null);
+	var MoveList = UTILS_CreateElement("ul", "MoveList", "oldgame", null);
+	var MoveListButtons = UTILS_CreateElement("div", "MoveListButtons", null, null);
+
+	var ButtonFirst = UTILS_CreateElement("input", "MoveListFirst");
+	var ButtonLast = UTILS_CreateElement("input", "MoveListLast");
+	var ButtonNext = UTILS_CreateElement("input", "MoveListNext");
+	var ButtonPrev = UTILS_CreateElement("input", "MoveListPrev");
+
+	ButtonFirst.title =UTILS_GetText("game_button_first");
+	ButtonPrev.title = UTILS_GetText("game_button_prev");
+	ButtonNext.title = UTILS_GetText("game_button_next");
+	ButtonLast.title = UTILS_GetText("game_button_last");
+
+	ButtonFirst.type = "button";
+	ButtonPrev.type = "button";
+	ButtonNext.type = "button";
+	ButtonLast.type = "button";
+	
+	/*
+	ButtonFirst.value = "|<";
+	ButtonPrev.value = "<";
+	ButtonNext.value = ">";
+	ButtonLast.value = ">|";
+	*/
+
+	/***********************************/
+	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();}
+	ButtonPrev.onclick  = function(){OLDGAME_PrevBoard(); }
+	ButtonNext.onclick  = function(){OLDGAME_NextBoard(); }
+	ButtonLast.onclick  = function(){OLDGAME_LastBoard(); }
+	/***********************************/
+
+	MoveListButtons.appendChild(ButtonFirst);
+	MoveListButtons.appendChild(ButtonPrev);
+	MoveListButtons.appendChild(ButtonNext);
+	MoveListButtons.appendChild(ButtonLast);
+
+	MoveListDiv.appendChild(MoveList);
+	MoveListDiv.appendChild(MoveListButtons);
+
+	return {Div:MoveListDiv, List:MoveList};
+}
+//Private
+function INTERFACE_CreateOldGameTab(DivMoves)
+{
+	var Tab = UTILS_CreateElement("div", "InfoTab", null, null);
+
+	var TabMove = UTILS_CreateElement("span", "InfoTab1", "oldgame", "Lances");
+
+	Tab.appendChild(TabMove);
+	Tab.appendChild(DivMoves);
+
+	return Tab;
+}
+

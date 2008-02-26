@@ -199,7 +199,7 @@ function INTERFACE_ShowGameRoomList(Rooms)
 	// Create elements and insert rooms
 	for (i=0; i < Rooms.length; i++)
 	{
-		Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+		Room = UTILS_CreateElement("li", null, null, Rooms[i].Name);
 		Node.appendChild(Room);
 	}
 	return true;
