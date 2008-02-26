@@ -39,11 +39,13 @@ function OLDGAME_EndGame(Id)
 	var NewOIdGame;
 	var i;
 	var MoveObj;
+	var Index;
 	
 	EndedGame = MainData.RemoveGame(Id);
 
-	//Add game to oldgamelist and set this game to CurrentOldGame
-	MainData.PushOldGame(EndedGame);
+	//Add game to oldgamelist, set this game to CurrentOldGame
+	//and return EndedGame Pos;
+	Index = MainData.PushOldGame(EndedGame);
 
 	MainData.CurrentOldGame.Color = "none";
 
@@ -53,6 +55,9 @@ function OLDGAME_EndGame(Id)
 
 	NewOldGame = MainData.CurrentOldGame.Game;
 	NewOldGame.OldGameMode();
+
+	//Change "X" close board button function when clicked
+	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 	
 	OLDGAME_LastBoard();
 	
@@ -62,7 +67,13 @@ function OLDGAME_EndGame(Id)
 		MoveObj = MainData.CurrentOldGame.Moves[i];
 		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.PWTime, MoveObj.PBTime)
 	}
-	
+
+}
+
+function OLDGAME_RemoveOldGame(Index)
+{
+	MainData.OldGameList[Index].Game.Remove();
+	MainData.RemoveOldGame(Index);
 }
 
 function OLDGAME_FirstBoard()
