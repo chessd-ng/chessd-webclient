@@ -52,7 +52,7 @@ function ROOM_HandleMessage(XML)
 	}
 
 	// Show message on interface
-	INTERFACE_ShowMessage(RoomName, From, Message, Stamp);
+	INTERFACE_ShowMessage(RoomName, From, UTILS_ConvertChatString(Message), Stamp);
 	
 	return "";
 }
@@ -144,7 +144,7 @@ function ROOM_SendMessage(RoomName, Message)
 
 	// Send message to room
 	To = MainData.RoomList[i].MsgTo;
-	CONNECTION_SendJabber(MESSAGE_GroupChat(To, Message));
+	CONNECTION_SendJabber(MESSAGE_GroupChat(To, UTILS_ConvertChatString(Message)));
 	return true;
 }
 

@@ -40,7 +40,8 @@ function CHAT_HandleMessage(XML)
 	}
 
 	// Show the message on interface
-	CHAT_ReceiveMessage(From, Message);
+	// UTILS_ConvertChatString -> Replace < and >
+	CHAT_ReceiveMessage(From, UTILS_ConvertChatString(Message));
 
 	return "";
 }
@@ -124,12 +125,14 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2)
 */
 function CHAT_SendMessage(Username, Message)
 {
-	var XML = MESSAGE_Chat(Username, Message);
+	//Replace < and  >
+	var Msg = UTILS_ConvertChatString(Message)
+	var XML = MESSAGE_Chat(Username, Msg);
 
 	CONNECTION_SendJabber(XML);
 
 	// Show message in chat list
-	INTERFACE_ShowChatMessage(Username, Message, true);
+	INTERFACE_ShowChatMessage(Username, Msg, true);
 }
 
 /**
