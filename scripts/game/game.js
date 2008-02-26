@@ -486,14 +486,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 }
 
 /**
-* Start Game
+* Update board in data struct and interface
 *
 * @param 	GameId = Game number
 * @param 	BoardStr = Board status in a string
 * @param 	Move = Chess Move (Piece/Orig-Dest)
 * @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
 * @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
-* @param 	TurnColor = color ("w"/"b")
+* @param 	TurnColor = color ("white"/"black")
 * @return 	void
 * @author 	Rubens
 */
@@ -542,7 +542,10 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 }
 
 /**
-* Remove a game
+* Remove a game from data struct and interface
+* @param 	GameId is the game identificator
+* @return 	void
+* @author 	Rubens
 */
 function GAME_RemoveGame(GameID)
 {
@@ -566,6 +569,11 @@ function GAME_RemoveGame(GameID)
 /**
 * Send a movement to server
 *
+* @param 	OldLine is line of piece origin position
+* @param 	OldCol is column of piece origin position
+* @param 	NewLine is line of piece dest position
+* @param 	NewCol is line of piece dest position
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
@@ -590,6 +598,8 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 /**
 * Send a draw message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendDraw(GameID)
@@ -600,6 +610,8 @@ function GAME_SendDraw(GameID)
 /**
 * Send a adjourn message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendCancel(GameID)
@@ -610,6 +622,8 @@ function GAME_SendCancel(GameID)
 /**
 * Send a adjourn message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendAdjourn(GameID)
@@ -620,6 +634,8 @@ function GAME_SendAdjourn(GameID)
 /**
 * Send a resign message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendResign(GameID)

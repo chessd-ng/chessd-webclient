@@ -21,7 +21,6 @@
 /***************************
 ** GAME BOARD OBJECT
 *****************************/
-
 function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 {
 	// Attributes
@@ -123,9 +122,12 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 *****************************/
 
 /**
-* Creating game div
+* Creating game div and set all attributes
 *
 * @constructor
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateGame()
 {
@@ -205,6 +207,9 @@ function INTERFACE_CreateGame()
 * Show this game in the interface
 *
 * @public
+* @param	void
+* @return	true if game is showed with sucess, else false
+* @author	Rubens and Pedro
 */
 function INTERFACE_ShowGame(Div)
 {
@@ -223,6 +228,9 @@ function INTERFACE_ShowGame(Div)
 * Hide this game in the interface
 *
 * @public
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_HideGame()
 {
@@ -236,6 +244,9 @@ function INTERFACE_HideGame()
 * Disable options and drag pieces
 *
 * @public
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_FinishGame()
 {
@@ -247,6 +258,9 @@ function INTERFACE_FinishGame()
 * Remove this game
 *
 * @public
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_RemoveGame()
 {
@@ -282,6 +296,9 @@ function INTERFACE_RemoveGame()
 * Set game interface to observer mode (Move list without options)
 *
 * @public
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_ObserverMode()
 {
@@ -300,6 +317,9 @@ function INTERFACE_ObserverMode()
 * Set game interface to oldgame mode(Observer mode with buttons to review(?) game)
 *
 * @public
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_OldGameMode()
 {
@@ -316,6 +336,10 @@ function INTERFACE_OldGameMode()
 
 /**
 * Clean all pieces of a board
+*
+* @param	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_ClearBoard()
 {
@@ -332,6 +356,10 @@ function INTERFACE_ClearBoard()
 
 /**
 * Clean the board and show 'BoardArray' in the screen
+*
+* @param	BoardArray is board in array of array format
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_SetBoard(BoardArray)
 {
@@ -356,6 +384,12 @@ function INTERFACE_SetBoard(BoardArray)
 
 /**
 * Display a piece in specified Line and Col of the board
+*
+* @param	Piece is piece char
+* @param 	Line is line where is the piece will be place
+* @param 	Col is column where is the piece will be place
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_InsertPiece(Piece, Line, Col)
 {
@@ -384,6 +418,11 @@ function INTERFACE_InsertPiece(Piece, Line, Col)
 
 /**
 * Remove a piece from the board
+*
+* @param 	Line is line where the piece was placed
+* @param 	Col is column where the piece was placed
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_RemovePiece(Line, Col)
 {
@@ -398,7 +437,12 @@ function INTERFACE_RemovePiece(Line, Col)
 }
 
 /**
-* Update the board on the screen
+* Update the board on the screen, where the pieces is diferrent
+*
+* @param 	OldBoard is current Board
+* @param 	NewBoard is new board that will be show
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 {
@@ -418,7 +462,6 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 				}
 				else
 				{
-					//Remover a peça no tauleiro anterior
 					if (OldBoard[i].charAt(j)!= "-")
 					{
 						this.RemovePiece(i+1, j+1);
@@ -432,6 +475,10 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 
 /**
 * Undo the last move done by the user
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_UndoMove()
 {
@@ -455,6 +502,10 @@ function INTERFACE_UndoMove()
 
 /**
 * Show turn info to user
+*
+* @param 	Color is the player color
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_SetTurn(Color)
 {
@@ -489,6 +540,10 @@ function INTERFACE_SetTurn(Color)
 
 /**
 * Decrease user time. Executed each second
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
 */
 function INTERFACE_DecreaseTime()
 {
@@ -504,27 +559,62 @@ function INTERFACE_DecreaseTime()
 	}
 }
 
+/**
+* Start timer
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_StartTimer()
 {
 	this.Timer = setInterval(this.DecreaseTime, 1000);
 }
 
+/**
+* Stop timer
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_StopTimer()
 {
 	this.Timer = window.clearInterval(this.Timer);
 }
 
 
+/**
+* Update white timer
+*
+* @param 	NewTime is the new time to be update
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_UpdateWTime(NewTime)
 {
 	this.WhitePlayer.Time = NewTime;
 }
 
+/**
+* Update black timer
+*
+* @param 	NewTime is the new time to be update
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_UpdateBTime(NewTime)
 {
 	this.BlackPlayer.Time = NewTime;
 }
 
+/**
+* Show white timer on interface
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_SetWTime()
 {
 	var min, sec;
@@ -557,6 +647,13 @@ function INTERFACE_SetWTime()
 	this.Time.WTime.innerHTML = minStr+":"+secStr;
 }
 
+/**
+* Show black timer on interface
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_SetBTime()
 {
 	var min, sec;
@@ -589,16 +686,42 @@ function INTERFACE_SetBTime()
 	this.Time.BTime.innerHTML = minStr+":"+secStr;
 }
 
+/**
+* Show white avatar image (in base64)
+*
+* @param 	PhotoType is the image type (png/gif)
+* @param 	PhotoStr is the image in base64 format string
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_SetWPhoto(PhotoType, PhotoStr)
 {
 	this.photo.wphoto.src = "data:"+PhotoType+";base64,"+PhotoStr;
 }
 
+/**
+* Show black avatar image (in base64)
+*
+* @param 	PhotoType is the image type (png/gif)
+* @param 	PhotoStr is the image in base64 format string
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_SetBPhoto(PhotoType, PhotoStr)
 {
 	this.photo.bphoto.src = "data:"+PhotoType+";base64,"+PhotoStr;
 }
 
+/**
+* Show a new move in Move List
+*
+* @param 	NumTurn is the turn number
+* @param 	Move is the move done
+* @param 	WTime is white time when move is done
+* @param 	BTime is black time when move is done
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 {
 	
@@ -670,6 +793,13 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	this.MoveList.appendChild(Item);
 }
 
+/**
+* Remove last move in Move List (this is should be used when players agree to return one move)
+*
+* @param 	void
+* @return	void
+* @author	Rubens and Pedro
+*/
 function INTERFACE_RemoveMove()
 {
 	this.MoveList.removeChild(this.MoveList.lastChild);
@@ -684,7 +814,10 @@ function INTERFACE_RemoveMove()
 /**
 * Create a board
 *
-* @return
+* @param 	MyColor is player color in the game
+* @param 	PieceSize is the board piece size
+* @return	board html div
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateBoard(MyColor, PieceSize)
 {
@@ -738,6 +871,10 @@ function INTERFACE_CreateBoard(MyColor, PieceSize)
 
 /**
 * Create timer elements
+*
+* @param 	void
+* @return	Timer html div, White Timer html span and Black Timer html span
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateTimer()
 {
@@ -753,6 +890,10 @@ function INTERFACE_CreateTimer()
 
 /**
 * Create game options
+*
+* @param 	GameId is game id string
+* @return	Options html div and Array of html elements
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateGameOptions(GameID)
 {
@@ -810,6 +951,10 @@ function INTERFACE_CreateGameOptions(GameID)
 
 /**
 * Create a move list
+*
+* @param 	void
+* @return	MoveListDiv html div and MoveList html list
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateMoveList()
 {
@@ -821,7 +966,12 @@ function INTERFACE_CreateMoveList()
 }
 
 /**
-* Create photos
+* Create photo images and names
+*
+* @param 	WhitePlayer is White player name
+* @param 	BlackPlayer is Black player name
+* @return	Photo html div, WPhoto html img, BPhoto html img, WName html span and BName html span
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 {
@@ -849,7 +999,12 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 }
 
 /**
-* Create tabs
+* Create tabs with 2 divs
+*
+* @param 	Div1 is first div in tab
+* @param 	Div2 is second div in tab
+* @return	Tab html Div
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateTab(Div1, Div2)
 {
@@ -889,7 +1044,12 @@ function INTERFACE_CreateTab(Div1, Div2)
 }
 
 /**
-* Vertical indexes of board
+* Create vertical indexes of board
+*
+* @param 	Color is the board color
+* @param 	Size is size of blocks of each block in board
+* @return	Vertical index html list
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateVerticalIndex(Color, Size)
 {
@@ -918,7 +1078,12 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 }
 
 /**
-* Horizontal indexes of board
+* Create horizontal indexes of board
+*
+* @param 	Color is the board color
+* @param 	Size is size of blocks of each block in board
+* @return	Horizontal index html list
+* @author	Rubens and Pedro
 */
 function INTERFACE_CreateHorizontalIndex(Color, Size)
 {
@@ -947,6 +1112,12 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 
 /**
 * Create a new piece, with drag listener in 'PLayerColor' pieces
+*
+* @param 	Piece is piece char
+* @param 	PlayerColor is the current player color
+* @param 	Size is size of blocks of each block in board
+* @return	Piece html img
+* @author	Rubens and Pedro
 */ 
 function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 {
@@ -1079,7 +1250,13 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 /***********************************************
  * OLD GAME MOVE LIST
 ***********************************************/
-//Private
+/**
+* Create OldGame move list with buttons to review all game moves
+*
+* @param 	void
+* @return	MoveListDiv html div and MoveList html list
+* @author	Rubens and Pedro
+*/
 function INTERFACE_CreateOldGameMoveList()
 {
 	var MoveListDiv = UTILS_CreateElement("div", "MoveListDiv", null, null);
@@ -1101,13 +1278,6 @@ function INTERFACE_CreateOldGameMoveList()
 	ButtonNext.type = "button";
 	ButtonLast.type = "button";
 	
-	/*
-	ButtonFirst.value = "|<";
-	ButtonPrev.value = "<";
-	ButtonNext.value = ">";
-	ButtonLast.value = ">|";
-	*/
-
 	/***********************************/
 	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();}
 	ButtonPrev.onclick  = function(){OLDGAME_PrevBoard(); }
@@ -1125,7 +1295,14 @@ function INTERFACE_CreateOldGameMoveList()
 
 	return {Div:MoveListDiv, List:MoveList};
 }
-//Private
+
+/**
+* Create tab with 1 div(this should be used in Observer and OldGame mode)
+*
+* @param 	Div1 is first div in tab
+* @return	Tab html Div
+* @author	Rubens and Pedro
+*/
 function INTERFACE_CreateOldGameTab(DivMoves)
 {
 	var Tab = UTILS_CreateElement("div", "InfoTab", null, null);

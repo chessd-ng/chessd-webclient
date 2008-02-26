@@ -1,9 +1,31 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+
+/**
+* This file contains OldGame 
+*/
+
 /** 
-* Start Game in Observer Mode 
+* Start Game in OldGame Mode
 * 
-* @param        P1 = Player 1 Object (Name, Time, Color, Inc) 
-* @param        P2 = Player 2 Object (Name, Time, Color, Inc) 
+* @param        P1 is Player 1 Object (Attributes: Name, Time, Color, Inc) 
+* @param        P2 is Player 2 Object (Attributes: Name, Time, Color, Inc) 
 * @return       void 
+* @see		MainData methods and Game Interface Object;
 * @author       Rubens 
 */
 function OLDGAME_StartOldGame(P1, P2)
@@ -32,6 +54,14 @@ function OLDGAME_StartOldGame(P1, P2)
 
 }
 
+/** 
+* Change board GameMode to OldGame Mode when game is over
+* 
+* @param        Id is Game ID  
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_EndGame(Id)
 {
 	var EndedGame;
@@ -70,12 +100,29 @@ function OLDGAME_EndGame(Id)
 
 }
 
+/** 
+* Remove OldGame board from interface and OldGameList
+* 
+* @param        Index is array index of OldGame
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_RemoveOldGame(Index)
 {
+	//Remove Board
 	MainData.OldGameList[Index].Game.Remove();
 	MainData.RemoveOldGame(Index);
 }
 
+/** 
+* Change current board to first game board
+* 
+* @param        void
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_FirstBoard()
 {
 	var Color, Board;
@@ -90,9 +137,20 @@ function OLDGAME_FirstBoard()
 
 	MainData.CurrentOldGame.CurrentMove = 0;
 	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
-	MainData.CurrentOldGame.Game.SetWTime(WTime);
-	MainData.CurrentOldGame.Game.SetBTime(BTime);
+	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
+	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
+	MainData.CurrentOldGame.Game.SetWTime();
+	MainData.CurrentOldGame.Game.SetBTime();
 }
+
+/** 
+* Change current board to previous game board
+* 
+* @param        void
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_PrevBoard()
 {
 	var Color, OldBoard, Board;
@@ -113,10 +171,20 @@ function OLDGAME_PrevBoard()
 
 	MainData.CurrentOldGame.CurrentMove = MovePos - 1;
 	MainData.CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
-	MainData.CurrentOldGame.Game.SetWTime(WTime);
-	MainData.CurrentOldGame.Game.SetBTime(BTime);
+	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
+	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
+	MainData.CurrentOldGame.Game.SetWTime();
+	MainData.CurrentOldGame.Game.SetBTime();
 }
 
+/** 
+* Change current board to next game board
+* 
+* @param        void
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_NextBoard()
 {
 	var Color, OldBoard, Board;
@@ -138,10 +206,20 @@ function OLDGAME_NextBoard()
 
 	MainData.CurrentOldGame.CurrentMove = MovePos + 1;
 	MainData.CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
-	MainData.CurrentOldGame.Game.SetWTime(WTime);
-	MainData.CurrentOldGame.Game.SetBTime(BTime);
+	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
+	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
+	MainData.CurrentOldGame.Game.SetWTime();
+	MainData.CurrentOldGame.Game.SetBTime();
 }
 
+/** 
+* Change current board to last game board
+* 
+* @param        void
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
 function OLDGAME_LastBoard()
 {
 	var Color, Board;
@@ -156,7 +234,9 @@ function OLDGAME_LastBoard()
 
 	MainData.CurrentOldGame.CurrentMove = MoveListLen-1;
 	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
-	MainData.CurrentOldGame.Game.SetWTime(WTime);
-	MainData.CurrentOldGame.Game.SetBTime(BTime);
+	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
+	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
+	MainData.CurrentOldGame.Game.SetWTime();
+	MainData.CurrentOldGame.Game.SetBTime();
 }
 
