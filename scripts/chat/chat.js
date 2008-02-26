@@ -62,6 +62,7 @@ function CHAT_OpenChat(Username)
 
 		// Show on interface
 		INTERFACE_OpenChat(Username);
+
 		return true;
 	}
 	catch (e)

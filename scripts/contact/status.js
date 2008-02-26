@@ -25,21 +25,19 @@
 */
 function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
-	var i, XML= new Array();
+	var i, XML;
 		
 	// Change user status for contacts
-	XML[0] = MESSAGE_ChangeStatus(NewStatus);
+	XML = MESSAGE_ChangeStatus(NewStatus);
 	
 	// Change user status for rooms
 	for (i=0 ; i<MainData.RoomList.length ; i++)
 	{
-		XML[i+1] = MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
+		XML += MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
 	}
 	
 	// Update your status instructure
 	MainData.Status = NewStatus;
-
-	XML = MESSAGE_MergeMessages(XML);
 
 	// Send to jabber or return the message
 	if (DontSend == null)
