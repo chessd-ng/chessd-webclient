@@ -286,11 +286,11 @@
 	overflow		: auto;
 }
 
-#MoveList .oldgame{
+#MoveList.oldgame{
 	height			: 22mm;
 }
 
-#MoveList .black{
+#MoveList li.black{
 	background-color	: #216778;
 	color			: #FFF;
 }
@@ -318,8 +318,8 @@
 	margin-left             : 6mm;
 	margin-top              : 2mm;
 	border			: none;
-	width			: 15px;
-	height			: 14px;
+	width			: 14px;
+	height			: 15px;
 	cursor			: pointer;
 }
 

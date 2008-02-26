@@ -24,7 +24,7 @@
 	</login>
 	<menu>
 		<menu_search_game>Buscar Partida</menu_search_game>
-		<menu_search_user>Buscar Usuário</menu_search_user>
+		<menu_search_user>Buscar Usuá¡rio</menu_search_user>
 		<menu_news>Notícias</menu_news>
 		<menu_preferences>Preferências</menu_preferences>
 		<menu_help>Ajuda</menu_help>
@@ -42,7 +42,7 @@
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Adicionar usuário</contact_invite>
-		<contact_invite_text> adicionou você como contato, deseja aceitar?</contact_invite_text>
+		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
 		<contact_search_user>Buscar usuário</contact_search_user>
@@ -80,8 +80,8 @@
 	</group>
 	<status>
 		<status_offline>offline</status_offline>
-		<status_available>disponí­vel</status_available>
-		<status_unavailable>indisponí­vel</status_unavailable>
+		<status_available>disponível</status_available>
+		<status_unavailable>indisponível</status_unavailable>
 		<status_busy>ocupado</status_busy>
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
@@ -92,7 +92,7 @@
 		<usermenu_match>Convidar para jogar</usermenu_match>
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
-		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
+		<usermenu_view_profile>Ver perfil e informaÃ§Ãµes</usermenu_view_profile>
 	</usermenu>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>

@@ -79,16 +79,17 @@ function CONNECTION_ConnectJabber(XML)
 */
 function CONNECTION_SendJabber()
 {
-	var Post, DT;
+	var Post = "", DT, i;
 
 	// If receive too many parameters, merge then
-	if (arguments.length > 1)
+	for (i=0; i<arguments.length; i++)
 	{
-		Post = MESSAGE_MergeMessages(arguments);
+		Post += arguments[i];
 	}
-	else
+
+	if ((MainData.SID != -1) && (MainData.ConnectionStatus != -1))
 	{
-		Post = arguments[0];
+		Post = MESSAGE_MakeXMPP(Post);
 	}
 
 	// Create XMLHttpRequest

@@ -178,8 +178,8 @@ function INTERFACE_CreateGame()
 	GameInfo.appendChild(GameTab);
 	GameInfo.appendChild(GameClose);
 
-
 	GameDiv.appendChild(GameInfo);
+
 
 	// Setting attributes
 	this.Game = GameDiv;
@@ -192,6 +192,8 @@ function INTERFACE_CreateGame()
 	this.tab = Tab;
 	this.MoveList = MoveList.List;
 	this.EventButtons = Options.ButtonList;
+	//Add "X" close buttons to EventButtons
+	this.EventButtons.push(GameClose);
 
 	this.StartTimer();
 
@@ -249,11 +251,20 @@ function INTERFACE_FinishGame()
 function INTERFACE_RemoveGame()
 {
 	var Game = MainData.GetGame(this.Id);
-	var Node = document.getElementById("GameDiv");
+	//var Node = document.getElementById("GameDiv");
+	var Node = this.Game;
 
-	if (!Game || !Node)
-	{
-		return false;
+	if (!Game)
+	{	
+		if(!Node)
+		{
+			return false
+		}
+		else
+		{
+			Node.parentNode.removeChild(Node);
+			return true;
+		}
 	}
 
 	if (Game.Finished)

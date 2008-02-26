@@ -61,8 +61,11 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 */
 function LOGIN_Logout()
 {
+	// Setting structure as disconnected
+	MainData.ConnectionStatus = -1;
+
 	// Logout from jabber
-	CONNECTION_SendJabber(MESSAGE_Unavailable());
+	CONNECTION_SendJabber(MESSAGE_EndConnection());
 
 	INTERFACE_StopInterface();
 
