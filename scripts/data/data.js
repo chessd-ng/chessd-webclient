@@ -1098,8 +1098,11 @@ function DATA_RemoveOldGame(Id)
 
 function DATA_PushGameToOldGame(GameObj)
 {
-	this.OldGameList.push(GameObj);
+	var Pos;
+	Pos = this.OldGameList.push(GameObj);
 	MainData.SetCurrentOldGame(GameObj);
+
+	return Pos -1;
 }
 
 /**********************************
