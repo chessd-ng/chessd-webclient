@@ -31,6 +31,7 @@
 function OLDGAME_StartOldGame(P1, P2)
 {
 	var GameDiv, GameId;
+	var Index;
 
 	// Hide current game
 	if (MainData.CurrentGame != null)
@@ -41,14 +42,16 @@ function OLDGAME_StartOldGame(P1, P2)
 	GameId = MainData.OldGameList.length;
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj("OldGame_"+GameId, P1.Name, P2.Name, "w");
-	MainData.AddOldGame(GameId, P1.Name, P2.Name, "none", GameDiv);
+	GameDiv = new INTERFACE_GameBoardObj("OldGame_"+GameId, P1.Name, P2.Name, "white");
+	Index = MainData.AddOldGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
 	// Show New Game
 	GameDiv.Show();
 	// Set Old Game Mode
 	GameDiv.OldGameMode();
 
+	//Change "X" close board button function when clicked
+	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 	// Send a message to get game moves
 	// TODO TODO TODO
 
@@ -66,7 +69,7 @@ function OLDGAME_EndGame(Id)
 {
 	var EndedGame;
 	var PWName, PBName, Color;
-	var NewOIdGame;
+	var NewOldGame;
 	var i;
 	var MoveObj;
 	var Index;
@@ -128,9 +131,12 @@ function OLDGAME_FirstBoard()
 	var Color, Board;
 	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
+	var Move;
 
 	Color = MainData.CurrentOldGame.BoardColor;
 	Board = MainData.CurrentOldGame.Moves[0].Board;
+
+	Move = MainData.CurrentOldGame.Moves[0].Move;
 
 	WTime = MainData.CurrentOldGame.Moves[ 0 ].PWTime;
 	BTime = MainData.CurrentOldGame.Moves[ 0 ].PBTime;
@@ -141,6 +147,7 @@ function OLDGAME_FirstBoard()
 	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
+	MainData.CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /** 
@@ -156,6 +163,7 @@ function OLDGAME_PrevBoard()
 	var Color, OldBoard, Board;
 	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
+	var Move; 
 
 	if(MovePos == 0)
 	{
@@ -165,6 +173,7 @@ function OLDGAME_PrevBoard()
 	Color = MainData.CurrentOldGame.BoardColor;
 	OldBoard = MainData.CurrentOldGame.Moves[MovePos].Board;
 	Board = MainData.CurrentOldGame.Moves[MovePos -1].Board;
+	Move = MainData.CurrentOldGame.Moves[MovePos - 1].Move;
 
 	WTime = MainData.CurrentOldGame.Moves[ MovePos - 1 ].PWTime;
 	BTime = MainData.CurrentOldGame.Moves[ MovePos - 1 ].PBTime;
@@ -175,6 +184,7 @@ function OLDGAME_PrevBoard()
 	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
+	MainData.CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /** 
@@ -191,6 +201,7 @@ function OLDGAME_NextBoard()
 
 	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
+	var Move; 
 
 	if(MovePos == MainData.CurrentOldGame.Moves.length-1)
 	{
@@ -200,6 +211,7 @@ function OLDGAME_NextBoard()
 	Color = MainData.CurrentOldGame.BoardColor;
 	OldBoard = MainData.CurrentOldGame.Moves[MovePos].Board;
 	Board = MainData.CurrentOldGame.Moves[ MovePos + 1 ].Board;
+	Move = MainData.CurrentOldGame.Moves[MovePos + 1].Move;
 
 	WTime = MainData.CurrentOldGame.Moves[ MovePos + 1 ].PWTime;
 	BTime = MainData.CurrentOldGame.Moves[ MovePos + 1 ].PBTime;
@@ -210,6 +222,7 @@ function OLDGAME_NextBoard()
 	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
+	MainData.CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /** 
@@ -225,9 +238,11 @@ function OLDGAME_LastBoard()
 	var Color, Board;
 	var MoveListLen = MainData.CurrentOldGame.Moves.length;
 	var WTime, BTime;
+	var Move; 
 
 	Color = MainData.CurrentOldGame.BoardColor;
 	Board = MainData.CurrentOldGame.Moves[MoveListLen-1].Board;
+	Move = MainData.CurrentOldGame.Moves[MoveListLen -1].Move;
 
 	WTime = MainData.CurrentOldGame.Moves[ MoveListLen - 1 ].PWTime;
 	BTime = MainData.CurrentOldGame.Moves[ MoveListLen - 1 ].PBTime;
@@ -238,5 +253,6 @@ function OLDGAME_LastBoard()
 	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
+	MainData.CurrentOldGame.Game.SetLastMove(Move);
 }
 

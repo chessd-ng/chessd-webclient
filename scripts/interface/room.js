@@ -180,7 +180,7 @@ function INTERFACE_HideRoomList()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowGameRoomList(Rooms)
+function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2)
 {
 	var Node = document.getElementById("GameRoomMenuList");
 	var Room, i;
@@ -190,18 +190,15 @@ function INTERFACE_ShowGameRoomList(Rooms)
 	{
 		return null;
 	}
-	// If rooms was already been inserted
-	else if (Node.childNodes.length > 0)
-	{
-		return null;
-	}
 
 	// Create elements and insert rooms
-	for (i=0; i < Rooms.length; i++)
-	{
-		Room = UTILS_CreateElement("li", null, null, Rooms[i].Name);
-		Node.appendChild(Room);
+	Room = UTILS_CreateElement("li", null, null, GameName);
+
+	Room.onclick = function(){
+		GAME_StartObserverGame(GameId, P1, P2)
 	}
+
+	Node.appendChild(Room);
 	return true;
 }
 

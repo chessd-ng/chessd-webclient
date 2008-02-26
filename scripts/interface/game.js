@@ -26,6 +26,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Attributes
 	this.Game = null;
 	this.Board = null;
+	this.BoardBlocks = null;
 	this.Time = new Object();
 	this.name = new Object();
 	this.photo = new Object();
@@ -33,6 +34,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.EventButtons = null;
 	this.Timer = null;
 	this.Turn = "white";
+	this.LastMove = null;
 
 	this.MyColor = YourColor;
 	this.Id = GameID;
@@ -110,6 +112,9 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.ObserverMode = INTERFACE_ObserverMode;
 	this.OldGameMode = INTERFACE_OldGameMode;
 
+	this.SetLastMove = INTERFACE_LastMove;
+	this.FindBlock = INTERFACE_FindBlock;
+
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
 	this.constructor();
@@ -186,6 +191,7 @@ function INTERFACE_CreateGame()
 	// Setting attributes
 	this.Game = GameDiv;
 
+	this.BoardBlocks = BoardBlocks;
 	this.Board = BoardPiece;
 	this.Time.WTime = Timer.WTimer;
 	this.Time.BTime = Timer.BTimer;
@@ -305,12 +311,13 @@ function INTERFACE_ObserverMode()
 	var MoveList = INTERFACE_CreateMoveList();
 	var NewTab = INTERFACE_CreateOldGameTab(MoveList.Div);
 
-	var TabParent = this.Tab.parentNode;
+	var TabParent = this.tab.parentNode;
 
-	TabParent.removeChild(this.Tab);
+	TabParent.removeChild(this.tab);
 	TabParent.appendChild(NewTab);
 
 	this.MoveList = MoveList.List;
+	this.tab = NewTab;
 }
 
 /*
@@ -332,6 +339,7 @@ function INTERFACE_OldGameMode()
 	TabParent.appendChild(NewTab);
 
 	this.MoveList = MoveList.List;
+	this.tab = NewTab;
 }
 
 /**
@@ -621,7 +629,9 @@ function INTERFACE_SetWTime()
 	var minStr, secStr;
 
 	if (this.WhitePlayer.Time <= 0)
-		clearInterval(this.Timer);
+	{
+		this.Timer = clearInterval(this.Timer);
+	}
 
 	min = Math.floor(this.WhitePlayer.Time / 60);
 	sec = this.WhitePlayer.Time % 60;
@@ -660,7 +670,9 @@ function INTERFACE_SetBTime()
 	var minStr, secStr;
 
 	if (this.BlackPlayer.Time <= 0)
-		clearInterval(this.Timer);
+	{
+		this.Timer = clearInterval(this.Timer);
+	}
 
 	min = Math.floor(this.BlackPlayer.Time / 60);
 	sec = this.BlackPlayer.Time % 60;
@@ -1315,3 +1327,74 @@ function INTERFACE_CreateOldGameTab(DivMoves)
 	return Tab;
 }
 
+function INTERFACE_LastMove(Move)
+{
+	var PosOrig = Move.charAt(0)+Move.charAt(1);
+	var PosDest = Move.charAt(2)+Move.charAt(3);
+
+	var OldPosOrig, OldPosDest;
+	var BlockOrig, BlockDest;
+	var OldBlockOrig, OldBlockDest;
+
+	if(this.LastMove != null)
+	{
+		OldPosOrig = this.LastMove.charAt(0)+this.LastMove.charAt(1);
+		OldPosDest = this.LastMove.charAt(2)+this.LastMove.charAt(3);
+		OldBlockOrig = this.FindBlock(OldPosOrig);
+		OldBlockDest = this.FindBlock(OldPosDest);
+
+		if((parseInt(UTILS_HorizontalIndex(OldPosOrig.charAt(0))) + parseInt(OldPosOrig.charAt(1))) % 2 == 0)
+		{
+			OldBlockOrig.className = "black";
+		}
+		else
+		{
+			OldBlockOrig.className = "white";
+		}
+
+		if((parseInt(UTILS_HorizontalIndex(OldPosDest.charAt(0))) + parseInt(OldPosDest.charAt(1))) % 2 == 0)
+		{
+			OldBlockDest.className = "black";
+		}
+		else
+		{
+			OldBlockDest.className = "white";
+		}
+
+	}
+	
+	if(Move != "------")
+	{
+		BlockOrig = this.FindBlock(PosOrig);
+		BlockDest = this.FindBlock(PosDest);
+
+		BlockDest.className = "select";
+		BlockOrig.className = "select";
+
+		this.LastMove = Move;
+	}
+	else
+	{
+		this.LastMove = null;
+	}
+}
+
+function INTERFACE_FindBlock(id)
+{
+	var i = 0;
+	var Blocks = this.BoardBlocks.getElementsByTagName("div");
+
+	while((Blocks[i].getAttribute("id")!=id) && (i<Blocks.length))
+	{
+		i++;
+	}
+
+	if(i==Blocks.length)
+	{
+		return null;
+	}
+	else
+	{
+		return Blocks[i];
+	}
+}
