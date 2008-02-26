@@ -5,35 +5,35 @@
 		<general_name>ChessD</general_name>
 	</general>
 	<login>
-		<login_title>Seja bem vindo à nova interface do ChessD!</login_title>
-		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
+		<login_title>Seja bem vindo Ã  nova interface do ChessD!</login_title>
+		<login_text>Esta Ã© uma versÃ£o de testes que nÃ£o depende da instalaÃ§Ã£o de outros programas. NÃ£o estÃ£o disponÃ­veis comandos para troca de mensagens com usuÃ¡rios do servidor antigo, sÃ³ Ã© possÃ­vel entre usuÃ¡rios que estejam utilizando a interface web. Contamos com a sua contribuiÃ§Ã£o, por meio de crÃ­ticas e sugestÃµes, para resolver possÃ­veis problemas encontrados e termos uma versÃ£o melhorada em breve!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha?</login_remember_pass>
-		<login_signin>Cadastro rápido</login_signin>
-		<login_user>Usuário</login_user>
+		<login_signin>Cadastro rÃ¡pido</login_signin>
+		<login_user>UsuÃ¡rio</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
-		<login_connection_refused>Servidor jabber indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
-		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
+		<login_connection_refused>Servidor jabber indisponÃ­vel no momento. Tente novamente mais tarde.</login_connection_refused>
+		<login_invalid_user>UsuÃ¡rio ou senha invÃ¡lidos.</login_invalid_user>
 		<login_load_wait>Aguarde...</login_load_wait>
 		<login_load_start>Iniciando carregador...</login_load_start>
 		<login_load_scripts>Carregando scripts...</login_load_scripts>
 		<login_load_css>Carregando css...</login_load_css>
 		<login_load_images>Carregando imagens...</login_load_images>
-		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
+		<login_load_user_list>Carregando lista de usuÃ¡rios...</login_load_user_list>
 	</login>
 	<menu>
 		<menu_search_game>Buscar Partida</menu_search_game>
-		<menu_search_user>Buscar Usuário</menu_search_user>
-		<menu_news>Notícias</menu_news>
-		<menu_preferences>Preferências</menu_preferences>
+		<menu_search_user>Buscar UsuÃ¡rio</menu_search_user>
+		<menu_news>NotÃ­cias</menu_news>
+		<menu_preferences>PreferÃªncias</menu_preferences>
 		<menu_help>Ajuda</menu_help>
 		<menu_exit>Sair</menu_exit>
 		<menu_current_games>Partidas em Andamento</menu_current_games>
 		<menu_challenges>Desafios</menu_challenges>
 		<menu_tourneys>Torneios</menu_tourneys>
 		<menu_rooms>Salas</menu_rooms>
-		<menu_history>Histórico</menu_history>
+		<menu_history>HistÃ³rico</menu_history>
 	</menu>
 	<contact>
 		<contact_contacts>Contatos</contact_contacts>
@@ -41,21 +41,21 @@
 		<contact_offline>Offline</contact_offline>
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
-		<contact_invite>Adicionar usuario</contact_invite>
-		<contact_invite_text> adicionou voce como contato, deseja aceitar?</contact_invite_text>
+		<contact_invite>Adicionar usuário</contact_invite>
+		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
-		<contact_search_user>Buscar usuario</contact_search_user>
+		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_search>Buscar</contact_search>
 		<contact_user>Usuario</contact_user>
 		<contact_cancel>Cancelar</contact_cancel>
-		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
-		<contact_user_found>Usuarios encontrados:</contact_user_found>
+		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
+		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_close>Fechar</contact_close>
 	</contact>
 	<chat>
-		<chat_warning>Atenção</chat_warning>
-		<chat_max_exceeded>Máximo %i chats abertos</chat_max_exceeded>
+		<chat_warning>AtenÃ§Ã£o</chat_warning>
+		<chat_max_exceeded>MÃ¡ximo %i chats abertos</chat_max_exceeded>
 	</chat>
 	<room>
 		<room_default>geral</room_default>
@@ -70,8 +70,8 @@
 		<room_create>Criar</room_create>
 		<room_cancel>Cancelar</room_cancel>
 		<room_cancel_text>Realmente deseja cancelar a criacao desta sala?</room_cancel_text>
-		<room_invalid_name>Nome inválido para sala</room_invalid_name>
-		<room_invalid_length>Tamanho máximo de 50 caracteres</room_invalid_length>
+		<room_invalid_name>Nome invÃ¡lido para sala</room_invalid_name>
+		<room_invalid_length>Tamanho mÃ¡ximo de 50 caracteres</room_invalid_length>
 		<room_yes>Sim</room_yes>
 		<room_no>Nao</room_no>
 	</room>
@@ -80,8 +80,8 @@
 	</group>
 	<status>
 		<status_offline>offline</status_offline>
-		<status_available>disponível</status_available>
-		<status_unavailable>indisponível</status_unavailable>
+		<status_available>disponÃ­vel</status_available>
+		<status_unavailable>indisponÃ­vel</status_unavailable>
 		<status_busy>ocupado</status_busy>
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
@@ -92,7 +92,7 @@
 		<usermenu_match>Convidar para jogar</usermenu_match>
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
-		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
+		<usermenu_view_profile>Ver perfil e informaÃ§Ãµes</usermenu_view_profile>
 	</usermenu>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>
@@ -122,17 +122,17 @@
 		<game_decline>Recusar</game_decline>
 		<game_ok>Ok</game_ok>
 		<game_cancel>Cancelar</game_cancel>
-		<game_draw>Requisição de empate</game_draw>
+		<game_draw>RequisiÃ§Ã£o de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
-		<game_draw_denied>%s recusou sua requisição de empate.</game_draw_denied>
+		<game_draw_denied>%s recusou sua requisiÃ§Ã£o de empate.</game_draw_denied>
 		<game_end_game>Fim de jogo</game_end_game>
 		<game_resign_text>%s desistiu da partida.</game_resign_text>
 		<game_adjourn>Adiar partida</game_adjourn>
 		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
-		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
+		<game_adjourn_denied>%s recusou sua requisiÃ§Ã£o de adiamento.</game_adjourn_denied>
 		<game_abort>Encerrar partida</game_abort>
 		<game_abort_text>%s deseja encerrar a partida, deseja aceitar?</game_abort_text>
-		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
+		<game_abort_denied>%s recusou sua requisiÃ§Ã£o de encerramento da partida.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
 		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
 		<game_checkmatew_text>Parabens! Voce ganhou de %s por xeque-mate.</game_checkmatew_text>
@@ -140,36 +140,36 @@
 		<game_timew_text>Voce ganhou de %s por tempo.</game_timew_text>
 		<game_timel_text>O seu tempo acabou. Voce perdeu para %s.</game_timel_text>
 
-		<game_options>Opções</game_options>
+		<game_options>OpÃ§Ãµes</game_options>
 		<game_moves>Lances</game_moves>
 		<game_send_draw>Empatar</game_send_draw>
 		<game_send_resign>Desistir</game_send_resign>
 		<game_send_terminate>Encerrar</game_send_terminate>
 		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
-		<game_give_time>Dar tempo ao adversário</game_give_time>
-		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
+		<game_give_time>Dar tempo ao adversÃ¡rio</game_give_time>
+		<game_pawn_promotion>PromoÃ§Ã£o do peÃ£o</game_pawn_promotion>
 		<game_promotion_queen>Rainha</game_promotion_queen>
 		<game_promotion_rook>Torre</game_promotion_rook>
 		<game_promotion_bishop>Bispo</game_promotion_bishop>
 		<game_promotion_knight>Cavalo</game_promotion_knight>
 
-		<game_white_pawn>Peão Branco</game_white_pawn>
+		<game_white_pawn>PeÃ£o Branco</game_white_pawn>
 		<game_white_rook>Torre Branca</game_white_rook>
 		<game_white_knight>Cavalo Branco</game_white_knight>
 		<game_white_bishop>Bispo Branco</game_white_bishop>
 		<game_white_queen>Rainha Branca</game_white_queen>
 		<game_white_king>Rei Branco</game_white_king>
 
-		<game_black_pawn>Peão Preto</game_black_pawn>
+		<game_black_pawn>PeÃ£o Preto</game_black_pawn>
 		<game_black_rook>Torre Preta</game_black_rook>
 		<game_black_knight>Cavalo Preto</game_black_knight>
 		<game_black_bishop>Bispo Preto</game_black_bishop>
 		<game_black_queen>Rainha Preta</game_black_queen>
 		<game_black_king>Rei Preto</game_black_king>
 
-		<game_button_first>In�cio</game_button_first>
+		<game_button_first>Início</game_button_first>
 		<game_button_prev>Anterior</game_button_prev>
-		<game_button_next>Pr�ximo</game_button_next>
-		<game_button_last>�ltimo</game_button_last>
+		<game_button_next>Próximo</game_button_next>
+		<game_button_last>Último</game_button_last>
 	</game>
 </language>
