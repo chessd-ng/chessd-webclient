@@ -560,8 +560,7 @@ function GAME_RemoveGame(GameID)
 		}
 		else
 		{
-			// TODO TODO TODO
-			WINDOW_Alert("Voce nao pode fechar um jogo em andamento");
+			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
 		}
 	}
 }
