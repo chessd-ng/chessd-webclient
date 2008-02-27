@@ -262,3 +262,22 @@ function WINDOW_SearchUserResult(UserList)
 	// Add Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+function WINDOW_Profile(Profile)
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowProfileWindow(Profile);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_window'));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Close Button
+/*	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	if (Div.Buttons.length == 3)
+	{
+		// Save Profile Button
+		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	}*/
+}
