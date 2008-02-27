@@ -95,7 +95,7 @@
 #Main #Left #Rooms .Room table {
 	display			: block;
 	height			: 25mm;
-	width			: 46mm;
+	width			: 48mm;
 	margin-top		: 2mm;
 	border-spacing	: 0px;
 	overflow		: auto;
@@ -166,16 +166,47 @@
 	padding			: 2px;
 	font			: 12px Trebuchet MS;
 	color			: #216778;
-	margin-bottom	: 5mm;
+	margin-bottom	: 1mm;
 }
 
+/* Emoticons */
+#Main #Left #Rooms .Room .emoticon {
+	margin-left		: 39mm;
+	cursor			: pointer;
+}
+
+#Main #Left #Rooms .Room #EmoticonDiv {
+	position		: absolute;
+	left			: 54mm;
+	top				: 50mm;
+	width			: 35mm;
+	height			: 39mm;
+	border			: 1px solid #216778;
+	background-color: #FFF;
+}
+
+#Main #Left #Rooms .Room #EmoticonList li {
+	list-style		: none;
+	float			: left;
+}
+
+#Main #Left #Rooms .Room #EmoticonList li img {
+	border			: 1px solid #FFF;
+}
+
+#Main #Left #Rooms .Room #EmoticonList li img:hover {
+	border			: 1px solid #FFA200;
+}
+
+/* Create room window */
+
 #CreateRoomDiv {
-	text-align	: center;
+	text-align		: center;
 }
 
 #CancelRoomDiv #TextDiv{
 	padding-top		:	30px;
-	position			:	relative;
+	position		:	relative;
 	text-align		: center;
 }
 
