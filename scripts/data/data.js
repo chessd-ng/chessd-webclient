@@ -1061,7 +1061,7 @@ function DATA_AddOldGame(GameId, PWName, PBName, Color)
 
 	this.OldGameList.push(NewOldGame);
 
-	return NewOldGame;
+	return this.OldGameList.length -1;
 }
 
 

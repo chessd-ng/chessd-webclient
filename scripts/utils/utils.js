@@ -480,3 +480,23 @@ function UTILS_String2Board(BoardString)
         return Board;
 }
 
+/************************************
+ * FUNCTIONS - CONVERT STRING       *
+ ************************************/
+
+/**
+* Convert a chat string to a format that can't be interpretated
+*
+* @param 	str is string
+* @return 	string with "<" and ">" replaced
+* @author
+*/
+function UTILS_ConvertChatString(Str)
+{
+	var StrTmp;
+
+	StrTmp = Str.replace(/</g,"&lt;");
+	StrTmp = StrTmp.replace(/>/g,"&gt;");
+
+	return StrTmp;
+}

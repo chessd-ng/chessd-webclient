@@ -283,6 +283,7 @@
 
 #MoveList{
 	list-style		: none;
+	height			: 30mm;
 	overflow		: auto;
 }
 

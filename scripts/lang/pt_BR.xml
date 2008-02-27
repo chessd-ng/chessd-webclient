@@ -24,7 +24,7 @@
 	</login>
 	<menu>
 		<menu_search_game>Buscar Partida</menu_search_game>
-		<menu_search_user>Buscar Usuá¡rio</menu_search_user>
+		<menu_search_user>Buscar Usuário</menu_search_user>
 		<menu_news>Notícias</menu_news>
 		<menu_preferences>Preferências</menu_preferences>
 		<menu_help>Ajuda</menu_help>
@@ -92,7 +92,7 @@
 		<usermenu_match>Convidar para jogar</usermenu_match>
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
-		<usermenu_view_profile>Ver perfil e informaÃ§Ãµes</usermenu_view_profile>
+		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
 	</usermenu>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>
