@@ -279,20 +279,49 @@
 
 #MoveListDiv{
 	position		: relative;
-	overflow		: auto;
 }
 
 #MoveList{
 	list-style		: none;
+	height			: 30mm;
+	overflow		: auto;
 }
 
-#MoveList .black{
+#MoveList.oldgame{
+	height			: 22mm;
+}
+
+#MoveList li.black{
 	background-color	: #216778;
 	color			: #FFF;
 }
 
 #MoveList span{
 	margin-left		: 3mm;
+}
+
+#MoveListDiv #MoveListButtons{
+	position                : absolute;
+	bottom                  : 0px;
+
+	background-color        : #FFF;
+
+	display                 : table;
+	width                   : 45.9mm;
+	height                  : 8mm;
+
+	border-style            : solid;
+	border-width            : 1px 0px 0px 0px;
+}
+
+#MoveListDiv #MoveListButtons input{
+	float                   : left;
+	margin-left             : 6mm;
+	margin-top              : 2mm;
+	border			: none;
+	width			: 14px;
+	height			: 15px;
+	cursor			: pointer;
 }
 
 #GameOptionDiv ul
@@ -426,4 +455,42 @@
 	border-color		: #ffa200;
 
 	color		: #ffa200;
+}
+
+#InfoTab1.oldgame{
+	width			: 46mm;
+}
+
+
+/*Move List Buttons*/
+#MoveListFirst{
+	background-image	: url("../images/board/first.png");
+}
+
+#MoveListFirst:hover {
+	background-image	: url("../images/board/first_active.png");
+}
+
+#MoveListPrev{
+	background-image	: url("../images/board/prev.png");
+}
+
+#MoveListPrev:hover {
+	background-image	: url("../images/board/prev_active.png");
+}
+
+#MoveListNext{
+	background-image	: url("../images/board/next.png");
+}
+
+#MoveListNext:hover {
+	background-image	: url("../images/board/next_active.png");
+}
+
+#MoveListLast{
+	background-image	: url("../images/board/last.png");
+}
+
+#MoveListLast:hover {
+	background-image	: url("../images/board/last_active.png");
 }

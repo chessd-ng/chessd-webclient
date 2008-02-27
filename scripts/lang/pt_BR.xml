@@ -15,7 +15,7 @@
 		<window_decline>Recusar</window_decline>
 	</window>
 	<login>
-		<login_title>Seja bem vindo à nova interface do ChessD!</login_title>
+		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
 		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha?</login_remember_pass>
@@ -23,7 +23,7 @@
 		<login_user>Usuário</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
-		<login_connection_refused>Servidor jabber indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
+		<login_connection_refused>Servidor de mensagens indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
 		<login_load_wait>Aguarde...</login_load_wait>
 		<login_load_start>Iniciando carregador...</login_load_start>
@@ -51,18 +51,22 @@
 		<contact_offline>Offline</contact_offline>
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
-		<contact_invite>Adicionar usuario</contact_invite>
-		<contact_invite_text> adicionou voce como contato, deseja aceitar?</contact_invite_text>
+		<contact_invite>Adicionar usuário</contact_invite>
+		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
-		<contact_search_user>Buscar usuario</contact_search_user>
+		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_search>Buscar</contact_search>
-		<contact_user>Usuario</contact_user>
+		<contact_user>Usuário</contact_user>
 		<contact_cancel>Cancelar</contact_cancel>
-		<contact_no_user_found>Nenhum usuario encontrado</contact_no_user_found>
-		<contact_user_found>Usuarios encontrados:</contact_user_found>
+		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
+		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_close>Fechar</contact_close>
 	</contact>
+	<chat>
+		<chat_warning>Atenção</chat_warning>
+		<chat_max_exceeded>Máximo %i chats abertos</chat_max_exceeded>
+	</chat>
 	<room>
 		<room_default>geral</room_default>
 		<room_contacts>Contatos</room_contacts>
@@ -72,14 +76,14 @@
 		<room_create_room>Criar sala</room_create_room>
 		<room_cancel_room>Cancelar sala</room_cancel_room>
 		<room_name>Nome: </room_name>
-		<room_description>Descricao: </room_description>
+		<room_description>Descrição: </room_description>
 		<room_create>Criar</room_create>
 		<room_cancel>Cancelar</room_cancel>
-		<room_cancel_text>Realmente deseja cancelar a criacao desta sala?</room_cancel_text>
+		<room_cancel_text>Realmente deseja cancelar a criação desta sala?</room_cancel_text>
 		<room_invalid_name>Nome inválido para sala</room_invalid_name>
 		<room_invalid_length>Tamanho máximo de 50 caracteres</room_invalid_length>
 		<room_yes>Sim</room_yes>
-		<room_no>Nao</room_no>
+		<room_no>Não</room_no>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
@@ -107,7 +111,7 @@
 		<challenge_title_invite>Convidar para jogar</challenge_title_invite>
 		<challenge_title_offer>Convite para jogar</challenge_title_offer>
 		<challenge_information>convidou para jogar uma partida com as seguintes caracteristicas:</challenge_information>
-		<challenge_pieces>Pecas:</challenge_pieces>
+		<challenge_pieces>Peças:</challenge_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
 		<challenge_category>Categoria de jogo:</challenge_category>
 		<challenge_inc_label>Incremento:</challenge_inc_label>
@@ -141,10 +145,12 @@
 		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
 		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
-		<game_checkmatew_text>Parabens! Voce ganhou de %s por xeque-mate.</game_checkmatew_text>
-		<game_checkmatel_text>Voce perdeu para %s por xeque-mate.</game_checkmatel_text>
-		<game_timew_text>Voce ganhou de %s por tempo.</game_timew_text>
-		<game_timel_text>O seu tempo acabou. Voce perdeu para %s.</game_timel_text>
+		<game_checkmatew_text>Parabéns! Você ganhou de %s por xeque-mate.</game_checkmatew_text>
+		<game_checkmatel_text>Você perdeu para %s por xeque-mate.</game_checkmatel_text>
+		<game_timew_text>Você ganhou de %s por tempo.</game_timew_text>
+		<game_timel_text>O seu tempo acabou. Você perdeu para %s.</game_timel_text>
+		<game_remove_game>Você não pode fechar um jogo em andamento</game_remove_game>
+		<game_remove_game_title>Atenção</game_remove_game_title>
 
 		<game_options>Opções</game_options>
 		<game_moves>Lances</game_moves>
@@ -172,6 +178,11 @@
 		<game_black_bishop>Bispo Preto</game_black_bishop>
 		<game_black_queen>Rainha Preta</game_black_queen>
 		<game_black_king>Rei Preto</game_black_king>
+
+		<game_button_first>Início</game_button_first>
+		<game_button_prev>Anterior</game_button_prev>
+		<game_button_next>Próximo</game_button_next>
+		<game_button_last>Último</game_button_last>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informacoes</profile_window>

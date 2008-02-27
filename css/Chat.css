@@ -1,0 +1,83 @@
+#Chat {
+	position		: absolute;
+	bottom			: 0px;
+	right			: 0px;
+	height			: 4.5mm;
+	width			: 100%;
+}
+
+/* chat list */
+#Chat #ChatList {	
+	list-style		: none;
+	height			: 100%;
+	margin-left		: 55mm;
+}
+
+#Chat #ChatList li {
+	float			: left;
+	width			: 25%;
+	position		: relative;
+}
+
+/* chat title */
+#Chat #ChatList .title {
+	height			: 4mm;
+	background-color: #216778;
+	font			: bold 12px Trebuchet MS;
+	color 			: #FFF;
+	text-indent		: 3mm;
+	position		: relative;
+}
+
+#Chat #ChatList .title_selec {
+	height			: 4mm;
+	background-color: #FFA200;
+	font			: bold 12px Trebuchet MS;
+	color 			: #FFF;
+	text-indent		: 3mm;
+	position		: relative;
+}
+
+#Chat #ChatInner {
+	padding			: 3px;
+	border			: 1px solid #216778;
+}
+
+/* chat icons */
+#Chat #ChatList .title img,
+#Chat #ChatList .title_selec img {
+	position		: absolute;
+	right			: 1mm;
+	top				: 4px;
+	cursor			: pointer;
+}
+
+/* chat box */
+#Chat #ChatList .ChatInside {
+	background-color: #FFF;
+	margin-right	: 2px;
+}
+
+#Chat #ChatList li ul {
+	border			: 1px solid #216778;
+	height			: 31mm;
+	overflow		: auto;
+}
+
+#Chat #ChatList li ul li {
+	width			: 100%;
+	list-style		: none;
+	float			: none;
+	border			: 0px;
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+}
+
+#Chat #ChatList li input {
+	width			: 99%;
+	border			: 1px solid #216778;
+	font			: 11px Trebuchet MS;
+	color			: #216778;
+	padding			: 2px 0px;
+	margin-top		: 1mm;
+}

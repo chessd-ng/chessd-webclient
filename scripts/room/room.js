@@ -52,7 +52,7 @@ function ROOM_HandleMessage(XML)
 	}
 
 	// Show message on interface
-	INTERFACE_ShowMessage(RoomName, From, Message, Stamp);
+	INTERFACE_ShowMessage(RoomName, From, UTILS_ConvertChatString(Message), Stamp);
 	
 	return "";
 }
@@ -101,22 +101,38 @@ function ROOM_HandleRoomList(XML)
 */
 function ROOM_HandleGameRoomList(XML)
 {
-	var Items, Rooms, RoomName, ID,  i;
-
-	Rooms = new Array();
+	var Items, i;
+	var Rooms = new Array();
+	var Name, WName, BName, Jid, GameId;
+	var P1, P2;
 
 	// Get items in XML
 	Items = XML.getElementsByTagName("item");
 
 	// Get the player's names
-	for (i=0; i < Items.length; i++)
+	for (i=0; i<Items.length; i++)
 	{
-		// Remove the server name of the player's ID
-		// and replace ' x ' to ' X '
-		Rooms[i] = Items[i].getAttribute("name");
-	}
+		P1 = new Object();
+		P2 = new Object();
 
-	INTERFACE_ShowGameRoomList(Rooms);
+		Name = Items[i].getAttribute("name");
+		WName = Name.split("x")[0].split("@")[0];
+		BName = Name.split("x")[1].split("@")[0].replace(" ","");
+		Jid = Items[i].getAttribute("jid");
+		GameId = Jid.split("@")[0];
+
+		P1.Name = WName;
+		P1.Time = 0;
+		P1.Color = "white";
+		P1.Inc = 0;
+
+		P2.Name = BName;
+		P2.Time = 0;
+		P2.Color = "black";
+		P2.Inc = 0;
+		
+		INTERFACE_ShowGameRoomList(GameId, Name, P1, P2);
+	}
 
 	return "";
 }
@@ -141,7 +157,7 @@ function ROOM_SendMessage(RoomName, Message)
 
 	// Send message to room
 	To = MainData.RoomList[i].MsgTo;
-	CONNECTION_SendJabber(MESSAGE_GroupChat(To, Message));
+	CONNECTION_SendJabber(MESSAGE_GroupChat(To, UTILS_ConvertChatString(Message)));
 	return true;
 }
 
@@ -207,6 +223,22 @@ function ROOM_ExitRoom()
 
 	// Exit room in jabber server
 	XML = MESSAGE_Unavailable(RoomName);
+	CONNECTION_SendJabber(XML);
+
+	return true;
+}
+
+/**
+* Send presence to a room game(enter room game)
+*/
+function ROOM_EnterRoomGame(RoomName)
+{
+	var XML, To;
+
+	To = RoomName+"@games."+MainData.Host+"/"+MainData.Username;
+
+	XML = MESSAGE_Presence(To);
+
 	CONNECTION_SendJabber(XML);
 
 	return true;

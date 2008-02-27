@@ -30,15 +30,7 @@ function MESSAGE_MakeXMPP(Msg, Type)
 
 	if (Msg != "")
 	{
-		if (Type == null)
-		{
-			XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
-		}
-		// Disconnecting
-		else 
-		{
-			XMPP = "<body type='"+Type+"' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
-		}
+		XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
 	}
 	else
 	{
@@ -54,30 +46,7 @@ function MESSAGE_MakeXMPP(Msg, Type)
 */
 function MESSAGE_Wait()
 {
-    return MESSAGE_MakeXMPP("");
-}
-
-
-/**
-* Merge messages into one
-*/
-function MESSAGE_MergeMessages(Msgs)
-{
-	var Msg, i, XML = "";
-
-
-	for (i=0; i<Msgs.length; i++)
-	{
-		if (Msgs[i] == "")
-			continue;
-
-		Msg = Msgs[i].replace(/<body .*?>/,"");
-		Msg = Msg.replace("</body>","");
-
-		XML += Msg;
-	}
-	
-	return MESSAGE_MakeXMPP(XML);
+    return "";
 }
 
 
@@ -96,6 +65,16 @@ function MESSAGE_StartConnection()
 }
 
 /**
+* End connection
+*/
+function MESSAGE_EndConnection()
+{
+	XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' />";
+
+	return XMPP;
+}
+
+/**
 * Send username to jabber
 */
 function MESSAGE_SendUsername()
@@ -107,7 +86,7 @@ function MESSAGE_SendUsername()
 	XMPP += "<username>"+MainData.Username+"</username>";
 	XMPP += "</query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -123,7 +102,7 @@ function MESSAGE_SendPasswd()
 	XMPP += "<password>"+MainData.Password+"</password>";
 	XMPP += "<resource>"+MainData.Resource+"</resource></query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -141,7 +120,7 @@ function MESSAGE_UserList()
    	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetUserList+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -154,7 +133,7 @@ function MESSAGE_RoomList()
    	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetRoomList+"' to='conference."+MainData.Host+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**********************************
@@ -186,7 +165,7 @@ function MESSAGE_Presence(To)
 
 	XMPP += "</presence>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -221,7 +200,7 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 			XMPP = "<presence xmlns='jabber:client'><show>"+NewStatus+"</show></presence>";
 		}
 	}
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -238,15 +217,7 @@ function MESSAGE_Unavailable(RoomName)
 	{
 		XMPP = "<presence to='"+RoomName+"@conference."+MainData.Host+"' xmlns='jabber:client' type='unavailable'></presence>";
 	}
-
-	// If 'RoomName' is null then user logged out
-	else
-	{
-		XMPP = '<presence xmlns="jabber:client" type="unavailable"><status>Logged out</status></presence>';
-		Type = "terminate";
-	}
-
-	return MESSAGE_MakeXMPP(XMPP, Type);
+	return XMPP;
 }
 
 /**********************************
@@ -260,11 +231,11 @@ function MESSAGE_Chat(To, Message)
 {
 	var XMPP;
 
-	XMPP  = "<message to='"+To+"' type='chat'>"
+	XMPP  = "<message to='"+To+"@"+MainData.Host+"/"+MainData.Resource+"' type='chat'>"
 	XMPP += "<body>"+Message+"</body>";
 	XMPP += "</message>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -278,7 +249,7 @@ function MESSAGE_GroupChat(To, Message)
 	XMPP += "<body>"+Message+"</body>";
 	XMPP += "</message>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**********************************
@@ -300,7 +271,7 @@ function MESSAGE_Info(User)
 	XMPP += "<type jid='"+User+"@"+MainData.Host+"' />";
 	XMPP += "</query></iq>";
 	
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -323,7 +294,7 @@ function MESSAGE_UserListInfo()
 	}
 	XMPP += "</query></iq>"
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**********************************
@@ -335,7 +306,7 @@ function MESSAGE_UserListInfo()
 */
 function MESSAGE_Invite(To)
 {
-	 return MESSAGE_MakeXMPP("<presence type='subscribe' to='"+To+"@"+MainData.Host+"' />"); 
+	 return "<presence type='subscribe' to='"+To+"@"+MainData.Host+"' />"; 
 }
 
 /**
@@ -343,7 +314,7 @@ function MESSAGE_Invite(To)
 */
 function MESSAGE_InviteAccept(To)
 {
-	return MESSAGE_MakeXMPP ("<presence type='subscribed' to='"+To+"@"+MainData.Host+"' />");
+	return "<presence type='subscribed' to='"+To+"@"+MainData.Host+"' />";
 }
 
 /**
@@ -351,7 +322,7 @@ function MESSAGE_InviteAccept(To)
 */
 function MESSAGE_InviteDeny(To)
 {
-	return MESSAGE_MakeXMPP ("<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />");
+	return "<presence type='unsubscribed' to='"+To+"@"+MainData.Host+"' />";
 }
 
 /**
@@ -359,14 +330,14 @@ function MESSAGE_InviteDeny(To)
 */
 function MESSAGE_RemoveContact(User)
 {
-	var XML;
+	var XMPP;
 
-	XML  = "<iq type='set' id='RemoveUser'>";
-	XML += "<query xmlns='jabber:iq:roster'>";
-	XML += "<item subscription='remove' jid='"+User+"@"+MainData.Host+"' />";
-	XML += "</query></iq>";
+	XMPP  = "<iq type='set' id='RemoveUser'>";
+	XMPP += "<query xmlns='jabber:iq:roster'>";
+	XMPP += "<item subscription='remove' jid='"+User+"@"+MainData.Host+"' />";
+	XMPP += "</query></iq>";
 
-	return MESSAGE_MakeXMPP(XML);
+	return XMPP;
 }
 
 
@@ -414,7 +385,7 @@ function MESSAGE_Challenge(Category, Players)
 	}
 	XMPP += "</match></query></iq>";
 	
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -430,7 +401,7 @@ function MESSAGE_ChallengeAccept(ChallengeID)
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -446,7 +417,7 @@ function MESSAGE_ChallengeDecline(ChallengeID)
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -467,7 +438,7 @@ function MESSAGE_GameRoomList()
    	XMPP  = "<iq type='get' id='"+MainData.Const.IQ_ID_GetGamesList+"' to='games."+MainData.Host+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -482,7 +453,7 @@ function MESSAGE_GameMove(Move, GameID)
 	XMPP += "<move long='"+Move+"'>";
 	XMPP += "</move></query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**
@@ -552,7 +523,7 @@ function MESSAGE_GameRequests(Action, GameID)
 
 	XMPP += "</query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 
@@ -634,7 +605,7 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 
 	XMPP += "</query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }
 
 /**********************************
@@ -711,5 +682,5 @@ function MESSAGE_SearchUser(Username)
 	*/
 	XMPP +=	"</x></query></iq>";
 
-	return MESSAGE_MakeXMPP(XMPP);
+	return XMPP;
 }

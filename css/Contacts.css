@@ -46,12 +46,13 @@
 	text-indent		: 5mm;
 	margin			: 1px 0px;
 	height			: 4.3mm;
+	width			: 100%;
 	font			: 11px Trebuchet MS;
 	color			: #000;
 }
 
 #Main #Left #Contact td {
-	width			: 31mm;
+	width			: 41mm;
 	text-align		: left;
 }
 

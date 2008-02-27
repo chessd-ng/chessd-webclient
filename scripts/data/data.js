@@ -43,6 +43,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
+	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
@@ -52,6 +53,7 @@ function DATA(ConfFile, LangFile)
 	* DATA STRUCTURE
 	*/
 	this.UserList = new Array();
+	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
@@ -120,8 +122,9 @@ DATA.prototype.SetTurn = DATA_SetTurnGame;
 
 DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
-DATA.prototype.AddOldGameMove = DATA_AddOldGameMove;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
+DATA.prototype.PushOldGame = DATA_PushGameToOldGame;
+
 DATA.prototype.GetGame = DATA_GetGame;
 DATA.prototype.GetOponent = DATA_GetOponent;
 
@@ -356,20 +359,23 @@ function DATA_SetRating(Username, Category, Rating)
 		UserPos = MainData.FindUser(Username);
 		Obj = MainData.UserList[UserPos];
 	}
-		
-	switch (Category)
+	
+	if (Obj)
 	{
-		case('blitz'):
-			Obj.Rating.Blitz = Rating;
-			break;
+		switch (Category)
+		{
+			case('blitz'):
+				Obj.Rating.Blitz = Rating;
+				break;
 
-		case('standard'):
-			Obj.Rating.Standard = Rating;
-			break;
-
-		case('lightning'):
-			Obj.Rating.Lightning = Rating;
-			break;
+			case('standard'):
+				Obj.Rating.Standard = Rating;
+				break;
+		
+			case('lightning'):
+				Obj.Rating.Lightning = Rating;
+				break;
+		}
 	}
 	
 	// Update rating in room user lists
@@ -581,6 +587,13 @@ function DATA_AddChat (Username, Status)
 	var Chat = new Object();
 	var i;
 
+
+	// Limit chat number
+	if (this.MaxChats <= this.ChatList.length)
+	{
+		throw "MaxChatExceeded";
+	}
+
 	i = this.FindChat(Username);
 	
 	// Try to find the same chat in structure
@@ -591,10 +604,11 @@ function DATA_AddChat (Username, Status)
 
 	// Setting atributes
 	Chat.Username = Username;
+	Chat.State = "hidden";
 	
 	if (Status == null)
 	{
-		Chat.Status = "available"
+		Chat.Status = "available";
 	}
 	else 
 	{
@@ -633,7 +647,7 @@ function DATA_RemoveChat(Username)
 		this.ChatList.splice(i, 1);
 	}
 
-	return "";
+	return true;
 }	
 
 
@@ -836,6 +850,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 
 	NewGame.Id = Id;
 	NewGame.YourColor = Color;
+	NewGame.BoardColor = Color;
 	
 	// Setting users colors
 	if (Color == "white")
@@ -1025,7 +1040,7 @@ function DATA_SetCurrentOldGame(Game)
 /**
 * Add a oldgame in 'OldGameList'
 */
-function DATA_AddOldGame(Id, P1Name, P2Name, Color)
+function DATA_AddOldGame(GameId, PWName, PBName, Color)
 {
 	var NewOldGame = new Object();
 
@@ -1034,14 +1049,19 @@ function DATA_AddOldGame(Id, P1Name, P2Name, Color)
 		MainData.SetCurrentGame(NewOldGame);
 	}
 
-	NewOldGame.Id = this.OldGameList.length;
-	NewOldGame.P1 = P1Name;
-	NewOldGame.P2 = P2Name;
-	NewOldGame.YouColor = Color;
+	NewOldGame.Id = GameId;
+	NewOldGame.PW = PWName;
+	NewOldGame.PB = PBName;
+	NewOldGame.Color = "none";
+	NewOldGame.BoardColor = Color
 	NewOldGame.IsYourTurn = false;
 	NewOldGame.Moves = new Array();
 
+	NewOldGame.AddMove = this.AddGameMove;
+
 	this.OldGameList.push(NewOldGame);
+
+	return this.OldGameList.length -1;
 }
 
 
@@ -1076,34 +1096,14 @@ function DATA_RemoveOldGame(Id)
 	
 }
 
-
-/**
-* Add a move in 'OldGameList[x].Moves' 
-*/
-function DATA_AddOldGameMove(Id, Board, Move, P1Time, P2Time, Turn)
+function DATA_PushGameToOldGame(GameObj)
 {
-	var GamePosition = Id;
-	var NewMove = new Object();
+	var Pos;
+	Pos = this.OldGameList.push(GameObj);
+	MainData.SetCurrentOldGame(GameObj);
 
-	if(this.OldGameList[GamePosition] == null)
-	{
-		return;
-	}
-	else
-	{
-		//Convert board string to board array of array
-		NewMove.Board = UTILS_String2Board(Board);
-
-		NewMove.Move = Move;
-		NewMove.P1Time = P1Time;
-		NewMove.P2Time = P2Time;
-		NewMove.Turn = Turn;
-
-		this.OldGameList[GamePosition].Moves.push(NewMove);
-	}
+	return Pos -1;
 }
-
-
 
 /**********************************
  * METHODS - WINDOWS              *

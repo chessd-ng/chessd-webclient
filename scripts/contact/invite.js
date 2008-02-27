@@ -72,7 +72,8 @@ function CONTACT_RemoveUser(Username)
 */
 function CONTACT_ReceiveSubscribe(Username)
 {
-	var XML, i;
+	var XML = "", i;
+	var Title, Text, Button1, Button2;
 
 	// Search user in sctructure
 	i = MainData.FindUser(Username);
@@ -84,13 +85,12 @@ function CONTACT_ReceiveSubscribe(Username)
 		if (MainData.UserList[i].Subs == "none")
 		{
 			MainData.SetSubs(Username, "from");
-			XML = new Array();
 			
 			// Send a subscribe and a subscribed to user
-			XML[0] = MESSAGE_InviteAccept(Username);
-			XML[1] = MESSAGE_Invite(Username);
+			XML += MESSAGE_InviteAccept(Username);
+			XML += MESSAGE_Invite(Username);
 
-			return MESSAGE_MergeMessages(XML);
+			return XML;
 		}
 		// Last confirmation
 		else if (MainData.UserList[i].Subs != "from")
@@ -106,26 +106,31 @@ function CONTACT_ReceiveSubscribe(Username)
 	// User is been added
 	else
 	{
-		// Ask user TODO TODO TODO
-		if (confirm("Deseja adicionar "+Username+"???"))
-		{
+		Title = UTILS_GetText("contact_invite");
+		Text = UTILS_GetText("contact_invite_text").replace(/%s/, UTILS_Capitalize(Username));
+		Button1 = new Object();
+		Button1.Name = UTILS_GetText("contact_auth");
+		Button1.Func = function () {
+			var XML = "";
+
 			if (MainData.AddUser(Username, "offline", "from"))
 			{
-				XML = new Array();
-
 				// Send a subscribe and a subscribed to user
-				XML[0] = MESSAGE_InviteAccept(Username);
-				XML[1] = MESSAGE_Invite(Username);
+				XML += MESSAGE_InviteAccept(Username);
+				XML += MESSAGE_Invite(Username);
 	
-				return MESSAGE_MergeMessages(XML);
+				CONNECTION_SendJabber(XML);
 			}
 		}
-		else
-		{
+
+		Button2 = new Object();
+		Button2.Name = UTILS_GetText("contact_decline");
+		Button2.Func = function () {
 			// Send a deny to user
-			XML = MESSAGE_InviteDeny(Username);
-			return XML;
+			CONNECTION_SendJabber(MESSAGE_InviteDeny(Username));
 		}
+
+		WINDOW_Confirm(Title, Text, Button1, Button2);
 	}
 	return "";
 }
@@ -139,12 +144,11 @@ function CONTACT_ReceiveSubscribed(Username)
 	if (MainData.SetSubs(Username, "both"))
 	{
 		INTERFACE_AddContact(Username, "available");
-		return true;
+
+		// Ask user type and rating
+		return MESSAGE_Info(Username);
 	}
-	else
-	{
-		return false;
-	}
+	return "";
 }
 
 /**
@@ -159,7 +163,7 @@ function CONTACT_ReceiveUnsubscribed(Username)
 	// If user is not in your list, something wrong! =D
 	if (i == null)
 	{
-		return false;
+		return "";
 	}
 
 	// User has removed you, do nothing
@@ -170,7 +174,7 @@ function CONTACT_ReceiveUnsubscribed(Username)
 
 		// Set user as offline
 		CONTACT_SetUserStatus(Username, "offline");
-		return true;
+		return "";
 	}
 
 	// Deny user invite

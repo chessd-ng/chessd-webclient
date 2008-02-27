@@ -348,13 +348,16 @@ function GAME_End(XML)
 	*/
 	// Show end game message to user
 	WINDOW_Alert(Title, Reason);
-	
+
 	// FInish game in structure
 	Game = MainData.GetGame(GameID);
+	Game.Game.StopTimer();
 	if (Game)
 	{
 		Game.Finished = true;
 	}
+
+	OLDGAME_EndGame(GameID);
 
 	// Set status to playing
 	return CONTACT_ChangeStatus("available", "return");
@@ -451,14 +454,54 @@ function GAME_StartGame(GameId, P1, P2)
 }
 
 /**
-* Start Game
+* Start Game in Observer Mode
+*
+* @param 	GameId = Game number
+* @param 	PWName is player white name
+* @param 	PBName is player black name
+* @return 	void
+* @author 	Rubens
+*/
+function GAME_StartObserverGame(GameId, P1, P2)
+{
+	var GameDiv;
+
+	// Hide current game
+	if (MainData.CurrentGame != null)
+	{
+		MainData.CurrentGame.Game.Hide();
+	}
+
+	// 38 -> default piece size
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white",38);
+	MainData.AddGame(GameId, P1.name, P2.name, "none", GameDiv);
+
+	MainData.CurrentGame.Finished = true;
+
+	// Show New Game
+	GameDiv.Show();
+	// Set Observer Mode
+	GameDiv.ObserverMode();
+
+	//Set Timers
+	GameDiv.UpdateWTime(0);
+	GameDiv.UpdateBTime(0);
+	GameDiv.SetWTime();
+	GameDiv.SetBTime();
+
+	// Send a message to get game moves
+	ROOM_EnterRoomGame(GameId)
+}
+
+/**
+* Update board in data struct and interface
 *
 * @param 	GameId = Game number
 * @param 	BoardStr = Board status in a string
 * @param 	Move = Chess Move (Piece/Orig-Dest)
 * @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
 * @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
-* @param 	TurnColor = color ("w"/"b")
+* @param 	TurnColor = color ("white"/"black")
 * @return 	void
 * @author 	Rubens
 */
@@ -498,16 +541,24 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	// Update turn in structure and interface
 	Game.SetTurn(TurnColor);
 	Game.Game.SetTurn(TurnColor);
+	
+	// Show new time
+	Game.Game.SetWTime();
+	Game.Game.SetBTime();
 
 	// Update interface
 	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
 	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
+	Game.Game.SetLastMove(Move);
 
 	return "";
 }
 
 /**
-* Remove a game
+* Remove a game from data struct and interface
+* @param 	GameId is the game identificator
+* @return 	void
+* @author 	Rubens and Pedro
 */
 function GAME_RemoveGame(GameID)
 {
@@ -522,8 +573,7 @@ function GAME_RemoveGame(GameID)
 		}
 		else
 		{
-			// TODO TODO TODO
-			WINDOW_Alert("Voce nao pode fechar um jogo em andamento");
+			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
 		}
 	}
 }
@@ -531,6 +581,11 @@ function GAME_RemoveGame(GameID)
 /**
 * Send a movement to server
 *
+* @param 	OldLine is line of piece origin position
+* @param 	OldCol is column of piece origin position
+* @param 	NewLine is line of piece dest position
+* @param 	NewCol is line of piece dest position
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
@@ -555,6 +610,8 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 /**
 * Send a draw message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendDraw(GameID)
@@ -565,6 +622,8 @@ function GAME_SendDraw(GameID)
 /**
 * Send a adjourn message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendCancel(GameID)
@@ -575,6 +634,8 @@ function GAME_SendCancel(GameID)
 /**
 * Send a adjourn message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendAdjourn(GameID)
@@ -585,6 +646,8 @@ function GAME_SendAdjourn(GameID)
 /**
 * Send a resign message to oponent
 *
+* @param 	GameId is the game identificator
+* @return 	void
 * @author	Pedro
 */
 function GAME_SendResign(GameID)

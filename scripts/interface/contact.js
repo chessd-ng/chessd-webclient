@@ -44,7 +44,7 @@ function INTERFACE_AddContact(Username, Status)
 		return true;
 	}
 
-	Contact = INTERFACE_CreateContact(Username, Status, Rating)
+	Contact = INTERFACE_CreateContact(Username, Status)
 	Node.appendChild(Contact);
 
 	return true;
@@ -413,62 +413,6 @@ function INTERFACE_CreateContactList()
 /*****************************
 *	FUNCTIONS - WINDOW
 ******************************/
-
-/**
-*	Create elements of invite window and returns div
-*
-* @param	User	User's nickname that sent the invitation
-* @return	Div; Array
-* @see		WINDOW_Invite();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowInviteWindow(User)
-{
-	// Variables
-	var Div;
-
-	var TextDiv, Username, Label;
-
-	var ButtonsDiv, Auth, Decline;
-
-	var Buttons = new Array();
-
-	// Main Div
-	Div = UTILS_CreateElement('div', 'InviteDiv');
-
-	// Text Div Elements
-	TextDiv = UTILS_CreateElement('div', 'TextDiv');
-
-	Username = UTILS_CreateElement('span',null,'username',UTILS_Capitalize(User));
-	Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_invite_text"));
-
-	// Buttons Div Elements
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-	Auth = UTILS_CreateElement('input',null,'button');
-	Auth.type = "button";
-	Auth.value = UTILS_GetText("contact_auth");
-	Buttons.push(Auth);
-
-	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.type = "button";
-	Decline.value = UTILS_GetText("contact_decline");
-	Buttons.push(Decline);
-
-	// Mount elements tree
-	// ButtonsDiv elements
-	ButtonsDiv.appendChild(Auth);
-	ButtonsDiv.appendChild(Decline);
-	
-	// TextDiv elements
-	TextDiv.appendChild(Username);
-	TextDiv.appendChild(Label);
-
-	// Main div elements
-	Div.appendChild(TextDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
 
 /**
 *	Create elements of search user window and returns div
