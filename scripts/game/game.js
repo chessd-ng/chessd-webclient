@@ -352,6 +352,7 @@ function GAME_End(XML)
 	// FInish game in structure
 	Game = MainData.GetGame(GameID);
 	Game.Game.StopTimer();
+
 	if (Game)
 	{
 		Game.Finished = true;
