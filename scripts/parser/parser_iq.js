@@ -23,6 +23,7 @@ function PARSER_ParseIq(XML)
 	var Type = XML.getAttribute("type");
 	var ID = XML.getAttribute("id");
 	var Query = XML.getElementsByTagName("query");
+	var vCard = XML.getElementsByTagName("vCard");
 	var Buffer = "";
 	var Xmlns = "";
 
@@ -30,6 +31,10 @@ function PARSER_ParseIq(XML)
 	if (Query.length > 0)
 	{
 		Xmlns = Query[0].getAttribute("xmlns");
+	}
+	else
+	{
+		Xmlns = vCard[0].getAttribute("xmlns");
 	}
 
 	switch (Type)
@@ -62,6 +67,10 @@ function PARSER_ParseIq(XML)
 			else if (Xmlns.match(/jabber:iq:search/))
 			{
 				Buffer += CONTACT_HandleSearchUser(XML);
+			}
+			else if (Xmlns.match(/vcard-temp/))
+			{
+				Buffer += PROFILE_HandleProfile(XML);
 			}
 			break;
 

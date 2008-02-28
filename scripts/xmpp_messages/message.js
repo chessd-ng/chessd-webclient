@@ -692,7 +692,7 @@ function MESSAGE_SearchUser(Username)
 function MESSAGE_GetProfile(Username)
 {
 	var XMPP = "";
-	XMPP += "<iq type='get' to="+Username+"@"+MainData.Host+" id="+MainData.Const.IQ_ID_GetProfile+">";
+	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetProfile+"'>";
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0' />";
 	XMPP += "</iq>";
 

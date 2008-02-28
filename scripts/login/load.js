@@ -102,6 +102,7 @@ function LOGIN_LoadScripts()
 	Scripts[24] = "scripts/contact/search.js";
 	Scripts[25] = "scripts/game/oldgame.js";
 	Scripts[26] = "scripts/interface/chat.js";
+	Scripts[27] = "scripts/profile/profile.js";
 
 
 	// Carregando arquivos

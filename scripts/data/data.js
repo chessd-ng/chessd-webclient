@@ -70,6 +70,7 @@ function DATA(ConfFile, LangFile)
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
 	
+	this.ProfileList = new Object();
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
@@ -132,6 +133,10 @@ DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
 DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
 DATA.prototype.FindWindow = DATA_FindWindow;
+
+DATA.prototype.AddProfile = DATA_AddProfile;
+DATA.prototype.RemoveProfile = DATA_RemoveProfile;
+DATA.prototype.FindProfile = DATA_FindProfile;
 
 /**********************************
  * METHODS - USER LIST            *
@@ -1125,8 +1130,6 @@ function DATA_AddWindow(WindowObj)
 */
 function DATA_ChangeWindowFocus(WindowObj)
 {
-	var i;
-
 	if(this.Windows.Focus == WindowObj)
 	{
 		return null;
@@ -1141,7 +1144,6 @@ function DATA_ChangeWindowFocus(WindowObj)
 */
 function DATA_RemoveWindow(WindowObj)
 {
-	var i;
 	var WindowIndex = this.FindWindow(WindowObj);
 	var WindowListLen = this.Windows.WindowList.length;
 
@@ -1171,4 +1173,83 @@ function DATA_FindWindow(WindowObj)
 		i++;
 	}
 	return null;
+}
+
+
+/**********************************
+ * METHODS - PROFILE              *
+ **********************************/
+
+function DATA_AddProfile(Jid, Username, ProfileWindow)
+{
+	var NewProfile = new Object();
+	 
+	// Data Id
+	NewProfile.Jid = Jid;
+	NewProfile.Profile = ProfileWindow;
+
+	// vCard Data
+	NewProfile.Fullname = "---";
+	NewProfile.Nickname = Username;
+	NewProfile.Desc = "---";
+	NewProfile.PhotoImg = "";
+	NewProfile.PhotoType = "";
+
+	// Chess Data
+	NewProfile.Rating = "---";
+	NewProfile.LastGame = "---";
+	NewProfile.OnlineTime = "---";
+	NewProfile.Title = "---";
+	NewProfile.TotalTime = "---";
+	NewProfile.Group = "---";
+	NewProfile.Warning = "";
+	NewProfile.GameInfo = null; //Table
+
+	this.ProfileList.push(NewProfile);
+
+}
+
+function DATA_FindProfile(Jid)
+{
+	var i=0;
+
+	while(i<this.ProfileList.length)
+	{
+		if(this.ProfileList[i].Jid == Jid)
+		{
+			return i;
+		}
+		i++;
+	}
+	return null;
+}
+
+function DATA_RemoveProfile(Jid)
+{
+	var ProfileIndex = this.FindProfile(Jid);
+
+	if (ProfileIndex == null)
+	{
+		return false
+	}
+
+	//Remove Profile from ProfileList
+	this.ProfileList.splice(ProfileIndex,1);
+
+}
+
+function DATA_GetProfile(Jid)
+{
+	var i=0;
+
+	while(i<this.ProfileList.length)
+	{
+		if(this.ProfileList[i].Jid == Jid)
+		{
+			return this.ProfileList[i];
+		}
+		i++;
+	}
+	return null;
+
 }

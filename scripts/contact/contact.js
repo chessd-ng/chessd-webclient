@@ -366,7 +366,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	// View user's profile
 	Options[i] = new Object();
 	Options[i].Name = UTILS_GetText("usermenu_view_profile");
-	Options[i].Func = function () { };
+	Options[i].Func = function () { PROFILE_StartProfile(Username) };
 
 	// Show menu in user's screen
 	INTERFACE_ShowUserMenu(Obj, Options);
