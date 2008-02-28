@@ -41,6 +41,7 @@ function INTERFACE_CreateLeft()
 function INTERFACE_CreateUserBox()
 {
 	var UserDiv, UserImg, UserInf, Name, Status, StatusItem;
+	var UserType = MainData.Type;
 
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img","UserImg");
@@ -48,25 +49,25 @@ function INTERFACE_CreateUserBox()
 	UserImg.src = "images/no_photo.png";
 	UserInf = UTILS_CreateElement("div", "UserInf");
 	Name = UTILS_CreateElement("h2", null, null, UTILS_Capitalize(MainData.Username));
-	Status = UTILS_CreateElement("select");
+	Status = UTILS_CreateElement("select", "UserStatusSelect");
 
 	// Available
-	StatusItem = UTILS_CreateElement("option", null, "available", "("+UTILS_Capitalize(UTILS_GetText("status_available"))+")");
+	StatusItem = UTILS_CreateElement("option", null, UserType+"_available", "("+UTILS_Capitalize(UTILS_GetText("status_available"))+")");
 	StatusItem.value = "available";
 	Status.appendChild(StatusItem);
 
 	// Unavailable
-	StatusItem = UTILS_CreateElement("option", null, "unavailable", "("+UTILS_Capitalize(UTILS_GetText("status_unavailable"))+")");
+	StatusItem = UTILS_CreateElement("option", null, UserType+"_unavailable", "("+UTILS_Capitalize(UTILS_GetText("status_unavailable"))+")");
 	StatusItem.value = "unavailable";
 	Status.appendChild(StatusItem);
 
 	// Busy
-	StatusItem = UTILS_CreateElement("option", null, "busy", "("+UTILS_Capitalize(UTILS_GetText("status_busy"))+")");
+	StatusItem = UTILS_CreateElement("option", null, UserType+"_busy", "("+UTILS_Capitalize(UTILS_GetText("status_busy"))+")");
 	StatusItem.value = "busy";
 	Status.appendChild(StatusItem);
 
 	// Away
-	StatusItem = UTILS_CreateElement("option", null, "away", "("+UTILS_Capitalize(UTILS_GetText("status_away"))+")");
+	StatusItem = UTILS_CreateElement("option", null, UserType+"_away", "("+UTILS_Capitalize(UTILS_GetText("status_away"))+")");
 	StatusItem.value = "away";
 	Status.appendChild(StatusItem);
 

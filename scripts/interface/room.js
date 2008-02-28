@@ -104,7 +104,7 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 {
 	var Item, Node = document.getElementById(RoomName+"_Messages");
-	var Message, Time;
+	var Message, Time, EmoticonNum;
 
 	if (!Node)
 	{
@@ -304,6 +304,11 @@ function INTERFACE_ShowEmoticonList(RName)
 		List.appendChild(Item);
 	}
 	Div.appendChild(List);
+	Div.style.width = ((26*5)+2)+"px";
+	Div.style.height = ((29*5)+2)+"px";
+
+	// TODO TODO TODO
+	//Div.style.top = "-"+((29*5)+2)+"px";
 
 	document.getElementById("RoomInside_"+RoomName).appendChild(Div);
 
