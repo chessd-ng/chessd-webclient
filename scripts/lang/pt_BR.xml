@@ -210,5 +210,9 @@
 		<profile_old_games1>Minhas partidas</profile_old_games1>
 		<profile_old_games2>Partidas de </profile_old_games2>
 		<profile_save>Salvar alteracoes</profile_save>
+		<profile_discard>Fechar sem salvar</profile_discard>
+		<profile_save_close>Salvar e fechar</profile_save_close>
+		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
+		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
 	</profile>
 </language>
