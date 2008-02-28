@@ -1,26 +1,92 @@
 /**
 * ProfileDiv
 */
-#ProfileDiv .inf,
-#ProfileDiv .inf_whoami {
-	display			: block;
-	font 			: 11px Trebuchet MS;
-	color			: #216778;
-	margin-top		: 10px;
-	width			: 30mm;
+/* CSS ProfileDiv Window */
+
+#ProfileDiv {
+	padding	:	10px 1px 10px 10px;
 }
 
-#ProfileDiv .inf_whoami {
-	max-height		: 15mm;
-	width					: 47mm;
-	overflow			: auto;
+#ProfileDiv #TopDiv {
+	display		:	table;
 }
 
-#ProfileDiv .valor {
-	font 			: 11px Trebuchet MS;
-	font-weight		: normal;
+#ProfileDiv #ProfPhotoDiv {
+	float				:	left;
+	text-align	:	center;
+	width				:	20mm;
 }
 
+#ProfileDiv #TopRightDiv #TopRight_LeftDiv {
+	width			: 90px;
+	float			:	left;
+	padding-left	:	10mm;
+}
+
+#ProfileDiv #TopRightDiv #TopRight_RightDiv {
+	padding-left	: 45mm;
+	padding-top		:	2px;
+}
+
+#ProfileDiv #RatingDiv {
+}
+
+#ProfileDiv #WhoDiv {
+	display	: table;
+	margin-top	:	5px;
+	margin-left:	2mm;
+	padding-right	:	15px;
+}
+
+#ProfileDiv #WhoDiv #WhoLeftDiv {
+	width			: 70px;
+	float			:	left;
+}
+
+#ProfileDiv #WhoDiv #WhoRightDiv {
+	padding-left	: 70px;
+	padding-top	: 2px;
+}
+#ProfileDiv #BottomDiv {
+	display	:	table;
+}
+
+#ProfileDiv #BottomDiv #BottomLeftDiv {
+	float	: left;
+	width	:	200px
+}
+
+#ProfileDiv #BottomDiv #BottomRightDiv {
+	margin-left	:	200px;
+	width				:	130px;
+	text-align	: center;
+	position		:	relative;
+	top					:	20px;
+}
+
+#ProfileDiv #TimeDiv #TimeLeftDiv {
+	float	: left;
+	width	:	50%;
+}
+
+#ProfileDiv #TimeDiv {
+	display	:	table;
+}
+
+#ProfileDiv #TimeDiv #TimeRightDiv {
+	margin-left	:	60%;
+}
+
+#ProfileDiv #OldGamesDiv {
+	margin-top	:	10px;
+}
+
+#ProfileDiv #ButtonsDiv {
+	margin-top	:	5mm;
+	text-align	: center;
+}
+
+/* Style */
 #ProfileDiv table {
 	display			: block;
 	width			: 95mm; 
@@ -39,9 +105,48 @@
 	text-align		: center;
 }
 
+#ProfileDiv p {
+	font 			: bold 12px Trebuchet MS;
+	color			: #216778;
+	margin-top		: 3mm;
+}
+/* Class */
+
+#ProfileDiv .edit_photo {
+	cursor		:	pointer;
+	font 			: 10px Trebuchet MS;
+	color			: #216778;
+}
+#ProfileDiv .inf,
+#ProfileDiv .inf_whoami {
+	display			: block;
+	font 			: 11px Trebuchet MS;
+	color			: #216778;
+	margin-top		: 10px;
+	width			: 40mm;
+	padding-left : 5px;
+}
+
+#ProfileDiv .inf_whoami {
+	max-height		: 10mm;
+	overflow		: auto;
+	width			: 70mm;
+}
+
+#ProfileDiv .value {
+	font 			: 11px Trebuchet MS;
+	font-weight		: normal;
+	padding-left	:	10px;
+}
+
 #ProfileDiv .header {
 	background-color: #EAF5F4;
 	font-weight		: bold;
+}
+
+#ProfileDiv .oldgames {
+	font 			: 12px Trebuchet MS;
+	color			: #216778;
 }
 
 #ProfileDiv .oldgames:hover {
@@ -49,51 +154,17 @@
 	cursor			: pointer;
 }
 
-#ProfileDiv .edit_photo {
-	font 			: 11px Trebuchet MS;
-	color			: #216778;
-	width			: 70mm;
+#WindowBox .button_big {
+	padding-bottom	: 5px;
+	border					: 0px;
+	font 						: bold 12px Trebuchet MS;
+	color						: #FFF;
+	cursor					: pointer;
+	margin					: 0px 0px 5px 2px;
+	padding					: 1px 2px;
+	position				: relative;
+	bottom					: 10px;
+	background			: #216778;
+	width						: 120px;
 }
 
-#ProfileDiv #EditableDiv {
-	padding-top		:	10px;
-	padding-left :	10px;
-}
-#ProfileDiv #ProfPhotoDiv {
-	text-align	: center;
-	float				: left;
-	display			: block;
-}
-
-#ProfileDiv #TopLeftDiv {
-	float				:	left;
-	display			: block;
-	width				: 20mm;
-	position		: relative;
-	left				:	10mm;
-}
-
-#ProfileDiv #TopRightDiv {
-	padding-left	: 50mm;
-}
-
-#ProfileDiv .label {
-	font-weight	:	bold;
-	padding-top	: 10px;
-}
-
-#ProfileDiv #WhoDiv {
-	padding-top	: 20px;
-	position		: relative;
-	left				:	2mm;
-}
-
-#ProfileDiv #WhoDiv #WhoLeftDiv {
-	float				: left;
-	width				:	20mm;
-	display			: block;
-}
-
-#ProfileDiv #WhoDiv #WhoRightDiv {
-	padding-left	: 20mm;
-}

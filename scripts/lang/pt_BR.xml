@@ -62,6 +62,9 @@
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_close>Fechar</contact_close>
+		<contact_user>Usuario</contact_user>
+		<contact_teacher>Professor</contact_teacher>
+		<contact_admin>Administrador</contact_admin>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
@@ -202,5 +205,8 @@
 		<profile_draw>Empates</profile_draw>
 		<profile_lose>Derrotas</profile_lose>
 		<profile_edit_photo>Editar imagem</profile_edit_photo>
+		<profile_old_games1>Minhas partidas</profile_old_games1>
+		<profile_old_games2>Partidas de </profile_old_games2>
+		<profile_save>Salvar alteracoes</profile_save>
 	</profile>
 </language>
