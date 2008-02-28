@@ -221,11 +221,22 @@ function CONNECTION_ReceiveConnection()
 function CONNECTION_ReceiveXml()
 {
 	var XML, Buffer = "";
-	
+	var State, Status;
+
 
 	if (MainData.HttpRequest.readyState == 4)
 	{
-		if (MainData.HttpRequest.status == 200)
+		// Try to get http request status
+		try
+		{
+			Status = MainData.HttpRequest.status;
+		}
+		catch (e)
+		{
+			return null;
+		}
+
+		if (Status == 200)
 		{
 			// Get Xml response
 			XML = MainData.HttpRequest.responseXML;

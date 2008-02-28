@@ -214,15 +214,23 @@ function ROOM_EnterRoom(RoomName)
 */
 function ROOM_ExitRoom()
 {
-	var XML, RoomName;
+	var XML, RoomName, RoomPos;
 
 	// Close room on the interface
 	// Interface tells what room to close
 	// ps: default room cannot be closed
 	RoomName = INTERFACE_CloseRoom();
 
+	RoomPos = MainData.FindRoom(RoomName);
+
+	// If RoomName isn't in sctructure
+	if (!RoomPos)
+	{
+		return null;
+	}
+
 	// Exit room in jabber server
-	XML = MESSAGE_Unavailable(RoomName);
+	XML = MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
 	CONNECTION_SendJabber(XML);
 
 	return true;
