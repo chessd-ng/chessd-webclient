@@ -736,7 +736,7 @@ function INTERFACE_SetBPhoto(PhotoType, PhotoStr)
 */
 function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 {
-	
+	var ScrollTop, ScrollHeight, ClientHeight;
 	var Item;
 	if(NumTurn % 2)
 	{
@@ -803,6 +803,18 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(BTimerSpan);
 
 	this.MoveList.appendChild(Item);
+
+	// Set Movelist scroll position;
+	ScrollTop = this.MoveList.scrollTop;
+	ScrollHeigth = this.MoveList.scrollHeight;
+	ClientHeight = this.MoveList.clientHeight;
+	/*
+	if((ScrollHeight > ClientHeight) && ((ScrollTop+1)>=(ScrollHeight-ClientHeight-20)))
+	{
+		this.MoveList.scrollTop += 20;
+	}
+	*/
+	this.MoveList.scrollTop += 14;
 }
 
 /**
