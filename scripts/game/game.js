@@ -321,31 +321,9 @@ function GAME_End(XML)
 	}
 	else
 	{
-		// Internacionalizar TODO TODO
-		Reason = "O jogo foi cancelado.";
+		Reason = UTILS_GetText("game_canceled");
 	}
 	
-	/* Get the winner player
-	PlayerTag = XML.getElementsByTagName("player");
-
-	if (PlayerTag.length > 0)
-	{
-		if (PlayerTag[0].getAttribute("result") == "winner")
-		{
-			// Winner JID
-			Winner = PlayerTag[0].getAttribute("jid").replace(/@.*,"");
-		}
-		else 
-		{
-			Winner = PlayerTag[1].getAttribute("jid").replace(/@.*,"");
-		}
-		Text = "Vencedor:"+Winner+"<br />Razao: "+Reason;
-	}
-	else
-	{
-		Text = Reason;
-	}
-	*/
 	// Show end game message to user
 	WINDOW_Alert(Title, Reason);
 
@@ -474,7 +452,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	}
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white",38);
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38);
 	MainData.AddGame(GameId, P1.name, P2.name, "none", GameDiv);
 
 	MainData.CurrentGame.Finished = true;

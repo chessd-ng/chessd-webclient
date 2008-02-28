@@ -41,7 +41,14 @@ function INTERFACE_CreateLeft()
 function INTERFACE_CreateUserBox()
 {
 	var UserDiv, UserImg, UserInf, Name, Status, StatusItem;
-	var UserType = MainData.Type;
+	var UserType;
+
+	UserType = MainData.Type;
+
+	if (!UserType)
+	{
+		UserType = "user";
+	}
 
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img","UserImg");

@@ -473,6 +473,8 @@ function INTERFACE_ShowSearchUserWindow()
 	Div.appendChild(FormDiv);
 	Div.appendChild(ButtonsDiv);
 
+	Input.focus();
+
 	return {Div:Div, Buttons:Buttons};
 }
 

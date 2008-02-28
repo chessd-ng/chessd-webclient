@@ -141,7 +141,6 @@ function CONTACT_HandleRoomPresence(XML)
 	// Get Attributes
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
-	TypeNode = XML.getElementsByTagName("type");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
 	RoomName = From.replace(/@.*/, "");

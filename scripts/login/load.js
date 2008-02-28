@@ -103,6 +103,7 @@ function LOGIN_LoadScripts()
 	Scripts[25] = "scripts/game/oldgame.js";
 	Scripts[26] = "scripts/interface/chat.js";
 	Scripts[27] = "scripts/profile/profile.js";
+	Scripts[28] = "scripts/interface/profile.js";
 
 
 	// Carregando arquivos
@@ -145,6 +146,7 @@ function LOGIN_LoadCss()
 	Files[7] = "css/Board.css";
 	Files[8] = "css/Game.css";
 	Files[9] = "css/Chat.css";
+	Files[10] = "css/Profile.css";
 
 
 	if(MainData.Browser != 1) //IE
