@@ -5,6 +5,7 @@
 		<cookie-validity>10</cookie-validity>
 		<max-rooms>5</max-rooms>
 		<max-chats>4</max-chats>
+		<emoticon-num>35</emoticon-num>
 	</general>
 	<jabber>
 		<host>shiva</host>

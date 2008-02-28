@@ -104,7 +104,7 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 {
 	var Item, Node = document.getElementById(RoomName+"_Messages");
-	var Message, Time;
+	var Message, Time, EmoticonNum;
 
 	if (!Node)
 	{
@@ -126,6 +126,8 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
+	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+
 	return true;
 }
 
@@ -285,7 +287,7 @@ function INTERFACE_ShowEmoticonList(RName)
 	Div = UTILS_CreateElement("div", "EmoticonDiv");
 	List = UTILS_CreateElement("ul", "EmoticonList");
 
-	for (i=0; i<25; i++)
+	for (i=0; i<MainData.EmoticonNum; i++)
 	{
 		Item = UTILS_CreateElement("li");
 		Img = UTILS_CreateElement("img", null, i);

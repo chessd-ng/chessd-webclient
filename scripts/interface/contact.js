@@ -184,6 +184,7 @@ function INTERFACE_SetUserType(Username, NewType)
 	var User = document.getElementById("contact-"+Username);
 	var List, Node, i;
 
+
 	// Updating user's type
 	if (User)
 	{
