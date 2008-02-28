@@ -126,6 +126,8 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
+	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+
 	return true;
 }
 
@@ -285,7 +287,7 @@ function INTERFACE_ShowEmoticonList(RName)
 	Div = UTILS_CreateElement("div", "EmoticonDiv");
 	List = UTILS_CreateElement("ul", "EmoticonList");
 
-	for (i=0; i<25; i++)
+	for (i=0; i<MainData.EmoticonNum; i++)
 	{
 		Item = UTILS_CreateElement("li");
 		Img = UTILS_CreateElement("img", null, i);
@@ -304,11 +306,6 @@ function INTERFACE_ShowEmoticonList(RName)
 		List.appendChild(Item);
 	}
 	Div.appendChild(List);
-	Div.style.width = ((26*5)+2)+"px";
-	Div.style.height = ((29*5)+2)+"px";
-
-	// TODO TODO TODO
-	//Div.style.top = "-"+((29*5)+2)+"px";
 
 	document.getElementById("RoomInside_"+RoomName).appendChild(Div);
 

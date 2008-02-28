@@ -51,7 +51,16 @@ function CHAT_HandleMessage(XML)
 */
 function CHAT_OpenChat(Username)
 {
-	var Title, Msg;
+	var Title, Msg, Status;
+
+	if ((!MainData.FindUser(Username)) && (!MainData.FindUserInRoom("geral", Username)))
+	{
+		Status = "offline";
+	}
+	else
+	{
+		Status = null;
+	}
 
 	try
 	{
@@ -62,7 +71,7 @@ function CHAT_OpenChat(Username)
 		}
 
 		// Show on interface
-		INTERFACE_OpenChat(Username);
+		INTERFACE_OpenChat(Username, Status);
 
 		return true;
 	}
@@ -145,12 +154,7 @@ function CHAT_ReceiveMessage(Username, Message)
 	// Do not exists a opened chat session
 	if (ChatPos == null)
 	{
-		if (MainData.AddChat(Username))
-		{
-			INTERFACE_OpenChat(Username);
-		}
-		else
-			return false;
+		CHAT_OpenChat(Username);
 
 		INTERFACE_FocusChat(Username);
 	}
