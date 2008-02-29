@@ -402,6 +402,68 @@ function INTERFACE_ShowProfileWindow(Profile)
 	return {Div:Div, Buttons:Buttons, Elements:Elements}
 }
 
+/**
+*	Create elements of confirm profile close window and returns div
+*
+* @return	Div; Array
+* @see		WINDOW_ProfileConfirm();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowProfileConfirmWindow()
+{
+	// Variables
+	var Div;
+	var Buttons = new Array();
+	var TextDiv;
+	var Label;
+	var ButtonsDiv;
+	var Discard;
+	var Save;
+	var Cancel;
+	// Main Div
+	Div = UTILS_CreateElement("div","ProfileConfirmDiv");
+	// Text Div
+	TextDiv = UTILS_CreateElement("div","TextDiv");
+	Label = UTILS_CreateElement("p",null,null,UTILS_GetText('profile_confirm'));
+	// Buttons Div
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+	Discard = UTILS_CreateElement("input", null,"button_big");
+	Discard.type = "button";
+	Discard.value = UTILS_GetText('profile_discard');
+	//TODO 
+	//insert discard functions
+
+	Save = UTILS_CreateElement("input", null,"button_big");
+	Save.type = "button";
+	Save.value = UTILS_GetText('profile_save_close');
+	// TODO
+	// save changes functions
+
+	Cancel = UTILS_CreateElement("input", null,"button_big");
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText('window_cancel');
+	// TODO
+	// close this window and return to profile window
+	// Insert buttons in array to return
+	Buttons.push(Discard);
+	Buttons.push(Save);
+	Buttons.push(Cancel);
+
+	// Mount tree elements
+	// Buttons elements
+	ButtonsDiv.appendChild(Discard);
+	ButtonsDiv.appendChild(Save);
+	ButtonsDiv.appendChild(Cancel);
+
+	// Text elements
+	TextDiv.appendChild(Label);
+
+	// Main Div elements
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
 
 function INTERFACE_ProfileSetUser(Username)
 {
@@ -412,37 +474,30 @@ function INTERFACE_ProfileSetUserImg(Img)
 {
 	this.UserImg.src = Img;
 }
-
 function INTERFACE_ProfileSetNick(Nick)
 {
 	this.Nick.value = Nick;
 }
-
 function INTERFACE_ProfileSetDesc(Desc)
 {
 	this.Desc.value = Desc;
 }
-
 function INTERFACE_ProfileSetRatings()
 {
 	WINDOW_Alert("Ratings","Fazer funcoes para atualizar ratings");
 }
-
 function INTERFACE_ProfileSetTotalTime(Time)
 {
 	this.TotalTime.innerHTML = Time;
 }
-
 function INTERFACE_ProfileSetOnlineTime(Time)
 {
 	this.OnlineTime.innerHTML = Time;
 }
-
 function INTERFACE_ProfileSetTitle(Title)
 {
 	this.Title.innerHTML = Title;
 }
-
 function INTERFACE_ProfileSetTitleImg(NewSrc)
 {
 	this.TitleImg.src = NewSrc;
@@ -452,4 +507,3 @@ function INTERFACE_ProfileSetGroup(Group)
 {
 	this.Group.innerHTML = Group;
 }
-

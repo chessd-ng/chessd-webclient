@@ -285,3 +285,21 @@ function WINDOW_Profile(Profile)
 
 	return Elements;
 }
+
+function WINDOW_ProfileConfirm(Profile)
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowProfileConfirmWindow(Profile);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_confirm_close'));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Discard Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Save Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

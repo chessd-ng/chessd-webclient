@@ -16,8 +16,13 @@ class db{
 
 	function selectData($sql){
 
+		$result = "ok";
+
 		if(!isset($this->dbconn)){
 			$conn = $this->dbConnect();
+			$stat = pg_connection_status($conn);
+			if($stat != PGSQL_CONNECTION_OK)
+				return "Error: $conn, Connection error";
 		}else{
 			$conn = $this->dbconn;
 		}
@@ -33,18 +38,18 @@ class db{
 
 		$result = "ok";
 
-		try{
-			if(!isset($this->dbconn)){
-				$conn = $this->dbConnect();
-			}else
-				$conn = $this->dbconn;
+		if(!isset($this->dbconn)){
+			$conn = $this->dbConnect();
+			$stat = pg_connection_status($conn);
+			if($stat != PGSQL_CONNECTION_OK)
+				return "Error: $conn, Connection error";
 
-			if(!@pg_query($conn, $sql)){
-				$result = pg_last_error($conn);
+		}else
+			$conn = $this->dbconn;
 
-			}
-		}catch(Exception $e){
-			$result = $e;
+		if(!@pg_query($conn, $sql)){
+			$result = pg_last_error($conn);
+
 		}
 		
 		return $result;
