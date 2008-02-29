@@ -32,7 +32,7 @@ function PARSER_ParseIq(XML)
 	{
 		Xmlns = Query[0].getAttribute("xmlns");
 	}
-	else
+	else if(vCard[0] != undefined)
 	{
 		Xmlns = vCard[0].getAttribute("xmlns");
 	}
