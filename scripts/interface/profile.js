@@ -133,10 +133,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	SaveProfile = UTILS_CreateElement('input',null,'button');
 
+	Nickname = 	UTILS_CreateElement('span', null, 'inf', Profile.User);
 	if (User)
 	{
-		Nickname = 	UTILS_CreateElement('input',null,'inf');
-		Nickname.value = Profile.User;
 
 		Username = 	UTILS_CreateElement('input',null,'inf');
 		Username.value = Profile.Name;
@@ -155,7 +154,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 	else
 	{
-		Nickname = 	UTILS_CreateElement('span', null, 'inf', Profile.User);
 		
 		Username = 	UTILS_CreateElement('span', null, 'inf', Profile.Name);
 
