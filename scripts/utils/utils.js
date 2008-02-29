@@ -500,3 +500,39 @@ function UTILS_ConvertChatString(Str)
 
 	return StrTmp;
 }
+
+/************************************
+ * FUNCTIONS - SORT FUNCTIONS       *
+ ************************************/
+
+/**
+* Use to sort Userlist into ascendent order
+* If x < y return -1
+*    x > y return  1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortByUsernameAsc(a, b) 
+{
+	var x = a.Username.toLowerCase();
+	var y = b.Username.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
+/**
+* Use to sort Userlist into descendent order
+* If x < y return  1
+*    x > y return -1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortByUsernameDsc(a, b) 
+{
+	var x = a.Username.toLowerCase();
+	var y = b.Username.toLowerCase();
+	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+}

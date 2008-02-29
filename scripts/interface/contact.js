@@ -308,7 +308,7 @@ function INTERFACE_HideUserMenu()
 function INTERFACE_ChangeGroupVisibility(Obj, Id)
 {
 	var Node = document.getElementById(Id);
-
+	
 	if (!Node)
 	{
 		return false;
@@ -352,14 +352,17 @@ function INTERFACE_CreateContactList()
 	// Group labels
 	ContactsDiv = UTILS_CreateElement("div", "Contacts");
 	ContactOnline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_online"));
-	ContactOnline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOnlineList"); };
+	ContactOnline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOnlineTable"); };
 	ContactOffline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_offline"));
-	ContactOffline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOfflineList"); };
+	ContactOffline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOfflineTable"); };
 
 	// User tables
-	OnlineTable = UTILS_CreateElement("table");
+	OnlineTable = UTILS_CreateElement("table","ContactOnlineTable");
+	OnlineTable.style.display= "table";
 	OnlineTbody = UTILS_CreateElement("tbody", "ContactOnlineList");
-	OfflineTable = UTILS_CreateElement("table");
+
+	OfflineTable = UTILS_CreateElement("table","ContactOfflineTable");
+	OfflineTable.style.display= "table";
 	OfflineTbody = UTILS_CreateElement("tbody", "ContactOfflineList");
 
 	// Loading user list
@@ -573,3 +576,5 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	return {Div:Div, Buttons:Buttons};
 }
+
+
