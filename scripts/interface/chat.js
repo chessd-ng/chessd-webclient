@@ -46,6 +46,8 @@ function INTERFACE_ShowChatMessage(Username, Message, YourMessage)
 
 	Item = UTILS_CreateElement("li", null, null, NewMessage);
 	Node.appendChild(Item);
+	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+
 	return true;
 }
 
@@ -53,7 +55,7 @@ function INTERFACE_ShowChatMessage(Username, Message, YourMessage)
 /**
 * Create chat elements
 */
-function INTERFACE_OpenChat(Username)
+function INTERFACE_OpenChat(Username, Status)
 {
 	var Chat;
 	var Node;
@@ -66,7 +68,7 @@ function INTERFACE_OpenChat(Username)
 	}
 
 	// Create chat elements
-	Chat = INTERFACE_CreateChat(Username);
+	Chat = INTERFACE_CreateChat(Username, Status);
 	Node.appendChild(Chat);
 
 }
@@ -172,14 +174,23 @@ function INTERFACE_ChatListPositioning()
 /**
 * Create chat elements
 */
-function INTERFACE_CreateChat(Username)
+function INTERFACE_CreateChat(Username, Status)
 {
 	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
 	var Close, Input;
 
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
-	ChatTitle = UTILS_CreateElement("h3", null, "title", Username);
+
+	if (Status == "offline")
+	{
+		ChatTitle = UTILS_CreateElement("h3", null, "title", Username+" (offline)");
+	}
+	else
+	{
+		ChatTitle = UTILS_CreateElement("h3", null, "title", Username);
+	}
+
 	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
 	ChatInner = UTILS_CreateElement("div", "ChatInner");
 	ChatInner.style.display = "none";
@@ -189,7 +200,6 @@ function INTERFACE_CreateChat(Username)
 
 	// Show/hide chat
 	ChatTitle.onclick = function () {
-		//INTERFACE_ChangeChatVisibility(ChatItem, ChatInner);
 		CHAT_ChangeChatState(Username, ChatItem, ChatInner);
 	}
 

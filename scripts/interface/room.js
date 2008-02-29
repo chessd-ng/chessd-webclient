@@ -104,19 +104,30 @@ function INTERFACE_UpdateUserInRoom(RoomName, Username, NewStatus, NewType)
 function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 {
 	var Item, Node = document.getElementById(RoomName+"_Messages");
-	var Message, Time;
+	var Message, Time, EmoticonNum;
 
 	if (!Node)
 	{
 		return false;
 	}
 	
+	// Show emoticons
+	while (Msg.match(/\[img{\d*}\]/) != null)
+	{
+		EmoticonNum = Msg.match(/\[img{\d*}\]/)[0];
+		EmoticonNum = EmoticonNum.match(/\d+/);
+		
+		Msg = Msg.replace(/\[img{\d*}\]/, "<img src='./images/emoticons/"+EmoticonNum+".png' />");
+	}
+
 	// Get time from a fiven timestamp
 	Time = UTILS_GetTime(Timestamp);
 
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
+	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+
 	return true;
 }
 
@@ -250,6 +261,74 @@ function INTERFACE_AddRoom(RoomName)
 	INTERFACE_FocusRoom(RoomName);
 }
 
+/**
+* Show emoticon list
+*
+* @public
+*/
+function INTERFACE_ShowEmoticonList(RName)
+{
+	var Div, List, Item, Img, i;
+	var Func, Hide = 0;
+	var RoomName = RName;
+
+	Func = function () {
+		Hide += 1;
+		
+		if (Hide == 2)
+		{
+			UTILS_RemoveListener(document, "click", Func, false);
+
+			// Remove menu from screen
+			INTERFACE_HideEmoticonList();
+		}
+	};
+
+	Div = UTILS_CreateElement("div", "EmoticonDiv");
+	List = UTILS_CreateElement("ul", "EmoticonList");
+
+	for (i=0; i<MainData.EmoticonNum; i++)
+	{
+		Item = UTILS_CreateElement("li");
+		Img = UTILS_CreateElement("img", null, i);
+		Img.src = "./images/emoticons/"+i+".png";
+		Img.onclick = function () {
+			var Node = document.getElementById("Input_"+RoomName);
+			var Num = i;
+
+			if (!Node)
+				return null;
+			Node.value += "[img{"+this.className+"}] ";
+			Node.focus();
+		}
+
+		Item.appendChild(Img);
+		List.appendChild(Item);
+	}
+	Div.appendChild(List);
+
+	document.getElementById("RoomInside_"+RoomName).appendChild(Div);
+
+	UTILS_AddListener(document, "click", Func, false);
+}
+
+/**
+* Hide emoticon list
+*
+* @public
+*/
+function INTERFACE_HideEmoticonList()
+{
+	var Node = document.getElementById("EmoticonDiv");
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	Node.parentNode.removeChild(Node);
+	return true;
+}
 
 /**
 * Close the room that are displayed
@@ -438,7 +517,7 @@ function INTERFACE_CreateRoom(RoomName)
 {
 	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
 	var Hr, MessageList;
-	var OrderNick, OrderRating, Input;
+	var OrderNick, OrderRating, Input, Emoticon;
 
 	// General room
 	RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
@@ -457,7 +536,7 @@ function INTERFACE_CreateRoom(RoomName)
 	
 	// MessageList
 	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
-	Input = UTILS_CreateElement("input");
+	Input = UTILS_CreateElement("input", "Input_"+RoomName);
 	Input.type = "text";
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
@@ -466,6 +545,12 @@ function INTERFACE_CreateRoom(RoomName)
 			ROOM_SendMessage(RoomName, Input.value);
 			Input.value = "";
 		}
+	}
+
+	Emoticon = UTILS_CreateElement("img", null, "emoticon");
+	Emoticon.src = "./images/emoticons/default.png";
+	Emoticon.onclick = function () {
+		INTERFACE_ShowEmoticonList(RoomName);
 	}
 
 	RoomTable.appendChild(RoomTbody);
@@ -477,6 +562,7 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomInside.appendChild(Hr);
 	RoomInside.appendChild(MessageList);
 	RoomInside.appendChild(Input);
+	RoomInside.appendChild(Emoticon);
 
 	RoomDiv.appendChild(RoomInside);
 

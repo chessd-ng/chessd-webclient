@@ -184,6 +184,7 @@ function INTERFACE_SetUserType(Username, NewType)
 	var User = document.getElementById("contact-"+Username);
 	var List, Node, i;
 
+
 	// Updating user's type
 	if (User)
 	{
@@ -471,6 +472,8 @@ function INTERFACE_ShowSearchUserWindow()
 	// Main div elements
 	Div.appendChild(FormDiv);
 	Div.appendChild(ButtonsDiv);
+
+	Input.focus();
 
 	return {Div:Div, Buttons:Buttons};
 }

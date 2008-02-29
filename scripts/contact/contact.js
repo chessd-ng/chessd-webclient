@@ -141,7 +141,6 @@ function CONTACT_HandleRoomPresence(XML)
 	// Get Attributes
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
-	TypeNode = XML.getElementsByTagName("type");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
 	RoomName = From.replace(/@.*/, "");
@@ -251,7 +250,7 @@ function CONTACT_InsertUser(User, Status, Subs)
 function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 {
 	var UserPos = MainData.FindUser(Jid);
-	var Type = "user";
+	var Type = "user", Rating = "";
 	var Buffer = "";
 
 	// Try to insert user in 'RoomName' structure
@@ -260,10 +259,12 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 		if (UserPos)
 		{
 			Type = MainData.UserList[UserPos].Type;
+			Rating = eval("MainData.UserList[UserPos].Rating."+UTILS_Capitalize(MainData.CurrentRating));
 		}
 		else if (Jid == MainData.Username)
 		{
 			Type = MainData.Type;
+			Rating = eval("MainData.Rating."+UTILS_Capitalize(MainData.CurrentRating));
 		}
 		else
 		{
@@ -272,7 +273,7 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 		}
 
 		MainData.AddUserInRoom(RoomName, Jid, Status, Type, Role, Affiliation);
-		INTERFACE_AddUserInRoom(RoomName, Jid, Status, Type);
+		INTERFACE_AddUserInRoom(RoomName, Jid, Status, Type, Rating);
 	}
 	catch (e)
 	{

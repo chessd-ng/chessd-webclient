@@ -271,7 +271,6 @@ function INTERFACE_FinishGame()
 function INTERFACE_RemoveGame()
 {
 	var Game = MainData.GetGame(this.Id);
-	//var Node = document.getElementById("GameDiv");
 	var Node = this.Game;
 
 	if (!Game)

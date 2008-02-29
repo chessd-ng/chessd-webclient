@@ -4,6 +4,16 @@
 		<general_title>Cliente Web ChessD</general_title>
 		<general_name>ChessD</general_name>
 	</general>
+	<window>
+		<window_yes>Sim</window_yes>
+		<window_no>Nao</window_no>
+		<window_ok>Ok</window_ok>
+		<window_close>Fechar</window_close>
+		<window_save>Salvar</window_save>
+		<window_accept>Aceitar</window_accept>
+		<window_cancel>Cancelar</window_cancel>
+		<window_decline>Recusar</window_decline>
+	</window>
 	<login>
 		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
 		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
@@ -20,7 +30,7 @@
 		<login_load_scripts>Carregando scripts...</login_load_scripts>
 		<login_load_css>Carregando css...</login_load_css>
 		<login_load_images>Carregando imagens...</login_load_images>
-		<login_load_user_list>Carregando lista de usuá¡rios...</login_load_user_list>
+		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 	</login>
 	<menu>
 		<menu_search_game>Buscar Partida</menu_search_game>
@@ -52,6 +62,9 @@
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_close>Fechar</contact_close>
+		<contact_user>Usuario</contact_user>
+		<contact_teacher>Professor</contact_teacher>
+		<contact_admin>Administrador</contact_admin>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
@@ -111,7 +124,7 @@
 		<challenge_private>Partida privada</challenge_private>
 		<challenge_invite>Convidar</challenge_invite>
 		<challenge_cancel>Cancelar</challenge_cancel>
-		<challenge_decline>Rejeitar</challenge_decline>
+		<challenge_decline>Recusar</challenge_decline>
 		<challenge_chat>Abrir chat</challenge_chat>
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
 		<challenge_accept>Aceitar</challenge_accept>
@@ -141,6 +154,8 @@
 		<game_timel_text>O seu tempo acabou. Você perdeu para %s.</game_timel_text>
 		<game_remove_game>Você não pode fechar um jogo em andamento</game_remove_game>
 		<game_remove_game_title>Atenção</game_remove_game_title>
+
+		<game_canceled>O jogo foi cancelado.</game_canceled>
 
 		<game_options>Opções</game_options>
 		<game_moves>Lances</game_moves>
@@ -174,4 +189,30 @@
 		<game_button_next>Próximo</game_button_next>
 		<game_button_last>Último</game_button_last>
 	</game>
+	<profile>
+		<profile_window>Perfil e Informacoes</profile_window>
+		<profile_name>Nome: </profile_name>
+		<profile_nick>Apelido: </profile_nick>
+		<profile_whoami>Quem sou: </profile_whoami>
+		<profile_level>Nivel do usuario: </profile_level>
+		<profile_group>Grupo: </profile_group>
+		<profile_type>Titulacao: </profile_type>
+		<profile_online_time>Tempo online: </profile_online_time>
+		<profile_total_time>Tempo acumulado: </profile_total_time>
+		<profile_category>Categoria</profile_category>
+		<profile_best_rating>Maior Rating</profile_best_rating>
+		<profile_record_date>Data do Record</profile_record_date>
+		<profile_games_number>No. de Partidas</profile_games_number>
+		<profile_win>Vitorias</profile_win>
+		<profile_draw>Empates</profile_draw>
+		<profile_lose>Derrotas</profile_lose>
+		<profile_edit_photo>Editar imagem</profile_edit_photo>
+		<profile_old_games1>Minhas partidas</profile_old_games1>
+		<profile_old_games2>Partidas de </profile_old_games2>
+		<profile_save>Salvar alteracoes</profile_save>
+		<profile_discard>Fechar sem salvar</profile_discard>
+		<profile_save_close>Salvar e fechar</profile_save_close>
+		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
+		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
+	</profile>
 </language>
