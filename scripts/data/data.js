@@ -71,7 +71,7 @@ function DATA(ConfFile, LangFile)
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
 	
-	this.ProfileList = new Object();
+	this.ProfileList = new Array();
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
@@ -138,6 +138,7 @@ DATA.prototype.FindWindow = DATA_FindWindow;
 DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
 DATA.prototype.FindProfile = DATA_FindProfile;
+DATA.prototype.GetProfile = DATA_GetProfile;
 
 /**********************************
  * METHODS - USER LIST            *
@@ -157,6 +158,7 @@ function DATA_AddUser(Username, Status, Subs)
 	// Setting atributes
 	// The user's rating will be seted after
 	User.Username = Username;
+	User.Photo = "";
 	User.Status = Status;
 	User.Subs = Subs;
 	User.Rating = new Object();;
@@ -1188,7 +1190,7 @@ function DATA_AddProfile(Jid, Username, ProfileWindow)
 	// Data Id
 	NewProfile.Jid = Jid;
 	NewProfile.Profile = ProfileWindow;
-
+/*
 	// vCard Data
 	NewProfile.Fullname = "---";
 	NewProfile.Nickname = Username;
@@ -1205,7 +1207,7 @@ function DATA_AddProfile(Jid, Username, ProfileWindow)
 	NewProfile.Group = "---";
 	NewProfile.Warning = "";
 	NewProfile.GameInfo = null; //Table
-
+*/
 	this.ProfileList.push(NewProfile);
 
 }

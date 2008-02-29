@@ -46,7 +46,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	var Nickname;
 
 	var WhoDiv;
-	var WhoLefttDiv;
+	var WhoLeftDiv;
 	var WhoAmILabel;
 
 	var WhoRightDiv;
@@ -54,6 +54,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	var RatingDiv;
 	var Table;
+	var TBody;
 	var Tr,Td;
 
 	var BottomDiv;
@@ -81,9 +82,16 @@ function INTERFACE_ShowProfileWindow(Profile)
 	var SaveProfile;
 	var Close;
 
+	var GroupSpan;
+	var TotalTimeSpan;
+	var OnlineTimeSpan;
+	var TitleSpan;
+	var TitleImg;
+
 	var Buttons = new Array();
 	var i,j, Time;
 	var User;
+	var Elements = new Object();
 
 	if (Profile.User == MainData.Username)
 	{
@@ -104,7 +112,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	PhotoDiv = UTILS_CreateElement('div','ProfPhotoDiv');
 
 	Photo = UTILS_CreateElement('img');
-	Photo.src = "images/no_photo_big.png";
+	Photo.src = "images/no_photo.png";
 	
 	Br = UTILS_CreateElement('br');
 	EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',UTILS_GetText('profile_edit_photo'));
@@ -160,6 +168,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	RatingDiv = UTILS_CreateElement('div','RatingDiv');
 
 	Table = UTILS_CreateElement('table');
+	TBody = UTILS_CreateElement('tbody');
 
 	// Table Headers
 	Tr = UTILS_CreateElement('tr');
@@ -177,8 +186,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
-	Table.appendChild(Tr);
-
+	TBody.appendChild(Tr);
+	Table.appendChild(TBody)
 /*
 	// Show the rating in rating array in Profile parameter
 	// Each line is a rating type and columns contais the values
@@ -217,17 +226,19 @@ function INTERFACE_ShowProfileWindow(Profile)
 	switch(Profile.Group)
 	{
 		case 'admin':
-			GroupLabel.appendChild(UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_admin')));
+			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_admin'));
 			break;
 		case 'teacher':
-			GroupLabel.appendChild(UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_teacher')));
+			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_teacher'));
 			break;
 		default:
-			GroupLabel.appendChild(UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_user')));
+			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_user'));
 	}
+	GroupLabel.appendChild(GroupSpan);
 
 	TypeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_type'));
-	TypeLabel.appendChild(UTILS_CreateElement('span',null,'value',Profile.Type));
+	TitleSpan = UTILS_CreateElement('span',null,'value',Profile.Type);
+	TypeLabel.appendChild(TitleSpan);
 
 	// Right Div <Imagem>
 	BottomRightDiv = UTILS_CreateElement('div','BottomRightDiv');
@@ -261,12 +272,14 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 
 	OnlineTimeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_online_time'));
-	OnlineTimeLabel.appendChild(UTILS_CreateElement('span',null,'value',Time));
+	OnlineTimeSpan = UTILS_CreateElement('span',null,'value',Time);
+	OnlineTimeLabel.appendChild(OnlineTimeSpan);
 
 	// Time Div <Total Time>
 	TimeRightDiv = UTILS_CreateElement('div','TimeRightDiv');
 	TotalTimeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_total_time'));
-	TotalTimeLabel.appendChild(UTILS_CreateElement('span',null,'value',Profile.Total));
+	TotalTimeSpan = UTILS_CreateElement('span',null,'value',Profile.Total);
+	TotalTimeLabel.appendChild(TotalTimeSpan);
 
 	// Old Games Div <Old Games Div>
 	OldGamesDiv = UTILS_CreateElement('div','OldGamesDiv');
@@ -276,7 +289,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 	else
 	{
-		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.Name);
+		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.User);
 	}
 	OldGamesLabel.onclick = function() {
 		// TODO
@@ -364,5 +377,79 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Div.appendChild(OldGamesDiv);
 	Div.appendChild(ButtonsDiv);
 
-	return {Div:Div, Buttons:Buttons}
+	Elements.Username = Username;
+	Elements.UserImg = Photo;
+	Elements.Nick = Nickname;
+	Elements.Desc = WhoAmIUser;
+	Elements.Table = Table;
+	Elements.TotalTime = TotalTimeSpan;
+	Elements.OnlineTime = OnlineTimeSpan;
+	Elements.Group = GroupSpan;
+	Elements.Title = TitleSpan;
+	Elements.TitleImg = TypeImg;
+	
+	Elements.SetUser = INTERFACE_ProfileSetUser;
+	Elements.SetUserImg = INTERFACE_ProfileSetUserImg;
+	Elements.SetNick = INTERFACE_ProfileSetNick;
+	Elements.SetDesc = INTERFACE_ProfileSetDesc;
+	Elements.SetRatings = INTERFACE_ProfileSetRatings;
+	Elements.SetTotalTime = INTERFACE_ProfileSetTotalTime;
+	Elements.SetOnlineTime = INTERFACE_ProfileSetOnlineTime;
+	Elements.SetTitle = INTERFACE_ProfileSetTitle;
+	Elements.SetTitleImg = INTERFACE_ProfileSetTitleImg;
+	Elements.SetGroup = INTERFACE_ProfileSetGroup;
+
+	return {Div:Div, Buttons:Buttons, Elements:Elements}
 }
+
+
+function INTERFACE_ProfileSetUser(Username)
+{
+	this.Username.value = Username;
+}
+
+function INTERFACE_ProfileSetUserImg(Img)
+{
+	this.UserImg.src = Img;
+}
+
+function INTERFACE_ProfileSetNick(Nick)
+{
+	this.Nick.value = Nick;
+}
+
+function INTERFACE_ProfileSetDesc(Desc)
+{
+	this.Desc.value = Desc;
+}
+
+function INTERFACE_ProfileSetRatings()
+{
+	WINDOW_Alert("Ratings","Fazer funcoes para atualizar ratings");
+}
+
+function INTERFACE_ProfileSetTotalTime(Time)
+{
+	this.TotalTime.innerHTML = Time;
+}
+
+function INTERFACE_ProfileSetOnlineTime(Time)
+{
+	this.OnlineTime.innerHTML = Time;
+}
+
+function INTERFACE_ProfileSetTitle(Title)
+{
+	this.Title.innerHTML = Title;
+}
+
+function INTERFACE_ProfileSetTitleImg(NewSrc)
+{
+	this.TitleImg.src = NewSrc;
+}
+
+function INTERFACE_ProfileSetGroup(Group)
+{
+	this.Group.innerHTML = Group;
+}
+

@@ -92,9 +92,10 @@ function INTERFACE_CreateUserBox()
 /**
 * Change user's image
 */
-function INTERFACE_SetUserImage(ImgType, Img64)
+function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 
-	UserImg.src = "data:"+ImgType+";base64,"+Img64;
+	//UserImg.src = "data:"+ImgType+";base64,"+Img64;
+	UserImg.src = Img;
 }

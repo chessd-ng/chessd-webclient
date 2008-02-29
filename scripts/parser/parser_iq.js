@@ -70,7 +70,7 @@ function PARSER_ParseIq(XML)
 			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
-				Buffer += PROFILE_HandleProfile(XML);
+				Buffer += PROFILE_HandleVCardProfile(XML);
 			}
 			break;
 

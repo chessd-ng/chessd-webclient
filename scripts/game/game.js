@@ -92,7 +92,8 @@ function GAME_State(XML)
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
-
+	var i;
+	var History;
 	Type = XML.getAttribute('type');
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
@@ -101,7 +102,11 @@ function GAME_State(XML)
 	PlayerTag = XML.getElementsByTagName("player");
 	MoveTag = XML.getElementsByTagName("move");
 
+	// Get game move history
+	History = XML.getElementsByTagName("history")[0];
+
 	Category = StateTag[0].getAttribute("category");
+
 
 	// Get the pgn of the last move
 	try 
@@ -130,14 +135,18 @@ function GAME_State(XML)
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
+	
 	// If it's the first board of the game
 	if (MainData.FindGame(GameID) == null)
 	{
 		Buffer += GAME_StartGame(GameID, Player1, Player2);
+
 		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 	else
 	{
+		Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+
 		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 
@@ -650,4 +659,65 @@ function GAME_SendResign(GameID)
 	
 	// Show message as a default confirm window
 	WINDOW_Confirm(Title, Text, Button1, Button2);
+}
+
+/**
+* Load all game history moves done in the game
+*
+* @param 	GameId is the game identificator
+* @param 	HistoryXml is a XML that contains all games states
+* @param 	Player1 = Player 1 Object (Name, Time, Color, Inc)
+* @param 	Player2 = Player 2 Object (Name, Time, Color, Inc)
+* @return 	void
+* @author	Rubens
+*/
+function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
+{
+	var i;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove;
+	var HPlayer1 = new Object();
+	var HPlayer2 = new Object();
+	var HistoryMoves;
+	var Buffer;
+
+	if(HistoryXml == undefined)
+	{
+		return "";
+	}
+
+	HistoryMoves = HistoryXml.getElementsByTagName("state");
+
+	StartP1Time = HistoryXml.getElementsByTagName("player")[0].getAttribute("time");
+	StartP2Time = HistoryXml.getElementsByTagName("player")[1].getAttribute("time");
+	HPlayer1.Name = Player1.Name;
+	HPlayer1.Inc = Player1.Inc;
+	HPlayer1.Color = Player1.Color;
+	HPlayer1.Time = StartP1Time;
+
+	HPlayer2.Name = Player2.Name;
+	HPlayer2.Inc = Player2.Inc;
+	HPlayer2.Color = Player2.Color;
+	HPlayer2.Time = StartP2Time;
+
+	// Load game history
+	for(i=0 ; i<HistoryMoves.length; i++)
+	{
+		HTime = HistoryMoves[i].getAttribute("time");
+		HTurn = HistoryMoves[i].getAttribute("turn");
+		HBoard = HistoryMoves[i].getAttribute("board");
+		HMove = HistoryMoves[i].getAttribute("move");
+
+		if(HTurn == "white")
+		{
+			HPlayer2.Time = HTime;
+		}
+		else
+		{
+			HPlayer1.Time = HTime;
+		}
+
+		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+	}
+
+	return Buffer;
 }

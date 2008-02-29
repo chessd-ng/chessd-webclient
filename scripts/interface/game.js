@@ -805,15 +805,13 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 
 	// Set Movelist scroll position;
 	ScrollTop = this.MoveList.scrollTop;
-	ScrollHeigth = this.MoveList.scrollHeight;
+	ScrollHeight = this.MoveList.scrollHeight;
 	ClientHeight = this.MoveList.clientHeight;
-	/*
+
 	if((ScrollHeight > ClientHeight) && ((ScrollTop+1)>=(ScrollHeight-ClientHeight-20)))
 	{
 		this.MoveList.scrollTop += 20;
 	}
-	*/
-	this.MoveList.scrollTop += 14;
 }
 
 /**
