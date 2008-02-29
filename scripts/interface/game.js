@@ -48,10 +48,15 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
 		}
-		else
+		else if( Player2.Name == MainData.UserName)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
+		}
+		else // Observer Mode
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
 		}
 	}
 	else
@@ -61,7 +66,12 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
 		}
-		else
+		else if( Player2.Name == MainData.UserName)
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+		else // Observer Mode
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
