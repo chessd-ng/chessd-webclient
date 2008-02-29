@@ -16,6 +16,8 @@ class db{
 
 	function selectData($sql){
 
+		$result = "ok";
+
 		if(!isset($this->dbconn)){
 			$conn = $this->dbConnect();
 			$stat = pg_connection_status($conn);
