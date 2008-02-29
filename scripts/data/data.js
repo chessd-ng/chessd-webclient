@@ -54,6 +54,7 @@ function DATA(ConfFile, LangFile)
 	* DATA STRUCTURE
 	*/
 	this.UserList = new Array();
+	this.OrderBy = "0";
 	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
@@ -94,6 +95,9 @@ DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
+
+DATA.prototype.SortUser = DATA_SortUser;
+DATA.prototype.SortUserRev = DATA_SortUserRev;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -153,7 +157,9 @@ function DATA_AddUser(Username, Status, Subs)
 	var User = new Object();
 
 	if (this.FindUser(Username) != null)
+	{
 		return false;
+	}
 
 	// Setting atributes
 	// The user's rating will be seted after
@@ -161,7 +167,7 @@ function DATA_AddUser(Username, Status, Subs)
 	User.Photo = "";
 	User.Status = Status;
 	User.Subs = Subs;
-	User.Rating = new Object();;
+	User.Rating = new Object();
 
 	this.UserList[this.UserList.length] = User;
 
@@ -412,6 +418,29 @@ function DATA_SetRating(Username, Category, Rating)
 	return true;
 }
 
+/**
+* Sort Userlist into ascending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUser()
+{
+	this.UserList.sort(UTILS_SortByUsernameAsc);
+	return true;
+}
+
+/**
+* Sort Userlist into descending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserRev()
+{
+	this.UserList.sort(UTILS_SortByUsernameDsc);
+	return true;
+}
 
 /**********************************
  * METHODS - ROOM LIST            *

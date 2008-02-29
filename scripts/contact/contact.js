@@ -240,6 +240,7 @@ function CONTACT_InsertUser(User, Status, Subs)
 	{
 		INTERFACE_AddContact(User, Status);
 		MainData.AddUser(User, Status, Subs);
+		MainData.SortUser();
 	}
 }
 
