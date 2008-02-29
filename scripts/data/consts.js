@@ -39,7 +39,8 @@ function DATA_SetConsts()
 	Const.IQ_ID_GameResign = "GameResign";
 	Const.IQ_ID_SearchUser = "SearchUser";
 	Const.IQ_ID_SearchUser = "SearchUser";
-	
+	Const.IQ_ID_KickUser = "KickUser";
+
 	// Login errors
 	Const.LOGIN_ServerDown = 1;
 	Const.LOGIN_ConnectionRefused = 2;

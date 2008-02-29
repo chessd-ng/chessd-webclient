@@ -548,9 +548,21 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 	if (i == null || j == null)
 		return false;
 
-	this.RoomList[j].UserList[i].Status = Status;
-	this.RoomList[j].UserList[i].Role = Role;
-	this.RoomList[j].UserList[i].Affiliation = Affiliation;
+	if (Status != "")
+	{
+		this.RoomList[j].UserList[i].Status = Status;
+	}
+	
+	if (Role != "")
+	{
+		this.RoomList[j].UserList[i].Role = Role;
+	}
+	
+	if (Affiliation != "")
+	{
+		this.RoomList[j].UserList[i].Affiliation = Affiliation;
+	}
+	
 	return true;
 }
 

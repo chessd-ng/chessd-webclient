@@ -77,6 +77,12 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleGame(XML);
 			}
+
+			// Admin messages
+			else if (Xmlns.match(/\/muc#admin/))
+			{
+				Buffer += ADMIN_HandleChange(XML);
+			}
 			break;
 
 		case "error": 
