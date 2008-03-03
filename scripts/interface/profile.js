@@ -186,64 +186,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
-/*
-	// Show the rating in rating array in Profile parameter
-	// Each line is a rating type and columns contais the values
-	// Col 0 = category
-	// Col 1 = current rating
-	// Col 2 = best rating
-	// Col 3 = record data
-	// Col 4 = number in game category
-	// Col 5 = number of won games in category
-	// Col 6 = number of lose games in category
-	// Col 7 = number of draw games in category
-	for(i = 0; i < Profile.Rates.length; i++)
-	{
-		Tr = UTILS_CreateElement('tr');
-		
-		Td = UTILS_CreateElement('td',null,null,Profile.Rates[i][0]);
-
-		Tr.appendChild(Td);
-
-		for(j = 0; j < 7; j++)
-		{
-			Td = UTILS_CreateElement('td',null,null,Profile.Rates[i][j]);
-			Tr.appendChild(Td);
-		}
-		Table.appendChild(Tr);
-	}
-
-
-// Sample
-	for(i = 0; i < 3; i++)
-	{
-		Tr = UTILS_CreateElement('tr');
-		
-		switch(i)
-		{
-			case 0:
-				Td = UTILS_CreateElement('td',null,null,"Lightning");
-				break;
-			case 1:
-				Td = UTILS_CreateElement('td',null,null,"Blitz");
-				break;
-			case 2:
-				Td = UTILS_CreateElement('td',null,null,"Standard");
-				break;
-			default:
-		}
-		Tr.appendChild(Td);
-
-		for(j = 0; j < 7; j++)
-		{
-			Td = UTILS_CreateElement('td',null,null,"---");
-			Tr.appendChild(Td);
-		}
-		TBody.appendChild(Tr);
-	}
-*/
-	Table.appendChild(TBody)
-// End Sample
+	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');
 
@@ -510,27 +453,13 @@ function INTERFACE_ProfileSetRatings(Ratings)
 	for(i = 0; i < 3; i++)
 	{
 		Tr = UTILS_CreateElement('tr');
-/*		
-		switch(i)
-		{
-			case 0:
-				Td = UTILS_CreateElement('td',null,null,"Lightning");
-				break;
-			case 1:
-				Td = UTILS_CreateElement('td',null,null,"Blitz");
-				break;
-			case 2:
-				Td = UTILS_CreateElement('td',null,null,"Standard");
-				break;
-			default:
-		}
-		Tr.appendChild(Td);
-*/
+		
 		for(j = 0; j < 8; j++)
 		{
 			Td = UTILS_CreateElement('td',null,null,Ratings[i][j]);
 			Tr.appendChild(Td);
 		}
+
 		this.TBody.appendChild(Tr);
 	}
 }
