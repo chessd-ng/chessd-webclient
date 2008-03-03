@@ -362,6 +362,25 @@ function UTILS_GetTime(Timestamp)
 	}
 	return NewTime;
 }
+
+/**
+* Return the max_timestamp from rating to format(dd-mm-yyyy)
+*
+* @return	String
+* @see		PROFILE_HandleRatings()
+* @author	Danilo Yorinori
+*/
+function UTILS_ConvertTimeStamp(TimeStamp)
+{
+	var DateTime = TimeStamp.split("T")[0];
+	var Year = DateTime.split("-")[0];
+	var Month = DateTime.split("-")[1];
+	var Day = DateTime.split("-")[2];
+
+	return Day+"/"+Month+"/"+Year;
+
+}
+
 /************************************
  * FUNCTIONS - OBJECT OFFSETS       *
  ************************************/

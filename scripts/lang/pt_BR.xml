@@ -200,6 +200,7 @@
 		<profile_online_time>Tempo online: </profile_online_time>
 		<profile_total_time>Tempo acumulado: </profile_total_time>
 		<profile_category>Categoria</profile_category>
+		<profile_current_rating>Rating Atual</profile_current_rating>
 		<profile_best_rating>Maior Rating</profile_best_rating>
 		<profile_record_date>Data do Record</profile_record_date>
 		<profile_games_number>No. de Partidas</profile_games_number>

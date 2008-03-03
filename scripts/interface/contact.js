@@ -31,7 +31,6 @@ function INTERFACE_AddContact(Username, Status)
 	var Search = document.getElementById("contact-"+Username);
 	var Contact;
 
-
 	if (!Node)
 	{
 		return false;
@@ -224,7 +223,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 {
 	var Tr, Td1, Td2;
 
-	Tr = UTILS_CreateElement("tr");
+	Tr = UTILS_CreateElement("tr","user-"+Username);
 
 	// Default type
 	if (Type == null)
