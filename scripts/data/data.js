@@ -917,6 +917,9 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 		}
 	}
 
+	NewGame.WPhoto = "./images/no_photo.png";
+	NewGame.BPhoto = "./images/no_photo.png";
+
 	NewGame.Game = GameDiv;
 	NewGame.Finished = false;
 	NewGame.IsYourTurn = false;
