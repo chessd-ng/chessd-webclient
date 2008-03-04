@@ -124,9 +124,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.const.IQ_ID_GetProfile));
-
-	CONNECTION_SendJabber(MESSAGE_Info(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_Info(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));

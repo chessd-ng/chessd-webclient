@@ -206,7 +206,7 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2)
 	Room = UTILS_CreateElement("li", null, null, GameName);
 
 	Room.onclick = function(){
-		if(MainData.CurrentGame != null)
+		if(MainData.CurrentGame == null)
 		{
 			GAME_StartObserverGame(GameId, P1, P2);
 		}
