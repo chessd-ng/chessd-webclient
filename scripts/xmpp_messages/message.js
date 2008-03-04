@@ -689,10 +689,10 @@ function MESSAGE_SearchUser(Username)
  * MESSAGES - PROFILE - vCard
  **********************************/
 
-function MESSAGE_GetProfile(Username)
+function MESSAGE_GetProfile(Username, Id)
 {
 	var XMPP = "";
-	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetProfile+"'>";
+	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0' />";
 	XMPP += "</iq>";
 

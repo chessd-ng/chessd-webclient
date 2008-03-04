@@ -125,7 +125,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.const.IQ_ID_GetProfile));
 
 	CONNECTION_SendJabber(MESSAGE_Info(Username));
 

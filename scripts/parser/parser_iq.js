@@ -70,7 +70,14 @@ function PARSER_ParseIq(XML)
 			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
-				Buffer += PROFILE_HandleVCardProfile(XML);
+				if (ID == MainData.Const.IQ_ID_GamePhoto)
+				{
+					Buffer += GAME_HandleVCardPhoto(XML);
+				}
+				else
+				{
+					Buffer += PROFILE_HandleVCardProfile(XML);
+				}
 			}
 			break;
 

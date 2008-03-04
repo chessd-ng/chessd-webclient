@@ -114,8 +114,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.SetBoard = INTERFACE_SetBoard;
 	this.ClearBoard = INTERFACE_ClearBoard
 
-	this.setWPhoto = INTERFACE_SetWPhoto;
-	this.setBPhoto = INTERFACE_SetBPhoto;
+	this.SetWPhoto = INTERFACE_SetWPhoto;
+	this.SetBPhoto = INTERFACE_SetBPhoto;
 
 	this.removeMove = INTERFACE_RemoveMove;
 
@@ -715,9 +715,9 @@ function INTERFACE_SetBTime()
 * @return	void
 * @author	Rubens and Pedro
 */
-function INTERFACE_SetWPhoto(PhotoType, PhotoStr)
+function INTERFACE_SetWPhoto(Img)
 {
-	this.photo.wphoto.src = "data:"+PhotoType+";base64,"+PhotoStr;
+	this.photo.wphoto.src = Img;
 }
 
 /**
@@ -728,9 +728,9 @@ function INTERFACE_SetWPhoto(PhotoType, PhotoStr)
 * @return	void
 * @author	Rubens and Pedro
 */
-function INTERFACE_SetBPhoto(PhotoType, PhotoStr)
+function INTERFACE_SetBPhoto(Img)
 {
-	this.photo.bphoto.src = "data:"+PhotoType+";base64,"+PhotoStr;
+	this.photo.bphoto.src = Img;
 }
 
 /**
