@@ -1,8 +1,7 @@
 
 	function createFormToEncode(form_id, action){
-		var form, body, file;
+		var form, file;
 
-		body = document.getElementsByTagName("body")[0];
 		form = document.createElement("form");
 		form.id= form_id;
 		form.action = action;
@@ -14,7 +13,7 @@
 		file.name = "image";
 		
 		form.appendChild(file);
-		body.appendChild(form);
+		return form;
 	}
 
 

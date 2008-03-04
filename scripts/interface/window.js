@@ -269,3 +269,53 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 
 	return {Div:Div, Buttons:Buttons};
 }
+
+/**
+*	Create elements of send user image
+*
+* @param	Text		Text to display in confirm box
+* @return	Div; Array
+* @see		WINDOW_Confirm();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function WINDOW_CreateImageSend()
+{
+	var Div;
+
+	var TextDiv;
+	var Label;
+	var Ok;
+	var Cancel;
+	var Buttons;
+
+
+	Div = UTILS_CreateElement("div","SendImageDiv");
+
+	TextDiv = UTILS_CreateElement("div","TextDiv");
+	Label = UTILS_CreateElement("p",null,null,"Insira sua foto");
+
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+	Ok = UTILS_CreateElement("input", null,"button");
+	Ok.type = "button";
+	Ok.value = "Ok";
+	Ok.onclick = function (){ imageEncode("teste_id"))};
+
+	Cancel = UTILS_CreateElement("input", null,"button");
+	Cancel.type = "button";
+	Cancel.value = Button2.Name;
+
+
+	Buttons.push(Ok);
+	Buttons.push(Cancel);
+
+	ButtonsDiv.appendChild(Ok);
+	ButtonsDiv.appendChild(Cancel);
+
+	TextDiv.appendChild(Label);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(ButtonsDiv);
+	
+	Div.appendChild(createFormToEncode("teste_id", "php/base64.php" );
+	return {Div:Div, Buttons:Buttons};
+}
