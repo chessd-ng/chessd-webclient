@@ -282,11 +282,11 @@ function WINDOW_CreateImageSend()
 {
 	var Div;
 
-	var TextDiv;
+	var TextDiv, ButtonsDiv;
 	var Label;
 	var Ok;
 	var Cancel;
-	var Buttons;
+	var Buttons = new Array();
 
 
 	Div = UTILS_CreateElement("div","SendImageDiv");
@@ -298,11 +298,11 @@ function WINDOW_CreateImageSend()
 	Ok = UTILS_CreateElement("input", null,"button");
 	Ok.type = "button";
 	Ok.value = "Ok";
-	Ok.onclick = function (){ imageEncode("teste_id"))};
+	Ok.onclick = function (){ imageEncode("teste_id")};
 
 	Cancel = UTILS_CreateElement("input", null,"button");
 	Cancel.type = "button";
-	Cancel.value = Button2.Name;
+	Cancel.value = "Cancel";
 
 
 	Buttons.push(Ok);
@@ -316,6 +316,6 @@ function WINDOW_CreateImageSend()
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
 	
-	Div.appendChild(createFormToEncode("teste_id", "php/base64.php" );
+	Div.appendChild(createFormToEncode("teste_id", "php/base64.php" ));
 	return {Div:Div, Buttons:Buttons};
 }

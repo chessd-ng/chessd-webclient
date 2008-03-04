@@ -116,6 +116,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	
 	Br = UTILS_CreateElement('br');
 	EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',UTILS_GetText('profile_edit_photo'));
+	EditPhotoLabel.onclick = function (){ WINDOW_ProfileImage();};
 	
 	// Top Right Div <User,Name>
 	TopRightDiv = UTILS_CreateElement('div','TopRightDiv');
@@ -186,7 +187,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
-	Table.appendChild(TBody);
 	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');

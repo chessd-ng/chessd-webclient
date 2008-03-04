@@ -40,12 +40,20 @@
 
 	}
 
+	//if type == ""; error!!!!
 	function b64Img(image, type){
-		var img, body;
+		var Profile;
+		var Img;
 
-		img = document.createElement("img");
-		img.src = "data:image/"+type+";base64,"+image;
-		body = document.getElementsByTagName("body")[0];
-		body.appendChild(img);
+		// Set my profile data
+		MainData.SetMyProfile("","","",type,image);
 
+		Img = "data:"+type+";base64,"+image;
+
+		Profile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);
+		if(Profile != null)
+		{
+			Profile.Profile.SetUserImg(Img);
+		}
+		
 	}

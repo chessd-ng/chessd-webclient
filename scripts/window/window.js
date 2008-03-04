@@ -277,11 +277,11 @@ function WINDOW_Profile(Profile)
 	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 
-/*	if (Div.Buttons.length == 3)
-	{
-		// Save Profile Button
-		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	}*/
+	// Save Profile Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){
+		WINDOW_RemoveWindow(WindowObj);
+		PROFILE_SaveMyProfile();
+		}, false);
 
 	return Elements;
 }
@@ -314,7 +314,8 @@ function WINDOW_ProfileImage()
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Cancel Button
+	// Ok Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }

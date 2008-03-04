@@ -73,6 +73,7 @@ function DATA(ConfFile, LangFile)
 	this.CurrentRating = "blitz";
 	
 	this.ProfileList = new Array();
+	this.MyProfile = new Object();
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
@@ -143,6 +144,8 @@ DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
 DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
+
+DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 
 /**********************************
  * METHODS - USER LIST            *
@@ -1287,4 +1290,36 @@ function DATA_GetProfile(Jid)
 	}
 	return null;
 
+}
+
+
+/**********************************
+ * METHODS - MY PROFILE           *
+ **********************************/
+function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
+{
+	if(Username != "")
+	{
+		this.MyProfile.Username = Username;
+	}
+
+	if(FullName != "")
+	{
+		this.MyProfile.FN = FullName;
+	}
+
+	if(Desc != "")
+	{
+		this.MyProfile.Desc = Desc;
+	}
+
+	if(ImgType != "")
+	{
+		this.MyProfile.ImgType = ImgType;
+	}
+
+	if(Img64 != "")
+	{
+		this.MyProfile.Img64 = Img64;
+	}
 }
