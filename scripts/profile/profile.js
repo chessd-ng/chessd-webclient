@@ -98,7 +98,8 @@ function PROFILE_HandleRatings(RatingNodes)
 		Rating[Index][5] = RatingNodes[i].getAttribute('wins');
 		Rating[Index][6] = RatingNodes[i].getAttribute('draws');
 		Rating[Index][7] = RatingNodes[i].getAttribute('losses');
-		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	}
+		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	
+	}
 
 	return Rating;
 }
