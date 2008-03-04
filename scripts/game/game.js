@@ -530,6 +530,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv.SetWTime();
 	GameDiv.SetBTime();
 
+	// Get players Photos
+	CONNECTION_SendJabber(MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto), MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto));
+
 	// Send a message to get game moves
 	ROOM_EnterRoomGame(GameId)
 }
@@ -793,6 +796,11 @@ function GAME_HandleVCardPhoto(XML)
 	var PhotoType;
 	var Img;
 
+	if( MainData.CurrentGame == null)
+	{
+		return "";
+	}
+	
 	// Get player image
 	Photo = XML.getElementsByTagName("PHOTO")[0]; 
 
@@ -815,7 +823,7 @@ function GAME_HandleVCardPhoto(XML)
 		MainData.CurrentGame.WPhoto = Img;
 		MainData.CurrentGame.Game.SetWPhoto(Img);
 	}
-	else
+	else if(MainData.CurrentGame.PB == Player)
 	{
 		MainData.CurrentGame.BPhoto = Img;
 		MainData.CurrentGame.Game.SetBPhoto(Img);

@@ -98,7 +98,8 @@ function PROFILE_HandleRatings(RatingNodes)
 		Rating[Index][5] = RatingNodes[i].getAttribute('wins');
 		Rating[Index][6] = RatingNodes[i].getAttribute('draws');
 		Rating[Index][7] = RatingNodes[i].getAttribute('losses');
-		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	}
+		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	
+	}
 
 	return Rating;
 }
@@ -124,9 +125,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.const.IQ_ID_GetProfile));
-
-	CONNECTION_SendJabber(MESSAGE_Info(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_Info(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));
