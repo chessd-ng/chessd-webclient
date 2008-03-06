@@ -48,10 +48,15 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
 		}
-		else
+		else if( Player2.Name == MainData.UserName)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
+		}
+		else // Observer Mode
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
 		}
 	}
 	else
@@ -61,7 +66,12 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
 		}
-		else
+		else if( Player2.Name == MainData.UserName)
+		{
+			this.WhitePlayer = Player1;
+			this.BlackPlayer = Player2;
+		}
+		else // Observer Mode
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
@@ -735,7 +745,7 @@ function INTERFACE_SetBPhoto(PhotoType, PhotoStr)
 */
 function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 {
-	
+	var ScrollTop, ScrollHeight, ClientHeight;
 	var Item;
 	if(NumTurn % 2)
 	{
@@ -802,6 +812,16 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(BTimerSpan);
 
 	this.MoveList.appendChild(Item);
+
+	// Set Movelist scroll position;
+	ScrollTop = this.MoveList.scrollTop;
+	ScrollHeight = this.MoveList.scrollHeight;
+	ClientHeight = this.MoveList.clientHeight;
+
+	if((ScrollHeight > ClientHeight) && ((ScrollTop+1)>=(ScrollHeight-ClientHeight-20)))
+	{
+		this.MoveList.scrollTop += 20;
+	}
 }
 
 /**

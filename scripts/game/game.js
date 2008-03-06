@@ -49,7 +49,7 @@ function GAME_HandleGame(XML)
 	}
 	else if (Xmlns.match(/\/chessd#game#move/))
 	{
-		Buffer += GAME_State(XML);
+		Buffer += GAME_Move(XML);
 	}
 	else if (Xmlns.match(/\/chessd#game#canceled/))
 	{
@@ -77,14 +77,14 @@ function GAME_HandleGame(XML)
 
 
 /**
-* Handle Game State
+* Handle Game Move
 * It's a good ideia to read the server's documentation before reading the code above
 *
-* @param 	XML The xml that contains the game state
+* @param 	XML The xml that contains the game move
 * @return 	void
 * @author 	Ulysses
 */
-function GAME_State(XML)
+function GAME_Move(XML)
 {
 	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
@@ -101,7 +101,9 @@ function GAME_State(XML)
 	PlayerTag = XML.getElementsByTagName("player");
 	MoveTag = XML.getElementsByTagName("move");
 
+	// Get game move history
 	Category = StateTag[0].getAttribute("category");
+
 
 	// Get the pgn of the last move
 	try 
@@ -130,10 +132,12 @@ function GAME_State(XML)
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
+	
 	// If it's the first board of the game
 	if (MainData.FindGame(GameID) == null)
 	{
 		Buffer += GAME_StartGame(GameID, Player1, Player2);
+
 		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
 	}
 	else
@@ -144,6 +148,62 @@ function GAME_State(XML)
 	return Buffer;
 }
 
+/**
+* Handle Game State
+* It's a good ideia to read the server's documentation before reading the code above
+*
+* @param 	XML The xml that contains the game state
+* @return 	void
+* @author 	Ulysses and Rubens
+*/
+function GAME_State(XML)
+{
+	var GameID, PlayerTag;
+	var Player1 = new Object();
+	var Player2 = new Object();
+	var Buffer = "";
+	var History;
+	var HistoryStates;
+
+
+	GameID = XML.getAttribute("from").replace(/@.*/,"");
+	PlayerTag = XML.getElementsByTagName("player");
+
+	// Get game move history
+	History = XML.getElementsByTagName("history")[0];
+	HistoryStates = History.getElementsByTagName("state");
+
+	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Inc = PlayerTag[0].getAttribute('inc');
+	Player1.Color = PlayerTag[0].getAttribute('color');
+	Player1.Time = PlayerTag[0].getAttribute('time');
+		
+	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Inc = PlayerTag[1].getAttribute('inc');
+	Player2.Color = PlayerTag[1].getAttribute('color');
+	Player2.Time = PlayerTag[1].getAttribute('time');
+
+	// First Board State (without history tag)
+	if(HistoryStates.length <= 0)
+	{
+		Buffer = GAME_Move(XML);
+	}
+	else
+	{
+		// History moves
+		if (MainData.FindGame(GameID) == null)
+		{
+			Buffer += GAME_StartGame(GameID, Player1, Player2);
+			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+		}
+		else
+		{
+			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+		}
+	}
+
+	return Buffer;
+}
 /**
 * Handle Draw Request
 *
@@ -330,6 +390,7 @@ function GAME_End(XML)
 	// FInish game in structure
 	Game = MainData.GetGame(GameID);
 	Game.Game.StopTimer();
+
 	if (Game)
 	{
 		Game.Finished = true;
@@ -548,6 +609,7 @@ function GAME_RemoveGame(GameID)
 		{
 			Game.Game.Remove();
 			MainData.RemoveGame(GameID);
+			ROOM_ExitRoom()
 		}
 		else
 		{
@@ -649,4 +711,65 @@ function GAME_SendResign(GameID)
 	
 	// Show message as a default confirm window
 	WINDOW_Confirm(Title, Text, Button1, Button2);
+}
+
+/**
+* Load all game history moves done in the game
+*
+* @param 	GameId is the game identificator
+* @param 	HistoryXml is a XML that contains all games states
+* @param 	Player1 = Player 1 Object (Name, Time, Color, Inc)
+* @param 	Player2 = Player 2 Object (Name, Time, Color, Inc)
+* @return 	void
+* @author	Rubens
+*/
+function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
+{
+	var i;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove;
+	var HPlayer1 = new Object();
+	var HPlayer2 = new Object();
+	var HistoryMoves;
+	var Buffer;
+
+	if(HistoryXml == undefined)
+	{
+		return "";
+	}
+
+	HistoryMoves = HistoryXml.getElementsByTagName("state");
+
+	StartP1Time = HistoryXml.getElementsByTagName("player")[0].getAttribute("time");
+	StartP2Time = HistoryXml.getElementsByTagName("player")[1].getAttribute("time");
+	HPlayer1.Name = Player1.Name;
+	HPlayer1.Inc = Player1.Inc;
+	HPlayer1.Color = Player1.Color;
+	HPlayer1.Time = StartP1Time;
+
+	HPlayer2.Name = Player2.Name;
+	HPlayer2.Inc = Player2.Inc;
+	HPlayer2.Color = Player2.Color;
+	HPlayer2.Time = StartP2Time;
+
+	// Load game history
+	for(i=0 ; i<HistoryMoves.length; i++)
+	{
+		HTime = HistoryMoves[i].getAttribute("time");
+		HTurn = HistoryMoves[i].getAttribute("turn");
+		HBoard = HistoryMoves[i].getAttribute("board");
+		HMove = HistoryMoves[i].getAttribute("move");
+
+		if(HTurn == "white")
+		{
+			HPlayer2.Time = HTime;
+		}
+		else
+		{
+			HPlayer1.Time = HTime;
+		}
+
+		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+	}
+
+	return Buffer;
 }

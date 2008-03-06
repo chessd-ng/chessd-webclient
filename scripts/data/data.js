@@ -54,6 +54,7 @@ function DATA(ConfFile, LangFile)
 	* DATA STRUCTURE
 	*/
 	this.UserList = new Array();
+	this.OrderBy = "0";
 	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.CurrentRoom = "";
@@ -71,6 +72,7 @@ function DATA(ConfFile, LangFile)
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
 	
+	this.ProfileList = new Array();
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
@@ -93,6 +95,9 @@ DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
+
+DATA.prototype.SortUser = DATA_SortUser;
+DATA.prototype.SortUserRev = DATA_SortUserRev;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -134,6 +139,11 @@ DATA.prototype.RemoveWindow = DATA_RemoveWindow;
 DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
 DATA.prototype.FindWindow = DATA_FindWindow;
 
+DATA.prototype.AddProfile = DATA_AddProfile;
+DATA.prototype.RemoveProfile = DATA_RemoveProfile;
+DATA.prototype.FindProfile = DATA_FindProfile;
+DATA.prototype.GetProfile = DATA_GetProfile;
+
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -147,14 +157,17 @@ function DATA_AddUser(Username, Status, Subs)
 	var User = new Object();
 
 	if (this.FindUser(Username) != null)
+	{
 		return false;
+	}
 
 	// Setting atributes
 	// The user's rating will be seted after
 	User.Username = Username;
+	User.Photo = "";
 	User.Status = Status;
 	User.Subs = Subs;
-	User.Rating = new Object();;
+	User.Rating = new Object();
 
 	this.UserList[this.UserList.length] = User;
 
@@ -405,6 +418,29 @@ function DATA_SetRating(Username, Category, Rating)
 	return true;
 }
 
+/**
+* Sort Userlist into ascending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUser()
+{
+	this.UserList.sort(UTILS_SortByUsernameAsc);
+	return true;
+}
+
+/**
+* Sort Userlist into descending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserRev()
+{
+	this.UserList.sort(UTILS_SortByUsernameDsc);
+	return true;
+}
 
 /**********************************
  * METHODS - ROOM LIST            *
@@ -1138,8 +1174,6 @@ function DATA_AddWindow(WindowObj)
 */
 function DATA_ChangeWindowFocus(WindowObj)
 {
-	var i;
-
 	if(this.Windows.Focus == WindowObj)
 	{
 		return null;
@@ -1154,7 +1188,6 @@ function DATA_ChangeWindowFocus(WindowObj)
 */
 function DATA_RemoveWindow(WindowObj)
 {
-	var i;
 	var WindowIndex = this.FindWindow(WindowObj);
 	var WindowListLen = this.Windows.WindowList.length;
 
@@ -1184,4 +1217,83 @@ function DATA_FindWindow(WindowObj)
 		i++;
 	}
 	return null;
+}
+
+
+/**********************************
+ * METHODS - PROFILE              *
+ **********************************/
+
+function DATA_AddProfile(Jid, Username, ProfileWindow)
+{
+	var NewProfile = new Object();
+	 
+	// Data Id
+	NewProfile.Jid = Jid;
+	NewProfile.Profile = ProfileWindow;
+/*
+	// vCard Data
+	NewProfile.Fullname = "---";
+	NewProfile.Nickname = Username;
+	NewProfile.Desc = "---";
+	NewProfile.PhotoImg = "";
+	NewProfile.PhotoType = "";
+
+	// Chess Data
+	NewProfile.Rating = "---";
+	NewProfile.LastGame = "---";
+	NewProfile.OnlineTime = "---";
+	NewProfile.Title = "---";
+	NewProfile.TotalTime = "---";
+	NewProfile.Group = "---";
+	NewProfile.Warning = "";
+	NewProfile.GameInfo = null; //Table
+*/
+	this.ProfileList.push(NewProfile);
+
+}
+
+function DATA_FindProfile(Jid)
+{
+	var i=0;
+
+	while(i<this.ProfileList.length)
+	{
+		if(this.ProfileList[i].Jid == Jid)
+		{
+			return i;
+		}
+		i++;
+	}
+	return null;
+}
+
+function DATA_RemoveProfile(Jid)
+{
+	var ProfileIndex = this.FindProfile(Jid);
+
+	if (ProfileIndex == null)
+	{
+		return false
+	}
+
+	//Remove Profile from ProfileList
+	this.ProfileList.splice(ProfileIndex,1);
+
+}
+
+function DATA_GetProfile(Jid)
+{
+	var i=0;
+
+	while(i<this.ProfileList.length)
+	{
+		if(this.ProfileList[i].Jid == Jid)
+		{
+			return this.ProfileList[i];
+		}
+		i++;
+	}
+	return null;
+
 }

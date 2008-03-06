@@ -3,14 +3,41 @@
 <link rel="stylesheet" type="text/css" href="css/Register.css" />
 
 <script type="text/javascript" src="scripts/register/Register.js"></script>
-<body>
+<script type="text/javascript" src="scripts/utils/utils.js"></script>
+<script language="javascript">
+	function labels(){
+		var XML = UTILS_OpenXMLFile("./scripts/lang/pt_BR.xml");
+		var inf = document.getElementById("register_inf");
+		var usrname = document.getElementById("register_user_name");
+		var mail = document.getElementById("register_mail"); 
+		var mail_inf = document.getElementById("register_mail_inf"); 
+		var pass = document.getElementById("register_passwd"); 
+		var pass_conf = document.getElementById("register_passwd_confirm");
+		var title =  document.getElementById("register_title");
+		var bt_confirm = document.getElementById("register");
+		var bt_cancel = document.getElementById("cancel");
+		inf.innerHTML = UTILS_GetTag(XML, "register_inf");
+		usrname.innerHTML = UTILS_GetTag(XML, "register_user_name");
+		mail.innerHTML = UTILS_GetTag(XML, "register_mail");
+		mail_inf.innerHTML = UTILS_GetTag(XML, "register_mail_inf");
+		pass.innerHTML = UTILS_GetTag(XML, "register_passwd");
+		pass_conf.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm");
+		title.innerHTML = UTILS_GetTag(XML, "register_title");
+		bt_confirm.value = UTILS_GetTag(XML, "register_bt_confirm");
+		bt_cancel.value = UTILS_GetTag(XML, "register_bt_cancel");
+
+
+	}
+</script>
+<body onload="labels()">
 	<div id="mainDiv">
-		<h1>Cadastro</h1>
-		<p class="italic">Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre (se nao cadastrar e-mail nao sera possivel recuperar sua senha caso a perca)</p>
-		<p><b>Nome de Usuario:</b><input type="text" class="nik" id="username"></p>
-		<p><b>E-mail (nao obrigatorio):</b><input type="text" class="mail" id="mail"></p>
-		<p><b>Senha:</b><input type="password" class="pwd" id="pwd"></p>
-		<p><b>Senha(confirmacao):</b><input type="password" class="pwd" id="confpwd"></p>
+		<h1 id="register_title"></h1>
+		<p class="italic" id="register_inf"></p>
+		<p><b id="register_user_name"></b><input type="text" class="nik" id="username"></p>
+		<p><b id="register_mail"></b><input type="text" class="mail" id="mail"></p>
+		<p class= "inf" id="register_mail_inf"></p>
+		<p><b id="register_passwd"></b><input type="password" class="pwd" id="pwd"></p>
+		<p><b id="register_passwd_confirm"></b><input type="password" class="pwd" id="confpwd"></p>
 		<p class="special">
 		<input type="button" class="enter" value="Cadastrar" id="register" onclick="post()">
 		<input type="button" class="enter" value="Cancelar" id="cancel" onclick="window.location.href='./'">

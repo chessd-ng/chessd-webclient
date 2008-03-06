@@ -703,7 +703,7 @@ function MESSAGE_SearchUser(Username)
 */
 function MESSAGE_KickUser (Room, To, Role, Reason)
 {
-	var XMPP="";
+	var XMPP = "";
 
 	XMPP += "<iq id='"+MainData.Const.IQ_ID_KickUser+"' to='"+Room+"@conference."+MainData.Host+"' type='set' >";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/protocol/muc#admin' >";
@@ -711,5 +711,19 @@ function MESSAGE_KickUser (Room, To, Role, Reason)
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</query></iq>";
 	
+	return XMPP;
+}
+
+/**********************************
+ * MESSAGES - PROFILE - vCard
+ **********************************/
+
+function MESSAGE_GetProfile(Username)
+	var XMPP = "";
+
+	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetProfile+"'>";
+	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0' />";
+	XMPP += "</iq>";
+
 	return XMPP;
 }

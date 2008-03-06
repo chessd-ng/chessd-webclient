@@ -51,7 +51,7 @@ function INTERFACE_CreateUserBox()
 	}
 
 	UserDiv = UTILS_CreateElement("div", "User");
-	UserImg = UTILS_CreateElement("img");
+	UserImg = UTILS_CreateElement("img","UserImg");
 	UserImg.title = MainData.Username;
 	UserImg.src = "images/no_photo.png";
 	UserInf = UTILS_CreateElement("div", "UserInf");
@@ -86,4 +86,16 @@ function INTERFACE_CreateUserBox()
 	UserDiv.appendChild(UserInf);
 
 	return UserDiv;
+}
+
+
+/**
+* Change user's image
+*/
+function INTERFACE_SetUserImage(Img)
+{
+	var UserImg = document.getElementById("UserImg");
+
+	//UserImg.src = "data:"+ImgType+";base64,"+Img64;
+	UserImg.src = Img;
 }

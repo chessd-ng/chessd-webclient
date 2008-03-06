@@ -265,21 +265,25 @@ function WINDOW_SearchUserResult(UserList)
 
 function WINDOW_Profile(Profile)
 {
-	//Return Div and Buttons;
+	//Return Div, Buttons and Elements;
 	var Div = INTERFACE_ShowProfileWindow(Profile);
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_window'));
+	var Elements = Div.Elements;
 
 	// Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 	// Close Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+
 /*	if (Div.Buttons.length == 3)
 	{
 		// Save Profile Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	}*/
+
+	return Elements;
 }
 
 function WINDOW_ProfileConfirm(Profile)

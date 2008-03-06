@@ -215,4 +215,15 @@
 		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
 		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
 	</profile>
+	<register>
+		<register_inf>Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre</register_inf>
+		<register_title>Cadastro</register_title>
+		<register_user_name>Nome de Usuario</register_user_name>
+		<register_mail>E-mail</register_mail>
+		<register_mail_inf>Permite recuperar sua senha em caso de esquecimento</register_mail_inf>
+		<register_passwd>Senha</register_passwd>
+		<register_passwd_confirm>Senha (confirmacao)</register_passwd_confirm>
+		<register_bt_confirm>Confirmar</register_bt_confirm>
+		<register_bt_cancel>Cancelar</register_bt_cancel>
+	</register>
 </language>
