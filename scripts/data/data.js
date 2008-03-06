@@ -98,10 +98,7 @@ DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
 
-
 DATA.prototype.SortUserByNick = DATA_SortUserByNick;
-DATA.prototype.SortUser = DATA_SortUser;
-DATA.prototype.SortUserRev = DATA_SortUserRev;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -109,8 +106,11 @@ DATA.prototype.FindRoom = DATA_FindRoom;
 DATA.prototype.SetRoom = DATA_SetRoom;
 DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
+DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+
+DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
@@ -483,30 +483,6 @@ function DATA_SortUserByNick()
 	return true;
 }
 
-/**
-* Sort Userlist into ascending order
-*
-* @return	boolean
-* @author	Danilo Yorinori
-*/
-function DATA_SortUser()
-{
-	this.UserList.sort(UTILS_SortByUsernameAsc);
-	return true;
-}
-
-/**
-* Sort Userlist into descending order
-*
-* @return	boolean
-* @author	Danilo Yorinori
-*/
-function DATA_SortUserRev()
-{
-	this.UserList.sort(UTILS_SortByUsernameDsc);
-	return true;
-}
-
 /**********************************
  * METHODS - ROOM LIST            *
  **********************************/
@@ -528,6 +504,7 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation)
 	Room.MsgTo = MsgTo;
 	Room.Role = Role;
 	Room.Affiliation = Affiliation;
+	Room.OrderBy = "0";
 
 	this.RoomList[this.RoomList.length] = Room;
 	return true;
@@ -640,6 +617,35 @@ function DATA_FindUserInRoom(RoomName, Username)
 }
 
 /**
+* Find next user in room user list
+*
+*	@param RoomName		Name of room to search the next user
+*	@param Username		Base user to search the next
+*	@param Status			Status of user to search the next 
+*	@see
+*	@author	Danilo Yorinori
+*/
+function DATA_FindNextUserInRoom(RoomName, Username)
+{
+	var i = this.FindRoom(RoomName);
+	var j, Index;
+
+	// Get the user's index in struct
+	Index = this.FindUserInRoom(RoomName, Username);
+
+	// If user isn't the last item in struct
+	if (Index < this.RoomList[i].UserList.length-1)
+	{
+		Index++;
+		return Index;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+/**
 * Set user attibutes in 'RoomName'
 */
 function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
@@ -650,9 +656,21 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 	if (i == null || j == null)
 		return false;
 
-	this.RoomList[j].UserList[i].Status = Status;
-	this.RoomList[j].UserList[i].Role = Role;
-	this.RoomList[j].UserList[i].Affiliation = Affiliation;
+	if (Status != "")
+	{
+		this.RoomList[j].UserList[i].Status = Status;
+	}
+	
+	if (Role != "")
+	{
+		this.RoomList[j].UserList[i].Role = Role;
+	}
+	
+	if (Affiliation != "")
+	{
+		this.RoomList[j].UserList[i].Affiliation = Affiliation;
+	}
+	
 	return true;
 }
 
@@ -668,6 +686,27 @@ function DATA_DelUserInRoom(RoomName, Username)
 		return false;
 
 	this.RoomList[j].UserList.splice(i, 1);
+	return true;
+}
+
+/**
+* Sort Userlist froom Room into ascending or descending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserByNickInRoom(RoomName)
+{
+	var i = this.FindRoom(RoomName);
+
+	if (this.RoomList[i].OrderBy == "0")
+	{
+		this.RoomList[i].UserList.sort(UTILS_SortByUsernameAsc);
+	}
+	else
+	{
+		this.RoomList[i].UserList.sort(UTILS_SortByUsernameDsc);
+	}
 	return true;
 }
 

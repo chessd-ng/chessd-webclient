@@ -23,8 +23,6 @@ function DATA_SetConsts()
 {
 	var Const = new Object();
 
-	// Adicionar o resto neste padrao..
-	
 	// Iq id's
 	Const.IQ_ID_GetUserList = "GetUserList";
 	Const.IQ_ID_GetRoomList = "GetRoomList";
@@ -38,7 +36,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_GameAdjourn = "GameAdjourn";
 	Const.IQ_ID_GameResign = "GameResign";
 	Const.IQ_ID_SearchUser = "SearchUser";
-	Const.IQ_ID_SearchUser = "SearchUser";
+	Const.IQ_ID_KickUser = "KickUser";
 	Const.IQ_ID_GetProfile = "GetProfile";
 	Const.IQ_ID_GamePhoto = "GetGamePlayerPhoto";
 	

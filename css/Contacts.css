@@ -62,7 +62,7 @@
 }
 
 
-#Main #Left #Contact td:hover {
+#Main #Left #Contact tr:hover {
 	background-color: #EAF5F4;
 	cursor			: pointer;
 }
