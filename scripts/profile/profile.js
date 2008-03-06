@@ -47,6 +47,8 @@ function PROFILE_HandleVCardProfile(XML)
 		Profile.Profile.SetUserImg(Img);
 	}
 
+	MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
+
 	return "";
 }
 
@@ -139,3 +141,14 @@ function PROFILE_RemoveProfile(Username)
 	MainData.RemoveProfile(Jid);
 }
 
+
+function PROFILE_SaveMyProfile()
+{
+		var FN, Desc, PhotoType, Binval;
+		FN = MainData.MyProfile.FN;
+		Desc = MainData.MyProfile.Desc;
+		PhotoType = MainData.MyProfile.ImgType;
+		Binval = MainData.MyProfile.Img64;
+
+		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
+}

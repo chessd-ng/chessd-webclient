@@ -104,6 +104,7 @@ function LOGIN_LoadScripts()
 	Scripts[26] = "scripts/interface/chat.js";
 	Scripts[27] = "scripts/profile/profile.js";
 	Scripts[28] = "scripts/interface/profile.js";
+	Scripts[29] = "scripts/utils/images.js";
 
 
 	// Carregando arquivos

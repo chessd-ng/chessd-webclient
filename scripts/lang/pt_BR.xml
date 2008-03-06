@@ -221,6 +221,8 @@
 		<profile_save_close>Salvar e fechar</profile_save_close>
 		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
 		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
+		<profile_change_image>Selecione a foto</profile_change_image>
+		<profile_change_image_title>Mudar foto</profile_change_image_title>
 	</profile>
 	<register>
 		<register_inf>Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre</register_inf>

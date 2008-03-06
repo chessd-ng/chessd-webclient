@@ -129,3 +129,21 @@
 #ConfirmDiv #ButtonsDiv .button {
 	bottom			:	5px;
 }
+
+#ChangeImageDiv #ButtonsDiv{
+	position			: relative;
+	text-align	: center;
+	padding-top		:	25px;
+}
+
+#ChangeImageDiv #TextDiv{
+	padding-top		:	10px;
+	position			:	relative;
+	text-align		: center;
+}
+
+#ChangeImageDiv #ImageForm{
+	position			: relative;
+	text-align	: center;
+	padding-top		:	15px;
+}

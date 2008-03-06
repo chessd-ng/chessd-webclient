@@ -727,3 +727,18 @@ function MESSAGE_GetProfile(Username, Id)
 
 	return XMPP;
 }
+
+function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' >";
+	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0'>";
+	XMPP += "<FN>"+FullName+"</FN>";
+	XMPP += "<DESC>"+Desc+"</DESC>";
+	XMPP += "<PHOTO>"
+	XMPP += "<TYPE>"+ImgType+"</TYPE>"
+	XMPP += "<BINVAL>"+Img64+"</BINVAL>"
+	XMPP += "</PHOTO></vCard></iq>";
+
+	return XMPP;
+}
