@@ -24,12 +24,38 @@
 function CONTACT_HandleInfo(XML)
 {
 	var RatingNodes, TypeNodes;
+	var Jid, Profile, Type, Rating;
 	
 	RatingNodes = XML.getElementsByTagName('rating');
 	TypeNodes = XML.getElementsByTagName('type');
 
-	CONTACT_HandleRating(RatingNodes);
-	CONTACT_HandleType(TypeNodes);
+	// Profile window opened
+	if (MainData.ProfileList.length > 0)
+	{
+		// Only one user
+		if (TypeNodes.length == 1)
+		{
+			Jid = TypeNodes[0].getAttribute('jid');
+
+			Type = TypeNodes[0].getAttribute('type');
+			
+			// Profile Update
+			Profile = MainData.GetProfile(Jid);
+			if (Profile)
+			{
+				Profile.Profile.SetGroup(Type);
+				
+				Rating = PROFILE_HandleRatings(RatingNodes);
+
+				Profile.Profile.SetRatings(Rating);
+			}
+		}
+	}
+	else
+	{
+		CONTACT_HandleRating(RatingNodes);
+		CONTACT_HandleType(TypeNodes);
+	}
 
 	return "";
 }

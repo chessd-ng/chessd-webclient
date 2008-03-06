@@ -134,9 +134,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 	SaveProfile = UTILS_CreateElement('input',null,'button');
 
 	Nickname = 	UTILS_CreateElement('span', null, 'inf', Profile.User);
+
 	if (User)
 	{
-
 		Username = 	UTILS_CreateElement('input',null,'inf');
 		Username.value = Profile.Name;
 		
@@ -154,7 +154,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 	else
 	{
-		
 		Username = 	UTILS_CreateElement('span', null, 'inf', Profile.Name);
 
 		WhoAmIUser = 	UTILS_CreateElement('span', null, 'inf_whoami', Profile.Description);
@@ -172,6 +171,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Tr = UTILS_CreateElement('tr');
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_category'));
 		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_current_rating'));
+		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_best_rating'));
 		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_record_date'));
@@ -185,33 +186,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
-	Table.appendChild(TBody)
-/*
-	// Show the rating in rating array in Profile parameter
-	// Each line is a rating type and columns contais the values
-	// Col 0 = category
-	// Col 1 = best rating
-	// Col 2 = record data
-	// Col 3 = number in game category
-	// Col 4 = number of won games in category
-	// Col 5 = number of lose games in category
-	// Col 6 = number of draw games in category
-	for(i = 0; i < Profile.Rates.length; i++)
-	{
-		Tr = UTILS_CreateElement('tr');
-		
-		Td = UTILS_CreateElement('td',null,null,Profile.Rates[i][0]);
-
-		Tr.appendChild(Td);
-
-		for(j = 0; j < 7; j++)
-		{
-			Td = UTILS_CreateElement('td',null,null,Profile.Rates[i][j]);
-			Tr.appendChild(Td);
-		}
-		Table.appendChild(Tr);
-	}
-*/
+	Table.appendChild(TBody);
+	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');
 
@@ -221,17 +197,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 //	LevelLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_level'));
 	
 	GroupLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_group'));
-	switch(Profile.Group)
-	{
-		case 'admin':
-			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_admin'));
-			break;
-		case 'teacher':
-			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_teacher'));
-			break;
-		default:
-			GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_user'));
-	}
+	GroupSpan = UTILS_CreateElement('span',null,'value',UTILS_GetText('contact_user'));
 	GroupLabel.appendChild(GroupSpan);
 
 	TypeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_type'));
@@ -379,7 +345,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.UserImg = Photo;
 	Elements.Nick = Nickname;
 	Elements.Desc = WhoAmIUser;
-	Elements.Table = Table;
+	Elements.TBody = TBody;
 	Elements.TotalTime = TotalTimeSpan;
 	Elements.OnlineTime = OnlineTimeSpan;
 	Elements.Group = GroupSpan;
@@ -480,10 +446,25 @@ function INTERFACE_ProfileSetDesc(Desc)
 {
 	this.Desc.value = Desc;
 }
-function INTERFACE_ProfileSetRatings()
+function INTERFACE_ProfileSetRatings(Ratings)
 {
-	WINDOW_Alert("Ratings","Fazer funcoes para atualizar ratings");
+	var Tr, Td;
+	var i,j;
+
+	for(i = 0; i < 3; i++)
+	{
+		Tr = UTILS_CreateElement('tr');
+		
+		for(j = 0; j < 8; j++)
+		{
+			Td = UTILS_CreateElement('td',null,null,Ratings[i][j]);
+			Tr.appendChild(Td);
+		}
+
+		this.TBody.appendChild(Tr);
+	}
 }
+
 function INTERFACE_ProfileSetTotalTime(Time)
 {
 	this.TotalTime.innerHTML = Time;
@@ -503,5 +484,18 @@ function INTERFACE_ProfileSetTitleImg(NewSrc)
 
 function INTERFACE_ProfileSetGroup(Group)
 {
-	this.Group.innerHTML = Group;
+	switch(Group)
+	{
+		case 'admin':
+			this.Group.innerHTML = UTILS_GetText('contact_admin');
+			break;
+		case 'teacher':
+			this.Group.innerHTML = UTILS_GetText('contact_teacher');
+			break;
+		case 'user':
+			this.Group.innerHTML = UTILS_GetText('contact_user');
+			break;
+		default:
+			this.Group.innerHTML = "---";
+	}
 }

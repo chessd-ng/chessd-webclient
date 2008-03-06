@@ -170,6 +170,9 @@
 		<game_promotion_bishop>Bispo</game_promotion_bishop>
 		<game_promotion_knight>Cavalo</game_promotion_knight>
 
+		<game_observer_alert>Você não pode observar uma nova partida enquanto estiver jogando ou observando uma partida.</game_observer_alert>
+		<game_observer_alert_title>Aviso</game_observer_alert_title>
+
 		<game_white_pawn>Peão Branco</game_white_pawn>
 		<game_white_rook>Torre Branca</game_white_rook>
 		<game_white_knight>Cavalo Branco</game_white_knight>
@@ -200,6 +203,7 @@
 		<profile_online_time>Tempo online: </profile_online_time>
 		<profile_total_time>Tempo acumulado: </profile_total_time>
 		<profile_category>Categoria</profile_category>
+		<profile_current_rating>Rating Atual</profile_current_rating>
 		<profile_best_rating>Maior Rating</profile_best_rating>
 		<profile_record_date>Data do Record</profile_record_date>
 		<profile_games_number>No. de Partidas</profile_games_number>

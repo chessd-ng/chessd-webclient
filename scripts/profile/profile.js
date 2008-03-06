@@ -50,6 +50,59 @@ function PROFILE_HandleVCardProfile(XML)
 	return "";
 }
 
+function PROFILE_HandleRatings(RatingNodes)
+{
+	var Rating = new Array();
+	var Category, TimeStamp, Index;
+	var i;
+
+	Rating[0] = new Array(); // lightning
+	Rating[0][0] = "Lightning";
+
+	Rating[1] = new Array(); // blitz
+	Rating[1][0] = "Blitz";
+
+	Rating[2] = new Array(); // standard
+	Rating[2][0] = "Standard";
+
+	for (i=0; i < 3; i++)
+	{
+		for (j=1; j < 8; j++)
+		{
+			Rating[i][j] = "---";
+		}
+	}
+
+	for (i=0; i < RatingNodes.length; i++)
+	{
+		Category = RatingNodes[i].getAttribute('category');
+
+		switch(Category)
+		{
+			case 'lightning':
+				Index = 0;
+				break;
+			case 'blitz':
+				Index = 1;
+				break;
+			case 'standard':
+				Index = 2;
+				break;
+			default:
+		}
+		
+		Rating[Index][1] = RatingNodes[i].getAttribute('rating');
+		Rating[Index][2] = RatingNodes[i].getAttribute('max_rating');
+		TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
+		Rating[Index][3] = UTILS_ConvertTimeStamp(TimeStamp);
+		Rating[Index][5] = RatingNodes[i].getAttribute('wins');
+		Rating[Index][6] = RatingNodes[i].getAttribute('draws');
+		Rating[Index][7] = RatingNodes[i].getAttribute('losses');
+		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	
+	}
+
+	return Rating;
+}
 
 function PROFILE_StartProfile(Username)
 {	
@@ -72,7 +125,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_Info(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));

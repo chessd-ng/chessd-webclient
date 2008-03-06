@@ -52,6 +52,7 @@ function OLDGAME_StartOldGame(P1, P2)
 
 	//Change "X" close board button function when clicked
 	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
+
 	// Send a message to get game moves
 	// TODO TODO TODO
 

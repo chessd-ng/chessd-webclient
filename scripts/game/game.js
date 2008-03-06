@@ -462,7 +462,6 @@ function GAME_HandleGameError(XML)
 */
 function GAME_StartGame(GameId, P1, P2)
 {
-	var P1Name, P2Name;
 	var GameDiv;
 	var YourColor;
 
@@ -486,6 +485,9 @@ function GAME_StartGame(GameId, P1, P2)
 
 	// Show New Game
 	GameDiv.Show();
+
+	// Get Players Photo
+	CONNECTION_SendJabber(MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto), MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto));
 
 	// Set status to playing
 	return CONTACT_ChangeStatus("playing", "return");
@@ -527,6 +529,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv.UpdateBTime(0);
 	GameDiv.SetWTime();
 	GameDiv.SetBTime();
+
+	// Get players Photos
+	CONNECTION_SendJabber(MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto), MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto));
 
 	// Send a message to get game moves
 	ROOM_EnterRoomGame(GameId)
@@ -609,6 +614,8 @@ function GAME_RemoveGame(GameID)
 		{
 			Game.Game.Remove();
 			MainData.RemoveGame(GameID);
+
+			INTERFACE_FocusRoom(GameID);
 			ROOM_ExitRoom()
 		}
 		else
@@ -772,4 +779,55 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 	}
 
 	return Buffer;
+}
+
+/**
+* Handle Game Players Photo
+*
+* @param 	XML The xml that contains vCard photo
+* @return 	none
+* @author 	Rubens
+*/
+function GAME_HandleVCardPhoto(XML)
+{
+	var Photo;
+	var Player;
+	var Binval;
+	var PhotoType;
+	var Img;
+
+	if( MainData.CurrentGame == null)
+	{
+		return "";
+	}
+	
+	// Get player image
+	Photo = XML.getElementsByTagName("PHOTO")[0]; 
+
+	// If player don't use any image, do nothing
+	if(Photo == null) 
+	{ 
+		return "";
+	}
+
+	// Get photo image 
+	PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]); 
+	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]); 
+	Img = "data:"+PhotoType+";base64,"+Binval; 
+
+	Player = XML.getAttribute("from").split("@")[0];
+
+	// Update current game player image
+	if(MainData.CurrentGame.PW == Player)
+	{
+		MainData.CurrentGame.WPhoto = Img;
+		MainData.CurrentGame.Game.SetWPhoto(Img);
+	}
+	else if(MainData.CurrentGame.PB == Player)
+	{
+		MainData.CurrentGame.BPhoto = Img;
+		MainData.CurrentGame.Game.SetBPhoto(Img);
+	}
+	
+	return "";
 }

@@ -35,6 +35,9 @@ function CONTACT_InviteUser(Username)
 	{
 		// Send it to jabber
 		CONNECTION_SendJabber(XML);
+
+		// Sort userlist
+		MainData.SortUser();
 		return true;
 	}
 	else
