@@ -35,7 +35,7 @@ if(eregi("^image\/(jpg|jpeg|png|gif)$", $image["type"])){
 		else
 			document.write("<?=$convert?>");
 
-		parent.b64Img("<?=$convert?>", "<?=$type?>");
+		parent.IMAGE_B64Img("<?=$convert?>", "<?=$type?>");
 	}
 </script>
 

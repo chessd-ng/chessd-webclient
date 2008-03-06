@@ -150,5 +150,5 @@ function PROFILE_SaveMyProfile()
 		PhotoType = MainData.MyProfile.ImgType;
 		Binval = MainData.MyProfile.Img64;
 
-		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval) );
+		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
 }

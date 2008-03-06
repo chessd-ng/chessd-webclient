@@ -276,7 +276,7 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 * @param	Text		Text to display in confirm box
 * @return	Div; Array
 * @see		WINDOW_Confirm();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Rubens and Fabiano
 */
 function WINDOW_CreateImageSend()
 {
@@ -289,20 +289,20 @@ function WINDOW_CreateImageSend()
 	var Buttons = new Array();
 
 
-	Div = UTILS_CreateElement("div","SendImageDiv");
+	Div = UTILS_CreateElement("div","ChangeImageDiv");
 
 	TextDiv = UTILS_CreateElement("div","TextDiv");
-	Label = UTILS_CreateElement("p",null,null,"Insira sua foto");
+	Label = UTILS_CreateElement("p",null,null,UTILS_GetText("profile_change_image"));
 
 	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
 	Ok = UTILS_CreateElement("input", null,"button");
 	Ok.type = "button";
-	Ok.value = "Ok";
-	Ok.onclick = function (){ imageEncode("teste_id")};
+	Ok.value = UTILS_GetText("window_ok");
+	Ok.onclick = function (){ IMAGE_ImageEncode("ImageForm")};
 
 	Cancel = UTILS_CreateElement("input", null,"button");
 	Cancel.type = "button";
-	Cancel.value = "Cancel";
+	Cancel.value = UTILS_GetText("window_cancel");
 
 
 	Buttons.push(Ok);
@@ -314,8 +314,8 @@ function WINDOW_CreateImageSend()
 	TextDiv.appendChild(Label);
 
 	Div.appendChild(TextDiv);
+	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm", "php/base64.php" ));
 	Div.appendChild(ButtonsDiv);
 	
-	Div.appendChild(createFormToEncode("teste_id", "php/base64.php" ));
 	return {Div:Div, Buttons:Buttons};
 }

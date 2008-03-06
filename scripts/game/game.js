@@ -464,6 +464,7 @@ function GAME_StartGame(GameId, P1, P2)
 {
 	var GameDiv;
 	var YourColor;
+	var Buffer;
 
 	// Hide current game
 	if (MainData.CurrentGame != null)
@@ -487,10 +488,11 @@ function GAME_StartGame(GameId, P1, P2)
 	GameDiv.Show();
 
 	// Get Players Photo
-	CONNECTION_SendJabber(MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto), MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto));
+	Buffer  = MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
 
 	// Set status to playing
-	return CONTACT_ChangeStatus("playing", "return");
+	return CONTACT_ChangeStatus("playing", "return") + Buffer;
 
 }
 

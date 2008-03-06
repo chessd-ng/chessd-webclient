@@ -274,14 +274,11 @@ function WINDOW_Profile(Profile)
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
-	// Close Button
+	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 
 	// Save Profile Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){
-		WINDOW_RemoveWindow(WindowObj);
-		PROFILE_SaveMyProfile();
-		}, false);
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 
 	return Elements;
 }
@@ -310,7 +307,7 @@ function WINDOW_ProfileImage()
 	var Div = WINDOW_CreateImageSend();
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_confirm_close'));
+	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_change_image_title'));
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);

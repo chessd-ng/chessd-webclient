@@ -148,9 +148,10 @@ function INTERFACE_ShowProfileWindow(Profile)
 		SaveProfile.type = "button";
 		SaveProfile.value = UTILS_GetText("profile_save");
 		SaveProfile.onclick = function() {
-		// TODO
-		// Send messages with changes
-		// Show the window confirmation
+			// Send messages with changes
+			PROFILE_SaveMyProfile();
+			//TODO
+			// Show the window confirmation
 		};
 	}
 	else
