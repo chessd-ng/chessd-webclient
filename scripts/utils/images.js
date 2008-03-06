@@ -1,8 +1,7 @@
 
-function createFormToEncode(form_id, action){
-	var form, body, file;
+function IMAGE_CreateFormToEncode(form_id, action){
+	var form, file;
 
-	body = document.getElementsByTagName("body")[0];
 	form = document.createElement("form");
 	form.id= form_id;
 	form.action = action;
@@ -14,15 +13,18 @@ function createFormToEncode(form_id, action){
 	file.name = "image";
 	
 	form.appendChild(file);
-	body.appendChild(form);
+	return form;
 }
 
 
-function IMAGE_ImageDecode(Img64){
-	return "webclient/php/base64_decode.php?"+img.src.slice(5);
+function IMAGE_ImageDecode(image_id){
+	var img = document.getElementById(image_id);
+	nada = document.getElementById("nada").src="webclient/php/base64_decode.php?"+img.src.slice(5);
+	img.src = "webclient/php/base64_decode.php?"+img.src.slice(5);
+
 }
 
-function imageEncode(formId){
+function IMAGE_ImageEncode(formId){
 	var frame, body, form;
 	
 	frame = document.createElement("iframe");
@@ -38,12 +40,20 @@ function imageEncode(formId){
 
 }
 
-function b64Img(image, type){
-	var img, body;
+//if type == ""; error!!!!
+function IMAGE_B64Img(image, type){
+	var Profile;
+	var Img;
 
-	img = document.createElement("img");
-	img.src = "data:image/"+type+";base64,"+image;
-	body = document.getElementsByTagName("body")[0];
-	body.appendChild(img);
+	// Set my profile data
+	MainData.SetMyProfile("","","",type,image);
 
+	Img = "data:"+type+";base64,"+image;
+
+	Profile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);
+	if(Profile != null)
+	{
+		Profile.Profile.SetUserImg(Img);
+	}
+	
 }

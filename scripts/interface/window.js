@@ -269,3 +269,53 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 
 	return {Div:Div, Buttons:Buttons};
 }
+
+/**
+*	Create elements of send user image
+*
+* @param	Text		Text to display in confirm box
+* @return	Div; Array
+* @see		WINDOW_Confirm();
+* @author	Rubens and Fabiano
+*/
+function WINDOW_CreateImageSend()
+{
+	var Div;
+
+	var TextDiv, ButtonsDiv;
+	var Label;
+	var Ok;
+	var Cancel;
+	var Buttons = new Array();
+
+
+	Div = UTILS_CreateElement("div","ChangeImageDiv");
+
+	TextDiv = UTILS_CreateElement("div","TextDiv");
+	Label = UTILS_CreateElement("p",null,null,UTILS_GetText("profile_change_image"));
+
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+	Ok = UTILS_CreateElement("input", null,"button");
+	Ok.type = "button";
+	Ok.value = UTILS_GetText("window_ok");
+	Ok.onclick = function (){ IMAGE_ImageEncode("ImageForm")};
+
+	Cancel = UTILS_CreateElement("input", null,"button");
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText("window_cancel");
+
+
+	Buttons.push(Ok);
+	Buttons.push(Cancel);
+
+	ButtonsDiv.appendChild(Ok);
+	ButtonsDiv.appendChild(Cancel);
+
+	TextDiv.appendChild(Label);
+
+	Div.appendChild(TextDiv);
+	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm", "php/base64.php" ));
+	Div.appendChild(ButtonsDiv);
+	
+	return {Div:Div, Buttons:Buttons};
+}

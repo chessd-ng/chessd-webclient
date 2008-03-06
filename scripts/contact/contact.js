@@ -56,6 +56,11 @@ function CONTACT_HandleUserList(XML)
 				}
 				break;
 
+			// Store the contact on structure with subs "none"
+			case("none"):
+				// If there's a pending invite send a accept
+				CONTACT_InsertUser(Jid, "offline", Subs);
+
 			// Do nothing =)
 			case("from"):
 				break;
@@ -296,7 +301,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 {
 	var Func, Options = new Array();
 	var i = 0, Hide = 0;
-	
+	var Button1 = new Object(), Button2 = new Object();
+
 	Func = function () {
 		Hide += 1;
 		
@@ -349,7 +355,13 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
 			Options[i].Func = function () { 
-				CONTACT_RemoveUser(Username);
+				Button1.Name = UTILS_GetText("contact_ok");
+				Button1.Func = function () {
+					CONTACT_RemoveUser(Username);
+				}
+				Button2.Name = UTILS_GetText("contact_decline");
+				Button2.Func = null;
+				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), UTILS_GetText("contact_remove_text"), Button1, Button2);
 			};
 			i += 1;
 		}

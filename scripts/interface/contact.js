@@ -341,6 +341,7 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 	// Changing node visibilty
 	if (Node.style.display == "none")
 	{
+		// Display should be "list-item", "table" don't work in IE6
 		Node.style.display = "list-item";
 		Obj.innerHTML = Obj.innerHTML.replace("+", "-");
 	}
@@ -384,11 +385,13 @@ function INTERFACE_CreateContactList()
 
 	// User tables
 	OnlineTable = UTILS_CreateElement("table","ContactOnlineTable");
-	OnlineTable.style.display= "table";
+	// Display should be "list-item", "table" don't work in IE6
+	OnlineTable.style.display = "list-item";
 	OnlineTbody = UTILS_CreateElement("tbody", "ContactOnlineList");
 
 	OfflineTable = UTILS_CreateElement("table","ContactOfflineTable");
-	OfflineTable.style.display= "table";
+	// Display should be "list-item", "table" don't work in IE6
+	OfflineTable.style.display = "list-item";
 	OfflineTbody = UTILS_CreateElement("tbody", "ContactOfflineList");
 
 	// Loading user list
