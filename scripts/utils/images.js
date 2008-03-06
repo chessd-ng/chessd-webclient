@@ -17,11 +17,9 @@ function IMAGE_CreateFormToEncode(form_id, action){
 }
 
 
-function IMAGE_ImageDecode(image_id){
-	var img = document.getElementById(image_id);
-	nada = document.getElementById("nada").src="webclient/php/base64_decode.php?"+img.src.slice(5);
-	img.src = "webclient/php/base64_decode.php?"+img.src.slice(5);
-
+// This function is used to show image base64 in IE6
+function IMAGE_ImageDecode(ImgSrc){
+	return "php/base64_decode.php?"+ImgSrc.slice(5);
 }
 
 function IMAGE_ImageEncode(formId){
@@ -41,18 +39,18 @@ function IMAGE_ImageEncode(formId){
 }
 
 //if type == ""; error!!!!
-function IMAGE_B64Img(image, type){
+function IMAGE_B64Img(Image, Type){
 	var Profile;
 	var Img;
 
-	// Set my profile data
-	MainData.SetMyProfile("","","",type,image);
+	Img = "data:"+Type+";base64,"+Image;
 
-	Img = "data:"+type+";base64,"+image;
-
+	// Update user profile image
 	Profile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);
 	if(Profile != null)
 	{
+		Profile.Profile.SetImgType(Type);
+		Profile.Profile.SetImg64(Image);
 		Profile.Profile.SetUserImg(Img);
 	}
 	

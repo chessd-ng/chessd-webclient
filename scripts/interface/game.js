@@ -717,7 +717,7 @@ function INTERFACE_SetBTime()
 */
 function INTERFACE_SetWPhoto(Img)
 {
-	this.photo.wphoto.src = Img;
+	this.photo.wphoto.src = IMAGE_ImageDecode(Img);
 }
 
 /**
@@ -730,7 +730,7 @@ function INTERFACE_SetWPhoto(Img)
 */
 function INTERFACE_SetBPhoto(Img)
 {
-	this.photo.bphoto.src = Img;
+	this.photo.bphoto.src = IMAGE_ImageDecode(Img);
 }
 
 /**
