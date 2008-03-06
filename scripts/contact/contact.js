@@ -56,6 +56,11 @@ function CONTACT_HandleUserList(XML)
 				}
 				break;
 
+			// Store the contact on structure with subs "none"
+			case("none"):
+				// If there's a pending invite send a accept
+				CONTACT_InsertUser(Jid, "offline", Subs);
+
 			// Do nothing =)
 			case("from"):
 				break;
