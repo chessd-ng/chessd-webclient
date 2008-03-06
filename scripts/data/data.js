@@ -73,6 +73,7 @@ function DATA(ConfFile, LangFile)
 	this.CurrentRating = "blitz";
 	
 	this.ProfileList = new Array();
+	this.MyProfile = new Object();
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();
@@ -87,6 +88,7 @@ function DATA(ConfFile, LangFile)
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
+DATA.prototype.FindNextUser = DATA_FindNextUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.GetRating = DATA_GetRating;
@@ -96,6 +98,8 @@ DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
 
+
+DATA.prototype.SortUserByNick = DATA_SortUserByNick;
 DATA.prototype.SortUser = DATA_SortUser;
 DATA.prototype.SortUserRev = DATA_SortUserRev;
 
@@ -143,6 +147,8 @@ DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
 DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
+
+DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 
 /**********************************
  * METHODS - USER LIST            *
@@ -206,6 +212,46 @@ function DATA_FindUser(Username)
 			return i;
 	}
 	return null;
+}
+
+/**
+* Find next user in user list
+*
+*	@param Username		Base user to search the next
+*	@param Status			Status of user to search the next 
+*	@see
+*	@author	Danilo Yorinori
+*/
+function DATA_FindNextUser(Username, Status)
+{
+	var i, Index;
+
+	// Take the index in struct of user
+	Index = this.FindUser(Username);
+	
+	// 
+	if ((this.OrderBy == "0") || (this.OrderBy == "1"))
+	{
+		Index++;
+		for (i=Index; i<this.UserList.length; i++)
+		{
+			if (Status != "offline")
+			{
+				if (this.UserList[i].Status != "offline")
+				{
+					return i;
+				}
+			}
+			else
+			{
+				if (this.UserList[i].Status == "offline")
+				{
+					return i;
+				}
+			}
+		}
+		return null;
+	}
 }
 
 
@@ -414,6 +460,25 @@ function DATA_SetRating(Username, Category, Rating)
 					break;
 			}
 		}
+	}
+	return true;
+}
+
+/**
+* Sort Userlist into ascending or descending order
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserByNick()
+{
+	if (this.OrderBy == "0")
+	{
+		this.UserList.sort(UTILS_SortByUsernameAsc);
+	}
+	else
+	{
+		this.UserList.sort(UTILS_SortByUsernameDsc);
 	}
 	return true;
 }
@@ -1287,4 +1352,36 @@ function DATA_GetProfile(Jid)
 	}
 	return null;
 
+}
+
+
+/**********************************
+ * METHODS - MY PROFILE           *
+ **********************************/
+function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
+{
+	if(Username != "")
+	{
+		this.MyProfile.Username = Username;
+	}
+
+	if(FullName != "")
+	{
+		this.MyProfile.FN = FullName;
+	}
+
+	if(Desc != "")
+	{
+		this.MyProfile.Desc = Desc;
+	}
+
+	if(ImgType != "")
+	{
+		this.MyProfile.ImgType = ImgType;
+	}
+
+	if(Img64 != "")
+	{
+		this.MyProfile.Img64 = Img64;
+	}
 }

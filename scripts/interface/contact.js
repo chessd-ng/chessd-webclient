@@ -29,8 +29,9 @@ function INTERFACE_AddContact(Username, Status)
 {
 	var Node = document.getElementById("ContactOnlineList");
 	var Search = document.getElementById("contact-"+Username);
-	var Contact;
+	var Contact, NextUser, Next;
 
+	// If contact node in interface not founded
 	if (!Node)
 	{
 		return false;
@@ -43,8 +44,23 @@ function INTERFACE_AddContact(Username, Status)
 		return true;
 	}
 
+	// Take next user position at userlist in struct
+	NextUser = MainData.FindNextUser(Username, Status);
+
+	// Create elements of contact
 	Contact = INTERFACE_CreateContact(Username, Status)
-	Node.appendChild(Contact);
+
+	// if not exits other user after, insert at last position in online list
+	if (NextUser == null)
+	{
+		Node.insertBefore(Contact, null);
+	}
+	// insert contact before the next user 
+	else
+	{
+		Next = document.getElementById("contact-"+MainData.UserList[NextUser].Username).parentNode;
+		Node.insertBefore(Contact, Next);
+	}
 
 	return true;
 }
@@ -79,7 +95,9 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 {
 	var User = document.getElementById("contact-"+Username);
 	var List;
+	var NextUser, Next;
 
+	NextUser = MainData.FindNextUser(Username, NewStatus);
 
 	if (!User)
 	{
@@ -101,11 +119,15 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 		// Up to 'tr'
 		User = User.parentNode;
 
-		// Remove from offline list
-		User.parentNode.removeChild(User);
-
-		// Add inonline list
-		List.appendChild(User);
+		if (NextUser == null)
+		{
+			List.insertBefore(User, null);
+		}
+		else
+		{
+			Next = document.getElementById("contact-"+MainData.UserList[NextUser].Username).parentNode;
+			List.insertBefore(User, Next);
+		}
 	}
 	// User disconnected
 	else if ((!User.className.match(/offline/)) && (NewStatus == "offline"))
@@ -122,11 +144,15 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 		// Up to 'tr'
 		User = User.parentNode;
 
-		// Remove from offline list
-		User.parentNode.removeChild(User);
-
-		// Add inonline list
-		List.appendChild(User);
+		if (NextUser == null)
+		{
+			List.insertBefore(User, null);
+		}
+		else
+		{
+			Next = document.getElementById("contact-"+MainData.UserList[NextUser].Username).parentNode;
+			List.insertBefore(User, Next);
+		}
 
 	}
 	// Only update status, dont change list
@@ -223,7 +249,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 {
 	var Tr, Td1, Td2;
 
-	Tr = UTILS_CreateElement("tr","user-"+Username);
+	Tr = UTILS_CreateElement("tr");
 
 	// Default type
 	if (Type == null)
@@ -347,6 +373,7 @@ function INTERFACE_CreateContactList()
 
 	// Order buttons
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
+	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
 	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("contact_order_rating"));
 
 	// Group labels
@@ -506,10 +533,6 @@ function INTERFACE_CreateUserElement(Username)
 	return Tr;
 }
 
-
-
-
-
 /**
 *	Create elements of search user result window and returns div
 *
@@ -579,4 +602,56 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	return {Div:Div, Buttons:Buttons};
 }
 
+/**
+*	Sort users by nick into ascendent or descendent order
+*
+* @return	boolean
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_SortUserByNick()
+{	
+	var Tam = MainData.UserList.length;
+	var ListOn, ListOff;
+	var i, Item, Status;
 
+	// TODO Expand to group
+	ListOn = document.getElementById("ContactOnlineList");
+	ListOff = document.getElementById("ContactOfflineList");
+
+	// Test the current order mode
+	// If ordered into ascending order, change to descending order
+	if (MainData.OrderBy == "0")
+	{
+		MainData.OrderBy = "1";
+	}
+	// other modes, change to ascending order
+	else
+	{
+		MainData.OrderBy = "0";
+	}
+
+	// Order userlist struct
+	MainData.SortUserByNick();
+
+	for(i=0; i<Tam; i++)
+	{
+		// Tr element 
+		Item = document.getElementById("contact-"+MainData.UserList[i].Username).parentNode;
+		// If user in interface
+		if (Item != null)
+		{
+			// Take the user's status
+			Status = MainData.UserList[i].Status;
+			// Insert user in last position at online group
+			if (Status != "offline")
+			{
+				ListOn.insertBefore(Item,null);
+			}
+			// Insert user in last position at offline group
+			else
+			{
+				ListOff.insertBefore(Item,null);
+			}
+		}
+	}
+}
