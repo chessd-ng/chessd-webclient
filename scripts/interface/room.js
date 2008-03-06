@@ -34,14 +34,51 @@
 function INTERFACE_AddUserInRoom(RoomName, Username, Status, Type, Rating)
 {
 	var User, Node = document.getElementById(RoomName+"UserList");
+	var NextUser, i, Next;
+
+	// Find Room's position at struct
+	i = MainData.FindRoom(RoomName);
 
 	if (!Node)
 	{
 		return false;
 	}
 
+	// Get the next user in room
+	NextUser = MainData.FindNextUserInRoom(RoomName, Username);
+
 	User = INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName);
-	Node.appendChild(User);
+	// if not exits other user after, insert at last position in online list
+	if (NextUser == null)
+	{
+		Node.insertBefore(User, null);
+	}
+	// insert contact before the next user 
+	else
+	{
+		// Get next user's node in interface
+		Next = document.getElementById(RoomName+"_"+MainData.RoomList[i].UserList[NextUser].Username);
+
+		// If next user's node not exist, search another one until reach the last user in struct
+		while(( Next == null) && ( NextUser <= MainData.RoomList[i].UserList.length))
+		{
+			NextUser = MainData.FindNextUserInRoom(RoomName, MainData.RoomList[i].UserList[NextUser].Username);
+			Next = document.getElementById(RoomName+"_"+MainData.RoomList[i].UserList[NextUser].Username);
+		}
+
+		// If a next user's node was found, insert user before it
+		if (Next != null)
+		{
+			Next = Next.parentNode;
+			Node.insertBefore(User, Next);
+		}
+		// Else, insert user at last position
+		else
+		{
+			Node.insertBefore(User, null);
+		}
+	}
+
 	return true;
 }
 
@@ -533,6 +570,7 @@ function INTERFACE_CreateRoom(RoomName)
 	
 	// Order
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
+	OrderNick.onclick = function() { INTERFACE_SortUserByNickInRoom(RoomName); }; 
 	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("room_order_rating"));
 
 	// Room user list
@@ -791,4 +829,48 @@ function INTERFACE_ShowCancelRoomWindow()
 	Buttons.push(No);
 
 	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+*	Sort users by nick into ascendent or descendent order
+*
+* @return	boolean
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_SortUserByNickInRoom(RoomName)
+{	
+	var Tam;
+	var List;
+	var i,j, Item;
+
+	List = document.getElementById(RoomName+"UserList");
+
+	i= MainData.FindRoom(RoomName);
+	Tam = MainData.RoomList[i].UserList.length;
+
+	// Test the current order mode
+	// If ordered into ascending order, change to descending order
+	if (MainData.RoomList[i].OrderBy == "0")
+	{
+		MainData.RoomList[i].OrderBy = "1";
+	}
+	// other modes, change to ascending order
+	else
+	{
+		MainData.RoomList[i].OrderBy = "0";
+	}
+
+	// Order userlist struct
+	MainData.SortUserByNickInRoom(RoomName);
+
+	for(j=0; j<Tam; j++)
+	{
+		// Tr element 
+		Item = document.getElementById(RoomName+"_"+MainData.RoomList[i].UserList[j].Username).parentNode;
+		// If user in interface
+		if (Item != null)
+		{
+			List.insertBefore(Item,null);
+		}
+	}
 }

@@ -240,7 +240,7 @@ function CONTACT_InsertUser(User, Status, Subs)
 	{
 		INTERFACE_AddContact(User, Status);
 		MainData.AddUser(User, Status, Subs);
-		MainData.SortUser();
+		MainData.SortUserByNick();
 	}
 }
 
@@ -274,6 +274,7 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 		}
 
 		MainData.AddUserInRoom(RoomName, Jid, Status, Type, Role, Affiliation);
+		MainData.SortUserByNickInRoom(RoomName);
 		INTERFACE_AddUserInRoom(RoomName, Jid, Status, Type, Rating);
 	}
 	catch (e)
