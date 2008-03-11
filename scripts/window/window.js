@@ -277,8 +277,11 @@ function WINDOW_Profile(Profile)
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 
-	// Save Profile Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+	if (Div.Buttons.length > 1)
+	{
+		// Save Profile Button
+		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+	}
 
 	return Elements;
 }

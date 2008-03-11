@@ -188,6 +188,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
+	Table.appendChild(TBody);
 	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');
