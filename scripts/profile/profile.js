@@ -19,7 +19,7 @@ function PROFILE_HandleVCardProfile(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
 	// Get photo image
-	if(Photo != null)
+	if (Photo != null)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
@@ -39,7 +39,7 @@ function PROFILE_HandleVCardProfile(XML)
 
 	// Update profile window
 	Profile = MainData.GetProfile(From)
-	if(Profile != null)
+	if (Profile != null)
 	{
 		Profile.Profile.SetUser(FullName);
 		Profile.Profile.SetNick(NickName);

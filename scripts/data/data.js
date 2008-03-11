@@ -49,6 +49,7 @@ function DATA(ConfFile, LangFile)
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;
+	this.Load = -1;
 
 	/**
 	* DATA STRUCTURE
@@ -376,20 +377,7 @@ function DATA_SetRating(Username, Category, Rating)
 	
 	if (Obj)
 	{
-		switch (Category)
-		{
-			case('blitz'):
-				Obj.Rating.Blitz = Rating;
-				break;
-
-			case('standard'):
-				Obj.Rating.Standard = Rating;
-				break;
-		
-			case('lightning'):
-				Obj.Rating.Lightning = Rating;
-				break;
-		}
+		eval("Obj.Rating."+UTILS_Capitalize(Category)+" = Rating");
 	}
 	
 	// Update rating in room user lists
@@ -397,22 +385,9 @@ function DATA_SetRating(Username, Category, Rating)
 	{
 		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
 
-		if (UserPos)
+		if (UserPos != null)
 		{
-			switch (Category)
-			{
-				case('blitz'):
-					this.RoomList[i].UserList[UserPos].Rating.Blitz = Rating
-					break;
-
-				case('standard'):
-					this.RoomList[i].UserList[UserPos].Rating.Standard = Rating
-					break;
-
-				case('lightning'):
-					this.RoomList[i].UserList[UserPos].Rating.Lightning = Rating
-					break;
-			}
+			eval("this.RoomList[i].UserList[UserPos].Rating."+UTILS_Capitalize(Category)+" = Rating");
 		}
 	}
 	return true;

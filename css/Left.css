@@ -52,7 +52,10 @@
 
 #Main #Left #order_rating {
 	position		: absolute;
-	right			: 4mm;
+	width			: 29mm;
+	right			: 3px;
+	border			: 0px;
+	text-align		:right;
 }
 
 #Main #Left .order_selec {
