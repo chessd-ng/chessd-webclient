@@ -109,7 +109,7 @@ function CONNECTION_SendJabber()
 		}
 		catch(e)
 		{
-			MainData.HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			MainData.HttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 	}
 
@@ -150,10 +150,20 @@ function CONNECTION_SendJabber()
 function CONNECTION_ReceiveConnection()
 {
 	var XML, XMLBuffer;
+	var Status;
 
 	if (MainData.HttpRequest.readyState == 4 )
 	{
-		if(MainData.HttpRequest.status == 200)
+		try
+		{
+			Status = MainData.HttpRequest.status;
+		}
+		catch(e)
+		{
+			return null;
+		}	
+
+		if(Status == 200)
 		{
 			XML = MainData.HttpRequest.responseXML;
 		
@@ -186,14 +196,18 @@ function CONNECTION_ReceiveConnection()
 						LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
 					else
 					{
-						MainData.ConnectionStatus++;
+						//MainData.ConnectionStatus++;
 
 						// Send a wait message to bind, to
 						// wait while loading scripts, css and images
 						CONNECTION_SendJabber(MESSAGE_Wait());
 
 						// Load scripts, css and images
-						LOGIN_Load();
+						if (MainData.Load == -1)
+						{
+							MainData.Load = 0;
+							LOGIN_Load();
+						}
 					}
 					break;
 
