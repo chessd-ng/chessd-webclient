@@ -120,7 +120,7 @@
 	font			: 11px Trebuchet MS;
 }
 
-#Main #Left #Rooms .Room #RoomUsers td:hover {
+#Main #Left #Rooms .Room #RoomUsers tr:hover {
 	background-color: #EAF5F4;
 	cursor			: pointer;
 }

@@ -619,6 +619,7 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 *	@return	String with search user message
 *	@author	Danilo Kiyoshi Simizu Yorinori
 
+
 function MESSAGE_SearchUser()
 {
 	var XMPP;
@@ -645,7 +646,7 @@ function MESSAGE_SearchUser(Username)
 	XMPP += "<field type='text-single' var='user' >";
 	XMPP += "<value>"+Username+"*</value>";
 	XMPP += "</field>";
-	/* Fields that could be use
+	/* Fields that could be used
 		<field type='text-single' var='fn' >
 		<value></value>
 		</field>
@@ -685,6 +686,34 @@ function MESSAGE_SearchUser(Username)
 	return XMPP;
 }
 
+
+/**********************************
+ * MESSAGES - ADMIN 
+ **********************************/
+
+/**
+* Moderator kicks an accupant
+* 
+* @param 	Room 	The room that the target user is
+* @param 	To 		Nick name of the target user in room
+* @param 	Role 	User's privilege in room
+* @param 	Reason 	Why the user will be kicked
+* @return 	string
+* @author 	Ulysses
+*/
+function MESSAGE_KickUser (Room, To, Role, Reason)
+{
+	var XMPP = "";
+
+	XMPP += "<iq id='"+MainData.Const.IQ_ID_KickUser+"' to='"+Room+"@conference."+MainData.Host+"' type='set' >";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/protocol/muc#admin' >";
+	XMPP += "<item nick='"+To+"' role='"+Role+"' />";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
+
 /**********************************
  * MESSAGES - PROFILE - vCard
  **********************************/
@@ -701,6 +730,21 @@ function MESSAGE_GetProfile(Username, Id)
 	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0' />";
 	XMPP += "</iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' >";
+	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0'>";
+	XMPP += "<FN>"+FullName+"</FN>";
+	XMPP += "<DESC>"+Desc+"</DESC>";
+	XMPP += "<PHOTO>"
+	XMPP += "<TYPE>"+ImgType+"</TYPE>"
+	XMPP += "<BINVAL>"+Img64+"</BINVAL>"
+	XMPP += "</PHOTO></vCard></iq>";
 
 	return XMPP;
 }

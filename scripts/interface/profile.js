@@ -115,7 +115,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Photo.src = "images/no_photo.png";
 	
 	Br = UTILS_CreateElement('br');
-	EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',UTILS_GetText('profile_edit_photo'));
 	
 	// Top Right Div <User,Name>
 	TopRightDiv = UTILS_CreateElement('div','TopRightDiv');
@@ -137,6 +136,10 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	if (User)
 	{
+		// Change photo label
+		EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',UTILS_GetText('profile_edit_photo'));
+		EditPhotoLabel.onclick = function (){ WINDOW_ProfileImage();};
+
 		Username = 	UTILS_CreateElement('input',null,'inf');
 		Username.value = Profile.Name;
 		
@@ -147,17 +150,23 @@ function INTERFACE_ShowProfileWindow(Profile)
 		SaveProfile.type = "button";
 		SaveProfile.value = UTILS_GetText("profile_save");
 		SaveProfile.onclick = function() {
-		// TODO
-		// Send messages with changes
-		// Show the window confirmation
+			// Send messages with changes
+			PROFILE_SaveMyProfile();
+			//TODO
+			// Show the window confirmation
 		};
 	}
 	else
 	{
+		// Change photo label
+		EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',"");
+		EditPhotoLabel.onclick = function (){ return false;};
+
 		Username = 	UTILS_CreateElement('span', null, 'inf', Profile.Name);
 
 		WhoAmIUser = 	UTILS_CreateElement('span', null, 'inf_whoami', Profile.Description);
 	}
+
 	
 	WhoAmILabel = UTILS_CreateElement('p',null,'label',UTILS_GetText('profile_whoami'));
 
@@ -186,7 +195,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
-	Table.appendChild(TBody);
 	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');
@@ -266,7 +274,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Close = UTILS_CreateElement('input',null,'button');
 	Close.type = "button";
 	Close.value = UTILS_GetText("window_close");
+
 	Buttons.push(Close);
+	Buttons.push(SaveProfile);
 	
 	// Mount tree elements
 	// Append Salve profile
@@ -343,6 +353,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	Elements.Username = Username;
 	Elements.UserImg = Photo;
+	Elements.ImgType = "";
+	Elements.Img64 = "";
 	Elements.Nick = Nickname;
 	Elements.Desc = WhoAmIUser;
 	Elements.TBody = TBody;
@@ -362,6 +374,12 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.SetTitle = INTERFACE_ProfileSetTitle;
 	Elements.SetTitleImg = INTERFACE_ProfileSetTitleImg;
 	Elements.SetGroup = INTERFACE_ProfileSetGroup;
+	Elements.GetUser = INTERFACE_ProfileGetUser;
+	Elements.GetDesc = INTERFACE_ProfileGetDesc;
+	Elements.GetImgType = INTERFACE_ProfileGetImgType;
+	Elements.GetImg64 = INTERFACE_ProfileGetImg64;
+	Elements.SetImgType = INTERFACE_ProfileSetImgType;
+	Elements.SetImg64 = INTERFACE_ProfileSetImg64;
 
 	return {Div:Div, Buttons:Buttons, Elements:Elements}
 }
@@ -434,10 +452,16 @@ function INTERFACE_ProfileSetUser(Username)
 	this.Username.value = Username;
 }
 
+function INTERFACE_ProfileGetUser()
+{
+	return this.Username.value;
+}
+
 function INTERFACE_ProfileSetUserImg(Img)
 {
-	this.UserImg.src = Img;
+	this.UserImg.src = IMAGE_ImageDecode(Img);
 }
+
 function INTERFACE_ProfileSetNick(Nick)
 {
 	this.Nick.value = Nick;
@@ -446,6 +470,12 @@ function INTERFACE_ProfileSetDesc(Desc)
 {
 	this.Desc.value = Desc;
 }
+
+function INTERFACE_ProfileGetDesc()
+{
+	return  this.Desc.value;
+}
+
 function INTERFACE_ProfileSetRatings(Ratings)
 {
 	var Tr, Td;
@@ -498,4 +528,24 @@ function INTERFACE_ProfileSetGroup(Group)
 		default:
 			this.Group.innerHTML = "---";
 	}
+}
+
+function INTERFACE_ProfileSetImgType(ImgType)
+{
+	this.ImgType = ImgType;
+}
+
+function INTERFACE_ProfileGetImgType()
+{
+	return this.ImgType;
+}
+
+function INTERFACE_ProfileSetImg64(Img64)
+{
+	this.Img64 = Img64;
+}
+
+function INTERFACE_ProfileGetImg64()
+{
+	return this.Img64;
 }

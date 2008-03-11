@@ -37,7 +37,7 @@ function CONTACT_InviteUser(Username)
 		CONNECTION_SendJabber(XML);
 
 		// Sort userlist
-		MainData.SortUser();
+		MainData.SortUserByNick();
 		return true;
 	}
 	else

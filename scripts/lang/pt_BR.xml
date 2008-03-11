@@ -16,7 +16,7 @@
 	</window>
 	<login>
 		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
-		<login_text>Esta é uma versão de testes que não depende da instalação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
+		<login_text>Esta é uma versão de testes que não depende da instação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha?</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
@@ -55,6 +55,9 @@
 		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
+		<contact_ok>OK</contact_ok>
+		<contact_remove_title>Remover Usuário</contact_remove_title>
+		<contact_remove_text>Tem certeza que deseja remover o usuário?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_search>Buscar</contact_search>
 		<contact_user>Usuário</contact_user>
@@ -218,6 +221,8 @@
 		<profile_save_close>Salvar e fechar</profile_save_close>
 		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
 		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
+		<profile_change_image>Selecione a foto</profile_change_image>
+		<profile_change_image_title>Mudar foto</profile_change_image_title>
 	</profile>
 	<register>
 		<register_inf>Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre</register_inf>

@@ -1,8 +1,7 @@
 
-function createFormToEncode(form_id, action){
-	var form, body, file;
+function IMAGE_CreateFormToEncode(form_id, action){
+	var form, file;
 
-	body = document.getElementsByTagName("body")[0];
 	form = document.createElement("form");
 	form.id= form_id;
 	form.action = action;
@@ -14,15 +13,16 @@ function createFormToEncode(form_id, action){
 	file.name = "image";
 	
 	form.appendChild(file);
-	body.appendChild(form);
+	return form;
 }
 
 
-function IMAGE_ImageDecode(Img64){
-	return "webclient/php/base64_decode.php?"+img.src.slice(5);
+// This function is used to show image base64 in IE6
+function IMAGE_ImageDecode(ImgSrc){
+	return "php/base64_decode.php?"+ImgSrc.slice(5);
 }
 
-function imageEncode(formId){
+function IMAGE_ImageEncode(formId){
 	var frame, body, form;
 	
 	frame = document.createElement("iframe");
@@ -38,12 +38,20 @@ function imageEncode(formId){
 
 }
 
-function b64Img(image, type){
-	var img, body;
+//if type == ""; error!!!!
+function IMAGE_B64Img(Image, Type){
+	var Profile;
+	var Img;
 
-	img = document.createElement("img");
-	img.src = "data:image/"+type+";base64,"+image;
-	body = document.getElementsByTagName("body")[0];
-	body.appendChild(img);
+	Img = "data:"+Type+";base64,"+Image;
 
+	// Update user profile image
+	Profile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);
+	if(Profile != null)
+	{
+		Profile.Profile.SetImgType(Type);
+		Profile.Profile.SetImg64(Image);
+		Profile.Profile.SetUserImg(Img);
+	}
+	
 }
