@@ -126,11 +126,7 @@ function LOGIN_LoadScripts()
 	Scripts[26] = "scripts/interface/chat.js";
 	Scripts[27] = "scripts/profile/profile.js";
 	Scripts[28] = "scripts/interface/profile.js";
-<<<<<<< HEAD:scripts/login/load.js
-	Scripts[29] = "../novo_template/teste.js";
-=======
 	Scripts[29] = "scripts/utils/images.js";
->>>>>>> fe94a987e7b8418326f3544584cba6ed51e76e37:scripts/login/load.js
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 
