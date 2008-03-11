@@ -441,7 +441,8 @@ function INTERFACE_CreateContactList()
 
 	// Order buttons
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
-<<<<<<< HEAD:scripts/interface/contact.js
+	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
+
 	OrderRating = UTILS_CreateElement("select", "order_rating", null, UTILS_GetText("contact_order_rating"));
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
@@ -456,10 +457,6 @@ function INTERFACE_CreateContactList()
 	OrderRating.onchange = function () {
 		INTERFACE_ChangeCurrentRating(this.value);
 	}
-=======
-	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
-	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("contact_order_rating"));
->>>>>>> fe94a987e7b8418326f3544584cba6ed51e76e37:scripts/interface/contact.js
 
 	// Group labels
 	ContactsDiv = UTILS_CreateElement("div", "Contacts");
