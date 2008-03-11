@@ -54,6 +54,7 @@ function INTERFACE_CreateUserBox()
 	UserImg = UTILS_CreateElement("img","UserImg");
 	UserImg.title = MainData.Username;
 	UserImg.src = "images/no_photo.png";
+
 	UserInf = UTILS_CreateElement("div", "UserInf");
 	Name = UTILS_CreateElement("h2", null, null, UTILS_Capitalize(MainData.Username));
 	Status = UTILS_CreateElement("select", "UserStatusSelect");
@@ -96,6 +97,5 @@ function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 
-	//UserImg.src = "data:"+ImgType+";base64,"+Img64;
-	UserImg.src = Img;
+	UserImg.src = IMAGE_ImageDecode(Img);
 }

@@ -202,6 +202,73 @@ function INTERFACE_SetUserRating(Username, Category, Rating)
 }
 
 /**
+* Change current rating type showed in interface
+*
+* @public
+*/
+function INTERFACE_ChangeCurrentRating(Type)
+{
+	var Node, NewRating;
+	var i, j;
+
+	// Changing ratings in contact list
+	for (i=0; i<MainData.UserList.length; i++)
+	{
+		// Search for the node
+		Node = document.getElementById("contact-"+MainData.UserList[i].Username+"-rating");
+
+		if (!Node)
+		{
+			continue;
+		}
+
+		// Getting new rating from structure
+		eval("NewRating = MainData.UserList[i].Rating."+UTILS_Capitalize(Type));
+
+		// Updating rating
+		if (NewRating)
+		{
+			Node.innerHTML = NewRating;
+		}
+		else
+		{
+			Node.innerHTML = "";
+		}
+	}
+
+	// Changing ratings in rooms list
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		for (j=0; j<MainData.RoomList[i].UserList.length; j++)
+		{
+			// Search for the node
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+MainData.RoomList[i].UserList[j].Username+"-rating");
+
+			if (!Node)
+			{
+				continue;
+			}
+
+			// Getting new rating from structure
+			eval("NewRating = MainData.RoomList[i].UserList[j].Rating."+UTILS_Capitalize(Type));
+
+			// Updating rating
+			if (NewRating)
+			{
+				Node.innerHTML = NewRating;
+			}
+			else
+			{
+				Node.innerHTML = "";
+			}	
+		}
+	}
+
+	// Update current rating in the sctructure
+	MainData.CurrentRating = UTILS_Capitalize(Type);
+}
+
+/**
 * Set type of user in interface
 *
 * @public
@@ -262,13 +329,14 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 	if (RoomName == null)
 	{
 		Td1 = UTILS_CreateElement("td", "contact-"+Username, Type+"_"+Status, Username);
+		Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	}
 	else
 	{
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
+		Td2 = UTILS_CreateElement("td", RoomName+"_"+Username+"-rating", "rating", Rating);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
-	Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
@@ -366,7 +434,7 @@ function INTERFACE_CreateContactList()
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
-	var OrderNick, OrderRating, Search, Hr, i;
+	var OrderNick, OrderRating, OrderRatingOpt, Search, Hr, i;
 
 	// Main div
 	ContactDiv = UTILS_CreateElement("div", "Contact");
@@ -376,7 +444,21 @@ function INTERFACE_CreateContactList()
 	// Order buttons
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
 	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
-	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("contact_order_rating"));
+
+	OrderRating = UTILS_CreateElement("select", "order_rating", null, UTILS_GetText("contact_order_rating"));
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
+	OrderRatingOpt.value = "lightning";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Blitz)");
+	OrderRatingOpt.selected = true;
+	OrderRatingOpt.value = "blitz";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Standard)");
+	OrderRatingOpt.value = "standard";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRating.onchange = function () {
+		INTERFACE_ChangeCurrentRating(this.value);
+	}
 
 	// Group labels
 	ContactsDiv = UTILS_CreateElement("div", "Contacts");

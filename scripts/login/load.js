@@ -20,7 +20,7 @@
 */
 
 /**
-* Show load screen to user, and load scripts, css and images
+* Show load screen to user, and begin to load scripts
 */
 function LOGIN_Load()
 {
@@ -30,20 +30,40 @@ function LOGIN_Load()
 	// Show load screen to user
 	INTERFACE_StartLoad();
 
-	// Loading scripts
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_scripts"), 2);
-	LOGIN_LoadScripts();
-
 	// Loading css files
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_css"), 3);
+	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_css"), 2);
 	LOGIN_LoadCss();
+}
 
+/**
+* Start to load css files
+*/
+function LOGIN_Load2()
+{
+	// Loading scripts
+	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_scripts"), 3);
+	LOGIN_LoadScripts();
+}
+
+/**
+* Start to load images
+*/
+function LOGIN_Load3()
+{
 	// Loading Images
 	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_images"), 4);
 	LOGIN_LoadImages();
+}
 
+/**
+* Finish load process
+*/
+function LOGIN_Load4()
+{
 	// Ending connection steps
 	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_user_list"), 5);
+	MainData.ConnectionStatus++;
+	MainData.Load = 1;
 	CONNECTION_ConnectJabber();
 }
 
@@ -60,10 +80,11 @@ function LOGIN_EndLoad()
 */
 function LOGIN_LoadScripts()
 {
-	var Tag, i, Head;
+	//var Tag, i, Head;
 	var Scripts = new Array();
+	var Load;
 
-	// Searching head of document
+	/* Searching head of document
 	Head = document.getElementsByTagName("head");
 	if (Head)
 	{
@@ -73,6 +94,7 @@ function LOGIN_LoadScripts()
 	{
 		return null;
 	}
+	*/
 
 	// Files to be loaded
 	Scripts[0] = "scripts/parser/parser.js";
@@ -106,8 +128,9 @@ function LOGIN_LoadScripts()
 	Scripts[28] = "scripts/interface/profile.js";
 	Scripts[29] = "scripts/utils/images.js";
 
+	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 
-	// Carregando arquivos
+	/* Carregando arquivos
 	for (i=0; i<Scripts.length; i++)
 	{
 		Tag = document.createElement("script");
@@ -115,6 +138,7 @@ function LOGIN_LoadScripts()
 
 		Head.appendChild(Tag);
 	}
+	*/
 }
 
 /**
@@ -135,7 +159,7 @@ function LOGIN_LoadCss()
 	{
 		return null;
 	}
-
+	
 	// Files to be loaded
 	Files[0] = "css/Top.css";
 	Files[1] = "css/Left.css";
@@ -148,7 +172,6 @@ function LOGIN_LoadCss()
 	Files[8] = "css/Game.css";
 	Files[9] = "css/Chat.css";
 	Files[10] = "css/Profile.css";
-
 
 	if(MainData.Browser != 1) //IE
 	{
@@ -165,6 +188,7 @@ function LOGIN_LoadCss()
 		// Appending to head of document
 		Head.appendChild(Tag);
 	}
+	LOGIN_Load2();
 }
 
 /**
@@ -172,7 +196,7 @@ function LOGIN_LoadCss()
 */
 function LOGIN_LoadImages()
 {
-	var Img, i;
+	//var Img, i;
 	var Images = new Array();
 
 	// Images to be loaded
@@ -182,8 +206,10 @@ function LOGIN_LoadImages()
 	Images[3] = "images/news.png";
 	Images[4] = "images/preferences.png";
 	Images[5] = "images/help.png";
+	/*
 	Images[6] = "images/exit.png";
 	Images[7] = "images/exit_selec.png";
+	
 	Images[8] = "images/available.png";
 	Images[9] = "images/unavailable.png";
 	Images[10] = "images/away.png";
@@ -191,10 +217,11 @@ function LOGIN_LoadImages()
 	Images[12] = "images/close.png";
 	Images[13] = "images/invite_black_pawn.png";
 	Images[14] = "images/invite_white_pawn.png";
-
+	/*
 	for (i=0; i<Images.length; i++)
 	{
 		Img = new Image();
 		Img.src = Images[i];
-	}
+	}*/
+	Load = new Preloader(Images, "image", LOGIN_Load4);
 }

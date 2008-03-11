@@ -122,12 +122,14 @@ function GAME_Move(XML)
 	Board = BoardTag[0].getAttribute("state");
 	Turn = BoardTag[0].getAttribute("turn");
 
-	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	//Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Name = PlayerTag[0].getAttribute('jid').split("@")[0];
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
 	Player1.Color = PlayerTag[0].getAttribute('color');
 	Player1.Time = PlayerTag[0].getAttribute('time');
 	
-	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	//Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Name = PlayerTag[1].getAttribute('jid').split("@")[0];
 	Player2.Inc = PlayerTag[1].getAttribute('inc');
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');

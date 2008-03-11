@@ -21,7 +21,7 @@
 function PROFILE_HandleVCardProfile(XML)
 {
 	var FullName;
-	var Photo, PhotoType, Binval;
+	var Photo, PhotoType="", Binval="";
 	var Birthday, NickName, Desc;
 
 	var From = XML.getAttribute("from");
@@ -39,7 +39,7 @@ function PROFILE_HandleVCardProfile(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
 	// Get photo image
-	if(Photo != null)
+	if (Photo != null)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
@@ -53,18 +53,21 @@ function PROFILE_HandleVCardProfile(XML)
 	// Update user image
 	if((UserFrom == MainData.Username) && (MainData.Photo != Img))
 	{
-		MainData.Photo = Img;
+		MainData.MyProfile.Img64 = Binval;
+		MainData.MyProfile.ImgType = PhotoType;
 		INTERFACE_SetUserImage(Img);
 	}
 
 	// Update profile window
 	Profile = MainData.GetProfile(From)
-	if(Profile != null)
+	if (Profile != null)
 	{
 		Profile.Profile.SetUser(FullName);
 		Profile.Profile.SetNick(NickName);
 		Profile.Profile.SetDesc(Desc)
 		Profile.Profile.SetUserImg(Img);
+		Profile.Profile.SetImg64(Binval);
+		Profile.Profile.SetImgType(PhotoType);
 	}
 
 	MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
@@ -191,10 +194,14 @@ function PROFILE_RemoveProfile(Username)
 function PROFILE_SaveMyProfile()
 {
 		var FN, Desc, PhotoType, Binval;
-		FN = MainData.MyProfile.FN;
-		Desc = MainData.MyProfile.Desc;
-		PhotoType = MainData.MyProfile.ImgType;
-		Binval = MainData.MyProfile.Img64;
+		var MyProfile;
+
+		MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
+
+		FN = MyProfile.Profile.GetUser();
+		Desc = MyProfile.Profile.GetDesc();
+		PhotoType = MyProfile.Profile.GetImgType();
+		Binval = MyProfile.Profile.GetImg64();
 
 		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
 }
