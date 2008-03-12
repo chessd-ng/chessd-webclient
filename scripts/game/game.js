@@ -482,6 +482,14 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 		YourColor = P2.Color;
 	}
+
+	//Remove oldgame board if exists
+	if(MainData.CurrentOldGame != null)
+	{
+		//0 = current game. In this version, user can see only one
+		// old game
+		OLDGAME_RemoveOldGame(0);
+	}
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
@@ -515,6 +523,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+	}
+
+	//Remove oldgame board if exists
+	if(MainData.CurrentOldGame != null)
+	{
+		//0 = current game. In this version, user can see only one
+		// old game
+		OLDGAME_RemoveOldGame(0);
 	}
 
 	// 38 -> default piece size
