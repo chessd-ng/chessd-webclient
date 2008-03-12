@@ -391,6 +391,41 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
 	NewParameters.type = "button";
+	NewParameters.onclick = function () {
+		// Checking the color
+		if (ColorOptW.checked)
+		{
+			Color = "white";
+		}
+		else if (ColorOptB.checked)
+		{
+			Color = "black";
+		}
+		else
+		{
+			//Random Color
+			if (Math.round(Math.random()) % 2 == 0)
+			{
+				Color = "white";
+			}
+			else
+			{
+				Color = "black";
+			}
+		}
+
+		// Rated or unrated?
+		if (RatingCheckbox.checked)
+		{
+			Rated = 1;
+		}
+		else
+		{
+			Rated = 0;
+		}
+
+		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
+	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('challenge_cancel');
