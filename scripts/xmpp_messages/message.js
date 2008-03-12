@@ -730,6 +730,12 @@ function MESSAGE_KickUser (Room, To, Role, Reason)
 function MESSAGE_GetProfile(Username, Id)
 {
 	var XMPP = "";
+
+	if (Id == null)
+	{
+		Id = MainData.Const.IQ_ID_GetProfile;
+	}
+
 	XMPP += "<iq type='get' to='"+Username+"@"+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0' />";
 	XMPP += "</iq>";

@@ -43,17 +43,20 @@
 }
 
 #Main #Left #Contact tr {
+	display		: block;
 	text-indent		: 5mm;
 	margin			: 1px 0px;
-	height			: 4.3mm;
 	width			: 100%;
 	font			: 11px Trebuchet MS;
 	color			: #000;
 }
 
 #Main #Left #Contact td {
-	width			: 41mm;
+	height			: 4.5mm;
+	display		: block;
+	width			: 32mm;
 	text-align		: left;
+	float		: left;
 }
 
 #Main #Left #Contact .rating {

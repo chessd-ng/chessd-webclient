@@ -13,21 +13,17 @@
 
 /*Top.css*/
 
+#Top{
+}
+
 #Top h1{
 	margin			: 0.5mm;
 	background		: url("../images/ie/logochessd.gif") no-repeat;
 }
 
 #Top .icons{
-	left			: 33mm;
-}
-
-
-
-
-/*Contacts.css*/
-#Main #Left #Contact #Contacts table{
-	width			: 43.5mm;
+	left			: 73mm;
+	width			: 68mm;
 }
 
 #Top .icons .search_game {
@@ -53,6 +49,20 @@
 #Top .icons .exit {
 	background              : url('../images/ie/exit.gif') no-repeat;
 }
+
+#Top #TopMenu{
+	right			: 0px;
+	width			: 140.5mm;
+	height			: 20.5mm;
+}
+
+
+/*Contacts.css*/
+#Main #Left #Contact #Contacts table{
+	width			: 43.5mm;
+}
+
+
 
 /* available */
 #Main #Left .user_available {
@@ -152,12 +162,12 @@
 
 /* available */
 #Main #Left .robot_available {
-	background              : url('../images/robot_available.gif') no-repeat;
+	background              : url('../images/ie/robot_available.gif') no-repeat;
 }
 
 /* offline */
 #Main #Left .robot_offline {
-	background              : url('../images/robot_offline.gif') no-repeat;
+	background              : url('../images/ie/robot_offline.gif') no-repeat;
 }
 
 
@@ -173,5 +183,29 @@
 	background-image	: url("../images/ie/pieces/bpawn.gif");
 }
 
+#InfoTab1{
+	width			: 24mm;
+}
 
+#GameOptionDiv, #MoveListDiv{
+	width			: 47mm;
+}
+
+#GameOptionsDiv select{
+	height			: 5mm;
+}
+
+/*Chat.css*/
+#Chat{
+	height			: 4.5mm;
+	overflow		: visible;
+}
+
+#Chat #ChatInner {
+	height                  : 20mm;
+}
+
+#Chat #ChatList {
+	height			: 4mm;
+}
 

@@ -1,3 +1,23 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+/**
+*
+* @author Rubens
+*/
 function PROFILE_HandleVCardProfile(XML)
 {
 	var FullName;
@@ -19,7 +39,7 @@ function PROFILE_HandleVCardProfile(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
 	// Get photo image
-	if(Photo != null)
+	if (Photo != null)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
@@ -40,7 +60,7 @@ function PROFILE_HandleVCardProfile(XML)
 
 	// Update profile window
 	Profile = MainData.GetProfile(From)
-	if(Profile != null)
+	if (Profile != null)
 	{
 		Profile.Profile.SetUser(FullName);
 		Profile.Profile.SetNick(NickName);
@@ -55,12 +75,35 @@ function PROFILE_HandleVCardProfile(XML)
 	return "";
 }
 
+/**
+* Create an array with ratings and return it
+*
+* @param RatingNodes	Array of ratings with data
+* @return		Array in format:
+* 						each line is a rating type
+* 						[1] lightning
+* 						[2] blitz
+* 						[3] Standard
+* 						each column is a data
+* 						[1] category
+* 						[2] current rating
+* 						[3] max rating
+* 						[4] max rating date
+* 						[5] number of games in category
+* 						[6] number of wins
+* 						[7] number of losses
+* 						[8] numeber of draws
+* @see 			CONTACT_HandleInfo(XML);	
+* @author		Danilo Yorinori
+*/
 function PROFILE_HandleRatings(RatingNodes)
 {
 	var Rating = new Array();
 	var Category, TimeStamp, Index;
 	var i;
 
+	// Set standard category
+	// TODO expand this
 	Rating[0] = new Array(); // lightning
 	Rating[0][0] = "Lightning";
 
@@ -70,6 +113,7 @@ function PROFILE_HandleRatings(RatingNodes)
 	Rating[2] = new Array(); // standard
 	Rating[2][0] = "Standard";
 
+	// Set with "---" all fields
 	for (i=0; i < 3; i++)
 	{
 		for (j=1; j < 8; j++)
@@ -78,6 +122,7 @@ function PROFILE_HandleRatings(RatingNodes)
 		}
 	}
 
+	// Get the category type and fill the fields with respective data.
 	for (i=0; i < RatingNodes.length; i++)
 	{
 		Category = RatingNodes[i].getAttribute('category');
@@ -95,7 +140,8 @@ function PROFILE_HandleRatings(RatingNodes)
 				break;
 			default:
 		}
-		
+	
+		// Set fields with values
 		Rating[Index][1] = RatingNodes[i].getAttribute('rating');
 		Rating[Index][2] = RatingNodes[i].getAttribute('max_rating');
 		TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
@@ -106,9 +152,14 @@ function PROFILE_HandleRatings(RatingNodes)
 		Rating[Index][4] = parseInt(Rating[Index][5])+ parseInt(Rating[Index][6])+ parseInt(Rating[Index][7]); 	
 	}
 
+	// return array of rating to show in profile window
 	return Rating;
 }
 
+/**
+*
+* @author Rubens
+*/
 function PROFILE_StartProfile(Username)
 {	
 	var ProfileInfo = new Object();
@@ -137,6 +188,10 @@ function PROFILE_StartProfile(Username)
 
 }
 
+/**
+*
+* @author Rubens
+*/
 function PROFILE_RemoveProfile(Username)
 {
 	var Jid = Username+"@"+MainData.Host;
@@ -144,7 +199,10 @@ function PROFILE_RemoveProfile(Username)
 	MainData.RemoveProfile(Jid);
 }
 
-
+/**
+*
+* @author Rubens
+*/
 function PROFILE_SaveMyProfile()
 {
 		var FN, Desc, PhotoType, Binval;

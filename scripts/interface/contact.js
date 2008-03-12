@@ -200,6 +200,73 @@ function INTERFACE_SetUserRating(Username, Category, Rating)
 }
 
 /**
+* Change current rating type showed in interface
+*
+* @public
+*/
+function INTERFACE_ChangeCurrentRating(Type)
+{
+	var Node, NewRating;
+	var i, j;
+
+	// Changing ratings in contact list
+	for (i=0; i<MainData.UserList.length; i++)
+	{
+		// Search for the node
+		Node = document.getElementById("contact-"+MainData.UserList[i].Username+"-rating");
+
+		if (!Node)
+		{
+			continue;
+		}
+
+		// Getting new rating from structure
+		eval("NewRating = MainData.UserList[i].Rating."+UTILS_Capitalize(Type));
+
+		// Updating rating
+		if (NewRating)
+		{
+			Node.innerHTML = NewRating;
+		}
+		else
+		{
+			Node.innerHTML = "";
+		}
+	}
+
+	// Changing ratings in rooms list
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		for (j=0; j<MainData.RoomList[i].UserList.length; j++)
+		{
+			// Search for the node
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+MainData.RoomList[i].UserList[j].Username+"-rating");
+
+			if (!Node)
+			{
+				continue;
+			}
+
+			// Getting new rating from structure
+			eval("NewRating = MainData.RoomList[i].UserList[j].Rating."+UTILS_Capitalize(Type));
+
+			// Updating rating
+			if (NewRating)
+			{
+				Node.innerHTML = NewRating;
+			}
+			else
+			{
+				Node.innerHTML = "";
+			}	
+		}
+	}
+
+	// Update current rating in the sctructure
+	MainData.CurrentRating = UTILS_Capitalize(Type);
+}
+
+/**
 * Set type of user in interface
 *
 * @public
@@ -260,13 +327,14 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 	if (RoomName == null)
 	{
 		Td1 = UTILS_CreateElement("td", "contact-"+Username, Type+"_"+Status, Username);
+		Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	}
 	else
 	{
 		Td1 = UTILS_CreateElement("td", RoomName+"_"+Username, Type+"_"+Status, Username);
+		Td2 = UTILS_CreateElement("td", RoomName+"_"+Username+"-rating", "rating", Rating);
 	}
 	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
-	Td2 = UTILS_CreateElement("td", "contact-"+Username+"-rating", "rating", Rating);
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 	
@@ -360,11 +428,11 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 */
 function INTERFACE_CreateContactList()
 {
-	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnline, ContactOffline;
+	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
-	var OrderNick, OrderRating, Search, Hr, i;
+	var OrderNick, OrderRating, OrderRatingOpt, Search, Hr, i;
 
 	// Main div
 	ContactDiv = UTILS_CreateElement("div", "Contact");
@@ -374,12 +442,28 @@ function INTERFACE_CreateContactList()
 	// Order buttons
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
 	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
-	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("contact_order_rating"));
+
+	OrderRating = UTILS_CreateElement("select", "order_rating", null, UTILS_GetText("contact_order_rating"));
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
+	OrderRatingOpt.value = "lightning";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Blitz)");
+	OrderRatingOpt.selected = true;
+	OrderRatingOpt.value = "blitz";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Standard)");
+	OrderRatingOpt.value = "standard";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRating.onchange = function () {
+		INTERFACE_ChangeCurrentRating(this.value);
+	}
 
 	// Group labels
 	ContactsDiv = UTILS_CreateElement("div", "Contacts");
+	ContactOnlineDiv = UTILS_CreateElement("div", "ContactOnlineDiv");
 	ContactOnline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_online"));
 	ContactOnline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOnlineTable"); };
+	ContactOfflineDiv = UTILS_CreateElement("div", "ContactOfflineDiv");
 	ContactOffline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_offline"));
 	ContactOffline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOfflineTable"); };
 
@@ -404,7 +488,7 @@ function INTERFACE_CreateContactList()
 														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
-			OnlineTbody.appendChild(ContactsOnline);
+	//		OnlineTbody.appendChild(ContactsOnline);
 		}
 		else
 		{
@@ -426,10 +510,13 @@ function INTERFACE_CreateContactList()
 	OnlineTable.appendChild(OnlineTbody);
 	OfflineTable.appendChild(OfflineTbody);
 
-	ContactsDiv.appendChild(ContactOnline);
-	ContactsDiv.appendChild(OnlineTable);
-	ContactsDiv.appendChild(ContactOffline);
-	ContactsDiv.appendChild(OfflineTable);
+	ContactOnlineDiv.appendChild(ContactOnline);
+	ContactOnlineDiv.appendChild(OnlineTable);
+	ContactOfflineDiv.appendChild(ContactOffline);
+	ContactOfflineDiv.appendChild(OfflineTable);
+	
+	ContactsDiv.appendChild(ContactOnlineDiv);
+	ContactsDiv.appendChild(ContactOfflineDiv);
 	
 	ContactInside.appendChild(OrderNick);
 	ContactInside.appendChild(OrderRating);

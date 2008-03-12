@@ -41,6 +41,8 @@
 #Chat #ChatInner {
 	padding			: 3px;
 	border			: 1px solid #216778;
+	height			: 38mm;
+	position		: relative;
 }
 
 /* chat icons */
@@ -48,7 +50,7 @@
 #Chat #ChatList .title_selec img {
 	position		: absolute;
 	right			: 1mm;
-	top				: 4px;
+	top			: 4px;
 	cursor			: pointer;
 }
 
@@ -80,4 +82,7 @@
 	color			: #216778;
 	padding			: 2px 0px;
 	margin-top		: 1mm;
+	height			: 4mm;
+	position		: relative;
+	top			: 0mm;
 }
