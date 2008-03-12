@@ -140,7 +140,8 @@ function PROFILE_HandleRatings(RatingNodes)
 				break;
 			default:
 		}
-		
+	
+		// Set fields with values
 		Rating[Index][1] = RatingNodes[i].getAttribute('rating');
 		Rating[Index][2] = RatingNodes[i].getAttribute('max_rating');
 		TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
@@ -155,6 +156,10 @@ function PROFILE_HandleRatings(RatingNodes)
 	return Rating;
 }
 
+/**
+*
+* @author Rubens
+*/
 function PROFILE_StartProfile(Username)
 {	
 	var ProfileInfo = new Object();
@@ -183,6 +188,10 @@ function PROFILE_StartProfile(Username)
 
 }
 
+/**
+*
+* @author Rubens
+*/
 function PROFILE_RemoveProfile(Username)
 {
 	var Jid = Username+"@"+MainData.Host;
@@ -190,7 +199,10 @@ function PROFILE_RemoveProfile(Username)
 	MainData.RemoveProfile(Jid);
 }
 
-
+/**
+*
+* @author Rubens
+*/
 function PROFILE_SaveMyProfile()
 {
 		var FN, Desc, PhotoType, Binval;

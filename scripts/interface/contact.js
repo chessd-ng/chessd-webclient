@@ -118,7 +118,6 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 
 		// Up to 'tr'
 		User = User.parentNode;
-		User.style.display = "block";
 
 		if (NextUser == null)
 		{
@@ -144,7 +143,6 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 
 		// Up to 'tr'
 		User = User.parentNode;
-		User.style.display = "block";
 
 		if (NextUser == null)
 		{
