@@ -208,7 +208,7 @@ function GAME_ChallengeError (XML)
 /**
 * Send a challenge message to 'Username'
 */
-function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
+function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated, GameID)
 {
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
@@ -250,7 +250,7 @@ function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	Players[1] = Player2;
 
 	// Create message
-	XML = MESSAGE_Challenge(Category, Players);
+	XML = MESSAGE_Challenge(Category, Players, GameID);
 
 	// Sending message
 	CONNECTION_SendJabber(XML);
