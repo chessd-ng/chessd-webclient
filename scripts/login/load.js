@@ -80,21 +80,8 @@ function LOGIN_EndLoad()
 */
 function LOGIN_LoadScripts()
 {
-	//var Tag, i, Head;
 	var Scripts = new Array();
 	var Load;
-
-	/* Searching head of document
-	Head = document.getElementsByTagName("head");
-	if (Head)
-	{
-		Head = Head[0];
-	}
-	else
-	{
-		return null;
-	}
-	*/
 
 	// Files to be loaded
 	Scripts[0] = "scripts/parser/parser.js";
@@ -129,16 +116,6 @@ function LOGIN_LoadScripts()
 	Scripts[29] = "scripts/utils/images.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
-
-	/* Carregando arquivos
-	for (i=0; i<Scripts.length; i++)
-	{
-		Tag = document.createElement("script");
-		Tag.src = Scripts[i];
-
-		Head.appendChild(Tag);
-	}
-	*/
 }
 
 /**
@@ -196,8 +173,8 @@ function LOGIN_LoadCss()
 */
 function LOGIN_LoadImages()
 {
-	//var Img, i;
 	var Images = new Array();
+	var Load;
 
 	// Images to be loaded
 	Images[0] = "images/logochessd.png";
@@ -217,11 +194,6 @@ function LOGIN_LoadImages()
 	Images[12] = "images/close.png";
 	Images[13] = "images/invite_black_pawn.png";
 	Images[14] = "images/invite_white_pawn.png";
-	/*
-	for (i=0; i<Images.length; i++)
-	{
-		Img = new Image();
-		Img.src = Images[i];
-	}*/
+	*/
 	Load = new Preloader(Images, "image", LOGIN_Load4);
 }

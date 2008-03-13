@@ -46,13 +46,13 @@
 
 /* order by rating or nick */
 #Main #Left #order_nick, 
-#Main #Left #order_rating {
+#Main #Left .order_rating {
 	font			: 11px Trebuchet MS;
 	color			: #216778;
 	cursor			: pointer;
 }
 
-#Main #Left #order_rating {
+#Main #Left .order_rating {
 	position		: absolute;
 	width			: 29mm;
 	right			: 3px;

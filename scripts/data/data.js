@@ -433,7 +433,7 @@ function DATA_SetRating(Username, Category, Rating)
 
 		if (UserPos != null)
 		{
-			eval("this.RoomList[i].UserList[UserPos].Rating."+UTILS_Capitalize(Category)+" = Rating");
+			eval("this.RoomList["+i+"].UserList["+UserPos+"].Rating."+UTILS_Capitalize(Category)+" = Rating");
 		}
 	}
 	return true;
@@ -544,6 +544,7 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
 	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
+	var UserPos = this.FindUser(Username);
 
 	// If room doesnt exists in data structure
 	if (RoomPos == null)
@@ -561,7 +562,20 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 	User.Type = Type;
-	User.Rating = new Object();
+	
+	// Searching if interface already has its rating
+	if (Username == this.Username)
+	{
+		User.Rating = this.Rating;
+	}
+	else if (UserPos == null)
+	{
+		User.Rating = new Object();
+	}
+	else
+	{
+		User.Rating = this.UserList[UserPos].Rating;
+	}
 
 	// Insert user in room's user list
 	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;
