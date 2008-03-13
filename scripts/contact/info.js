@@ -136,7 +136,10 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 {
 	if (MainData.SetRating(Username, Category, Rating))
 	{
-		INTERFACE_SetUserRating(Username, Category, Rating)	
+		if (Category == MainData.CurrentRating)
+		{
+			INTERFACE_SetUserRating(Username, Category, Rating)	
+		}
 		return true;
 	}
 	return false;

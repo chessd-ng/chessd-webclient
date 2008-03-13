@@ -561,7 +561,7 @@ function INTERFACE_CreateRoom(RoomName)
 {
 	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
 	var Hr, MessageList;
-	var OrderNick, OrderRating, Input, Emoticon;
+	var OrderNick, OrderRating, OrderRatingOpt, Input, Emoticon;
 
 	// General room
 	RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
@@ -571,7 +571,20 @@ function INTERFACE_CreateRoom(RoomName)
 	// Order
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
 	OrderNick.onclick = function() { INTERFACE_SortUserByNickInRoom(RoomName); }; 
-	OrderRating = UTILS_CreateElement("span", "order_rating", null, UTILS_GetText("room_order_rating"));
+	OrderRating = UTILS_CreateElement("select", "order_rating_"+RoomName, "order_rating", UTILS_GetText("room_order_rating"));
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
+	OrderRatingOpt.value = "lightning";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Blitz)");
+	OrderRatingOpt.selected = true;
+	OrderRatingOpt.value = "blitz";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Standard)");
+	OrderRatingOpt.value = "standard";
+	OrderRating.appendChild(OrderRatingOpt);
+	OrderRating.onchange = function () {
+		INTERFACE_ChangeCurrentRating(this.value);
+	}
 
 	// Room user list
 	RoomUsers = UTILS_CreateElement("div", "RoomUsers");

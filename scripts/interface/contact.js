@@ -175,7 +175,7 @@ function INTERFACE_SetUserRating(Username, Category, Rating)
 	var User = document.getElementById("contact-"+Username+"-rating");
 	var List, Node, i;
 
-	// Updating user's type
+	// Updating user's rating
 	if (User)
 	{
 		User.innerHTML = Rating;
@@ -234,9 +234,31 @@ function INTERFACE_ChangeCurrentRating(Type)
 		}
 	}
 
+	// Changing rating select of this room
+	Node = document.getElementById("order_rating-contact");
+	if (Node)
+	{	
+		for (j=0; j<Node.childNodes.length; j++)
+		{
+			if (Node.childNodes[j].value == Type)
+				Node.selectedIndex = j;
+		}
+	}
+
 	// Changing ratings in rooms list
 	for (i=0; i<MainData.RoomList.length; i++)
 	{
+		// Changing rating select of this room
+		Node = document.getElementById("order_rating_"+MainData.RoomList[i].Name);
+		if (Node)
+		{	
+			for (j=0; j<Node.childNodes.length; j++)
+			{
+				if (Node.childNodes[j].value == Type)
+					Node.selectedIndex = j;
+			}
+		}
+		
 		for (j=0; j<MainData.RoomList[i].UserList.length; j++)
 		{
 			// Search for the node
@@ -263,7 +285,7 @@ function INTERFACE_ChangeCurrentRating(Type)
 	}
 
 	// Update current rating in the sctructure
-	MainData.CurrentRating = UTILS_Capitalize(Type);
+	MainData.CurrentRating = Type;
 }
 
 /**
@@ -443,7 +465,7 @@ function INTERFACE_CreateContactList()
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
 	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
 
-	OrderRating = UTILS_CreateElement("select", "order_rating", null, UTILS_GetText("contact_order_rating"));
+	OrderRating = UTILS_CreateElement("select", "order_rating-contact", "order_rating", UTILS_GetText("contact_order_rating"));
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
 	OrderRating.appendChild(OrderRatingOpt);
