@@ -1346,6 +1346,13 @@ function INTERFACE_CreateOldGameTab(DivMoves)
 	return Tab;
 }
 
+/**
+* Change board to last move done
+*
+* @param 	Move string (i.e: a2a3)
+* @return	void
+* @author	Rubens
+*/
 function INTERFACE_LastMove(Move)
 {
 	var PosOrig = Move.charAt(0)+Move.charAt(1);
@@ -1398,6 +1405,13 @@ function INTERFACE_LastMove(Move)
 	}
 }
 
+/**
+* Find a block with parameter Identificator
+*
+* @param 	id is the block identificator
+* @return	null ou Block HTML div element
+* @author	Rubens
+*/
 function INTERFACE_FindBlock(id)
 {
 	var i = 0;
