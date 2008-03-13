@@ -117,7 +117,7 @@ function OLDGAME_RemoveOldGame(Index)
 	//Remove Board
 	MainData.OldGameList[Index].Game.Remove();
 	MainData.RemoveOldGame(Index);
-	ROOM_ExitRoom();
+	//ROOM_ExitRoom();
 }
 
 /** 

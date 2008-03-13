@@ -195,6 +195,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('profile_lose'));
 		Tr.appendChild(Td);
 	TBody.appendChild(Tr);
+	Table.appendChild(TBody);
 	
 	// Bottom Div < Group, Type, Image Type>
 	BottomDiv = UTILS_CreateElement('div','BottomDiv');
@@ -447,35 +448,64 @@ function INTERFACE_ShowProfileConfirmWindow()
 	return {Div:Div, Buttons:Buttons};
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetUser(Username)
 {
 	this.Username.value = Username;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileGetUser()
 {
 	return this.Username.value;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetUserImg(Img)
 {
 	this.UserImg.src = IMAGE_ImageDecode(Img);
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetNick(Nick)
 {
 	this.Nick.value = Nick;
 }
+
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetDesc(Desc)
 {
 	this.Desc.value = Desc;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileGetDesc()
 {
 	return  this.Desc.value;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetRatings(Ratings)
 {
 	var Tr, Td;
@@ -495,23 +525,49 @@ function INTERFACE_ProfileSetRatings(Ratings)
 	}
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetTotalTime(Time)
 {
 	this.TotalTime.innerHTML = Time;
 }
+
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetOnlineTime(Time)
 {
 	this.OnlineTime.innerHTML = Time;
 }
+
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetTitle(Title)
 {
 	this.Title.innerHTML = Title;
 }
+
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetTitleImg(NewSrc)
 {
 	this.TitleImg.src = NewSrc;
 }
 
+/**
+*	Set Group Label in Profile Window of user
+*
+*	@param	Group	User's Group
+*	@return	void
+* @author Danilo Yorinori
+*/
 function INTERFACE_ProfileSetGroup(Group)
 {
 	switch(Group)
@@ -530,21 +586,37 @@ function INTERFACE_ProfileSetGroup(Group)
 	}
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetImgType(ImgType)
 {
 	this.ImgType = ImgType;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileGetImgType()
 {
 	return this.ImgType;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileSetImg64(Img64)
 {
 	this.Img64 = Img64;
 }
 
+/**
+*
+* @author Rubens
+*/
 function INTERFACE_ProfileGetImg64()
 {
 	return this.Img64;

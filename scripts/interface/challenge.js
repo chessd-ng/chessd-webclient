@@ -164,46 +164,53 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	ChalLeftDiv = UTILS_CreateElement('div','ChalLeftDiv');
 
 	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_pieces'));
-	ColorOptW =	UTILS_CreateElement('input');
-	ColorOptW.type = "radio";
-	ColorOptW.name = "color";
-	ColorOptW.value = "colorW";
 
+
+	try
+	//Fix radio button for IE
+	{
+		ColorOptW = document.createElement('<input type="radio" name="color"/>');
+	}
+	catch(err)
+	{ //FF
+		ColorOptW =	UTILS_CreateElement('input');
+		ColorOptW.type = "radio";
+		ColorOptW.name = "color";
+		ColorOptW.value = "colorW";
+	}
 	
 
 	ColorOptWImg = UTILS_CreateElement('img');
 	ColorOptWImg.src = "images/invite_white_pawn.png"
-	
-	ColorOptB =	UTILS_CreateElement('input');
-	ColorOptB.type = "radio";
-	ColorOptB.name = "color";
-	ColorOptB.value = "colorB";
 
-	// Quick fix for IE radio buttons
-	ColorOptW.onclick = function(){
-		ColorOptW.checked = true;
-		ColorOptB.checked = false;
-	};
-
-	ColorOptB.onclick = function(){
-		ColorOptW.checked = false;
-		ColorOptB.checked = true;
+	try
+	//Fix radio button for IE
+	{
+		ColorOptB = document.createElement("<input type='radio' name='color'/>")
 	}
-	/////////////////////////////////
+	catch(err)
+	{ //FF
+		ColorOptB = UTILS_CreateElement('input');
+		ColorOptB.type = "radio";
+		ColorOptB.name = "color";
+		ColorOptB.value = "colorB";
+	}
 
 	ColorOptBImg = UTILS_CreateElement('img');
 	ColorOptBImg.src = "images/invite_black_pawn.png"
 	
-	// Marca o radio referente a cor
+	// Select player color
 	if (GameParameters != undefined)
 	{
 		if (GameParameters.Color == "white")
 		{
-			ColorOptB.checked = true;
+			//defaultChecked is used to fix IE radio checked
+			ColorOptB.setAttribute("defaultChecked", "true");
 		}
 		else if (GameParameters.Color == "black")
 		{
-			ColorOptW.checked = true;
+			//defaultChecked is used to fix IE radio checked
+			ColorOptW.setAttribute("defaultChecked", "true");
 		}
 	}
 
@@ -391,6 +398,41 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
 	NewParameters.type = "button";
+	NewParameters.onclick = function () {
+		// Checking the color
+		if (ColorOptW.checked)
+		{
+			Color = "white";
+		}
+		else if (ColorOptB.checked)
+		{
+			Color = "black";
+		}
+		else
+		{
+			//Random Color
+			if (Math.round(Math.random()) % 2 == 0)
+			{
+				Color = "white";
+			}
+			else
+			{
+				Color = "black";
+			}
+		}
+
+		// Rated or unrated?
+		if (RatingCheckbox.checked)
+		{
+			Rated = 1;
+		}
+		else
+		{
+			Rated = 0;
+		}
+
+		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
+	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('challenge_cancel');

@@ -122,12 +122,14 @@ function GAME_Move(XML)
 	Board = BoardTag[0].getAttribute("state");
 	Turn = BoardTag[0].getAttribute("turn");
 
-	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	//Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Name = PlayerTag[0].getAttribute('jid').split("@")[0];
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
 	Player1.Color = PlayerTag[0].getAttribute('color');
 	Player1.Time = PlayerTag[0].getAttribute('time');
 	
-	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	//Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Name = PlayerTag[1].getAttribute('jid').split("@")[0];
 	Player2.Inc = PlayerTag[1].getAttribute('inc');
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
@@ -480,6 +482,14 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 		YourColor = P2.Color;
 	}
+
+	//Remove oldgame board if exists
+	if(MainData.CurrentOldGame != null)
+	{
+		//0 = current game. In this version, user can see only one
+		// old game
+		OLDGAME_RemoveOldGame(0);
+	}
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
@@ -513,6 +523,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+	}
+
+	//Remove oldgame board if exists
+	if(MainData.CurrentOldGame != null)
+	{
+		//0 = current game. In this version, user can see only one
+		// old game
+		OLDGAME_RemoveOldGame(0);
 	}
 
 	// 38 -> default piece size

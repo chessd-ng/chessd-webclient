@@ -450,7 +450,7 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 */
 function INTERFACE_CreateContactList()
 {
-	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnline, ContactOffline;
+	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
@@ -482,8 +482,10 @@ function INTERFACE_CreateContactList()
 
 	// Group labels
 	ContactsDiv = UTILS_CreateElement("div", "Contacts");
+	ContactOnlineDiv = UTILS_CreateElement("div", "ContactOnlineDiv");
 	ContactOnline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_online"));
 	ContactOnline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOnlineTable"); };
+	ContactOfflineDiv = UTILS_CreateElement("div", "ContactOfflineDiv");
 	ContactOffline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_offline"));
 	ContactOffline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOfflineTable"); };
 
@@ -508,7 +510,7 @@ function INTERFACE_CreateContactList()
 														MainData.UserList[i].Rating.Blitz,
 														MainData.UserList[i].Type
 													);
-			OnlineTbody.appendChild(ContactsOnline);
+	//		OnlineTbody.appendChild(ContactsOnline);
 		}
 		else
 		{
@@ -530,10 +532,13 @@ function INTERFACE_CreateContactList()
 	OnlineTable.appendChild(OnlineTbody);
 	OfflineTable.appendChild(OfflineTbody);
 
-	ContactsDiv.appendChild(ContactOnline);
-	ContactsDiv.appendChild(OnlineTable);
-	ContactsDiv.appendChild(ContactOffline);
-	ContactsDiv.appendChild(OfflineTable);
+	ContactOnlineDiv.appendChild(ContactOnline);
+	ContactOnlineDiv.appendChild(OnlineTable);
+	ContactOfflineDiv.appendChild(ContactOffline);
+	ContactOfflineDiv.appendChild(OfflineTable);
+	
+	ContactsDiv.appendChild(ContactOnlineDiv);
+	ContactsDiv.appendChild(ContactOfflineDiv);
 	
 	ContactInside.appendChild(OrderNick);
 	ContactInside.appendChild(OrderRating);

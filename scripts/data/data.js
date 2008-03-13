@@ -67,7 +67,7 @@ function DATA(ConfFile, LangFile)
 	this.CurrentGame = null;
 	this.GameList = new Array();
 
-	this.CurrentOldGame = "";
+	this.CurrentOldGame = null;
 	this.OldGameList = new Array();
 
 	this.Rating = new Object();
