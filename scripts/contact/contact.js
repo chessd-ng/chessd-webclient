@@ -223,7 +223,6 @@ function CONTACT_HandleRoomPresence(XML)
 	{
 		if (Type == "unavailable")
 		{
-			// 666 the number of the beast!
 			MainData.DelUserInRoom(RoomName, Jid);
 			INTERFACE_DelUserInRoom(RoomName, Jid);
 		}
@@ -265,7 +264,7 @@ function CONTACT_InsertUserInRoom(RoomName, Jid, Status, Role, Affiliation)
 		if (UserPos)
 		{
 			Type = MainData.UserList[UserPos].Type;
-			Rating = eval("MainData.UserList[UserPos].Rating."+UTILS_Capitalize(MainData.CurrentRating));
+			Rating = eval("MainData.UserList["+UserPos+"].Rating."+UTILS_Capitalize(MainData.CurrentRating));
 		}
 		else if (Jid == MainData.Username)
 		{
@@ -339,7 +338,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		i += 1;
 
 		// Match user
-		if ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy"))
+		if ( ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy")) && (MainData.Status != "playing"))
 		{
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_match");

@@ -144,7 +144,8 @@ function PROFILE_HandleRatings(RatingNodes)
 				break;
 			default:
 		}
-		
+	
+		// Set fields with values
 		Rating[Index][1] = RatingNodes[i].getAttribute('rating');
 		Rating[Index][2] = RatingNodes[i].getAttribute('max_rating');
 		TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
@@ -166,6 +167,7 @@ function PROFILE_HandleRatings(RatingNodes)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
+* @author Rubens
 */
 function PROFILE_StartProfile(Username)
 {	
@@ -202,8 +204,8 @@ function PROFILE_StartProfile(Username)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
+* @author Rubens
 */
-
 function PROFILE_RemoveProfile(Username)
 {
 	var Jid = Username+"@"+MainData.Host;
@@ -218,19 +220,27 @@ function PROFILE_RemoveProfile(Username)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
+* @author Rubens
 */
-
 function PROFILE_SaveMyProfile()
 {
-		var FN, Desc, PhotoType, Binval;
-		var MyProfile;
+	var FN, Desc, PhotoType, Binval;
+	var MyProfile;
 
-		MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
+	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
 
-		FN = MyProfile.Profile.GetUser();
-		Desc = MyProfile.Profile.GetDesc();
-		PhotoType = MyProfile.Profile.GetImgType();
-		Binval = MyProfile.Profile.GetImg64();
+	FN = MyProfile.Profile.GetUser();
+	Desc = MyProfile.Profile.GetDesc();
+	PhotoType = MyProfile.Profile.GetImgType();
+	Binval = MyProfile.Profile.GetImg64();
 
-		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
+	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MainData.Username));
+}
+
+/**
+* Return a default message to create a basic profile
+*/
+function PROFILE_CreateProfile()
+{
+	return MESSAGE_SetProfile("", MainData.Username, "", "", "");
 }

@@ -347,19 +347,18 @@ function MESSAGE_RemoveContact(User)
 
 /**
 * Send a Challenge message
+*
+* Should be extended to support Bughouse with more two players.
+* The Player's structure has the following fields:
+*  - Name
+*  - Color
+*  - Inc
+*  - Time
+*
+* The 'Color' field must content just the first letter
 */
-function MESSAGE_Challenge(Category, Players)
+function MESSAGE_Challenge(Category, Players, GameID)
 {
-	/** 
-	* Should be extended to support Bughouse with more two players.
-	* The Player's structure has the following fields:
-	*  - Name
-	*  - Color
-	*  - Inc
-	*  - Time
-	*
-	* The 'Color' field must content just the first letter
-	*/
 	var i, Id, XMPP = "";
 
 	// Setting iq's id
@@ -376,7 +375,17 @@ function MESSAGE_Challenge(Category, Players)
 	// Tag the id with the challenged player's name
 	XMPP  = "<iq type='set' to='match."+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
-	XMPP += "<match category='"+Category+"' >";
+
+	// Game offer
+	if (GameID == null)
+	{
+		XMPP += "<match category='"+Category+"' >";
+	}
+	// Reoffer
+	else 
+	{
+		XMPP += "<match category='"+Category+"' id='"+GameID+"' >";
+	}
 
 	// Creating players tags
 	for (i=0; i < Players.length; i++)

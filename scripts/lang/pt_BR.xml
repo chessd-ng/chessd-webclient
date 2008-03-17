@@ -224,7 +224,7 @@
 		<profile_change_image>Selecione a foto</profile_change_image>
 		<profile_change_image_title>Mudar foto</profile_change_image_title>
 		<profile_load_error>Erro</profile_load_error>
-		<profile_load_error_title>Não foi possível carregar a foto</profile_load_error_title>
+		<profile_load_error_title>Nao foi possivel carregar a foto</profile_load_error_title>
 	</profile>
 	<register>
 		<register_inf>Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre</register_inf>

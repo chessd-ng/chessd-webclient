@@ -52,7 +52,7 @@ function CONNECTION_ConnectJabber(XML)
 
 		// Get user information
 		case (5):
-			CONNECTION_SendJabber(MESSAGE_UserListInfo(), MESSAGE_GetProfile(MainData.Username));
+			CONNECTION_SendJabber(MESSAGE_UserListInfo(), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile));
 			break;
 
 		// Send presence, enter in 'default_room' and
