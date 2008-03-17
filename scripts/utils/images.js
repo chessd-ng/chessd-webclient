@@ -1,48 +1,103 @@
+/*
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
 
-function IMAGE_CreateFormToEncode(form_id, action){
-	var form, file;
 
-	form = document.createElement("form");
-	form.id= form_id;
-	form.action = action;
-	form.method = "post";
-	form.name = form_id;
-	form.enctype="multipart/form-data"
-	file = document.createElement("input");
-	file.type = "file";
-	file.name = "image";
+/**
+* This file contais all function used to decode/encode images to base64
+*/
+
+
+/**
+* Create input file to user
+*
+* @param        FormId is Form identificator
+* @param 	Action is script source
+* @return       Form HTML element
+* @author       Fabiano and Rubens
+*/
+function IMAGE_CreateFormToEncode(FormId, Action){
+	var Form, File;
+
+	Form = document.createElement("Form");
+	Form.id= FormId;
+	Form.action = Action;
+	Form.method = "post";
+	Form.name = FormId;
+	Form.enctype="multipart/Form-data"
+	File = document.createElement("input");
+	File.type = "file";
+	File.name = "image";
 	
-	form.appendChild(file);
-	return form;
+	Form.appendChild(File);
+	return Form;
 }
 
 
-// This function is used to show image base64 in IE6
+/**
+* This function is used to show image base64 in IE6
+*
+* @param 	ImgSrc is the image source in base64 Firefox standart
+* @return       Image base64 in IE Format
+* @author       Fabiano and Rubens
+*/
 function IMAGE_ImageDecode(ImgSrc){
 	return "php/base64_decode.php?"+ImgSrc.slice(5);
 }
 
-function IMAGE_ImageEncode(formId){
-	var frame, body, form;
+/**
+* This function get image and convert to base64
+*
+* @param        FormId is Form identificator
+* @return       void
+* @author       Fabiano and Rubens
+*/
+function IMAGE_ImageEncode(FormId){
+	var Frame, Body, Form;
 	
-	frame = document.createElement("iframe");
-	frame.name = "nda";
-	frame.setAttribute("style","width: 0; height: 0; border: none;");
-	body = document.getElementsByTagName("body")[0];
-	body.appendChild(frame);
-	form = document.getElementById(formId);
-	form.target = frame.name;
-	form.submit();
+	Frame = document.createElement("iFrame");
+	Frame.name = "nda";
+	Frame.setAttribute("style","width: 0; height: 0; border: none;");
+	Body = document.getElementsByTagName("body")[0];
+	Body.appendChild(Frame);
+	Form = document.getElementById(FormId);
+	Form.target = Frame.name;
+	Form.submit();
 
 
 
 }
 
-//if type == ""; error!!!!
+/**
+* When image is loaded this function is called 
+*
+* @param        Image is the image base 64
+* @param        Type is the image type
+* @return       void
+* @author       Fabiano and Rubens
+*/
 function IMAGE_B64Img(Image, Type){
 	var Profile;
 	var Img;
 
+	//if type == ""; error!!!!
+	if(Type == "")
+	{
+		WINDOW_Alert(UTILS_GetText("profile_load_error"), UTILS_GetText("profile_load_error_title"));
+		return ""
+	}
 	Img = "data:"+Type+";base64,"+Image;
 
 	// Update user profile image

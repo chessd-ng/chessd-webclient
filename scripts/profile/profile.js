@@ -15,8 +15,12 @@
 */
 
 /**
+* Handle Jabber vCard User
 *
-* @author Rubens
+* @public
+* @param        XML is the xml that contais vCard information
+* @return       void
+* @author       Rubens
 */
 function PROFILE_HandleVCardProfile(XML)
 {
@@ -157,7 +161,12 @@ function PROFILE_HandleRatings(RatingNodes)
 }
 
 /**
+* Create profile in data Struct and show Profile window
 *
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 * @author Rubens
 */
 function PROFILE_StartProfile(Username)
@@ -189,7 +198,12 @@ function PROFILE_StartProfile(Username)
 }
 
 /**
+* Remove Profile from data struct 
 *
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 * @author Rubens
 */
 function PROFILE_RemoveProfile(Username)
@@ -200,7 +214,12 @@ function PROFILE_RemoveProfile(Username)
 }
 
 /**
+* Save changes of profile
 *
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 * @author Rubens
 */
 function PROFILE_SaveMyProfile()

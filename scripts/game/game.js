@@ -615,6 +615,11 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
 	Game.Game.SetLastMove(Move);
 
+	if (Game.Moves.length == 3)
+	{
+		Game.Game.StartTimer();
+	}
+
 	return "";
 }
 

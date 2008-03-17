@@ -448,6 +448,7 @@ function INTERFACE_ShowProfileConfirmWindow()
 	return {Div:Div, Buttons:Buttons};
 }
 
+//METHODS
 /**
 *
 * @author Rubens
