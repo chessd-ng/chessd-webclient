@@ -209,6 +209,9 @@ function INTERFACE_ChangeCurrentRating(Type)
 	var Node, NewRating;
 	var i, j;
 
+	// Update current rating in the sctructure
+	MainData.CurrentRating = Type;
+
 	// Changing ratings in contact list
 	for (i=0; i<MainData.UserList.length; i++)
 	{
@@ -244,6 +247,7 @@ function INTERFACE_ChangeCurrentRating(Type)
 				Node.selectedIndex = j;
 		}
 	}
+	INTERFACE_SortUserByRating();
 
 	// Changing ratings in rooms list
 	for (i=0; i<MainData.RoomList.length; i++)
@@ -282,10 +286,8 @@ function INTERFACE_ChangeCurrentRating(Type)
 				Node.innerHTML = "";
 			}	
 		}
+		INTERFACE_SortUserByRatingInRoom(MainData.RoomList[i].Name);
 	}
-
-	// Update current rating in the sctructure
-	MainData.CurrentRating = Type;
 }
 
 /**
@@ -741,6 +743,50 @@ function INTERFACE_SortUserByNick()
 
 	// Order userlist struct
 	MainData.SortUserByNick();
+
+	for(i=0; i<Tam; i++)
+	{
+		// Tr element 
+		Item = document.getElementById("contact-"+MainData.UserList[i].Username).parentNode;
+		// If user in interface
+		if (Item != null)
+		{
+			// Take the user's status
+			Status = MainData.UserList[i].Status;
+			// Insert user in last position at online group
+			if (Status != "offline")
+			{
+				ListOn.insertBefore(Item,null);
+			}
+			// Insert user in last position at offline group
+			else
+			{
+				ListOff.insertBefore(Item,null);
+			}
+		}
+	}
+}
+
+/**
+*	Sort users by nick into ascendent or descendent order
+*
+* @return	boolean
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_SortUserByRating()
+{	
+	var Tam = MainData.UserList.length;
+	var ListOn, ListOff;
+	var i, Item, Status;
+
+	// TODO Expand to group
+	ListOn = document.getElementById("ContactOnlineList");
+	ListOff = document.getElementById("ContactOfflineList");
+
+	MainData.OrderBy = "2";
+
+	// Order userlist struct
+	MainData.SortUserByRating();
 
 	for(i=0; i<Tam; i++)
 	{

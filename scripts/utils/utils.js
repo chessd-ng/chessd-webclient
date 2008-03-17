@@ -555,3 +555,78 @@ function UTILS_SortByUsernameDsc(a, b)
 	var y = b.Username.toLowerCase();
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
+
+/**
+* Use to sort Userlist into descendent order by Rating
+* If x < y return  1
+*    x > y return -1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortByRatingDsc(a, b) 
+{
+	var Type = UTILS_Capitalize(MainData.CurrentRating);
+	var x;
+	var y;
+
+	if (Type == "Lightning")
+	{
+		if (a.Rating.Lightning != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Lightning));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Lightning != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Lightning));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	else if (Type == "Blitz")
+	{
+		if (a.Rating.Blitz != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Blitz));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Blitz != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Blitz));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	if (Type == "Standard")
+	{
+		if (a.Rating.Standard != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Standard));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Standard != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Standard));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+}

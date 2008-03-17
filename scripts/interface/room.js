@@ -887,3 +887,37 @@ function INTERFACE_SortUserByNickInRoom(RoomName)
 		}
 	}
 }
+
+/**
+*	Sort users by rating into descendent order
+*
+* @return	boolean
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_SortUserByRatingInRoom(RoomName)
+{	
+	var Tam;
+	var List;
+	var i,j, Item;
+
+	List = document.getElementById(RoomName+"UserList");
+
+	i= MainData.FindRoom(RoomName);
+	Tam = MainData.RoomList[i].UserList.length;
+
+	MainData.RoomList[i].OrderBy = "2";
+
+	// Order userlist struct
+	MainData.SortUserByRatingInRoom(RoomName);
+
+	for(j=0; j<Tam; j++)
+	{
+		// Tr element 
+		Item = document.getElementById(RoomName+"_"+MainData.RoomList[i].UserList[j].Username).parentNode;
+		// If user in interface
+		if (Item != null)
+		{
+			List.insertBefore(Item,null);
+		}
+	}
+}
