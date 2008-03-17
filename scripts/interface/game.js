@@ -810,8 +810,6 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(BTimerSpan);
 
 	this.MoveList.appendChild(Item);
-	if (MainData.CurrentGame.CurrentMove == 2)
-		this.StartTimer();
 
 	// Set Movelist scroll position;
 	ScrollTop = this.MoveList.scrollTop;
