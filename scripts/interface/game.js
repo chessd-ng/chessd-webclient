@@ -48,7 +48,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
 		}
-		else if( Player2.Name == MainData.UserName)
+		else if(Player2.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
@@ -66,7 +66,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
 		}
-		else if( Player2.Name == MainData.UserName)
+		else if(Player2.Name == MainData.Username)
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
@@ -128,7 +128,6 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
 	this.constructor();
-
 }
 
 
@@ -213,7 +212,7 @@ function INTERFACE_CreateGame()
 	//Add "X" close buttons to EventButtons
 	this.EventButtons.push(GameClose);
 
-	this.StartTimer();
+	//this.StartTimer();
 
 	this.SetWTime();
 	this.SetBTime();
@@ -302,8 +301,7 @@ function INTERFACE_RemoveGame()
 	}
 	else
 	{
-		// TODO TODO TODO
-		WINDOW_Alert("Voce nao pode fechar um jogo em andamento");
+		WINDOW_Alert(UTILS_GetText("game_remove_game"));
 	}
 }
 
@@ -746,8 +744,14 @@ function INTERFACE_SetBPhoto(Img)
 function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 {
 	var ScrollTop, ScrollHeight, ClientHeight;
+	var Num = UTILS_CreateElement("span", null, null, NumTurn+".");
+	var WTimeMin = Math.round(WTime / 60);
+	var WTimeMinStr;
+	var WTimeSec = WTime % 60;
+	var WTimeSecStr;
 	var Item;
-	if(NumTurn % 2)
+
+	if (NumTurn % 2)
 	{
 		Item = UTILS_CreateElement("li",null,"black",null);
 	}
@@ -756,10 +760,6 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 		Item = UTILS_CreateElement("li",null,"white",null);
 	}
 
-	var Num = UTILS_CreateElement("span", null, null, NumTurn+".");
-
-	var WTimeMin = Math.round(WTime / 60);
-	var WTimeMinStr;
 	if(WTimeMin < 10)
 	{
 		WTimeMinStr = "0"+WTimeMin;
@@ -769,8 +769,6 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 		WTimeMinStr = WTimeMin;
 	}
 
-	var WTimeSec = WTime % 60;
-	var WTimeSecStr;
 	if(WTimeSec < 10)
 	{
 		WTimeSecStr = "0"+WTimeSec;
@@ -812,6 +810,8 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(BTimerSpan);
 
 	this.MoveList.appendChild(Item);
+	if (MainData.CurrentGame.CurrentMove == 2)
+		this.StartTimer();
 
 	// Set Movelist scroll position;
 	ScrollTop = this.MoveList.scrollTop;

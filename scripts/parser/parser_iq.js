@@ -79,6 +79,10 @@ function PARSER_ParseIq(XML)
 					Buffer += PROFILE_HandleVCardProfile(XML);
 				}
 			}
+			else if (Xmlns == "")
+			{
+				Buffer += PARSER_ParseIqById(XML);
+			}
 			break;
 
 		case "set":
@@ -117,5 +121,24 @@ function PARSER_ParseIq(XML)
 		default: break;
 	}
 
+	return Buffer;
+}
+
+/**
+* Parse Iq's received from jabber by iq id
+*
+* @return string
+*/
+function PARSER_ParseIqById(XML)
+{
+	var Type = XML.getAttribute("type");
+	var ID = XML.getAttribute("id");
+	var Buffer = "";
+
+	// Received an empty vcard. Need to create a basic profile
+	if (ID == MainData.Const.IQ_ID_GetMyProfile)
+	{
+		Buffer += PROFILE_CreateProfile();
+	}
 	return Buffer;
 }

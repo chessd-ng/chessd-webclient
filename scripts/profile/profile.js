@@ -205,15 +205,23 @@ function PROFILE_RemoveProfile(Username)
 */
 function PROFILE_SaveMyProfile()
 {
-		var FN, Desc, PhotoType, Binval;
-		var MyProfile;
+	var FN, Desc, PhotoType, Binval;
+	var MyProfile;
 
-		MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
+	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
 
-		FN = MyProfile.Profile.GetUser();
-		Desc = MyProfile.Profile.GetDesc();
-		PhotoType = MyProfile.Profile.GetImgType();
-		Binval = MyProfile.Profile.GetImg64();
+	FN = MyProfile.Profile.GetUser();
+	Desc = MyProfile.Profile.GetDesc();
+	PhotoType = MyProfile.Profile.GetImgType();
+	Binval = MyProfile.Profile.GetImg64();
 
-		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
+	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MainData.Username));
+}
+
+/**
+* Return a default message to create a basic profile
+*/
+function PROFILE_CreateProfile()
+{
+	return MESSAGE_SetProfile("", MainData.Username, "", "", "");
 }
