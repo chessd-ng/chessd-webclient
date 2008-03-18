@@ -167,7 +167,6 @@ function PROFILE_HandleRatings(RatingNodes)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
-* @author Rubens
 */
 function PROFILE_StartProfile(Username)
 {	
@@ -204,7 +203,6 @@ function PROFILE_StartProfile(Username)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
-* @author Rubens
 */
 function PROFILE_RemoveProfile(Username)
 {
@@ -220,7 +218,6 @@ function PROFILE_RemoveProfile(Username)
 * @param        Username is the jabber username
 * @return       void
 * @author       Rubens
-* @author Rubens
 */
 function PROFILE_SaveMyProfile()
 {
@@ -239,6 +236,8 @@ function PROFILE_SaveMyProfile()
 
 /**
 * Return a default message to create a basic profile
+* @return       XMPP set profile message
+* @author       Pedro
 */
 function PROFILE_CreateProfile()
 {

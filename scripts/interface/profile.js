@@ -455,7 +455,14 @@ function INTERFACE_ShowProfileConfirmWindow()
 */
 function INTERFACE_ProfileSetUser(Username)
 {
-	this.Username.value = Username;
+	if(this.Username.tagName == "INPUT")
+	{
+		this.Username.value = Username;
+	}
+	else
+	{
+		this.Username.innerHTML = Username;
+	}
 }
 
 /**
