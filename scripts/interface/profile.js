@@ -448,13 +448,21 @@ function INTERFACE_ShowProfileConfirmWindow()
 	return {Div:Div, Buttons:Buttons};
 }
 
+//METHODS
 /**
 *
 * @author Rubens
 */
 function INTERFACE_ProfileSetUser(Username)
 {
-	this.Username.value = Username;
+	if(this.Username.tagName == "INPUT")
+	{
+		this.Username.value = Username;
+	}
+	else
+	{
+		this.Username.innerHTML = Username;
+	}
 }
 
 /**
@@ -472,7 +480,11 @@ function INTERFACE_ProfileGetUser()
 */
 function INTERFACE_ProfileSetUserImg(Img)
 {
-	this.UserImg.src = IMAGE_ImageDecode(Img);
+	//No user image
+	if(Img != "images/no_photo.png")
+	{
+		this.UserImg.src = IMAGE_ImageDecode(Img);
+	}
 }
 
 /**
@@ -490,7 +502,14 @@ function INTERFACE_ProfileSetNick(Nick)
 */
 function INTERFACE_ProfileSetDesc(Desc)
 {
-	this.Desc.value = Desc;
+	if(this.Desc.tagName == "TEXTAREA")
+	{
+		this.Desc.value = Desc;
+	}
+	else
+	{
+		this.Desc.innerHTML = Desc;
+	}
 }
 
 /**

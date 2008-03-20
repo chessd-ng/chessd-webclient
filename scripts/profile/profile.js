@@ -15,8 +15,12 @@
 */
 
 /**
+* Handle Jabber vCard User
 *
-* @author Rubens
+* @public
+* @param        XML is the xml that contais vCard information
+* @return       void
+* @author       Rubens
 */
 function PROFILE_HandleVCardProfile(XML)
 {
@@ -39,38 +43,51 @@ function PROFILE_HandleVCardProfile(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
 	// Get photo image
-	if (Photo != null)
+	if (Photo != undefined)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
-		Img = "data:"+PhotoType+";base64,"+Binval;
+		if((Binval == "") || (PhotoType == ""))
+		{
+			Img = "images/no_photo.png";
+		}
+		else
+		{
+			Img = "data:"+PhotoType+";base64,"+Binval;
+		}
 	}
 	else
 	{
 		Img = "images/no_photo.png";
 	}
 
-	// Update user image
-	if((UserFrom == MainData.Username) && (MainData.Photo != Img))
+	if(UserFrom == MainData.Username)
 	{
-		MainData.MyProfile.Img64 = Binval;
-		MainData.MyProfile.ImgType = PhotoType;
-		INTERFACE_SetUserImage(Img);
+		// Update user image
+		if (MainData.Photo != Img)
+		{
+			MainData.MyProfile.Img64 = Binval;
+			MainData.MyProfile.ImgType = PhotoType;
+			INTERFACE_SetUserImage(Img);
+			MainData.Photo = Img;
+		}
+		
+		// Update profile data struct
+		MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
 	}
 
 	// Update profile window
 	Profile = MainData.GetProfile(From)
 	if (Profile != null)
 	{
-		Profile.Profile.SetUser(FullName);
-		Profile.Profile.SetNick(NickName);
-		Profile.Profile.SetDesc(Desc)
-		Profile.Profile.SetUserImg(Img);
+		Profile.Profile.SetUser(FullName); // Set user full name
+		Profile.Profile.SetNick(NickName); //Set nickname (static)
+		Profile.Profile.SetDesc(Desc); // Set description
+		Profile.Profile.SetUserImg(Img); //Set user img
 		Profile.Profile.SetImg64(Binval);
 		Profile.Profile.SetImgType(PhotoType);
 	}
 
-	MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
 
 	return "";
 }
@@ -157,8 +174,12 @@ function PROFILE_HandleRatings(RatingNodes)
 }
 
 /**
+* Create profile in data Struct and show Profile window
 *
-* @author Rubens
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 */
 function PROFILE_StartProfile(Username)
 {	
@@ -189,8 +210,12 @@ function PROFILE_StartProfile(Username)
 }
 
 /**
+* Remove Profile from data struct 
 *
-* @author Rubens
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 */
 function PROFILE_RemoveProfile(Username)
 {
@@ -200,20 +225,34 @@ function PROFILE_RemoveProfile(Username)
 }
 
 /**
+* Save changes of profile
 *
-* @author Rubens
+* @public
+* @param        Username is the jabber username
+* @return       void
+* @author       Rubens
 */
 function PROFILE_SaveMyProfile()
 {
-		var FN, Desc, PhotoType, Binval;
-		var MyProfile;
+	var FN, Desc, PhotoType, Binval;
+	var MyProfile;
 
-		MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
+	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
 
-		FN = MyProfile.Profile.GetUser();
-		Desc = MyProfile.Profile.GetDesc();
-		PhotoType = MyProfile.Profile.GetImgType();
-		Binval = MyProfile.Profile.GetImg64();
+	FN = MyProfile.Profile.GetUser();
+	Desc = MyProfile.Profile.GetDesc();
+	PhotoType = MyProfile.Profile.GetImgType();
+	Binval = MyProfile.Profile.GetImg64();
 
-		CONNECTION_SendJabber( MESSAGE_SetProfile("",FN,Desc,PhotoType,Binval), MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetProfile));
+	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MainData.Username));
+}
+
+/**
+* Return a default message to create a basic profile
+* @return       XMPP set profile message
+* @author       Pedro
+*/
+function PROFILE_CreateProfile()
+{
+	return MESSAGE_SetProfile("", MainData.Username, "", "", "");
 }

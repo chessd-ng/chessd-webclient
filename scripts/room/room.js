@@ -84,7 +84,7 @@ function ROOM_HandleRoomList(XML)
 		// Find room names
 		for (i=0; i < Items.length; i++)
 		{
-			Rooms[i] = Items[i].getAttribute("name").replace(/ (.*)/, "");
+			Rooms[i] = Items[i].getAttribute("jid").replace(/.conference.*/, "");
 		}
 		INTERFACE_ShowRoomList(Rooms);
 	}

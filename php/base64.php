@@ -6,21 +6,26 @@ $type = "";
 
 
 if(eregi("^image\/(jpg|jpeg|png|gif)$", $image["type"])){
-	if(is_uploaded_file($_FILES["image"]["tmp_name"])){
+	if($image['size'] < 10000){
+		if(is_uploaded_file($_FILES["image"]["tmp_name"])){
 		
-		$type = $image["type"];
-		$fd = fopen($image['tmp_name'], "rb");
-		$convert=fread($fd, $image['size'] );
-		$convert = base64_encode($convert);
-		fclose($fd);
+			$type = $image["type"];
+			$fd = fopen($image['tmp_name'], "rb");
+			$convert=fread($fd, $image['size'] );
+			$convert = base64_encode($convert);
+			fclose($fd);
 
+		}else{
+			$result = 1;
+			$convert="Error: Invalid file";
+		}
 	}else{
-		$result = 1;
-		$convert="Error: Invalid file";
+		$result = 2;
+		$convert="Error: Invalid file size ".$image['size'];
 	}
 }else{
-		$result = 2;
-		$convert="Error: Invalid file type ".$image['type'];
+	$result = 3;
+	$convert="Error: Invalid file type ".$image['type'];
 }
 
 ?>
@@ -29,13 +34,12 @@ if(eregi("^image\/(jpg|jpeg|png|gif)$", $image["type"])){
 <script>
 	imageResult();
 	function imageResult(){
-		
 		if(<?=$result?>)
 			document.write("Erro: <?=$convert?>");
 		else
 			document.write("<?=$convert?>");
 
-		parent.IMAGE_B64Img("<?=$convert?>", "<?=$type?>");
+		parent.IMAGE_B64Img("<?=$convert?>", "<?=$type?>", <?=$result?>);
 	}
 </script>
 

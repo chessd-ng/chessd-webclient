@@ -100,6 +100,7 @@ DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
 
 DATA.prototype.SortUserByNick = DATA_SortUserByNick;
+DATA.prototype.SortUserByRating = DATA_SortUserByRating;
 
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.DelRoom = DATA_DelRoom;
@@ -112,6 +113,7 @@ DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
+DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
 
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
@@ -458,6 +460,19 @@ function DATA_SortUserByNick()
 	return true;
 }
 
+/**
+* Sort Userlist into descending order by Rating selected in interface
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserByRating()
+{
+	this.UserList.sort(UTILS_SortByRatingDsc);
+
+	return true;
+}
+
 /**********************************
  * METHODS - ROOM LIST            *
  **********************************/
@@ -679,7 +694,7 @@ function DATA_DelUserInRoom(RoomName, Username)
 }
 
 /**
-* Sort Userlist froom Room into ascending or descending order
+* Sort Userlist from Room into ascending or descending order
 *
 * @return	boolean
 * @author	Danilo Yorinori
@@ -696,6 +711,20 @@ function DATA_SortUserByNickInRoom(RoomName)
 	{
 		this.RoomList[i].UserList.sort(UTILS_SortByUsernameDsc);
 	}
+	return true;
+}
+
+/**
+* Sort Userlist from Room into descending order by Rating
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_SortUserByRatingInRoom(RoomName)
+{
+	var i = this.FindRoom(RoomName);
+
+	this.RoomList[i].UserList.sort(UTILS_SortByRatingDsc);
 	return true;
 }
 
