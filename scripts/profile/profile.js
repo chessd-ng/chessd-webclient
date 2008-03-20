@@ -43,38 +43,51 @@ function PROFILE_HandleVCardProfile(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
 	// Get photo image
-	if (Photo != null)
+	if (Photo != undefined)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
-		Img = "data:"+PhotoType+";base64,"+Binval;
+		if((Binval == "") || (PhotoType == ""))
+		{
+			Img = "images/no_photo.png";
+		}
+		else
+		{
+			Img = "data:"+PhotoType+";base64,"+Binval;
+		}
 	}
 	else
 	{
 		Img = "images/no_photo.png";
 	}
 
-	// Update user image
-	if((UserFrom == MainData.Username) && (MainData.Photo != Img))
+	if(UserFrom == MainData.Username)
 	{
-		MainData.MyProfile.Img64 = Binval;
-		MainData.MyProfile.ImgType = PhotoType;
-		INTERFACE_SetUserImage(Img);
+		// Update user image
+		if (MainData.Photo != Img)
+		{
+			MainData.MyProfile.Img64 = Binval;
+			MainData.MyProfile.ImgType = PhotoType;
+			INTERFACE_SetUserImage(Img);
+			MainData.Photo = Img;
+		}
+		
+		// Update profile data struct
+		MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
 	}
 
 	// Update profile window
 	Profile = MainData.GetProfile(From)
 	if (Profile != null)
 	{
-		Profile.Profile.SetUser(FullName);
-		Profile.Profile.SetNick(NickName);
-		Profile.Profile.SetDesc(Desc)
-		Profile.Profile.SetUserImg(Img);
+		Profile.Profile.SetUser(FullName); // Set user full name
+		Profile.Profile.SetNick(NickName); //Set nickname (static)
+		Profile.Profile.SetDesc(Desc); // Set description
+		Profile.Profile.SetUserImg(Img); //Set user img
 		Profile.Profile.SetImg64(Binval);
 		Profile.Profile.SetImgType(PhotoType);
 	}
 
-	MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
 
 	return "";
 }
