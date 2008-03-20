@@ -109,6 +109,10 @@
 		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
 		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
+		<usermenu_disconnect_user>Desconectar usuário</usermenu_disconnect_user>
+		<usermenu_ban>Banir</usermenu_ban>
+		<usermenu_mute>Amordaçar</usermenu_mute>
+		<usermenu_abusive>Abusivo</usermenu_abusive>
 	</usermenu>
 	<error>
 		<error_disconnected>Perdeu contato com o servidor. Favor reconectar.</error_disconnected>

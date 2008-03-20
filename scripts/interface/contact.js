@@ -390,6 +390,11 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	}
 	// Get parent scrolling
 	ParentDiv = UTILS_GetParentDiv(Obj);
+	if (ParentDiv.id == "ContactOfflineDiv")
+	{
+		ParentDiv = UTILS_GetParentDiv(ParentDiv.parentNode);
+	}
+
 	Pos = UTILS_GetOffset(Obj);
 
 	Menu.style.top = (Pos.Y+18-ParentDiv.scrollTop)+"px";
