@@ -637,6 +637,7 @@ function GAME_RemoveGame(GameID)
 	{
 		if (Game.Finished)
 		{
+			Game.Game.StopTimer();
 			Game.Game.Remove();
 			MainData.RemoveGame(GameID);
 

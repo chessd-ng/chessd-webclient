@@ -595,7 +595,10 @@ function INTERFACE_StartTimer()
 */
 function INTERFACE_StopTimer()
 {
-	this.Timer = window.clearInterval(this.Timer);
+	if(this.Timer != undefined)
+	{
+		this.Timer = window.clearInterval(this.Timer);
+	}
 }
 
 
