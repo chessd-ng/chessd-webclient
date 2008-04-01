@@ -757,3 +757,29 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 
 	return XMPP;
 }
+
+/**********************************
+ * MESSAGES - SEARCH OLDGAME
+ **********************************/
+
+function MESSAGE_GetOldGames(Jid1, Jid2, NumGames, Offset)
+{
+	var XMPP = "";
+	XMPP += "<iq type='get' to='rating."+MainData.Host+"'>";
+	XMPP += "<query xmlns='"+xmlns+"/chessd#search_game'>";
+	XMPP += "<search results='"+NumGames+"' offset='"+Offset+"'>";
+	XMPP += "<player jid='"+Jid1+"'/>";
+	XMPP += "<player jid='"+Jid2+"'/>";
+	XMPP += "</search></query></iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_FetchOldGame(OldGameId)
+{
+	var XMPP = "";
+	XMPP += "<iq from='rating."+MainData.Host+"' type='result'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#fetch_game'>";
+	XMPP += "<game id='"+OldGameId+"'/>";
+	XMPP += "</query></iq>";
+}
