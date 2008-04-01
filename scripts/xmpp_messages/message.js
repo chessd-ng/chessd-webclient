@@ -765,11 +765,13 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 function MESSAGE_GetOldGames(Jid1, Jid2, NumGames, Offset)
 {
 	var XMPP = "";
-	XMPP += "<iq type='get' to='rating."+MainData.Host+"'>";
-	XMPP += "<query xmlns='"+xmlns+"/chessd#search_game'>";
+	XMPP += "<iq type='get' id='"+MainData.Const.IQ_ID_OldGameSearch+"' to='rating."+MainData.Host+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#search_game'>";
 	XMPP += "<search results='"+NumGames+"' offset='"+Offset+"'>";
-	XMPP += "<player jid='"+Jid1+"'/>";
-	XMPP += "<player jid='"+Jid2+"'/>";
+	if (Jid1 != "")
+		XMPP += "<player jid='"+Jid1+"@"+MainData.Host+"' />";
+	if (Jid2 != "")
+		XMPP += "<player jid='"+Jid2+"@"+MainData.Host+"' />";
 	XMPP += "</search></query></iq>";
 
 	return XMPP;

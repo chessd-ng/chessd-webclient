@@ -61,7 +61,7 @@ function INTERFACE_ShowOldGameSearchWindow()
 	Search = UTILS_CreateElement('input',null,'button');
 	Search.type = "button";
 	Search.value = UTILS_GetText("window_search");
-//	UTILS_AddListener(Search,"click",	function() { }, "false");
+	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_GetOldGames(Input1.value, Input2.value, 10, 0)); }, "false");
 	Buttons.push(Search);
 
 	Cancel = UTILS_CreateElement('input',null,'button');
