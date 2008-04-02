@@ -559,6 +559,12 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 
 	// Get game from GameList
 	Game = MainData.GetGame(GameId);
+	
+	if(Game == null)
+	{
+		// Get game from OldGameList
+		MainData.GetOldGame(GameId);
+	}
 
 	if (Game.CurrentMove != null)
 	{
