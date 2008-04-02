@@ -1145,11 +1145,30 @@ function DATA_SetTurnGame(TurnColor)
 function DATA_GetGame(Id)
 {
 	var i=0;
+	//Search game from game list
 	while(i<this.GameList.length)
 	{
 		if(this.GameList[i].Id == Id)
 		{
 			return(this.GameList[i])
+		}
+		i++;
+	}
+
+
+	return null;
+}
+
+function DATA_GetOldGame(Id)
+{
+	var i=0;
+
+	//Search game from old game list
+	while(i<this.OldGameList.length)
+	{
+		if(this.OldGameList[i].Id == Id)
+		{
+			return(this.OldGameList[i])
 		}
 		i++;
 	}
