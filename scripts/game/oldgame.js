@@ -126,7 +126,6 @@ function OLDGAME_StartOldGame(P1, P2, OldGameId)
 
 }
 
-{
 /**
 * Handle Game State
 * It's a good ideia to read the server's documentation before reading the code above

@@ -73,7 +73,7 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += OLDGAME_HandleSearchOldGame(XML);
 			}
-			else if (Xmlns.match/\/chessd#fetch_game/)
+			else if (Xmlns.match(/\/chessd#fetch_game/))
 			{
 				Buffer += OLDGAME_FetchOldGame(XML);
 			}
