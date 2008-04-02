@@ -28,7 +28,7 @@
 */
 function OLDGAME_HandleSearchOldGame(XML)
 {
-	var Games;
+	var Games, GameList;
 	var i;
 	var Buffer="";
 	var GameList = new Array();
@@ -48,31 +48,40 @@ function OLDGAME_HandleSearchOldGame(XML)
 
 		if(Players[0].getAttribute("role")=="white")
 		{
-			GameInfoTmp.white = Player[0].getAttribute("role");
-			GameInfoTmp.black = Player[1].getAttribute("role");
+			GameInfoTmp.white = Players[0].getAttribute("jid").split("@")[0];
+			GameInfoTmp.black = Players[1].getAttribute("jid").split("@")[0];
 
 			if(Players[0].getAttribute("score")=="1")
 			{
-				GameInfoTmp.winner = "white";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
+			}
+			else if(Players[1].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
 			}
 			else
 			{
-				GameInfoTmp.winner = "black";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
 			}
 		}
 		else
 		{
-			GameInfoTmp.white = Player[1].getAttribute("role");
-			GameInfoTmp.black = Player[0].getAttribute("role");
+			GameInfoTmp.white = Players[1].getAttribute("jid").split("@")[0];
+			GameInfoTmp.black = Players[0].getAttribute("jid").split("@")[0];
 
 			if(Players[0].getAttribute("score")=="1")
 			{
-				GameInfoTmp.winner = "black";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
+			}
+			else if(Players[1].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
 			}
 			else
 			{
-				GameInfoTmp.winner = "white";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
 			}
+
 		}
 
 
@@ -80,11 +89,11 @@ function OLDGAME_HandleSearchOldGame(XML)
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
 		GameInfoTmp.id = Games[i].getAttribute("id");
 		GameInfoTmp.wintype = "-----";
-
+	
 		GameList.push(GameInfoTmp);
 	}
 
-	WINDOW_OldGameResult(Games);
+	WINDOW_OldGameResult(GameList);
 
 	return Buffer;
 }
@@ -92,13 +101,13 @@ function OLDGAME_HandleSearchOldGame(XML)
 /** 
 * Start Game in OldGame Mode
 * 
-* @param        P1 is Player 1 Object (Attributes: Name, Time, Color, Inc) 
-* @param        P2 is Player 2 Object (Attributes: Name, Time, Color, Inc) 
+* @param        P1 is Player 1 name
+* @param        P2 is Player 2 name
 * @return       void 
 * @see		MainData methods and Game Interface Object;
 * @author       Rubens 
 */
-function OLDGAME_StartOldGame(P1, P2, OldGameId)
+function OLDGAME_StartOldGame(P1Name, P2Name, OldGameId)
 {
 	var GameDiv;
 	var Index;
@@ -110,8 +119,8 @@ function OLDGAME_StartOldGame(P1, P2, OldGameId)
 	}
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1.Name, P2.Name, "white");
-	Index = MainData.AddOldGame(OldGameId, P1.Name, P2.Name, "none", GameDiv);
+	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1Name, P2Name, "white");
+	Index = MainData.AddOldGame(OldGameId, P1Name, P2Name, "none", GameDiv);
 
 	// Show New Game
 	GameDiv.Show();
