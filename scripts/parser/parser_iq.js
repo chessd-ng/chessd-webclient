@@ -68,6 +68,15 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += CONTACT_HandleSearchUser(XML);
 			}
+			// Search Old Game
+			else if (Xmlns.match(/\/chessd#search_game/))
+			{
+				Buffer += OLDGAME_HandleSearchOldGame(XML);
+			}
+			else if (Xmlns.match(/\/chessd#fetch_game/))
+			{
+				Buffer += OLDGAME_FetchOldGame(XML);
+			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
 				if (ID == MainData.Const.IQ_ID_GamePhoto)

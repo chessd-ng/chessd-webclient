@@ -19,6 +19,76 @@
 * This file contains OldGame 
 */
 
+/**
+* Handle Search Old Games Messages
+*
+* @param        XML The xml that contains the string 'search_game' in xmlns attribute
+* @return       Buffer with the messages that must be send
+* @author       Rubens;
+*/
+function OLDGAME_HandleSearchOldGame(XML)
+{
+	var Games;
+	var i;
+	var Buffer="";
+	var GameList = new Array();
+	var GameInfoTmp;
+	var Players;
+
+
+	Games = XML.getElementsByTagName("game");
+
+	// Create a Array of game infos object
+	for(i=0; i<Games.length; i++)
+	{
+		// Create a game object and set attributes (white, black,
+		// winner, date, id, gametype, wintype)
+		GameInfoTmp = new Object();
+		Players = Games[i].getElementsByTagName("player");
+
+		if(Players[0].getAttribute("role")=="white")
+		{
+			GameInfoTmp.white = Player[0].getAttribute("role");
+			GameInfoTmp.black = Player[1].getAttribute("role");
+
+			if(Players[0].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = "white";
+			}
+			else
+			{
+				GameInfoTmp.winner = "black";
+			}
+		}
+		else
+		{
+			GameInfoTmp.white = Player[1].getAttribute("role");
+			GameInfoTmp.black = Player[0].getAttribute("role");
+
+			if(Players[0].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = "black";
+			}
+			else
+			{
+				GameInfoTmp.winner = "white";
+			}
+		}
+
+
+		GameInfoTmp.date = Games[i].getAttribute("time_stamp");
+		GameInfoTmp.gametype = Games[i].getAttribute("category");
+		GameInfoTmp.id = Games[i].getAttribute("id");
+		GameInfoTmp.wintype = "-----";
+
+		GameList.push(GameInfoTmp);
+	}
+
+	WINDOW_OldGameResult(Games);
+
+	return Buffer;
+}
+
 /** 
 * Start Game in OldGame Mode
 * 
@@ -28,22 +98,20 @@
 * @see		MainData methods and Game Interface Object;
 * @author       Rubens 
 */
-function OLDGAME_StartOldGame(P1, P2)
+function OLDGAME_StartOldGame(P1, P2, OldGameId)
 {
-	var GameDiv, GameId;
+	var GameDiv;
 	var Index;
 
 	// Hide current game
-	if (MainData.CurrentGame != null)
+	if (MainData.CurrentOldGame != null)
 	{
-		MainData.CurrentGame.Game.Hide();
+		MainData.CurrentOldGame.Game.Hide();
 	}
 
-	GameId = MainData.OldGameList.length;
-
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj("OldGame_"+GameId, P1.Name, P2.Name, "white");
-	Index = MainData.AddOldGame(GameId, P1.Name, P2.Name, "none", GameDiv);
+	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1.Name, P2.Name, "white");
+	Index = MainData.AddOldGame(OldGameId, P1.Name, P2.Name, "none", GameDiv);
 
 	// Show New Game
 	GameDiv.Show();
@@ -54,8 +122,56 @@ function OLDGAME_StartOldGame(P1, P2)
 	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 
 	// Send a message to get game moves
-	// TODO TODO TODO
+	MESSAGE_FecthOldGame(OldGameId);
 
+}
+
+/**
+* Handle Game State
+* It's a good ideia to read the server's documentation before reading the code above
+*
+* @param 	XML The xml that contains the game state
+* @return 	void
+* @author 	Ulysses and Rubens
+*/
+function OLDGAME_FetchOldGame(XML)
+{
+	var GameTag;
+	var GameID, PlayerTag;
+	var Player1 = new Object();
+	var Player2 = new Object();
+	var Buffer = "";
+	var HistoryStates;
+
+	GameTag = XML.getElementsByTagName[0];
+
+	GameID = Game.getAttribute("id");
+	PlayerTag = XML.getElementsByTagName("player");
+
+	HistoryStates = XML.getElementsByTagName("state");
+
+	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
+	Player1.Inc = PlayerTag[0].getAttribute('inc');
+	Player1.Color = PlayerTag[0].getAttribute('color');
+	Player1.Time = PlayerTag[0].getAttribute('time');
+		
+	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
+	Player2.Inc = PlayerTag[1].getAttribute('inc');
+	Player2.Color = PlayerTag[1].getAttribute('color');
+	Player2.Time = PlayerTag[1].getAttribute('time');
+
+	// History moves
+	if (MainData.FindGame(GameID) == null)
+	{
+		Buffer += OLDGAME_StartOldGame(GameID, Player1, Player2);
+		Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+	}
+	else
+	{
+		Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+	}
+
+	return Buffer;
 }
 
 /** 

@@ -319,3 +319,33 @@ function WINDOW_ProfileImage()
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+function WINDOW_OldGameSearch()
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowOldGameSearchWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(250, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Ok Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_OldGameResult()
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowOldGameResultWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
