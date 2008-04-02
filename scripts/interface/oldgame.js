@@ -34,7 +34,7 @@ function INTERFACE_ShowOldGameSearchWindow()
 	// Variables
 	var Div;
 
-	var FormDiv, Player1,Input1, Player2, Input2, Br1, Br1;
+	var FormDiv, Player1,Input1, Player2, Input2, Br1, Br2;
 
 	var ButtonsDiv, Search, Cancel;
 
@@ -47,11 +47,11 @@ function INTERFACE_ShowOldGameSearchWindow()
 	FormDiv = UTILS_CreateElement('div', 'FormDiv');
 
 	Player1 = UTILS_CreateElement('span', null, null, UTILS_GetText("oldgame_player1"));
-	Input1 = UTILS_CreateElement('input', "OldGameInput");
+	Input1 = UTILS_CreateElement('input', "OldGameInput1");
 	Input1.size = "23";
 	Br1 = UTILS_CreateElement('br');
 	Player2 = UTILS_CreateElement('span', null, null, UTILS_GetText("oldgame_player2"));
-	Input2 = UTILS_CreateElement('input', "OldGameInput");
+	Input2 = UTILS_CreateElement('input', "OldGameInput2");
 	Input2.size = "23";
 	Br2 = UTILS_CreateElement('br');
 
@@ -92,11 +92,12 @@ function INTERFACE_ShowOldGameSearchWindow()
 /**
 *	Create elements of search old games window and returns div
 *
+* @param	Games	Array of old games
 * @return	Div; Array
 * @see		WINDOW_OldGameSearch();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowOldGameResultWindow()
+function INTERFACE_ShowOldGameResultWindow(Games)
 {
 	// Variables
 	var Div;
