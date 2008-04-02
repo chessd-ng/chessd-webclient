@@ -328,6 +328,9 @@ function WINDOW_OldGameSearch()
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(250, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
 
+	// Focus input player 1
+	document.getElementById('OldGameInput1').focus();
+
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Ok Button
@@ -343,7 +346,7 @@ function WINDOW_OldGameResult(GameList)
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
-
+	
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Close Button
