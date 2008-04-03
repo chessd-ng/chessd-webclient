@@ -83,6 +83,9 @@ function PARSER_ParseIq(XML)
 				{
 					Buffer += GAME_HandleVCardPhoto(XML);
 				}
+				else if (ID == MainData.Const.IQ_ID_OldGamePhoto)				{
+					Buffer += OLDGAME_HandleVCardPhoto(XML);
+				}
 				else
 				{
 					Buffer += PROFILE_HandleVCardProfile(XML);

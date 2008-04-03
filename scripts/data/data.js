@@ -1271,7 +1271,7 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 function DATA_RemoveOldGame(Id)
 {
 	var GamePosition = Id;
-	var RemovedGame;
+	var RemovedOldGame;
 
 	if(this.OldGameList[GamePosition] == undefined)
 	{

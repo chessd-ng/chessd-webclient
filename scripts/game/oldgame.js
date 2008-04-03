@@ -112,6 +112,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var GameDiv;
 	var Index;
 	var Color;
+	var Buffer;
 
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
@@ -147,9 +148,13 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	//Change "X" close board button function when clicked
 	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 
-	// Send a message to get game moves
-	//CONNECTION_SendJabber(MESSAGE_FetchOldGame(OldGameId));
+	Buffer  = MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_OldGamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_OldGamePhoto);
 
+	//Change user status to observer
+	//Buffer += CONTACT_ChangeStatus("","return");
+
+	return Buffer;
 }
 
 /**
@@ -163,7 +168,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 function OLDGAME_FetchOldGame(XML)
 {
 	var GameTag;
-	var GameID, PlayerTag;
+	var GamePos, PlayerTag;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -188,7 +193,7 @@ function OLDGAME_FetchOldGame(XML)
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
 	// Open a board
-	OLDGAME_StartOldGame(GamePos, Player1, Player2);
+	Buffer = OLDGAME_StartOldGame(GamePos, Player1, Player2);
 
 	// Load history moves
 	Buffer += OLDGAME_LoadGameHistory(GamePos, History, Player1, Player2);
@@ -357,6 +362,59 @@ function OLDGAME_EndGame(Id)
 	}
 
 }
+
+
+/**
+* Handle Game Players Photo
+*
+* @param        XML The xml that contains vCard photo
+* @return       none
+* @author       Rubens
+*/
+function OLDGAME_HandleVCardPhoto(XML)
+{
+	var Photo;
+	var Player;
+	var Binval;
+	var PhotoType;
+	var Img;
+
+	if( MainData.CurrentOldGame == null)
+	{
+		return "";
+	}
+
+	// Get player image
+	Photo = XML.getElementsByTagName("PHOTO")[0];
+
+	// If player don't use any image, do nothing
+	if(Photo == null)
+	{
+		return "";
+	}
+
+	// Get photo image 
+	PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
+	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
+	Img = "data:"+PhotoType+";base64,"+Binval;
+
+	Player = XML.getAttribute("from").split("@")[0];
+
+	// Update current old game player image
+	if(MainData.CurrentOldGame.PW.Name == Player)
+	{
+		MainData.CurrentOldGame.WPhoto = Img;
+		MainData.CurrentOldGame.Game.SetWPhoto(Img);
+	}
+	else if(MainData.CurrentOldGame.PB.Name == Player)
+	{
+		MainData.CurrentOldGame.BPhoto = Img;
+		MainData.CurrentOldGame.Game.SetBPhoto(Img);
+	}
+
+	return "";
+}
+
 
 /** 
 * Remove OldGame board from interface and OldGameList
