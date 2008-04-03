@@ -306,18 +306,7 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, P1, P2, TurnColor)
 		Game.Game.UpdateBTime(P1.Time);
 	}
 
-	// Update turn in structure and interface
-	Game.SetTurn(TurnColor);
-	Game.Game.SetTurn(TurnColor);
-
-	// Show new time
-	Game.Game.SetWTime();
-	Game.Game.SetBTime();
-
-	// Update interface
-	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
 	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
-	Game.Game.SetLastMove(Move);
 
 	return "";
 }
