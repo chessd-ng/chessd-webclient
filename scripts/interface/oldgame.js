@@ -140,7 +140,7 @@ function INTERFACE_ShowOldGameResultWindow(GameList)
 	
  	for(i=0; i<GameList.length ; i++)
 	{
-		TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].gametype, GameList[i].winner, GameList[i].WinType, GameList[i].date, GameList[i].id));
+		TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].gametype, GameList[i].winner, GameList[i].wintype, GameList[i].date, GameList[i].id));
 	}
 
 
@@ -183,7 +183,7 @@ function INTERFACE_AddOldGameResult(White, Black, GameType, Winner, WinType, Dat
 		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'header',Date);
 		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function(){ OLDGAME_StartOldGame(White, Black, Id)}, false);
+		UTILS_AddListener(Tr, "click", function(){ CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id))}, false);
 	
 	return(Tr);
 }
