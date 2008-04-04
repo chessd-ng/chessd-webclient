@@ -62,7 +62,7 @@ function GAME_HandleChallenge (XML)
 */
 function GAME_HandleOffer(XML)
 {
-	var Players, Match, MatchID, Category, Type;
+	var Players, Match, MatchID, Category, Type, Rating;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -109,8 +109,9 @@ function GAME_HandleOffer(XML)
 		{
 			MainData.AddChallenge(Player1.Name, MatchID, Player1.Name);
 
+			Rating = MainData.GetUserRatingInRoom('geral',Player1.Name,Category);
 			// Show challenge window for user
-			WINDOW_Challenge(Player1.Name, Player1, MatchID);
+			WINDOW_Challenge(Player1.Name, Rating, Player1, MatchID);
 		}
 		else 
 		{

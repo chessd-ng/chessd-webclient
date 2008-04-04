@@ -137,23 +137,23 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-function WINDOW_Challenge(User,GameParameters, MatchId)
+function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 {
 	// Return Div and Buttons;
-	var Div = INTERFACE_ShowChallengeWindow(User, GameParameters, MatchId);
+	var Div = INTERFACE_ShowChallengeWindow(User, Rating, GameParameters, MatchId);
 	var Title;
 
 	if (GameParameters)
 	{
-		Title = UTILS_GetText('challenge_title_invite');
+		Title = UTILS_GetText('challenge_title_offer');
 	}
 	else
 	{
-		Title = UTILS_GetText('challenge_title_offer');
+		Title = UTILS_GetText('challenge_title_invite');
 	}
 
 	// Create New Window
-	var WindowObj = WINDOW_NewWindow(330, Div.Div, Div.Buttons, Title);
+	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, Title);
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);

@@ -18,17 +18,19 @@
 * Create elements to challenge invite or challenge offer
 *
 * @param Oponent					Oponent's nickname 
+* @param Rating						Oponent's current rating
 * @param GameParameters		Object that contains the game parameters of a received challenge
 * @param MatchId					Id of Match 
 * @return									Div; Array
 * @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
+function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 {
 	var Div;
 
-	var Username, Label;
+	var TopDiv;
+	var Username, RatingLabel, Label;
 
 	var ChalLeftDiv;
 	var ColorLabel, ColorOptW, ColorOptWImg, ColorOptB, ColorOptBImg ;
@@ -53,7 +55,10 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	Div = UTILS_CreateElement('div', 'ChallengeDiv');
 	
 	// Top Elments
+	TopDiv = UTILS_CreateElement('div', 'TopDiv');
 	Username = UTILS_CreateElement('h3', null, null, Oponent);
+	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
+	Username.appendChild(RatingLabel);
 	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
 	
 	// Right Elements
@@ -67,7 +72,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	CatOptBl.value = "blitz";
 	CatOptSt = UTILS_CreateElement('option', null, null, 'Standard');
 	CatOptSt.value = "standard";
-	CatSelect =	UTILS_CreateElement('select');
+	CatSelect =	UTILS_CreateElement('select',null,'drop_select');
 
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
@@ -94,6 +99,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
+		Rating = MainData.GetUserRatingInRoom('geral',Oponent,"lightning");
 		}
 
 		// Blitz = 1
@@ -106,9 +112,10 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
+		Rating = MainData.GetUserRatingInRoom('geral',Oponent,"blitz");
 		}
 
-		// Standart = 2
+		// Standard = 2
 		else if (Type == 2)
 		{
 			for (i=11; i <=30; i++)
@@ -132,11 +139,16 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
+			Rating = MainData.GetUserRatingInRoom('geral',Oponent,"standard");
 		}
+	
+		Username.removeChild(Username.childNodes[1]);
+		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
+		Username.appendChild(RatingLabel);
 	}
 
 	IncLabel =	UTILS_CreateElement('p', null, null, UTILS_GetText('challenge_inc_label'));
-	IncSelect = UTILS_CreateElement('select', null, 'time_select');
+	IncSelect = UTILS_CreateElement('select', null, 'drop_select');
 	IncLabelSeg =	UTILS_CreateElement('span', null, 'italic', UTILS_GetText('challenge_inc_label_seg'));
 	IncBr = UTILS_CreateElement('br');
 	
@@ -217,7 +229,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	TimeLabel =	UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_time_label'));
 	TimeLabelMin =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_time_label_min'));
 	TimeBr = UTILS_CreateElement('br');
-	TimeSelect = UTILS_CreateElement('select',null,'time_select');
+	TimeSelect = UTILS_CreateElement('select',null,'drop_select');
 	
 	if (GameParameters != undefined)
 	{
@@ -497,12 +509,16 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 		Buttons.push(Cancel);
 	}
 
-	// Mount Main Div
-	Div.appendChild(Username);
+	// TopDiv
+	TopDiv.appendChild(Username);
 	if (GameParameters != undefined)
 	{
-		Div.appendChild(Label);
+		TopDiv.appendChild(Label);
 	}
+	
+
+	// Mount Main Div
+	Div.appendChild(TopDiv);
 	Div.appendChild(ChalLeftDiv);
 	Div.appendChild(ChalRightDiv);
 	Div.appendChild(Br);

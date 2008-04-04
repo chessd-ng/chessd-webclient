@@ -111,6 +111,7 @@ DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
 DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+DATA.prototype.GetUserRatingInRoom = DATA_GetUserRatingInRoom;
 
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
@@ -691,6 +692,65 @@ function DATA_DelUserInRoom(RoomName, Username)
 
 	this.RoomList[j].UserList.splice(i, 1);
 	return true;
+}
+
+/**
+* Return Category's Rating from Username in Room
+* (Based on fact that's all online users are connected to 'geral' room
+*
+* @param RoomName
+* @param Username
+* @param Category	Category which rating will be returned
+* @return	Rating's value
+* @author	Danilo Yorinori
+*/
+function DATA_GetUserRatingInRoom(RoomName, Username, Category)
+{
+	var RatingList, Rating;
+
+	RatingList = this.RoomList[0].UserList[this.FindUserInRoom(RoomName,Username)].Rating;	
+
+	if (Category == null)
+	{
+		Category = this.CurrentRating;
+	}
+
+	switch (Category)
+	{
+		case "blitz":	
+			if (RatingList.Blitz)
+			{
+				Rating = RatingList.Blitz; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+			break;
+		case "lightning": 
+			if (RatingList.Lightning)
+			{
+				Rating = RatingList.Lightning; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+			break;
+		case "standard": 
+			if (RatingList.Standard)
+			{
+				Rating = RatingList.Standard; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+		break;
+		default:	Rating = "---";
+	}
+
+	return Rating;
 }
 
 /**
