@@ -95,7 +95,7 @@ function GAME_HandleOffer(XML)
 		// Get information of player one
 		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
 		Player1.Inc = Players[0].getAttribute('inc');
-		Player1.Color = Players[0].getAttribute('color');
+		Player1.Color = Players[0].getAttribute('color'); 
 		Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
 		
 		// Get information of player two
