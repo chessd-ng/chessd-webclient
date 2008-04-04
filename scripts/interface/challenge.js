@@ -47,7 +47,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	var Buttons = new Array();
 
 	var Type, Color, Rated;
-	var i;
+	var i; 
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'ChallengeDiv');
@@ -204,11 +204,15 @@ function INTERFACE_ShowChallengeWindow(Oponent, GameParameters, MatchId)
 	{
 		if (GameParameters.Color == "white")
 		{
+			// Firefox fix
+			ColorOptB.checked = true;
 			//defaultChecked is used to fix IE radio checked
 			ColorOptB.setAttribute("defaultChecked", "true");
 		}
 		else if (GameParameters.Color == "black")
 		{
+			// Firefox fix
+			ColorOptW.checked = true;
 			//defaultChecked is used to fix IE radio checked
 			ColorOptW.setAttribute("defaultChecked", "true");
 		}
