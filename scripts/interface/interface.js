@@ -53,7 +53,7 @@ function INTERFACE_ShowInterface(Tree)
 
 
 /**
-* Show interface in the user screen
+* Remove interface in the user screen
 */
 function INTERFACE_StopInterface()
 {

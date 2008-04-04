@@ -630,3 +630,23 @@ function UTILS_SortByRatingDsc(a, b)
 	}
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
+
+function UTILS_GetLanguage()
+{
+	var Lang = navigator.browserLanguage;
+
+	switch(Lang)
+	{
+		case "pt-br":
+			return "pt_BR";
+
+		case "en-us":
+			return "en_US";
+
+		case "zh-cn":
+			return "zh_CN";
+
+		default:
+			return "pt_BR";
+	}
+}

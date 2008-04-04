@@ -50,6 +50,7 @@ function DATA(ConfFile, LangFile)
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;
 	this.Load = -1;
+	this.Lang = "";
 
 	/**
 	* DATA STRUCTURE
