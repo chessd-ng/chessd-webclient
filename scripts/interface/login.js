@@ -31,7 +31,7 @@ var MainData;
 * @return void
 * @public
 */
-function INTERFACE_StartLogin()
+function INTERFACE_StartLogin(Lang)
 {
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
 	var Title, TitleEnd, Text, Banner, Version;
@@ -47,7 +47,8 @@ function INTERFACE_StartLogin()
 	var TBody = document.createElement('tbody');
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/pt_BR.xml");
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData.Lang = Lang;
 
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
@@ -130,6 +131,7 @@ function INTERFACE_StartLogin()
 	LoginBoxDiv.appendChild(LoginTextBoxDiv);
 	LoginBoxDiv.appendChild(LoginFormBoxDiv);
 
+	document.body.appendChild(INTERFACE_CreateLanguage());
 	document.body.appendChild(LoginBoxDiv);
 	document.body.appendChild(Banner);
 	//document.body.appendChild(Version);
@@ -154,6 +156,7 @@ function INTERFACE_EndLogin()
 {
 	var Div = document.getElementById("LoginDiv");
 	var Banner = document.getElementById("BannerLogin");
+	var Lang = document.getElementById("LangDiv");
 
 	// If login div is on screen
 	if (Div)
@@ -161,4 +164,55 @@ function INTERFACE_EndLogin()
 
 	if (Banner)
 		Banner.parentNode.removeChild(Banner);
+
+	if (Lang)
+		Lang.parentNode.removeChild(Lang);
+}
+
+/**
+* Remove login screen
+*
+* @return Div elements with tags
+* @public
+*/
+function INTERFACE_CreateLanguage()
+{
+	var DivLang = UTILS_CreateElement("div","LangDiv");
+	var Ul = UTILS_CreateElement("ul","LangUl");
+	var i;
+
+	var Languages = UTILS_OpenXMLFile("scripts/data/lang.xml");
+	var Langs = Languages.getElementsByTagName("lang");
+
+	for(i=0; i<Langs.length; i++)
+	{
+		Ul.appendChild(INTERFACE_CreateLangFlag(UTILS_GetNodeText(Langs[i])));
+	}
+
+	DivLang.appendChild(Ul);
+
+	return DivLang;
+}
+
+/**
+* Create language flag image
+*
+* @param Lang is language (i.e.: en_US, pt_BR, zh_CN,...)
+* @return List item element with image
+* @private
+*/
+function INTERFACE_CreateLangFlag(Lang)
+{
+	var Li = UTILS_CreateElement("li");
+	var Img = UTILS_CreateElement("img");
+
+	Img.src = "images/lang/"+Lang+".png";
+	Li.appendChild(Img);
+
+	Li.onclick = function(){
+		INTERFACE_EndLogin();
+		INTERFACE_StartLogin(Lang);
+	}
+
+	return Li;
 }

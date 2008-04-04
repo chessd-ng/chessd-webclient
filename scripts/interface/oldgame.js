@@ -97,7 +97,7 @@ function INTERFACE_ShowOldGameSearchWindow()
 * @see		WINDOW_OldGameSearch();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowOldGameResultWindow(Games)
+function INTERFACE_ShowOldGameResultWindow(GameList)
 {
 	// Variables
 	var Div;
@@ -108,6 +108,8 @@ function INTERFACE_ShowOldGameResultWindow(Games)
 	var ButtonsDiv, Close;
 
 	var Buttons = new Array();
+
+	var i;
 
 	// Main div
 	Div = UTILS_CreateElement('div', 'OldGameResultDiv');
@@ -135,6 +137,12 @@ function INTERFACE_ShowOldGameResultWindow(Games)
 	TBody.appendChild(Tr);
 	Table.appendChild(TBody);
 
+	
+ 	for(i=0; i<GameList.length ; i++)
+	{
+		TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].gametype, GameList[i].winner, GameList[i].wintype, GameList[i].date, GameList[i].id));
+	}
+
 
 	// ButtonsDiv elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
@@ -156,4 +164,26 @@ function INTERFACE_ShowOldGameResultWindow(Games)
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons};
+}
+
+function INTERFACE_AddOldGameResult(White, Black, GameType, Winner, WinType, Date, Id)
+{
+	var Tr, Td;
+	
+	Tr = UTILS_CreateElement('tr');
+		Td = UTILS_CreateElement('td',null,'header',White);
+		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',Black);
+		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',GameType);
+		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',Winner);
+		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',WinType);
+		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,'header',Date);
+		Tr.appendChild(Td);
+		UTILS_AddListener(Tr, "click", function(){ CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id))}, false);
+	
+	return(Tr);
 }

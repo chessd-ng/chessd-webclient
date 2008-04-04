@@ -780,8 +780,10 @@ function MESSAGE_GetOldGames(Jid1, Jid2, NumGames, Offset)
 function MESSAGE_FetchOldGame(OldGameId)
 {
 	var XMPP = "";
-	XMPP += "<iq from='rating."+MainData.Host+"' type='result'>";
+	XMPP += "<iq to='rating."+MainData.Host+"' type='get' id='get_rating'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#fetch_game'>";
 	XMPP += "<game id='"+OldGameId+"'/>";
 	XMPP += "</query></iq>";
+
+	return XMPP;
 }

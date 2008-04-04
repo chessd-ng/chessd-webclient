@@ -128,3 +128,25 @@
 	font-weight		: bold;
 }
 */
+
+
+#LangDiv
+{
+	position		: absolute;
+	left			: 50%;
+	margin-left		: -70px;
+	top			: 40px;
+}
+
+#LangDiv ul
+{
+	list-style		: none;
+	display			: table;
+	width			: 100%;
+}
+
+#LangDiv li
+{
+	float			: left;
+	margin-right		: 10px;
+}

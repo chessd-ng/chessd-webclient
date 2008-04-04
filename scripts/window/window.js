@@ -339,10 +339,10 @@ function WINDOW_OldGameSearch()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-function WINDOW_OldGameResult()
+function WINDOW_OldGameResult(GameList)
 {
 	//Return Div and Buttons;
-	var Div = INTERFACE_ShowOldGameResultWindow();
+	var Div = INTERFACE_ShowOldGameResultWindow(GameList);
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));

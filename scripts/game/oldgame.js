@@ -28,7 +28,7 @@
 */
 function OLDGAME_HandleSearchOldGame(XML)
 {
-	var Games;
+	var Games, GameList;
 	var i;
 	var Buffer="";
 	var GameList = new Array();
@@ -48,31 +48,40 @@ function OLDGAME_HandleSearchOldGame(XML)
 
 		if(Players[0].getAttribute("role")=="white")
 		{
-			GameInfoTmp.white = Player[0].getAttribute("role");
-			GameInfoTmp.black = Player[1].getAttribute("role");
+			GameInfoTmp.white = Players[0].getAttribute("jid").split("@")[0];
+			GameInfoTmp.black = Players[1].getAttribute("jid").split("@")[0];
 
 			if(Players[0].getAttribute("score")=="1")
 			{
-				GameInfoTmp.winner = "white";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
+			}
+			else if(Players[1].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
 			}
 			else
 			{
-				GameInfoTmp.winner = "black";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
 			}
 		}
 		else
 		{
-			GameInfoTmp.white = Player[1].getAttribute("role");
-			GameInfoTmp.black = Player[0].getAttribute("role");
+			GameInfoTmp.white = Players[1].getAttribute("jid").split("@")[0];
+			GameInfoTmp.black = Players[0].getAttribute("jid").split("@")[0];
 
 			if(Players[0].getAttribute("score")=="1")
 			{
-				GameInfoTmp.winner = "black";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
+			}
+			else if(Players[1].getAttribute("score")=="1")
+			{
+				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
 			}
 			else
 			{
-				GameInfoTmp.winner = "white";
+				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
 			}
+
 		}
 
 
@@ -80,11 +89,11 @@ function OLDGAME_HandleSearchOldGame(XML)
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
 		GameInfoTmp.id = Games[i].getAttribute("id");
 		GameInfoTmp.wintype = "-----";
-
+	
 		GameList.push(GameInfoTmp);
 	}
 
-	WINDOW_OldGameResult(Games);
+	WINDOW_OldGameResult(GameList);
 
 	return Buffer;
 }
@@ -92,26 +101,44 @@ function OLDGAME_HandleSearchOldGame(XML)
 /** 
 * Start Game in OldGame Mode
 * 
-* @param        P1 is Player 1 Object (Attributes: Name, Time, Color, Inc) 
-* @param        P2 is Player 2 Object (Attributes: Name, Time, Color, Inc) 
+* @param        P1 = Player 1 Object (Name, Time, Color, Inc)
+* @param        P2 = Player 2 Object (Name, Time, Color, Inc)
 * @return       void 
 * @see		MainData methods and Game Interface Object;
 * @author       Rubens 
 */
-function OLDGAME_StartOldGame(P1, P2, OldGameId)
+function OLDGAME_StartOldGame(OldGameId, P1, P2)
 {
 	var GameDiv;
 	var Index;
+	var Color;
+	var Buffer;
 
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
 	{
-		MainData.CurrentOldGame.Game.Hide();
+		//MainData.CurrentOldGame.Game.Hide();
+		//In this version, user can only see one OldGame
+		OLDGAME_RemoveOldGame(0);
+	}
+
+	// Check if player is watch own old game
+	if(P1.Name == MainData.Username)
+	{
+		Color = P1.Color;
+	}
+	else if (P2.Name == MainData.Username)
+	{
+		Color = P2.Color;
+	}
+	else //See anothers players old game
+	{
+		Color = "white";
 	}
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1.Name, P2.Name, "white");
-	Index = MainData.AddOldGame(OldGameId, P1.Name, P2.Name, "none", GameDiv);
+	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1, P2, Color, 38);
+	Index = MainData.AddOldGame(P1, P2, "none", GameDiv);
 
 	// Show New Game
 	GameDiv.Show();
@@ -119,11 +146,15 @@ function OLDGAME_StartOldGame(P1, P2, OldGameId)
 	GameDiv.OldGameMode();
 
 	//Change "X" close board button function when clicked
-	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
+	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 
-	// Send a message to get game moves
-	MESSAGE_FecthOldGame(OldGameId);
+	Buffer  = MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_OldGamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_OldGamePhoto);
 
+	//Change user status to observer
+	//Buffer += CONTACT_ChangeStatus("","return");
+
+	return Buffer;
 }
 
 /**
@@ -137,18 +168,19 @@ function OLDGAME_StartOldGame(P1, P2, OldGameId)
 function OLDGAME_FetchOldGame(XML)
 {
 	var GameTag;
-	var GameID, PlayerTag;
+	var GamePos, PlayerTag;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
-	var HistoryStates;
+	var History;
 
-	GameTag = XML.getElementsByTagName[0];
+	GameTag = XML.getElementsByTagName("game")[0];
 
-	GameID = Game.getAttribute("id");
+	GamePos = MainData.OldGameList.length;
+
 	PlayerTag = XML.getElementsByTagName("player");
 
-	HistoryStates = XML.getElementsByTagName("state");
+	History = XML.getElementsByTagName("history")[0];
 
 	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
@@ -160,19 +192,130 @@ function OLDGAME_FetchOldGame(XML)
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
-	// History moves
-	if (MainData.FindGame(GameID) == null)
-	{
-		Buffer += OLDGAME_StartOldGame(GameID, Player1, Player2);
-		Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
-	}
-	else
-	{
-		Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
-	}
+	// Open a board
+	Buffer = OLDGAME_StartOldGame(GamePos, Player1, Player2);
+
+	// Load history moves
+	Buffer += OLDGAME_LoadGameHistory(GamePos, History, Player1, Player2);
 
 	return Buffer;
 }
+
+/**
+* Load all game history moves done in the game
+*
+* @param        GameId is the game identificator
+* @param        HistoryXml is a XML that contains all games states
+* @param        Player1 = Player 1 Object (Name, Time, Color, Inc)
+* @param        Player2 = Player 2 Object (Name, Time, Color, Inc)
+* @return       void
+* @author       Rubens
+*/
+function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
+{
+	var i;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove;
+	var HPlayer1 = new Object();
+	var HPlayer2 = new Object();
+	var HistoryMoves;
+	var Buffer;
+
+	if(HistoryXml == undefined)
+	{
+		return "";
+	}
+
+	HistoryMoves = HistoryXml.getElementsByTagName("state");
+
+	StartP1Time = HistoryXml.getElementsByTagName("player")[0].getAttribute("time");
+	StartP2Time = HistoryXml.getElementsByTagName("player")[1].getAttribute("time");
+	HPlayer1.Name = Player1.Name;
+	HPlayer1.Inc = Player1.Inc;
+	HPlayer1.Color = Player1.Color;
+	HPlayer1.Time = StartP1Time;
+
+	HPlayer2.Name = Player2.Name;
+	HPlayer2.Inc = Player2.Inc;
+	HPlayer2.Color = Player2.Color;
+	HPlayer2.Time = StartP2Time;
+
+	// Load game history
+	for(i=0 ; i<HistoryMoves.length; i++)
+	{
+		HTime = HistoryMoves[i].getAttribute("time");
+		HTurn = HistoryMoves[i].getAttribute("turn");
+		HBoard = HistoryMoves[i].getAttribute("board");
+		HMove = HistoryMoves[i].getAttribute("move");
+
+		if(HTurn == "white")
+		{
+			HPlayer2.Time = HTime;
+		}
+		else
+		{
+			HPlayer1.Time = HTime;
+		}
+
+		Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+	}
+
+	OLDGAME_FirstBoard();
+
+	return Buffer;
+}
+
+/**
+* Update board in data struct and interface
+*
+* @param        GameId = Game number
+* @param        BoardStr = Board status in a string
+* @param        Move = Chess Move (Piece/Orig-Dest)
+* @param        P1 = Player 1 Object (Name, Time, Color, Inc)
+* @param        P2 = Player 2 Object (Name, Time, Color, Inc)
+* @param        TurnColor = color ("white"/"black")
+* @return       void
+* @author       Rubens
+*/
+function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, P1, P2, TurnColor)
+{
+	var NewBoardArray = UTILS_String2Board(BoardStr);
+	var CurrentBoardArray;
+	var Game;
+
+	// Get game from GameList
+	//Game = MainData.GetOldGame(GamePos);
+	// In this version, user can only see one OldGame
+	Game = MainData.CurrentOldGame;
+	
+	if (Game.CurrentMove != null)
+	{
+		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
+	}
+	// If there's no previous moves
+	else
+	{
+		CurrentBoardArray = new Array("--------","--------","--------","--------","--------","--------","--------","--------");
+	}
+
+	// Update data sctructure
+	if (P1.Color == "white")
+	{
+		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
+		Game.Game.UpdateWTime(P1.Time);
+		Game.Game.UpdateBTime(P2.Time);
+	}
+	else
+	{
+		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
+		Game.Game.UpdateWTime(P2.Time);
+		Game.Game.UpdateBTime(P1.Time);
+	}
+
+	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
+
+	return "";
+}
+
 
 /** 
 * Change board GameMode to OldGame Mode when game is over
@@ -219,6 +362,59 @@ function OLDGAME_EndGame(Id)
 	}
 
 }
+
+
+/**
+* Handle Game Players Photo
+*
+* @param        XML The xml that contains vCard photo
+* @return       none
+* @author       Rubens
+*/
+function OLDGAME_HandleVCardPhoto(XML)
+{
+	var Photo;
+	var Player;
+	var Binval;
+	var PhotoType;
+	var Img;
+
+	if( MainData.CurrentOldGame == null)
+	{
+		return "";
+	}
+
+	// Get player image
+	Photo = XML.getElementsByTagName("PHOTO")[0];
+
+	// If player don't use any image, do nothing
+	if(Photo == null)
+	{
+		return "";
+	}
+
+	// Get photo image 
+	PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
+	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
+	Img = "data:"+PhotoType+";base64,"+Binval;
+
+	Player = XML.getAttribute("from").split("@")[0];
+
+	// Update current old game player image
+	if(MainData.CurrentOldGame.PW.Name == Player)
+	{
+		MainData.CurrentOldGame.WPhoto = Img;
+		MainData.CurrentOldGame.Game.SetWPhoto(Img);
+	}
+	else if(MainData.CurrentOldGame.PB.Name == Player)
+	{
+		MainData.CurrentOldGame.BPhoto = Img;
+		MainData.CurrentOldGame.Game.SetBPhoto(Img);
+	}
+
+	return "";
+}
+
 
 /** 
 * Remove OldGame board from interface and OldGameList
@@ -366,6 +562,36 @@ function OLDGAME_LastBoard()
 	BTime = MainData.CurrentOldGame.Moves[ MoveListLen - 1 ].PBTime;
 
 	MainData.CurrentOldGame.CurrentMove = MoveListLen-1;
+	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
+	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
+	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
+	MainData.CurrentOldGame.Game.SetWTime();
+	MainData.CurrentOldGame.Game.SetBTime();
+	MainData.CurrentOldGame.Game.SetLastMove(Move);
+}
+
+/** 
+* Change current board to some game board
+* 
+* @param        NumBoard in Board Number
+* @return       void 
+* @see		MainData methods and Game Interface Object;
+* @author       Rubens 
+*/
+function OLDGAME_GotoBoard(NumBoard)
+{
+	var Color, Board;
+	var WTime, BTime;
+	var Move; 
+
+	Color = MainData.CurrentOldGame.BoardColor;
+	Board = MainData.CurrentOldGame.Moves[NumBoard-1].Board;
+	Move = MainData.CurrentOldGame.Moves[NumBoard -1].Move;
+
+	WTime = MainData.CurrentOldGame.Moves[ NumBoard - 1 ].PWTime;
+	BTime = MainData.CurrentOldGame.Moves[ NumBoard - 1 ].PBTime;
+
+	MainData.CurrentOldGame.CurrentMove = NumBoard-1;
 	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
 	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
 	MainData.CurrentOldGame.Game.UpdateBTime(BTime);

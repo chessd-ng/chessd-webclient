@@ -812,6 +812,8 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(WTimerSpan);
 	Item.appendChild(BTimerSpan);
 
+	UTILS_AddListener(Item, "click", function(){OLDGAME_GotoBoard(NumTurn)}, false);
+
 	this.MoveList.appendChild(Item);
 
 	// Set Movelist scroll position;

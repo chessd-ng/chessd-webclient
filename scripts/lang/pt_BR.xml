@@ -249,5 +249,6 @@
 		<oldgame_winner>Ganhador</oldgame_winner>
 		<oldgame_wintype>Motivo</oldgame_wintype>
 		<oldgame_date>Data</oldgame_date>
+		<oldgame_draw>Empate</oldgame_draw>
 	</oldgame>
 </language>

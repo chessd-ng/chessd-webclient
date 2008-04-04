@@ -40,6 +40,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetMyProfile = "GetMyProfile";
 	Const.IQ_ID_GetProfile = "GetProfile";
 	Const.IQ_ID_GamePhoto = "GetGamePlayerPhoto";
+	Const.IQ_ID_OldGamePhoto = "GetOldGamePlayerPhoto";
 	Const.IQ_ID_OldGameSearch= "OldGameSearch";
 	
 	// Login errors
