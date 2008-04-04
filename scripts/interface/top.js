@@ -34,6 +34,7 @@ function INTERFACE_CreateTop()
 	ItemTitle = UTILS_GetText("menu_search_game")
 	Item = UTILS_CreateElement("li", null, "search_game", ItemTitle);
 	Item.title = ItemTitle;
+	UTILS_AddListener(Item,"click",function() { WINDOW_OldGameSearch(); }, "false");
 	IconsList.appendChild(Item);
 	
 	// Search user
