@@ -13,6 +13,7 @@
 	        <window_accept>接受</window_accept>
 	        <window_cancel>取消</window_cancel>
 	        <window_decline>拒绝</window_decline>
+                <window_search>Search</window_search>
 	</window>
 	<login>
 		<login_title>欢迎进入ChessD新版Web界面！</login_title>
@@ -241,4 +242,16 @@
 		<register_bt_confirm>确认</register_bt_confirm>
 		<register_bt_cancel>取消</register_bt_cancel>
 	</register>
+	<oldgame>
+		<oldgame_title>Old games</oldgame_title>
+		<oldgame_player1>Player 1:</oldgame_player1>
+		<oldgame_player2>Player 2:</oldgame_player2>
+		<oldgame_white>White</oldgame_white>
+		<oldgame_black>Black</oldgame_black>
+		<oldgame_category>Category</oldgame_category>
+		<oldgame_winner>Winner</oldgame_winner>
+		<oldgame_wintype>Win reason</oldgame_wintype>
+		<oldgame_date>Date</oldgame_date>
+		<oldgame_draw>Draw</oldgame_draw>
+	</oldgame>
 </language>
