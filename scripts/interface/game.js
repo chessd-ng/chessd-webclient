@@ -1341,7 +1341,7 @@ function INTERFACE_CreateOldGameTab(DivMoves)
 {
 	var Tab = UTILS_CreateElement("div", "InfoTab", null, null);
 
-	var TabMove = UTILS_CreateElement("span", "InfoTab1", "oldgame", "Lances");
+	var TabMove = UTILS_CreateElement("span", "InfoTab1", "oldgame", UTILS_GetText("game_moves"));
 
 	Tab.appendChild(TabMove);
 	Tab.appendChild(DivMoves);
