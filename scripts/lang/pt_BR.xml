@@ -134,6 +134,8 @@
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
 		<challenge_accept>Aceitar</challenge_accept>
 		<challenge_no_time>Sem tempo</challenge_no_time>
+		<challenge_color_auto>Automatico</challenge_color_auto>
+		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 	</challenge>
 	<game>
 		<game_accept>Aceitar</game_accept>
