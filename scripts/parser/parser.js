@@ -37,6 +37,17 @@ function PARSER_ParseXml(XML)
 		return 0;
 	}
 
+	// If bind return a invalid sid
+	if (Body.childNodes.length == 0)
+	{
+		if (Body.getAttribute("type") == "terminate")
+		{
+			LOGIN_Disconnected();
+			alert(UTILS_GetText("login_lost_connection"));
+			return null;
+		}
+	}
+
 	// Verify all tags 
 	for (i=0; i < Body.childNodes.length; i++)
 	{

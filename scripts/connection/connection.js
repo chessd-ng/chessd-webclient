@@ -257,7 +257,15 @@ function CONNECTION_ReceiveXml()
 
 		    // Forward XML to parser
 			Buffer = PARSER_ParseXml(XML);
-				
+	
+			alert(MainData.ConnectionStatus);
+			// User disconnected 
+			if (MainData.ConnectionStatus == -1)
+			{
+				alert('retornando null');
+				return null;
+			}
+
 			// Parser returned some xml: send it
 			if ((Buffer != "") && (Buffer != null) && (Buffer != undefined))
 			{
