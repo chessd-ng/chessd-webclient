@@ -22,6 +22,7 @@
 function INTERFACE_CreateTop()
 {
 	var MainDiv, Logo, MenuDiv, IconsList, MenuList, Item, ItemTitle;
+	var Pos;
 
 	MainDiv = UTILS_CreateElement("div", "Top");
 	Logo = UTILS_CreateElement("h1", null, null, UTILS_GetText("general_name"));
@@ -75,7 +76,8 @@ function INTERFACE_CreateTop()
 	// Current games
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_current_games"));
 	Item.onclick = function () {
-		ROOM_ShowGameRoomList();
+		Pos = UTILS_GetOffset(this);
+		ROOM_ShowGameRoomList(Pos.X);
 	}
 	MenuList.appendChild(Item);
 	
@@ -83,7 +85,8 @@ function INTERFACE_CreateTop()
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_challenges"));
 	MenuList.appendChild(Item);
 		Item.onclick = function () {
-		INTERFACE_ShowChallengeMenu();
+		Pos = UTILS_GetOffset(this);
+		INTERFACE_ShowChallengeMenu(Pos.X);
 	}
 
 	MenuList.appendChild(Item);
@@ -94,13 +97,16 @@ function INTERFACE_CreateTop()
 	// Rooms
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_rooms"));
 	Item.onclick = function () {
-		ROOM_ShowRoomList();
+		Pos = UTILS_GetOffset(this);
+		ROOM_ShowRoomList(Pos.X);
 	}
 	MenuList.appendChild(Item);
 	
 	// History
+	/*
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_history"));
 	MenuList.appendChild(Item);
+	*/
 
 	MenuDiv.appendChild(IconsList);
 	MenuDiv.appendChild(MenuList);
@@ -113,13 +119,15 @@ function INTERFACE_CreateTop()
 /**
 * Show rooms menu
 */
-function INTERFACE_ShowRoomMenu()
+function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomList, RoomItem, Create;
 	var Node, Menu, Func, i, Hide = 0;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("RoomMenuDiv");
+
+
 
 	if (!Node || Menu)
 	{
@@ -152,6 +160,8 @@ function INTERFACE_ShowRoomMenu()
 	MenuDiv.appendChild(RoomList);
 	Node.appendChild(MenuDiv);
 
+	MenuDiv.style.left = (OffsetLeft-72)+"px";
+
 	UTILS_AddListener(document, "click", Func, false);
 
 	return true;
@@ -164,7 +174,7 @@ function INTERFACE_ShowRoomMenu()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowGameRoomMenu()
+function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 {
 	var MenuDiv, GameRoomList, RoomItem;
 	var Node, Menu, Func, i, Hide = 0;
@@ -193,6 +203,8 @@ function INTERFACE_ShowGameRoomMenu()
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
 	GameRoomList = UTILS_CreateElement("ul", "GameRoomMenuList");
 
+	MenuDiv.style.left = OffsetLeft+"px";
+
 	MenuDiv.appendChild(GameRoomList);
 	Node.appendChild(MenuDiv);
 
@@ -207,7 +219,7 @@ function INTERFACE_ShowGameRoomMenu()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowChallengeMenu()
+function INTERFACE_ShowChallengeMenu(OffsetLeft)
 {
 	var Challenge, MenuDiv, ChallengeList, RoomItem;
 	var Node, Menu, Func, i, Hide = 0;
@@ -242,6 +254,8 @@ function INTERFACE_ShowChallengeMenu()
 		Challenge = UTILS_CreateElement("li", null, null, MainData.ChallengeList[i].Username); 
 		ChallengeList.appendChild(Challenge);
 	}
+
+	MenuDiv.style.left = OffsetLeft+"px";
 
 	MenuDiv.appendChild(ChallengeList);
 	Node.appendChild(MenuDiv);
