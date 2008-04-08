@@ -710,7 +710,14 @@ function DATA_GetUserRatingInRoom(RoomName, Username, Category)
 {
 	var RatingList, Rating;
 
-	RatingList = this.RoomList[0].UserList[this.FindUserInRoom(RoomName,Username)].Rating;	
+	if (this.FindUserInRoom(RoomName,Username) != null)
+	{
+		RatingList = this.RoomList[0].UserList[this.FindUserInRoom(RoomName,Username)].Rating;
+	}
+	else
+	{
+		return Rating = "---";
+	}
 
 	if (Category == null)
 	{
