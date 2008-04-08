@@ -566,7 +566,6 @@ function INTERFACE_CreateContactList()
 /**
 *	Create elements of search user window and returns div
 *
-* @param	User	User's nickname that sent the invitation
 * @return	Div; Array
 * @see		WINDOW_Invite();
 * @author Danilo Kiyoshi Simizu Yorinori
@@ -598,13 +597,13 @@ function INTERFACE_ShowSearchUserWindow()
 
 	Search = UTILS_CreateElement('input',null,'button');
 	Search.type = "button";
-	Search.value = UTILS_GetText("contact_search");
+	Search.value = UTILS_GetText("window_search");
 	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value)); }, "false");
 	Buttons.push(Search);
 
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.type = "button";
-	Cancel.value = UTILS_GetText("contact_cancel");
+	Cancel.value = UTILS_GetText("window_cancel");
 	Buttons.push(Cancel);
 
 	// Mount elements tree
@@ -698,7 +697,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	Button = UTILS_CreateElement('input',null,'button');
 	Button.type = "button";
-	Button.value = UTILS_GetText("contact_close");
+	Button.value = UTILS_GetText("window_close");
 	Buttons.push(Button);
 
 	// Mount tree elements

@@ -62,7 +62,7 @@ function GAME_HandleChallenge (XML)
 */
 function GAME_HandleOffer(XML)
 {
-	var Players, Match, MatchID, Category, Type;
+	var Players, Match, MatchID, Category, Type, Rating;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -95,7 +95,7 @@ function GAME_HandleOffer(XML)
 		// Get information of player one
 		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
 		Player1.Inc = Players[0].getAttribute('inc');
-		Player1.Color = Players[0].getAttribute('color');
+		Player1.Color = Players[0].getAttribute('color'); 
 		Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
 		
 		// Get information of player two
@@ -109,8 +109,9 @@ function GAME_HandleOffer(XML)
 		{
 			MainData.AddChallenge(Player1.Name, MatchID, Player1.Name);
 
+			Rating = MainData.GetUserRatingInRoom('geral',Player1.Name,Category);
 			// Show challenge window for user
-			WINDOW_Challenge(Player1.Name, Player1, MatchID);
+			WINDOW_Challenge(Player1.Name, Rating, Player1, MatchID);
 		}
 		else 
 		{

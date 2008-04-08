@@ -114,6 +114,7 @@ function LOGIN_LoadScripts()
 	Scripts[27] = "scripts/profile/profile.js";
 	Scripts[28] = "scripts/interface/profile.js";
 	Scripts[29] = "scripts/utils/images.js";
+	Scripts[30] = "scripts/interface/oldgame.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }
@@ -149,6 +150,7 @@ function LOGIN_LoadCss()
 	Files[8] = "css/Game.css";
 	Files[9] = "css/Chat.css";
 	Files[10] = "css/Profile.css";
+	Files[11] = "css/Oldgame.css";
 
 	if(MainData.Browser != 1) //IE
 	{

@@ -300,6 +300,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 {
 	var Func, Options = new Array();
 	var i = 0, Hide = 0;
+	var Rating;
 	var Button1 = new Object(), Button2 = new Object();
 
 	Func = function () {
@@ -343,7 +344,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_match");
 			Options[i].Func = function () {
-				WINDOW_Challenge(Username);
+				Rating = MainData.GetUserRatingInRoom('geral',Username);
+				WINDOW_Challenge(Username, Rating);
 			};
 			i += 1;
 		}

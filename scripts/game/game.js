@@ -559,7 +559,7 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 
 	// Get game from GameList
 	Game = MainData.GetGame(GameId);
-
+	
 	if (Game.CurrentMove != null)
 	{
 		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
@@ -826,12 +826,12 @@ function GAME_HandleVCardPhoto(XML)
 	Player = XML.getAttribute("from").split("@")[0];
 
 	// Update current game player image
-	if(MainData.CurrentGame.PW == Player)
+	if(MainData.CurrentGame.PW.Name == Player)
 	{
 		MainData.CurrentGame.WPhoto = Img;
 		MainData.CurrentGame.Game.SetWPhoto(Img);
 	}
-	else if(MainData.CurrentGame.PB == Player)
+	else if(MainData.CurrentGame.PB.Name == Player)
 	{
 		MainData.CurrentGame.BPhoto = Img;
 		MainData.CurrentGame.Game.SetBPhoto(Img);

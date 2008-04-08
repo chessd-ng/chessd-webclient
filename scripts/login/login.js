@@ -70,7 +70,7 @@ function LOGIN_Logout()
 	INTERFACE_StopInterface();
 
 	// Show Login interface
-	INTERFACE_StartLogin();
+	INTERFACE_StartLogin(MainData.Lang);
 }
 
 /**

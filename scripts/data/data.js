@@ -50,6 +50,7 @@ function DATA(ConfFile, LangFile)
 	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.SID = -1;
 	this.Load = -1;
+	this.Lang = "";
 
 	/**
 	* DATA STRUCTURE
@@ -111,6 +112,7 @@ DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
 DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+DATA.prototype.GetUserRatingInRoom = DATA_GetUserRatingInRoom;
 
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
@@ -138,6 +140,7 @@ DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
 DATA.prototype.PushOldGame = DATA_PushGameToOldGame;
 
+DATA.prototype.GetOldGame = DATA_GetOldGame;
 DATA.prototype.GetGame = DATA_GetGame;
 DATA.prototype.GetOponent = DATA_GetOponent;
 
@@ -694,6 +697,65 @@ function DATA_DelUserInRoom(RoomName, Username)
 }
 
 /**
+* Return Category's Rating from Username in Room
+* (Based on fact that's all online users are connected to 'geral' room
+*
+* @param RoomName
+* @param Username
+* @param Category	Category which rating will be returned
+* @return	Rating's value
+* @author	Danilo Yorinori
+*/
+function DATA_GetUserRatingInRoom(RoomName, Username, Category)
+{
+	var RatingList, Rating;
+
+	RatingList = this.RoomList[0].UserList[this.FindUserInRoom(RoomName,Username)].Rating;	
+
+	if (Category == null)
+	{
+		Category = this.CurrentRating;
+	}
+
+	switch (Category)
+	{
+		case "blitz":	
+			if (RatingList.Blitz)
+			{
+				Rating = RatingList.Blitz; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+			break;
+		case "lightning": 
+			if (RatingList.Lightning)
+			{
+				Rating = RatingList.Lightning; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+			break;
+		case "standard": 
+			if (RatingList.Standard)
+			{
+				Rating = RatingList.Standard; 
+			}
+			else
+			{
+				Rating = "---";
+			}
+		break;
+		default:	Rating = "---";
+	}
+
+	return Rating;
+}
+
+/**
 * Sort Userlist from Room into ascending or descending order
 *
 * @return	boolean
@@ -1145,6 +1207,7 @@ function DATA_SetTurnGame(TurnColor)
 function DATA_GetGame(Id)
 {
 	var i=0;
+	//Search game from game list
 	while(i<this.GameList.length)
 	{
 		if(this.GameList[i].Id == Id)
@@ -1153,7 +1216,28 @@ function DATA_GetGame(Id)
 		}
 		i++;
 	}
+
+
 	return null;
+}
+
+function DATA_GetOldGame(Id)
+{
+	/*
+	var i=0;
+
+	//Search game from old game list
+	while(i<this.OldGameList.length)
+	{
+		if(this.OldGameList[i].Id == Id)
+		{
+			return(this.OldGameList[i])
+		}
+		i++;
+	}
+	return null;
+	*/
+	return this.OldGameList[Id];
 }
 
 /**
@@ -1202,28 +1286,43 @@ function DATA_SetCurrentOldGame(Game)
 /**
 * Add a oldgame in 'OldGameList'
 */
-function DATA_AddOldGame(GameId, PWName, PBName, Color)
+function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 {
 	var NewOldGame = new Object();
 
 	if(this.OldGameList.length == 0)
 	{
-		MainData.SetCurrentGame(NewOldGame);
+		MainData.SetCurrentOldGame(NewOldGame);
 	}
 
-	NewOldGame.Id = GameId;
-	NewOldGame.PW = PWName;
-	NewOldGame.PB = PBName;
-	NewOldGame.Color = "none";
+	NewOldGame.Game = GameDiv;
+	NewOldGame.YourColor = Color;
 	NewOldGame.BoardColor = Color
 	NewOldGame.IsYourTurn = false;
 	NewOldGame.Moves = new Array();
+	NewOldGame.PW = PWName;
+	NewOldGame.PB = PBName;
+	NewOldGame.Finished = false;
+	NewOldGame.CurrentMove = null;
+	NewOldGame.Moves = new Array();
+
+
+	NewOldGame.WPhoto = "./images/no_photo.png";
+	NewOldGame.BPhoto = "./images/no_photo.png";
+
+	NewOldGame.SetTurn = this.SetTurn;
+	NewOldGame.AddMove = this.AddGameMove;
 
 	NewOldGame.AddMove = this.AddGameMove;
 
-	this.OldGameList.push(NewOldGame);
+	NewOldGame.Id = this.OldGameList.length;
 
-	return this.OldGameList.length -1;
+	//this.OldGameList.push(NewOldGame);
+	// This version, user can only see one OldGame
+	this.OldGameList[0] = NewOldGame;
+
+	//return this.OldGameList.length -1;
+	return 0;
 }
 
 
@@ -1233,7 +1332,7 @@ function DATA_AddOldGame(GameId, PWName, PBName, Color)
 function DATA_RemoveOldGame(Id)
 {
 	var GamePosition = Id;
-	var RemovedGame;
+	var RemovedOldGame;
 
 	if(this.OldGameList[GamePosition] == undefined)
 	{

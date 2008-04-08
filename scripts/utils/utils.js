@@ -630,3 +630,50 @@ function UTILS_SortByRatingDsc(a, b)
 	}
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
+
+/************************************
+ * FUNCTIONS - BROWSER LANGUAGE     *
+ ************************************/
+/*
+Code from:
+http://www.criarweb.com/faq/conseguir_idioma_navegador_cliente.html
+*/
+
+/* Detect browser language
+ *
+ * @params void
+ * @return Language string (i.e.: pt-BR, en-US, etc.)
+ */
+function UTILS_GetLanguage()
+{
+	var Lang
+	
+	Lang = navigator.browserLanguage;
+	if (navigator.userAgent.indexOf("Opera")!=-1)
+	{
+		Lang=navigator.language;
+	}
+	else if (navigator.appName == "Netscape")
+	{
+		Lang=navigator.language;
+	}
+	else
+	{
+		Lang=navigator.browserLanguage;
+	}
+
+	switch(Lang)
+	{
+		case "pt-BR":
+			return "pt_BR";
+
+		case "en-US":
+			return "en_US";
+
+		case "zh-CN":
+			return "zh_CN";
+
+		default:
+			return "pt_BR";
+	}
+}

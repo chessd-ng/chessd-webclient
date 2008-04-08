@@ -13,6 +13,7 @@
 		<window_accept>Aceitar</window_accept>
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
+		<window_search>Buscar</window_search>
 	</window>
 	<login>
 		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
@@ -60,12 +61,9 @@
 		<contact_remove_title>Remover Usuário</contact_remove_title>
 		<contact_remove_text>Tem certeza que deseja remover o usuário?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
-		<contact_search>Buscar</contact_search>
 		<contact_user>Usuário</contact_user>
-		<contact_cancel>Cancelar</contact_cancel>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
-		<contact_close>Fechar</contact_close>
 		<contact_user>Usuario</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
@@ -242,4 +240,16 @@
 		<register_bt_confirm>Confirmar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
 	</register>
+	<oldgame>
+		<oldgame_title>Jogos antigos</oldgame_title>
+		<oldgame_player1>Jogador 1:</oldgame_player1>
+		<oldgame_player2>Jogador 2:</oldgame_player2>
+		<oldgame_white>Brancas</oldgame_white>
+		<oldgame_black>Pretas</oldgame_black>
+		<oldgame_category>Categoria</oldgame_category>
+		<oldgame_winner>Ganhador</oldgame_winner>
+		<oldgame_wintype>Motivo</oldgame_wintype>
+		<oldgame_date>Data</oldgame_date>
+		<oldgame_draw>Empate</oldgame_draw>
+	</oldgame>
 </language>
