@@ -251,7 +251,7 @@ function INTERFACE_ShowChallengeMenu(OffsetLeft)
 	// Create elements and insert challenges
 	for (i=0; i < MainData.ChallengeList.length; i++)
 	{
-		Challenge = UTILS_CreateElement("li", null, null, MainData.ChallengeList[i].Username); 
+		Challenge = UTILS_CreateElement("li", null, null, "<img src='images/cancel.png' onclick='GAME_DeclineChallenge("+MainData.ChallengeList[i].Id+")' /> "+MainData.ChallengeList[i].Username); 
 		ChallengeList.appendChild(Challenge);
 	}
 
