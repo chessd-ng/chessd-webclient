@@ -81,10 +81,8 @@ function LOGIN_Logout()
 */
 function LOGIN_Disconnected()
 {
-	alert("setando connection status");
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
-	alert(MainData.ConnectionStatus);
 
 	INTERFACE_StopInterface();
 

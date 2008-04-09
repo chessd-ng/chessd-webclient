@@ -43,7 +43,7 @@ function PARSER_ParseXml(XML)
 		if (Body.getAttribute("type") == "terminate")
 		{
 			LOGIN_Disconnected();
-			alert(UTILS_GetText("login_lost_connection"));
+			alert(UTILS_GetText("error_disconnected"));
 			return null;
 		}
 	}

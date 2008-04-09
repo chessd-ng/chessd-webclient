@@ -520,6 +520,14 @@ function UTILS_ConvertChatString(Str)
 	return StrTmp;
 }
 
+/**
+* Convert default lang to jabber lang
+*/
+function UTILS_JabberLang(DefaultLang)
+{
+	return DefaultLang.substr(0, 2)+"-"+DefaultLang.substr(3, 5).toLowerCase();
+}
+
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
  ************************************/
