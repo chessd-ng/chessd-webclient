@@ -58,10 +58,17 @@ function INTERFACE_ShowInterface(Tree)
 function INTERFACE_StopInterface()
 {
 	var Page = document.getElementById("Page");
+	var Windows = document.getElementsByTagName("div");
+	var i;
 
 	// Remove the interface div
 	if (Page)
 	{
 		Page.parentNode.removeChild(Page);
+	}
+
+	for(i=Windows.length-1; i>=0; i--)
+	{
+		Windows[i].parentNode.removeChild(Windows[i]);
 	}
 }

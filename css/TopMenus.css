@@ -2,7 +2,7 @@
 #Page #ChallengeMenuDiv,
 #Page #GameRoomMenuDiv {
 	position		: absolute;
-	right			: 25mm;
+	/*right			: 25mm;*/
 	top 			: 19.0mm;
 	border			: 1px solid #216778;
 	border-top		: 0px;
@@ -14,11 +14,11 @@
 
 #Page #GameRoomMenuDiv {
 	width			: 41.5mm;
-	right			: 90.75mm;
+	/*right			: 90.75mm;*/
 }
 
 #Page #ChallengeMenuDiv {
-	right			: 67.5mm;
+	/*right			: 67.5mm;*/
 }
 
 
