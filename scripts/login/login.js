@@ -85,9 +85,6 @@ function LOGIN_Disconnected()
 	MainData.ConnectionStatus = -1;
 
 	INTERFACE_StopInterface();
-
-	// Show Login interface
-	INTERFACE_StartLogin();
 }
 
 /**

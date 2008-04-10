@@ -125,7 +125,7 @@ function CONNECTION_SendJabber()
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveXml;
 	}
 	// Conection messages
-	else
+	else if (MainData.ConnectionStatus > 0)
 	{
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveConnection;
 	}
@@ -166,7 +166,7 @@ function CONNECTION_ReceiveConnection()
 		if(Status == 200)
 		{
 			XML = MainData.HttpRequest.responseXML;
-		
+
 			switch (MainData.ConnectionStatus)
 			{
 				 case (1):
@@ -257,7 +257,7 @@ function CONNECTION_ReceiveXml()
 
 		    // Forward XML to parser
 			Buffer = PARSER_ParseXml(XML);
-	
+
 			// User disconnected 
 			if (MainData.ConnectionStatus == -1)
 			{

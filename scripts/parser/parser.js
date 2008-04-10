@@ -42,9 +42,9 @@ function PARSER_ParseXml(XML)
 	{
 		if (Body.getAttribute("type") == "terminate")
 		{
+			MainData.ConnectionStatus = -1;
 			LOGIN_Disconnected();
 			alert(UTILS_GetText("error_disconnected"));
-			return null;
 		}
 	}
 

@@ -147,6 +147,7 @@
 
 #LangDiv li
 {
+	cursor			: pointer;
 	float			: left;
-	margin-right		: 10px;
+	margin-right	: 10px;
 }

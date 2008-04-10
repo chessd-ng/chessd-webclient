@@ -525,7 +525,10 @@ function UTILS_ConvertChatString(Str)
 */
 function UTILS_JabberLang(DefaultLang)
 {
-	return DefaultLang.substr(0, 2)+"-"+DefaultLang.substr(3, 5).toLowerCase();
+	if (DefaultLang)
+		return DefaultLang.substr(0, 2)+"-"+DefaultLang.substr(3, 5).toLowerCase();
+	else
+		return "";
 }
 
 /************************************
