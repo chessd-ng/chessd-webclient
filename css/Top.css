@@ -7,10 +7,11 @@
 	float			: left;
 	margin			: 1mm;
 	width			: 213px;
-	height			: 71px;
-	background		: url('../images/logochessd.png') no-repeat;
+	height			: 95px;
+	background		: url('../images/logo.png') no-repeat;
 	text-indent		: -9999px;
 	overflow		: hidden;
+	margin-left		: 30px;
 
 }
 
@@ -19,7 +20,7 @@
 }
 
 #Top ul {
-	display			: table;
+	display			: block;
 }
 
 #Top li {
@@ -31,16 +32,18 @@
 /* icons menu */
 #Top .icons {
 	position		: relative;
-	left			: 73mm;
 	height			: 15mm;
+	top			: 3mm;
+	width			: 110mm;
+	left			: 25mm;
 }
 
 #Top .icons li {
 	text-indent		: -9999px;
 	overflow		: hidden;
 	width			: 35px;
-	height			: 26px;
-	margin			: 1mm;
+	height			: 35px;
+	margin			: 1mm 0mm 0mm 9mm;
 }
 
 /* setting icons */
@@ -83,8 +86,13 @@
 #Top .menu li {
 	font			: bold 3.5mm Trebuchet MS;
 	color			: #216778;
-	border-right	: 1px solid #216778;
-	padding			: 0mm 5mm;
+	border-right		: 1px solid #216778;
+	width			: 115px;
+	text-align		: center;
+}
+
+#Top .menu li.currentGames {
+	width			: 175px;
 }
 
 #Top .menu li:hover {

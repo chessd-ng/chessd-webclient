@@ -163,7 +163,7 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
-	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+	Node.scrollTop += Item.clientHeight + 1000;
 
 	return true;
 }

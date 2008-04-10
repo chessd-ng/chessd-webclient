@@ -73,6 +73,19 @@ function LOGIN_Logout()
 	INTERFACE_StartLogin(MainData.Lang);
 }
 
+/**
+* Make logout 
+*
+* @return none
+* @public
+*/
+function LOGIN_Disconnected()
+{
+	// Setting structure as disconnected
+	MainData.ConnectionStatus = -1;
+
+	INTERFACE_StopInterface();
+}
 
 /**
 * Clear Login window and start interface 

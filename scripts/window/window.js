@@ -325,6 +325,12 @@ function WINDOW_ProfileImage()
 
 function WINDOW_OldGameSearch()
 {
+	if(document.getElementById("OldGameSearchDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowOldGameSearchWindow();
 

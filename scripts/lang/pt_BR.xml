@@ -26,6 +26,7 @@
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor de mensagens indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
+		<login_lost_connection>Conexão perdida.</login_lost_connection>
 		<login_load_wait>Aguarde...</login_load_wait>
 		<login_load_start>Iniciando carregador...</login_load_start>
 		<login_load_scripts>Carregando scripts...</login_load_scripts>
@@ -176,7 +177,7 @@
 		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
 		<game_give_time>Dar tempo ao adversário</game_give_time>
 		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
-		<game_promotion_queen>Rainha</game_promotion_queen>
+		<game_promotion_queen>Dama</game_promotion_queen>
 		<game_promotion_rook>Torre</game_promotion_rook>
 		<game_promotion_bishop>Bispo</game_promotion_bishop>
 		<game_promotion_knight>Cavalo</game_promotion_knight>
