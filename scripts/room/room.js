@@ -121,7 +121,7 @@ function ROOM_HandleGameRoomList(XML)
 
 		Name = Items[i].getAttribute("name");
 
-		WName = Name.split("x")[0].split("@")[0];
+		WName = Name.split("x")[0].split("@")[0].replace(" ","");
 		BName = Name.split("x")[1].split("@")[0].replace(" ","");
 		Jid = Items[i].getAttribute("jid");
 		GameId = Jid.split("@")[0];
