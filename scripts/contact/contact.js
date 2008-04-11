@@ -152,6 +152,12 @@ function CONTACT_HandleRoomPresence(XML)
 	Jid = From.replace(/.*\//, "");
 	MsgTo = From.replace(/\/.*/, "");
 
+	// Correct default room name
+	if (RoomName == "general")
+	{
+		RoomName = UTILS_GetText("room_default");
+	}
+
 	// Check if the type is error
 	if (Type == "error")
 		return "";

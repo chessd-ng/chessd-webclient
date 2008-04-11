@@ -168,7 +168,7 @@ function UTILS_CreateElement(Element, Id, ClassName, Inner)
 /**
 * Create cookies
 */
-function UTILS_CreateCookie(CookieName,CookieValue,Days)
+function UTILS_CreateCookie(CookieName, CookieValue, Days)
 {
 	var Expires, Data;
 
@@ -234,6 +234,34 @@ function UTILS_Capitalize(Word)
 	return Word.charAt(0).toUpperCase() + Word.slice(1);
 }
 
+/**
+* Short a word
+*/
+function UTILS_ShortString(Word, NumChars)
+{
+	var ShortWord;
+	var NumChs;
+
+	if(NumChars != null)
+	{
+		NumChs = NumChars;
+	}
+	else
+	{
+		NumChs = 5
+	}
+
+	if(Word.length > NumChs)
+	{
+		ShortWord = Word.slice(0,NumChs);
+		ShortWord = ShortWord + "...";
+	}
+	else
+	{
+		ShortWord = Word;
+	}
+	return ShortWord;
+}
 
 /**********************************
  * FUNCTIONS - EVENT LISTENERS
@@ -520,6 +548,17 @@ function UTILS_ConvertChatString(Str)
 	return StrTmp;
 }
 
+/**
+* Convert default lang to jabber lang
+*/
+function UTILS_JabberLang(DefaultLang)
+{
+	if (DefaultLang)
+		return DefaultLang.substr(0, 2)+"-"+DefaultLang.substr(3, 5).toLowerCase();
+	else
+		return "";
+}
+
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
  ************************************/
@@ -677,3 +716,5 @@ function UTILS_GetLanguage()
 			return "pt_BR";
 	}
 }
+
+

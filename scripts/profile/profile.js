@@ -42,6 +42,7 @@ function PROFILE_HandleVCardProfile(XML)
 
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
+
 	// Get photo image
 	if (Photo != undefined)
 	{
@@ -61,7 +62,7 @@ function PROFILE_HandleVCardProfile(XML)
 		Img = "images/no_photo.png";
 	}
 
-	if(UserFrom == MainData.Username)
+	if (UserFrom == MainData.Username)
 	{
 		// Update user image
 		if (MainData.Photo != Img)
@@ -87,7 +88,6 @@ function PROFILE_HandleVCardProfile(XML)
 		Profile.Profile.SetImg64(Binval);
 		Profile.Profile.SetImgType(PhotoType);
 	}
-
 
 	return "";
 }

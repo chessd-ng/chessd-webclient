@@ -20,7 +20,7 @@
 }
 
 #Top ul {
-	display			: table;
+	display			: block;
 }
 
 #Top li {
@@ -35,6 +35,7 @@
 	height			: 15mm;
 	top			: 3mm;
 	width			: 110mm;
+	left			: 25mm;
 }
 
 #Top .icons li {
@@ -86,7 +87,12 @@
 	font			: bold 3.5mm Trebuchet MS;
 	color			: #216778;
 	border-right		: 1px solid #216778;
-	padding			: 0mm 5mm;
+	width			: 115px;
+	text-align		: center;
+}
+
+#Top .menu li.currentGames {
+	width			: 175px;
 }
 
 #Top .menu li:hover {

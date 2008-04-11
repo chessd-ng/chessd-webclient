@@ -74,7 +74,7 @@ function INTERFACE_CreateTop()
 
 	// Appending itens to menu
 	// Current games
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_current_games"));
+	Item = UTILS_CreateElement("li", null, "currentGames", UTILS_GetText("menu_current_games"));
 	Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowGameRoomList(Pos.X);
@@ -102,12 +102,6 @@ function INTERFACE_CreateTop()
 	}
 	MenuList.appendChild(Item);
 	
-	// History
-	/*
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_history"));
-	MenuList.appendChild(Item);
-	*/
-
 	MenuDiv.appendChild(IconsList);
 	MenuDiv.appendChild(MenuList);
 	MainDiv.appendChild(Logo);
@@ -160,7 +154,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 	MenuDiv.appendChild(RoomList);
 	Node.appendChild(MenuDiv);
 
-	MenuDiv.style.left = (OffsetLeft-72)+"px";
+	MenuDiv.style.left = (OffsetLeft-72+46)+"px";
 
 	UTILS_AddListener(document, "click", Func, false);
 
@@ -255,7 +249,7 @@ function INTERFACE_ShowChallengeMenu(OffsetLeft)
 		ChallengeList.appendChild(Challenge);
 	}
 
-	MenuDiv.style.left = OffsetLeft+"px";
+	MenuDiv.style.left = (OffsetLeft-1)+"px";
 
 	MenuDiv.appendChild(ChallengeList);
 	Node.appendChild(MenuDiv);

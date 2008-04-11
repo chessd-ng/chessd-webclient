@@ -577,6 +577,10 @@ function INTERFACE_ShowSearchUserWindow()
 
 	var FormDiv, Username,Input, Br;
 
+	var OptionDiv;
+	var OptionLabel, Br1;
+	var Name,NameLabel, User,UserLabel, Both, BothLabel;
+
 	var ButtonsDiv, Search, Cancel;
 
 	var Buttons = new Array();
@@ -587,10 +591,33 @@ function INTERFACE_ShowSearchUserWindow()
 	// FormDiv elements
 	FormDiv = UTILS_CreateElement('div', 'FormDiv');
 
-	Username = UTILS_CreateElement('span', null, 'option', UTILS_GetText("contact_user"));
+	Username = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user"));
 	Br = UTILS_CreateElement('br');
-	Input = UTILS_CreateElement('input', "SearchUserInput");
+	Input = UTILS_CreateElement('input', 'SearchUserInput');
 	Input.size = "23";
+
+	// OptionDiv Elements
+	OptionDiv = UTILS_CreateElement('div','OptionDiv');
+
+	OptionLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_by"));
+	Br1 = UTILS_CreateElement('br');
+	
+	Name = UTILS_CreateElement('input');
+	Name.type = "radio";
+	Name.name = "search_user";
+	Name.checked = true;
+	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
+
+	User= UTILS_CreateElement('input');
+	User.type = "radio";
+	User.name = "search_user";
+	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
+
+	Both= UTILS_CreateElement('input');
+	Both.type = "radio";
+	Both.name = "search_user";
+	BothLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_both"));
+
 
 	// ButtonsDiv elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
@@ -598,7 +625,25 @@ function INTERFACE_ShowSearchUserWindow()
 	Search = UTILS_CreateElement('input',null,'button');
 	Search.type = "button";
 	Search.value = UTILS_GetText("window_search");
-	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value)); }, "false");
+	UTILS_AddListener(Search,"click",	function() { 
+		var Option;
+		if (Name.checked == true)
+		{
+			Option = 0;
+		}
+		else if (User.checked == true)
+		{
+			Option = 1;
+		}
+		else if (Both.checked == true)
+		{
+			Option = 2;
+		}
+		else
+		{
+			Option = 2;
+		}
+		CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,Option)); }, "false");
 	Buttons.push(Search);
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -610,6 +655,17 @@ function INTERFACE_ShowSearchUserWindow()
 	// ButtonsDiv elements
 	ButtonsDiv.appendChild(Search);
 	ButtonsDiv.appendChild(Cancel);
+
+	// OptionDiv
+	OptionDiv.appendChild(OptionLabel);
+	OptionDiv.appendChild(Br1);
+	OptionDiv.appendChild(Name);
+	OptionDiv.appendChild(NameLabel);
+	OptionDiv.appendChild(User);
+	OptionDiv.appendChild(UserLabel);
+
+//	OptionDiv.appendChild(Both);
+//	OptionDiv.appendChild(BothLabel);
 	
 	// FormDiv elements
 	FormDiv.appendChild(Username);
@@ -618,6 +674,7 @@ function INTERFACE_ShowSearchUserWindow()
 
 	// Main div elements
 	Div.appendChild(FormDiv);
+	Div.appendChild(OptionDiv);
 	Div.appendChild(ButtonsDiv);
 
 	Input.focus();
@@ -660,6 +717,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 {
 	// Variables
 	var Div;
+	var TopDiv;
 	var ListDiv, Label, Table, Tr, Item, Br;
 	var ButtonsDiv, Button;
 	var Buttons = new Array();
@@ -668,6 +726,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	TopDiv = UTILS_CreateElement('div', 'TopDiv');
 
 	// Div of results
 	ListDiv = UTILS_CreateElement('div', 'ListDiv');
@@ -680,7 +740,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	}
 	else
 	{
-		Label = UTILS_CreateElement('span', null, null, UTILS_GetText("contact_user_found"));
+		Label = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_found"));
 		
 		for (i=0; i< UserList.length; i++)
 		{
@@ -704,8 +764,11 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	// ButtonsDiv elements
 	ButtonsDiv.appendChild(Button);
 	
+	// TopDiv elements
+	TopDiv.appendChild(Label);
+	
 	// Main div and result div elements
-	Div.appendChild(Label);
+	Div.appendChild(TopDiv);
 	Div.appendChild(Br);
 	if (UserList != null)
 	{
