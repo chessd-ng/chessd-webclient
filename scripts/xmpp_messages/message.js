@@ -645,20 +645,26 @@ function MESSAGE_SearchUser()
 *	@return	String with search user message
 *	@author	Danilo Kiyoshi Simizu Yorinori
 */
-function MESSAGE_SearchUser(Username)
+function MESSAGE_SearchUser(Username, Option)
 {
 	var XMPP="";
 	
 	XMPP = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+MainData.SearchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchUser+"' >";
 	XMPP +=	"<query xmlns='jabber:iq:search'>";
 	XMPP += "<x xmlns='jabber:x:data' type='submit' >";
-	XMPP += "<field type='text-single' var='user' >";
-	XMPP += "<value>"+Username+"*</value>";
-	XMPP += "</field>";
+	if (Option == 1)
+	{
+		XMPP += "<field type='text-single' var='user' >";
+		XMPP += "<value>"+Username+"*</value>";
+		XMPP += "</field>";
+	}
+	if (Option == 0)
+	{
+		XMPP += "<field type='text-single' var='fn' >";
+		XMPP += "<value>"+Username+"*</value>";
+		XMPP +=	"</field>";
+	}
 	/* Fields that could be used
-		<field type='text-single' var='fn' >
-		<value></value>
-		</field>
 		<field type="text-single" var="given" >
 		<value></value>
 		</field>

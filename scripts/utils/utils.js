@@ -234,6 +234,34 @@ function UTILS_Capitalize(Word)
 	return Word.charAt(0).toUpperCase() + Word.slice(1);
 }
 
+/**
+* Short a word
+*/
+function UTILS_ShortString(Word, NumChars)
+{
+	var ShortWord;
+	var NumChs;
+
+	if(NumChars != null)
+	{
+		NumChs = NumChars;
+	}
+	else
+	{
+		NumChs = 5
+	}
+
+	if(Word.length > NumChs)
+	{
+		ShortWord = Word.slice(0,NumChs);
+		ShortWord = ShortWord + "...";
+	}
+	else
+	{
+		ShortWord = Word;
+	}
+	return ShortWord;
+}
 
 /**********************************
  * FUNCTIONS - EVENT LISTENERS
@@ -688,3 +716,5 @@ function UTILS_GetLanguage()
 			return "pt_BR";
 	}
 }
+
+
