@@ -1013,8 +1013,8 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	var PWPhoto = UTILS_CreateElement("img", "PWPhoto");
 	var PBPhoto = UTILS_CreateElement("img", "PBPhoto");
 	var VS = UTILS_CreateElement("span", "vs", null, "x");
-	var PWName = UTILS_CreateElement("span", "PWName", null, UTILS_ShortString(WhitePlayer+"abcde",8));
-	var PBName = UTILS_CreateElement("span", "PBName", null, UTILS_ShortString(BlackPlayer+"abcde",8));
+	var PWName = UTILS_CreateElement("span", "PWName", null, UTILS_ShortString(WhitePlayer,8));
+	var PBName = UTILS_CreateElement("span", "PBName", null, UTILS_ShortString(BlackPlayer,8));
 	var PWPawn = UTILS_CreateElement("div", "PWPawn");
 	var PBPawn = UTILS_CreateElement("div", "PBPawn");
 	
