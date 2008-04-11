@@ -593,8 +593,10 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	Layer3Div.appendChild(PrivateCheckbox);
 	Layer3Div.appendChild(PrivateLabel);
 
-	Layer3Div.appendChild(AutoFlagCheckbox);
-	Layer3Div.appendChild(AutoFlagLabel);
+	// Disabled
+//	Layer3Div.appendChild(AutoFlagCheckbox);
+//	Layer3Div.appendChild(AutoFlagLabel);
+
 	// Buttons
 	if (GameParameters != undefined)
 	{
