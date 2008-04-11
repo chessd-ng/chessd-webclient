@@ -31,11 +31,12 @@ var MainData;
 * @return void
 * @public
 */
-function INTERFACE_StartLogin(Lang)
+function INTERFACE_StartLogin()
 {
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
 	var Title, TitleEnd, Text, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
+	var Lang;
 	var ev; //Temp event
 
 	var Table = document.createElement('table');
@@ -45,6 +46,11 @@ function INTERFACE_StartLogin(Lang)
 
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
+
+	// What language show?
+	Lang = UTILS_ReadCookie("lang");
+	if (Lang == "")
+		Lang = UTILS_GetLanguage();
 
 	// Read xml config files and starting data structure
 	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
@@ -79,12 +85,6 @@ function INTERFACE_StartLogin(Lang)
 
 	if (UTILS_ReadCookie("RememberPass") == "true")
 		CheckBox.checked = true;
-
-	// Event listeners
-	//InputSubmit.onclick = function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	//InputLogin.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	//InputPasswd.onkeypress = function(event) { if (event.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); };
-	//SignIn.onclick = function() { window.open("cadastro.html","", "height=300,width=350,left=100,top=100,menubar=0,location=0,resizable=0,scrollbars=0"); };
 
 	UTILS_AddListener(InputSubmit, "click", function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); } , false);
 
@@ -211,7 +211,8 @@ function INTERFACE_CreateLangFlag(Lang)
 
 	Li.onclick = function(){
 		INTERFACE_EndLogin();
-		INTERFACE_StartLogin(Lang);
+		UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
+		INTERFACE_StartLogin();
 	}
 
 	return Li;

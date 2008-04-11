@@ -13,12 +13,12 @@
 
 /* Logo chessd */
 #LoadDiv h1 {
-	width			: 213px;
-	height			: 71px;
+	width			: 138px;
+	height			: 91px;
 	text-indent		: -9999px;
 	overflow		: hidden;
-	background		: url('../images/login/logo_chessd.png') no-repeat;
-	margin			: 3mm 0mm 9mm 11mm;
+	background		: url('../images/logo.png') no-repeat;
+	margin			: 3mm 0mm 9mm 25mm;
 }
 
 #LoadDiv h3 {

@@ -168,7 +168,7 @@ function UTILS_CreateElement(Element, Id, ClassName, Inner)
 /**
 * Create cookies
 */
-function UTILS_CreateCookie(CookieName,CookieValue,Days)
+function UTILS_CreateCookie(CookieName, CookieValue, Days)
 {
 	var Expires, Data;
 
