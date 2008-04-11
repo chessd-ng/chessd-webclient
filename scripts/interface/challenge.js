@@ -538,6 +538,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	Chat = UTILS_CreateElement('input',null,'button');
 	Chat.value = UTILS_GetText('challenge_chat');
 	Chat.type = "button";
+	Chat.onclick = function () {
+		CHAT_OpenChat(Oponent);
+	}
 
 	Decline = UTILS_CreateElement('input',null,'button');
 	Decline.value = UTILS_GetText('challenge_decline');
