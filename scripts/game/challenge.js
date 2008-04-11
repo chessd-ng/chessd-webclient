@@ -109,7 +109,7 @@ function GAME_HandleOffer(XML)
 		{
 			MainData.AddChallenge(Player1.Name, MatchID, Player1.Name);
 
-			Rating = MainData.GetUserRatingInRoom('geral',Player1.Name,Category);
+			Rating = MainData.GetUserRatingInRoom(UTILS_GetText("room_default"),Player1.Name,Category);
 			// Show challenge window for user
 			WINDOW_Challenge(Player1.Name, Rating, Player1, MatchID);
 		}

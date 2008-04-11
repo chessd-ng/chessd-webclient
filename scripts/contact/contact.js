@@ -350,7 +350,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_match");
 			Options[i].Func = function () {
-				Rating = MainData.GetUserRatingInRoom('geral',Username);
+				Rating = MainData.GetUserRatingInRoom(UTILS_GetText("room_default"),Username);
 				WINDOW_Challenge(Username, Rating);
 			};
 			i += 1;

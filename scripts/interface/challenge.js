@@ -48,7 +48,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 
 	var ChalRightDiv;
 
-	var Layer3;
+	var Layer3Div;
 	var RatingCheckbox, RatingLabel;
 	var PrivateCheckbox, PrivateLabel;
 	var AutoFlagCheckbox, AutoFlagLabel;
@@ -201,7 +201,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom('geral',Oponent,"lightning");
+		Rating = MainData.GetUserRatingInRoom(UTILS_GetText("room_default"),Oponent,"lightning");
 		}
 
 		// Blitz = 1
@@ -214,7 +214,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom('geral',Oponent,"blitz");
+		Rating = MainData.GetUserRatingInRoom(UTILS_GetText("room_default"),Oponent,"blitz");
 		}
 
 		// Standard = 2
@@ -241,7 +241,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
-			Rating = MainData.GetUserRatingInRoom('geral',Oponent,"standard");
+			Rating = MainData.GetUserRatingInRoom(UTILS_GetText("room_default"),Oponent,"standard");
 		}
 	
 		Username.removeChild(Username.childNodes[1]);

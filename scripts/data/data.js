@@ -708,11 +708,13 @@ function DATA_DelUserInRoom(RoomName, Username)
 */
 function DATA_GetUserRatingInRoom(RoomName, Username, Category)
 {
-	var RatingList, Rating;
+	var RatingList, Rating, PosRoom;
+
+	PosRoom = this.FindRoom(RoomName);
 
 	if (this.FindUserInRoom(RoomName,Username) != null)
 	{
-		RatingList = this.RoomList[0].UserList[this.FindUserInRoom(RoomName,Username)].Rating;
+		RatingList = this.RoomList[PosRoom].UserList[this.FindUserInRoom(RoomName,Username)].Rating;
 	}
 	else
 	{
