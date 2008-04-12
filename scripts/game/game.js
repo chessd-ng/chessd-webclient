@@ -523,7 +523,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38);
-	MainData.AddGame(GameId, P1.name, P2.name, "none", GameDiv);
+	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
 	MainData.CurrentGame.Finished = true;
 
