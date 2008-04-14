@@ -42,7 +42,6 @@ function PROFILE_HandleVCardProfile(XML)
 
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
-
 	// Get photo image
 	if (Photo != undefined)
 	{

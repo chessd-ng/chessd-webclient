@@ -57,6 +57,10 @@ function INTERFACE_CreateUserBox()
 
 	try 
 	{
+		// If user dont have received profile photo yet
+		if (MainData.Photo == undefined)
+			throw "No_Photo";
+
 		UserImg.src = MainData.Photo;
 	}
 	catch (e) {
@@ -105,6 +109,8 @@ function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 
-	if (UserImg != null)
+	if ((UserImg != null) && (Img != "images/no_photo.png"))
+	{
 		UserImg.src = IMAGE_ImageDecode(Img);
+	}
 }
