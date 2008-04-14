@@ -186,7 +186,7 @@ function INTERFACE_CreateLanguage()
 
 	for(i=0; i<Langs.length; i++)
 	{
-		Ul.appendChild(INTERFACE_CreateLangFlag(UTILS_GetNodeText(Langs[i])));
+		Ul.appendChild(INTERFACE_CreateLangItem(UTILS_GetNodeText(Langs[i]), Langs[i].getAttribute("name")));
 	}
 
 	DivLang.appendChild(Ul);
@@ -195,20 +195,22 @@ function INTERFACE_CreateLanguage()
 }
 
 /**
-* Create language flag image
+* Create language links
 *
 * @param Lang is language (i.e.: en_US, pt_BR, zh_CN,...)
-* @return List item element with image
+* @return List item
 * @private
 */
-function INTERFACE_CreateLangFlag(Lang)
+function INTERFACE_CreateLangItem(Lang, Name)
 {
 	var Li = UTILS_CreateElement("li");
-	var Img = UTILS_CreateElement("img");
+	//var Item = UTILS_CreateElement("img");
+	var Item = UTILS_CreateElement("span");
 
-	Img.src = "images/lang/"+Lang+".png";
-	Li.appendChild(Img);
-
+	//Item.src = "images/lang/"+Lang+".png";
+	Item.innerHTML = UTILS_Capitalize(Name);
+	Li.appendChild(Item);
+	
 	Li.onclick = function(){
 		INTERFACE_EndLogin();
 		UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
