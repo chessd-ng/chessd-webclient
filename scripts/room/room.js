@@ -31,10 +31,6 @@ function ROOM_HandleMessage(XML)
 	// Get the Chat Room name
 	RoomName = XML.getAttribute('from').replace(/@.*/,"");
 
-	// If it's default room
-	if (RoomName == "general")
-		RoomName = UTILS_GetText("room_default");
-
 	// Get the message sender
 	From = XML.getAttribute('from').replace(/.*\//,"");
 

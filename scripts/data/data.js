@@ -42,6 +42,7 @@ function DATA(ConfFile, LangFile)
 	this.Type = null;
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
+	this.RoomDefault = UTILS_GetTag(Params, "room-default");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
 	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
@@ -551,7 +552,7 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 	MainData.RoomList[i].MsgTo = From;
 	MainData.RoomList[i].Affiliation = Affiliation;
 	MainData.RoomList[i].Role = Role;
-
+	
 	return true;
 }
 

@@ -406,7 +406,7 @@ function INTERFACE_CloseRoom()
 	// Search for the next room to replace
 	for (i=0; i < MainData.RoomList.length; i++)
 	{
-		if ((MainData.RoomList[i].Name != RoomName) && (MainData.RoomList[i].Name != UTILS_GetText("room_default")))
+		if ((MainData.RoomList[i].Name != RoomName) && (MainData.RoomList[i].Name != MainData.RoomDefault))
 		{
 			NextRoom = MainData.RoomList[i].Name;
 			break;
@@ -422,7 +422,7 @@ function INTERFACE_CloseRoom()
 	{
 		Node = Node.parentNode;
 		Node.parentNode.removeChild(Node);
-		INTERFACE_FocusRoom(UTILS_GetText("room_default"));
+		INTERFACE_FocusRoom(MainData.RoomDefault);
 	}
 	
 	return RoomName;
@@ -453,7 +453,7 @@ function INTERFACE_FocusRoom(RoomName)
 	MainData.CurrentRoom = RoomName;
 
 	// Focus to default room
-	if (RoomName == UTILS_GetText("room_default"))
+	if (RoomName == MainData.RoomDefault)
 	{
 		RoomList.childNodes[0].className = "room_selec";
 
@@ -640,14 +640,14 @@ function INTERFACE_CreateRooms()
 	// Room list
 	RoomsDiv = UTILS_CreateElement("div", "Rooms");
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(UTILS_GetText("room_default")));
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(MainData.RoomDefault));
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
 	Arrow.src = "images/room_arrow.png";
 
 	// General room
-	RoomName = UTILS_GetText("room_default");
+	RoomName = MainData.RoomDefault;
 	RoomsListGeneral.onclick = function () {
 		INTERFACE_FocusRoom(RoomName);
 	}
