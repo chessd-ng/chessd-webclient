@@ -88,7 +88,7 @@ function OLDGAME_HandleSearchOldGame(XML)
 		GameInfoTmp.date = Games[i].getAttribute("time_stamp");
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
 		GameInfoTmp.id = Games[i].getAttribute("id");
-		GameInfoTmp.wintype = "-----";
+		GameInfoTmp.wintype = UTILS_GetNodeText(Games[i].getElementsByTagName("result")[0]);
 	
 		GameList.push(GameInfoTmp);
 	}
