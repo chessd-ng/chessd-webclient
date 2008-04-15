@@ -149,9 +149,14 @@
 {
 	cursor			: pointer;
 	float			: left;
-	margin-right	: 10px;
+	margin-right		: 10px;
 	font			: bold 11px Trebuchet MS;
 	color			: #216778;
+}
+
+#LangDiv li span
+{
+	cursor			: pointer;
 }
 
 #LangDiv li:hover {
