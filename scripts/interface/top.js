@@ -31,6 +31,21 @@ function INTERFACE_CreateTop()
 	MenuList = UTILS_CreateElement("ul", null, "menu");
 
 	// Append icons to list
+	// Adjourn game
+	if(MainData.Type == "admin")
+	{
+		ItemTitle = UTILS_GetText("menu_adjourn")
+		Item = UTILS_CreateElement("li", null, "adjourn_game", ItemTitle);
+		Item.title = ItemTitle;
+		//UTILS_AddListener(Item,"click",function() { }, "false");
+		IconsList.appendChild(Item);
+	}
+	else
+	{ // None
+		Item = UTILS_CreateElement("li", null, "null", null);
+		Item.title = ItemTitle;
+		IconsList.appendChild(Item);
+	}
 	// Search game
 	ItemTitle = UTILS_GetText("menu_search_game")
 	Item = UTILS_CreateElement("li", null, "search_game", ItemTitle);

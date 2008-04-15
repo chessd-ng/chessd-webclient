@@ -34,8 +34,8 @@
 	position		: relative;
 	height			: 15mm;
 	top			: 3mm;
-	width			: 110mm;
-	left			: 25mm;
+	width			: 130mm;
+	left			: 5mm;
 }
 
 #Top .icons li {
@@ -47,6 +47,14 @@
 }
 
 /* setting icons */
+#Top .icons .null {
+	cursor			: default;
+}
+
+#Top .icons .adjourn_game {
+	background		: url('../images/adjourn_game.png') no-repeat;
+}
+
 #Top .icons .search_game {
 	background		: url('../images/search_game.png') no-repeat;
 }
