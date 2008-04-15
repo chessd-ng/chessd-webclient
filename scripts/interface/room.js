@@ -383,6 +383,7 @@ function INTERFACE_HideEmoticonList()
 function INTERFACE_CloseRoom()
 {
 	var RoomName, Room, NextRoom = null, Node, i;
+	var Game;
 	
 	Node = document.getElementById("RoomSecondary");
 
@@ -398,6 +399,25 @@ function INTERFACE_CloseRoom()
 	if (!Room)
 	{
 		return null;
+	}
+
+	// All game messages come from game room
+	// Check if exist some room game
+	Game = MainData.GetGame(RoomName)
+	if(Game != null)
+	{
+		if(Game.Finished == false)
+		{
+			// If player is playing a game then do nothing
+			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
+			return;
+		}
+		else
+		{
+			// if player is observer a game then remove game
+			// from interface
+			GAME_RemoveGame(RoomName);
+		}
 	}
 
 	// Removing room of screen
