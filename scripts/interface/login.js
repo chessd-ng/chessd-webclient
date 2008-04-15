@@ -92,7 +92,7 @@ function INTERFACE_StartLogin()
 
 	UTILS_AddListener(InputPasswd, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
 
-	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html"})
+	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html?lang="+Lang+".xml"})
 	
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
