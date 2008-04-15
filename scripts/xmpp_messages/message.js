@@ -275,6 +275,23 @@ function MESSAGE_Info(User)
 }
 
 /**
+* Message to get users ratings profile
+*
+*/
+function MESSAGE_InfoProfile(User)
+{
+	var XMPP;
+
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#profile'>";
+	XMPP += "<profile jid='"+User+"@"+MainData.Host+"' />";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
+
+
+/**
 * Message to get users ratings
 */
 function MESSAGE_UserListInfo()

@@ -64,6 +64,7 @@ function CONNECTION_ConnectJabber(XML)
 				MESSAGE_Presence(), 
 				MESSAGE_Presence("general@conference."+MainData.Host+"/"+MainData.Username),
 				MESSAGE_Presence("match."+MainData.Host),
+				MESSAGE_Presence("rating."+MainData.Host),
 				XML
 				);
 			LOGIN_Interface();
