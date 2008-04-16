@@ -58,6 +58,12 @@ function PARSER_ParseIq(XML)
 				Buffer += CONTACT_HandleInfo(XML);
 			}
 
+			// Receive profile information of user
+			else if (Xmlns.match(/\/chessd#profile/))
+			{
+				Buffer += PROFILE_HandleInfoProfile(XML);
+			}
+
 			// Challenge accept confirmation
 			else if (Xmlns.match(/\/chessd#match/))
 			{

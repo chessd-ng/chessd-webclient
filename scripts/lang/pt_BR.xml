@@ -26,6 +26,7 @@
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor de mensagens indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
+		<login_lost_connection>Conexão perdida.</login_lost_connection>
 		<login_load_wait>Aguarde...</login_load_wait>
 		<login_load_start>Iniciando carregador...</login_load_start>
 		<login_load_scripts>Carregando scripts...</login_load_scripts>
@@ -34,6 +35,7 @@
 		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 	</login>
 	<menu>
+		<menu_adjourn>Adjudicar</menu_adjourn>
 		<menu_search_game>Buscar Partida</menu_search_game>
 		<menu_search_user>Buscar Usuário</menu_search_user>
 		<menu_news>Notícias</menu_news>
@@ -60,12 +62,16 @@
 		<contact_remove_title>Remover Usuário</contact_remove_title>
 		<contact_remove_text>Tem certeza que deseja remover o usuário?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
-		<contact_user>Usuário</contact_user>
+		<contact_user>Usuário:</contact_user>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_user>Usuario</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
+		<contact_search_by>Buscar por:</contact_search_by>
+		<contact_by_name>Nome</contact_by_name>
+		<contact_by_user>Apelido</contact_by_user>
+		<contact_both>Ambos</contact_both>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
@@ -134,6 +140,8 @@
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
 		<challenge_accept>Aceitar</challenge_accept>
 		<challenge_no_time>Sem tempo</challenge_no_time>
+		<challenge_color_auto>Automatico</challenge_color_auto>
+		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 	</challenge>
 	<game>
 		<game_accept>Aceitar</game_accept>
@@ -170,7 +178,7 @@
 		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
 		<game_give_time>Dar tempo ao adversário</game_give_time>
 		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
-		<game_promotion_queen>Rainha</game_promotion_queen>
+		<game_promotion_queen>Dama</game_promotion_queen>
 		<game_promotion_rook>Torre</game_promotion_rook>
 		<game_promotion_bishop>Bispo</game_promotion_bishop>
 		<game_promotion_knight>Cavalo</game_promotion_knight>

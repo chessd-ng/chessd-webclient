@@ -417,7 +417,7 @@ function GAME_HandleGameError(XML)
 	var Xmlns;
 	var Buffer = "";
 	var Game, GameID, Move;
-	var Type;
+	var Invalid, Over;
 
 	// Getting query xmlns
 	if (Query.length > 0)
@@ -434,9 +434,11 @@ function GAME_HandleGameError(XML)
 
 	if (Xmlns.match(/\/chessd#game#move/))
 	{
+		Invalid = XML.getElementsByTagName('invalid-move');
+		Over = XML.getElementsByTagName('game-over');
+
 		// If it's a invalid move
-		Type = XML.getElementsByTagName('invalid-move');
-		if (Type.length > 0)
+		if (Invalid.length > 0)
 		{
 			// Get game from GameList
 			Game = MainData.GetGame(GameID);
@@ -444,9 +446,13 @@ function GAME_HandleGameError(XML)
 			// Undo last move
 			Game.Game.UndoMove();
 		}
-		// TODO TODO TODO
+		// If game is over
+		else if (Over.length > 0)
+		{
+			return "";
+		}
 		else
-			alert("erro estranho nao tratado ainda..");
+			alert("Erro: reportar bug..");
 	}
 	return "";
 }
@@ -517,7 +523,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38);
-	MainData.AddGame(GameId, P1.name, P2.name, "none", GameDiv);
+	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
 	MainData.CurrentGame.Finished = true;
 

@@ -49,11 +49,23 @@ function INTERFACE_CreateUserBox()
 	{
 		UserType = "user";
 	}
-
+ 
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img","UserImg");
 	UserImg.title = MainData.Username;
 	UserImg.src = "images/no_photo.png";
+
+	try 
+	{
+		// If user dont have received profile photo yet
+		if (MainData.Photo == undefined)
+			throw "No_Photo";
+
+		UserImg.src = MainData.Photo;
+	}
+	catch (e) {
+		UserImg.src = "images/no_photo.png";
+	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");
 	Name = UTILS_CreateElement("h2", null, null, UTILS_Capitalize(MainData.Username));
@@ -97,5 +109,8 @@ function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 
-	UserImg.src = IMAGE_ImageDecode(Img);
+	if ((UserImg != null) && (Img != "images/no_photo.png"))
+	{
+		UserImg.src = IMAGE_ImageDecode(Img);
+	}
 }

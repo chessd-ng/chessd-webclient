@@ -105,6 +105,9 @@ function INTERFACE_ShowOldGameResultWindow(GameList)
 	var TableDiv;
 	var Table, TBody, Tr, Td;
 
+	var ControlDiv, LeftDiv, RightDiv;
+	var Prev, Next;
+
 	var ButtonsDiv, Close;
 
 	var Buttons = new Array();
@@ -114,7 +117,7 @@ function INTERFACE_ShowOldGameResultWindow(GameList)
 	// Main div
 	Div = UTILS_CreateElement('div', 'OldGameResultDiv');
 
-	// FormDiv elements
+	// TableDiv elements
 	TableDiv = UTILS_CreateElement('div', 'TableDiv');
 
 	Table = UTILS_CreateElement('table');
@@ -143,6 +146,13 @@ function INTERFACE_ShowOldGameResultWindow(GameList)
 		TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].gametype, GameList[i].winner, GameList[i].wintype, GameList[i].date, GameList[i].id));
 	}
 
+	// ControlDiv Elements
+	ControlDiv = UTILS_CreateElement('div', 'ControlDiv');
+	RightDiv = UTILS_CreateElement('div', 'RightDiv');
+	LeftDiv = UTILS_CreateElement('div', 'LeftDiv');
+
+	Prev = UTILS_CreateElement('span',null,'left',"Anterior");
+	Next = UTILS_CreateElement('span',null,'right',"Proximo");
 
 	// ButtonsDiv elements
 	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
@@ -156,11 +166,18 @@ function INTERFACE_ShowOldGameResultWindow(GameList)
 	// ButtonsDiv elements
 	ButtonsDiv.appendChild(Close);
 	
-	// FormDiv elements
+	LeftDiv.appendChild(Prev);
+	RightDiv.appendChild(Next);
+
+	ControlDiv.appendChild(LeftDiv);
+	ControlDiv.appendChild(RightDiv);
+	
+	// TableDiv elements
 	TableDiv.appendChild(Table);
 
 	// Main div elements
 	Div.appendChild(TableDiv);
+	Div.appendChild(ControlDiv);
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons};
@@ -171,17 +188,17 @@ function INTERFACE_AddOldGameResult(White, Black, GameType, Winner, WinType, Dat
 	var Tr, Td;
 	
 	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'header',White);
+		Td = UTILS_CreateElement('td',null,null,White);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',Black);
+		Td = UTILS_CreateElement('td',null,null,Black);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',GameType);
+		Td = UTILS_CreateElement('td',null,null,GameType);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',Winner);
+		Td = UTILS_CreateElement('td',null,null,Winner);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',WinType);
+		Td = UTILS_CreateElement('td',null,null,WinType);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',Date);
+		Td = UTILS_CreateElement('td',null,null,Date);
 		Tr.appendChild(Td);
 		UTILS_AddListener(Tr, "click", function(){ CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id))}, false);
 	

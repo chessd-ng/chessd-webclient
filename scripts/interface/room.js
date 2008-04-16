@@ -163,7 +163,7 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
-	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
+	Node.scrollTop += Item.clientHeight + 1000;
 
 	return true;
 }
@@ -383,6 +383,7 @@ function INTERFACE_HideEmoticonList()
 function INTERFACE_CloseRoom()
 {
 	var RoomName, Room, NextRoom = null, Node, i;
+	var Game;
 	
 	Node = document.getElementById("RoomSecondary");
 
@@ -400,13 +401,32 @@ function INTERFACE_CloseRoom()
 		return null;
 	}
 
+	// All game messages come from game room
+	// Check if exist some room game
+	Game = MainData.GetGame(RoomName)
+	if(Game != null)
+	{
+		if(Game.Finished == false)
+		{
+			// If player is playing a game then do nothing
+			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
+			return;
+		}
+		else
+		{
+			// if player is observer a game then remove game
+			// from interface
+			GAME_RemoveGame(RoomName);
+		}
+	}
+
 	// Removing room of screen
 	Room.parentNode.removeChild(Room);
 
 	// Search for the next room to replace
 	for (i=0; i < MainData.RoomList.length; i++)
 	{
-		if ((MainData.RoomList[i].Name != RoomName) && (MainData.RoomList[i].Name != UTILS_GetText("room_default")))
+		if ((MainData.RoomList[i].Name != RoomName) && (MainData.RoomList[i].Name != MainData.RoomDefault))
 		{
 			NextRoom = MainData.RoomList[i].Name;
 			break;
@@ -422,7 +442,7 @@ function INTERFACE_CloseRoom()
 	{
 		Node = Node.parentNode;
 		Node.parentNode.removeChild(Node);
-		INTERFACE_FocusRoom(UTILS_GetText("room_default"));
+		INTERFACE_FocusRoom(MainData.RoomDefault);
 	}
 	
 	return RoomName;
@@ -453,7 +473,7 @@ function INTERFACE_FocusRoom(RoomName)
 	MainData.CurrentRoom = RoomName;
 
 	// Focus to default room
-	if (RoomName == UTILS_GetText("room_default"))
+	if (RoomName == MainData.RoomDefault)
 	{
 		RoomList.childNodes[0].className = "room_selec";
 
@@ -640,14 +660,14 @@ function INTERFACE_CreateRooms()
 	// Room list
 	RoomsDiv = UTILS_CreateElement("div", "Rooms");
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(UTILS_GetText("room_default")));
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(MainData.RoomDefault));
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
 	Arrow.src = "images/room_arrow.png";
 
 	// General room
-	RoomName = UTILS_GetText("room_default");
+	RoomName = MainData.RoomDefault;
 	RoomsListGeneral.onclick = function () {
 		INTERFACE_FocusRoom(RoomName);
 	}

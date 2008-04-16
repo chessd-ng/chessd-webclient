@@ -239,7 +239,10 @@ function WINDOW_SearchUser()
 	var Div = INTERFACE_ShowSearchUserWindow();
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+
+	// Focus search input
+	document.getElementById('SearchUserInput').focus();
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -255,7 +258,7 @@ function WINDOW_SearchUserResult(UserList)
 	var Div = INTERFACE_ShowSearchUserResultWindow(UserList);
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -322,6 +325,12 @@ function WINDOW_ProfileImage()
 
 function WINDOW_OldGameSearch()
 {
+	if(document.getElementById("OldGameSearchDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowOldGameSearchWindow();
 

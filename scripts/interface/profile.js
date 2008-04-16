@@ -264,9 +264,10 @@ function INTERFACE_ShowProfileWindow(Profile)
 	{
 		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.User);
 	}
+
 	OldGamesLabel.onclick = function() {
-		// TODO
 		// Send the messages to get user old games
+        	CONNECTION_SendJabber(MESSAGE_GetOldGames(Profile.User, "", 10, 0));
 	}
 
 	// Buttons Div 

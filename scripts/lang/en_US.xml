@@ -47,6 +47,7 @@
 		<menu_history>History</menu_history>
 	</menu>
 	<contact>
+		<menu_adjourn>Adjourn</menu_adjourn>
 		<contact_contacts>Contacts</contact_contacts>
 		<contact_online>Online</contact_online>
 		<contact_offline>Offline</contact_offline>
@@ -69,6 +70,10 @@
 		<contact_user>User</contact_user>
 		<contact_teacher>Teacher</contact_teacher>
 		<contact_admin>Admin</contact_admin>
+		<contact_search_by>Search by:</contact_search_by>
+		<contact_by_name>Name</contact_by_name>
+		<contact_by_user>Nick</contact_by_user>
+		<contact_both>Both</contact_both>
 	</contact>
 	<chat>
 		<chat_warning>Warning</chat_warning>
@@ -109,7 +114,7 @@
 		<usermenu_match>Invite to play</usermenu_match>
 		<usermenu_add_contact>Add contact</usermenu_add_contact>
 		<usermenu_remove_contact>Remove contact</usermenu_remove_contact>
-		<usermenu_view_profile>View perfil</usermenu_view_profile>
+		<usermenu_view_profile>View profile</usermenu_view_profile>
 		<usermenu_disconnect_user>Disconnect user</usermenu_disconnect_user>
 		<usermenu_ban>Ban</usermenu_ban>
 		<usermenu_mute>Mute</usermenu_mute>

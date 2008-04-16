@@ -117,7 +117,7 @@ function ROOM_HandleGameRoomList(XML)
 
 		Name = Items[i].getAttribute("name");
 
-		WName = Name.split("x")[0].split("@")[0];
+		WName = Name.split("x")[0].split("@")[0].replace(" ","");
 		BName = Name.split("x")[1].split("@")[0].replace(" ","");
 		Jid = Items[i].getAttribute("jid");
 		GameId = Jid.split("@")[0];
@@ -165,7 +165,7 @@ function ROOM_SendMessage(RoomName, Message)
 /**
 * Get Room list from server and show in pop down menu
 */
-function ROOM_ShowRoomList()
+function ROOM_ShowRoomList(OffsetLeft)
 {
 	var XML = MESSAGE_RoomList();
 
@@ -173,7 +173,7 @@ function ROOM_ShowRoomList()
 	CONNECTION_SendJabber(XML);
 
 	// Show menu on interface
-	INTERFACE_ShowRoomMenu();
+	INTERFACE_ShowRoomMenu(OffsetLeft);
 }
 
 /**
@@ -182,7 +182,7 @@ function ROOM_ShowRoomList()
 * @return 	void
 * @author 	Ulysses
 */
-function ROOM_ShowGameRoomList()
+function ROOM_ShowGameRoomList(OffsetLeft)
 {
 	var XML = MESSAGE_GameRoomList();
 
@@ -190,7 +190,7 @@ function ROOM_ShowGameRoomList()
 	CONNECTION_SendJabber(XML);
 
 	// Show menu on interface
-	INTERFACE_ShowGameRoomMenu();
+	INTERFACE_ShowGameRoomMenu(OffsetLeft)
 }
 
 

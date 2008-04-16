@@ -140,7 +140,7 @@ function CONTACT_HandleUserPresence(XML)
 */
 function CONTACT_HandleRoomPresence(XML)
 {
-	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo;
+	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo, NewRoom = false;
 	var Buffer = "";
 
 	// Get Attributes
@@ -151,6 +151,7 @@ function CONTACT_HandleRoomPresence(XML)
 	RoomName = From.replace(/@.*/, "");
 	Jid = From.replace(/.*\//, "");
 	MsgTo = From.replace(/\/.*/, "");
+
 
 	// Check if the type is error
 	if (Type == "error")
@@ -196,7 +197,7 @@ function CONTACT_HandleRoomPresence(XML)
 	// and show on the interface
 	if (MainData.AddRoom(RoomName))
 	{
-		if (RoomName != UTILS_GetText("room_default"))
+		if (RoomName != MainData.RoomDefault)
 		{
 			INTERFACE_AddRoom(RoomName);
 		}
@@ -344,7 +345,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_match");
 			Options[i].Func = function () {
-				Rating = MainData.GetUserRatingInRoom('geral',Username);
+				Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username);
 				WINDOW_Challenge(Username, Rating);
 			};
 			i += 1;

@@ -3,6 +3,7 @@
 	text-align	: center;
 }
 
+#OldGameResultDiv span,
 #OldGameSearchDiv span {
 	padding-top	:	20px;
 	margin-right: 10px;
@@ -82,3 +83,17 @@
 	padding-left	:	10px;
 }
 
+#OldGameResultDiv #ControlDiv {
+	margin-top:	2mm;
+}
+
+#OldGameResultDiv #ControlDiv #LeftDiv {
+	text-align	:	left;
+	float: left;
+	width: 80%;
+}
+
+#OldGameResultDiv #ControlDiv #RightDiv {
+	text-align	:	right;
+	margin-left: 80%;
+}

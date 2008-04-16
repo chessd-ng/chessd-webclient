@@ -51,6 +51,11 @@
 	color			: #000;
 }
 
+#Main #Left #Contact tr:hover {
+	background-color: #EAF5F4;
+	cursor			: pointer;
+}
+
 #Main #Left #Contact td {
 	height			: 4.5mm;
 	display		: block;
@@ -62,12 +67,8 @@
 #Main #Left #Contact .rating {
 	width			: 2mm;
 	text-align		: right;
-}
-
-
-#Main #Left #Contact tr:hover {
-	background-color: #EAF5F4;
-	cursor			: pointer;
+#	float		: none;
+#	margin-left	:	32mm;
 }
 
 #Main #Left #Contact hr {
@@ -254,7 +255,7 @@
 
 #SearchUserDiv {
 	padding-top	:	15px;
-	text-align	: center;
+#	text-align	: center;
 }
 
 #SearchUserDiv span {
@@ -282,17 +283,28 @@
 	border			: 0px solid #216778;
 }
 
-#SearchUserDiv .option {
+#SearchUserDiv .header {
 	color				: #216778;
-	border-bottom	:	2px solid #216778;
 }
 
 #SearchUserDiv .no_found {
-	padding-left	:	10px;
+	padding-left	:	5px;
 }
 
+#SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
-	text-align 	:	center;
+	padding-left	:	4mm;
+}
+
+#SearchUserDiv #OptionDiv {
+	padding-top	:	6mm;
+	padding-left	:	4mm;
+}
+
+#SearchUserDiv .label {
+	margin-top	:	5px;
+	font-size	:	11px;
+	font-weight	:	normal;
 }
 
 #SearchUserDiv #ListDiv {
@@ -302,11 +314,10 @@
 	display				:	block;
 	overflow			:	auto;
 	height				:	58px;
-	margin-top		:	15px
 }
 
-#SearchUserDiv #FormDiv input{
-	margin-top	:	15px;
+#SearchUserDiv input{
+	margin-top	:	5px;
 }
 
 #SearchUserDiv #ButtonsDiv .button {

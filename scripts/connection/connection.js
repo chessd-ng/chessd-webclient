@@ -62,8 +62,9 @@ function CONNECTION_ConnectJabber(XML)
 			MainData.ConnectionStatus = 0;
 			CONNECTION_SendJabber(	
 				MESSAGE_Presence(), 
-				MESSAGE_Presence(UTILS_GetText("room_default")+"@conference."+MainData.Host+"/"+MainData.Username),
+				MESSAGE_Presence("general@conference."+MainData.Host+"/"+MainData.Username),
 				MESSAGE_Presence("match."+MainData.Host),
+				MESSAGE_Presence("rating."+MainData.Host),
 				XML
 				);
 			LOGIN_Interface();
@@ -125,7 +126,7 @@ function CONNECTION_SendJabber()
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveXml;
 	}
 	// Conection messages
-	else
+	else if (MainData.ConnectionStatus > 0)
 	{
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveConnection;
 	}
@@ -166,7 +167,7 @@ function CONNECTION_ReceiveConnection()
 		if(Status == 200)
 		{
 			XML = MainData.HttpRequest.responseXML;
-		
+
 			switch (MainData.ConnectionStatus)
 			{
 				 case (1):
@@ -257,7 +258,13 @@ function CONNECTION_ReceiveXml()
 
 		    // Forward XML to parser
 			Buffer = PARSER_ParseXml(XML);
-				
+
+			// User disconnected 
+			if (MainData.ConnectionStatus == -1)
+			{
+				return null;
+			}
+
 			// Parser returned some xml: send it
 			if ((Buffer != "") && (Buffer != null) && (Buffer != undefined))
 			{
