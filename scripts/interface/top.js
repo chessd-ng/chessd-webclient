@@ -120,7 +120,7 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 	
 	// Rooms
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_rooms"));
+	Item = UTILS_CreateElement("li", null, "rooms", UTILS_GetText("menu_rooms"));
 	Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowRoomList(Pos.X);
