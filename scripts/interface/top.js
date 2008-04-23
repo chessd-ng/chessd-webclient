@@ -142,6 +142,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomList, RoomItem, Create;
 	var Node, Menu, Func, i, Hide = 0;
+	var Hr;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("RoomMenuDiv");
@@ -169,17 +170,20 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
 
+
+	Hr = UTILS_CreateElement("hr");
 	// Show the create room window
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create_room"));
+	Create = UTILS_CreateElement("p", "createRoom", null, UTILS_GetText("room_create_room"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
 	}
 	
-	MenuDiv.appendChild(Create);
 	MenuDiv.appendChild(RoomList);
+	MenuDiv.appendChild(Hr);
+	MenuDiv.appendChild(Create);
 	Node.appendChild(MenuDiv);
 
-	MenuDiv.style.left = (OffsetLeft-72+46)+"px";
+	MenuDiv.style.left = (OffsetLeft-72+45)+"px";
 
 	UTILS_AddListener(document, "click", Func, false);
 
