@@ -23,6 +23,7 @@ function INTERFACE_CreateTop()
 {
 	var MainDiv, Logo, MenuDiv, IconsList, MenuList, Item, ItemTitle;
 	var Pos;
+	var ExitText;
 
 	MainDiv = UTILS_CreateElement("div", "Top");
 	Logo = UTILS_CreateElement("h1", null, null, UTILS_GetText("general_name"));
@@ -35,7 +36,7 @@ function INTERFACE_CreateTop()
 	if(MainData.Type == "admin")
 	{
 		ItemTitle = UTILS_GetText("menu_adjourn")
-		Item = UTILS_CreateElement("li", null, "adjourn_game", ItemTitle);
+		Item = UTILS_CreateElement("li", null, "adjourn_game");
 		Item.title = ItemTitle;
 		//UTILS_AddListener(Item,"click",function() { }, "false");
 		IconsList.appendChild(Item);
@@ -48,43 +49,45 @@ function INTERFACE_CreateTop()
 	}
 	// Search game
 	ItemTitle = UTILS_GetText("menu_search_game")
-	Item = UTILS_CreateElement("li", null, "search_game", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "search_game");
 	Item.title = ItemTitle;
 	UTILS_AddListener(Item,"click",function() { WINDOW_OldGameSearch(); }, "false");
 	IconsList.appendChild(Item);
 	
 	// Search user
 	ItemTitle = UTILS_GetText("menu_search_user")
-	Item = UTILS_CreateElement("li", null, "search_user", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "search_user");
 	Item.title = ItemTitle;
 	UTILS_AddListener(Item,"click",function() { WINDOW_SearchUser(); }, "false");
 	IconsList.appendChild(Item);
 
 	// News
 	ItemTitle = UTILS_GetText("menu_news")
-	Item = UTILS_CreateElement("li", null, "news", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "news");
 	Item.title = ItemTitle;
 	IconsList.appendChild(Item);
 
 	// Preferences
 	ItemTitle = UTILS_GetText("menu_preferences")
-	Item = UTILS_CreateElement("li", null, "preferences", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "preferences");
 	Item.title = ItemTitle;
 	IconsList.appendChild(Item);
 
 	// Help
 	ItemTitle = UTILS_GetText("menu_help")
-	Item = UTILS_CreateElement("li", null, "help", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "help");
 	Item.title = ItemTitle;
 	IconsList.appendChild(Item);
 
 	// Exit
 	ItemTitle = UTILS_GetText("menu_exit");
-	Item = UTILS_CreateElement("li", null, "exit", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "exit");
+	ExitText = UTILS_CreateElement("span","ExitText", null, ItemTitle);
 	Item.onclick = function () { 
 		LOGIN_Logout();
 	}
 	Item.title = ItemTitle;
+	Item.appendChild(ExitText);
 	IconsList.appendChild(Item);
 
 	// Appending itens to menu

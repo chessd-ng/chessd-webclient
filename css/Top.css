@@ -39,11 +39,20 @@
 }
 
 #Top .icons li {
-	text-indent		: -9999px;
 	overflow		: hidden;
 	width			: 35px;
 	height			: 35px;
 	margin			: 1mm 0mm 0mm 9mm;
+}
+
+#Top #ExitText
+{
+	text-align		: center;
+	font			: bold 2.8mm Trebuchet MS;
+	position		: relative;
+	margin-left		: 50%;
+	left			: -25%;
+	top			: -1px;
 }
 
 /* setting icons */
@@ -78,11 +87,13 @@
 
 #Top .icons .exit {
 	background		: url('../images/exit.png') no-repeat;
-	width			: 40px;
+	width			: 46px;
+	color			: #216778;
 }
 
 #Top .icons .exit:hover {
 	background		: url('../images/exit_selec.png') no-repeat;
+	color			: #FFF;
 }
 
 /* menu */
