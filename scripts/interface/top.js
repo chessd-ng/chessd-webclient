@@ -44,7 +44,6 @@ function INTERFACE_CreateTop()
 	else
 	{ // None
 		Item = UTILS_CreateElement("li", null, "null", null);
-		Item.title = ItemTitle;
 		IconsList.appendChild(Item);
 	}
 	// Search game
@@ -59,12 +58,6 @@ function INTERFACE_CreateTop()
 	Item = UTILS_CreateElement("li", null, "search_user");
 	Item.title = ItemTitle;
 	UTILS_AddListener(Item,"click",function() { WINDOW_SearchUser(); }, "false");
-	IconsList.appendChild(Item);
-
-	// News
-	ItemTitle = UTILS_GetText("menu_news")
-	Item = UTILS_CreateElement("li", null, "news");
-	Item.title = ItemTitle;
 	IconsList.appendChild(Item);
 
 	// Preferences
