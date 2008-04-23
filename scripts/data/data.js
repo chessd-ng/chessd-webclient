@@ -835,7 +835,7 @@ function DATA_AddChat (Username, Status)
 
 	// Setting atributes
 	Chat.Username = Username;
-	Chat.State = "hidden";
+	Chat.State = "show";
 	
 	if (Status == null)
 	{
