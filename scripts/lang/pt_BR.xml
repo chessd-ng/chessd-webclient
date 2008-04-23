@@ -16,8 +16,11 @@
 		<window_search>Buscar</window_search>
 	</window>
 	<login>
-		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
-		<login_text>Esta é uma versão de testes que não depende da instação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
+		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
+		<login_text>Aqui você pode jogar xadrez com outros usuários ou com rôbos, além de
+interagir com os demais usuários através das salas de conversação. Para
+isso você não precisa instalar nenhum outro programa, basta fazer seu
+cadastro no link ao lado, logar e jogar!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha?</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
@@ -246,6 +249,11 @@
 		<register_passwd_confirm>Senha (confirmacao)</register_passwd_confirm>
 		<register_bt_confirm>Confirmar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
+		<register_invalid_user_name>Nome de usu�rio inv�lido</register_invalid_user_name>
+		<register_invalid_mail>E-mail inválido</register_invalid_mail>
+		<register_invalid_password>Senha n�o confere</register_invalid_password>
+		<register_error_409>Usuárioj� cadastrado</register_error_409>
+		<register_sucess_message>Usuáriocadastrado com sucesso</register_sucess_message>
 	</register>
 	<oldgame>
 		<oldgame_title>Jogos antigos</oldgame_title>

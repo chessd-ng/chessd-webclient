@@ -1,5 +1,6 @@
 var HttpRequest;
 
+//Necessary to persist the RID and SID
 var RegisterData;
 
 
@@ -8,23 +9,16 @@ var RegisterData;
 * @parameter void
 * @return void
 */
-/*function REGISTER_RegisterData(Host){
-	
-	this.UserName = "";
-	this.UserPassword = "";
-	this.Mail = "";
+function REGISTER_RegisterData(){
 	this.Host = REGISTER_GetHost();
 	this.SID = "";
 	this.RID = parseInt(Math.random()*1000000000);
-	this.Step = 0;
-
 }
-*/
+
 function REGISTER_MakeXMPP(Msg){
 
 	var XMPP = "<body rid='"+RegisterData.RID+"' sid='"+RegisterData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
-	this.RID++;
-
+	RegisterData.RID++;
 	return XMPP;
 }
 
@@ -47,14 +41,11 @@ function REGISTER_Post()
 		return false;
 	}
 
-	// RegisterData is used to register direct in Jabber, but now
-	// this feature is not implemented
-	/*
+
 	RegisterData = new REGISTER_RegisterData();
+
    	var Msg = "<body hold='1' rid='"+RegisterData.RID+"' to='"+RegisterData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
 	REGISTER_SendData(Msg);
-	*/
-	REGISTER_SendDataPHP(User, Mail, Pwd);
 }
 
 
@@ -66,14 +57,15 @@ function REGISTER_Post()
 
 function REGISTER_GetError(err)
 {
+	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
 	switch(err)
 	{
 		case 1: 
-			return "User name invalido";
+			return UTILS_GetTag(XML, "register_invalid_user_name");
 		case 2:
-			return "Mail invlido";
+			return UTILS_GetTag(XML, "register_invalid_mail");
 		case 3:
-			return "Senha invalida";
+			return UTILS_GetTag(XML, "register_invalid_password");
 	}
 }
 
@@ -157,8 +149,7 @@ function REGISTER_SendData(Msg)
 
 	// ReceiveXml is used to register direct in Jabber, but now
 	// this feature is not implemented
-	//HttpRequest.onreadystatechange = REGISTER_ReceiveXml;
-	HttpRequest.onreadystatechange = REGISTER_ReceiveXmlPHP;
+	HttpRequest.onreadystatechange = REGISTER_ReceiveXml;
 
 	// Send request to server
 	HttpRequest.send(Msg)
@@ -189,7 +180,7 @@ function REGISTER_ReceiveXml()
 
 function REGISTER_ProcessMessage(XmlDoc){
 
-	var Msg, Uname, Passwd, TestBody, TestIq;
+	var Msg, Uname, Passwd, TestBody, TestIq, RID, SID;
 		
 	TestIq = XmlDoc.getElementsByTagName("iq");
 	TestBody = XmlDoc.getElementsByTagName("body");
@@ -199,9 +190,10 @@ function REGISTER_ProcessMessage(XmlDoc){
 		return;
 	}
 
+
 	if(TestIq.length == 0){
-		Msg = "<iq type='get' id='reg1' to='shiva'><query xmlns='jabber:iq:register'/></iq>";
 		RegisterData.SID = XmlDoc.getElementsByTagName("body")[0].getAttribute("sid");
+		Msg = "<iq type='get' id='reg1' to='shiva'><query xmlns='jabber:iq:register'/></iq>";
 		Msg = REGISTER_MakeXMPP(Msg);
 		REGISTER_SendData(Msg);
 	}
@@ -214,6 +206,37 @@ function REGISTER_ProcessMessage(XmlDoc){
 			Msg = REGISTER_MakeXMPP(Msg);
 			REGISTER_SendData(Msg);
 	}
+	else if(TestIq[0].getAttribute("id") == "reg2")
+	{
+		if(XmlDoc.getElementsByTagName("error").length > 0)
+			REGISTER_ParseError(XmlDoc.getElementsByTagName("error")[0].getAttribute("code"));
+		else{
+			REGISTER_SucessMessage();
+			window.location=(".");
+		}
+	}
+}
+
+
+function REGISTER_SucessMessage(){
+
+	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+
+	alert(UTILS_GetTag(XML, "register_sucess_message"));
+
+
+}
+
+function REGISTER_ParseError(code){
+
+	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+
+	switch(code){
+		case "409":
+			alert(UTILS_GetTag(XML, "register_error_409"));
+			break;
+	}
+
 }
 
 function REGISTER_GetDatabaseError(Msg, Usr)
