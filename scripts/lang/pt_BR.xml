@@ -19,7 +19,7 @@
 		<login_title>Seja bem vindo à  nova interface do ChessD!</login_title>
 		<login_text>Esta é uma versão de testes que não depende da instação de outros programas. Não estão disponíveis comandos para troca de mensagens com usuários do servidor antigo, só é possível entre usuários que estejam utilizando a interface web. Contamos com a sua contribuição, por meio de críticas e sugestões, para resolver possíveis problemas encontrados e termos uma versão melhorada em breve!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
-		<login_remember_pass>Lembrar senha?</login_remember_pass>
+		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
 		<login_user>Usuário</login_user>
 		<login_passwd>Senha</login_passwd>
@@ -60,7 +60,7 @@
 		<contact_decline>Cancelar</contact_decline>
 		<contact_ok>OK</contact_ok>
 		<contact_remove_title>Remover Usuário</contact_remove_title>
-		<contact_remove_text>Tem certeza que deseja remover o usuário?</contact_remove_text>
+		<contact_remove_text>Tem certeza que deseja remover %s da sua lista?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_user>Usuário:</contact_user>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>

@@ -139,8 +139,8 @@
 	position		: absolute;
 	left			: 8mm;
 	top			: 5mm;
-	width			: 12mm;
-	height			: 15mm;
+	width			: 50px;
+	height			: 60px;
 	border-style		: solid;
 	border-width		: 1px;
 }
@@ -153,8 +153,8 @@
 	right			: 8mm;
 	top			: 5mm;
 
-	width			: 12mm;
-	height			: 15mm;
+	width			: 50px;
+	height			: 60px;
 
 	border-style		: solid;
 	border-width		: 1px;
