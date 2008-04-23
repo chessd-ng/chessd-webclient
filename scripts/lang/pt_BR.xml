@@ -26,7 +26,7 @@ interagir com os demais usuários através das salas de conversação. Para
 isso você não precisa instalar nenhum outro programa, basta fazer seu
 cadastro no link ao lado, logar e jogar!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
-		<login_remember_pass>Lembrar senha?</login_remember_pass>
+		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
 		<login_user>Usuário</login_user>
 		<login_passwd>Senha</login_passwd>
@@ -67,7 +67,7 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<contact_decline>Cancelar</contact_decline>
 		<contact_ok>OK</contact_ok>
 		<contact_remove_title>Remover Usuário</contact_remove_title>
-		<contact_remove_text>Tem certeza que deseja remover o usuário?</contact_remove_text>
+		<contact_remove_text>Tem certeza que deseja remover %s da sua lista?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_user>Usuário:</contact_user>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>

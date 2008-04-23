@@ -68,7 +68,7 @@ function INTERFACE_CreateUserBox()
 	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");
-	Name = UTILS_CreateElement("h2", null, null, UTILS_Capitalize(MainData.Username));
+	Name = UTILS_CreateElement("h2", null, null, MainData.Username);
 	Status = UTILS_CreateElement("select", "UserStatusSelect");
 
 	// Available

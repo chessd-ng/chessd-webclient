@@ -363,7 +363,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 				}
 				Button2.Name = UTILS_GetText("contact_decline");
 				Button2.Func = null;
-				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), UTILS_GetText("contact_remove_text"), Button1, Button2);
+				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), UTILS_GetText("contact_remove_text").replace("%s", "<strong>"+Username+"</strong>"), Button1, Button2);
 			};
 			i += 1;
 		}
