@@ -64,12 +64,22 @@ function INTERFACE_CreateTop()
 	ItemTitle = UTILS_GetText("menu_preferences")
 	Item = UTILS_CreateElement("li", null, "preferences");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Help
 	ItemTitle = UTILS_GetText("menu_help")
 	Item = UTILS_CreateElement("li", null, "help");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Exit
