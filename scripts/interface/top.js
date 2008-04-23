@@ -103,6 +103,10 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 	// Tourneys
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_tourneys"));
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	MenuList.appendChild(Item);
 	
 	// Rooms

@@ -4,6 +4,10 @@
 		<general_title>Cliente Web ChessD</general_title>
 		<general_name>ChessD</general_name>
 	</general>
+	<utils>
+		<not_implemented_title>Não implementado.</not_implemented_title>
+		<not_implemented>Este recurso não está implementado no momento.</not_implemented>
+	</utils>
 	<window>
 		<window_yes>Sim</window_yes>
 		<window_no>Nao</window_no>
