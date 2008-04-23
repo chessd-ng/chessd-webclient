@@ -246,6 +246,11 @@
 		<register_passwd_confirm>Senha (confirmacao)</register_passwd_confirm>
 		<register_bt_confirm>Confirmar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
+		<register_invalid_user_name>Nome de usu√rio inv√lido</register_invalid_user_name>
+		<register_invalid_mail>E-mail inv√°lido</register_invalid_mail>
+		<register_invalid_password>Senha n√o confere</register_invalid_password>
+		<register_error_409>Usu√°rioj√ cadastrado</register_error_409>
+		<register_sucess_message>Usu√°riocadastrado com sucesso</register_sucess_message>
 	</register>
 	<oldgame>
 		<oldgame_title>Jogos antigos</oldgame_title>
