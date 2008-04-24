@@ -228,9 +228,9 @@ function INTERFACE_HideRoomList()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2)
+function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 {
-	var Node = document.getElementById("GameRoomMenuList");
+	var Node = document.getElementById("GameRoomMenuList"+UTILS_Capitalize(GameType));
 	var Room, i;
 
 	// If menu is not on screen
@@ -243,6 +243,7 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2)
 	Room = UTILS_CreateElement("li", null, null, GameName);
 
 	Room.onclick = function(){
+		//if user is not playing or observe a game
 		if(MainData.CurrentGame == null)
 		{
 			GAME_StartObserverGame(GameId, P1, P2);
@@ -252,8 +253,9 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2)
 			WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));
 		}
 	}
-
+	
 	Node.appendChild(Room);
+	Node.style.visibility = "visible";
 	return true;
 }
 

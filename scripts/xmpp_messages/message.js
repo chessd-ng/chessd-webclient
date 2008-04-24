@@ -468,6 +468,22 @@ function MESSAGE_GameRoomList()
 }
 
 /**
+* Get the list information of all games  been played
+* 
+* @return 	XMPP with iq to get all games been played with respective info
+* @author 	Rubens
+*/
+function MESSAGE_GameRoomInfoList(Room)
+{
+	var XMPP;
+
+	XMPP  = "<iq type='get' to='"+Room+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameInfo+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
+
+	return XMPP;
+}
+
+/**
 * Send a game moviment
 */
 function MESSAGE_GameMove(Move, GameID)

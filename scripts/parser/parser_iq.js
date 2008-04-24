@@ -52,6 +52,13 @@ function PARSER_ParseIq(XML)
 				Buffer += ROOM_HandleRoomList(XML);
 			}
 
+			// Receive room info -> used to current games
+			else if (Xmlns.match(/disco#info/))
+			{
+				Buffer += ROOM_HandleGameRoomInfoList(XML);
+			}
+
+
 			// Receive information of user list
 			else if (Xmlns.match(/\/chessd#info/))
 			{
