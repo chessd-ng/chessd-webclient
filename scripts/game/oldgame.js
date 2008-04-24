@@ -34,9 +34,26 @@ function OLDGAME_HandleSearchOldGame(XML)
 	var GameList = new Array();
 	var GameInfoTmp;
 	var Players;
+	var Result;
+	var More;
+	var Id, SearchGameWindow;
 
 
+	// Get window's Id
+	Id = XML.getAttribute("id").split("-")[1];
+
+	SearchGameWindow = MainData.GetSearchGameInfo(Id);
 	Games = XML.getElementsByTagName("game");
+	if(XML.getElementsByTagName("more")[0] != undefined)
+	{
+		SearchGameWindow.More = true;
+		More = true;
+	}
+	else
+	{
+		SearchGameWindow.More = false;
+		More = false;
+	}
 
 	// Create a Array of game infos object
 	for(i=0; i<Games.length; i++)
@@ -85,15 +102,17 @@ function OLDGAME_HandleSearchOldGame(XML)
 		}
 
 
-		GameInfoTmp.date = Games[i].getAttribute("time_stamp");
+		GameInfoTmp.date = UTILS_ConvertTimeStamp(Games[i].getAttribute("time_stamp"));
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
 		GameInfoTmp.id = Games[i].getAttribute("id");
-		GameInfoTmp.wintype = "-----";
+		GameInfoTmp.wintype = UTILS_GetNodeText(Games[i].getElementsByTagName("result")[0]);
 	
 		GameList.push(GameInfoTmp);
 	}
 
-	WINDOW_OldGameResult(GameList);
+//	WINDOW_OldGameResult(GameList);
+
+	SearchGameWindow.Elements.SetResult(Id, GameList, More);
 
 	return Buffer;
 }
@@ -600,3 +619,49 @@ function OLDGAME_GotoBoard(NumBoard)
 	MainData.CurrentOldGame.Game.SetLastMove(Move);
 }
 
+/**
+* Create search game info in data Struct and send old game search message
+*
+* @return       void
+* @author       Danilo
+*/
+function OLDGAME_OpenOldGameWindow()
+{	
+	if (document.getElementById("OldGamesDiv"))
+		return;
+
+	var Elements;
+	var SearchInfo;
+	var Id = MainData.SearchGameMaxId; 
+	MainData.SearchGameMaxId++; 
+
+
+	Elements = WINDOW_OldGame(Id);
+
+	MainData.AddSearchGameInfo(Id, Elements);
+
+	CONNECTION_SendJabber(MESSAGE_GetOldGames(Id,"","",10,0));
+
+	SearchInfo = MainData.GetSearchGameInfo(Id);
+	SearchInfo.Elements.SetSearchButton(SearchInfo);
+	SearchInfo.Elements.SetPrevButton(SearchInfo);
+	SearchInfo.Elements.SetNextButton(SearchInfo);
+	
+}
+
+/**
+* Remove Search Game Info in data struct and set new old game window max id count
+*
+* @param				Id		Window's id
+* @return       void
+* @author       Danilo
+*/
+function OLDGAME_CloseWindow(Id)
+{
+	MainData.RemoveSearchGameInfo(Id);
+
+	if (Id = MainData.SearchGameMaxId - 1)
+		MainData.SearchGameMaxId--;
+	else if (MainData.SearchGameInfoList.length == 0)
+		MainData.SearchGameMaxId = 0;
+}

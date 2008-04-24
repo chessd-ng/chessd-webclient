@@ -71,6 +71,9 @@ function DATA(ConfFile, LangFile)
 	this.CurrentOldGame = null;
 	this.OldGameList = new Array();
 
+	this.SearchGameMaxId = 0;
+	this.SearchGameInfoList = new Array();
+
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
 	
@@ -143,6 +146,11 @@ DATA.prototype.PushOldGame = DATA_PushGameToOldGame;
 DATA.prototype.GetOldGame = DATA_GetOldGame;
 DATA.prototype.GetGame = DATA_GetGame;
 DATA.prototype.GetOponent = DATA_GetOponent;
+
+DATA.prototype.AddSearchGameInfo = DATA_AddSearchGameInfo;
+DATA.prototype.RemoveSearchGameInfo = DATA_RemoveSearchGameInfo;
+DATA.prototype.FindSearchGameInfo = DATA_FindSearchGameInfo;
+DATA.prototype.GetSearchGameInfo = DATA_GetSearchGameInfo;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -1373,6 +1381,90 @@ function DATA_PushGameToOldGame(GameObj)
 	MainData.SetCurrentOldGame(GameObj);
 
 	return Pos -1;
+}
+
+/**********************************
+ * METHODS - SEARCHGAME           *
+ **********************************/
+
+/**
+* Add search game window parameters
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_AddSearchGameInfo(Id, Elements)
+{
+	var Search = new Object();
+
+	Search.Id = Id;
+	Search.NGames = 10;
+	Search.Offset = 0;
+	Search.P1 = "";
+	Search.P2 = "";
+	Search.Color = "";
+	Search.From = "";
+	Search.To = "";
+	Search.More = false;
+	Search.Elements = Elements;
+
+	this.SearchGameInfoList.push(Search);
+
+	return true;
+}
+
+/**
+* Remove search game window
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_RemoveSearchGameInfo(Id)
+{
+	var i = this.FindSearchGameInfo(Id);
+
+	if (i != null)
+		this.SearchGameInfoList.splice(i,1);
+
+	return true;
+}
+
+/**
+* Find search game window
+*
+* @return	integer
+* @author	Danilo Yorinori
+*/
+function DATA_FindSearchGameInfo(Id)
+{
+	var i;
+	var GameInfoLen = this.SearchGameInfoList.length;
+
+	for(i=0; i<GameInfoLen; i++)
+	{
+		if(this.SearchGameInfoList[i].Id == Id)
+		{
+			return i;
+		}
+	}
+
+	//If game Id is not found
+	return null
+}
+
+function DATA_GetSearchGameInfo(Id)
+{
+	var i=0;
+
+	while(i<this.SearchGameInfoList.length)
+	{
+		if(this.SearchGameInfoList[i].Id == Id)
+		{
+			return this.SearchGameInfoList[i];
+		}
+		i++;
+	}
+	return null;
 }
 
 /**********************************

@@ -768,10 +768,10 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
  * MESSAGES - SEARCH OLDGAME
  **********************************/
 
-function MESSAGE_GetOldGames(Jid1, Jid2, NumGames, Offset)
+function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset)
 {
 	var XMPP = "";
-	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_OldGameSearch+"' to='rating."+MainData.Host+"'>";
+	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_OldGameSearch+"-"+Id+"' to='rating."+MainData.Host+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#search_game'>";
 	XMPP += "<search results='"+NumGames+"' offset='"+Offset+"'>";
 	if (Jid1 != "")

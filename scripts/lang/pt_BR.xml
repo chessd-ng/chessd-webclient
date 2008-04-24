@@ -248,14 +248,24 @@
 	</register>
 	<oldgame>
 		<oldgame_title>Jogos antigos</oldgame_title>
+		<oldgame_my_games>Minhas partidas</oldgame_my_games>
+		<oldgame_other_games>Partidas de outros usuários</oldgame_other_games>
 		<oldgame_player1>Jogador 1:</oldgame_player1>
+		<oldgame_pieces>Peças:</oldgame_pieces>
+		<oldgame_both>Qualquer</oldgame_both>
 		<oldgame_player2>Jogador 2:</oldgame_player2>
-		<oldgame_white>Brancas</oldgame_white>
-		<oldgame_black>Pretas</oldgame_black>
+		<oldgame_date_form>Data:</oldgame_date_form>
+		<oldgame_from>de:</oldgame_from>
+		<oldgame_to>a:</oldgame_to>
+		<oldgame_new_search>Nova Busca</oldgame_new_search>
+		<oldgame_search_result>Resultado da busca:</oldgame_search_result>
+		<oldgame_no_result>Nenhuma partida encontrada.</oldgame_no_result>
+		<oldgame_player1_hd>Jogador 1</oldgame_player1_hd>
+		<oldgame_player2_hd>Jogador 2</oldgame_player2_hd>
 		<oldgame_category>Categoria</oldgame_category>
-		<oldgame_winner>Ganhador</oldgame_winner>
-		<oldgame_wintype>Motivo</oldgame_wintype>
+		<oldgame_result>Resultado</oldgame_result>
 		<oldgame_date>Data</oldgame_date>
-		<oldgame_draw>Empate</oldgame_draw>
+		<oldgame_prev>Anteriores</oldgame_prev>
+		<oldgame_next>Proximos</oldgame_next>
 	</oldgame>
 </language>
