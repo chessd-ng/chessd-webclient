@@ -73,6 +73,7 @@ function INTERFACE_AddContact(Username, Status)
 function INTERFACE_RemoveContact(Username)
 {
 	var Node = document.getElementById("contact-"+Username);
+	var List;
 
 	if (!Node)
 	{
@@ -80,8 +81,10 @@ function INTERFACE_RemoveContact(Username)
 	}
 	
 	// Remove node
-	Node = Node.parentNode;
-	Node.parentNode.removeChild(Node);
+	Node = Node.parentNode; // tr
+	List = Node.parentNode; // tbody
+	List.removeChild(Node);
+//	Node.parentNode.removeChild(Node);
 
 	return true;
 }
