@@ -53,3 +53,15 @@
 #Page #GameRoomMenuDiv p:hover {
 	background-color: #EAF4F5;
 }
+
+
+
+#Page #RoomMenuDiv hr {
+	height			: 1px;
+	background-color	: #FFA200;
+	border			: 0px;
+}
+
+#Page #RoomMenuDiv #createRoom {
+	text-align		: center;
+}

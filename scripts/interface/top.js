@@ -64,12 +64,22 @@ function INTERFACE_CreateTop()
 	ItemTitle = UTILS_GetText("menu_preferences")
 	Item = UTILS_CreateElement("li", null, "preferences");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Help
 	ItemTitle = UTILS_GetText("menu_help")
 	Item = UTILS_CreateElement("li", null, "help");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Exit
@@ -103,10 +113,14 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 	// Tourneys
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_tourneys"));
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	MenuList.appendChild(Item);
 	
 	// Rooms
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_rooms"));
+	Item = UTILS_CreateElement("li", null, "rooms", UTILS_GetText("menu_rooms"));
 	Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowRoomList(Pos.X);
@@ -128,6 +142,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomList, RoomItem, Create;
 	var Node, Menu, Func, i, Hide = 0;
+	var Hr;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("RoomMenuDiv");
@@ -155,17 +170,20 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
 
+
+	Hr = UTILS_CreateElement("hr");
 	// Show the create room window
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create_room"));
+	Create = UTILS_CreateElement("p", "createRoom", null, UTILS_GetText("room_create_room"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
 	}
 	
-	MenuDiv.appendChild(Create);
 	MenuDiv.appendChild(RoomList);
+	MenuDiv.appendChild(Hr);
+	MenuDiv.appendChild(Create);
 	Node.appendChild(MenuDiv);
 
-	MenuDiv.style.left = (OffsetLeft-72+46)+"px";
+	MenuDiv.style.left = (OffsetLeft-72+45)+"px";
 
 	UTILS_AddListener(document, "click", Func, false);
 
