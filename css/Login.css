@@ -110,6 +110,11 @@
 	margin-bottom	: 3mm;
 }
 
+#LoginDiv a {
+	font			: 3mm Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 2mm;
+}
 #BannerLogin {
 	position		: relative;
 	left			: 50%;
