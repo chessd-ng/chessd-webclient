@@ -17,10 +17,7 @@
 	</window>
 	<login>
 		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
-		<login_text>Aqui você pode jogar xadrez com outros usuários ou com rôbos, além de
-interagir com os demais usuários através das salas de conversação. Para
-isso você não precisa instalar nenhum outro programa, basta fazer seu
-cadastro no link ao lado, logar e jogar!</login_text>
+		<login_text>Aqui você pode jogar xadrez com outros usuários ou com rôbos, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
@@ -58,7 +55,7 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Adicionar usuário</contact_invite>
-		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
+		<contact_invite_text>%s adicionou vocÃª como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
 		<contact_ok>OK</contact_ok>
@@ -68,7 +65,7 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<contact_user>Usuário:</contact_user>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
-		<contact_user>Usuario</contact_user>
+		<contact_user>Usuário</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
 		<contact_search_by>Buscar por:</contact_search_by>
@@ -206,16 +203,16 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<game_button_first>Início</game_button_first>
 		<game_button_prev>Anterior</game_button_prev>
 		<game_button_next>Próximo</game_button_next>
-		<game_button_last>Último</game_button_last>
+		<game_button_last>Útimo</game_button_last>
 	</game>
 	<profile>
-		<profile_window>Perfil e Informacoes</profile_window>
+		<profile_window>Perfil e Informações</profile_window>
 		<profile_name>Nome: </profile_name>
 		<profile_nick>Apelido: </profile_nick>
 		<profile_whoami>Quem sou: </profile_whoami>
 		<profile_level>Nivel do usuario: </profile_level>
 		<profile_group>Grupo: </profile_group>
-		<profile_type>Titulacao: </profile_type>
+		<profile_type>Titulação: </profile_type>
 		<profile_online_time>Tempo online: </profile_online_time>
 		<profile_total_time>Tempo acumulado: </profile_total_time>
 		<profile_category>Categoria</profile_category>
@@ -223,7 +220,7 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<profile_best_rating>Maior Rating</profile_best_rating>
 		<profile_record_date>Data do Record</profile_record_date>
 		<profile_games_number>No. de Partidas</profile_games_number>
-		<profile_win>Vitorias</profile_win>
+		<profile_win>Vitórias</profile_win>
 		<profile_draw>Empates</profile_draw>
 		<profile_lose>Derrotas</profile_lose>
 		<profile_edit_photo>Editar imagem</profile_edit_photo>
@@ -232,28 +229,28 @@ cadastro no link ao lado, logar e jogar!</login_text>
 		<profile_save>Salvar alteracoes</profile_save>
 		<profile_discard>Fechar sem salvar</profile_discard>
 		<profile_save_close>Salvar e fechar</profile_save_close>
-		<profile_confirm>Voce tem certeza que desejar fechar a janela sem salvar as alteracoes de perfil?</profile_confirm>
+		<profile_confirm>Você tem certeza que desejar fechar a janela sem salvar as alterações de perfil?</profile_confirm>
 		<profile_confirm_close>Confirmar fechar</profile_confirm_close>
 		<profile_change_image>Selecione a foto</profile_change_image>
 		<profile_change_image_title>Mudar foto</profile_change_image_title>
 		<profile_load_error>Erro</profile_load_error>
-		<profile_load_error_title>Nao foi possivel carregar a foto</profile_load_error_title>
+		<profile_load_error_title>Nao foi possível carregar a foto</profile_load_error_title>
 	</profile>
 	<register>
-		<register_inf>Por favor preencha as informacoes abaixo para criar sua conta no Xadrez Livre</register_inf>
+		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre</register_inf>
 		<register_title>Cadastro</register_title>
-		<register_user_name>Nome de Usuario</register_user_name>
+		<register_user_name>Nome de Usuário</register_user_name>
 		<register_mail>E-mail</register_mail>
 		<register_mail_inf>Permite recuperar sua senha em caso de esquecimento</register_mail_inf>
 		<register_passwd>Senha</register_passwd>
-		<register_passwd_confirm>Senha (confirmacao)</register_passwd_confirm>
+		<register_passwd_confirm>Senha (confirmação)</register_passwd_confirm>
 		<register_bt_confirm>Confirmar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
-		<register_invalid_user_name>Nome de usu�rio inv�lido</register_invalid_user_name>
+		<register_invalid_user_name>Nome de usuário inválido</register_invalid_user_name>
 		<register_invalid_mail>E-mail inválido</register_invalid_mail>
-		<register_invalid_password>Senha n�o confere</register_invalid_password>
-		<register_error_409>Usuárioj� cadastrado</register_error_409>
-		<register_sucess_message>Usuáriocadastrado com sucesso</register_sucess_message>
+		<register_invalid_password>Senha não confere</register_invalid_password>
+		<register_error_409>Usuário já cadastrado</register_error_409>
+		<register_sucess_message>Usuário cadastrado com sucesso</register_sucess_message>
 	</register>
 	<oldgame>
 		<oldgame_title>Jogos antigos</oldgame_title>
