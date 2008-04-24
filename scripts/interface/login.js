@@ -34,7 +34,7 @@ var MainData;
 function INTERFACE_StartLogin()
 {
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
-	var Title, TitleEnd, Text, Banner, Version;
+	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
 	var Lang;
 	var ev; //Temp event
@@ -62,7 +62,11 @@ function INTERFACE_StartLogin()
 	LoginFormBoxDiv = UTILS_CreateElement("div", "FormDiv");
 	Title = UTILS_CreateElement("h3", null, null, UTILS_GetText("login_title"));
 	TitleEnd = UTILS_CreateElement("h3", null, null, UTILS_GetText("login_footer"));
-	Text = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text"));
+	Text = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text1"));
+	Text2 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text2"));
+	Text3 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text3"));
+	Link = UTILS_CreateElement("a", null, null, "http://xadrezlivre.c3sl.ufpr.br/projeto");
+	Link.href = "http://xadrezlivre.c3sl.ufpr.br/projeto";
 	Version = UTILS_CreateElement("p", "version", null, MainData.Version);
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
@@ -97,6 +101,9 @@ function INTERFACE_StartLogin()
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
 	LoginTextBoxDiv.appendChild(Text);
+	LoginTextBoxDiv.appendChild(Text2);
+	LoginTextBoxDiv.appendChild(Link);
+	LoginTextBoxDiv.appendChild(Text3);
 	LoginTextBoxDiv.appendChild(TitleEnd);
 
 	// Creating tree
