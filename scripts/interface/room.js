@@ -582,7 +582,8 @@ function INTERFACE_ChangeRoomListVisibility()
 function INTERFACE_CreateRoom(RoomName)
 {
 	var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
-	var Hr, MessageList;
+	//var Hr;
+	var MessageList;
 	var OrderNick, OrderRating, OrderRatingOpt, Input, Emoticon;
 
 	// General room
@@ -612,7 +613,7 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomUsers = UTILS_CreateElement("div", "RoomUsers");
 	RoomTable = UTILS_CreateElement("table");
 	RoomTbody = UTILS_CreateElement("tbody", RoomName+"UserList");
-	Hr = UTILS_CreateElement("hr");
+	//Hr = UTILS_CreateElement("hr");
 	
 	// MessageList
 	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
@@ -639,7 +640,7 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomInside.appendChild(OrderNick);
 	RoomInside.appendChild(OrderRating);
 	RoomInside.appendChild(RoomUsers);
-	RoomInside.appendChild(Hr);
+	//RoomInside.appendChild(Hr);
 	RoomInside.appendChild(MessageList);
 	RoomInside.appendChild(Input);
 	RoomInside.appendChild(Emoticon);

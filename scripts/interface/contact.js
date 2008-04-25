@@ -461,7 +461,8 @@ function INTERFACE_CreateContactList()
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
-	var OrderNick, OrderRating, OrderRatingOpt, Search, Hr, i;
+	var OrderNick, OrderRating, OrderRatingOpt, Search, i;
+	var Hr;
 
 	// Main div
 	ContactDiv = UTILS_CreateElement("div", "Contact");
@@ -533,7 +534,7 @@ function INTERFACE_CreateContactList()
 	// Search user
 	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
 	UTILS_AddListener(Search, "click", function() { WINDOW_SearchUser(); }, "false");
-	Hr = UTILS_CreateElement("hr");
+	//Hr = UTILS_CreateElement("hr");
 	
 	// Creating DOM tree
 	OnlineTable.appendChild(OnlineTbody);
@@ -550,7 +551,7 @@ function INTERFACE_CreateContactList()
 	ContactInside.appendChild(OrderNick);
 	ContactInside.appendChild(OrderRating);
 	ContactInside.appendChild(ContactsDiv);
-	ContactInside.appendChild(Hr);
+	//ContactInside.appendChild(Hr);
 	ContactInside.appendChild(Search);
 
 	ContactDiv.appendChild(ContactTitle);
