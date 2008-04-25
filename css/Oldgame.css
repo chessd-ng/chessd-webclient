@@ -35,7 +35,7 @@
 #OldGamesDiv #ButtonsDiv {
 	text-align : center;
 	position:relative;
-	margin-top	:	8mm;
+	margin-top	:	10mm;
 }
 
 #OldGamesDiv #ResultDiv #TableDiv {
@@ -43,15 +43,19 @@
 }
 
 #OldGamesDiv #ResultDiv #THeadDiv {
-	width:	125mm;
+#	width:	125mm;
+	width:	95%;
 	background-color: #EAF5F4;
 	border : solid thin;
 	border-color: Teal;
-	text-align : left;
+	text-align : center;
+	font-size: 13px;
+	font-weight: bold;
 }
 
 #OldGamesDiv #ResultDiv #TBodyDiv {
-	width: 125mm;
+#	width: 125mm;
+	width:	95%;
 	border : solid thin;
 	border-color: Teal;
 	overflow-x : hidden;
@@ -68,7 +72,8 @@
 }
 
 #OldGamesDiv #ResultDiv #TFootDiv {
-	width:	125mm;
+#	width:	125mm;
+	width:	95%;
 	border : solid thin;
 	border-color: Teal;
 	text-align : center;
@@ -173,33 +178,28 @@
 
 #OldGamesDiv .player1header {
 	position: relative;
-	margin-left: 4mm;
-	font-size: 13px;
-	font-weight: bold;
+#	margin-left: 4mm;
+	margin-left: -9%;
 }
 #OldGamesDiv .player2header {
 	position: relative;
-	margin-left: 4mm;
-	font-size: 13px;
-	font-weight: bold;
+#	margin-left: 4mm;
+	margin-left: 5%;
 }
 #OldGamesDiv .dateheader {
 	position: relative;
-	margin-left: 8mm;
-	font-size: 13px;
-	font-weight: bold;
+#	margin-left: 8mm;
+	margin-left: 6%;
 }
 #OldGamesDiv .catheader {
 	position: relative;
-	margin-left: 10mm;
-	font-size: 13px;
-	font-weight: bold;
+#	margin-left: 10mm;
+	margin-left: 8%;
 }
 #OldGamesDiv .resultheader {
 	position: relative;
-	margin-left: 16mm;
-	font-size: 13px;
-	font-weight: bold;
+#	margin-left: 16mm;
+	margin-left: 12%;
 }
 
 #OldGamesDiv .player1td,
