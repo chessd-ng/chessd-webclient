@@ -46,19 +46,19 @@
 	display		: block;
 	text-indent		: 5mm;
 	margin			: 1px 0px;
-	width			: 100%;
+	width			: 42mm;
 	font			: 11px Trebuchet MS;
 	color			: #000;
 }
 
-#Main #Left #Contact tr:hover {
+#Main #Left #Contact td:hover {
 	background-color: #EAF5F4;
 	cursor			: pointer;
 }
 
 #Main #Left #Contact td {
 	height			: 4.5mm;
-	display		: block;
+#	display		: block;
 	width			: 32mm;
 	text-align		: left;
 	float		: left;
@@ -67,8 +67,6 @@
 #Main #Left #Contact .rating {
 	width			: 2mm;
 	text-align		: right;
-#	float		: none;
-#	margin-left	:	32mm;
 }
 
 #Main #Left #Contact hr {

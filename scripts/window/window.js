@@ -323,6 +323,31 @@ function WINDOW_ProfileImage()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+function WINDOW_OldGame(Id)
+{
+	//Return Div and Buttons;
+	var Div = INTERFACE_ShowOldGameWindow(Id);
+
+	if (document.getElementById("OldGamesDiv"))
+		return;
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
+	var Elements = Div.Elements;
+
+	// Focus input player 1
+//	document.getElementById('OldGameInput1').focus();
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); OLDGAME_CloseWindow(Id); }, false);
+	// Search Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){}, false);
+	// NewSearch Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){}, false);
+
+	return Elements;
+}
+
 function WINDOW_OldGameSearch()
 {
 	if(document.getElementById("OldGameSearchDiv")!=null)
