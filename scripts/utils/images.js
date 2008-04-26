@@ -40,7 +40,17 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 	File = document.createElement("input");
 	File.type = "file";
 	File.name = "image";
+	Width = document.createElement("input");
+	Width.type = "hidden";
+	Width.name = "width";
+	Width.value = "50";
+	Height = document.createElement("input");
+    Height.type = "hidden";
+	Height.name = "height"
+    Height.value = "50";
 	
+	Form.appendChild(Height);
+	Form.appendChild(Width);
 	Form.appendChild(File);
 	return Form;
 }

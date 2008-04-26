@@ -23,6 +23,7 @@ function INTERFACE_CreateTop()
 {
 	var MainDiv, Logo, MenuDiv, IconsList, MenuList, Item, ItemTitle;
 	var Pos;
+	var ExitText;
 
 	MainDiv = UTILS_CreateElement("div", "Top");
 	Logo = UTILS_CreateElement("h1", null, null, UTILS_GetText("general_name"));
@@ -31,45 +32,65 @@ function INTERFACE_CreateTop()
 	MenuList = UTILS_CreateElement("ul", null, "menu");
 
 	// Append icons to list
+	// Adjourn game
+	if(MainData.Type == "admin")
+	{
+		ItemTitle = UTILS_GetText("menu_adjourn")
+		Item = UTILS_CreateElement("li", null, "adjourn_game");
+		Item.title = ItemTitle;
+		//UTILS_AddListener(Item,"click",function() { }, "false");
+		IconsList.appendChild(Item);
+	}
+	else
+	{ // None
+		Item = UTILS_CreateElement("li", null, "null", null);
+		IconsList.appendChild(Item);
+	}
 	// Search game
 	ItemTitle = UTILS_GetText("menu_search_game")
-	Item = UTILS_CreateElement("li", null, "search_game", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "search_game");
 	Item.title = ItemTitle;
 	UTILS_AddListener(Item,"click",function() { OLDGAME_OpenOldGameWindow(); }, "false");
 	IconsList.appendChild(Item);
 	
 	// Search user
 	ItemTitle = UTILS_GetText("menu_search_user")
-	Item = UTILS_CreateElement("li", null, "search_user", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "search_user");
 	Item.title = ItemTitle;
 	UTILS_AddListener(Item,"click",function() { WINDOW_SearchUser(); }, "false");
 	IconsList.appendChild(Item);
 
-	// News
-	ItemTitle = UTILS_GetText("menu_news")
-	Item = UTILS_CreateElement("li", null, "news", ItemTitle);
-	Item.title = ItemTitle;
-	IconsList.appendChild(Item);
-
 	// Preferences
 	ItemTitle = UTILS_GetText("menu_preferences")
-	Item = UTILS_CreateElement("li", null, "preferences", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "preferences");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Help
 	ItemTitle = UTILS_GetText("menu_help")
-	Item = UTILS_CreateElement("li", null, "help", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "help");
 	Item.title = ItemTitle;
+
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	IconsList.appendChild(Item);
 
 	// Exit
 	ItemTitle = UTILS_GetText("menu_exit");
-	Item = UTILS_CreateElement("li", null, "exit", ItemTitle);
+	Item = UTILS_CreateElement("li", null, "exit");
+	ExitText = UTILS_CreateElement("span","ExitText", null, ItemTitle);
 	Item.onclick = function () { 
 		LOGIN_Logout();
 	}
 	Item.title = ItemTitle;
+	Item.appendChild(ExitText);
 	IconsList.appendChild(Item);
 
 	// Appending itens to menu
@@ -92,10 +113,14 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 	// Tourneys
 	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_tourneys"));
+	Item.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
 	MenuList.appendChild(Item);
 	
 	// Rooms
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_rooms"));
+	Item = UTILS_CreateElement("li", null, "rooms", UTILS_GetText("menu_rooms"));
 	Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowRoomList(Pos.X);
@@ -117,6 +142,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomList, RoomItem, Create;
 	var Node, Menu, Func, i, Hide = 0;
+	var Hr;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("RoomMenuDiv");
@@ -144,17 +170,20 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 	MenuDiv = UTILS_CreateElement("div", "RoomMenuDiv");
 	RoomList = UTILS_CreateElement("ul", "RoomMenuList");
 
+
+	Hr = UTILS_CreateElement("hr");
 	// Show the create room window
-	Create = UTILS_CreateElement("p", null, null, UTILS_GetText("room_create_room"));
+	Create = UTILS_CreateElement("p", "createRoom", null, UTILS_GetText("room_create_room"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
 	}
 	
-	MenuDiv.appendChild(Create);
 	MenuDiv.appendChild(RoomList);
+	MenuDiv.appendChild(Hr);
+	MenuDiv.appendChild(Create);
 	Node.appendChild(MenuDiv);
 
-	MenuDiv.style.left = (OffsetLeft-72+46)+"px";
+	MenuDiv.style.left = (OffsetLeft-72+45)+"px";
 
 	UTILS_AddListener(document, "click", Func, false);
 
@@ -170,7 +199,9 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 */
 function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 {
-	var MenuDiv, GameRoomList, RoomItem;
+	var MenuDiv, RoomItem;
+	var GameRoomListBlitz,    GameRoomListStandart;
+	var GameRoomListBughouse, GameRoomListLight;
 	var Node, Menu, Func, i, Hide = 0;
 
 	Node = document.getElementById("Page");
@@ -195,11 +226,23 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
-	GameRoomList = UTILS_CreateElement("ul", "GameRoomMenuList");
+
+	GameRoomListBlitz = UTILS_CreateElement("ul", "GameRoomMenuListBlitz",null,"Blitz");
+	GameRoomListStandart = UTILS_CreateElement("ul", "GameRoomMenuListStandart",null,"Standart");
+	GameRoomListLight = UTILS_CreateElement("ul", "GameRoomMenuListLight", null, "Light");
+	GameRoomListBughouse = UTILS_CreateElement("ul", "GameRoomMenuListBughouse",null, "Bughouse");
 
 	MenuDiv.style.left = OffsetLeft+"px";
 
-	MenuDiv.appendChild(GameRoomList);
+	GameRoomListBlitz.style.visibility = "hidden";
+	GameRoomListStandart.style.visibility = "hidden";
+	GameRoomListLight.style.visibility = "hidden";
+	GameRoomListBughouse.style.visibility = "hidden";
+
+	MenuDiv.appendChild(GameRoomListBlitz);
+	MenuDiv.appendChild(GameRoomListStandart);
+	MenuDiv.appendChild(GameRoomListLight);
+	MenuDiv.appendChild(GameRoomListBughouse);
 	Node.appendChild(MenuDiv);
 
 	UTILS_AddListener(document, "click", Func, false);

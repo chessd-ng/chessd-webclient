@@ -3,6 +3,7 @@
 	<general>
 		<version>Alpha 0.5</version>
 		<cookie-validity>10</cookie-validity>
+		<room-default>general</room-default>
 		<max-rooms>5</max-rooms>
 		<max-chats>4</max-chats>
 		<emoticon-num>35</emoticon-num>

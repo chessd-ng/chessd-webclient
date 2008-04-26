@@ -31,10 +31,6 @@ function ROOM_HandleMessage(XML)
 	// Get the Chat Room name
 	RoomName = XML.getAttribute('from').replace(/@.*/,"");
 
-	// If it's default room
-	if (RoomName == "general")
-		RoomName = UTILS_GetText("room_default");
-
 	// Get the message sender
 	From = XML.getAttribute('from').replace(/.*\//,"");
 
@@ -67,6 +63,7 @@ function ROOM_HandleMessage(XML)
 function ROOM_HandleRoomList(XML)
 {
 	var Items, Rooms, RoomName, ID,  i;
+	var Buffer;
 
 	Rooms = new Array();
 
@@ -76,7 +73,7 @@ function ROOM_HandleRoomList(XML)
 	// XML with all games rooms
 	if (ID == MainData.Const.IQ_ID_GetGamesList)
 	{
-		ROOM_HandleGameRoomList(XML);
+		Buffer = ROOM_HandleGameRoomList(XML);
 	}
 	
 	// Chat Room List
@@ -92,7 +89,7 @@ function ROOM_HandleRoomList(XML)
 		}
 		INTERFACE_ShowRoomList(Rooms);
 	}
-		return "";
+	return Buffer;
 }
 
 /**
@@ -109,6 +106,7 @@ function ROOM_HandleGameRoomList(XML)
 	var Rooms = new Array();
 	var Name, WName, BName, Jid, GameId;
 	var P1, P2;
+	var XMPP="";
 
 	// Get items in XML
 	Items = XML.getElementsByTagName("item");
@@ -116,33 +114,60 @@ function ROOM_HandleGameRoomList(XML)
 	// Get the player's names
 	for (i=0; i<Items.length; i++)
 	{
-		P1 = new Object();
-		P2 = new Object();
 
-		Name = Items[i].getAttribute("name");
-
-		WName = Name.split("x")[0].split("@")[0].replace(" ","");
-		BName = Name.split("x")[1].split("@")[0].replace(" ","");
 		Jid = Items[i].getAttribute("jid");
 		GameId = Jid.split("@")[0];
-
-		P1.Name = WName;
-		P1.Time = 0;
-		P1.Color = "white";
-		P1.Inc = 0;
-
-		P2.Name = BName;
-		P2.Time = 0;
-		P2.Color = "black";
-		P2.Inc = 0;
-		
-		INTERFACE_ShowGameRoomList(GameId, Name, P1, P2);
+		XMPP += MESSAGE_GameRoomInfoList(GameId);
 	}
+
+	return XMPP;
+}
+
+/**
+* Handle game room info list.
+* Calls the interface to show the games that's been played.
+*
+* @param 	XML The xml that the server send's
+* @return 	void
+* @author 	Rubens
+*/
+function ROOM_HandleGameRoomInfoList(XML)
+{
+	var P1 = new Object();
+	var P2 = new Object();
+
+	var Iq;
+	var Identity;
+	var Game, GameType;
+	var Name, WName, BName, Jid, GameId;
+
+	
+	Identity = XML.getElementsByTagName("identity")[0];
+	Name = Identity.getAttribute("name");
+
+	Jid = XML.getAttribute("from");
+	GameId = Jid.split("@")[0];
+
+	Game = XML.getElementsByTagName("game")[0];
+	GameType = Game.getAttribute("category");
+
+	WName = Name.split("x")[0].split("@")[0].replace(" ","");
+	BName = Name.split("x")[1].split("@")[0].replace(" ","");
+
+	P1.Name = WName;
+	P1.Time = 0;
+	P1.Color = "white";
+	P1.Inc = 0;
+
+	P2.Name = BName;
+	P2.Time = 0;
+	P2.Color = "black";
+	P2.Inc = 0;
+	
+	INTERFACE_ShowGameRoomList(GameId, Name, P1, P2, GameType);
 
 	return "";
 }
-
-
 
 /**
 * Handle group chat messages

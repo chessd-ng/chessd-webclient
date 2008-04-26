@@ -231,7 +231,10 @@ function UTILS_ValidateUsername(Username)
 */
 function UTILS_Capitalize(Word)
 {
-	return Word.charAt(0).toUpperCase() + Word.slice(1);
+	if (Word)
+		return Word.charAt(0).toUpperCase() + Word.slice(1);
+	else
+		return "";
 }
 
 /**

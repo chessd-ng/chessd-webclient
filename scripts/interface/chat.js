@@ -207,6 +207,8 @@ function INTERFACE_CreateChat(Username, Status)
 	Close = UTILS_CreateElement("img");
 	Close.src = "./images/close_chat.png";
 
+	// Show chat
+	INTERFACE_ShowChat(ChatItem, ChatInner);
 
 	// Show/hide chat
 	ChatTitle.onclick = function () {

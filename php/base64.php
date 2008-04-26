@@ -28,43 +28,150 @@
 
 <?php
 
-define("MAXSIZE", 10000);
-$image = $_FILES["image"];
-$result = 0;
-$type = "";
+define("MAXSIZE", 1000000);
 
-//Regular expression to validate file type
-if(eregi("^image\/(jpeg|jpg|png|gif)$", $image["type"])){
-	//Validate image max size
-	if($image['size'] < MAXSIZE){
-		//Upload image to temp file
-		if(is_uploaded_file($_FILES["image"]["tmp_name"])){
-		
-			$type = $image["type"];
-			//Open temporary file
-			$fd = fopen($image['tmp_name'], "rb");
-			$convert=fread($fd, $image['size'] );
-			//Convert binary file to printable caracteres
-			$convert = base64_encode($convert);
-			$size=strlen($convert);
-			fclose($fd);
 
-		}else{ 
-			$result = 1;
-			$convert="Error: Invalid file";
-		}
-	}else{
-		$result = 2;
-		$convert="Error: Invalid file size ".$image['size'];
+class Image{
+	private $image;
+	private $image_new_name;
+	private $result;
+	private $error;
+	private $type;
+	private $size;
+	private $newsize;
+	private $B64String;
+
+	public function getType(){
+		if($this->B64String != "")
+			return "image/png";
+		else
+			return 0;
 	}
-}else{
-	$result = 3;
-	$convert="Error: Invalid file type ".$image['type'];
+
+	public function getB64String(){
+		return $this->B64String;
+	}
+	
+
+	public function getResult(){
+		return $this->result;
+
+	}
+
+
+	public function getError(){
+		return $this->error;
+	}
+
+	public function Image($img, $height, $width){
+		$this->image = $img["tmp_name"];
+		$this->result = 0;
+		$this->error = "";
+		$this->type = $img["type"];
+		$this->size = $img['size'];
+		$this->newsize = array($height, $width);
+		if($this->validateImage())
+				$this->B64String = $this->readNewImage();
+
+	}
+		
+
+
+	public function imageResize(){
+
+		
+		list($newwidth, $newheight) = $this->newsize;
+		
+		$posX = 0;
+		$posY = 0;
+
+		list($width, $height) = getimagesize($this->image);
+
+		$scaleX = $newwidth / $width;
+		$scaleY = $newheight / $height;
+
+		if($scaleX > $scaleY){
+			$snewidth = intval($width * $scaleY);
+			$snewheight = intval($height * $scaleY);
+			$posX = ($newwidth - $snewidth) / 2;
+		}else{
+			$snewidth = intval($width * $scaleX);
+			$snewheight = intval($height * $scaleX);
+			$posY = ($newheight - $snewheight) / 2;
+		}
+		
+
+		$thumb = imagecreate($newwidth, $newheight);
+		imagecolorallocate($thumb, 255, 255, 255);
+		$source = $this->correctImage($this->image, $this->type);
+
+		 $_result = imagecopyresized($thumb, $source, $posX, $posY, 0, 0, $snewidth, $snewheight,$width,$height);
+
+		return imagepng($thumb,  $this->image.".png");
+
+		
+	}
+
+
+	private function correctImage($img, $type){
+
+		if(eregi("^image\/(jpeg|jpg)$", $type)){
+			 return imagecreatefromjpeg($img);
+		}else if(eregi("^image\/(gif)$", $type))
+			return imagecreatefromgif($img);
+		else if(eregi("^image\/(png)$", $type))
+			return imagecreatefrompng($img);
+
+	}
+	
+	private function readNewImage(){
+		$type = $image["type"];
+		//Open temporary file
+		$fd = fopen($this->image.".png", "rb");
+		$convert=fread($fd, $this->size);
+		//Convert binary file to printable caracteres
+		$convert = base64_encode($convert);
+		$size=strlen($convert);
+		fclose($fd);
+		return $convert;
+	}
+
+	private function validateImage(){
+		if(eregi("^image\/(jpeg|jpg|png|gif)$", $this->type)){
+			//Validate image max size
+			if($this->size < MAXSIZE){
+				//Upload image to temp file
+				if(is_uploaded_file($this->image)){
+					return($this->imageResize($this->image, $this->type));		
+
+				}else{ 
+					$this->result = 1;
+					$this->error="Error: Invalid file";
+				}
+			}else{
+				$this->result = 2;
+				$this->error="Error: Invalid file size ".$image['size'];
+			}
+		}else{
+			$this->result = 3;
+			$this->error="Error: Invalid file type ".$image['type'];
+		}
+	}
+
 }
+
+
+$img = $_FILES["image"];
+$img_width = $_POST["width"];
+$img_height = $_POST["height"];
+$conv = new Image($img, $img_width , $img_height);
+
 
 ?>
 
 <HTML>
+<body bgcolor="black">
+<img src="" id="img">
 <script>
 	//Call this function on create page
 	imageResult();
@@ -75,14 +182,17 @@ if(eregi("^image\/(jpeg|jpg|png|gif)$", $image["type"])){
 	* @return
 	* @author Fabiano Kuss
 	*/
+
 	function imageResult(){
-		if(!<?=$result?>)
-			parent.IMAGE_B64Img("<?=$convert?>", "<?=$type?>", <?=$result?>);
+
+		document.getElementById("img").src="base64_decode.php?<?=$conv->getType()?>;base64,<?=$conv->getB64String()?>";
+		if(!<?=$conv->getResult();?>)
+			parent.IMAGE_B64Img("<?=$conv->getB64String()?>", "<?=$conv->getType()?>", "<?=$conv->getError()?>");
 		else
-			parent.IMAGE_B64Img("<?=$convert?>", "", <?=$result?>);
+			parent.IMAGE_B64Img("<?=$conv->getB64String()?>", "", <?=$conv->getResult()?>);
 		
 	}
 </script>
-
+</body>
 </HTML>
 

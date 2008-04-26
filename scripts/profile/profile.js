@@ -42,7 +42,6 @@ function PROFILE_HandleVCardProfile(XML)
 
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
-
 	// Get photo image
 	if (Photo != undefined)
 	{
@@ -91,6 +90,68 @@ function PROFILE_HandleVCardProfile(XML)
 
 	return "";
 }
+
+/**
+* Handle info profile user
+*
+* @public
+* @param        XML is the xml that contais profile informations
+* @return       void
+* @author       Rubens
+*/
+function PROFILE_HandleInfoProfile(XML)
+{
+	var RatingNodes, TypeNode, ProfileNode;
+	var OnlineNode, UptimeNode;
+	var Jid, Profile, Type, Rating;
+	var OnlineTime, Uptime;
+	
+	OnlineNode = XML.getElementsByTagName('online_time')[0];
+	UptimeNode = XML.getElementsByTagName('uptime')[0];
+	ProfileNode = XML.getElementsByTagName('profile')[0];
+	RatingNodes = XML.getElementsByTagName('rating');
+	TypeNode = XML.getElementsByTagName('type')[0];
+
+	// Profile window opened
+	if (MainData.ProfileList.length > 0)
+	{
+		Jid = ProfileNode.getAttribute('jid');
+
+		// Profile Update
+		Profile = MainData.GetProfile(Jid);
+		if (Profile)
+		{
+
+			if(UptimeNode != null)
+			{
+				Profile.Profile.SetOnlineTime(UptimeNode.getAttribute("seconds"));
+			}
+
+			if(OnlineNode != null)
+			{
+				Profile.Profile.SetTotalTime(OnlineNode.getAttribute("seconds"));
+			}
+
+			if(TypeNode != null)
+			{
+				Type = TypeNode.getAttribute('type');
+			}
+			else
+			{
+				Type = 'user';
+			}
+
+			Profile.Profile.SetGroup(Type);
+		
+			Rating = PROFILE_HandleRatings(RatingNodes);
+
+			Profile.Profile.SetRatings(Rating);
+		}
+	}
+
+	return "";
+}
+
 
 /**
 * Create an array with ratings and return it
@@ -202,7 +263,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_Info(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));

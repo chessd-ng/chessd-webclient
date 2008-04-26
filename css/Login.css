@@ -110,6 +110,11 @@
 	margin-bottom	: 3mm;
 }
 
+#LoginDiv a {
+	font			: 3mm Trebuchet MS;
+	color			: #216778;
+	margin-bottom	: 2mm;
+}
 #BannerLogin {
 	position		: relative;
 	left			: 50%;
@@ -149,5 +154,16 @@
 {
 	cursor			: pointer;
 	float			: left;
-	margin-right	: 10px;
+	margin-right		: 10px;
+	font			: bold 11px Trebuchet MS;
+	color			: #216778;
+}
+
+#LangDiv li span
+{
+	cursor			: pointer;
+}
+
+#LangDiv li:hover {
+	text-decoration	: underline;
 }

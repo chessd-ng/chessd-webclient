@@ -51,15 +51,19 @@ function CHAT_HandleMessage(XML)
 */
 function CHAT_OpenChat(Username)
 {
-	var Title, Msg, Status;
+	var Title, Msg, UserPos, Status = null;
 
-	if ((!MainData.FindUser(Username)) && (!MainData.FindUserInRoom("geral", Username)))
+	UserPos = MainData.FindUser(Username);
+	if (UserPos == null)
+	{
+		if (!MainData.FindUserInRoom("general", Username))
+		{
+			Status = "offline";
+		}
+	}
+	else if (MainData.UserList[UserPos].Status == "offline")
 	{
 		Status = "offline";
-	}
-	else
-	{
-		Status = null;
 	}
 
 	try

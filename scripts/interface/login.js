@@ -34,7 +34,7 @@ var MainData;
 function INTERFACE_StartLogin()
 {
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
-	var Title, TitleEnd, Text, Banner, Version;
+	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
 	var Lang;
 	var ev; //Temp event
@@ -62,7 +62,11 @@ function INTERFACE_StartLogin()
 	LoginFormBoxDiv = UTILS_CreateElement("div", "FormDiv");
 	Title = UTILS_CreateElement("h3", null, null, UTILS_GetText("login_title"));
 	TitleEnd = UTILS_CreateElement("h3", null, null, UTILS_GetText("login_footer"));
-	Text = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text"));
+	Text = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text1"));
+	Text2 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text2"));
+	Text3 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text3"));
+	Link = UTILS_CreateElement("a", null, null, "http://xadrezlivre.c3sl.ufpr.br/projeto");
+	Link.href = "http://xadrezlivre.c3sl.ufpr.br/projeto";
 	Version = UTILS_CreateElement("p", "version", null, MainData.Version);
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
@@ -92,11 +96,14 @@ function INTERFACE_StartLogin()
 
 	UTILS_AddListener(InputPasswd, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
 
-	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html"})
+	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html?lang="+Lang+".xml"})
 	
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
 	LoginTextBoxDiv.appendChild(Text);
+	LoginTextBoxDiv.appendChild(Text2);
+	LoginTextBoxDiv.appendChild(Link);
+	LoginTextBoxDiv.appendChild(Text3);
 	LoginTextBoxDiv.appendChild(TitleEnd);
 
 	// Creating tree
@@ -186,7 +193,7 @@ function INTERFACE_CreateLanguage()
 
 	for(i=0; i<Langs.length; i++)
 	{
-		Ul.appendChild(INTERFACE_CreateLangFlag(UTILS_GetNodeText(Langs[i])));
+		Ul.appendChild(INTERFACE_CreateLangItem(UTILS_GetNodeText(Langs[i]), Langs[i].getAttribute("name")));
 	}
 
 	DivLang.appendChild(Ul);
@@ -195,20 +202,22 @@ function INTERFACE_CreateLanguage()
 }
 
 /**
-* Create language flag image
+* Create language links
 *
 * @param Lang is language (i.e.: en_US, pt_BR, zh_CN,...)
-* @return List item element with image
+* @return List item
 * @private
 */
-function INTERFACE_CreateLangFlag(Lang)
+function INTERFACE_CreateLangItem(Lang, Name)
 {
 	var Li = UTILS_CreateElement("li");
-	var Img = UTILS_CreateElement("img");
+	//var Item = UTILS_CreateElement("img");
+	var Item = UTILS_CreateElement("span");
 
-	Img.src = "images/lang/"+Lang+".png";
-	Li.appendChild(Img);
-
+	//Item.src = "images/lang/"+Lang+".png";
+	Item.innerHTML = UTILS_Capitalize(Name);
+	Li.appendChild(Item);
+	
 	Li.onclick = function(){
 		INTERFACE_EndLogin();
 		UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);

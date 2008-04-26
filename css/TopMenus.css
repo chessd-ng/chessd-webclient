@@ -30,7 +30,7 @@
 
 #Page #RoomMenuDiv ul,
 #Page #ChallengeMenuDiv ul,
-#Page #GameRoomMenuDiv ul {
+{
 	height			: 22.5mm;
 	list-style		: none;
 	overflow		: auto;
@@ -38,7 +38,7 @@
 
 #Page #RoomMenuDiv li,
 #Page #ChallengeMenuDiv li,
-#Page #GameRoomMenuDiv li {
+{
 	font			: 11px Trebuchet MS;
 	color			: #216778;
 	margin-top		: 3px;
@@ -52,4 +52,34 @@
 #Page #GameRoomMenuDiv li:hover,
 #Page #GameRoomMenuDiv p:hover {
 	background-color: #EAF4F5;
+}
+
+
+
+#Page #RoomMenuDiv hr {
+	height			: 1px;
+	background-color	: #FFA200;
+	border			: 0px;
+}
+
+#Page #RoomMenuDiv #createRoom {
+	text-align		: center;
+}
+
+
+#Page #GameRoomMenuDiv ul
+{
+	font			: italic bold 11px Trebuchet MS;
+	color			: #216778;
+	margin-top		: 3px;
+	cursor			: default;
+	list-style		: none;
+}
+
+#Page #GameRoomMenuDiv li
+{
+	font			: 10px Trebuchet MS;
+	color			: #216778;
+	cursor			: pointer;
+	text-align		: center;
 }

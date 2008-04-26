@@ -275,6 +275,23 @@ function MESSAGE_Info(User)
 }
 
 /**
+* Message to get users ratings profile
+*
+*/
+function MESSAGE_InfoProfile(User)
+{
+	var XMPP;
+
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' from='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' to='rating."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetRating+"'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#profile'>";
+	XMPP += "<profile jid='"+User+"@"+MainData.Host+"' />";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
+
+
+/**
 * Message to get users ratings
 */
 function MESSAGE_UserListInfo()
@@ -446,6 +463,22 @@ function MESSAGE_GameRoomList()
 
    	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_GetGamesList+"' to='games."+MainData.Host+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
+
+	return XMPP;
+}
+
+/**
+* Get the list information of all games  been played
+* 
+* @return 	XMPP with iq to get all games been played with respective info
+* @author 	Rubens
+*/
+function MESSAGE_GameRoomInfoList(Room)
+{
+	var XMPP;
+
+	XMPP  = "<iq type='get' to='"+Room+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameInfo+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
 
 	return XMPP;
 }
