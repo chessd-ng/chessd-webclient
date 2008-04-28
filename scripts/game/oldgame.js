@@ -625,7 +625,7 @@ function OLDGAME_GotoBoard(NumBoard)
 * @return       void
 * @author       Danilo
 */
-function OLDGAME_OpenOldGameWindow()
+function OLDGAME_OpenOldGameWindow(User)
 {	
 	if (document.getElementById("OldGamesDiv"))
 		return;
@@ -635,12 +635,16 @@ function OLDGAME_OpenOldGameWindow()
 	var Id = MainData.SearchGameMaxId; 
 	MainData.SearchGameMaxId++; 
 
+	if (User == null)
+	{
+		User ="";
+	}
 
 	Elements = WINDOW_OldGame(Id);
 
-	MainData.AddSearchGameInfo(Id, Elements);
+	MainData.AddSearchGameInfo(Id, Elements, User);
 
-	CONNECTION_SendJabber(MESSAGE_GetOldGames(Id,"","",10,0));
+	CONNECTION_SendJabber(MESSAGE_GetOldGames(Id,User,"",10,0));
 
 	SearchInfo = MainData.GetSearchGameInfo(Id);
 	SearchInfo.Elements.SetSearchButton(SearchInfo);
