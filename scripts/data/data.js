@@ -60,6 +60,7 @@ function DATA(ConfFile, LangFile)
 	this.OrderBy = "0";
 	this.ChatList = new Array();
 	this.RoomList = new Array();
+	this.RoomCurrentRating ="blitz"
 	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
 	this.ChatList = new Array();

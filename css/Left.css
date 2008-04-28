@@ -46,18 +46,33 @@
 
 /* order by rating or nick */
 #Main #Left #order_nick, 
-#Main #Left .order_rating {
+#Main #Left .order_rating,
+#Main #Left .order_rating_selec {
 	font			: 11px Trebuchet MS;
 	color			: #216778;
 	cursor			: pointer;
+	border-bottom:	1px solid
 }
 
-#Main #Left .order_rating {
+#Main #Left .order_rating,
+#Main #Left .order_rating_selec {
 	position		: absolute;
 	width			: 29mm;
 	right			: 3px;
-	border			: 0px;
+	border			: 1px solid #FFA200;
 	text-align		:right;
+}
+
+#Main #Left .option_selected {
+	color			: #FFA200 !important;
+}
+
+#Main #Left .option_not_selected {
+	color			: #216778;
+}
+
+#Main #Left .order_rating_selec {
+	color			: #FFA200 !important;
 }
 
 #Main #Left .order_selec {
