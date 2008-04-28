@@ -1394,14 +1394,14 @@ function DATA_PushGameToOldGame(GameObj)
 * @return	boolean
 * @author	Danilo Yorinori
 */
-function DATA_AddSearchGameInfo(Id, Elements)
+function DATA_AddSearchGameInfo(Id, Elements, User)
 {
 	var Search = new Object();
 
 	Search.Id = Id;
 	Search.NGames = 10;
 	Search.Offset = 0;
-	Search.P1 = "";
+	Search.P1 = User;
 	Search.P2 = "";
 	Search.Color = "";
 	Search.From = "";

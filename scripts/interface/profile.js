@@ -145,6 +145,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 		
 		WhoAmIUser = 	UTILS_CreateElement('textarea',null,'inf_whoami');
 		WhoAmIUser.value = Profile.Description;
+		WhoAmIUser.rows="6";
 	
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
 		SaveProfile.type = "button";
@@ -255,19 +256,16 @@ function INTERFACE_ShowProfileWindow(Profile)
 	TotalTimeLabel.appendChild(TotalTimeSpan);
 
 	// Old Games Div <Old Games Div>
-	OldGamesDiv = UTILS_CreateElement('div','OldGamesDiv');
+	OldGamesDiv = UTILS_CreateElement('div','OldGameDiv');
 	if (User)
 	{
-		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games1'))
+		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games1'));
+		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(MainData.Username); };
 	}
 	else
 	{
 		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.User);
-	}
-
-	OldGamesLabel.onclick = function() {
-		// Send the messages to get user old games
-        	CONNECTION_SendJabber(MESSAGE_GetOldGames(Profile.User, "", 10, 0));
+		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(Profile.User); };
 	}
 
 	// Buttons Div 
