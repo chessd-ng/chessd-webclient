@@ -5,8 +5,8 @@
 		<general_name>ChessD</general_name>
 	</general>
 	<utils>
-		<not_implemented_title>N�o implementado.</not_implemented_title>
-		<not_implemented>Este recurso n�o est� implementado no momento.</not_implemented>
+		<not_implemented_title>Não implementado.</not_implemented_title>
+		<not_implemented>Este recurso não está implementado no momento.</not_implemented>
 	</utils>
 	<window>
 		<window_yes>Sim</window_yes>
@@ -21,7 +21,7 @@
 	</window>
 	<login>
 		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
-		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com rôbos, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text1>
+		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text1>
 		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse</login_text2>
 		<login_text3>Recomendamos o uso do navegador Firefox para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova clique aqui para baixá-la.</login_text3>
 		<login_footer>Bom Divertimento!</login_footer>
@@ -30,7 +30,7 @@
 		<login_user>Usuário</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
-		<login_connection_refused>Servidor de mensagens indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
+		<login_connection_refused>Servidor de mensagens indisponí­vel no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
 		<login_lost_connection>Conexão perdida.</login_lost_connection>
 		<login_load_wait>Aguarde...</login_load_wait>
@@ -44,7 +44,7 @@
 		<menu_adjourn>Adjudicar</menu_adjourn>
 		<menu_search_game>Buscar Partida</menu_search_game>
 		<menu_search_user>Buscar Usuário</menu_search_user>
-		<menu_news>Notícias</menu_news>
+		<menu_news>Notí­cias</menu_news>
 		<menu_preferences>Preferências</menu_preferences>
 		<menu_help>Ajuda</menu_help>
 		<menu_exit>Sair</menu_exit>
@@ -61,7 +61,7 @@
 		<contact_order_nick>Apelido</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Adicionar usuário</contact_invite>
-		<contact_invite_text>%s adicionou vocÃª como contato, deseja aceitar?</contact_invite_text>
+		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
 		<contact_auth>Aceitar</contact_auth>
 		<contact_decline>Cancelar</contact_decline>
 		<contact_ok>OK</contact_ok>
@@ -106,8 +106,8 @@
 	</group>
 	<status>
 		<status_offline>offline</status_offline>
-		<status_available>disponível</status_available>
-		<status_unavailable>indisponível</status_unavailable>
+		<status_available>disponí­vel</status_available>
+		<status_unavailable>indisponí­vel</status_unavailable>
 		<status_busy>ocupado</status_busy>
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
@@ -206,10 +206,10 @@
 		<game_black_queen>Rainha Preta</game_black_queen>
 		<game_black_king>Rei Preto</game_black_king>
 
-		<game_button_first>Início</game_button_first>
+		<game_button_first>Iní­cio</game_button_first>
 		<game_button_prev>Anterior</game_button_prev>
 		<game_button_next>Próximo</game_button_next>
-		<game_button_last>Útimo</game_button_last>
+		<game_button_last>Ótimo</game_button_last>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informações</profile_window>
@@ -240,7 +240,7 @@
 		<profile_change_image>Selecione a foto</profile_change_image>
 		<profile_change_image_title>Mudar foto</profile_change_image_title>
 		<profile_load_error>Erro</profile_load_error>
-		<profile_load_error_title>Nao foi possível carregar a foto</profile_load_error_title>
+		<profile_load_error_title>Não foi possí­vel carregar a foto</profile_load_error_title>
 	</profile>
 	<register>
 		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre</register_inf>
