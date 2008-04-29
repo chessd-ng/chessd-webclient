@@ -367,6 +367,7 @@ function GAME_End(XML)
 	var PlayerTag, ReasonTag;
 	var Game, GameID, Reason, Player, Winner;
 	var Title = UTILS_GetText("game_end_game");
+	var Playing;
 	var Text;
 
 	// Get the room name
@@ -381,34 +382,47 @@ function GAME_End(XML)
 		Game.Finished = true;
 	}
 
-	// If this end game message is from a not current
-	// game then do nothing
-	// This case happen when player is in observer mode
-	if(MainData.CurrentGame.Id != GameID)
+	// If this end game message is from a current game then
+	// show message
+	if(MainData.CurrentGame.Id == GameID)
 	{
-		return;
+		// Get the reason 
+		ReasonTag = XML.getElementsByTagName("reason");
+		if (ReasonTag.length > 0)
+		{
+			// Get the reason from tag 'reason'
+			Reason = UTILS_GetNodeText(ReasonTag[0]);
+		}
+		else
+		{
+			Reason = UTILS_GetText("game_canceled");
+		}
+		
+		// Show end game message to user
+		WINDOW_Alert(Title, Reason);
 	}
 
-	// Get the reason 
-	ReasonTag = XML.getElementsByTagName("reason");
-	if (ReasonTag.length > 0)
+	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
 	{
-		// Get the reason from tag 'reason'
-		Reason = UTILS_GetNodeText(ReasonTag[0]);
+		Playing = false;
 	}
 	else
 	{
-		Reason = UTILS_GetText("game_canceled");
+		Playing = true;
 	}
-	
-	// Show end game message to user
-	WINDOW_Alert(Title, Reason);
 
-	
 	OLDGAME_EndGame(GameID);
 
-	// Set status to playing
-	return CONTACT_ChangeStatus("available", "return");
+	// Set status avaialable for players
+	if (Playing)
+	{
+		return CONTACT_ChangeStatus("available", "return");
+	}
+	// and do nothing for observers
+	else
+	{
+		return "";
+	}
 }
 
 

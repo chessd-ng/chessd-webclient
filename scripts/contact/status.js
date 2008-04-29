@@ -26,6 +26,7 @@
 function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
 	var i, XML, Status, StatusItem;
+	var Select;
 		
 	// Change user status for contacts
 	XML = MESSAGE_ChangeStatus(NewStatus);
