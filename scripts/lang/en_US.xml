@@ -16,8 +16,8 @@
                 <window_search>Search</window_search>	
 	</window>
 	<login>
-		<login_title>Welcome to new ChessD Web Interface!</login_title>
-		<login_text>This is a test version that doesn't depends of other software. It isn't available commands to change messages with the old server user's, it's only possible betwin the users on this web interface. We are counting on you, with criticisms, suggestions, to solve any possible problems found and have a better version soon!</login_text>
+		<login_title>Welcome to new Xadrez Livre Web Interface!</login_title>
+		<login_text1>This is a test version that doesn't depends of other software. It isn't available commands to change messages with the old server user's, it's only possible betwin the users on this web interface. We are counting on you, with criticisms, suggestions, to solve any possible problems found and have a better version soon!</login_text1>
 		<login_footer>Have fun!</login_footer>
 		<login_remember_pass>Remember password?</login_remember_pass>
 		<login_signin>Quick register</login_signin>
