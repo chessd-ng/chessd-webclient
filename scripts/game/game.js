@@ -817,6 +817,7 @@ function GAME_HandleVCardPhoto(XML)
 	var PhotoType;
 	var Img;
 
+	// If there is no game opened, do nothing;
 	if( MainData.CurrentGame == null)
 	{
 		return "";
@@ -839,15 +840,21 @@ function GAME_HandleVCardPhoto(XML)
 	Player = XML.getAttribute("from").split("@")[0];
 
 	// Update current game player image
-	if(MainData.CurrentGame.PW.Name == Player)
+	// Player White
+	if(MainData.CurrentGame.PW == Player)
 	{
 		MainData.CurrentGame.WPhoto = Img;
 		MainData.CurrentGame.Game.SetWPhoto(Img);
 	}
-	else if(MainData.CurrentGame.PB.Name == Player)
+	// Player Black
+	else if(MainData.CurrentGame.PB == Player)
 	{
 		MainData.CurrentGame.BPhoto = Img;
 		MainData.CurrentGame.Game.SetBPhoto(Img);
+	}
+	else
+	{
+		//This case should not happen
 	}
 	
 	return "";
