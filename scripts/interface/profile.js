@@ -549,7 +549,7 @@ function INTERFACE_ProfileSetRatings(Ratings)
 */
 function INTERFACE_ProfileSetTotalTime(Time)
 {
-	this.TotalTime.innerHTML = Time;
+	this.TotalTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
 }
 
 /**
@@ -558,7 +558,7 @@ function INTERFACE_ProfileSetTotalTime(Time)
 */
 function INTERFACE_ProfileSetOnlineTime(Time)
 {
-	this.OnlineTime.innerHTML = Time;
+	this.OnlineTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
 }
 
 /**

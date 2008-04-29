@@ -20,8 +20,8 @@
 		<window_search>Buscar</window_search>
 	</window>
 	<login>
-		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
-		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text1>
+		<login_title>Seja bem-vindo ao Xadrez Livre!</login_title>
+		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no link ao lado, entrar e jogar!</login_text1>
 		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse </login_text2>
 		<login_text3><![CDATA[Recomendamos o uso do navegador <a href='http://www.firefox.com'>Firefox</a> para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova <a href='http://www.firefox.com'>clique aqui para baixá-la</a>.]]></login_text3>
 		<login_footer>Bom Divertimento!</login_footer>
@@ -243,6 +243,9 @@
 		<profile_change_image_title>Mudar foto</profile_change_image_title>
 		<profile_load_error>Erro</profile_load_error>
 		<profile_load_error_title>Não foi possí­vel carregar a foto</profile_load_error_title>
+		<profile_year>a</profile_year>
+		<profile_month>m</profile_month>
+		<profile_day>d</profile_day>
 	</profile>
 	<register>
 		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre</register_inf>
