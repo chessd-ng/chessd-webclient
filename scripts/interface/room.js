@@ -230,18 +230,24 @@ function INTERFACE_HideRoomList()
 */
 function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 {
-	// Get game type list
-	var Node = document.getElementById("GameRoomMenuList"+UTILS_Capitalize(GameType));
+	// Get game menu
+	var Node = document.getElementById("GameRoomMenuDiv");
+	var List;
 	var Room, i;
 
-	if (!Node)
+	if (Node == null)
+	{
+		return false;
+	}
+	else
 	{
 		// Get default list
-		Node = document.getElementById("GameRoomMenuListOthers");
-		// If menu is not on screen
-		if(!Node)
+		List = document.getElementById("GameRoomMenuList"+UTILS_Capitalize(GameType));
+		// If list doesn't exists, create one
+		if(List == null)
 		{
-			return;
+			List = UTILS_CreateElement("ul","GameRoomMenuList"+UTILS_Capitalize(GameType),null, UTILS_Capitalize(GameType));
+			Node.appendChild(List);
 		}
 	}
 
@@ -261,8 +267,8 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 	}
 
 	// Insert item in current game list
-	Node.appendChild(Room);
-	Node.style.visibility = "visible";
+	List.appendChild(Room);
+	//List.style.visibility = "visible";
 	return true;
 }
 
