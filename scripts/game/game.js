@@ -367,6 +367,7 @@ function GAME_End(XML)
 	var PlayerTag, ReasonTag;
 	var Game, GameID, Reason, Player, Winner;
 	var Title = UTILS_GetText("game_end_game");
+	var Playing;
 	var Text;
 
 	// Get the room name
@@ -389,6 +390,10 @@ function GAME_End(XML)
 
 	// FInish game in structure
 	Game = MainData.GetGame(GameID);
+	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
+		Playing = false;
+	else
+		Playing = true;
 	Game.Game.StopTimer();
 
 	if (Game)
@@ -398,8 +403,12 @@ function GAME_End(XML)
 
 	OLDGAME_EndGame(GameID);
 
-	// Set status to playing
-	return CONTACT_ChangeStatus("available", "return");
+	// Set status avaialable for players
+	if (Playing)
+		return CONTACT_ChangeStatus("available", "return");
+	// and do nothing for observers
+	else
+		return "";
 }
 
 
