@@ -234,6 +234,8 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	GameRoomListLight = UTILS_CreateElement("ul", "GameRoomMenuListLight", null, "Light");
 	GameRoomListBughouse = UTILS_CreateElement("ul", "GameRoomMenuListBughouse",null, "Bughouse");
 
+	GameRoomListOthers = UTILS_CreateElement("ul", "GameRoomMenuListOthers",null, "Others");
+	
 	MenuDiv.style.left = OffsetLeft+"px";
 
 	GameRoomListBlitz.style.visibility = "hidden";

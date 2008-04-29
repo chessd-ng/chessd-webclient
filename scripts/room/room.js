@@ -163,7 +163,8 @@ function ROOM_HandleGameRoomInfoList(XML)
 	P2.Time = 0;
 	P2.Color = "black";
 	P2.Inc = 0;
-	
+
+	// interface/room.js
 	INTERFACE_ShowGameRoomList(GameId, Name, P1, P2, GameType);
 
 	return "";
