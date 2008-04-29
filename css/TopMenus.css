@@ -47,6 +47,7 @@
 
 #Page #RoomMenuDiv li:hover,
 #Page #RoomMenuDiv p:hover,
+#Page #RoomMenuDiv span:hover,
 #Page #ChallengeMenuDiv li:hover,
 #Page #ChallengeMenuDiv p:hover,
 #Page #GameRoomMenuDiv li:hover,
@@ -54,16 +55,16 @@
 	background-color: #EAF4F5;
 }
 
-
-
 #Page #RoomMenuDiv hr {
 	height			: 1px;
 	background-color	: #FFA200;
 	border			: 0px;
+	margin			:	2mm 0mm 1mm 0mm;
 }
 
 #Page #RoomMenuDiv #createRoom {
-	text-align		: center;
+	border-bottom	:	1px solid #216778;
+	cursor			: pointer;
 }
 
 

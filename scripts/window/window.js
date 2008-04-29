@@ -183,11 +183,18 @@ function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 
 function WINDOW_CreateRoom()
 {
+	// If another create room window is opened, exit function
+	if (document.getElementById("CreateRoomDiv"))
+		return;
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowCreateRoomWindow();
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create_room'));
+
+	// Focus room name input
+	document.getElementById('CreateRoomInputName').focus();
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);

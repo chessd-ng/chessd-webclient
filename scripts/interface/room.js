@@ -828,7 +828,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	OptionsDiv = UTILS_CreateElement('div', 'OptionsDiv');
 	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_name'));
-	Input = UTILS_CreateElement('input');
+	Input = UTILS_CreateElement('input','CreateRoomInputName');
 	Br = UTILS_CreateElement('br');
 
 	Input.type = "text";

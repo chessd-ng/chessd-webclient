@@ -90,6 +90,7 @@
 		<room_order_nick>Apelido</room_order_nick>
 		<room_order_rating>Rating</room_order_rating>
 		<room_create_room>Criar sala</room_create_room>
+		<room_create_rooms>Criar salas</room_create_rooms>
 		<room_cancel_room>Cancelar sala</room_cancel_room>
 		<room_name>Nome: </room_name>
 		<room_description>Descrição: </room_description>
