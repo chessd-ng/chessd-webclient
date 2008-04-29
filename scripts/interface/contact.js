@@ -355,7 +355,20 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	for (i=0; i < Options.length; i++)
 	{
 		// Create element
-		Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		// If Option is match request
+		if (Options[i].Name == UTILS_GetText("usermenu_match"))
+		{
+			// test if match request was set, if not, set class as disabled
+			if (Options[i].Func == null)
+				Option = UTILS_CreateElement("p", null, 'option_disabled', Options[i].Name);
+			// else, add this option normally
+			else
+				Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		}
+		else
+		{
+			Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		}
 
 		// Setting function
 		Option.onclick = Options[i].Func;

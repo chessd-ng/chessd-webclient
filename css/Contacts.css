@@ -223,6 +223,10 @@
 	background-color: #EAF5F4;
 }
 
+#UserMenuDiv .option_disabled {
+	color			: #C0C0C0;
+}
+
 /**
 *	Invite window
 */

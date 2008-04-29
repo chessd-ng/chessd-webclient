@@ -340,16 +340,22 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		i += 1;
 
 		// Match user
-		if ( ((MainData.GetStatus(Username) == "available") || (MainData.GetStatus(Username) == "away") || (MainData.GetStatus(Username) == "busy")) && (MainData.Status != "playing"))
+		Options[i] = new Object();
+		Options[i].Name = UTILS_GetText("usermenu_match");
+		// Request for match is possible only if the status of opponent is (avaiable, away, busy) and
+		// the user isn't playing a game
+		if ( ((MainData.GetStatus(Username) != "offline") && (MainData.GetStatus(Username) != "playing") && (MainData.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
 		{
-			Options[i] = new Object();
-			Options[i].Name = UTILS_GetText("usermenu_match");
 			Options[i].Func = function () {
 				Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username);
 				WINDOW_Challenge(Username, Rating);
 			};
-			i += 1;
 		}
+		else
+		{
+			Options[i].Func = null;
+		}
+		i += 1;
 
 		// Add or remove contact
 		if (MainData.IsContact(Username))
