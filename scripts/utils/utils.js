@@ -539,7 +539,7 @@ function UTILS_String2Board(BoardString)
 *
 * @param 	str is string
 * @return 	string with "<" and ">" replaced
-* @author
+* @author	Rubens
 */
 function UTILS_ConvertChatString(Str)
 {
@@ -561,6 +561,94 @@ function UTILS_JabberLang(DefaultLang)
 	else
 		return "";
 }
+
+/*
+* Convert time in seconds to days, hours, minuts.
+*
+* @param 	time number
+* @return 	time formated in string
+* @author	Rubens
+*/
+function UTILS_ConvertTime(Seconds)
+{
+	var Day, Month, Year;
+	var Sec, Min, Hour;
+	var TimeFormat = "";
+
+	Sec = Seconds % 60;
+	Min = Math.round((Seconds / 60) % 60);
+	Hour  = Math.round((Seconds / 3600) % 24);
+
+	Day = Math.round((Seconds / (3600*24)) % 30);
+	Month = Math.round((Seconds / (3600*24*30)) % 12);
+	Year = Math.round(Seconds / (3600*24*30*12));
+
+	// Concat Years
+	if(Year != 0)
+	{
+		TimeFormat += Year + UTILS_GetText("profile_year");
+	}
+	// Concat Months
+	if(Month != 0)
+	{
+		TimeFormat += " "+Month + UTILS_GetText("profile_month");
+	}
+	// Concat Days
+	if(Day != 0)
+	{
+		TimeFormat += " "+Day + UTILS_GetText("profile_day");
+	}
+
+
+	// Concat hour
+	if(Hour != 0)
+	{
+		TimeFormat +=" ";
+		if(Hour < 10)
+		{
+			TimeFormat += "0";
+		}
+		TimeFormat += Hour+":";
+	}
+	else
+	{
+		TimeFormat += " 00:" ;
+	}
+
+
+	// Concat minutes
+	if(Min != 0)
+	{
+		if(Min < 10)
+		{
+			TimeFormat += "0";
+		}
+		TimeFormat += Min+":";
+	}
+	else
+	{
+		TimeFormat += "00:" ;
+	}
+
+	
+	// Concat seconds
+	if(Sec != 0)
+	{
+		if(Sec < 10)
+		{
+			TimeFormat += "0";
+		}
+		TimeFormat += Sec;
+	}
+	else
+	{
+		TimeFormat += "00" ;
+	}
+
+	return TimeFormat;
+}
+
+
 
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
