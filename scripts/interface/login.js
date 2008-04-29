@@ -65,7 +65,7 @@ function INTERFACE_StartLogin()
 	Text = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text1"));
 	Text2 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text2"));
 	Text3 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text3"));
-	Link = UTILS_CreateElement("a", null, null, "http://xadrezlivre.c3sl.ufpr.br/projeto");
+	Link = UTILS_CreateElement("a", null, "link", "http://xadrezlivre.c3sl.ufpr.br/projeto");
 	Link.href = "http://xadrezlivre.c3sl.ufpr.br/projeto";
 	Version = UTILS_CreateElement("p", "version", null, MainData.Version);
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
@@ -101,8 +101,8 @@ function INTERFACE_StartLogin()
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
 	LoginTextBoxDiv.appendChild(Text);
+	Text2.appendChild(Link);
 	LoginTextBoxDiv.appendChild(Text2);
-	LoginTextBoxDiv.appendChild(Link);
 	LoginTextBoxDiv.appendChild(Text3);
 	LoginTextBoxDiv.appendChild(TitleEnd);
 
