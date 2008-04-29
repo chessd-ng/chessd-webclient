@@ -11,6 +11,10 @@
 	overflow		: hidden;
 }
 
+#LoginDiv #TextDiv a {
+	cursor			: pointer;
+}
+
 #LoginDiv #TextDiv {
 	width			: 450px;
 	float			: left;

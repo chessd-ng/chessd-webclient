@@ -22,7 +22,7 @@
 	<login>
 		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
 		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text1>
-		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse</login_text2>
+		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse </login_text2>
 		<login_text3><![CDATA[Recomendamos o uso do navegador <a href='http://www.firefox.com'>Firefox</a> para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova <a href='http://www.firefox.com'>clique aqui para baixá-la</a>.]]></login_text3>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha</login_remember_pass>
