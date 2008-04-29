@@ -78,7 +78,14 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	// Layer 1 Left Elements
 	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
 
-	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_pieces'));
+	if (GameParameters != undefined)
+	{
+		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_op_pieces'));
+	}
+	else
+	{
+		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
+	}
 
 	try
 	//Fix radio button for IE

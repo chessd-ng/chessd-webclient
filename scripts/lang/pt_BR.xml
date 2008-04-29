@@ -22,8 +22,8 @@
 	<login>
 		<login_title>Seja bem vindo ao Xadrez Livre!</login_title>
 		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no botão ao lado, entrar e jogar!</login_text1>
-		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse</login_text2>
-		<login_text3>Recomendamos o uso do navegador Firefox para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova clique aqui para baixá-la.</login_text3>
+		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse </login_text2>
+		<login_text3><![CDATA[Recomendamos o uso do navegador <a href='http://www.firefox.com'>Firefox</a> para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova <a href='http://www.firefox.com'>clique aqui para baixá-la</a>.]]></login_text3>
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
@@ -90,6 +90,7 @@
 		<room_order_nick>Apelido</room_order_nick>
 		<room_order_rating>Rating</room_order_rating>
 		<room_create_room>Criar sala</room_create_room>
+		<room_create_rooms>Criar salas</room_create_rooms>
 		<room_cancel_room>Cancelar sala</room_cancel_room>
 		<room_name>Nome: </room_name>
 		<room_description>Descrição: </room_description>
@@ -131,7 +132,8 @@
 		<challenge_title_invite>Convidar para jogar</challenge_title_invite>
 		<challenge_title_offer>Convite para jogar</challenge_title_offer>
 		<challenge_information>convidou para jogar uma partida com as seguintes caracteristicas:</challenge_information>
-		<challenge_pieces>Peças:</challenge_pieces>
+		<challenge_my_pieces>Minhas peças:</challenge_my_pieces>
+		<challenge_op_pieces>Suas peças:</challenge_op_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
 		<challenge_category>Categoria de jogo:</challenge_category>
 		<challenge_inc_label>Incremento:</challenge_inc_label>

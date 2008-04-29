@@ -1,5 +1,5 @@
 #Main #Left #Contact {
-	height			: 50mm;
+	height			: 52mm;
 	border			: 2px solid #216778;
 	background-color: #FFF;
 	margin-top		: 0.5mm;
@@ -25,7 +25,9 @@
 	display			: block;
 	height			: 33mm;
 	padding-bottom	: 1mm;
-	overflow		: auto;
+	margin-top	: 2mm;
+	overflow-y		: auto;
+	overflow-x		: hidden;
 	width			: 48mm;
 }
 
@@ -191,7 +193,8 @@
 /* Search user */
 #Main #Left #Contact a {
 	display			: block;
-	margin			: 1mm 0mm 1mm 13mm;
+	margin			: 1mm 14.7mm 1mm 13mm;
+	border-bottom:	1px solid #216778;
 	text-decoration	: none;
 	font			: bold 11px Trebuchet MS;
 	color			: #216778;
@@ -218,6 +221,10 @@
 
 #UserMenuDiv p:hover {
 	background-color: #EAF5F4;
+}
+
+#UserMenuDiv .option_disabled {
+	color			: #C0C0C0;
 }
 
 /**

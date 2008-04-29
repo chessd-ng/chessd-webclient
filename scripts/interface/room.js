@@ -593,7 +593,7 @@ function INTERFACE_CreateRoom(RoomName)
 	
 	// Order
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
-	OrderNick.onclick = function() { INTERFACE_SortUserByNickInRoom(RoomName); }; 
+	OrderNick.onclick = function() { INTERFACE_SortUserByNickInRooms(); }; 
 	OrderRating = UTILS_CreateElement("select", "order_rating_"+RoomName, "order_rating", UTILS_GetText("room_order_rating"));
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
@@ -606,7 +606,7 @@ function INTERFACE_CreateRoom(RoomName)
 	OrderRatingOpt.value = "standard";
 	OrderRating.appendChild(OrderRatingOpt);
 	OrderRating.onchange = function () {
-		INTERFACE_ChangeCurrentRating(this.value);
+		INTERFACE_ChangeCurrentRatingInRooms(this.value);
 	}
 
 	// Room user list
@@ -691,6 +691,112 @@ function INTERFACE_CreateRooms()
 	return RoomsDiv;
 }
 
+/**
+* Change current rating type showed in interface
+*
+* @public
+*/
+function INTERFACE_ChangeCurrentRatingInRooms(Type)
+{
+	var Node, NewRating, Div;
+	var i, j;
+
+	// Update current rating in the sctructure
+	MainData.RoomCurrentRating = Type;
+
+	// Changing ratings in rooms list
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		// Changing rating select of this room
+		Node = document.getElementById("order_rating_"+MainData.RoomList[i].Name);
+
+		// Changing style
+		Node.className = 'order_rating_selec';
+
+		Div = document.getElementById("RoomInside_"+MainData.RoomList[i].Name);
+
+		// Change style of nick's span
+		Div.getElementsByTagName("span")[0].className = null;
+
+		if (Node)
+		{	
+			for (j=0; j<Node.childNodes.length; j++)
+			{
+				if (Node.childNodes[j].value == Type)
+				{
+					Node.selectedIndex = j;
+					Node.childNodes[j].className = 'option_selected';
+				}
+				else
+				{
+					Node.childNodes[j].className = 'option_not_selected';
+				}
+			}
+		}
+		
+		for (j=0; j<MainData.RoomList[i].UserList.length; j++)
+		{
+			// Search for the node
+			Node = document.getElementById(MainData.RoomList[i].Name+"_"+MainData.RoomList[i].UserList[j].Username+"-rating");
+
+			if (!Node)
+			{
+				continue;
+			}
+
+			// Getting new rating from structure
+			eval("NewRating = MainData.RoomList[i].UserList[j].Rating."+UTILS_Capitalize(Type));
+
+			// Updating rating
+			if (NewRating)
+			{
+				Node.innerHTML = NewRating;
+			}
+			else
+			{
+				Node.innerHTML = "";
+			}	
+		}
+		INTERFACE_SortUserByRatingInRoom(MainData.RoomList[i].Name);
+	}
+}
+
+/**
+*	Change styles and sort users in rooms by nick 
+*
+* @void
+* @author Danilo 
+*/
+function INTERFACE_SortUserByNickInRooms()
+{
+	var Node, Div;
+	var i, j;
+
+	// Changing ratings in rooms list
+	for (i=0; i<MainData.RoomList.length; i++)
+	{
+		// Changing rating select of this room
+		Node = document.getElementById("order_rating_"+MainData.RoomList[i].Name);
+
+		// Changing style
+		Node.className = 'order_rating';
+
+		Div = document.getElementById("RoomInside_"+MainData.RoomList[i].Name);
+
+		// Change style of nick's span
+		Div.getElementsByTagName("span")[0].className = 'order_selec';
+
+		if (Node)
+		{	
+			for (j=0; j<Node.childNodes.length; j++)
+			{
+				Node.childNodes[j].className = 'option_not_selected';
+			}
+		}
+		INTERFACE_SortUserByNickInRoom(MainData.RoomList[i].Name);
+	}
+}
+
 /**********************************
  * FUNCTIONS - WINDOWS
  *************************************/
@@ -722,7 +828,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	OptionsDiv = UTILS_CreateElement('div', 'OptionsDiv');
 	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_name'));
-	Input = UTILS_CreateElement('input');
+	Input = UTILS_CreateElement('input','CreateRoomInputName');
 	Br = UTILS_CreateElement('br');
 
 	Input.type = "text";

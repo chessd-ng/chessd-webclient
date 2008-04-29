@@ -209,7 +209,7 @@ function INTERFACE_SetUserRating(Username, Category, Rating)
 */
 function INTERFACE_ChangeCurrentRating(Type)
 {
-	var Node, NewRating;
+	var Node, NewRating, Div;
 	var i, j;
 
 	// Update current rating in the sctructure
@@ -240,57 +240,28 @@ function INTERFACE_ChangeCurrentRating(Type)
 		}
 	}
 
-	// Changing rating select of this room
+	// Changing rating select of contact list
 	Node = document.getElementById("order_rating-contact");
 	if (Node)
 	{	
 		for (j=0; j<Node.childNodes.length; j++)
 		{
 			if (Node.childNodes[j].value == Type)
+			{
 				Node.selectedIndex = j;
+				Node.childNodes[j].className = 'option_selected';
+			}	
+			else
+			{
+				Node.childNodes[j].className = 'option_not_selected';
+			}
 		}
 	}
 	INTERFACE_SortUserByRating();
 
-	// Changing ratings in rooms list
-	for (i=0; i<MainData.RoomList.length; i++)
-	{
-		// Changing rating select of this room
-		Node = document.getElementById("order_rating_"+MainData.RoomList[i].Name);
-		if (Node)
-		{	
-			for (j=0; j<Node.childNodes.length; j++)
-			{
-				if (Node.childNodes[j].value == Type)
-					Node.selectedIndex = j;
-			}
-		}
-		
-		for (j=0; j<MainData.RoomList[i].UserList.length; j++)
-		{
-			// Search for the node
-			Node = document.getElementById(MainData.RoomList[i].Name+"_"+MainData.RoomList[i].UserList[j].Username+"-rating");
-
-			if (!Node)
-			{
-				continue;
-			}
-
-			// Getting new rating from structure
-			eval("NewRating = MainData.RoomList[i].UserList[j].Rating."+UTILS_Capitalize(Type));
-
-			// Updating rating
-			if (NewRating)
-			{
-				Node.innerHTML = NewRating;
-			}
-			else
-			{
-				Node.innerHTML = "";
-			}	
-		}
-		INTERFACE_SortUserByRatingInRoom(MainData.RoomList[i].Name);
-	}
+	// Changing style
+	document.getElementById("order_nick").className = null;
+	document.getElementById("order_rating-contact").className = 'order_rating_selec';
 }
 
 /**
@@ -384,7 +355,20 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	for (i=0; i < Options.length; i++)
 	{
 		// Create element
-		Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		// If Option is match request
+		if (Options[i].Name == UTILS_GetText("usermenu_match"))
+		{
+			// test if match request was set, if not, set class as disabled
+			if (Options[i].Func == null)
+				Option = UTILS_CreateElement("p", null, 'option_disabled', Options[i].Name);
+			// else, add this option normally
+			else
+				Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		}
+		else
+		{
+			Option = UTILS_CreateElement("p", null, null, Options[i].Name);
+		}
 
 		// Setting function
 		Option.onclick = Options[i].Func;
@@ -795,6 +779,7 @@ function INTERFACE_SortUserByNick()
 	var Tam = MainData.UserList.length;
 	var ListOn, ListOff;
 	var i, Item, Status;
+	var Node;
 
 	// TODO Expand to group
 	ListOn = document.getElementById("ContactOnlineList");
@@ -834,6 +819,22 @@ function INTERFACE_SortUserByNick()
 			{
 				ListOff.insertBefore(Item,null);
 			}
+		}
+	}
+
+	// Changin style
+	
+	// Nick style
+	document.getElementById("order_nick").className = 'order_selec';
+
+	// Contact list's select
+	Node = document.getElementById("order_rating-contact");
+	Node.className = 'order_rating';
+	if (Node)
+	{	
+		for (j=0; j<Node.childNodes.length; j++)
+		{
+			Node.childNodes[j].className = 'option_not_selected';
 		}
 	}
 }

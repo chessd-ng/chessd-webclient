@@ -163,8 +163,8 @@ function GAME_HandleAccept (XML)
 	// TODO
 	// Warn the player's interface
 
-	// Send a presence to GameRoom
-	return (MESSAGE_Presence(GameRoom+"/"+MainData.Username));	
+	// Send a presence to GameRoom with playing status
+	return (MESSAGE_ChangeStatus("playing",GameRoom+"/"+MainData.Username));	
 }
 
 
