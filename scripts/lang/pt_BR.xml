@@ -131,7 +131,8 @@
 		<challenge_title_invite>Convidar para jogar</challenge_title_invite>
 		<challenge_title_offer>Convite para jogar</challenge_title_offer>
 		<challenge_information>convidou para jogar uma partida com as seguintes caracteristicas:</challenge_information>
-		<challenge_pieces>Peças:</challenge_pieces>
+		<challenge_my_pieces>Minhas peças:</challenge_my_pieces>
+		<challenge_op_pieces>Suas peças:</challenge_op_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
 		<challenge_category>Categoria de jogo:</challenge_category>
 		<challenge_inc_label>Incremento:</challenge_inc_label>
