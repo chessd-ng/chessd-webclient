@@ -478,6 +478,13 @@ function GAME_StartGame(GameId, P1, P2)
 		MainData.CurrentGame.Game.Hide();
 	}
 
+	if (MainData.CurrentOldGame != null)
+	{
+		MainData.CurrentOldGame.Game.Hide();
+		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
+		MainData.RemoveOldGame(0);
+	}
+
 	if (P1.Name == MainData.Username)
 	{
 		YourColor = P1.Color;
