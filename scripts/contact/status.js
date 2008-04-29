@@ -25,7 +25,7 @@
 */
 function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
-	var i, XML;
+	var i, XML, Status, StatusItem;
 		
 	// Change user status for contacts
 	XML = MESSAGE_ChangeStatus(NewStatus);
@@ -36,7 +36,31 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 		XML += MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
 	}
 	
-	// Update your status instructure
+	// Change status in select menu
+	Select = document.getElementById("UserStatusSelect");
+
+	// If new status is playing, create new item in select box, select it and disabled select box
+	if (NewStatus == "playing")
+	{
+		// Playing
+		StatusItem = UTILS_CreateElement("option", 'status_playing_op', MainData.UserType+"_playing", "("+UTILS_Capitalize(UTILS_GetText("status_playing"))+")");
+		StatusItem.value = "playing";
+		StatusItem.selected = true;
+		Select.appendChild(StatusItem);
+	
+		Select.disabled = true;
+	}
+	// If current status is playing, remove playing option from select box, enable select box and 
+	// select avaiable status(Index 0)
+	else if (MainData.Status == "playing")
+	{
+		Select.disabled = false;
+		StatusItem = document.getElementById('status_playing_op');
+		Select.removeChild(StatusItem);
+		Select.selectedIdex = 0;
+	}
+	
+	// Update your status in structure
 	MainData.Status = NewStatus;
 
 	// Send to jabber or return the message
