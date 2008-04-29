@@ -280,29 +280,34 @@ function INTERFACE_FinishGame()
 function INTERFACE_RemoveGame()
 {
 	var Game = MainData.GetGame(this.Id);
-	var Node = this.Game;
+	var Board = this.Game;
 
-	if (!Game)
+	// If game exists
+	if (Game != null)
 	{	
-		if(!Node)
+		// if board isn't opened, do nothing.
+		if(Board == null)
 		{
 			return false
 		}
 		else
 		{
-			Node.parentNode.removeChild(Node);
-			return true;
+			// else if game is finished, remove it.
+			if (Game.Finished == true)
+			{
+				Board.parentNode.removeChild(Board);
+				this.Game = null;
+				return true;
+			}
+			else //else show a message and don't close board.
+			{
+				//This case happen when player is playing.
+				WINDOW_Alert(UTILS_GetText("game_remove_game"));
+				return false;
+			}
 		}
 	}
 
-	if (Game.Finished)
-	{
-		Node.parentNode.removeChild(Node);
-	}
-	else
-	{
-		WINDOW_Alert(UTILS_GetText("game_remove_game"));
-	}
 }
 
 /*

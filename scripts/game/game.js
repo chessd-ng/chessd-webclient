@@ -372,6 +372,23 @@ function GAME_End(XML)
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
+	Game = MainData.GetGame(GameID);
+	Game.Game.StopTimer();
+
+	// Finish game in structure
+	if (Game)
+	{
+		Game.Finished = true;
+	}
+
+	// If this end game message is from a not current
+	// game then do nothing
+	// This case happen when player is in observer mode
+	if(MainData.CurrentGame.Id != GameID)
+	{
+		return;
+	}
+
 	// Get the reason 
 	ReasonTag = XML.getElementsByTagName("reason");
 	if (ReasonTag.length > 0)
@@ -387,15 +404,7 @@ function GAME_End(XML)
 	// Show end game message to user
 	WINDOW_Alert(Title, Reason);
 
-	// FInish game in structure
-	Game = MainData.GetGame(GameID);
-	Game.Game.StopTimer();
-
-	if (Game)
-	{
-		Game.Finished = true;
-	}
-
+	
 	OLDGAME_EndGame(GameID);
 
 	// Set status to playing
@@ -472,7 +481,8 @@ function GAME_StartGame(GameId, P1, P2)
 	var YourColor;
 	var Buffer;
 
-	// Hide current game
+	// Hide current game (this case should happen when player
+	// is observing a game)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
@@ -481,8 +491,6 @@ function GAME_StartGame(GameId, P1, P2)
 	if (MainData.CurrentOldGame != null)
 	{
 		MainData.CurrentOldGame.Game.Hide();
-		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
-		MainData.RemoveOldGame(0);
 	}
 
 	if (P1.Name == MainData.Username)
@@ -495,6 +503,8 @@ function GAME_StartGame(GameId, P1, P2)
 	}
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
+
+	// Add game to data struct and set it to current game
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
@@ -526,6 +536,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+		// In this version, player should be able to
+		// observer just one game.
+		//GAME_RemoveGame(MainData.CurrentGame.Id);
+	}
+
+	if (MainData.CurrentOldGame != null)
+	{
+		MainData.CurrentOldGame.Game.Hide();
 	}
 
 	// 38 -> default piece size

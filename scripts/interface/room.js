@@ -431,12 +431,17 @@ function INTERFACE_CloseRoom()
 		{
 			// if player is observer a game then remove game
 			// from interface
+			// ps: This function close Room
 			GAME_RemoveGame(RoomName);
 		}
 	}
 
-	// Removing room of screen
-	Room.parentNode.removeChild(Room);
+	// if GAME_RemoveGame not closed the Room then remove room of screen
+	Room = document.getElementById("Room_"+RoomName);
+	if(Room != null)
+	{
+		Room.parentNode.removeChild(Room);
+	}
 
 	// Search for the next room to replace
 	for (i=0; i < MainData.RoomList.length; i++)

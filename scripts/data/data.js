@@ -1083,10 +1083,14 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 {
 	var NewGame = new Object();
 
+	/*
 	if(this.GameList.length == 0)
 	{
 		this.SetCurrentGame(NewGame);
 	}
+	*/
+	
+	this.SetCurrentGame(NewGame);
 
 	NewGame.Id = Id;
 	NewGame.YourColor = Color;
