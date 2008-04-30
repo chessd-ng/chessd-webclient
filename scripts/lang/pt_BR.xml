@@ -208,7 +208,7 @@
 		<game_black_queen>Rainha Preta</game_black_queen>
 		<game_black_king>Rei Preto</game_black_king>
 
-		<game_button_first>Iní­cio</game_button_first>
+		<game_button_first>Início</game_button_first>
 		<game_button_prev>Anterior</game_button_prev>
 		<game_button_next>Próximo</game_button_next>
 		<game_button_last>Ótimo</game_button_last>
@@ -284,5 +284,7 @@
 		<oldgame_date>Data</oldgame_date>
 		<oldgame_prev>Anteriores</oldgame_prev>
 		<oldgame_next>Proximos</oldgame_next>
+
+		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
 	</oldgame>
 </language>
