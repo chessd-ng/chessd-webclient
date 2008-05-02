@@ -136,9 +136,8 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
 	{
-		//MainData.CurrentOldGame.Game.Hide();
 		//In this version, user can only see one OldGame
-		OLDGAME_RemoveOldGame(0);
+		MainData.CurrentOldGame.Game.Hide();
 	}
 
 	// Check if player is watch own old game
@@ -258,28 +257,34 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 	HPlayer2.Color = Player2.Color;
 	HPlayer2.Time = StartP2Time;
 
-	// Load game history
-	for(i=0 ; i<HistoryMoves.length; i++)
+	if(HistoryMoves.length == 0)
 	{
-		HTime = HistoryMoves[i].getAttribute("time");
-		HTurn = HistoryMoves[i].getAttribute("turn");
-		HBoard = HistoryMoves[i].getAttribute("board");
-		HMove = HistoryMoves[i].getAttribute("move");
-
-		if(HTurn == "white")
-		{
-			HPlayer2.Time = HTime;
-		}
-		else
-		{
-			HPlayer1.Time = HTime;
-		}
-
-		Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+		WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("oldgame_no_moves"));
 	}
+	else
+	{
+		// Load game history
+		for(i=0 ; i<HistoryMoves.length; i++)
+		{
+			HTime = HistoryMoves[i].getAttribute("time");
+			HTurn = HistoryMoves[i].getAttribute("turn");
+			HBoard = HistoryMoves[i].getAttribute("board");
+			HMove = HistoryMoves[i].getAttribute("move");
 
-	OLDGAME_FirstBoard();
+			if(HTurn == "white")
+			{
+				HPlayer2.Time = HTime;
+			}
+			else
+			{
+				HPlayer1.Time = HTime;
+			}
 
+			Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+		}
+
+		OLDGAME_FirstBoard();
+	}
 	return Buffer;
 }
 

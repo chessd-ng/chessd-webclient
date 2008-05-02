@@ -373,42 +373,56 @@ function GAME_End(XML)
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
-	// Get the reason 
-	ReasonTag = XML.getElementsByTagName("reason");
-	if (ReasonTag.length > 0)
-	{
-		// Get the reason from tag 'reason'
-		Reason = UTILS_GetNodeText(ReasonTag[0]);
-	}
-	else
-	{
-		Reason = UTILS_GetText("game_canceled");
-	}
-	
-	// Show end game message to user
-	WINDOW_Alert(Title, Reason);
-
-	// FInish game in structure
 	Game = MainData.GetGame(GameID);
-	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
-		Playing = false;
-	else
-		Playing = true;
 	Game.Game.StopTimer();
 
+	// Finish game in structure
 	if (Game)
 	{
 		Game.Finished = true;
+	}
+
+	// If this end game message is from a current game then
+	// show message
+	if(MainData.CurrentGame.Id == GameID)
+	{
+		// Get the reason 
+		ReasonTag = XML.getElementsByTagName("reason");
+		if (ReasonTag.length > 0)
+		{
+			// Get the reason from tag 'reason'
+			Reason = UTILS_GetNodeText(ReasonTag[0]);
+		}
+		else
+		{
+			Reason = UTILS_GetText("game_canceled");
+		}
+		
+		// Show end game message to user
+		WINDOW_Alert(Title, Reason);
+	}
+
+	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
+	{
+		Playing = false;
+	}
+	else
+	{
+		Playing = true;
 	}
 
 	OLDGAME_EndGame(GameID);
 
 	// Set status avaialable for players
 	if (Playing)
+	{
 		return CONTACT_ChangeStatus("available", "return");
+	}
 	// and do nothing for observers
 	else
+	{
 		return "";
+	}
 }
 
 
@@ -481,10 +495,16 @@ function GAME_StartGame(GameId, P1, P2)
 	var YourColor;
 	var Buffer;
 
-	// Hide current game
+	// Hide current game (this case should happen when player
+	// is observing a game)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+	}
+
+	if (MainData.CurrentOldGame != null)
+	{
+		MainData.CurrentOldGame.Game.Hide();
 	}
 
 	if (P1.Name == MainData.Username)
@@ -497,6 +517,8 @@ function GAME_StartGame(GameId, P1, P2)
 	}
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
+
+	// Add game to data struct and set it to current game
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
 
 	// Show New Game
@@ -528,6 +550,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+		// In this version, player should be able to
+		// observer just one game.
+		//GAME_RemoveGame(MainData.CurrentGame.Id);
+	}
+
+	if (MainData.CurrentOldGame != null)
+	{
+		MainData.CurrentOldGame.Game.Hide();
 	}
 
 	// 38 -> default piece size
@@ -819,6 +849,7 @@ function GAME_HandleVCardPhoto(XML)
 	var PhotoType;
 	var Img;
 
+	// If there is no game opened, do nothing;
 	if( MainData.CurrentGame == null)
 	{
 		return "";
@@ -841,15 +872,21 @@ function GAME_HandleVCardPhoto(XML)
 	Player = XML.getAttribute("from").split("@")[0];
 
 	// Update current game player image
-	if(MainData.CurrentGame.PW.Name == Player)
+	// Player White
+	if(MainData.CurrentGame.PW == Player)
 	{
 		MainData.CurrentGame.WPhoto = Img;
 		MainData.CurrentGame.Game.SetWPhoto(Img);
 	}
-	else if(MainData.CurrentGame.PB.Name == Player)
+	// Player Black
+	else if(MainData.CurrentGame.PB == Player)
 	{
 		MainData.CurrentGame.BPhoto = Img;
 		MainData.CurrentGame.Game.SetBPhoto(Img);
+	}
+	else
+	{
+		//This case should not happen
 	}
 	
 	return "";

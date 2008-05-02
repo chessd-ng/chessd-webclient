@@ -163,7 +163,8 @@ function ROOM_HandleGameRoomInfoList(XML)
 	P2.Time = 0;
 	P2.Color = "black";
 	P2.Inc = 0;
-	
+
+	// interface/room.js
 	INTERFACE_ShowGameRoomList(GameId, Name, P1, P2, GameType);
 
 	return "";
@@ -240,7 +241,10 @@ function ROOM_EnterRoom(RoomName)
 }
 
 /**
-* Exit a room
+* Exit a room.
+* @param 	ReturnMsg is a flag to return XML or send Jabber(if ReturnMsg is null)
+* @return	XMPP with presence unavailable to a room
+* @author	Pedro and Rubens
 */
 function ROOM_ExitRoom()
 {
@@ -259,11 +263,10 @@ function ROOM_ExitRoom()
 		return null;
 	}
 
-	// Exit room in jabber server
 	XML = MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
 	CONNECTION_SendJabber(XML);
-
-	return true;
+	
+	return XML;
 }
 
 /**

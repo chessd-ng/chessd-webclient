@@ -279,30 +279,30 @@ function INTERFACE_FinishGame()
 */
 function INTERFACE_RemoveGame()
 {
-	var Game = MainData.GetGame(this.Id);
-	var Node = this.Game;
+	var GameObj = MainData.GetGame(this.Id);
+	var Board = this.Game;
 
-	if (!Game)
+	
+	// If game exists
+	if (GameObj != null)
 	{	
-		if(!Node)
+		// if board isn't opened, do nothing.
+		if(Board == null)
 		{
 			return false
 		}
-		else
+		// else if game is no finished, show message.
+		else if (GameObj.Finished == false)
 		{
-			Node.parentNode.removeChild(Node);
-			return true;
+			WINDOW_Alert(UTILS_GetText("game_remove_game"));
+			return false;
 		}
 	}
 
-	if (Game.Finished)
-	{
-		Node.parentNode.removeChild(Node);
-	}
-	else
-	{
-		WINDOW_Alert(UTILS_GetText("game_remove_game"));
-	}
+	//Remove board from interface
+	Board.parentNode.removeChild(Board);
+	return true;
+
 }
 
 /*

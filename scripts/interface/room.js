@@ -230,13 +230,25 @@ function INTERFACE_HideRoomList()
 */
 function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 {
-	var Node = document.getElementById("GameRoomMenuList"+UTILS_Capitalize(GameType));
+	// Get game menu
+	var Node = document.getElementById("GameRoomMenuDiv");
+	var List;
 	var Room, i;
 
-	// If menu is not on screen
-	if (!Node)
+	if (Node == null)
 	{
-		return null;
+		return false;
+	}
+	else
+	{
+		// Get default list
+		List = document.getElementById("GameRoomMenuList"+UTILS_Capitalize(GameType));
+		// If list doesn't exists, create one
+		if(List == null)
+		{
+			List = UTILS_CreateElement("ul","GameRoomMenuList"+UTILS_Capitalize(GameType),null, UTILS_Capitalize(GameType));
+			Node.appendChild(List);
+		}
 	}
 
 	// Create elements and insert rooms
@@ -253,9 +265,10 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 			WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));
 		}
 	}
-	
-	Node.appendChild(Room);
-	Node.style.visibility = "visible";
+
+	// Insert item in current game list
+	List.appendChild(Room);
+	//List.style.visibility = "visible";
 	return true;
 }
 
@@ -418,12 +431,17 @@ function INTERFACE_CloseRoom()
 		{
 			// if player is observer a game then remove game
 			// from interface
+			// ps: This function close Room
 			GAME_RemoveGame(RoomName);
 		}
 	}
 
-	// Removing room of screen
-	Room.parentNode.removeChild(Room);
+	// if GAME_RemoveGame not closed the Room then remove room of screen
+	Room = document.getElementById("Room_"+RoomName);
+	if(Room != null)
+	{
+		Room.parentNode.removeChild(Room);
+	}
 
 	// Search for the next room to replace
 	for (i=0; i < MainData.RoomList.length; i++)
