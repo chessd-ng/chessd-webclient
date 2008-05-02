@@ -538,7 +538,7 @@ function UTILS_String2Board(BoardString)
 * Convert a chat string to a format that can't be interpretated
 *
 * @param 	str is string
-* @return 	string with "<" and ">" replaced
+* @return 	string with '<' , '>', '&' and '"' replaced
 * @author	Rubens
 */
 function UTILS_ConvertChatString(Str)
@@ -547,6 +547,8 @@ function UTILS_ConvertChatString(Str)
 
 	StrTmp = Str.replace(/</g,"&lt;");
 	StrTmp = StrTmp.replace(/>/g,"&gt;");
+	StrTmp = StrTmp.replace(/&/g,"&amp;");
+	StrTmp = StrTmp.replace(/"/g,"&quot;");
 
 	return StrTmp;
 }
