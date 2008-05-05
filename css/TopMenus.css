@@ -29,15 +29,15 @@
 }
 
 #Page #RoomMenuDiv ul,
-#Page #ChallengeMenuDiv ul,
+#Page #ChallengeMenuDiv ul
 {
-	height			: 22.5mm;
+	height			: 17.5mm;
 	list-style		: none;
 	overflow		: auto;
 }
 
 #Page #RoomMenuDiv li,
-#Page #ChallengeMenuDiv li,
+#Page #ChallengeMenuDiv li
 {
 	font			: 11px Trebuchet MS;
 	color			: #216778;
