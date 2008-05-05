@@ -1392,7 +1392,7 @@ function INTERFACE_LastMove(Move)
 
 	}
 	
-	if(Move != "------")
+	if((Move != "------")&&( Move != "" ))
 	{
 		BlockOrig = this.FindBlock(PosOrig);
 		BlockDest = this.FindBlock(PosDest);
