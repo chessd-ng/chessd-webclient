@@ -31,7 +31,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	// Pre-validation
 	if (!UTILS_ValidateUsername(Username))
 	{
-		alert ("Invalid username");
+		alert (UTILS_GetText("login_validate_user"));
 		return;
 	}
 
@@ -128,10 +128,10 @@ function LOGIN_Interface()
 */
 function LOGIN_LoginFailed(Code)
 {
-	var ErroLabel = document.getElementById("ErrorLabel");
+	var ErrorLabel = document.getElementById("ErrorLabel");
 
 	// if login window is closed, then do nothing
-	if(ErroLabel == null)
+	if(ErrorLabel == null)
 	{
 		return;
 	}

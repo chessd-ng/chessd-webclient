@@ -39,6 +39,7 @@
 		<login_load_css>Carregando css...</login_load_css>
 		<login_load_images>Carregando imagens...</login_load_images>
 		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
+		<login_validate_user>Usuário inválido</login_validate_user>
 	</login>
 	<menu>
 		<menu_adjourn>Adjudicar</menu_adjourn>
