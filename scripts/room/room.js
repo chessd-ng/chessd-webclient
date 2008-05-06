@@ -254,6 +254,7 @@ function ROOM_ExitRoom()
 	// Interface tells what room to close
 	// ps: default room cannot be closed
 	RoomName = INTERFACE_CloseRoom();
+	INTERFACE_RemoveRoomFromList(RoomName);
 
 	RoomPos = MainData.FindRoom(RoomName);
 

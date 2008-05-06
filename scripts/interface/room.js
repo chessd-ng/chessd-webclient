@@ -176,6 +176,9 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 * Show room list in the room menu, if it exists
 *
 * @public
+* @params	Array of room names
+* @return	void
+* @author	Pedro
 */
 function INTERFACE_ShowRoomList(Rooms)
 {
@@ -209,6 +212,9 @@ function INTERFACE_ShowRoomList(Rooms)
 * Hide room list menu
 *
 * @public
+* @params 	void
+* @return	void
+* @author	Pedro
 */
 function INTERFACE_HideRoomList()
 {
@@ -220,6 +226,7 @@ function INTERFACE_HideRoomList()
 	}
 	Node.parentNode.removeChild(Node);
 }
+
 
 /**
 * Show game room list in the room menu
@@ -604,6 +611,40 @@ function INTERFACE_ChangeRoomListVisibility()
 		return false;
 	}
 	return true;
+}
+
+
+/**
+* Remove a room from room list if RoomListMenu is opened
+*
+* @param 	Room name that will be removed from list
+* @return 	void
+* @author 	Rubens
+*/
+function INTERFACE_RemoveRoomFromList(Room)
+{
+	var Menu = document.getElementById("RoomListMenu");
+	var ListItens;
+	var i=0;
+
+	// if list is not opened, then do nothing;
+	if(Menu == null)
+	{
+		return;
+	}
+	
+	ListItens = Menu.getElementsByTagName("li");
+
+	while( (ListItens[i].innerHTML != Room) && (i<ListItens.length) )
+	{
+		i++;
+	}
+	
+	// If room founded in list, then remove it from;
+	if(i != ListItens.length)
+	{
+		ListItens[i].parentNode.removeChild(ListItens[i]);
+	}
 }
 
 /**
