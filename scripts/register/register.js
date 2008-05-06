@@ -1,3 +1,23 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*/
+
+
+/**
+* Register window functions
+*/
+
+
 var HttpRequest;
 
 //Necessary to persist the RID and SID
@@ -5,9 +25,10 @@ var RegisterData;
 
 
 /*
-* Prepare data to send to register server
-* @parameter void
-* @return void
+* Register Object with Host, SID and RID
+* @parameter	void
+* @return	void
+* @author	Fabiano
 */
 function REGISTER_RegisterData(){
 	this.Host = REGISTER_GetHost();
@@ -15,18 +36,33 @@ function REGISTER_RegisterData(){
 	this.RID = parseInt(Math.random()*1000000000);
 }
 
+/*
+* Create XMPP Bosh message
+* @parameter	Msg is XMPP message
+* @return	XMPP Bosh
+* @author	Fabiano
+*/
 function REGISTER_MakeXMPP(Msg){
 
 	var XMPP = "<body rid='"+RegisterData.RID+"' sid='"+RegisterData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+
 	RegisterData.RID++;
+
 	return XMPP;
 }
 
+/*
+* Validate fields and send message to open a stream for new register
+* @parameter	void
+* @return	void
+* @author	Fabiano
+*/
 function REGISTER_Post()
 {
 
 	var User, Mail, Pwd, ConfPwd;
 	var Valid;
+	var Msg;
 
 	Pwd = document.getElementById("pwd").value;
 	ConfPwd = document.getElementById("confpwd").value;
@@ -37,22 +73,23 @@ function REGISTER_Post()
 	
 	if(Valid > 0)
 	{
-		alert(REGISTER_GetError(valid));
+		alert(REGISTER_GetError(Valid));
 		return false;
 	}
 
 
 	RegisterData = new REGISTER_RegisterData();
 
-   	var Msg = "<body hold='1' rid='"+RegisterData.RID+"' to='"+RegisterData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
+   	Msg = "<body hold='1' rid='"+RegisterData.RID+"' to='"+RegisterData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
 	REGISTER_SendData(Msg);
 }
 
 
 /*
 * Get error in register user 
-* @parameter var err int error code
+* @parameter	var err int error code
 * @return 	string error description
+* @author	Fabiano
 */
 
 function REGISTER_GetError(err)
@@ -71,11 +108,12 @@ function REGISTER_GetError(err)
 
 /*
 * Validate date before send
-* @parameter var user - user name 
-* @parameter var mail - user mail
-* @parameter var pwd - user password
-* @parameter var confpw - user password confirmation
-* @return 0 sucess or error code
+* @parameter	User - user name 
+* @parameter	Mail - user mail
+* @parameter	Pwd - user password
+* @parameter	ConfPW - user password confirmation
+* @return	0 is sucess or error code
+* @author	Fabiano
 */
 
 function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
@@ -108,10 +146,9 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 
 
 /*
-* Send data to register server
-* @parameter var user - user name 
-* @parameter var mail - user mail
-* @parameter var pwd - user password
+* Send data to register in jabber
+* @params	Msg is XMPP message that contais register instructions
+* @author	Fabiano
 */
 
 function REGISTER_SendData(Msg)
@@ -159,9 +196,10 @@ function REGISTER_SendData(Msg)
 
 
 /**
-*
-* @return none
+* Check and parse the XMPP register response
 * @public
+* @return 	none
+* @author	Fabiano
 */
 function REGISTER_ReceiveXml()
 {
@@ -177,7 +215,12 @@ function REGISTER_ReceiveXml()
 	}
 }
 
-
+/**
+* Process the XMPP register response
+* @public
+* @return 	none
+* @author	Fabiano
+*/
 function REGISTER_ProcessMessage(XmlDoc){
 
 	var Msg, Uname, Passwd, TestBody, TestIq, RID, SID;
@@ -191,12 +234,15 @@ function REGISTER_ProcessMessage(XmlDoc){
 	}
 
 
-	if(TestIq.length == 0){
+	// Open a stream to jabber
+	if(TestIq.length == 0)
+	{
 		RegisterData.SID = XmlDoc.getElementsByTagName("body")[0].getAttribute("sid");
-		Msg = "<iq type='get' id='reg1' to='shiva'><query xmlns='jabber:iq:register'/></iq>";
+		Msg = "<iq type='get' id='reg1' to='"+RegisterData.Host+"'><query xmlns='jabber:iq:register'/></iq>";
 		Msg = REGISTER_MakeXMPP(Msg);
 		REGISTER_SendData(Msg);
 	}
+	// Send register data to jabber
 	else if(TestIq[0].getAttribute("id") == "reg1")
 	{
 			Uname = "<username>"+document.getElementById("username").value+"</username>";
@@ -206,18 +252,27 @@ function REGISTER_ProcessMessage(XmlDoc){
 			Msg = REGISTER_MakeXMPP(Msg);
 			REGISTER_SendData(Msg);
 	}
+	// Receive final response from server. Check if sucess or errors
 	else if(TestIq[0].getAttribute("id") == "reg2")
 	{
 		if(XmlDoc.getElementsByTagName("error").length > 0)
+		{
 			REGISTER_ParseError(XmlDoc.getElementsByTagName("error")[0].getAttribute("code"));
-		else{
+		}
+		else
+		{
 			REGISTER_SucessMessage();
 			window.location=(".");
 		}
 	}
 }
 
-
+/**
+* Show a alert box to sucess register
+* @public
+* @return 	none
+* @author	Fabiano
+*/
 function REGISTER_SucessMessage(){
 
 	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
@@ -227,11 +282,18 @@ function REGISTER_SucessMessage(){
 
 }
 
+/**
+* Show a alert box to error in register
+* @public
+* @return 	none
+* @author	Fabiano
+*/
 function REGISTER_ParseError(code){
 
 	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
 
-	switch(code){
+	switch(code)
+	{
 		case "409":
 			alert(UTILS_GetTag(XML, "register_error_409"));
 			break;
@@ -239,37 +301,34 @@ function REGISTER_ParseError(code){
 
 }
 
-function REGISTER_GetDatabaseError(Msg, Usr)
-{
-	var ErrMsg = /violates unique constraint/
-
-	if(ErrMsg.test(Msg))
-		return "Nome de usurio "+Usr+" ja cadastrado, tente outro nome";
-	
-	return Msg;
-}
-
-
 /*
-* Get language parameter
-* @parameter string page url
-* @return string language xml file
+* get language parameter
+* @parameter	string page url
+* @return	string language xml file
+* @author	Fabiano
 */
-
 function REGISTER_GetLanguage(URL)
 {
 	var QString = URL.split('?');
 
-	if(QString[1]){
+	if(QString[1])
+	{
 		QString = URL.split('=');
 		if(QString[1])
+		{
 			return "./scripts/lang/"+QString[1];
+		}
 	}
 
 	return "./scripts/lang/pt_BR.xml"
 }
 
-
+/*
+* Get host from configuration file
+* @parameter	void
+* @return	Host string
+* @author	Fabiano
+*/
 function REGISTER_GetHost(){
 	
 	var CONF = UTILS_OpenXMLFile("scripts/data/conf.xml");
@@ -277,7 +336,12 @@ function REGISTER_GetHost(){
 
 }
 
-
+/*
+* Change fields label language
+* @parameter	void
+* @return	void
+* @author	Fabiano
+*/
 function REGISTER_Labels()
 {
 
@@ -308,10 +372,16 @@ function REGISTER_Labels()
 /**************************************
 ***************** PHP *****************
 **************************************/
-function REGISTER_SendDataPHP(user, mail, pwd)
+/**
+* Send register data to a PHP file (used if jabber don't support user register)
+* @return none
+* @public
+* @author	Fabiano
+*/
+function REGISTER_SendDataPHP(User, Mail, Pwd)
 {
 
-	var Post = "username="+user+"&mail="+mail+"&pwd="+pwd;
+	var Post = "username="+User+"&mail="+Mail+"&pwd="+Pwd;
 	// Create XMLHttpRequest
 	if (window.XMLHttpRequest)
 	{
@@ -348,29 +418,49 @@ function REGISTER_SendDataPHP(user, mail, pwd)
 }
 
 /**
-*
+* Receive response from PHP file
 * @return none
 * @public
+* @author	Fabiano
 */
 function REGISTER_ReceiveXmlPHP()
 {
-    var XmlDoc;
-        var Sql;
-        var User;
+	var XmlDoc;
+	var Sql;
+	var User;
 
-    if (HttpRequest.readyState == 4)
-    {
-        if (HttpRequest.status == 200)
-        {
-            XmlDoc = HttpRequest.responseXML;
-                        Sql = XmlDoc.getElementsByTagName("sql_result")[0].childNodes[0].nodeValue;
-                        User = XmlDoc.getElementsByTagName("username")[0].childNodes[0].nodeValue;
-                        if(Sql != "ok"){
-                                alert(REGISTER_GetDatabaseError(Sql, User));
-
-                        }else
-                                window.location=(".");
-        }
-    }
+	if (HttpRequest.readyState == 4)
+	{
+		if (HttpRequest.status == 200)
+		{
+			XmlDoc = HttpRequest.responseXML;
+			Sql = XmlDoc.getElementsByTagName("sql_result")[0].childNodes[0].nodeValue;
+			User = XmlDoc.getElementsByTagName("username")[0].childNodes[0].nodeValue;
+			if(Sql != "ok")
+			{
+				alert(REGISTER_GetDatabaseError(Sql));
+			}
+			else
+			{	
+				window.location=(".");
+			}
+		}
+	}
 }
 
+/**
+* Show a alert with error
+* @return none
+* @public
+* @author	Fabiano
+*/
+function REGISTER_GetDatabaseError(Msg)
+{
+	var ErrMsg = /violates unique constraint/
+
+	if(ErrMsg.test(Msg))
+	{
+		return UTILS_GetText("register_error_409");
+	}
+	return Msg;
+}
