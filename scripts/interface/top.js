@@ -202,10 +202,6 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomItem;
-/*
-	var GameRoomListBlitz,    GameRoomListStandart;
-	var GameRoomListBughouse, GameRoomListLight;
-*/
 	var Node, Menu, Func, i, Hide = 0;
 
 	Node = document.getElementById("Page");
@@ -231,28 +227,8 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
 
-/*
-	GameRoomListBlitz = UTILS_CreateElement("ul", "GameRoomMenuListBlitz",null,"Blitz");
-	GameRoomListStandart = UTILS_CreateElement("ul", "GameRoomMenuListStandard",null,"Standard");
-	GameRoomListLight = UTILS_CreateElement("ul", "GameRoomMenuListLightning", null, "Lightning");
-	GameRoomListBughouse = UTILS_CreateElement("ul", "GameRoomMenuListBughouse",null, "Bughouse");
-
-	GameRoomListOthers = UTILS_CreateElement("ul", "GameRoomMenuListOthers",null, "Others");
-*/	
 
 	MenuDiv.style.left = OffsetLeft+"px";
-
-/*
-	GameRoomListBlitz.style.visibility = "hidden";
-	GameRoomListStandart.style.visibility = "hidden";
-	GameRoomListLight.style.visibility = "hidden";
-	GameRoomListBughouse.style.visibility = "hidden";
-
-	MenuDiv.appendChild(GameRoomListBlitz);
-	MenuDiv.appendChild(GameRoomListStandart);
-	MenuDiv.appendChild(GameRoomListLight);
-	MenuDiv.appendChild(GameRoomListBughouse);
-*/
 
 	Node.appendChild(MenuDiv);
 
