@@ -128,18 +128,26 @@ function LOGIN_Interface()
 */
 function LOGIN_LoginFailed(Code)
 {
+	var ErroLabel = document.getElementById("ErrorLabel");
+
+	// if login window is closed, then do nothing
+	if(ErroLabel == null)
+	{
+		return;
+	}
+
 	switch (Code)
 	{
 		case (MainData.Const.LOGIN_ServerDown):
-			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_server_down");
+			ErrorLabel.innerHTML = UTILS_GetText("login_server_down");
 			break;
 
 		case (MainData.Const.LOGIN_ConnectionRefused):
-			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_connection_refused");
+			ErrorLabel.innerHTML = UTILS_GetText("login_connection_refused");
 			break;
 
 		case (MainData.Const.LOGIN_InvalidUser):
-			document.getElementById("ErrorLabel").innerHTML = UTILS_GetText("login_invalid_user");
+			ErrorLabel.innerHTML = UTILS_GetText("login_invalid_user");
 			break;
 	}
 }
