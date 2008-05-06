@@ -238,6 +238,11 @@ function CONNECTION_ReceiveXml()
 	var XML, Buffer = "";
 	var State, Status;
 
+	//Check if HttpRequet Object exists
+	if(MainData.HttpRequest == null)
+	{
+		return;
+	}
 
 	if (MainData.HttpRequest.readyState == 4)
 	{
