@@ -67,10 +67,16 @@ function LOGIN_Logout()
 	// Logout from jabber
 	CONNECTION_SendJabber(MESSAGE_EndConnection());
 
+	//Stop game count timer of current game 
+	if(MainData.CurrentGame != null)
+	{
+		MainData.CurrentGame.Game.StopTimer();
+	}
+
 	INTERFACE_StopInterface();
 
 	// Show Login interface
-	INTERFACE_StartLogin(MainData.Lang);
+	INTERFACE_StartLogin();
 }
 
 /**
