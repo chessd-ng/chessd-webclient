@@ -255,15 +255,29 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 	Room = UTILS_CreateElement("li", null, null, GameName);
 
 	Room.onclick = function(){
+		var Buffer="";
+		var To;
+
 		//if user is not playing or observe a game
 		if(MainData.CurrentGame == null)
 		{
-			GAME_StartObserverGame(GameId, P1, P2);
+			if((P1.Name!= MainData.Username) &&(P2.Name != MainData.Username))
+			{
+				Buffer += GAME_StartObserverGame(GameId, P1, P2);				
+			}
+			else
+			{
+				//Open game board and enter game in room
+				Buffer += GAME_StartGame(GameId, P1, P2);
+				To = GameId+"@games."+MainData.Host+"/"+MainData.Username;
+				Buffer += MESSAGE_Presence(To)
+			}
 		}
 		else
 		{
 			WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));
 		}
+		CONNECTION_SendJabber(Buffer);
 	}
 
 	// Insert item in current game list

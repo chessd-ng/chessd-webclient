@@ -195,7 +195,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 
 /**
 * Show rooms menu
-*
+* @see		room/room.js: ROOM_HandleGameRoomInfoList to load list itens
 * @return 	bool
 * @author 	Ulysses
 */
