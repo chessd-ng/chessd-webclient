@@ -22,8 +22,13 @@
 
 #Main #Left #User #UserInf {
 	float			: right;
-	margin-top		: 3mm;
+	margin-top		: 2mm;
 	width			: 32mm;
+}
+
+#Main #Left #User span {
+	font			: 11px Trebuchet MS;
+	color			: #FFA200;
 }
 
 #Main #Left #User h2 {
@@ -44,6 +49,13 @@
 	height			: 16px;
 }
 
+#Main #Left #User hr {
+	height			: 1px;
+	background-color	: #FFA200;
+	border			: 0px;
+	margin			:	1mm 0mm 1mm 0mm;
+	width				:	73%;
+}
 /* order by rating or nick */
 #Main #Left #order_nick, 
 #Main #Left .order_rating,
