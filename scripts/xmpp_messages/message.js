@@ -69,7 +69,7 @@ function MESSAGE_StartConnection()
 */
 function MESSAGE_EndConnection()
 {
-	XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' />";
+	var XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' />";
 
 	return XMPP;
 }

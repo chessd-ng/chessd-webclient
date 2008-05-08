@@ -178,7 +178,7 @@ function PROFILE_HandleRatings(RatingNodes)
 {
 	var Rating = new Array();
 	var Category, TimeStamp, Index;
-	var i;
+	var i,j;
 
 	// Set standard category
 	// TODO expand this

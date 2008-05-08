@@ -446,7 +446,7 @@ function UTILS_GetParentDiv(Obj)
 			return Obj;
 	}
 	while(Obj = Obj.parentNode);
-	return null
+	return null;
 }
 
 
