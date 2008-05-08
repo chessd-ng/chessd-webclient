@@ -252,6 +252,7 @@
 		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre</register_inf>
 		<register_title>Cadastro</register_title>
 		<register_user_name>Nome de Usuário</register_user_name>
+		<register_user_inf>Usar somente caracteres minúsculos, números, sem espaços, '-', '.' e '_' </register_user_inf>
 		<register_mail>E-mail</register_mail>
 		<register_mail_inf>Permite recuperar sua senha em caso de esquecimento</register_mail_inf>
 		<register_passwd>Senha</register_passwd>

@@ -120,7 +120,8 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 {
 	//RE = regular expression	
 	var REMail = /^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/;
-	var REUsername = /^\w{1,}$/
+	//var REUsername = /^\w{1,}$/
+	var REUsername = /^[a-z0-9-._]+$/
 
 	if(!REUsername.test(User))
 	{
@@ -347,7 +348,8 @@ function REGISTER_Labels()
 
 	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
 	var Inf = document.getElementById("register_inf");
-	var Usrname = document.getElementById("register_user_name");
+	var Username = document.getElementById("register_user_name");
+	var UserInfo = document.getElementById("register_user_inf");
 	var Mail = document.getElementById("register_mail");
 	var MailInf = document.getElementById("register_mail_inf");
 	var Pass = document.getElementById("register_passwd");
@@ -357,7 +359,8 @@ function REGISTER_Labels()
 	var BtCancel = document.getElementById("cancel");
 
 	Inf.innerHTML = UTILS_GetTag(XML, "register_inf");
-	Usrname.innerHTML = UTILS_GetTag(XML, "register_user_name");
+	Username.innerHTML = UTILS_GetTag(XML, "register_user_name");
+	UserInfo.innerHTML = UTILS_GetTag(XML, "register_user_inf");
 	Mail.innerHTML = UTILS_GetTag(XML, "register_mail");
 	MailInf.innerHTML = UTILS_GetTag(XML, "register_mail_inf");
 	Pass.innerHTML = UTILS_GetTag(XML, "register_passwd");
