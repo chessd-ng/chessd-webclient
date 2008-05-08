@@ -811,8 +811,14 @@ function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
 	Item.appendChild(MoveSpan);
 	Item.appendChild(WTimerSpan);
 	Item.appendChild(BTimerSpan);
-
-	UTILS_AddListener(Item, "click", function(){OLDGAME_GotoBoard(NumTurn)}, false);
+	
+	//Players can see old moves when game is finished
+	//MainData.CurrentGame.Finished is not used here because
+	//observer game set Finished = true;
+	if(MainData.CurrentGame == null)
+	{
+		UTILS_AddListener(Item, "click", function(){ OLDGAME_GotoBoard(NumTurn); }, false);
+	}
 
 	this.MoveList.appendChild(Item);
 

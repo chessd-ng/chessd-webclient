@@ -493,18 +493,26 @@ function GAME_StartGame(GameId, P1, P2)
 {
 	var GameDiv;
 	var YourColor;
-	var Buffer;
+	var Buffer="";
+	var RoomPos; 
 
 	// Hide current game (this case should happen when player
 	// is observing a game)
 	if (MainData.CurrentGame != null)
 	{
 		MainData.CurrentGame.Game.Hide();
+
+		//Quickfix to leave room when observer
+		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
+		Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
 	}
 
 	if (MainData.CurrentOldGame != null)
 	{
 		MainData.CurrentOldGame.Game.Hide();
+		// In this version, player can see only one oldgame
+		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
+		MainData.RemoveOldGame(0);
 	}
 
 	if (P1.Name == MainData.Username)
@@ -525,7 +533,7 @@ function GAME_StartGame(GameId, P1, P2)
 	GameDiv.Show();
 
 	// Get Players Photo
-	Buffer  = MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
 	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
 
 	// Set status to playing
@@ -545,6 +553,8 @@ function GAME_StartGame(GameId, P1, P2)
 function GAME_StartObserverGame(GameId, P1, P2)
 {
 	var GameDiv;
+	var RoomPos;
+	var Buffer = "";
 
 	// Hide current game
 	if (MainData.CurrentGame != null)
@@ -553,6 +563,10 @@ function GAME_StartObserverGame(GameId, P1, P2)
 		// In this version, player should be able to
 		// observer just one game.
 		//GAME_RemoveGame(MainData.CurrentGame.Id);
+		
+		//Quickfix to leave room when observer
+		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
+		Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
 	}
 
 	if (MainData.CurrentOldGame != null)
@@ -578,7 +592,11 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv.SetBTime();
 
 	// Get players Photos
-	CONNECTION_SendJabber(MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto), MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto));
+	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
+
+	// Send message to leave from old game observer room;
+	CONNECTION_SendJabber(Buffer);
 
 	// Send a message to get game moves
 	ROOM_EnterRoomGame(GameId)
