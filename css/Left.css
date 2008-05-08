@@ -29,6 +29,11 @@
 #Main #Left #User span {
 	font			: 11px Trebuchet MS;
 	color			: #FFA200;
+	cursor		: pointer;
+}
+
+#Main #Left #User span:hover {
+	font			: bold 11px Trebuchet MS;
 }
 
 #Main #Left #User h2 {
