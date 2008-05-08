@@ -450,10 +450,26 @@ function OLDGAME_HandleVCardPhoto(XML)
 */
 function OLDGAME_RemoveOldGame(Index)
 {
+	var RoomPos;
+	var Buffer;
+
 	//Remove Board
 	MainData.OldGameList[Index].Game.Remove();
+
+	//Exit room if is there some room affiliated with oldgame;
+	RoomPos = MainData.FindRoom(MainData.CurrentOldGame.Id);
+	if(RoomPos != null)
+	{
+		//Close room on interface
+		INTERFACE_FocusRoom(MainData.RoomList[RoomPos].Name);
+		ROOM_ExitRoom();
+
+		//Send a message to leave from that room
+		Buffer = MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		CONNECTION_SendJabber(Buffer);
+	}
+
 	MainData.RemoveOldGame(Index);
-	//ROOM_ExitRoom();
 }
 
 /** 
