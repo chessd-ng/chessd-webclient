@@ -64,7 +64,7 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 * @author       Fabiano and Rubens
 */
 function IMAGE_ImageDecode(ImgSrc){
-	return "php/base64_decode.php?"+ImgSrc.slice(5);
+	return "php/base64_decode.php5?"+ImgSrc.slice(5);
 }
 
 /**
