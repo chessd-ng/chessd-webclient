@@ -35,6 +35,10 @@ function PARSER_ParseChat(XML)
 		return ROOM_HandleMessage(XML);
 	}
 	// Other type
+	else if (Type == "normal")
+	{
+		return CHAT_HandleAnnounceMessage(XML);
+	}
 	else
 	{
 		return "";

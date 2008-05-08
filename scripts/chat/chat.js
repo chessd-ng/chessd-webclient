@@ -47,6 +47,38 @@ function CHAT_HandleMessage(XML)
 }
 
 /**
+* Show announcement users messages
+*/
+function CHAT_HandleAnnounceMessage(XML)
+{
+	var From, Subject, Message, Body;
+
+	// Get the sender name
+	From = XML.getAttribute('from').replace(/@.*/,"");
+
+	// Show Annouce message only if sender is host server
+	if (From != MainData.Host)
+		return "";
+
+	// Announce's subject
+	Subject = UTILS_GetNodeText(XML.getElementsByTagName("subject")[0]);
+
+	Body = XML.getElementsByTagName("body");
+
+	// If there is a body
+	if (Body.length > 0)
+	{
+		// Get the message
+		Message = UTILS_GetNodeText(Body[0]);
+	}
+
+	// Show the message on interface
+	WINDOW_Alert(Subject,Message);
+
+	return "";
+}
+
+/**
 * Open a chat
 */
 function CHAT_OpenChat(Username)

@@ -43,7 +43,6 @@
 }
 
 #OldGamesDiv #ResultDiv #THeadDiv {
-#	width:	125mm;
 	width:	95%;
 	background-color: #EAF5F4;
 	border : solid thin;
@@ -54,7 +53,6 @@
 }
 
 #OldGamesDiv #ResultDiv #TBodyDiv {
-#	width: 125mm;
 	width:	95%;
 	border : solid thin;
 	border-color: Teal;
@@ -178,27 +176,22 @@
 
 #OldGamesDiv .player1header {
 	position: relative;
-#	margin-left: 4mm;
 	margin-left: -9%;
 }
 #OldGamesDiv .player2header {
 	position: relative;
-#	margin-left: 4mm;
 	margin-left: 5%;
 }
 #OldGamesDiv .dateheader {
 	position: relative;
-#	margin-left: 8mm;
 	margin-left: 6%;
 }
 #OldGamesDiv .catheader {
 	position: relative;
-#	margin-left: 10mm;
 	margin-left: 8%;
 }
 #OldGamesDiv .resultheader {
 	position: relative;
-#	margin-left: 16mm;
 	margin-left: 12%;
 }
 
