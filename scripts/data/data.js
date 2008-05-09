@@ -1338,7 +1338,8 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 
 	NewOldGame.AddMove = this.AddGameMove;
 
-	NewOldGame.Id = this.OldGameList.length;
+	//NewOldGame.Id = this.OldGameList.length;
+	NewOldGame.Id = 0;
 
 	//this.OldGameList.push(NewOldGame);
 	// This version, user can only see one OldGame

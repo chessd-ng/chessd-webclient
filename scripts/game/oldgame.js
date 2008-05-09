@@ -137,7 +137,8 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	if (MainData.CurrentOldGame != null)
 	{
 		//In this version, user can only see one OldGame
-		MainData.CurrentOldGame.Game.Hide();
+		//MainData.CurrentOldGame.Game.Hide();
+		OLDGAME_RemoveOldGame(OldGameId);
 	}
 
 	// Check if player is watch own old game
@@ -194,7 +195,8 @@ function OLDGAME_FetchOldGame(XML)
 
 	GameTag = XML.getElementsByTagName("game")[0];
 
-	GamePos = MainData.OldGameList.length;
+	//GamePos = MainData.OldGameList.length;
+	GamePos = 0;
 
 	PlayerTag = XML.getElementsByTagName("player");
 
