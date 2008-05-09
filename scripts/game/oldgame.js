@@ -687,7 +687,7 @@ function OLDGAME_CloseWindow(Id)
 {
 	MainData.RemoveSearchGameInfo(Id);
 
-	if (Id = MainData.SearchGameMaxId - 1)
+	if (Id == MainData.SearchGameMaxId - 1)
 		MainData.SearchGameMaxId--;
 	else if (MainData.SearchGameInfoList.length == 0)
 		MainData.SearchGameMaxId = 0;
