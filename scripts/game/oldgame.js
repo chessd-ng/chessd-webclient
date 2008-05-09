@@ -131,7 +131,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var GameDiv;
 	var Index;
 	var Color;
-	var Buffer;
+	var Buffer = "";
 
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
@@ -167,7 +167,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	//Change "X" close board button function when clicked
 	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 
-	Buffer  = MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_OldGamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_OldGamePhoto);
 	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_OldGamePhoto);
 
 	//Change user status to observer

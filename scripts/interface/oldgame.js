@@ -525,7 +525,18 @@ function INTERFACE_AddOldGameResultR(White, Black, Date, GameType, WinType,  Id)
 //		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,null,WinType);
 		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function(){ CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id))}, false);
+		UTILS_AddListener(Tr, "click", function()
+		{
+			alert("teste!");
+			if(MainData.CurrentGame == null)
+			{
+				CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
+			}
+			else
+			{
+				WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));			
+			}
+		}, false);
 	
 	return(Tr);
 }
@@ -547,7 +558,18 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 //		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'resulttd',WinType);
 		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function(){ CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id))}, false);
+		UTILS_AddListener(Tr, "click", function()
+		{
+			if(MainData.CurrentGame == null)
+			{
+				CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
+			}
+			else
+			{
+				WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
+			}
+
+		}, false);
 	
 	return(Tr);
 }
