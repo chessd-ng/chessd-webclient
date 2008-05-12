@@ -374,7 +374,7 @@ function MESSAGE_RemoveContact(User)
 *
 * The 'Color' field must content just the first letter
 */
-function MESSAGE_Challenge(Category, Players, GameID)
+function MESSAGE_Challenge(Category, Rated, Players, GameID)
 {
 	var i, Id, XMPP = "";
 
@@ -396,18 +396,26 @@ function MESSAGE_Challenge(Category, Players, GameID)
 	// Game offer
 	if (GameID == null)
 	{
-		XMPP += "<match category='"+Category+"' >";
+		XMPP += "<match category='"+Category+"' rated='"+Rated+"' >";
 	}
 	// Reoffer
 	else 
 	{
-		XMPP += "<match category='"+Category+"' id='"+GameID+"' >";
+		XMPP += "<match category='"+Category+"' rated='"+Rated+"' id='"+GameID+"' >";
 	}
 
 	// Creating players tags
 	for (i=0; i < Players.length; i++)
 	{
-		XMPP += "<player jid='"+Players[i].Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Players[i].Time+"' inc='"+Players[i].Inc+"' color='"+Players[i].Color+"' />";
+		// If player color was chose
+		if (Players[i].Color != "")
+		{
+			XMPP += "<player jid='"+Players[i].Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Players[i].Time+"' inc='"+Players[i].Inc+"' color='"+Players[i].Color+"' />";
+		}
+		else
+		{
+			XMPP += "<player jid='"+Players[i].Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Players[i].Time+"' inc='"+Players[i].Inc+"' />";
+		}
 	}
 	XMPP += "</match></query></iq>";
 	

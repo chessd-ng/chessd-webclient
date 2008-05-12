@@ -414,26 +414,34 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
 	// Rating
-	RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
-	RatingCheckbox.type = "checkbox";
-	RatingCheckbox.name = "rating";
-	RatingCheckbox.checked = true;
-	RatingCheckbox.disabled = true;
+	try
+	{
+		RatingCheckbox = document.createElement("<input class='rating_radio' type='radio' name='rating'/>")
+	}
+	catch(err)
+	{
+		RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
+		RatingCheckbox.type = "checkbox";
+		RatingCheckbox.name = "rating";
+		RatingCheckbox.checked = true;
+	}
+//	RatingCheckbox.disabled = true;
 	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
 
-/* In this version, a game always is rated.
 	if (GameParameters != undefined)
 	{
-		if (GameParameters.Rated == 1)
+		if (GameParameters.Rated == "true")
 		{
 			RatingCheckbox.checked = true;
+			RatingCheckbox.setAttribute("defaultChecked", "true");
 		}
 		else
 		{
 			RatingCheckbox.checked = false;
+			RatingCheckbox.setAttribute("defaultChecked", "false");
 		}
 	}
-*/
+
 
 	// Auto-flag
 	AutoFlagCheckbox = UTILS_CreateElement('input',null,'rating_radio');
@@ -465,25 +473,17 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 		}
 		else
 		{
-			//Random Color
-			if (Math.round(Math.random()) % 2 == 0)
-			{
-				Color = "white";
-			}
-			else
-			{
-				Color = "black";
-			}
+			Color = "";
 		}
 
 		// Rated or unrated?
 		if (RatingCheckbox.checked)
 		{
-			Rated = 1;
+			Rated = true;
 		}
 		else
 		{
-			Rated = 0;
+			Rated = false;
 		}
 
 		// Create and send the chellenge message
@@ -514,25 +514,17 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 		}
 		else
 		{
-			//Random Color
-			if (Math.round(Math.random()) % 2 == 0)
-			{
-				Color = "white";
-			}
-			else
-			{
-				Color = "black";
-			}
+			Color = "";
 		}
 
 		// Rated or unrated?
 		if (RatingCheckbox.checked)
 		{
-			Rated = 1;
+			Rated = true;
 		}
 		else
 		{
-			Rated = 0;
+			Rated = false;
 		}
 
 		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
