@@ -185,7 +185,7 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 	MenuDiv.appendChild(CreateP);
 	Node.appendChild(MenuDiv);
 
-	MenuDiv.style.left = (OffsetLeft-72+45)+"px";
+	MenuDiv.style.left = (OffsetLeft-1)+"px";
 
 	UTILS_AddListener(document, "click", Func, false);
 

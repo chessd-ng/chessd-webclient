@@ -7,6 +7,7 @@
 		<max-rooms>100</max-rooms>
 		<max-chats>4</max-chats>
 		<emoticon-num>35</emoticon-num>
+		<default-lang>pt_BR</default-lang>
 	</general>
 	<jabber>
 		<host>shiva</host>
