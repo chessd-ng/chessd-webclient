@@ -37,6 +37,8 @@ function INTERFACE_StartLogin()
 	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
 	var Lang;
+	var ConfTmp;
+
 	var ev; //Temp event
 
 	var Table = document.createElement('table');
@@ -48,9 +50,19 @@ function INTERFACE_StartLogin()
 	var TBody = document.createElement('tbody');
 
 	// What language show?
+	// Find lang in cookie
 	Lang = UTILS_ReadCookie("lang");
+	// if language is not found in cookie
 	if (Lang == "")
-		Lang = UTILS_GetLanguage();
+	{
+		// Get from browser language
+		//Lang = UTILS_GetLanguage();
+		
+		// QuickFix!
+		// Get default lang from configuration file
+		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml");
+		Lang = UTILS_GetTag(ConfTmp, "default-lang");
+	}
 
 	// Read xml config files and starting data structure
 	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
