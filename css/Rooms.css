@@ -99,7 +99,8 @@
 	width			: 48mm;
 	margin-top		: 2mm;
 	border-spacing	: 0px;
-	overflow		: auto;
+	overflow-y		: auto;
+	overflow-x		: hidden;
 }
 
 #Main #Left #Rooms .Room tbody {
@@ -152,6 +153,7 @@
 	padding			: 2px;
 	margin-right	: 3mm;
 	overflow		: auto;
+	margin-top	:	5px;
 }
 
 #Main #Left #Rooms .Room .MessageList li {
