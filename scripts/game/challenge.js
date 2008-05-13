@@ -62,7 +62,7 @@ function GAME_HandleChallenge (XML)
 */
 function GAME_HandleOffer(XML)
 {
-	var Players, Match, MatchID, Category, Type, Rating;
+	var Players, Match, MatchID, Category, Type, Rating, Rated;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -87,7 +87,12 @@ function GAME_HandleOffer(XML)
 	
 	MatchID = Match.getAttribute('id');
 	Category = Match.getAttribute('category');
+	if (Type == 'set')
+	{
+		Rated = Match.getAttribute('rated');
+	}
 	Players = XML.getElementsByTagName('player');
+
 
 	//  Player is challenged
 	if (Players.length > 0)
@@ -97,12 +102,14 @@ function GAME_HandleOffer(XML)
 		Player1.Inc = Players[0].getAttribute('inc');
 		Player1.Color = Players[0].getAttribute('color'); 
 		Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
+		Player1.Rated = Rated;
 		
 		// Get information of player two
 		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
 		Player2.Inc = Players[1].getAttribute('inc');
 		Player2.Color = Players[1].getAttribute('color');
 		Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
+		Player2.Rated = Rated;
 
 		// Add the challenge in structure
 		if (Player1.Name != MainData.Username)
@@ -226,7 +233,7 @@ function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated, GameID)
 	{
 		OpColor = "white";
 	}
-	else //this case should never happen 
+	else // random color 
 	{
 		OpColor = "";
 	}
@@ -239,19 +246,19 @@ function GAME_SendChallenge(Oponent, Color, Time, Inc, Category, Rated, GameID)
 	Player1.Color = Color;
 	Player1.Time = Time;
 	Player1.Inc = Inc;
-	Player1.Rated = Rated;
 
 	Player2.Name = Oponent;
 	Player2.Color = OpColor;
 	Player2.Time = Time;
 	Player2.Inc = Inc;
-	Player2.Rated = Rated;
 
 	Players[0] = Player1;
 	Players[1] = Player2;
 
+//	alert('interface'+Rated);
+
 	// Create message
-	XML = MESSAGE_Challenge(Category, Players, GameID);
+	XML = MESSAGE_Challenge(Category, Rated, Players, GameID);
 
 	// Sending message
 	CONNECTION_SendJabber(XML);
