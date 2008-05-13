@@ -52,6 +52,7 @@ function DATA(ConfFile, LangFile)
 	this.SID = -1;
 	this.Load = -1;
 	this.Lang = "";
+	this.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
 	/**
 	* DATA STRUCTURE

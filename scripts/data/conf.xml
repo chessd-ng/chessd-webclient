@@ -8,6 +8,7 @@
 		<max-chats>4</max-chats>
 		<emoticon-num>35</emoticon-num>
 		<default-lang>pt_BR</default-lang>
+		<default-php>php</default-php>
 	</general>
 	<jabber>
 		<host>shiva</host>

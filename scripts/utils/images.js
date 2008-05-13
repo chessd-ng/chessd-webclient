@@ -64,7 +64,8 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 * @author       Fabiano and Rubens
 */
 function IMAGE_ImageDecode(ImgSrc){
-	return "php/base64_decode.php5?"+ImgSrc.slice(5);
+	//DefaultPHP is loaded from conf.xml
+	return "php/base64_decode."+MainData.DefaultPHP+"?"+ImgSrc.slice(5);
 }
 
 /**
@@ -85,9 +86,6 @@ function IMAGE_ImageEncode(FormId){
 	Form = document.getElementById(FormId);
 	Form.target = Frame.name;
 	Form.submit();
-
-
-
 }
 
 /**
