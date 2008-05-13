@@ -377,7 +377,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	}
 	// Get parent scrolling
 	ParentDiv = UTILS_GetParentDiv(Obj);
-	if (ParentDiv.id == "ContactOfflineDiv")
+	if ((ParentDiv.id == "ContactOfflineDiv") || (ParentDiv.id == "ContactOnlineDiv"))
 	{
 		ParentDiv = UTILS_GetParentDiv(ParentDiv.parentNode);
 	}
