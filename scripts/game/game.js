@@ -88,7 +88,7 @@ function GAME_Move(XML)
 {
 	var StateTag, Category, GameID;
 	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
-	var PlayerTag, MoveTag, Move, Type;
+	var PlayerTag, MoveTag, Move, ShortMove, Type;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -105,14 +105,16 @@ function GAME_Move(XML)
 	Category = StateTag[0].getAttribute("category");
 
 
-	// Get the pgn of the last move
-	try 
+	// Get the pgn of last move
+	if(MoveTag != null)
 	{
 		Move = MoveTag[0].getAttribute("long");
+		ShortMove = MoveTag[0].getAttribute("short");
 	}
-	catch(e)
+	else
 	{
 		Move = "------";
+		ShortMove = "------";
 	}
 
 	FullMoves = BoardTag[0].getAttribute("fullmoves");
@@ -138,11 +140,11 @@ function GAME_Move(XML)
 	{
 		Buffer += GAME_StartGame(GameID, Player1, Player2);
 
-		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
 	}
 	else
 	{
-		Buffer += GAME_UpdateBoard(GameID, Board, Move, Player1, Player2, Turn)
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
 	}
 
 	return Buffer;
@@ -614,7 +616,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 * @return 	void
 * @author 	Rubens
 */
-function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
+function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 {
 	var NewBoardArray = UTILS_String2Board(BoardStr);
 	var CurrentBoardArray;
@@ -627,7 +629,7 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	{
 		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
 	}
-	// If there's no previous moves
+	// if Move is first move in game
 	else
 	{
 		CurrentBoardArray = new Array("--------","--------","--------","--------","--------","--------","--------","--------");
@@ -636,13 +638,13 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 	// Update data sctructure
 	if (P1.Color == "white")
 	{
-		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
+		Game.AddMove(NewBoardArray, Move, ShortMove, P1.Time, P2.Time, TurnColor);
 		Game.Game.UpdateWTime(P1.Time);
 		Game.Game.UpdateBTime(P2.Time);
 	}
 	else
 	{
-		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
+		Game.AddMove(NewBoardArray, Move, ShortMove, P2.Time, P1.Time, TurnColor);
 		Game.Game.UpdateWTime(P2.Time);
 		Game.Game.UpdateBTime(P1.Time);
 	}
@@ -657,8 +659,12 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, P1, P2, TurnColor)
 
 	// Update interface
 	Game.Game.UpdateBoard(CurrentBoardArray, NewBoardArray, Game.YourColor);
-	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
-	Game.Game.SetLastMove(Move);
+
+	if((Move != "") || (ShortMove!= ""))
+	{
+		Game.Game.AddMove(Game.Moves.length, Move, ShortMove, P1.Time, P2.Time);
+		Game.Game.SetLastMove(Move);
+	}
 
 	if (Game.Moves.length == 3)
 	{
@@ -804,7 +810,7 @@ function GAME_SendResign(GameID)
 function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 {
 	var i;
-	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort;
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;
@@ -836,6 +842,7 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 		HTurn = HistoryMoves[i].getAttribute("turn");
 		HBoard = HistoryMoves[i].getAttribute("board");
 		HMove = HistoryMoves[i].getAttribute("move");
+		HShortMove = HistoryMoves[i].getAttribute("short");
 
 		if(HTurn == "white")
 		{
@@ -846,7 +853,7 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 			HPlayer1.Time = HTime;
 		}
 
-		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn)
 	}
 
 	return Buffer;

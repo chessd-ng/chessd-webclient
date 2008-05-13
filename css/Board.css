@@ -297,7 +297,11 @@
 }
 
 #MoveList span{
-	margin-left		: 3mm;
+	margin-left		: 2mm;
+}
+
+#MoveList span.move{
+	margin-left		: 5mm;
 }
 
 #MoveListDiv #MoveListButtons{

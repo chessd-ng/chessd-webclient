@@ -234,7 +234,7 @@ function OLDGAME_FetchOldGame(XML)
 function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 {
 	var i;
-	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShortMove;
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;
@@ -272,6 +272,7 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 			HTurn = HistoryMoves[i].getAttribute("turn");
 			HBoard = HistoryMoves[i].getAttribute("board");
 			HMove = HistoryMoves[i].getAttribute("move");
+			HShortMove = HistoryMoves[i].getAttribute("short");
 
 			if(HTurn == "white")
 			{
@@ -282,7 +283,7 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 				HPlayer1.Time = HTime;
 			}
 
-			Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HPlayer1, HPlayer2, HTurn)
+			Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn)
 		}
 
 		OLDGAME_FirstBoard();
@@ -302,7 +303,7 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 * @return       void
 * @author       Rubens
 */
-function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, P1, P2, TurnColor)
+function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 {
 	var NewBoardArray = UTILS_String2Board(BoardStr);
 	var CurrentBoardArray;
@@ -326,18 +327,21 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, P1, P2, TurnColor)
 	// Update data sctructure
 	if (P1.Color == "white")
 	{
-		Game.AddMove(NewBoardArray, Move, P1.Time, P2.Time, TurnColor);
+		Game.AddMove(NewBoardArray, Move, ShortMove, P1.Time, P2.Time, TurnColor);
 		Game.Game.UpdateWTime(P1.Time);
 		Game.Game.UpdateBTime(P2.Time);
 	}
 	else
 	{
-		Game.AddMove(NewBoardArray, Move, P2.Time, P1.Time, TurnColor);
+		Game.AddMove(NewBoardArray, Move, ShortMove, P2.Time, P1.Time, TurnColor);
 		Game.Game.UpdateWTime(P2.Time);
 		Game.Game.UpdateBTime(P1.Time);
 	}
 
-	Game.Game.AddMove(Game.Moves.length, Move, P1.Time, P2.Time);
+	if((Move !="") || (ShortMove !=""))
+	{
+		Game.Game.AddMove(Game.Moves.length, Move, ShortMove, P1.Time, P2.Time);
+	}
 
 	return "";
 }
@@ -381,10 +385,11 @@ function OLDGAME_EndGame(Id)
 	OLDGAME_LastBoard();
 	
 	//Reload all moves done in MoveList
-	for(i=0 ; i<MainData.CurrentOldGame.Moves.length; i++)
+	for(i=1 ; i<MainData.CurrentOldGame.Moves.length; i++)
 	{
 		MoveObj = MainData.CurrentOldGame.Moves[i];
-		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.PWTime, MoveObj.PBTime)
+		// i+1 is a QuickFix
+		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime)
 	}
 
 }

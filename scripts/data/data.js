@@ -1197,12 +1197,13 @@ function DATA_FindGame(Id)
 /**
 * Add a move in 'GameList[x].Moves' 
 */
-function DATA_AddGameMove(BoardArray, Move, PWTime, PBTime, Turn)
+function DATA_AddGameMove(BoardArray, Move, ShortMove, PWTime, PBTime, Turn)
 {
 	var NewMove = new Object();
 
 	NewMove.Board = BoardArray;
 	NewMove.Move = Move;
+	NewMove.ShortMove = ShortMove;
 	NewMove.PWTime = PWTime;
 	NewMove.PBTime = PBTime;
 	NewMove.Turn = Turn;
@@ -1334,8 +1335,6 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 	NewOldGame.BPhoto = "./images/no_photo.png";
 
 	NewOldGame.SetTurn = this.SetTurn;
-	NewOldGame.AddMove = this.AddGameMove;
-
 	NewOldGame.AddMove = this.AddGameMove;
 
 	//NewOldGame.Id = this.OldGameList.length;

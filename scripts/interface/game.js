@@ -744,80 +744,47 @@ function INTERFACE_SetBPhoto(Img)
 * @return	void
 * @author	Rubens and Pedro
 */
-function INTERFACE_AddMove(NumTurn, Move, WTime, BTime)
+function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 {
 	var ScrollTop, ScrollHeight, ClientHeight;
-	var Num = UTILS_CreateElement("span", null, null, NumTurn+".");
-	var WTimeMin = Math.round(WTime / 60);
-	var WTimeMinStr;
-	var WTimeSec = WTime % 60;
-	var WTimeSecStr;
+	var Num;
+	var FullMove;
+	var MoveSpan;
 	var Item;
 
-	if (NumTurn % 2)
+	// NumTurn-1 is a Quickfix to display moves in move list 
+	// without the first board of game (contains no move and shortmove)
+	FullMove = Math.ceil((NumTurn-1)/2);
+	if ((NumTurn-1) % 2 == 1)
 	{
-		Item = UTILS_CreateElement("li",null,"black",null);
+		// Create a item on list 
+		if(FullMove % 2 == 1)
+		{
+			Item = UTILS_CreateElement("li",this.Id+"_"+FullMove,"white",null);
+		}
+		else
+		{
+			Item = UTILS_CreateElement("li",this.Id+"_"+FullMove,"black",null);
+		}
+		Num = UTILS_CreateElement("span", null, null, FullMove+".");
+		Item.appendChild(Num);
 	}
 	else
 	{
-		Item = UTILS_CreateElement("li",null,"white",null);
+		// Get item from list
+		Item = document.getElementById(this.Id+"_"+((NumTurn-1)/2));
 	}
 
-	if(WTimeMin < 10)
-	{
-		WTimeMinStr = "0"+WTimeMin;
-	}
-	else
-	{
-		WTimeMinStr = WTimeMin;
-	}
+	MoveSpan = UTILS_CreateElement("span", null, "move", ShortMove);
 
-	if(WTimeSec < 10)
-	{
-		WTimeSecStr = "0"+WTimeSec;
-	}
-	else
-	{
-		WTimeSecStr = WTimeSec;
-	}
-
-	var BTimeMin = Math.round(BTime / 60);
-	var BTimeMinStr;
-	if(BTimeMin < 10)
-	{
-		BTimeMinStr = "0"+BTimeMin;
-	}
-	else
-	{
-		BTimeMinStr = BTimeMin;
-	}
-
-	var BTimeSec = BTime % 60;
-	var BTimeSecStr;
-	if(BTimeSec < 10)
-	{
-		BTimeSecStr = "0"+BTimeSec;
-	}
-	else
-	{
-		BTimeSecStr = BTimeSec;
-	}
-
-	var MoveSpan = UTILS_CreateElement("span", null, null, Move);
-	var WTimerSpan = UTILS_CreateElement("span",null,null, WTimeMinStr+":"+WTimeSecStr);
-	var BTimerSpan = UTILS_CreateElement("span",null,null, BTimeMinStr+":"+BTimeSecStr);
-
-	Item.appendChild(Num);
 	Item.appendChild(MoveSpan);
-	Item.appendChild(WTimerSpan);
-	Item.appendChild(BTimerSpan);
-	
+
 	//Players can see old moves when game is finished
 	//MainData.CurrentGame.Finished is not used here because
 	//observer game set Finished = true;
 	if(MainData.CurrentGame == null)
 	{
-		UTILS_AddListener(Item, "click", function(){ OLDGAME_GotoBoard(NumTurn); }, false);
+		UTILS_AddListener(MoveSpan, "click", function(){ OLDGAME_GotoBoard(NumTurn); }, false);
 	}
 
 	this.MoveList.appendChild(Item);
