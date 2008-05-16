@@ -545,9 +545,9 @@ function UTILS_ConvertChatString(Str)
 {
 	var StrTmp;
 
-	StrTmp = Str.replace(/</g,"&lt;");
+	StrTmp = Str.replace(/&/g,"&amp;");
+	StrTmp = StrTmp.replace(/</g,"&lt;");
 	StrTmp = StrTmp.replace(/>/g,"&gt;");
-	StrTmp = StrTmp.replace(/&/g,"&amp;");
 	StrTmp = StrTmp.replace(/"/g,"&quot;");
 
 	return StrTmp;
