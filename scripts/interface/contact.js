@@ -347,7 +347,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 */
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
-	var Menu, Option, ParentDiv, Pos, i;
+	var Menu, Option, ParentNode, Pos, i;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -376,15 +376,20 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		Menu.appendChild(Option);
 	}
 	// Get parent scrolling
-	ParentDiv = UTILS_GetParentDiv(Obj);
-	if (ParentDiv.id == "ContactOfflineDiv")
+	ParentNode = UTILS_GetParentDiv(Obj);
+	if (ParentNode.id.match("Room") != null)
 	{
-		ParentDiv = UTILS_GetParentDiv(ParentDiv.parentNode);
+		// Get Table element
+		ParentNode = Obj.parentNode.parentNode.parentNode;
+	}
+	else
+	{
+		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode);
 	}
 
 	Pos = UTILS_GetOffset(Obj);
 
-	Menu.style.top = (Pos.Y+18-ParentDiv.scrollTop)+"px";
+	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
 	Menu.style.left = Pos.X+"px";
 
 	document.body.appendChild(Menu);
@@ -519,8 +524,12 @@ function INTERFACE_CreateContactList()
 	}
 
 	// Search user
-	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
-	UTILS_AddListener(Search, "click", function() { WINDOW_SearchUser(); }, "false");
+	var SearchP, SearchS
+//	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
+	SearchP = UTILS_CreateElement("p",null,"contact_search_user_p");
+	SearchS = UTILS_CreateElement("span","contact_search_user", null, UTILS_GetText("menu_search_user"));
+	UTILS_AddListener(SearchP, "click", function() { WINDOW_SearchUser(); }, "false");
+	SearchP.appendChild(SearchS);
 	//Hr = UTILS_CreateElement("hr");
 	
 	// Creating DOM tree
@@ -539,7 +548,7 @@ function INTERFACE_CreateContactList()
 	ContactInside.appendChild(OrderRating);
 	ContactInside.appendChild(ContactsDiv);
 	//ContactInside.appendChild(Hr);
-	ContactInside.appendChild(Search);
+	ContactInside.appendChild(SearchP);
 
 	ContactDiv.appendChild(ContactTitle);
 	ContactDiv.appendChild(ContactInside);

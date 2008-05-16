@@ -592,7 +592,15 @@ function INTERFACE_ChangeRoomListVisibility()
 	for (i=0; i < MainData.RoomList.length; i++)
 	{
 		Item = UTILS_CreateElement('li');
-		Item.innerHTML = MainData.RoomList[i].Name;
+		// Change name for general room
+		if (MainData.RoomList[i].Name == MainData.RoomDefault)
+		{
+			Item.innerHTML = UTILS_GetText("room_default");
+		}
+		else
+		{
+			Item.innerHTML = MainData.RoomList[i].Name;
+		}
 		Item.onclick = function () {
 			INTERFACE_FocusRoom(this.innerHTML);
 			INTERFACE_ChangeRoomListVisibility();
@@ -736,7 +744,9 @@ function INTERFACE_CreateRooms()
 	// Room list
 	RoomsDiv = UTILS_CreateElement("div", "Rooms");
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(MainData.RoomDefault));
+//	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_Capitalize(MainData.RoomDefault));
+	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_GetText("room_default"));
+
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
@@ -921,7 +931,12 @@ function INTERFACE_ShowCreateRoomWindow()
 				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 				return;
 			}
-			if (RoomName.length > 50)
+			else if (RoomName == UTILS_GetText("room_default"))
+			{
+				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+				return;
+			}
+			if (RoomName.length > 20)
 			{
 				WINDOW_Alert(UTILS_GetText('room_invalid_length'));
 				Input.value = "";
@@ -957,7 +972,12 @@ function INTERFACE_ShowCreateRoomWindow()
 			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 			return;
 		}
-		else if (RoomName.length > 50)
+		else if (RoomName == UTILS_GetText("room_default"))
+		{
+			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+			return;
+		}
+		else if (RoomName.length > 20)
 		{
 			WINDOW_Alert(UTILS_GetText('room_invalid_length'));
 			Create.value = "";

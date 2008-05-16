@@ -28,7 +28,7 @@
 	margin-top	: 2mm;
 	overflow-y		: auto;
 	overflow-x		: hidden;
-	width			: 48mm;
+	width			: 98%;
 }
 
 #Main #Left #Contact #Contacts table {
@@ -190,14 +190,18 @@
 }
 
 /* Search user */
-#Main #Left #Contact a {
-	display			: block;
-	margin			: 1mm 14.7mm 1mm 13mm;
+#Main #Left #Contact #contact_search_user {
 	border-bottom:	1px solid #216778;
 	text-decoration	: none;
 	font			: bold 11px Trebuchet MS;
 	color			: #216778;
 	cursor			: pointer;
+}
+
+#Main #Left #Contact .contact_search_user_p {
+	text-align: center;
+	padding-top:	3px;
+	padding-right:	7%;
 }
 
 /**

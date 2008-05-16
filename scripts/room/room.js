@@ -52,7 +52,7 @@ function ROOM_HandleMessage(XML)
 	}
 
 	// Show message on interface
-	INTERFACE_ShowMessage(RoomName, From, UTILS_ConvertChatString(Message), Stamp);
+	INTERFACE_ShowMessage(RoomName, From, Message, Stamp);
 	
 	return "";
 }
@@ -86,6 +86,11 @@ function ROOM_HandleRoomList(XML)
 		for (i=0; i < Items.length; i++)
 		{
 			Rooms[i] = Items[i].getAttribute("jid").replace(/.conference.*/, "");
+			// Change name for general room
+			if (Rooms[i] == MainData.RoomDefault)
+			{
+				Rooms[i] = UTILS_GetText("room_default");
+			}
 		}
 		INTERFACE_ShowRoomList(Rooms);
 	}
@@ -231,7 +236,15 @@ function ROOM_EnterRoom(RoomName)
 {
 	var XML, To;
 
-	To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+	// Send Message to general room - must be change to Focus Room
+	if (RoomName == UTILS_GetText("room_default"))
+	{
+		To = MainData.RoomDefault+"@conference."+MainData.Host+"/"+MainData.Username;
+	}
+	else
+	{
+		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+	}
 
 	XML = MESSAGE_Presence(To);
 

@@ -147,7 +147,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
-	width			: 44mm;
+	width			: 91%;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;
@@ -165,7 +165,7 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 44.3mm;
+	width			: 91%;
 	padding			: 2px;
 	font			: 12px Trebuchet MS;
 	color			: #216778;
