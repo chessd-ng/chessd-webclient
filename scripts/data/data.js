@@ -62,11 +62,10 @@ function DATA(ConfFile, LangFile)
 	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
-	this.CurrentRoom = "";
 	this.ChallengeList = new Array();
 	this.ChatList = new Array();
 
-	this.CurrentRoom = "";
+	this.CurrentRoom = null;
 
 	this.CurrentGame = null;
 	this.GameList = new Array();
@@ -119,6 +118,7 @@ DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
 DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
 DATA.prototype.GetUserRatingInRoom = DATA_GetUserRatingInRoom;
+DATA.prototype.GetRoom = DATA_GetRoom;
 
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
@@ -494,13 +494,13 @@ function DATA_SortUserByRating()
 /**
 * Create new room in room list
 */
-function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation)
+function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 {
 	// Creating a new object
 	var Room = new Object();
 
-	if (this.FindRoom(RoomName) != null || this.MaxRooms <= this.RoomList.length)
-		return false;
+	//if (this.FindRoom(RoomName) != null || this.MaxRooms <= this.RoomList.length)
+	//	return false;
 
 	// Setting atributes
 	Room.UserList = new Array();
@@ -509,9 +509,10 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation)
 	Room.Role = Role;
 	Room.Affiliation = Affiliation;
 	Room.OrderBy = "0";
+	Room.Room = RoomObj;
 
 	this.RoomList[this.RoomList.length] = Room;
-	return true;
+	return Room;
 }
 
 /**
@@ -810,6 +811,23 @@ function DATA_SortUserByRatingInRoom(RoomName)
 	return true;
 }
 
+/**
+* Get room from room list
+*
+* @return	boolean
+* @author	Danilo Yorinori
+*/
+function DATA_GetRoom(RoomName)
+{
+	var RoomPos = this.FindRoom(RoomName);
+
+	if(RoomPos == null)
+	{
+		return null
+	}
+
+	return this.RoomList[RoomPos];
+}
 
 /**********************************
  * METHODS - CHAT  *

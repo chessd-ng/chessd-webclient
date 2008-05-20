@@ -567,8 +567,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 		//GAME_RemoveGame(MainData.CurrentGame.Id);
 		
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
-		Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		//RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
+		//Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		ROOM_ExitRoom(MainData.CurrentGame.Id);
 	}
 
 	if (MainData.CurrentOldGame != null)
@@ -688,12 +689,15 @@ function GAME_RemoveGame(GameID)
 	{
 		if (Game.Finished)
 		{
+			// Remove game board from interface
 			Game.Game.StopTimer();
 			Game.Game.Remove();
+			
+			// Remove board from data struct
 			MainData.RemoveGame(GameID);
 
-			INTERFACE_FocusRoom(GameID);
-			ROOM_ExitRoom()
+			// Send message to leave room
+			ROOM_ExitRoom(GameID)
 		}
 		else
 		{
