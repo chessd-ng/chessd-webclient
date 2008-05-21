@@ -133,6 +133,9 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var Color;
 	var Buffer = "";
 
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
+
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
 	{

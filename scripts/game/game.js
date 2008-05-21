@@ -498,6 +498,9 @@ function GAME_StartGame(GameId, P1, P2)
 	var Buffer="";
 	var RoomPos; 
 
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
+
 	// Hide current game (this case should happen when player
 	// is observing a game)
 	if (MainData.CurrentGame != null)
@@ -557,6 +560,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var GameDiv;
 	var RoomPos;
 	var Buffer = "";
+
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
 
 	// Hide current game
 	if (MainData.CurrentGame != null)
