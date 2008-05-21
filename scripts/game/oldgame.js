@@ -141,7 +141,8 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	{
 		//In this version, user can only see one OldGame
 		//MainData.CurrentOldGame.Game.Hide();
-		OLDGAME_RemoveOldGame(OldGameId);
+		Buffer += OLDGAME_RemoveOldGame(OldGameId);
+
 	}
 
 	// Check if player is watch own old game
@@ -461,7 +462,7 @@ function OLDGAME_HandleVCardPhoto(XML)
 function OLDGAME_RemoveOldGame(Index)
 {
 	var Room;
-	var Buffer;
+	var Buffer = "";
 	var OldGame;
 
 	OldGame = MainData.OldGameList[Index];
@@ -474,10 +475,11 @@ function OLDGAME_RemoveOldGame(Index)
 	if(Room != null)
 	{
 		// Send a message to leave from room
-		ROOM_ExitRoom(Room.Name);
+		Buffer += ROOM_ExitRoom(Room.Name);
 	}
 
 	MainData.RemoveOldGame(Index);
+
 }
 
 /** 

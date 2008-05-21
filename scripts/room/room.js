@@ -389,6 +389,19 @@ function ROOM_ExitRoom(RoomName)
 		return "";
 	}
 
+	// if user is playing, show a message and don't close room
+	if(MainData.CurrentGame != null)
+	{
+		if(RoomName == MainData.CurrentGame.Id)
+		{
+			if(MainData.CurrentGame.Finished == false)
+			{
+				WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
+				return "";
+			}
+		}
+	}
+
 	XML = MESSAGE_Unavailable(Room.MsgTo);
 	CONNECTION_SendJabber(XML);
 	
@@ -402,7 +415,7 @@ function ROOM_EnterRoomGame(RoomName)
 {
 	var XML, To;
 
-	To = RoomName+"@games."+MainData.Host+"/"+MainData.Username;
+	To = RoomName+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
 
 	XML = MESSAGE_Presence(To);
 
