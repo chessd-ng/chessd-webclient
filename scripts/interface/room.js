@@ -160,6 +160,7 @@ function INTERFACE_ShowMessage(RoomName, Username, Msg, Timestamp)
 	// Get time from a fiven timestamp
 	Time = UTILS_GetTime(Timestamp);
 
+	Msg = UTILS_ConvertChatString(Msg);
 	Message = "<strong>"+Time+" "+Username+"</strong>: "+Msg;
 	Item = UTILS_CreateElement("li", null, null, Message);
 	Node.appendChild(Item);
