@@ -62,9 +62,9 @@ function CONNECTION_ConnectJabber(XML)
 			MainData.ConnectionStatus = 0;
 			CONNECTION_SendJabber(	
 				MESSAGE_Presence(), 
-				MESSAGE_Presence("general@conference."+MainData.Host+"/"+MainData.Username),
-				MESSAGE_Presence("match."+MainData.Host),
-				MESSAGE_Presence("rating."+MainData.Host),
+				MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username),
+				MESSAGE_Presence(MainData.MatchComponent+"."+MainData.Host),
+				MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host),
 				XML
 				);
 			LOGIN_Interface();
