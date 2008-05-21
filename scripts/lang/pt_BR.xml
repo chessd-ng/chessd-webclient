@@ -268,7 +268,7 @@
 		<register_sucess_message>Usuário cadastrado com sucesso</register_sucess_message>
 	</register>
 	<oldgame>
-		<oldgame_title>Jogos antigos</oldgame_title>
+		<oldgame_title>Partidas antigas</oldgame_title>
 		<oldgame_my_games>Minhas partidas</oldgame_my_games>
 		<oldgame_other_games>Partidas de outros usuários</oldgame_other_games>
 		<oldgame_player1>Jogador 1:</oldgame_player1>
