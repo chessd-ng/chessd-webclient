@@ -469,7 +469,7 @@ function MESSAGE_GameRoomList()
 {
 	var XMPP;
 
-   	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_GetGamesList+"' to='games."+MainData.Host+"'>";
+   	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_GetGamesList+"' to='"+MainData.GameComponent+"."+MainData.Host+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return XMPP;
@@ -485,7 +485,7 @@ function MESSAGE_GameRoomInfoList(Room)
 {
 	var XMPP;
 
-	XMPP  = "<iq type='get' to='"+Room+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameInfo+"'>";
+	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameInfo+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
 
 	return XMPP;
@@ -498,7 +498,7 @@ function MESSAGE_GameMove(Move, GameID)
 {
 	var XMPP="";
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameMove+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameMove+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
 	XMPP += "<move long='"+Move+"'>";
 	XMPP += "</move></query></iq>";
@@ -548,22 +548,22 @@ function MESSAGE_GameRequests(Action, GameID)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn'>";
 			break;
 	
 		case "Resign":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameResign+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameResign+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#resign'>";
 			break;
 	
@@ -635,17 +635,17 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#draw"+Response+"'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#cancel"+Response+"'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@games."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+RoomID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#adjourn"+Response+"'>";
 			break;
 	
