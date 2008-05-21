@@ -133,6 +133,9 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var Color;
 	var Buffer = "";
 
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
+
 	// Hide current game
 	if (MainData.CurrentOldGame != null)
 	{
@@ -457,23 +460,21 @@ function OLDGAME_HandleVCardPhoto(XML)
 */
 function OLDGAME_RemoveOldGame(Index)
 {
-	var RoomPos;
+	var Room;
 	var Buffer;
+	var OldGame;
 
-	//Remove Board
-	MainData.OldGameList[Index].Game.Remove();
+	OldGame = MainData.OldGameList[Index];
+
+	//Remove Board from interface
+	OldGame.Game.Remove();
 
 	//Exit room if is there some room affiliated with oldgame;
-	RoomPos = MainData.FindRoom(MainData.CurrentOldGame.Id);
-	if(RoomPos != null)
+	Room = MainData.GetRoom(OldGame.Id);
+	if(Room != null)
 	{
-		//Close room on interface
-		INTERFACE_FocusRoom(MainData.RoomList[RoomPos].Name);
-		ROOM_ExitRoom();
-
-		//Send a message to leave from that room
-		Buffer = MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
-		CONNECTION_SendJabber(Buffer);
+		// Send a message to leave from room
+		ROOM_ExitRoom(Room.Name);
 	}
 
 	MainData.RemoveOldGame(Index);

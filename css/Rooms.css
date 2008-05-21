@@ -93,14 +93,17 @@
 }
 
 /* User list */
+#Main #Left #Rooms #RoomUsers {
+	overflow-y		: auto;
+	overflow-x		: hidden;
+}
+
 #Main #Left #Rooms .Room table {
 	display			: block;
 	height			: 25mm;
 	width			: 48mm;
 	margin-top		: 2mm;
 	border-spacing	: 0px;
-	overflow-y		: auto;
-	overflow-x		: hidden;
 }
 
 #Main #Left #Rooms .Room tbody {

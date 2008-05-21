@@ -498,6 +498,9 @@ function GAME_StartGame(GameId, P1, P2)
 	var Buffer="";
 	var RoomPos; 
 
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
+
 	// Hide current game (this case should happen when player
 	// is observing a game)
 	if (MainData.CurrentGame != null)
@@ -558,6 +561,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var RoomPos;
 	var Buffer = "";
 
+	// Remove welcome div
+	INTERFACE_RemoveWelcome();
+
 	// Hide current game
 	if (MainData.CurrentGame != null)
 	{
@@ -567,8 +573,9 @@ function GAME_StartObserverGame(GameId, P1, P2)
 		//GAME_RemoveGame(MainData.CurrentGame.Id);
 		
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
-		Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		//RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
+		//Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		ROOM_ExitRoom(MainData.CurrentGame.Id);
 	}
 
 	if (MainData.CurrentOldGame != null)
@@ -688,12 +695,15 @@ function GAME_RemoveGame(GameID)
 	{
 		if (Game.Finished)
 		{
+			// Remove game board from interface
 			Game.Game.StopTimer();
 			Game.Game.Remove();
+			
+			// Remove board from data struct
 			MainData.RemoveGame(GameID);
 
-			INTERFACE_FocusRoom(GameID);
-			ROOM_ExitRoom()
+			// Send message to leave room
+			ROOM_ExitRoom(GameID)
 		}
 		else
 		{
