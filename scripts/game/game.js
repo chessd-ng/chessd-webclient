@@ -505,11 +505,12 @@ function GAME_StartGame(GameId, P1, P2)
 	// is observing a game)
 	if (MainData.CurrentGame != null)
 	{
-		MainData.CurrentGame.Game.Hide();
 
 		//Quickfix to leave room when observer
 		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
 		Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		MainData.CurrentGame.Game.Hide();
+		MainData.RemoveGame(MainData.CurrentGame.Id);
 	}
 
 	if (MainData.CurrentOldGame != null)
@@ -518,6 +519,13 @@ function GAME_StartGame(GameId, P1, P2)
 		// In this version, player can see only one oldgame
 		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
 		MainData.RemoveOldGame(0);
+
+		//Quickfix to leave room when observer
+		RoomPos = MainData.FindRoom(MainData.CurrentOldGame.Id)
+		if(RoomPos != null)
+		{
+			Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		}
 	}
 
 	if (P1.Name == MainData.Username)
@@ -567,20 +575,14 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	// Hide current game
 	if (MainData.CurrentGame != null)
 	{
-		MainData.CurrentGame.Game.Hide();
 		// In this version, player should be able to
 		// observer just one game.
-		//GAME_RemoveGame(MainData.CurrentGame.Id);
-		
-		//Quickfix to leave room when observer
-		//RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
-		//Buffer += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
-		ROOM_ExitRoom(MainData.CurrentGame.Id);
+		GAME_RemoveGame(MainData.CurrentGame.Id);
 	}
 
 	if (MainData.CurrentOldGame != null)
 	{
-		MainData.CurrentOldGame.Game.Hide();
+		OLDGAME_RemoveOldGame(0);
 	}
 
 	// 38 -> default piece size
@@ -691,7 +693,7 @@ function GAME_RemoveGame(GameID)
 {
 	var Game = MainData.GetGame(GameID);
 
-	if (Game)
+	if (Game != null)
 	{
 		if (Game.Finished)
 		{

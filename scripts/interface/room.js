@@ -433,7 +433,7 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(GameId, P1, P2);
-				To = GameId+"@games."+MainData.Host+"/"+MainData.Username;
+				To = GameId+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
 				Buffer += MESSAGE_Presence(To)
 			}
 		}
