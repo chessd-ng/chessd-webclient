@@ -38,6 +38,13 @@ function DATA(ConfFile, LangFile)
 	this.Browser = UTILS_IdentifyBrowser();
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
+
+	this.MatchComponent = UTILS_GetTag(Params,"match-component");
+	this.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
+	this.GameComponent = UTILS_GetTag(Params, "game-component");
+	this.RatingComponent = UTILS_GetTag(Params, "rating-component");
+	this.AdminComponent = UTILS_GetTag(Params, "admin-component");
+
 	this.Status = "available";
 	this.Type = null;
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");

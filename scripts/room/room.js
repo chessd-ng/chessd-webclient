@@ -358,7 +358,7 @@ function ROOM_EnterRoom(RoomName)
 {
 	var XML, To;
 
-	To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+	To = RoomName+"@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username;
 
 	XML = MESSAGE_Presence(To);
 
