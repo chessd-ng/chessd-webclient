@@ -489,7 +489,14 @@ function INTERFACE_ChangeRoomListVisibility()
 			Item.innerHTML = MainData.RoomList[i].Name; 
 		}
 		Item.onclick = function () { 
-			ROOM_FocusRoom(this.innerHTML); 
+			if (this.innerHTML == UTILS_GetText("room_default"))
+			{
+				ROOM_FocusRoom(MainData.RoomDefault); 
+			}
+			else
+			{
+				ROOM_FocusRoom(this.innerHTML); 
+			}
 			INTERFACE_ChangeRoomListVisibility(); 
 		} 
 		List.appendChild(Item); 
@@ -688,7 +695,7 @@ function INTERFACE_FocusRoom(RoomName)
 	{
 		return null;
 	}
-
+	
 	// Focus to default room
 	if (RoomName == MainData.RoomDefault)
 	{
