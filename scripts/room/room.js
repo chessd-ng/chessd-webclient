@@ -665,17 +665,8 @@ function ROOM_SortUsersByRating(Category)
 			return "";
 		}
 		
-		// Test the current order mode (order == sort)
 		// If ordered into ascending order, change to descending order
-		if (Room.OrderBy == "0")
-		{
-			Room.OrderBy = "1";
-		}
-		// other modes, change to ascending order
-		else
-		{
-			Room.OrderBy = "0";
-		}
+		Room.OrderBy = "2";
 		
 		RoomName = Room.Name;
 		// Sort user list by nick name in data struct

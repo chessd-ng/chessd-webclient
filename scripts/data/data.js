@@ -814,7 +814,7 @@ function DATA_SortUserByRatingInRoom(RoomName)
 {
 	var i = this.FindRoom(RoomName);
 
-	this.RoomList[i].UserList.sort(UTILS_SortByRatingDsc);
+	this.RoomList[i].UserList.sort(UTILS_SortRoomByRatingDsc);
 	return true;
 }
 
