@@ -303,7 +303,27 @@ function INTERFACE_FindUserInRoom(Username)
 	}
 }
 
+/**
+* Refresh room's occupants number
+*
+* @param	RoomName
+* 		Room's name
+* @return void
+* @author Danilo 
+*/
+function INTERFACE_RefreshOccupantsNumber(RoomName)
+{
+	// Get number of occupants in room data struct
+	var N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
+	// Get element in interface that will be refreshed
+	var Node = document.getElementById(RoomName+"_occupants");
 
+	// If Room is showed at interface, refresh the number of occupants
+	if(Node)
+	{
+		Node.innerHTML= " ("+N_Occupants+")";
+	}
+}
 
 /*********************************************
  * FUNCTIONS - ROOM TOP MENU LIST 
@@ -728,18 +748,22 @@ function INTERFACE_FocusRoom(RoomName)
 	return true;
 }
 
+/* Rubens
+ */
 function INTERFACE_CreateRoomInBar(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
 	var RoomItem, RoomClose;
-	var RoomItemTitle
+	var RoomItemTitle, RoomOccupants;
 
 	//Create Room default
 	if(RoomList.childNodes.length == 1)
 	{
 		RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
-		RoomItem = UTILS_CreateElement("li");
+		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
+		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
+		RoomItem.appendChild(RoomOccupants);
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
@@ -753,6 +777,8 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
+		RoomOcupants = UTILS_CreateElement('span',RoomName+"_occupants",null," (0)");
+		RoomItem.appendChild(RoomOcupants);
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
