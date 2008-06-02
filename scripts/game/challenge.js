@@ -180,7 +180,7 @@ function GAME_HandleAccept (XML)
 */
 function GAME_HandleDecline (XML)
 {
-	var Match, MatchID;
+	var Match, MatchID, WindowObj,i;
 
 	// If there's no match, there's nothing to do (again)
 	try 
@@ -193,6 +193,15 @@ function GAME_HandleDecline (XML)
 	}
 	
 	MatchID = Match.getAttribute('id');
+
+	// search challenge postion in data struct
+	i = MainData.FindChallengeById(MatchID);
+
+	// get window object
+	WindowObj = MainData.ChallengeList[i].Window;
+
+	// close challenge window
+	WINDOW_RemoveWindow(WindowObj);
 
 	// Remove the ID from 'ChallengeList'
 	MainData.RemoveChallengeById(MatchID);

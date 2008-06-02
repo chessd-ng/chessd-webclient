@@ -140,6 +140,7 @@ DATA.prototype.RemoveChallengeById = DATA_RemoveChallengeById;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
 DATA.prototype.FindChallengeById = DATA_FindChallengeById;
 DATA.prototype.ClearChallenges = DATA_ClearChallenges;
+DATA.prototype.AddChallengeWindow = DATA_AddChallengeWindow;
 
 DATA.prototype.AddGame = DATA_AddGame;
 DATA.prototype.RemoveGame = DATA_RemoveGame;
@@ -970,6 +971,7 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	Challenge.Username = Username;
 	Challenge.Id = Id;
 	Challenge.Challenger = Challenger;
+	Challenge.Window = null;
 
 	this.ChallengeList[this.ChallengeList.length] = Challenge;
 
@@ -1082,6 +1084,15 @@ function DATA_FindChallengeById(ID)
 	return null;
 }
 
+function DATA_AddChallengeWindow (Id, WindowObj)
+{
+	var i = this.FindChallengeById(Id);
+
+	if (i != null)
+	{
+		this.ChallengeList[i].Window = WindowObj;
+	}
+}
 
 /**********************************
  * METHODS - GAME                 *

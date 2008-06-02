@@ -866,7 +866,7 @@ function INTERFACE_CreateRooms()
  * Create elements to create room window and return divs and array of buttons
  *
  * @ return     Div, Array 
- * @ see                WINDOW_CreateRoom();
+ * @ see        WINDOW_CreateRoom();
  * @ author     Danilo Kiyoshi Simizu Yorinori
  */
 
@@ -884,9 +884,13 @@ function INTERFACE_ShowCreateRoomWindow()
 	var RoomName;
 	var Buttons = new Array();
 
+	// Main Div
 	Div = UTILS_CreateElement('div', 'CreateRoomDiv');
 
+	// Options Div
 	OptionsDiv = UTILS_CreateElement('div', 'OptionsDiv');
+
+	// Room Name Input
 	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_name'));
 	Input = UTILS_CreateElement('input','CreateRoomInputName');
 	Br = UTILS_CreateElement('br');
@@ -894,21 +898,16 @@ function INTERFACE_ShowCreateRoomWindow()
 	Input.type = "text";
 	Input.size = "22";
 	Input.onkeypress = function(event) {
-
-		if (event.keyCode == 13)
+		if (event.keyCode == 13) // enter key pressed
 		{
 			if (Input.value == '' || Input.value == null)
 			{
 				return;
 			}
 
-			RoomName = Input.value.replace(/ /g,"_");
-			if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
-			{
-				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
-				return;
-			}
-			else if (RoomName == UTILS_GetText("room_default"))
+			RoomName = Input.value.replace(/ /g,"_"); // replace ' ' with '_'
+
+			if (RoomName == UTILS_GetText("room_default"))
 			{
 				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 				return;
@@ -919,20 +918,26 @@ function INTERFACE_ShowCreateRoomWindow()
 				Input.value = "";
 				return;
 			}
-
-			// TODO
 			// message to create room
-
+			else
+			{
+				CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.Host+"/"+MainData.Username));
+			}
 		}
 	};
 
+	// TODO - not implemented
+	// Room Description Input 
 	Description = UTILS_CreateElement('p',null,null,UTILS_GetText('room_description'));
 	Textarea = UTILS_CreateElement('textarea','CreateRoomTextarea');
 	Textarea.rows = "3";
 	Textarea.cols = "20";
+	Textarea.disabled = true; // Disable textarea field - Option not implemented
 
+	// Buttons Div
 	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
+	// Create Button
 	Create = UTILS_CreateElement('input',null,'button');
 	Create.type = "button";
 	Create.value = UTILS_GetText('room_create');
@@ -944,12 +949,7 @@ function INTERFACE_ShowCreateRoomWindow()
 		}
 
 		RoomName = Input.value.replace(/ /g,"_");
-		if (RoomName.match(/^\d{6}_\w+_\w+$/g) != null)
-		{
-			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
-			return;
-		}
-		else if (RoomName == UTILS_GetText("room_default"))
+		if (RoomName == UTILS_GetText("room_default"))
 		{
 			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
 			return;
@@ -967,28 +967,30 @@ function INTERFACE_ShowCreateRoomWindow()
 		}
 	};
 
+	// Cancel Button
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.type = "button";
 	Cancel.value = UTILS_GetText('room_cancel');
 
 	// Mount elements tree
+	// Options Div
 	OptionsDiv.appendChild(Label);
 	OptionsDiv.appendChild(Input);
 	OptionsDiv.appendChild(Br);
 	OptionsDiv.appendChild(Description);
 	OptionsDiv.appendChild(Textarea);
 
+	// Buttons Div
 	ButtonsDiv.appendChild(Create);
 	ButtonsDiv.appendChild(Cancel);
 
+	// Main Div
 	Div.appendChild(OptionsDiv);
 	Div.appendChild(ButtonsDiv);
 
+	// Insert buttons in Buttons array
 	Buttons.push(Create);
 	Buttons.push(Cancel);
-
-	// Set focus on input
-	Input.focus();
 
 	return {Div:Div, Buttons:Buttons};
 }
@@ -1013,30 +1015,39 @@ function INTERFACE_ShowCancelRoomWindow()
 	var RoomName;
 	var Buttons = new Array();
 
+	// Main Div
 	Div = UTILS_CreateElement('div', 'CancelRoomDiv');
 
+	// Text Div
 	TextDiv = UTILS_CreateElement('div', 'TextDiv');
 	Label = UTILS_CreateElement('p', null, null, UTILS_GetText('room_cancel_text'));
 
+	// Buttons Div
 	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
+	// Yes Button
 	Yes = UTILS_CreateElement('input',null,'button');
 	Yes.type = "button";
 	Yes.value = UTILS_GetText('room_yes');
 
+	// No Button
 	No = UTILS_CreateElement('input',null,'button');
 	No.type = "button";
 	No.value = UTILS_GetText('room_no');
 
 	// Mount elements tree
+	// Text Div
 	TextDiv.appendChild(Label);
 
+	// Buttons Div
 	ButtonsDiv.appendChild(Yes);
 	ButtonsDiv.appendChild(No);
 
+	// Main Div
 	Div.appendChild(TextDiv);
 	Div.appendChild(ButtonsDiv);
 
+	// Insert buttons in Buttons array
 	Buttons.push(Yes);
 	Buttons.push(No);
 
