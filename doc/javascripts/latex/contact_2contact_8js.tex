@@ -1,0 +1,65 @@
+\section{/home/www/ulysses/webclient/scripts/contact/contact.js File Reference}
+\label{contact_2contact_8js}\index{/home/www/ulysses/webclient/scripts/contact/contact.js@{/home/www/ulysses/webclient/scripts/contact/contact.js}}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf CONTACT\_\-HandleUserList} (XML)
+\item 
+function {\bf CONTACT\_\-HandleUserPresence} (XML)
+\item 
+function {\bf CONTACT\_\-InsertUser} (User, Status, Subs)
+\item 
+function {\bf CONTACT\_\-ShowUserMenu} (Obj, Username)
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{contact/contact.js@{contact/contact.js}!CONTACT\_\-HandleUserList@{CONTACT\_\-HandleUserList}}
+\index{CONTACT\_\-HandleUserList@{CONTACT\_\-HandleUserList}!contact/contact.js@{contact/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-HandleUserList ( {\em XML})}\label{contact_2contact_8js_0fc9dd46f6e48c722cc884197efe6bd9}
+
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software Handle contacts and user status Handle user list received from jabber server during connection
+
+\begin{Desc}
+\item[Returns:]string \end{Desc}
+
+
+References CONTACT\_\-InsertUser(), MainData, and MESSAGE\_\-InviteAccept().
+
+Referenced by PARSER\_\-ParseIq().\index{contact/contact.js@{contact/contact.js}!CONTACT\_\-HandleUserPresence@{CONTACT\_\-HandleUserPresence}}
+\index{CONTACT\_\-HandleUserPresence@{CONTACT\_\-HandleUserPresence}!contact/contact.js@{contact/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-HandleUserPresence ( {\em XML})}\label{contact_2contact_8js_53500c8e9abf607022b79c6b131e2f39}
+
+
+Parse user presence (user status) 
+
+References CONTACT\_\-ReceiveSubscribe(), CONTACT\_\-ReceiveSubscribed(), CONTACT\_\-ReceiveUnsubscribed(), CONTACT\_\-SetUserStatus(), and UTILS\_\-GetNodeText().
+
+Referenced by PARSER\_\-ParsePresence().\index{contact/contact.js@{contact/contact.js}!CONTACT\_\-InsertUser@{CONTACT\_\-InsertUser}}
+\index{CONTACT\_\-InsertUser@{CONTACT\_\-InsertUser}!contact/contact.js@{contact/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-InsertUser ( {\em User}, \/   {\em Status}, \/   {\em Subs})}\label{contact_2contact_8js_2c2a47451ed094e54747852e31db0a94}
+
+
+Insert user in data structure 
+
+References INTERFACE\_\-AddContact(), and MainData.
+
+Referenced by CONTACT\_\-HandleUserList().\index{contact/contact.js@{contact/contact.js}!CONTACT\_\-ShowUserMenu@{CONTACT\_\-ShowUserMenu}}
+\index{CONTACT\_\-ShowUserMenu@{CONTACT\_\-ShowUserMenu}!contact/contact.js@{contact/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-ShowUserMenu ( {\em Obj}, \/   {\em Username})}\label{contact_2contact_8js_8c339eb1f5ab5660dde74ee3c92061d3}
+
+
+Create and set options for user menu 
+
+Setting options 
+
+References CHAT\_\-OpenChat(), CONTACT\_\-InviteUser(), CONTACT\_\-RemoveUser(), INTERFACE\_\-HideUserMenu(), INTERFACE\_\-ShowUserMenu(), MainData, PROFILE\_\-StartProfile(), UTILS\_\-AddListener(), UTILS\_\-GetText(), UTILS\_\-RemoveListener(), WINDOW\_\-Challenge(), and WINDOW\_\-Confirm().
+
+Referenced by INTERFACE\_\-CreateContact(), and INTERFACE\_\-CreateUserElement().
