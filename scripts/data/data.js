@@ -66,12 +66,18 @@ function DATA(ConfFile, LangFile)
 	this.SID = -1;
 	this.Load = -1;
 	this.Lang = "";
+
+	//Default php version
 	this.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
 	/**
 	* DATA STRUCTURE
 	*/
+	//Contact
+	this.Contact = null;
+	this.ContactOnline = null;
 	this.UserList = new Array();
+
 	this.OrderBy = "0";
 	this.ChatList = new Array();
 	this.RoomList = new Array();
@@ -113,6 +119,7 @@ DATA.prototype.FindNextUser = DATA_FindNextUser;
 DATA.prototype.IsContact = DATA_IsContact;
 DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.GetRating = DATA_GetRating;
+DATA.prototype.GetType = DATA_GetType;
 DATA.prototype.SetDefault = DATA_SetDefault;
 DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
@@ -199,15 +206,10 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 * @return 		false - User already on list, true otherwise
 * @see			DATA_DelUser DATA_FindUser DATA_FindNextUser DATA_IsContact
 */
-function DATA_AddUser(Username, Status, Subs)
+function DATA_AddUser(Username, Status, Subs, Group)
 {
 	// Creating a new object
 	var User = new Object();
-
-	if (this.FindUser(Username) != null)
-	{
-		return false;
-	}
 
 	// Setting atributes
 	// The user's rating will be seted after
@@ -216,10 +218,9 @@ function DATA_AddUser(Username, Status, Subs)
 	User.Status = Status;
 	User.Subs = Subs;
 	User.Rating = new Object();
+	User.Group = Group;
 
 	this.UserList[this.UserList.length] = User;
-
-	return true;
 }
 
 /**
@@ -363,6 +364,32 @@ function DATA_GetRating(Username)
 		if (UserPos)
 		{
 			return this.RoomList[i].UserList[UserPos].Rating;
+		}
+	}
+	return null;
+}
+
+/**
+* Return User type
+*/
+function DATA_GetType(Username)
+{
+	var UserPos = this.FindUser(Username);
+	var i;
+
+	if (UserPos != null)
+	{
+		return this.UserList[UserPos].Type;
+	}
+
+	// Find type in room user lists
+	for (i=0; i<this.RoomList.length; i++)
+	{
+		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+
+		if (UserPos != null)
+		{
+			return this.RoomList[i].UserList[UserPos].Type;
 		}
 	}
 	return null;

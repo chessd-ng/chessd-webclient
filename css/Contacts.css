@@ -1,38 +1,55 @@
 #Main #Left #Contact {
 	height			: 52mm;
-	border			: 2px solid #216778;
-	background-color: #FFF;
-	margin-top		: 0.5mm;
-	position		: relative;
 }
 
-#Main #Left #Contact .title {
-	padding			: 2px;
-	padding-left	: 3mm;
+#Main #Left #Contact #ContactTitle {
 	font			: bold 11px Trebuchet MS;
 	color			: #FFF;
-	background-color: #216778;
-	margin-bottom	: 1mm;
-	cursor			: pointer;
+	padding			: 1mm 0mm 0mm 0mm;
+	display			: table;
+	list-style		: none;
+	position		: relative;
+	width			: 54.3mm;
 }
 
-#Main #Left #Contact #ContactInside {
-	padding-left	: 3mm;
+#Main #Left #Contact #ContactTitle li {
+	background-color	: #216778;
+	cursor			: pointer;
+	float			: left;
+	height			: 14px;
+	width			: 42%;
+	padding			: 2px 2px 2px 3mm;
+	margin-right		: 1px;
+}
+
+
+#Main #Left #Contact #ContactTitle li.contact_selec {
+	background-color	: #FFA200;
+}
+
+#Main #Left #Contact #ContactInside ,
+#Main #Left #Contact #ContactOnline {
+	padding-top		: 1mm;
+	padding-left		: 2mm;
+	border			: 2px solid #216778;
+	border-top		: 0px;
+	background-color	: #FFF;
+	position		: relative;
 }
 
 /* User list */
 #Main #Left #Contact #Contacts {
 	display			: block;
 	height			: 33mm;
-	padding-bottom	: 1mm;
-	margin-top	: 2mm;
+	padding-bottom		: 1mm;
+	margin-top		: 2mm;
 	overflow-y		: auto;
 	overflow-x		: hidden;
 	width			: 98%;
 }
 
 #Main #Left #Contact #Contacts table {
-	border-spacing	: 0px;
+	border-spacing		: 0px;
 	width			: 44mm;
 }
 
@@ -45,7 +62,7 @@
 }
 
 #Main #Left #Contact tr {
-	display		: block;
+	display			: block;
 	text-indent		: 5mm;
 	margin			: 1px 0px;
 	width			: 42mm;
@@ -54,7 +71,7 @@
 }
 
 #Main #Left #Contact td:hover {
-	background-color: #EAF5F4;
+	background-color	: #EAF5F4;
 	cursor			: pointer;
 }
 
@@ -77,6 +94,11 @@
 	border			: 0px;
 }
 
+#Main #Left #Contact #ListDiv {
+	overflow-y		: auto;
+	overflow-x		: hidden;
+	height			: 34mm;
+}
 /**
 * USER STATUS
 */

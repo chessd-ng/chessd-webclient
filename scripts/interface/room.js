@@ -40,21 +40,17 @@ function RoomObj(Roomname)
 	//Attributes
 	this.roomName = Roomname;
 	this.room = Room.RoomDiv;
-	this.userList = Room.UserList;
-	this.users = new Array();
 	this.msgList = Room.MsgList;
+	this.userList = new UserListObj(Room.RoomDiv);
+	this.userList.show();
+	this.userList.setSortUserFunction(ROOM_SortUsersByNick);
+	this.userList.setSortRatingFunction(ROOM_SortUsersByRating);
 	
 	//Methods Public
 	this.show = INTERFACE_ShowRoom;
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
-	this.addUser = INTERFACE_AddUserInRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
-	this.removeUser = INTERFACE_RemoveUserInRoom;
-	this.updateUser = INTERFACE_ChangeUserStatusInRoom;
-
-	//Methods Private
-	this.findUser = INTERFACE_FindUserInRoom;
 }
 
 
@@ -68,37 +64,33 @@ function RoomObj(Roomname)
 */
 function INTERFACE_CreateRoom(RoomName)
 {
-        var RoomDiv, RoomName, RoomInside, RoomUsers, RoomTable, RoomTbody;
+        var RoomDiv, RoomName, RoomInside;
         var MessageList;
-        var OrderNick, OrderRating, OrderRatingOpt, Input, Emoticon;
+        var Input, Emoticon;
 
         // General room
         RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
         RoomDiv.style.display = "none";
         RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
 
-        // Order
-        OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
-        OrderNick.onclick = function() { ROOM_SortUsersByNick(); };
-        OrderRating = UTILS_CreateElement("select", "order_rating_"+RoomName, "order_rating", UTILS_GetText("room_order_rating"));
-        OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
-        OrderRatingOpt.value = "lightning";
-        OrderRating.appendChild(OrderRatingOpt);
-        OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Blitz)");
-        OrderRatingOpt.selected = true;
-        OrderRatingOpt.value = "blitz";
-        OrderRating.appendChild(OrderRatingOpt);
-        OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Standard)");
-        OrderRatingOpt.value = "standard";
-        OrderRating.appendChild(OrderRatingOpt);
-        OrderRating.onchange = function () {
-		ROOM_SortUsersByRating(this.value);
+        // MessageList
+        MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
+        Input = UTILS_CreateElement("input", "Input_"+RoomName);
+        Input.type = "text";
+        Input.onkeypress = function(event) {
+                if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
+                {
+                        // Send message to room
+                        ROOM_SendMessage(RoomName, Input.value);
+                        Input.value = "";
+                }
         }
 
-        // Room user list
-        RoomUsers = UTILS_CreateElement("div", "RoomUsers");
-        RoomTable = UTILS_CreateElement("table");
-        RoomTbody = UTILS_CreateElement("tbody", RoomName+"UserList");
+        Emoticon = UTILS_CreateElement("img", null, "emoticon");
+        Emoticon.src = "./images/emoticons/default.png";
+        Emoticon.onclick = function () {
+                INTERFACE_ShowEmoticonList(RoomName);
+        }
 
         // MessageList
         MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
@@ -119,43 +111,13 @@ function INTERFACE_CreateRoom(RoomName)
                 INTERFACE_ShowEmoticonList(RoomName);
         }
 
-        // Room user list
-        RoomUsers = UTILS_CreateElement("div", "RoomUsers");
-        RoomTable = UTILS_CreateElement("table");
-        RoomTbody = UTILS_CreateElement("tbody", RoomName+"UserList");
-
-        // MessageList
-        MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
-        Input = UTILS_CreateElement("input", "Input_"+RoomName);
-        Input.type = "text";
-        Input.onkeypress = function(event) {
-                if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
-                {
-                        // Send message to room
-                        ROOM_SendMessage(RoomName, Input.value);
-                        Input.value = "";
-                }
-        }
-
-        Emoticon = UTILS_CreateElement("img", null, "emoticon");
-        Emoticon.src = "./images/emoticons/default.png";
-        Emoticon.onclick = function () {
-                INTERFACE_ShowEmoticonList(RoomName);
-        }
-
-        RoomTable.appendChild(RoomTbody);
-        RoomUsers.appendChild(RoomTable);
-
-        RoomInside.appendChild(OrderNick);
-        RoomInside.appendChild(OrderRating);
-        RoomInside.appendChild(RoomUsers);
         RoomInside.appendChild(MessageList);
         RoomInside.appendChild(Input);
         RoomInside.appendChild(Emoticon);
 
         RoomDiv.appendChild(RoomInside);
 
-        return {RoomDiv:RoomDiv, UserList:RoomTbody, MsgList:MessageList};
+        return {RoomDiv:RoomDiv, MsgList:MessageList};
 }
 
 function INTERFACE_ShowRoom()
@@ -184,24 +146,6 @@ function INTERFACE_RemoveRoom()
 }
 
 
-
-function INTERFACE_AddUserInRoom(Username, Status, Rating, Type)
-{
-	var User;
-	var UserObj = new Object();
-
-	// Create Tr
-	User = INTERFACE_CreateContact(Username, Status, Rating, Type, this.roomName);
-
-	// Add user in room users
-	UserObj.Id = Username;
-	UserObj.User = User;
-	this.users.push(UserObj);
-
-	//this.userList.insertBefore(User,null);
-	this.userList.appendChild(User);
-}
-
 function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 {
 	var Item;
@@ -228,102 +172,6 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	return true;
 }
 
-
-
-function INTERFACE_RemoveUserInRoom(Username)
-{
-	var UserItem = this.findUser(Username);
-	var i=0;
-
-	
-	if(UserItem == null)
-	{
-		return false;
-	}
-
-	this.userList.removeChild(UserItem);
-
-
-	// Find user in "users" list and remove from it
-	while((Username != this.users[i].Id) && (i<this.users.length))
-	{
-		i++;
-	}
-
-	if(i< this.users.length)
-	{
-		this.users.splice(i,1);
-	}
-
-	return true;
-}
-
-function INTERFACE_ChangeUserStatusInRoom(Username, NewStatus, NewType)
-{
-	var Node = this.findUser(Username);
-	var User;
-
-	if(Node == null)
-	{
-		return false;
-	}
-	
-	// Get user and status icon element
-	User = Node.getElementsByTagName("td")[0];
-
-	// If 'NewType' is not passed, set normal user status
-	if (NewType == null)
-	{
-		User.className = User.className.replace(/_.*/, "_"+NewStatus);
-	}
-	else
-	{
-		User.className = NewType+"_"+NewStatus;
-	}
-	return true;
-}
-
-
-function INTERFACE_FindUserInRoom(Username)
-{
-	var i=0;
-
-	while((i<this.users.length) && (Username != this.users[i].Id))
-	{
-		i++;
-	}
-	
-	if(i>= this.users.length)
-	{
-		return null;	
-	}
-	else
-	{
-		return this.users[i].User;
-	}
-}
-
-/**
-* Refresh room's occupants number
-*
-* @param	RoomName
-* 		Room's name
-* @return void
-* @author Danilo 
-*/
-function INTERFACE_RefreshOccupantsNumber(RoomName)
-{
-	// Get number of occupants in room data struct
-	var N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
-	// Get element in interface that will be refreshed
-	var Node = document.getElementById(RoomName+"_occupants");
-
-	// If Room is showed at interface, refresh the number of occupants
-	if(Node)
-	{
-		Node.innerHTML= " ("+N_Occupants+")";
-	}
-}
 
 /*********************************************
  * FUNCTIONS - ROOM TOP MENU LIST 

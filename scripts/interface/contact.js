@@ -19,12 +19,316 @@
 * Control interface of contact list
 */
 
+/*******************************************
+ ******* FUNCTIONS - CONTACT OBJECT
+ * ***************************************/
+
+function ContactObj()
+{
+	var ContactContent = INTERFACE_CreateContactContent();
+	// Attributes
+	this.div = ContactContent.MainDiv;
+	this.listDiv = ContactContent.ListDiv;
+
+	this.groups = new Array();
+	
+	//Create sort options
+	this.sort = new UserListObj(this.div);
+	this.sort.show();
+	this.sort.hideList();
+	this.sort.setSortUserFunction(CONTACT_SortUsersByNick);
+	this.sort.setSortRatingFunction(CONTACT_SortUsersByRating);
+
+	// Methods
+	this.addGroup = INTERFACE_AddContactGroup;
+	this.removeGroup = INTERFACE_RemoveContactGroup;
+	this.findGroup = INTERFACE_FindContactGroup;
+	this.getGroup = INTERFACE_GetContactGroup;
+	this.findUserGroup = INTERFACE_FindContactUserGroup;
+
+	this.addUser = INTERFACE_AddContactUser;
+	this.removeUser = INTERFACE_RemoveContactUser;
+	this.updateUser = INTERFACE_UpdateContactUser;
+
+	this.show = INTERFACE_ShowContactList;
+	this.hide = INTERFACE_HideContactList;
+}
+
+function INTERFACE_AddContactGroup(GroupName)
+{
+	//TODO -> Create contact Group object in other file
+	var Group = new Object();
+	var GroupInterface = INTERFACE_CreateGroup(GroupName);
+
+	Group.mainDiv = GroupInterface.GroupDiv;
+	Group.onlineDiv = GroupInterface.Online;
+	Group.offlineDiv = GroupInterface.Offline;
+	Group.title = GroupInterface.Title;
+	Group.name = GroupName;
+
+	Group.online = new UserListObj(Group.onlineDiv);
+	Group.online.show();
+	Group.online.hideSort();
+
+	Group.offline = new UserListObj(Group.offlineDiv);
+	Group.offline.show();
+	Group.offline.hideSort();
+
+	Group.display = "block";
+	Group.show = function (){
+		if(this.display == "none")
+		{
+			this.display = "block";
+			this.online.showList();
+			this.offline.showList();
+			this.title.onclick = function() { Group.hide() };
+		}
+	}
+	Group.hide = function() {
+		if(this.display == "block")
+		{
+			this.display = "none";
+			this.online.hideList();
+			this.offline.hideList();
+			this.title.onclick = function() { Group.show() };
+		}
+	}
+
+	Group.remove = function(){
+		this.mainDiv.parentNode.removeChild(this.mainDiv);
+	};
+
+	Group.title.onclick = function() { Group.hide() }
+
+	this.groups.push(Group);
+	this.listDiv.appendChild(GroupInterface.GroupDiv);
+}
+
+function INTERFACE_CreateGroup(GroupName)
+{
+	var GroupDiv;
+	var GroupTitle;
+	var GroupOnline, GroupOffline;
+
+	GroupDiv = UTILS_CreateElement("div",null,"GroupDiv");
+
+	GroupTitle = UTILS_CreateElement("label",null,null,GroupName);
+	GroupOnline = UTILS_CreateElement("div",null,"OnlineGroup");
+	GroupOffline = UTILS_CreateElement("div",null,"OfflineGroup");
+
+	GroupDiv.appendChild(GroupTitle);
+	GroupDiv.appendChild(GroupOnline);
+	GroupDiv.appendChild(GroupOffline);
+
+	return {GroupDiv:GroupDiv, Online:GroupOnline, Offline:GroupOffline, Title:GroupTitle };
+}
+
+function INTERFACE_RemoveContactGroup(GroupName)
+{
+	var GroupPos = this.findGroup(GroupName);
+	var Group = this.getGroup(GroupName);
+
+	//Remove group from interface
+	Group.remove();
+
+	this.groups.splice(GroupPos,1);
+
+}
+
+function INTERFACE_FindContactGroup(GroupName)
+{
+	var i=0;
+
+	while((i<this.groups.length) && (GroupName != this.groups[i].name))
+	{
+		i++;
+	}
+	
+	if(i<this.groups.length)
+	{
+		return i;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function INTERFACE_GetContactGroup(GroupName)
+{
+	var GroupPos = this.findGroup(GroupName);
+	return this.groups[GroupPos];
+}
+
+
+function INTERFACE_FindContactUserGroup(UserName)
+{
+	var i=0;
+	var GroupTmp;
+
+	while(i<this.groups.length)
+	{
+		GroupTmp = this.groups[i];
+		if(GroupTmp.online.findUser(UserName) != null)
+		{
+			return GroupTmp;
+		}
+
+		if(GroupTmp.offline.findUser(UserName) != null)
+		{
+			return GroupTmp;
+		}
+		i++;
+	}
+	return null;
+}
+
+
+function INTERFACE_AddContactUser(GroupName, UserName, Status, Rating, Type)
+{
+	var Group = this.getGroup(GroupName);
+
+	if(Group == null)
+	{
+		return "";
+	}
+
+	if(Status != "offline")
+	{
+		Group.online.addUser(UserName, Status, Rating, Type);
+	}
+	else
+	{
+		Group.offline.addUser(UserName, Status, Rating, Type);
+	}
+}
+
+function INTERFACE_RemoveContactUser(UserName)
+{
+	var Group = this.findUserGroup(UserName);
+
+	// User not founded
+	if(Group == null)
+	{
+		return null;
+	}
+
+	if(Group.online.findUser(UserName) != null)
+	{
+		Group.online.removeUser(UserName);
+	}
+	else 
+	{
+		Group.offline.removeUser(UserName);
+	}
+}
+
+function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
+{
+	var Group = this.findUserGroup(UserName);
+
+	// Group not founded
+	if(Group == null)
+	{
+		return null;
+	}
+
+	// if user is in online list
+	if(Group.online.findUser(UserName) != null)
+	{
+		// if this online user status turn to offline... 
+		if(Status == "offline")
+		{	
+			//Remove from online list and insert in offline;
+			this.removeUser(UserName);
+			this.addUser(Group.name, UserName, Status, Rating, Type);
+		}
+		// update user state
+		else 
+		{
+			Group.online.updateUser(UserName, Status, Rating, Type);
+		}
+	}
+	// if user is in offline list
+	else 
+	{
+		if(Status != "offline")
+		{
+			//Remove from offline list and insert in online;
+			this.removeUser(UserName);
+			this.addUser(Group.name, UserName, Status, Rating, Type);
+		}
+	}
+	
+}
+
+
+
+function INTERFACE_ShowContactList()
+{
+	var ParentTmp;
+
+	if(this.div.parentNode == null)
+	{
+		ParentTmp = document.getElementById("Contact");
+		ParentTmp.appendChild(this.div);
+	}
+
+	this.div.style.display = "block";
+}
+
+function INTERFACE_HideContactList()
+{
+	this.div.style.display = "none";
+}
+
+
+
+/*******************************************
+ ******* FUNCTIONS - CONTACT ONLINE OBJECT
+ * ***************************************/
+
+// Contact Online Object
+function ContactOnlineObj()
+{
+	this.div = INTERFACE_CreateOnlineContent();
+
+	this.userList = new UserListObj(this.div);
+	this.userList.show();
+	this.userList.setSortUserFunction(CONTACT_OnlineSortUserByNick);
+	this.userList.setSortRatingFunction(CONTACT_OnlineSortUserByRating);
+
+	this.show = INTERFACE_ShowOnlineList;
+	this.hide = INTERFACE_HideOnlineList;
+}
+
+
+function INTERFACE_ShowOnlineList()
+{
+	var ParentTmp;
+
+	if(this.div.parentNode == null)
+	{
+		ParentTmp = document.getElementById("Contact");
+		ParentTmp.appendChild(this.div);
+	}
+
+	this.div.style.display = "block";
+}
+
+function INTERFACE_HideOnlineList()
+{
+	this.div.style.display = "none";
+}
+
+
 
 /**
 * Add user in contact list
 *
 * @public
 */
+/*
 function INTERFACE_AddContact(Username, Status)
 {
 	var Node = document.getElementById("ContactOnlineList");
@@ -64,12 +368,13 @@ function INTERFACE_AddContact(Username, Status)
 
 	return true;
 }
-
+*/
 /**
 * Remove user in contact list
 *
 * @public
 */
+/*
 function INTERFACE_RemoveContact(Username)
 {
 	var Node = document.getElementById("contact-"+Username);
@@ -88,12 +393,13 @@ function INTERFACE_RemoveContact(Username)
 
 	return true;
 }
-
+*/
 /**
 * Set status of user in interface
 *
 * @public
 */
+/*
 function INTERFACE_SetUserStatus(Username, NewStatus)
 {
 	var User = document.getElementById("contact-"+Username);
@@ -117,7 +423,8 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 			return false;
 		}
 		// Updating status
-		User.className = User.className.replace(/_.*/, "_"+NewStatus);
+		User.className = User.className.replace(/_.*/
+		/*"_"+NewStatus);
 
 		// Up to 'tr'
 		User = User.parentNode;
@@ -142,7 +449,8 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 			return false;
 		}
 		// Updating status
-		User.className = User.className.replace(/_.*/, "_"+NewStatus);
+		User.className = User.className.replace(/_.*/
+		/*, "_"+NewStatus);
 
 		// Up to 'tr'
 		User = User.parentNode;
@@ -162,17 +470,19 @@ function INTERFACE_SetUserStatus(Username, NewStatus)
 	else
 	{
 		// Updating status
-		User.className = User.className.replace(/_.*/, "_"+NewStatus);
+		User.className = User.className.replace(/_.*/
+		/*, "_"+NewStatus);
 	}
 
 	return true;
 }
-
+*/
 /**
 * Set rating of user in interface
 *
 * @public
 */
+/*
 function INTERFACE_SetUserRating(Username, Category, Rating)
 {
 	var User = document.getElementById("contact-"+Username+"-rating");
@@ -201,12 +511,13 @@ function INTERFACE_SetUserRating(Username, Category, Rating)
 
 	return true;
 }
-
+*/
 /**
 * Change current rating type showed in interface
 *
 * @public
 */
+/*
 function INTERFACE_ChangeCurrentRating(Type)
 {
 	var Node, NewRating, Div;
@@ -263,7 +574,7 @@ function INTERFACE_ChangeCurrentRating(Type)
 	document.getElementById("order_nick").className = null;
 	document.getElementById("order_rating-contact").className = 'order_rating_selec';
 }
-
+*/
 /**
 * Set type of user in interface
 *
@@ -310,6 +621,7 @@ function INTERFACE_SetUserType(Username, NewType)
 * @private
 * @return DOM object
 */
+/*
 function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 {
 	var Tr, Td1, Td2;
@@ -338,13 +650,14 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 	
 	return Tr;
 }
-
+*/
 
 /**
 * Show user menu
 *
 * @private
 */
+/*
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i, Offset;
@@ -395,13 +708,14 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 
 	document.body.appendChild(Menu);
 }
-
+*/
 
 /**
 * Hide user menu from screen
 *
 * @private
 */
+/*
 function INTERFACE_HideUserMenu()
 {
 	var Menu = document.getElementById("UserMenuDiv");
@@ -413,7 +727,7 @@ function INTERFACE_HideUserMenu()
 	Menu.parentNode.removeChild(Menu);
 	return true;
 }
-
+*/
 
 /**
 * Show or hide contact groups
@@ -448,21 +762,138 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 *
 * @private
 */
-function INTERFACE_CreateContactList()
+function INTERFACE_CreateContact()
+{
+	var ContactDiv, ContactTitle;
+	var ContactTitleOnline, ContactTitleContacts;
+	var ContactTitleOnlineSpan, ContactTitleContactsSpan;
+
+	// Main div
+	ContactDiv = UTILS_CreateElement("div", "Contact");
+
+	// Contact change bar
+	ContactTitle = UTILS_CreateElement("ul", "ContactTitle");
+	ContactTitleContacts = UTILS_CreateElement("li");
+
+	ContactTitleOnline = UTILS_CreateElement("li", null, "contact_selec");
+
+	ContactTitleContactsSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_contacts"));
+	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_online"));
+
+	ContactTitleContacts.onclick = function(){
+		ContactTitleContacts.className = "contact_selec";
+		ContactTitleOnline.className = "";
+
+		MainData.Contact.show();
+		MainData.ContactOnline.hide();
+	};
+	ContactTitleOnline.onclick = function(){
+		ContactTitleContacts.className = "";
+		ContactTitleOnline.className = "contact_selec";
+
+		MainData.Contact.hide();
+		MainData.ContactOnline.show();
+	};
+
+	// Creating DOM tree
+	ContactTitleOnline.appendChild(ContactTitleOnlineSpan);
+	ContactTitleContacts.appendChild(ContactTitleContactsSpan);
+	ContactTitle.appendChild(ContactTitleOnline);
+	ContactTitle.appendChild(ContactTitleContacts);
+
+	ContactDiv.appendChild(ContactTitle);
+//	ContactDiv.appendChild(INTERFACE_CreateContactContent());
+
+	return ContactDiv;
+}
+
+function INTERFACE_CreateContactContent()
+{
+	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
+	var OrderNick, OrderRating, OrderRatingOpt, Search;
+	var Hr;
+	var SearchP, SearchS;
+	var ListDiv;
+
+
+	//Contact content
+	ContactInside = UTILS_CreateElement("div", "ContactInside");
+	ListDiv = UTILS_CreateElement("div", "ListDiv");
+
+	// Group labels
+	/*
+	ContactsDiv = UTILS_CreateElement("div", "Contacts");
+	ContactOnlineDiv = UTILS_CreateElement("div", "ContactOnlineDiv");
+	ContactOnline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_online"));
+	ContactOnline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOnlineTable"); };
+	ContactOfflineDiv = UTILS_CreateElement("div", "ContactOfflineDiv");
+	ContactOffline = UTILS_CreateElement("label", null, null, "- "+UTILS_GetText("contact_offline"));
+	ContactOffline.onclick = function () { INTERFACE_ChangeGroupVisibility(this, "ContactOfflineTable"); };
+	// User tables
+	OnlineTable = UTILS_CreateElement("table","ContactOnlineTable");
+	// Display should be "list-item", "table" don't work in IE6
+	OnlineTable.style.display = "list-item";
+	OnlineTbody = UTILS_CreateElement("tbody", "ContactOnlineList");
+
+	OfflineTable = UTILS_CreateElement("table","ContactOfflineTable");
+	// Display should be "list-item", "table" don't work in IE6
+	OfflineTable.style.display = "list-item";
+	OfflineTbody = UTILS_CreateElement("tbody", "ContactOfflineList");
+	*/
+
+	// Search user
+//	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
+	SearchP = UTILS_CreateElement("p",null,"contact_search_user_p");
+	SearchS = UTILS_CreateElement("span","contact_search_user", null, UTILS_GetText("menu_search_user"));
+	UTILS_AddListener(SearchP, "click", function() { WINDOW_SearchUser(); }, "false");
+	SearchP.appendChild(SearchS);
+	Hr = UTILS_CreateElement("hr");
+
+	/*
+	OnlineTable.appendChild(OnlineTbody);
+	OfflineTable.appendChild(OfflineTbody);
+
+	ContactOnlineDiv.appendChild(ContactOnline);
+	ContactOnlineDiv.appendChild(OnlineTable);
+	ContactOfflineDiv.appendChild(ContactOffline);
+	ContactOfflineDiv.appendChild(OfflineTable);
+	ContactsDiv.appendChild(ContactOnlineDiv);
+	ContactsDiv.appendChild(ContactOfflineDiv);
+	ContactInside.appendChild(ContactsDiv);
+	*/
+	ContactInside.appendChild(ListDiv);
+	ContactInside.appendChild(Hr);
+	ContactInside.appendChild(SearchP);
+
+	//HIDE CONTACT DIV
+	ContactInside.style.display = "none";
+
+	return { MainDiv:ContactInside, ListDiv:ListDiv};
+}
+
+
+/**
+* Create contact online list
+*
+* @private
+*/
+function INTERFACE_CreateOnlineContent()
 {
 	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
 	var ContactsOnline, ContactsOffline;
 	var OnlineTable, OnlineTbody;
 	var OfflineTable, OfflineTbody;
-	var OrderNick, OrderRating, OrderRatingOpt, Search, i;
+	var OrderNick, OrderRating, OrderRatingOpt, Search;
 	var Hr;
+	var SearchP, SearchS;
 
-	// Main div
-	ContactDiv = UTILS_CreateElement("div", "Contact");
-	ContactTitle = UTILS_CreateElement("h3", null, "title", UTILS_GetText("contact_contacts"));
-	ContactInside = UTILS_CreateElement("div", "ContactInside");
+
+	//Contact content
+	ContactInside = UTILS_CreateElement("div", "ContactOnline");
+
 
 	// Order buttons
+	/*
 	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("contact_order_nick"));
 	OrderNick.onclick = function() { INTERFACE_SortUserByNick(); }; 
 
@@ -500,37 +931,15 @@ function INTERFACE_CreateContactList()
 	// Display should be "list-item", "table" don't work in IE6
 	OfflineTable.style.display = "list-item";
 	OfflineTbody = UTILS_CreateElement("tbody", "ContactOfflineList");
-
-	// Loading user list
-	for (i=0; i < MainData.UserList.length; i++)
-	{
-		if (MainData.UserList[i].Status != "offline")
-		{
-			ContactsOnline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
-														MainData.UserList[i].Status,
-														MainData.UserList[i].Rating.Blitz,
-														MainData.UserList[i].Type
-													);
-	//		OnlineTbody.appendChild(ContactsOnline);
-		}
-		else
-		{
-			ContactsOffline = INTERFACE_CreateContact(	MainData.UserList[i].Username, 
-														MainData.UserList[i].Status,
-														MainData.UserList[i].Rating.Blitz,
-														MainData.UserList[i].Type
-													);
-			OfflineTbody.appendChild(ContactsOffline);
-		}
-	}
-
+	*/
 	// Search user
-	var SearchP, SearchS
 	SearchP = UTILS_CreateElement("p",null,"contact_search_user_p");
 	SearchS = UTILS_CreateElement("span","contact_search_user", null, UTILS_GetText("menu_search_user"));
 	UTILS_AddListener(SearchP, "click", function() { WINDOW_SearchUser(); }, "false");
 	SearchP.appendChild(SearchS);
-	
+	Hr = UTILS_CreateElement("hr");
+
+	/*
 	// Creating DOM tree
 	OnlineTable.appendChild(OnlineTbody);
 	OfflineTable.appendChild(OfflineTbody);
@@ -539,20 +948,22 @@ function INTERFACE_CreateContactList()
 	ContactOnlineDiv.appendChild(OnlineTable);
 	ContactOfflineDiv.appendChild(ContactOffline);
 	ContactOfflineDiv.appendChild(OfflineTable);
-	
 	ContactsDiv.appendChild(ContactOnlineDiv);
 	ContactsDiv.appendChild(ContactOfflineDiv);
 	
 	ContactInside.appendChild(OrderNick);
 	ContactInside.appendChild(OrderRating);
 	ContactInside.appendChild(ContactsDiv);
+	*/
+	ContactInside.appendChild(Hr);
 	ContactInside.appendChild(SearchP);
 
-	ContactDiv.appendChild(ContactTitle);
-	ContactDiv.appendChild(ContactInside);
+	//HIDE CONTACT DIV
+	//ContactInside.style.display = "none";
 
-	return ContactDiv;
+	return ContactInside;
 }
+
 
 /*****************************
 *	FUNCTIONS - WINDOW
@@ -674,7 +1085,7 @@ function INTERFACE_ShowSearchUserWindow()
 
 	Input.focus();
 
-	return {Div:Div, Buttons:Buttons};
+	return {MainDiv:Div, Buttons:Buttons};
 }
 
 
@@ -781,6 +1192,7 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 * @return	boolean
 * @author Danilo Kiyoshi Simizu Yorinori
 */
+/*
 function INTERFACE_SortUserByNick()
 {	
 	var Tam = MainData.UserList.length;
@@ -845,13 +1257,14 @@ function INTERFACE_SortUserByNick()
 		}
 	}
 }
-
+*/
 /**
 *	Sort users by nick into ascendent or descendent order
 *
 * @return	boolean
 * @author Danilo Kiyoshi Simizu Yorinori
 */
+/*
 function INTERFACE_SortUserByRating()
 {	
 	var Tam = MainData.UserList.length;
@@ -889,3 +1302,4 @@ function INTERFACE_SortUserByRating()
 		}
 	}
 }
+*/

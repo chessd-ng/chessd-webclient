@@ -22,7 +22,7 @@
 function PARSER_ParsePresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
-
+	var Buffer = ""
 
 	// Get Jid
 	try 
@@ -38,7 +38,9 @@ function PARSER_ParsePresence(XML)
 	if (Jid.match(/.*conference.*/) || (Jid.match(/.*games.*/)))
 	//if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	{
-		return ROOM_HandleRoomPresence(XML);
+		Buffer += ROOM_HandleRoomPresence(XML);
+		Buffer += CONTACT_HandleOnlinePresence(XML);
+		return Buffer;
 	}
 	// User presence
 	else

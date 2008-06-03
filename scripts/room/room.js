@@ -92,7 +92,6 @@ function ROOM_HandleRoomPresence(XML)
 		if (Type == "unavailable")
 		{
 			ROOM_RemoveRoom(RoomName);
-			//MainData.DelRoom(RoomName);
 		}
 		else
 		{
@@ -474,9 +473,10 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 
 	// Check if user has already inserted. 
 	// If not inserted, add user, else update information
-	if(Room.Room.findUser(Jid) == null)
+	if(Room.Room.userList.findUser(Jid) == null)
 	{
-		if (UserPos) 
+		/* //Review this code to be more 
+		if (UserPos != null) 
 		{ 
 			Type = MainData.UserList[UserPos].Type; 
 			Rating = eval("MainData.UserList["+UserPos+"].Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
@@ -487,24 +487,28 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 			Rating = eval("MainData.Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
 		} 
 		else 
-		{ 
+		{
 			// Ask user info, if it's not your contact 
 			Buffer += MESSAGE_Info(Jid); 
 		} 
+		*/
+
+		// Get user rating and type information
+		Buffer += MESSAGE_Info(Jid); 
 
 		//Add user in data struct
 		MainData.AddUserInRoom(RoomName, Jid, Status, Type, Role, Affiliation); 
 		MainData.SortUserByNickInRoom(RoomName); 
 	
 		//Add user in interface
-		Room.Room.addUser(Jid, Status, Rating, Type); 
+		Room.Room.userList.addUser(Jid, Status, Rating, Type); 
 	} 
 	else
 	{
 		//Update user information in data struct
 		MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation) 
 		//Update user information in interface
-		Room.Room.updateUser(Jid, Status); 
+		Room.Room.userList.updateUser(Jid, Status); 
 	} 
 	return Buffer; 
 }
@@ -516,7 +520,7 @@ function ROOM_RemoveUser(RoomName, UserName)
 	MainData.DelUserInRoom(RoomName,UserName)
 	
 	// Remove user from interface
-	Room.Room.removeUser(UserName);
+	Room.Room.userList.removeUser(UserName);
 
 	return "";
 }
@@ -645,8 +649,8 @@ function ROOM_SortUsersByNick()
 					break;
 			}
 
-			Room.Room.removeUser(UserName);
-			Room.Room.addUser(UserName, Status, Rating, Type);
+			Room.Room.userList.removeUser(UserName);
+			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
 	}
 }
@@ -697,8 +701,8 @@ function ROOM_SortUsersByRating(Category)
 					break;
 			}
 
-			Room.Room.removeUser(UserName);
-			Room.Room.addUser(UserName, Status, Rating, Type);
+			Room.Room.userList.removeUser(UserName);
+			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
 	}
 }

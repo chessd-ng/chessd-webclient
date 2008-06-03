@@ -67,7 +67,7 @@
 /* Room List menu */
 #Main #Left #Rooms #RoomListMenu {
 	position		: absolute;
-	left			: 53mm;
+	left			: 100%;
 	width			: 28mm;
 	height			: 35mm;
 	border			: 2px solid #216778;
@@ -93,11 +93,17 @@
 }
 
 /* User list */
+/*
 #Main #Left #Rooms #RoomUsers {
 	overflow-y		: auto;
 	overflow-x		: hidden;
 }
 
+#Main #Left #Rooms .Room .UserList {
+	padding-left		: 3mm;
+	padding-top		: 1mm;
+		
+}
 #Main #Left #Rooms .Room table {
 	display			: block;
 	height			: 25mm;
@@ -111,13 +117,7 @@
 	width			: 44mm;
 }
 
-#Main #Left #Rooms .Room #RoomUsers ul {
-	padding-bottom	: 1mm;
-	border-bottom	: 1px solid #FFA200;
-	text-indent		: 5mm;
-}
-
-#Main #Left #Rooms .Room #RoomUsers tr {
+#Main #Left #Rooms .Room tr {
 	text-indent		: 5mm;
 	margin			: 1px 0px;
 	height			: 16px;
@@ -125,7 +125,7 @@
 	font			: 11px Trebuchet MS;
 }
 
-#Main #Left #Rooms .Room #RoomUsers tr:hover {
+#Main #Left #Rooms .Room tr:hover {
 	background-color: #EAF5F4;
 	cursor			: pointer;
 }
@@ -140,7 +140,7 @@
 	width			: 2mm;
 	text-align		: right;
 }
-
+*/
 #Main #Left #Rooms hr {
 	height			: 1px;
 	margin			: 0.5mm 4mm 2mm 0mm;
@@ -151,7 +151,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
-	width			: 91%;
+	width			: 89%;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;
@@ -169,7 +169,7 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 91%;
+	width			: 89%;
 	padding			: 2px;
 	font			: 12px Trebuchet MS;
 	color			: #216778;
@@ -184,10 +184,10 @@
 
 #Main #Left #Rooms .Room #EmoticonDiv {
 	position		: absolute;
-	left			: 54mm;
+	left			: 100%;
 	top				: 50mm;
-	width			: 39mm;
-	height			: 39mm;
+	width			: 75%;
+	height			: 44%;
 	border			: 1px solid #216778;
 	background-color: #FFF;
 	overflow		: auto;

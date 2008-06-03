@@ -81,12 +81,42 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 */
 function CONTACT_SetUserStatus(Username, NewStatus)
 {
-	if (MainData.SetUserStatus(Username, NewStatus))
+	var Rating, Type;
+	var UserPos;
+
+	// Update new user status in data struct
+	MainData.SetUserStatus(Username, NewStatus)
+
+	// Update user status in interface
+	if(MainData.Contact != null)
 	{
-		INTERFACE_SetUserStatus(Username, NewStatus)	
-		return true;
+		// Find user in data struct 
+		UserPos = MainData.FindUser(Username);
+
+		if(UserPos != null)
+		{
+			// Get user type
+			Type = MainData.UserList[UserPos].Type;
+
+			// Get user rating
+			switch(MainData.CurrentRating)
+			{
+				case "blitz":
+					Rating = MainData.UserList[UserPos].Rating.Blitz;
+					break;
+				case "lightning":
+					Rating = MainData.UserList[UserPos].Rating.Lightning;
+					break;
+				case "standard":
+					Rating = MainData.UserList[UserPos].Rating.Standard;
+					break;
+			}
+			// Update user status in contact list
+			MainData.Contact.updateUser(Username, NewStatus, Rating, Type);
+		}
+
 	}
-	return false;
+	return "";
 }
 
 

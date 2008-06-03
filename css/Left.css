@@ -62,6 +62,7 @@
 	width				:	73%;
 }
 /* order by rating or nick */
+/*
 #Main #Left #order_nick, 
 #Main #Left .order_rating,
 #Main #Left .order_rating_selec {
@@ -97,6 +98,7 @@
 	color			: #FFA200 !important;
 }
 
+*/
 
 /* Group names */
 #Main #Left label {

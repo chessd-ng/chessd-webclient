@@ -25,7 +25,7 @@ function INTERFACE_CreateLeft()
 
 	Left = UTILS_CreateElement("div", "Left");
 	UserBox = INTERFACE_CreateUserBox();
-	ContactList = INTERFACE_CreateContactList();
+	ContactList = INTERFACE_CreateContact();
 	Rooms = INTERFACE_CreateRooms();
 
 	Left.appendChild(UserBox);
