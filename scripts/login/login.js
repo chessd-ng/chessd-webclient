@@ -115,8 +115,15 @@ function LOGIN_Interface()
 {
 	var All = INTERFACE_CreateInterface();
 
+	// Close load image
 	LOGIN_EndLoad();
+
+	// Open XadrezLivre game environment
 	INTERFACE_ShowInterface(All);
+	
+	// Create contact object and set values
+	CONTACT_StartContact();
+	CONTACT_LoadUserContactList();	
 }
 
 

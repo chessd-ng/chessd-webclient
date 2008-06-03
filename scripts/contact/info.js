@@ -51,11 +51,10 @@ function CONTACT_HandleInfo(XML)
 			}
 		}
 	}
-	else
-	{
-		CONTACT_HandleRating(RatingNodes);
-		CONTACT_HandleType(TypeNodes);
-	}
+
+	// Update contacts 
+	CONTACT_HandleRating(RatingNodes);
+	CONTACT_HandleType(TypeNodes);
 
 	return "";
 }
@@ -65,7 +64,7 @@ function CONTACT_HandleInfo(XML)
 */
 function CONTACT_HandleRating(NodeList)
 {
-	var Jid, Rating, Category, i;
+	var Username, Rating, Category, i;
 
 	// Getting ratings
 	for (i=0 ; i<NodeList.length ; i++)
@@ -73,7 +72,7 @@ function CONTACT_HandleRating(NodeList)
 		// Try to get the user name, rating and category of rating
 		try 
 		{
-			Jid = NodeList[i].getAttribute('jid').replace(/@.*/,"");
+			Username = NodeList[i].getAttribute('jid').replace(/@.*/,"");
 			Category = NodeList[i].getAttribute('category');
 			Rating = NodeList[i].getAttribute('rating');
 		}
@@ -83,7 +82,7 @@ function CONTACT_HandleRating(NodeList)
 		}
 		
 		// Set rating on structure
-		CONTACT_SetUserRating(Jid, Category, Rating);
+		CONTACT_SetUserRating(Username, Category, Rating);
 	}
 }
 
@@ -121,26 +120,99 @@ function CONTACT_HandleType(NodeList)
 */
 function CONTACT_SetUserType(Username, NewType)
 {
-	if (MainData.SetType(Username, NewType))
+	var i;
+	var Room;
+	var Status, Rating;
+	var User;
+	
+
+	// update on interface
+	if(MainData.SetType(Username, NewType))
 	{
-		INTERFACE_SetUserType(Username, NewType)	
-		return true;
+		// RoomList[0] = general room where is all user online
+		if(MainData.RoomList[0] == null)
+		{
+			return "";
+		}		
+		User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+		if(User != null)
+		{
+			Room = MainData.RoomList[0]; 
+			Status = Room.UserList[User].Status;
+
+			MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
+		}
+
+		// Update in rooms
+		// Updating in room lists
+		for (i=0; i<MainData.RoomList.length; i++)
+		{
+			User = MainData.FindUserInRoom(MainData.RoomList[i].Name, Username);
+			if (User != null)
+			{
+				Room = MainData.RoomList[i];
+				Status = Room.UserList[User].Status;
+
+				// Search user node in room user list
+				Room.Room.userList.updateUser(Username, Status, null, NewType);
+			}
+		}
+
 	}
-	return false;
+	return true;
 }
 
 /**
-* Change type of 'Username' in structure and interface
+* Change rating of 'Username' in structure and interface
 */
 function CONTACT_SetUserRating(Username, Category, Rating)
 {
-	if (MainData.SetRating(Username, Category, Rating))
+	var i;
+	var Room;
+	var Status, Type;
+	var User;
+	
+
+	// update on interface
+	if(MainData.SetRating(Username, Category, Rating))
 	{
 		if (Category == MainData.CurrentRating)
 		{
-			INTERFACE_SetUserRating(Username, Category, Rating)	
+			if(MainData.RoomList[0] == null)
+			{
+				return "";
+			}		
+			User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+			if(User != null)
+			{
+				// General Room
+				Room = MainData.RoomList[0]; 
+				Status = Room.UserList[User].Status;
+				Type = Room.UserList[User].Type;
+
+				MainData.ContactOnline.userList.updateUser(Username,Status, Rating, Type);
+			}
 		}
-		return true;
+
+		// Update in rooms
+		if (Category == MainData.RoomCurrentRating)
+		{
+
+			// Updating in room lists
+			for (i=0; i<MainData.RoomList.length; i++)
+			{
+				User = MainData.FindUserInRoom(MainData.RoomList[i].Name, Username);
+				if (User != null)
+				{
+					Room = MainData.RoomList[i];
+					Status = Room.UserList[User].Status;
+					Type = Room.UserList[User].Type;
+					// Search user node in room user list
+					Room.Room.userList.updateUser(Username, Status, Rating, Type);
+				}
+			}
+		}
+
 	}
 	return false;
 }

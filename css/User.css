@@ -1,0 +1,91 @@
+div .UserList{
+	padding-left		: 3mm;
+	padding-top		: 1mm;
+	font                    : 11px Trebuchet MS;
+}
+
+div .UserList .UserTable{
+	overflow-y		: auto;
+	overflow-x		: hidden;
+}
+
+div .UserList table{
+	display			: block;
+	height			: 25mm;
+	width			: 48mm;
+	margin-top		: 2mm;
+	border-spacing		: 0px;
+}
+
+div .UserList tbody{
+	display			: block;
+	width			: 44mm;
+}
+
+
+div .UserList tr{
+	text-indent		: 5mm;
+	margin			: 1px 0px;
+	height			: 16px;
+	list-style		: none;
+	font			: 11px Trebuchet MS;
+	cursor			: pointer;
+}
+
+div .UserList tr:hover {
+	background-color	: #EAF5F4;
+}
+
+div .UserList td{
+	width			: 41mm;
+	text-align		: left;
+}
+
+div .UserList td.rating{
+	width			: 2mm;
+	text-align		: right;
+}
+
+div .UserList #order_nick, 
+div .UserList .order_rating,
+div .UserList .order_rating_selec {
+	color                   : #216778;
+	cursor                  : pointer;
+	border-bottom		:  1px solid
+}
+
+div .UserList .order_rating,
+div .UserList .order_rating_selec {
+	position                : absolute;
+	width                   : 29mm;
+	right                   : 3px;
+	border                  : 1px solid #FFA200;
+	text-align              : right;
+	font-size		: 11px;
+}
+
+div .UserList .option_selected {
+	color                   : #FFA200 !important;
+}
+
+div .UserList .option_not_selected {
+	color                   : #216778;
+}
+
+div .UserList .order_rating_selec {
+	color                   : #FFA200 !important;
+}
+
+div .UserList .order_selec {
+	font-weight             : bold !important;
+	color                   : #FFA200 !important;
+}
+
+#ListDiv div .UserList table{
+	height			: 0mm;
+	margin-top		: 0mm;
+}
+
+#ContactOnline div .UserTable table{
+	height			: 32mm;
+}

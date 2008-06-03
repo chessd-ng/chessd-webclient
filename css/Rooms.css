@@ -93,11 +93,17 @@
 }
 
 /* User list */
+/*
 #Main #Left #Rooms #RoomUsers {
 	overflow-y		: auto;
 	overflow-x		: hidden;
 }
 
+#Main #Left #Rooms .Room .UserList {
+	padding-left		: 3mm;
+	padding-top		: 1mm;
+		
+}
 #Main #Left #Rooms .Room table {
 	display			: block;
 	height			: 25mm;
@@ -111,13 +117,7 @@
 	width			: 44mm;
 }
 
-#Main #Left #Rooms .Room #RoomUsers ul {
-	padding-bottom	: 1mm;
-	border-bottom	: 1px solid #FFA200;
-	text-indent		: 5mm;
-}
-
-#Main #Left #Rooms .Room #RoomUsers tr {
+#Main #Left #Rooms .Room tr {
 	text-indent		: 5mm;
 	margin			: 1px 0px;
 	height			: 16px;
@@ -125,7 +125,7 @@
 	font			: 11px Trebuchet MS;
 }
 
-#Main #Left #Rooms .Room #RoomUsers tr:hover {
+#Main #Left #Rooms .Room tr:hover {
 	background-color: #EAF5F4;
 	cursor			: pointer;
 }
@@ -139,7 +139,7 @@
 	width			: 2mm;
 	text-align		: right;
 }
-
+*/
 #Main #Left #Rooms hr {
 	height			: 1px;
 	margin			: 0.5mm 4mm 2mm 0mm;

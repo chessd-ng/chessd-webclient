@@ -31,19 +31,18 @@ function CONTACT_InviteUser(Username)
 	XML = MESSAGE_Invite(Username);
 
 	// Insert user in structure
-	if (MainData.AddUser(Username, "offline", ""))
-	{
-		// Send it to jabber
-		CONNECTION_SendJabber(XML);
+	MainData.AddUser(Username, "offline", "");
 
-		// Sort userlist
-		MainData.SortUserByNick();
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	// Insert user in interface
+	MainData.Contact.addUser(Username, "offline");
+
+	// Send it to jabber
+	CONNECTION_SendJabber(XML);
+
+	// Sort userlist
+	MainData.SortUserByNick();
+
+	return "";
 }
 
 /**
@@ -60,7 +59,8 @@ function CONTACT_RemoveUser(Username)
 	MainData.DelUser(Username);
 
 	// Remove user from interface
-	INTERFACE_RemoveContact(Username);
+	MainData.Contact.removeUser(Username);
+	//INTERFACE_RemoveContact(Username);
 
 	// Send it to jabber
 	CONNECTION_SendJabber(XML);
@@ -106,8 +106,8 @@ function CONTACT_ReceiveSubscribe(Username)
 		else
 			return "";
 	}
-	// User is been added
-	else
+	// show window to confirm user invitation
+	else 
 	{
 		Title = UTILS_GetText("contact_invite");
 		Text = UTILS_GetText("contact_invite_text").replace(/%s/, UTILS_Capitalize(Username));
@@ -116,14 +116,17 @@ function CONTACT_ReceiveSubscribe(Username)
 		Button1.Func = function () {
 			var XML = "";
 
-			if (MainData.AddUser(Username, "offline", "from"))
-			{
-				// Send a subscribe and a subscribed to user
-				XML += MESSAGE_InviteAccept(Username);
-				XML += MESSAGE_Invite(Username);
-	
-				CONNECTION_SendJabber(XML);
-			}
+			// See data/data.js
+			//MainData.AddUser(Username, "offline", "from");
+
+			// See contact/contact.js
+			CONTACT_InsertUser(Username, "offline","from","default");
+
+			// Send a subscribe and a subscribed to user
+			XML += MESSAGE_InviteAccept(Username);
+			XML += MESSAGE_Invite(Username);
+
+			CONNECTION_SendJabber(XML);
 		}
 
 		Button2 = new Object();
@@ -146,7 +149,11 @@ function CONTACT_ReceiveSubscribed(Username)
 	// Setting user subscription state to 'both'
 	if (MainData.SetSubs(Username, "both"))
 	{
-		INTERFACE_AddContact(Username, "available");
+		//INTERFACE_AddContact(Username, "available");
+		//MainData.Contact.addUser(Username, "available");
+
+		// See contact/contact.js
+		CONTACT_InsertUser(Username, "online","from","default");
 
 		// Ask user type and rating
 		return MESSAGE_Info(Username);
