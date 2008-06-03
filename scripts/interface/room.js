@@ -172,6 +172,26 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	return true;
 }
 
+/* Refresh room's occupants number
+*
+* @param       RoomName
+*              Room's name
+* @return void
+* @author Danilo 
+*/
+function INTERFACE_RefreshOccupantsNumber(RoomName)
+{
+	// Get number of occupants in room data struct
+	var N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
+	// Get element in interface that will be refreshed
+	var Node = document.getElementById(RoomName+"_occupants");
+	
+	// If Room is showed at interface, refresh the number of occupants
+	if(Node)
+	{
+		Node.innerHTML= " ("+N_Occupants+")";
+	}
+}
 
 /*********************************************
  * FUNCTIONS - ROOM TOP MENU LIST 
@@ -230,7 +250,7 @@ function INTERFACE_HideRoomList()
         Node.parentNode.removeChild(Node);
 }
 
-/*********************************************
+/********************************************
  * FUNCTIONS - ROOM GAME TOP MENU LIST 
  *********************************************/
 /**
