@@ -660,7 +660,7 @@ function INTERFACE_CreateContact(Username, Status, Rating, Type, RoomName)
 /*
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
-	var Menu, Option, ParentNode, Pos, i;
+	var Menu, Option, ParentNode, Pos, i, Offset;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -692,17 +692,18 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	ParentNode = UTILS_GetParentDiv(Obj);
 	if (ParentNode.id.match("Room") != null)
 	{
-		// Get Table element
-		ParentNode = Obj.parentNode.parentNode.parentNode;
+		// Parent Div is RoomUsers
+		Offset = 8;
 	}
 	else
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode);
+		Offset = -1;
 	}
 
 	Pos = UTILS_GetOffset(Obj);
 
-	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
+	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
 	Menu.style.left = Pos.X+"px";
 
 	document.body.appendChild(Menu);
@@ -932,7 +933,6 @@ function INTERFACE_CreateOnlineContent()
 	OfflineTbody = UTILS_CreateElement("tbody", "ContactOfflineList");
 	*/
 	// Search user
-//	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
 	SearchP = UTILS_CreateElement("p",null,"contact_search_user_p");
 	SearchS = UTILS_CreateElement("span","contact_search_user", null, UTILS_GetText("menu_search_user"));
 	UTILS_AddListener(SearchP, "click", function() { WINDOW_SearchUser(); }, "false");
@@ -940,6 +940,7 @@ function INTERFACE_CreateOnlineContent()
 	Hr = UTILS_CreateElement("hr");
 
 	/*
+	// Creating DOM tree
 	OnlineTable.appendChild(OnlineTbody);
 	OfflineTable.appendChild(OfflineTbody);
 
@@ -1240,7 +1241,7 @@ function INTERFACE_SortUserByNick()
 		}
 	}
 
-	// Changin style
+	// Changing style
 	
 	// Nick style
 	document.getElementById("order_nick").className = 'order_selec';

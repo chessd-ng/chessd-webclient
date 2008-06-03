@@ -155,12 +155,15 @@ function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 	// Create New Window
 	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, Title);
 
-	// Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Add Window Object in challenge's list
+	MainData.AddChallengeWindow (MatchId, WindowObj);
+
 
 	// If you receive a challenge
 	if (GameParameters != null)
 	{
+		// Close Button (X)
+		UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ GAME_DeclineChallenge(MatchId); }, false);
 		// Accept Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// NewParameters Button
@@ -173,6 +176,8 @@ function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 	// If you are the challenger
 	else
 	{
+		// Close Button (X)
+		UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// Invite Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 

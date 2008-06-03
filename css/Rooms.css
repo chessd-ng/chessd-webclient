@@ -67,7 +67,7 @@
 /* Room List menu */
 #Main #Left #Rooms #RoomListMenu {
 	position		: absolute;
-	left			: 53mm;
+	left			: 100%;
 	width			: 28mm;
 	height			: 35mm;
 	border			: 2px solid #216778;
@@ -132,6 +132,7 @@
 
 #Main #Left #Rooms td {
 	width			: 41mm;
+	height		:	4.5mm;
 	text-align		: left;
 }
 
@@ -150,7 +151,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
-	width			: 91%;
+	width			: 89%;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;
@@ -168,7 +169,7 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 91%;
+	width			: 89%;
 	padding			: 2px;
 	font			: 12px Trebuchet MS;
 	color			: #216778;
@@ -183,10 +184,10 @@
 
 #Main #Left #Rooms .Room #EmoticonDiv {
 	position		: absolute;
-	left			: 54mm;
+	left			: 100%;
 	top				: 50mm;
-	width			: 39mm;
-	height			: 39mm;
+	width			: 75%;
+	height			: 44%;
 	border			: 1px solid #216778;
 	background-color: #FFF;
 	overflow		: auto;

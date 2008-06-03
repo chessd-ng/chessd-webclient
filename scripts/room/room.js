@@ -99,6 +99,7 @@ function ROOM_HandleRoomPresence(XML)
 			Buffer += ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation);
 			// Set your role and affiliation in data struct
 			MainData.SetRoom(RoomName, MsgTo, Role, Affiliation);
+			INTERFACE_RefreshOccupantsNumber(RoomName);
 		}
 	}
 	// Presence of others users
@@ -109,10 +110,12 @@ function ROOM_HandleRoomPresence(XML)
 			//MainData.DelUserInRoom(RoomName, Jid);
 			//INTERFACE_DelUserInRoom(RoomName, Jid);
 			ROOM_RemoveUser(RoomName, Jid);
+			INTERFACE_RefreshOccupantsNumber(RoomName);
 		}
 		else
 		{
 			Buffer += ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation);
+			INTERFACE_RefreshOccupantsNumber(RoomName);
 		}
 	}
 	return Buffer;
@@ -583,6 +586,7 @@ function ROOM_RemoveRoom(RoomName)
 	
 		//Show next room in interface
 		INTERFACE_CreateRoomInBar(NextRoom.Name);
+		INTERFACE_RefreshOccupantsNumber(NextRoom.Name);
 		ROOM_FocusRoom(NextRoom.Name)
 	}
 	else
@@ -669,17 +673,8 @@ function ROOM_SortUsersByRating(Category)
 			return "";
 		}
 		
-		// Test the current order mode (order == sort)
 		// If ordered into ascending order, change to descending order
-		if (Room.OrderBy == "0")
-		{
-			Room.OrderBy = "1";
-		}
-		// other modes, change to ascending order
-		else
-		{
-			Room.OrderBy = "0";
-		}
+		Room.OrderBy = "2";
 		
 		RoomName = Room.Name;
 		// Sort user list by nick name in data struct
