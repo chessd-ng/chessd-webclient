@@ -16,12 +16,19 @@
 
 
 /**
-* Class definition for main data sctructure
+* @file data.js
+* @brief Class definition for main data structure
+* 
+* Read the config file (scripts/data/conf.xml) and load all data 
+* structure
 */
 
 
 /**
-* Main data sctructure
+* @class DATA
+* @brief Main data sctructure
+*
+* Class to organize the interface's data 
 */
 function DATA(ConfFile, LangFile)
 {
@@ -180,7 +187,17 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
  **********************************/
 
 /**
-* Add user to user list
+* @brief		Add user to user list
+*
+* Search the user in DATA.Userlist, if the user wasn't found,
+* add the user in the list with a blank photo and a empty rating.
+*
+* @param 		Username The user's name to add in structure
+* @param		Status 	 The user's status
+* @param 		Subs 	 User's subscription
+* @author		Ulysses Bonfim
+* @return 		false - User already on list, true otherwise
+* @see			DATA_DelUser DATA_FindUser DATA_FindNextUser DATA_IsContact
 */
 function DATA_AddUser(Username, Status, Subs)
 {
