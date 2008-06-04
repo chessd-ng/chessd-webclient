@@ -1,53 +1,117 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+/**
+* @file user.js
+* @brief Class defition for user list object and some functions assign
+*
+* Create a user list object used in rooms, contact list, online list, etc.
+*/
+
+/**
+* @class UserListObj
+* @brief User list object that contais pointer to HTML elements, some methods to add/remove/update user, show/hide list  and show/hide sort options;
+* @see INTERFACE_CreateUserList
+* @param Element parent node, where user list object will be append
+* Class to organize the use of user lists;
+*/
 function UserListObj(Element)
 {
+	// Create HTML elements to user list
 	var UserList = INTERFACE_CreateUserList(Element);
+	
+	// Attributes
+	this.mainDiv = UserList.MainDiv; // div with sorts and userlist
+	this.userList = UserList.UserList; //user list tbody
+	this.sortNick = UserList.SortNick; //span element
+	this.sortRating = UserList.SortRating; // option element
 
-	this.mainDiv = UserList.MainDiv;
-	this.userList = UserList.UserList;
-	this.sortNick = UserList.SortNick;
-	this.sortRating = UserList.SortRating;
-
+	//User list with pointer to user list item tr element
+	//used to control users in list on interface
 	this.users = new Array();
 
-	this.show = INTERFACE_ShowUserList;
-	this.hide = INTERFACE_HideUserList;
+	// Methods
+	this.show = INTERFACE_ShowUserList; // show main div
+	this.hide = INTERFACE_HideUserList; // hide main div
 
-	this.addUser = INTERFACE_AddUser;
-	this.removeUser = INTERFACE_RemoveUser;
-	this.updateUser = INTERFACE_UpdateUser;
-	this.findUser = INTERFACE_FindUser;
+	this.addUser = INTERFACE_AddUser; // add a user in list
+	this.removeUser = INTERFACE_RemoveUser; // remove user from list
+	this.updateUser = INTERFACE_UpdateUser; // update user status/rating
+	this.findUser = INTERFACE_FindUser; // find user in list
 
-	this.hideSort = INTERFACE_HideSort;
-	this.showSort = INTERFACE_ShowSort;
-	this.hideList = INTERFACE_HideList;
-	this.showList = INTERFACE_ShowList;
+	this.hideSort = INTERFACE_HideSort; // hide sort elements
+	this.showSort = INTERFACE_ShowSort; // show sort elements
+	this.hideList = INTERFACE_HideList; // hide users list
+	this.showList = INTERFACE_ShowList; // show users list
 
+	// set sort list function when click in (sortNick) span element
 	this.setSortUserFunction = INTERFACE_SetSortUserFunction;
+	// set sort list function when click in (sortRating) option element
 	this.setSortRatingFunction = INTERFACE_SetSortRatingFunction;
 }
 
 
-
+/**
+ * @brief	Show user list div
+ * 
+ * Show user list div changing element style display to block.
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_ShowUserList()
 {
 	this.mainDiv.style.display = "block";
 }
 
+/**
+ * @brief	Hide user list div
+ * 
+ * Hide user list div changing element style display to none.
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_HideUserList()
 {
 	this.userList.style.display = "none";
 }
 
 
+/**
+ * @brief	Add one user in list
+ * 
+ * Add a user in user list creating a tr element and insert it in (this.users) array.
+ *
+ * @param 	Username The user's name 
+ * @param 	Status	The user's status
+ * @param 	Rating	User's rating that will be show
+ * @param 	Type	User's type (teacher, admin, robot, etc.)
+ * @author	Rubens Suguimoto
+ * @see		INTERFACE_CreateUser
+ */
 function INTERFACE_AddUser(Username, Status, Rating, Type)
 {
 	var User;
+
+	// User item that will be inserted in array (this.users)
 	var UserObj = new Object();
 
-	// Create Tr
+	// Create tr element
 	User = INTERFACE_CreateUser(Username, Status, Rating, Type, this.roomName);
 
-	// Add user in room users
+	// Add user in users struct
 	UserObj.Id = Username;
 	UserObj.User = User;
 	this.users.push(UserObj);
@@ -56,17 +120,29 @@ function INTERFACE_AddUser(Username, Status, Rating, Type)
 	this.userList.appendChild(User);
 }
 
+/**
+ * @brief	Remove user from list
+ * 
+ * Remove a user from user list and remove from array. 
+ *
+ * @param 	Username The user's name 
+ * 
+ * @author	Rubens Suguimoto
+ * @return	false - User is not founded in list, true otherwise
+ */
 function INTERFACE_RemoveUser(Username)
 {
 	var UserItem = this.findUser(Username);
 	var i=0;
 
-	
+
+	// If user is not founded in user list, return false
 	if(UserItem == null)
 	{
 		return false;
 	}
 
+	// remove from interface
 	this.userList.removeChild(UserItem);
 
 
@@ -75,17 +151,28 @@ function INTERFACE_RemoveUser(Username)
 	{
 		i++;
 	}
-
 	if(i< this.users.length)
 	{
+		//remove from array
 		this.users.splice(i,1);
 	}
 
 	return true;
 }
 
-
-
+/**
+ * @brief	Update user status and rating in list
+ * 
+ * Update user status and rating in user list. Find the user and set his type status and, if exists rating, update rating;
+ *
+ * @param 	Username The user's name
+ * @param	Newstatus The new user's status
+ * @param	Rating The user's rating
+ * @param	NewType The new user's type
+ * 
+ * @author	Rubens Suguimoto
+ * @return	false - User is not founded in list, true otherwise
+ */
 function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 {
 	var Node = this.findUser(Username);
@@ -118,6 +205,16 @@ function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 	return true;
 }
 
+/**
+ * @brief	Find user in user list
+ * 
+ * Search user in array (this.users);
+ *
+ * @param 	Username	The user's name
+ * 
+ * @author	Rubens Suguimoto
+ * @return	null if user is not founded in list, else tr elemente if user item;
+ */
 function INTERFACE_FindUser(Username)
 {
 	var i=0;
@@ -138,38 +235,85 @@ function INTERFACE_FindUser(Username)
 }
 
 
-
+/**
+ * @brief	Set sort list by nick function to list
+ * 
+ * Set sort by nick function when click in sort span
+ *
+ * @param 	Func 	Function that contais sort instructions
+ * 
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_SetSortUserFunction(Func)
 {
 	this.sortNick.onclick = Func;
 }
 
 
+/**
+ * @brief	Set sort list by rating function to list
+ * 
+ * Set sort by rating function when click in sort option
+ *
+ * @param 	Func 	Function that contais sort instructions
+ * 
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_SetSortRatingFunction(Func)
 {
 	var TmpFunc = Func;
 
+	// Get category to sort
 	this.sortRating.onchange = function(){
 		TmpFunc(this.value);
 	};
 }
 
+/**
+ * @brief	Hide sort options
+ * 
+ * Hide sort span and option
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_HideSort()
 {
 	this.sortNick.style.display = "none";
 	this.sortRating.style.display = "none";
 }
 
+/**
+ * @brief	Show sort options
+ * 
+ * Show sort span and option
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_ShowSort()
 {
 	this.sortNick.style.display = "block";
 	this.sortRating.style.display = "block";
 }
 
+/**
+ * @brief	Hide user list element
+ * 
+ * Hide user list in interface
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_HideList()
 {
 	this.userList.parentNode.style.display = "none";
 }
+
+/**
+ * @brief	Show user list element
+ * 
+ * Show user list in interface
+ *
+ * @author	Rubens Suguimoto
+ */
 function INTERFACE_ShowList()
 {
 	this.userList.parentNode.style.display = "block";
@@ -179,6 +323,16 @@ function INTERFACE_ShowList()
 **** FUNCTION - CREATE HTML LIST
 **************************************/
 
+/**
+ * @brief	Create user list in interface
+ * 
+ * Create user list HTML, and return div, list parent, sort span, sort rating option;
+ *
+ * @param	Element 	Parent node of list main div
+ *
+ * @author	Rubens Suguimoto
+ * @return	Object that contains list main div, user list, sort span and sort rating option
+ */
 function INTERFACE_CreateUserList(Element)
 {
 	var MainDiv;
@@ -221,11 +375,19 @@ function INTERFACE_CreateUserList(Element)
 
 
 /**
-* Create a user node
-*
-* @private
-* @return DOM object
-*/
+ * @brief	Create a user item and return it
+ * 
+ * Create a user tr element, contais username, status/type and rating, and return this element.
+ *
+ * @param 	Username	The user's name
+ * @param	Status		The new user's status
+ * @param	Rating		The user's rating
+ * @param	Type		The new user's type
+ *
+ * @author	Rubens Suguimoto
+ *
+ * @return 	Tr HTML element with username, status/type and rating
+ */
 function INTERFACE_CreateUser(Username, Status, Rating, Type)
 {
 	var Tr, Td1, Td2;
@@ -252,10 +414,16 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 
 
 /**
-* Show user menu
-*
-* @private
-*/
+ * @brief	Show user menu when click over user list item
+ * 
+ * Create a menu and show options to challenge, view profile, add/remove contact, admin options, etc.
+ *
+ * @param 	Obj	User list item
+ * @param	Options	Array with user menu options;
+ *
+ * @author	Pedro
+ *
+ */
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i;
@@ -298,8 +466,8 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode);
 	}
 
+	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
-
 	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
 	Menu.style.left = Pos.X+"px";
 
@@ -308,19 +476,20 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 
 
 /**
-* Hide user menu from screen
-*
-* @private
-*/
+ * @brief	Hide user menu
+ * 
+ * Remove user menu from interface;
+ *
+ * @author	Pedro
+ *
+ */
 function INTERFACE_HideUserMenu()
 {
 	var Menu = document.getElementById("UserMenuDiv");
 
-	if (!Menu)
+	if (Menu != null)
 	{
-		return false;
+		Menu.parentNode.removeChild(Menu);
 	}
-	Menu.parentNode.removeChild(Menu);
-	return true;
 }
 
