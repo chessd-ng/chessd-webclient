@@ -86,6 +86,11 @@ div .UserList .order_selec {
 	margin-top		: 0mm;
 }
 
-#ContactOnline div .UserTable table{
-	height			: 32mm;
+#ContactOnline div .UserTable table,
+#ContactInside div .UserTable table{
+	height			: 31mm;
+}
+
+#ContactOnline .UserList{
+	margin			: 0px 0px 0px -6px;
 }
