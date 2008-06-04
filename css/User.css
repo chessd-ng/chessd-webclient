@@ -1,3 +1,5 @@
+/*CSS default*/
+
 div .UserList{
 	padding-left		: 3mm;
 	padding-top		: 1mm;
@@ -81,16 +83,25 @@ div .UserList .order_selec {
 	color                   : #FFA200 !important;
 }
 
+
+/*Contact list user list css*/
+#ContactInside .UserList{
+	padding-left		: 1mm;
+}
+
 #ListDiv div .UserList table{
 	height			: 0mm;
 	margin-top		: 0mm;
 }
 
-#ContactOnline div .UserTable table,
-#ContactInside div .UserTable table{
-	height			: 31mm;
+#ListDiv .UserList {
+	padding-left		: 1mm;
+	padding-top		: 0mm;
 }
 
+
+/*Contact online user list css*/
 #ContactOnline .UserList{
-	margin			: 0px 0px 0px -6px;
+	padding-left		: 1mm;
+	height			: 37.7mm;
 }
