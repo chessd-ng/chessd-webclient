@@ -1085,7 +1085,7 @@ function INTERFACE_ShowSearchUserWindow()
 
 	Input.focus();
 
-	return {MainDiv:Div, Buttons:Buttons};
+	return {Div:Div, Buttons:Buttons};
 }
 
 
