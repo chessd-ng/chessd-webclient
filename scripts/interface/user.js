@@ -54,6 +54,13 @@ function UserListObj(Element)
 
 	this.hideSort = INTERFACE_HideSort; // hide sort elements
 	this.showSort = INTERFACE_ShowSort; // show sort elements
+
+	this.focusNick = INTERFACE_FocusNick; // focus span element
+	this.blurNick = INTERFACE_BlurNick; // blur focus span element
+
+	this.focusRating = INTERFACE_FocusRating; // focus rating option
+	this.blurRating = INTERFACE_BlurRating; // blur rating option
+
 	this.hideList = INTERFACE_HideList; // hide users list
 	this.showList = INTERFACE_ShowList; // show users list
 
@@ -246,7 +253,7 @@ function INTERFACE_FindUser(Username)
  */
 function INTERFACE_SetSortUserFunction(Func)
 {
-	this.sortNick.onclick = Func;
+	UTILS_AddListener(this.sortNick , "click", Func, false);
 }
 
 
@@ -264,9 +271,7 @@ function INTERFACE_SetSortRatingFunction(Func)
 	var TmpFunc = Func;
 
 	// Get category to sort
-	this.sortRating.onchange = function(){
-		TmpFunc(this.value);
-	};
+	UTILS_AddListener(this.sortRating, "change", function(){ TmpFunc(this.value)}, false);
 }
 
 /**
@@ -319,6 +324,31 @@ function INTERFACE_ShowList()
 	this.userList.parentNode.style.display = "block";
 }
 
+// focus span element
+function INTERFACE_FocusNick()
+{
+	this.sortNick.className = "selected";
+}
+
+// blur focus span element
+function INTERFACE_BlurNick()
+{
+	this.sortNick.className = "";
+}
+
+// focus rating option
+function INTERFACE_FocusRating()
+{
+	this.sortRating.className = "selected";
+}
+
+// blur rating option
+function INTERFACE_BlurRating()
+{
+	this.sortRating.className = "";
+}
+
+
 /**************************************
 **** FUNCTION - CREATE HTML LIST
 **************************************/
@@ -341,8 +371,8 @@ function INTERFACE_CreateUserList(Element)
 	
 	MainDiv = UTILS_CreateElement("div",null,"UserList");
 
-	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
-	OrderRating = UTILS_CreateElement("select", null, "order_rating", UTILS_GetText("room_order_rating"));
+	OrderNick = UTILS_CreateElement("span", "order_nick", "selected", UTILS_GetText("room_order_nick"));
+	OrderRating = UTILS_CreateElement("select", "order_rating", "", UTILS_GetText("room_order_rating"));
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
 	OrderRating.appendChild(OrderRatingOpt);
@@ -354,7 +384,28 @@ function INTERFACE_CreateUserList(Element)
 	OrderRatingOpt.value = "standard";
 	OrderRating.appendChild(OrderRatingOpt);
 
-	// Sort functions will be set in UserListObject;
+
+	OrderNick.onclick = function(){
+		OrderNick.className = "selected";
+		OrderRating.className = "";
+	};
+
+	OrderRating.onchange = function(){
+		var Options;
+		var i;
+		var Select;
+	
+		Options = OrderRating.options;
+		Select = OrderRating.selectedIndex;
+		for(i=0; i< Options.length; i++)
+		{
+			Options[i].className = "";
+		}
+
+		OrderNick.className = "";
+		OrderRating.className = "selected";
+		OrderRating.options[Select].className = "selected";
+	};
 
 	// User list
 	Users = UTILS_CreateElement("div",null,"UserTable");
