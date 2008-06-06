@@ -34,6 +34,7 @@ var MainData;
 function START_StartPage()
 {
 	var Lang;
+	var ConfTmp;
 
 	// What language show?
 	// Find lang in cookie

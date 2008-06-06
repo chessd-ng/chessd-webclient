@@ -45,6 +45,8 @@ function INTERFACE_StartLogin(Lang)
 	var Tr = document.createElement('tr');
 	var Td = document.createElement('td');
 	var Br = document.createElement('br');
+	
+	var MainDiv = UTILS_CreateElement('div','MainDiv');
 
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
@@ -150,9 +152,11 @@ function INTERFACE_StartLogin(Lang)
 	LoginBoxDiv.appendChild(LoginTextBoxDiv);
 	LoginBoxDiv.appendChild(LoginFormBoxDiv);
 
-	document.body.appendChild(INTERFACE_CreateLanguage());
-	document.body.appendChild(LoginBoxDiv);
-	document.body.appendChild(Banner);
+	MainDiv.appendChild(INTERFACE_CreateLanguage());
+	MainDiv.appendChild(LoginBoxDiv);
+	MainDiv.appendChild(Banner);
+
+	document.body.appendChild(MainDiv);
 	//document.body.appendChild(Version);
 
 	// Setting document title
@@ -163,6 +167,11 @@ function INTERFACE_StartLogin(Lang)
 
 	// Block context menu
 	document.oncontextmenu = function() { return false; };
+
+	// Set vertical align middle to MainDiv when resize window
+	document.body.setAttribute("onresize", "INTERFACE_LoginVerticalAlignMiddle()");
+	// Align main div in the center
+	INTERFACE_LoginVerticalAlignMiddle();
 }
 
 /**
@@ -238,3 +247,23 @@ function INTERFACE_CreateLangItem(Lang, Name)
 
 	return Li;
 }
+
+
+/**
+ * @brief       Align main div in middle
+ * @author      Rubens
+ */
+
+function INTERFACE_LoginVerticalAlignMiddle()
+{
+        var MainDiv = document.getElementById("MainDiv");
+
+        var WindowHeight = window.innerHeight;
+
+	MainDiv.style.position = "relative";
+        if(WindowHeight > 600)
+        {
+                MainDiv.style.top = ((WindowHeight / 2) - 300) + "px";
+        }
+}
+
