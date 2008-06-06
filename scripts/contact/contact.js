@@ -35,6 +35,7 @@ function CONTACT_HandleOnlinePresence(XML)
 	var From, User, Type, Show, Status;
 	var Buffer = "";
 	var ContactOnline = MainData.ContactOnline;
+	var RoomName;
 
 	// Get Attributes from XML
 	Show = XML.getElementsByTagName("show");
