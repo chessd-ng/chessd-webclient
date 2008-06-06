@@ -380,6 +380,8 @@ function REGISTER_Labels()
 * @return none
 * @public
 * @author	Fabiano
+*
+* @deprecated
 */
 function REGISTER_SendDataPHP(User, Mail, Pwd)
 {
@@ -425,6 +427,7 @@ function REGISTER_SendDataPHP(User, Mail, Pwd)
 * @return none
 * @public
 * @author	Fabiano
+* @deprecated
 */
 function REGISTER_ReceiveXmlPHP()
 {
@@ -456,6 +459,7 @@ function REGISTER_ReceiveXmlPHP()
 * @return none
 * @public
 * @author	Fabiano
+* @deprecated
 */
 function REGISTER_GetDatabaseError(Msg)
 {
