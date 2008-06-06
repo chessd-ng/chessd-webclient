@@ -23,7 +23,7 @@
 * Global object that stores all data needed
 * by interface
 */
-var MainData;
+//var MainData;
 
 /**
 * Create elements and show login screen to user
@@ -31,12 +31,12 @@ var MainData;
 * @return void
 * @public
 */
-function INTERFACE_StartLogin()
+function INTERFACE_StartLogin(Lang)
 {
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
 	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
-	var Lang;
+	//var Lang;
 	var ConfTmp;
 
 	var ev; //Temp event
@@ -48,7 +48,7 @@ function INTERFACE_StartLogin()
 
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
-
+/*
 	// What language show?
 	// Find lang in cookie
 	Lang = UTILS_ReadCookie("lang");
@@ -67,7 +67,7 @@ function INTERFACE_StartLogin()
 	// Read xml config files and starting data structure
 	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
 	MainData.Lang = Lang;
-
+*/
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
 	LoginTextBoxDiv = UTILS_CreateElement("div", "TextDiv");

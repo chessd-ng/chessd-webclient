@@ -1,0 +1,57 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+/*
+* Start MainData and show login page
+*/
+
+/**
+* Global object that stores all data needed
+* by interface
+*/
+var MainData;
+
+/*
+* @brief	Start main data and show login page
+* 
+* Start page, initialize MainData and show page
+*
+* @author 	Rubens Suguimoto
+*/
+function START_StartPage()
+{
+	var Lang;
+
+	// What language show?
+	// Find lang in cookie
+	Lang = UTILS_ReadCookie("lang");
+	// if language is not found in cookie
+	if (Lang == "")
+	{
+		// Get from browser language
+		//Lang = UTILS_GetLanguage();
+		
+		// Get default lang from configuration file
+		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml");
+		Lang = UTILS_GetTag(ConfTmp, "default-lang");
+	}
+
+	// Read xml config files and starting data structure
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData.Lang = Lang;
+	
+	INTERFACE_StartLogin(Lang);
+}
