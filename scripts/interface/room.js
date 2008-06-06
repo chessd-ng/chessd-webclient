@@ -64,7 +64,7 @@ function RoomObj(Roomname)
 */
 function INTERFACE_CreateRoom(RoomName)
 {
-        var RoomDiv, RoomName, RoomInside;
+        var RoomDiv, RoomInside;
         var MessageList;
         var Input, Emoticon;
 
@@ -468,8 +468,8 @@ function INTERFACE_ShowEmoticonList(RName)
 * Show or hide list of user's rooms 
 * 
 * @public 
-*/ 
-function INTERFACE_ChangeRoomListVisibility() 
+* 
+nction INTERFACE_ChangeRoomListVisibility() 
 { 
         var Div, List, Node, Item, i; 
         var Menu = document.getElementById('RoomListMenu'); 
@@ -512,7 +512,7 @@ function INTERFACE_ChangeRoomListVisibility()
         } 
         return true; 
 }
-
+*/
 			INTERFACE_HideEmoticonList();
 		}
 	};
@@ -702,7 +702,7 @@ function INTERFACE_CloseRoom()
 */
 function INTERFACE_CreateRooms()
 {
-	var RoomDiv, RoomsDiv, RoomsList, RoomName, RoomsListGeneral, RoomsListArrow, Arrow;
+	var RoomDiv, RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
 
 
 	// Room list

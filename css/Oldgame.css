@@ -22,6 +22,11 @@
 	margin-bottom	:	3mm;
 }
 
+#OldGamesDiv .format {
+	font-weight: normal;
+	font-size : 9px;
+}
+
 #OldGamesDiv #FormDiv {
 	padding-top	:	6mm;
 }
@@ -35,7 +40,7 @@
 #OldGamesDiv #ButtonsDiv {
 	text-align : center;
 	position:relative;
-	margin-top	:	10mm;
+	margin-top	:	8mm;
 }
 
 #OldGamesDiv #ResultDiv #TableDiv {
@@ -58,15 +63,16 @@
 	border-color: Teal;
 	overflow-x : hidden;
 	overflow-y : auto;
-	max-height: 20mm;
+	max-height: 35mm;
 	border-top-width: 0mm;
 	border-bottom-width: 0mm;
+	border-left-width: 1px;
+	border-right-width: 1px;
 }
 
 #OldGamesDiv #ResultDiv {
 	padding-left : 6mm;
 	padding-bottom: 4mm;
-	padding-top: 3mm;
 }
 
 #OldGamesDiv #ResultDiv #TFootDiv {
@@ -105,6 +111,10 @@
 	bottom: 0px;
 }
 
+#OldGamesDiv #ResultDiv p {
+	font-weight:	normal;
+}
+
 #OldGamesDiv #ResultDiv #TFootDiv .button_disabled {
 	border-color : #C0C0C0;
 	background-color: #C0C0C0;
@@ -114,8 +124,14 @@
 	width: 55px;
 }
 
+#OldGamesDiv #ResultDiv #NoResultDiv {
+	text-align : center;
+	height : 30mm;
+	padding-top	:	15mm;
+}
+
 #OldGamesDiv #Layer1Div {
-	margin-bottom	:	4mm;
+	margin-bottom	:	2mm;
 	padding-left : 22mm;
 }
 
@@ -209,4 +225,14 @@
 
 #OldGamesDiv .resulttd {
 	width : 26%;
+}
+
+#OldGamesDiv #L2RightDiv #FromDiv {
+	float: left;
+	margin-right: 10%;
+}
+
+#OldGamesDiv #CloseDiv {
+	text-align: center;
+	padding-top: 4mm;
 }

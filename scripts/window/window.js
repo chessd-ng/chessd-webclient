@@ -352,10 +352,8 @@ function WINDOW_OldGame(Id)
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); OLDGAME_CloseWindow(Id); }, false);
-	// Search Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){}, false);
-	// NewSearch Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){}, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); OLDGAME_CloseWindow(Id); }, false);
 
 	return Elements;
 }
@@ -379,12 +377,11 @@ function WINDOW_OldGameSearch()
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Ok Button
+	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Cancel Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
 function WINDOW_OldGameResult(GameList)
 {
 	//Return Div and Buttons;
@@ -397,4 +394,4 @@ function WINDOW_OldGameResult(GameList)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
+}*/

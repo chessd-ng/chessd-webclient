@@ -26,7 +26,7 @@
 *	Create elements of search old games window and returns div
 *
 * @return	Div; Array
-* @see		WINDOW_OldGameSearch();
+* @see		WINDOW_OpeOldGameWindow();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowOldGameWindow(Id)
@@ -50,18 +50,28 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var Layer2Div;
 	var L2LeftDiv;
 	var Player2Label, Br2, Player2Input;
+	
 	var L2RightDiv;
 	var DateLabel, Br3, FromLabel, FromInput, ToLabel, ToInput;
+	var FromDiv, ToDiv;
+	var FormatLabel1,FormatLabel2;
 
 	var ButtonsDiv;
 	var Search, NewSearch;
 
 	var ResultDiv;
-	var SearchResultLabel, NoFound;
+	var SearchResultLabel;
 	var TableDiv;
 	var THead, TPlayer1Label, TPlayer2Label, TDateLabel, TResultLabel, TCategoryLabel;
 	var TBodyDiv,TBody, Table; 
 	var TFoot, Hr, Prev, PageLabel, Next;
+	
+	var NoResultDiv;
+	var NoFound;
+
+	var CloseDiv;
+	var Close;
+
 	var Buttons = new Array();
 	var Elements = new Object();
 
@@ -167,15 +177,21 @@ function INTERFACE_ShowOldGameWindow(Id)
 	L2RightDiv= UTILS_CreateElement('div','L2RightDiv');
 
 	// Date Form
+	FromDiv = UTILS_CreateElement('div','FromDiv');
+	ToDiv = UTILS_CreateElement('div','ToDiv');
 	DateLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('oldgame_date_form'));
 	FromLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
-	FromInput.size = "10";
+	FromInput.size = "11";
 	FromInput.disabled = true;
+	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 	ToLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
-	ToInput.size = "10";
+	ToInput.size = "11";
 	ToInput.disabled = true;
+	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
+	Br2 = UTILS_CreateElement("br");
+	Br3 = UTILS_CreateElement("br");
 	// End Date Form
 	// End Layer 2 Right Div
 	// End Layer 2
@@ -186,12 +202,10 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Search = UTILS_CreateElement('input', null, 'button');
 	Search.type = "button";
 	Search.value = UTILS_GetText("window_search");
-	Buttons.push(Search);
 	NewSearch	= UTILS_CreateElement('input',null,'button');
 	NewSearch.type = "button";
 	NewSearch.value = UTILS_GetText("oldgame_new_search");
 	UTILS_AddListener(NewSearch,"click",	function() { if(Select.options.selectedIndex != 0) Player1Input.value = ""; Player2Input.value = ""; ARadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
-	Buttons.push(NewSearch);
 	// End ButtonsDiv;
 
 	// Result Div
@@ -233,10 +247,19 @@ function INTERFACE_ShowOldGameWindow(Id)
 	TFoot.appendChild(Prev);
 	TFoot.appendChild(PageLabel);
 	TFoot.appendChild(Next);
-	NoFound = UTILS_CreateElement('p',null,null,UTILS_GetText("oldgame_no_result"));
 	
 	// End Table Div
 	
+	NoResultDiv = UTILS_CreateElement('div','NoResultDiv');
+	NoFound = UTILS_CreateElement('p',null,null,UTILS_GetText("oldgame_no_result"));
+
+	// Close Button
+	Close = UTILS_CreateElement('input', null, 'button');
+	Close.type = "button";
+	Close.value = UTILS_GetText("window_close");
+	
+	CloseDiv = UTILS_CreateElement('div','CloseDiv');
+
 	// Mount Tree of Elements
 	
 	// Select Div
@@ -265,10 +288,19 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	// Layer 2 Right Div
 	L2RightDiv.appendChild(DateLabel);
-	L2RightDiv.appendChild(FromLabel);
-	L2RightDiv.appendChild(FromInput);
-	L2RightDiv.appendChild(ToLabel);
-	L2RightDiv.appendChild(ToInput);
+
+	FromDiv.appendChild(FromLabel);
+	FromDiv.appendChild(FromInput);
+	FromDiv.appendChild(Br2);
+	FromDiv.appendChild(FormatLabel1);
+	ToDiv.appendChild(ToLabel);
+	ToDiv.appendChild(ToInput);
+	ToDiv.appendChild(Br3);
+	ToDiv.appendChild(FormatLabel2);
+//	L2RightDiv.appendChild(Br);
+
+	L2RightDiv.appendChild(FromDiv);
+	L2RightDiv.appendChild(ToDiv);
 
 	// Layer 2 Div
 	Layer2Div.appendChild(L2LeftDiv);
@@ -298,15 +330,20 @@ function INTERFACE_ShowOldGameWindow(Id)
 	TableDiv.appendChild(TBodyDiv);
 	TableDiv.appendChild(TFoot);
 
+	NoResultDiv.appendChild(NoFound);
+
 	// ResultDiv
 	ResultDiv.appendChild(SearchResultLabel);
 	ResultDiv.appendChild(TableDiv);
+
+	CloseDiv.appendChild(Close);
 
 	// Main Div
 	Div.appendChild(IdDiv);
 	Div.appendChild(FormDiv);
 	Div.appendChild(ButtonsDiv);
 	Div.appendChild(ResultDiv);
+	Div.appendChild(CloseDiv);
 
 	Elements.Player1 = Player1Input;
 	Elements.Player2 = Player2Input;
@@ -319,7 +356,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Elements.Page = PageLabel;
 	Elements.TableDiv = TableDiv;
 	Elements.ResultDiv = ResultDiv;
-	Elements.NoFound = NoFound;
+	Elements.NoResultDiv = NoResultDiv;
 	Elements.Prev = Prev;
 	Elements.Next = Next;
 	Elements.Search = Search;
@@ -338,209 +375,19 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Elements.SetPrevButton = INTERFACE_SetPrevButton;
 	Elements.SetNextButton = INTERFACE_SetNextButton;
 	
-//	CONNECTION_SendJabber(MESSAGE_GetOldGames("", "", 10, 0));
+	Buttons.push(Close);
 
 	return {Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 /**
-*	Create elements of search old games window and returns div
+*	Set result table of old games search
 *
-* @return	Div; Array
-* @see		WINDOW_OldGameSearch();
+* @param	GameList	Array of old games
+* @return	boolean
+* @see		WINDOW_SetResult();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowOldGameSearchWindow()
-{
-	// Variables
-	var Div;
-
-	var FormDiv, Player1,Input1, Player2, Input2, Br1, Br2;
-
-	var ButtonsDiv, Search, Cancel;
-
-	var Buttons = new Array();
-
-	// Main div
-	Div = UTILS_CreateElement('div', 'OldGameSearchDiv');
-
-	// FormDiv elements
-	FormDiv = UTILS_CreateElement('div', 'FormDiv');
-
-	Player1 = UTILS_CreateElement('span', null, null, UTILS_GetText("oldgame_player1"));
-	Input1 = UTILS_CreateElement('input', "OldGameInput1");
-	Input1.size = "23";
-	Br1 = UTILS_CreateElement('br');
-	Player2 = UTILS_CreateElement('span', null, null, UTILS_GetText("oldgame_player2"));
-	Input2 = UTILS_CreateElement('input', "OldGameInput2");
-	Input2.size = "23";
-	Br2 = UTILS_CreateElement('br');
-
-	// ButtonsDiv elements
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Search = UTILS_CreateElement('input',null,'button');
-	Search.type = "button";
-	Search.value = UTILS_GetText("window_search");
-	UTILS_AddListener(Search,"click",	function() { CONNECTION_SendJabber(MESSAGE_GetOldGames(Input1.value, Input2.value, 10, 0)); }, "false");
-	Buttons.push(Search);
-
-	Cancel = UTILS_CreateElement('input',null,'button');
-	Cancel.type = "button";
-	Cancel.value = UTILS_GetText("window_cancel");
-	Buttons.push(Cancel);
-
-	// Mount elements tree
-	// ButtonsDiv elements
-	ButtonsDiv.appendChild(Search);
-	ButtonsDiv.appendChild(Cancel);
-	
-	// FormDiv elements
-	FormDiv.appendChild(Player1);
-	FormDiv.appendChild(Input1);
-	FormDiv.appendChild(Br1);
-	FormDiv.appendChild(Player2);
-	FormDiv.appendChild(Input2);
-	FormDiv.appendChild(Br2);
-
-	// Main div elements
-	Div.appendChild(FormDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*	Create elements of search old games window and returns div
-*
-* @param	Games	Array of old games
-* @return	Div; Array
-* @see		WINDOW_OldGameSearch();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_ShowOldGameResultWindow(GameList)
-{
-	// Variables
-	var Div;
-
-	var TableDiv;
-	var Table, TBody, Tr, Td;
-
-	var ControlDiv, LeftDiv, RightDiv;
-	var Prev, Next;
-
-	var ButtonsDiv, Close;
-
-	var Buttons = new Array();
-
-	var i;
-
-	// Main div
-	Div = UTILS_CreateElement('div', 'OldGameResultDiv');
-
-	// TableDiv elements
-	TableDiv = UTILS_CreateElement('div', 'TableDiv');
-
-	Table = UTILS_CreateElement('table');
-	TBody = UTILS_CreateElement('tbody');
-
-	// Table Headers
-	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_white'));
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_black'));
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_category'));
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_winner'));
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_wintype'));
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_date'));
-		Tr.appendChild(Td);
-	TBody.appendChild(Tr);
-	Table.appendChild(TBody);
-
-	
- 	for(i=0; i<GameList.length ; i++)
-	{
-		TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].gametype, GameList[i].winner, GameList[i].wintype, GameList[i].date, GameList[i].id));
-	}
-
-	// ControlDiv Elements
-	ControlDiv = UTILS_CreateElement('div', 'ControlDiv');
-	RightDiv = UTILS_CreateElement('div', 'RightDiv');
-	LeftDiv = UTILS_CreateElement('div', 'LeftDiv');
-
-	Prev = UTILS_CreateElement('span',null,'left',"Anterior");
-	Next = UTILS_CreateElement('span',null,'right',"Proximo");
-
-	// ButtonsDiv elements
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Close = UTILS_CreateElement('input',null,'button');
-	Close.type = "button";
-	Close.value = UTILS_GetText("window_close");
-	Buttons.push(Close);
-
-	// Mount elements tree
-	// ButtonsDiv elements
-	ButtonsDiv.appendChild(Close);
-	
-	LeftDiv.appendChild(Prev);
-	RightDiv.appendChild(Next);
-
-	ControlDiv.appendChild(LeftDiv);
-	ControlDiv.appendChild(RightDiv);
-	
-	// TableDiv elements
-	TableDiv.appendChild(Table);
-
-	// Main div elements
-	Div.appendChild(TableDiv);
-	Div.appendChild(ControlDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-
-/**
-*
-* @author	Rubens 
-*/
-function INTERFACE_AddOldGameResultR(White, Black, Date, GameType, WinType,  Id)
-{
-	var Tr, Td;
-	
-	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,null,White);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,null,Black);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,null,Date);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,null,GameType);
-		Tr.appendChild(Td);
-//		Td = UTILS_CreateElement('td',null,null,Winner);
-//		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,null,WinType);
-		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function()
-		{
-			alert("teste!");
-			if(MainData.CurrentGame == null)
-			{
-				CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
-			}
-			else
-			{
-				WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));			
-			}
-		}, false);
-	
-	return(Tr);
-}
-
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
 	var Tr, Td;
@@ -573,6 +420,7 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 	
 	return(Tr);
 }
+
 function INTERFACE_Player1Input() 
 {
 }
@@ -609,7 +457,7 @@ function INTERFACE_OldGameSetResult(Id, GameList, More)
 			this.ResultDiv.removeChild(this.TableDiv);
 
 			// show no found message
-			this.ResultDiv.appendChild(this.NoFound);
+			this.ResultDiv.appendChild(this.NoResultDiv);
 		}
 	}
 	// if list games contain some data
@@ -621,7 +469,7 @@ function INTERFACE_OldGameSetResult(Id, GameList, More)
 		}
 		else
 		{	
-			this.ResultDiv.removeChild(this.NoFound);
+			this.ResultDiv.removeChild(this.NoResultDiv);
 
 			this.ResultDiv.appendChild(this.TableDiv);
 			this.SetTable(Id, GameList, More);
@@ -679,6 +527,14 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	return true;
 }
 
+/**
+*	Set function associated to previous button
+*
+* @param	Node	
+* 				Oldgame object
+* @void	
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
 function INTERFACE_SetPrevButton(Node)
 {
 	UTILS_AddListener(this.Prev,"click",
@@ -691,6 +547,14 @@ function INTERFACE_SetPrevButton(Node)
 		}, "false");
 }
 
+/**
+*	Set function associated to next button
+*
+* @param	Node	
+* 				Oldgame object
+* @void	
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
 function INTERFACE_SetNextButton(Node)
 {
 	UTILS_AddListener(this.Next,"click",
@@ -703,6 +567,14 @@ function INTERFACE_SetNextButton(Node)
 		}, "false");
 }
 
+/**
+*	Set function associated to search button
+*
+* @param	Node	
+* 				Oldgame object
+* @void
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
 function INTERFACE_SetSearchButton(Node)
 {
 	UTILS_AddListener(this.Search,"click",	

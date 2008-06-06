@@ -237,7 +237,7 @@
 		<profile_edit_photo>Editar imagem</profile_edit_photo>
 		<profile_old_games1>Minhas partidas</profile_old_games1>
 		<profile_old_games2>Partidas de </profile_old_games2>
-		<profile_save>Salvar alteracoes</profile_save>
+		<profile_save>Salvar alterações</profile_save>
 		<profile_discard>Fechar sem salvar</profile_discard>
 		<profile_save_close>Salvar e fechar</profile_save_close>
 		<profile_confirm>Você tem certeza que desejar fechar a janela sem salvar as alterações de perfil?</profile_confirm>
@@ -279,8 +279,8 @@
 		<oldgame_from>de:</oldgame_from>
 		<oldgame_to>a:</oldgame_to>
 		<oldgame_new_search>Nova Busca</oldgame_new_search>
-		<oldgame_search_result>Resultado da busca:</oldgame_search_result>
-		<oldgame_no_result>Nenhuma partida encontrada.</oldgame_no_result>
+		<oldgame_search_result>Resultados encontrados:</oldgame_search_result>
+		<oldgame_no_result>Nenhum resultado encontrado.</oldgame_no_result>
 		<oldgame_player1_hd>Jogador 1</oldgame_player1_hd>
 		<oldgame_player2_hd>Jogador 2</oldgame_player2_hd>
 		<oldgame_category>Categoria</oldgame_category>
@@ -288,12 +288,12 @@
 		<oldgame_date>Data</oldgame_date>
 		<oldgame_prev>Anteriores</oldgame_prev>
 		<oldgame_next>Proximos</oldgame_next>
-
+		<oldgame_format>Formato: dd/mm/aaaa</oldgame_format>
 		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
 	</oldgame>
 	<welcome>
-		<welcome_title>Bem Vindo!</welcome_title>
-		<welcome_text1>Este é o ambiente de jogo/interação do XadrezLivre. Aqui, além de outras possibilidades, você pode:</welcome_text1>
+		<welcome_title>Bem-vindo!</welcome_title>
+		<welcome_text1>Este é o ambiente de jogo/interação do Xadrez Livre. Aqui, além de outras possibilidades, você pode:</welcome_text1>
 		<welcome_text2>Para outras informações sobre o uso do ambiente, consulte a "Ajuda" no menu superior.</welcome_text2>
 		<welcome_instruction>
 			<welcome_item><![CDATA[<b>Iniciar uma partida:</b> clique sobre um usuário do ambiente e escolha a opção "Convidar para jogar". Todos os usuários on-line do ambiente são mostrados na sala Geral. janela encontrada na parte inferior esquerda do ambiente.]]>></welcome_item>
