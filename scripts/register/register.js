@@ -372,6 +372,23 @@ function REGISTER_Labels()
 
 }
 
+/**
+ * @brief	Align main div in middle
+ * @author	Rubens
+ */
+
+function REGISTER_VerticalAlignMiddle()
+{
+	var MainDiv = document.getElementById("mainDiv");
+
+	var WindowHeight = window.innerHeight;
+
+	if(WindowHeight > 500)
+	{
+		MainDiv.style.top = ((WindowHeight / 2) - 200) + "px";
+	}
+}
+
 /**************************************
 ***************** PHP *****************
 **************************************/
@@ -471,3 +488,5 @@ function REGISTER_GetDatabaseError(Msg)
 	}
 	return Msg;
 }
+
+
