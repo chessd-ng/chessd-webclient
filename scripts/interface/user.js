@@ -54,6 +54,13 @@ function UserListObj(Element)
 
 	this.hideSort = INTERFACE_HideSort; // hide sort elements
 	this.showSort = INTERFACE_ShowSort; // show sort elements
+
+	this.focusNick = INTERFACE_FocusNick; // focus span element
+	this.blurNick = INTERFACE_BlurNick; // blur focus span element
+
+	this.focusRating = INTERFACE_FocusRating; // focus rating option
+	this.blurRating = INTERFACE_BlurRating; // blur rating option
+
 	this.hideList = INTERFACE_HideList; // hide users list
 	this.showList = INTERFACE_ShowList; // show users list
 
@@ -246,7 +253,7 @@ function INTERFACE_FindUser(Username)
  */
 function INTERFACE_SetSortUserFunction(Func)
 {
-	this.sortNick.onclick = Func;
+	UTILS_AddListener(this.sortNick , "click", Func, false);
 }
 
 
@@ -264,9 +271,7 @@ function INTERFACE_SetSortRatingFunction(Func)
 	var TmpFunc = Func;
 
 	// Get category to sort
-	this.sortRating.onchange = function(){
-		TmpFunc(this.value);
-	};
+	UTILS_AddListener(this.sortRating, "change", function(){ TmpFunc(this.value)}, false);
 }
 
 /**
@@ -319,6 +324,31 @@ function INTERFACE_ShowList()
 	this.userList.parentNode.style.display = "block";
 }
 
+// focus span element
+function INTERFACE_FocusNick()
+{
+	this.sortNick.className = "selected";
+}
+
+// blur focus span element
+function INTERFACE_BlurNick()
+{
+	this.sortNick.className = "";
+}
+
+// focus rating option
+function INTERFACE_FocusRating()
+{
+	this.sortRating.className = "selected";
+}
+
+// blur rating option
+function INTERFACE_BlurRating()
+{
+	this.sortRating.className = "";
+}
+
+
 /**************************************
 **** FUNCTION - CREATE HTML LIST
 **************************************/
@@ -341,8 +371,8 @@ function INTERFACE_CreateUserList(Element)
 	
 	MainDiv = UTILS_CreateElement("div",null,"UserList");
 
-	OrderNick = UTILS_CreateElement("span", "order_nick", "order_selec", UTILS_GetText("room_order_nick"));
-	OrderRating = UTILS_CreateElement("select", null, "order_rating", UTILS_GetText("room_order_rating"));
+	OrderNick = UTILS_CreateElement("span", "order_nick", "selected", UTILS_GetText("room_order_nick"));
+	OrderRating = UTILS_CreateElement("select", "order_rating", "", UTILS_GetText("room_order_rating"));
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
 	OrderRating.appendChild(OrderRatingOpt);
@@ -354,7 +384,28 @@ function INTERFACE_CreateUserList(Element)
 	OrderRatingOpt.value = "standard";
 	OrderRating.appendChild(OrderRatingOpt);
 
-	// Sort functions will be set in UserListObject;
+
+	OrderNick.onclick = function(){
+		OrderNick.className = "selected";
+		OrderRating.className = "";
+	};
+
+	OrderRating.onchange = function(){
+		var Options;
+		var i;
+		var Select;
+	
+		Options = OrderRating.options;
+		Select = OrderRating.selectedIndex;
+		for(i=0; i< Options.length; i++)
+		{
+			Options[i].className = "";
+		}
+
+		OrderNick.className = "";
+		OrderRating.className = "selected";
+		OrderRating.options[Select].className = "selected";
+	};
 
 	// User list
 	Users = UTILS_CreateElement("div",null,"UserTable");
@@ -493,3 +544,223 @@ function INTERFACE_HideUserMenu()
 	}
 }
 
+
+/*****************************
+*	FUNCTIONS - WINDOW
+******************************/
+/**
+*	Create elements of search user window and returns div
+*
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserWindow()
+{
+	// Variables
+	var Div;
+
+	var FormDiv, Username,Input, Br;
+
+	var OptionDiv;
+	var OptionLabel, Br1;
+	var Name,NameLabel, User,UserLabel, Both, BothLabel;
+
+	var ButtonsDiv, Search, Cancel;
+
+	var Buttons = new Array();
+
+	// Main div
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	// FormDiv elements
+	FormDiv = UTILS_CreateElement('div', 'FormDiv');
+
+	Username = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user"));
+	Br = UTILS_CreateElement('br');
+	Input = UTILS_CreateElement('input', 'SearchUserInput');
+	Input.size = "23";
+
+	// OptionDiv Elements
+	OptionDiv = UTILS_CreateElement('div','OptionDiv');
+
+	OptionLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_by"));
+	Br1 = UTILS_CreateElement('br');
+	
+	Name = UTILS_CreateElement('input');
+	Name.type = "radio";
+	Name.name = "search_user";
+	Name.checked = true;
+	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
+
+	User= UTILS_CreateElement('input');
+	User.type = "radio";
+	User.name = "search_user";
+	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
+
+	Both= UTILS_CreateElement('input');
+	Both.type = "radio";
+	Both.name = "search_user";
+	BothLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_both"));
+
+
+	// ButtonsDiv elements
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Search = UTILS_CreateElement('input',null,'button');
+	Search.type = "button";
+	Search.value = UTILS_GetText("window_search");
+	UTILS_AddListener(Search,"click",	function() { 
+		var Option;
+		if (Name.checked == true)
+		{
+			Option = 0;
+		}
+		else if (User.checked == true)
+		{
+			Option = 1;
+		}
+		else if (Both.checked == true)
+		{
+			Option = 2;
+		}
+		else
+		{
+			Option = 2;
+		}
+		CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,Option)); }, "false");
+	Buttons.push(Search);
+
+	Cancel = UTILS_CreateElement('input',null,'button');
+	Cancel.type = "button";
+	Cancel.value = UTILS_GetText("window_cancel");
+	Buttons.push(Cancel);
+
+	// Mount elements tree
+	// ButtonsDiv elements
+	ButtonsDiv.appendChild(Search);
+	ButtonsDiv.appendChild(Cancel);
+
+	// OptionDiv
+	OptionDiv.appendChild(OptionLabel);
+	OptionDiv.appendChild(Br1);
+	OptionDiv.appendChild(Name);
+	OptionDiv.appendChild(NameLabel);
+	OptionDiv.appendChild(User);
+	OptionDiv.appendChild(UserLabel);
+
+//	OptionDiv.appendChild(Both);
+//	OptionDiv.appendChild(BothLabel);
+	
+	// FormDiv elements
+	FormDiv.appendChild(Username);
+	FormDiv.appendChild(Br);
+	FormDiv.appendChild(Input);
+
+	// Main div elements
+	Div.appendChild(FormDiv);
+	Div.appendChild(OptionDiv);
+	Div.appendChild(ButtonsDiv);
+
+	Input.focus();
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+
+
+/**
+*	Create elements of an user 
+*
+* @param	Username	User that will be inserted
+* @return	Tr
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_CreateUserElement(Username)
+{
+	var Tr, Td;
+
+	Tr = UTILS_CreateElement("tr");
+
+	Td = UTILS_CreateElement("td", null, null, Username);
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+	Tr.appendChild(Td);
+
+	return Tr;
+}
+
+/**
+*	Create elements of search user result window and returns div
+*
+* @param	UserList	List of users founded
+* @return	Div; Array
+* @see		WINDOW_Invite();
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserResultWindow(UserList)
+{
+	// Variables
+	var Div;
+	var TopDiv;
+	var ListDiv, Label, Table, Tr, Item, Br;
+	var ButtonsDiv, Button;
+	var Buttons = new Array();
+	var i;
+	this.User;
+
+	// Main Div
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	TopDiv = UTILS_CreateElement('div', 'TopDiv');
+
+	// Div of results
+	ListDiv = UTILS_CreateElement('div', 'ListDiv');
+
+	Table = UTILS_CreateElement('tbody');
+
+	if (UserList == null)
+	{
+		Label = UTILS_CreateElement('span', null, 'no_found', UTILS_GetText("contact_no_user_found"));
+	}
+	else
+	{
+		Label = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_found"));
+		
+		for (i=0; i< UserList.length; i++)
+		{
+			// Insert each item of the user founded list in interface
+			Tr = INTERFACE_CreateUserElement(UserList[i]);
+			Table.appendChild(Tr);
+		}
+	}
+
+	Br = UTILS_CreateElement('br');
+
+	// ButtonsDiv
+	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
+
+	Button = UTILS_CreateElement('input',null,'button');
+	Button.type = "button";
+	Button.value = UTILS_GetText("window_close");
+	Buttons.push(Button);
+
+	// Mount tree elements
+	// ButtonsDiv elements
+	ButtonsDiv.appendChild(Button);
+	
+	// TopDiv elements
+	TopDiv.appendChild(Label);
+	
+	// Main div and result div elements
+	Div.appendChild(TopDiv);
+	Div.appendChild(Br);
+	if (UserList != null)
+	{
+		ListDiv.appendChild(Table);
+		Div.appendChild(ListDiv);
+	}
+	Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}

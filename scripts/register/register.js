@@ -372,6 +372,23 @@ function REGISTER_Labels()
 
 }
 
+/**
+ * @brief	Align main div in middle
+ * @author	Rubens
+ */
+
+function REGISTER_VerticalAlignMiddle()
+{
+	var MainDiv = document.getElementById("mainDiv");
+
+	var WindowHeight = window.innerHeight;
+
+	if(WindowHeight > 500)
+	{
+		MainDiv.style.top = ((WindowHeight / 2) - 200) + "px";
+	}
+}
+
 /**************************************
 ***************** PHP *****************
 **************************************/
@@ -380,6 +397,8 @@ function REGISTER_Labels()
 * @return none
 * @public
 * @author	Fabiano
+*
+* @deprecated
 */
 function REGISTER_SendDataPHP(User, Mail, Pwd)
 {
@@ -425,6 +444,7 @@ function REGISTER_SendDataPHP(User, Mail, Pwd)
 * @return none
 * @public
 * @author	Fabiano
+* @deprecated
 */
 function REGISTER_ReceiveXmlPHP()
 {
@@ -456,6 +476,7 @@ function REGISTER_ReceiveXmlPHP()
 * @return none
 * @public
 * @author	Fabiano
+* @deprecated
 */
 function REGISTER_GetDatabaseError(Msg)
 {
@@ -467,3 +488,5 @@ function REGISTER_GetDatabaseError(Msg)
 	}
 	return Msg;
 }
+
+
