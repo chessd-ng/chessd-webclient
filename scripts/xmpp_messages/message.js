@@ -819,7 +819,7 @@ function MESSAGE_BanUser(Username)
 function MESSAGE_UnbanUser(Username)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='BanUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='UnBanUser'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
 	XMPP += "<unban jid='"+Username+"@"+MainData.Host+"'/>";
 	XMPP += "</query></iq>";

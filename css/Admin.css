@@ -1,0 +1,12 @@
+#UnbanDiv{
+	width		: 230px;
+}
+
+#UnbanDiv #UnbanInput{
+	margin		: 5px;
+	size		: 25;
+}
+
+#UnbanDiv #ButtonsDiv{
+	margin-top	: 15px;
+}
