@@ -56,3 +56,20 @@ function START_StartPage()
 	
 	INTERFACE_StartLogin(Lang);
 }
+
+function START_ChangeLanguage(Lang)
+{
+	// Close login div
+	INTERFACE_EndLogin();
+
+	// Reload MainData with configurations and new language selected
+	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	// Create cookie for new language
+	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
+
+	// Set language
+	MainData.Lang = Lang;
+	
+	// Show new login div with language selected
+	INTERFACE_StartLogin(Lang);
+}
