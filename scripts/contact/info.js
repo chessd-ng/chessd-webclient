@@ -24,11 +24,11 @@
 function CONTACT_HandleInfo(XML)
 {
 	var RatingNodes, TypeNodes;
-	var Jid, Profile, Type, Rating;
+	//var Jid, Profile, Type, Rating;
 	
 	RatingNodes = XML.getElementsByTagName('rating');
 	TypeNodes = XML.getElementsByTagName('type');
-
+/*
 	// Profile window opened
 	if (MainData.ProfileList.length > 0)
 	{
@@ -51,7 +51,7 @@ function CONTACT_HandleInfo(XML)
 			}
 		}
 	}
-
+*/
 	// Update contacts 
 	CONTACT_HandleRating(RatingNodes);
 	CONTACT_HandleType(TypeNodes);
