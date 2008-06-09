@@ -117,6 +117,7 @@ function LOGIN_LoadScripts()
 	Scripts[30] = "scripts/interface/oldgame.js";
 	Scripts[31] = "scripts/interface/welcome.js";
 	Scripts[32] = "scripts/interface/user.js";
+	Scripts[33] = "scripts/admin/admin.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }

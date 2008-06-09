@@ -757,7 +757,7 @@ function MESSAGE_SearchUser(Username, Option)
 * @return 	string
 * @author 	Ulysses
 */
-function MESSAGE_KickUser (Room, To, Role, Reason)
+function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 {
 	var XMPP = "";
 
@@ -770,6 +770,62 @@ function MESSAGE_KickUser (Room, To, Role, Reason)
 	return XMPP;
 }
 
+/**
+ * @brief Message to kick a user from jabber
+ *
+ * Create message to kick user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_KickUser(Username)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='KickUser'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
+	XMPP += "<kick jid='"+Username+"@"+MainData.Host+"'/>";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
+
+/**
+ * @brief Message to ban a user from jabber
+ *
+ * Create message to ban user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_BanUser(Username)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='BanUser'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
+	XMPP += "<ban jid='"+Username+"@"+MainData.Host+"'/>";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
+
+/**
+ * @brief Message to unban a user from jabber
+ *
+ * Create message to unban user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_UnbanUser(Username)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='BanUser'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
+	XMPP += "<unban jid='"+Username+"@"+MainData.Host+"'/>";
+	XMPP += "</query></iq>";
+	
+	return XMPP;
+}
 /**********************************
  * MESSAGES - PROFILE - vCard
  **********************************/

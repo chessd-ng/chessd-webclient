@@ -24,3 +24,19 @@ function ADMIN_HandleChange (XML)
 {
 	return "";
 }
+
+
+function ADMIN_KickUser(Username)
+{
+	CONNECTION_SendJabber(MESSAGE_KickUser(Username));
+}
+
+function ADMIN_BanUser(Username)
+{
+	CONNECTION_SendJabber(MESSAGE_BanUser(Username));
+}
+
+function ADMIN_UnbanUser(Username)
+{
+	CONNECTION_SendJabber(MESSAGE_UnbanUser(Username));
+}

@@ -559,6 +559,41 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			};
 			i += 1;
 		}
+
+		// Administrative functions
+		if (MainData.Type == "admin")
+		{
+			// Disconnet user
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_disconnect_user");
+			Options[i].Func = function () {
+				ADMIN_KickUser(Username)
+			};
+			i += 1;
+
+			// Ban user
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_ban");
+			Options[i].Func = function () {
+				ADMIN_BanUser(Username)
+			};
+			i += 1;
+
+			// Mute user
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_mute");
+			Options[i].Func = function () {
+			};
+			i += 1;
+
+			// Abusive
+			Options[i] = new Object();
+			Options[i].Name = UTILS_GetText("usermenu_abusive");
+			Options[i].Func = function () {
+			};
+			i += 1;
+		}
+
 	}
 
 	// View user's profile
@@ -569,37 +604,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	};
 	i += 1;
 
-	// Administrative functions
-	if (MainData.Type == "admin")
-	{
-		// Disconnet user
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_disconnect_user");
-		Options[i].Func = function () {
-		};
-		i += 1;
-
-		// Ban user
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_ban");
-		Options[i].Func = function () {
-		};
-		i += 1;
-
-		// Mute user
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_mute");
-		Options[i].Func = function () {
-		};
-		i += 1;
-
-		// Abusive
-		Options[i] = new Object();
-		Options[i].Name = UTILS_GetText("usermenu_abusive");
-		Options[i].Func = function () {
-		};
-		i += 1;
-	}
 
 	// Show menu in user's screen
 	INTERFACE_ShowUserMenu(Obj, Options);
