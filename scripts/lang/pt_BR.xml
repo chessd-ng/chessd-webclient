@@ -27,7 +27,7 @@
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
-		<login_user>Usuário</login_user>
+		<login_user>Login</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor de mensagens indisponí­vel no momento. Tente novamente mais tarde.</login_connection_refused>
