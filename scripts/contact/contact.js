@@ -19,16 +19,35 @@
 * Handle contacts and user status
 */
 
+/**
+ * @brief	Show contact and contact online Div
+ *
+ * Create contact list object and contact online list object. Hide contact list and show online list.
+*
+* @author Rubens Suguimoto
+*/
+function CONTACT_StartContact()
+{
+	MainData.Contact = new ContactObj();
+	MainData.ContactOnline = new ContactOnlineObj();
+
+	//Hide user contact list and show online list
+	MainData.Contact.hide();
+	MainData.ContactOnline.show();
+}
+
 
 /************************************
 *** FUNCTIONS - CONTACT ONLINE LIST
 *************************************/
 /**
-* Handle all presence from a room;
+ * @brief	Handle presence to online list
+ *
+* Handle all presence from online list (General room);
 *
 * @param        XML The xml come from server with tag presence
-* @return       void
-* @author       Ulysses
+*
+* @author       Ulysses Bonfim
 */
 function CONTACT_HandleOnlinePresence(XML)
 {
@@ -90,6 +109,16 @@ function CONTACT_HandleOnlinePresence(XML)
 	return Buffer;
 }
 
+/**
+ * @brief 	Add user in the online list
+ * 
+ * Add a user with status in online list.
+ *
+ * @param 	User 	Username
+ * @param	Status	User's status
+ *
+ * @author	Rubens Suguimoto
+ */
 function CONTACT_AddUserOnlineList(User, Status)
 {
 	var RatingTmp;
@@ -135,6 +164,13 @@ function CONTACT_AddUserOnlineList(User, Status)
 	}
 }
 
+/**
+ * @brief 	Sort online list by nick name
+ * 
+ * Sort on line user list by nick name. Sort in MainData and for each user in MainData online user, remove and insert it.
+ *
+ * @author	Rubens Suguimoto
+ */
 function CONTACT_OnlineSortUserByNick()
 {
 	var Room, RoomName;
@@ -192,6 +228,15 @@ function CONTACT_OnlineSortUserByNick()
 	}
 }
 
+/**
+ * @brief 	Sort online list by rating category
+ * 
+ * Sort on line user list by rating. Sort in MainData and for each user in MainData online user, remove and insert it.
+ *
+ * @param	Category	Chess game category
+ *
+ * @author	Rubens Suguimoto
+ */
 function CONTACT_OnlineSortUserByRating(Category)
 {
 	var Room, RoomName;
@@ -255,10 +300,13 @@ function CONTACT_OnlineSortUserByRating(Category)
 *************************************/
 
 /**
-* Handle user list received from jabber server
-* during connection
+ * @brief	Handle user contact list
+ *
+ * Handle user list received from jabber with yours contacts.
 *
 * @return string
+*
+* @author Ulysses Bonfim
 */
 function CONTACT_HandleUserList(XML)
 {
@@ -319,8 +367,15 @@ function CONTACT_HandleUserList(XML)
 
 
 /**
-* Parse user presence (user status)
+ * @brief	Handle a user presence
+ *
+ * Handle user presence for accept or decline invite to contact list and user status.
+*
+* @return string
+*
+* @author Ulysses Bonfim
 */
+
 function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
@@ -331,6 +386,8 @@ function CONTACT_HandleUserPresence(XML)
 
 	Type = XML.getAttribute('type');
 
+	/* HANDLE INVITE TO CONTACT LIST */
+	
 	// User is offline
 	if (Type == "unavailable")
 	{
@@ -356,6 +413,8 @@ function CONTACT_HandleUserPresence(XML)
 		return Buffer;
 	}
 
+	/* HANDLE USER STATUS */
+
 	// Searching for the user status
 	Show = XML.getElementsByTagName('show');
 	if (Show.length > 0)
@@ -377,9 +436,16 @@ function CONTACT_HandleUserPresence(XML)
 	return Buffer;
 }
 
-
 /**
-* Insert user in data structure
+ * @brief	Add user in contact list
+ *
+ * Add user in MainData contact list, sort and show this user in interface.
+*
+* @param 	User	User's name
+* @param	Status	User's status
+* @param	Subs	User's subscribe status
+* @param	Group	User's group in contact list
+* @author Pedro Rocha
 */
 function CONTACT_InsertUser(User, Status, Subs, Group)
 {
@@ -397,7 +463,14 @@ function CONTACT_InsertUser(User, Status, Subs, Group)
 
 
 /**
-* Create and set options for user menu
+ * @brief	Show user menu options
+ *
+ * Show user menu to send private message, match, view profile, etc.
+*
+* @param 	Obj 	Object with menu options and functions
+* @param	Username	User's name
+*
+* @author Pedro Rocha
 */
 function CONTACT_ShowUserMenu(Obj, Username)
 {
@@ -444,8 +517,10 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		// Match user
 		Options[i] = new Object();
 		Options[i].Name = UTILS_GetText("usermenu_match");
-		// Request for match is possible only if the status of opponent is (avaiable, away, busy) and
-		// the user isn't playing a game
+
+		// Request for match is possible only if the status
+		// of opponent is (avaiable, away, busy) and the user
+		// isn't playing a game
 		if ( ((MainData.GetStatus(Username) != "offline") && (MainData.GetStatus(Username) != "playing") && (MainData.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
 		{
 			Options[i].Func = function () {
@@ -532,7 +607,13 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	UTILS_AddListener(document, "click", Func, false);
 }
 
-
+/**
+ * @brief	Load contact list in interface
+ *
+ * Load user contact list in interface.
+*
+* @author Rubens Suguimoto
+*/
 function CONTACT_LoadUserContactList()
 {
 	var i;
@@ -543,6 +624,7 @@ function CONTACT_LoadUserContactList()
 	{
 		User = MainData.UserList[i];
 
+		// Find user group, if not exists create group
 		if(MainData.Contact.findGroup(User.Group) == null)
 		{
 			MainData.Contact.addGroup(User.Group);
@@ -555,22 +637,16 @@ function CONTACT_LoadUserContactList()
 }
 
 
-/*
- * Create contact and online user list in interface
- */
-function CONTACT_StartContact()
-{
-	MainData.Contact = new ContactObj();
-	MainData.ContactOnline = new ContactOnlineObj();
-
-	//Hide user contact list and show online list
-	MainData.Contact.hide();
-	MainData.ContactOnline.show();
-}
-
 /************************************
 *** FUNCTIONS - SORT CONTACT LIST
 *************************************/
+/**
+ * @brief 	Sort user contact list by nick name
+ * 
+ * Sort user online list by nick name. Sort in MainData and for each user in MainData online user, remove and insert it.
+ *
+ * @author	Rubens Suguimoto and Danilo Yorinori
+ */
 function CONTACT_SortUsersByNick()
 {
 	var i;
@@ -614,6 +690,15 @@ function CONTACT_SortUsersByNick()
 	}
 }
 
+/**
+ * @brief 	Sort user contact list by rating category
+ * 
+ * Sort user contact list by rating. Sort in MainData and for each user in MainData online user, remove and insert it.
+ *
+ * @param	Category	Chess game category
+ *
+ * @author	Rubens Suguimoto and Danilo Yorinori
+ */
 function CONTACT_SortUsersByRating(Category)
 {
 	var i;
