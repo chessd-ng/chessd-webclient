@@ -296,8 +296,8 @@
 		<welcome_text1>Este é o ambiente de jogo/interação do Xadrez Livre. Aqui, além de outras possibilidades, você pode:</welcome_text1>
 		<welcome_text2>Para outras informações sobre o uso do ambiente, consulte a "Ajuda" no menu superior.</welcome_text2>
 		<welcome_instruction>
-			<welcome_item><![CDATA[<b>Iniciar uma partida:</b> clique sobre um usuário do ambiente e escolha a opção "Convidar para jogar". Todos os usuários on-line do ambiente são mostrados na sala Geral. janela encontrada na parte inferior esquerda do ambiente.]]>></welcome_item>
-			<welcome_item><![CDATA[<b>Adicionar contatos:</b> sua lista de contatos encontra-se na parte superior esquerda do ambiente. Para adicionar novos contatos clique sobre um usuário na sala Geral e escolha a opção "Adicionar contato". O usuário estará em sua lista de contato, assim que ele autorizar.]]>></welcome_item>
+			<welcome_item><![CDATA[<b>Iniciar uma partida:</b> clique sobre um usuário do ambiente e escolha a opção "Convidar para jogar". Todos os usuários on-line do ambiente são mostrados na sala Geral. janela encontrada na parte inferior esquerda do ambiente.]]></welcome_item>
+			<welcome_item><![CDATA[<b>Adicionar contatos:</b> sua lista de contatos encontra-se na parte superior esquerda do ambiente. Para adicionar novos contatos clique sobre um usuário na sala Geral e escolha a opção "Adicionar contato". O usuário estará em sua lista de contato, assim que ele autorizar.]]></welcome_item>
 		</welcome_instruction>
 	</welcome>
 
