@@ -141,10 +141,11 @@
 
 #LangDiv
 {
-	position		: absolute;
+	position		: relative;
 	left			: 50%;
 	margin-left		: -70px;
 	top			: 40px;
+	width			: 100%;
 }
 
 #LangDiv ul
