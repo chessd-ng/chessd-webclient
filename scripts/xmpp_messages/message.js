@@ -782,10 +782,9 @@ function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
 	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='KickUser'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<kick jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<kick xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
-	XMPP += "</kick></query></iq>";
+	XMPP += "</kick></iq>";
 	
 	return XMPP;
 }
@@ -802,10 +801,9 @@ function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
 	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='BanUser'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<ban jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<ban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
-	XMPP += "</ban></query></iq>";
+	XMPP += "</ban></iq>";
 	
 	return XMPP;
 }
@@ -822,10 +820,9 @@ function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
 	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='UnBanUser'>";
-	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<unban jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<unban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
-	XMPP += "</unban></query></iq>";
+	XMPP += "</unban></iq>";
 	
 	return XMPP;
 }
