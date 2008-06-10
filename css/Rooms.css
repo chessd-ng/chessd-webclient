@@ -28,8 +28,9 @@
 	float 			: left;
 	list-style		: none;
 	padding			: 2px;
-	padding-left	: 3mm;
-	font			: bold 11px Trebuchet MS;
+	padding-left		: 3mm;
+	font-weight		: bold;
+	font-size		: 11px;
 	color			: #FFF;
 	background-color: #216778;
 	border-right	: 1px solid #FFF;
@@ -88,7 +89,7 @@
 #Main #Left #Rooms #RoomListMenu li {
 	list-style		: none;
 	margin-bottom	: 1mm;
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 	color			: #216778;
 }
 
@@ -122,7 +123,7 @@
 	margin			: 1px 0px;
 	height			: 16px;
 	list-style		: none;
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 }
 
 #Main #Left #Rooms .Room tr:hover {
@@ -162,7 +163,7 @@
 
 #Main #Left #Rooms .Room .MessageList li {
 	list-style		: none;
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 	color			: #216778;
 }
 
@@ -171,7 +172,7 @@
 	border			: 1px solid #216778;
 	width			: 89%;
 	padding			: 2px;
-	font			: 12px Trebuchet MS;
+	font-size		: 12px;
 	color			: #216778;
 	margin-bottom	: 1mm;
 }

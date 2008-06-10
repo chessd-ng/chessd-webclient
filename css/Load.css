@@ -22,13 +22,15 @@
 }
 
 #LoadDiv h3 {
-	font			: bold 14px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 14px;
 	color			: #216778;
 	margin-bottom	: 10mm;
 }
 
 #LoadDiv p {
-	font			: italic 12px Trebuchet MS;
+	font-style		: italic;
+	font-size		: 12px;
 	color			: #216778;
 	margin-bottom	: 5mm;
 }

@@ -104,7 +104,7 @@
 #ProfileDiv td {
 	width			: 20mm;
 	border			: 1px solid #216778;
-	font 			: 10px Trebuchet MS;
+	font-size		: 10px;
 	color			: #216778;
 	background-color: #FFF;
 	text-align		: center;
@@ -112,7 +112,8 @@
 
 #ProfileConfirmDiv p,
 #ProfileDiv p {
-	font 			: bold 12px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 12px;
 	color			: #216778;
 	margin-top		: 3mm;
 }
@@ -120,14 +121,14 @@
 
 #ProfileDiv .edit_photo {
 	cursor		:	pointer;
-	font 			: 10px Trebuchet MS;
+	font-size		: 10px;
 	color			: #216778;
 	border-bottom		:	1px solid #216778
 }
 #ProfileDiv .inf,
 #ProfileDiv .inf_whoami {
 	display			: block;
-	font 			: 11px Trebuchet MS;
+	font-size		: 11px;
 	color			: #216778;
 	margin-top		: 10px;
 	width			: 40mm;
@@ -141,7 +142,7 @@
 }
 
 #ProfileDiv .value {
-	font 			: 11px Trebuchet MS;
+	font-size		: 11px;
 	font-weight		: normal;
 	padding-left	:	10px;
 }
@@ -152,7 +153,7 @@
 }
 
 #ProfileDiv .oldgames {
-	font 			: 12px Trebuchet MS;
+	font-size		: 12px;
 	color			: #216778;
 	border-bottom		:	1px solid #216778
 }
@@ -163,9 +164,10 @@
 }
 
 #WindowBox .button_big {
-	padding-bottom	: 5px;
-	border					: 0px;
-	font 						: bold 12px Trebuchet MS;
+	padding-bottom		: 5px;
+	border			: 0px;
+	font-weight		: bold;
+	font-size		: 12px;
 	color						: #FFF;
 	cursor					: pointer;
 	margin					: 0px 0px 5px 2px;
@@ -203,7 +205,8 @@
 }
 
 #ProfileConfirmDiv p {
-	font 			: bold 14px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 14px;
 	color			: #216778;
 	margin-top		: 3mm;
 }

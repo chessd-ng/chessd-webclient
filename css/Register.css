@@ -18,7 +18,6 @@ body {
 
 #MainDiv p{
 	color			:#216778;
-	font-family		:Trebuchet MS;
 	font-size		:13px;
 	font-size-adjust:none;
 	font-stretch	:normal;
@@ -31,7 +30,6 @@ body {
 
 #MainDiv h1{
 	color			:#216778;
-	font-family		:Trebuchet MS;
 	font-size		:17px;
 	height			:20px;
 	font-size-adjust	:none;
@@ -53,7 +51,6 @@ body {
 }
 
 input {
-	font-family		:Trebuchet MS;
 	font-size		:11px;
 	font-size-adjust	:none;
 	font-stretch		:normal;
