@@ -123,15 +123,17 @@ function INTERFACE_CreateRoom(RoomName)
 function INTERFACE_ShowRoom()
 {
 	var RoomMain;
+
 	// The code above is used in specific case of this interface.
 	// All rooms should be in "Rooms" div.
-	if(this.room.parentNode == null)
+	RoomMain = document.getElementById("Rooms");
+	if(this.room.parentNode != RoomMain)
 	{
-		RoomMain = document.getElementById("Rooms");
+		//RoomMain = document.getElementById("Rooms");
 		RoomMain.appendChild(this.room);
 	}
 	
-	this.room.style.display = "table";
+	this.room.style.display = "block";
 }
 
 function INTERFACE_HideRoom()

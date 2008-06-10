@@ -268,9 +268,11 @@ function INTERFACE_ShowContactList()
 {
 	var ParentTmp;
 
-	if(this.div.parentNode == null)
+	// The code above is used in specific case of this interface.
+	// Contact list should be in "Contact" div.
+	ParentTmp = document.getElementById("Contact");
+	if(this.div.parentNode != ParentTmp)
 	{
-		ParentTmp = document.getElementById("Contact");
 		ParentTmp.appendChild(this.div);
 	}
 
@@ -307,9 +309,11 @@ function INTERFACE_ShowOnlineList()
 {
 	var ParentTmp;
 
-	if(this.div.parentNode == null)
+	// The code above is used in specific case of this interface.
+	// Contact list should be in "Contact" div.
+	ParentTmp = document.getElementById("Contact");
+	if(this.div.parentNode != ParentTmp)
 	{
-		ParentTmp = document.getElementById("Contact");
 		ParentTmp.appendChild(this.div);
 	}
 
