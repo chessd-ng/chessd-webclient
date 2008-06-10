@@ -162,5 +162,8 @@ function LOGIN_LoginFailed(Code)
 		case (MainData.Const.LOGIN_InvalidUser):
 			ErrorLabel.innerHTML = UTILS_GetText("login_invalid_user");
 			break;
+		case (MainData.Const.LOGIN_BannedUser):
+			ErrorLabel.innerHTML = UTILS_GetText("login_banned_user");
+			break;
 	}
 }

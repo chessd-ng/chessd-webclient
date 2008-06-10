@@ -151,6 +151,7 @@ function CONNECTION_SendJabber()
 function CONNECTION_ReceiveConnection()
 {
 	var XML, XMLBuffer;
+	var Error, ErrorCode;
 	var Status;
 
 	if (MainData.HttpRequest.readyState == 4 )
@@ -194,7 +195,20 @@ function CONNECTION_ReceiveConnection()
 					// Check errors in username and passwd
 					Error = XML.getElementsByTagName("error");
 					if (Error.length > 0)
-						LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
+					{
+						ErrorCode = Error[0].getAttribute("code");
+						switch(ErrorCode)
+						{
+							// Username and passwd invalid
+							case "401":
+								LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
+								break;
+							case "405":
+								LOGIN_LoginFailed(MainData.Const.LOGIN_BannedUser);
+								break;
+								
+						}
+					}
 					else
 					{
 						//MainData.ConnectionStatus++;
