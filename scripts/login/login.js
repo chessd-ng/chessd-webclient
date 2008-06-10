@@ -75,8 +75,11 @@ function LOGIN_Logout()
 
 	INTERFACE_StopInterface();
 
+	delete MainData;
+
 	// Show Login interface
-	INTERFACE_StartLogin();
+	//INTERFACE_StartLogin(Lang);
+	START_StartPage();
 }
 
 /**
@@ -102,6 +105,9 @@ function LOGIN_Disconnected()
 function LOGIN_EndLogin()
 {
 	INTERFACE_EndLogin();
+
+	// Remove auto vertical align middle to login
+	document.body.removeAttribute("onresize");
 }
 
 
