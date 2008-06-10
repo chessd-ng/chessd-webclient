@@ -778,13 +778,14 @@ function MESSAGE_KickUserRoom (Room, To, Role, Reason)
  * @param 	Username	User's name
  * @author 	Rubens Suguimoto
  */
-function MESSAGE_KickUser(Username)
+function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
 	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='KickUser'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<kick jid='"+Username+"@"+MainData.Host+"'/>";
-	XMPP += "</query></iq>";
+	XMPP += "<kick jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</kick></query></iq>";
 	
 	return XMPP;
 }
@@ -797,13 +798,14 @@ function MESSAGE_KickUser(Username)
  * @param 	Username	User's name
  * @author 	Rubens Suguimoto
  */
-function MESSAGE_BanUser(Username)
+function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='BanUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='BanUser'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<ban jid='"+Username+"@"+MainData.Host+"'/>";
-	XMPP += "</query></iq>";
+	XMPP += "<ban jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</ban></query></iq>";
 	
 	return XMPP;
 }
@@ -816,13 +818,14 @@ function MESSAGE_BanUser(Username)
  * @param 	Username	User's name
  * @author 	Rubens Suguimoto
  */
-function MESSAGE_UnbanUser(Username)
+function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='UnBanUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='UnBanUser'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#admin'>";
-	XMPP += "<unban jid='"+Username+"@"+MainData.Host+"'/>";
-	XMPP += "</query></iq>";
+	XMPP += "<unban jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</unban></query></iq>";
 	
 	return XMPP;
 }

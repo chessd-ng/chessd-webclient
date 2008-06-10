@@ -567,7 +567,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_disconnect_user");
 			Options[i].Func = function () {
-				ADMIN_KickUser(Username)
+				//ADMIN_KickUser(Username)
+				WINDOW_KickUser(Username);
 			};
 			i += 1;
 
@@ -575,7 +576,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_ban");
 			Options[i].Func = function () {
-				ADMIN_BanUser(Username)
+				//ADMIN_BanUser(Username)
+				WINDOW_BanUser(Username);
 			};
 			i += 1;
 

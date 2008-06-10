@@ -26,17 +26,17 @@ function ADMIN_HandleChange (XML)
 }
 
 
-function ADMIN_KickUser(Username)
+function ADMIN_KickUser(Username, Reason)
 {
-	CONNECTION_SendJabber(MESSAGE_KickUser(Username));
+	CONNECTION_SendJabber(MESSAGE_KickUser(Username,Reason));
 }
 
-function ADMIN_BanUser(Username)
+function ADMIN_BanUser(Username, Reason)
 {
-	CONNECTION_SendJabber(MESSAGE_BanUser(Username));
+	CONNECTION_SendJabber(MESSAGE_BanUser(Username, Reason));
 }
 
-function ADMIN_UnbanUser(Username)
+function ADMIN_UnbanUser(Username, Reason)
 {
-	CONNECTION_SendJabber(MESSAGE_UnbanUser(Username));
+	CONNECTION_SendJabber(MESSAGE_UnbanUser(Username, Reason));
 }
