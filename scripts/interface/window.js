@@ -45,6 +45,7 @@ function WindowObj(Height, Width, Div, Title, CloseCommands)
 function WINDOW_ShowWindow(Element)
 {
 	var RandomTop, RandomLeft;
+	var Height, Width;
 	if(Element == null)
 	{
 		document.body.appendChild(this.window);
@@ -53,8 +54,21 @@ function WINDOW_ShowWindow(Element)
 		RandomTop = (Math.floor((Math.random()*10000)) % 60) * ((-1)*Math.floor(Math.random()*10000)%2);
 		RandomLeft = (Math.floor((Math.random()*10000)) % 60) * ((-1)*Math.floor(Math.random()*10000)%2);
 
-		this.window.style.top = (window.innerHeight/2) - (window.innerHeight/5)+ RandomTop+"px";
-		this.window.style.left = ((window.innerWidth/2) - (window.innerWidth/10)) + RandomLeft+"px";
+		// Check Internet Explorer
+		if(MainData.Browser == 0)
+		{
+			Height = (document.body.clientHeight/2) - (document.body.clientHeight/5)+ RandomTop;
+			Width = (document.body.clientWidth/2) - (document.body.clientWidth/10) + RandomLeft;
+		}
+		else
+		{
+			Height = (window.innerHeight/2) - (window.innerHeight/5)+ RandomTop;
+			Width = (window.innerWidth/2) - (window.innerWidth/10) + RandomLeft;
+		}
+
+
+		this.window.style.top = Height+"px";
+		this.window.style.left = Width+"px";
 	}
 	else
 	{
