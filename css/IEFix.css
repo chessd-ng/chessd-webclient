@@ -9,8 +9,6 @@
 }
 
 
-
-
 /*Top.css*/
 
 #Top{
@@ -20,12 +18,12 @@
 	margin			: 0.5mm;
 	background		: url("../images/ie/logo.gif") no-repeat;
 }
-
+/*
 #Top .icons{
 	left			: 73mm;
 	width			: 68mm;
 }
-
+*/
 #Top .icons .search_game {
 	background              : url('../images/ie/search_game.gif') no-repeat;
 }
