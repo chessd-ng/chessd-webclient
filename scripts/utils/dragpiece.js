@@ -27,10 +27,15 @@ function UTILS_StartDragPiece(Obj, Size)
 	
 	var BoardPieceOffset;
 
+	if(MainData.CurrentGame == null)
+	{
+		return false;
+	}
+
 	// If ut's not your turn, don't drag
 	if ((!MainData.CurrentGame.IsYourTurn) || (MainData.CurrentGame.Finished))
 	{
-		return false
+		return false;
 	}
 
 	//Obj.style.position = "absolute";
