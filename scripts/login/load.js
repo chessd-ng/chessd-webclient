@@ -159,7 +159,7 @@ function LOGIN_LoadCss()
 	Files[13] = "css/User.css";
 	Files[14] = "css/Admin.css";
 
-	if(MainData.Browser != 1) //IE
+	if(MainData.Browser == 0) //IE
 	{
 		Files.push("css/IEFix.css");
 	}

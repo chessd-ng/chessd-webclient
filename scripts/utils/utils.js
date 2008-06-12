@@ -35,7 +35,30 @@ function UTILS_IdentifyBrowser()
 	// Firefox, Mozilla, Opera, etc.
 	if (BrowserName.match("Netscape"))
 	{
-		BrowserValue = 1;
+		// Code from:
+		// http://www.javascriptkit.com/javatutors/navigator.shtml
+		if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))
+		{ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
+			// capture x.x portion and store as a number
+			var ffversion=new Number(RegExp.$1)
+			if (ffversion>=3)
+			{
+				BrowserValue = 2;
+			}
+			/*
+			else if (ffversion>=2)
+			else if (ffversion>=1)
+			*/
+			else
+			{
+				BrowserValue = 1;
+			}
+		}
+		else
+		{
+			BrowserValue = 1;
+		}
+			
 	}
 	// Explorer
 	else if (BrowserName.match("Microsoft Internet Explorer"))
@@ -327,13 +350,13 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 
 function UTILS_ReturnEvent(event)
 {
-	if(MainData.Browser == 1) // Firefox
-	{
-		return event;
-	}
-	else //IE
+	if(MainData.Browser == 0) // IE
 	{
 		return window.event;
+	}
+	else //FIREFOX
+	{
+		return event;
 	}
 }
 

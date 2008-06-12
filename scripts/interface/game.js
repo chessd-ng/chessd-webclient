@@ -1133,7 +1133,7 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	var DragPieceW, DrawPieceB;
 	var PieceDir, Extension;
 
-	if(MainData.Browser != 1) //IE
+	if(MainData.Browser == 0) //IE
 	{
 		PieceDir = "images/ie/pieces";
 		Extension = ".gif";

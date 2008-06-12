@@ -27,7 +27,17 @@ function PARSER_ParseIq(XML)
 	var Buffer = "";
 	var Xmlns = "";
 
-	Xmlns = FirstNode.getAttribute("xmlns");
+	if(FirstNode != undefined)
+	{
+		Xmlns = FirstNode.getAttribute("xmlns");
+	}
+	else
+	{	
+		// This case should happen when user receive result from server.
+		// Some messages come without iq child node in chess server
+		// protocol.
+		return "";
+	}
 
 	switch (Type)
 	{
