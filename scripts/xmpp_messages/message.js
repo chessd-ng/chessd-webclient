@@ -828,7 +828,7 @@ function MESSAGE_UnbanUser(Username, Reason)
 }
 /**********************************
  * MESSAGES - PROFILE - vCard
- **********************************/
+ 	**********************************/
 
 function MESSAGE_GetProfile(Username, Id)
 {
@@ -865,16 +865,40 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
  * MESSAGES - SEARCH OLDGAME
  **********************************/
 
-function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset)
+function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
 {
 	var XMPP = "";
 	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='get' id='"+MainData.Const.IQ_ID_OldGameSearch+"-"+Id+"' to='"+MainData.RatingComponent+"."+MainData.Host+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#search_game'>";
 	XMPP += "<search results='"+NumGames+"' offset='"+Offset+"'>";
 	if (Jid1 != "")
-		XMPP += "<player jid='"+Jid1+"@"+MainData.Host+"' />";
+	{
+		if (Color != undefined && Color != "") 
+		{
+			XMPP += "<player jid='"+Jid1+"@"+MainData.Host+"' role='"+Color+"' />";
+		}
+		else
+		{
+			XMPP += "<player jid='"+Jid1+"@"+MainData.Host+"' />";
+		}
+	}
 	if (Jid2 != "")
+	{
 		XMPP += "<player jid='"+Jid2+"@"+MainData.Host+"' />";
+	}
+	if (((To != undefined ) && ( To != "")) ||  ((From != undefined) && (From != "")))
+	{
+		XMPP += "<date ";
+		if ((From != undefined ) && ( From != ""))
+		{
+			XMPP += "begin='"+From+"' ";	
+		}
+		if ((To != undefined ) && ( To != ""))
+		{
+			XMPP += "end='"+To+"' ";	
+		}
+		XMPP += "/>";
+	}
 	XMPP += "</search></query></iq>";
 
 	return XMPP;

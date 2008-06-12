@@ -291,6 +291,10 @@
 		<oldgame_next>Proximos</oldgame_next>
 		<oldgame_format>Formato: dd/mm/aaaa</oldgame_format>
 		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
+		<oldgame_invalid_begin>Data inicial inválida!</oldgame_invalid_begin>
+		<oldgame_invalid_end>Data final inválida!</oldgame_invalid_end>
+		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
+		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>
