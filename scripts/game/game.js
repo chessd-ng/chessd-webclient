@@ -515,17 +515,18 @@ function GAME_StartGame(GameId, P1, P2)
 
 	if (MainData.CurrentOldGame != null)
 	{
-		MainData.CurrentOldGame.Game.Hide();
-		// In this version, player can see only one oldgame
-		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
-		MainData.RemoveOldGame(0);
-
 		//Quickfix to leave room when observer
 		RoomPos = MainData.FindRoom(MainData.CurrentOldGame.Id)
 		if(RoomPos != null)
 		{
 			Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
 		}
+
+		MainData.CurrentOldGame.Game.Hide();
+		// In this version, player can see only one oldgame
+		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
+		MainData.RemoveOldGame(0);
+
 	}
 
 	if (P1.Name == MainData.Username)
