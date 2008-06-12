@@ -412,6 +412,47 @@ function UTILS_ConvertTimeStamp(TimeStamp)
 
 }
 
+/**
+* Return the date-time string to search old games 
+* input format  (dd/mm/yyyy)
+* output format (yyyy-mm-ddTnn:nn:nnZ)
+*
+* @param	TimeStamp
+* 				Date string
+* @param	Type
+* 				begin or end
+* @return	String
+* @see		INTERFACE_SetSearchButton(Node)
+* @author	Danilo Yorinori
+*/
+function UTILS_ConvertSearchDate(TimeStamp, Type)
+{
+	var Day, Month, Year;
+	var SDate = "";
+
+	if (TimeStamp == "") {
+		return "";
+	}
+	else if (TimeStamp.match(/^\d{2}\/\d{2}\/\d{4}/g)==null) {
+		return null;
+	}
+
+	Day = TimeStamp.split("/")[0];
+	Month = TimeStamp.split("/")[1];
+	Year = TimeStamp.split("/")[2];
+
+	SDate += Year+"-"+Month+"-"+Day+"T";
+	if (Type == "begin")
+	{
+		SDate +="00:00:00Z";
+	}
+	else if (Type == "end")
+	{
+		SDate +="23:59:59Z";
+	}
+	return SDate;
+}
+
 /************************************
  * FUNCTIONS - OBJECT OFFSETS       *
  ************************************/

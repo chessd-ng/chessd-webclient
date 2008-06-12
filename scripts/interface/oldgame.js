@@ -136,7 +136,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	WRadio.type = "radio";
 	WRadio.name = "color";
 	WRadio.value = "white";
-	WRadio.disabled = true;
 
 	WImg = UTILS_CreateElement('img');
 	WImg.src = "images/invite_white_pawn.png";
@@ -145,7 +144,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	BRadio.type = "radio";
 	BRadio.name = "color";
 	BRadio.value = "black";
-	BRadio.disabled = true;
 
 	BImg = UTILS_CreateElement('img');
 	BImg.src = "images/invite_black_pawn.png";
@@ -155,7 +153,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	ARadio.name = "color";
 	ARadio.value = "both";
 	ARadio.checked = true;
-	ARadio.disabled = true;
 
 	ALabel = UTILS_CreateElement('span',null,'pieces_span',UTILS_GetText('oldgame_both'));
 	// End Pieces Form
@@ -180,16 +177,17 @@ function INTERFACE_ShowOldGameWindow(Id)
 	FromDiv = UTILS_CreateElement('div','FromDiv');
 	ToDiv = UTILS_CreateElement('div','ToDiv');
 	DateLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('oldgame_date_form'));
+
 	FromLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
 	FromInput.size = "11";
-	FromInput.disabled = true;
 	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
+
 	ToLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
 	ToInput.size = "11";
-	ToInput.disabled = true;
 	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
+
 	Br2 = UTILS_CreateElement("br");
 	Br3 = UTILS_CreateElement("br");
 	// End Date Form
@@ -293,11 +291,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	FromDiv.appendChild(FromInput);
 	FromDiv.appendChild(Br2);
 	FromDiv.appendChild(FormatLabel1);
+
 	ToDiv.appendChild(ToLabel);
 	ToDiv.appendChild(ToInput);
 	ToDiv.appendChild(Br3);
 	ToDiv.appendChild(FormatLabel2);
-//	L2RightDiv.appendChild(Br);
 
 	L2RightDiv.appendChild(FromDiv);
 	L2RightDiv.appendChild(ToDiv);
@@ -542,7 +540,7 @@ function INTERFACE_SetPrevButton(Node)
 			if(Node.Offset != 0)
 			{
 				Node.Offset -= Node.NGames;
-				CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id, Node.P1, Node.P2, Node.NGames, Node.Offset));
+				CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id,Node.P1, Node.P2,Node.NGames, Node.Offset, Node.Color, Node.To, Node.From)); 
 			}
 		}, "false");
 }
@@ -562,7 +560,7 @@ function INTERFACE_SetNextButton(Node)
 			if (Node.More)
 			{
 				Node.Offset += Node.NGames;
-				CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id, Node.P1, Node.P2, Node.NGames, Node.Offset));
+				CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id,Node.P1, Node.P2,Node.NGames, Node.Offset, Node.Color, Node.To, Node.From)); 
 			}
 		}, "false");
 }
@@ -589,9 +587,23 @@ function INTERFACE_SetSearchButton(Node)
 			else
 				Node.Color = "";
 			// end selected color verification
-			Node.To = Node.Elements.To.value;
-			Node.From = Node.Elements.From.value;
+			Node.From = UTILS_ConvertSearchDate(Node.Elements.From.value,"begin"); 
+			if (Node.From == null)
+			{
+				WINDOW_Alert(UTILS_GetText("oldgame_invalid_date"),UTILS_GetText("oldgame_invalid_begin"));
+				return false;
+			}
+			Node.To = UTILS_ConvertSearchDate(Node.Elements.To.value,"end"); 
+			if (Node.To == null) {
+				WINDOW_Alert(UTILS_GetText("oldgame_invalid_date"),UTILS_GetText("oldgame_invalid_end"));
+				return false;
+			}
+			if (( Node.To != "") && (Node.From > Node.To))
+			{
+				WINDOW_Alert(UTILS_GetText("oldgame_invalid_date"),UTILS_GetText("oldgame_invalid_interval"));
+				return false;
+			}
 			Node.Offset = 0;
-			CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id,Node.P1, Node.P2,Node.NGames, Node.Offset)); 
+			CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id,Node.P1, Node.P2,Node.NGames, Node.Offset, Node.Color, Node.To, Node.From)); 
 		}, "false");
 }
