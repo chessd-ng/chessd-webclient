@@ -286,6 +286,8 @@
 	list-style		: none;
 	height			: 30mm;
 	overflow		: auto;
+
+	font-weight		: normal;
 }
 
 #MoveList.oldgame{
@@ -336,6 +338,8 @@
 	left			: 2mm;
 	bottom			: 1mm;
 	list-style		: none;
+
+	font-weight		: normal;
 }
 
 #GameOptionDiv li
