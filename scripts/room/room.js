@@ -286,6 +286,83 @@ function ROOM_HandleGameRoomInfoList(XML)
 }
 
 /**
+* Handle chess user information.
+* @param XML	XMPP that contains users ratings and type.
+* @author	Rubens Suguimoto
+*/
+function ROOM_HandleInfo(XML)
+{
+	var RatingNodes, TypeNodes;
+
+        var Username, Rating, Category
+	var i,j;
+	var Room;
+	var Status, Rating;
+	var User;
+	var NewType;
+
+	RatingNodes = XML.getElementsByTagName('rating');
+	TypeNodes = XML.getElementsByTagName('type');
+
+
+	// Getting ratings nodes
+	for (i=0 ; i<RatingNodes.length ; i++)
+	{
+		Username = RatingNodes[i].getAttribute('jid').replace(/@.*/,"");
+		Category = RatingNodes[i].getAttribute('category');
+		Rating = RatingNodes[i].getAttribute('rating');
+
+		// Updating ratings in room lists
+		for (j=0; j<MainData.RoomList.length; j++)
+		{
+			// Search user node in room user list
+			User = MainData.FindUserInRoom(MainData.RoomList[j].Name, Username);
+			if (User != null)
+			{
+				Room = MainData.RoomList[j];
+				Status = Room.UserList[User].Status;
+				Type = Room.UserList[User].Type;
+
+				// Update in interface 
+				if (Category == MainData.RoomCurrentRating)
+				{
+					Room.Room.userList.updateUser(Username, Status, Rating, Type);
+				}
+			}
+		}
+
+	}
+
+	// Getting users type nodes
+	for (i=0 ; i<TypeNodes.length ; i++)
+	{
+		Username = TypeNodes[i].getAttribute('jid').replace(/@.*/,"");
+		NewType = TypeNodes[i].getAttribute('type');
+	
+		// Updating type in room lists
+		for (j=0; j<MainData.RoomList.length; j++)
+		{
+			// Search user node in room user list
+			User = MainData.FindUserInRoom(MainData.RoomList[j].Name, Username);
+			if (User != null)
+			{
+				Room = MainData.RoomList[j];
+				Status = Room.UserList[User].Status;
+				Room.UserList[User].Type = NewType;
+
+				// Update in interface
+				if(NewType != "user")
+				{
+					// Search user node in room user list
+					Room.Room.userList.updateUser(Username, Status, null, NewType);	
+				}
+			}
+		}
+	}
+	return "";
+}
+
+/**
 * Send a message to room;
 *
 * @param 	RoomName is the room name string
