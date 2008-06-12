@@ -1,0 +1,21 @@
+#UnbanDiv,
+#BanDiv,
+#KickDiv
+{
+	width		: 230px;
+}
+
+#UnbanDiv #UnbanInput,
+#BanDiv #BanInput,
+#KickDiv #KickInput
+{
+	margin		: 5px;
+	size		: 25;
+}
+
+#UnbanDiv #ButtonsDiv,
+#BanDiv #ButtonsDiv,
+#KickDiv #ButtonsDiv
+{
+	margin-top	: 15px;
+}

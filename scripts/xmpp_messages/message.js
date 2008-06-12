@@ -757,7 +757,7 @@ function MESSAGE_SearchUser(Username, Option)
 * @return 	string
 * @author 	Ulysses
 */
-function MESSAGE_KickUser (Room, To, Role, Reason)
+function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 {
 	var XMPP = "";
 
@@ -770,6 +770,62 @@ function MESSAGE_KickUser (Room, To, Role, Reason)
 	return XMPP;
 }
 
+/**
+ * @brief Message to kick a user from jabber
+ *
+ * Create message to kick user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_KickUser(Username, Reason)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='KickUser'>";
+	XMPP += "<kick xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</kick></iq>";
+	
+	return XMPP;
+}
+
+/**
+ * @brief Message to ban a user from jabber
+ *
+ * Create message to ban user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_BanUser(Username, Reason)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='BanUser'>";
+	XMPP += "<ban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</ban></iq>";
+	
+	return XMPP;
+}
+
+/**
+ * @brief Message to unban a user from jabber
+ *
+ * Create message to unban user from jabber.
+ *
+ * @param 	Username	User's name
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_UnbanUser(Username, Reason)
+{
+	var XMPP = "";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='UnBanUser'>";
+	XMPP += "<unban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
+	XMPP += "<reason>"+Reason+"</reason>";
+	XMPP += "</unban></iq>";
+	
+	return XMPP;
+}
 /**********************************
  * MESSAGES - PROFILE - vCard
  	**********************************/

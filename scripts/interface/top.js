@@ -38,7 +38,7 @@ function INTERFACE_CreateTop()
 		ItemTitle = UTILS_GetText("menu_adjourn")
 		Item = UTILS_CreateElement("li", null, "adjourn_game");
 		Item.title = ItemTitle;
-		//UTILS_AddListener(Item,"click",function() { }, "false");
+		UTILS_AddListener(Item,"click",function() { WINDOW_UnbanUser() }, "false");
 		IconsList.appendChild(Item);
 	}
 	else

@@ -20,22 +20,14 @@
 */
 function PARSER_ParseIq(XML)
 {
+	//XML = iq tag
 	var Type = XML.getAttribute("type");
 	var ID = XML.getAttribute("id");
-	var Query = XML.getElementsByTagName("query");
-	var vCard = XML.getElementsByTagName("vCard");
+	var FirstNode = XML.firstChild;
 	var Buffer = "";
 	var Xmlns = "";
 
-	// Getting query xmlns
-	if (Query.length > 0)
-	{
-		Xmlns = Query[0].getAttribute("xmlns");
-	}
-	else if(vCard[0] != undefined)
-	{
-		Xmlns = vCard[0].getAttribute("xmlns");
-	}
+	Xmlns = FirstNode.getAttribute("xmlns");
 
 	switch (Type)
 	{
@@ -104,6 +96,12 @@ function PARSER_ParseIq(XML)
 					Buffer += PROFILE_HandleVCardProfile(XML);
 				}
 			}
+
+			else if (Xmlns.match(/\/chessd#admin/))
+			{
+				Buffer += ADMIN_HandleAdminNotification(XML);
+			}
+
 			else if (Xmlns == "")
 			{
 				Buffer += PARSER_ParseIqById(XML);
@@ -126,7 +124,13 @@ function PARSER_ParseIq(XML)
 			// Admin messages
 			else if (Xmlns.match(/\/muc#admin/))
 			{
-				Buffer += ADMIN_HandleChange(XML);
+				Buffer += ADMIN_HandleRoomAdmin(XML);
+			}
+
+			// Admin notification
+			else if (Xmlns.match(/\/chessd#admin/))
+			{
+				Buffer += ADMIN_HandleUserNotification(XML);
 			}
 			break;
 

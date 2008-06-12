@@ -31,7 +31,8 @@
 #Page #RoomMenuDiv p,
 #Page #ChallengeMenuDiv p,
 #Page #GameRoomMenuDiv p {
-	font			: italic 12px Trebuchet MS;
+	font-style		: italic;
+	font-size		: 12px;
 	color			: #216778;
 	cursor			: pointer;
 }
@@ -47,7 +48,7 @@
 #Page #RoomMenuDiv li,
 #Page #ChallengeMenuDiv li
 {
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 	color			: #216778;
 	margin-top		: 3px;
 	cursor			: pointer;
@@ -78,7 +79,9 @@
 
 #Page #GameRoomMenuDiv ul
 {
-	font			: italic bold 11px Trebuchet MS;
+	font-style		: italic;
+	font-weight		: bold;
+	font-size		: 11px;
 	color			: #216778;
 	margin-top		: 3px;
 	cursor			: default;
@@ -87,7 +90,7 @@
 
 #Page #GameRoomMenuDiv li
 {
-	font			: 10px Trebuchet MS;
+	font-size		: 10px;
 	color			: #216778;
 	cursor			: pointer;
 	text-align		: center;

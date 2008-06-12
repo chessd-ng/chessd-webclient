@@ -395,3 +395,80 @@ function WINDOW_OldGameResult(GameList)
 	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }*/
+
+
+function WINDOW_UnbanUser()
+{
+	if(document.getElementById("UnbanDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Buttons;
+	var Div = INTERFACE_UnbanUserWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(150, Div.Div, Div.Buttons, "Unban User");
+
+	// Focus input player 1
+	document.getElementById('UnbanInput').focus();
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Unban Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_BanUser(Username)
+{
+	if(document.getElementById("BanDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Buttons;
+	var Div = INTERFACE_BanUserWindow(Username);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(150, Div.Div, Div.Buttons, "Ban "+Username);
+
+	// Focus input player 1
+	document.getElementById('BanInput').focus();
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Unban Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+
+function WINDOW_KickUser(Username)
+{
+	if(document.getElementById("BanDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Buttons;
+	var Div = INTERFACE_KickUserWindow(Username);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(150, Div.Div, Div.Buttons, "Kick "+Username);
+
+	// Focus input player 1
+	document.getElementById('KickInput').focus();
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Unban Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+

@@ -27,11 +27,12 @@
 		<login_footer>Bom Divertimento!</login_footer>
 		<login_remember_pass>Lembrar senha</login_remember_pass>
 		<login_signin>Cadastro rápido</login_signin>
-		<login_user>Usuário</login_user>
+		<login_user>Login</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
 		<login_connection_refused>Servidor de mensagens indisponí­vel no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
+		<login_banned_user>Usuário banido.</login_banned_user>
 		<login_lost_connection>Conexão perdida.</login_lost_connection>
 		<login_load_wait>Aguarde...</login_load_wait>
 		<login_load_start>Iniciando carregador...</login_load_start>
@@ -300,8 +301,8 @@
 		<welcome_text1>Este é o ambiente de jogo/interação do Xadrez Livre. Aqui, além de outras possibilidades, você pode:</welcome_text1>
 		<welcome_text2>Para outras informações sobre o uso do ambiente, consulte a "Ajuda" no menu superior.</welcome_text2>
 		<welcome_instruction>
-			<welcome_item><![CDATA[<b>Iniciar uma partida:</b> clique sobre um usuário do ambiente e escolha a opção "Convidar para jogar". Todos os usuários on-line do ambiente são mostrados na sala Geral. janela encontrada na parte inferior esquerda do ambiente.]]>></welcome_item>
-			<welcome_item><![CDATA[<b>Adicionar contatos:</b> sua lista de contatos encontra-se na parte superior esquerda do ambiente. Para adicionar novos contatos clique sobre um usuário na sala Geral e escolha a opção "Adicionar contato". O usuário estará em sua lista de contato, assim que ele autorizar.]]>></welcome_item>
+			<welcome_item><![CDATA[<b>Iniciar uma partida:</b> clique sobre um usuário do ambiente e escolha a opção "Convidar para jogar". Todos os usuários on-line do ambiente são mostrados na sala Geral. janela encontrada na parte inferior esquerda do ambiente.]]></welcome_item>
+			<welcome_item><![CDATA[<b>Adicionar contatos:</b> sua lista de contatos encontra-se na parte superior esquerda do ambiente. Para adicionar novos contatos clique sobre um usuário na sala Geral e escolha a opção "Adicionar contato". O usuário estará em sua lista de contato, assim que ele autorizar.]]></welcome_item>
 		</welcome_instruction>
 	</welcome>
 

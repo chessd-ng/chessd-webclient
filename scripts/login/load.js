@@ -117,6 +117,8 @@ function LOGIN_LoadScripts()
 	Scripts[30] = "scripts/interface/oldgame.js";
 	Scripts[31] = "scripts/interface/welcome.js";
 	Scripts[32] = "scripts/interface/user.js";
+	Scripts[33] = "scripts/admin/admin.js";
+	Scripts[34] = "scripts/interface/admin.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }
@@ -155,6 +157,7 @@ function LOGIN_LoadCss()
 	Files[11] = "css/Oldgame.css";
 	Files[12] = "css/Welcome.css";
 	Files[13] = "css/User.css";
+	Files[14] = "css/Admin.css";
 
 	if(MainData.Browser != 1) //IE
 	{

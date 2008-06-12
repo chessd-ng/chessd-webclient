@@ -46,7 +46,18 @@ function INTERFACE_StartLogin(Lang)
 	var Td = document.createElement('td');
 	var Br = document.createElement('br');
 	
-	var MainDiv = UTILS_CreateElement('div','MainDiv');
+	var MainDiv;
+	
+	MainDiv = document.getElementById("MainDiv");
+	
+	if(MainDiv != null)
+	{
+		MainDiv.parentNode.removeChild(MainDiv);
+	}
+	else
+	{
+		MainDiv = UTILS_CreateElement('div','MainDiv');
+	}
 
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
@@ -240,9 +251,7 @@ function INTERFACE_CreateLangItem(Lang, Name)
 	Li.appendChild(Item);
 	
 	Li.onclick = function(){
-		INTERFACE_EndLogin();
-		UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
-		INTERFACE_StartLogin();
+		START_ChangeLanguage(Lang);
 	}
 
 	return Li;

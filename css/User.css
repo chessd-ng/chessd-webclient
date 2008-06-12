@@ -3,7 +3,7 @@
 div .UserList{
 	padding-left		: 3mm;
 	padding-top		: 1mm;
-	font                    : 11px Trebuchet MS;
+	font-size		: 11px;
 }
 
 div .UserList .UserTable{
@@ -30,7 +30,7 @@ div .UserList tr{
 	margin			: 1px 0px;
 	height			: 16px;
 	list-style		: none;
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 	cursor			: pointer;
 }
 

@@ -29,19 +29,20 @@
 }
 
 #LoginDiv #FormDiv span {
-	font			: bold 13px Trebuchet MS;
+	font-size		: 13px;
+	font-weight		: bold;
 	color			: #216778;
 }
 
 #LoginDiv #FormDiv label {
-	font			: 10px Trebuchet MS;
+	font-size		: 10px;
 	color			: #216778;
 	margin-left		: 2mm;
 }
 
 #LoginDiv #FormDiv input {
 	border			: 1px solid #216778;
-	font			: 11px Trebuchet MS;
+	font-size		: 11px;
 	padding			: 1px;
 }
 
@@ -81,7 +82,8 @@
 	border			: 0px;
 	width			: 90px;
 	height			: 17px;
-	font 			: bold 12px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 12px;
 	color			: #FFF;
 	cursor			: pointer;
 }
@@ -89,7 +91,8 @@
 #LoginDiv #FormDiv a {
 	display			: block;
 	margin-top		: 2mm;
-	font			: bold 13px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 13px;
 	color			: #216778;
 	cursor			: pointer;
 }
@@ -103,19 +106,20 @@
 }
 
 #LoginDiv h3 {
-	font			: bold 13px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 13px;
 	color			: #216778;
-	margin-bottom	: 20px;
+	margin-bottom		: 20px;
 }
 
 #LoginDiv p {
-	font			: 3mm Trebuchet MS;
+	font-size		: 3mm;
 	color			: #216778;
 	margin-bottom	: 3mm;
 }
 
 #LoginDiv a {
-	font			: 3mm Trebuchet MS;
+	font-size		: 3mm;
 	color			: #216778;
 	margin-bottom	: 2mm;
 }
@@ -132,7 +136,7 @@
 	position		: absolute;
 	bottom			: 0mm;
 	right			: 1mm;
-	font			: 3mm Trebuchet MS;
+	font-size		: 3mm;
 	color			: #D33300;
 	font-weight		: bold;
 }
@@ -141,10 +145,11 @@
 
 #LangDiv
 {
-	position		: absolute;
+	position		: relative;
 	left			: 50%;
 	margin-left		: -70px;
 	top			: 40px;
+	width			: 30%;
 }
 
 #LangDiv ul
@@ -159,7 +164,8 @@
 	cursor			: pointer;
 	float			: left;
 	margin-right		: 10px;
-	font			: bold 11px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 11px;
 	color			: #216778;
 }
 

@@ -14,7 +14,7 @@
 }
 
 #OldGamesDiv .italic {
-		font-style		: italic;
+	font-style		: italic;
 }
 
 #OldGamesDiv .result {
@@ -162,19 +162,21 @@
 #OldGamesDiv th, 
 #OldGamesDiv td {
 	border			: 1px solid #216778;
-	font 			: 10px Trebuchet MS;
+	font-size		: 10px;
 	color			: #216778;
 	background-color: #FFF;
 	text-align		: center;
 }
 
 #OldGamesDiv p {
-	font 			: bold 12px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 12px;
 	color			: #216778;
 }
 
 #OldGamesDiv span {
-	font 			: bold 12px Trebuchet MS;
+	font-weight		: bold;
+	font-size		: 12px;
 	color			: #216778;
 	padding-right	:	4px;
 }

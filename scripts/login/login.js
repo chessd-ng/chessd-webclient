@@ -75,8 +75,11 @@ function LOGIN_Logout()
 
 	INTERFACE_StopInterface();
 
+	delete MainData;
+
 	// Show Login interface
-	INTERFACE_StartLogin();
+	//INTERFACE_StartLogin(Lang);
+	START_StartPage();
 }
 
 /**
@@ -102,6 +105,9 @@ function LOGIN_Disconnected()
 function LOGIN_EndLogin()
 {
 	INTERFACE_EndLogin();
+
+	// Remove auto vertical align middle to login
+	document.body.removeAttribute("onresize");
 }
 
 
@@ -155,6 +161,9 @@ function LOGIN_LoginFailed(Code)
 
 		case (MainData.Const.LOGIN_InvalidUser):
 			ErrorLabel.innerHTML = UTILS_GetText("login_invalid_user");
+			break;
+		case (MainData.Const.LOGIN_BannedUser):
+			ErrorLabel.innerHTML = UTILS_GetText("login_banned_user");
 			break;
 	}
 }
