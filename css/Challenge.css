@@ -40,12 +40,13 @@
 #ChallengeDiv p {
 	margin-top		: 0mm;
 	font-weight		: bold;
-	font-size		: 12px;
+/*	font-size		: 11px;*/
 	color			: #216778;
 }
 
 #ChallengeDiv .rating {
 	margin-left		: 4mm;
+	font-size		: 14px;
 }
 
 #ChallengeDiv img {
@@ -93,7 +94,7 @@
 #ChallengeDiv input,
 #ChallengeDiv textarea,
 #ChallengeDiv select {
-	font-size		: 12px;
+	font-size		: 11px;
 	border			: 1px solid #216778;
 	color			: #216778;
 }

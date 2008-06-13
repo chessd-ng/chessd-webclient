@@ -104,7 +104,7 @@
 #ProfileDiv td {
 	width			: 20mm;
 	border			: 1px solid #216778;
-	font-size		: 10px;
+	font-size		: 9px;
 	color			: #216778;
 	background-color: #FFF;
 	text-align		: center;
@@ -113,7 +113,7 @@
 #ProfileConfirmDiv p,
 #ProfileDiv p {
 	font-weight		: bold;
-	font-size		: 12px;
+/*	font-size		: 12px;*/
 	color			: #216778;
 	margin-top		: 3mm;
 }
@@ -167,7 +167,7 @@
 	padding-bottom		: 5px;
 	border			: 0px;
 	font-weight		: bold;
-	font-size		: 12px;
+/*	font-size		: 12px;*/
 	color						: #FFF;
 	cursor					: pointer;
 	margin					: 0px 0px 5px 2px;
