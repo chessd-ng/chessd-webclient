@@ -200,8 +200,11 @@ function GAME_HandleDecline (XML)
 	// get window object
 	WindowObj = MainData.ChallengeList[i].Window;
 
-	// close challenge window
-	WINDOW_RemoveWindow(WindowObj);
+	// close challenge window if exists.
+	if(WindowObj != null)
+	{
+		WINDOW_RemoveWindow(WindowObj);
+	}
 
 	// Remove the ID from 'ChallengeList'
 	MainData.RemoveChallengeById(MatchID);
