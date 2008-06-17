@@ -1145,13 +1145,13 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	}
 	if (PlayerColor == "white")
 	{
-		DragPieceW = function (event) { UTILS_StartDragPiece(this, Size); return false; };
+		DragPieceW = function (event) { UTILS_StartDragPiece(this, Size, event); return false; };
 		DragPieceB = function () { return false; };
 	}
 	else
 	{
 		DragPieceW = function(){return false;};
-		DragPieceB = function(event){ UTILS_StartDragPiece(this, Size); return false;};
+		DragPieceB = function(event){ UTILS_StartDragPiece(this, Size, event); return false;};
 	}
 
 	PieceImg = UTILS_CreateElement("img");

@@ -17,12 +17,18 @@
 * Drag board pieces 
 */
 
+//This variable is used to save original position of piece when move it
+var OldPos;
+
 /**
-* Start drag a piece
+* Start drag a piece when click or click and hold button a button over a piece.
+* If click for second time, when click without hold button, then release piece
+* and send move to server. If click and hold button was set and release the button
+* drop piece and send move to server;
 */
-function UTILS_StartDragPiece(Obj, Size)
+function UTILS_StartDragPiece(Obj, Size, event)
 {
-	var MousePos, OldPos;
+	var MousePos;
 	var Offset, OffsetLeft, OffsetTop, OffsetBoard;
 	
 	var BoardPieceOffset;
@@ -39,11 +45,6 @@ function UTILS_StartDragPiece(Obj, Size)
 	}
 
 	//Obj.style.position = "absolute";
-
-	// Get Obj position
-	OldPos = new Object();
-	OldPos.x = Obj.style.left.replace(/px/, "");
-	OldPos.y = Obj.style.top.replace(/px/, "");
 
 	// Set BoardPiece OffSet
 	BoardPieceOffset = new Object;
@@ -69,16 +70,130 @@ function UTILS_StartDragPiece(Obj, Size)
 	OffsetLeft = OffsetBoard.X + Offset - 257 + BoardPieceOffset.x;
 	
 	// Drag piece
-	document.body.onmousemove = function (ev) {
-		MousePos = UTILS_GetMouseCoords(ev);
+	if(document.body.onmouseup == null) // Quick fix to not use global variable
+	{
+		// Get Obj position
+		OldPos = new Object();
+		OldPos.x = Obj.style.left.replace(/px/, "");
+		OldPos.y = Obj.style.top.replace(/px/, "");
 
-		Obj.style.top = (MousePos.y-OffsetTop)+"px";
-		Obj.style.left = (MousePos.x-OffsetLeft)+"px";
+		document.body.onmousemove = function (ev) {
+			MousePos = UTILS_GetMouseCoords(ev);
+
+			Obj.style.top = (MousePos.y-OffsetTop)+"px";
+			Obj.style.left = (MousePos.x-OffsetLeft)+"px";
+
+			// If mousedown was set, and piece was moved
+			// then set mouseup to stop drag when release the button
+			document.body.onmouseup = function(evt){
+				var NewPos = new Object();
+				var NewCol, NewLine, OldCol, OldLine;
+
+				// Getting mouse coord
+				MousePos = UTILS_GetMouseCoords(evt);
+				MousePos.x = MousePos.x - OffsetLeft + (Size/2);
+				MousePos.y = MousePos.y - OffsetTop + (Size/2);
+				/*
+				MousePos.x += Size/2;
+				MousePos.y += Size/2;
+				*/
+				// If release outside the board
+				if (MousePos.x < 0 || MousePos.x > 8*Size || MousePos.y < 0 || MousePos.y > 8*Size)
+				{
+					NewPos.x = OldPos.x;
+					NewPos.y = OldPos.y;
+				}
+				else
+				{
+					NewPos.x = MousePos.x - (MousePos.x % Size);
+					NewPos.y = MousePos.y - (MousePos.y % Size);
+				}
+				// Previous position
+				OldLine = 8 - (OldPos.y / Size);
+				OldCol = (OldPos.x / Size) + 1;
+
+				// NewPosition
+				NewLine = 8 - (NewPos.y / Size);
+				NewCol = (NewPos.x / Size) + 1;
+
+				// Set object in the new position
+				Obj.style.top =  NewPos.y +"px";
+				Obj.style.left = NewPos.x +"px";
+
+				// Remove listener
+				//Obj.onmouseup = null;
+				document.body.onmousemove = null;
+				document.body.onmouseup = null;
+
+				// If piece has been moved
+				if ((NewCol != OldCol) || (NewLine != OldLine))
+				{
+					// Send movement
+					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+				}
+
+				delete OldPos;
+
+				return false;
+			}
+			return false;
+		}
+	}
+	else // Stop drag when click for second time
+	{
+		var NewPos = new Object();
+		var NewCol, NewLine, OldCol, OldLine;
+
+		// Getting mouse coord
+		MousePos = UTILS_GetMouseCoords(event);
+		MousePos.x = MousePos.x - OffsetLeft + (Size/2);
+		MousePos.y = MousePos.y - OffsetTop + (Size/2);
+		/*
+		MousePos.x += Size/2;
+		MousePos.y += Size/2;
+		*/
+		// If release outside the board
+		if (MousePos.x < 0 || MousePos.x > 8*Size || MousePos.y < 0 || MousePos.y > 8*Size)
+		{
+			NewPos.x = OldPos.x;
+			NewPos.y = OldPos.y;
+		}
+		else
+		{
+			NewPos.x = MousePos.x - (MousePos.x % Size);
+			NewPos.y = MousePos.y - (MousePos.y % Size);
+		}
+		// Previous position
+		OldLine = 8 - (OldPos.y / Size);
+		OldCol = (OldPos.x / Size) + 1;
+
+		// NewPosition
+		NewLine = 8 - (NewPos.y / Size);
+		NewCol = (NewPos.x / Size) + 1;
+
+		// Set object in the new position
+		Obj.style.top =  NewPos.y +"px";
+		Obj.style.left = NewPos.x +"px";
+
+		// Remove listener
+		//Obj.onmouseup = null;
+		document.body.onmousemove = null;
+		document.body.onmouseup = null;
+
+		// If piece has been moved
+		if ((NewCol != OldCol) || (NewLine != OldLine))
+		{
+			// Send movement
+			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+		}
+
+		delete OldPos;
+
 		return false;
-	};
-
+	}
+/*
 	// Stop drag
-	document.body.onmouseup = function(ev) {	
+	document.onmouseup = function(ev) {	
 		var NewPos = new Object();
 		var NewCol, NewLine, OldCol, OldLine;
 
@@ -113,8 +228,9 @@ function UTILS_StartDragPiece(Obj, Size)
 		Obj.style.left = NewPos.x +"px";
 
 		// Remove listener
-		document.body.onmousemove = null;
-		document.body.onmouseup = null;
+		Obj.onmouseup = null;
+		document.onmousemove = null;
+		document.onmouseup = null;
 
 		// If piece has been moved
 		if ((NewCol != OldCol) || (NewLine != OldLine))
@@ -124,6 +240,7 @@ function UTILS_StartDragPiece(Obj, Size)
 		}
 		return false;
 	}
+*/
 }
 
 
