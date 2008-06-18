@@ -140,3 +140,12 @@ div .UserList #order_rating option.selected
 	padding-left		: 1mm;
 	height			: 37.7mm;
 }
+
+#ContactOnline .UserTable{
+	height			: 34mm;
+}
+
+/*Room list user list css*/
+#Rooms div .UserList .UserTable{
+	height			: 22mm;
+}
