@@ -263,6 +263,7 @@
 		<register_bt_confirm>Cadastrar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
 		<register_invalid_user_name>Nome de usuário inválido</register_invalid_user_name>
+		<register_invalid_user_name_len>Nome de usuário deve possuir menos do que 14 caracteres.</register_invalid_user_name_len>
 		<register_invalid_mail>E-mail inválido</register_invalid_mail>
 		<register_invalid_password>Senha não confere</register_invalid_password>
 		<register_error_409>Usuário já cadastrado</register_error_409>

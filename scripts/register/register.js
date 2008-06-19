@@ -103,6 +103,8 @@ function REGISTER_GetError(err)
 			return UTILS_GetTag(XML, "register_invalid_mail");
 		case 3:
 			return UTILS_GetTag(XML, "register_invalid_password");
+		case 4:
+			return UTILS_GetTag(XML, "register_invalid_user_name_len");
 	}
 }
 
@@ -126,6 +128,11 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 	if(!REUsername.test(User))
 	{
 		return 1;
+	}
+
+	if (User.length > 14)
+	{
+		return 4;
 	}
 
 	if(Mail.length > 0)
