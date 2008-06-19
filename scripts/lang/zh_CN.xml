@@ -81,6 +81,7 @@
 		<contact_by_name>姓名</contact_by_name>
 		<contact_by_user>昵称</contact_by_user>
 		<contact_both>同时</contact_both>
+		<contact_change_profile>Change my profile</contact_change_profile>
 	</contact>
 	<chat>
 		<chat_warning>提醒</chat_warning>
