@@ -409,7 +409,7 @@ function WINDOW_UnbanUser()
 	var Div = INTERFACE_UnbanUserWindow();
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(150, Div.Div, Div.Buttons, "Unban User");
+	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, "Unban User");
 
 	// Focus input player 1
 	document.getElementById('UnbanInput').focus();
