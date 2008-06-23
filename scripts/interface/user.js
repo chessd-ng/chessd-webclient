@@ -376,7 +376,7 @@ function INTERFACE_CreateUserList(Element)
 	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Lightning)");
 	OrderRatingOpt.value = "lightning";
 	OrderRating.appendChild(OrderRatingOpt);
-	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Blitz)");
+	OrderRatingOpt = UTILS_CreateElement("option", null,'selected', UTILS_GetText("contact_order_rating")+" (Blitz)");
 	OrderRatingOpt.selected = true;
 	OrderRatingOpt.value = "blitz";
 	OrderRating.appendChild(OrderRatingOpt);
@@ -394,17 +394,23 @@ function INTERFACE_CreateUserList(Element)
 		var Options;
 		var i;
 		var Select;
+		
+		OrderNick.className = "";
+		OrderRating.className = "selected";
 	
 		Options = OrderRating.options;
 		Select = OrderRating.selectedIndex;
 		for(i=0; i< Options.length; i++)
 		{
-			Options[i].className = "";
+			if (i != Select)
+			{
+				Options[i].className = "not_selected";
+			}
+			else
+			{
+				Options[i].className = "selected";
+			}
 		}
-
-		OrderNick.className = "";
-		OrderRating.className = "selected";
-		OrderRating.options[Select].className = "selected";
 	};
 
 	// User list
@@ -478,6 +484,7 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i;
+	var Offset = 9;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -506,20 +513,19 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		Menu.appendChild(Option);
 	}
 	// Get parent scrolling
+	
 	ParentNode = UTILS_GetParentDiv(Obj);
-	if (ParentNode.id.match("Room") != null)
+
+	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
-		// Get Table element
-		ParentNode = Obj.parentNode.parentNode.parentNode;
-	}
-	else
-	{
-		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode);
+		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		Offset = 2;
 	}
 
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
-	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
+	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
 	Menu.style.left = Pos.X+"px";
 
 	document.body.appendChild(Menu);

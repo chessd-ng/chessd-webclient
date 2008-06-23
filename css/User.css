@@ -9,6 +9,7 @@ div .UserList{
 div .UserList .UserTable{
 	overflow-y		: auto;
 	overflow-x		: hidden;
+	margin-top		:	2mm;
 }
 
 div .UserList table{
@@ -89,12 +90,14 @@ div .UserList #order_nick
 {
 	color			: #216778;
 	cursor			: pointer;
+	border-bottom:	1px solid #216778;
 }
 
 div .UserList #order_nick.selected
 {
 	color			: #FFA200;
 	font-weight             : bold !important;
+	border-bottom:	1px solid #FFA200;
 }
 
 div .UserList #order_rating
@@ -112,11 +115,17 @@ div .UserList #order_rating
 div .UserList #order_rating.selected
 {
 	border                  : 1px solid #FFA200;
+	color			: #FFA200;
 }
 
 div .UserList #order_rating option.selected
 {
 	color			: #FFA200;
+}
+
+div .UserList #order_rating option.not_selected 
+{
+	color                   : #216778;
 }
 
 /*Contact list user list css*/
@@ -142,7 +151,7 @@ div .UserList #order_rating option.selected
 }
 
 #ContactOnline .UserTable{
-	height			: 34mm;
+	height			: 32mm;
 }
 
 /*Room list user list css*/
