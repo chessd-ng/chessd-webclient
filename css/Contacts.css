@@ -1,4 +1,5 @@
 #Main #Left #Contact {
+	margin-bottom: 3%;
 	height			: 52mm;
 }
 
@@ -10,7 +11,7 @@
 	display			: table;
 	list-style		: none;
 	position		: relative;
-	width			: 54.3mm;
+	width			: 102%;
 }
 
 #Main #Left #Contact #ContactTitle li {
@@ -78,8 +79,8 @@
 }
 
 #Main #Left #Contact td {
-	height			: 4.5mm;
-	width			: 32mm;
+	height			: 100%;
+	width			: 76%;
 	text-align		: left;
 	float		: left;
 }
@@ -101,6 +102,11 @@
 	overflow-x		: hidden;
 	height			: 34mm;
 }
+
+#Main #Left #Contact #ContactInside div .UserList .UserTable{
+	margin-top		:	0mm;
+}
+
 /**
 * USER STATUS
 */
@@ -227,6 +233,7 @@
 	text-align: center;
 	padding-top:	3px;
 	padding-right:	7%;
+	padding-bottom: 2%;
 }
 
 /**
