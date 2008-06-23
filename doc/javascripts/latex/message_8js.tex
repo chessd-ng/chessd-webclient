@@ -81,20 +81,44 @@ function {\bf MESSAGE\_\-GameResponse} (Action, RoomID, Response)
 \item 
 function {\bf MESSAGE\_\-SearchUser} (Username, Option)
 \item 
-function {\bf MESSAGE\_\-KickUser} (Room, To, Role, Reason)
+function {\bf MESSAGE\_\-KickUserRoom} (Room, To, Role, Reason)
 \item 
+function {\bf MESSAGE\_\-KickUser} (Username, Reason)
+\begin{CompactList}\small\item\em Message to kick a user from jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-BanUser} (Username, Reason)
+\begin{CompactList}\small\item\em Message to ban a user from jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-UnbanUser} (Username, Reason)
+\begin{CompactList}\small\item\em Message to unban a user from jabber. \item\end{CompactList}\item 
 function {\bf MESSAGE\_\-GetProfile} (Username, Id)
 \item 
 function {\bf MESSAGE\_\-SetProfile} (Username, FullName, Desc, ImgType, Img64)
 \item 
-function {\bf MESSAGE\_\-GetOldGames} (Id, Jid1, Jid2, NumGames, Offset)
+function {\bf MESSAGE\_\-GetOldGames} (Id, Jid1, Jid2, NumGames, Offset, Color, To, From)
 \item 
 function {\bf MESSAGE\_\-FetchOldGame} (OldGameId)
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\index{message.js@{message.js}!MESSAGE\_\-Challenge@{MESSAGE\_\-Challenge}}
+\index{message.js@{message.js}!MESSAGE\_\-BanUser@{MESSAGE\_\-BanUser}}
+\index{MESSAGE\_\-BanUser@{MESSAGE\_\-BanUser}!message.js@{message.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-BanUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_39fee462e2b3bd9e308e56f977ac1277}
+
+
+Message to ban a user from jabber. 
+
+Create message to ban user from jabber.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by ADMIN\_\-BanUser().\index{message.js@{message.js}!MESSAGE\_\-Challenge@{MESSAGE\_\-Challenge}}
 \index{MESSAGE\_\-Challenge@{MESSAGE\_\-Challenge}!message.js@{message.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Challenge ( {\em Category}, \/   {\em Rated}, \/   {\em Players}, \/   {\em GameID})}\label{message_8js_8c65b17964ae0922f86b646e3c41e4ca}
 
@@ -161,7 +185,7 @@ Referenced by LOGIN\_\-Logout().\index{message.js@{message.js}!MESSAGE\_\-FetchO
 
 
 
-Referenced by INTERFACE\_\-AddOldGameResult(), and INTERFACE\_\-AddOldGameResultR().\index{message.js@{message.js}!MESSAGE\_\-GameAdjournAccept@{MESSAGE\_\-GameAdjournAccept}}
+Referenced by INTERFACE\_\-AddOldGameResult().\index{message.js@{message.js}!MESSAGE\_\-GameAdjournAccept@{MESSAGE\_\-GameAdjournAccept}}
 \index{MESSAGE\_\-GameAdjournAccept@{MESSAGE\_\-GameAdjournAccept}!message.js@{message.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameAdjournAccept ( {\em RoomID})}\label{message_8js_8b381df696df7d21f8ea5f5e376e31f8}
 
@@ -310,12 +334,12 @@ References MainData.
 
 Referenced by ROOM\_\-ShowGameRoomList().\index{message.js@{message.js}!MESSAGE\_\-GetOldGames@{MESSAGE\_\-GetOldGames}}
 \index{MESSAGE\_\-GetOldGames@{MESSAGE\_\-GetOldGames}!message.js@{message.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetOldGames ( {\em Id}, \/   {\em Jid1}, \/   {\em Jid2}, \/   {\em NumGames}, \/   {\em Offset})}\label{message_8js_e4abdb6a8a59159f3d1877dbae5af37c}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetOldGames ( {\em Id}, \/   {\em Jid1}, \/   {\em Jid2}, \/   {\em NumGames}, \/   {\em Offset}, \/   {\em Color}, \/   {\em To}, \/   {\em From})}\label{message_8js_a79486f0b21d18c02627efae77438930}
 
 
 
 
-Referenced by INTERFACE\_\-SetNextButton(), INTERFACE\_\-SetPrevButton(), INTERFACE\_\-SetSearchButton(), INTERFACE\_\-ShowOldGameSearchWindow(), and OLDGAME\_\-OpenOldGameWindow().\index{message.js@{message.js}!MESSAGE\_\-GetProfile@{MESSAGE\_\-GetProfile}}
+Referenced by INTERFACE\_\-SetNextButton(), INTERFACE\_\-SetPrevButton(), INTERFACE\_\-SetSearchButton(), and OLDGAME\_\-OpenOldGameWindow().\index{message.js@{message.js}!MESSAGE\_\-GetProfile@{MESSAGE\_\-GetProfile}}
 \index{MESSAGE\_\-GetProfile@{MESSAGE\_\-GetProfile}!message.js@{message.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetProfile ( {\em Username}, \/   {\em Id})}\label{message_8js_2928ced3ca9dd98762c75a408effff70}
 
@@ -382,7 +406,25 @@ References MainData.
 
 Referenced by CONTACT\_\-ReceiveSubscribe().\index{message.js@{message.js}!MESSAGE\_\-KickUser@{MESSAGE\_\-KickUser}}
 \index{MESSAGE\_\-KickUser@{MESSAGE\_\-KickUser}!message.js@{message.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-KickUser ( {\em Room}, \/   {\em To}, \/   {\em Role}, \/   {\em Reason})}\label{message_8js_8ed38914ab13d4345271a890b73000c1}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-KickUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_95846811122fe413726bb66df200f60e}
+
+
+Message to kick a user from jabber. 
+
+Create message to kick user from jabber.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by ADMIN\_\-KickUser().\index{message.js@{message.js}!MESSAGE\_\-KickUserRoom@{MESSAGE\_\-KickUserRoom}}
+\index{MESSAGE\_\-KickUserRoom@{MESSAGE\_\-KickUserRoom}!message.js@{message.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-KickUserRoom ( {\em Room}, \/   {\em To}, \/   {\em Role}, \/   {\em Reason})}\label{message_8js_7fb936c7e483ba2350e7e2bcbca6e004}
 
 
 Moderator kicks an accupant
@@ -506,7 +548,25 @@ Set offline on jabber or exit a room
 
 References MainData.
 
-Referenced by GAME\_\-StartGame(), and ROOM\_\-ExitRoom().\index{message.js@{message.js}!MESSAGE\_\-UserList@{MESSAGE\_\-UserList}}
+Referenced by GAME\_\-StartGame(), and ROOM\_\-ExitRoom().\index{message.js@{message.js}!MESSAGE\_\-UnbanUser@{MESSAGE\_\-UnbanUser}}
+\index{MESSAGE\_\-UnbanUser@{MESSAGE\_\-UnbanUser}!message.js@{message.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-UnbanUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_52c33b07805ba6e270643bff9cf121e8}
+
+
+Message to unban a user from jabber. 
+
+Create message to unban user from jabber.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by ADMIN\_\-UnbanUser().\index{message.js@{message.js}!MESSAGE\_\-UserList@{MESSAGE\_\-UserList}}
 \index{MESSAGE\_\-UserList@{MESSAGE\_\-UserList}!message.js@{message.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-UserList ()}\label{message_8js_3eb5826c67297b03256070aa19f775af}
 

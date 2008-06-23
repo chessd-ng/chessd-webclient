@@ -80,6 +80,7 @@
 		<contact_by_name>Nome</contact_by_name>
 		<contact_by_user>Apelido</contact_by_user>
 		<contact_both>Ambos</contact_both>
+		<contact_change_profile>Alterar meu perfil</contact_change_profile>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>

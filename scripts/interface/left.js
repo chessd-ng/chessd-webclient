@@ -96,7 +96,7 @@ function INTERFACE_CreateUserBox()
 
 	Hr = UTILS_CreateElement("hr");
 
-	Profile = UTILS_CreateElement("span",null,null,"Alterar meu perfil");
+	Profile = UTILS_CreateElement("span",null,null,UTILS_GetText("contact_change_profile"));
 	UTILS_AddListener(Profile,"click", function() { PROFILE_StartProfile(MainData.Username); }, "false");
 
 	UserInf.appendChild(Name);
