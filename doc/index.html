@@ -9,7 +9,7 @@
 <P ALIGN="center"><CENTER><H1>Interface WEB para Xadrez - Teste</H1>
 <FONT SIZE="4">
 <I>Equipe de Implementação da interface Web - C3SL 2007</I><BR>
-Última atualização - Mon Jun  2 16:23:45 2008
+Última atualização - Tue Jun  3 10:56:44 2008
 </FONT></CENTER>
 
 <HR NOSHADE SIZE=1>
@@ -263,111 +263,112 @@ Alguns dos atributos listados abaixos são também listas de objetos, contendo out
 <UL>
 <LI>Data.<B>UserList</B> <I>Lista dos contatos do usuário</I>
   <UL>
-  <LI>Data.UserList.<B>Username</B> <I>Nome do contato</I>
-  <LI>Data.UserList.<B>Photo</B> <I>Foto do contato</I>
-  <LI>Data.UserList.<B>Status</B> <I>Status do contato</I>
-  <LI>Data.UserList.<B>Subs</B> <I>Subscription do contato (usado para controle do convite)</I>
-  <LI>Data.UserList.<B>Rating</B> <I>Objeto contendo o rating em todas as categorias</I>
+  <LI>Data.UserList[].<B>Username</B> <I>Nome do contato</I>
+  <LI>Data.UserList[].<B>Photo</B> <I>Foto do contato</I>
+  <LI>Data.UserList[].<B>Status</B> <I>Status do contato</I>
+  <LI>Data.UserList[].<B>Subs</B> <I>Subscription do contato (usado para controle do convite)</I>
+  <LI>Data.UserList[].<B>Type</B> <I>Tipo do contato</I>
+  <LI>Data.UserList[].<B>Rating</B> <I>Objeto contendo o rating em todas as categorias</I>
   <P></P>
   </UL>
 <LI>Data.<B>ChatList</B> <I>Lista de conversas abertas</I>
   <UL>
-  <LI>Data.ChatList.<B>Username</B> <I>Nome do outro participante da conversa</I>
-  <LI>Data.ChatList.<B>Status</B> <I>Status do outro participante</I>
-  <LI>Data.ChatList.<B>State</B> <I>Define se o chat esta visível ou minimizado</I>
+  <LI>Data.ChatList[].<B>Username</B> <I>Nome do outro participante da conversa</I>
+  <LI>Data.ChatList[].<B>Status</B> <I>Status do outro participante</I>
+  <LI>Data.ChatList[].<B>State</B> <I>Define se o chat esta visível ou minimizado</I>
   </UL>
 </UL>
 
 <UL>
 <LI>Data.<B>RoomList</B> <I>Lista de salas que o usuário esta conectado</I>
  <UL>
- <LI>Data.RoomList.<B>UserList</B> <I>Lista de usuários conectados na sala</I>
- <LI>Data.RoomList.<B>MsgTo</B> <I>Para onde a mensagem deverá ser enviada</I>
- <LI>Data.RoomList.<B>Role</B> <I>A posição administrativa temporária do usuário na sala</I>
- <LI>Data.RoomList.<B>Affiliation</B> <I>A posição administrativa do usuário na sala</I>
- <LI>Data.RoomList.<B>OrderBy</B> <I>Como os usuários são ordenados</I>
+ <LI>Data.RoomList[].<B>UserList</B> <I>Lista de usuários conectados na sala</I>
+ <LI>Data.RoomList[].<B>MsgTo</B> <I>Para onde a mensagem deverá ser enviada</I>
+ <LI>Data.RoomList[].<B>Role</B> <I>A posição administrativa temporária do usuário na sala</I>
+ <LI>Data.RoomList[].<B>Affiliation</B> <I>A posição administrativa do usuário na sala</I>
+ <LI>Data.RoomList[].<B>OrderBy</B> <I>Como os usuários são ordenados</I>
   <UL>
   <LI>'0' - <I>Ordem alfabetica crescente</I>
   <LI>'1' - <I>Ordem alfabetica decrescente</I> 
   <LI>'2' - <I>Por rating (escolhido previamente) decrescente</I>
   </UL>
- <LI>Data.RoomList.<B>Room</B> <I>Objeto de sala, guarda os elementos da interface</I>
+ <LI>Data.RoomList[].<B>Room</B> <I>Objeto de sala, guarda os elementos da interface</I>
  <P></P>
  </UL>
 <LI>Data.<B>ChallengeList</B> <I>Lista dos desafios recebidos e enviados</I>
   <UL>
-  <LI>Data.ChallengeList.<B>Username</B> <I>Nome do usuário desafiante ou desafiado</I>
-  <LI>Data.ChallengeList.<B>Id</B> <I>Identificador do desafio</I>
-  <LI>Data.ChallengeList.<B>Challenger</B> <I>Nome do usuário que fez o desafio</I>
+  <LI>Data.ChallengeList[].<B>Username</B> <I>Nome do usuário desafiante ou desafiado</I>
+  <LI>Data.ChallengeList[].<B>Id</B> <I>Identificador do desafio</I>
+  <LI>Data.ChallengeList[].<B>Challenger</B> <I>Nome do usuário que fez o desafio</I>
   <P></P>
   </UL>
 <LI>Data.<B>GameList</B> <I>Lista de jogos</I>
   <UL>
-  <LI>Data.GameList.<B>Id</B> <I>Identificador da partida</I>
-  <LI>Data.GameList.<B>YourColor</B> <I>Cor do usuário na partida</I>
-  <LI>Data.GameList.<B>BoardColor</B> <I>Cor do tabuleiro</I>
-  <LI>Data.GameList.<B>PW</B> <I>Jogador das peças brancas</I>
-  <LI>Data.GameList.<B>PB</B> <I>Jogador das peças pretas</I>
-  <LI>Data.GameList.<B>WPhoto</B> <I>Foto do jogador das peças brancas</I>
-  <LI>Data.GameList.<B>BPhoto</B> <I>Foto do jogador das peças pretas</I>
-  <LI>Data.GameList.<B>Game</B> <I>Div do jogo</I>
-  <LI>Data.GameList.<B>Finished</B> <I>Guarda se o jogo ainda esta em andamento</I>
-  <LI>Data.GameList.<B>CurrentMove</B> <I>Última jogada realizada</I>
-  <LI>Data.GameList.<B>Moves</B> <I>Lista de movimentos já feitos na partida</I>
+  <LI>Data.GameList[].<B>Id</B> <I>Identificador da partida</I>
+  <LI>Data.GameList[].<B>YourColor</B> <I>Cor do usuário na partida</I>
+  <LI>Data.GameList[].<B>BoardColor</B> <I>Cor do tabuleiro</I>
+  <LI>Data.GameList[].<B>PW</B> <I>Jogador das peças brancas</I>
+  <LI>Data.GameList[].<B>PB</B> <I>Jogador das peças pretas</I>
+  <LI>Data.GameList[].<B>WPhoto</B> <I>Foto do jogador das peças brancas</I>
+  <LI>Data.GameList[].<B>BPhoto</B> <I>Foto do jogador das peças pretas</I>
+  <LI>Data.GameList[].<B>Game</B> <I>Div do jogo</I>
+  <LI>Data.GameList[].<B>Finished</B> <I>Guarda se o jogo ainda esta em andamento</I>
+  <LI>Data.GameList[].<B>CurrentMove</B> <I>Última jogada realizada</I>
+  <LI>Data.GameList[].<B>Moves</B> <I>Lista de movimentos já feitos na partida</I>
    <UL>
-   <LI>Data.GameList.Moves.<B>Board</B> <I>Estado do tabuleiro antes do movimento</I>  							
-   <LI>Data.GameList.Moves.<B>Move</B> <I>Estado final do tabuleiro após a jogada</I> 
-   <LI>Data.GameList.Moves.<B>ShortMove</B> <I>Apenas a jogada realizada</I>
-   <LI>Data.GameList.Moves.<B>PWTime</B> <I>Tempo das peças brancas</I> 
-   <LI>Data.GameList.Moves.<B>PBTime</B> <I>Tempo das peças pretas</I> 
-   <LI>Data.GameList.Moves.<B>Turn</B> <I>De quem foi a jogada</I> 
+   <LI>Data.GameList[].Moves.<B>Board</B> <I>Estado do tabuleiro antes do movimento</I>  							
+   <LI>Data.GameList[].Moves.<B>Move</B> <I>Estado final do tabuleiro após a jogada</I> 
+   <LI>Data.GameList[].Moves.<B>ShortMove</B> <I>Apenas a jogada realizada</I>
+   <LI>Data.GameList[].Moves.<B>PWTime</B> <I>Tempo das peças brancas</I> 
+   <LI>Data.GameList[].Moves.<B>PBTime</B> <I>Tempo das peças pretas</I> 
+   <LI>Data.GameList[].Moves.<B>Turn</B> <I>De quem foi a jogada</I> 
    </UL>
-  <LI>Data.GameList.<B>SetTurn</B> <I>De quem é a vez de jogar</I>
-  <LI>Data.GameList.<B>AddMove</B> <I>Método para adicionar um movimento</I>
+  <LI>Data.GameList[].<B>SetTurn</B> <I>De quem é a vez de jogar</I>
+  <LI>Data.GameList[].<B>AddMove</B> <I>Método para adicionar um movimento</I>
   <P></P>
   </UL>
 <LI>Data.<B>OldGameList</B> <I>Lista de jogos antigos</I>
   <UL>
-  <LI>Data.OldGameList.<B>Id</B> <I>Identificador da partida</I>
-  <LI>Data.OldGameList.<B>YourColor</B> <I>Cor do usuário na partida</I>
-  <LI>Data.OldGameList.<B>BoardColor</B> <I>Cor do tabuleiro</I>
-  <LI>Data.OldGameList.<B>Moves</B> <I>Lista de movimentos já feitos na partida</I>
+  <LI>Data.OldGameList[].<B>Id</B> <I>Identificador da partida</I>
+  <LI>Data.OldGameList[].<B>YourColor</B> <I>Cor do usuário na partida</I>
+  <LI>Data.OldGameList[].<B>BoardColor</B> <I>Cor do tabuleiro</I>
+  <LI>Data.OldGameList[].<B>Moves</B> <I>Lista de movimentos já feitos na partida</I>
    <UL>
-   <LI>Data.OldGameList.Moves.<B>Board</B> <I>Estado do tabuleiro antes do movimento</I>  							
-   <LI>Data.OldGameList.Moves.<B>Move</B> <I>Estado final do tabuleiro após a jogada</I> 
-   <LI>Data.OldGameList.Moves.<B>ShortMove</B> <I>Apenas a jogada realizada</I>
-   <LI>Data.OldGameList.Moves.<B>PWTime</B> <I>Tempo das peças brancas</I> 
-   <LI>Data.OldGameList.Moves.<B>PBTime</B> <I>Tempo das peças pretas</I> 
-   <LI>Data.OldGameList.Moves.<B>Turn</B> <I>De quem foi a jogada</I> 
+   <LI>Data.OldGameList[].Moves.<B>Board</B> <I>Estado do tabuleiro antes do movimento</I>  							
+   <LI>Data.OldGameList[].Moves.<B>Move</B> <I>Estado final do tabuleiro após a jogada</I> 
+   <LI>Data.OldGameList[].Moves.<B>ShortMove</B> <I>Apenas a jogada realizada</I>
+   <LI>Data.OldGameList[].Moves.<B>PWTime</B> <I>Tempo das peças brancas</I> 
+   <LI>Data.OldGameList[].Moves.<B>PBTime</B> <I>Tempo das peças pretas</I> 
+   <LI>Data.OldGameList[].Moves.<B>Turn</B> <I>De quem foi a jogada</I> 
    </UL>
-  <LI>Data.OldGameList.<B>PW</B> <I>Jogador das peças brancas</I>
-  <LI>Data.OldGameList.<B>PB</B> <I>Jogador das peças pretas</I>
-  <LI>Data.OldGameList.<B>WPhoto</B> <I>Foto do jogador das peças brancas</I>
-  <LI>Data.OldGameList.<B>BPhoto</B> <I>Foto do jogador das peças pretas</I>
-  <LI>Data.OldGameList.<B>Finished</B> <I>Guarda se o jogo ainda esta em andamento</I>
-  <LI>Data.OldGameList.<B>CurrentMove</B> <I>Última jogada realizada</I>
-  <LI>Data.OldGameList.<B>SetTurn</B> <I>De quem é a vez de jogar</I>
-  <LI>Data.OldGameList.<B>AddMove</B> <I>Método para adicionar um movimento</I>
+  <LI>Data.OldGameList[].<B>PW</B> <I>Jogador das peças brancas</I>
+  <LI>Data.OldGameList[].<B>PB</B> <I>Jogador das peças pretas</I>
+  <LI>Data.OldGameList[].<B>WPhoto</B> <I>Foto do jogador das peças brancas</I>
+  <LI>Data.OldGameList[].<B>BPhoto</B> <I>Foto do jogador das peças pretas</I>
+  <LI>Data.OldGameList[].<B>Finished</B> <I>Guarda se o jogo ainda esta em andamento</I>
+  <LI>Data.OldGameList[].<B>CurrentMove</B> <I>Última jogada realizada</I>
+  <LI>Data.OldGameList[].<B>SetTurn</B> <I>De quem é a vez de jogar</I>
+  <LI>Data.OldGameList[].<B>AddMove</B> <I>Método para adicionar um movimento</I>
   <P></P>
   </UL>
 <LI>Data.<B>SearchGameInfoList</B> <I>Lista com o resultado de uma busca de jogos</I>
   <UL>
-  <LI>Data.SearchGameInfoList.<B>Id</B> <I>Identificação da busca</I>
-  <LI>Data.SearchGameInfoList.<B>NGames</B> <I>Números de jogos encontrados</I>
-  <LI>Data.SearchGameInfoList.<B>Offset</B> ////
-  <LI>Data.SearchGameInfoList.<B>P1</B> <I>Nome do jogador buscado</I>
-  <LI>Data.SearchGameInfoList.<B>P2</B> <I>Nome do adversário</I>
-  <LI>Data.SearchGameInfoList.<B>Color</B> <I>Cor do jogador buscado</I>
-  <LI>Data.SearchGameInfoList.<B>From</B> ////
-  <LI>Data.SearchGameInfoList.<B>To</B> ////
-  <LI>Data.SearchGameInfoList.<B>More</B> ////
-  <LI>Data.SearchGameInfoList.<B>Elements</B> ////			
+  <LI>Data.SearchGameInfoList[].<B>Id</B> <I>Identificação da busca</I>
+  <LI>Data.SearchGameInfoList[].<B>NGames</B> <I>Números de jogos encontrados</I>
+  <LI>Data.SearchGameInfoList[].<B>Offset</B> ////
+  <LI>Data.SearchGameInfoList[].<B>P1</B> <I>Nome do jogador buscado</I>
+  <LI>Data.SearchGameInfoList[].<B>P2</B> <I>Nome do adversário</I>
+  <LI>Data.SearchGameInfoList[].<B>Color</B> <I>Cor do jogador buscado</I>
+  <LI>Data.SearchGameInfoList[].<B>From</B> ////
+  <LI>Data.SearchGameInfoList[].<B>To</B> ////
+  <LI>Data.SearchGameInfoList[].<B>More</B> ////
+  <LI>Data.SearchGameInfoList[].<B>Elements</B> ////			
   <P></P>
   </UL>
 <LI>Data.<B>Windows</B> <I>Objeto com as janelas mostradas na interface</I>
   <UL>
-  <LI>Data.Windows.<B>Focus</B> <I>Aponta para a janela com foco no momento</I>
-  <LI>Data.Windows.<B>WindowList</B> <I>Lista de janelas na interface</I>
+  <LI>Data.Windows[].<B>Focus</B> <I>Aponta para a janela com foco no momento</I>
+  <LI>Data.Windows[].<B>WindowList</B> <I>Lista de janelas na interface</I>
   </UL>
 </UL>
 

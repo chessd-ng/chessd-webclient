@@ -3,19 +3,16 @@
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-function {\bf INTERFACE\_\-StartLogin} ()
+function {\bf INTERFACE\_\-StartLogin} (Lang)
 \item 
 function {\bf INTERFACE\_\-EndLogin} ()
 \item 
 function {\bf INTERFACE\_\-CreateLanguage} ()
 \item 
 function {\bf INTERFACE\_\-CreateLangItem} (Lang, Name)
-\end{CompactItemize}
-\subsection*{Variables}
-\begin{CompactItemize}
 \item 
-var {\bf MainData}
-\end{CompactItemize}
+function {\bf INTERFACE\_\-LoginVerticalAlignMiddle} ()
+\begin{CompactList}\small\item\em Align main div in middle. \item\end{CompactList}\end{CompactItemize}
 
 
 \subsection{Function Documentation}
@@ -35,7 +32,7 @@ Create language links
 \item[Returns:]List item \end{Desc}
 
 
-References INTERFACE\_\-EndLogin(), INTERFACE\_\-StartLogin(), MainData, UTILS\_\-Capitalize(), UTILS\_\-CreateCookie(), and UTILS\_\-CreateElement().
+References START\_\-ChangeLanguage(), UTILS\_\-Capitalize(), and UTILS\_\-CreateElement().
 
 Referenced by INTERFACE\_\-CreateLanguage().\index{interface/login.js@{interface/login.js}!INTERFACE\_\-CreateLanguage@{INTERFACE\_\-CreateLanguage}}
 \index{INTERFACE\_\-CreateLanguage@{INTERFACE\_\-CreateLanguage}!interface/login.js@{interface/login.js}}
@@ -61,25 +58,20 @@ Remove login screen
 \item[Returns:]void \end{Desc}
 
 
-Referenced by INTERFACE\_\-CreateLangItem(), and LOGIN\_\-EndLogin().\index{interface/login.js@{interface/login.js}!INTERFACE\_\-StartLogin@{INTERFACE\_\-StartLogin}}
-\index{INTERFACE\_\-StartLogin@{INTERFACE\_\-StartLogin}!interface/login.js@{interface/login.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-StartLogin ()}\label{interface_2login_8js_1eab2aa8ae068c60514e00b76816e747}
+Referenced by LOGIN\_\-EndLogin(), and START\_\-ChangeLanguage().\index{interface/login.js@{interface/login.js}!INTERFACE\_\-LoginVerticalAlignMiddle@{INTERFACE\_\-LoginVerticalAlignMiddle}}
+\index{INTERFACE\_\-LoginVerticalAlignMiddle@{INTERFACE\_\-LoginVerticalAlignMiddle}!interface/login.js@{interface/login.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-LoginVerticalAlignMiddle ()}\label{interface_2login_8js_6b90c74538273942ad883632f6f035cd}
 
 
-Create elements and show login screen to user
+Align main div in middle. 
 
 \begin{Desc}
-\item[Returns:]void \end{Desc}
+\item[Author:]Rubens \end{Desc}
 
 
-References DATA(), INTERFACE\_\-CreateLanguage(), LOGIN\_\-Login(), MainData, UTILS\_\-AddListener(), UTILS\_\-CreateElement(), UTILS\_\-GetTag(), UTILS\_\-GetText(), UTILS\_\-OpenXMLFile(), UTILS\_\-ReadCookie(), and UTILS\_\-ReturnEvent().
-
-Referenced by INTERFACE\_\-CreateLangItem(), and LOGIN\_\-Logout().
-
-\subsection{Variable Documentation}
-\index{interface/login.js@{interface/login.js}!MainData@{MainData}}
-\index{MainData@{MainData}!interface/login.js@{interface/login.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}var {\bf MainData}}\label{interface_2login_8js_be4e3545ee0ac3ff17e7aecaff4fce1a}
+Referenced by INTERFACE\_\-StartLogin().\index{interface/login.js@{interface/login.js}!INTERFACE\_\-StartLogin@{INTERFACE\_\-StartLogin}}
+\index{INTERFACE\_\-StartLogin@{INTERFACE\_\-StartLogin}!interface/login.js@{interface/login.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-StartLogin ( {\em Lang})}\label{interface_2login_8js_919f0023df1f957bd2a395217df85f0f}
 
 
 CHESSD - WebClient
@@ -88,6 +80,12 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-C3SL - Center for Scientific Computing and Free Software Shows login screen to user Global object that stores all data needed by interface 
+C3SL - Center for Scientific Computing and Free Software Shows login screen to user Global object that stores all data needed by interface Create elements and show login screen to user
 
-Referenced by CHAT\_\-ChangeChatState(), CHAT\_\-CloseChat(), CHAT\_\-HandleAnnounceMessage(), CHAT\_\-OpenChat(), CHAT\_\-ReceiveMessage(), CONNECTION\_\-ConnectJabber(), CONNECTION\_\-ReceiveConnection(), CONNECTION\_\-ReceiveXml(), CONNECTION\_\-SendJabber(), CONTACT\_\-ChangeStatus(), CONTACT\_\-HandleInfo(), CONTACT\_\-HandleUserList(), CONTACT\_\-InsertUser(), CONTACT\_\-InviteUser(), CONTACT\_\-ReceiveSubscribe(), CONTACT\_\-ReceiveSubscribed(), CONTACT\_\-ReceiveUnsubscribed(), CONTACT\_\-RemoveUser(), CONTACT\_\-SetUserRating(), CONTACT\_\-SetUserStatus(), CONTACT\_\-SetUserType(), CONTACT\_\-ShowUserMenu(), DATA\_\-AddOldGame(), DATA\_\-PushGameToOldGame(), DATA\_\-RemoveGame(), DATA\_\-RemoveOldGame(), DATA\_\-SetRating(), DATA\_\-SetRoom(), DATA\_\-SetType(), GAME\_\-End(), GAME\_\-HandleAccept(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDecline(), GAME\_\-HandleDraw(), GAME\_\-HandleGameError(), GAME\_\-HandleOffer(), GAME\_\-HandleVCardPhoto(), GAME\_\-Move(), GAME\_\-RemoveGame(), GAME\_\-SendChallenge(), GAME\_\-SendMove(), GAME\_\-StartGame(), GAME\_\-StartObserverGame(), GAME\_\-State(), GAME\_\-UpdateBoard(), IMAGE\_\-B64Img(), IMAGE\_\-ImageDecode(), INTERFACE\_\-AddContact(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-AddOldGameResultR(), INTERFACE\_\-ChangeCurrentRating(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateContactList(), INTERFACE\_\-CreateLangItem(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-DecreaseTime(), INTERFACE\_\-FocusRoom(), INTERFACE\_\-GameBoardObj(), INTERFACE\_\-NewPiece(), INTERFACE\_\-OldGameSetTable(), INTERFACE\_\-RefreshOccupantsNumber(), INTERFACE\_\-RemoveGame(), INTERFACE\_\-SetUserRating(), INTERFACE\_\-SetUserStatus(), INTERFACE\_\-SetUserType(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowChatMessage(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-SortUserByNick(), INTERFACE\_\-SortUserByRating(), INTERFACE\_\-StartLogin(), INTERFACE\_\-UndoMove(), LOGIN\_\-Disconnected(), LOGIN\_\-Load4(), LOGIN\_\-LoadCss(), LOGIN\_\-Login(), LOGIN\_\-LoginFailed(), LOGIN\_\-Logout(), MESSAGE\_\-Challenge(), MESSAGE\_\-ChallengeAccept(), MESSAGE\_\-ChallengeDecline(), MESSAGE\_\-ChangeStatus(), MESSAGE\_\-Chat(), MESSAGE\_\-EndConnection(), MESSAGE\_\-GameMove(), MESSAGE\_\-GameRequests(), MESSAGE\_\-GameResponse(), MESSAGE\_\-GameRoomInfoList(), MESSAGE\_\-GameRoomList(), MESSAGE\_\-GroupChat(), MESSAGE\_\-Info(), MESSAGE\_\-InfoProfile(), MESSAGE\_\-Invite(), MESSAGE\_\-InviteAccept(), MESSAGE\_\-InviteDeny(), MESSAGE\_\-MakeXMPP(), MESSAGE\_\-Presence(), MESSAGE\_\-RemoveContact(), MESSAGE\_\-RoomList(), MESSAGE\_\-SendPasswd(), MESSAGE\_\-SendUsername(), MESSAGE\_\-StartConnection(), MESSAGE\_\-Unavailable(), MESSAGE\_\-UserList(), MESSAGE\_\-UserListInfo(), OLDGAME\_\-CloseWindow(), OLDGAME\_\-EndGame(), OLDGAME\_\-FirstBoard(), OLDGAME\_\-GotoBoard(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-HandleVCardPhoto(), OLDGAME\_\-LastBoard(), OLDGAME\_\-NextBoard(), OLDGAME\_\-OpenOldGameWindow(), OLDGAME\_\-PrevBoard(), OLDGAME\_\-RemoveOldGame(), OLDGAME\_\-StartOldGame(), OLDGAME\_\-UpdateBoard(), PARSER\_\-ParseIq(), PARSER\_\-ParseIqById(), PARSER\_\-ParseXml(), PROFILE\_\-CreateProfile(), PROFILE\_\-HandleInfoProfile(), PROFILE\_\-HandleVCardProfile(), PROFILE\_\-RemoveProfile(), PROFILE\_\-SaveMyProfile(), PROFILE\_\-StartProfile(), ROOM\_\-AddUser(), ROOM\_\-CreateRoom(), ROOM\_\-EnterRoom(), ROOM\_\-EnterRoomGame(), ROOM\_\-ExitRoom(), ROOM\_\-FocusRoom(), ROOM\_\-HandleRoomList(), ROOM\_\-HandleRoomPresence(), ROOM\_\-RemoveRoom(), ROOM\_\-RemoveUser(), ROOM\_\-SendMessage(), ROOM\_\-ShowMessage(), ROOM\_\-SortUsersByNick(), ROOM\_\-SortUsersByRating(), UTILS\_\-GetText(), UTILS\_\-ReturnEvent(), UTILS\_\-ReturnKeyCode(), UTILS\_\-StartDragPiece(), WINDOW\_\-Challenge(), WINDOW\_\-ChangeFocus(), WINDOW\_\-NewWindow(), and WINDOW\_\-RemoveWindow().
+\begin{Desc}
+\item[Returns:]void \end{Desc}
+
+
+References INTERFACE\_\-CreateLanguage(), INTERFACE\_\-LoginVerticalAlignMiddle(), LOGIN\_\-Login(), MainData, UTILS\_\-AddListener(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), UTILS\_\-ReadCookie(), and UTILS\_\-ReturnEvent().
+
+Referenced by START\_\-ChangeLanguage(), and START\_\-StartPage().

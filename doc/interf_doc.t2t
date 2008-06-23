@@ -195,90 +195,91 @@ A solução escolhida para manter todos os dados necessários foi uma estrutura de 
 Alguns dos atributos listados abaixos são também listas de objetos, contendo outros atributos.
 
 - Data.**UserList** //Lista dos contatos do usuário//
-  - Data.UserList.**Username** //Nome do contato//
-  - Data.UserList.**Photo** //Foto do contato//
-  - Data.UserList.**Status** //Status do contato//
-  - Data.UserList.**Subs** //Subscription do contato (usado para controle do convite)//
-  - Data.UserList.**Rating** //Objeto contendo o rating em todas as categorias//
+  - Data.UserList[].**Username** //Nome do contato//
+  - Data.UserList[].**Photo** //Foto do contato//
+  - Data.UserList[].**Status** //Status do contato//
+  - Data.UserList[].**Subs** //Subscription do contato (usado para controle do convite)//
+  - Data.UserList[].**Type** //Tipo do contato//
+  - Data.UserList[].**Rating** //Objeto contendo o rating em todas as categorias//
 
 - Data.**ChatList** //Lista de conversas abertas//
-  - Data.ChatList.**Username** //Nome do outro participante da conversa//
-  - Data.ChatList.**Status** //Status do outro participante//
-  - Data.ChatList.**State** //Define se o chat esta visível ou minimizado//
+  - Data.ChatList[].**Username** //Nome do outro participante da conversa//
+  - Data.ChatList[].**Status** //Status do outro participante//
+  - Data.ChatList[].**State** //Define se o chat esta visível ou minimizado//
 
 
 - Data.**RoomList** //Lista de salas que o usuário esta conectado//
- - Data.RoomList.**UserList** //Lista de usuários conectados na sala//
- - Data.RoomList.**MsgTo** //Para onde a mensagem deverá ser enviada//
- - Data.RoomList.**Role** //A posição administrativa temporária do usuário na sala//
- - Data.RoomList.**Affiliation** //A posição administrativa do usuário na sala//
- - Data.RoomList.**OrderBy** //Como os usuários são ordenados//
+ - Data.RoomList[].**UserList** //Lista de usuários conectados na sala//
+ - Data.RoomList[].**MsgTo** //Para onde a mensagem deverá ser enviada//
+ - Data.RoomList[].**Role** //A posição administrativa temporária do usuário na sala//
+ - Data.RoomList[].**Affiliation** //A posição administrativa do usuário na sala//
+ - Data.RoomList[].**OrderBy** //Como os usuários são ordenados//
   - '0' - //Ordem alfabetica crescente//
   - '1' - //Ordem alfabetica decrescente// 
   - '2' - //Por rating (escolhido previamente) decrescente//
- - Data.RoomList.**Room** //Objeto de sala, guarda os elementos da interface//
+ - Data.RoomList[].**Room** //Objeto de sala, guarda os elementos da interface//
 
 - Data.**ChallengeList** //Lista dos desafios recebidos e enviados//
-  - Data.ChallengeList.**Username** //Nome do usuário desafiante ou desafiado//
-  - Data.ChallengeList.**Id** //Identificador do desafio//
-  - Data.ChallengeList.**Challenger** //Nome do usuário que fez o desafio//
+  - Data.ChallengeList[].**Username** //Nome do usuário desafiante ou desafiado//
+  - Data.ChallengeList[].**Id** //Identificador do desafio//
+  - Data.ChallengeList[].**Challenger** //Nome do usuário que fez o desafio//
 
 - Data.**GameList** //Lista de jogos//
-  - Data.GameList.**Id** //Identificador da partida//
-  - Data.GameList.**YourColor** //Cor do usuário na partida//
-  - Data.GameList.**BoardColor** //Cor do tabuleiro//
-  - Data.GameList.**PW** //Jogador das peças brancas//
-  - Data.GameList.**PB** //Jogador das peças pretas//
-  - Data.GameList.**WPhoto** //Foto do jogador das peças brancas//
-  - Data.GameList.**BPhoto** //Foto do jogador das peças pretas//
-  - Data.GameList.**Game** //Div do jogo//
-  - Data.GameList.**Finished** //Guarda se o jogo ainda esta em andamento//
-  - Data.GameList.**CurrentMove** //Última jogada realizada//
-  - Data.GameList.**Moves** //Lista de movimentos já feitos na partida//
-   - Data.GameList.Moves.**Board** //Estado do tabuleiro antes do movimento//  							
-   - Data.GameList.Moves.**Move** //Estado final do tabuleiro após a jogada// 
-   - Data.GameList.Moves.**ShortMove** //Apenas a jogada realizada//
-   - Data.GameList.Moves.**PWTime** //Tempo das peças brancas// 
-   - Data.GameList.Moves.**PBTime** //Tempo das peças pretas// 
-   - Data.GameList.Moves.**Turn** //De quem foi a jogada// 
-  - Data.GameList.**SetTurn** //De quem é a vez de jogar//
-  - Data.GameList.**AddMove** //Método para adicionar um movimento//
+  - Data.GameList[].**Id** //Identificador da partida//
+  - Data.GameList[].**YourColor** //Cor do usuário na partida//
+  - Data.GameList[].**BoardColor** //Cor do tabuleiro//
+  - Data.GameList[].**PW** //Jogador das peças brancas//
+  - Data.GameList[].**PB** //Jogador das peças pretas//
+  - Data.GameList[].**WPhoto** //Foto do jogador das peças brancas//
+  - Data.GameList[].**BPhoto** //Foto do jogador das peças pretas//
+  - Data.GameList[].**Game** //Div do jogo//
+  - Data.GameList[].**Finished** //Guarda se o jogo ainda esta em andamento//
+  - Data.GameList[].**CurrentMove** //Última jogada realizada//
+  - Data.GameList[].**Moves** //Lista de movimentos já feitos na partida//
+   - Data.GameList[].Moves.**Board** //Estado do tabuleiro antes do movimento//  							
+   - Data.GameList[].Moves.**Move** //Estado final do tabuleiro após a jogada// 
+   - Data.GameList[].Moves.**ShortMove** //Apenas a jogada realizada//
+   - Data.GameList[].Moves.**PWTime** //Tempo das peças brancas// 
+   - Data.GameList[].Moves.**PBTime** //Tempo das peças pretas// 
+   - Data.GameList[].Moves.**Turn** //De quem foi a jogada// 
+  - Data.GameList[].**SetTurn** //De quem é a vez de jogar//
+  - Data.GameList[].**AddMove** //Método para adicionar um movimento//
 
 - Data.**OldGameList** //Lista de jogos antigos//
-  - Data.OldGameList.**Id** //Identificador da partida//
-  - Data.OldGameList.**YourColor** //Cor do usuário na partida//
-  - Data.OldGameList.**BoardColor** //Cor do tabuleiro//
-  - Data.OldGameList.**Moves** //Lista de movimentos já feitos na partida//
-   - Data.OldGameList.Moves.**Board** //Estado do tabuleiro antes do movimento//  							
-   - Data.OldGameList.Moves.**Move** //Estado final do tabuleiro após a jogada// 
-   - Data.OldGameList.Moves.**ShortMove** //Apenas a jogada realizada//
-   - Data.OldGameList.Moves.**PWTime** //Tempo das peças brancas// 
-   - Data.OldGameList.Moves.**PBTime** //Tempo das peças pretas// 
-   - Data.OldGameList.Moves.**Turn** //De quem foi a jogada// 
-  - Data.OldGameList.**PW** //Jogador das peças brancas//
-  - Data.OldGameList.**PB** //Jogador das peças pretas//
-  - Data.OldGameList.**WPhoto** //Foto do jogador das peças brancas//
-  - Data.OldGameList.**BPhoto** //Foto do jogador das peças pretas//
-  - Data.OldGameList.**Finished** //Guarda se o jogo ainda esta em andamento//
-  - Data.OldGameList.**CurrentMove** //Última jogada realizada//
-  - Data.OldGameList.**SetTurn** //De quem é a vez de jogar//
-  - Data.OldGameList.**AddMove** //Método para adicionar um movimento//
+  - Data.OldGameList[].**Id** //Identificador da partida//
+  - Data.OldGameList[].**YourColor** //Cor do usuário na partida//
+  - Data.OldGameList[].**BoardColor** //Cor do tabuleiro//
+  - Data.OldGameList[].**Moves** //Lista de movimentos já feitos na partida//
+   - Data.OldGameList[].Moves.**Board** //Estado do tabuleiro antes do movimento//  							
+   - Data.OldGameList[].Moves.**Move** //Estado final do tabuleiro após a jogada// 
+   - Data.OldGameList[].Moves.**ShortMove** //Apenas a jogada realizada//
+   - Data.OldGameList[].Moves.**PWTime** //Tempo das peças brancas// 
+   - Data.OldGameList[].Moves.**PBTime** //Tempo das peças pretas// 
+   - Data.OldGameList[].Moves.**Turn** //De quem foi a jogada// 
+  - Data.OldGameList[].**PW** //Jogador das peças brancas//
+  - Data.OldGameList[].**PB** //Jogador das peças pretas//
+  - Data.OldGameList[].**WPhoto** //Foto do jogador das peças brancas//
+  - Data.OldGameList[].**BPhoto** //Foto do jogador das peças pretas//
+  - Data.OldGameList[].**Finished** //Guarda se o jogo ainda esta em andamento//
+  - Data.OldGameList[].**CurrentMove** //Última jogada realizada//
+  - Data.OldGameList[].**SetTurn** //De quem é a vez de jogar//
+  - Data.OldGameList[].**AddMove** //Método para adicionar um movimento//
 
 - Data.**SearchGameInfoList** //Lista com o resultado de uma busca de jogos//
-  - Data.SearchGameInfoList.**Id** //Identificação da busca//
-  - Data.SearchGameInfoList.**NGames** //Números de jogos encontrados//
-  - Data.SearchGameInfoList.**Offset** ////
-  - Data.SearchGameInfoList.**P1** //Nome do jogador buscado//
-  - Data.SearchGameInfoList.**P2** //Nome do adversário//
-  - Data.SearchGameInfoList.**Color** //Cor do jogador buscado//
-  - Data.SearchGameInfoList.**From** ////
-  - Data.SearchGameInfoList.**To** ////
-  - Data.SearchGameInfoList.**More** ////
-  - Data.SearchGameInfoList.**Elements** ////			
+  - Data.SearchGameInfoList[].**Id** //Identificação da busca//
+  - Data.SearchGameInfoList[].**NGames** //Números de jogos encontrados//
+  - Data.SearchGameInfoList[].**Offset** ////
+  - Data.SearchGameInfoList[].**P1** //Nome do jogador buscado//
+  - Data.SearchGameInfoList[].**P2** //Nome do adversário//
+  - Data.SearchGameInfoList[].**Color** //Cor do jogador buscado//
+  - Data.SearchGameInfoList[].**From** ////
+  - Data.SearchGameInfoList[].**To** ////
+  - Data.SearchGameInfoList[].**More** ////
+  - Data.SearchGameInfoList[].**Elements** ////			
 
 - Data.**Windows** //Objeto com as janelas mostradas na interface//
-  - Data.Windows.**Focus** //Aponta para a janela com foco no momento//
-  - Data.Windows.**WindowList** //Lista de janelas na interface//
+  - Data.Windows[].**Focus** //Aponta para a janela com foco no momento//
+  - Data.Windows[].**WindowList** //Lista de janelas na interface//
 
 
 =======================================================

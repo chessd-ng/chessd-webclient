@@ -39,6 +39,8 @@ function {\bf UTILS\_\-GetTime} (Timestamp)
 \item 
 function {\bf UTILS\_\-ConvertTimeStamp} (TimeStamp)
 \item 
+function {\bf UTILS\_\-ConvertSearchDate} (TimeStamp, Type)
+\item 
 function {\bf UTILS\_\-GetOffset} (Obj)
 \item 
 function {\bf UTILS\_\-GetParentDiv} (Obj)
@@ -59,14 +61,14 @@ function {\bf UTILS\_\-ConvertChatString} (Str)
 
 Add a Element event listener SRC = {\tt http://snipplr.com/view/561/add-event-listener/} Cross-browser implementation of Element.addEventListener() 
 
-Referenced by CONTACT\_\-ShowUserMenu(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-AddOldGameResultR(), INTERFACE\_\-CreateContactList(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-SetNextButton(), INTERFACE\_\-SetPrevButton(), INTERFACE\_\-SetSearchButton(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomMenu(), INTERFACE\_\-ShowOldGameSearchWindow(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-StartLogin(), WINDOW\_\-Alert(), WINDOW\_\-CancelRoom(), WINDOW\_\-Challenge(), WINDOW\_\-Confirm(), WINDOW\_\-CreateConfirm(), WINDOW\_\-CreateRoom(), WINDOW\_\-CreateWindow(), WINDOW\_\-Invite(), WINDOW\_\-NewWindow(), WINDOW\_\-OldGame(), WINDOW\_\-OldGameResult(), WINDOW\_\-OldGameSearch(), WINDOW\_\-Profile(), WINDOW\_\-ProfileConfirm(), WINDOW\_\-ProfileImage(), WINDOW\_\-SearchUser(), and WINDOW\_\-SearchUserResult().\index{utils.js@{utils.js}!UTILS\_\-Capitalize@{UTILS\_\-Capitalize}}
+Referenced by CONTACT\_\-ShowUserMenu(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-BanUserWindow(), INTERFACE\_\-CreateContactContent(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateOnlineContent(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-KickUserWindow(), INTERFACE\_\-SetNextButton(), INTERFACE\_\-SetPrevButton(), INTERFACE\_\-SetSearchButton(), INTERFACE\_\-SetSortRatingFunction(), INTERFACE\_\-SetSortUserFunction(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomMenu(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-StartLogin(), INTERFACE\_\-UnbanUserWindow(), WINDOW\_\-Alert(), WINDOW\_\-BanUser(), WINDOW\_\-CancelRoom(), WINDOW\_\-Challenge(), WINDOW\_\-Confirm(), WINDOW\_\-CreateConfirm(), WINDOW\_\-CreateRoom(), WINDOW\_\-CreateWindow(), WINDOW\_\-Invite(), WINDOW\_\-KickUser(), WINDOW\_\-NewWindow(), WINDOW\_\-OldGame(), WINDOW\_\-OldGameSearch(), WINDOW\_\-Profile(), WINDOW\_\-ProfileConfirm(), WINDOW\_\-ProfileImage(), WINDOW\_\-SearchUser(), WINDOW\_\-SearchUserResult(), and WINDOW\_\-UnbanUser().\index{utils.js@{utils.js}!UTILS\_\-Capitalize@{UTILS\_\-Capitalize}}
 \index{UTILS\_\-Capitalize@{UTILS\_\-Capitalize}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-Capitalize ( {\em Word})}\label{utils_8js_fc57b525e3ad6bff0fb72ff91bd877ef}
 
 
 Capitalize a word 
 
-Referenced by CONTACT\_\-ChangeStatus(), CONTACT\_\-ReceiveSubscribe(), DATA\_\-SetRating(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDraw(), INTERFACE\_\-ChangeCurrentRating(), INTERFACE\_\-CreateLangItem(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-ShowGameRoomList(), and ROOM\_\-AddUser().\index{utils.js@{utils.js}!UTILS\_\-ConvertChatString@{UTILS\_\-ConvertChatString}}
+Referenced by CONTACT\_\-ChangeStatus(), CONTACT\_\-ReceiveSubscribe(), DATA\_\-SetRating(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDraw(), INTERFACE\_\-CreateLangItem(), INTERFACE\_\-CreateUserBox(), and INTERFACE\_\-ShowGameRoomList().\index{utils.js@{utils.js}!UTILS\_\-ConvertChatString@{UTILS\_\-ConvertChatString}}
 \index{UTILS\_\-ConvertChatString@{UTILS\_\-ConvertChatString}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-ConvertChatString ( {\em Str})}\label{utils_8js_c1629a3ba5192774b4c092940025483a}
 
@@ -84,7 +86,27 @@ Convert a chat string to a format that can't be interpretated
 \item[Author:]Rubens \end{Desc}
 
 
-Referenced by CHAT\_\-HandleMessage(), CHAT\_\-SendMessage(), and ROOM\_\-SendMessage().\index{utils.js@{utils.js}!UTILS\_\-ConvertTimeStamp@{UTILS\_\-ConvertTimeStamp}}
+Referenced by CHAT\_\-HandleMessage(), CHAT\_\-SendMessage(), and ROOM\_\-SendMessage().\index{utils.js@{utils.js}!UTILS\_\-ConvertSearchDate@{UTILS\_\-ConvertSearchDate}}
+\index{UTILS\_\-ConvertSearchDate@{UTILS\_\-ConvertSearchDate}!utils.js@{utils.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-ConvertSearchDate ( {\em TimeStamp}, \/   {\em Type})}\label{utils_8js_621dd7a769524e3500244a24f37e4929}
+
+
+Return the date-time string to search old games input format (dd/mm/yyyy) output format (yyyy-mm-ddTnn:nn:nnZ)
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em TimeStamp}]Date string \item[{\em Type}]begin or end \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]String \end{Desc}
+\begin{Desc}
+\item[See also:]INTERFACE\_\-SetSearchButton(Node) \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+Referenced by INTERFACE\_\-SetSearchButton().\index{utils.js@{utils.js}!UTILS\_\-ConvertTimeStamp@{UTILS\_\-ConvertTimeStamp}}
 \index{UTILS\_\-ConvertTimeStamp@{UTILS\_\-ConvertTimeStamp}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-ConvertTimeStamp ( {\em TimeStamp})}\label{utils_8js_6acba470a5c451ac329ce8a23f25a259}
 
@@ -106,14 +128,14 @@ Referenced by OLDGAME\_\-HandleSearchOldGame(), and PROFILE\_\-HandleRatings().\
 
 Create cookies 
 
-Referenced by INTERFACE\_\-CreateLangItem(), LOGIN\_\-Login(), and UTILS\_\-DeleteCookie().\index{utils.js@{utils.js}!UTILS\_\-CreateElement@{UTILS\_\-CreateElement}}
+Referenced by LOGIN\_\-Login(), START\_\-ChangeLanguage(), and UTILS\_\-DeleteCookie().\index{utils.js@{utils.js}!UTILS\_\-CreateElement@{UTILS\_\-CreateElement}}
 \index{UTILS\_\-CreateElement@{UTILS\_\-CreateElement}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-CreateElement ( {\em Element}, \/   {\em Id}, \/   {\em ClassName}, \/   {\em Inner})}\label{utils_8js_e23c9414d52b5607640f6ec9e25942d9}
 
 
 
 
-Referenced by CONTACT\_\-ChangeStatus(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-AddOldGameResultR(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateBoard(), INTERFACE\_\-CreateChat(), INTERFACE\_\-CreateChatList(), INTERFACE\_\-CreateContact(), INTERFACE\_\-CreateContactList(), INTERFACE\_\-CreateGame(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateHorizontalIndex(), INTERFACE\_\-CreateInterface(), INTERFACE\_\-CreateLangItem(), INTERFACE\_\-CreateLanguage(), INTERFACE\_\-CreateLeft(), INTERFACE\_\-CreateMoveList(), INTERFACE\_\-CreateOldGameMoveList(), INTERFACE\_\-CreateOldGameTab(), INTERFACE\_\-CreatePhoto(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateRooms(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTimer(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateUserElement(), INTERFACE\_\-CreateVerticalIndex(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-NewPiece(), INTERFACE\_\-ProfileSetRatings(), INTERFACE\_\-ShowCancelRoomWindow(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowChatMessage(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowGameRoomMenu(), INTERFACE\_\-ShowOldGameResultWindow(), INTERFACE\_\-ShowOldGameSearchWindow(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowProfileConfirmWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-ShowRoomList(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserResultWindow(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-ShowUserMenu(), INTERFACE\_\-StartLoad(), INTERFACE\_\-StartLogin(), WINDOW\_\-CreateAlert(), WINDOW\_\-CreateConfirm(), and WINDOW\_\-CreateImageSend().\index{utils.js@{utils.js}!UTILS\_\-DeleteCookie@{UTILS\_\-DeleteCookie}}
+Referenced by CONTACT\_\-ChangeStatus(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-BanUserWindow(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateBoard(), INTERFACE\_\-CreateChat(), INTERFACE\_\-CreateChatList(), INTERFACE\_\-CreateContact(), INTERFACE\_\-CreateContactContent(), INTERFACE\_\-CreateGame(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateGroup(), INTERFACE\_\-CreateHorizontalIndex(), INTERFACE\_\-CreateInterface(), INTERFACE\_\-CreateLangItem(), INTERFACE\_\-CreateLanguage(), INTERFACE\_\-CreateLeft(), INTERFACE\_\-CreateMoveList(), INTERFACE\_\-CreateOldGameMoveList(), INTERFACE\_\-CreateOldGameTab(), INTERFACE\_\-CreateOnlineContent(), INTERFACE\_\-CreatePhoto(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateRooms(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTimer(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUser(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateUserElement(), INTERFACE\_\-CreateUserList(), INTERFACE\_\-CreateVerticalIndex(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-KickUserWindow(), INTERFACE\_\-NewPiece(), INTERFACE\_\-ProfileSetRatings(), INTERFACE\_\-ShowCancelRoomWindow(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowChatMessage(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowGameRoomMenu(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowProfileConfirmWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-ShowRoomList(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserResultWindow(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-ShowUserMenu(), INTERFACE\_\-StartLoad(), INTERFACE\_\-StartLogin(), INTERFACE\_\-UnbanUserWindow(), WINDOW\_\-CreateAlert(), WINDOW\_\-CreateConfirm(), and WINDOW\_\-CreateImageSend().\index{utils.js@{utils.js}!UTILS\_\-DeleteCookie@{UTILS\_\-DeleteCookie}}
 \index{UTILS\_\-DeleteCookie@{UTILS\_\-DeleteCookie}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-DeleteCookie ( {\em CookieName})}\label{utils_8js_273e5b36566494c592bee66e3c53dfd0}
 
@@ -129,7 +151,7 @@ Referenced by LOGIN\_\-Login().\index{utils.js@{utils.js}!UTILS\_\-GetNodeText@{
 
 Get param name for any browser 
 
-Referenced by CHAT\_\-HandleAnnounceMessage(), CHAT\_\-HandleMessage(), CONTACT\_\-HandleSearchUser(), CONTACT\_\-HandleUserPresence(), GAME\_\-End(), GAME\_\-HandleVCardPhoto(), INTERFACE\_\-CreateLanguage(), INTERFACE\_\-CreateWelcome(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-HandleVCardPhoto(), PROFILE\_\-HandleVCardProfile(), ROOM\_\-HandleMessage(), ROOM\_\-HandleRoomPresence(), and UTILS\_\-GetTag().\index{utils.js@{utils.js}!UTILS\_\-GetOffset@{UTILS\_\-GetOffset}}
+Referenced by ADMIN\_\-HandleUserNotification(), CHAT\_\-HandleAnnounceMessage(), CHAT\_\-HandleMessage(), CONTACT\_\-HandleSearchUser(), CONTACT\_\-HandleUserList(), CONTACT\_\-HandleUserPresence(), GAME\_\-End(), GAME\_\-HandleVCardPhoto(), INTERFACE\_\-CreateLanguage(), INTERFACE\_\-CreateWelcome(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-HandleVCardPhoto(), PROFILE\_\-HandleVCardProfile(), ROOM\_\-HandleMessage(), ROOM\_\-HandleRoomPresence(), and UTILS\_\-GetTag().\index{utils.js@{utils.js}!UTILS\_\-GetOffset@{UTILS\_\-GetOffset}}
 \index{UTILS\_\-GetOffset@{UTILS\_\-GetOffset}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-GetOffset ( {\em Obj})}\label{utils_8js_0e23f654dcaf6fdeb4e31561a21122ed}
 
@@ -152,7 +174,7 @@ Return content of param
 
 References UTILS\_\-GetNodeText().
 
-Referenced by DATA(), INTERFACE\_\-StartLogin(), REGISTER\_\-GetError(), REGISTER\_\-GetHost(), REGISTER\_\-Labels(), REGISTER\_\-ParseError(), REGISTER\_\-SucessMessage(), and UTILS\_\-GetText().\index{utils.js@{utils.js}!UTILS\_\-GetText@{UTILS\_\-GetText}}
+Referenced by DATA(), REGISTER\_\-GetError(), REGISTER\_\-GetHost(), REGISTER\_\-Labels(), REGISTER\_\-ParseError(), REGISTER\_\-SucessMessage(), START\_\-StartPage(), and UTILS\_\-GetText().\index{utils.js@{utils.js}!UTILS\_\-GetText@{UTILS\_\-GetText}}
 \index{UTILS\_\-GetText@{UTILS\_\-GetText}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-GetText ( {\em TagName})}\label{utils_8js_81bd0be2fcebdaee0b663fb22f712c61}
 
@@ -161,7 +183,7 @@ Get Text for internacionalization
 
 References MainData, and UTILS\_\-GetTag().
 
-Referenced by CHAT\_\-OpenChat(), CONNECTION\_\-ReceiveXml(), CONTACT\_\-ChangeStatus(), CONTACT\_\-ReceiveSubscribe(), CONTACT\_\-ShowUserMenu(), GAME\_\-End(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDraw(), GAME\_\-RemoveGame(), GAME\_\-SendResign(), IMAGE\_\-B64Img(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-AddOldGameResultR(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateContactList(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateOldGameMoveList(), INTERFACE\_\-CreateOldGameTab(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateRooms(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-NewPiece(), INTERFACE\_\-ProfileSetGroup(), INTERFACE\_\-RemoveGame(), INTERFACE\_\-ShowCancelRoomWindow(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowOldGameResultWindow(), INTERFACE\_\-ShowOldGameSearchWindow(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowProfileConfirmWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserResultWindow(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-ShowUserMenu(), INTERFACE\_\-StartLoad(), INTERFACE\_\-StartLogin(), LOGIN\_\-Load(), LOGIN\_\-Load2(), LOGIN\_\-Load3(), LOGIN\_\-Load4(), LOGIN\_\-Login(), LOGIN\_\-LoginFailed(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-LoadGameHistory(), PARSER\_\-ParseXml(), REGISTER\_\-GetDatabaseError(), ROOM\_\-EnterRoom(), ROOM\_\-ExitRoom(), ROOM\_\-HandleRoomList(), WINDOW\_\-CancelRoom(), WINDOW\_\-Challenge(), WINDOW\_\-CreateImageSend(), WINDOW\_\-CreateRoom(), WINDOW\_\-Invite(), WINDOW\_\-OldGame(), WINDOW\_\-OldGameResult(), WINDOW\_\-OldGameSearch(), WINDOW\_\-Profile(), WINDOW\_\-ProfileConfirm(), WINDOW\_\-ProfileImage(), WINDOW\_\-SearchUser(), and WINDOW\_\-SearchUserResult().\index{utils.js@{utils.js}!UTILS\_\-GetTime@{UTILS\_\-GetTime}}
+Referenced by CHAT\_\-OpenChat(), CONNECTION\_\-ReceiveXml(), CONTACT\_\-ChangeStatus(), CONTACT\_\-ReceiveSubscribe(), CONTACT\_\-ShowUserMenu(), GAME\_\-End(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDraw(), GAME\_\-RemoveGame(), GAME\_\-SendResign(), IMAGE\_\-B64Img(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateContact(), INTERFACE\_\-CreateContactContent(), INTERFACE\_\-CreateGameOptions(), INTERFACE\_\-CreateOldGameMoveList(), INTERFACE\_\-CreateOldGameTab(), INTERFACE\_\-CreateOnlineContent(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateRooms(), INTERFACE\_\-CreateTab(), INTERFACE\_\-CreateTop(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateUserList(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-NewPiece(), INTERFACE\_\-ProfileSetGroup(), INTERFACE\_\-RemoveGame(), INTERFACE\_\-SetSearchButton(), INTERFACE\_\-ShowCancelRoomWindow(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowProfileConfirmWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-ShowRoomMenu(), INTERFACE\_\-ShowSearchUserResultWindow(), INTERFACE\_\-ShowSearchUserWindow(), INTERFACE\_\-ShowUserMenu(), INTERFACE\_\-StartLoad(), INTERFACE\_\-StartLogin(), LOGIN\_\-Load(), LOGIN\_\-Load2(), LOGIN\_\-Load3(), LOGIN\_\-Load4(), LOGIN\_\-Login(), LOGIN\_\-LoginFailed(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-LoadGameHistory(), PARSER\_\-ParseXml(), REGISTER\_\-GetDatabaseError(), ROOM\_\-EnterRoom(), ROOM\_\-ExitRoom(), ROOM\_\-HandleRoomList(), WINDOW\_\-CancelRoom(), WINDOW\_\-Challenge(), WINDOW\_\-CreateImageSend(), WINDOW\_\-CreateRoom(), WINDOW\_\-Invite(), WINDOW\_\-OldGame(), WINDOW\_\-OldGameSearch(), WINDOW\_\-Profile(), WINDOW\_\-ProfileConfirm(), WINDOW\_\-ProfileImage(), WINDOW\_\-SearchUser(), and WINDOW\_\-SearchUserResult().\index{utils.js@{utils.js}!UTILS\_\-GetTime@{UTILS\_\-GetTime}}
 \index{UTILS\_\-GetTime@{UTILS\_\-GetTime}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-GetTime ( {\em Timestamp})}\label{utils_8js_fece2ad852b4b46769ab931b8771bbf7}
 
@@ -193,14 +215,14 @@ Referenced by DATA().\index{utils.js@{utils.js}!UTILS\_\-OpenXMLFile@{UTILS\_\-O
 
 Open a XML file and return XML DOM Tree 
 
-Referenced by DATA(), INTERFACE\_\-CreateLanguage(), INTERFACE\_\-StartLogin(), REGISTER\_\-GetError(), REGISTER\_\-GetHost(), REGISTER\_\-Labels(), REGISTER\_\-ParseError(), and REGISTER\_\-SucessMessage().\index{utils.js@{utils.js}!UTILS\_\-ReadCookie@{UTILS\_\-ReadCookie}}
+Referenced by DATA(), INTERFACE\_\-CreateLanguage(), REGISTER\_\-GetError(), REGISTER\_\-GetHost(), REGISTER\_\-Labels(), REGISTER\_\-ParseError(), REGISTER\_\-SucessMessage(), and START\_\-StartPage().\index{utils.js@{utils.js}!UTILS\_\-ReadCookie@{UTILS\_\-ReadCookie}}
 \index{UTILS\_\-ReadCookie@{UTILS\_\-ReadCookie}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-ReadCookie ( {\em CookieName})}\label{utils_8js_37675f2c39d701446bfb63680d04eeb0}
 
 
 Read cookies 
 
-Referenced by INTERFACE\_\-StartLogin().\index{utils.js@{utils.js}!UTILS\_\-RemoveListener@{UTILS\_\-RemoveListener}}
+Referenced by INTERFACE\_\-StartLogin(), and START\_\-StartPage().\index{utils.js@{utils.js}!UTILS\_\-RemoveListener@{UTILS\_\-RemoveListener}}
 \index{UTILS\_\-RemoveListener@{UTILS\_\-RemoveListener}!utils.js@{utils.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function UTILS\_\-RemoveListener ( {\em Element}, \/   {\em Type}, \/   {\em Expression}, \/   {\em Bubbling})}\label{utils_8js_822026767f00a1356d49df24513f9ded}
 

@@ -29,6 +29,8 @@
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">function&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="room_2room_8js.html#e88940f31ea79698692d9fcbf49e04bf">ROOM_HandleGameRoomInfoList</a> (XML)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">function&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="room_2room_8js.html#b808dbbcc855d292d50a67bbdbeb5f8d">ROOM_HandleInfo</a> (XML)</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">function&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="room_2room_8js.html#826f57caabe7d468297581a021fa17ef">ROOM_SendMessage</a> (RoomName, Message)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">function&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="room_2room_8js.html#99678e0a267a2fa6853fe401b4b8be73">ROOM_ShowRoomList</a> (OffsetLeft)</td></tr>
@@ -104,7 +106,7 @@
 
 <p>
 Insert user in room list 
-<p>References <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="message_8js-source.html#l00264">MESSAGE_Info()</a>, and <a class="el" href="utils_8js-source.html#l00232">UTILS_Capitalize()</a>.</p>
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>, and <a class="el" href="message_8js-source.html#l00264">MESSAGE_Info()</a>.</p>
 
 <p>Referenced by <a class="el" href="room_2room_8js-source.html#l00033">ROOM_HandleRoomPresence()</a>.</p>
 
@@ -128,7 +130,7 @@ Insert user in room list
 
 <p>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00753">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00540">ROOM_FocusRoom()</a>, and <a class="el" href="interface_2room_8js-source.html#l00036">RoomObj()</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00623">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00621">ROOM_FocusRoom()</a>, and <a class="el" href="interface_2room_8js-source.html#l00036">RoomObj()</a>.</p>
 
 <p>Referenced by <a class="el" href="room_2room_8js-source.html#l00033">ROOM_HandleRoomPresence()</a>.</p>
 
@@ -160,9 +162,9 @@ Send presence to a room (enter room)<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>string "" </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Ulysses </dd></dl>
 
-<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="message_8js-source.html#l00147">MESSAGE_Presence()</a>, and <a class="el" href="utils_8js-source.html#l00109">UTILS_GetText()</a>.</p>
+<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="message_8js-source.html#l00147">MESSAGE_Presence()</a>, and <a class="el" href="utils_8js-source.html#l00132">UTILS_GetText()</a>.</p>
 
-<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00339">INTERFACE_ShowRoomList()</a>.</p>
+<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00209">INTERFACE_ShowRoomList()</a>.</p>
 
 </div>
 </div><p>
@@ -184,9 +186,9 @@ Send presence to a room (enter room)<p>
 
 <p>
 Send presence to a room game(enter room game) 
-<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, and <a class="el" href="message_8js-source.html#l00147">MESSAGE_Presence()</a>.</p>
+<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, and <a class="el" href="message_8js-source.html#l00147">MESSAGE_Presence()</a>.</p>
 
-<p>Referenced by <a class="el" href="game_2game_8js-source.html#l00566">GAME_StartObserverGame()</a>.</p>
+<p>Referenced by <a class="el" href="game_2game_8js-source.html#l00567">GAME_StartObserverGame()</a>.</p>
 
 </div>
 </div><p>
@@ -215,9 +217,9 @@ Exit a room. <dl compact><dt><b>Parameters:</b></dt><dd>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>XMPP with presence unavailable to a room </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Pedro and Rubens </dd></dl>
 
-<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="message_8js-source.html#l00210">MESSAGE_Unavailable()</a>, <a class="el" href="utils_8js-source.html#l00109">UTILS_GetText()</a>, and <a class="el" href="window_2window_8js-source.html#l00109">WINDOW_Alert()</a>.</p>
+<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="message_8js-source.html#l00210">MESSAGE_Unavailable()</a>, <a class="el" href="utils_8js-source.html#l00132">UTILS_GetText()</a>, and <a class="el" href="window_2window_8js-source.html#l00109">WINDOW_Alert()</a>.</p>
 
-<p>Referenced by <a class="el" href="game_2game_8js-source.html#l00692">GAME_RemoveGame()</a>, <a class="el" href="interface_2room_8js-source.html#l00753">INTERFACE_CreateRoomInBar()</a>, and <a class="el" href="game_2oldgame_8js-source.html#l00462">OLDGAME_RemoveOldGame()</a>.</p>
+<p>Referenced by <a class="el" href="game_2game_8js-source.html#l00693">GAME_RemoveGame()</a>, <a class="el" href="interface_2room_8js-source.html#l00623">INTERFACE_CreateRoomInBar()</a>, and <a class="el" href="game_2oldgame_8js-source.html#l00462">OLDGAME_RemoveOldGame()</a>.</p>
 
 </div>
 </div><p>
@@ -239,9 +241,9 @@ Exit a room. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 <p>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00709">INTERFACE_FocusRoom()</a>, and <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00579">INTERFACE_FocusRoom()</a>, and <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
 
-<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00481">INTERFACE_ChangeRoomListVisibility()</a>, <a class="el" href="interface_2room_8js-source.html#l00753">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="interface_2room_8js-source.html#l00709">INTERFACE_FocusRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00524">ROOM_CreateRoom()</a>, and <a class="el" href="room_2room_8js-source.html#l00556">ROOM_RemoveRoom()</a>.</p>
+<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00351">INTERFACE_ChangeRoomListVisibility()</a>, <a class="el" href="interface_2room_8js-source.html#l00623">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="interface_2room_8js-source.html#l00579">INTERFACE_FocusRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00605">ROOM_CreateRoom()</a>, and <a class="el" href="room_2room_8js-source.html#l00637">ROOM_RemoveRoom()</a>.</p>
 
 </div>
 </div><p>
@@ -271,7 +273,7 @@ Handle game room information. Get game room information and show in interface<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>void </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Rubens </dd></dl>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00415">INTERFACE_ShowGameRoomList()</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00285">INTERFACE_ShowGameRoomList()</a>.</p>
 
 <p>Referenced by <a class="el" href="parser__iq_8js-source.html#l00021">PARSER_ParseIq()</a>.</p>
 
@@ -305,7 +307,37 @@ Handle game room list, and resend a request for game information for each game.<
 
 <p>References <a class="el" href="message_8js-source.html#l00484">MESSAGE_GameRoomInfoList()</a>.</p>
 
-<p>Referenced by <a class="el" href="room_2room_8js-source.html#l00175">ROOM_HandleRoomList()</a>.</p>
+<p>Referenced by <a class="el" href="room_2room_8js-source.html#l00174">ROOM_HandleRoomList()</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="b808dbbcc855d292d50a67bbdbeb5f8d"></a><!-- doxytag: member="room.js::ROOM_HandleInfo" ref="b808dbbcc855d292d50a67bbdbeb5f8d" args="(XML)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">function ROOM_HandleInfo           </td>
+          <td>(</td>
+          <td class="paramtype">&nbsp;</td>
+          <td class="paramname"> <em>XML</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td width="100%"></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Handle chess user information. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>XML</em>&nbsp;</td><td>XMPP that contains users ratings and type. </td></tr>
+  </table>
+</dl>
+<dl class="author" compact><dt><b>Author:</b></dt><dd>Rubens Suguimoto </dd></dl>
+
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
+
+<p>Referenced by <a class="el" href="parser__iq_8js-source.html#l00021">PARSER_ParseIq()</a>.</p>
 
 </div>
 </div><p>
@@ -335,7 +367,7 @@ Handle group chat messages<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>void </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Ulysses </dd></dl>
 
-<p>References <a class="el" href="room_2room_8js-source.html#l00445">ROOM_ShowMessage()</a>, and <a class="el" href="utils_8js-source.html#l00118">UTILS_GetNodeText()</a>.</p>
+<p>References <a class="el" href="room_2room_8js-source.html#l00521">ROOM_ShowMessage()</a>, and <a class="el" href="utils_8js-source.html#l00141">UTILS_GetNodeText()</a>.</p>
 
 <p>Referenced by <a class="el" href="parser__chat_8js-source.html#l00023">PARSER_ParseChat()</a>.</p>
 
@@ -367,7 +399,7 @@ Handle room list in top menu.<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>void </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Ulysses </dd></dl>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00339">INTERFACE_ShowRoomList()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00220">ROOM_HandleGameRoomList()</a>, and <a class="el" href="utils_8js-source.html#l00109">UTILS_GetText()</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00209">INTERFACE_ShowRoomList()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00219">ROOM_HandleGameRoomList()</a>, and <a class="el" href="utils_8js-source.html#l00132">UTILS_GetText()</a>.</p>
 
 <p>Referenced by <a class="el" href="parser__iq_8js-source.html#l00021">PARSER_ParseIq()</a>.</p>
 
@@ -402,7 +434,7 @@ C3SL - Center for Scientific Computing and Free Software Room controller Handle 
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>void </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Ulysses </dd></dl>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00314">INTERFACE_RefreshOccupantsNumber()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00462">ROOM_AddUser()</a>, <a class="el" href="room_2room_8js-source.html#l00524">ROOM_CreateRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00556">ROOM_RemoveRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00512">ROOM_RemoveUser()</a>, and <a class="el" href="utils_8js-source.html#l00118">UTILS_GetNodeText()</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00184">INTERFACE_RefreshOccupantsNumber()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="room_2room_8js-source.html#l00538">ROOM_AddUser()</a>, <a class="el" href="room_2room_8js-source.html#l00605">ROOM_CreateRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00637">ROOM_RemoveRoom()</a>, <a class="el" href="room_2room_8js-source.html#l00593">ROOM_RemoveUser()</a>, and <a class="el" href="utils_8js-source.html#l00141">UTILS_GetNodeText()</a>.</p>
 
 <p>Referenced by <a class="el" href="parser__presence_8js-source.html#l00022">PARSER_ParsePresence()</a>.</p>
 
@@ -426,7 +458,7 @@ C3SL - Center for Scientific Computing and Free Software Room controller Handle 
 
 <p>
 
-<p>References <a class="el" href="interface_2room_8js-source.html#l00802">INTERFACE_CloseRoom()</a>, <a class="el" href="interface_2room_8js-source.html#l00753">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="interface_2room_8js-source.html#l00314">INTERFACE_RefreshOccupantsNumber()</a>, <a class="el" href="interface_2room_8js-source.html#l00548">INTERFACE_RemoveRoomFromList()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, and <a class="el" href="room_2room_8js-source.html#l00540">ROOM_FocusRoom()</a>.</p>
+<p>References <a class="el" href="interface_2room_8js-source.html#l00672">INTERFACE_CloseRoom()</a>, <a class="el" href="interface_2room_8js-source.html#l00623">INTERFACE_CreateRoomInBar()</a>, <a class="el" href="interface_2room_8js-source.html#l00184">INTERFACE_RefreshOccupantsNumber()</a>, <a class="el" href="interface_2room_8js-source.html#l00418">INTERFACE_RemoveRoomFromList()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, and <a class="el" href="room_2room_8js-source.html#l00621">ROOM_FocusRoom()</a>.</p>
 
 <p>Referenced by <a class="el" href="room_2room_8js-source.html#l00033">ROOM_HandleRoomPresence()</a>.</p>
 
@@ -459,7 +491,7 @@ C3SL - Center for Scientific Computing and Free Software Room controller Handle 
 
 <p>
 
-<p>References <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>.</p>
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
 
 <p>Referenced by <a class="el" href="room_2room_8js-source.html#l00033">ROOM_HandleRoomPresence()</a>.</p>
 
@@ -501,9 +533,9 @@ Send a message to room;<p>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>void </dd></dl>
 <dl class="author" compact><dt><b>Author:</b></dt><dd>Rubens </dd></dl>
 
-<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>, <a class="el" href="message_8js-source.html#l00244">MESSAGE_GroupChat()</a>, and <a class="el" href="utils_8js-source.html#l00544">UTILS_ConvertChatString()</a>.</p>
+<p>References <a class="el" href="connection_8js-source.html#l00081">CONNECTION_SendJabber()</a>, <a class="el" href="start_8js-source.html#l00025">MainData</a>, <a class="el" href="message_8js-source.html#l00244">MESSAGE_GroupChat()</a>, and <a class="el" href="utils_8js-source.html#l00608">UTILS_ConvertChatString()</a>.</p>
 
-<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00069">INTERFACE_CreateRoom()</a>.</p>
+<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00065">INTERFACE_CreateRoom()</a>.</p>
 
 </div>
 </div><p>
@@ -578,9 +610,9 @@ Get Game Room list from server and show in pop down top menu<p>
 
 <p>
 
-<p>References <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>.</p>
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
 
-<p>Referenced by <a class="el" href="room_2room_8js-source.html#l00134">ROOM_HandleMessage()</a>.</p>
+<p>Referenced by <a class="el" href="room_2room_8js-source.html#l00133">ROOM_HandleMessage()</a>.</p>
 
 </div>
 </div><p>
@@ -633,9 +665,9 @@ Get Room list from server and show in pop down in top menu<p>
 
 <p>
 
-<p>References <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>.</p>
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
 
-<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00069">INTERFACE_CreateRoom()</a>.</p>
+<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00036">RoomObj()</a>.</p>
 
 </div>
 </div><p>
@@ -657,14 +689,14 @@ Get Room list from server and show in pop down in top menu<p>
 
 <p>
 
-<p>References <a class="el" href="interface_2login_8js-source.html#l00026">MainData</a>.</p>
+<p>References <a class="el" href="start_8js-source.html#l00025">MainData</a>.</p>
 
-<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00069">INTERFACE_CreateRoom()</a>.</p>
+<p>Referenced by <a class="el" href="interface_2room_8js-source.html#l00036">RoomObj()</a>.</p>
 
 </div>
 </div><p>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jun 2 17:16:54 2008 for Xadrez-InterfaceWeb by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jun 23 14:11:50 2008 for Xadrez-InterfaceWeb by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
 </body>
