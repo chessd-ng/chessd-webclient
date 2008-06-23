@@ -183,14 +183,37 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 */
 function INTERFACE_RefreshOccupantsNumber(RoomName)
 {
-	// Get number of occupants in room data struct
-	var N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
-	// Get element in interface that will be refreshed
-	var Node = document.getElementById(RoomName+"_occupants");
+	var N_Occupants;
+	var Focused;
+	var Node;
+
+	// If general room
+	if (RoomName == "general")
+	{
+		// Get element in interface that will be refreshed
+		Node = document.getElementById("general_occupants");
+	}
+	else {
+		// else get name of focused room
+		Focused = document.getElementById("RoomSecName").innerHTML;
+		// If change of occupant's number occured in focused room
+		if (Focused == RoomName)
+		{
+			// Get element in interface that will be refreshed
+			Node = document.getElementById("Sec_occupants");
+		}
+		// else do nothing
+		else
+		{
+			Node = null;
+		}
+	}
 	
 	// If Room is showed at interface, refresh the number of occupants
 	if(Node)
 	{
+		// Get number of occupants in room data struct
+		N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
 		Node.innerHTML= " ("+N_Occupants+")";
 	}
 }
@@ -465,56 +488,6 @@ function INTERFACE_ShowEmoticonList(RName)
 		if (Hide == 2)
 		{
 			UTILS_RemoveListener(document, "click", Func, false);
-
-/*
-* Show or hide list of user's rooms 
-* 
-* @public 
-* 
-nction INTERFACE_ChangeRoomListVisibility() 
-{ 
-        var Div, List, Node, Item, i; 
-        var Menu = document.getElementById('RoomListMenu'); 
-        var Node = document.getElementById('RoomList'); 
- 
-        // If already exists room list menu, hide it 
-        if (Menu) 
-        { 
-                Menu.parentNode.removeChild(Menu); 
-                return; 
-        } 
- 
-        // Creating menu 
-        Div = UTILS_CreateElement("div", "RoomListMenu"); 
-        List = UTILS_CreateElement('ul'); 
- 
-        Div.style.position = "absolute"; 
-         
-        // Population list with user's rooms 
-        for (i=0; i < MainData.RoomList.length; i++) 
-        { 
-                Item = UTILS_CreateElement('li'); 
-                Item.innerHTML = MainData.RoomList[i].Name; 
-                Item.onclick = function () { 
-                        INTERFACE_FocusRoom(this.innerHTML); 
-                        INTERFACE_ChangeRoomListVisibility(); 
-                } 
-                List.appendChild(Item); 
-        } 
- 
-        Div.appendChild(List); 
- 
-        try 
-        { 
-                document.getElementById('Rooms').insertBefore(Div, Node); 
-        } 
-        catch(e) 
-        { 
-                return false; 
-        } 
-        return true; 
-}
-*/
 			INTERFACE_HideEmoticonList();
 		}
 	};
@@ -613,6 +586,7 @@ function INTERFACE_FocusRoom(RoomName)
 		Node.innerHTML = RoomName;
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
+		INTERFACE_RefreshOccupantsNumber(RoomName);
 	}
 
 	return true;
@@ -647,7 +621,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
-		RoomOcupants = UTILS_CreateElement('span',RoomName+"_occupants",null," (0)");
+		RoomOcupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
 		RoomItem.appendChild(RoomOcupants);
 
 		RoomItem.onclick = function () {
