@@ -57,6 +57,14 @@ function START_StartPage()
 	INTERFACE_StartLogin(Lang);
 }
 
+/*
+* @brief	Set new language and re-show login page
+*
+* Set new language in main data and show login page with new language selected
+*
+* @param 	Lang	Language in ISO 639 and ISO 3166 format standard.
+* @author 	Rubens Suguimoto
+*/
 function START_ChangeLanguage(Lang)
 {
 	// Close login div
