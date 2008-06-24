@@ -314,8 +314,7 @@
 }
 
 #SearchUserDiv td {
-	padding-left	:	10px;
-	width					:	130px;
+	width					:	160px;
 }
 
 #SearchUserDiv td:hover {
@@ -329,11 +328,12 @@
 
 #SearchUserDiv .no_found {
 	padding-left	:	5px;
+	font-size 	: 10px;
 }
 
 #SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
-	padding-left	:	4mm;
+	padding-left	:	8%;
 }
 
 #SearchUserDiv #OptionDiv {
@@ -349,8 +349,8 @@
 
 #SearchUserDiv #ListDiv {
 	text-align 	:	left;
-	padding-left	:	12px;
-	width					:	150px;
+	margin-left	:	8%;
+	width					:	90%;
 	display				:	block;
 	overflow			:	auto;
 	height				:	58px;

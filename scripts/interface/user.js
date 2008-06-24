@@ -522,6 +522,10 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2;
 	}
+	else if (ParentNode.id.match("ListDiv") != null) 
+	{
+		Offset= 3;
+	}
 
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
