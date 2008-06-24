@@ -82,8 +82,11 @@ function DATA(ConfFile, LangFile)
 	this.ChatList = new Array();
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
-	this.ChallengeList = new Array();
 	this.ChatList = new Array();
+
+	this.ChallengeList = new Array();
+	this.ChallengeSequence = 0;
+	this.AnnounceList = new Array();
 
 	this.CurrentRoom = null;
 
@@ -150,9 +153,8 @@ DATA.prototype.FindChat = DATA_FindChat;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
-DATA.prototype.RemoveChallengeById = DATA_RemoveChallengeById;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
-DATA.prototype.FindChallengeById = DATA_FindChallengeById;
+DATA.prototype.UpdateChallenge = DATA_UpdateChallenge;
 DATA.prototype.ClearChallenges = DATA_ClearChallenges;
 DATA.prototype.AddChallengeWindow = DATA_AddChallengeWindow;
 
@@ -996,25 +998,48 @@ function DATA_FindChat(Username)
 /**
 * Add a challenge in 'ChallengeList'
 */
-function DATA_AddChallenge(Username, Id, Challenger)
+function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated, MatchId)
 {
 	// Creating a new object
 	var Challenge = new Object();
+	var ChallengerObj = new Object();
+	var ChallengedObj = new Object();
 	var i;
 
-	i = this.FindChallenge(Username);
+	i = this.FindChallenge(ChallengeId, MatchId);
 	
 	// Challenge already exist on structure
 	if (i != null)
 	{
-		if (this.ChallengeList[i].Challenger == Challenger)
-			return null;
+		return null;
 	}
 
+	ChallengerObj.Name  = Challenger.Name;
+	ChallengerObj.Time  = Challenger.Time * 60;
+	ChallengerObj.Inc  = Challenger.Inc;
+	ChallengerObj.Color  = Challenger.Color;
+
+	ChallengedObj.Name  = Challenged.Name;
+	ChallengedObj.Time  = Challenged.Time * 60;
+	ChallengedObj.Inc  = Challenged.Inc;
+	ChallengedObj.Color  = Challenged.Color;
+
 	// Setting atributes
-	Challenge.Username = Username;
-	Challenge.Id = Id;
-	Challenge.Challenger = Challenger;
+	Challenge.ChallengeId = ChallengeId;
+	Challenge.Challenger = ChallengerObj;
+	Challenge.Challenged = ChallengedObj;
+	Challenge.Category = Category;
+	Challenge.Rated = Rated;
+
+	if(MatchId == null)
+	{
+		Challenge.MatchId = null;
+	}
+	else
+	{
+		Challenge.MatchId = MatchId;
+	}
+
 	Challenge.Window = null;
 
 	this.ChallengeList[this.ChallengeList.length] = Challenge;
@@ -1022,28 +1047,78 @@ function DATA_AddChallenge(Username, Id, Challenger)
 	return true;
 }	
 
+/**
+* Update a challenge in 'ChallengeList'
+*/
+function DATA_UpdateChallenge(ChallengeId, Challenger, Challenged, Category, Rated, MatchId)
+{
+	// Creating a new object
+	var Challenge;
+	var i;
+
+	i = this.FindChallenge(ChallengeId, MatchId);
+	
+	// Challenge already exist on structure
+	if (i == null)
+	{
+			return null;
+	}
+
+	Challenge = MainData.ChallengeList[i];
+
+	// Setting atributes
+	if(ChallengeId != null)
+	{
+		Challenge.ChallengeId = ChallengeId;
+	}
+
+	if(Challenger != null)
+	{
+		Challenge.Challenger = Challenger;
+	}
+
+	if(Challenged != null)
+	{
+		Challenge.Challenged = Challenged;
+	}
+
+	if(Category != null)
+	{
+		Challenge.Category = Category;
+	}
+
+	if(Rated != null)
+	{
+		Challenge.Rated = Rated;
+	}
+
+	if(MatchId != null)
+	{
+		Challenge.MatchId = MatchId;
+	}
+
+	//Challenge.Window = Window;
+
+	return true;
+}
 
 /**
 * Remove a challenge in 'ChallengeList'
 */
-function DATA_RemoveChallenge(Username)
+function DATA_RemoveChallenge(ChallengeId, MatchId)
 {
 	var i;
 
-	// Try to find Username on ChallengeList
-	i = this.FindChallenge(Username);
+	i = this.FindChallenge(ChallengeId, MatchId);
 
-	// No challenge with the user given
+	// No challenge with id founded
 	if (i == null)
 	{
 		return null;
 	}
 
-	else 
-	{
-		// Remove from the list the position of the challenge
-		this.ChallengeList.splice(i, 1);
-	}
+	// Remove from the list the position of the challenge
+	this.ChallengeList.splice(i, 1);
 
 	return "";
 }	
@@ -1052,6 +1127,7 @@ function DATA_RemoveChallenge(Username)
 /**
 * Remove a challenge by ID in 'ChallengeList'
 */
+/*
 function DATA_RemoveChallengeById(ID)
 {
 	var i;
@@ -1073,7 +1149,7 @@ function DATA_RemoveChallengeById(ID)
 
 	return "";
 }	
-
+*/
 
 /**
 * Remove all challenges in 'ChallengeList'
@@ -1089,21 +1165,36 @@ function DATA_ClearChallenges()
 
 /**
 * Find a challenge in 'ChallengeList'
+* You can find a challenge by ChallengeId or MatchId;
+* This is used because interface create a instance of challenge
+* before get match id from server. If server send a error, this function
+* is able to find challenge in challenge list;
 */
-function DATA_FindChallenge(Username)
+function DATA_FindChallenge(ChallengeId, MatchId)
 {
 	var i;
-	
+	// If match id exists, find by match id
+	if(MatchId != null)
+	{
+		for (i=0 ; i < this.ChallengeList.length ; i++)
+		{
+			if (this.ChallengeList[i].MatchId == MatchId)
+			{
+				return i;
+			}
+		}
+	}
+
+	// By default, find by challenge id
 	for (i=0 ; i < this.ChallengeList.length ; i++)
 	{
-		// A challenge with the username given already exist on structure
-		if (this.ChallengeList[i].Username == Username)
+		if (this.ChallengeList[i].ChallengeId == ChallengeId)
 		{
 			return i;
 		}
 	}
-	
-	// User not found
+
+	// Challenge not found
 	return null;
 	
 }
@@ -1112,6 +1203,7 @@ function DATA_FindChallenge(Username)
 /**
 * Find a challenge in 'ChallengeList'
 */
+/*
 function DATA_FindChallengeById(ID)
 {
 	var i;
@@ -1127,10 +1219,10 @@ function DATA_FindChallengeById(ID)
 	// ID not found
 	return null;
 }
-
+*/
 function DATA_AddChallengeWindow (Id, WindowObj)
 {
-	var i = this.FindChallengeById(Id);
+	var i = this.FindChallenge(Id, Id);
 
 	if (i != null)
 	{

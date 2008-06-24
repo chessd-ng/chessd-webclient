@@ -156,7 +156,7 @@ function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, Title);
 
 	// Add Window Object in challenge's list
-	MainData.AddChallengeWindow (MatchId, WindowObj);
+	MainData.AddChallengeWindow(MatchId, WindowObj);
 
 
 	// If you receive a challenge

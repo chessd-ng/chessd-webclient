@@ -374,12 +374,23 @@ function MESSAGE_RemoveContact(User)
 *
 * The 'Color' field must content just the first letter
 */
-function MESSAGE_Challenge(Category, Rated, Players, GameID)
+function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 {
-	var i, Id, XMPP = "";
+	var i;
+	var Id;
+	var XMPP = "";
 
 	// Setting iq's id
-	Id = MainData.Const.IQ_ID_Challenge;
+	if(ChallengeID == null)
+	{
+		Id = MainData.Const.IQ_ID_Challenge;
+	}
+	else
+	{
+		Id = ChallengeID;
+	}
+
+	/*
 	for (i=0; i < Players.length; i++)
 	{
 		if (Players[i].Name == MainData.Username)
@@ -388,20 +399,20 @@ function MESSAGE_Challenge(Category, Rated, Players, GameID)
 		}
 		Id += "_"+Players[i].Name;
 	}
-
+	*/
 	// Tag the id with the challenged player's name
 	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+Id+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
 
 	// Game offer
-	if (GameID == null)
+	if (MatchID == null)
 	{
 		XMPP += "<match category='"+Category+"' rated='"+Rated+"' >";
 	}
 	// Reoffer
 	else 
 	{
-		XMPP += "<match category='"+Category+"' rated='"+Rated+"' id='"+GameID+"' >";
+		XMPP += "<match category='"+Category+"' rated='"+Rated+"' id='"+MatchID+"' >";
 	}
 
 	// Creating players tags

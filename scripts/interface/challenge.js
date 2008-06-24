@@ -527,7 +527,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 			Rated = false;
 		}
 
-		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
+		GAME_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
