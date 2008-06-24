@@ -9,13 +9,15 @@
 <body onload="REGISTER_Labels()" onresize="REGISTER_VerticalAlignMiddle()">
 	<div id="mainDiv">
 		<h1 id="register_title"></h1>
-		<p class="italic" id="register_inf"></p>
-		<p><b id="register_user_name"></b><input type="text" class="nik" id="username"></p>
+		<p id="register_inf"></p>
+		<div id="FormDiv">
+		<p><b id="register_login"><span class="mitalic" id="register_max_char"></span></b><input type="text" class="nik" id="username"></p>
 		<p id="register_user_inf" class="italic"></p>
-		<p><b id="register_mail"></b><input type="text" class="mail" id="mail"></p>
+		<p><b id="register_mail1"><span class="mitalic" id="register_mail2"></span></b><input type="text" class="mail" id="mail"></p>
 		<p class="italic" id="register_mail_inf"></p>
 		<p><b id="register_passwd"></b><input type="password" class="pwd" id="pwd"></p>
-		<p><b id="register_passwd_confirm"></b><input type="password" class="pwd" id="confpwd"></p>
+		<p><b id="register_passwd_confirm1"><span class="mitalic" id="register_passwd_confirm2"></span></b><input type="password" class="pwd" id="confpwd"></p>
+		</div>
 		<p class="special">
 		<input type="button" class="enter" value="Cadastrar" id="register" onclick="REGISTER_Post()">
 		<input type="button" class="enter" value="Cancelar" id="cancel" onclick="window.location.href='./'">

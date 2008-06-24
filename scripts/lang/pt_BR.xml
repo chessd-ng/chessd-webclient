@@ -256,16 +256,19 @@
 	<register>
 		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre.</register_inf>
 		<register_title>Cadastro</register_title>
-		<register_user_name>Nome de Usuário:</register_user_name>
+		<register_login>Login </register_login>
+		<register_max_char>(máx. 14 caracteres)</register_max_char>
 		<register_user_inf>Usar somente caracteres minúsculos, números, sem espaços, '-', '.' e '_' </register_user_inf>
-		<register_mail>E-mail (opcional):</register_mail>
+		<register_mail1>E-mail </register_mail1>
+		<register_mail2>(opcional)</register_mail2>
 		<register_mail_inf>Permite recuperar sua senha em caso de esquecimento.</register_mail_inf>
 		<register_passwd>Senha:</register_passwd>
-		<register_passwd_confirm>Senha (confirmação):</register_passwd_confirm>
+		<register_passwd_confirm1>Senha </register_passwd_confirm1>
+		<register_passwd_confirm2>(confirmação)</register_passwd_confirm2>
 		<register_bt_confirm>Cadastrar</register_bt_confirm>
 		<register_bt_cancel>Cancelar</register_bt_cancel>
 		<register_invalid_user_name>Nome de usuário inválido</register_invalid_user_name>
-		<register_invalid_user_name_len>Nome de usuário deve possuir menos do que 14 caracteres.</register_invalid_user_name_len>
+		<register_invalid_user_name_len>O Login deve possuir no máximo 14 caracteres.</register_invalid_user_name_len>
 		<register_invalid_mail>E-mail inválido</register_invalid_mail>
 		<register_invalid_password>Senha não confere</register_invalid_password>
 		<register_error_409>Usuário já cadastrado</register_error_409>
