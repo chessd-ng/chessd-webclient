@@ -452,7 +452,7 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 	Tr = UTILS_CreateElement("tr",Username);
 
 	// Default type
-	if (Type == null)
+	if ((Type == null) || (Type== ""))
 	{
 		Type = "user";
 	}
