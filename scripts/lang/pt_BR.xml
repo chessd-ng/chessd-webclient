@@ -76,6 +76,7 @@
 		<contact_user>Usuário</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
+		<contact_robot>Robô</contact_robot>
 		<contact_search_by>Buscar por:</contact_search_by>
 		<contact_by_name>Nome</contact_by_name>
 		<contact_by_user>Apelido</contact_by_user>

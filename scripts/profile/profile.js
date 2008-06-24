@@ -142,6 +142,8 @@ function PROFILE_HandleInfoProfile(XML)
 			}
 
 			Profile.Profile.SetGroup(Type);
+
+			Profile.Profile.SetTitleImg(Type);
 		
 			Rating = PROFILE_HandleRatings(RatingNodes);
 
