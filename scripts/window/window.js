@@ -199,14 +199,31 @@ function WINDOW_CreateRoom()
 	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create_room'));
 
 	// Focus room name input
-	document.getElementById('CreateRoomInputName').focus();
+	var Input = document.getElementById('CreateRoomInputName');
+	Input.focus();
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Create Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", 
+		function() { 
+				if (Input.value == '' || Input.value == null)
+					return;
+				else
+					 WINDOW_RemoveWindow(WindowObj);
+	}, false);
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Input - Close window if input value isn't a null or empty string
+	UTILS_AddListener(WindowObj.eventButtons[3],"keypress", 
+		function(event) { 
+			if(event.keyCode == 13 ) {
+				if (Input.value == '' || Input.value == null)
+					return;
+				else
+					 WINDOW_RemoveWindow(WindowObj);
+			} 
+	}, false);
 }
 
 function WINDOW_CancelRoom()

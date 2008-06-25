@@ -760,12 +760,13 @@ function INTERFACE_ShowCreateRoomWindow()
 
 			if (RoomName == UTILS_GetText("room_default"))
 			{
-				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
+				Input.value = "";
 				return;
 			}
-			if (RoomName.length > 20)
+			if (RoomName.length > 30)
 			{
-				WINDOW_Alert(UTILS_GetText('room_invalid_length'));
+				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
 				Input.value = "";
 				return;
 			}
@@ -802,13 +803,14 @@ function INTERFACE_ShowCreateRoomWindow()
 		RoomName = Input.value.replace(/ /g,"_");
 		if (RoomName == UTILS_GetText("room_default"))
 		{
-			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
+			Input.value = "";
 			return;
 		}
-		else if (RoomName.length > 20)
+		else if (RoomName.length > 30)
 		{
-			WINDOW_Alert(UTILS_GetText('room_invalid_length'));
-			Create.value = "";
+			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
+			Input.value = "";
 			return;
 		}
 		// Send a message to create room
@@ -842,6 +844,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Insert buttons in Buttons array
 	Buttons.push(Create);
 	Buttons.push(Cancel);
+	Buttons.push(Input);
 
 	return {Div:Div, Buttons:Buttons};
 }
