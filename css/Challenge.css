@@ -1,7 +1,10 @@
 /**
 * Challenge Window
 */
-#ChallengeDiv {
+#ChallengeDiv #Layer1Div,
+#ChallengeDiv #Layer2Div,
+#ChallengeDiv #Layer3Div, 
+#ChallengeDiv #ButtonsDiv {
 	padding			: 0px 28px;
 }
 
@@ -40,13 +43,14 @@
 #ChallengeDiv p {
 	margin-top		: 0mm;
 	font-weight		: bold;
-/*	font-size		: 11px;*/
+	font-size		: 10px;
 	color			: #216778;
 }
 
 #ChallengeDiv .rating {
 	margin-left		: 4mm;
-	font-size		: 14px;
+	font-size		: 10px;
+	font-weight	: normal;
 }
 
 #ChallengeDiv img {
@@ -57,10 +61,10 @@
 #ChallengeDiv .label_information {
 	text-align		: center;
 	font-weight		: normal;
-	margin			: 0;
+	margin-top			: 1%;
 	font-size		: 2.6mm;
 	position		: relative;
-	width				:	300px;
+	width				:	102%;
 }
 
 #ChallengeDiv .drop_select {
@@ -100,7 +104,7 @@
 }
 
 #ChallengeDiv span {
-	font-size		: 12px;
+	font-size		: 10px;
 	color			: #216778;
 }
 
