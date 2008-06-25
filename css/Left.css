@@ -53,7 +53,7 @@
 	width			: 22mm;
 	font-size		: 10px;
 	color			: #FFA200;
-	border			: 0px;
+	border			: 1px solid #FFA200;
 }
 
 #Main #Left #User option {
