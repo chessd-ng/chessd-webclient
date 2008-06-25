@@ -1,0 +1,162 @@
+body
+{
+	font-family	: sans-serif;
+	font-size	: 11px;
+	color		: #216778;
+}
+
+#ChallengeMenu
+{
+	border-style	: solid;
+	border-width	: 2px;
+	border-color	: #216778;
+
+	width		: 240px;
+	height		: 270px;
+
+	overflow-y	: auto;
+	overflow-x	: hidden;
+
+	padding		: 10px;
+	background-color: #ffffff;
+}
+
+
+#ChallengeMenu ul
+{
+	list-style	: none;
+	padding		: 0px;
+	margin-top	: 3px;
+	margin-bottom	: 5px;
+
+	border-bottom	: 1px solid #FFA200;
+}
+
+#ChallengeMenu ul #title
+{
+	font-weight	: bold;
+}
+
+#ChallengeMenu li
+{
+	margin-top	: 5px;
+
+	padding-left	: 20px;
+	padding-top	: 5px;
+	display		: block;
+	height		: 20px;
+	width		: 210px;
+}
+
+#ChallengeMenu li.offline
+{
+	color		: #777777;
+	background-image: url('../images/disable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li.undefined
+{
+	background-image: url('../images/disable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li.white
+{
+	background-image: url('../images/white_enable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li.black
+{
+	background-image: url('../images/black_enable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu p
+{
+	margin		: 0px;
+	padding		: 0px;
+	float		: left;
+}
+
+#ChallengeMenu li #name
+{
+	width		: 70px;
+}
+
+#ChallengeMenu li #time
+{
+	width		: 30px;
+}
+
+#ChallengeMenu li #inc
+{
+	width		: 30px;
+}
+
+#ChallengeMenu li #rated
+{
+	font-style	: italic;
+	width		: 40px;
+}
+#ChallengeMenu li #rated.false
+{
+	color		: #777777;
+}
+
+#ChallengeMenu li #rated.true
+{
+	color		: #216778;
+}
+
+#ChallengeMenu li #private
+{
+	width		: 30px;
+	height		: 12px;
+}
+#ChallengeMenu li #private.true
+{
+	background-image: url('../images/observer.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li #private.false
+{
+	background-image: url('../images/observer_disable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li #button
+{
+	width		: 10px;
+	height		: 10px;
+}
+
+#ChallengeMenu li #button.accept
+{
+	background-image: url('../images/accept.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li #button.decline
+{
+	background-image: url('../images/decline.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li #button.inative
+{
+	background-image: url('../images/accept_disable.png');
+	background-repeat: no-repeat;
+}
+
+#ChallengeMenu li #date
+{
+	width		: 71px;
+}
+
+#ChallengeMenu li #category
+{
+	width		: 58px;
+}
