@@ -5,8 +5,8 @@
 		<general_name>ChessD</general_name>
 	</general>
 	<utils>
-		<not_implemented_title>Não implementado.</not_implemented_title>
-		<not_implemented>Este recurso não está implementado no momento.</not_implemented>
+		<not_implemented_title>Não implementado</not_implemented_title>
+		<not_implemented>Funcionalidade ainda não implementada para esta versão.</not_implemented>
 	</utils>
 	<window>
 		<window_yes>Sim</window_yes>
@@ -85,7 +85,7 @@
 		<chat_max_exceeded>Máximo %i chats abertos</chat_max_exceeded>
 	</chat>
 	<room>
-		<room_default>geral</room_default>
+		<room_default>Geral</room_default>
 		<room_contacts>Contatos</room_contacts>
 		<room_all>Online</room_all>
 		<room_order_nick>Apelido</room_order_nick>
@@ -143,7 +143,7 @@
 		<challenge_chat>Abrir chat</challenge_chat>
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
 		<challenge_no_time>Sem tempo</challenge_no_time>
-		<challenge_color_auto>Automático</challenge_color_auto>
+		<challenge_color_auto>Automática</challenge_color_auto>
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 	</challenge>
 	<game>
