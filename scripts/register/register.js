@@ -386,7 +386,7 @@ function REGISTER_Labels()
 	PassConf1.innerHTML +=":";
 	Title.innerHTML = UTILS_GetTag(XML, "register_title");
 	BtConfirm.value = UTILS_GetTag(XML, "register_bt_confirm");
-	BtCancel.value = UTILS_GetTag(XML, "register_bt_cancel");
+	BtCancel.value = UTILS_GetTag(XML, "window_cancel");
 
 
 }

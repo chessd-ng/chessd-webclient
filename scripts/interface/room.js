@@ -814,7 +814,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Cancel Button
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.type = "button";
-	Cancel.value = UTILS_GetText('room_cancel');
+	Cancel.value = UTILS_GetText('window_cancel');
 
 	// Mount elements tree
 	// Options Div
@@ -872,12 +872,12 @@ function INTERFACE_ShowCancelRoomWindow()
 	// Yes Button
 	Yes = UTILS_CreateElement('input',null,'button');
 	Yes.type = "button";
-	Yes.value = UTILS_GetText('room_yes');
+	Yes.value = UTILS_GetText('window_yes');
 
 	// No Button
 	No = UTILS_CreateElement('input',null,'button');
 	No.type = "button";
-	No.value = UTILS_GetText('room_no');
+	No.value = UTILS_GetText('window_no');
 
 	// Mount elements tree
 	// Text Div

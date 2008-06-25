@@ -112,7 +112,7 @@ function CONTACT_ReceiveSubscribe(Username)
 		Title = UTILS_GetText("contact_invite");
 		Text = UTILS_GetText("contact_invite_text").replace(/%s/, UTILS_Capitalize(Username));
 		Button1 = new Object();
-		Button1.Name = UTILS_GetText("contact_auth");
+		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			var XML = "";
 
@@ -130,7 +130,7 @@ function CONTACT_ReceiveSubscribe(Username)
 		}
 
 		Button2 = new Object();
-		Button2.Name = UTILS_GetText("contact_decline");
+		Button2.Name = UTILS_GetText("window_cancel");
 		Button2.Func = function () {
 			// Send a deny to user
 			CONNECTION_SendJabber(MESSAGE_InviteDeny(Username));

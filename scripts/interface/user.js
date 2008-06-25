@@ -586,7 +586,7 @@ function INTERFACE_ShowSearchUserWindow()
 	// FormDiv elements
 	FormDiv = UTILS_CreateElement('div', 'FormDiv');
 
-	Username = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user"));
+	Username = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_t"));
 	Br = UTILS_CreateElement('br');
 	Input = UTILS_CreateElement('input', 'SearchUserInput');
 	Input.size = "23";
