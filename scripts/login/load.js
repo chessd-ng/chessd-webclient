@@ -119,6 +119,7 @@ function LOGIN_LoadScripts()
 	Scripts[32] = "scripts/interface/user.js";
 	Scripts[33] = "scripts/admin/admin.js";
 	Scripts[34] = "scripts/interface/admin.js";
+	Scripts[35] = "scripts/challenge/challenge.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }
@@ -158,6 +159,7 @@ function LOGIN_LoadCss()
 	Files[12] = "css/Welcome.css";
 	Files[13] = "css/User.css";
 	Files[14] = "css/Admin.css";
+	Files[15] = "css/ChallengeMenu.css";
 
 	if(MainData.Browser == 0) //IE
 	{

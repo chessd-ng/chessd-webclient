@@ -78,7 +78,7 @@ function PARSER_ParseIq(XML)
 			// Challenge accept confirmation
 			else if (Xmlns.match(/\/chessd#match/))
 			{
-				Buffer += GAME_HandleChallenge(XML);
+				Buffer += CHALLENGE_HandleChallenge(XML);
 			}
 			// Search user request
 			else if (Xmlns.match(/jabber:iq:search/))
@@ -124,7 +124,7 @@ function PARSER_ParseIq(XML)
 			// Challenge messages
 			if (Xmlns.match(/\/chessd#match/))
 			{
-				Buffer += GAME_HandleChallenge(XML);
+				Buffer += CHALLENGE_HandleChallenge(XML);
 			}
 
 			// Game messages
@@ -150,7 +150,7 @@ function PARSER_ParseIq(XML)
 			// Challenge messages
 			if (Xmlns.match(/\/chessd#match/))
 			{
-				Buffer += GAME_HandleChallenge(XML);
+				Buffer += CHALLENGE_HandleChallenge(XML);
 			}
 			// Game messages
 			else if (Xmlns.match(/\/chessd#game/))

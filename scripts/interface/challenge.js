@@ -487,7 +487,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 		}
 
 		// Create and send the chellenge message
-		GAME_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
+		CHALLENGE_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
 	}
 
 	// Accept challenge
@@ -496,7 +496,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	Accept.value = UTILS_GetText('challenge_accept');
 	Accept.type = "button";
 	Accept.onclick = function () {
-		GAME_AcceptChallenge(MatchId);
+		CHALLENGE_AcceptChallenge(MatchId);
 	}	
 
 	NewParameters = UTILS_CreateElement('input',null,'button');
@@ -527,7 +527,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 			Rated = false;
 		}
 
-		GAME_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
+		CHALLENGE_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -545,7 +545,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	Decline.value = UTILS_GetText('challenge_decline');
 	Decline.type = "button";
 	Decline.onclick = function () {
-		GAME_DeclineChallenge(MatchId);
+		CHALLENGE_DeclineChallenge(MatchId);
 	}	
 
 	// Appending childs
