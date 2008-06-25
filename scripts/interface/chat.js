@@ -69,8 +69,8 @@ function INTERFACE_OpenChat(Username, Status)
 
 	// Create chat elements
 	Chat = INTERFACE_CreateChat(Username, Status);
-	Node.appendChild(Chat);
-
+	Node.appendChild(Chat.ChatItem);
+	Chat.Elements.InputFocus();
 }
 
 /**
@@ -189,6 +189,8 @@ function INTERFACE_CreateChat(Username, Status)
 	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
 	var Close, Input;
 
+	var Elements = new Object();
+
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
 
@@ -243,7 +245,21 @@ function INTERFACE_CreateChat(Username, Status)
 
 	ChatItem.appendChild(ChatInside);
 
-	return ChatItem;
+	Elements.Input = Input;
+
+	Elements.InputFocus = INTERFACE_InputChatFocus;
+
+	return {ChatItem:ChatItem, Elements:Elements};
+}
+
+/*
+* Set focus in input element 
+*
+* @author Danilo
+*/
+function INTERFACE_InputChatFocus()
+{
+	this.Input.focus();
 }
 
 /**

@@ -41,6 +41,7 @@ function RoomObj(Roomname)
 	this.roomName = Roomname;
 	this.room = Room.RoomDiv;
 	this.msgList = Room.MsgList;
+	this.input = Room.Input;
 	this.userList = new UserListObj(Room.RoomDiv);
 	this.userList.show();
 	this.userList.setSortUserFunction(ROOM_SortUsersByNick);
@@ -51,6 +52,7 @@ function RoomObj(Roomname)
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
+	this.focus = INTERFACE_FocusRoomInput;
 }
 
 
@@ -117,7 +119,7 @@ function INTERFACE_CreateRoom(RoomName)
 
         RoomDiv.appendChild(RoomInside);
 
-        return {RoomDiv:RoomDiv, MsgList:MessageList};
+        return {RoomDiv:RoomDiv, MsgList:MessageList, Input:Input};
 }
 
 function INTERFACE_ShowRoom()
@@ -145,6 +147,11 @@ function INTERFACE_RemoveRoom()
 {
 	var RoomParent = this.room.parentNode;
 	RoomParent.removeChild(this.room);
+}
+
+function INTERFACE_FocusRoomInput()
+{
+	this.input.focus();
 }
 
 
@@ -621,8 +628,8 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
-		RoomOcupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
-		RoomItem.appendChild(RoomOcupants);
+		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
+		RoomItem.appendChild(RoomOccupants);
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
