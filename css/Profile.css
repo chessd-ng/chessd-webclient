@@ -20,6 +20,7 @@
 #ProfileDiv #ProfPhotoDiv img{
 	width		: 50px;
 	height		: 60px;
+	padding-bottom: 2px;
 }
 
 #ProfileDiv #TopRightDiv #TopRight_LeftDiv {
@@ -121,10 +122,17 @@
 
 #ProfileDiv .edit_photo {
 	cursor		:	pointer;
-	font-size		: 10px;
+	font-size		: 9px;
+	font-style: italic;
 	color			: #216778;
-	border-bottom		:	1px solid #216778
+	border-bottom		:	1px solid #216778;
 }
+
+#ProfileDiv .edit_photo:hover {
+	color			: #FFA200;
+	border-color:	#FFA200;
+}
+
 #ProfileDiv .inf,
 #ProfileDiv .inf_whoami {
 	display			: block;
