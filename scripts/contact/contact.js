@@ -544,7 +544,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 				Button1.Func = function () {
 					CONTACT_RemoveUser(Username);
 				}
-				Button2.Name = UTILS_GetText("contact_decline");
+				Button2.Name = UTILS_GetText("window_cancel");
 				Button2.Func = null;
 				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), UTILS_GetText("contact_remove_text").replace("%s", "<strong>"+Username+"</strong>"), Button1, Button2);
 			};
