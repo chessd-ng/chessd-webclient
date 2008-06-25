@@ -26,13 +26,20 @@
 	width			: 32mm;
 }
 
+#Main #Left #User p {
+	margin-top: 5%;
+}
+
 #Main #Left #User span {
 	font-size		: 10px;
-	color			: #FFA200;
+	color			: #216778;
 	cursor		: pointer;
+	font-style:italic;
+	border-bottom:	1px solid #216778;
 }
 
 #Main #Left #User span:hover {
+	color			: #FFA200;
 	border-bottom:	1px solid #FFA200;
 }
 

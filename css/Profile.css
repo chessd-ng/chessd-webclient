@@ -154,13 +154,15 @@
 
 #ProfileDiv .oldgames {
 	font-size		: 12px;
+	font-style	:	italic;
 	color			: #216778;
-	border-bottom		:	1px solid #216778
+	border-bottom		:	1px solid #216778;
+	cursor			: pointer;
 }
 
 #ProfileDiv .oldgames:hover {
-	color			: #2167FF;
-	cursor			: pointer;
+	color			: #FFA200;
+	border-bottom		:	1px solid #FFA200;
 }
 
 #WindowBox .button_big {
