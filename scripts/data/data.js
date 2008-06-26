@@ -160,6 +160,10 @@ DATA.prototype.UpdateChallenge = DATA_UpdateChallenge;
 DATA.prototype.ClearChallenges = DATA_ClearChallenges;
 DATA.prototype.AddChallengeWindow = DATA_AddChallengeWindow;
 
+DATA.prototype.AddPostpone = DATA_AddPostpone;
+DATA.prototype.RemovePostpone = DATA_RemovePostpone;
+DATA.prototype.FindPostpone = DATA_FindPostpone;
+
 DATA.prototype.AddGame = DATA_AddGame;
 DATA.prototype.RemoveGame = DATA_RemoveGame;
 DATA.prototype.FindGame = DATA_FindGame;
@@ -1404,6 +1408,102 @@ function DATA_AddChallengeWindow (Id, WindowObj)
 	{
 		this.ChallengeList[i].Window = WindowObj;
 	}
+}
+
+
+/**********************************
+ * METHODS - POSTPONE CHALLENGES  *
+ **********************************/
+
+/**
+* @brief		Add a challenge in 'PosponeList'
+* @param		Oponent		The oponent
+* @param		Category	Game category
+* @param		Date		Date of adjourned match
+* @param		AdjournId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_AddPostpone(Oponent, Category, Date, AdjournId)
+{
+	// Creating a new object
+	var Challenge = new Object();
+	var ChallengedObj = new Object();
+	var i;
+
+	i = this.FindPostpone(AdjournId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	ChallengedObj.Name  = Oponent.Name;
+	ChallengedObj.Time  = Oponent.Time;
+	ChallengedObj.Inc  = Oponent.Inc;
+	ChallengedObj.Color  = Oponent.Color;
+
+	// Setting atributes
+	Challenge.Id = AdjournId;
+	Challenge.Challenged = ChallengedObj;
+	Challenge.Category = Category;
+	Challenge.Private = false;
+
+	Challenge.Window = null;
+
+	this.PostponeList[this.PostponeList.length] = Challenge;
+
+	return true;
+}	
+
+/*
+* @brief		Find a postpone challenge in 'PostponeList'
+* @param		AdjournId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_FindPostpone(AdjournId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.PostponeList.length ; i++)
+	{
+		if (this.PostponeList[i].Id == AdjournId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
+}
+
+/**
+* @brief		Remove a postpone challenge in 'PostponeList'
+* @param		Username	The oponent
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+* @see			DATA_FindPostpone
+*/
+function DATA_RemovePostpone(AdjournId)
+{
+	var i;
+
+	i = this.FindPostpone(AdjournId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.PostponeList.splice(i, 1);
+
+	return "";
 }
 
 /**********************************
