@@ -187,7 +187,7 @@ function INTERFACE_ChatListPositioning()
 function INTERFACE_CreateChat(Username, Status)
 {
 	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
-	var Close, Input;
+	var Close, Input, State;
 
 	var Elements = new Object();
 
@@ -206,15 +206,17 @@ function INTERFACE_CreateChat(Username, Status)
 	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
 	ChatInner = UTILS_CreateElement("div", "ChatInner");
 	ChatInner.style.display = "none";
-	Close = UTILS_CreateElement("img");
+	State = UTILS_CreateElement("img",null,"minimize");
+	State.src = "./images/minimize_chat.png";
+	Close = UTILS_CreateElement("img",null,"close");
 	Close.src = "./images/close_chat.png";
 
 	// Show chat
 	INTERFACE_ShowChat(ChatItem, ChatInner);
 
 	// Show/hide chat
-	ChatTitle.onclick = function () {
-		CHAT_ChangeChatState(Username, ChatItem, ChatInner);
+	State.onclick = function () {
+		CHAT_ChangeChatState(Username, ChatItem, ChatInner, State);
 	}
 
 	// Close chat
@@ -235,6 +237,7 @@ function INTERFACE_CreateChat(Username, Status)
 		}
 	}
 
+	ChatTitle.appendChild(State);
 	ChatTitle.appendChild(Close);
 
 	ChatInner.appendChild(ChatMessages);

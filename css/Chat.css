@@ -47,6 +47,23 @@
 	position		: relative;
 }
 
+#Chat .minimize {
+	padding-top: 1.1%;
+	padding-right: 7%;
+	width : 7%;
+	height: 15%;
+}
+
+#Chat .maximize {
+	padding-right: 7%;
+	width : 6%;
+	height: 45%;
+}
+#Chat .close {
+	width : 4%;
+	height: 55%;
+}
+
 /* chat icons */
 #Chat #ChatList .title img,
 #Chat #ChatList .title_selec img {
