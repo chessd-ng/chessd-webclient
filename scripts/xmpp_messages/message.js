@@ -470,8 +470,8 @@ function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 {
 	var XMPP="";
 
-	XMPP += "<iq type='get' to='+"MainData.MatchComponenet+"."+MainData.Host+"' id='get_adj'>";
-	XMPP += "<query xmlns='"+MainData;Xmlns+"/chessd#adjourned#list'>";
+	XMPP += "<iq type='get' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='get_adj'>";
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#adjourned#list'>";
 	XMPP += "<search results='"+Num+"' offset='"+Offset+"'/>";
 	XMPP += "</query></iq>";
 
@@ -481,7 +481,7 @@ function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 function MESSAGE_ChallengeResumeGame(Id)
 {
 	var XMPP = "";
-	XMPP += "<iq to='"+MainData.MatchComponent+"."+Match.Host+"' type='set' id='offer_adj'>;
+	XMPP += "<iq to='"+MainData.MatchComponent+"."+MainData.Host+"' type='set' id='offer_adj'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
 	XMPP += "<match adjourned_id='"+Id+"'/>";
 	XMPP += "</query></iq>";
