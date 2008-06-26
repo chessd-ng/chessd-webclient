@@ -24,20 +24,22 @@
 	height			: 4mm;
 	background-color: #216778;
 	font-weight		: bold;
-	font-size		: 12px;
+	font-size		: 11px;
 	color 			: #FFF;
 	text-indent		: 3mm;
 	position		: relative;
+	padding-top	: 1%;
 }
 
 #Chat #ChatList .title_selec {
 	height			: 4mm;
 	background-color: #FFA200;
 	font-weight		: bold;
-	font-size		: 12px;
+	font-size		: 11px;
 	color 			: #FFF;
 	text-indent		: 3mm;
 	position		: relative;
+	padding-top	: 1%;
 }
 
 #Chat #ChatInner {
