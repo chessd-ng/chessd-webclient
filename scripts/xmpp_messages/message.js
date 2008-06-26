@@ -466,6 +466,29 @@ function MESSAGE_ChallengeDecline(ChallengeID)
 }
 
 
+function MESSAGE_ChallengeGetAdjournList(Num, Offset)
+{
+	var XMPP="";
+
+	XMPP += "<iq type='get' to='+"MainData.MatchComponenet+"."+MainData.Host+"' id='get_adj'>";
+	XMPP += "<query xmlns='"+MainData;Xmlns+"/chessd#adjourned#list'>";
+	XMPP += "<search results='"+Num+"' offset='"+Offset+"'/>";
+	XMPP += "</query></iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_ChallengeResumeGame(Id)
+{
+	var XMPP = "";
+	XMPP += "<iq to='"+MainData.MatchComponent+"."+Match.Host+"' type='set' id='offer_adj'>;
+	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#match#offer'>";
+	XMPP += "<match adjourned_id='"+Id+"'/>";
+	XMPP += "</query></iq>";
+
+	return XMPP;
+}
+
 /**********************************
  * MESSAGES - GAME
  **********************************/
