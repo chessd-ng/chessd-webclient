@@ -121,6 +121,7 @@ function LOGIN_LoadScripts()
 	Scripts[34] = "scripts/interface/admin.js";
 	Scripts[35] = "scripts/challenge/challenge.js";
 	Scripts[36] = "scripts/interface/challengemenu.js";
+	Scripts[37] = "scripts/challenge/adjourn.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }
