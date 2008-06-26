@@ -229,26 +229,28 @@ function CHALLENGE_HandleDecline (XML)
 	// search challenge postion in data struct
 	i = MainData.FindChallenge(null, MatchID);
 
-	// get window object
-	WindowObj = MainData.ChallengeList[i].Window;
-
-	// close challenge window if exists.
-	if(WindowObj != null)
+	if(i != null)
 	{
-		if(WindowObj.window.parentNode != null)
+		// get window object
+		WindowObj = MainData.ChallengeList[i].Window;
+
+		// close challenge window if exists.
+		if(WindowObj != null)
 		{
-			WINDOW_RemoveWindow(WindowObj);
+			if(WindowObj.window.parentNode != null)
+			{
+				WINDOW_RemoveWindow(WindowObj);
+			}
 		}
+		// Remove the challenge from Challenge List
+		MainData.RemoveChallenge(null, MatchID);
+
+		// Remove from challenge menu
+		MainData.ChallengeMenu.removeMatch(MatchID);
+
+		// TODO
+		// Warn the interface that the challenge was declined
 	}
-	// Remove the challenge from Challenge List
-	MainData.RemoveChallenge(null, MatchID);
-
-	// Remove from challenge menu
-	MainData.ChallengeMenu.removeMatch(MatchID);
-
-	// TODO
-	// Warn the interface that the challenge was declined
-	
 	return "";
 }
 
@@ -421,6 +423,9 @@ function CHALLENGE_StartChallenge()
 	MainData.ChallengeMenu.showMatch();
 	MainData.ChallengeMenu.hideAnnounce();
 	MainData.ChallengeMenu.hidePostpone();
+
+	//Get adjourned games list -> see adjourn.js
+	//CHALLENGE_GetAdjournGames();
 }
 
 
@@ -448,6 +453,9 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	UTILS_AddListener(document, "click",Func,false);
 
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
+
+	// Get adjourn games list
+	CHALLENGE_GetAdjournGames();
 }
 
 /**

@@ -166,6 +166,7 @@ function INTERFACE_RemoveMatch(MatchId)
 
 	//Remove from match list
 	this.MatchOfferList.splice(i,1);
+
 }
 
 
@@ -279,7 +280,7 @@ function INTERFACE_RemoveAnnounce(MatchId)
 function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	//var Item = UTILS_CreateElement("li",null,Oponent.Color);
-	var Item = UTILS_CreateElement("li",null,"undefined");
+	var Item = UTILS_CreateElement("li",null,"offline");
 
 	var PName, PCategory, PDate, PButton;
 	var ItemObj = new Object();
@@ -287,10 +288,13 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	PName = UTILS_CreateElement("p","name",null,Oponent.Name);
 	PCategory = UTILS_CreateElement("p","category",null,Category);
 	PDate = UTILS_CreateElement("p","date",null,Date);
-	PButton = UTILS_CreateElement("p","button","accept");
+	PButton = UTILS_CreateElement("p","button","inative");
+
+	/*
 	PButton.onclick = function(){
-		//TODO -> send a decline challenge to cancel offer
+		CHALLENGE_SendResumeGame(PostponeId);
 	}
+	*/
 
 	Item.appendChild(PName);
 	Item.appendChild(PCategory);
@@ -331,6 +335,11 @@ function INTERFACE_RemovePostpone(PostponeId)
 
 	//Remove from match list
 	this.PostponeList.splice(i,1);
+
+	if(this.PostponeList.length == 0)
+	{
+		this.hidePostpone();
+	}
 }
 
 function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
@@ -338,33 +347,33 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 	var i=0;
 	var Item, Button;
 	var ItemObj;
+	var Id;
 	
-	// Find match
-	while(( i < this.PostponeList.length)&&(this.PostponeList[i].OponentName != OponentName))
+	for(i=0; i< this.PostponeList.length; i++)
 	{
-		i++;
-	}
+		if(this.PostponeList[i].OponentName == OponentName)
+		{
+			Item = this.PostponeList[i].Item;
+			Button = this.PostponeList[i].Button;
+			ItemObj = this.PostponeList[i];
+			Id = this.PostponeList[i].Id;
 
-	// If not found, do nothing
-	if(i == this.PostponeList.length)
-	{
-		return "";
-	}
-
-	Item = this.PostponeList[i].Item;
-	Button = this.PostponeList[i].Button;
-	ItemObj = this.PostponeList[i];
-
-	if(OponentStatus == "offline")
-	{
-		Item.className = "offline";
-		Button.className = "inative";
-	}
-	else
-	{
-		//Item.className = ItemObj.OponentColor;
-		Item.className = "undefined";
-		Button.className = "accept";
+			if(OponentStatus == "offline")
+			{
+				Item.className = "offline";
+				Button.className = "inative";
+				Button.onclick = false;
+			}
+			else
+			{
+				//Item.className = ItemObj.OponentColor;
+				Item.className = "undefined";
+				Button.className = "accept";
+				Button.onclick = function(){
+					CHALLENGE_SendResumeGame(Id);
+				};
+			}
+		}
 	}
 }
 
