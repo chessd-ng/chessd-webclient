@@ -1869,7 +1869,6 @@ function DATA_FindWindow(WindowObj)
 function DATA_AddProfile(Jid, Username, ProfileWindow)
 {
 	var NewProfile = new Object();
-	 
 	// Data Id
 	NewProfile.Jid = Jid;
 	NewProfile.Profile = ProfileWindow;
