@@ -141,7 +141,7 @@ function CHAT_CloseChat(Username)
 /**
 * Change  visibility of chat window
 */
-function CHAT_ChangeChatState(Username, Obj1, Obj2)
+function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 {
 	var i = MainData.FindChat(Username);
 
@@ -156,11 +156,15 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2)
 		INTERFACE_ShowChat(Obj1, Obj2);
 		MainData.ChatList[i].State = "show";
 		INTERFACE_UnfocusChat(Username);
+		State.className = "minimize";
+		State.src = "./images/minimize_chat.png";
 	}
 	else
 	{
 		INTERFACE_HideChat(Obj1, Obj2);
 		MainData.ChatList[i].State = "hidden";
+		State.className = "maximize";
+		State.src = "./images/maximize_chat.png";
 	}
 }
 

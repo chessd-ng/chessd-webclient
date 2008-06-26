@@ -41,6 +41,7 @@ function RoomObj(Roomname)
 	this.roomName = Roomname;
 	this.room = Room.RoomDiv;
 	this.msgList = Room.MsgList;
+	this.input = Room.Input;
 	this.userList = new UserListObj(Room.RoomDiv);
 	this.userList.show();
 	this.userList.setSortUserFunction(ROOM_SortUsersByNick);
@@ -51,6 +52,7 @@ function RoomObj(Roomname)
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
+	this.focus = INTERFACE_FocusRoomInput;
 }
 
 
@@ -117,7 +119,7 @@ function INTERFACE_CreateRoom(RoomName)
 
         RoomDiv.appendChild(RoomInside);
 
-        return {RoomDiv:RoomDiv, MsgList:MessageList};
+        return {RoomDiv:RoomDiv, MsgList:MessageList, Input:Input};
 }
 
 function INTERFACE_ShowRoom()
@@ -145,6 +147,11 @@ function INTERFACE_RemoveRoom()
 {
 	var RoomParent = this.room.parentNode;
 	RoomParent.removeChild(this.room);
+}
+
+function INTERFACE_FocusRoomInput()
+{
+	this.input.focus();
 }
 
 
@@ -183,14 +190,37 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 */
 function INTERFACE_RefreshOccupantsNumber(RoomName)
 {
-	// Get number of occupants in room data struct
-	var N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
-	// Get element in interface that will be refreshed
-	var Node = document.getElementById(RoomName+"_occupants");
+	var N_Occupants;
+	var Focused;
+	var Node;
+
+	// If general room
+	if (RoomName == "general")
+	{
+		// Get element in interface that will be refreshed
+		Node = document.getElementById("general_occupants");
+	}
+	else {
+		// else get name of focused room
+		Focused = document.getElementById("RoomSecName").innerHTML;
+		// If change of occupant's number occured in focused room
+		if (Focused == RoomName)
+		{
+			// Get element in interface that will be refreshed
+			Node = document.getElementById("Sec_occupants");
+		}
+		// else do nothing
+		else
+		{
+			Node = null;
+		}
+	}
 	
 	// If Room is showed at interface, refresh the number of occupants
 	if(Node)
 	{
+		// Get number of occupants in room data struct
+		N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
 		Node.innerHTML= " ("+N_Occupants+")";
 	}
 }
@@ -465,56 +495,6 @@ function INTERFACE_ShowEmoticonList(RName)
 		if (Hide == 2)
 		{
 			UTILS_RemoveListener(document, "click", Func, false);
-
-/*
-* Show or hide list of user's rooms 
-* 
-* @public 
-* 
-nction INTERFACE_ChangeRoomListVisibility() 
-{ 
-        var Div, List, Node, Item, i; 
-        var Menu = document.getElementById('RoomListMenu'); 
-        var Node = document.getElementById('RoomList'); 
- 
-        // If already exists room list menu, hide it 
-        if (Menu) 
-        { 
-                Menu.parentNode.removeChild(Menu); 
-                return; 
-        } 
- 
-        // Creating menu 
-        Div = UTILS_CreateElement("div", "RoomListMenu"); 
-        List = UTILS_CreateElement('ul'); 
- 
-        Div.style.position = "absolute"; 
-         
-        // Population list with user's rooms 
-        for (i=0; i < MainData.RoomList.length; i++) 
-        { 
-                Item = UTILS_CreateElement('li'); 
-                Item.innerHTML = MainData.RoomList[i].Name; 
-                Item.onclick = function () { 
-                        INTERFACE_FocusRoom(this.innerHTML); 
-                        INTERFACE_ChangeRoomListVisibility(); 
-                } 
-                List.appendChild(Item); 
-        } 
- 
-        Div.appendChild(List); 
- 
-        try 
-        { 
-                document.getElementById('Rooms').insertBefore(Div, Node); 
-        } 
-        catch(e) 
-        { 
-                return false; 
-        } 
-        return true; 
-}
-*/
 			INTERFACE_HideEmoticonList();
 		}
 	};
@@ -613,6 +593,7 @@ function INTERFACE_FocusRoom(RoomName)
 		Node.innerHTML = RoomName;
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
+		INTERFACE_RefreshOccupantsNumber(RoomName);
 	}
 
 	return true;
@@ -647,8 +628,8 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
-		RoomOcupants = UTILS_CreateElement('span',RoomName+"_occupants",null," (0)");
-		RoomItem.appendChild(RoomOcupants);
+		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
+		RoomItem.appendChild(RoomOccupants);
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
@@ -779,12 +760,13 @@ function INTERFACE_ShowCreateRoomWindow()
 
 			if (RoomName == UTILS_GetText("room_default"))
 			{
-				WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
+				Input.value = "";
 				return;
 			}
-			if (RoomName.length > 20)
+			if (RoomName.length > 30)
 			{
-				WINDOW_Alert(UTILS_GetText('room_invalid_length'));
+				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
 				Input.value = "";
 				return;
 			}
@@ -821,13 +803,14 @@ function INTERFACE_ShowCreateRoomWindow()
 		RoomName = Input.value.replace(/ /g,"_");
 		if (RoomName == UTILS_GetText("room_default"))
 		{
-			WINDOW_Alert(UTILS_GetText('room_invalid_name'));
+			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
+			Input.value = "";
 			return;
 		}
-		else if (RoomName.length > 20)
+		else if (RoomName.length > 30)
 		{
-			WINDOW_Alert(UTILS_GetText('room_invalid_length'));
-			Create.value = "";
+			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
+			Input.value = "";
 			return;
 		}
 		// Send a message to create room
@@ -840,7 +823,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Cancel Button
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.type = "button";
-	Cancel.value = UTILS_GetText('room_cancel');
+	Cancel.value = UTILS_GetText('window_cancel');
 
 	// Mount elements tree
 	// Options Div
@@ -861,6 +844,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Insert buttons in Buttons array
 	Buttons.push(Create);
 	Buttons.push(Cancel);
+	Buttons.push(Input);
 
 	return {Div:Div, Buttons:Buttons};
 }
@@ -898,12 +882,12 @@ function INTERFACE_ShowCancelRoomWindow()
 	// Yes Button
 	Yes = UTILS_CreateElement('input',null,'button');
 	Yes.type = "button";
-	Yes.value = UTILS_GetText('room_yes');
+	Yes.value = UTILS_GetText('window_yes');
 
 	// No Button
 	No = UTILS_CreateElement('input',null,'button');
 	No.type = "button";
-	No.value = UTILS_GetText('room_no');
+	No.value = UTILS_GetText('window_no');
 
 	// Mount elements tree
 	// Text Div

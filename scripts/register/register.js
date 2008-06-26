@@ -103,6 +103,8 @@ function REGISTER_GetError(err)
 			return UTILS_GetTag(XML, "register_invalid_mail");
 		case 3:
 			return UTILS_GetTag(XML, "register_invalid_password");
+		case 4:
+			return UTILS_GetTag(XML, "register_invalid_user_name_len");
 	}
 }
 
@@ -126,6 +128,11 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 	if(!REUsername.test(User))
 	{
 		return 1;
+	}
+
+	if (User.length > 14)
+	{
+		return 4;
 	}
 
 	if(Mail.length > 0)
@@ -348,26 +355,38 @@ function REGISTER_Labels()
 
 	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
 	var Inf = document.getElementById("register_inf");
-	var Username = document.getElementById("register_user_name");
+	var Login = document.getElementById("register_login");
+	var MaxChar = document.getElementById("register_max_char");
 	var UserInfo = document.getElementById("register_user_inf");
-	var Mail = document.getElementById("register_mail");
+	var Mail1 = document.getElementById("register_mail1");
+	var Mail2 = document.getElementById("register_mail2");
 	var MailInf = document.getElementById("register_mail_inf");
 	var Pass = document.getElementById("register_passwd");
-	var PassConf = document.getElementById("register_passwd_confirm");
+	var PassConf1 = document.getElementById("register_passwd_confirm1");
+	var PassConf2 = document.getElementById("register_passwd_confirm2");
 	var Title =  document.getElementById("register_title");
 	var BtConfirm = document.getElementById("register");
 	var BtCancel = document.getElementById("cancel");
 
 	Inf.innerHTML = UTILS_GetTag(XML, "register_inf");
-	Username.innerHTML = UTILS_GetTag(XML, "register_user_name");
+	Login.innerHTML = UTILS_GetTag(XML, "register_login");
+	MaxChar.innerHTML = UTILS_GetTag(XML, "register_max_char");
+	Login.appendChild(MaxChar);
+	Login.innerHTML += ":";
 	UserInfo.innerHTML = UTILS_GetTag(XML, "register_user_inf");
-	Mail.innerHTML = UTILS_GetTag(XML, "register_mail");
+	Mail2.innerHTML = UTILS_GetTag(XML, "register_mail2");
+	Mail1.innerHTML = UTILS_GetTag(XML, "register_mail1");
+	Mail1.appendChild(Mail2);
+	Mail1.innerHTML += ":";
 	MailInf.innerHTML = UTILS_GetTag(XML, "register_mail_inf");
 	Pass.innerHTML = UTILS_GetTag(XML, "register_passwd");
-	PassConf.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm");
+	PassConf2.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm2");
+	PassConf1.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm1");
+	PassConf1.appendChild(PassConf2);
+	PassConf1.innerHTML +=":";
 	Title.innerHTML = UTILS_GetTag(XML, "register_title");
 	BtConfirm.value = UTILS_GetTag(XML, "register_bt_confirm");
-	BtCancel.value = UTILS_GetTag(XML, "register_bt_cancel");
+	BtCancel.value = UTILS_GetTag(XML, "window_cancel");
 
 
 }

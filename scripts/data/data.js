@@ -200,7 +200,7 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 /**
 * @brief		Add user to user list
 *
-* Search the user in DATA.Userlist, if the user wasn't found,
+* Search the user in DATA.UserList, if the user wasn't found,
 * add the user in the list with a blank photo and a empty rating.
 *
 * @param 		Username The user's name to add in structure
@@ -208,7 +208,6 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 * @param 		Subs 	 User's subscription
 * @author		Ulysses Bonfim
 * @return 		false - User already on list, true otherwise
-* @see			DATA_DelUser DATA_FindUser DATA_FindNextUser DATA_IsContact
 */
 function DATA_AddUser(Username, Status, Subs, Group)
 {
@@ -223,12 +222,19 @@ function DATA_AddUser(Username, Status, Subs, Group)
 	User.Subs = Subs;
 	User.Rating = new Object();
 	User.Group = Group;
-
+	User.Type = "";
 	this.UserList[this.UserList.length] = User;
 }
 
 /**
-* Del user from user list
+* @brief		Delete user from user list
+* 
+* Search and remove the user of DATA.UserList 
+* 
+* @param		Username User's name to remove of structure
+* @author		Pedro
+* @return 		null if user is not on your list, true otherwise
+* @see 			DATA_FindUser
 */
 function DATA_DelUser(Username)
 {
@@ -247,7 +253,11 @@ function DATA_DelUser(Username)
 }
 
 /**
-* Find user in user list
+* @brief		Find user in user list
+* 
+* @param		Username User's name to search
+* @author		Pedro
+* @return 		null if user is not on your list, the structure User otherwise
 */
 function DATA_FindUser(Username)
 {
@@ -262,12 +272,14 @@ function DATA_FindUser(Username)
 }
 
 /**
-* Find next user in user list
+* @brief		Find next user in user list	
+* @deprecated
 *
-*	@param Username		Base user to search the next
-*	@param Status			Status of user to search the next 
-*	@see
-*	@author	Danilo Yorinori
+* @param		Username Base user to search the next
+* @param 		Status	 Status of user to search the next 
+* @author		Danilo Yorinori
+* @return 		The struct user founded, null otherwise
+* @see			DATA_FindUser
 */
 function DATA_FindNextUser(Username, Status)
 {
@@ -303,7 +315,12 @@ function DATA_FindNextUser(Username, Status)
 
 
 /**
-* Is 'Username' in your contact list?
+* @brief		Is 'Username' in your contact list?
+*
+* @param		Username User name to search
+* @author		Danilo Yorinori
+* @return 		Boolean
+* @see			DATA_FindUser
 */
 function DATA_IsContact(Username)
 {
@@ -322,7 +339,17 @@ function DATA_IsContact(Username)
 }
 
 /**
-* Get user status 
+* @brief		Get User status
+*
+* Get the user status on jabber.
+* If the given user is not on your list, then search through
+* the RoomList. 
+*
+* @param		Username User name to search
+* @author		Danilo Yorinori
+* @return 		If the user is not on your list and the RoomList, false.
+* 				Else return the user status.
+* @see			DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_GetStatus(Username)
 {
@@ -348,7 +375,16 @@ function DATA_GetStatus(Username)
 }
 
 /**
-* Return Username Rating object
+* @brief		Get the User's rating
+*
+* Get the user's rating (in a structure, with all types of reating) 
+* on chess server.
+*
+* @param		Username User name to search
+* @author		Danilo Yorinori
+* @return 		If the user is not on your list and the RoomList, false.
+* 				Else return the user's rating in a structure.
+* @see			DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_GetRating(Username)
 {
@@ -374,7 +410,13 @@ function DATA_GetRating(Username)
 }
 
 /**
-* Return User type
+* @brief		Get the User's type
+*
+* @param		Username User name to search
+* @author		Danilo Yorinori
+* @return 		If the user is not on your list and the RoomList, false.
+* 				Else return the user's type.
+* @see			DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_GetType(Username)
 {
@@ -400,7 +442,11 @@ function DATA_GetType(Username)
 }
 
 /**
-* Set default values to use
+* @brief		Set default values to use
+*
+* Set "user" to DATA.Type and 0 to rating types.
+*
+* @author		Pedro Eugenio
 */
 function DATA_SetDefault(Username)
 {
@@ -411,7 +457,13 @@ function DATA_SetDefault(Username)
 }
 
 /**
-* Set user's status
+* @brief		Change the user's status
+*
+* @param		Username  User name 
+* @param		NewStatus New Username status
+* @author		Danilo Yorinori
+* @return 		false if the user is not on your list, true otherwise
+* @see			DATA_FindUser 
 */
 function DATA_SetUserStatus(Username, NewStatus)
 {
@@ -426,7 +478,13 @@ function DATA_SetUserStatus(Username, NewStatus)
 
 
 /**
-* Set user's subscription state
+* @brief		Change the user's subscription
+*
+* @param		Username  User name 
+* @param		NewSubs   New Username subscriptioon 
+* @author		Ulysses Bonfim
+* @return 		false if the user is not on your list, true otherwise
+* @see			DATA_FindUser 
 */
 function DATA_SetSubs(Username, NewSubs)
 {
@@ -440,7 +498,17 @@ function DATA_SetSubs(Username, NewSubs)
 }
 
 /**
-* Set user's type
+* @brief		Change user's type
+*
+* Search in your contact list and in all rooms that the user 
+* is, and change his/her status. If the given username is your 
+* own name, change on DATA the user type.
+*
+* @param		Username  User name 
+* @param		NewType   New Username Type
+* @author		Danilo Yorinori
+* @return 		true
+* @see			DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_SetType(Username, NewType)
 {
@@ -476,7 +544,17 @@ function DATA_SetType(Username, NewType)
 
 
 /**
-* Set user's rating 
+* @brief		Change user's rating 
+*
+* Search in your contact list and in all rooms that the user 
+* is, and change his/her rating.
+*
+* @param		Username  User name 
+* @param		Category  Category of rating   
+* @param		Rating    The new rating value
+* @author		Danilo Yorinori
+* @return 		true
+* @see			DATA_FindUser DATA_FindUserInRoom UTILS_Capitalize
 */
 function DATA_SetRating(Username, Category, Rating)
 {
@@ -512,10 +590,11 @@ function DATA_SetRating(Username, Category, Rating)
 }
 
 /**
-* Sort Userlist into ascending or descending order
+* @brief		Sort Userlist into ascending or descending order
 *
-* @return	boolean
-* @author	Danilo Yorinori
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
 */
 function DATA_SortUserByNick()
 {
@@ -531,10 +610,11 @@ function DATA_SortUserByNick()
 }
 
 /**
-* Sort Userlist into descending order by Rating selected in interface
+* @brief		Sort Userlist into descending order by Rating selected in interface
 *
-* @return	boolean
-* @author	Danilo Yorinori
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByRatingDsc
 */
 function DATA_SortUserByRating()
 {
@@ -548,7 +628,16 @@ function DATA_SortUserByRating()
  **********************************/
 
 /**
-* Create new room in room list
+* @brief		Create new room in room list
+*
+* @param		RoomName	New room's name
+* @param		MsgTo		Where the messages will be send 
+* @param		Role		Your role in room
+* @param		Affiliation	Your affiliation in room
+* @param		RoomObj		Room object, used to control the interface
+* @author		Pedro Eugenio
+* @return		The new room object
+* @see			DATA_FindRoom
 */
 function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 {
@@ -572,7 +661,12 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 }
 
 /**
-* Del room in room list
+* @brief		Delete a room in room list
+*
+* @param		RoomName	Room name to remove
+* @author		Pedro Eugenio
+* @return		Boolean
+* @see			DATA_FindRoom
 */
 function DATA_DelRoom(RoomName)
 {
@@ -588,7 +682,11 @@ function DATA_DelRoom(RoomName)
 }
 
 /**
-* Find room in room list
+* @brief		Find room in room list
+*
+* @param		RoomName	Room name to remove
+* @author		Pedro Eugenio
+* @return		Room structure founded or null
 */
 function DATA_FindRoom(RoomName)
 {
@@ -603,9 +701,17 @@ function DATA_FindRoom(RoomName)
 }
 
 /**
-* Set from, affiliation and role in 'RoomName'
-* structure.
+* @brief		Set from, affiliation and role in 'RoomName' structure.
+*
 * Only for interface user
+*
+* @param		RoomName	Room name 
+* @param		From		Where the messages will be send 
+* @param		Affiliation New room's affiliation 	
+* @param		Role		New room's role
+* @author		Pedro Eugenio
+* @return		null, if the room doesn't exist, true otherwise
+* @see			DATA_FindRoom
 */
 function DATA_SetRoom(RoomName, From, Affiliation, Role)
 {
@@ -624,7 +730,16 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 }
 
 /**
-* Add user in user list of a room
+* @brief		Add user in user list of a room
+* @param		RoomName	Room name 
+* @param		Username 	The new user
+* @param		Status		New user's status
+* @param		Type		New user's type
+* @param		Role		New user's role
+* @param		Affiliation	New user's affiliation
+* @author		Pedro Eugenio
+* @return		true
+* @see			DATA_FindRoom DATA_FindUser
 */
 function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 {
@@ -669,7 +784,12 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 }
 
 /**
-* Find user in user list of a room
+* @brief		Find user in user list of a room
+* @param		RoomName  Room to search 
+* @param		Username  User to find
+* @author		Pedro Eugenio
+* @return		User's position on Room UserList vector, or null, if not found
+* @see			DATA_FindRoom 
 */
 function DATA_FindUserInRoom(RoomName, Username)
 {
@@ -692,13 +812,14 @@ function DATA_FindUserInRoom(RoomName, Username)
 }
 
 /**
-* Find next user in room user list
+* @brief		Find next user in room user list
 *
-*	@param RoomName		Name of room to search the next user
-*	@param Username		Base user to search the next
-*	@param Status			Status of user to search the next 
-*	@see
-*	@author	Danilo Yorinori
+* @param		RoomName	Name of room to search the next user
+* @param 		Username	Base user to search the next
+* @param 		Status		Status of user to search the next 
+* @author		Danilo Yorinori
+* @return 		Next user's position
+* @see			DATA_FindRoom DATA_FindUserInRoom
 */
 function DATA_FindNextUserInRoom(RoomName, Username)
 {
@@ -721,7 +842,15 @@ function DATA_FindNextUserInRoom(RoomName, Username)
 }
 
 /**
-* Set user attibutes in 'RoomName'
+* @brief		Set user attibutes in 'RoomName'
+* @param		RoomName	Room to set attribute
+* @param 		Username	Base user to set
+* @param 		Status		New user's status
+* @param 		Role		New user's Role
+* @param 		Affiliation	New user's Affiliation
+* @author		Danilo Yorinori
+* @return 		Boolean
+* @see			DATA_FindRoom DATA_FindUserInRoom
 */
 function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 {
@@ -750,7 +879,12 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 }
 
 /**
-* Del user from user list of a room
+* @brief		Delete user from user list of a room
+* @param		RoomName	Room name
+* @param 		Username	User to remove
+* @author		Danilo Yorinori
+* @return 		Boolean
+* @see			DATA_FindRoom DATA_FindUserInRoom
 */
 function DATA_DelUserInRoom(RoomName, Username)
 {
@@ -765,14 +899,17 @@ function DATA_DelUserInRoom(RoomName, Username)
 }
 
 /**
+* @brief		Get user's rating 
+*
 * Return Category's Rating from Username in Room
 * (Based on fact that's all online users are connected to 'geral' room
 *
-* @param RoomName
-* @param Username
-* @param Category	Category which rating will be returned
-* @return	Rating's value
-* @author	Danilo Yorinori
+* @param		RoomName	Room name
+* @param 		Username	User name
+* @param 		Category	Category which rating will be returned
+* @author		Danilo Yorinori
+* @return		Rating's value
+* @see			DATA_FindRoom DATA_FinUserInRoom
 */
 function DATA_GetUserRatingInRoom(RoomName, Username, Category)
 {
@@ -833,10 +970,12 @@ function DATA_GetUserRatingInRoom(RoomName, Username, Category)
 }
 
 /**
-* Sort Userlist from Room into ascending or descending order
+* @brief		Sort Userlist from Room into ascending or descending order
 *
-* @return	boolean
-* @author	Danilo Yorinori
+* @param		RoomName	Room to sort
+* @author		Danilo Yorinori
+* @return		Boolean
+* @see			DATA_FindRoom UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
 */
 function DATA_SortUserByNickInRoom(RoomName)
 {
@@ -854,10 +993,10 @@ function DATA_SortUserByNickInRoom(RoomName)
 }
 
 /**
-* Sort Userlist from Room into descending order by Rating
-*
-* @return	boolean
-* @author	Danilo Yorinori
+* @brief		Sort Userlist from Room into descending order by Rating
+* @author		Danilo Yorinori
+* @return		Boolean
+* @see			DATA_FindRoom UTILS_SortByUsernameDsc
 */
 function DATA_SortUserByRatingInRoom(RoomName)
 {
@@ -868,10 +1007,11 @@ function DATA_SortUserByRatingInRoom(RoomName)
 }
 
 /**
-* Get room from room list
+* @brief		Get room from room list
 *
-* @return	boolean
-* @author	Danilo Yorinori
+* @author		Danilo Yorinori
+* @return		Boolean
+* @see			DATA_FindRooom
 */
 function DATA_GetRoom(RoomName)
 {
@@ -890,12 +1030,13 @@ function DATA_GetRoom(RoomName)
  **********************************/
 
 /**
-* Add a chat in interface structure, with the other user name and his status
+* @brief		Add a chat in interface structure, with the other user name and his status
 *
-* @param 	Username The user that you are chating with
-* @param 	Status User's current status
-* @return 	bool
-* @author 	Ulysses
+* @param		Username The user that you are chating with
+* @param 		Status 	 User's current status
+* @author 		Ulysses Bonfim
+* @return 		Boolean
+* @see 			DATA_FindChat
 */
 function DATA_AddChat (Username, Status)
 {
@@ -937,11 +1078,12 @@ function DATA_AddChat (Username, Status)
 
 
 /**
-* Remove a chat with the user given from the structure
+* @brief		Remove a chat with the user given from the structure
 *
-* @param 	User The user that the chat will be removed
-* @return 	void
-* @author 	Ulysses
+* @param		Username	The user that the chat will be removed
+* @author 		Ulysses Bonfim
+* @return 		void
+* @see 			DATA_FindChat
 */
 function DATA_RemoveChat(Username)
 {
@@ -968,11 +1110,11 @@ function DATA_RemoveChat(Username)
 
 
 /**
-* Find a chat with the user's name
+* @brief		Find a chat with the user's name
 *
-* @param 	User The user that you are chating with
-* @return 	interger The position of the chat in structure
-* @author 	Ulysses
+* @param		Username	The user that you are chating with
+* @author 		Ulysses Bonfim
+* @return 		interger the position of the chat in structure
 */
 function DATA_FindChat(Username)
 {
@@ -998,7 +1140,12 @@ function DATA_FindChat(Username)
  **********************************/
 
 /**
-* Add a challenge in 'ChallengeList'
+* @brief		Add a challenge in 'ChallengeList'
+* @param		Username	The oponent
+* @param		Id			Challenge ID
+* @param		Challenger	The challenge challenger
+* @author 		Ulysses Bonfim
+* @return 		Boolean
 */
 function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated, MatchId)
 {
@@ -1106,7 +1253,11 @@ function DATA_UpdateChallenge(ChallengeId, Challenger, Challenged, Category, Rat
 }
 
 /**
-* Remove a challenge in 'ChallengeList'
+* @brief		Remove a challenge in 'ChallengeList'
+* @param		Username	The oponent
+* @author 		Ulysses Bonfim
+* @return 		Boolean
+* @see			DATA_FindChallenge
 */
 function DATA_RemoveChallenge(ChallengeId, MatchId)
 {
@@ -1129,6 +1280,10 @@ function DATA_RemoveChallenge(ChallengeId, MatchId)
 
 /**
 * Remove a challenge by ID in 'ChallengeList'
+* @param		ID	 Challenge ID
+* @author 		Ulysses Bonfim
+* @return 		Boolean
+* @see			DATA_FindChallengeById
 */
 /*
 function DATA_RemoveChallengeById(ID)
@@ -1155,7 +1310,9 @@ function DATA_RemoveChallengeById(ID)
 */
 
 /**
-* Remove all challenges in 'ChallengeList'
+* @brief		Remove all challenges in 'ChallengeList'
+* @author 		Ulysses Bonfim
+* @return 		void
 */
 function DATA_ClearChallenges()
 {
@@ -1172,6 +1329,10 @@ function DATA_ClearChallenges()
 * This is used because interface create a instance of challenge
 * before get match id from server. If server send a error, this function
 * is able to find challenge in challenge list;
+* @brief		Find a challenge in 'ChallengeList'
+* @param		Username	Challenge opponent
+* @author 		Ulysses Bonfim
+* @return 		Boolean
 */
 function DATA_FindChallenge(ChallengeId, MatchId)
 {
@@ -1204,7 +1365,10 @@ function DATA_FindChallenge(ChallengeId, MatchId)
 
 
 /**
-* Find a challenge in 'ChallengeList'
+* @brief		Find a challenge by ID in 'ChallengeList'
+* @param		Username	Challenge opponent
+* @author 		Ulysses Bonfim
+* @return 		Challenge list index or null (user not found)
 */
 /*
 function DATA_FindChallengeById(ID)
@@ -1223,6 +1387,15 @@ function DATA_FindChallengeById(ID)
 	return null;
 }
 */
+
+/**
+* @brief		Add a Challenge window on structure
+* @param		Id	  		Challenge id
+* @param		WindowObj	Window Object shown on interface
+* @author 		Ulysses Bonfim
+* @return 		null
+* @see			DATA_FindChallengeById
+*/
 function DATA_AddChallengeWindow (Id, WindowObj)
 {
 	var i = this.FindChallenge(Id, Id);
@@ -1238,7 +1411,10 @@ function DATA_AddChallengeWindow (Id, WindowObj)
  **********************************/
 
 /**
-* Set current game 
+* @brief		Set current game 
+* @param		Game	Game to set
+* @author 		Rubens Sugimoto
+* @return 		null
 */
 function DATA_SetCurrentGame(Game)
 {
@@ -1253,7 +1429,15 @@ function DATA_SetCurrentGame(Game)
 }
 
 /**
-* Add a game in 'GameList'
+* @brief		Add a game in 'GameList'
+* @param		Id 	  	   Game Id
+* @param		Player1	   Player name
+* @param		Player2	   Player name
+* @param		Color	   Your color on game
+* @param		GameDiv	   Interface information 
+* @author 		Rubens Sugimoto
+* @return 		New Game structure
+* @see			DATA_SetCurrentGame
 */
 function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 {
@@ -1320,7 +1504,11 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 
 
 /**
-* Remove a game in 'GameList' by game id
+* @brief		Remove a game in 'GameList' by game id
+* @param		Id 	  	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		Removed Game structure
+* @see			DATA_FindGame DATA_SetCurrentGame 
 */
 function DATA_RemoveGame(Id)
 {
@@ -1351,7 +1539,11 @@ function DATA_RemoveGame(Id)
 }
 
 /**
-* Find game in 'GameList' by game id
+* @brief		Find game in 'GameList' by game id
+* @param		Id 	  	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		Game index
+* @see			DATA_FindGame DATA_SetCurrentGame 
 */
 function DATA_FindGame(Id)
 {
@@ -1371,7 +1563,15 @@ function DATA_FindGame(Id)
 }
 
 /**
-* Add a move in 'GameList[x].Moves' 
+* @brief		Add a move in 'GameList[x].Moves' 
+* @param		BoardArray 	  Board Array
+* @param		Move		  Board after move
+* @param		ShortMove	  The move
+* @param		PWTime		  White player time
+* @param		PBTime		  Balck player time
+* @param		Turn		  Who did the move
+* @author 		Rubens Sugimoto
+* @return 		null
 */
 function DATA_AddGameMove(BoardArray, Move, ShortMove, PWTime, PBTime, Turn)
 {
@@ -1390,7 +1590,10 @@ function DATA_AddGameMove(BoardArray, Move, ShortMove, PWTime, PBTime, Turn)
 }
 
 /**
-* Set true, if is the player's turn
+* @brief		Set true, if is the player's turn
+* @param		TurnColor 	 The round color
+* @author 		Rubens Sugimoto
+* @return 		Boolean
 */
 function DATA_SetTurnGame(TurnColor)
 {
@@ -1404,6 +1607,13 @@ function DATA_SetTurnGame(TurnColor)
 	}
 }
 
+
+/**
+* @brief		Search for a game in GameList
+* @param		Id	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		The game structure
+*/
 function DATA_GetGame(Id)
 {
 	var i=0;
@@ -1421,6 +1631,13 @@ function DATA_GetGame(Id)
 	return null;
 }
 
+
+/**
+* @brief		Search for a game in OldGameList
+* @param		Id	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		The game structure
+*/
 function DATA_GetOldGame(Id)
 {
 	/*
@@ -1441,7 +1658,11 @@ function DATA_GetOldGame(Id)
 }
 
 /**
-* Return the oponent's name
+* @brief		Return the oponent's name
+* @param		GameId	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		Opponent's name
+* @see 			DATA_GetGame
 */
 function DATA_GetOponent(GameID)
 {
@@ -1469,7 +1690,10 @@ function DATA_GetOponent(GameID)
 
 
 /**
-* Set current oldgame 
+* @brief		Set current oldgame 
+* @param		Game	Game structure
+* @author 		Rubens Sugimoto
+* @return 		null
 */
 function DATA_SetCurrentOldGame(Game)
 {
@@ -1484,7 +1708,14 @@ function DATA_SetCurrentOldGame(Game)
 }
 
 /**
-* Add a oldgame in 'OldGameList'
+* @brief		Add a oldgame in 'OldGameList'
+* @param		PWName		  White player's name
+* @param		PBName		  Black player's name
+* @param		Color		  Your color on game
+* @param		GameDiv		  Div structure
+* @author 		Rubens Sugimoto
+* @return 		null
+* @see 			DATA_SetCurrentOldGame
 */
 function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 {
@@ -1526,7 +1757,11 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 
 
 /**
-* Remove a game in 'OldGameList' by game id
+* @brief		Remove a game in 'OldGameList' by game id
+* @param		Id	   	 The Game Id
+* @author 		Rubens Sugimoto
+* @return 		The game removed object
+* @see			DATA_SetCurrentOldGame
 */
 function DATA_RemoveOldGame(Id)
 {
@@ -1556,6 +1791,14 @@ function DATA_RemoveOldGame(Id)
 	
 }
 
+
+/**
+* @brief		Set an old game as the current old game
+* @param		GameObj    		The old game object
+* @author 		Rubens Sugimoto
+* @return 		Game's position on OldGameList
+* @see			DATA_SetCurrentOldGame
+*/
 function DATA_PushGameToOldGame(GameObj)
 {
 	var Pos;
@@ -1570,10 +1813,12 @@ function DATA_PushGameToOldGame(GameObj)
  **********************************/
 
 /**
-* Add search game window parameters
-*
-* @return	boolean
-* @author	Danilo Yorinori
+* @brief		Add search game window parameters
+* @param		Id		   Game ID
+* @param		Elements   
+* @param		User	   Username
+* @author		Danilo Yorinori
+* @return		boolean
 */
 function DATA_AddSearchGameInfo(Id, Elements, User)
 {
@@ -1596,10 +1841,9 @@ function DATA_AddSearchGameInfo(Id, Elements, User)
 }
 
 /**
-* Remove search game window
-*
-* @return	boolean
-* @author	Danilo Yorinori
+* @brief		Remove search game window
+* @author		Danilo Yorinori
+* @return		boolean
 */
 function DATA_RemoveSearchGameInfo(Id)
 {
@@ -1612,10 +1856,9 @@ function DATA_RemoveSearchGameInfo(Id)
 }
 
 /**
-* Find search game window
-*
-* @return	integer
-* @author	Danilo Yorinori
+* @brief		Find search game window
+* @author		Danilo Yorinori
+* @return		Game's position
 */
 function DATA_FindSearchGameInfo(Id)
 {
@@ -1722,7 +1965,6 @@ function DATA_FindWindow(WindowObj)
 function DATA_AddProfile(Jid, Username, ProfileWindow)
 {
 	var NewProfile = new Object();
-	 
 	// Data Id
 	NewProfile.Jid = Jid;
 	NewProfile.Profile = ProfileWindow;

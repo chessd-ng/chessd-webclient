@@ -199,14 +199,31 @@ function WINDOW_CreateRoom()
 	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('room_create_room'));
 
 	// Focus room name input
-	document.getElementById('CreateRoomInputName').focus();
+	var Input = document.getElementById('CreateRoomInputName');
+	Input.focus();
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Create Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", 
+		function() { 
+				if (Input.value == '' || Input.value == null)
+					return;
+				else
+					 WINDOW_RemoveWindow(WindowObj);
+	}, false);
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Input - Close window if input value isn't a null or empty string
+	UTILS_AddListener(WindowObj.eventButtons[3],"keypress", 
+		function(event) { 
+			if(event.keyCode == 13 ) {
+				if (Input.value == '' || Input.value == null)
+					return;
+				else
+					 WINDOW_RemoveWindow(WindowObj);
+			} 
+	}, false);
 }
 
 function WINDOW_CancelRoom()
@@ -347,8 +364,8 @@ function WINDOW_OldGame(Id)
 	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
 	var Elements = Div.Elements;
 
-	// Focus input player 1
-//	document.getElementById('OldGameInput1').focus();
+	// Focus input player 1 - TODO expand this if more than one old game search window could be opened
+	document.getElementById('OldGameInput1').focus();
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); OLDGAME_CloseWindow(Id); }, false);
@@ -357,45 +374,6 @@ function WINDOW_OldGame(Id)
 
 	return Elements;
 }
-
-function WINDOW_OldGameSearch()
-{
-	if(document.getElementById("OldGameSearchDiv")!=null)
-	{
-		// Do nothing
-		return;
-	}
-
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowOldGameSearchWindow();
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(250, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
-
-	// Focus input player 1
-	document.getElementById('OldGameInput1').focus();
-
-	// Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Close Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-
-/*
-function WINDOW_OldGameResult(GameList)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowOldGameResultWindow(GameList);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
-	
-	// Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Close Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}*/
-
 
 function WINDOW_UnbanUser()
 {
@@ -409,7 +387,7 @@ function WINDOW_UnbanUser()
 	var Div = INTERFACE_UnbanUserWindow();
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(150, Div.Div, Div.Buttons, "Unban User");
+	var WindowObj = WINDOW_NewWindow(180, Div.Div, Div.Buttons, "Unban User");
 
 	// Focus input player 1
 	document.getElementById('UnbanInput').focus();

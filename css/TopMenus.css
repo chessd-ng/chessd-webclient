@@ -37,6 +37,10 @@
 	cursor			: pointer;
 }
 
+#Page #RoomMenuDiv p {
+	text-align :center;
+}
+
 #Page #RoomMenuDiv ul,
 #Page #ChallengeMenuDiv ul
 {
@@ -72,6 +76,7 @@
 }
 
 #Page #RoomMenuDiv #createRoom {
+	font-size : 10px;
 	border-bottom	:	1px solid #216778;
 	cursor			: pointer;
 }

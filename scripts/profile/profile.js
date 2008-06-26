@@ -142,6 +142,8 @@ function PROFILE_HandleInfoProfile(XML)
 			}
 
 			Profile.Profile.SetGroup(Type);
+
+			Profile.Profile.SetTitleImg(Type);
 		
 			Rating = PROFILE_HandleRatings(RatingNodes);
 
@@ -239,7 +241,7 @@ function PROFILE_HandleRatings(RatingNodes)
 *
 * @public
 * @param        Username is the jabber username
-* @return       void
+* @return       boolean
 * @author       Rubens
 */
 function PROFILE_StartProfile(Username)
@@ -249,6 +251,11 @@ function PROFILE_StartProfile(Username)
 	var Jid = Username+"@"+MainData.Host;
 
 	var Elements;
+	
+	if (MainData.FindProfile(Jid) != null)
+	{
+		return false;
+	}
 
 	ProfileInfo.User = Username;
 	ProfileInfo.Name = "---";
@@ -262,12 +269,13 @@ function PROFILE_StartProfile(Username)
 	Elements = WINDOW_Profile(ProfileInfo);
 
 	MainData.AddProfile(Jid, Username, Elements);
-
+		
 	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));
 
+	return true;
 }
 
 /**

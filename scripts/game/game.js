@@ -239,13 +239,13 @@ function GAME_HandleDraw(XML, Xmlns)
 		Button2 = new Object();
 
 		// Ok button
-		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameDrawAccept(GameID));
 		}
 
 		// Cancel button
-		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameDrawDeny(GameID));
 		}
@@ -289,13 +289,13 @@ function GAME_HandleCancel(XML, Xmlns)
 		Button2 = new Object();
 
 		// Ok button
-		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameCancelAccept(GameID));
 		}
 
 		// Cancel button
-		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameCancelDeny(GameID));
 		}
@@ -339,13 +339,13 @@ function GAME_HandleAdjourn(XML, Xmlns)
 		Button2 = new Object();
 
 		// Ok button
-		Button1.Name = UTILS_GetText("game_accept");
+		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameAdjournAccept(GameID));
 		}
 
 		// Cancel button
-		Button2.Name = UTILS_GetText("game_decline");
+		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameAdjournDeny(GameID));
 		}
@@ -798,13 +798,13 @@ function GAME_SendResign(GameID)
 	Button2 = new Object();
 
 	// Ok button
-	Button1.Name = UTILS_GetText("game_ok");
+	Button1.Name = UTILS_GetText("window_ok");
 	Button1.Func = function () {
 		CONNECTION_SendJabber(MESSAGE_GameResign(GameID));
 	}
 
 	// Cancel button
-	Button2.Name = UTILS_GetText("game_cancel");
+	Button2.Name = UTILS_GetText("window_cancel");
 	
 	// Show message as a default confirm window
 	WINDOW_Confirm(Title, Text, Button1, Button2);

@@ -13,15 +13,7 @@ function {\bf INTERFACE\_\-HideRoom} ()
 \item 
 function {\bf INTERFACE\_\-RemoveRoom} ()
 \item 
-function {\bf INTERFACE\_\-AddUserInRoom} (Username, Status, Rating, Type)
-\item 
 function {\bf INTERFACE\_\-AddMsgInRoom} (Username, Msg, Timestamp)
-\item 
-function {\bf INTERFACE\_\-RemoveUserInRoom} (Username)
-\item 
-function {\bf INTERFACE\_\-ChangeUserStatusInRoom} (Username, NewStatus, NewType)
-\item 
-function {\bf INTERFACE\_\-FindUserInRoom} (Username)
 \item 
 function {\bf INTERFACE\_\-RefreshOccupantsNumber} (RoomName)
 \item 
@@ -63,15 +55,6 @@ function {\bf INTERFACE\_\-ShowCancelRoomWindow} ()
 
 
 
-Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-AddUserInRoom@{INTERFACE\_\-AddUserInRoom}}
-\index{INTERFACE\_\-AddUserInRoom@{INTERFACE\_\-AddUserInRoom}!interface/room.js@{interface/room.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddUserInRoom ( {\em Username}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type})}\label{interface_2room_8js_d8afab178d7ce9053b648dc193f667ac}
-
-
-
-
-References INTERFACE\_\-CreateContact().
-
 Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-ChangeRoomListVisibility@{INTERFACE\_\-ChangeRoomListVisibility}}
 \index{INTERFACE\_\-ChangeRoomListVisibility@{INTERFACE\_\-ChangeRoomListVisibility}!interface/room.js@{interface/room.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ChangeRoomListVisibility ()}\label{interface_2room_8js_733bcde6f623c3ff341c361fa74822eb}
@@ -81,14 +64,7 @@ Show or hide list of user's rooms
 
 References MainData, ROOM\_\-FocusRoom(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
 
-Referenced by INTERFACE\_\-CreateRooms(), and INTERFACE\_\-ShowEmoticonList().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-ChangeUserStatusInRoom@{INTERFACE\_\-ChangeUserStatusInRoom}}
-\index{INTERFACE\_\-ChangeUserStatusInRoom@{INTERFACE\_\-ChangeUserStatusInRoom}!interface/room.js@{interface/room.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ChangeUserStatusInRoom ( {\em Username}, \/   {\em NewStatus}, \/   {\em NewType})}\label{interface_2room_8js_a0339637febdec26a151cff6620a731e}
-
-
-
-
-Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-CloseRoom@{INTERFACE\_\-CloseRoom}}
+Referenced by INTERFACE\_\-CreateRooms().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-CloseRoom@{INTERFACE\_\-CloseRoom}}
 \index{INTERFACE\_\-CloseRoom@{INTERFACE\_\-CloseRoom}!interface/room.js@{interface/room.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CloseRoom ()}\label{interface_2room_8js_05549f1cd90d5f2b27785c2477609722}
 
@@ -106,7 +82,7 @@ Room name; \begin{Desc}
 \item[Returns:]RoomDiv, User list and Message list in this room  Pedro and Rubens \end{Desc}
 
 
-References INTERFACE\_\-ShowEmoticonList(), ROOM\_\-SendMessage(), ROOM\_\-SortUsersByNick(), ROOM\_\-SortUsersByRating(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and UTILS\_\-ReturnKeyCode().
+References INTERFACE\_\-ShowEmoticonList(), ROOM\_\-SendMessage(), UTILS\_\-CreateElement(), and UTILS\_\-ReturnKeyCode().
 
 Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-CreateRoomInBar@{INTERFACE\_\-CreateRoomInBar}}
 \index{INTERFACE\_\-CreateRoomInBar@{INTERFACE\_\-CreateRoomInBar}!interface/room.js@{interface/room.js}}
@@ -126,14 +102,7 @@ Create rooms div
 
 References INTERFACE\_\-ChangeRoomListVisibility(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
 
-Referenced by INTERFACE\_\-CreateLeft().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-FindUserInRoom@{INTERFACE\_\-FindUserInRoom}}
-\index{INTERFACE\_\-FindUserInRoom@{INTERFACE\_\-FindUserInRoom}!interface/room.js@{interface/room.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FindUserInRoom ( {\em Username})}\label{interface_2room_8js_12906a12b09754d60cb127043ae7048b}
-
-
-
-
-Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-FocusRoom@{INTERFACE\_\-FocusRoom}}
+Referenced by INTERFACE\_\-CreateLeft().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-FocusRoom@{INTERFACE\_\-FocusRoom}}
 \index{INTERFACE\_\-FocusRoom@{INTERFACE\_\-FocusRoom}!interface/room.js@{interface/room.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FocusRoom ( {\em RoomName})}\label{interface_2room_8js_5cd8c4276d71be1d724d9910d90f9e33}
 
@@ -142,7 +111,7 @@ Give focus to a room in change room bar
 
 References MainData, and ROOM\_\-FocusRoom().
 
-Referenced by INTERFACE\_\-ShowEmoticonList(), and ROOM\_\-FocusRoom().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-HideEmoticonList@{INTERFACE\_\-HideEmoticonList}}
+Referenced by ROOM\_\-FocusRoom().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-HideEmoticonList@{INTERFACE\_\-HideEmoticonList}}
 \index{INTERFACE\_\-HideEmoticonList@{INTERFACE\_\-HideEmoticonList}!interface/room.js@{interface/room.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideEmoticonList ()}\label{interface_2room_8js_2f6400d74a7e3c77a7f71bd0383214dc}
 
@@ -187,17 +156,6 @@ Referenced by INTERFACE\_\-ShowRoomMenu().\index{interface/room.js@{interface/ro
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RefreshOccupantsNumber ( {\em RoomName})}\label{interface_2room_8js_a18058276a9ab31dd0a0a9b815c7fac4}
 
 
-Refresh room's occupants number
-
-\begin{Desc}
-\item[Parameters:]
-\begin{description}
-\item[{\em RoomName}]Room's name \end{description}
-\end{Desc}
-\begin{Desc}
-\item[Returns:]void \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo \end{Desc}
 
 
 References MainData.
@@ -227,14 +185,7 @@ Remove a room from room list if RoomListMenu is opened
 \item[Author:]Rubens \end{Desc}
 
 
-Referenced by ROOM\_\-RemoveRoom().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-RemoveUserInRoom@{INTERFACE\_\-RemoveUserInRoom}}
-\index{INTERFACE\_\-RemoveUserInRoom@{INTERFACE\_\-RemoveUserInRoom}!interface/room.js@{interface/room.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveUserInRoom ( {\em Username})}\label{interface_2room_8js_394acf965b87a45f1fea3d09980c6a15}
-
-
-
-
-Referenced by RoomObj().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-ShowCancelRoomWindow@{INTERFACE\_\-ShowCancelRoomWindow}}
+Referenced by ROOM\_\-RemoveRoom().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-ShowCancelRoomWindow@{INTERFACE\_\-ShowCancelRoomWindow}}
 \index{INTERFACE\_\-ShowCancelRoomWindow@{INTERFACE\_\-ShowCancelRoomWindow}!interface/room.js@{interface/room.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowCancelRoomWindow ()}\label{interface_2room_8js_a93c183ab581a78e6789d6b97edb6099}
 
@@ -269,7 +220,7 @@ Referenced by WINDOW\_\-CreateRoom().\index{interface/room.js@{interface/room.js
 
 Show emoticon list 
 
-References INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-FocusRoom(), INTERFACE\_\-HideEmoticonList(), MainData, UTILS\_\-AddListener(), UTILS\_\-CreateElement(), and UTILS\_\-RemoveListener().
+References INTERFACE\_\-HideEmoticonList(), MainData, UTILS\_\-AddListener(), UTILS\_\-CreateElement(), and UTILS\_\-RemoveListener().
 
 Referenced by INTERFACE\_\-CreateRoom().\index{interface/room.js@{interface/room.js}!INTERFACE\_\-ShowGameRoomList@{INTERFACE\_\-ShowGameRoomList}}
 \index{INTERFACE\_\-ShowGameRoomList@{INTERFACE\_\-ShowGameRoomList}!interface/room.js@{interface/room.js}}
@@ -326,6 +277,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 C3SL - Center for Scientific Computing and Free Software Control rooms interface 
 
-References INTERFACE\_\-AddMsgInRoom(), INTERFACE\_\-AddUserInRoom(), INTERFACE\_\-ChangeUserStatusInRoom(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-FindUserInRoom(), INTERFACE\_\-HideRoom(), INTERFACE\_\-RemoveRoom(), INTERFACE\_\-RemoveUserInRoom(), and INTERFACE\_\-ShowRoom().
+References INTERFACE\_\-AddMsgInRoom(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-HideRoom(), INTERFACE\_\-RemoveRoom(), INTERFACE\_\-ShowRoom(), ROOM\_\-SortUsersByNick(), ROOM\_\-SortUsersByRating(), and UserListObj().
 
 Referenced by DATA\_\-AddRoom(), and ROOM\_\-CreateRoom().

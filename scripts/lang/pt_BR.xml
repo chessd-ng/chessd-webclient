@@ -5,12 +5,12 @@
 		<general_name>ChessD</general_name>
 	</general>
 	<utils>
-		<not_implemented_title>Não implementado.</not_implemented_title>
-		<not_implemented>Este recurso não está implementado no momento.</not_implemented>
+		<not_implemented_title>Não implementado</not_implemented_title>
+		<not_implemented>Funcionalidade ainda não implementada para esta versão.</not_implemented>
 	</utils>
 	<window>
 		<window_yes>Sim</window_yes>
-		<window_no>Nao</window_no>
+		<window_no>Não</window_no>
 		<window_ok>Ok</window_ok>
 		<window_close>Fechar</window_close>
 		<window_save>Salvar</window_save>
@@ -30,7 +30,7 @@
 		<login_user>Login</login_user>
 		<login_passwd>Senha</login_passwd>
 		<login_server_down>Servidor fora do ar. Tente novamente mais tarde.</login_server_down>
-		<login_connection_refused>Servidor de mensagens indisponí­vel no momento. Tente novamente mais tarde.</login_connection_refused>
+		<login_connection_refused>Servidor de mensagens indisponível no momento. Tente novamente mais tarde.</login_connection_refused>
 		<login_invalid_user>Usuário ou senha inválidos.</login_invalid_user>
 		<login_banned_user>Usuário banido.</login_banned_user>
 		<login_lost_connection>Conexão perdida.</login_lost_connection>
@@ -64,18 +64,16 @@
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Adicionar usuário</contact_invite>
 		<contact_invite_text>%s adicionou você como contato, deseja aceitar?</contact_invite_text>
-		<contact_auth>Aceitar</contact_auth>
-		<contact_decline>Cancelar</contact_decline>
-		<contact_ok>OK</contact_ok>
 		<contact_remove_title>Remover Usuário</contact_remove_title>
 		<contact_remove_text>Tem certeza que deseja remover %s da sua lista?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
-		<contact_user>Usuário:</contact_user>
+		<contact_user_t>Usuário:</contact_user_t>
 		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
 		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_user>Usuário</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
+		<contact_robot>Robô</contact_robot>
 		<contact_search_by>Buscar por:</contact_search_by>
 		<contact_by_name>Nome</contact_by_name>
 		<contact_by_user>Apelido</contact_by_user>
@@ -87,7 +85,7 @@
 		<chat_max_exceeded>Máximo %i chats abertos</chat_max_exceeded>
 	</chat>
 	<room>
-		<room_default>geral</room_default>
+		<room_default>Geral</room_default>
 		<room_contacts>Contatos</room_contacts>
 		<room_all>Online</room_all>
 		<room_order_nick>Apelido</room_order_nick>
@@ -98,20 +96,18 @@
 		<room_name>Nome: </room_name>
 		<room_description>Descrição: </room_description>
 		<room_create>Criar</room_create>
-		<room_cancel>Cancelar</room_cancel>
 		<room_cancel_text>Realmente deseja cancelar a criação desta sala?</room_cancel_text>
-		<room_invalid_name>Nome inválido para sala</room_invalid_name>
-		<room_invalid_length>Tamanho máximo de 50 caracteres</room_invalid_length>
-		<room_yes>Sim</room_yes>
-		<room_no>Não</room_no>
+		<room_error>Erro na criação de sala</room_error>
+		<room_invalid_name>Nome inválido para sala.</room_invalid_name>
+		<room_invalid_length>Tamanho máximo de 30 caracteres.</room_invalid_length>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
 	</group>
 	<status>
 		<status_offline>offline</status_offline>
-		<status_available>disponí­vel</status_available>
-		<status_unavailable>indisponí­vel</status_unavailable>
+		<status_available>disponível</status_available>
+		<status_unavailable>indisponível</status_unavailable>
 		<status_busy>ocupado</status_busy>
 		<status_away>ausente</status_away>
 		<status_playing>jogando</status_playing>
@@ -134,7 +130,7 @@
 	<challenge>
 		<challenge_title_invite>Convidar para jogar</challenge_title_invite>
 		<challenge_title_offer>Convite para jogar</challenge_title_offer>
-		<challenge_information>convidou para jogar uma partida com as seguintes caracteristicas:</challenge_information>
+		<challenge_information>convidou para jogar uma partida com as seguintes características:</challenge_information>
 		<challenge_my_pieces>Minhas peças:</challenge_my_pieces>
 		<challenge_op_pieces>Suas peças:</challenge_op_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
@@ -145,13 +141,10 @@
 		<challenge_rating>Valendo rating</challenge_rating>
 		<challenge_private>Partida privada</challenge_private>
 		<challenge_invite>Convidar</challenge_invite>
-		<challenge_cancel>Cancelar</challenge_cancel>
-		<challenge_decline>Recusar</challenge_decline>
 		<challenge_chat>Abrir chat</challenge_chat>
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
-		<challenge_accept>Aceitar</challenge_accept>
 		<challenge_no_time>Sem tempo</challenge_no_time>
-		<challenge_color_auto>Automatico</challenge_color_auto>
+		<challenge_color_auto>Automática</challenge_color_auto>
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
@@ -159,10 +152,6 @@
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 	</challenge>
 	<game>
-		<game_accept>Aceitar</game_accept>
-		<game_decline>Recusar</game_decline>
-		<game_ok>Ok</game_ok>
-		<game_cancel>Cancelar</game_cancel>
 		<game_draw>Requisição de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
 		<game_draw_denied>%s recusou sua requisição de empate.</game_draw_denied>
@@ -187,11 +176,11 @@
 
 		<game_options>Opções</game_options>
 		<game_moves>Lances</game_moves>
-		<game_send_draw>Empatar</game_send_draw>
+		<game_send_draw>Propor empate</game_send_draw>
 		<game_send_resign>Desistir</game_send_resign>
-		<game_send_terminate>Encerrar</game_send_terminate>
-		<game_send_adjourn>Pausar / adiar</game_send_adjourn>
-		<game_give_time>Dar tempo ao adversário</game_give_time>
+		<game_send_terminate>Propor encerramento</game_send_terminate>
+		<game_send_adjourn>Propor adiamento</game_send_adjourn>
+		<game_give_time>Dar mais tempo ao adversário</game_give_time>
 		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
 		<game_promotion_queen>Dama</game_promotion_queen>
 		<game_promotion_rook>Torre</game_promotion_rook>
@@ -227,7 +216,7 @@
 		<profile_name>Nome: </profile_name>
 		<profile_nick>Apelido: </profile_nick>
 		<profile_whoami>Quem sou: </profile_whoami>
-		<profile_level>Nivel do usuario: </profile_level>
+		<profile_level>Nível do usuário: </profile_level>
 		<profile_group>Grupo: </profile_group>
 		<profile_type>Titulação: </profile_type>
 		<profile_online_time>Tempo online: </profile_online_time>
@@ -251,23 +240,26 @@
 		<profile_change_image>Selecione a foto</profile_change_image>
 		<profile_change_image_title>Mudar foto</profile_change_image_title>
 		<profile_load_error>Erro</profile_load_error>
-		<profile_load_error_title>Não foi possí­vel carregar a foto</profile_load_error_title>
+		<profile_load_error_title>Não foi possível carregar a foto</profile_load_error_title>
 		<profile_year>a</profile_year>
 		<profile_month>m</profile_month>
 		<profile_day>d</profile_day>
 	</profile>
 	<register>
-		<register_inf>Por favor preencha as informações abaixo para criar sua conta no Xadrez Livre.</register_inf>
+		<register_inf>Por favor, preencha as informações abaixo para criar sua conta no Xadrez Livre.</register_inf>
 		<register_title>Cadastro</register_title>
-		<register_user_name>Nome de Usuário:</register_user_name>
+		<register_login>Login </register_login>
+		<register_max_char>(máx. 14 caracteres)</register_max_char>
 		<register_user_inf>Usar somente caracteres minúsculos, números, sem espaços, '-', '.' e '_' </register_user_inf>
-		<register_mail>E-mail (opcional):</register_mail>
+		<register_mail1>E-mail </register_mail1>
+		<register_mail2>(opcional)</register_mail2>
 		<register_mail_inf>Permite recuperar sua senha em caso de esquecimento.</register_mail_inf>
 		<register_passwd>Senha:</register_passwd>
-		<register_passwd_confirm>Senha (confirmação):</register_passwd_confirm>
+		<register_passwd_confirm1>Senha </register_passwd_confirm1>
+		<register_passwd_confirm2>(confirmação)</register_passwd_confirm2>
 		<register_bt_confirm>Cadastrar</register_bt_confirm>
-		<register_bt_cancel>Cancelar</register_bt_cancel>
 		<register_invalid_user_name>Nome de usuário inválido</register_invalid_user_name>
+		<register_invalid_user_name_len>O Login deve possuir no máximo 14 caracteres.</register_invalid_user_name_len>
 		<register_invalid_mail>E-mail inválido</register_invalid_mail>
 		<register_invalid_password>Senha não confere</register_invalid_password>
 		<register_error_409>Usuário já cadastrado</register_error_409>

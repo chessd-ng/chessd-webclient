@@ -1,7 +1,6 @@
 
 /* Rooms */
 #Main #Left #Rooms {
-	margin-top		: 1mm;
 	position		: relative
 }
 
@@ -23,7 +22,7 @@
 
 #Main #Left #Rooms #RoomList li {
 	position		: relative;
-	width			: 19.9mm;
+	width			: 38%;
 	height			: 14px;
 	float 			: left;
 	list-style		: none;
@@ -43,6 +42,8 @@
 	position		: absolute;
 	right			: 5px;
 	top				: 6px;
+	width			: 5px;
+	height		:	5px;
 	cursor			: pointer;
 }
 
@@ -152,7 +153,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
-	width			: 89%;
+	width			: 90%;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;
@@ -170,7 +171,7 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 89%;
+	width			: 90%;
 	padding			: 2px;
 	font-size		: 12px;
 	color			: #216778;
@@ -179,7 +180,7 @@
 
 /* Emoticons */
 #Main #Left #Rooms .Room .emoticon {
-	margin-left		: 39mm;
+	margin-left		: 81%;
 	cursor			: pointer;
 }
 

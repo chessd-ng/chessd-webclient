@@ -3,44 +3,52 @@
 \subsection*{Functions}
 \begin{CompactItemize}
 \item 
-function {\bf INTERFACE\_\-AddContact} (Username, Status)
+function {\bf ContactObj} ()
 \item 
-function {\bf INTERFACE\_\-RemoveContact} (Username)
+function {\bf INTERFACE\_\-AddContactGroup} (GroupName)
 \item 
-function {\bf INTERFACE\_\-SetUserStatus} (Username, NewStatus)
+function {\bf INTERFACE\_\-CreateGroup} (GroupName)
 \item 
-function {\bf INTERFACE\_\-SetUserRating} (Username, Category, Rating)
+function {\bf INTERFACE\_\-RemoveContactGroup} (GroupName)
 \item 
-function {\bf INTERFACE\_\-ChangeCurrentRating} (Type)
+function {\bf INTERFACE\_\-FindContactGroup} (GroupName)
+\item 
+function {\bf INTERFACE\_\-GetContactGroup} (GroupName)
+\item 
+function {\bf INTERFACE\_\-FindContactUserGroup} (UserName)
+\item 
+function {\bf INTERFACE\_\-AddContactUser} (GroupName, UserName, Status, Rating, Type)
+\item 
+function {\bf INTERFACE\_\-RemoveContactUser} (UserName)
+\item 
+function {\bf INTERFACE\_\-UpdateContactUser} (UserName, Status, Rating, Type)
+\item 
+function {\bf INTERFACE\_\-ShowContactList} ()
+\item 
+function {\bf INTERFACE\_\-HideContactList} ()
+\item 
+function {\bf ContactOnlineObj} ()
+\item 
+function {\bf INTERFACE\_\-ShowOnlineList} ()
+\item 
+function {\bf INTERFACE\_\-HideOnlineList} ()
 \item 
 function {\bf INTERFACE\_\-SetUserType} (Username, NewType)
 \item 
-function {\bf INTERFACE\_\-CreateContact} (Username, Status, Rating, Type, RoomName)
-\item 
-function {\bf INTERFACE\_\-ShowUserMenu} (Obj, Options)
-\item 
-function {\bf INTERFACE\_\-HideUserMenu} ()
-\item 
 function {\bf INTERFACE\_\-ChangeGroupVisibility} (Obj, Id)
 \item 
-function {\bf INTERFACE\_\-CreateContactList} ()
+function {\bf INTERFACE\_\-CreateContact} ()
 \item 
-function {\bf INTERFACE\_\-ShowSearchUserWindow} ()
+function {\bf INTERFACE\_\-CreateContactContent} ()
 \item 
-function {\bf INTERFACE\_\-CreateUserElement} (Username)
-\item 
-function {\bf INTERFACE\_\-ShowSearchUserResultWindow} (UserList)
-\item 
-function {\bf INTERFACE\_\-SortUserByNick} ()
-\item 
-function {\bf INTERFACE\_\-SortUserByRating} ()
+function {\bf INTERFACE\_\-CreateOnlineContent} ()
 \end{CompactItemize}
 
 
 \subsection{Function Documentation}
-\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-AddContact@{INTERFACE\_\-AddContact}}
-\index{INTERFACE\_\-AddContact@{INTERFACE\_\-AddContact}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddContact ( {\em Username}, \/   {\em Status})}\label{interface_2contact_8js_b0507bf6e377fbfd86f5c285e9a97233}
+\index{interface/contact.js@{interface/contact.js}!ContactObj@{ContactObj}}
+\index{ContactObj@{ContactObj}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function ContactObj ()}\label{interface_2contact_8js_befba56b856674055a8dfddbbbb0e72c}
 
 
 CHESSD - WebClient
@@ -49,185 +57,155 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-C3SL - Center for Scientific Computing and Free Software Control interface of contact list Add user in contact list 
+C3SL - Center for Scientific Computing and Free Software Control interface of contact list 
 
-References INTERFACE\_\-CreateContact(), INTERFACE\_\-SetUserStatus(), and MainData.
+References CONTACT\_\-SortUsersByNick(), CONTACT\_\-SortUsersByRating(), INTERFACE\_\-AddContactGroup(), INTERFACE\_\-AddContactUser(), INTERFACE\_\-CreateContactContent(), INTERFACE\_\-FindContactGroup(), INTERFACE\_\-FindContactUserGroup(), INTERFACE\_\-GetContactGroup(), INTERFACE\_\-HideContactList(), INTERFACE\_\-RemoveContactGroup(), INTERFACE\_\-RemoveContactUser(), INTERFACE\_\-ShowContactList(), INTERFACE\_\-UpdateContactUser(), and UserListObj().
 
-Referenced by CONTACT\_\-InsertUser(), and CONTACT\_\-ReceiveSubscribed().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ChangeCurrentRating@{INTERFACE\_\-ChangeCurrentRating}}
-\index{INTERFACE\_\-ChangeCurrentRating@{INTERFACE\_\-ChangeCurrentRating}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ChangeCurrentRating ( {\em Type})}\label{interface_2contact_8js_a522566b1d96bf94ae0ed1459b8093f0}
+Referenced by CONTACT\_\-StartContact().\index{interface/contact.js@{interface/contact.js}!ContactOnlineObj@{ContactOnlineObj}}
+\index{ContactOnlineObj@{ContactOnlineObj}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function ContactOnlineObj ()}\label{interface_2contact_8js_8ecce5de98dc2f1b4dc46123cb05e381}
 
 
-Change current rating type showed in interface 
 
-References INTERFACE\_\-SortUserByRating(), MainData, and UTILS\_\-Capitalize().
 
-Referenced by INTERFACE\_\-CreateContactList().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ChangeGroupVisibility@{INTERFACE\_\-ChangeGroupVisibility}}
+References CONTACT\_\-OnlineSortUserByNick(), CONTACT\_\-OnlineSortUserByRating(), INTERFACE\_\-CreateOnlineContent(), INTERFACE\_\-HideOnlineList(), INTERFACE\_\-ShowOnlineList(), and UserListObj().
+
+Referenced by CONTACT\_\-StartContact().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-AddContactGroup@{INTERFACE\_\-AddContactGroup}}
+\index{INTERFACE\_\-AddContactGroup@{INTERFACE\_\-AddContactGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddContactGroup ( {\em GroupName})}\label{interface_2contact_8js_6be0e69248e5f0d6357215497a88cf7b}
+
+
+
+
+References INTERFACE\_\-CreateGroup(), and UserListObj().
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-AddContactUser@{INTERFACE\_\-AddContactUser}}
+\index{INTERFACE\_\-AddContactUser@{INTERFACE\_\-AddContactUser}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddContactUser ( {\em GroupName}, \/   {\em UserName}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type})}\label{interface_2contact_8js_5b544f15b2ba98d7ea117c9a1a98967e}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ChangeGroupVisibility@{INTERFACE\_\-ChangeGroupVisibility}}
 \index{INTERFACE\_\-ChangeGroupVisibility@{INTERFACE\_\-ChangeGroupVisibility}!interface/contact.js@{interface/contact.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ChangeGroupVisibility ( {\em Obj}, \/   {\em Id})\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_82de8f8952b342b44f73504bd21680e4}
-
-
-Show or hide contact groups 
-
-Referenced by INTERFACE\_\-CreateContactList().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateContact@{INTERFACE\_\-CreateContact}}
-\index{INTERFACE\_\-CreateContact@{INTERFACE\_\-CreateContact}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateContact ( {\em Username}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type}, \/   {\em RoomName})\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_17ea36b645af6af201be565a0cc6f689}
 
 
 Change user's status Create a contact node
 
 \begin{Desc}
-\item[Returns:]DOM object \end{Desc}
-
-
-References CONTACT\_\-ShowUserMenu(), and UTILS\_\-CreateElement().
-
-Referenced by INTERFACE\_\-AddContact(), INTERFACE\_\-AddUserInRoom(), and INTERFACE\_\-CreateContactList().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateContactList@{INTERFACE\_\-CreateContactList}}
-\index{INTERFACE\_\-CreateContactList@{INTERFACE\_\-CreateContactList}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateContactList ()\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_6c8f67e210dd5e6a7b7111999bdb9116}
+\item[Returns:]DOM object Show user menu Hide user menu from screen Show or hide contact groups \end{Desc}
+\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateContact@{INTERFACE\_\-CreateContact}}
+\index{INTERFACE\_\-CreateContact@{INTERFACE\_\-CreateContact}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateContact ()\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_fc3a4302d4c9bf87f8f09296189d184e}
 
 
 Create contact list 
 
-References INTERFACE\_\-ChangeCurrentRating(), INTERFACE\_\-ChangeGroupVisibility(), INTERFACE\_\-CreateContact(), INTERFACE\_\-SortUserByNick(), MainData, UTILS\_\-AddListener(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and WINDOW\_\-SearchUser().
+References MainData, UTILS\_\-CreateElement(), and UTILS\_\-GetText().
 
-Referenced by INTERFACE\_\-CreateLeft().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateUserElement@{INTERFACE\_\-CreateUserElement}}
-\index{INTERFACE\_\-CreateUserElement@{INTERFACE\_\-CreateUserElement}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateUserElement ( {\em Username})}\label{interface_2contact_8js_d7ecc84514a2b4a6c0957773e594d4a0}
-
-
-Create elements of an user
-
-\begin{Desc}
-\item[Parameters:]
-\begin{description}
-\item[{\em Username}]User that will be inserted \end{description}
-\end{Desc}
-\begin{Desc}
-\item[Returns:]Tr \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
+Referenced by INTERFACE\_\-CreateLeft().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateContactContent@{INTERFACE\_\-CreateContactContent}}
+\index{INTERFACE\_\-CreateContactContent@{INTERFACE\_\-CreateContactContent}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateContactContent ()}\label{interface_2contact_8js_0fb5ab190b974eaf63e2a6a4dbb84b52}
 
 
-References CONTACT\_\-ShowUserMenu(), and UTILS\_\-CreateElement().
-
-Referenced by INTERFACE\_\-ShowSearchUserResultWindow().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-HideUserMenu@{INTERFACE\_\-HideUserMenu}}
-\index{INTERFACE\_\-HideUserMenu@{INTERFACE\_\-HideUserMenu}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideUserMenu ()\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_88f86ba0e4294ffc2d39ef96313a6761}
 
 
-Hide user menu from screen 
+References UTILS\_\-AddListener(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and WINDOW\_\-SearchUser().
 
-Referenced by CONTACT\_\-ShowUserMenu().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-RemoveContact@{INTERFACE\_\-RemoveContact}}
-\index{INTERFACE\_\-RemoveContact@{INTERFACE\_\-RemoveContact}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveContact ( {\em Username})}\label{interface_2contact_8js_405d083a6a628f886d57725d35acbcd3}
-
-
-Remove user in contact list 
-
-Referenced by CONTACT\_\-RemoveUser().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SetUserRating@{INTERFACE\_\-SetUserRating}}
-\index{INTERFACE\_\-SetUserRating@{INTERFACE\_\-SetUserRating}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SetUserRating ( {\em Username}, \/   {\em Category}, \/   {\em Rating})}\label{interface_2contact_8js_d1860c4a57ea4d51923b5c23f3d6c42a}
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateGroup@{INTERFACE\_\-CreateGroup}}
+\index{INTERFACE\_\-CreateGroup@{INTERFACE\_\-CreateGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGroup ( {\em GroupName})}\label{interface_2contact_8js_fdd2bd640d3145fa915630d0f52d1a3a}
 
 
-Set rating of user in interface 
-
-References MainData.
-
-Referenced by CONTACT\_\-SetUserRating().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SetUserStatus@{INTERFACE\_\-SetUserStatus}}
-\index{INTERFACE\_\-SetUserStatus@{INTERFACE\_\-SetUserStatus}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SetUserStatus ( {\em Username}, \/   {\em NewStatus})}\label{interface_2contact_8js_3429d5314328ecdf9beec476c7beb891}
 
 
-Set status of user in interface 
+References UTILS\_\-CreateElement().
 
-References MainData.
+Referenced by INTERFACE\_\-AddContactGroup().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-CreateOnlineContent@{INTERFACE\_\-CreateOnlineContent}}
+\index{INTERFACE\_\-CreateOnlineContent@{INTERFACE\_\-CreateOnlineContent}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateOnlineContent ()\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_2e4cc3991845152ed817c111ad649e8f}
 
-Referenced by CONTACT\_\-SetUserStatus(), and INTERFACE\_\-AddContact().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SetUserType@{INTERFACE\_\-SetUserType}}
+
+Create contact online list 
+
+References UTILS\_\-AddListener(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and WINDOW\_\-SearchUser().
+
+Referenced by ContactOnlineObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-FindContactGroup@{INTERFACE\_\-FindContactGroup}}
+\index{INTERFACE\_\-FindContactGroup@{INTERFACE\_\-FindContactGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FindContactGroup ( {\em GroupName})}\label{interface_2contact_8js_8bd72a027bb280b431364761ded00557}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-FindContactUserGroup@{INTERFACE\_\-FindContactUserGroup}}
+\index{INTERFACE\_\-FindContactUserGroup@{INTERFACE\_\-FindContactUserGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FindContactUserGroup ( {\em UserName})}\label{interface_2contact_8js_99f836bd411fff8de8b729a674b731c4}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-GetContactGroup@{INTERFACE\_\-GetContactGroup}}
+\index{INTERFACE\_\-GetContactGroup@{INTERFACE\_\-GetContactGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-GetContactGroup ( {\em GroupName})}\label{interface_2contact_8js_aeea57571d9c593b9f92f20165ffb329}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-HideContactList@{INTERFACE\_\-HideContactList}}
+\index{INTERFACE\_\-HideContactList@{INTERFACE\_\-HideContactList}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideContactList ()}\label{interface_2contact_8js_504d791d962108cf68f1e344b4e87b09}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-HideOnlineList@{INTERFACE\_\-HideOnlineList}}
+\index{INTERFACE\_\-HideOnlineList@{INTERFACE\_\-HideOnlineList}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideOnlineList ()}\label{interface_2contact_8js_b3e0c5cba52482b37f8db37c546dfc28}
+
+
+
+
+Referenced by ContactOnlineObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-RemoveContactGroup@{INTERFACE\_\-RemoveContactGroup}}
+\index{INTERFACE\_\-RemoveContactGroup@{INTERFACE\_\-RemoveContactGroup}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveContactGroup ( {\em GroupName})}\label{interface_2contact_8js_f867adcdabbae80ec5d442264d8b16c8}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-RemoveContactUser@{INTERFACE\_\-RemoveContactUser}}
+\index{INTERFACE\_\-RemoveContactUser@{INTERFACE\_\-RemoveContactUser}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveContactUser ( {\em UserName})}\label{interface_2contact_8js_b1e3ff34a9188b26fc35081d3608dc74}
+
+
+
+
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SetUserType@{INTERFACE\_\-SetUserType}}
 \index{INTERFACE\_\-SetUserType@{INTERFACE\_\-SetUserType}!interface/contact.js@{interface/contact.js}}
 \subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SetUserType ( {\em Username}, \/   {\em NewType})}\label{interface_2contact_8js_d469caf03b9be7dbf01dd27c2b4c8509}
 
 
-Set type of user in interface 
+Add user in contact list Remove user in contact list Set status of user in interface Set rating of user in interface Change current rating type showed in interface Set type of user in interface 
 
-References MainData.
-
-Referenced by CONTACT\_\-SetUserType().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ShowSearchUserResultWindow@{INTERFACE\_\-ShowSearchUserResultWindow}}
-\index{INTERFACE\_\-ShowSearchUserResultWindow@{INTERFACE\_\-ShowSearchUserResultWindow}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowSearchUserResultWindow ( {\em UserList})}\label{interface_2contact_8js_cc30393c416f6f324060a98d81339284}
+References MainData.\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ShowContactList@{INTERFACE\_\-ShowContactList}}
+\index{INTERFACE\_\-ShowContactList@{INTERFACE\_\-ShowContactList}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowContactList ()}\label{interface_2contact_8js_91c5d6feebd8eccac587290d5e74134c}
 
 
-Create elements of search user result window and returns div
-
-\begin{Desc}
-\item[Parameters:]
-\begin{description}
-\item[{\em UserList}]List of users founded \end{description}
-\end{Desc}
-\begin{Desc}
-\item[Returns:]Div; Array \end{Desc}
-\begin{Desc}
-\item[See also:]\doxyref{WINDOW\_\-Invite()}{p.}{window_2window_8js_a0b254ab6a166342fef8e2ff561e155d}; \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
 
 
-References INTERFACE\_\-CreateUserElement(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
-
-Referenced by WINDOW\_\-SearchUserResult().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ShowSearchUserWindow@{INTERFACE\_\-ShowSearchUserWindow}}
-\index{INTERFACE\_\-ShowSearchUserWindow@{INTERFACE\_\-ShowSearchUserWindow}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowSearchUserWindow ()}\label{interface_2contact_8js_fd507075270a105dd96872e2e6c3d2e6}
+Referenced by ContactObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ShowOnlineList@{INTERFACE\_\-ShowOnlineList}}
+\index{INTERFACE\_\-ShowOnlineList@{INTERFACE\_\-ShowOnlineList}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowOnlineList ()}\label{interface_2contact_8js_25c673d2d7d179fdca8de7d03f205b17}
 
 
-Create elements of search user window and returns div
-
-\begin{Desc}
-\item[Returns:]Div; Array \end{Desc}
-\begin{Desc}
-\item[See also:]\doxyref{WINDOW\_\-Invite()}{p.}{window_2window_8js_a0b254ab6a166342fef8e2ff561e155d}; \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
 
 
-References UTILS\_\-AddListener(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
-
-Referenced by WINDOW\_\-SearchUser().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-ShowUserMenu@{INTERFACE\_\-ShowUserMenu}}
-\index{INTERFACE\_\-ShowUserMenu@{INTERFACE\_\-ShowUserMenu}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowUserMenu ( {\em Obj}, \/   {\em Options})\hspace{0.3cm}{\tt  [private]}}\label{interface_2contact_8js_29776ca97905ccbf968f56e17ab89bd2}
+Referenced by ContactOnlineObj().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-UpdateContactUser@{INTERFACE\_\-UpdateContactUser}}
+\index{INTERFACE\_\-UpdateContactUser@{INTERFACE\_\-UpdateContactUser}!interface/contact.js@{interface/contact.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-UpdateContactUser ( {\em UserName}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type})}\label{interface_2contact_8js_f2eab82d0c214c7da4d76f5f05c1500a}
 
 
-Show user menu 
-
-References UTILS\_\-CreateElement(), UTILS\_\-GetOffset(), UTILS\_\-GetParentDiv(), and UTILS\_\-GetText().
-
-Referenced by CONTACT\_\-ShowUserMenu().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SortUserByNick@{INTERFACE\_\-SortUserByNick}}
-\index{INTERFACE\_\-SortUserByNick@{INTERFACE\_\-SortUserByNick}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SortUserByNick ()}\label{interface_2contact_8js_87b0bf9f4617646cfd55db9b890624a1}
 
 
-Sort users by nick into ascendent or descendent order
-
-\begin{Desc}
-\item[Returns:]boolean \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
-
-
-References MainData.
-
-Referenced by INTERFACE\_\-CreateContactList().\index{interface/contact.js@{interface/contact.js}!INTERFACE\_\-SortUserByRating@{INTERFACE\_\-SortUserByRating}}
-\index{INTERFACE\_\-SortUserByRating@{INTERFACE\_\-SortUserByRating}!interface/contact.js@{interface/contact.js}}
-\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SortUserByRating ()}\label{interface_2contact_8js_4868716bbdb57330cf91f877981afc26}
-
-
-Sort users by nick into ascendent or descendent order
-
-\begin{Desc}
-\item[Returns:]boolean \end{Desc}
-\begin{Desc}
-\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
-
-
-References MainData.
-
-Referenced by INTERFACE\_\-ChangeCurrentRating().
+Referenced by ContactObj().

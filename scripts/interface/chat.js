@@ -69,8 +69,8 @@ function INTERFACE_OpenChat(Username, Status)
 
 	// Create chat elements
 	Chat = INTERFACE_CreateChat(Username, Status);
-	Node.appendChild(Chat);
-
+	Node.appendChild(Chat.ChatItem);
+	Chat.Elements.InputFocus();
 }
 
 /**
@@ -187,7 +187,9 @@ function INTERFACE_ChatListPositioning()
 function INTERFACE_CreateChat(Username, Status)
 {
 	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
-	var Close, Input;
+	var Close, Input, State;
+
+	var Elements = new Object();
 
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
@@ -204,15 +206,17 @@ function INTERFACE_CreateChat(Username, Status)
 	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
 	ChatInner = UTILS_CreateElement("div", "ChatInner");
 	ChatInner.style.display = "none";
-	Close = UTILS_CreateElement("img");
+	State = UTILS_CreateElement("img",null,"minimize");
+	State.src = "./images/minimize_chat.png";
+	Close = UTILS_CreateElement("img",null,"close");
 	Close.src = "./images/close_chat.png";
 
 	// Show chat
 	INTERFACE_ShowChat(ChatItem, ChatInner);
 
 	// Show/hide chat
-	ChatTitle.onclick = function () {
-		CHAT_ChangeChatState(Username, ChatItem, ChatInner);
+	State.onclick = function () {
+		CHAT_ChangeChatState(Username, ChatItem, ChatInner, State);
 	}
 
 	// Close chat
@@ -233,6 +237,7 @@ function INTERFACE_CreateChat(Username, Status)
 		}
 	}
 
+	ChatTitle.appendChild(State);
 	ChatTitle.appendChild(Close);
 
 	ChatInner.appendChild(ChatMessages);
@@ -243,7 +248,21 @@ function INTERFACE_CreateChat(Username, Status)
 
 	ChatItem.appendChild(ChatInside);
 
-	return ChatItem;
+	Elements.Input = Input;
+
+	Elements.InputFocus = INTERFACE_InputChatFocus;
+
+	return {ChatItem:ChatItem, Elements:Elements};
+}
+
+/*
+* Set focus in input element 
+*
+* @author Danilo
+*/
+function INTERFACE_InputChatFocus()
+{
+	this.Input.focus();
 }
 
 /**

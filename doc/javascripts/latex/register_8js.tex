@@ -29,6 +29,8 @@ function {\bf REGISTER\_\-GetHost} ()
 \item 
 function {\bf REGISTER\_\-Labels} ()
 \item 
+function {\bf REGISTER\_\-VerticalAlignMiddle} ()
+\begin{CompactList}\small\item\em Align main div in middle. \item\end{CompactList}\item 
 function {\bf REGISTER\_\-SendDataPHP} (User, Mail, Pwd)
 \item 
 function {\bf REGISTER\_\-ReceiveXmlPHP} ()
@@ -61,6 +63,8 @@ Show a alert with error \begin{Desc}
 \item[Returns:]none\end{Desc}
 \begin{Desc}
 \item[Author:]Fabiano \end{Desc}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
 
 
 References UTILS\_\-GetText().
@@ -167,6 +171,8 @@ Receive response from PHP file \begin{Desc}
 \item[Returns:]none\end{Desc}
 \begin{Desc}
 \item[Author:]Fabiano \end{Desc}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
 
 
 References HttpRequest, and REGISTER\_\-GetDatabaseError().
@@ -197,7 +203,9 @@ Referenced by REGISTER\_\-Post(), and REGISTER\_\-ProcessMessage().\index{regist
 Send register data to a PHP file (used if jabber don't support user register) \begin{Desc}
 \item[Returns:]none\end{Desc}
 \begin{Desc}
-\item[Author:]Fabiano \end{Desc}
+\item[Author:]Fabiano\end{Desc}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
 
 
 References HttpRequest, and REGISTER\_\-ReceiveXmlPHP().\index{register.js@{register.js}!REGISTER\_\-SucessMessage@{REGISTER\_\-SucessMessage}}
@@ -215,7 +223,16 @@ Show a alert box to sucess register
 
 References REGISTER\_\-GetLanguage(), UTILS\_\-GetTag(), and UTILS\_\-OpenXMLFile().
 
-Referenced by REGISTER\_\-ProcessMessage().
+Referenced by REGISTER\_\-ProcessMessage().\index{register.js@{register.js}!REGISTER\_\-VerticalAlignMiddle@{REGISTER\_\-VerticalAlignMiddle}}
+\index{REGISTER\_\-VerticalAlignMiddle@{REGISTER\_\-VerticalAlignMiddle}!register.js@{register.js}}
+\subsubsection{\setlength{\rightskip}{0pt plus 5cm}function REGISTER\_\-VerticalAlignMiddle ()}\label{register_8js_4862cc46ed6cf1f2ec985a1339f0e0ef}
+
+
+Align main div in middle. 
+
+\begin{Desc}
+\item[Author:]Rubens \end{Desc}
+
 
 \subsection{Variable Documentation}
 \index{register.js@{register.js}!HttpRequest@{HttpRequest}}

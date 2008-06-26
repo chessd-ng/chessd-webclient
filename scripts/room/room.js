@@ -632,6 +632,7 @@ function ROOM_FocusRoom(RoomName)
 	INTERFACE_FocusRoom(RoomName);
 	Room.Room.show();
 	MainData.CurrentRoom = Room;
+	Room.Room.focus();
 }
 
 function ROOM_RemoveRoom(RoomName)

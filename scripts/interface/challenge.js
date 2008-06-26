@@ -493,7 +493,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	// Accept challenge
 	// Only if you receive a challenge
 	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.value = UTILS_GetText('challenge_accept');
+	Accept.value = UTILS_GetText('window_accept');
 	Accept.type = "button";
 	Accept.onclick = function () {
 		CHALLENGE_AcceptChallenge(MatchId);
@@ -531,7 +531,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
-	Cancel.value = UTILS_GetText('challenge_cancel');
+	Cancel.value = UTILS_GetText('window_cancel');
 	Cancel.type = "button";
 
 	Chat = UTILS_CreateElement('input',null,'button');
@@ -542,7 +542,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	}
 
 	Decline = UTILS_CreateElement('input',null,'button');
-	Decline.value = UTILS_GetText('challenge_decline');
+	Decline.value = UTILS_GetText('window_decline');
 	Decline.type = "button";
 	Decline.onclick = function () {
 		CHALLENGE_DeclineChallenge(MatchId);

@@ -41,7 +41,7 @@ function INTERFACE_CreateLeft()
 function INTERFACE_CreateUserBox()
 {
 	var UserDiv, UserImg, UserInf, Name, Status, StatusItem;
-	var Hr, Profile;
+	var Profile, ProfileP;
 	var UserType;
 
 	UserType = MainData.Type;
@@ -94,15 +94,14 @@ function INTERFACE_CreateUserBox()
 
 	Status.onchange = function () { CONTACT_ChangeStatus(this.value) };
 
-	Hr = UTILS_CreateElement("hr");
-
+	ProfileP = UTILS_CreateElement("p");
 	Profile = UTILS_CreateElement("span",null,null,UTILS_GetText("contact_change_profile"));
+	ProfileP.appendChild(Profile);
 	UTILS_AddListener(Profile,"click", function() { PROFILE_StartProfile(MainData.Username); }, "false");
 
 	UserInf.appendChild(Name);
 	UserInf.appendChild(Status);
-	UserInf.appendChild(Hr);
-	UserInf.appendChild(Profile);
+	UserInf.appendChild(ProfileP);
 	UserDiv.appendChild(UserImg);
 	UserDiv.appendChild(UserInf);
 

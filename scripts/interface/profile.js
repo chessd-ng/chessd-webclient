@@ -574,9 +574,25 @@ function INTERFACE_ProfileSetTitle(Title)
 *
 * @author Rubens
 */
-function INTERFACE_ProfileSetTitleImg(NewSrc)
+function INTERFACE_ProfileSetTitleImg(Group)
 {
-	this.TitleImg.src = NewSrc;
+	switch(Group)
+	{
+		case 'admin':
+			this.TitleImg.src = "images/admin_available.png";
+			break;
+		case 'teacher':
+			this.TitleImg.src = "images/teacher_available.png";
+			break;
+		case 'user':
+			this.TitleImg.src = "images/user_available.png";
+			break;
+		case 'robot':
+			this.TitleImg.src = "images/robot_available.png";
+			break;
+		default:
+			this.TitleImg.src = "images/user_available.png";
+	}
 }
 
 /**
@@ -598,6 +614,9 @@ function INTERFACE_ProfileSetGroup(Group)
 			break;
 		case 'user':
 			this.Group.innerHTML = UTILS_GetText('contact_user');
+			break;
+		case 'robot':
+			this.Group.innerHTML = UTILS_GetText('contact_robot');
 			break;
 		default:
 			this.Group.innerHTML = "---";

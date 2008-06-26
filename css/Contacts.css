@@ -1,4 +1,5 @@
 #Main #Left #Contact {
+	margin-bottom: 5%;
 	height			: 52mm;
 }
 
@@ -10,7 +11,7 @@
 	display			: table;
 	list-style		: none;
 	position		: relative;
-	width			: 54.3mm;
+	width			: 102%;
 }
 
 #Main #Left #Contact #ContactTitle li {
@@ -78,8 +79,8 @@
 }
 
 #Main #Left #Contact td {
-	height			: 4.5mm;
-	width			: 32mm;
+	height			: 100%;
+	width			: 76%;
 	text-align		: left;
 	float		: left;
 }
@@ -99,8 +100,13 @@
 #Main #Left #Contact #ListDiv {
 	overflow-y		: auto;
 	overflow-x		: hidden;
-	height			: 34mm;
+	height			: 32mm;
 }
+
+#Main #Left #Contact #ContactInside div .UserList .UserTable{
+	margin-top		:	0mm;
+}
+
 /**
 * USER STATUS
 */
@@ -217,16 +223,22 @@
 #Main #Left #Contact #contact_search_user {
 	border-bottom:	1px solid #216778;
 	text-decoration	: none;
-	font-weight		: bold;
-	font-size		: 11px;
+	font-style		: italic;
+	font-size		: 10px;
 	color			: #216778;
 	cursor			: pointer;
 }
 
+#Main #Left #Contact #contact_search_user:hover {
+	color			: #FFA200;
+	border-bottom:	1px solid #FFA200;
+}
+
 #Main #Left #Contact .contact_search_user_p {
 	text-align: center;
-	padding-top:	3px;
+	padding-top:	3%;
 	padding-right:	7%;
+	padding-bottom: 3%;
 }
 
 /**
@@ -307,8 +319,7 @@
 }
 
 #SearchUserDiv td {
-	padding-left	:	10px;
-	width					:	130px;
+	width					:	160px;
 }
 
 #SearchUserDiv td:hover {
@@ -322,11 +333,12 @@
 
 #SearchUserDiv .no_found {
 	padding-left	:	5px;
+	font-size 	: 10px;
 }
 
 #SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
-	padding-left	:	4mm;
+	padding-left	:	8%;
 }
 
 #SearchUserDiv #OptionDiv {
@@ -342,8 +354,8 @@
 
 #SearchUserDiv #ListDiv {
 	text-align 	:	left;
-	padding-left	:	12px;
-	width					:	150px;
+	margin-left	:	8%;
+	width					:	90%;
 	display				:	block;
 	overflow			:	auto;
 	height				:	58px;

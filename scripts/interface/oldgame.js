@@ -121,7 +121,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	// Player 1 Form
 	Player1Label= UTILS_CreateElement('p',null,null,UTILS_GetText('oldgame_player1'));
-	Player1Input = UTILS_CreateElement('input');
+	Player1Input = UTILS_CreateElement('input','OldGameInput1');
 	Player1Input.type = 'text';
 	// End Player 1 Form
 	// End Layer 1 Left Div
@@ -492,6 +492,10 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	var GameLen = GameList.length;
 	var Start = SearchInfo.Offset;
 	var End = Start + GameLen; 
+	var ParentDiv = UTILS_GetParentDiv(this.TBody);
+
+	// Set the scroll bar to begin of result table
+	ParentDiv.scrollTop = 0;
 
 	// Remove old results
 	while (this.TBody.childNodes.length != 0)
