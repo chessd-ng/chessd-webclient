@@ -153,6 +153,10 @@
 		<challenge_no_time>Sem tempo</challenge_no_time>
 		<challenge_color_auto>Automatico</challenge_color_auto>
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
+
+		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
+		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 	</challenge>
 	<game>
 		<game_accept>Aceitar</game_accept>

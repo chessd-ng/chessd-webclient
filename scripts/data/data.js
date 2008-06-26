@@ -86,7 +86,9 @@ function DATA(ConfFile, LangFile)
 
 	this.ChallengeList = new Array();
 	this.ChallengeSequence = 0;
+	this.ChallengeMenu = null;
 	this.AnnounceList = new Array();
+	this.PostponeList = new Array();
 
 	this.CurrentRoom = null;
 
@@ -1015,12 +1017,12 @@ function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated,
 	}
 
 	ChallengerObj.Name  = Challenger.Name;
-	ChallengerObj.Time  = Challenger.Time * 60;
+	ChallengerObj.Time  = Challenger.Time;
 	ChallengerObj.Inc  = Challenger.Inc;
 	ChallengerObj.Color  = Challenger.Color;
 
 	ChallengedObj.Name  = Challenged.Name;
-	ChallengedObj.Time  = Challenged.Time * 60;
+	ChallengedObj.Time  = Challenged.Time;
 	ChallengedObj.Inc  = Challenged.Inc;
 	ChallengedObj.Color  = Challenged.Color;
 
@@ -1030,6 +1032,7 @@ function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated,
 	Challenge.Challenged = ChallengedObj;
 	Challenge.Category = Category;
 	Challenge.Rated = Rated;
+	Challenge.Private = false;
 
 	if(MatchId == null)
 	{

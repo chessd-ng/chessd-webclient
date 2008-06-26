@@ -107,7 +107,7 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 		Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
-		INTERFACE_ShowChallengeMenu(Pos.X);
+		CHALLENGE_ShowChallengeMenu(Pos.X, Pos.Y);
 	}
 
 	MenuList.appendChild(Item);

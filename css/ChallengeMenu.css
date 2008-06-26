@@ -19,6 +19,8 @@ body
 
 	padding		: 10px;
 	background-color: #ffffff;
+
+	position	: absolute;
 }
 
 
@@ -37,6 +39,15 @@ body
 	font-weight	: bold;
 }
 
+#ChallengeMenu ul #announce 
+{
+	font-style	: italic;
+
+	border-bottom	: 1px solid #216778;
+
+	cursor		: pointer;
+}
+
 #ChallengeMenu li
 {
 	margin-top	: 5px;
@@ -51,25 +62,25 @@ body
 #ChallengeMenu li.offline
 {
 	color		: #777777;
-	background-image: url('../images/disable.png');
+	background-image: url('../images/challenge_menu/disable.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li.undefined
 {
-	background-image: url('../images/disable.png');
+	background-image: url('../images/challenge_menu/disable.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li.white
 {
-	background-image: url('../images/white_enable.png');
+	background-image: url('../images/challenge_menu/white_enable.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li.black
 {
-	background-image: url('../images/black_enable.png');
+	background-image: url('../images/challenge_menu/black_enable.png');
 	background-repeat: no-repeat;
 }
 
@@ -117,13 +128,13 @@ body
 }
 #ChallengeMenu li #private.true
 {
-	background-image: url('../images/observer.png');
+	background-image: url('../images/challenge_menu/observer.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li #private.false
 {
-	background-image: url('../images/observer_disable.png');
+	background-image: url('../images/challenge_menu/observer_disable.png');
 	background-repeat: no-repeat;
 }
 
@@ -131,23 +142,24 @@ body
 {
 	width		: 10px;
 	height		: 10px;
+	cursor		: pointer;
 }
 
 #ChallengeMenu li #button.accept
 {
-	background-image: url('../images/accept.png');
+	background-image: url('../images/challenge_menu/accept.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li #button.decline
 {
-	background-image: url('../images/decline.png');
+	background-image: url('../images/challenge_menu/decline.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li #button.inative
 {
-	background-image: url('../images/accept_disable.png');
+	background-image: url('../images/challenge_menu/accept_disable.png');
 	background-repeat: no-repeat;
 }
 

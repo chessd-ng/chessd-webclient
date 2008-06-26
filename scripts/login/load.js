@@ -120,7 +120,7 @@ function LOGIN_LoadScripts()
 	Scripts[33] = "scripts/admin/admin.js";
 	Scripts[34] = "scripts/interface/admin.js";
 	Scripts[35] = "scripts/challenge/challenge.js";
-	Scripts[35] = "scripts/interface/challengemenu.js";
+	Scripts[36] = "scripts/interface/challengemenu.js";
 
 	Load = new Preloader(Scripts, "script", LOGIN_Load3);
 }

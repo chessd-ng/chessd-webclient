@@ -163,7 +163,7 @@ function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
 	if (GameParameters != null)
 	{
 		// Close Button (X)
-		UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ GAME_DeclineChallenge(MatchId); }, false);
+		UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ CHALLENGE_DeclineChallenge(MatchId); }, false);
 		// Accept Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// NewParameters Button

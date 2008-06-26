@@ -67,6 +67,9 @@ function CHALLENGE_HandleOffer(XML)
 	var Player2 = new Object();
 	var Buffer = "";
 	var ChallengeID;
+	var ChallengeObj;
+	var ChallengePos;
+	var ChallengedPlayer;
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -123,6 +126,8 @@ function CHALLENGE_HandleOffer(XML)
 			else // Receive a re-match
 			{
 				MainData.UpdateChallenge(ChallengeID, Player2, Player1, Category, Rated, MatchID);
+				// Remove offer from challenge menu
+				MainData.ChallengeMenu.removeMatch(MatchID);
 				
 			}
 
@@ -140,6 +145,8 @@ function CHALLENGE_HandleOffer(XML)
 			else // Receive a re-match
 			{
 				MainData.UpdateChallenge(ChallengeID, Player1, Player2, Category, Rated, MatchID);
+				// Remove offer from challenge menu
+				MainData.ChallengeMenu.removeMatch(MatchID);
 			}
 
 			//Quick fix to get oponent rating
@@ -155,6 +162,13 @@ function CHALLENGE_HandleOffer(XML)
 	{
 		// Set match id in challenge
 		MainData.UpdateChallenge(ChallengeID, null, null, null, null, MatchID);
+
+		// Add offered challenge in challenge menu
+		ChallengePos = MainData.FindChallenge(ChallengeID, MatchID);
+		ChallengeObj = MainData.ChallengeList[ChallengePos];
+		ChallengedPlayer = ChallengeObj.Challenged;
+
+		MainData.ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), (ChallengedPlayer.Inc/60), ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 	}
 
 	// TODO
@@ -185,7 +199,8 @@ function CHALLENGE_HandleAccept (XML)
 	GameRoom = Match.getAttribute('room');
 
 	// Remove all challanges on structure
-	MainData.ClearChallenges();
+	//MainData.ClearChallenges();
+	CHALLENGE_ClearChallenges();
 
 	// TODO
 	// Warn the player's interface
@@ -216,17 +231,20 @@ function CHALLENGE_HandleDecline (XML)
 
 	// get window object
 	WindowObj = MainData.ChallengeList[i].Window;
-	
+
 	// close challenge window if exists.
 	if(WindowObj != null)
 	{
-		if(WindowObj.parentNode != null)
+		if(WindowObj.window.parentNode != null)
 		{
 			WINDOW_RemoveWindow(WindowObj);
 		}
 	}
 	// Remove the challenge from Challenge List
 	MainData.RemoveChallenge(null, MatchID);
+
+	// Remove from challenge menu
+	MainData.ChallengeMenu.removeMatch(MatchID);
 
 	// TODO
 	// Warn the interface that the challenge was declined
@@ -291,13 +309,14 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	Players[0] = Player1;
 	Players[1] = Player2;
 
-	// Set ChallengeID
+	// Set ChallengeID, this id is used temporary to identify challenge
+	// in challenge list when match id is not defined yet
 	ChallengeID = "Challenge_"+MainData.ChallengeSequence;
 	MainData.ChallengeSequence++;
 
-	// Create challenge in main data
+	// Create challenge in main data -> Player 1 challenger
 	MainData.AddChallenge(ChallengeID, Player1, Player2, Category, Rated, null);
-
+	
 	// Create message
 	XML = MESSAGE_Challenge(ChallengeID, Category, Rated, Players);
 
@@ -388,4 +407,77 @@ function CHALLENGE_DeclineChallenge(MatchID)
 	XML = MESSAGE_ChallengeDecline(MatchID);
 
 	CONNECTION_SendJabber(XML);
+}
+
+
+
+/*
+ * Initialize Challenge menu object
+ */
+function CHALLENGE_StartChallenge()
+{
+	MainData.ChallengeMenu = new ChallengeMenuObj();
+	MainData.ChallengeMenu.hideMenu();
+	MainData.ChallengeMenu.showMatch();
+	MainData.ChallengeMenu.hideAnnounce();
+	MainData.ChallengeMenu.hidePostpone();
+}
+
+
+/*
+ * Show challenge menu, set position and click to hide
+ */
+function CHALLENGE_ShowChallengeMenu(Left, Top)
+{
+	var Func;
+	var Hide = 0;
+
+	Func = function(){
+		Hide += 1;
+
+		//if(MainData.ChallengeMenu.MenuVisible == true)
+		if(Hide == 2)
+		{
+			UTILS_RemoveListener(document,"click",Func,false);
+
+			// Hide Challenge menu from screen
+			CHALLENGE_HideChallengeMenu();
+		}
+	}
+
+	UTILS_AddListener(document, "click",Func,false);
+
+	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
+}
+
+/**
+ * Hide challenge menu from screen
+ */
+function CHALLENGE_HideChallengeMenu()
+{
+	MainData.ChallengeMenu.hideMenu();
+}
+
+/**
+ * Remove all challenges from main data and challenge menu that contains match id
+ */
+function CHALLENGE_ClearChallenges()
+{
+	var i;
+	var MatchId;
+
+	// Remove all challenges from challenge menu
+	for(i=0;i<MainData.ChallengeList.length; i++)
+	{
+		MatchId = MainData.ChallengeList[i].MatchId;
+
+		if(MatchId != null)
+		{
+			//CHALLENGE_DeclineChallenge(MatchID);
+			MainData.ChallengeMenu.removeMatch(MatchId);
+		}
+	}
+
+	// Remove all challenges from main data
+	MainData.ClearChallenges();
 }

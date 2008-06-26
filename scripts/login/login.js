@@ -130,6 +130,9 @@ function LOGIN_Interface()
 	// Create contact object and set values
 	CONTACT_StartContact();
 	CONTACT_LoadUserContactList();	
+
+	// Create challenge menu object
+	CHALLENGE_StartChallenge();
 }
 
 
