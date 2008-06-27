@@ -456,3 +456,23 @@ function WINDOW_KickUser(Username)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+function WINDOW_AdminWindow()
+{
+	if(document.getElementById("AdminDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Button
+	var Div = INTERFACE_CreateAdminWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(250, Div.Div, Div.Buttons, "Admin Tools");
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+

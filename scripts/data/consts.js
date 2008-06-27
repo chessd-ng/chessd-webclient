@@ -37,12 +37,17 @@ function DATA_SetConsts()
 	Const.IQ_ID_GameAdjourn = "GameAdjourn";
 	Const.IQ_ID_GameResign = "GameResign";
 	Const.IQ_ID_SearchUser = "SearchUser";
-	Const.IQ_ID_KickUser = "KickUser";
+	Const.IQ_ID_KickUserRoom = "KickUserRoom";
 	Const.IQ_ID_GetMyProfile = "GetMyProfile";
 	Const.IQ_ID_GetProfile = "GetProfile";
 	Const.IQ_ID_GamePhoto = "GetGamePlayerPhoto";
 	Const.IQ_ID_OldGamePhoto = "GetOldGamePlayerPhoto";
 	Const.IQ_ID_OldGameSearch= "OldGameSearch";
+	Const.IQ_ID_GetBanList = "GetBanList";
+	Const.IQ_ID_BanUser = "BanUser";
+	Const.IQ_ID_UnbanUser = "UnbanUser";
+	Const.IQ_ID_KickUser = "KickUser";
+
 	
 	// Login errors
 	Const.LOGIN_ServerDown = 1;

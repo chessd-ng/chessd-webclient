@@ -179,3 +179,57 @@ function INTERFACE_KickUserWindow(Username)
 
 	return{Div:Div, Buttons:Buttons, Elements:Elements}
 }
+
+
+/**
+ * @brief Create admin window with administrative tools
+ *
+ * Create window content with administrative tools.
+ *
+ * @author 	Rubens Suguimoto
+ * @see 	WINDOW_AdminWindow
+ */
+function INTERFACE_CreateAdminWindow()
+{
+	var Div;
+	var UnbanList;
+	var ButtonsDiv, Close;
+	var Buttons = new Array();
+
+	Div = UTILS_CreateElement("div","AdminDiv");
+	UnbanList = UTILS_CreateElement("ul","AdminUnbanList",null,"Unban List");
+	ButtonsDiv = UTILS_CreateElement("div","ButtonsDiv");
+
+	Close = UTILS_CreateElement("input", null,"button");
+	Close.type = "button";
+	Close.value = UTILS_GetText("window_cancel");
+
+	Buttons.push(Close);
+
+	ButtonsDiv.appendChild(Close);
+
+	Div.appendChild(UnbanList);
+	//Div.appendChild(ButtonsDiv);
+
+	return {Div:Div, Buttons:Buttons};
+}
+
+
+function INTERFACE_AddBannedUser(Username)
+{
+	var List = document.getElementById("AdminUnbanList");
+	var Item;
+	
+	if(List == null)
+	{	
+		return "";
+	}
+
+	Item = UTILS_CreateElement("li",null,null,Username);
+	Item.onclick = function (){
+		ADMIN_UnbanUser(Username);
+		List.removeChild(this);
+	}
+
+	List.appendChild(Item);
+}

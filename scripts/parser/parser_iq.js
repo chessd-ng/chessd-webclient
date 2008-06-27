@@ -112,12 +112,10 @@ function PARSER_ParseIq(XML)
 					Buffer += PROFILE_HandleVCardProfile(XML);
 				}
 			}
-			/* // this is used to show a feedback to admin
 			else if (Xmlns.match(/\/chessd#admin/))
 			{
-				Buffer += ADMIN_HandleAdminNotification(XML);
+				Buffer += ADMIN_HandleAdmin(XML);
 			}
-			*/
 			else if (Xmlns == "")
 			{
 				Buffer += PARSER_ParseIqById(XML);

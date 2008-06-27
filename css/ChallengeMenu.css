@@ -67,6 +67,12 @@
 	background-repeat: no-repeat;
 }
 
+#ChallengeMenu li.random
+{
+	background-image: url('../images/challenge_menu/random.png');
+	background-repeat: no-repeat;
+}
+
 #ChallengeMenu li.white
 {
 	background-image: url('../images/challenge_menu/white_enable.png');

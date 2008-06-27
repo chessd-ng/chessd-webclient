@@ -149,6 +149,7 @@
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
 		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 	</challenge>
 	<game>
@@ -304,5 +305,12 @@
 			<welcome_item><![CDATA[<b>Adicionar contatos:</b> sua lista de contatos encontra-se na parte superior esquerda do ambiente. Para adicionar novos contatos clique sobre um usuário na sala Geral e escolha a opção "Adicionar contato". O usuário estará em sua lista de contato, assim que ele autorizar.]]></welcome_item>
 		</welcome_instruction>
 	</welcome>
+	<admin>
+		<admin_kick_ok>Você desconectou usuário com sucesso</admin_kick_ok>
+		<admin_ban_ok>Você baniu usuário com sucesso</admin_ban_ok>
+		<admin_unban_ok>Você desbaniu usuário com sucesso</admin_unban_ok>
+		<admin_user_ban>Você foi banido.\nMotivo: </admin_user_ban>
+		<admin_user_kick>Você foi desconectado.\nMotivo: </admin_user_kick>
 
+	</admin>
 </language>

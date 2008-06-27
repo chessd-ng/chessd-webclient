@@ -31,7 +31,7 @@ function CONTACT_InviteUser(Username)
 	XML = MESSAGE_Invite(Username);
 
 	// Insert user in structure
-	MainData.AddUser(Username, "offline", "");
+	MainData.AddUser(Username, "offline", "", "default");
 
 	// Insert user in interface
 	MainData.Contact.addUser("default",Username, "offline");
