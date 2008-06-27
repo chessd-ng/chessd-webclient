@@ -795,7 +795,7 @@ function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 {
 	var XMPP = "";
 
-	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' id='"+MainData.Const.IQ_ID_KickUser+"' to='"+Room+"@"+MainData.ConferenceComponent+"."+MainData.Host+"' type='set' >";
+	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' id='"+MainData.Const.IQ_ID_KickUserRoom+"' to='"+Room+"@"+MainData.ConferenceComponent+"."+MainData.Host+"' type='set' >";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/protocol/muc#admin' >";
 	XMPP += "<item nick='"+To+"' role='"+Role+"' />";
 	XMPP += "<reason>"+Reason+"</reason>";
@@ -815,7 +815,7 @@ function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='KickUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_KickUser+"'>";
 	XMPP += "<kick xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</kick></iq>";
@@ -834,7 +834,7 @@ function MESSAGE_KickUser(Username, Reason)
 function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='BanUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='"+MainData.Const.IQ_ID_BanUser+"'>";
 	XMPP += "<ban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</ban></iq>";
@@ -853,13 +853,33 @@ function MESSAGE_BanUser(Username, Reason)
 function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
-	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='UnBanUser'>";
+	XMPP += "<iq type='set' to='"+MainData.AdminComponent+"."+MainData.Host+"/"+MainData.Resource+"' id='"+MainData.Const.IQ_ID_UnbanUser+"'>";
 	XMPP += "<unban xmlns='"+MainData.Xmlns+"/chessd#admin' jid='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</unban></iq>";
 	
 	return XMPP;
 }
+
+/**
+ * @brief Message to get list off banned users
+ *
+ * Create message to get a list of all banned users
+ *
+ * @author 	Rubens Suguimoto
+ */
+function MESSAGE_GetBanList()
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='get' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='"+ MainData.Const.GetBanList+"'>"
+	XMPP += "<banned-list xmlns='http://c3sl.ufpr.br/chessd#admin'/>"
+	XMPP += "</iq>"
+
+	return XMPP;
+}
+
+
 /**********************************
  * MESSAGES - PROFILE - vCard
  	**********************************/
