@@ -100,7 +100,9 @@ function CONTACT_SetUserType(Username, NewType)
 			Room = MainData.RoomList[0]; 
 			Status = Room.UserList[User].Status;
 
+			// Update type in contact online and contact list
 			MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
+			MainData.Contact.updateUser(Username,Status, null, NewType);
 		}
 
 	}
@@ -135,7 +137,9 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 				Status = Room.UserList[User].Status;
 				Type = Room.UserList[User].Type;
 
+				// Update type in contact online and contact list
 				MainData.ContactOnline.userList.updateUser(Username,Status, Rating, Type);
+				MainData.Contact.updateUser(Username,Status, Rating, Type);
 			}
 		}
 	}
