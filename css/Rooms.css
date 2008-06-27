@@ -40,10 +40,10 @@
 
 #Main #Left #Rooms #RoomList .close {
 	position		: absolute;
-	right			: 5px;
-	top				: 6px;
-	width			: 5px;
-	height		:	5px;
+	right			: 3%;
+	top				: 25%;
+	width			: 11%;
+	height		:	43%;
 	cursor			: pointer;
 }
 
@@ -250,3 +250,23 @@
 	padding-bottom	: 20px;
 	text-align	: center;
 }
+
+/**
+* USER MENU
+*/
+#RoomFullNameDiv {
+	position		: absolute;
+	width			: 3%;
+	padding			: 1mm;
+	background-color: #FFF;
+	border			: 1px solid #216778;
+}
+
+#RoomFullNameDiv p {
+	font-style		: italic;
+	font-size		: 10px;
+	color			: #216778;
+	cursor			: pointer;
+	margin-bottom	: 1px;
+}
+

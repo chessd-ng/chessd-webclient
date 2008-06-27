@@ -202,9 +202,12 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 	}
 	else {
 		// else get name of focused room
-		Focused = document.getElementById("RoomSecName").innerHTML;
+//		Focused = document.getElementById("RoomSecName").innerHTML;
+	
+		Focused = document.getElementById("Room_"+RoomName);
+
 		// If change of occupant's number occured in focused room
-		if (Focused == RoomName)
+		if ((Focused != null) && (Focused.style.display == 'block'))
 		{
 			// Get element in interface that will be refreshed
 			Node = document.getElementById("Sec_occupants");
@@ -215,7 +218,7 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 			Node = null;
 		}
 	}
-	
+
 	// If Room is showed at interface, refresh the number of occupants
 	if(Node)
 	{
@@ -559,13 +562,13 @@ function INTERFACE_HideEmoticonList()
 function INTERFACE_FocusRoom(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
-	var RoomItem, RoomClose, Current, NewRoom, Node;
+	var RoomItem, RoomClose, Current, NewRoom, Node, ShortName;
 
 	if (RoomList == null)
 	{
 		return null;
 	}
-	
+
 	// Focus to default room
 	if (RoomName == MainData.RoomDefault)
 	{
@@ -586,14 +589,18 @@ function INTERFACE_FocusRoom(RoomName)
 			return null;
 		}
 
-		Node.onclick = function () {
+		Node.parentNode.onclick = function () {
 			ROOM_FocusRoom(RoomName);
 		}
 	
-		Node.innerHTML = RoomName;
+		ShortName = UTILS_ShortString(RoomName, 4);
+		Node.innerHTML = ShortName;
+		Node.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
+		Node.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
-		INTERFACE_RefreshOccupantsNumber(RoomName);
+		RoomClose = document.getElementById("CloseRoom");
+		RoomClose.onclick = function() { ROOM_ExitRoom(RoomName); };
 	}
 
 	return true;
@@ -604,13 +611,15 @@ function INTERFACE_FocusRoom(RoomName)
 function INTERFACE_CreateRoomInBar(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
-	var RoomItem, RoomClose;
+	var RoomItem, RoomClose, ShortName;
 	var RoomItemTitle, RoomOccupants;
 
 	//Create Room default
 	if(RoomList.childNodes.length == 1)
 	{
 		RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
+		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, UTILS_GetText("room_default")); }
+		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
 		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
@@ -625,7 +634,10 @@ function INTERFACE_CreateRoomInBar(RoomName)
 	else if(RoomList.childNodes.length == 2)
 	{
 		// Create a item and set focus to it
-		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
+		ShortName = UTILS_ShortString(RoomName, 4);
+		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
+		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
+		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
@@ -635,13 +647,48 @@ function INTERFACE_CreateRoomInBar(RoomName)
 			ROOM_FocusRoom(RoomName);
 		}
 
-		RoomClose = UTILS_CreateElement("img", null, "close");
-		RoomClose.src = "./images/close.png";
+		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
+		RoomClose.src = "./images/close_chat.png";
 		RoomClose.onclick = function() { ROOM_ExitRoom(RoomName); };
 		RoomItem.appendChild(RoomClose);
 
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[1]);
 	}
+}
+
+/**
+ * @author	Danilo
+ *
+ */
+function INTERFACE_ShowRoomFullName(Obj,RoomName)
+{
+	var Hint, Name, ParentNode, Pos, i;
+//	var Offset = 9;
+
+	Hint = UTILS_CreateElement("div", "RoomFullNameDiv");
+
+	Name = UTILS_CreateElement("p", null, null, RoomName);
+
+	Hint.appendChild(Name);
+	
+	// Get parent scrolling
+	
+	ParentNode = UTILS_GetParentDiv(Obj);
+
+	// Get position of user list item
+	Pos = UTILS_GetOffset(Obj);
+	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
+	Hint.style.left = Pos.X+"px";
+	Hint.style.width = RoomName.length/2+'%';
+
+	document.body.appendChild(Hint);
+}
+
+function INTERFACE_CloseRoomFullName()
+{
+	var Hint = document.getElementById("RoomFullNameDiv");
+	if (Hint)
+		document.body.removeChild(Hint);
 }
 
 /**

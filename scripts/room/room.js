@@ -631,6 +631,7 @@ function ROOM_FocusRoom(RoomName)
 	// Show new room and set it to current
 	INTERFACE_FocusRoom(RoomName);
 	Room.Room.show();
+	INTERFACE_RefreshOccupantsNumber(RoomName);
 	MainData.CurrentRoom = Room;
 	Room.Room.focus();
 }
