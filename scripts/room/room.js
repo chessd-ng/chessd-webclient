@@ -196,11 +196,12 @@ function ROOM_HandleRoomList(XML)
 		// Find room names
 		for (i=0; i < Items.length; i++)
 		{
-			Rooms[i] = Items[i].getAttribute("jid").replace(/.conference.*/, "");
+			Rooms[i] = Items[i].getAttribute("name");
+
 			// Change name for general room
-			if (Rooms[i] == MainData.RoomDefault)
+			if (Rooms[i].match(MainData.RoomDefault))
 			{
-				Rooms[i] = UTILS_GetText("room_default");
+				Rooms[i]=Rooms[i].replace(MainData.RoomDefault,UTILS_GetText("room_default"));
 			}
 		}
 		INTERFACE_ShowRoomList(Rooms);
@@ -436,25 +437,38 @@ function ROOM_ShowGameRoomList(OffsetLeft)
 *
 * @param 	Room name is the name of room
 * @return 	string ""
-* @author 	Ulysses
+* @author 	Ulysses and Danilo
 */
 function ROOM_EnterRoom(RoomName)
 {
 	var XML, To;
 
+	var Room;
+
+	RoomName = RoomName.split(" ")[0];
+	
 	// Send Message to general room - must be change to Focus Room
 	if (RoomName == UTILS_GetText("room_default"))
 	{
-		To = MainData.RoomDefault+"@conference."+MainData.Host+"/"+MainData.Username;
+		ROOM_FocusRoom(MainData.RoomDefault);
 	}
 	else
 	{
-		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+		Room = MainData.GetRoom(RoomName);
+
+		if (Room != null)
+		{
+			ROOM_FocusRoom(RoomName);
+		}
+		else
+		{
+			To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+
+			XML = MESSAGE_Presence(To);
+
+			CONNECTION_SendJabber(XML);
+		}
 	}
-
-	XML = MESSAGE_Presence(To);
-
-	CONNECTION_SendJabber(XML);
 
 	return "";
 }
