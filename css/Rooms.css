@@ -153,7 +153,7 @@
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
 	height			: 35mm;
-	width			: 90%;
+	width			: 89%;
 	border			: 1px solid #216778;
 	border-bottom	: 0px;
 	padding			: 2px;
@@ -171,7 +171,7 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 90%;
+	width			: 89%;
 	padding			: 2px;
 	font-size		: 12px;
 	color			: #216778;

@@ -244,6 +244,8 @@
 		<profile_year>a</profile_year>
 		<profile_month>m</profile_month>
 		<profile_day>d</profile_day>
+		<profile_error>Erro ao salvar o perfil</profile_error>
+		<profile_desc_limit>A descrição pode ter no máximo 200 caracteres.</profile_desc_limit>
 	</profile>
 	<register>
 		<register_inf>Por favor, preencha as informações abaixo para criar sua conta no Xadrez Livre.</register_inf>

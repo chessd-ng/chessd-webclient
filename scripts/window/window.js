@@ -312,7 +312,13 @@ function WINDOW_Profile(Profile)
 	if (Div.Buttons.length > 1)
 	{
 		// Save Profile Button
-		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+		UTILS_AddListener(WindowObj.eventButtons[2],"click", 
+			function(){ 
+				if (Elements.Desc.value.length <= 200) {
+					WINDOW_RemoveWindow(WindowObj); 
+					PROFILE_RemoveProfile(Profile.User);
+				}
+		}, false);
 	}
 
 	return Elements;

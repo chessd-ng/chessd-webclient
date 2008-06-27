@@ -298,7 +298,7 @@ function PROFILE_RemoveProfile(Username)
 *
 * @public
 * @param        Username is the jabber username
-* @return       void
+* @return       boolean
 * @author       Rubens
 */
 function PROFILE_SaveMyProfile()
@@ -310,10 +310,17 @@ function PROFILE_SaveMyProfile()
 
 	FN = MyProfile.Profile.GetUser();
 	Desc = MyProfile.Profile.GetDesc();
+	if (Desc.length > 200) 
+	{
+		WINDOW_Alert(UTILS_GetText('profile_error'),UTILS_GetText('profile_desc_limit'));
+		return false;
+	}
 	PhotoType = MyProfile.Profile.GetImgType();
 	Binval = MyProfile.Profile.GetImg64();
 
 	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MainData.Username));
+
+	return true;
 }
 
 /**
