@@ -337,6 +337,7 @@ function CONTACT_HandleUserList(XML)
 				// If there's a pending invite send a accept
 				Pending += MESSAGE_InviteAccept(Jid);
 				CONTACT_InsertUser(Jid, "offline", "both", Group);
+				break;
 
 			// Insert users and group in data structure
 			case("both"):
@@ -350,6 +351,13 @@ function CONTACT_HandleUserList(XML)
 			case("none"):
 				// If there's a pending invite send a accept
 				CONTACT_InsertUser(Jid, "offline", Subs, Group);
+				break;
+			
+			// Remove user from contact list
+			case("remove"):
+				alert("Removendo: "+Jid)
+				CONTACT_RemoveUser(Jid);
+				break;
 
 			// Do nothing =)
 			case("from"):
@@ -364,6 +372,57 @@ function CONTACT_HandleUserList(XML)
 	// two cups of flour
 	return Pending;
 }
+
+
+/**
+ * @brief	Handle user contact receive subscribe
+ *
+ * Handle user list received from jabber with yours contacts.
+*
+* @return string
+*
+* @author Ulysses Bonfim
+*/
+function CONTACT_HandleSetSubscribe(XML)
+{
+	var Users, Jid, Subs, i, Pending = "";
+	var Group;
+
+	Users = XML.getElementsByTagName("item");
+
+	for (i=0; i < Users.length; i++)
+	{
+		Jid = Users[i].getAttribute("jid").match(/[^@]+/)[0];
+		Subs = Users[i].getAttribute ("subscription"); 
+		
+		if(Users[i].getElementsByTagName("group")[0] != null)
+		{
+			Group = UTILS_GetNodeText(Users[i].getElementsByTagName("group")[0]);
+		}
+		else
+		{
+			Group = "default";
+		}
+
+		// Check subscription state of users
+		switch (Subs)
+		{
+			// Remove user from contact list
+			case("remove"):
+				alert("Removendo: "+Jid)
+				CONTACT_RemoveUser(Jid);
+				break;
+		}
+	}
+
+	// two eggs
+	// a cup of milk 
+	// a spoon of sugar
+	// a 'tea spoon' of yeast
+	// two cups of flour
+	return Pending;
+}
+
 
 
 /**
@@ -449,16 +508,18 @@ function CONTACT_HandleUserPresence(XML)
 */
 function CONTACT_InsertUser(User, Status, Subs, Group)
 {
-	//Add in data struct
-	MainData.AddUser(User, Status, Subs, Group)
-	MainData.SortUserByNick();
-
-	//Show in interface
-	if(MainData.Contact != null)
+	if(MainData.FindUser(User) == null)
 	{
-		MainData.Contact.addUser(Group, User, Status);
-	}
+		//Add in data struct
+		MainData.AddUser(User, Status, Subs, Group)
+		MainData.SortUserByNick();
 
+		//Show in interface
+		if(MainData.Contact != null)
+		{
+			MainData.Contact.addUser(Group, User, Status);
+		}
+	}
 }
 
 
@@ -542,7 +603,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i].Func = function () { 
 				Button1.Name = UTILS_GetText("window_ok");
 				Button1.Func = function () {
-					CONTACT_RemoveUser(Username);
+					CONTACT_SendRemoveUser(Username);
 				}
 				Button2.Name = UTILS_GetText("window_cancel");
 				Button2.Func = null;

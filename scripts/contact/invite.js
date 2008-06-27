@@ -34,7 +34,7 @@ function CONTACT_InviteUser(Username)
 	MainData.AddUser(Username, "offline", "");
 
 	// Insert user in interface
-	MainData.Contact.addUser(Username, "offline");
+	MainData.Contact.addUser("default",Username, "offline");
 
 	// Send it to jabber
 	CONNECTION_SendJabber(XML);
@@ -50,11 +50,6 @@ function CONTACT_InviteUser(Username)
 */
 function CONTACT_RemoveUser(Username)
 {
-	var XML;
-
-	// Create a remove message
-	XML = MESSAGE_RemoveContact(Username);
-
 	// Remove user from data structure
 	MainData.DelUser(Username);
 
@@ -62,12 +57,19 @@ function CONTACT_RemoveUser(Username)
 	MainData.Contact.removeUser(Username);
 	//INTERFACE_RemoveContact(Username);
 
-	// Send it to jabber
-	CONNECTION_SendJabber(XML);
-
 	return true;
 }
 
+function CONTACT_SendRemoveUser(Username)
+{
+	var XML;
+
+	// Create a remove message
+	XML = MESSAGE_RemoveContact(Username);
+	
+	// Send it to jabber
+	CONNECTION_SendJabber(XML);
+}
 
 
 /**

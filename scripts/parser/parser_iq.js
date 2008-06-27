@@ -148,6 +148,12 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += ADMIN_HandleUserNotification(XML);
 			}
+
+			// Search user request
+			else if (Xmlns.match(/jabber:iq:roster/))
+			{
+				Buffer += CONTACT_HandleSetSubscribe(XML);
+			}
 			break;
 
 		case "error": 
