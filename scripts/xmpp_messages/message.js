@@ -872,7 +872,7 @@ function MESSAGE_GetBanList()
 {
 	var XMPP = "";
 
-	XMPP += "<iq type='get' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='"+ MainData.Const.GetBanList+"'>"
+	XMPP += "<iq type='get' to='"+MainData.AdminComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetBanList+"'>"
 	XMPP += "<banned-list xmlns='http://c3sl.ufpr.br/chessd#admin'/>"
 	XMPP += "</iq>"
 
