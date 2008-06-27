@@ -28,19 +28,47 @@ function ADMIN_HandleRoomAdmin(XML)
 }
 
 
-function ADMIN_HandleAdminNotification(XML)
+function ADMIN_HandleAdmin(XML)
+{
+	var Id = XML.getAttribute("id");
+
+	switch(Id)
+	{
+		case MainData.Const.IQ_ID_GetBanList:
+			ADMIN_HandleBanList(XML);
+			break;
+
+		/*
+		case MainData.Const.IQ_ID_BanUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
+
+		case MainData.Const.IQ_ID_UnbanUser:
+			ADMIN_Notification(XML)
+			break;
+
+		/*
+		case MainData.Const.IQ_ID_KickUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
+	}
+}
+
+function ADMIN_Notification(XML)
 {
 	var Node = XML.firstChild;
 	switch(Node.tagName)
 	{
 		case "kick":
-			WINDOW_Alert("Kick","Você kikou com sucesso.");
+			WINDOW_Alert("Kick",UTILS_GetText("admin_kick_ok"));
 			break;
 		case "ban":
-			WINDOW_Alert("Ban","Você baniu com sucesso.");
+			WINDOW_Alert("Ban",UTILS_GetText("admin_ban_ok"));
 			break;
 		case "unban":
-			WINDOW_Alert("Unban","Você desbaniu com sucesso.");
+			WINDOW_Alert("Unban",UTILS_GetText("admin_unban_ok"));
 			break;
 	}
 
@@ -56,15 +84,31 @@ function ADMIN_HandleUserNotification(XML)
 	switch(Node.tagName)
 	{
 		case "kick":
-			alert("Você foi kikado.\nMotivo: "+Reason);
+			alert(UTILS_GetText("admin_user_ban")+Reason);
 			break;
 		case "ban":
-			alert("Você foi banido.\nMotivo: "+Reason);
+			alert(UTILS_GetText("admin_user_kick")+Reason);
 			break;
 	}	
 	return "";
 }
 
+function ADMIN_HandleBanList(XML)
+{	
+	var Jids = XML.getElementsByTagName("jid");
+	var i;
+	var Username;
+
+	for(i=0;i<Jids.length;i++)
+	{
+		Username = UTILS_GetNodeText(Jids[i]).split("@")[0];
+		INTERFACE_AddBannedUser(Username);
+	}
+}
+
+/************************
+ * ADMIN - MESSAGES
+ * **********************/
 function ADMIN_KickUser(Username, Reason)
 {
 	CONNECTION_SendJabber(MESSAGE_KickUser(Username,Reason));
@@ -78,4 +122,9 @@ function ADMIN_BanUser(Username, Reason)
 function ADMIN_UnbanUser(Username, Reason)
 {
 	CONNECTION_SendJabber(MESSAGE_UnbanUser(Username, Reason));
+}
+
+function ADMIN_GetBanList()
+{
+	CONNECTION_SendJabber(MESSAGE_GetBanList());
 }
