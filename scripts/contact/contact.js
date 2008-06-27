@@ -355,7 +355,6 @@ function CONTACT_HandleUserList(XML)
 			
 			// Remove user from contact list
 			case("remove"):
-				alert("Removendo: "+Jid)
 				CONTACT_RemoveUser(Jid);
 				break;
 
@@ -409,7 +408,6 @@ function CONTACT_HandleSetSubscribe(XML)
 		{
 			// Remove user from contact list
 			case("remove"):
-				alert("Removendo: "+Jid)
 				CONTACT_RemoveUser(Jid);
 				break;
 		}
