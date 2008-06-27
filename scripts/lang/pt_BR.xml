@@ -149,6 +149,7 @@
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
 		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 	</challenge>
 	<game>

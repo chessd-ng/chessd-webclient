@@ -52,7 +52,7 @@ function INTERFACE_CreateChallengeMenu()
 	var PostponeTitle = UTILS_CreateElement("span","title",null,UTILS_GetText("challenge_menu_postpone_title"));
 
 	var AnnounceLine = UTILS_CreateElement("span", null,null," - ");
-	var AnnounceButton = UTILS_CreateElement("span", "announce",null,"anunciar partida");
+	var AnnounceButton = UTILS_CreateElement("span", "announce",null,UTILS_GetText("challenge_menu_announce"));
 
 	MatchOfferList.appendChild(MatchOfferTitle);
 	AnnounceList.appendChild(AnnounceTitle);
@@ -78,7 +78,7 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 	// Random color
 	if(Oponent.Color == "")
 	{
-		Item = UTILS_CreateElement("li",null,"undefined");
+		Item = UTILS_CreateElement("li",null,"random");
 	}
 	else
 	{
@@ -181,7 +181,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	// Random color
 	if(Oponent.Color == "")
 	{
-		Item = UTILS_CreateElement("li",null,"undefined");
+		Item = UTILS_CreateElement("li",null,"random");
 	}
 	else
 	{
