@@ -1592,6 +1592,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 	NewGame.IsYourTurn = false;
 	NewGame.CurrentMove = null;
 	NewGame.Moves = new Array();
+	NewGame.Promotion = "q";
 
 	NewGame.SetTurn = this.SetTurn;
 	NewGame.AddMove = this.AddGameMove;

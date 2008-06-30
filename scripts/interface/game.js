@@ -925,6 +925,11 @@ function INTERFACE_CreateGameOptions(GameID)
 	UTILS_AddListener(OptionFinish, "click", function() {GAME_SendCancel(GameID);}, false);
 	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
 
+	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); }
+	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); }
+	OptionSelectB.onclick = function (){ GAME_ChangePromotion("b"); }
+	OptionSelectN.onclick = function (){ GAME_ChangePromotion("n"); }
+
 	var ButtonList = new Array();
 
 	ButtonList.push(OptionDraw);

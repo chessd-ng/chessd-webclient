@@ -528,13 +528,13 @@ function MESSAGE_GameRoomInfoList(Room)
 /**
 * Send a game moviment
 */
-function MESSAGE_GameMove(Move, GameID)
+function MESSAGE_GameMove(Move, GameID, Promotion)
 {
 	var XMPP="";
 
 	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+GameID+"@"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GameMove+"'>";
 	XMPP += "<query xmlns='"+MainData.Xmlns+"/chessd#game#move'>";
-	XMPP += "<move long='"+Move+"'>";
+	XMPP += "<move long='"+Move+Promotion+"'>";
 	XMPP += "</move></query></iq>";
 
 	return XMPP;

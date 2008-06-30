@@ -729,19 +729,48 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 {
 	var GameID = MainData.CurrentGame.Id;
 	var Move;
+	var CurrentMove = MainData.CurrentGame.CurrentMove;
+	var CurrentBoard = MainData.CurrentGame.Moves[CurrentMove].Board;
+	var Promotion = "";
 
 	// Create long notation
 	if (MainData.CurrentGame.YourColor == "white")
 	{
 		Move = UTILS_HorizontalIndex(OldCol)+OldLine+UTILS_HorizontalIndex(NewCol)+NewLine;
+
 	}
 	else
 	{
 		Move = UTILS_HorizontalIndex(9-OldCol)+(9-OldLine)+UTILS_HorizontalIndex(9-NewCol)+(9-NewLine);
+
+	}
+
+	// Check for pawn promotion.
+	if(NewLine == 8)
+	{
+		if(MainData.CurrentGame.YourColor == "white")
+		{
+			if(CurrentBoard[8-OldLine][OldCol-1] == "P")
+			{
+				Promotion = MainData.CurrentGame.Promotion;
+			}
+
+//		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[8-OldLine][OldCol-1] +"\n"+ Promotion +"\n"+CurrentBoard[8-OldLine])
+
+		}
+		else
+		{
+			if(CurrentBoard[OldLine-1][8-OldCol] == "p")
+			{
+				Promotion = MainData.CurrentGame.Promotion;
+			}
+
+//		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[OldLine-1][8-OldCol] +"\n"+Promotion+"\n"+CurrentBoard[OldLine-1])
+		}
 	}
 
 	// Send move for the current game
-	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id));
+	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id, Promotion));
 }
 
 /**
@@ -778,6 +807,18 @@ function GAME_SendCancel(GameID)
 function GAME_SendAdjourn(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestAdjourn(GameID));
+}
+
+/**
+* Change current game piece promotion
+*
+* @param 	Piece	Piece char
+* @return 	void
+* @author	Rubens Suguimoto
+*/
+function GAME_ChangePromotion(Piece)
+{
+	MainData.CurrentGame.Promotion = Piece;
 }
 
 /**
@@ -929,3 +970,4 @@ function GAME_HandleVCardPhoto(XML)
 	
 	return "";
 }
+
