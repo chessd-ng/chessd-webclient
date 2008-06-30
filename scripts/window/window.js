@@ -137,10 +137,10 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-function WINDOW_Challenge(User, Rating, GameParameters, MatchId)
+function WINDOW_Challenge(User, Rating, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
-	var Div = INTERFACE_ShowChallengeWindow(User, Rating, GameParameters, MatchId);
+	var Div = INTERFACE_ShowChallengeWindow(User, Rating, GameParameters, Rated, MatchId);
 	var Title;
 
 	if (GameParameters)

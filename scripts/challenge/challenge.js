@@ -96,6 +96,10 @@ function CHALLENGE_HandleOffer(XML)
 	{
 		Rated = Match.getAttribute('rated');
 	}
+	else
+	{
+		Rated = null;
+	}
 	Players = XML.getElementsByTagName('player');
 
 
@@ -134,7 +138,7 @@ function CHALLENGE_HandleOffer(XML)
 			//Quick fix to get oponent rating
 			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player2.Name,Category);
 			// Show challenge window for user
-			WINDOW_Challenge(Player2.Name, Rating, Player2, MatchID);
+			WINDOW_Challenge(Player2.Name, Rating, Player2, Rated, MatchID);
 		}
 		else 
 		{
@@ -152,7 +156,7 @@ function CHALLENGE_HandleOffer(XML)
 			//Quick fix to get oponent rating
 			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player1.Name,Category);
 			// Show challenge window for user
-			WINDOW_Challenge(Player1.Name, Rating, Player1, MatchID);
+			WINDOW_Challenge(Player1.Name, Rating, Player1, Rated, MatchID);
 
 		}
 
@@ -168,7 +172,7 @@ function CHALLENGE_HandleOffer(XML)
 		ChallengeObj = MainData.ChallengeList[ChallengePos];
 		ChallengedPlayer = ChallengeObj.Challenged;
 
-		MainData.ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), (ChallengedPlayer.Inc/60), ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+		MainData.ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 	}
 
 	// TODO

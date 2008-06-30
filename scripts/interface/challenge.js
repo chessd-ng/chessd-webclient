@@ -25,7 +25,7 @@
 * @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
+function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, MatchId)
 {
 	var Div;
 
@@ -58,7 +58,8 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 	var Invite, Accept, Decline, NewParameters, Cancel, Chat;
 	var Buttons = new Array();
 
-	var Type, Color, Rated;
+	var Type, Color;
+//	var Rated;
 	var i; 
 
 	// Main Div
@@ -430,7 +431,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, MatchId)
 
 	if (GameParameters != undefined)
 	{
-		if (GameParameters.Rated == "true")
+		if (Rated == "true")
 		{
 			RatingCheckbox.checked = true;
 			RatingCheckbox.setAttribute("defaultChecked", "true");
