@@ -21,7 +21,7 @@
 
 function PARSER_ParsePresence(XML)
 {
-	var Jid, Type, Show, NewStatus;
+	var Jid, Show, NewStatus;
 	var Buffer = ""
 
 	// Get Jid

@@ -300,7 +300,7 @@ function ROOM_HandleInfo(XML)
 	var Room;
 	var Status, Rating;
 	var User;
-	var NewType;
+	var NewType, Type;
 
 	RatingNodes = XML.getElementsByTagName('rating');
 	TypeNodes = XML.getElementsByTagName('type');
