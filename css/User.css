@@ -42,6 +42,7 @@ div .UserList tr:hover {
 div .UserList td{
 	width			: 41mm;
 	text-align		: left;
+	height : 17px;
 }
 
 div .UserList td.rating{

@@ -95,7 +95,7 @@ function CHALLENGE_HandleAdjourn(XML)
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
-	var Item, Username;
+	var Item, Username, i;
 
 	if(GeneralRoom == "general")
 	{
