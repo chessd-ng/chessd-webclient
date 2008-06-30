@@ -86,8 +86,8 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 	}
 
 	PName = UTILS_CreateElement("p","name", null, Oponent.Name);
-	PTime = UTILS_CreateElement("p","time", null, Time+'"');
-	PInc = UTILS_CreateElement("p","inc", null, Inc+"'");
+	PTime = UTILS_CreateElement("p","time", null, Time+"'");
+	PInc = UTILS_CreateElement("p","inc", null, Inc+'"');
 
 	/*// This feature is not implemented yet
 	if(Private == false)
