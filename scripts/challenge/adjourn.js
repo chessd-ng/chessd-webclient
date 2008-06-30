@@ -95,17 +95,13 @@ function CHALLENGE_HandleAdjourn(XML)
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
+	var UserRoom;
 	var Item, Username, i;
 
-	if(GeneralRoom == "general")
+	if(GeneralRoom == MainData.RoomDefault)
 	{
-		Item = XML.getElementsByTagName("item");
-
-		for(i=0; i<Item.length; i++)
-		{
-			Username = Item[i].getAttribute("jid").split("@")[0];
-			CHALLENGE_PostponePresence(Username);
-		}
+		Username = XML.getAttribute("from").split("/")[1];
+		CHALLENGE_PostponePresence(Username);
 	}
 
 	return "";
