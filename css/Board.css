@@ -17,15 +17,17 @@
 	position		: relative;
 	float			: left;
 	border			: 3px solid #216778;
-	border-right	: 0px;
+	border-right		: 0px;
 }
 
 #Board {
 	position		: relative;
-
+	/*
 	height			: 80.5mm;
 	width			: 80.5mm;
-
+	*/
+	height			: 304px;
+	width			: 304px;
 	display			: table;
 }
 
@@ -59,8 +61,12 @@
 */
 #IndexV {
 	position		: absolute;
+	/*
 	top			: 1mm;
 	left			: -8mm;
+	*/
+	top			: 0px;
+	left			: -35px;
 	margin-left		: 0px;
 	list-style		: none;
 }
@@ -82,9 +88,11 @@
 	position		: absolute;
 	top			: 80mm;
 	*/
-	left			: 1mm;
+	left			: 0px;
+	top			: 309px;
 	position		: absolute;
-	width			: 81mm;
+	width			: 305px;
+	/*width			: 81mm;*/
 }
 
 #IndexH li {
@@ -104,21 +112,24 @@
 #GameInfoDiv
 {
 	position		: relative;
-	width			: 195px;
+	width			: 180px;
 	height			: 304px;
 	float			: left;
 	border			: 3px solid #216778;
+	padding			: 0px 5px;
 }
 
 #GameClose {
 	position		: absolute;
 	right			: -3px;
-	top				: -5mm;
-	width			: 4mm;
+	/*top			: -5mm;*/
+	top			: -20px;
+	/*width			: 4mm;*/
+	width			: 16px;
 	font-weight		: bold;
 	font-size		: 10px;
 	text-align		: center;
-	background-color: #216778;
+	background-color	: #216778;
 	color			: #FFF;
 	padding			: 2px;
 	cursor			: pointer;
@@ -127,53 +138,69 @@
 #PhotoDiv
 {
 	position		: relative;
-	width			: 53mm;
-	height			: 30mm;
+	/*width			: 53mm;*/
+	width			: 170px;
+	/*height		: 30mm;*/
+	height			: 95px;;
 	font-size		: 14px;
 	color			: #216778;
+
+	padding-top		: 15px;
+	padding-right		: 10px;
+	padding-bottom		: 0px;
+	padding-left		: 10px;
 }
 
 #PhotoDiv #PWPhoto
 {
 	background-color	: #fff;
 	
+	/*
 	position		: absolute;
 	left			: 8mm;
 	top			: 5mm;
+	*/
 	width			: 50px;
 	height			: 60px;
 	border-style		: solid;
 	border-width		: 1px;
+	float			: left;
+
+	margin-left		: 5px;
 }
 
 #PhotoDiv #PBPhoto
 {
 	background-color	: #fff;
 
+	/*
 	position		: absolute;
 	right			: 8mm;
 	top			: 5mm;
-
+	*/
 	width			: 50px;
 	height			: 60px;
 
 	border-style		: solid;
 	border-width		: 1px;
+	float			: left;
 }
 
 
 #PhotoDiv #PWName
 {
 	position		: absolute;
-	left			: 5mm;
-	top			: 25mm;
+	left			: 0px;
+	bottom			: 0px;
+	margin-left		: 10px;
 }
 
 #PhotoDiv #PBName
 {
 	position		: absolute;
-	right			: 5mm;
-	top			: 25mm;
+	right			: 0px;
+	bottom			: 0px;
+	margin-right		: 12px;
 }
 
 #PhotoDiv #PWPawn
@@ -181,8 +208,12 @@
 	background-image	: url("../images/pieces/wpawn.png");
 
 	position		: absolute;
+	/*
 	top			: 13.5mm;
 	left			: 3.5mm;
+	*/
+	top			: 55px;
+	left			: 0px;
 
 	width			: 35px;
 	height			: 35px;
@@ -192,8 +223,12 @@
 	background-image	: url("../images/pieces/bpawn.png");
 
 	position		: absolute;
+	/*
 	top			: 13.5mm;
 	right			: 3.5mm;
+	*/
+	top			: 55px;
+	right			: 7px;
 
 	width			: 35px;
 	height			: 35px;
@@ -201,10 +236,19 @@
 
 #PhotoDiv #vs
 {
-	position		: absolute;
+	position		: relative;
+	/*
 	right			: 50%;
 	left			: 50%;
-	top			: 10mm;
+	top			: 40mm;
+	*/
+	top			: 20px;
+	float			: left;
+
+	margin-left		: 20px;
+	margin-right		: 20px;
+	margin-top		: 10px;
+	margin-bottom		: 10px;
 }
 
 /*Timers*/
@@ -213,9 +257,11 @@
 
 	position		: relative;
 
+	width			: 180px;
+	height			: 35px;
+/*
 	width			: 53mm;
 	height			: 10mm;
-/*
 	border-style		: solid;
 	border-width		: 1px;
 	border-color		: #216778;
@@ -225,22 +271,27 @@
 	color			: #216778;
 }
 
-#PWTimer
+#PWTimer, #PBTimer
 {
 	background-color	: #ffeed1;
-	width			: 15mm;
+	/*width			: 15mm;*/
+	width			: 60px;
 
-	position		: absolute;
-	left			: 6.5mm;
-	top			: 1mm;
+/*	position		: absolute;*/
+/*	left			: 6.5mm;*/
+/*	top			: 1mm;*/
 
 	text-align		: center;
 
 	border-style		: solid;
 	border-width		: 1px;
 	border-color		: #ffa200;
-}
 
+	float			: left;
+
+	margin			: 6px 14px;
+}
+/*
 #PBTimer
 {
 	background-color	: #ffeed1;
@@ -248,27 +299,30 @@
 	width			: 15mm;
 
 	position		: absolute;
-	right			: 6.5mm;
-	top			: 1mm;
-
+/*	right			: 6.5mm;*/
+/*	top			: 1mm;*/
+/*
 	text-align		: center;
 
 	border-style		: solid;
 	border-width		: 1px;
 	border-color		: #ffa200;
 }
-
+*/
 /*GameOptions*/
 #GameOptionDiv, #MoveListDiv
 {
 	background-color	: #FFF;
 	
 	position		: absolute;
-	top			: 5mm;
+	/*top			: 5mm;*/
+	top			: 19px;
 	left			: -1px;
 
-	width			: 46mm;
-	height			: 30mm;
+	/*width			: 46mm;*/
+	width			: 175px;
+	/*height		: 30mm;*/
+	height			: 115px;
 
 	border-style		: solid;
 	border-width		: 0px 1px 1px 1px;
@@ -284,14 +338,16 @@
 
 #MoveList{
 	list-style		: none;
-	height			: 30mm;
+	/*height		: 30mm;*/
+	height			: 115px;
 	overflow		: auto;
 
 	font-weight		: normal;
 }
 
 #MoveList.oldgame{
-	height			: 22mm;
+	/*height			: 22mm;*/
+	height			: 85px;
 }
 
 #MoveList li.black{
@@ -314,8 +370,10 @@
 	background-color        : #FFF;
 
 	display                 : table;
-	width                   : 45.9mm;
-	height                  : 8mm;
+	/*width                   : 45.9mm;*/
+	width			: 174px;
+	/*height                  : 8mm;*/
+	height			: 28px;
 
 	border-style            : solid;
 	border-width            : 1px 0px 0px 0px;
@@ -323,8 +381,12 @@
 
 #MoveListDiv #MoveListButtons input{
 	float                   : left;
+	/*
 	margin-left             : 6mm;
 	margin-top              : 2mm;
+	*/
+	margin-left		: 23px;
+	margin-top		: 7px;
 	border			: none;
 	width			: 14px;
 	height			: 15px;
@@ -396,9 +458,9 @@
 #GameInfoTab
 {
 	position		: relative;
+/*
 	left			: 2mm;
 	right			: 2mm;
-/*
 	border-style		: solid;
 	border-width		: 1px;
 	border-color		: #216778;
@@ -411,7 +473,9 @@
 	top			: 0px;
 	left			: 0px;
 
-	width			: 46mm;
+	/*width			: 46mm;*/
+	width			: 175px;
+	height			: 18px;
 
 	font-size		: 12px;
 	font-weight		: bold;
@@ -432,8 +496,10 @@
 	border-width		: 1px;
 	border-color		: #216778;
 
-	width			: 23mm;
-	height			: 4.7mm;
+	/*width			: 23mm;*/
+	width			: 87px;
+	/*height		: 4.7mm;*/
+	height			: 18px;
 
 	text-align		: center;
 	cursor			: pointer;
@@ -449,8 +515,10 @@
 	border-width		: 1px;
 	border-color		: #216778;
 
-	width			: 22.5mm;
-	height			: 4.7mm;
+	/*width			: 22.5mm;*/
+	width			: 88px;
+	/*height		: 4.7mm;*/
+	height			: 18px;
 
 	text-align		: center;
 	cursor			: pointer;
@@ -464,11 +532,12 @@
 	border-width		: 1px;
 	border-color		: #ffa200;
 
-	color		: #ffa200;
+	color			: #ffa200;
 }
 
 #InfoTab1.oldgame{
-	width			: 46mm;
+	/*width			: 46mm;*/
+	width			: 175px;
 }
 
 
