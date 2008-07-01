@@ -95,13 +95,13 @@ function ADMIN_HandleUserNotification(XML)
 
 function ADMIN_HandleBanList(XML)
 {	
-	var Jids = XML.getElementsByTagName("jid");
+	var Users = XML.getElementsByTagName("user");
 	var i;
 	var Username;
 
-	for(i=0;i<Jids.length;i++)
+	for(i=0;i<Users.length;i++)
 	{
-		Username = UTILS_GetNodeText(Jids[i]).split("@")[0];
+		Username = Users[i].getAttribute("jid").split("@")[0];
 		INTERFACE_AddBannedUser(Username);
 	}
 }
