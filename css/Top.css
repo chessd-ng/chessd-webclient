@@ -52,7 +52,7 @@
 	font-size		: 2.8mm;
 	position		: relative;
 	margin-left		: 50%;
-	left			: -25%;
+	left			: -30%;
 	top			: -6%;
 }
 
@@ -87,7 +87,7 @@
 
 #Top .icons .exit {
 	background		: url('../images/exit.png') no-repeat;
-	width			: 46px;
+	width			: 56px;
 	color			: #216778;
 	margin-top : 2.5%;
 }
