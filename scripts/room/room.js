@@ -663,7 +663,7 @@ function ROOM_RemoveRoom(RoomName)
 	//Remove room from interface
 	INTERFACE_RemoveRoomFromList(RoomName);
 	ROOM_FocusRoom(RoomName);
-	INTERFACE_CloseRoom()
+	INTERFACE_CloseRoom(RoomName);
 	Room.Room.hide();
 
 	//Remove from data struct
