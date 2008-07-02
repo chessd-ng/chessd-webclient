@@ -81,7 +81,7 @@
 		<contact_by_name>姓名</contact_by_name>
 		<contact_by_user>昵称</contact_by_user>
 		<contact_both>同时</contact_both>
-		<contact_change_profile>Change my profile</contact_change_profile>
+		<contact_change_profile>修改个人资料</contact_change_profile>
 	</contact>
 	<chat>
 		<chat_warning>提醒</chat_warning>
@@ -120,7 +120,7 @@
 	<usermenu>
 		<usermenu_send_message>发送消息</usermenu_send_message>
 		<usermenu_send_offlinemessage>发送离线消息</usermenu_send_offlinemessage>
-		<usermenu_match>邀请下棋</usermenu_match>
+		<usermenu_match>邀请对局</usermenu_match>
 		<usermenu_add_contact>添加联系人</usermenu_add_contact>
 		<usermenu_remove_contact>删除联系人</usermenu_remove_contact>
 		<usermenu_view_profile>查看资料</usermenu_view_profile>
@@ -255,15 +255,19 @@
 	<register>
 		<register_inf>请填写以下的信息以完成注册</register_inf>
 		<register_title>注册</register_title>
-		<register_user_name>用户名</register_user_name>
+		<register_login>用户名</register_login>
+		<register_max_char>(最多14个字符)</register_max_char>
 		<register_user_inf>只能使用小写字母、数字、'-"、"."及"_"，不能含空格</register_user_inf>
-		<register_mail>E-mail</register_mail>
+		<register_mail1>E-mail</register_mail1>
+		<register_mail2>(可选)</register_mail2>
 		<register_mail_inf>以便找回密码</register_mail_inf>
-		<register_passwd>密码</register_passwd>
-		<register_passwd_confirm>再输入一次密码</register_passwd_confirm>
+		<register_passwd>密码:</register_passwd>
+		<register_passwd_confirm1></register_passwd_confirm1>
+		<register_passwd_confirm2>再输入一次密码</register_passwd_confirm2>
 		<register_bt_confirm>确认</register_bt_confirm>
 		<register_bt_cancel>取消</register_bt_cancel>
 		<register_invalid_user_name>用户名无效！</register_invalid_user_name>
+		<register_invalid_user_name_len>用户名最多不能超过14个字符.</register_invalid_user_name_len>
 		<register_invalid_mail>E-mail无效</register_invalid_mail>
 		<register_invalid_password>密码无效！</register_invalid_password>
 		<register_error_409>该用户名已被注册！</register_error_409>
