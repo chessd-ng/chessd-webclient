@@ -211,6 +211,18 @@
 		<game_button_last>Fim</game_button_last>
 
 		<game_oldgame_alert>Você não pode ver um jogo antigo enquanto estiver jogando ou observando uma partida.</game_oldgame_alert>
+
+		<game_result_white-timeover>O tempo das brancas acabou</game_result_white-timeover>
+		<game_result_black-timeover>O tempo das pretas acabou</game_result_black-timeover>
+		<game_result_white-mated>As brancas ganharam por xeque-mate</game_result_white-mated>
+		<game_result_black-mated>As pretas ganharam por xeque-mate</game_result_black-mated>
+		<game_result_white-resigned>As brancas desistiram do jogo</game_result_white-resigned>
+		<game_result_black-resigned>As pretas desistiram do jogo</game_result_black-resigned>
+		<game_result_draw-agreement>Os jogadores concordaram em um empate</game_result_draw-agreement>
+		<game_result_draw-repetition>Empate por repetição de posição</game_result_draw-repetition>
+		<game_result_draw-fifty-moves>Empate pela regra dos 50 lances</game_result_draw-fifty-moves>
+		<game_result_draw-impossible-mate>Empate por insuficiência de material</game_result_draw-impossible-mate>
+		<game_result_draw-timeover>O tempo dos dois jogadores acabaram</game_result_draw-timeover>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informações</profile_window>

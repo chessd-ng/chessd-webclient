@@ -105,7 +105,7 @@ function OLDGAME_HandleSearchOldGame(XML)
 		GameInfoTmp.date = UTILS_ConvertTimeStamp(Games[i].getAttribute("time_stamp"));
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
 		GameInfoTmp.id = Games[i].getAttribute("id");
-		GameInfoTmp.wintype = UTILS_GetNodeText(Games[i].getElementsByTagName("result")[0]);
+		GameInfoTmp.result = OLDGAME_GameResult(Games[i].getAttribute("result"));
 	
 		GameList.push(GameInfoTmp);
 	}
@@ -699,4 +699,34 @@ function OLDGAME_CloseWindow(Id)
 		MainData.SearchGameMaxId--;
 	else if (MainData.SearchGameInfoList.length == 0)
 		MainData.SearchGameMaxId = 0;
+}
+	
+function OLDGAME_GameResult(Result)
+{
+	if ((Result == "") || (Result == null) || (Result == undefined))
+		return "";
+	else if (Result == "white-timeover")
+		return UTILS_GetText("game_result_white-timeover");
+	else if (Result == "black-timeover")
+		return UTILS_GetText("game_result_black-timeover");
+	else if (Result == "white-mated")
+		return UTILS_GetText("game_result_white-mated");
+	else if (Result == "black-mated")
+		return UTILS_GetText("game_result_black-mated");
+	else if (Result == "stalemate")
+		return UTILS_GetText("game_result_stalemate");
+	else if (Result == "white-resigned")
+		return UTILS_GetText("game_result_white-resigned");
+	else if (Result == "black-resigned")
+		return UTILS_GetText("game_result_black-resigned");
+	else if (Result == "draw-agreement")
+		return UTILS_GetText("game_result_draw-agreement");
+	else if (Result == "draw-repetition")
+		return UTILS_GetText("game_result_draw-repetition");
+	else if (Result == "draw-fifty-moves")
+		return UTILS_GetText("game_result_draw-fifty-moves");
+	else if (Result == "draw-impossible-mate")
+		return UTILS_GetText("game_result_draw-impossible-mate");
+	else if (Result == "draw-timeover")
+		return UTILS_GetText("game_result_draw-timeover");
 }
