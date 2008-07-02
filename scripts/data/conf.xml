@@ -15,10 +15,10 @@
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>
 		<resource>ChessD</resource>
 		<search-component>vjud</search-component>
-		<match-component>match</match-component>
+		<match-component>chessd</match-component>
 		<conference-component>conference</conference-component>
-		<game-component>games</game-component>
-		<rating-component>rating</rating-component>
-		<admin-component>admin</admin-component>
+		<game-component>chessd</game-component>
+		<rating-component>chessd</rating-component>
+		<admin-component>chessd</admin-component>
 	</jabber>
 </conf>
