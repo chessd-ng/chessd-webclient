@@ -201,6 +201,8 @@ function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 	}
 	else
 	{
+//		if (NewType == "")
+//			NewType="user";
 		User.className = NewType+"_"+NewStatus;
 	}
 	
