@@ -6,7 +6,10 @@
 	display			: table;
 	position		: relative;
 	left			: 50%;
-	margin			: 35px 0px 0px -260px;
+	margin-top		: 35px;
+	margin-right		: 0px;
+	margin-bottom		: 0px;
+	margin-left		: -260px;
 }
 
 /**

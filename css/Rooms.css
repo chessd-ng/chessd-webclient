@@ -1,50 +1,67 @@
 
 /* Rooms */
 #Main #Left #Rooms {
-	position		: relative
+	border			: 2px solid #216778;
+	border-top		: 0px;
+	position		: relative;
+	height			: 320px;
 }
 
 #Main #Left #Rooms .Room {
-	border			: 2px solid #216778;
-	border-top		: 0px;
-	background-color: #FFF;
+	background-color	: #FFF;
+	padding-top		: 4px;
+	position		: relative;
+	/*
 	height			: 84mm;
-	padding-top:	1mm;
+	padding-top		: 1mm;
+	*/
 }
 
 /* Room title list */
 #Main #Left #Rooms #RoomList {
-	width			: 100%;
+	width			: 200px;
 	display			: table;
 	position		: relative;
-	background-color: #216778;
+	left			: -2px;
+	background-color	: #216778;
 }
 
 #Main #Left #Rooms #RoomList li {
 	position		: relative;
-	width			: 38%;
+	width			: 82px;
 	height			: 14px;
 	float 			: left;
 	list-style		: none;
 	padding			: 2px;
-	padding-left		: 3mm;
+	padding-left		: 4px;
 	font-weight		: bold;
 	font-size		: 11px;
 	color			: #FFF;
-	background-color: #216778;
-	border-right	: 1px solid #FFF;
-	margin-right	: 1px;
+	background-color	: #216778;
+	border-right		: 1px solid #FFF;
+	margin-right		: 1px;
 	cursor			: pointer;
+
+	/*
+	width			: 38%;
+	padding-left		: 3mm;
+	*/
 }
 
 
 #Main #Left #Rooms #RoomList .close {
 	position		: absolute;
-	right			: 3%;
-	top				: 25%;
-	width			: 11%;
-	height		:	43%;
+	right			: 3px;
+	top			: 5px;
+	width			: 10px;
+	height			: 8px;
 	cursor			: pointer;
+	/*
+	right			: 3%;
+	top			: 25%;
+	width			: 11%;
+	height			: 43%;
+	*/
 }
 
 #Main #Left #Rooms #RoomList .room_selec {
@@ -53,45 +70,62 @@
 
 #Main #Left #Rooms #RoomList .room_arrow {
 	width			: 18px;
-	height			: 4.8mm;
+	height			: 18px;
 	padding			: 0px;
 	position		: absolute;
 	right			: 2px;
 	overflow		: hidden;
 	border			: 0px;
 	border-left		: 1px solid #FFF;
+	/*
+	height			: 4.8mm;
+	*/
 }
 
 #Main #Left #Rooms .RoomInside {
-	padding-left	: 3mm;
+	padding-left		: 12px;
+	/*
+	padding-left		: 3mm;
+	*/
 }
 
 /* Room List menu */
 #Main #Left #Rooms #RoomListMenu {
 	position		: absolute;
 	left			: 100%;
+	width			: 105px;
+	height			: 120px;
+	border			: 2px solid #216778;
+	background-color	: #EAF5F4;
+	cursor			: pointer;
+	/*
+	left			: 100%;
 	width			: 28mm;
 	height			: 35mm;
-	border			: 2px solid #216778;
-	background-color: #EAF5F4;
-	cursor			: pointer;
+	*/
 }
 
 #Main #Left #Rooms #RoomListMenu li:hover {
-	background-color: #FFF;
+	background-color	: #FFF;
 }
 
 #Main #Left #Rooms #RoomListMenu ul {
 	padding			: 5px 10px;
-	height			: 32mm;
+	height			: 120px;
 	overflow		: auto;
+	/*
+	height			: 32mm;
+	*/
 }
 
 #Main #Left #Rooms #RoomListMenu li {
 	list-style		: none;
-	margin-bottom	: 1mm;
+	margin-bottom		: 4px;
 	font-size		: 11px;
 	color			: #216778;
+	/*
+	margin-bottom		: 1mm;
+	*/
 }
 
 /* User list */
@@ -142,24 +176,29 @@
 	width			: 2mm;
 	text-align		: right;
 }
-*/
 #Main #Left #Rooms hr {
 	height			: 1px;
 	margin			: 0.5mm 4mm 2mm 0mm;
 	background-color: #FFA200;
 	border			: 0px;
 }
+*/
 
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
+	border			: 1px solid #216778;
+	border-bottom		: 0px;
+	padding			: 2px;
+	margin-right		: 12px;
+	height			: 130px;
+	width			: 164px;
+	overflow		: auto;
+	margin-top		: 5px;
+	/*
+	margin-right		: 3mm;
 	height			: 35mm;
 	width			: 89%;
-	border			: 1px solid #216778;
-	border-bottom	: 0px;
-	padding			: 2px;
-	margin-right	: 3mm;
-	overflow		: auto;
-	margin-top	:	5px;
+	*/
 }
 
 #Main #Left #Rooms .Room .MessageList li {
@@ -171,28 +210,42 @@
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
-	width			: 89%;
 	padding			: 2px;
 	font-size		: 12px;
 	color			: #216778;
-	margin-bottom	: 1mm;
+	width			: 164px;
+	margin-bottom		: 4px;
+	/*
+	width			: 89%;
+	margin-bottom		: 1mm;
+	*/
 }
 
 /* Emoticons */
 #Main #Left #Rooms .Room .emoticon {
-	margin-left		: 81%;
+	position		: relative;
+	margin-left		: 145px;
 	cursor			: pointer;
+	/*
+	margin-left		: 81%;
+	*/
 }
 
 #Main #Left #Rooms .Room #EmoticonDiv {
 	position		: absolute;
 	left			: 100%;
-	top				: 50mm;
+	top			: 150px;
+	width			: 145px;
+	height			: 150px;
+	border			: 1px solid #216778;
+	background-color	: #FFF;
+	overflow		: auto;
+	/*
+	left			: 100%;
+	top			: 50mm;
 	width			: 75%;
 	height			: 44%;
-	border			: 1px solid #216778;
-	background-color: #FFF;
-	overflow		: auto;
+	*/
 }
 
 #Main #Left #Rooms .Room #EmoticonList li {
@@ -215,40 +268,40 @@
 }
 
 #CancelRoomDiv #TextDiv{
-	padding-top		:	30px;
-	position		:	relative;
+	padding-top		: 30px;
+	position		: relative;
 	text-align		: center;
 }
 
 #CancelRoomDiv #TextDiv p {
-	font-weight	:	normal;
-	font-size		:	13px;
+	font-weight		: normal;
+	font-size		: 13px;
 }
 
 #CreateRoomDiv #OptionsDiv {
-	padding-top		:	10px;
-	position			:	relative;
+	padding-top		: 10px;
+	position		: relative;
 	text-align		: left;
-	padding-left	:	26px;
+	padding-left		: 26px;
 }
 
 #CreateRoomDiv #OptionsDiv p {
-	padding-top		:	10px;
-	padding-bottom	: 3px;
+	padding-top		: 10px;
+	padding-bottom		: 3px;
 }
 
 #CreateRoomDiv #ButtonsDiv {
-	position		:	relative;
-	padding-top	: 30px;
-	padding-bottom	: 5px;
-	text-align	: center;
+	position		: relative;
+	padding-top		: 30px;
+	padding-bottom		: 5px;
+	text-align		: center;
 }
 
 #CancelRoomDiv #ButtonsDiv {
-	position		:	relative;
-	padding-top	: 40px;
-	padding-bottom	: 20px;
-	text-align	: center;
+	position		: relative;
+	padding-top		: 40px;
+	padding-bottom		: 20px;
+	text-align		: center;
 }
 
 /**
@@ -256,9 +309,9 @@
 */
 #RoomFullNameDiv {
 	position		: absolute;
-	width			: 3%;
-	padding			: 1mm;
-	background-color: #FFF;
+	/*width			: 3%;*/
+	padding			: 4px;
+	background-color	: #FFF;
 	border			: 1px solid #216778;
 }
 
@@ -267,6 +320,6 @@
 	font-size		: 10px;
 	color			: #216778;
 	cursor			: pointer;
-	margin-bottom	: 1px;
+	margin-bottom		: 1px;
 }
 

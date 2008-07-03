@@ -6,15 +6,19 @@
 	border			: 1px solid #216778;
 	border-top		: 0px;
 	background-color: #FFF;
-	width			: 28mm;
-	height			: 26mm;
-	padding			: 1mm;
+	width			: 105px;
+	/*height			: 26mm;*/
+	height			: 100px;
+	padding			: 4px;
 	overflow-x	:	hidden;
 	overflow-y	:	auto;
 }
+
+/*
 #Page #ChallengeMenuDiv{
 	position		: absolute;
-	/*right			: 25mm;*/
+	right			: 25mm;
+	top 			: 19.0mm;
 	top 			: 19.0mm;
 	border			: 1px solid #216778;
 	border-top		: 0px;
@@ -23,9 +27,11 @@
 	height			: 26mm;
 	padding			: 1mm;
 }
+*/
 
 #Page #GameRoomMenuDiv {
-	width			: 13%;
+	/*width			: 13%;*/
+	width			: 166px;
 }
 
 #Page #RoomMenuDiv p,
@@ -44,7 +50,8 @@
 #Page #RoomMenuDiv ul,
 #Page #ChallengeMenuDiv ul
 {
-	height			: 17.5mm;
+	/*height			: 17.5mm;*/
+	height			: 70px;
 	list-style		: none;
 	overflow		: auto;
 }

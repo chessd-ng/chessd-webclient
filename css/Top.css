@@ -17,6 +17,7 @@
 
 #Top #TopMenu {
 	float			: right;
+	width			: 525px;
 }
 
 #Top ul {
@@ -32,8 +33,12 @@
 /* icons menu */
 #Top .icons {
 	position		: relative;
+	/*
 	height			: 15mm;
 	top			: 3mm;
+	*/
+	height			: 60px;
+	top			: 10px;
 	width			: 85%;
 	left			: 12%;
 }
@@ -42,14 +47,16 @@
 	overflow		: hidden;
 	width			: 35px;
 	height			: 35px;
-	margin			: 1mm 0mm 0mm 9mm;
+	/*margin		: 1mm 0mm 0mm 9mm;*/
+	margin			: 4px 0px 0px 35px;
 }
 
 #Top #ExitText
 {
 	text-align		: center;
 	font-weight		: bold;
-	font-size		: 2.8mm;
+	font-size		: 10px;
+	/*font-size		: 2.8mm;*/
 	position		: relative;
 	margin-left		: 50%;
 	left			: -25%;
@@ -89,7 +96,7 @@
 	background		: url('../images/exit.png') no-repeat;
 	width			: 46px;
 	color			: #216778;
-	margin-top : 2.5%;
+	margin-top 		: 10px;
 }
 
 #Top .icons .exit:hover {
