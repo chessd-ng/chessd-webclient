@@ -37,7 +37,8 @@ function UTILS_IdentifyBrowser()
 	{
 		// Code from:
 		// http://www.javascriptkit.com/javatutors/navigator.shtml
-		if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))
+		if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
+		   (/Iceweasel[\/\s](\d+\.\d+)/.test(navigator.userAgent)))
 		{ //test for Firefox/x.x or Firefox x.x (ignoring remaining digits);
 			// capture x.x portion and store as a number
 			var ffversion=new Number(RegExp.$1)
