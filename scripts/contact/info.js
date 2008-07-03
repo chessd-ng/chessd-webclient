@@ -68,10 +68,7 @@ function CONTACT_HandleType(NodeList)
 		Type = NodeList[i].getAttribute('type');
 
 		// Set type on sctructure
-		if (Type != "user")
-		{
 			CONTACT_SetUserType(Jid, Type);
-		}
 	}
 }
 

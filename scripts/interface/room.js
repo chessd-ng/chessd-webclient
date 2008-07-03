@@ -697,10 +697,9 @@ function INTERFACE_CloseRoomFullName()
 *
 * @public
 */
-function INTERFACE_CloseRoom()
+function INTERFACE_CloseRoom(RoomName)
 {
-	var RoomName;
-	var NodeParent, Node;
+	var NodeParent, Node, Div;
 
 	// Find element
 	Node = document.getElementById("RoomSecondary");
@@ -710,8 +709,9 @@ function INTERFACE_CloseRoom()
 		return null;
 	}
 
-	// Getting room name
-	RoomName = Node.innerHTML;
+	// Remove room's div
+	Div = document.getElementById("Room_"+RoomName);
+	Div.parentNode.removeChild(Div);
 
 	// Remove from change room bar
 	NodeParent = Node.parentNode;

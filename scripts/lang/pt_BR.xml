@@ -208,7 +208,7 @@
 		<game_button_first>Início</game_button_first>
 		<game_button_prev>Anterior</game_button_prev>
 		<game_button_next>Próximo</game_button_next>
-		<game_button_last>Ótimo</game_button_last>
+		<game_button_last>Fim</game_button_last>
 
 		<game_oldgame_alert>Você não pode ver um jogo antigo enquanto estiver jogando ou observando uma partida.</game_oldgame_alert>
 	</game>
