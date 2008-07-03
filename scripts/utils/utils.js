@@ -365,7 +365,7 @@ function UTILS_ReturnKeyCode(event)
 {
 	var KeyNum;
 
-	if(MainData.Browser != 1) // IE
+	if(MainData.Browser == 0) // IE
 	{
 		KeyNum = window.event.keyCode;
 	}
