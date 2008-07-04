@@ -35,13 +35,19 @@ function PARSER_ParsePresence(XML)
 	}
 
 	// Room presence
-	if (Jid.match(/.*conference.*/) || (Jid.match(/.*games.*/)))
+	if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	//if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	{
 		Buffer += ROOM_HandleRoomPresence(XML);
-		Buffer += CONTACT_HandleOnlinePresence(XML);
-		Buffer += CHALLENGE_HandlePresence(XML);
-		Buffer += CHAT_HandlePresence(XML);
+		
+		// Presence from general room
+		if(Jid.split("@")[0] == MainData.RoomDefault)
+		{
+			Buffer += CONTACT_HandleOnlinePresence(XML);
+			Buffer += CHALLENGE_HandlePresence(XML);
+			Buffer += CHAT_HandlePresence(XML);
+		}
+
 		return Buffer;
 	}
 	// User presence
