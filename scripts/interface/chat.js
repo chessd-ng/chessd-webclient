@@ -79,16 +79,16 @@ function INTERFACE_OpenChat(Username, Status)
 function INTERFACE_ShowChat(Item, Hide)
 {
 	/*
-	if(MainData.Browser == 1)
-	{
-		Item.style.top = "-40mm";
-	}
-	else
+	if(MainData.Browser == 0)
 	{
 		Item.style.top = "-60mm";
 	}
+	else
+	{
+		Item.style.top = "-40mm";
+	}
 	*/
-	Item.style.top = "-40mm";
+	Item.style.top = "-155px";
 	Hide.style.display = "block";
 }
 

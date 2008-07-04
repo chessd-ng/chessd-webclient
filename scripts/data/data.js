@@ -106,6 +106,7 @@ function DATA(ConfFile, LangFile)
 	
 	this.ProfileList = new Array();
 	this.MyProfile = new Object();
+	this.Photo = null;
 	
 	this.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Const = DATA_SetConsts();

@@ -1,17 +1,23 @@
 #Main #Left #Contact {
-	margin-bottom: 5%;
+	/*
+	margin-bottom		: 5%;
 	height			: 52mm;
+	*/
+	margin-bottom		: 5px;
+	height			: 200px;
 }
 
 #Main #Left #Contact #ContactTitle {
 	font-weight		: bold;
 	font-size		: 11px;
 	color			: #FFF;
-	padding			: 1mm 0mm 0mm 0mm;
+	/*padding		: 1mm 0mm 0mm 0mm;*/
+	padding			: 4px 0px 0px 0px;
 	display			: table;
 	list-style		: none;
 	position		: relative;
-	width			: 102%;
+	/*width			: 102%;*/
+	width			: 205px;
 }
 
 #Main #Left #Contact #ContactTitle li {
@@ -19,9 +25,12 @@
 	cursor			: pointer;
 	float			: left;
 	height			: 14px;
+	/*
 	width			: 42%;
 	padding			: 2px 2px 2px 3mm;
-	margin-right		: 1px;
+	*/
+	width			: 86px;
+	padding			: 2px 2px 2px 12px;
 }
 
 
@@ -31,8 +40,12 @@
 
 #Main #Left #Contact #ContactInside ,
 #Main #Left #Contact #ContactOnline {
+	/*
 	padding-top		: 1mm;
 	padding-left		: 2mm;
+	*/
+	padding-top		: 4px;
+	padding-left		: 8px;
 	border			: 2px solid #216778;
 	border-top		: 0px;
 	background-color	: #FFF;
@@ -40,6 +53,7 @@
 }
 
 /* User list */
+/*
 #Main #Left #Contact #Contacts {
 	display			: block;
 	height			: 33mm;
@@ -54,23 +68,27 @@
 	border-spacing		: 0px;
 	width			: 44mm;
 }
-
+*/
 #Main #Left #Contact label {
 	display			: block;
 	font-weight		: bold;
 	font-size		: 12px;
 	color			: #216778;
-	margin			: 1mm 0mm 0.5mm 0mm;
+	margin			: 4px 0px 2px 0px;
 	cursor			: pointer;
 }
 
 #Main #Left #Contact tr {
 	display			: block;
-	text-indent		: 5mm;
+	text-indent		: 20px;
+	width			: 160px;
 	margin			: 1px 0px;
-	width			: 42mm;
 	font-size		: 11px;
 	color			: #000;
+	/*
+	text-indent		: 5mm;
+	width			: 42mm;
+	*/
 }
 
 #Main #Left #Contact td:hover {
@@ -80,31 +98,43 @@
 
 #Main #Left #Contact td {
 	height			: 17px;
-	width			: 76%;
+	width			: 115px;
 	text-align		: left;
 	float		: left;
+	/*
+	width			: 76%;
+	*/
 }
 
 #Main #Left #Contact .rating {
-	width			: 2mm;
+	width			: 8px;
 	text-align		: right;
+	/*
+	width			: 2mm;
+	*/
 }
 
 #Main #Left #Contact hr {
 	height			: 1px;
-	margin			: 0.5mm 4mm 0mm 0mm;
-	background-color: #FFA200;
+	margin			: 2px 15px 0px 0px;
+	background-color	: #FFA200;
 	border			: 0px;
+	/*
+	margin			: 0.5mm 4mm 0mm 0mm;
+	*/
 }
 
 #Main #Left #Contact #ListDiv {
 	overflow-y		: auto;
 	overflow-x		: hidden;
+	height			: 120px;
+	/*
 	height			: 32mm;
+	*/
 }
 
 #Main #Left #Contact #ContactInside div .UserList .UserTable{
-	margin-top		:	0mm;
+	margin-top		: 0mm;
 }
 
 /**
@@ -221,8 +251,8 @@
 
 /* Search user */
 #Main #Left #Contact #contact_search_user {
-	border-bottom:	1px solid #216778;
-	text-decoration	: none;
+	border-bottom		: 1px solid #216778;
+	text-decoration		: none;
 	font-style		: italic;
 	font-size		: 10px;
 	color			: #216778;
@@ -231,14 +261,19 @@
 
 #Main #Left #Contact #contact_search_user:hover {
 	color			: #FFA200;
-	border-bottom:	1px solid #FFA200;
+	border-bottom		: 1px solid #FFA200;
 }
 
 #Main #Left #Contact .contact_search_user_p {
-	text-align: center;
-	padding-top:	3%;
-	padding-right:	7%;
-	padding-bottom: 3%;
+	text-align		: center;
+	padding-top		: 5px;
+	padding-right		: 14px;
+	padding-bottom		: 5px;
+	/*
+	padding-top		: 3%;
+	padding-right		: 7%;
+	padding-bottom		: 3%;
+	*/
 }
 
 /**
@@ -246,10 +281,14 @@
 */
 #UserMenuDiv {
 	position		: absolute;
-	width			: 35mm;
-	padding			: 1mm;
+	width			: 120px;
+	padding			: 4px;
 	background-color: #FFF;
 	border			: 1px solid #216778;
+	/*
+	width			: 35mm;
+	padding			: 1mm;
+	*/
 }
 
 #UserMenuDiv p {
@@ -257,11 +296,11 @@
 	font-size		: 10px;
 	color			: #216778;
 	cursor			: pointer;
-	margin-bottom	: 1px;
+	margin-bottom		: 1px;
 }
 
 #UserMenuDiv p:hover {
-	background-color: #EAF5F4;
+	background-color	: #EAF5F4;
 }
 
 #UserMenuDiv .option_disabled {
@@ -273,53 +312,53 @@
 */
 
 #InviteDiv {
-	padding-top	:	30px;
+	padding-top		: 30px;
 }
 
 #InviteDiv #TextDiv span {
-	font-size 	: 11px;
-	font-weight	:	normal;
-	color				: #216778;
+	font-size 		: 11px;
+	font-weight		: normal;
+	color			: #216778;
 }
 
 #InviteDiv #TextDiv .username {
-	font-size 	: 13px;
-	font-weight	:	bold;
+	font-size 		: 13px;
+	font-weight		: bold;
 }
 
 #InviteDiv #ButtonsDiv {
-	padding-top : 30px;
-	padding-bottom : 5px;
-	text-align	: center;
+	padding-top 		: 30px;
+	padding-bottom 		: 5px;
+	text-align		: center;
 	position		: relative;
 }
 
 #InviteDiv #TextDiv {
-	text-align	: center;
+	text-align		: center;
 	position		: relative;
 }
 
 #SearchUserDiv {
-	padding-top	:	15px;
+	padding-top		: 15px;
 }
 
 #SearchUserDiv span {
-	padding-top	:	20px;
-	margin-right: 10px;
-	font-size 	: 13px;
-	margin-right: 10px;
-	font-weight	:	bold;
-	color				: #216778;
+	padding-top		: 20px;
+	margin-right		: 10px;
+	font-size 		: 13px;
+	margin-right		: 10px;
+	font-weight		: bold;
+	color			: #216778;
 }
 
 #SearchUserDiv tr {
-	cursor			:	pointer;
-	font-size 	: 12px;
-	color				: #216778;
+	cursor			: pointer;
+	font-size 		: 12px;
+	color			: #216778;
 }
 
 #SearchUserDiv td {
-	width					:	160px;
+	width			: 160px;
 }
 
 #SearchUserDiv td:hover {
@@ -328,50 +367,50 @@
 }
 
 #SearchUserDiv .header {
-	color				: #216778;
+	color			: #216778;
 }
 
 #SearchUserDiv .no_found {
-	padding-left	:	5px;
-	font-size 	: 10px;
+	padding-left		: 5px;
+	font-size 		: 10px;
 }
 
 #SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
-	padding-left	:	8%;
+	padding-left		: 8%;
 }
 
 #SearchUserDiv #OptionDiv {
-	padding-top	:	6mm;
-	padding-left	:	4mm;
+	padding-top		: 6mm;
+	padding-left		: 4mm;
 }
 
 #SearchUserDiv .label {
-	margin-top	:	5px;
-	font-size	:	11px;
-	font-weight	:	normal;
+	margin-top		: 5px;
+	font-size		: 11px;
+	font-weight		: normal;
 }
 
 #SearchUserDiv #ListDiv {
-	text-align 	:	left;
-	margin-left	:	8%;
-	width					:	90%;
-	display				:	block;
-	overflow			:	auto;
-	height				:	58px;
+	text-align 		: left;
+	margin-left		: 8%;
+	width			: 90%;
+	display			: block;
+	overflow		: auto;
+	height			: 58px;
 }
 
 #SearchUserDiv input{
-	margin-top	:	5px;
+	margin-top		: 5px;
 }
 
 #SearchUserDiv #ButtonsDiv .button {
-	margin-left:	10px;
+	margin-left		: 10px;
 }
 
 #SearchUserDiv #ButtonsDiv {
-	padding-top : 30px;
-	padding-right	:	10px;
-	text-align	: center;
+	padding-top 		: 30px;
+	padding-right		: 10px;
+	text-align		: center;
 	position		: relative;
 }

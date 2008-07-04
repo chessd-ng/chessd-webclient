@@ -16,10 +16,17 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong{
 #Page {
 	position		: relative;
 	min-width		: 780px;
-	height			: 185mm;
+	/*height			: 185mm;*/
+	height			: 700px;
 }
 
 #Main #Center {
+	/*
 	margin-left		: 55mm;
 	height			: 150mm;
+	*/
+
+	margin-left		: 15px;
+	height			: 550px;
+	overflow		: hidden;
 }

@@ -2,15 +2,21 @@
 	position		: absolute;
 	bottom			: 0px;
 	right			: 0px;
-	height			: 4.5mm;
+	height			: 18px;
 	width			: 100%;
+	/*
+	height			: 4.5mm;
+	*/
 }
 
 /* chat list */
 #Chat #ChatList {	
 	list-style		: none;
 	height			: 100%;
+	margin-left		: 205px;
+	/*
 	margin-left		: 55mm;
+	*/
 }
 
 #Chat #ChatList li {
@@ -21,58 +27,87 @@
 
 /* chat title */
 #Chat #ChatList .title {
-	height			: 4mm;
 	background-color: #216778;
 	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
-	text-indent		: 3mm;
+	height			: 16px;
+	text-indent		: 12px;
 	position		: relative;
-	padding-top	: 1%;
+	padding-top		: 2px;
+	/*
+	height			: 4mm;
+	text-indent		: 3mm;
+	*/
 }
 
 #Chat #ChatList .title_selec {
-	height			: 4mm;
-	background-color: #FFA200;
+	background-color	: #FFA200;
 	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
-	text-indent		: 3mm;
+	text-indent		: 12px;
+	height			: 16px;
 	position		: relative;
-	padding-top	: 1%;
+	padding-top		: 2px;
+	/*
+	text-indent		: 3mm;
+	height			: 4mm;
+	*/
 }
 
 #Chat #ChatInner {
 	padding			: 3px;
 	border			: 1px solid #216778;
-	height			: 38mm;
+	height			: 145px;
 	position		: relative;
+	/*
+	height			: 38mm;
+	*/
 }
 
 #Chat .minimize {
-	padding-top: 1.1%;
-	padding-right: 7%;
-	width : 7%;
-	height: 15%;
+	padding-top		: 6px;
+	padding-right		: 15px;
+	width 			: 15px;
+	height			: 4px;
+	/*
+	padding-top		: 1.1%;
+	padding-right		: 7%;
+	width 			: 7%;
+	height			: 15%;
+	*/
 }
 
 #Chat .maximize {
-	padding-right: 7%;
-	width : 6%;
-	height: 45%;
+	padding-right		: 15px;
+	width 			: 15px;
+	height			: 6px;
+	/*
+	padding-right		: 7%;
+	width 			: 6%;
+	height			: 45%;
+	*/
 }
 #Chat .close {
-	width : 4%;
-	height: 55%;
+	width 			: 10px;
+	height			: 10px;
+	/*
+	width 			: 4%;
+	height			: 55%;
+	*/
 }
 
 /* chat icons */
 #Chat #ChatList .title img,
 #Chat #ChatList .title_selec img {
 	position		: absolute;
-	right			: 1mm;
+	right			: 4px;
 	top			: 4px;
 	cursor			: pointer;
+	/*
+	right			: 1mm;
+	*/
 }
 
 /* chat box */
@@ -83,8 +118,11 @@
 
 #Chat #ChatList li ul {
 	border			: 1px solid #216778;
-	height			: 31mm;
+	height			: 118px;
 	overflow		: auto;
+	/*
+	height			: 31mm;
+	*/
 }
 
 #Chat #ChatList li ul li {
@@ -102,8 +140,13 @@
 	font-size		: 11px;
 	color			: #216778;
 	padding			: 2px 0px;
+	position		: relative;
+	margin-top		: 4px;
+	height			: 16px;
+	top			: 0px;
+	/*
 	margin-top		: 1mm;
 	height			: 4mm;
-	position		: relative;
 	top			: 0mm;
+	*/
 }

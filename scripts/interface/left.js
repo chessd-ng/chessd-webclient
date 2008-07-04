@@ -54,18 +54,14 @@ function INTERFACE_CreateUserBox()
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img","UserImg");
 	UserImg.title = MainData.Username;
-	UserImg.src = "images/no_photo.png";
 
-	try 
+	if (MainData.Photo == null)
 	{
-		// If user dont have received profile photo yet
-		if (MainData.Photo == undefined)
-			throw "No_Photo";
-
-		UserImg.src = MainData.Photo;
-	}
-	catch (e) {
 		UserImg.src = "images/no_photo.png";
+	}
+	else
+	{
+		UserImg.src = MainData.Photo;
 	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");

@@ -18,11 +18,18 @@
 	margin			: 0.5mm;
 	background		: url("../images/ie/logo.gif") no-repeat;
 }
+
+#Top .icons li {
+	margin			: 4px 0px 0px 30px;
+}
+
 /*
 #Top .icons{
 	left			: 73mm;
 	width			: 68mm;
 }
+
+
 */
 #Top .icons .search_game {
 	background              : url('../images/ie/search_game.gif') no-repeat;
@@ -50,8 +57,10 @@
 
 #Top #TopMenu{
 	right			: 0px;
+	/*
 	width			: 140.5mm;
 	height			: 20.5mm;
+	*/
 }
 
 
@@ -181,6 +190,7 @@
 	background-image	: url("../images/ie/pieces/bpawn.gif");
 }
 
+/*
 #InfoTab1{
 	width			: 24mm;
 }
@@ -192,7 +202,7 @@
 #GameOptionsDiv select{
 	height			: 5mm;
 }
-
+*/
 /*Chat.css*/
 #Chat{
 	height			: 4.5mm;

@@ -65,10 +65,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	Offset = Size / 2;
 	OffsetBoard = UTILS_GetOffset(MainData.CurrentGame.Game.Board);
 
+
 	// Add half of the piece size and others elements margin and borders
 	OffsetTop = OffsetBoard.Y + Offset + 38 + BoardPieceOffset.y;
 	OffsetLeft = OffsetBoard.X + Offset - 257 + BoardPieceOffset.x;
 	
+	//alert(OffsetTop +" = " +OffsetBoard.Y +" + "+ Offset+" + 38 + "+BoardPieceOffset.y +"\n"+OffsetLeft +" = " +OffsetBoard.X +" + "+ Offset+" + 257 + "+BoardPieceOffset.x);
+
 	// Drag piece
 	if(document.body.onmouseup == null) // Quick fix to not use global variable
 	{
