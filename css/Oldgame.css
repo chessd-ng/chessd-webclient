@@ -46,7 +46,7 @@
 #OldGamesDiv #ResultDiv #TableDiv {
 	text-align : center;
 }
-
+/*
 #OldGamesDiv #ResultDiv #THeadDiv {
 	width:	95%;
 	background-color: #EAF5F4;
@@ -56,18 +56,17 @@
 	font-size: 13px;
 	font-weight: bold;
 }
-
+*/
 #OldGamesDiv #ResultDiv #TBodyDiv {
-	width:	95%;
+	width:	465px;
 	border : solid thin;
 	border-color: Teal;
 	overflow-x : hidden;
 	overflow-y : auto;
-	max-height: 35mm;
-	border-top-width: 0mm;
+	border-top-width: 1px;
 	border-bottom-width: 0mm;
 	border-left-width: 1px;
-	border-right-width: 1px;
+	border-right-width: 0px;
 }
 
 #OldGamesDiv #ResultDiv {
@@ -76,12 +75,12 @@
 }
 
 #OldGamesDiv #ResultDiv #TFootDiv {
-	width:	95%;
+	width:	464px;
 	border : solid thin;
 	border-color: Teal;
 	text-align : center;
-	padding-top:1mm;
-	padding-bottom:2mm;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	border-top-width: 0mm;
 }
 
@@ -144,10 +143,11 @@
 	font-weight	:	normal;
 }
 
-#OldGamesDiv .header {
+#OldGamesDiv thead {
 	background-color: #EAF5F4;
 	font-weight		: bold;
 	font-size	:	12px;
+	border			: 1px solid #216778;
 }
 
 #OldGamesDiv tbody,
@@ -159,13 +159,14 @@
 	empty-cells		: show;
 }
 
-#OldGamesDiv th, 
 #OldGamesDiv td {
 	border			: 1px solid #216778;
 	font-size		: 10px;
 	color			: #216778;
 	background-color: #FFF;
 	text-align		: center;
+	width	:	80px;
+	padding : 1px;
 }
 
 #OldGamesDiv p {
@@ -191,42 +192,18 @@
 	border-color : #FFA200;
 }
 
-#OldGamesDiv .player1header {
-	position: relative;
-	margin-left: -9%;
+#OldGamesDiv #ResultDiv #TBodyDiv .header {
+	background-color: #EAF5F4;
+	font-size	:	12px;
 }
-#OldGamesDiv .player2header {
-	position: relative;
-	margin-left: 5%;
-}
-#OldGamesDiv .dateheader {
-	position: relative;
-	margin-left: 6%;
-}
-#OldGamesDiv .catheader {
-	position: relative;
-	margin-left: 8%;
-}
-#OldGamesDiv .resultheader {
-	position: relative;
-	margin-left: 12%;
-}
-
-#OldGamesDiv .player1td,
-#OldGamesDiv .player2td {
-	width: 15%;
-}
-
-#OldGamesDiv .datetd {
-	width: 12%;
-}
-
-#OldGamesDiv .cattd {
-	width: 18%;
+#OldGamesDiv #ResultDiv #TBodyDiv .resultheader {
+	background-color: #EAF5F4;
+	font-size	:	13px;
+	width: 130px;
 }
 
 #OldGamesDiv .resulttd {
-	width : 26%;
+	width: 130px;
 }
 
 #OldGamesDiv #L2RightDiv #FromDiv {

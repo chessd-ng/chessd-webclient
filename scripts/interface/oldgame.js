@@ -64,7 +64,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var TableDiv;
 	var THead, TPlayer1Label, TPlayer2Label, TDateLabel, TResultLabel, TCategoryLabel;
 	var TBodyDiv,TBody, Table; 
-	var TFoot, Hr, Prev, PageLabel, Next;
+	var TFoot, Hr, Prev, PageLabel, Next, Tr,Td;
 	
 	var NoResultDiv;
 	var NoFound;
@@ -214,19 +214,28 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// Table Div
 	TableDiv = UTILS_CreateElement('div','TableDiv');
 
-	// THead Div
-	THead = UTILS_CreateElement('div','THeadDiv');
-	TPlayer1Label = UTILS_CreateElement('span',null,'player1header',UTILS_GetText('oldgame_player1_hd'));
-	TPlayer2Label = UTILS_CreateElement('span',null,'player2header',UTILS_GetText('oldgame_player2_hd'));
-	TDateLabel =UTILS_CreateElement('span',null,'dateheader',UTILS_GetText('oldgame_date'));
-	TCategoryLabel = UTILS_CreateElement('span',null,'catheader',UTILS_GetText('oldgame_category'));
-	TResultLabel = UTILS_CreateElement('span',null,'resultheader',UTILS_GetText('oldgame_result'));
 
 	// TBody Div
 	TBodyDiv = UTILS_CreateElement('div','TBodyDiv');
 	
 	// Table
 	Table = UTILS_CreateElement('table');
+
+	THead = UTILS_CreateElement('thead');
+	Tr = UTILS_CreateElement('tr');
+		TPlayer1Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_player1_hd'));
+		Tr.appendChild(TPlayer1Label);
+		TPlayer2Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_player2_hd'));
+		Tr.appendChild(TPlayer2Label);
+		TDateLabel =UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_date'));
+		Tr.appendChild(TDateLabel);
+		TCategoryLabel = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_category'));
+		Tr.appendChild(TCategoryLabel);
+		TResultLabel = UTILS_CreateElement('td',null,'resultheader',UTILS_GetText('oldgame_result'));
+		Tr.appendChild(TResultLabel);
+	THead.appendChild(Tr);
+	Table.appendChild(THead);
+
 	TBody = UTILS_CreateElement('tbody');
 	Table.appendChild(TBody);
 
@@ -241,7 +250,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Next.type = "button";
 	Next.value = UTILS_GetText("oldgame_next");
 
-	TFoot.appendChild(Hr);
+//	TFoot.appendChild(Hr);
 	TFoot.appendChild(Prev);
 	TFoot.appendChild(PageLabel);
 	TFoot.appendChild(Next);
@@ -314,17 +323,17 @@ function INTERFACE_ShowOldGameWindow(Id)
 	ButtonsDiv.appendChild(NewSearch);
 
 	// THead Div
-	THead.appendChild(TPlayer1Label);
-	THead.appendChild(TPlayer2Label);
-	THead.appendChild(TDateLabel);
-	THead.appendChild(TCategoryLabel);
-	THead.appendChild(TResultLabel);
+//	THead.appendChild(TPlayer1Label);
+//	THead.appendChild(TPlayer2Label);
+//	THead.appendChild(TDateLabel);
+//	THead.appendChild(TCategoryLabel);
+//	THead.appendChild(TResultLabel);
 
 	// TBody
 	TBodyDiv.appendChild(Table);
 	
 	// Table Div
-	TableDiv.appendChild(THead);
+//	TableDiv.appendChild(THead);
 	TableDiv.appendChild(TBodyDiv);
 	TableDiv.appendChild(TFoot);
 
@@ -391,9 +400,9 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 	var Tr, Td;
 	
 	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'player1td',White);
+		Td = UTILS_CreateElement('td',null,'player1td',UTILS_BreakString(White,14));
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'player2td',Black);
+		Td = UTILS_CreateElement('td',null,'player2td',UTILS_BreakString(Black,14));
 		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'datetd',Date);
 		Tr.appendChild(Td);
@@ -506,7 +515,7 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	// Append new results
 	for(i=0; i<GameLen ; i++)
 	{
-			this.TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].date, GameList[i].gametype,  GameList[i].wintype, GameList[i].id));
+		this.TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].date, GameList[i].gametype,  GameList[i].result, GameList[i].id));
 	}
 	this.Page.innerHTML = Start+" - "+End;
 	// Set buttons class

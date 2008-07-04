@@ -263,6 +263,45 @@ function UTILS_Capitalize(Word)
 }
 
 /**
+* Break a string putting a ' ' character at multiples of NumChar
+*
+* @param Word
+* 	String to be break
+* @param NumChars
+* 	max length of string
+* @return String
+* @author Danilo Kiyoshi Simizu Yorinori
+*
+*/
+function UTILS_BreakString(Word, NumChars)
+{
+	var ShortWord=" ", Part;
+	var NumChs;
+
+	if(NumChars != null)
+	{
+		NumChs = NumChars;
+	}
+	else
+	{
+		NumChs = 5;
+	}
+
+	if (Word.length < NumChs)
+		ShortWord = Word;
+	else {
+		while (Word.length > NumChs)
+		{
+			Part = Word.slice(0,NumChs);
+			Word = Word.slice(NumChs);
+			ShortWord = ShortWord + " " + Part;
+		}
+		ShortWord = ShortWord + " " + Word;
+	}
+	return ShortWord;
+}
+
+/**
 * Short a word
 */
 function UTILS_ShortString(Word, NumChars)
