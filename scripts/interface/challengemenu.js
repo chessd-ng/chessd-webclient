@@ -279,12 +279,11 @@ function INTERFACE_RemoveAnnounce(MatchId)
 
 function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 {
-	//var Item = UTILS_CreateElement("li",null,Oponent.Color);
-	var Item = UTILS_CreateElement("li",null,"offline");
-
+	var Item;
 	var PName, PCategory, PDate, PButton;
 	var ItemObj = new Object();
 
+	Item = UTILS_CreateElement("li",null,Oponent.Color);
 	PName = UTILS_CreateElement("p","name",null,Oponent.Name);
 	PCategory = UTILS_CreateElement("p","category",null,Category);
 	PDate = UTILS_CreateElement("p","date",null,Date);
@@ -367,7 +366,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			else
 			{
 				//Item.className = ItemObj.OponentColor;
-				Item.className = "undefined";
+				Item.className = this.PostponeList[i].OponentColor;
 				Button.className = "accept";
 				Button.onclick = function(){
 					CHALLENGE_SendResumeGame(Id);

@@ -52,14 +52,14 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2 = new Object();
 
 			Player1.Name = Players[0].getAttribute("jid").split("@")[0];
-			Player1.Color= "undefined";
-			Player1.Time = 0;
-			Player1.Inc = 0;
+			Player1.Color= Players[0].getAttribute("role");
+			Player1.Time = Players[0].getAttribute("time");
+			Player1.Inc  = Players[0].getAttribute("inc");
 
 			Player2.Name = Players[1].getAttribute("jid").split("@")[0];
-			Player2.Color= "undefined";
-			Player2.Time = 0;
-			Player2.Inc = 0;
+			Player2.Color= Players[1].getAttribute("role");
+			Player2.Time = Players[1].getAttribute("time");
+			Player2.Inc  = Players[1].getAttribute("inc");
 
 			if(Player1.Name == MainData.Username)
 			{
