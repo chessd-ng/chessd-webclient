@@ -48,6 +48,8 @@ function INTERFACE_ShowChatMessage(Username, Message, YourMessage)
 	Node.appendChild(Item);
 	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
 
+	INTERFACE_FocusChat(Username);
+
 	return true;
 }
 
@@ -164,6 +166,27 @@ function INTERFACE_UnfocusChat(Username)
 	return true;
 }
 
+function INTERFACE_ChatChangeStatus(Username, Status)
+{
+	var Node = document.getElementById("ChatTitle_"+Username);
+
+	if (!Node)
+	{
+		return null;
+	}
+
+	if(Status == "online")
+	{
+		Node.innerHTML = Username;
+	}
+	else
+	{
+		Node.innerHTML = Username +" (offline)";
+	}
+
+	return true;
+}
+
 /**
 * Positioning chat list
 */
@@ -188,19 +211,22 @@ function INTERFACE_CreateChat(Username, Status)
 {
 	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
 	var Close, Input, State;
+	var TitleSpan;
 
 	var Elements = new Object();
 
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
 
+	ChatTitle = UTILS_CreateElement("h3", null, "title");
+
 	if (Status == "offline")
 	{
-		ChatTitle = UTILS_CreateElement("h3", null, "title", Username+" (offline)");
+		TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username,null,Username+" (offline)");
 	}
 	else
 	{
-		ChatTitle = UTILS_CreateElement("h3", null, "title", Username);
+		TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username,null,Username);
 	}
 
 	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
@@ -236,7 +262,20 @@ function INTERFACE_CreateChat(Username, Status)
 			Input.value = "";
 		}
 	}
+	
+	// Remove focus
+	ChatItem.onclick = function(){
+		INTERFACE_UnfocusChat(Username);
+	}
+	ChatInner.onclick = function(){
+		INTERFACE_UnfocusChat(Username);
+	}
+	Input.onfocus = function(){
+		INTERFACE_UnfocusChat(Username);
+	}
 
+
+	ChatTitle.appendChild(TitleSpan);
 	ChatTitle.appendChild(State);
 	ChatTitle.appendChild(Close);
 

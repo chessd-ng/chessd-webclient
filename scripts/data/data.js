@@ -1052,7 +1052,7 @@ function DATA_AddChat (Username, Status)
 	// Limit chat number
 	if (this.MaxChats <= this.ChatList.length)
 	{
-		throw "MaxChatExceeded";
+		return false;
 	}
 
 	i = this.FindChat(Username);

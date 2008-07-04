@@ -41,6 +41,7 @@ function PARSER_ParsePresence(XML)
 		Buffer += ROOM_HandleRoomPresence(XML);
 		Buffer += CONTACT_HandleOnlinePresence(XML);
 		Buffer += CHALLENGE_HandlePresence(XML);
+		Buffer += CHAT_HandlePresence(XML);
 		return Buffer;
 	}
 	// User presence

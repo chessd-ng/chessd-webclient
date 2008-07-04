@@ -46,6 +46,34 @@ function CHAT_HandleMessage(XML)
 	return "";
 }
 
+function CHAT_HandlePresence(XML)
+{
+	var From;
+	var Status;
+	var Username;
+	var Type = XML.getAttribute("type");
+
+	if(Type == "error")
+	{
+		return "";
+	}
+
+	
+	From = XML.getAttribute("from");
+	Username = From.split("/")[1];
+	
+	if(Type == "unavailable")
+	{
+		Status = "offline";
+	}
+	else
+	{
+		Status = "online";
+	}
+
+	INTERFACE_ChatChangeStatus(Username, Status);
+}
+
 /**
 * Show announcement users messages
 */
@@ -83,44 +111,26 @@ function CHAT_HandleAnnounceMessage(XML)
 */
 function CHAT_OpenChat(Username)
 {
-	var Title, Msg, UserPos, Status = null;
+	var Title, Msg, Status = null;
 
-	UserPos = MainData.FindUser(Username);
-	if (UserPos == null)
-	{
-		if (!MainData.FindUserInRoom("general", Username))
-		{
-			Status = "offline";
-		}
-	}
-	else if (MainData.UserList[UserPos].Status == "offline")
+	if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
 		Status = "offline";
 	}
 
-	try
+	// Try add in sctructure
+	if (MainData.AddChat(Username) == true)
 	{
-		// Try add in sctructure
-		if (!MainData.AddChat(Username))
-		{
-			return false;
-		}
-
 		// Show on interface
 		INTERFACE_OpenChat(Username, Status);
-
-		return true;
 	}
-	catch (e)
+	else
 	{
 		// Show error message to user
-		if (e == "MaxChatExceeded")
-		{
-			Title = UTILS_GetText("chat_warning");
-			Msg = UTILS_GetText("chat_max_exceeded");
-			Msg = Msg.replace(/%i/, MainData.MaxChats);
-			WINDOW_Alert(Title, Msg);
-		}
+		Title = UTILS_GetText("chat_warning");
+		Msg = UTILS_GetText("chat_max_exceeded");
+		Msg = Msg.replace(/%i/, MainData.MaxChats);
+		WINDOW_Alert(Title, Msg);
 	}
 }
 
@@ -155,7 +165,6 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 	{
 		INTERFACE_ShowChat(Obj1, Obj2);
 		MainData.ChatList[i].State = "show";
-		INTERFACE_UnfocusChat(Username);
 		State.className = "minimize";
 		State.src = "./images/minimize_chat.png";
 	}
