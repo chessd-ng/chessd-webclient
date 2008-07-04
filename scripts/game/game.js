@@ -366,7 +366,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 */
 function GAME_End(XML)
 {
-	var PlayerTag, ReasonTag;
+	var PlayerTag, EndTag, Result;
 	var Game, GameID, Reason, Player, Winner;
 	var Title = UTILS_GetText("game_end_game");
 	var Playing;
@@ -389,19 +389,19 @@ function GAME_End(XML)
 	if(MainData.CurrentGame.Id == GameID)
 	{
 		// Get the reason 
-		ReasonTag = XML.getElementsByTagName("reason");
-		if (ReasonTag.length > 0)
+		EndTag = XML.getElementsByTagName("end");
+		if (EndTag.length > 0)
 		{
 			// Get the reason from tag 'reason'
-			Reason = UTILS_GetNodeText(ReasonTag[0]);
+			Result = EndTag[0].getAttribute("result");
 		}
 		else
 		{
-			Reason = UTILS_GetText("game_canceled");
+			Result = "canceled";
 		}
 		
 		// Show end game message to user
-		WINDOW_Alert(Title, Reason);
+		WINDOW_Alert(Title, UTILS_GetText("game_result_"+Result));
 	}
 
 	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
