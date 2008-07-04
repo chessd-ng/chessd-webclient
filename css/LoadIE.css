@@ -1,3 +1,8 @@
+#LoginDiv p{
+	font-size		: 12px;	
+	font-weight		: normal;
+}
+
 #LoadDiv h1{
 	background		: url("../images/ie/logo.gif") no-repeat;
 }
