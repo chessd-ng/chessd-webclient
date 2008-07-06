@@ -188,6 +188,9 @@
 	width						: 120px;
 }
 
+#WindowBox .button_big:hover {
+	background-color: #FFA200;
+}
 
 #ProfileConfirmDiv {
 	padding-top	:	10px;
