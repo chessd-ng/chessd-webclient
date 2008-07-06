@@ -373,18 +373,24 @@ function REGISTER_Labels()
 	MaxChar.innerHTML = UTILS_GetTag(XML, "register_max_char");
 	Login.appendChild(MaxChar);
 	Login.innerHTML += ":";
+
 	UserInfo.innerHTML = UTILS_GetTag(XML, "register_user_inf");
-	Mail2.innerHTML = UTILS_GetTag(XML, "register_mail2");
+
 	Mail1.innerHTML = UTILS_GetTag(XML, "register_mail1");
+	Mail2.innerHTML = UTILS_GetTag(XML, "register_mail2");
 	Mail1.appendChild(Mail2);
 	Mail1.innerHTML += ":";
+
 	MailInf.innerHTML = UTILS_GetTag(XML, "register_mail_inf");
+
 	Pass.innerHTML = UTILS_GetTag(XML, "register_passwd");
-	PassConf2.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm2");
 	PassConf1.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm1");
+	PassConf2.innerHTML = UTILS_GetTag(XML, "register_passwd_confirm2");
 	PassConf1.appendChild(PassConf2);
 	PassConf1.innerHTML +=":";
+
 	Title.innerHTML = UTILS_GetTag(XML, "register_title");
+
 	BtConfirm.value = UTILS_GetTag(XML, "register_bt_confirm");
 	BtCancel.value = UTILS_GetTag(XML, "window_cancel");
 
