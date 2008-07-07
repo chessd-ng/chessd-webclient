@@ -799,3 +799,24 @@ function ROOM_SortUsersByRating(Category)
 		}
 	}
 }
+
+function ROOM_ShowHideUserList(RoomName)
+{
+	var Room = MainData.GetRoom(RoomName);
+
+	if(Room == null)
+	{
+		return "";
+	}
+
+	if(Room.Room.userListVisibility == false)
+	{
+		Room.Room.showUserList();
+		Room.Room.userListButton.className = "UserListVisibilityOn";
+	}
+	else
+	{
+		Room.Room.hideUserList();
+		Room.Room.userListButton.className = "UserListVisibility";
+	}
+}

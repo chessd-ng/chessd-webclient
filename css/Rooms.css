@@ -4,7 +4,7 @@
 	border			: 2px solid #216778;
 	border-top		: 0px;
 	position		: relative;
-	height			: 320px;
+	/*height			: 320px;*/
 }
 
 #Main #Left #Rooms .Room {
@@ -26,6 +26,29 @@
 	background-color	: #216778;
 }
 
+#Main #Left #Rooms span.UserListVisibility{
+	font-size		: 11px;
+	color			: #216778;
+
+	position		: relative;
+	left			: 55px;
+
+	border-bottom		: 1px solid #216778;
+
+	cursor			: pointer;
+}
+
+#Main #Left #Rooms span.UserListVisibilityOn{
+	font-size		: 11px;
+	color			: #FFA200;
+
+	position		: relative;
+	left			: 55px;
+
+	border-bottom		: 1px solid #FFA200;
+
+	cursor			: pointer;
+}
 #Main #Left #Rooms #RoomList li {
 	position		: relative;
 	width			: 82px;
@@ -190,7 +213,7 @@
 	border-bottom		: 0px;
 	padding			: 2px;
 	margin-right		: 12px;
-	height			: 130px;
+	height			: 210px;
 	width			: 164px;
 	overflow		: auto;
 	margin-top		: 5px;
