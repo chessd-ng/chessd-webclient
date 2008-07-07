@@ -181,7 +181,7 @@ div .UserList #order_rating option.not_selected
 /*Contact online user list css*/
 #ContactOnline .UserList{
 	padding-left		: 4px;
-	height			: 145px;
+	height			: 141px;
 	/*
 	padding-left		: 1mm;
 	height			: 37.7mm;
@@ -189,7 +189,7 @@ div .UserList #order_rating option.not_selected
 }
 
 #ContactOnline .UserTable{
-	height			: 125px;
+	height			: 122px;
 	/*
 	height			: 32mm;
 	*/
