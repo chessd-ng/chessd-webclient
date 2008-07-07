@@ -346,7 +346,6 @@
 	padding-top		: 20px;
 	margin-right		: 10px;
 	font-size 		: 13px;
-	margin-right		: 10px;
 	font-weight		: bold;
 	color			: #216778;
 }
@@ -377,12 +376,12 @@
 
 #SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
-	padding-left		: 8%;
+	padding-left		: 20px;
 }
 
 #SearchUserDiv #OptionDiv {
-	padding-top		: 6mm;
-	padding-left		: 4mm;
+	padding-top	: 22px;
+	padding-left :  20px;
 }
 
 #SearchUserDiv .label {
@@ -393,7 +392,7 @@
 
 #SearchUserDiv #ListDiv {
 	text-align 		: left;
-	margin-left		: 8%;
+	margin-left		: 20px;
 	width			: 90%;
 	display			: block;
 	overflow		: auto;
