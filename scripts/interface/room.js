@@ -85,7 +85,7 @@ function INTERFACE_CreateRoom(RoomName)
         RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
 
 	// Show/Hide user list
-	UserListVisibility = UTILS_CreateElement("span",null,"UserListVisibility","Ver usuarios da sala");
+	UserListVisibility = UTILS_CreateElement("span",null,"UserListVisibility",UTILS_GetText("room_show_user_list"));
 	UserListVisibility.onclick = function(){
 		ROOM_ShowHideUserList(RoomName);
 	}

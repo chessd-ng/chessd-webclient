@@ -813,10 +813,12 @@ function ROOM_ShowHideUserList(RoomName)
 	{
 		Room.Room.showUserList();
 		Room.Room.userListButton.className = "UserListVisibilityOn";
+		Room.Room.userListButton.innerHTML = UTILS_GetText("room_hide_user_list");
 	}
 	else
 	{
 		Room.Room.hideUserList();
 		Room.Room.userListButton.className = "UserListVisibility";
+		Room.Room.userListButton.innerHTML = UTILS_GetText("room_show_user_list");
 	}
 }

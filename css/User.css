@@ -205,6 +205,8 @@ div .UserList #order_rating option.not_selected
 	background-color	: #FFF;
 
 	padding			: 4px 0px 4px 5px;
+
+	z-index			: 1;
 }
 
 #Rooms div .UserList .UserTable{
