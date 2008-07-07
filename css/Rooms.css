@@ -121,6 +121,7 @@
 	border			: 2px solid #216778;
 	background-color	: #EAF5F4;
 	cursor			: pointer;
+	z-index			: 3;
 	/*
 	left			: 100%;
 	width			: 28mm;
@@ -150,62 +151,6 @@
 	margin-bottom		: 1mm;
 	*/
 }
-
-/* User list */
-/*
-#Main #Left #Rooms #RoomUsers {
-	overflow-y		: auto;
-	overflow-x		: hidden;
-}
-
-#Main #Left #Rooms .Room .UserList {
-	padding-left		: 3mm;
-	padding-top		: 1mm;
-		
-}
-#Main #Left #Rooms .Room table {
-	display			: block;
-	height			: 25mm;
-	width			: 48mm;
-	margin-top		: 2mm;
-	border-spacing	: 0px;
-}
-
-#Main #Left #Rooms .Room tbody {
-	display			: block;
-	width			: 44mm;
-}
-
-#Main #Left #Rooms .Room tr {
-	text-indent		: 5mm;
-	margin			: 1px 0px;
-	height			: 16px;
-	list-style		: none;
-	font-size		: 11px;
-}
-
-#Main #Left #Rooms .Room tr:hover {
-	background-color: #EAF5F4;
-	cursor			: pointer;
-}
-
-#Main #Left #Rooms td {
-	width			: 41mm;
-	height		:	4.5mm;
-	text-align		: left;
-}
-
-#Main #Left #Rooms .rating {
-	width			: 2mm;
-	text-align		: right;
-}
-#Main #Left #Rooms hr {
-	height			: 1px;
-	margin			: 0.5mm 4mm 2mm 0mm;
-	background-color: #FFA200;
-	border			: 0px;
-}
-*/
 
 /* Room messages */
 #Main #Left #Rooms .Room .MessageList {
