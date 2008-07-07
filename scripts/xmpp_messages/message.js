@@ -217,6 +217,10 @@ function MESSAGE_Unavailable(RoomName)
 	{
 		XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' to='"+RoomName+"' xmlns='jabber:client' type='unavailable'></presence>";
 	}
+	else // Exit from jabber
+	{
+		XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' xmlns='jabber:client' type='unavailable'></presence>";
+	}
 	return XMPP;
 }
 
