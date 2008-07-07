@@ -113,6 +113,11 @@ function OLDGAME_HandleSearchOldGame(XML)
 //	WINDOW_OldGameResult(GameList);
 
 	SearchGameWindow.Elements.SetResult(Id, GameList, More);
+	SearchGameWindow.Elements.SetPlayer1(SearchGameWindow.P1);
+	SearchGameWindow.Elements.SetPlayer2(SearchGameWindow.P2);
+	SearchGameWindow.Elements.SetColor(SearchGameWindow.Color);
+	SearchGameWindow.Elements.SetFrom(SearchGameWindow.From);
+	SearchGameWindow.Elements.SetTo(SearchGameWindow.To);
 
 	return Buffer;
 }
@@ -681,7 +686,6 @@ function OLDGAME_OpenOldGameWindow(User)
 	SearchInfo.Elements.SetSearchButton(SearchInfo);
 	SearchInfo.Elements.SetPrevButton(SearchInfo);
 	SearchInfo.Elements.SetNextButton(SearchInfo);
-	
 }
 
 /**
@@ -700,7 +704,15 @@ function OLDGAME_CloseWindow(Id)
 	else if (MainData.SearchGameInfoList.length == 0)
 		MainData.SearchGameMaxId = 0;
 }
-	
+
+/**
+* Return apropriate result text according to result string 
+*
+* @param Result Result's string
+* @return String
+* @see OLDGAME_HandleSearchOldGame
+* @author Danilo
+*/
 function OLDGAME_GameResult(Result)
 {
 	if ((Result == "") || (Result == null) || (Result == undefined))
@@ -729,4 +741,12 @@ function OLDGAME_GameResult(Result)
 		return UTILS_GetText("game_result_draw-impossible-mate");
 	else if (Result == "draw-timeover")
 		return UTILS_GetText("game_result_draw-timeover");
+	else if (Result == "canceled-agreement")
+		return UTILS_GetText("game_result_canceled_agreement");
+	else if (Result == "canceled-timed-out")
+		return UTILS_GetText("game_result_canceled-timed-out");
+	else if (Result == "adjourned-agreement")
+		return UTILS_GetText("game_result_adjourned-agreement");
+	else if (Result == "adjourned-shutdown")
+		return UTILS_GetText("game_result_adjourned-shutdown");
 }

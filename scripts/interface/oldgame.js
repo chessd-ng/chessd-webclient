@@ -223,9 +223,9 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	THead = UTILS_CreateElement('thead');
 	Tr = UTILS_CreateElement('tr');
-		TPlayer1Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_player1_hd'));
+		TPlayer1Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_white_hd'));
 		Tr.appendChild(TPlayer1Label);
-		TPlayer2Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_player2_hd'));
+		TPlayer2Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_black_hd'));
 		Tr.appendChild(TPlayer2Label);
 		TDateLabel =UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_date'));
 		Tr.appendChild(TDateLabel);
@@ -428,20 +428,81 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 	return(Tr);
 }
 
-function INTERFACE_Player1Input() 
+/*
+* Set the player 1 input
+*
+* @param User	String to be set
+* @return void
+* @author Danilo
+*/
+function INTERFACE_Player1Input(User) 
 {
+	this.Player1.value = User;
 }
-function INTERFACE_Player2Input()
+
+/*
+* Set the player 2 input
+*
+* @param User	String to be set
+* @return void
+* @author Danilo
+*/
+function INTERFACE_Player2Input(User)
 {
+	this.Player2.value = User;
 }
-function INTERFACE_Color()
+
+/*
+* Check the appropriate color's checkbox
+*
+* @param Color Color's checkbox to be checked
+* @return void
+* @author Danilo
+*/
+function INTERFACE_Color(Color)
 {
+	if (Color == "white")
+	{
+		this.WRadio.checked = true;
+		this.BRadio.checked = false;
+		this.ARadio.checked = false;
+	}
+	else if (Color == "black")
+	{
+		this.WRadio.checked = false;
+		this.BRadio.checked = true;
+		this.ARadio.checked = false;
+	}
+	else if (Color = "")
+	{
+		this.WRadio.checked = false;
+		this.BRadio.checked = false;
+		this.ARadio.checked = true;
+	}
 }
-function INTERFACE_FromInput()
+
+/*
+* Set the From input
+*
+* @param From	String to be set
+* @return void
+* @author Danilo
+*/
+function INTERFACE_FromInput(From)
 {
+	this.From.value = From;
 }
-function INTERFACE_ToInput()
+
+/*
+* Set the To input
+*
+* @param To	String to be set
+* @return void
+* @author Danilo
+*/
+function INTERFACE_ToInput(To)
 {
+	this.To.value = To;
 }
 
 /**
