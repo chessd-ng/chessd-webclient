@@ -36,6 +36,9 @@ function ROOM_HandleRoomPresence(XML)
 	var Room;
 	var Buffer = "";
 
+	var Component;
+	var Room;
+
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
@@ -44,6 +47,8 @@ function ROOM_HandleRoomPresence(XML)
 	RoomName = From.replace(/@.*/, "");
 	Jid = From.replace(/.*\//, "");
 	MsgTo = From.replace(/\/.*/, "");
+
+	Component = From.split("@")[1].split("/")[0].split(".")[0];
 
 
 	// Check if the type is error
@@ -84,6 +89,13 @@ function ROOM_HandleRoomPresence(XML)
 	if (MainData.FindRoom(RoomName) == null)
 	{
 		ROOM_CreateRoom(RoomName);
+
+		// Show room user list if room is a room game
+		if(Component == MainData.GameComponent)
+		{
+			Room = MainData.GetRoom(RoomName);
+			Room.Room.showUserList();
+		}
 	}
 
 	// If its your presence
@@ -812,13 +824,9 @@ function ROOM_ShowHideUserList(RoomName)
 	if(Room.Room.userListVisibility == false)
 	{
 		Room.Room.showUserList();
-		Room.Room.userListButton.className = "UserListVisibilityOn";
-		Room.Room.userListButton.innerHTML = UTILS_GetText("room_hide_user_list");
 	}
 	else
 	{
 		Room.Room.hideUserList();
-		Room.Room.userListButton.className = "UserListVisibility";
-		Room.Room.userListButton.innerHTML = UTILS_GetText("room_show_user_list");
 	}
 }

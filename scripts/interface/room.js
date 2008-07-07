@@ -176,12 +176,17 @@ function INTERFACE_ShowRoomUserList()
 {
 	this.userList.show();
 	this.userListVisibility = true;
+
+	this.userListButton.innerHTML = UTILS_GetText("room_hide_user_list");
+	this.userListButton.className = "UserListVisibilityOn";
 }
 
 function INTERFACE_HideRoomUserList()
 {
 	this.userList.hide();
 	this.userListVisibility = false;
+	this.userListButton.innerHTML = UTILS_GetText("room_show_user_list");
+	this.userListButton.className = "UserListVisibility";
 }
 
 function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
