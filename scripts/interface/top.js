@@ -43,7 +43,7 @@ function INTERFACE_CreateTop()
 	}
 	else
 	{ // None
-		Item = UTILS_CreateElement("li", null, "null", null);
+		Item = UTILS_CreateElement("li", "admin_icon", "null", null);
 		IconsList.appendChild(Item);
 	}
 	// Search game
@@ -274,6 +274,21 @@ function INTERFACE_NoGamesInGameList()
 	{
 		Div.appendChild(Span);
 		GameList.appendChild(Div);
+	}
+}
+
+function INTERFACE_ShowAdminIcon()
+{
+	var Item = document.getElementById("admin_icon");
+	var ItemTitle;
+
+	if(Item != null)
+	{
+		ItemTitle = UTILS_GetText("menu_adjourn")
+		Item.title = ItemTitle;
+		Item.className = "adjourn_game";
+		Item.id = "";
+		UTILS_AddListener(Item,"click",function() { WINDOW_AdminWindow(); ADMIN_GetBanList(); }, "false");
 	}
 }
 

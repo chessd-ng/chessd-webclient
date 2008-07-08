@@ -64,6 +64,7 @@ function PARSER_ParseIq(XML)
 			// Receive information of user list
 			else if (Xmlns.match(/\/chessd#info/))
 			{
+				Buffer += ADMIN_HandleInfo(XML);
 				// contact/info.js
 				Buffer += CONTACT_HandleInfo(XML);
 				Buffer += ROOM_HandleInfo(XML);

@@ -56,6 +56,28 @@ function ADMIN_HandleAdmin(XML)
 	}
 }
 
+function ADMIN_HandleInfo(XML)
+{
+	var Items = XML.getElementsByTagName("type");
+	var Username;
+	var i =0;
+
+	// Find user
+	while((i<Items.length) &&(Items[i].getAttribute("jid").split("@")[0])!= MainData.Username)
+	{
+		i++;
+	}
+	
+	if( i != Items.length)
+	{
+		Type = Items[i].getAttribute("type");
+		if(Type == "admin")
+		{
+			INTERFACE_ShowAdminIcon();
+		}
+	}
+}
+
 function ADMIN_Notification(XML)
 {
 	var Node = XML.firstChild;
