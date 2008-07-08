@@ -477,16 +477,24 @@ function CHALLENGE_ClearChallenges()
 {
 	var i;
 	var MatchId;
+	var ChallengeWindow;
 
 	// Remove all challenges from challenge menu
 	for(i=0;i<MainData.ChallengeList.length; i++)
 	{
 		MatchId = MainData.ChallengeList[i].MatchId;
+		ChallengeWindow = MainData.ChallengeList[i].Window;
 
 		if(MatchId != null)
 		{
 			//CHALLENGE_DeclineChallenge(MatchID);
 			MainData.ChallengeMenu.removeMatch(MatchId);
+		}
+
+		// Close all challenge window, if exists
+		if(ChallengeWindow != null)
+		{
+			WINDOW_RemoveWindow(ChallengeWindow);
 		}
 	}
 
