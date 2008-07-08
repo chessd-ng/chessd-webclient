@@ -15,6 +15,7 @@
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>
 		<resource>ChessD</resource>
 		<search-component>vjud</search-component>
+		<server>chessd</server>
 		<match-component>chessd</match-component>
 		<conference-component>conference</conference-component>
 		<game-component>chessd</game-component>
