@@ -181,7 +181,7 @@
 		<game_moves>Lances</game_moves>
 		<game_send_draw>Propor empate</game_send_draw>
 		<game_send_resign>Desistir</game_send_resign>
-		<game_send_terminate>Propor encerramento</game_send_terminate>
+		<game_send_cancel>Propor cancelamento</game_send_cancel>
 		<game_send_adjourn>Propor adiamento</game_send_adjourn>
 		<game_give_time>Dar mais tempo ao adversário</game_give_time>
 		<game_pawn_promotion>Promoção do peão</game_pawn_promotion>
