@@ -301,7 +301,7 @@ function WINDOW_Profile(Profile)
 	var Div = INTERFACE_ShowProfileWindow(Profile);
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_window'));
+	var WindowObj = WINDOW_NewWindow(400, Div.Div, Div.Buttons, UTILS_GetText('profile_window'));
 	var Elements = Div.Elements;
 
 	// Close Button (X)
