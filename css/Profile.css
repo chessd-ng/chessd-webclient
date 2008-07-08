@@ -4,17 +4,18 @@
 /* CSS ProfileDiv Window */
 
 #ProfileDiv {
-	padding	:	10px 1px 10px 10px;
+	padding	:	10px 1px 10px 0px;
 }
 
 #ProfileDiv #TopDiv {
 	display		:	table;
+	padding-left : 30px;
 }
 
 #ProfileDiv #ProfPhotoDiv {
 	float				:	left;
 	text-align	:	center;
-	width				:	20mm;
+	width				:	80px;
 }
 
 #ProfileDiv #ProfPhotoDiv img{
@@ -23,24 +24,30 @@
 	padding-bottom: 2px;
 }
 
+#ProfileDiv #TopRightDiv {
+	display : block;
+}
+
 #ProfileDiv #TopRightDiv #TopRight_LeftDiv {
-	width			: 90px;
+	width			: 60px;
 	float			:	left;
-	padding-left	:	10mm;
+	padding-left	:	20px;
 }
 
 #ProfileDiv #TopRightDiv #TopRight_RightDiv {
-	padding-left	: 45mm;
-	padding-top		:	2px;
+	padding-left	: 170px;
+	padding-top		:	1px;
+	display : block;
 }
 
 #ProfileDiv #RatingDiv {
+	padding-left	: 15px;
 }
 
 #ProfileDiv #WhoDiv {
 	display	: table;
 	margin-top	:	5px;
-	margin-left:	2mm;
+	margin-left:	25px;
 	padding-right	:	15px;
 }
 
@@ -50,11 +57,14 @@
 }
 
 #ProfileDiv #WhoDiv #WhoRightDiv {
-	padding-left	: 70px;
+	padding-left	: 80px;
 	padding-top	: 2px;
 }
+
+#ProfileDiv #TimeDiv,
 #ProfileDiv #BottomDiv {
 	display	:	table;
+	padding-left : 15px;
 }
 
 #ProfileDiv #BottomDiv #BottomLeftDiv {
@@ -72,19 +82,16 @@
 
 #ProfileDiv #TimeDiv #TimeLeftDiv {
 	float	: left;
-	width	:	50%;
-}
-
-#ProfileDiv #TimeDiv {
-	display	:	table;
+	width	:	180px;
 }
 
 #ProfileDiv #TimeDiv #TimeRightDiv {
-	margin-left	:	60%;
+	margin-left	:	180px;
 }
 
 #ProfileDiv #OldGameDiv {
 	margin-top	:	10px;
+	padding-left : 15px;
 }
 
 #ProfileDiv #ButtonsDiv {
@@ -95,7 +102,7 @@
 /* Style */
 #ProfileDiv table {
 	display			: block;
-	width			: 95mm; 
+	width			: 370px; 
 	position		: relative;
 	margin-top		: 6mm;
 	border-collapse	: collapse;
@@ -103,12 +110,13 @@
 }
 
 #ProfileDiv td {
-	width			: 20mm;
+	width			: 44px;
 	border			: 1px solid #216778;
 	font-size		: 9px;
 	color			: #216778;
 	background-color: #FFF;
 	text-align		: center;
+	padding : 1px;
 }
 
 #ProfileConfirmDiv p,
@@ -139,20 +147,20 @@
 	font-size		: 11px;
 	color			: #216778;
 	margin-top		: 10px;
-	width			: 40mm;
+	width			: 150px;
 	padding-left : 5px;
 }
 
 #ProfileDiv .inf_whoami {
-	max-height		: 22mm;
+	max-height		: 80px;
 	overflow	: auto;
-	width			: 70mm;
+	width			: 265px;
 }
 
 #ProfileDiv .value {
 	font-size		: 11px;
 	font-weight		: normal;
-	padding-left	:	10px;
+	padding-left	:	5px;
 }
 
 #ProfileDiv .header {
