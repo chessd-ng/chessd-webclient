@@ -179,6 +179,9 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 		WINDOW_CreateRoom();
 	}
 	
+	// Show loading message
+	MenuDiv.appendChild(INTERFACE_ShowLoadBox());
+
 	MenuDiv.appendChild(RoomList);
 	MenuDiv.appendChild(Hr);
 	CreateP.appendChild(Create);
@@ -227,6 +230,8 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
 
+	// Show loading message
+	MenuDiv.appendChild(INTERFACE_ShowLoadBox());
 
 	MenuDiv.style.left = OffsetLeft+"px";
 
@@ -235,6 +240,41 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	UTILS_AddListener(document, "click", Func, false);
 
 	return true;
+}
+
+function INTERFACE_ShowLoadBox()
+{
+	var Div = UTILS_CreateElement("div", "DivLoadBox");
+
+	var Span = UTILS_CreateElement("span",null,null,UTILS_GetText("menu_loading"));
+
+	Div.appendChild(Span);
+
+	return Div;
+}
+
+function INTERFACE_RemoveLoadBox()
+{
+	var Div = document.getElementById("DivLoadBox");
+
+	if(Div != null)
+	{
+		Div.parentNode.removeChild(Div);
+	}
+}
+
+function INTERFACE_NoGamesInGameList()
+{
+	var GameList = document.getElementById("GameRoomMenuDiv");
+	var Div = UTILS_CreateElement("div", "DivNoGames");
+
+	var Span = UTILS_CreateElement("span",null,null,UTILS_GetText("menu_no_games"));
+
+	if(GameList != null)
+	{
+		Div.appendChild(Span);
+		GameList.appendChild(Div);
+	}
 }
 
 /**

@@ -218,6 +218,9 @@ function ROOM_HandleRoomList(XML)
 		}
 		INTERFACE_ShowRoomList(Rooms);
 	}
+
+	INTERFACE_RemoveLoadBox();
+
 	return Buffer;
 }
 
@@ -240,13 +243,21 @@ function ROOM_HandleGameRoomList(XML)
 	// Get items in XML
 	Items = XML.getElementsByTagName("item");
 
-	// Get the player's names
-	for (i=0; i<Items.length; i++)
+	if(Items.length == 0)
 	{
+		// interface/top.js
+		INTERFACE_NoGamesInGameList();
+	}
+	else
+	{
+		// Get the player's names
+		for (i=0; i<Items.length; i++)
+		{
 
-		Jid = Items[i].getAttribute("jid");
-		GameId = Jid.split("@")[0];
-		XMPP += MESSAGE_GameRoomInfoList(GameId);
+			Jid = Items[i].getAttribute("jid");
+			GameId = Jid.split("@")[0];
+			XMPP += MESSAGE_GameRoomInfoList(GameId);
+		}
 	}
 
 	return XMPP;

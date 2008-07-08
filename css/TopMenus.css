@@ -109,3 +109,11 @@
 	margin-top:	1px;
 	margin-bottom:	1px;
 }
+
+#DivLoadBox, #DivNoGames
+{
+	position		: absolute;
+
+	color			: #216778;
+	font-size		: 11px;
+}
