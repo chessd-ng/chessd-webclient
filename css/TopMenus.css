@@ -8,7 +8,7 @@
 	background-color: #FFF;
 	width			: 105px;
 	/*height			: 26mm;*/
-	height			: 100px;
+	height			: 200px;
 	padding			: 4px;
 	overflow-x	:	hidden;
 	overflow-y	:	auto;
@@ -50,10 +50,14 @@
 #Page #RoomMenuDiv ul,
 #Page #ChallengeMenuDiv ul
 {
-	/*height			: 17.5mm;*/
-	height			: 70px;
+	height			: 175px;
 	list-style		: none;
 	overflow		: auto;
+}
+
+#Page #RoomMenuDiv ul {
+	border-bottom	:	1px solid #FFA200;
+	margin-bottom : 5px;
 }
 
 #Page #RoomMenuDiv li,
@@ -79,7 +83,7 @@
 	height			: 1px;
 	background-color	: #FFA200;
 	border			: 0px;
-	margin			:	3mm 0mm 1mm 0mm;
+	margin			:	5px 0px 5px 0px;
 }
 
 #Page #RoomMenuDiv #createRoom {

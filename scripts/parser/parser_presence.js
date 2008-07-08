@@ -22,7 +22,8 @@
 function PARSER_ParsePresence(XML)
 {
 	var Jid, Show, NewStatus;
-	var Buffer = ""
+	var Buffer = "";
+	var Type;
 
 	// Get Jid
 	try 
@@ -34,8 +35,15 @@ function PARSER_ParsePresence(XML)
 		return;
 	}
 
+	if (Jid.match(MainData.Server+"."+MainData.Host)) {
+		Type = XML.getAttribute('type');
+		if (Type = "unavailable") {
+			//TODO || Put text in lang/pt_BR
+			WINDOW_Alert("Servidor offline","O servidor foi desligado");
+		}
+	}
 	// Room presence
-	if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
+	else if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	//if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	{
 		Buffer += ROOM_HandleRoomPresence(XML);
