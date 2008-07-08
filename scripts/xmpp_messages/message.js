@@ -696,6 +696,24 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 	return XMPP;
 }
 
+/**
+ * Search for user current games.
+ */
+
+function MESSAGE_GameSearchCurrentGame()
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='get' to='"+MainData.GameComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchCurrentGame+"'>";
+	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd#game'>";
+	XMPP += "<game>";
+
+	XMPP += "<player jid='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"'/>";
+
+	XMPP += "</game></search></iq>";
+
+}
+
 /**********************************
  * MESSAGES - SEARCH USER
  **********************************/
