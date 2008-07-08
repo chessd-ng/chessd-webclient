@@ -243,6 +243,7 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 * @return 	bool
 * @author 	Ulysses
 */
+/*
 function INTERFACE_ShowChallengeMenu(OffsetLeft)
 {
 	var Challenge, MenuDiv, ChallengeList, RoomItem;
@@ -288,3 +289,4 @@ function INTERFACE_ShowChallengeMenu(OffsetLeft)
 
 	return true;
 }
+*/
