@@ -43,7 +43,7 @@ function INTERFACE_CreateTop()
 	}
 	else
 	{ // None
-		Item = UTILS_CreateElement("li", null, "null", null);
+		Item = UTILS_CreateElement("li", "admin_icon", "null", null);
 		IconsList.appendChild(Item);
 	}
 	// Search game
@@ -177,6 +177,9 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 		WINDOW_CreateRoom();
 	}
 	
+	// Show loading message
+	MenuDiv.appendChild(INTERFACE_ShowLoadBox());
+
 	MenuDiv.appendChild(RoomList);
 	CreateP.appendChild(Create);
 	MenuDiv.appendChild(CreateP);
@@ -224,6 +227,8 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	// Creating elements
 	MenuDiv = UTILS_CreateElement("div", "GameRoomMenuDiv");
 
+	// Show loading message
+	MenuDiv.appendChild(INTERFACE_ShowLoadBox());
 
 	MenuDiv.style.left = OffsetLeft+"px";
 
@@ -234,12 +239,63 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	return true;
 }
 
+function INTERFACE_ShowLoadBox()
+{
+	var Div = UTILS_CreateElement("div", "DivLoadBox");
+
+	var Span = UTILS_CreateElement("span",null,null,UTILS_GetText("menu_loading"));
+
+	Div.appendChild(Span);
+
+	return Div;
+}
+
+function INTERFACE_RemoveLoadBox()
+{
+	var Div = document.getElementById("DivLoadBox");
+
+	if(Div != null)
+	{
+		Div.parentNode.removeChild(Div);
+	}
+}
+
+function INTERFACE_NoGamesInGameList()
+{
+	var GameList = document.getElementById("GameRoomMenuDiv");
+	var Div = UTILS_CreateElement("div", "DivNoGames");
+
+	var Span = UTILS_CreateElement("span",null,null,UTILS_GetText("menu_no_games"));
+
+	if(GameList != null)
+	{
+		Div.appendChild(Span);
+		GameList.appendChild(Div);
+	}
+}
+
+function INTERFACE_ShowAdminIcon()
+{
+	var Item = document.getElementById("admin_icon");
+	var ItemTitle;
+
+	if(Item != null)
+	{
+		ItemTitle = UTILS_GetText("menu_adjourn")
+		Item.title = ItemTitle;
+		Item.className = "adjourn_game";
+		Item.id = "";
+		UTILS_AddListener(Item,"click",function() { WINDOW_AdminWindow(); ADMIN_GetBanList(); }, "false");
+	}
+}
+
 /**
 * Show challange menu
 *
 * @return 	bool
 * @author 	Ulysses
 */
+/*
 function INTERFACE_ShowChallengeMenu(OffsetLeft)
 {
 	var Challenge, MenuDiv, ChallengeList, RoomItem;
@@ -285,3 +341,4 @@ function INTERFACE_ShowChallengeMenu(OffsetLeft)
 
 	return true;
 }
+*/

@@ -55,6 +55,8 @@
 		<menu_tourneys>Torneios</menu_tourneys>
 		<menu_rooms>Salas</menu_rooms>
 		<menu_history>Histórico</menu_history>
+		<menu_loading>Carregando...</menu_loading>
+		<menu_no_games>Não há partidas em andamento.</menu_no_games>
 	</menu>
 	<contact>
 		<contact_contacts>Contatos</contact_contacts>
