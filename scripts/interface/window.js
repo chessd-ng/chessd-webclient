@@ -78,8 +78,10 @@ function WINDOW_ShowWindow(Element)
 
 function WINDOW_CloseWindow()
 {
-	this.window.parentNode.removeChild(this.window);
-	//delete this;
+	if(this.window.parentNode != null)
+	{
+		this.window.parentNode.removeChild(this.window);
+	}
 }
 
 function WINDOW_SetId(Id)

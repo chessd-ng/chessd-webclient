@@ -92,7 +92,9 @@ function INTERFACE_StartLogin(Lang)
 	Text3 = UTILS_CreateElement("p", null, null, UTILS_GetText("login_text3"));
 	Link = UTILS_CreateElement("a", null, "link", "http://xadrezlivre.c3sl.ufpr.br/projeto");
 	Link.href = "http://xadrezlivre.c3sl.ufpr.br/projeto";
+
 	Version = UTILS_CreateElement("p", "version", null, MainData.Version);
+	
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
 	InputLogin = UTILS_CreateElement("input", "login");
@@ -168,7 +170,9 @@ function INTERFACE_StartLogin(Lang)
 	MainDiv.appendChild(Banner);
 
 	document.body.appendChild(MainDiv);
-	//document.body.appendChild(Version);
+
+	// Show webclient version
+	document.body.appendChild(Version);
 
 	// Setting document title
 	document.title = UTILS_GetText("general_title");
@@ -196,16 +200,28 @@ function INTERFACE_EndLogin()
 	var Div = document.getElementById("LoginDiv");
 	var Banner = document.getElementById("BannerLogin");
 	var Lang = document.getElementById("LangDiv");
+	var Version = document.getElementById("version");
 
 	// If login div is on screen
 	if (Div)
+	{
 		Div.parentNode.removeChild(Div);
+	}
 
 	if (Banner)
+	{
 		Banner.parentNode.removeChild(Banner);
+	}
 
 	if (Lang)
+	{
 		Lang.parentNode.removeChild(Lang);
+	}
+
+	if (Version)
+	{
+		Version.parentNode.removeChild(Version);
+	}
 }
 
 /**

@@ -181,7 +181,7 @@ div .UserList #order_rating option.not_selected
 /*Contact online user list css*/
 #ContactOnline .UserList{
 	padding-left		: 4px;
-	height			: 145px;
+	height			: 141px;
 	/*
 	padding-left		: 1mm;
 	height			: 37.7mm;
@@ -189,16 +189,38 @@ div .UserList #order_rating option.not_selected
 }
 
 #ContactOnline .UserTable{
-	height			: 125px;
+	height			: 122px;
 	/*
 	height			: 32mm;
 	*/
 }
 
 /*Room list user list css*/
+#Rooms div .UserList{
+	position		: absolute;
+	left			: 200px;
+	width			: 150px;
+
+	border			: 2px solid #216778;
+	background-color	: #FFF;
+
+	padding			: 4px 0px 4px 5px;
+
+	z-index			: 1;
+}
+
 #Rooms div .UserList .UserTable{
 	height			: 80px;
 	/*
 	height			: 22mm;
 	*/
+}
+
+#Rooms div .UserList td{
+	width			: 95px;
+}
+
+#Rooms div .UserList td.rating{
+	width			: 8px;
+	text-indent		: 10px;
 }

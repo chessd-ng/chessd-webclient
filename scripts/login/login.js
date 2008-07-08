@@ -61,11 +61,14 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 */
 function LOGIN_Logout()
 {
+	var XMPP = "";
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
 
 	// Logout from jabber
-	CONNECTION_SendJabber(MESSAGE_EndConnection());
+	XMPP += MESSAGE_Unavailable();
+	XMPP += MESSAGE_EndConnection();
+	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
 	if(MainData.CurrentGame != null)
@@ -80,6 +83,15 @@ function LOGIN_Logout()
 	// Show Login interface
 	//INTERFACE_StartLogin(Lang);
 	START_StartPage();
+}
+
+
+function LOGIN_LeavePage()
+{
+	var XMPP = "";
+	XMPP += MESSAGE_Unavailable();
+	XMPP += MESSAGE_EndConnection();
+	CONNECTION_SendJabber(XMPP);
 }
 
 /**

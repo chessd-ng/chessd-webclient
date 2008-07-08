@@ -92,7 +92,7 @@ function INTERFACE_ShowUserList()
  */
 function INTERFACE_HideUserList()
 {
-	this.userList.style.display = "none";
+	this.mainDiv.style.display = "none";
 }
 
 

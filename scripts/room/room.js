@@ -36,6 +36,9 @@ function ROOM_HandleRoomPresence(XML)
 	var Room;
 	var Buffer = "";
 
+	var Component;
+	var Room;
+
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
@@ -44,6 +47,8 @@ function ROOM_HandleRoomPresence(XML)
 	RoomName = From.replace(/@.*/, "");
 	Jid = From.replace(/.*\//, "");
 	MsgTo = From.replace(/\/.*/, "");
+
+	Component = From.split("@")[1].split("/")[0].split(".")[0];
 
 
 	// Check if the type is error
@@ -84,6 +89,13 @@ function ROOM_HandleRoomPresence(XML)
 	if (MainData.FindRoom(RoomName) == null)
 	{
 		ROOM_CreateRoom(RoomName);
+
+		// Show room user list if room is a room game
+		if(Component == MainData.GameComponent)
+		{
+			Room = MainData.GetRoom(RoomName);
+			Room.Room.showUserList();
+		}
 	}
 
 	// If its your presence
@@ -797,5 +809,24 @@ function ROOM_SortUsersByRating(Category)
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
+	}
+}
+
+function ROOM_ShowHideUserList(RoomName)
+{
+	var Room = MainData.GetRoom(RoomName);
+
+	if(Room == null)
+	{
+		return "";
+	}
+
+	if(Room.Room.userListVisibility == false)
+	{
+		Room.Room.showUserList();
+	}
+	else
+	{
+		Room.Room.hideUserList();
 	}
 }

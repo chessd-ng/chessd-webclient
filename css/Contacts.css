@@ -283,8 +283,10 @@
 	position		: absolute;
 	width			: 120px;
 	padding			: 4px;
-	background-color: #FFF;
+	background-color	: #FFF;
 	border			: 1px solid #216778;
+
+	z-Index			: 2;
 	/*
 	width			: 35mm;
 	padding			: 1mm;

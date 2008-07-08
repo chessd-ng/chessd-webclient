@@ -42,17 +42,25 @@ function RoomObj(Roomname)
 	this.room = Room.RoomDiv;
 	this.msgList = Room.MsgList;
 	this.input = Room.Input;
+
+	this.userListButton = Room.UserListButton;
+	this.userListVisibility = false;
+
 	this.userList = new UserListObj(Room.RoomDiv);
-	this.userList.show();
 	this.userList.setSortUserFunction(ROOM_SortUsersByNick);
 	this.userList.setSortRatingFunction(ROOM_SortUsersByRating);
-	
+
 	//Methods Public
 	this.show = INTERFACE_ShowRoom;
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
 	this.focus = INTERFACE_FocusRoomInput;
+	this.showUserList = INTERFACE_ShowRoomUserList;
+	this.hideUserList = INTERFACE_HideRoomUserList;
+
+	this.hideUserList();
+//	this.showUserList();
 }
 
 
@@ -69,30 +77,19 @@ function INTERFACE_CreateRoom(RoomName)
         var RoomDiv, RoomInside;
         var MessageList;
         var Input, Emoticon;
+	var UserListVisibility;
 
         // General room
         RoomDiv = UTILS_CreateElement("div", "Room_"+RoomName, "Room");
         RoomDiv.style.display = "none";
         RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
 
-        // MessageList
-        MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
-        Input = UTILS_CreateElement("input", "Input_"+RoomName);
-        Input.type = "text";
-        Input.onkeypress = function(event) {
-                if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
-                {
-                        // Send message to room
-                        ROOM_SendMessage(RoomName, Input.value);
-                        Input.value = "";
-                }
-        }
+	// Show/Hide user list
+	UserListVisibility = UTILS_CreateElement("span",null,"UserListVisibility",UTILS_GetText("room_show_user_list"));
+	UserListVisibility.onclick = function(){
+		ROOM_ShowHideUserList(RoomName);
+	}
 
-        Emoticon = UTILS_CreateElement("img", null, "emoticon");
-        Emoticon.src = "./images/emoticons/default.png";
-        Emoticon.onclick = function () {
-                INTERFACE_ShowEmoticonList(RoomName);
-        }
 
         // MessageList
         MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
@@ -113,13 +110,33 @@ function INTERFACE_CreateRoom(RoomName)
                 INTERFACE_ShowEmoticonList(RoomName);
         }
 
+        // MessageList
+        MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
+        Input = UTILS_CreateElement("input", "Input_"+RoomName);
+        Input.type = "text";
+        Input.onkeypress = function(event) {
+                if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
+                {
+                        // Send message to room
+                        ROOM_SendMessage(RoomName, Input.value);
+                        Input.value = "";
+                }
+        }
+
+        Emoticon = UTILS_CreateElement("img", null, "emoticon");
+        Emoticon.src = "./images/emoticons/default.png";
+        Emoticon.onclick = function () {
+                INTERFACE_ShowEmoticonList(RoomName);
+        }
+	
+	RoomInside.appendChild(UserListVisibility);
         RoomInside.appendChild(MessageList);
         RoomInside.appendChild(Input);
         RoomInside.appendChild(Emoticon);
 
         RoomDiv.appendChild(RoomInside);
 
-        return {RoomDiv:RoomDiv, MsgList:MessageList, Input:Input};
+        return {RoomDiv:RoomDiv, MsgList:MessageList, Input:Input, UserListButton:UserListVisibility};
 }
 
 function INTERFACE_ShowRoom()
@@ -154,6 +171,23 @@ function INTERFACE_FocusRoomInput()
 	this.input.focus();
 }
 
+
+function INTERFACE_ShowRoomUserList()
+{
+	this.userList.show();
+	this.userListVisibility = true;
+
+	this.userListButton.innerHTML = UTILS_GetText("room_hide_user_list");
+	this.userListButton.className = "UserListVisibilityOn";
+}
+
+function INTERFACE_HideRoomUserList()
+{
+	this.userList.hide();
+	this.userListVisibility = false;
+	this.userListButton.innerHTML = UTILS_GetText("room_show_user_list");
+	this.userListButton.className = "UserListVisibility";
+}
 
 function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 {

@@ -100,6 +100,8 @@
 		<room_error>Erro na criação de sala</room_error>
 		<room_invalid_name>Nome inválido para sala.</room_invalid_name>
 		<room_invalid_length>Tamanho máximo de 30 caracteres.</room_invalid_length>
+		<room_show_user_list>Ver usuários da sala</room_show_user_list>
+		<room_hide_user_list>Ocultar usuários da sala</room_hide_user_list>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
