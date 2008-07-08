@@ -46,6 +46,7 @@ function DATA(ConfFile, LangFile)
 	this.Host = UTILS_GetTag(Params, "host");
 	this.Resource = UTILS_GetTag(Params, "resource");
 
+	this.Server = UTILS_GetTag(Params,"server");
 	this.MatchComponent = UTILS_GetTag(Params,"match-component");
 	this.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
 	this.GameComponent = UTILS_GetTag(Params, "game-component");
@@ -79,7 +80,7 @@ function DATA(ConfFile, LangFile)
 	this.UserList = new Array();
 
 	this.OrderBy = "0";
-	this.ChatList = new Array();
+	this.ChatList = new Array()
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
 	this.ChatList = new Array();
