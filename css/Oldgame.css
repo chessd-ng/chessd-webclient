@@ -8,6 +8,10 @@
 	margin-left		: 2mm;
 }
 
+#OldGamesDiv .button {
+	width : 80px;
+}
+
 #OldGamesDiv .botao {
 	margin-top		: 3mm;
 	margin-right	: 0mm;
@@ -96,7 +100,7 @@
 	font-weight: normal;
 	margin: 0mm 0mm 0mm 0mm;
 	width: 55px;
-	border-color : #EAF5F4;
+	border-color : #DAF3F5;
 }
 
 #OldGamesDiv #ResultDiv #TFootDiv hr {
@@ -144,7 +148,7 @@
 }
 
 #OldGamesDiv thead {
-	background-color: #EAF5F4;
+	background-color: #DAF3F5;
 	font-weight		: bold;
 	font-size	:	12px;
 	border			: 1px solid #216778;
@@ -192,14 +196,20 @@
 	border-color : #FFA200;
 }
 
+#OldGamesDiv #ResultDiv #TBodyDiv tr {
+	cursor: pointer;
+}
+
 #OldGamesDiv #ResultDiv #TBodyDiv .header {
-	background-color: #EAF5F4;
+	background-color: #DAF3F5;
 	font-size	:	12px;
+	cursor: normal;
 }
 #OldGamesDiv #ResultDiv #TBodyDiv .resultheader {
-	background-color: #EAF5F4;
+	background-color: #DAF3F5;
 	font-size	:	13px;
 	width: 130px;
+	cursor: normal;
 }
 
 #OldGamesDiv .resulttd {
