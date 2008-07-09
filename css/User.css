@@ -209,6 +209,10 @@ div .UserList #order_rating option.not_selected
 	z-index			: 1;
 }
 
+#Rooms div .UserList table{
+	height			: 70px;
+}
+
 #Rooms div .UserList .UserTable{
 	height			: 80px;
 	/*
