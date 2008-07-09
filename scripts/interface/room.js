@@ -713,7 +713,7 @@ function INTERFACE_ShowRoomFullName(Obj,RoomName)
 	Pos = UTILS_GetOffset(Obj);
 	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
 	Hint.style.left = Pos.X+"px";
-	Hint.style.width = RoomName.length/2+'%';
+	Hint.style.width = RoomName.length*6+'px';
 
 	document.body.appendChild(Hint);
 }
@@ -911,8 +911,8 @@ function INTERFACE_ShowCreateRoomWindow()
 	OptionsDiv.appendChild(Label);
 	OptionsDiv.appendChild(Input);
 	OptionsDiv.appendChild(Br);
-	OptionsDiv.appendChild(Description);
-	OptionsDiv.appendChild(Textarea);
+//	OptionsDiv.appendChild(Description);
+//	OptionsDiv.appendChild(Textarea);
 
 	// Buttons Div
 	ButtonsDiv.appendChild(Create);
