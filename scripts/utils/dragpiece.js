@@ -86,6 +86,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			Obj.style.top = (MousePos.y-OffsetTop)+"px";
 			Obj.style.left = (MousePos.x-OffsetLeft)+"px";
 
+			// Change cursor to move
+			document.body.style.cursor = "move";
+
 			// If mousedown was set, and piece was moved
 			// then set mouseup to stop drag when release the button
 			document.body.onmouseup = function(evt){
@@ -134,6 +137,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 					// Send movement
 					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 				}
+
+				// Return to deafult cursor
+				document.body.style.cursor = "default";
 
 				delete OldPos;
 
@@ -189,6 +195,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			// Send movement
 			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 		}
+
+		// Return to deafult cursor
+		document.body.style.cursor = "default";
 
 		delete OldPos;
 
