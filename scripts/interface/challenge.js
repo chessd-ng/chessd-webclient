@@ -34,7 +34,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 
 	var Layer1Div;
 	var L1LeftDiv;
-	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel;
+	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
 	var L1RightDiv;
 	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt;
 	var Br1;
@@ -136,7 +136,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		AutoColorOpt.value = "auto";
 	}
 
-	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
+	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
+	RandomColorOptImg.src = "images/random.png"
+	BrR = UTILS_CreateElement('br');
+	
+//	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
 
 	// Select player color
 	if (GameParameters != undefined)
@@ -561,7 +565,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	L1LeftDiv.appendChild(ColorOptBImg);
 	L1LeftDiv.appendChild(BrB);
 	L1LeftDiv.appendChild(AutoColorOpt);
-	L1LeftDiv.appendChild(AutoColorLabel);
+	L1LeftDiv.appendChild(RandomColorOptImg);
+	L1LeftDiv.appendChild(BrR);
+//	L1LeftDiv.appendChild(AutoColorLabel);
 	
 	// Right
 	L1RightDiv.appendChild(CatLabel);
