@@ -905,8 +905,8 @@ function MESSAGE_GetBanList()
 
 /**********************************
  * MESSAGES - PROFILE - vCard
- 	**********************************/
-
+**********************************/
+  
 function MESSAGE_GetProfile(Username, Id)
 {
 	var XMPP = "";
@@ -991,3 +991,55 @@ function MESSAGE_FetchOldGame(OldGameId)
 
 	return XMPP;
 }
+
+/**********************************
+ * MESSAGES - ANNOUNCE CHALLENGES
+ **********************************/
+//Player object
+function MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag)
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_AnnounceMatch+"'>";
+	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
+	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"'>";
+	XMPP += "<player jid='"+Player.Name+"@"+MainData.Host+"/"+MainData.Resource+"' time='"+Player.Time+"' inc='"+Player.Inc+"' color='"+Player.Color+"'/>";
+	XMPP += "</announcement></create></iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_GetAnnounceMatch(Username, Offset, NumResult, MinTime, MaxTime, Category)
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_GetAnnounceMatch+"'>";
+	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
+	XMPP += "<parameters offset='"+Offset+"' results='"+NumResult+"' minimum_time='"+MinTime+"' maximum_time='"+MaxTime+"' category='"+Category+"' player='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'/>";
+	XMPP += "</search></iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_RemoveAnnounceMatch(Id)
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_RemoveAnnounceMatch+"'>";
+	XMPP += "<delete xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
+	XMPP += "<announcement id='"+Id+"'/>";
+	XMPP += "</delete></iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_AcceptAnnounceMatch(Id)
+{
+	var XMPP = "";
+
+	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_AcceptAnnounceMatch+"'>";
+	XMPP += "<accept xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
+	XMPP += "<announcement id='"+Id+"'/>";
+	XMPP += "</accept></iq>";
+}
+
