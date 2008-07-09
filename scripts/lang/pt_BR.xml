@@ -155,6 +155,9 @@
 		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
+		<challenge_menu_no_match>Não há partidas feitas.</challenge_menu_no_match>
+		<challenge_menu_no_announce>Não há partidas anunciadas.</challenge_menu_no_announce>
+		<challenge_menu_no_postpone>Não há partidas adiadas.</challenge_menu_no_postpone>
 	</challenge>
 	<game>
 		<game_draw>Requisição de empate</game_draw>

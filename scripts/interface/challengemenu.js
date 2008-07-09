@@ -8,6 +8,10 @@ function ChallengeMenuObj()
 	this.AnnounceUl = Challenge.AnnounceList;
 	this.PostponeUl = Challenge.PostponeList;
 
+	this.NoMatch = Challenge.NoMatch;
+	this.NoAnnounce = Challenge.NoAnnounce; 
+	this.NoPostpone = Challenge.NoPostpone;
+
 	this.MenuVisibile = false;
 	this.MatchVisibile = false;
 	this.AnnounceVisibile = false;
@@ -20,13 +24,19 @@ function ChallengeMenuObj()
 	// Methods
 	this.addMatch = INTERFACE_AddMatchOffer;
 	this.removeMatch = INTERFACE_RemoveMatch;
+	this.showNoMatch = INTERFACE_ShowNoMatch;
+	this.hideNoMatch = INTERFACE_HideNoMatch;
 
 	this.addAnnounce = INTERFACE_AddAnnounce;
 	this.removeAnnounce = INTERFACE_RemoveAnnounce;
+	this.showNoAnnounce = INTERFACE_ShowNoAnnounce;
+	this.hideNoAnnounce = INTERFACE_HideNoAnnounce;
 
 	this.addPostpone = INTERFACE_AddPostpone;
 	this.removePostpone = INTERFACE_RemovePostpone;
 	this.updatePostpone = INTERFACE_UpdatePostpone;
+	this.showNoPostpone = INTERFACE_ShowNoPostpone;
+	this.hideNoPostpone = INTERFACE_HideNoPostpone;
 
 	this.showMenu = INTERFACE_ShowChallengeMenu;
 	this.hideMenu = INTERFACE_HideChallengeMenu;
@@ -54,18 +64,24 @@ function INTERFACE_CreateChallengeMenu()
 	var AnnounceLine = UTILS_CreateElement("span", null,null," - ");
 	var AnnounceButton = UTILS_CreateElement("span", "announce",null,UTILS_GetText("challenge_menu_announce"));
 
+	var NoMatch = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_match"));
+	var NoAnnounce = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_announce"));
+	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
+
 	MatchOfferList.appendChild(MatchOfferTitle);
+	MatchOfferList.appendChild(NoMatch);
 	AnnounceList.appendChild(AnnounceTitle);
 	AnnounceList.appendChild(AnnounceLine);
 	AnnounceList.appendChild(AnnounceButton);
+	AnnounceList.appendChild(NoAnnounce);
 	PostponeList.appendChild(PostponeTitle);
+	PostponeList.appendChild(NoPostpone);
 
 	ChallengeDiv.appendChild(MatchOfferList);
 	ChallengeDiv.appendChild(AnnounceList);
-
 	ChallengeDiv.appendChild(PostponeList);
 
-	return { Div:ChallengeDiv,  MatchList:MatchOfferList, AnnounceList:AnnounceList, PostponeList:PostponeList};
+	return { Div:ChallengeDiv,  MatchList:MatchOfferList, AnnounceList:AnnounceList, PostponeList:PostponeList, NoMatch:NoMatch, NoAnnounce:NoAnnounce, NoPostpone:NoPostpone};
 }
 
 function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
@@ -139,6 +155,11 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 
 	this.MatchOfferList.push(ItemObj);
 	this.MatchOfferUl.appendChild(Item);
+
+	if(this.MatchOfferList.length == 1)
+	{
+		this.hideNoMatch();
+	}
 }
 
 function INTERFACE_RemoveMatch(MatchId)
@@ -167,6 +188,10 @@ function INTERFACE_RemoveMatch(MatchId)
 	//Remove from match list
 	this.MatchOfferList.splice(i,1);
 
+	if(this.MatchOfferList.length <= 0)
+	{
+		this.showNoMatch();
+	}
 }
 
 
@@ -246,7 +271,11 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 
 	this.AnnounceList.push(ItemObj);
 	this.AnnounceUl.appendChild(Item);
-
+	
+	if(this.AnnounceList.length == 1)
+	{
+		this.hideNoAnnounce();
+	}
 }
 
 function INTERFACE_RemoveAnnounce(MatchId)
@@ -281,6 +310,7 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	var Item;
 	var PName, PCategory, PDate, PButton;
+	var Id = PostponeId;
 	var ItemObj = new Object();
 
 	Item = UTILS_CreateElement("li",null,Oponent.Color);
@@ -302,12 +332,17 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 
 	ItemObj.Item = Item;
 	ItemObj.Button = PButton;
-	ItemObj.Id = PostponeId;
+	ItemObj.Id = Id;
 	ItemObj.OponentName = Oponent.Name;
 	ItemObj.OponentColor = Oponent.Color;
 
 	this.PostponeList.push(ItemObj);
 	this.PostponeUl.appendChild(Item);
+
+	if(this.PostponeList.length == 1)
+	{
+		this.hideNoPostpone();
+	}
 }
 
 function INTERFACE_RemovePostpone(PostponeId)
@@ -335,9 +370,9 @@ function INTERFACE_RemovePostpone(PostponeId)
 	//Remove from match list
 	this.PostponeList.splice(i,1);
 
-	if(this.PostponeList.length == 0)
+	if(this.PostponeList.length <= 0)
 	{
-		this.hidePostpone();
+		this.showNoPostpone();
 	}
 }
 
@@ -441,3 +476,33 @@ function INTERFACE_HidePostponeList()
 	this.PostponeVisible = false;
 }
 
+
+function INTERFACE_ShowNoMatch()
+{
+	this.NoMatch.style.display = "block";
+}
+
+function INTERFACE_HideNoMatch()
+{
+	this.NoMatch.style.display = "none";
+}
+
+function INTERFACE_ShowNoAnnounce()
+{
+	this.NoAnnounce.style.display = "block"; 
+}
+
+function INTERFACE_HideNoAnnounce()
+{
+	this.NoAnnounce.style.display = "none"; 
+}
+
+function INTERFACE_ShowNoPostpone()
+{
+	this.NoPostpone.style.display = "block";
+}
+
+function INTERFACE_HideNoPostpone()
+{
+	this.NoPostpone.style.display = "none";
+}
