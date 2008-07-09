@@ -186,7 +186,7 @@ function ROOM_HandleMessage(XML)
 function ROOM_HandleRoomList(XML)
 {
 	var Items, Rooms, RoomName, ID,  i;
-	var Buffer;
+	var Buffer = "";
 
 	Rooms = new Array();
 
@@ -196,7 +196,7 @@ function ROOM_HandleRoomList(XML)
 	// XML with all games rooms
 	if (ID == MainData.Const.IQ_ID_GetGamesList)
 	{
-		Buffer = ROOM_HandleGameRoomList(XML);
+		Buffer += ROOM_HandleGameRoomList(XML);
 	}
 	
 	// Chat Room List
