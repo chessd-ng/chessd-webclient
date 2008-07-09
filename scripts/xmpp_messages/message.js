@@ -712,6 +712,7 @@ function MESSAGE_GameSearchCurrentGame()
 
 	XMPP += "</game></search></iq>";
 
+	return XMPP;
 }
 
 /**********************************

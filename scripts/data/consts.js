@@ -47,7 +47,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_BanUser = "BanUser";
 	Const.IQ_ID_UnbanUser = "UnbanUser";
 	Const.IQ_ID_KickUser = "KickUser";
-	Const.IQ_ID_SearchCurrenGame = "SearchCurrentGame";
+	Const.IQ_ID_SearchCurrentGame = "SearchCurrentGame";
 
 	
 	// Login errors

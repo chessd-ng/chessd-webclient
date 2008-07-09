@@ -151,6 +151,42 @@ function GAME_Move(XML)
 }
 
 /**
+* Handle Game IQ Result
+*
+* @param 	XML	The xml that contains the game result
+* @return 	void
+* @author 	Rubens Suguimoto
+*/
+function GAME_HandleGameResult(XML)
+{
+	var Id = XML.getAttribute("id");
+	var Buffer = "";
+	var Room;
+	var GameTag;
+	var i;
+	var To;
+
+	// The code above is used to parse games that player is playing;
+	// 
+	if(Id == MainData.Const.IQ_ID_SearchCurrentGame)
+	{
+		var GameTag = XML.getElementsByTagName("game");
+
+		if(GameTag.length != 0)
+		{
+			for(i=0; i< GameTag.length; i++)
+			{
+				Room = GameTag[i].getAttribute("room");
+				MainData.Status = "playing"
+				To = Room+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+				Buffer += MESSAGE_Presence(To);
+			}
+		}
+	}
+	return Buffer;
+}
+
+/**
 * Handle Game State
 * It's a good ideia to read the server's documentation before reading the code above
 *
@@ -807,6 +843,11 @@ function GAME_SendCancel(GameID)
 function GAME_SendAdjourn(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestAdjourn(GameID));
+}
+
+function GAME_SearchCurrentGame()
+{
+	CONNECTION_SendJabber(MESSAGE_GameSearchCurrentGame());
 }
 
 /**

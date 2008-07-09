@@ -99,6 +99,11 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += CHALLENGE_HandleAdjourn(XML);
 			}
+			// Game messages
+			else if (Xmlns.match(/\/chessd#game/))
+			{
+				Buffer += GAME_HandleGameResult(XML);
+			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
 				if (ID == MainData.Const.IQ_ID_GamePhoto)
