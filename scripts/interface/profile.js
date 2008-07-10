@@ -327,8 +327,10 @@ function INTERFACE_ShowProfileWindow(Profile)
 	TopDiv.appendChild(TopRightDiv);
 	
 	// Counter Div
-	CounterDiv.appendChild(CounterInput);
-	CounterDiv.appendChild(CounterLabel);
+	if (User) {
+		CounterDiv.appendChild(CounterInput);
+		CounterDiv.appendChild(CounterLabel);
+	}
 	
 	// Who Left and Right elements
 	WhoLeftDiv.appendChild(WhoAmILabel);
@@ -536,7 +538,10 @@ function INTERFACE_ProfileSetDesc(Desc)
 	{
 		this.Desc.innerHTML = Desc;
 	}
-	this.Counter.value = 200 -this.Desc.value.length;
+	if (this.Username.innerHTML == MainData.Username)
+	{
+		this.Counter.value = 200 -this.Desc.value.length;
+	}
 }
 
 /**
