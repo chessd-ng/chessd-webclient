@@ -538,7 +538,7 @@ function INTERFACE_ProfileSetDesc(Desc)
 	{
 		this.Desc.innerHTML = Desc;
 	}
-	if (this.Username.innerHTML == MainData.Username)
+	if (this.Nick.innerHTML == MainData.Username)
 	{
 		this.Counter.value = 200 -this.Desc.value.length;
 	}
