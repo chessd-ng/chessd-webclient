@@ -253,6 +253,16 @@
 	padding-left		: 26px;
 }
 
+#CreateRoomDiv #OptionsDiv #CounterDiv {
+	margin-top : 3px;
+	margin-left : 58px;
+}
+
+#CreateRoomDiv .counter_input {
+	text-align : right;
+	color : #216778;
+}
+
 #CreateRoomDiv #OptionsDiv p {
 	padding-top		: 10px;
 	padding-bottom		: 3px;
@@ -263,6 +273,13 @@
 	padding-top		: 30px;
 	padding-bottom		: 5px;
 	text-align		: center;
+}
+
+#CreateRoomDiv #OptionsDiv #CounterDiv span {
+	font-size : 9px;
+	font-style : italic;
+	color : #216778;
+	padding-left : 3px;
 }
 
 #CancelRoomDiv #ButtonsDiv {

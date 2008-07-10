@@ -18,6 +18,7 @@
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
 		<window_search>Buscar</window_search>
+		<window_character>caractere(s)</window_character>
 	</window>
 	<login>
 		<login_title>Seja bem-vindo ao Xadrez Livre!</login_title>
@@ -104,6 +105,7 @@
 		<room_invalid_length>Tamanho máximo de 30 caracteres.</room_invalid_length>
 		<room_show_user_list>Ver usuários da sala</room_show_user_list>
 		<room_hide_user_list>Ocultar usuários da sala</room_hide_user_list>
+		<room_counter>caractere(s)</room_counter>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
