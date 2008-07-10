@@ -54,6 +54,11 @@
 	width		: 210px;
 }
 
+#ChallengeMenu li:hover
+{
+	background-color: #D4F3F5;
+}
+
 #ChallengeMenu li.offline
 {
 	color		: #777777;
