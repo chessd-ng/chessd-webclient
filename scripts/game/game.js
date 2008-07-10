@@ -717,6 +717,9 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 		Game.Game.StartTimer();
 	}
 
+	// Hide loading div
+	Game.Game.HideLoadingMove();
+
 	return "";
 }
 
@@ -1012,3 +1015,17 @@ function GAME_HandleVCardPhoto(XML)
 	return "";
 }
 
+
+function GAME_ShowLoadingMove(Id)
+{
+	var Game = MainData.GetGame(Id)
+
+	Game.Game.ShowLoadingMove();
+}
+
+function GAME_HideLoadingMove(Id)
+{
+	var Game = MainData.GetGame(Id)
+
+	Game.Game.HideLoadingMove();
+}

@@ -143,6 +143,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 				// Return to deafult cursor
 				document.body.style.cursor = "default";
 
+				// Show loading move message
+				GAME_ShowLoadingMove(MainData.CurrentGame.Id);
+
 				delete OldPos;
 
 				return false;
@@ -200,6 +203,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 		// Return to deafult cursor
 		document.body.style.cursor = "default";
+
+		// Show loading move message
+		GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 
 		delete OldPos;
 

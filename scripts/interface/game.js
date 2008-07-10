@@ -181,6 +181,8 @@ function INTERFACE_CreateGame()
 	var LoadingMoveDiv = UTILS_CreateElement("div","GameLoadingMove");
 	var LoadingSpan = UTILS_CreateElement("span",null,null,UTILS_GetText("game_loading_move"));
 
+	//LoadingMoveDiv.style.display = "none";
+
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
 
@@ -1438,7 +1440,6 @@ function INTERFACE_ShowLoadingMove()
 /**
 * Hide loading move box
 *
-* @param 	Move string (i.e: a2a3)
 * @return	void
 * @author	Rubens Suguimoto
 */
