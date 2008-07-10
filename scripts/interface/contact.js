@@ -29,6 +29,7 @@ function ContactObj()
 	// Attributes
 	this.div = ContactContent.MainDiv;
 	this.listDiv = ContactContent.ListDiv;
+	this.loadingDiv = ContactContent.LoadingDiv;
 
 	this.groups = new Array();
 	
@@ -52,6 +53,9 @@ function ContactObj()
 
 	this.show = INTERFACE_ShowContactList;
 	this.hide = INTERFACE_HideContactList;
+
+	this.showLoading = INTERFACE_ShowContactLoading;
+	this.hideLoading = INTERFACE_HideContactLoading;
 }
 
 function INTERFACE_AddContactGroup(GroupName)
@@ -284,6 +288,15 @@ function INTERFACE_HideContactList()
 	this.div.style.display = "none";
 }
 
+function INTERFACE_ShowContactLoading()
+{
+	this.loadingDiv.style.display = "block";
+}
+
+function INTERFACE_HideContactLoading()
+{
+	this.loadingDiv.style.display = "none";
+}
 
 
 /*******************************************
@@ -293,7 +306,9 @@ function INTERFACE_HideContactList()
 // Contact Online Object
 function ContactOnlineObj()
 {
-	this.div = INTERFACE_CreateOnlineContent();
+	var ContactOnline = INTERFACE_CreateOnlineContent();
+	this.div = ContactOnline.Div;
+	this.loadingDiv = ContactOnline.LoadingDiv;
 
 	this.userList = new UserListObj(this.div);
 	this.userList.show();
@@ -302,6 +317,9 @@ function ContactOnlineObj()
 
 	this.show = INTERFACE_ShowOnlineList;
 	this.hide = INTERFACE_HideOnlineList;
+
+	this.showLoading = INTERFACE_ShowContactLoading;
+	this.hideLoading = INTERFACE_HideContactLoading;
 }
 
 
@@ -818,7 +836,7 @@ function INTERFACE_CreateContactContent()
 	var Hr;
 	var SearchP, SearchS;
 	var ListDiv;
-
+	var LoadingDiv;
 
 	//Contact content
 	ContactInside = UTILS_CreateElement("div", "ContactInside");
@@ -865,14 +883,17 @@ function INTERFACE_CreateContactContent()
 	ContactsDiv.appendChild(ContactOfflineDiv);
 	ContactInside.appendChild(ContactsDiv);
 	*/
+	LoadingDiv = INTERFACE_CreateLoadingBox("contact_loading","Carregando lista de contatos...");
+
 	ContactInside.appendChild(ListDiv);
 	ContactInside.appendChild(Hr);
 	ContactInside.appendChild(SearchP);
+	ContactInside.appendChild(LoadingDiv);
 
 	//HIDE CONTACT DIV
 	ContactInside.style.display = "none";
 
-	return { MainDiv:ContactInside, ListDiv:ListDiv};
+	return { MainDiv:ContactInside, ListDiv:ListDiv, LoadingDiv:LoadingDiv};
 }
 
 
@@ -890,7 +911,7 @@ function INTERFACE_CreateOnlineContent()
 	var OrderNick, OrderRating, OrderRatingOpt, Search;
 	var Hr;
 	var SearchP, SearchS;
-
+	var LoadingDiv;
 
 	//Contact content
 	ContactInside = UTILS_CreateElement("div", "ContactOnline");
@@ -959,13 +980,17 @@ function INTERFACE_CreateOnlineContent()
 	ContactInside.appendChild(OrderRating);
 	ContactInside.appendChild(ContactsDiv);
 	*/
+
+	LoadingDiv = INTERFACE_CreateLoadingBox("contact_online_loading","Carregando lista de usuários online...");
+	
 	ContactInside.appendChild(Hr);
 	ContactInside.appendChild(SearchP);
+	ContactInside.appendChild(LoadingDiv);
 
 	//HIDE CONTACT DIV
 	//ContactInside.style.display = "none";
 
-	return ContactInside;
+	return { Div:ContactInside, LoadingDiv:LoadingDiv};
 }
 
 

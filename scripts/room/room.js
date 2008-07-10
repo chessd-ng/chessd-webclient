@@ -37,7 +37,8 @@ function ROOM_HandleRoomPresence(XML)
 	var Buffer = "";
 
 	var Component;
-	var Room;
+	
+	var LoadingBox;
 
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
@@ -65,6 +66,17 @@ function ROOM_HandleRoomPresence(XML)
 		Role = "participant";
 		Affiliation = "none";
 	}
+
+	// Remove loading box if user enter in general room;
+	if(RoomName == MainData.RoomDefault)
+	{
+		LoadingBox = document.getElementById("room_loading");
+		if(LoadingBox != null)
+		{
+//			LoadingBox.parentNode.removeChild(LoadingBox);
+		}
+	}
+
 
 	// Status of user
 	if (Show.length > 0)

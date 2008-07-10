@@ -415,3 +415,21 @@
 	text-align		: center;
 	position		: relative;
 }
+
+#contact_loading, #contact_online_loading
+{
+	width			: 125px;
+	height			: 35px;
+
+	padding			: 10px;
+
+	position		: absolute;
+	background-color	: #FFF;
+	border			: 1px solid #216778;
+
+	color			: #216778;
+	font-size		: 12px;
+
+	top			: 60px;
+	left			: 20px;
+}
