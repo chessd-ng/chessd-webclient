@@ -82,6 +82,8 @@
 		<contact_by_user>Apelido</contact_by_user>
 		<contact_both>Ambos</contact_both>
 		<contact_change_profile>Alterar meu perfil</contact_change_profile>
+		<contact_loading>Carregando lista de contatos...</contact_loading>
+		<contact_online_loading>Carregando lista de usuários online...</contact_online_loading>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
@@ -106,6 +108,7 @@
 		<room_show_user_list>Ver usuários da sala</room_show_user_list>
 		<room_hide_user_list>Ocultar usuários da sala</room_hide_user_list>
 		<room_counter>caractere(s)</room_counter>
+		<room_loading>Carregando sala...</room_loading>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
@@ -157,7 +160,7 @@
 		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
-		<challenge_menu_no_match>Não há partidas feitas.</challenge_menu_no_match>
+		<challenge_menu_no_match>Não há desafios feitas.</challenge_menu_no_match>
 		<challenge_menu_no_announce>Não há partidas anunciadas.</challenge_menu_no_announce>
 		<challenge_menu_no_postpone>Não há partidas adiadas.</challenge_menu_no_postpone>
 	</challenge>
@@ -323,6 +326,7 @@
 		<oldgame_invalid_end>Data final inválida!</oldgame_invalid_end>
 		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
+		<oldgame_loading>Buscando partidas antigas...</oldgame_loading>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>
