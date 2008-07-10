@@ -89,7 +89,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			// Change cursor to move
 			document.body.style.cursor = "move";
 			// Set piece zIndex
-			Obj.style.style.zIndex = 1;
+			Obj.style.zIndex = 1;
 
 			// If mousedown was set, and piece was moved
 			// then set mouseup to stop drag when release the button
