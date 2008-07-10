@@ -205,56 +205,6 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 		return false;
 	}
-/*
-	// Stop drag
-	document.onmouseup = function(ev) {	
-		var NewPos = new Object();
-		var NewCol, NewLine, OldCol, OldLine;
-
-		// Getting mouse coord
-		MousePos = UTILS_GetMouseCoords(ev);
-		MousePos.x -= OffsetLeft;
-		MousePos.y -= OffsetTop;
-		MousePos.x += Size/2;
-		MousePos.y += Size/2;
-
-		// If release outside the board
-		if (MousePos.x < 0 || MousePos.x > 8*Size || MousePos.y < 0 || MousePos.y > 8*Size)
-		{
-			NewPos.x = OldPos.x;
-			NewPos.y = OldPos.y;
-		}
-		else
-		{
-			NewPos.x = MousePos.x - (MousePos.x % Size);
-			NewPos.y = MousePos.y - (MousePos.y % Size);
-		}
-		// Previous position
-		OldLine = 8 - (OldPos.y / Size);
-		OldCol = (OldPos.x / Size) + 1;
-
-		// NewPosition
-		NewLine = 8 - (NewPos.y / Size);
-		NewCol = (NewPos.x / Size) + 1;
-
-		// Set object in the new position
-		Obj.style.top =  NewPos.y +"px";
-		Obj.style.left = NewPos.x +"px";
-
-		// Remove listener
-		Obj.onmouseup = null;
-		document.onmousemove = null;
-		document.onmouseup = null;
-
-		// If piece has been moved
-		if ((NewCol != OldCol) || (NewLine != OldLine))
-		{
-			// Send movement
-			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
-		}
-		return false;
-	}
-*/
 }
 
 

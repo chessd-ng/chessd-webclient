@@ -576,3 +576,14 @@
 #MoveListLast:hover {
 	background-image	: url("../images/board/last_active.png");
 }
+
+#GameLoadingMove{
+	position		: absolute;
+	width			: 300px;
+	height			: 100px;
+
+	font-size		: 13px;
+	color			: #216778
+
+	background-color	: #FFF;
+}

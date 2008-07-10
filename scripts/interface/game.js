@@ -35,6 +35,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.Timer = null;
 	this.Turn = "white";
 	this.LastMove = null;
+	this.LoadingMove = null;
 
 	this.MyColor = YourColor;
 	this.Id = GameID;
@@ -125,6 +126,9 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.SetLastMove = INTERFACE_LastMove;
 	this.FindBlock = INTERFACE_FindBlock;
 
+	this.ShowLoadingMove = INTERFACE_ShowLoadingMove;
+	this.HideLoadingMove = INTERFACE_HideLoadingMove;
+
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
 	this.constructor();
@@ -173,6 +177,10 @@ function INTERFACE_CreateGame()
 	// Options and Move list Tab
 	var Tab = INTERFACE_CreateTab(Options.Div, MoveList.Div);
 
+	// Loading Move box
+	var LoadingMoveDiv = UTILS_CreateElement("div","GameLoadingMove");
+	var LoadingSpan = UTILS_CreateElement("span",null,null,UTILS_GetText("game_loading_move"));
+
 	// Setting board width, depending on piece size
 	GameDiv.style.width = (this.PieceSize*8) + 195 + 20 + "px";
 
@@ -195,7 +203,10 @@ function INTERFACE_CreateGame()
 	GameInfo.appendChild(GameClose);
 
 	GameDiv.appendChild(GameInfo);
-
+	
+	LoadingMoveDiv.appendChild(LoadingSpan);
+	GameDiv.appendChild(LoadingMoveDiv);
+	
 
 	// Setting attributes
 	this.Game = GameDiv;
@@ -208,6 +219,7 @@ function INTERFACE_CreateGame()
 	this.photo.bphoto = Photo.BPhoto;
 	this.tab = Tab;
 	this.MoveList = MoveList.List;
+	this.LoadingMove = LoadingMoveDiv;
 	this.EventButtons = Options.ButtonList;
 	//Add "X" close buttons to EventButtons
 	this.EventButtons.push(GameClose);
@@ -1411,4 +1423,26 @@ function INTERFACE_FindBlock(id)
 	{
 		return Blocks[i];
 	}
+}
+
+/**
+* Show loading move box
+*
+* @return	void
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_ShowLoadingMove()
+{
+	this.LoadingMove.style.display = "block";
+}
+/**
+* Hide loading move box
+*
+* @param 	Move string (i.e: a2a3)
+* @return	void
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_HideLoadingMove()
+{
+	this.LoadingMove.style.display = "none";
 }

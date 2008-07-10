@@ -234,6 +234,7 @@
 		<game_result_canceled-timed-out>A partida foi cancelada por inatividade</game_result_canceled-timed-out>
 		<game_result_adjourned-agreement>Os jogadores concordaram em adiar a partida</game_result_adjourned-agreement>
 		<game_result_adjourned-shutdown>A partida foi adiada porque o servidor está sendo desligado</game_result_adjourned-shutdown>
+		<game_loading_move>Carregando movimento...</game_loading_move>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informações</profile_window>
