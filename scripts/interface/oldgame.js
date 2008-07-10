@@ -77,6 +77,9 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	var Who;
 
+	var LoadingBox;
+	var NotFounded;
+
 	// Main Div
 	Div = UTILS_CreateElement('div','OldGamesDiv');
 
@@ -267,6 +270,10 @@ function INTERFACE_ShowOldGameWindow(Id)
 	
 	CloseDiv = UTILS_CreateElement('div','CloseDiv');
 
+	// Loading Box
+	LoadingBox = INTERFACE_CreateLoadingBox("oldgame_loading","Buscando jogos antigos...");
+	LoadingBox.style.display = "block";
+
 	// Mount Tree of Elements
 	
 	// Select Div
@@ -335,6 +342,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// Table Div
 //	TableDiv.appendChild(THead);
 	TableDiv.appendChild(TBodyDiv);
+	TableDiv.appendChild(LoadingBox);
 	TableDiv.appendChild(TFoot);
 
 	NoResultDiv.appendChild(NoFound);
@@ -679,5 +687,32 @@ function INTERFACE_SetSearchButton(Node)
 			}
 			Node.Offset = 0;
 			CONNECTION_SendJabber(MESSAGE_GetOldGames(Node.Id,Node.P1, Node.P2,Node.NGames, Node.Offset, Node.Color, Node.To, Node.From)); 
+
+			// Show loading message
+			INTERFACE_ShowOldgameLoading();
+
 		}, "false");
 }
+
+
+function INTERFACE_ShowOldgameLoading()
+{
+	var LoadingBox = document.getElementById("oldgame_loading");
+
+	if(LoadingBox != null)
+	{
+		LoadingBox.style.display = "block";
+	}
+}
+
+function INTERFACE_HideOldgameLoading()
+{
+	var LoadingBox = document.getElementById("oldgame_loading");
+
+	if(LoadingBox != null)
+	{
+		LoadingBox.style.display = "none";
+	}
+
+}
+

@@ -215,3 +215,10 @@
 	text-align: center;
 	padding-top: 4mm;
 }
+
+#oldgame_loading, #oldgame_not_found{
+	width			: 464px;
+	border-style		: solid;
+	border-width		: 0px thin;
+	border-color		: #216778;
+}

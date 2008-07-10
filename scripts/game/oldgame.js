@@ -37,6 +37,7 @@ function OLDGAME_HandleSearchOldGame(XML)
 	var Result;
 	var More;
 	var Id, SearchGameWindow;
+	var LoadingBox;
 
 
 	// Get window's Id
@@ -109,6 +110,9 @@ function OLDGAME_HandleSearchOldGame(XML)
 	
 		GameList.push(GameInfoTmp);
 	}
+
+	// Remove loading message
+	INTERFACE_HideOldgameLoading();
 
 //	WINDOW_OldGameResult(GameList);
 
