@@ -301,6 +301,8 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 
 		OLDGAME_FirstBoard();
 	}
+
+	MainData.CurrentOldGame.Game.HideLoadingMove();
 	return Buffer;
 }
 
@@ -405,6 +407,7 @@ function OLDGAME_EndGame(Id)
 		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime)
 	}
 
+	NewOldGame.hideLoadingMove();
 }
 
 

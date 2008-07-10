@@ -506,6 +506,9 @@ function GAME_HandleGameError(XML)
 
 			// Undo last move
 			Game.Game.UndoMove();
+
+			// Remove loading move message
+			GAME_HideLoadingMove(GameID);
 		}
 		// If game is over
 		else if (Over.length > 0)

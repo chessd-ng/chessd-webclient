@@ -272,7 +272,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	CloseDiv = UTILS_CreateElement('div','CloseDiv');
 
 	// Loading Box
-	LoadingBox = INTERFACE_CreateLoadingBox("oldgame_loading","Buscando jogos antigos...");
+	LoadingBox = INTERFACE_CreateLoadingBox("oldgame_loading",UTILS_GetText("oldgame_loading"));
 	LoadingBox.style.display = "block";
 
 	// Mount Tree of Elements

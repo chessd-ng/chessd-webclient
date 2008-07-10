@@ -138,13 +138,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 				{
 					// Send movement
 					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+					// Show loading move message
+					GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 				}
 
 				// Return to deafult cursor
 				document.body.style.cursor = "default";
 
-				// Show loading move message
-				GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 
 				delete OldPos;
 
@@ -199,13 +199,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		{
 			// Send movement
 			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+			// Show loading move message
+			GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 		}
 
 		// Return to deafult cursor
 		document.body.style.cursor = "default";
 
-		// Show loading move message
-		GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 
 		delete OldPos;
 

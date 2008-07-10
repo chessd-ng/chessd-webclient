@@ -784,7 +784,7 @@ function INTERFACE_CreateRooms()
 	
 	RoomsList.appendChild(RoomsListArrow);
 
-	RoomsDiv.appendChild(INTERFACE_CreateLoadingBox("room_loading","Carregando sala..."));
+	RoomsDiv.appendChild(INTERFACE_CreateLoadingBox("room_loading",UTILS_GetText("room_loading")));
 	RoomsDiv.appendChild(RoomsList);
 	//RoomsDiv.appendChild(RoomDiv.RoomDiv);
 

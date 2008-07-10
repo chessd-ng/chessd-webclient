@@ -481,7 +481,7 @@ function INTERFACE_CreateContactContent()
 	SearchP.appendChild(SearchS);
 	Hr = UTILS_CreateElement("hr");
 
-	LoadingDiv = INTERFACE_CreateLoadingBox("contact_loading","Carregando lista de contatos...");
+	LoadingDiv = INTERFACE_CreateLoadingBox("contact_loading",UTILS_GetText("contact_loading"));
 
 	// Creating DOM tree
 	ContactInside.appendChild(ListDiv);
@@ -523,7 +523,7 @@ function INTERFACE_CreateOnlineContent()
 	SearchP.appendChild(SearchS);
 	Hr = UTILS_CreateElement("hr");
 
-	LoadingDiv = INTERFACE_CreateLoadingBox("contact_online_loading","Carregando lista de usuários online...");
+	LoadingDiv = INTERFACE_CreateLoadingBox("contact_online_loading",UTILS_GetText("contact_online_loading"));
 	
 	// Creating DOM tree
 	ContactInside.appendChild(Hr);
