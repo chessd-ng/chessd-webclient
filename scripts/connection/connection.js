@@ -315,7 +315,11 @@ function CONNECTION_ReceiveXml()
 		// Server down
 		else if (MainData.HttpRequest.status == 503)
 		{
-			alert(UTILS_GetText("error_disconnected"));
+			// Show this message if user is connected
+			if(MainData.ConnectionStatus == 0)
+			{
+				alert(UTILS_GetText("error_disconnected"));
+			}
 		}
    	}
 }

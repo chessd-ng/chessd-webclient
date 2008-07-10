@@ -37,7 +37,8 @@ function ROOM_HandleRoomPresence(XML)
 	var Buffer = "";
 
 	var Component;
-	var Room;
+	
+	var LoadingBox;
 
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
@@ -65,6 +66,17 @@ function ROOM_HandleRoomPresence(XML)
 		Role = "participant";
 		Affiliation = "none";
 	}
+
+	// Remove loading box if user enter in general room;
+	if(RoomName == MainData.RoomDefault)
+	{
+		LoadingBox = document.getElementById("room_loading");
+		if(LoadingBox != null)
+		{
+//			LoadingBox.parentNode.removeChild(LoadingBox);
+		}
+	}
+
 
 	// Status of user
 	if (Show.length > 0)
@@ -186,7 +198,7 @@ function ROOM_HandleMessage(XML)
 function ROOM_HandleRoomList(XML)
 {
 	var Items, Rooms, RoomName, ID,  i;
-	var Buffer;
+	var Buffer = "";
 
 	Rooms = new Array();
 
@@ -196,7 +208,7 @@ function ROOM_HandleRoomList(XML)
 	// XML with all games rooms
 	if (ID == MainData.Const.IQ_ID_GetGamesList)
 	{
-		Buffer = ROOM_HandleGameRoomList(XML);
+		Buffer += ROOM_HandleGameRoomList(XML);
 	}
 	
 	// Chat Room List

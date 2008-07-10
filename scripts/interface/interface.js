@@ -77,3 +77,15 @@ function INTERFACE_StopInterface()
 		Windows[i].parentNode.removeChild(Windows[i]);
 	}
 }
+
+
+
+function INTERFACE_CreateLoadingBox(Id, Text)
+{
+	var Div = UTILS_CreateElement("div",Id,"loading_box");
+	var Span = UTILS_CreateElement("Span",null,null,Text);
+
+	Div.appendChild(Span);
+
+	return Div;
+}

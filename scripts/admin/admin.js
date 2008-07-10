@@ -76,6 +76,7 @@ function ADMIN_HandleInfo(XML)
 			INTERFACE_ShowAdminIcon();
 		}
 	}
+	return "";
 }
 
 function ADMIN_Notification(XML)

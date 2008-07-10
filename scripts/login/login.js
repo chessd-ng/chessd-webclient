@@ -145,6 +145,9 @@ function LOGIN_Interface()
 
 	// Create challenge menu object
 	CHALLENGE_StartChallenge();
+
+	// Search for some game that player is playing
+	GAME_SearchCurrentGame();
 }
 
 

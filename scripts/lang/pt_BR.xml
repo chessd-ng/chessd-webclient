@@ -157,6 +157,9 @@
 		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
+		<challenge_menu_no_match>Não há partidas feitas.</challenge_menu_no_match>
+		<challenge_menu_no_announce>Não há partidas anunciadas.</challenge_menu_no_announce>
+		<challenge_menu_no_postpone>Não há partidas adiadas.</challenge_menu_no_postpone>
 	</challenge>
 	<game>
 		<game_draw>Requisição de empate</game_draw>
@@ -233,6 +236,7 @@
 		<game_result_canceled-timed-out>A partida foi cancelada por inatividade</game_result_canceled-timed-out>
 		<game_result_adjourned-agreement>Os jogadores concordaram em adiar a partida</game_result_adjourned-agreement>
 		<game_result_adjourned-shutdown>A partida foi adiada porque o servidor está sendo desligado</game_result_adjourned-shutdown>
+		<game_loading_move>Carregando movimento...</game_loading_move>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informações</profile_window>

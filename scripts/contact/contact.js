@@ -162,6 +162,9 @@ function CONTACT_AddUserOnlineList(User, Status)
 	{
 		ContactOnline.userList.updateUser(User, Status, Rating, Type);
 	}
+
+	// Hide loading box
+	ContactOnline.hideLoading();
 }
 
 /**
@@ -698,6 +701,8 @@ function CONTACT_LoadUserContactList()
 		MainData.Contact.addUser(User.Group, User.Username, User.Status, User.Rating.Blitz, User.Type);
 
 	}
+
+	MainData.Contact.hideLoading();
 
 }
 
