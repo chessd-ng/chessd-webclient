@@ -812,6 +812,9 @@ function INTERFACE_ShowCreateRoomWindow()
 	var Label, Input, Br;
 	var Description, Textarea;
 
+	var CounterDiv;
+	var CounterInput, CounterLabel;
+
 	var ButtonsDiv;
 	var Create, Cancel;
 
@@ -829,9 +832,18 @@ function INTERFACE_ShowCreateRoomWindow()
 	Input = UTILS_CreateElement('input','CreateRoomInputName');
 	Br = UTILS_CreateElement('br');
 
+	CounterDiv = UTILS_CreateElement('div', 'CounterDiv');
+	CounterInput = UTILS_CreateElement("input",null,"counter_input");
+	CounterInput.value = "0";
+	CounterInput.setAttribute("size",2);
+	CounterInput.readOnly = true;
+	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+
 	Input.type = "text";
-	Input.size = "22";
+	Input.setAttribute("size",22);
+	Input.maxLength = 30;
 	Input.onkeypress = function(event) {
+
 		if (event.keyCode == 13) // enter key pressed
 		{
 			if (Input.value == '' || Input.value == null)
@@ -844,12 +856,14 @@ function INTERFACE_ShowCreateRoomWindow()
 			if (RoomName == UTILS_GetText("room_default"))
 			{
 				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
+				CounterInput.value = 0;
 				Input.value = "";
 				return;
 			}
 			if (RoomName.length > 30)
 			{
 				WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
+				CounterInput.value = 0;
 				Input.value = "";
 				return;
 			}
@@ -861,6 +875,10 @@ function INTERFACE_ShowCreateRoomWindow()
 		}
 	};
 
+	Input.onkeyup = function() {
+		CounterInput.value = 30 - Input.value.length;
+	}
+	
 	// TODO - not implemented
 	// Room Description Input 
 	Description = UTILS_CreateElement('p',null,null,UTILS_GetText('room_description'));
@@ -888,11 +906,13 @@ function INTERFACE_ShowCreateRoomWindow()
 		{
 			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_name'));
 			Input.value = "";
+			CounterInput.value = 0;
 			return;
 		}
 		else if (RoomName.length > 30)
 		{
 			WINDOW_Alert(UTILS_GetText('room_error'),UTILS_GetText('room_invalid_length'));
+			CounterInput.value = 0;
 			Input.value = "";
 			return;
 		}
@@ -909,10 +929,16 @@ function INTERFACE_ShowCreateRoomWindow()
 	Cancel.value = UTILS_GetText('window_cancel');
 
 	// Mount elements tree
+	
+	// Counter Div
+	CounterDiv.appendChild(CounterInput);
+	CounterDiv.appendChild(CounterLabel);
+
 	// Options Div
 	OptionsDiv.appendChild(Label);
 	OptionsDiv.appendChild(Input);
 	OptionsDiv.appendChild(Br);
+	OptionsDiv.appendChild(CounterDiv);
 //	OptionsDiv.appendChild(Description);
 //	OptionsDiv.appendChild(Textarea);
 

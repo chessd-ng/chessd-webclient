@@ -45,6 +45,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 	var Username;
 	var Nickname;
 
+	var CounterDiv;
+	var CounterInput, CounterLabel;
+
 	var WhoDiv;
 	var WhoLeftDiv;
 	var WhoAmILabel;
@@ -143,9 +146,24 @@ function INTERFACE_ShowProfileWindow(Profile)
 		Username = 	UTILS_CreateElement('input',null,'inf');
 		Username.value = Profile.Name;
 		
+		CounterDiv = UTILS_CreateElement('div', 'CounterDiv');
+		CounterInput = UTILS_CreateElement("input",null,"counter_input");
+		CounterInput.value = "0";
+		CounterInput.setAttribute("size",3);
+		CounterInput.readOnly = true;
+		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+
 		WhoAmIUser = 	UTILS_CreateElement('textarea',null,'inf_whoami');
 		WhoAmIUser.value = Profile.Description;
-		WhoAmIUser.rows="6";
+		WhoAmIUser.rows=6;
+
+		WhoAmIUser.onkeyup = function() {
+			if (200 - WhoAmIUser.value.length < 0)
+			{
+				WhoAmIUser.value = WhoAmIUser.value.substr(0,200);
+			}
+			CounterInput.value = 200 - WhoAmIUser.value.length;
+		}
 	
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
 		SaveProfile.type = "button";
@@ -308,9 +326,17 @@ function INTERFACE_ShowProfileWindow(Profile)
 	TopDiv.appendChild(PhotoDiv);
 	TopDiv.appendChild(TopRightDiv);
 	
+	// Counter Div
+	CounterDiv.appendChild(CounterInput);
+	CounterDiv.appendChild(CounterLabel);
+	
 	// Who Left and Right elements
 	WhoLeftDiv.appendChild(WhoAmILabel);
 	WhoRightDiv.appendChild(WhoAmIUser);
+	if (User)
+	{
+		WhoRightDiv.appendChild(CounterDiv);
+	}
 	
 	// Who elements
 	WhoDiv.appendChild(WhoLeftDiv);
@@ -363,6 +389,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.Group = GroupSpan;
 	Elements.Title = TitleSpan;
 	Elements.TitleImg = TypeImg;
+	Elements.Counter = CounterInput;
 	
 	Elements.SetUser = INTERFACE_ProfileSetUser;
 	Elements.SetUserImg = INTERFACE_ProfileSetUserImg;
@@ -509,6 +536,7 @@ function INTERFACE_ProfileSetDesc(Desc)
 	{
 		this.Desc.innerHTML = Desc;
 	}
+	this.Counter.value = 200 -this.Desc.value.length;
 }
 
 /**

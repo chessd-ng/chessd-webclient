@@ -45,7 +45,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var L1LeftDiv;
 	var Player1Label,Player1Input;
 	var L1RightDiv;
-	var PiecesLabel, WRadio, WImg, BRadio, BImg, ARadio, ALabel;
+	var PiecesLabel, WRadio, WImg, BRadio, BImg, RRadio, ALabel, RImg;
 
 	var Layer2Div;
 	var L2LeftDiv;
@@ -151,13 +151,14 @@ function INTERFACE_ShowOldGameWindow(Id)
 	BImg = UTILS_CreateElement('img');
 	BImg.src = "images/invite_black_pawn.png";
 	
-	ARadio = UTILS_CreateElement('input');
-	ARadio.type = "radio";
-	ARadio.name = "color";
-	ARadio.value = "both";
-	ARadio.checked = true;
+	RRadio = UTILS_CreateElement('input');
+	RRadio.type = "radio";
+	RRadio.name = "color";
+	RRadio.value = "both";
+	RRadio.checked = true;
 
-	ALabel = UTILS_CreateElement('span',null,'pieces_span',UTILS_GetText('oldgame_both'));
+	RImg = UTILS_CreateElement('img');
+	RImg.src = "images/random.png";
 	// End Pieces Form
 
 	// Layer 2 Div
@@ -206,7 +207,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	NewSearch	= UTILS_CreateElement('input',null,'button');
 	NewSearch.type = "button";
 	NewSearch.value = UTILS_GetText("oldgame_new_search");
-	UTILS_AddListener(NewSearch,"click",	function() { if(Select.options.selectedIndex != 0) Player1Input.value = ""; Player2Input.value = ""; ARadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
+	UTILS_AddListener(NewSearch,"click",	function() { if(Select.options.selectedIndex != 0) Player1Input.value = ""; Player2Input.value = ""; RRadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
 	// End ButtonsDiv;
 
 	// Result Div
@@ -289,8 +290,8 @@ function INTERFACE_ShowOldGameWindow(Id)
 	L1RightDiv.appendChild(WImg);
 	L1RightDiv.appendChild(BRadio);
 	L1RightDiv.appendChild(BImg);
-	L1RightDiv.appendChild(ARadio);
-	L1RightDiv.appendChild(ALabel);
+	L1RightDiv.appendChild(RRadio);
+	L1RightDiv.appendChild(RImg);
 
 	// Layer 1 Div
 	Layer1Div.appendChild(L1LeftDiv);
@@ -377,7 +378,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Elements.Search = Search;
 	Elements.WRadio = WRadio;
 	Elements.BRadio = BRadio;
-	Elements.ARadio = ARadio;
+	Elements.RRadio = RRadio;
 
 	Elements.SetPlayer1 = INTERFACE_Player1Input;
 	Elements.SetPlayer2 = INTERFACE_Player2Input;
@@ -473,19 +474,19 @@ function INTERFACE_Color(Color)
 	{
 		this.WRadio.checked = true;
 		this.BRadio.checked = false;
-		this.ARadio.checked = false;
+		this.RRadio.checked = false;
 	}
 	else if (Color == "black")
 	{
 		this.WRadio.checked = false;
 		this.BRadio.checked = true;
-		this.ARadio.checked = false;
+		this.RRadio.checked = false;
 	}
-	else if (Color = "")
+	else if (Color == "")
 	{
 		this.WRadio.checked = false;
 		this.BRadio.checked = false;
-		this.ARadio.checked = true;
+		this.RRadio.checked = true;
 	}
 }
 

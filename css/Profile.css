@@ -61,6 +61,23 @@
 	padding-top	: 2px;
 }
 
+#ProfileDiv #WhoDiv #CounterDiv {
+	margin-top : 3px;
+	margin-left : 180px;
+}
+
+#ProfileDiv #WhoDiv #CounterDiv span {
+	font-size : 9px;
+	font-style : italic;
+	color : #216778;
+	padding-left : 3px;
+}
+
+#ProfileDiv .counter_input {
+	text-align : right;
+	color : #216778;
+}
+
 #ProfileDiv #TimeDiv,
 #ProfileDiv #BottomDiv {
 	display	:	table;
@@ -164,7 +181,7 @@
 }
 
 #ProfileDiv .header {
-	background-color: #EAF5F4;
+	background-color: #DAF3F5;
 	font-weight		: bold;
 }
 

@@ -92,7 +92,7 @@
 }
 
 #Main #Left #Contact td:hover {
-	background-color	: #EAF5F4;
+	background-color	: #DAF3F5;
 	cursor			: pointer;
 }
 
@@ -302,7 +302,7 @@
 }
 
 #UserMenuDiv p:hover {
-	background-color	: #EAF5F4;
+	background-color	: #DAF3F5;
 }
 
 #UserMenuDiv .option_disabled {
@@ -363,7 +363,7 @@
 }
 
 #SearchUserDiv td:hover {
-	background-color	: #EAF5F4;
+	background-color	: #DAF3F5;
 	border			: 0px solid #216778;
 }
 
