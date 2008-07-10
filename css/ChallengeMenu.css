@@ -167,6 +167,7 @@
 {
 	background-image: url('../images/challenge_menu/accept_disable.png');
 	background-repeat: no-repeat;
+	cursor		: default;
 }
 
 #ChallengeMenu li #date
