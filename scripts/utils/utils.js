@@ -35,6 +35,7 @@ function UTILS_IdentifyBrowser()
 	// Firefox, Mozilla, Opera, etc.
 	if (BrowserName.match("Netscape"))
 	{
+		/*
 		// Code from:
 		// http://www.javascriptkit.com/javatutors/navigator.shtml
 		if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
@@ -47,13 +48,46 @@ function UTILS_IdentifyBrowser()
 			{
 				BrowserValue = 2;
 			}
-			/*
-			else if (ffversion>=2)
-			else if (ffversion>=1)
-			*/
 			else
 			{
 				BrowserValue = 1;
+			}
+		}
+		// Quick fix to detect epiphany with gecko 1.9;
+		else if (/Epiphany[\/\s](\d+\.\d+)/.test(navigator.userAgent)||
+		        (/Galeon[\/\s](\d+\.\d+)/.test(navigator.userAgent)))
+		*/ 
+		if (
+		   (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
+		   (/Iceweasel[\/\s](\d+\.\d+)/.test(navigator.userAgent))||
+		   (/Epiphany[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
+		   (/Galeon[\/\s](\d+\.\d+)/.test(navigator.userAgent))
+		   )
+		{
+			var geckoVersion;
+			var UserAgent = navigator.userAgent.split(" ");
+			var i=0;
+
+			while((!UserAgent[i].match("rv:")) || (i<UserAgent.lengthg))
+			{
+				i++;
+			}
+			if(i != UserAgent.length)
+			{
+				geckoVersion = UserAgent[i].split(":")[1];
+				if (geckoVersion.match("1.9"))
+				{
+					BrowserValue = 2;
+				}
+				else
+				{
+					BrowserValue = 1;
+				}
+				//alert(UserAgent[i] +"\n"+i+"\n"+geckoVersion+"\n"+BrowserValue);
+			}
+			else
+			{
+				alert("User agent without Gecko version.");
 			}
 		}
 		else
