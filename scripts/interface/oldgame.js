@@ -134,28 +134,52 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	// Pieces Form
 	PiecesLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('oldgame_pieces'));
-	
-	WRadio = UTILS_CreateElement('input');
-	WRadio.type = "radio";
-	WRadio.name = "color";
-	WRadio.value = "white";
+
+	try
+	//Fix radio button for IE
+	{
+		WRadio = document.createElement('<input type="radio" name="color" value="white" />');
+	}
+	catch(err)
+	{
+		WRadio = UTILS_CreateElement('input');
+		WRadio.type = "radio";
+		WRadio.name = "color";
+		WRadio.value = "white";
+	}
 
 	WImg = UTILS_CreateElement('img');
 	WImg.src = "images/invite_white_pawn.png";
 	
-	BRadio = UTILS_CreateElement('input');
-	BRadio.type = "radio";
-	BRadio.name = "color";
-	BRadio.value = "black";
+	try
+	//Fix radio button for IE
+	{
+		BRadio = document.createElement('<input type="radio" name="color" value="black" />');
+	}
+	catch(err)
+	{
+		BRadio = UTILS_CreateElement('input');
+		BRadio.type = "radio";
+		BRadio.name = "color";
+		BRadio.value = "black";
+	}
 
 	BImg = UTILS_CreateElement('img');
 	BImg.src = "images/invite_black_pawn.png";
 	
-	RRadio = UTILS_CreateElement('input');
-	RRadio.type = "radio";
-	RRadio.name = "color";
-	RRadio.value = "both";
-	RRadio.checked = true;
+	try
+	//Fix radio button for IE
+	{
+		RRadio = document.createElement('<input type="radio" name="color" value="both" checked="checked" />');
+	}
+	catch(err)
+	{
+		RRadio = UTILS_CreateElement('input');
+		RRadio.type = "radio";
+		RRadio.name = "color";
+		RRadio.value = "both";
+		RRadio.checked = true;
+	}
 
 	RImg = UTILS_CreateElement('img');
 	RImg.src = "images/random.png";
