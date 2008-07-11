@@ -599,15 +599,31 @@ function INTERFACE_ShowSearchUserWindow()
 	OptionLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_by"));
 	Br1 = UTILS_CreateElement('br');
 	
-	Name = UTILS_CreateElement('input');
-	Name.type = "radio";
-	Name.name = "search_user";
-	Name.checked = true;
+	try
+	//Fix radio button for IE
+	{
+		Name = document.createElement('<input type="radio" name="search_user" checked="checked" />');
+	}
+	catch(err) 
+	{
+		Name = UTILS_CreateElement('input');
+		Name.type = "radio";
+		Name.name = "search_user";
+		Name.checked = true;
+	}
 	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
 
-	User= UTILS_CreateElement('input');
-	User.type = "radio";
-	User.name = "search_user";
+	try
+	//Fix radio button for IE
+	{
+		User = document.createElement('<input type="radio" name="search_user" />');
+	}
+	catch(err) 
+	{
+		User= UTILS_CreateElement('input');
+		User.type = "radio";
+		User.name = "search_user";
+	}
 	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
 
 	Both= UTILS_CreateElement('input');
@@ -674,8 +690,6 @@ function INTERFACE_ShowSearchUserWindow()
 	Div.appendChild(OptionDiv);
 	Div.appendChild(ButtonsDiv);
 
-	Input.focus();
-
 	return {Div:Div, Buttons:Buttons};
 }
 
@@ -715,11 +729,10 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	// Variables
 	var Div;
 	var TopDiv;
-	var ListDiv, Label, Table, Tr, Item, Br;
+	var ListDiv, Label,Table, TBody, Tr, Item, Br;
 	var ButtonsDiv, Button;
 	var Buttons = new Array();
 	var i;
-	this.User;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'SearchUserDiv');
@@ -729,7 +742,8 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	// Div of results
 	ListDiv = UTILS_CreateElement('div', 'ListDiv');
 
-	Table = UTILS_CreateElement('tbody');
+	Table = UTILS_CreateElement('table');
+	TBody = UTILS_CreateElement('tbody');
 
 	if (UserList == null)
 	{
@@ -743,9 +757,10 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 		{
 			// Insert each item of the user founded list in interface
 			Tr = INTERFACE_CreateUserElement(UserList[i]);
-			Table.appendChild(Tr);
+			TBody.appendChild(Tr);
 		}
 	}
+	Table.appendChild(TBody);
 
 	Br = UTILS_CreateElement('br');
 
