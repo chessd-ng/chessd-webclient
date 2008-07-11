@@ -253,11 +253,12 @@
 	position		: relative;
 	text-align		: left;
 	padding-left		: 26px;
+	width	: 145px;
 }
 
 #CreateRoomDiv #OptionsDiv #CounterDiv {
 	margin-top : 3px;
-	margin-left : 58px;
+	text-align : right;
 }
 
 #CreateRoomDiv .counter_input {
