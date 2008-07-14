@@ -221,3 +221,7 @@
 	height			: 4mm;
 }
 
+/* Window.css */
+#SubWindowBox{
+	overflow		: hidden;
+}

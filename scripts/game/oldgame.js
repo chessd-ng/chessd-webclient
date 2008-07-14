@@ -407,7 +407,7 @@ function OLDGAME_EndGame(Id)
 		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime)
 	}
 
-	NewOldGame.hideLoadingMove();
+	NewOldGame.HideLoadingMove();
 }
 
 

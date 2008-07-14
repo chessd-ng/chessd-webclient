@@ -210,13 +210,13 @@
 #OldGamesDiv #ResultDiv #TBodyDiv .header {
 	background-color: #DAF3F5;
 	font-size	:	12px;
-	cursor: normal;
+	cursor		: default;
 }
 #OldGamesDiv #ResultDiv #TBodyDiv .resultheader {
 	background-color: #DAF3F5;
 	font-size	:	13px;
 	width: 130px;
-	cursor: normal;
+	cursor		: default;
 }
 
 #OldGamesDiv .resulttd {
