@@ -421,7 +421,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	// Rating
 	try
 	{
-		RatingCheckbox = document.createElement("<input class='rating_radio' type='radio' name='rating'/>")
+		RatingCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='rating'/>")
 	}
 	catch(err)
 	{

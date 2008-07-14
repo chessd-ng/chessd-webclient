@@ -4,7 +4,7 @@
 	height			: 52mm;
 	*/
 	margin-bottom		: 5px;
-	height			: 200px;
+	width			: 198px;
 }
 
 #Main #Left #Contact #ContactTitle {
@@ -17,7 +17,7 @@
 	list-style		: none;
 	position		: relative;
 	/*width			: 102%;*/
-	width			: 205px;
+	width			: 206px;
 }
 
 #Main #Left #Contact #ContactTitle li {
@@ -29,7 +29,7 @@
 	width			: 42%;
 	padding			: 2px 2px 2px 3mm;
 	*/
-	width			: 86px;
+	width			: 88px;
 	padding			: 2px 2px 2px 12px;
 }
 
@@ -50,6 +50,7 @@
 	border-top		: 0px;
 	background-color	: #FFF;
 	position		: relative;
+	width : 192px;
 }
 
 /* User list */

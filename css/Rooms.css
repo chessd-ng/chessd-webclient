@@ -4,6 +4,8 @@
 	border			: 2px solid #216778;
 	border-top		: 0px;
 	position		: relative;
+	height : 305px; 
+	width : 200px;
 	/*height			: 320px;*/
 }
 
@@ -11,6 +13,7 @@
 	background-color	: #FFF;
 	padding-top		: 4px;
 	position		: relative;
+	width : 200px;
 	/*
 	height			: 84mm;
 	padding-top		: 1mm;
@@ -19,7 +22,7 @@
 
 /* Room title list */
 #Main #Left #Rooms #RoomList {
-	width			: 200px;
+	width			: 202px;
 	display			: table;
 	position		: relative;
 	left			: -2px;
@@ -51,7 +54,7 @@
 }
 #Main #Left #Rooms #RoomList li {
 	position		: relative;
-	width			: 82px;
+	width			: 86px;
 	height			: 14px;
 	float 			: left;
 	list-style		: none;
@@ -62,7 +65,6 @@
 	color			: #FFF;
 	background-color	: #216778;
 	border-right		: 1px solid #FFF;
-	margin-right		: 1px;
 	cursor			: pointer;
 
 	/*
@@ -96,7 +98,7 @@
 	height			: 18px;
 	padding			: 0px;
 	position		: absolute;
-	right			: 2px;
+	right			: -2px;
 	overflow		: hidden;
 	border			: 0px;
 	border-left		: 1px solid #FFF;
@@ -115,11 +117,11 @@
 /* Room List menu */
 #Main #Left #Rooms #RoomListMenu {
 	position		: absolute;
-	left			: 100%;
+	left			: 202px;
 	width			: 105px;
 	height			: 120px;
 	border			: 2px solid #216778;
-	background-color	: #DAF3F5;
+	background-color	: #EAF4F5;
 	cursor			: pointer;
 	z-index			: 3;
 	/*
@@ -201,9 +203,9 @@
 
 #Main #Left #Rooms .Room #EmoticonDiv {
 	position		: absolute;
-	left			: 100%;
-	top			: 150px;
-	width			: 145px;
+	left			: 202px;
+	top			: 137px;
+	width			: 150px;
 	height			: 150px;
 	border			: 1px solid #216778;
 	background-color	: #FFF;
@@ -251,11 +253,12 @@
 	position		: relative;
 	text-align		: left;
 	padding-left		: 26px;
+	width	: 145px;
 }
 
 #CreateRoomDiv #OptionsDiv #CounterDiv {
 	margin-top : 3px;
-	margin-left : 58px;
+	text-align : right;
 }
 
 #CreateRoomDiv .counter_input {

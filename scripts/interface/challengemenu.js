@@ -12,10 +12,10 @@ function ChallengeMenuObj()
 	this.NoAnnounce = Challenge.NoAnnounce; 
 	this.NoPostpone = Challenge.NoPostpone;
 
-	this.MenuVisibile = false;
-	this.MatchVisibile = false;
-	this.AnnounceVisibile = false;
-	this.PostponeVisibile = false;
+	this.MenuVisible = false;
+	this.MatchVisible = false;
+	this.AnnounceVisible = false;
+	this.PostponeVisible = false;
 
 	this.MatchOfferList = new Array();
 	this.AnnounceList = new Array();

@@ -6,11 +6,11 @@
 
 /* User information div */
 #Main #Left #User {
-	width			: 198px;
+	width			: 200px;
 	border			: 2px solid #216778;
 	background-color	: #FFF;
 	display			: table;
-	height			: 60px;	
+	height			: 70px;	
 }
 
 #Main #Left #User img {

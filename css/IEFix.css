@@ -31,6 +31,10 @@
 
 
 */
+#Top .icons .adjourn_game {
+	background              : url('../images/ie/adjourn_game.gif') no-repeat;
+}
+
 #Top .icons .search_game {
 	background              : url('../images/ie/search_game.gif') no-repeat;
 }

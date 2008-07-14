@@ -63,7 +63,7 @@
 
 #ProfileDiv #WhoDiv #CounterDiv {
 	margin-top : 3px;
-	margin-left : 180px;
+	text-align : right;
 }
 
 #ProfileDiv #WhoDiv #CounterDiv span {
