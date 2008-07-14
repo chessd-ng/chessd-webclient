@@ -239,6 +239,8 @@
 		<game_result_canceled-timed-out>A partida foi cancelada por inatividade</game_result_canceled-timed-out>
 		<game_result_adjourned-agreement>Os jogadores concordaram em adiar a partida</game_result_adjourned-agreement>
 		<game_result_adjourned-shutdown>A partida foi adiada porque o servidor está sendo desligado</game_result_adjourned-shutdown>
+		<game_result_white-wo>As brancas ganharam por W.O.</game_result_white-wo>
+		<game_result_black-wo>As pretas ganharam por W.O.</game_result_black-wo>
 		<game_loading_move>Carregando movimento...</game_loading_move>
 	</game>
 	<profile>
