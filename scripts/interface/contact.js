@@ -274,7 +274,8 @@ function INTERFACE_ShowContactList()
 
 	// The code above is used in specific case of this interface.
 	// Contact list should be in "Contact" div.
-	ParentTmp = document.getElementById("Contact");
+//	ParentTmp = document.getElementById("Contact");
+	ParentTmp = document.getElementById("UserLists");
 	if(this.div.parentNode != ParentTmp)
 	{
 		ParentTmp.appendChild(this.div);
@@ -329,7 +330,8 @@ function INTERFACE_ShowOnlineList()
 
 	// The code above is used in specific case of this interface.
 	// Contact list should be in "Contact" div.
-	ParentTmp = document.getElementById("Contact");
+//	ParentTmp = document.getElementById("Contact");
+	ParentTmp = document.getElementById("UserLists");
 	if(this.div.parentNode != ParentTmp)
 	{
 		ParentTmp.appendChild(this.div);
@@ -420,6 +422,7 @@ function INTERFACE_CreateContact()
 	var ContactDiv, ContactTitle;
 	var ContactTitleOnline, ContactTitleContacts;
 	var ContactTitleOnlineSpan, ContactTitleContactsSpan;
+	var Lists;
 
 	// Main div
 	ContactDiv = UTILS_CreateElement("div", "Contact");
@@ -448,6 +451,8 @@ function INTERFACE_CreateContact()
 		MainData.ContactOnline.show();
 	};
 
+	Lists = UTILS_CreateElement("div","UserLists");
+
 	// Creating DOM tree
 	ContactTitleOnline.appendChild(ContactTitleOnlineSpan);
 	ContactTitleContacts.appendChild(ContactTitleContactsSpan);
@@ -455,6 +460,7 @@ function INTERFACE_CreateContact()
 	ContactTitle.appendChild(ContactTitleContacts);
 
 	ContactDiv.appendChild(ContactTitle);
+	ContactDiv.appendChild(Lists);
 //	ContactDiv.appendChild(INTERFACE_CreateContactContent());
 
 	return ContactDiv;
