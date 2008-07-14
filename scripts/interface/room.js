@@ -844,7 +844,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	Input.maxLength = 30;
 	Input.onkeypress = function(event) {
 
-		if (event.keyCode == 13) // enter key pressed
+		if (UTILS_ReturnKeyCode(event) == 13) // enter key pressed
 		{
 			if (Input.value == '' || Input.value == null)
 			{
