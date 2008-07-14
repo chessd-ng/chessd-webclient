@@ -15,11 +15,22 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/**
+ * @file 	challenge.js
+ * @brief	Functions to parse challenges offered and receive.
+ *
+ * See interface challenge menu (scripts/interface/challengemenu.js), data
+ * methods to challenge list (scripts/data/data.js) and window challenge
+ * (scripts/window/window.js).
+ */
 
 /**
-* Handle Challenge
-*/
-
+ * @brief	Handle challenge messages from server
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer with XMPP to send
+ * @author	Ulysses Bomfim
+ */
 function CHALLENGE_HandleChallenge (XML)
 {
 	var Query = XML.getElementsByTagName("query");
@@ -33,7 +44,7 @@ function CHALLENGE_HandleChallenge (XML)
 	}
 	else 
 	{
-		return "";
+		return Buffer;
 	}
 
 	if (Xmlns.match(/\/chessd#match#offer/))
@@ -58,11 +69,16 @@ function CHALLENGE_HandleChallenge (XML)
 
 
 /**
-* Handle Offer
-*/
+ * @brief	Parse challenge offered
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer	Buffer with XMPP to send
+ * @author	Ulysses Bomfim
+ */
 function CHALLENGE_HandleOffer(XML)
 {
 	var Players, Match, MatchID, Category, Type, Rating, Rated;
+	var MatchTag;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
@@ -77,21 +93,20 @@ function CHALLENGE_HandleOffer(XML)
 	if (Type == "error")
 	{
 		CHALLENGE_ChallengeError (XML);
-		return "";
+		return Buffer;
 	}
 
+	MatchTag = XML.getElementsByTagName('match');
 	// If there's no match, there's nothing to do
-	try 
+	if(MatchTag == null)
 	{
-		Match = XML.getElementsByTagName('match')[0];
+		return Buffer;
 	}
-	catch (e)
-	{
-		return "";
-	}
-	
+	Match = MatchTag[0];
+
 	MatchID = Match.getAttribute('id');
 	Category = Match.getAttribute('category');
+
 	if (Type == 'set')
 	{
 		Rated = Match.getAttribute('rated');
@@ -183,21 +198,25 @@ function CHALLENGE_HandleOffer(XML)
 
 
 /**
-* Handle Accept 
-*/
+ * @brief	Parse challenge accept
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer with XMPP to send
+ * @author	Ulysses Bomfim
+ */
 function CHALLENGE_HandleAccept (XML)
 {
 	var Match, GameRoom;
+	var MatchTag;
+	var Buffer = "";
 
 	// Try to get the Match tag
-	try 
+	MatchTag = XML.getElementsByTagName('match');
+	if(MatchTag == null)
 	{
-		Match = XML.getElementsByTagName('match')[0]
+		return Buffer;
 	}
-	catch (e)
-	{
-		return "";
-	}
+	Match = MatchTag[0];
 		
 	// Get the game room name
 	GameRoom = Match.getAttribute('room');
@@ -210,22 +229,29 @@ function CHALLENGE_HandleAccept (XML)
 	// Warn the player's interface
 
 	// Send a presence to GameRoom with playing status
-	return (MESSAGE_ChangeStatus("playing",GameRoom));	
+	Buffer += MESSAGE_ChangeStatus("playing",GameRoom);	
+
+	return Buffer;	
 }
 
 
 /**
-* Handle Decline
-*/
+ * @brief	Parse challenge decline
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer with XMPP to send
+ * @author	Ulysses Bomfim
+ */
 function CHALLENGE_HandleDecline (XML)
 {
 	var Match, MatchID, WindowObj,i;
+	var Buffer = "";
 
 	// If there's no match, there's nothing to do (again)
 	Match = XML.getElementsByTagName('match')[0];
 	if(Match == null)
 	{
-		return "";
+		return Buffer;
 	}
 	
 	MatchID = Match.getAttribute('id');
@@ -255,13 +281,17 @@ function CHALLENGE_HandleDecline (XML)
 		// TODO
 		// Warn the interface that the challenge was declined
 	}
-	return "";
+	return Buffer;
 }
 
 
 /**
-* Handle errors on challenge
-*/
+ * @brief	Parse challenge errors
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Empty string
+ * @author	Ulysses Bomfim
+ */
 function CHALLENGE_ChallengeError (XML)
 {
 	// Remove challenge from list
@@ -273,8 +303,17 @@ function CHALLENGE_ChallengeError (XML)
 }
 
 /**
-* Send a challenge message to 'Username'
-*/
+ * @brief	Send a challenge message to other user
+ *
+ * @param	Oponent	Oponent username
+ * @param	Color	Your color
+ * @param	Time	Game time
+ * @param	Inc	Game time increment
+ * @param	Category	Game category
+ * @param	Rated	Rated match (boolean)
+ * @return	Empty string
+ * @author	Rubens Suguimoto
+ */
 function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 {
 	var XML, Player1, Player2, OpColor;
@@ -328,11 +367,24 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 
 	// Sending message
 	CONNECTION_SendJabber(XML);
+
+	return "";
 }
 
 /**
- * Send a rematch to oponent and update challenge information in main data
+ * @brief	Send a rematch to oponent and update challenge information in main data
+ *
+ * @param	Oponent	Oponent username
+ * @param	Color	Your color
+ * @param	Time	Game time
+ * @param	Inc	Game time increment
+ * @param	Category	Game category
+ * @param	Rated	Rated match (boolean)
+ * @param	MatchId	Match identificator
+ * @return	Empty string
+ * @author	Rubens Suguimoto
  */
+
 function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, MatchID)
 {
 	var XML, Player1, Player2, OpColor;
@@ -380,9 +432,11 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 
 	// Sending message
 	CONNECTION_SendJabber(XML);
+
+	return "";
 }
 /**
-* Accept the challenge with the specified MatchID
+* @brief 	Accept the challenge with the specified MatchID
 *
 * @param	MatchID 	Id of the match to be accepted
 * @return 	void
@@ -415,10 +469,18 @@ function CHALLENGE_DeclineChallenge(MatchID)
 	CONNECTION_SendJabber(XML);
 }
 
-
+/*******************************
+ * CHALLENGE MENU
+ * ****************************/
 
 /*
- * Initialize Challenge menu object
+ * @brief 	Initialize Challenge menu object
+ *
+ * Create challenge menu in main data
+ *
+ * @return	Empty string
+ * @see		scripts/interface/challengemenu.js
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_StartChallenge()
 {
@@ -430,17 +492,26 @@ function CHALLENGE_StartChallenge()
 
 	//Get adjourned games list -> see adjourn.js
 	//CHALLENGE_GetAdjournGames();
+	
+	return "";
 }
 
 
 /*
- * Show challenge menu, set position and click to hide
+ * @brief	Show challenge menu, set menu position and click function to hide it.
+ *
+ * @param	Left	Left position of challenge menu
+ * @param	Top	Top position of challenge menu
+ * @return	Empty string
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_ShowChallengeMenu(Left, Top)
 {
 	var Func;
 	var Hide = 0;
 
+	// This function is used to hide challenge menu
+	// TODO -> need fix
 	Func = function(){
 		Hide += 1;
 
@@ -460,18 +531,28 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 
 	// Get adjourn games list
 	CHALLENGE_GetAdjournGames();
+
+	return "";
 }
 
 /**
- * Hide challenge menu from screen
+ * @brief	Hide challenge menu from screen
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_HideChallengeMenu()
 {
 	MainData.ChallengeMenu.hideMenu();
+
+	return "";
 }
 
 /**
- * Remove all challenges from main data and challenge menu that contains match id
+ * @brief	Remove all challenges from main data and interface
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_ClearChallenges()
 {
@@ -500,4 +581,6 @@ function CHALLENGE_ClearChallenges()
 
 	// Remove all challenges from main data
 	MainData.ClearChallenges();
+
+	return "";
 }

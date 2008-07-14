@@ -15,16 +15,16 @@
 */
 
 /**
-* Jabber Connection
-* This file has all functions that is used to provide a connection
-* with a Jabber Server
+* @file	connection.js
+* @brief	This file has all functions that is used to provide a connection
+* 		with a Jabber Server.
 */
 
 /**
-* Start connection to Jabber server
+* @brief	 Start connection to Jabber server
 *
-* @return none
-* @public
+* @return 	Empty string;
+* @author	Pedro Rocha
 */
 function CONNECTION_ConnectJabber(XML)
 {
@@ -75,13 +75,16 @@ function CONNECTION_ConnectJabber(XML)
 			LOGIN_Interface();
 			break;
 	}
+
+	return "";
 }
 
 /**
-* Send a XML post
+* @brief	Send a XML post
 *
-* @return none
-* @public
+* @param	XMPP	XMPP messages;
+* @return	Empty string
+* @author	Pedro Rocha
 */
 function CONNECTION_SendJabber()
 {
@@ -93,6 +96,7 @@ function CONNECTION_SendJabber()
 		Post += arguments[i];
 	}
 
+	// Check if connection status == "disconnected" or SID not initialized
 	if ((MainData.SID != -1) && (MainData.ConnectionStatus != -1))
 	{
 		Post = MESSAGE_MakeXMPP(Post);
@@ -144,14 +148,16 @@ function CONNECTION_SendJabber()
 
 	// Increment RID
 	MainData.RID++;
+
+	return "";
 }
 
 
 /**
-* Receive Connection messages and make all steps to connect user
+* @brief	Receive Connection messages and make all steps to connect user
 *
-* @return none
-* @public
+* @return 	Empty string
+* @author	Pedro Rocha
 */
 function CONNECTION_ReceiveConnection()
 {
@@ -159,6 +165,7 @@ function CONNECTION_ReceiveConnection()
 	var Error, ErrorCode;
 	var Status;
 
+	// Check ready state of HTTP Request
 	if (MainData.HttpRequest.readyState == 4 )
 	{
 		try
@@ -167,7 +174,7 @@ function CONNECTION_ReceiveConnection()
 		}
 		catch(e)
 		{
-			return null;
+			return "";
 		}	
 
 		if(Status == 200)
@@ -247,10 +254,10 @@ function CONNECTION_ReceiveConnection()
 
 
 /**
-* Receive a Jabber message when user is already connected
+* @brief 	Receive a Jabber message when user is already connected
 *
-* @return none
-* @public
+* @return 	Empty string
+* @author	Pedro Rocha
 */
 function CONNECTION_ReceiveXml()
 {
@@ -259,13 +266,13 @@ function CONNECTION_ReceiveXml()
 
 	if(MainData == null)
 	{
-		return;
+		return "";
 	}
 
 	//Check if HttpRequet Object exists
 	if(MainData.HttpRequest == null)
 	{
-		return;
+		return "";
 	}
 
 	if (MainData.HttpRequest.readyState == 4)
@@ -277,7 +284,7 @@ function CONNECTION_ReceiveXml()
 		}
 		catch (e)
 		{
-			return null;
+			return "";
 		}
 
 		if (Status == 200)
