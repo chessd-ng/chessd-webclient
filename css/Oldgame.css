@@ -43,12 +43,19 @@
 
 #OldGamesDiv #ButtonsDiv {
 	text-align : center;
-	position:relative;
+	position :relative;
 	margin-top	:	8mm;
+	display : block;
+	height : 20px;
+}
+
+#OldGamesDiv #ResultDiv {
+	display: block;
 }
 
 #OldGamesDiv #ResultDiv #TableDiv {
 	text-align : center;
+	height : 100%;
 }
 /*
 #OldGamesDiv #ResultDiv #THeadDiv {
@@ -218,7 +225,20 @@
 
 #OldGamesDiv #L2RightDiv #FromDiv {
 	float: left;
-	margin-right: 10%;
+	margin-right: 20px;
+}
+
+#OldGamesDiv #L2RightDiv #ToDiv {
+	float: left;
+}
+
+#OldGamesDiv #L2RightDiv:after {
+	content:".";
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	overflow:hidden;
 }
 
 #OldGamesDiv #CloseDiv {
