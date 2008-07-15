@@ -61,9 +61,69 @@ function CHALLENGE_HandleChallenge (XML)
 	}
 	else if (Xmlns.match(/\/chessd#match#error/))
 	{
-		Buffer = CHALLENGE_HandleError(XML);
+		Buffer = CHALLENGE_ChallengeError(XML);
 	}
 		
+	return Buffer;
+}
+
+/**
+ * @brief	Handle errors challenge messages from server
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer with XMPP to send
+ * @author	Rubens Suguimoto
+ */
+function CHALLENGE_HandleErrorChallenge (XML)
+{
+	var Query = XML.getElementsByTagName("query");
+	var Xmlns;
+	var Buffer = "";
+	var ErrorTag;
+	var ErrorType;
+
+	// Getting query xmlns
+	if (Query.length > 0)
+	{
+		Xmlns = Query[0].getAttribute("xmlns");
+	}
+	else 
+	{
+		return Buffer;
+	}
+
+	if (Xmlns.match(/\/chessd#match#offer/))
+	{ 
+		ErrorTag = XML.getElementsByTagName("error")[0];
+		ErrorType = ErrorTag.getAttribute("type");
+
+		switch(ErrorType)
+		{
+			case "modify":
+				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_opponent_offline"));
+				break;
+
+			case "cancel":
+				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"))
+				break;
+		}
+	}
+	/*
+	else if (Xmlns.match(/\/chessd#match#accept/))
+	{
+		Buffer = CHALLENGE_HandleAccept(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#decline/))
+	{
+		Buffer = CHALLENGE_HandleDecline(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#error/))
+	{
+		Buffer = CHALLENGE_HandleError(XML);
+	}
+	*/	
+
+	Buffer = CHALLENGE_ChallengeError(XML);
 	return Buffer;
 }
 
@@ -445,6 +505,9 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 function CHALLENGE_AcceptChallenge(MatchID)
 {
 	var XML;
+	
+	//Remove all challenges
+	CHALLENGE_ClearChallenges()
 
 	// Create accept message
 	XML = MESSAGE_ChallengeAccept(MatchID);

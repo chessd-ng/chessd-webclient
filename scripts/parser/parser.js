@@ -27,8 +27,7 @@ function PARSER_ParseXml(XML)
 
 
 	// Find bind body
-	Body = XML.getElementsByTagName("body");
-	if (Body.length > 0)
+	if (XML.getElementsByTagName("body") != null)
 	{
 		Body = XML.getElementsByTagName("body")[0];
 	}
