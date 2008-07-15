@@ -287,6 +287,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	
 	NoResultDiv = UTILS_CreateElement('div','NoResultDiv');
 	NoFound = UTILS_CreateElement('p',null,null,UTILS_GetText("oldgame_no_result"));
+	NoResultDiv.style.display = "none";
 
 	// Close Button
 	Close = UTILS_CreateElement('input', null, 'button');
@@ -375,6 +376,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// ResultDiv
 	ResultDiv.appendChild(SearchResultLabel);
 	ResultDiv.appendChild(TableDiv);
+	ResultDiv.appendChild(NoResultDiv);
 
 	CloseDiv.appendChild(Close);
 
@@ -551,30 +553,23 @@ function INTERFACE_OldGameSetResult(Id, GameList, More)
 	// if list of games is empty
 	if (GameList.length == 0)
 	{
-		// if table of results is displayed
-		if (this.TableDiv.parentNode != null)
-		{
-			// remove table of results
-			this.ResultDiv.removeChild(this.TableDiv);
+		// undisplay result table
+		this.TableDiv.style.display = "none";
 
-			// show no found message
-			this.ResultDiv.appendChild(this.NoResultDiv);
-		}
+		// show no found message
+		this.NoResultDiv.style.display = "block";
 	}
 	// if list games contain some data
 	else
 	{
-		if (this.TableDiv.parentNode != null)
-		{
-			this.SetTable(Id, GameList, More);
-		}
-		else
-		{	
-			this.ResultDiv.removeChild(this.NoResultDiv);
+		// undisplay no result div
+		this.NoResultDiv.style.display = "none";
 
-			this.ResultDiv.appendChild(this.TableDiv);
-			this.SetTable(Id, GameList, More);
-		}
+		// display result table
+		this.TableDiv.style.display = "block";
+
+		//set result values in table
+		this.SetTable(Id, GameList, More);
 	}
 
 	return true;

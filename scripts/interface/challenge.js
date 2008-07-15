@@ -59,7 +59,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	var Buttons = new Array();
 
 	var Type, Color;
-//	var Rated;
 	var i; 
 
 	// Main Div
@@ -419,34 +418,52 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
 	// Rating
-	try
-	{
-		RatingCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='rating'/>")
-	}
-	catch(err)
-	{
-		RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
-		RatingCheckbox.type = "checkbox";
-		RatingCheckbox.name = "rating";
-		RatingCheckbox.checked = true;
-	}
-//	RatingCheckbox.disabled = true;
-	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
-
-	if (GameParameters != undefined)
+	if (Rated != undefined)
 	{
 		if (Rated == "true")
 		{
-			RatingCheckbox.checked = true;
-			RatingCheckbox.setAttribute("defaultChecked", "true");
+			try
+			{
+				RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>");
+			}
+			catch(err)
+			{
+				RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
+				RatingCheckbox.type = "checkbox";
+				RatingCheckbox.name = "rating";
+				RatingCheckbox.checked = true;
+			}
 		}
 		else
 		{
-			RatingCheckbox.checked = false;
-			RatingCheckbox.setAttribute("defaultChecked", "false");
+			try
+			{
+				RatingCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='rating'/>");
+			}
+			catch(err)
+			{
+				RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
+				RatingCheckbox.type = "checkbox";
+				RatingCheckbox.name = "rating";
+				RatingCheckbox.checked = false;
+			}
 		}
 	}
-
+	else
+	{
+		try
+		{
+			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
+		}
+		catch(err)
+		{
+			RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
+			RatingCheckbox.type = "checkbox";
+			RatingCheckbox.name = "rating";
+			RatingCheckbox.checked = true;
+		}
+	}
+	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
 
 	// Auto-flag
 	AutoFlagCheckbox = UTILS_CreateElement('input',null,'rating_radio');
@@ -484,11 +501,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		// Rated or unrated?
 		if (RatingCheckbox.checked)
 		{
-			Rated = true;
+			Rated = "true";
 		}
 		else
 		{
-			Rated = false;
+			Rated = "false";
 		}
 
 		// Create and send the chellenge message
@@ -525,11 +542,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		// Rated or unrated?
 		if (RatingCheckbox.checked)
 		{
-			Rated = true;
+			Rated = "true";
 		}
 		else
 		{
-			Rated = false;
+			Rated = "false";
 		}
 
 		CHALLENGE_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);

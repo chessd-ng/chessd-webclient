@@ -8,8 +8,10 @@
 }
 
 #ProfileDiv #TopDiv {
-	display		:	table;
+	display		:	block;
 	padding-left : 30px;
+	padding-bottom : 1px;
+	margin-bottom : 1px;
 }
 
 #ProfileDiv #ProfPhotoDiv {
@@ -35,9 +37,22 @@
 }
 
 #ProfileDiv #TopRightDiv #TopRight_RightDiv {
-	padding-left	: 170px;
 	padding-top		:	1px;
-	display : block;
+	float			:	left;
+	margin-bottom : 25px;
+}
+
+#ProfileDiv #ProfPhotoDiv:after,
+#ProfileDiv #TopRightDiv:after, 
+#ProfileDiv #TopRightDiv #TopRight_RightDiv:after,
+#ProfileDiv #WhoDiv:after,
+#ProfileDiv #TopDiv:after {
+	content:".";
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	overflow:hidden;
 }
 
 #ProfileDiv #RatingDiv {
@@ -45,10 +60,8 @@
 }
 
 #ProfileDiv #WhoDiv {
-	display	: table;
-	margin-top	:	5px;
+	display	: block;
 	margin-left:	25px;
-	padding-right	:	15px;
 }
 
 #ProfileDiv #WhoDiv #WhoLeftDiv {
@@ -57,8 +70,9 @@
 }
 
 #ProfileDiv #WhoDiv #WhoRightDiv {
-	padding-left	: 80px;
+	padding-left	: 5px; 
 	padding-top	: 2px;
+	float			:	left;
 }
 
 #ProfileDiv #WhoDiv #CounterDiv {
@@ -86,7 +100,7 @@
 
 #ProfileDiv #BottomDiv #BottomLeftDiv {
 	float	: left;
-	width	:	200px
+	width	:	200px;
 }
 
 #ProfileDiv #BottomDiv #BottomRightDiv {
@@ -171,7 +185,7 @@
 #ProfileDiv .inf_whoami {
 	max-height		: 80px;
 	overflow	: auto;
-	width			: 265px;
+	width			: 255px;
 }
 
 #ProfileDiv .value {

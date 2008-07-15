@@ -756,4 +756,8 @@ function OLDGAME_GameResult(Result)
 		return UTILS_GetText("game_result_adjourned-agreement");
 	else if (Result == "adjourned-shutdown")
 		return UTILS_GetText("game_result_adjourned-shutdown");
+	else if (Result == "white-wo")
+		return UTILS_GetText("game_result_white-wo");
+	else if (Result == "black-wo")
+		return UTILS_GetText("game_result_black-wo");
 }

@@ -67,13 +67,37 @@
 	*/
 }
 
+/* Room.css */
+#Main #Left #Rooms .Room {
+	width : 202px;
+}
+/* Challenge.css */
+#ChallengeDiv #Layer1Div {
+	margin-bottom	:	60px;
+}
+
+#ChallengeDiv #ButtonsDiv {
+	width : 300px;
+}
 
 /*Contacts.css*/
 #Main #Left #Contact #Contacts table{
 	width			: 43.5mm;
 }
 
+#Main #Left #Contact #UserLists {
+	width : 196px;
+}
 
+#Main #Left #Contact #ContactTitle {
+	width			: 204px;
+	left : 0px;
+}
+
+#Main #Left #Contact #ContactTitle li {
+	padding			: 3px 0px 3px 4px; 
+	width : 98px;
+}
 
 /* available */
 #Main #Left .user_available {

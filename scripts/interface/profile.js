@@ -532,11 +532,25 @@ function INTERFACE_ProfileSetDesc(Desc)
 {
 	if(this.Desc.tagName == "TEXTAREA")
 	{
-		this.Desc.value = Desc;
+		if (Desc != undefined)
+		{
+			this.Desc.value = Desc;
+		}
+		else
+		{
+			this.Desc.value = "";
+		}
 	}
 	else
 	{
-		this.Desc.innerHTML = Desc;
+		if (Desc != undefined)
+		{
+			this.Desc.innerHTML = Desc;
+		}
+		else
+		{
+			this.Desc.innerHTML = "";
+		}
 	}
 	if (this.Nick.innerHTML == MainData.Username)
 	{
