@@ -292,14 +292,14 @@ function CONNECTION_ReceiveXml()
 			// Get Xml response
 			XML = MainData.HttpRequest.responseXML;
 
-		    // Forward XML to parser
-			Buffer = PARSER_ParseXml(XML);
-
 			// User disconnected 
 			if (MainData.ConnectionStatus == -1)
 			{
-				return null;
+				return "";
 			}
+
+			// Forward XML to parser
+			Buffer = PARSER_ParseXml(XML);
 
 			// Parser returned some xml: send it
 			if ((Buffer != "") && (Buffer != null) && (Buffer != undefined))
