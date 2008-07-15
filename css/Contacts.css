@@ -53,6 +53,10 @@
 	background-color	: #FFA200;
 }
 
+#Main #Left #Contact #UserLists {
+	width : 192px;
+}
+
 #Main #Left #Contact #ContactInside ,
 #Main #Left #Contact #ContactOnline {
 	/*
@@ -85,10 +89,6 @@
 	width			: 44mm;
 }
 */
-
-#Main #Left #UserLists {
-	width : 192px;
-}
 
 #Main #Left #Contact label {
 	display			: block;

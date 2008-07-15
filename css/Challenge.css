@@ -8,13 +8,27 @@
 	padding			: 0px 28px;
 }
 
+#ChallengeDiv #Layer1Div:after,
+#ChallengeDiv #Layer2Div:after {
+	content:".";
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	overflow:hidden;
+}
+
 #ChallengeDiv #TopDiv {
 	padding-top		:	2mm;
 	margin-bottom	:	3mm;
 }
 
 #ChallengeDiv #Layer1Div {
-	margin-bottom	:	12mm;
+	margin-bottom	:	0px;
+}
+
+#ChallengeDiv #Layer1Div #L1RightDiv {
+	float : left;
 }
 
 #ChallengeDiv #Layer3Div {
