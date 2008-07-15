@@ -234,6 +234,7 @@
 		<game_result_white-resigned>As brancas desistiram da partida</game_result_white-resigned>
 		<game_result_black-resigned>As pretas desistiram da partida</game_result_black-resigned>
 		<game_result_draw-agreement>Os jogadores concordaram em um empate</game_result_draw-agreement>
+		<game_result_stalemate>Empate por afogamento</game_result_stalemate>
 		<game_result_draw-repetition>Empate por repetição de posição</game_result_draw-repetition>
 		<game_result_draw-fifty-moves>Empate pela regra dos 50 lances</game_result_draw-fifty-moves>
 		<game_result_draw-impossible-mate>Empate por insuficiência de material</game_result_draw-impossible-mate>

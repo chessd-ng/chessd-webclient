@@ -194,7 +194,8 @@ function INTERFACE_AddContactUser(GroupName, UserName, Status, Rating, Type)
 
 	if(Group == null)
 	{
-		return "";
+		this.addGroup(GroupName);
+		Group = this.getGroup(GroupName);
 	}
 
 	if(Status != "offline")
