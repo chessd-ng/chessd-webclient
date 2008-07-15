@@ -17,11 +17,22 @@
 
 
 /**
-* Handle Adjourn Challenge
+ * @file 	adjourn.js
+ * @brief	Functions to parse adjourned games message and show result
+ * 		in interface
+ *
+ * See interface challenge menu (scripts/interface/challengemenu.js) and data
+ * methods to adjourn/postpone game list (scripts/data/data.js)
+ *
+ * PS: Currently, adjourn and postpone games are considered the same thing.
 */
 
 /**
- * Parse XML with adjourned games list and show in challenge menu
+ * @brief 	Parse XML with adjourned games list and show in challenge menu
+ *
+ * @param	XML	XML with adjourned games
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_HandleAdjourn(XML)
 {
@@ -84,38 +95,53 @@ function CHALLENGE_HandleAdjourn(XML)
 		}
 	}
 
+	// Show postpone games
 	MainData.ChallengeMenu.showPostpone();
 
-	return "";
+	return Buffer;
 }
 
 /**
- * Check presence to adjourn list
+ * @brief 	Parse presence to adjourn game user;
+ *
+ * Parse presence to user in challenge list. I.E.: if user comes offline
+ * the adjourn game with this user turn unavailable to play.
+ *
+ * @param	XML	XML with adjourned games
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
 	var UserRoom;
 	var Item, Username, i;
+	var Buffer = "";
 
+	// Get presence from general room (where all user is connected)
 	if(GeneralRoom == MainData.RoomDefault)
 	{
 		Username = XML.getAttribute("from").split("/")[1];
 		CHALLENGE_PostponePresence(Username);
 	}
 
-	return "";
+	return Buffer;
 }
 
 
 
 /**
- * Update status of user in postpone list
+ * @brief	Update status of user in postpone list
+ *
+ * @param	Username	Name used by user
+ * @return	Empty string;
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_PostponePresence(Username)
 {
 	var i = MainData.FindUserInRoom(MainData.RoomDefault, Username);
 
+	//If user is founded, set adjourn game to available, else unavailable
 	if(i != null)
 	{
 		MainData.ChallengeMenu.updatePostpone(Username, "online");
@@ -124,15 +150,21 @@ function CHALLENGE_PostponePresence(Username)
 	{
 		MainData.ChallengeMenu.updatePostpone(Username, "offline");
 	}
+
+	return "";
 }
 
 
 /**
- * Create and send message to resume a game to some player
+ * @brief 	Create and send a message to resume a game with some player
+ *
+ * @param	AdjournId	Adjourned game Id;
+ * @return	Empty string;
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_SendResumeGame(AdjournId)
 {
-	var XMPP;
+	var XMPP = "";
 	
 	var PostponePos = MainData.FindPostpone(AdjournId);
 	var Postpone = MainData.PostponeList[PostponePos];
@@ -140,7 +172,7 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	var Challenger = new Object();
 	var Challenged = new Object();
 
-	// Create Challenge in challenge list
+	// Create challenge in challenge list
 	Challenged.Name = Postpone.Challenged.Name;
 	Challenged.Color = Postpone.Challenged.Color;
 	Challenged.Time = Postpone.Challenged.Time;
@@ -151,17 +183,27 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	Challenged.Time = 0;
 	Challenged.Inc = 0;
 
+	// Add challenge in challenge list
 	MainData.AddChallenge("offer_adj", Challenger, Challenged, Postpone.Category, "false", null);
 
-	XMPP = MESSAGE_ChallengeResumeGame(AdjournId);
-
+	// Create and send message to resume adjourned game
+	XMPP += MESSAGE_ChallengeResumeGame(AdjournId);
 	CONNECTION_SendJabber(XMPP);
 
+	// Remove adjourned game from postponed list;
 	CHALLENGE_RemovePostpone(AdjournId);
+
+	//TODO -> Remove and don't show again a removed adjourn game with 
+	// AdjournId
+
+	return "";
 }
 
 /**
- * Create and send message to get adjourned games
+ * @brief 	Create and send message to get adjourned games list
+ *
+ * @return	Empty string;
+ * @author	Rubens Suguimoto
  */
 function CHALLENGE_GetAdjournGames()
 {
@@ -171,13 +213,22 @@ function CHALLENGE_GetAdjournGames()
 	XMPP = MESSAGE_ChallengeGetAdjournList(Num,0);
 
 	CONNECTION_SendJabber(XMPP);
+
+	return "";
 }
 
 /**
- * Remove post pone from maindata and challenge menu
+ * @brief	Remove post pone from maindata and challenge menu
+ *
+ * @param	Id	Adjourned/Postpone game Id
+ * @return	Empty string;
+ * @author	Rubens Suguimoto
  */
+
 function CHALLENGE_RemovePostpone(Id)
 {
 	MainData.RemovePostpone(Id);
 	MainData.ChallengeMenu.removePostpone(Id);
+
+	return "";
 }

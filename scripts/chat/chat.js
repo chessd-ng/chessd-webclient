@@ -16,16 +16,24 @@
 
 
 /**
-* Control chat messages
+ * @file	chat.js
+ * @brief	Functions to parse chat messages.
+ *
+ * See interface chat (scripts/interface/chat.js).
 */
 
 
 /**
-* Show ordinary users messages
+ * @brief 	Parse and show ordinary users messages
+ *
+ * @param	XML	XML with message
+ * @return	Buffer with other XMPP to send
+ * @author	Pedro Rocha
 */
 function CHAT_HandleMessage(XML)
 {
 	var From, Message, Body;
+	var Buffer = "";
 
 	// Get the sender name
 	From = XML.getAttribute('from').replace(/@.*/,"");
@@ -43,15 +51,23 @@ function CHAT_HandleMessage(XML)
 	// UTILS_ConvertChatString -> Replace < and >
 	CHAT_ReceiveMessage(From, UTILS_ConvertChatString(Message));
 
-	return "";
+	return Buffer;
 }
 
+/**
+ * @brief 	Parse and show user chat presence
+ *
+ * @param	XML	XML with presence
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
+*/
 function CHAT_HandlePresence(XML)
 {
 	var From;
 	var Status;
 	var Username;
 	var Type = XML.getAttribute("type");
+	var Buffer = "";
 
 	if(Type == "error")
 	{
@@ -72,14 +88,21 @@ function CHAT_HandlePresence(XML)
 	}
 
 	INTERFACE_ChatChangeStatus(Username, Status);
+
+	return Buffer;
 }
 
 /**
-* Show announcement users messages
+ * @brief 	Show announcement users messages
+ *
+ * @param	XML	XML with announce message
+ * @return	Buffer with other XMPP to send
+ * @author	Pedro Rocha
 */
 function CHAT_HandleAnnounceMessage(XML)
 {
 	var From, Subject, Message, Body;
+	var Buffer = "";
 
 	// Get the sender name
 	From = XML.getAttribute('from').replace(/@.*/,"");
@@ -103,12 +126,17 @@ function CHAT_HandleAnnounceMessage(XML)
 	// Show the message on interface
 	WINDOW_Alert(Subject,Message);
 
-	return "";
+	return Buffer;
 }
 
 /**
-* Open a chat
+ * @brief 	Open a chat with some user
+ *
+ * @param	Username	Name used by user
+ * @return	Empty string
+ * @author	Pedro Rocha
 */
+
 function CHAT_OpenChat(Username)
 {
 	var Title, Msg, Status = null;
@@ -132,24 +160,36 @@ function CHAT_OpenChat(Username)
 		Msg = Msg.replace(/%i/, MainData.MaxChats);
 		WINDOW_Alert(Title, Msg);
 	}
+
+	return "";
 }
 
 /**
-* Close a chat
+ * @brief 	Close a chat with user
+ *
+ * @param	Username	Name used by user
+ * @return	Empty string
+ * @author	Pedro Rocha
 */
 function CHAT_CloseChat(Username)
 {
-	if (!MainData.RemoveChat(Username))
+	if (MainData.RemoveChat(Username) == true)
 	{
-		return false;
+		INTERFACE_CloseChat(Username);
 	}
-	INTERFACE_CloseChat(Username);
-	return true;
+	return "";
 }
 
 
 /**
-* Change  visibility of chat window
+ * @brief 	Change  visibility of chat window
+ *
+ * @param	Username	Name used by user
+ * @param	Obj1		Chat item
+ * @param	Obj2		Chat item inner content
+ * @param	State		Chat status (show/hidden)
+ * @return	Empty string
+ * @author	Pedro Rocha
 */
 function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 {
@@ -157,7 +197,7 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 
 	if (i == null)
 	{
-		return null;
+		return "";
 	}
 
 	// Changing the visibility of chat window
@@ -175,11 +215,18 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 		State.className = "maximize";
 		State.src = "./images/maximize_chat.png";
 	}
+	
+	return "";
 }
 
 
 /**
-* Send a chat message
+ * @brief 	Send a chat message
+ *
+ * @param	Username	Name used by user
+ * @param	Message		Message to send
+ * @return	Empty string
+ * @author	Pedro Rocha
 */
 function CHAT_SendMessage(Username, Message)
 {
@@ -191,10 +238,17 @@ function CHAT_SendMessage(Username, Message)
 
 	// Show message in chat list
 	INTERFACE_ShowChatMessage(Username, Msg, true);
+
+	return "";
 }
 
 /**
-* Show a message received on interface
+ * @brief 	Show a message received from another user
+ *
+ * @param	Username	Name used by user
+ * @param	Message		Message received
+ * @return	Empty string
+ * @author	Pedro Rocha
 */
 function CHAT_ReceiveMessage(Username, Message)
 {
@@ -219,5 +273,5 @@ function CHAT_ReceiveMessage(Username, Message)
 	// Show message in chat list
 	INTERFACE_ShowChatMessage(Username, Message);
 
-	return true;
+	return "";
 }
