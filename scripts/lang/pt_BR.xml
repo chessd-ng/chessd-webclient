@@ -163,7 +163,8 @@
 		<challenge_menu_no_match>Não há desafios feitas.</challenge_menu_no_match>
 		<challenge_menu_no_announce>Não há partidas anunciadas.</challenge_menu_no_announce>
 		<challenge_menu_no_postpone>Não há partidas adiadas.</challenge_menu_no_postpone>
-		<challenge_offer_user_offline>Usuário desconectado do servidor de xadrez.</challenge_offer_user_offline>
+		<challenge_offer_user_offline>Você está desconectado do servidor de xadrez. Connecte novamente na página para ficar online.</challenge_offer_user_offline>
+		<challenge_offer_opponent_offline>Oponente está desconectado do servidor de xadrez.</challenge_offer_opponent_offline>
 		<challenge_error>Erro ao desafiar</challenge_error>
 	</challenge>
 	<game>

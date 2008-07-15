@@ -61,7 +61,7 @@ function CHALLENGE_HandleChallenge (XML)
 	}
 	else if (Xmlns.match(/\/chessd#match#error/))
 	{
-		Buffer = CHALLENGE_HandleError(XML);
+		Buffer = CHALLENGE_ChallengeError(XML);
 	}
 		
 	return Buffer;
@@ -79,7 +79,8 @@ function CHALLENGE_HandleErrorChallenge (XML)
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
 	var Buffer = "";
-	var ErrorTag, ErrorText;
+	var ErrorTag;
+	var ErrorType;
 
 	// Getting query xmlns
 	if (Query.length > 0)
@@ -94,11 +95,17 @@ function CHALLENGE_HandleErrorChallenge (XML)
 	if (Xmlns.match(/\/chessd#match#offer/))
 	{ 
 		ErrorTag = XML.getElementsByTagName("error")[0];
-		ErrorText = UTILS_GetNodeText(ErrorTag);
+		ErrorType = ErrorTag.getAttribute("type");
 
-		if(ErrorText.match("User is unable to play the game"))
+		switch(ErrorType)
 		{
-			WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"));
+			case "modify":
+				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_opponent_offline"));
+				break;
+
+			case "cancel":
+				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"))
+				break;
 		}
 	}
 	/*
@@ -115,6 +122,8 @@ function CHALLENGE_HandleErrorChallenge (XML)
 		Buffer = CHALLENGE_HandleError(XML);
 	}
 	*/	
+
+	Buffer = CHALLENGE_ChallengeError(XML);
 	return Buffer;
 }
 
@@ -496,6 +505,9 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 function CHALLENGE_AcceptChallenge(MatchID)
 {
 	var XML;
+	
+	//Remove all challenges
+	CHALLENGE_ClearChallenges()
 
 	// Create accept message
 	XML = MESSAGE_ChallengeAccept(MatchID);
