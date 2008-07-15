@@ -67,6 +67,57 @@ function CHALLENGE_HandleChallenge (XML)
 	return Buffer;
 }
 
+/**
+ * @brief	Handle errors challenge messages from server
+ *
+ * @param	XML	XML with challenge parameters
+ * @return	Buffer with XMPP to send
+ * @author	Rubens Suguimoto
+ */
+function CHALLENGE_HandleErrorChallenge (XML)
+{
+	var Query = XML.getElementsByTagName("query");
+	var Xmlns;
+	var Buffer = "";
+	var ErrorTag, ErrorText;
+
+	// Getting query xmlns
+	if (Query.length > 0)
+	{
+		Xmlns = Query[0].getAttribute("xmlns");
+	}
+	else 
+	{
+		return Buffer;
+	}
+
+	if (Xmlns.match(/\/chessd#match#offer/))
+	{ 
+		ErrorTag = XML.getElementsByTagName("error")[0];
+		ErrorText = UTILS_GetNodeText(ErrorTag);
+
+		if(ErrorText.match("User is unable to play the game"))
+		{
+			WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"));
+		}
+	}
+	/*
+	else if (Xmlns.match(/\/chessd#match#accept/))
+	{
+		Buffer = CHALLENGE_HandleAccept(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#decline/))
+	{
+		Buffer = CHALLENGE_HandleDecline(XML);
+	}
+	else if (Xmlns.match(/\/chessd#match#error/))
+	{
+		Buffer = CHALLENGE_HandleError(XML);
+	}
+	*/	
+	return Buffer;
+}
+
 
 /**
  * @brief	Parse challenge offered
