@@ -78,6 +78,8 @@ function LOGIN_Logout()
 
 	INTERFACE_StopInterface();
 
+	CONTACT_StopAwayStatus();
+
 	delete MainData;
 
 	// Show Login interface
@@ -148,6 +150,9 @@ function LOGIN_Interface()
 
 	// Search for some game that player is playing
 	GAME_SearchCurrentGame();
+
+	// Set away counter
+	CONTACT_StartAwayCounter();
 }
 
 
