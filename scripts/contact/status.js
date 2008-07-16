@@ -139,7 +139,7 @@ function CONTACT_SetAwayStatus()
 {
 	MainData.AwayCounter = MainData.AwayCounter - 1;
 
-	if(MainData.AwayCounter < 0)
+	if(MainData.AwayCounter == 0)
 	{
 		if((MainData.Status != "playing")&&(MainData.Status != "unavailable"))
 		{
