@@ -62,7 +62,7 @@ function LoadScript(Src)
 	var Node = document.createElement("script");
 	var Head = document.getElementsByTagName("head")[0];
 
-	Node.src = Src;
+	Node.src = Src+"?"+NoCache;
 	Node.type = "text/javascript";
 
 	// Assign pointer back
@@ -88,7 +88,7 @@ function LoadImage(Src)
 	Img.onerror = this.Loaded;
 	Img.onabort = this.Loaded;
 
-	Img.src = Src;
+	Img.src = Src+"?"+NoCache;
 }
 
 function Loaded()
