@@ -599,7 +599,7 @@
 
 #GameLeaveUser
 {
-	width			: 333px;
+	width			: 345px;
 	height			: 30px;
 
 	background-color	: #FFF;
@@ -610,7 +610,7 @@
 	position		: fixed;
 	bottom			: 30px;
 	left			: 50%;
-	margin-left		: -130px;
+	margin-left		: -135px;
 
 	padding			: 2px 15px;
 
