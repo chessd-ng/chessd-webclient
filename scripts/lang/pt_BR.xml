@@ -245,6 +245,7 @@
 		<game_result_adjourned-shutdown>A partida foi adiada porque o servidor está sendo desligado</game_result_adjourned-shutdown>
 		<game_result_white-wo>As brancas ganharam por W.O.</game_result_white-wo>
 		<game_result_black-wo>As pretas ganharam por W.O.</game_result_black-wo>
+		<game_result_closed>A partida acabou. No entando o resultado não foi mostrado na tela.</game_result_closed>
 		<game_loading_move>Carregando movimento...</game_loading_move>
 		<game_white_player_leave>Jogador branco saiu da partida. Caso ele não volte dentro de alguns minutos o jogador preto irá vencer.</game_white_player_leave>
 		<game_black_player_leave>Jogador preto saiu da partida. Caso ele não volte dentro de alguns minutos o jogador branco irá vencer.</game_black_player_leave>

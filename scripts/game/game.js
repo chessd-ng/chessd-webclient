@@ -559,8 +559,13 @@ function GAME_HandleGameError(XML)
 		{
 			return "";
 		}
+		// This case should happen when game is over in server
+		// but not in interface
 		else
-			alert("Erro: reportar bug..");
+		{
+			WINDOW_Alert(UTILS_GetText("game_end_game"),UTILS_GetText("game_result_closed"));
+			OLDGAME_EndGame(GameID);
+		}
 	}
 	return "";
 }
