@@ -119,4 +119,57 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 	return "";
 }
 
+/**
+ * Start away counter;
+ */
+function CONTACT_StartAwayCounter()
+{
+	MainData.AwayCounter = 300;
 
+	MainData.AwayTimeout = setInterval("CONTACT_SetAwayStatus()", 1000);
+
+	document.body.setAttribute("onmousedown","CONTACT_ResetAwayStatus()");
+	document.body.setAttribute("onkeypress","CONTACT_ResetAwayStatus()");
+}
+
+/**
+ * Countdown away counter, and set away status if away counter less than zero
+ */ 
+function CONTACT_SetAwayStatus()
+{
+	MainData.AwayCounter = MainData.AwayCounter - 1;
+
+	if(MainData.AwayCounter < 0)
+	{
+		if((MainData.Status != "playing")&&(MainData.Status != "unavailable"))
+		{
+			CONTACT_ChangeStatus("away");
+		}
+	}
+}
+
+/**
+ * Reset away counter and set status to available
+ */
+function CONTACT_ResetAwayStatus()
+{
+	// Away counter reset to 5 minutes
+	MainData.AwayCounter = 300;
+
+	if(MainData.Status == "away")
+	{
+		CONTACT_ChangeStatus("available");
+	}
+
+}
+
+/**
+ * Stop away counter
+ */
+function CONTACT_StopAwayStatus()
+{
+	clearInterval(MainData.AwayTimeout);
+
+	document.body.removeAttribute("onmousedown");
+	document.body.removeAttribute("onkeypress");
+}
