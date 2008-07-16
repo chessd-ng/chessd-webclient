@@ -129,6 +129,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 
 	this.SetLastMove = INTERFACE_LastMove;
 	this.FindBlock = INTERFACE_FindBlock;
+	this.SetBlockBorder = INTERFACE_SetBlockBorder;
+	this.RemoveBlockBorder = INTERFACE_RemoveBlockBorder;
 
 	this.ShowLoadingMove = INTERFACE_ShowLoadingMove;
 	this.HideLoadingMove = INTERFACE_HideLoadingMove;
@@ -1497,4 +1499,24 @@ function INTERFACE_ShowLeaveUser(Color)
 function INTERFACE_HideLeaveUser()
 {
 	this.LeaveUser.style.display = "none";
+}
+
+function INTERFACE_SetBlockBorder(BlockId)
+{
+	var Block = this.FindBlock(BlockId);
+	var Border = UTILS_CreateElement("div","BlockBoard");
+
+	Border.style.width = (this.PieceSize - 4)+"px";
+	Border.style.height = (this.PieceSize - 4)+"px";
+	Block.appendChild(Border);
+}
+
+function INTERFACE_RemoveBlockBorder(BlockId)
+{
+	var Block = this.FindBlock(BlockId);
+
+	if(Block.firstChild != null)
+	{
+		Block.removeChild(Block.firstChild);
+	}
 }

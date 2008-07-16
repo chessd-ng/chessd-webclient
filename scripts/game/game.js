@@ -1076,3 +1076,39 @@ function GAME_HideLoadingMove(Id)
 
 	Game.Game.HideLoadingMove();
 }
+
+function GAME_SetBlockBorder(Line, Col)
+{
+	var Game = MainData.CurrentGame;
+	var BlockId;
+
+	// Create long notation
+	if (MainData.CurrentGame.YourColor == "white")
+	{
+		BlockId = UTILS_HorizontalIndex(Col)+Line;
+	}
+	else
+	{
+		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
+	}
+
+	Game.Game.SetBlockBorder(BlockId);
+}
+
+function GAME_RemoveBlockBorder(Line, Col)
+{
+	var Game = MainData.CurrentGame;
+	var BlockId;
+
+	// Create long notation
+	if (MainData.CurrentGame.YourColor == "white")
+	{
+		BlockId = UTILS_HorizontalIndex(Col)+Line;
+	}
+	else
+	{
+		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
+	}
+
+	Game.Game.RemoveBlockBorder(BlockId);
+}

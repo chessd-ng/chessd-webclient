@@ -80,6 +80,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		OldPos.x = Obj.style.left.replace(/px/, "");
 		OldPos.y = Obj.style.top.replace(/px/, "");
 
+		// Show block border of origin
+		GAME_SetBlockBorder((8 - OldPos.y/Size), (OldPos.x/Size + 1));
+	
 		document.body.onmousemove = function (ev) {
 			MousePos = UTILS_GetMouseCoords(ev);
 
@@ -140,6 +143,8 @@ function UTILS_StartDragPiece(Obj, Size, event)
 					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 					// Show loading move message
 					GAME_ShowLoadingMove(MainData.CurrentGame.Id);
+					// Remove block border of origin
+					GAME_RemoveBlockBorder(OldLine, OldCol);
 				}
 
 				// Return to deafult cursor
@@ -199,8 +204,12 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		{
 			// Send movement
 			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+
 			// Show loading move message
 			GAME_ShowLoadingMove(MainData.CurrentGame.Id);
+
+			// Remove block border of origin
+			GAME_RemoveBlockBorder(OldLine, OldCol);
 		}
 
 		// Return to deafult cursor
