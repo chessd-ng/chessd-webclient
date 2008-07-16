@@ -2,6 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="no-cache; must-revalidate" />
+
+<script type="text/javascript">
+	var TimeStampBrowser = new Date();
+	var NoCache = "";
+	NoCache += TimeStampBrowser.getMonth();
+	NoCache += "/"+TimeStampBrowser.getDate();
+	NoCache += "/"+TimeStampBrowser.getFullYear();
+	NoCache += "-"+TimeStampBrowser.getHours();
+	NoCache += ":"+TimeStampBrowser.getMinutes();
+	NoCache += ":"+TimeStampBrowser.getSeconds();
+</script>
 
 <link rel="stylesheet" type="text/css" href="css/Main.css" />
 <link rel="stylesheet" type="text/css" href="css/Login.css" />
@@ -24,6 +38,25 @@
 <script type="text/javascript" src="scripts/interface/load.js"></script>
 
 <script type="text/javascript" src="scripts/start.js"></script>
+
+<script type="text/javascript">
+	function NoCacheIndex()
+	{
+		var i;
+		var Css = document.getElementsByTagName("link");
+		var Scripts = document.getElementsByTagName("script");
+		for (i=0; i< Css.length; i++)
+		{
+			Css[i].href += "?"+NoCache;
+		}
+		for (i=0; i < Scripts.length; i++)
+		{
+			if (Scripts[i].src != "")
+				Scripts[i].src += "?"+NoCache;
+		}
+	}
+	NoCacheIndex();
+</script>
 
 </head>
 <!---INTERFACE_StartLogin() in scripts/interface/login.js-->

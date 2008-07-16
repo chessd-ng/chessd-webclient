@@ -169,7 +169,7 @@ function LOGIN_LoadCss()
 	for (i=0; i<Files.length; i++)
 	{
 		Tag = document.createElement("link");
-		Tag.href = Files[i];
+		Tag.href = Files[i]+"?"+NoCache;
 		Tag.type = "text/css";
 		Tag.rel = "stylesheet";
 
