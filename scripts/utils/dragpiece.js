@@ -143,13 +143,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 					// Show loading move message
 					GAME_ShowLoadingMove(MainData.CurrentGame.Id);
-					// Remove block border of origin
-					GAME_RemoveBlockBorder(OldLine, OldCol);
 				}
 
 				// Return to deafult cursor
 				document.body.style.cursor = "default";
 
+				// Remove block border of origin
+				GAME_RemoveBlockBorder(OldLine, OldCol);
 
 				delete OldPos;
 
@@ -208,13 +208,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			// Show loading move message
 			GAME_ShowLoadingMove(MainData.CurrentGame.Id);
 
-			// Remove block border of origin
-			GAME_RemoveBlockBorder(OldLine, OldCol);
 		}
 
 		// Return to deafult cursor
 		document.body.style.cursor = "default";
 
+		// Remove block border of origin
+		GAME_RemoveBlockBorder(OldLine, OldCol);
 
 		delete OldPos;
 
