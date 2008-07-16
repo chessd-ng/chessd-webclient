@@ -75,6 +75,45 @@ function GAME_HandleGame(XML)
 	return Buffer;
 }
 
+/**
+ * Handle game presence
+ */
+function GAME_HandlePresence(XML)
+{
+	var Username = XML.getAttribute("from").split("/")[1];
+	var GameId = XML.getAttribute("from").split("@")[0];
+	var Buffer = "";
+	var Type = XML.getAttribute("type");
+
+	var Game = MainData.GetGame(GameId);
+
+	if(Game == null)
+	{
+		return Buffer;
+	}
+	if(Type == "unavailable")
+	{
+		// If some player leave from game, show a W.O. message;
+		if (Game.PB == Username)
+		{
+			Game.Game.ShowLeaveUser("black");
+		}
+		else if (Game.PW == Username)
+		{
+			Game.Game.ShowLeaveUser("white");
+		}
+	}
+	else
+	{
+		// If some player reenter in game, hide a W.O. message;
+		if ((Game.PB == Username) || (Game.PW == Username))
+		{
+			Game.Game.HideLeaveUser();
+		}
+
+	}
+	return Buffer;
+}
 
 /**
 * Handle Game Move
@@ -413,6 +452,11 @@ function GAME_End(XML)
 
 	Game = MainData.GetGame(GameID);
 	Game.Game.StopTimer();
+
+	// Hide loading box
+	Game.Game.HideLoadingMove();
+	// Hide leave user box
+	Game.Game.HideLeaveUser();
 
 	// Finish game in structure
 	if (Game)

@@ -577,17 +577,6 @@
 	background-image	: url("../images/board/last_active.png");
 }
 
-#GameLoadingMove{
-	position		: absolute;
-	width			: 300px;
-	height			: 100px;
-
-	font-size		: 13px;
-	color			: #216778;
-
-	background-color	: #FFF;
-}
-
 #GameLoadingMove
 {
 	width			: 160px;
@@ -606,6 +595,25 @@
 	padding			: 2px 15px;
 
 	border			: 1px solid #216778;
+}
 
+#GameLeaveUser
+{
+	width			: 333px;
+	height			: 30px;
 
+	background-color	: #FFF;
+
+	font-size		: 12px;
+	color			: #216778;
+
+	position		: fixed;
+	bottom			: 30px;
+	left			: 50%;
+	margin-left		: -130px;
+
+	padding			: 2px 15px;
+
+	border			: 1px solid #216778;
+	text-align		: center;
 }

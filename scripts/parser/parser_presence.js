@@ -47,7 +47,6 @@ function PARSER_ParsePresence(XML)
 	}
 	// Room presence
 	else if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
-	//if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	{
 		Buffer += ROOM_HandleRoomPresence(XML);
 		
@@ -57,6 +56,10 @@ function PARSER_ParsePresence(XML)
 			Buffer += CONTACT_HandleOnlinePresence(XML);
 			Buffer += CHALLENGE_HandlePresence(XML);
 			Buffer += CHAT_HandlePresence(XML);
+		}
+		else if(Jid.match(MainData.GameComponent))
+		{
+			Buffer += GAME_HandlePresence(XML);
 		}
 
 		return Buffer;

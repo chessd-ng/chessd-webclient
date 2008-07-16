@@ -246,6 +246,8 @@
 		<game_result_white-wo>As brancas ganharam por W.O.</game_result_white-wo>
 		<game_result_black-wo>As pretas ganharam por W.O.</game_result_black-wo>
 		<game_loading_move>Carregando movimento...</game_loading_move>
+		<game_white_player_leave>Jogador branco saiu da partida. Caso ele não volte dentro de alguns minutos o jogador preto irá vencer.</game_white_player_leave>
+		<game_black_player_leave>Jogador preto saiu da partida. Caso ele não volte dentro de alguns minutos o jogador branco irá vencer.</game_black_player_leave>
 	</game>
 	<profile>
 		<profile_window>Perfil e Informações</profile_window>

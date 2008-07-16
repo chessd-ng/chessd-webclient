@@ -35,7 +35,11 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.Timer = null;
 	this.Turn = "white";
 	this.LastMove = null;
+
 	this.LoadingMove = null;
+
+	this.LeaveUser = null;
+	this.LeaveUserText = null;
 
 	this.MyColor = YourColor;
 	this.Id = GameID;
@@ -129,6 +133,9 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.ShowLoadingMove = INTERFACE_ShowLoadingMove;
 	this.HideLoadingMove = INTERFACE_HideLoadingMove;
 
+	this.ShowLeaveUser = INTERFACE_ShowLeaveUser;
+	this.HideLeaveUser = INTERFACE_HideLeaveUser;
+
 	// Constructor
 	this.constructor = INTERFACE_CreateGame;
 	this.constructor();
@@ -181,6 +188,12 @@ function INTERFACE_CreateGame()
 	var LoadingMoveDiv = UTILS_CreateElement("div","GameLoadingMove");
 	var LoadingSpan = UTILS_CreateElement("span",null,null,UTILS_GetText("game_loading_move"));
 
+	// Leave user box
+	var LeaveUserDiv = UTILS_CreateElement("div","GameLeaveUser");
+	var LeaveUserSpan = UTILS_CreateElement("span",null,null,"");
+	// Hide leave user box
+	LeaveUserDiv.style.display = "none";
+
 	//LoadingMoveDiv.style.display = "none";
 
 	// Setting board width, depending on piece size
@@ -208,6 +221,9 @@ function INTERFACE_CreateGame()
 	
 	LoadingMoveDiv.appendChild(LoadingSpan);
 	GameDiv.appendChild(LoadingMoveDiv);
+
+	LeaveUserDiv.appendChild(LeaveUserSpan);
+	GameDiv.appendChild(LeaveUserDiv);
 	
 
 	// Setting attributes
@@ -221,7 +237,12 @@ function INTERFACE_CreateGame()
 	this.photo.bphoto = Photo.BPhoto;
 	this.tab = Tab;
 	this.MoveList = MoveList.List;
+
 	this.LoadingMove = LoadingMoveDiv;
+
+	this.LeaveUser = LeaveUserDiv;
+	this.LeaveUserText = LeaveUserSpan;
+
 	this.EventButtons = Options.ButtonList;
 	//Add "X" close buttons to EventButtons
 	this.EventButtons.push(GameClose);
@@ -1446,4 +1467,34 @@ function INTERFACE_ShowLoadingMove()
 function INTERFACE_HideLoadingMove()
 {
 	this.LoadingMove.style.display = "none";
+}
+
+/**
+* Show leave user from game message
+*
+* @return	void
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_ShowLeaveUser(Color)
+{
+	if(Color == "white")
+	{
+		this.LeaveUserText.innerHTML = UTILS_GetText("game_white_player_leave");
+	}
+	else
+	{
+		this.LeaveUserText.innerHTML = UTILS_GetText("game_black_player_leave");
+	}
+	this.LeaveUser.style.display = "block";
+}
+
+/**
+* Hide leave user from game message
+*
+* @return	void
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_HideLeaveUser()
+{
+	this.LeaveUser.style.display = "none";
 }
