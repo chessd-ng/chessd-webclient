@@ -435,9 +435,9 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 	var Tr, Td;
 	
 	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'player1td',UTILS_BreakString(White,14));
+		Td = UTILS_CreateElement('td',null,'player1td',White);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'player2td',UTILS_BreakString(Black,14));
+		Td = UTILS_CreateElement('td',null,'player2td',Black);
 		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'datetd',Date);
 		Tr.appendChild(Td);
@@ -601,10 +601,18 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.removeChild(this.TBody.childNodes[0]);
 	}
 
+	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0].clientWidth;
+	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1].clientWidth;
+
 	// Append new results
 	for(i=0; i<GameLen ; i++)
 	{
 		this.TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].date, GameList[i].gametype,  GameList[i].result, GameList[i].id));
+
+		// Break string if its break table result layout - White Player
+		UTILS_BreakString(this.TBody.rows[i].childNodes[0],getWidth1);
+		// Break string if its break table result layout - Black Player
+		UTILS_BreakString(this.TBody.rows[i].childNodes[1],getWidth2);
 	}
 	this.Page.innerHTML = Start+" - "+End;
 	// Set buttons class

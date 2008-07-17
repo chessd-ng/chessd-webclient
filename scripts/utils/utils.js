@@ -298,7 +298,7 @@ function UTILS_Capitalize(Word)
 }
 
 /**
-* Break a string putting a ' ' character at multiples of NumChar
+* Put a <br /> tag at Obj.innerHTML if it pass the Width limit
 *
 * @param Word
 * 	String to be break
@@ -308,8 +308,9 @@ function UTILS_Capitalize(Word)
 * @author Danilo Kiyoshi Simizu Yorinori
 *
 */
-function UTILS_BreakString(Word, NumChars)
+function UTILS_BreakString(Obj, Width)
 {
+/*
 	var ShortWord=" ", Part;
 	var NumChs;
 
@@ -334,6 +335,36 @@ function UTILS_BreakString(Word, NumChars)
 		ShortWord = ShortWord + " " + Word;
 	}
 	return ShortWord;
+*/
+	var text = Obj.innerHTML;
+	var i;
+	var old;
+	var broke = 0;
+//	alert ("Inicial: "+Obj.clientWidth+ " :"+ Obj.innerHTML);
+	if (Obj.clientWidth > Width) {
+
+		Obj.innerHMTL = "";
+
+		for (i=0; i<=text.length; i++)
+		{
+			if (broke == 1)
+			{
+				old =Obj.innerHTML;
+				Obj.innerHTML = Obj.innerHTML + text.slice(i-1,i); 
+			}
+			else
+			{
+				old = Obj.innerHTML;
+				Obj.innerHTML = text.slice(0,i);
+			}
+
+			if (Obj.clientWidth > Width)
+			{
+				Obj.innerHTML = old +"<br />" + text.slice(i-1,i); 
+				broke = 1;
+			}
+		}
+	}
 }
 
 /**
