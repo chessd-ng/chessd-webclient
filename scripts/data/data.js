@@ -167,6 +167,10 @@ DATA.prototype.AddPostpone = DATA_AddPostpone;
 DATA.prototype.RemovePostpone = DATA_RemovePostpone;
 DATA.prototype.FindPostpone = DATA_FindPostpone;
 
+DATA.prototype.AddAnnounce = DATA_AddAnnounce;
+DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
+DATA.prototype.FindAnnounce = DATA_FindAnnounce;
+
 DATA.prototype.AddGame = DATA_AddGame;
 DATA.prototype.RemoveGame = DATA_RemoveGame;
 DATA.prototype.FindGame = DATA_FindGame;
@@ -1411,6 +1415,80 @@ function DATA_AddChallengeWindow (Id, WindowObj)
 	{
 		this.ChallengeList[i].Window = WindowObj;
 	}
+}
+
+
+/**********************************
+ * METHODS - ANNOUNCE CHALLENGES  *
+ **********************************/
+function DATA_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId)
+{
+	// Creating a new object
+	var Announce = new Object();
+	var User = new Object();
+	var i;
+
+	i = this.FindAnnounce(AnnounceId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	User.Name = Username;
+	User.Color = Color;
+	User.Time = Time;
+	User.Inc = Inc;
+
+	// Setting atributes
+	Announce.Id = AnnounceId;
+	Announce.Category = Category;
+	Announce.Player = User;
+	Announce.Rated = Rated;
+	Announce.AutoFlag = AutoFlag;
+	Announce.Private = false;
+
+	this.AnnounceList[this.AnnounceList.length] = Announce;
+
+	return true;
+}
+
+function DATA_RemoveAnnounce(AnnounceId)
+{
+	var i;
+
+	i = this.FindAnnounce(AnnounceId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.AnnounceList.splice(i, 1);
+
+	return "";
+
+}
+
+function DATA_FindAnnounce(AnnounceId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.AnnounceList.length ; i++)
+	{
+		if (this.AnnounceList[i].Id == AnnounceId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
 }
 
 
