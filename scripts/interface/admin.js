@@ -222,7 +222,7 @@ function INTERFACE_AddBannedUser(Username)
 	
 	if(List == null)
 	{	
-		return "";
+		return false;
 	}
 
 	Item = UTILS_CreateElement("li",null,null,Username);
@@ -232,4 +232,6 @@ function INTERFACE_AddBannedUser(Username)
 	}
 
 	List.appendChild(Item);
+
+	return true;
 }

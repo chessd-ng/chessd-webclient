@@ -88,7 +88,7 @@ function LoadImage(Src)
 	Img.onerror = this.Loaded;
 	Img.onabort = this.Loaded;
 
-	Img.src = Src+"?"+NoCache;
+	Img.src = Src;
 }
 
 function Loaded()

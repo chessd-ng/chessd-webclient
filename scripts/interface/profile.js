@@ -148,7 +148,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 		
 		CounterDiv = UTILS_CreateElement('div', 'CounterDiv');
 		CounterInput = UTILS_CreateElement("input",null,"counter_input");
-		CounterInput.value = "0";
+		CounterInput.type = "text"
+		CounterInput.value = 200;
 		CounterInput.setAttribute("size",3);
 		CounterInput.readOnly = true;
 		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));

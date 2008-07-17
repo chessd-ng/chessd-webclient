@@ -360,11 +360,14 @@ function WINDOW_ProfileImage()
 
 function WINDOW_OldGame(Id)
 {
+	// Verify if exist old game window opened
+	if (document.getElementById("OldGamesDiv"))
+	{
+		return false;
+	}
+
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowOldGameWindow(Id);
-
-	if (document.getElementById("OldGamesDiv"))
-		return;
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'),35);

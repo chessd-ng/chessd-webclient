@@ -33,7 +33,7 @@ function PARSER_ParsePresence(XML)
 	}
 	catch(e)
 	{
-		return;
+		return Buffer;
 	}
 
 	Pattern = new RegExp("^"+MainData.Server+"."+MainData.Host+"$");

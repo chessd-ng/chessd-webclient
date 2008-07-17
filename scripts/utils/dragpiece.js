@@ -220,6 +220,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 		return false;
 	}
+	return true;
 }
 
 

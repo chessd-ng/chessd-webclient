@@ -192,7 +192,7 @@ function CONNECTION_ReceiveConnection()
 					catch(e)
 					{
 						LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionRefused);
-						return;
+						return "";
 					}
 					MainData.ConnectionStatus++;
 					CONNECTION_ConnectJabber();
@@ -250,6 +250,7 @@ function CONNECTION_ReceiveConnection()
 			LOGIN_LoginFailed(MainData.Const.LOGIN_ServerDown);
 		}
 	}
+	return "";
 }
 
 
@@ -328,5 +329,6 @@ function CONNECTION_ReceiveXml()
 				alert(UTILS_GetText("error_disconnected"));
 			}
 		}
-   	}
+	}
+	return "";
 }

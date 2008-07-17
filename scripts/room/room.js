@@ -1,4 +1,4 @@
-/**
+	/**
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -65,7 +65,7 @@ function ROOM_HandleRoomPresence(XML)
 			ROOM_RemoveRoom(RoomName);
 		}
 
-		return "";
+		return Buffer;
 	}
 
 	if(Item.length > 0)
@@ -85,7 +85,7 @@ function ROOM_HandleRoomPresence(XML)
 		LoadingBox = document.getElementById("room_loading");
 		if(LoadingBox != null)
 		{
-//			LoadingBox.parentNode.removeChild(LoadingBox);
+			LoadingBox.parentNode.removeChild(LoadingBox);
 		}
 	}
 
@@ -606,7 +606,7 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	Room = MainData.GetRoom(RoomName);
 	if(Room == null)
 	{
-		return "";
+		return null;
 	}
 
 	// Check if user has already inserted. 
@@ -734,6 +734,8 @@ function ROOM_RemoveRoom(RoomName)
 		//Set focus to general room
 		ROOM_FocusRoom(MainData.RoomDefault);
 	}
+
+	return RoomName;
 }
 
 //Sort all user in all rooms by nick name
@@ -749,7 +751,7 @@ function ROOM_SortUsersByNick()
 		Room = MainData.RoomList[j];
 		if(Room == null)
 		{
-			return "";
+			return false;
 		}
 		
 		// Test the current order mode (order == sort)
@@ -793,6 +795,8 @@ function ROOM_SortUsersByNick()
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
 	}
+
+	return true;
 }
 
 //Sort all user in all rooms by rating name
@@ -810,7 +814,7 @@ function ROOM_SortUsersByRating(Category)
 		Room = MainData.RoomList[j];
 		if(Room == null)
 		{
-			return "";
+			return false;
 		}
 		
 		// If ordered into ascending order, change to descending order
@@ -845,6 +849,8 @@ function ROOM_SortUsersByRating(Category)
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
 	}
+
+	return true;
 }
 
 function ROOM_ShowHideUserList(RoomName)
@@ -853,7 +859,7 @@ function ROOM_ShowHideUserList(RoomName)
 
 	if(Room == null)
 	{
-		return "";
+		return false;
 	}
 
 	if(Room.Room.userListVisibility == false)
@@ -864,4 +870,5 @@ function ROOM_ShowHideUserList(RoomName)
 	{
 		Room.Room.hideUserList();
 	}
+	return true;
 }

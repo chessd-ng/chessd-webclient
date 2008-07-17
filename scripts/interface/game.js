@@ -263,7 +263,7 @@ function INTERFACE_CreateGame()
 * @return	true if game is showed with sucess, else false
 * @author	Rubens and Pedro
 */
-function INTERFACE_ShowGame(Div)
+function INTERFACE_ShowGame()
 {
 	var Div = document.getElementById("Center");
 
@@ -485,6 +485,10 @@ function INTERFACE_RemovePiece(Line, Col)
 	{
 		Piece.parentNode.removeChild(Piece);
 		return Piece;
+	}
+	else
+	{
+		return null;
 	}
 }
 

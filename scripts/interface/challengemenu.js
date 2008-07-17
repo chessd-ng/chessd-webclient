@@ -180,7 +180,7 @@ function INTERFACE_RemoveMatch(MatchId)
 	// If not found, do nothing
 	if(i == this.MatchOfferList.length)
 	{
-		return "";
+		return false;
 
 	}
 
@@ -196,6 +196,8 @@ function INTERFACE_RemoveMatch(MatchId)
 	{
 		this.showNoMatch();
 	}
+
+	return true;
 }
 
 
@@ -293,7 +295,7 @@ function INTERFACE_RemoveAnnounce(MatchId)
 	// If not found, do nothing
 	if(i == this.AnnounceList.length)
 	{
-		return "";
+		return false;
 	}
 
 	Item = this.AnnounceList[i].Item;
@@ -309,6 +311,7 @@ function INTERFACE_RemoveAnnounce(MatchId)
 		this.showNoAnnounce();
 	}
 
+	return true;
 }
 
 
@@ -366,7 +369,7 @@ function INTERFACE_RemovePostpone(PostponeId)
 	// If not found, do nothing
 	if(i == this.PostponeList.length)
 	{
-		return "";
+		return false;
 	}
 
 	Item = this.PostponeList[i].Item;
@@ -381,6 +384,8 @@ function INTERFACE_RemovePostpone(PostponeId)
 	{
 		this.showNoPostpone();
 	}
+
+	return true;
 }
 
 function INTERFACE_UpdatePostpone(OponentName, OponentStatus)

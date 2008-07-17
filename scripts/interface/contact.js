@@ -226,6 +226,8 @@ function INTERFACE_RemoveContactUser(UserName)
 	{
 		Group.offline.removeUser(UserName);
 	}
+
+	return UserName;
 }
 
 function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
@@ -264,7 +266,7 @@ function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
 			this.addUser(Group.name, UserName, Status, Rating, Type);
 		}
 	}
-	
+	return UserName;	
 }
 
 
@@ -410,6 +412,7 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 		Node.style.display = "none";
 		Obj.innerHTML = Obj.innerHTML.replace("-", "+");
 	}
+	return true;
 }
 
 

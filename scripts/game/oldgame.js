@@ -561,6 +561,8 @@ function OLDGAME_PrevBoard()
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
 	MainData.CurrentOldGame.Game.SetLastMove(Move);
+
+	return true;
 }
 
 /** 
@@ -599,6 +601,8 @@ function OLDGAME_NextBoard()
 	MainData.CurrentOldGame.Game.SetWTime();
 	MainData.CurrentOldGame.Game.SetBTime();
 	MainData.CurrentOldGame.Game.SetLastMove(Move);
+
+	return true;
 }
 
 /** 
@@ -760,4 +764,6 @@ function OLDGAME_GameResult(Result)
 		return UTILS_GetText("game_result_white-wo");
 	else if (Result == "black-wo")
 		return UTILS_GetText("game_result_black-wo");
+	else
+		return null;
 }

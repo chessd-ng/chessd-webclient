@@ -322,6 +322,10 @@ function DATA_FindNextUser(Username, Status)
 		}
 		return null;
 	}
+	else
+	{
+		return null;
+	}
 }
 
 
@@ -1952,7 +1956,7 @@ function DATA_RemoveOldGame(Id)
 
 	if(this.OldGameList[GamePosition] == undefined)
 	{
-		return;
+		return null;
 	}
 	else //Remove
 	{
@@ -2101,6 +2105,8 @@ function DATA_ChangeWindowFocus(WindowObj)
 
 	//Set new top window
 	this.Windows.Focus = WindowObj;
+
+	return WindowObj;
 }
 
 /**
@@ -2198,6 +2204,8 @@ function DATA_RemoveProfile(Jid)
 
 	//Remove Profile from ProfileList
 	this.ProfileList.splice(ProfileIndex,1);
+
+	return true;
 
 }
 

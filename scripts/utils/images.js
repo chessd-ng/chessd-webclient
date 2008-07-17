@@ -104,7 +104,7 @@ function IMAGE_B64Img(Image, Type){
 	if(Type == "")
 	{
 		WINDOW_Alert(UTILS_GetText("profile_load_error"), UTILS_GetText("profile_load_error_title"));
-		return ""
+		return false;
 	}
 	Img = "data:"+Type+";base64,"+Image;
 
@@ -116,5 +116,5 @@ function IMAGE_B64Img(Image, Type){
 		Profile.Profile.SetImg64(Image);
 		Profile.Profile.SetUserImg(Img);
 	}
-	
+	return true;
 }

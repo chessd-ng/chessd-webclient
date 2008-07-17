@@ -317,6 +317,8 @@ function INTERFACE_HideRoomList()
                 return false;
         }
         Node.parentNode.removeChild(Node);
+
+				return true;
 }
 
 /********************************************
@@ -549,9 +551,13 @@ function INTERFACE_ShowEmoticonList(RName)
 			var Num = i;
 
 			if (!Node)
+			{
 				return null;
+			}
 			Node.value += "[img{"+this.className+"}] ";
 			Node.focus();
+
+			return true;
 		}
 
 		Item.appendChild(Img);
@@ -834,7 +840,8 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	CounterDiv = UTILS_CreateElement('div', 'CounterDiv');
 	CounterInput = UTILS_CreateElement("input",null,"counter_input");
-	CounterInput.value = "0";
+	CounterInput.type="text";
+	CounterInput.value = 30;
 	CounterInput.setAttribute("size",2);
 	CounterInput.readOnly = true;
 	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));

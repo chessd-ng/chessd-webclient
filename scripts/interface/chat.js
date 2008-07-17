@@ -73,6 +73,8 @@ function INTERFACE_OpenChat(Username, Status)
 	Chat = INTERFACE_CreateChat(Username, Status);
 	Node.appendChild(Chat.ChatItem);
 	Chat.Elements.InputFocus();
+
+	return true;
 }
 
 /**
@@ -202,6 +204,8 @@ function INTERFACE_ChatListPositioning()
 	ScreenHeight = document.documentElement.clientHeight;
 	ScreenScroll = document.documentElement.scrollTop;
 	Node.style.top = (ScreenHeight+ScreenScroll-20)+"px";
+
+	return true;
 }
 
 /**
