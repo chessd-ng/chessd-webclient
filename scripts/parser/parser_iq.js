@@ -75,7 +75,10 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += PROFILE_HandleInfoProfile(XML);
 			}
-
+			else if (Xmlns.match(/\/chessd#match_announcement/))
+			{
+				Buffer += ANNOUNCE_HandleAnnounce(XML);
+			}
 			// Challenge accept confirmation
 			else if (Xmlns.match(/\/chessd#match/))
 			{
@@ -129,8 +132,12 @@ function PARSER_ParseIq(XML)
 			break;
 
 		case "set":
+			if (Xmlns.match(/\/chessd#match_announcement/))
+			{
+				Buffer += ANNOUNCE_HandleAnnounceGame(XML);
+			}
 			// Challenge messages
-			if (Xmlns.match(/\/chessd#match/))
+			else if (Xmlns.match(/\/chessd#match/))
 			{
 				Buffer += CHALLENGE_HandleChallenge(XML);
 			}
@@ -161,8 +168,12 @@ function PARSER_ParseIq(XML)
 			break;
 
 		case "error": 
+			if (Xmlns.match(/\/chessd#match_announcement/))
+			{
+				Buffer += ANNOUNCE_HandleAnnounceError(XML);
+			}
 			// Challenge messages
-			if (Xmlns.match(/\/chessd#match/))
+			else if (Xmlns.match(/\/chessd#match/))
 			{
 				Buffer += CHALLENGE_HandleErrorChallenge(XML);
 			}
