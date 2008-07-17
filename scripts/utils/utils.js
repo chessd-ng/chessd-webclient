@@ -68,10 +68,11 @@ function UTILS_IdentifyBrowser()
 			var UserAgent = navigator.userAgent.split(" ");
 			var i=0;
 
-			while((!UserAgent[i].match("rv:")) || (i<UserAgent.lengthg))
+			while((!UserAgent[i].match("rv:")) && ( i < UserAgent.length))
 			{
 				i++;
 			}
+
 			if(i != UserAgent.length)
 			{
 				geckoVersion = UserAgent[i].split(":")[1];
@@ -565,12 +566,18 @@ function UTILS_GetOffset(Obj)
 	{
 		Curleft = Obj.offsetLeft;
 		Curtop = Obj.offsetTop;
-		while (Obj = Obj.offsetParent)
+		Obj = Obj.offsetParent;
+		while (Obj)
 		{
 			Curleft += Obj.offsetLeft
 			Curtop += Obj.offsetTop
+			Obj = Obj.offsetParent;
 		}
-	return {X:Curleft, Y:Curtop};
+		return {X:Curleft, Y:Curtop};
+	}
+	else
+	{
+		return {X:0, Y:0};
 	}
 }
 
@@ -583,8 +590,9 @@ function UTILS_GetParentDiv(Obj)
 	{
 		if (Obj.tagName == "DIV")
 			return Obj;
+		Obj = Obj.parentNode;
 	}
-	while(Obj = Obj.parentNode);
+	while(Obj);
 	return null;
 }
 

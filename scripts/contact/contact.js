@@ -186,7 +186,7 @@ function CONTACT_OnlineSortUserByNick()
 
 	if(Room == null)
 	{
-		return "";
+		return false;
 	}
 		
 	// Test the current order mode 
@@ -229,6 +229,8 @@ function CONTACT_OnlineSortUserByNick()
 		ContactOnline.userList.removeUser(UserName);
 		ContactOnline.userList.addUser(UserName, Status, Rating, Type);
 	}
+
+	return true;
 }
 
 /**
@@ -252,7 +254,7 @@ function CONTACT_OnlineSortUserByRating(Category)
 	Room = MainData.RoomList[0];
 	if(Room == null)
 	{
-		return "";
+		return false;
 	}
 	
 	// Test the current order mode (order == sort)
@@ -296,6 +298,8 @@ function CONTACT_OnlineSortUserByRating(Category)
 		ContactOnline.userList.removeUser(UserName);
 		ContactOnline.userList.addUser(UserName, Status, Rating, Type);
 	}
+
+	return true;
 }
 
 /************************************

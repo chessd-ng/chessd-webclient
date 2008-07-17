@@ -79,6 +79,7 @@ function INTERFACE_SetLoadPhrase(Phrase, Num)
 		{
 			Ball.className = "green_ball";
 		}
+		return Phrase;
 	}
 	else
 	{

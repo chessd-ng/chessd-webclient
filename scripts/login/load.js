@@ -177,6 +177,8 @@ function LOGIN_LoadCss()
 		Head.appendChild(Tag);
 	}
 	LOGIN_Load2();
+
+	return true;
 }
 
 /**

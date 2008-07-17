@@ -711,6 +711,8 @@ function INTERFACE_SetSearchButton(Node)
 			// Show loading message
 			INTERFACE_ShowOldgameLoading();
 
+			return true;
+
 		}, "false");
 }
 
