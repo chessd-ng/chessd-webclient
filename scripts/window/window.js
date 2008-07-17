@@ -24,7 +24,7 @@
 /**
 * 
 */
-function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
+function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 {
 	var Height, Width;
 	var Win;
@@ -40,7 +40,7 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title)
 	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_ChangeFocus(Win)},false);
 
 	//Show Windows on browser
-	Win.show();
+	Win.show(null,Top,Left);
 
 	if(MainData.Windows.Focus != null)
 	{
@@ -367,7 +367,7 @@ function WINDOW_OldGame(Id)
 		return;
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'));
+	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'),35);
 	var Elements = Div.Elements;
 
 	// Focus input player 1 - TODO expand this if more than one old game search window could be opened
