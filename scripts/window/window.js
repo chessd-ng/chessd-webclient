@@ -476,3 +476,25 @@ function WINDOW_AdminWindow()
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+function WINDOW_AnnounceWindow(Username, Rating)
+{
+	if(document.getElementById("AnnounceDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Button
+	var Div = INTERFACE_AnnounceWindow(Username, Rating);
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, "Announce challenge");
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Announce Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+

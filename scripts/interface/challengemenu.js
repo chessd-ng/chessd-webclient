@@ -68,6 +68,10 @@ function INTERFACE_CreateChallengeMenu()
 	var NoAnnounce = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_announce"));
 	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
 
+	AnnounceButton.onclick = function(){
+		WINDOW_AnnounceWindow(MainData.Username, MainData.Rating)
+	}
+
 	MatchOfferList.appendChild(MatchOfferTitle);
 	MatchOfferList.appendChild(NoMatch);
 	AnnounceList.appendChild(AnnounceTitle);
@@ -202,15 +206,16 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 
 	var PName, PTime, PInc, PRated, PPrivate, PButton;
 	var ItemObj = new Object();
+	var Id = MatchId;
 
 	// Random color
-	if(Oponent.Color == "")
+	if(Player.Color == "")
 	{
 		Item = UTILS_CreateElement("li",null,"random");
 	}
 	else
 	{
-		Item = UTILS_CreateElement("li",null,Oponent.Color);
+		Item = UTILS_CreateElement("li",null,Player.Color);
 	}
 
 
@@ -240,24 +245,20 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		PRated = UTILS_CreateElement("p","rated","true","rating");
 	}
 
-	PButton = UTILS_CreateElement("p","button","decline");
-	/*
 	if(Player.Name == MainData.Username)
 	{
 		PButton = UTILS_CreateElement("p","button","decline");
 		PButton.onclick = function(){
-			//TODO -> send a cancel/accept to cancel offer
+			ANNOUNCE_RemoveAnnounce(Id);
 		}
 	}
 	else
 	{
 		PButton = UTILS_CreateElement("p","button","accept");
 		PButton.onclick = function(){
-			//TODO -> send a cancel/accept to cancel offer
+			ANNOUNCE_AcceptAnnounce(Id);
 		}
 	}
-	*/
-
 
 	Item.appendChild(PName);
 	Item.appendChild(PTime);
@@ -302,6 +303,12 @@ function INTERFACE_RemoveAnnounce(MatchId)
 
 	//Remove from match list
 	this.AnnounceList.splice(i,1);
+
+	if(this.AnnounceList.length == 0)
+	{
+		this.showNoAnnounce();
+	}
+
 }
 
 
