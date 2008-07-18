@@ -46,6 +46,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	UTILS_CreateCookie("Username", Username, MainData.CookieValidity);
 	UTILS_CreateCookie("RememberPass", RememberPass, MainData.CookieValidity);
 
+	//TODO -> Fix to IE
 	if (RememberPass)
 		UTILS_CreateCookie("Passwd", Passwd, MainData.CookieValidity);
 	else
@@ -131,6 +132,7 @@ function LOGIN_EndLogin()
 * @return none
 * @public
 */
+/*
 function LOGIN_Interface()
 {
 	var All = INTERFACE_CreateInterface();
@@ -154,7 +156,7 @@ function LOGIN_Interface()
 	// Set away counter
 	CONTACT_StartAwayCounter();
 }
-
+*/
 
 /**
 * Show a error message on login

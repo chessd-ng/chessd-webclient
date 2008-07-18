@@ -81,3 +81,45 @@ function START_ChangeLanguage(Lang)
 	// Show new login div with language selected
 	INTERFACE_StartLogin(Lang);
 }
+
+
+
+/**
+* Clear Login window and start interface 
+*
+* @return none
+* @public
+*/
+function START_Webclient()
+{
+	var All = INTERFACE_CreateInterface();
+	var XMPP = "";
+
+	XMPP += MESSAGE_UserList();
+	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);
+	XMPP += MESSAGE_UserListInfo();
+	XMPP += MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile);
+	XMPP += MESSAGE_Presence();
+	XMPP += MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username);
+
+	CONNECTION_SendJabber(XMPP);
+
+	// Close load image
+	LOAD_EndLoad();
+
+	// Open XadrezLivre game environment
+	INTERFACE_ShowInterface(All);
+	
+	// Create contact object and set values
+	CONTACT_StartContact();
+	CONTACT_LoadUserContactList();	
+
+	// Create challenge menu object
+	CHALLENGE_StartChallenge();
+
+	// Search for some game that player is playing
+	GAME_SearchCurrentGame();
+
+	// Set away counter
+	CONTACT_StartAwayCounter();
+}
