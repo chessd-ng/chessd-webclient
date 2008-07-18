@@ -194,6 +194,8 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	var Item;
 	var Message, Time, EmoticonNum;
 
+	Msg =UTILS_ConvertChatString(Msg);
+
 	// Show emoticons
 	while (Msg.match(/\[img{\d*}\]/) != null)
 	{
