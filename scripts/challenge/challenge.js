@@ -1,5 +1,4 @@
 /**
-* 3C
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -550,7 +549,7 @@ function CHALLENGE_StartChallenge()
 	MainData.ChallengeMenu = new ChallengeMenuObj();
 	MainData.ChallengeMenu.hideMenu();
 	MainData.ChallengeMenu.showMatch();
-	MainData.ChallengeMenu.hideAnnounce();
+	MainData.ChallengeMenu.showAnnounce();
 	MainData.ChallengeMenu.hidePostpone();
 
 	//Get adjourned games list -> see adjourn.js
@@ -593,7 +592,11 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
 
 	// Get adjourn games list
+	/*
 	CHALLENGE_GetAdjournGames();
+	ANNOUNCE_GetAnnounceGames();
+	*/
+	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","",""));
 
 	return "";
 }

@@ -42,10 +42,13 @@ function WindowObj(Height, Width, Div, Title, CloseCommands)
 }
 
 
-function WINDOW_ShowWindow(Element)
+function WINDOW_ShowWindow(Element, Top, Left)
 {
 	var RandomTop, RandomLeft;
-	var Height, Width;
+	var TopTmp = 0;
+	var LeftTmp = 0;
+
+
 	if(Element == null)
 	{
 		document.body.appendChild(this.window);
@@ -57,18 +60,46 @@ function WINDOW_ShowWindow(Element)
 		// Check Internet Explorer
 		if(MainData.Browser == 0)
 		{
-			Height = (document.body.clientHeight/2) - (document.body.clientHeight/5)+ RandomTop;
-			Width = (document.body.clientWidth/2) - (document.body.clientWidth/10) + RandomLeft;
+
+			if(Top != null)
+			{
+				TopTmp += Top;
+			}
+			else
+			{
+				TopTmp += (document.body.clientHeight/2) - (document.body.clientHeight/5)+ RandomTop;
+			}
+
+			if(Left != null)
+			{
+				LeftTmp += Left;
+			}
+			else
+			{
+				LeftTmp += (document.body.clientWidth/2) - (document.body.clientWidth/10) + RandomLeft;
+			}
 		}
 		else
 		{
-			Height = (window.innerHeight/2) - (window.innerHeight/5)+ RandomTop;
-			Width = (window.innerWidth/2) - (window.innerWidth/10) + RandomLeft;
+			if(Top != null)
+			{
+				TopTmp += Top;
+			}
+			else
+			{
+				TopTmp += (window.innerHeight/2) - (window.innerHeight/5)+ RandomTop;
+			}
+
+			if(Left != null)
+			{
+				LeftTmp += Left;
+			}
+			LeftTmp += (window.innerWidth/2) - (window.innerWidth/10) + RandomLeft;
 		}
 
 
-		this.window.style.top = Height+"px";
-		this.window.style.left = Width+"px";
+		this.window.style.top = TopTmp+"px";
+		this.window.style.left = LeftTmp+"px";
 	}
 	else
 	{

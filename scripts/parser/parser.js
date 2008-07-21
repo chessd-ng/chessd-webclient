@@ -75,6 +75,12 @@ function PARSER_ParseXml(XML)
 
 			default: break;
 		}
+		/*
+		if(Buffer.match("undefined"))
+		{
+			alert(XMLTag.tagName+"\n"+XMLTag.getAttribute("xmlns")+"\n"+Buffer);
+		}
+		*/
 	}
 	return Buffer;
 }

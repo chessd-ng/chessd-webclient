@@ -1,4 +1,4 @@
-/**
+	/**
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -40,6 +40,8 @@ function ROOM_HandleRoomPresence(XML)
 	
 	var LoadingBox;
 
+	var RoomNotFound;
+
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
@@ -55,6 +57,14 @@ function ROOM_HandleRoomPresence(XML)
 	// Check if the type is error
 	if (Type == "error")
 	{
+		// Check if error is a inexist room; -> QuickFix to close room
+		RoomNotFound = XML.getElementsByTagName("item-not-found")[0];
+
+		if(RoomNotFound != null)
+		{
+			ROOM_RemoveRoom(RoomName);
+		}
+
 		return Buffer;
 	}
 

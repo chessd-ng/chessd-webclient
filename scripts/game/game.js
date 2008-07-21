@@ -964,11 +964,11 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;
-	var Buffer;
+	var Buffer = "";
 
 	if(HistoryXml == undefined)
 	{
-		return "";
+		return Buffer;
 	}
 
 	HistoryMoves = HistoryXml.getElementsByTagName("state");
