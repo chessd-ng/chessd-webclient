@@ -128,7 +128,7 @@ function CONNECTION_SendJabber()
 	// Avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	MainData.HttpRequest.open('POST','http://'+MainData.Host+'/jabber?id='+DT , true);
+	MainData.HttpRequest.open('POST','http://'+MainData.HostPost+'/jabber?id='+DT , true);
 	MainData.HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
 	// Normal parse messages
@@ -231,7 +231,7 @@ function CONNECTION_ReceiveConnection()
 					{
 						// Send a wait message to bind, to
 						// wait while loading scripts, css and images
-					//	CONNECTION_SendJabber(MESSAGE_Wait());
+						CONNECTION_SendJabber(MESSAGE_Wait());
 						/******** LOAD FILES**********/
 						// Load scripts, css and images
 						if (MainData.Load == -1)
