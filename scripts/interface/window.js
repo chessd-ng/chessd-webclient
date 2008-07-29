@@ -220,7 +220,7 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 		UTILS_AddListener(TmpClose, "click", CloseCommands ,false);
 	}
 	*/
-	Div.style.width = Width - 10;
+	Div.style.width = Width - 10+"px";
 
 
 	TitleBar.appendChild(TmpTitle);
