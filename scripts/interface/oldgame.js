@@ -525,7 +525,14 @@ function INTERFACE_Color(Color)
 */
 function INTERFACE_FromInput(From)
 {
-	this.From.value = From;
+	if (From == "")
+	{
+		this.From.value = "";
+	}
+	else
+	{
+		this.From.value = UTILS_ConvertTimeStamp(From);
+	}
 }
 
 /*
@@ -537,7 +544,14 @@ function INTERFACE_FromInput(From)
 */
 function INTERFACE_ToInput(To)
 {
-	this.To.value = To;
+	if (To == "")
+	{
+		this.To.value = "";
+	}
+	else
+	{
+		this.To.value = UTILS_ConvertTimeStamp(To);
+	}
 }
 
 /**
