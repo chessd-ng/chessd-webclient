@@ -3,7 +3,7 @@
 	height			: 265px;
 	border			: 2px solid #FFA200;
 	position		: relative;
-	top			: 80px;
+	top				: 80px;
 	left 			: 50%;
 	margin-left		: -150px;
 	background		: url('../images/login/login_box_fundo.gif') repeat-x;
@@ -18,7 +18,7 @@
 	text-indent		: -9999px;
 	overflow		: hidden;
 	background		: url('../images/logo.png') no-repeat;
-	margin			: 10px 0mm 35px 90px;
+	margin			: 10px 0mm 30px 90px;
 }
 
 #LoadDiv h3 {
@@ -57,22 +57,4 @@
 	height			: 9px;
 	background		: url('../images/login/bola_verde.png') no-repeat;
 	margin			: 10px;
-}
-
-#LoadDiv #Bar
-{
-	height			: 15px;
-	width			: 0px;
-	/*background-color	: #21f048;*/
-	background		: url('../images/loadbkg.png') repeat-X;
-	position		: relative;
-}
-
-#LoadDiv #BarBorder
-{
-	height			: 15px;
-	width			: 300px;
-	border			: 1px solid #216778;
-	overflow		: hidden;
-	text-align		: left;
 }
