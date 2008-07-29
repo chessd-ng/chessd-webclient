@@ -715,11 +715,13 @@ function INTERFACE_SetSearchButton(Node)
 			if (Node.From == null)
 			{
 				WINDOW_Alert(UTILS_GetText("oldgame_invalid_date"),UTILS_GetText("oldgame_invalid_begin"));
+				Node.From = "";
 				return false;
 			}
 			Node.To = UTILS_ConvertSearchDate(Node.Elements.To.value,"end"); 
 			if (Node.To == null) {
 				WINDOW_Alert(UTILS_GetText("oldgame_invalid_date"),UTILS_GetText("oldgame_invalid_end"));
+				Node.To = "";
 				return false;
 			}
 			if (( Node.To != "") && (Node.From > Node.To))
