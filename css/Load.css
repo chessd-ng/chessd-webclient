@@ -58,3 +58,16 @@
 	background		: url('../images/login/bola_verde.png') no-repeat;
 	margin			: 10px;
 }
+
+#LoadDiv #BarBorder{
+	width			: 300px;
+	height			: 15px;
+	border			: 1px solid #216778;
+	text-align		: left;
+}
+
+#LoadDiv #Bar{
+	background		: url('../images/loadbkg.png') repeat-X;
+	height			: 15px;
+	width			: 0px;
+}
