@@ -122,7 +122,7 @@ function INTERFACE_CreateGroup(GroupName)
 	}
 	else
 	{
-		GroupTitle = UTILS_CreateElement("label",null,null,UTILS_GetTag("contact_default_group"));
+		GroupTitle = UTILS_CreateElement("label",null,null,UTILS_GetText("contact_default_group"));
 	}
 
 	GroupOnline = UTILS_CreateElement("div",null,"OnlineGroup");
