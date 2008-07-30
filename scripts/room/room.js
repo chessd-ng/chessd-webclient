@@ -794,6 +794,12 @@ function ROOM_SortUsersByNick()
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
+		// TODO - Fix user menu position in FF3
+		// Proposital hide
+		if (MainData.Browser == 2)
+		{
+			Room.Room.hideUserList();
+		}
 	}
 
 	return true;
@@ -847,6 +853,13 @@ function ROOM_SortUsersByRating(Category)
 
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
+		}
+
+		// TODO - Fix user menu position in FF3
+		// Proposital hide
+		if (MainData.Browser == 2)
+		{
+			Room.Room.hideUserList();
 		}
 	}
 

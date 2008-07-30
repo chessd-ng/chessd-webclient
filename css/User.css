@@ -228,3 +228,22 @@ div .UserList #order_rating option.not_selected
 	width			: 8px;
 	text-indent		: 10px;
 }
+
+/**
+* USER MENU
+*/
+#UserFullNameDiv {
+	position		: absolute;
+	padding			: 4px;
+	background-color	: #FFF;
+	border			: 1px solid #216778;
+	z-index	:	2;
+}
+
+#UserFullNameDiv p {
+	font-style		: italic;
+	font-size		: 10px;
+	color			: #216778;
+	cursor			: pointer;
+	margin-bottom		: 1px;
+}

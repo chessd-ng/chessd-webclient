@@ -65,7 +65,16 @@ function INTERFACE_CreateUserBox()
 	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");
-	Name = UTILS_CreateElement("h2", null, null, MainData.Username);
+	if (MainData.Username.length > 10)
+	{
+		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(MainData.Username,10));
+		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MainData.Username); }
+		Name.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+	}
+	else
+	{
+		Name = UTILS_CreateElement("h2", null, null, MainData.Username);
+	}
 	Status = UTILS_CreateElement("select", "UserStatusSelect");
 
 	// Available

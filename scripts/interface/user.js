@@ -460,14 +460,24 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 	}
 
 	// Create user and rating html elements
-	Td1 = UTILS_CreateElement("td", null, Type+"_"+Status, Username);
+	if (Username.length > 10)
+	{
+		Td1 = UTILS_CreateElement("td", null, Type+"_"+Status, UTILS_ShortString(Username,8));
+		Td1.onmouseover = function () { INTERFACE_ShowUserFullName(this, Username); }
+		Td1.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+	}
+	else
+	{
+		Td1 = UTILS_CreateElement("td", null, Type+"_"+Status, Username);
+	}
 	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
 
 	// Add onclick function to open user menu
-	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+//	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 
+	Tr.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	return Tr;
 }
 
@@ -519,20 +529,36 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	ParentNode = UTILS_GetParentDiv(Obj);
 
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+	// Contact List
 	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2;
 	}
+	// Search User Result
 	else if (ParentNode.id.match("ListDiv") != null) 
 	{
 		Offset= 3;
+	}
+	// Room and Online User List
+	else if (ParentNode.className.match("UserTable") != null) 
+	{
+		if (MainData.Browser == 2)
+		{
+			Offset = 1; //
+		}
+		else
+		{
+			Offset = 9; // ok
+		}
 	}
 
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
 	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
 	Menu.style.left = Pos.X+"px";
+	
+//	alert(ParentNode.scrollTop+" "+Pos.Y+" "+Offset+" "+Menu.style.top+"-"+Pos.X);
 
 	document.body.appendChild(Menu);
 }
@@ -708,8 +734,16 @@ function INTERFACE_CreateUserElement(Username)
 
 	Tr = UTILS_CreateElement("tr");
 
-	Td = UTILS_CreateElement("td", null, null, Username);
-	
+	if (Username.length > 14)
+	{
+		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Username,14));
+		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Username); }
+		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+	}
+	else
+	{
+		Td = UTILS_CreateElement("td", null, null, Username);
+	}
 	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	Tr.appendChild(Td);
 
@@ -790,4 +824,78 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons};
+}
+
+/**
+ * @author	Danilo
+ *
+ */
+function INTERFACE_ShowUserFullName(Obj,UserName)
+{
+	var Hint, Name, ParentNode, Pos, i;
+	var Offset = 9;
+
+	Hint = UTILS_CreateElement("div", "UserFullNameDiv");
+
+	Name = UTILS_CreateElement("p", null, null, UserName);
+
+	Hint.appendChild(Name);
+	
+	// Get parent scrolling
+	
+	ParentNode = UTILS_GetParentDiv(Obj);
+	
+	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+	// Contact List
+	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+	{
+		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		Offset = 2; //ok
+	}
+	// Search User Result List
+	else if (ParentNode.id.match("ListDiv") != null) 
+	{
+		Offset = 3; // ok
+	}
+	// Online and Room User List
+	else if (ParentNode.className.match("UserTable") != null) 
+	{
+		if (MainData.Browser == 2)
+		{
+			Offset = 1; //
+		}
+		else
+		{
+			Offset = 9; // ok
+		}
+	}
+	// User Nickname
+	else if (ParentNode.id.match("UserInf") != null)
+	{
+		if (MainData.Browser == 2)
+		{
+			Offset = 3;
+		}
+		else
+		{
+			Offset = 6;
+		}
+	}
+
+
+	// Get position of user list item
+	Pos = UTILS_GetOffset(Obj);
+	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
+	Hint.style.left = Pos.X+"px";
+	Hint.style.width = UserName.length*6+'px';
+
+
+	document.body.appendChild(Hint);
+}
+
+function INTERFACE_CloseUserFullName()
+{
+	var Hint = document.getElementById("UserFullNameDiv");
+	if (Hint)
+		document.body.removeChild(Hint);
 }

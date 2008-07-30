@@ -301,6 +301,7 @@
 	padding			: 4px;
 	background-color	: #FFF;
 	border			: 1px solid #216778;
+	z-index : 2;
 }
 
 #RoomFullNameDiv p {
