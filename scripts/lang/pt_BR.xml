@@ -84,6 +84,7 @@
 		<contact_change_profile>Alterar meu perfil</contact_change_profile>
 		<contact_loading>Carregando lista de contatos...</contact_loading>
 		<contact_online_loading>Carregando lista de usuários online...</contact_online_loading>
+		<contact_default_group>Amigos</contact_default_group>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
