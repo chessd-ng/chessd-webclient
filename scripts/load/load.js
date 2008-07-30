@@ -353,7 +353,11 @@ function LOAD_AppendFiles(Files, NumFiles)
 				Head.appendChild(File);
 				
 				//Quick fix -> CSS doesn't trigger onload event
-				LOAD_NextFile(Files, NumFiles);
+				//in FF2/FF3
+				if(MainData.Browser != 0 )
+				{
+					LOAD_NextFile(Files, NumFiles);
+				}
 				break;
 
 			case "images":
@@ -361,11 +365,32 @@ function LOAD_AppendFiles(Files, NumFiles)
 				File.src = Files[0]+"?"+NoCache;
 				break;
 		}
+	
+		
+		
+		// http://cain.supersized.org/archives/2-Dynamic-loading-of-external-JavaScript-.js-files.html	
+		// IE script onload doesn't work. To resolve this problem
+		// we used onreadystatechange event to know when script
+		// was loaded and ready to use.
+		// This event work with CSS files too.
+		if(MainData.Browser == 0) //IE
+		{
+			File.onreadystatechange = function(){
+				if(File.readyState == "loaded" || File.readyState == "complete")
+				{
+					LOAD_NextFile(Files, NumFiles);
+				}
+			};
+		}
+		else // FF2 / FF3
+		{
+			File.onload = function(){LOAD_NextFile(Files, NumFiles)};
+		}
 
-		File.onload = function(){LOAD_NextFile(Files, NumFiles)};
+		/*
 		File.onerror = function(){LOAD_NextFile(Files, NumFiles)};
 		File.onabort = function(){LOAD_NextFile(Files, NumFiles)};
-
+		*/
 	}
 	// All files has been loaded
 	else 
