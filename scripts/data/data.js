@@ -43,7 +43,15 @@ function DATA(ConfFile, LangFile)
 	this.ConnectionStatus = 1;
 	this.HttpRequest = null;
 	this.Browser = UTILS_IdentifyBrowser();
-	this.Host = UTILS_GetTag(Params, "host");
+	
+	// Get Host from configuration file
+	//this.Host = UTILS_GetTag(Params, "host");
+	//this.HostPost = UTILS_GetTag(Params, "host");
+	
+	// Get Host from url
+	this.Host = window.location.href.split("/")[2].split(":")[0];
+	this.HostPost = window.location.href.split("/")[2];
+
 	this.Resource = UTILS_GetTag(Params, "resource");
 
 	this.Server = UTILS_GetTag(Params,"server");

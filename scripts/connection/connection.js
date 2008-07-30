@@ -45,6 +45,7 @@ function CONNECTION_ConnectJabber(XML)
 			CONNECTION_SendJabber(MESSAGE_SendPasswd());
 			break;
 
+		/*
 		// Get user list
 		case (4):
 			CONNECTION_SendJabber(MESSAGE_UserList());
@@ -74,6 +75,7 @@ function CONNECTION_ConnectJabber(XML)
 				);
 			LOGIN_Interface();
 			break;
+		*/
 	}
 
 	return "";
@@ -126,15 +128,15 @@ function CONNECTION_SendJabber()
 	// Avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	MainData.HttpRequest.open('POST','http://'+MainData.Host+'/jabber?id='+DT , true);
+	MainData.HttpRequest.open('POST','http://'+MainData.HostPost+'/jabber?id='+DT , true);
 	MainData.HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
-	// Normal messages
+	// Normal parse messages
 	if (MainData.ConnectionStatus == 0)
 	{
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveXml;
 	}
-	// Conection messages
+	// Conection parse messages
 	else if (MainData.ConnectionStatus > 0)
 	{
 		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveConnection;
@@ -195,11 +197,15 @@ function CONNECTION_ReceiveConnection()
 						return "";
 					}
 					MainData.ConnectionStatus++;
+
+					// Send second step connection
 					CONNECTION_ConnectJabber();
 					break;
 
-			    case(2):
+				case(2):
 					MainData.ConnectionStatus++;
+
+					// Send third step connection
 					CONNECTION_ConnectJabber();
 					break;
 
@@ -223,26 +229,30 @@ function CONNECTION_ReceiveConnection()
 					}
 					else
 					{
-						//MainData.ConnectionStatus++;
-
 						// Send a wait message to bind, to
 						// wait while loading scripts, css and images
 						CONNECTION_SendJabber(MESSAGE_Wait());
-
+						/******** LOAD FILES**********/
 						// Load scripts, css and images
 						if (MainData.Load == -1)
 						{
 							MainData.Load = 0;
-							LOGIN_Load();
+							LOAD_StartLoad();
 						}
+
+						// Set connected status
+						MainData.ConnectionStatus = 0;
+
+						CONNECTION_SendJabber(MESSAGE_Wait());
 					}
 					break;
-
+				/*
 			    default:
 					MainData.ConnectionStatus++;
 					XMLBuffer = PARSER_ParseXml(XML);
 					CONNECTION_ConnectJabber(XMLBuffer);
 				break;
+				*/
 			}
 		}
 		else if (MainData.HttpRequest.status == 503)
@@ -265,16 +275,18 @@ function CONNECTION_ReceiveXml()
 	var XML, Buffer = "";
 	var State, Status;
 
-	if(MainData == null)
+	//Check if HttpRequest Object exists
+	if((MainData == null) || (MainData.HttpRequest == null))
 	{
 		return "";
 	}
 
-	//Check if HttpRequet Object exists
-	if(MainData.HttpRequest == null)
+	// User was disconnected 
+	if (MainData.ConnectionStatus == -1)
 	{
 		return "";
 	}
+
 
 	if (MainData.HttpRequest.readyState == 4)
 	{
@@ -307,9 +319,9 @@ function CONNECTION_ReceiveXml()
 			{
 				CONNECTION_SendJabber(Buffer);
 			}
-			// Send a wait message to jabber
 			else
 			{
+				// Send a wait message to jabber
 				CONNECTION_SendJabber(MESSAGE_Wait());
 			}
 		}
@@ -330,5 +342,6 @@ function CONNECTION_ReceiveXml()
 			}
 		}
 	}
+
 	return "";
 }

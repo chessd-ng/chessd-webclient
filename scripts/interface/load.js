@@ -14,56 +14,109 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+function LoadObj() 
+{
+	var Load = INTERFACE_StartLoad();
+
+	// Attributes
+	this.LoadDiv = Load.LoadDiv;
+	this.LoadLabel = Load.LoadLabel;
+	this.BarBorder = Load.BarBorder;
+	this.LoadBar = new LoadingBar();
+
+	// Methods
+	this.show = INTERFACE_ShowLoad;
+	this.hide = INTERFACE_HideLoading;
+	this.remove = INTERFACE_RemoveLoad;
+	this.setLabel = INTERFACE_SetLabel;
+
+	// Show LoadDiv
+	this.LoadBar.show(this.BarBorder);
+	this.show();
+}
 
 /**
 * Shows load screen to user
 */
-
 function INTERFACE_StartLoad()
 {
 	var LoadDiv, LoadHeader, WaitLabel, LoadingLabel;
 	var LoadList, Item, Img, i;
+	var BarBorder;
 
 	// Creating elements
 	LoadDiv = UTILS_CreateElement("div", "LoadDiv");
 	LoadHeader = UTILS_CreateElement("h1", null, null, UTILS_GetText("general_name"));
 	WaitLabel = UTILS_CreateElement("h3", null, null, UTILS_GetText("login_load_wait"));
 	LoadingLabel = UTILS_CreateElement("p", "LoadingLabel", null);
-	LoadList = UTILS_CreateElement("ul", "LoadList");
+	
+	BarBorder = UTILS_CreateElement("div","BarBorder");
 
+	/*
+	LoadList = UTILS_CreateElement("ul", "LoadList");
 	// Creating balls
 	for (i=1; i<=5; i++)
 	{
 		Item = UTILS_CreateElement("li", "LoadingBall"+i, "grey_ball");
 		LoadList.appendChild(Item);
 	}
-
+	*/
 	// Creating tree
 	LoadDiv.appendChild(LoadHeader);
 	LoadDiv.appendChild(WaitLabel);
 	LoadDiv.appendChild(LoadingLabel);
-	LoadDiv.appendChild(LoadList);
+	//LoadDiv.appendChild(LoadList);
 
-	document.body.appendChild(LoadDiv);
-	
+	LoadDiv.appendChild(BarBorder);
+
 	// Setting first message in the loading box
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_start"), 1);
+	//INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_start"), 1);
+
+	return {LoadDiv:LoadDiv, LoadLabel:LoadingLabel, BarBorder:BarBorder}
+}
+
+
+
+/** 
+* Show load screen
+*/ 
+function INTERFACE_ShowLoad()
+{
+	if(this.LoadDiv.parentNode != document.body)
+	{
+		document.body.appendChild(this.LoadDiv);
+	}
+	this.LoadDiv.style.display = "block";
+}
+
+/** 
+* Hide load screen
+*/ 
+function INTERFACE_HideLoading()
+{
+	this.LoadDiv.style.display = "none";
 }
 
 /** 
 * Remove load screen
 */ 
-function INTERFACE_EndLoad()
+function INTERFACE_RemoveLoad()
 {
-	var Node = document.getElementById("LoadDiv");
+	this.LoadDiv.parentNode.removeChild(this.LoadDiv);
+}
 
-	if (Node)
-		Node.parentNode.removeChild(Node);
+/** 
+* Show wich files will be load
+*/ 
+function INTERFACE_SetLabel(Str)
+{
+	this.LoadLabel.innerHTML = Str;
 }
 
 /**
 * Show phrase in the load box and paint next ball
-*/ 
+*/
+/*
 function INTERFACE_SetLoadPhrase(Phrase, Num)
 {
 	var Node = document.getElementById('LoadingLabel');
@@ -85,4 +138,91 @@ function INTERFACE_SetLoadPhrase(Phrase, Num)
 	{
 		return null;
 	}
+}
+*/
+/************************
+ * Loading Bar Object
+ ************************/
+
+function LoadingBar()
+{
+	// Attributes
+	this.MaxValue = 300;
+	this.CurrentValue = 0;
+	this.ProgressBar = INTERFACE_CreateBar("Bar");
+
+	//methods
+	this.add = INTERFACE_AddValue;
+	this.sub = INTERFACE_SubValue;
+	this.show = INTERFACE_ShowLoadingBar;
+	this.hide = INTERFACE_HideLoadingBar;
+	this.remove = INTERFACE_RemoveLoadingBar;
+}
+
+function INTERFACE_CreateBar(Id)
+{
+	var Bar = document.createElement("div");
+
+	Bar.id = Id;
+
+	/*
+	Bar.style.height = "15px";
+	Bar.style.width = "0px";
+	Bar.style.backgroundColor = "#000";
+	Bar.style.position = "relative";
+	*/
+
+	return Bar;
+}
+
+function INTERFACE_AddValue(Num)
+{
+	if((this.CurrentValue + Num) > this.MaxValue)
+	{
+		this.CurrentValue = this.MaxValue;
+	}
+	else
+	{
+		this.CurrentValue += Num;
+	}
+
+	this.ProgressBar.style.width = this.CurrentValue+"px";
+}
+
+function INTERFACE_SubValue(Num)
+{
+	if((this.CurrentValue - Num) < 0)
+	{
+		this.CurrentValue = 0;
+	}
+	else
+	{
+		this.CurrentValue -= Num;
+	}
+
+	this.ProgressBar.style.width = this.CurrentValue+"px";
+}
+
+function INTERFACE_ShowLoadingBar(Element)
+{
+	if(Element != null)
+	{
+		Element.appendChild(this.ProgressBar);
+	}
+	else
+	{
+		document.body.appendChild(this.ProgressBar);
+	}
+
+	this.ProgressBar.style.display = "block";
+}
+
+function INTERFACE_HideLoadingBar(Element)
+{
+	this.ProgressBar.style.display = "none";
+}
+
+function INTERFACE_RemoveLoadingBar()
+{
+	this.ProgressBar.parendNode.removeChild(this.ProgressBar);
 }
