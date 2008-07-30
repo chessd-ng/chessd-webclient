@@ -273,40 +273,41 @@ function LOAD_LoadFiles()
 	Files.push("scripts/parser/parser_iq.js");
 	Files.push("scripts/parser/parser_presence.js");
 	Files.push("scripts/parser/parser_chat.js");
+	Files.push("scripts/admin/admin.js");
 	Files.push("scripts/contact/contact.js");
 	Files.push("scripts/chat/chat.js");
+	Files.push("scripts/challenge/challenge.js");
+	Files.push("scripts/challenge/adjourn.js");
+	Files.push("scripts/challenge/announce.js");
+	Files.push("scripts/contact/status.js");
+	Files.push("scripts/contact/invite.js");
+	Files.push("scripts/contact/info.js");
+	Files.push("scripts/contact/search.js");
 	Files.push("scripts/interface/interface.js");
 	Files.push("scripts/interface/top.js");
 	Files.push("scripts/interface/left.js");
 	Files.push("scripts/interface/room.js");
 	Files.push("scripts/interface/contact.js");
-	Files.push("scripts/room/room.js");
-	Files.push("scripts/contact/status.js");
-	Files.push("scripts/contact/invite.js");
-	Files.push("scripts/window/window.js");
-	Files.push("scripts/interface/window.js");
-	Files.push("scripts/interface/challenge.js");
-	Files.push("scripts/interface/game.js");
-	Files.push("scripts/game/game.js");
-	Files.push("scripts/utils/dragpiece.js");
-	Files.push("scripts/utils/dragwindow.js");
-	Files.push("scripts/contact/info.js");
-	Files.push("scripts/contact/search.js");
-	Files.push("scripts/game/oldgame.js");
 	Files.push("scripts/interface/chat.js");
-	Files.push("scripts/profile/profile.js");
-	Files.push("scripts/interface/profile.js");
-	Files.push("scripts/utils/images.js");
+	Files.push("scripts/interface/window.js");
+	Files.push("scripts/interface/challengemenu.js");
+	Files.push("scripts/interface/challenge.js");
 	Files.push("scripts/interface/oldgame.js");
 	Files.push("scripts/interface/welcome.js");
 	Files.push("scripts/interface/user.js");
-	Files.push("scripts/admin/admin.js");
 	Files.push("scripts/interface/admin.js");
-	Files.push("scripts/challenge/challenge.js");
-	Files.push("scripts/interface/challengemenu.js");
-	Files.push("scripts/challenge/adjourn.js");
-	Files.push("scripts/challenge/announce.js");
 	Files.push("scripts/interface/announce.js");
+	Files.push("scripts/interface/profile.js");
+	Files.push("scripts/interface/board.js");
+	Files.push("scripts/interface/game.js");
+	Files.push("scripts/profile/profile.js");
+	Files.push("scripts/room/room.js");
+	Files.push("scripts/window/window.js");
+	Files.push("scripts/utils/dragpiece.js");
+	Files.push("scripts/utils/images.js");
+	Files.push("scripts/utils/dragwindow.js");
+	Files.push("scripts/game/oldgame.js");
+	Files.push("scripts/game/game.js");
 
 
 	if(MainData.Browser == 0) //IE
@@ -354,10 +355,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 				
 				//Quick fix -> CSS doesn't trigger onload event
 				//in FF2/FF3
-				if(MainData.Browser != 0 )
-				{
-					LOAD_NextFile(Files, NumFiles);
-				}
+				LOAD_NextFile(Files, NumFiles);
 				break;
 
 			case "images":
@@ -366,8 +364,6 @@ function LOAD_AppendFiles(Files, NumFiles)
 				break;
 		}
 	
-		
-		
 		// http://cain.supersized.org/archives/2-Dynamic-loading-of-external-JavaScript-.js-files.html	
 		// IE script onload doesn't work. To resolve this problem
 		// we used onreadystatechange event to know when script
@@ -375,8 +371,9 @@ function LOAD_AppendFiles(Files, NumFiles)
 		// This event work with CSS files too.
 		if(MainData.Browser == 0) //IE
 		{
+			
 			File.onreadystatechange = function(){
-				if(File.readyState == "loaded" || File.readyState == "complete")
+				if(File.readyState == "loaded" )
 				{
 					LOAD_NextFile(Files, NumFiles);
 				}
@@ -387,10 +384,8 @@ function LOAD_AppendFiles(Files, NumFiles)
 			File.onload = function(){LOAD_NextFile(Files, NumFiles)};
 		}
 
-		/*
 		File.onerror = function(){LOAD_NextFile(Files, NumFiles)};
 		File.onabort = function(){LOAD_NextFile(Files, NumFiles)};
-		*/
 	}
 	// All files has been loaded
 	else 
