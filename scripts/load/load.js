@@ -269,6 +269,11 @@ function LOAD_LoadFiles()
 	Files.push("css/ChallengeMenu.css");
 	Files.push("css/Announce.css");
 
+	if(MainData.Browser == 0) //IE
+	{
+		Files.push("css/IEFix.css");
+	}
+
 	// Scripts Files to be loaded
 	Files.push("scripts/parser/parser_iq.js");
 	Files.push("scripts/parser/parser_presence.js");
@@ -310,10 +315,6 @@ function LOAD_LoadFiles()
 	Files.push("scripts/game/game.js");
 
 
-	if(MainData.Browser == 0) //IE
-	{
-		Files.push("css/IEFix.css");
-	}
 
 
 	NumFiles = Files.length;
