@@ -5,14 +5,12 @@
 
 #Top h1 {
 	float			: left;
-	margin			: 1mm;
 	width			: 213px;
 	height			: 95px;
 	background		: url('../images/logo.png') no-repeat;
 	text-indent		: -9999px;
 	overflow		: hidden;
-	margin-left		: 30px;
-
+	margin			: 4px 4px 4px 35px;
 }
 
 #Top #TopMenu {
@@ -59,8 +57,8 @@
 	/*font-size		: 2.8mm;*/
 	position		: relative;
 	margin-left		: 50%;
-	left			: -30%;
-	top			: -6%;
+	left			: -15px;
+	top			: -1px;
 }
 
 /* setting icons */
