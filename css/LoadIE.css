@@ -5,6 +5,7 @@
 
 #LoadDiv h1{
 	background		: url("../images/ie/logo.gif") no-repeat;
+	margin			: 10px 0px 30px 0px;
 }
 
 #LoadDiv .grey_ball{
@@ -13,4 +14,8 @@
 
 #LoadDiv .green_ball{
 	background		: url("../images/ie/login/bola_verde.gif") no-repeat;
+}
+
+#LoadDiv #BarBorder{
+	overflow		: hidden;
 }
