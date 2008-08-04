@@ -59,6 +59,7 @@ function DATA_SetConsts()
 	Const.LOGIN_ConnectionRefused = 2;
 	Const.LOGIN_InvalidUser = 3;
 	Const.LOGIN_BannedUser = 4;
+	Const.LOGIN_ConnectionClosed = 5;
 
 	return Const;
 }
