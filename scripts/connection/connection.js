@@ -44,38 +44,6 @@ function CONNECTION_ConnectJabber(XML)
 		case (3):
 			CONNECTION_SendJabber(MESSAGE_SendPasswd());
 			break;
-
-		/*
-		// Get user list
-		case (4):
-			CONNECTION_SendJabber(MESSAGE_UserList());
-			break;
-
-		// Send presence to Chessd Server an get user information
-		case (5):
-			CONNECTION_SendJabber(
-				MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host),
-				MESSAGE_UserListInfo()
-			);
-
-		// Get user profile
-		case (6):
-			CONNECTION_SendJabber(
-				MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile)
-			);
-			break;
-
-		// Send presence, enter in 'default_room'
-		case (7):
-			// Set interface as 'connected'
-			MainData.ConnectionStatus = 0;
-			CONNECTION_SendJabber(	
-				MESSAGE_Presence(), 
-				MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username)
-				);
-			LOGIN_Interface();
-			break;
-		*/
 	}
 
 	return "";
