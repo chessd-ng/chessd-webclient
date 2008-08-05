@@ -185,3 +185,14 @@ function LOGIN_LoginFailed(Code)
 	// Hide login message
 	INTERFACE_HideLoginMessage();
 }
+
+/**
+ * Show a connection string when start login
+ *
+ * @param	Msg	Message string
+ * @author	Rubens Suguimoto
+ */
+function LOGIN_LoginMsg(Msg)
+{
+	INTERFACE_ShowLoginMessage(Msg);
+}

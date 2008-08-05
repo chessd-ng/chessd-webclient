@@ -98,7 +98,7 @@ function INTERFACE_StartLogin(Lang)
 	
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
-	LoginMessage = UTILS_CreateElement("span","LoginMessage",null,"Logando...");
+	LoginMessage = UTILS_CreateElement("span","LoginMessage");
 	LoginMessage.style.display = "none";
 	InputLogin = UTILS_CreateElement("input", "login");
 	InputPasswd = UTILS_CreateElement("input", "password");
@@ -332,9 +332,10 @@ function INTERFACE_ClearError()
 	ErrorLabel.innerHTML = "";
 }
 
-function INTERFACE_ShowLoginMessage()
+function INTERFACE_ShowLoginMessage(Msg)
 {
 	var LoginMsg = document.getElementById("LoginMessage");
+	LoginMsg.innerHTML = Msg;
 	LoginMsg.style.display = "block";
 }
 
