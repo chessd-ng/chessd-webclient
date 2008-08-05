@@ -268,6 +268,7 @@ function LOAD_LoadFiles()
 	Files.push("css/Admin.css");
 	Files.push("css/ChallengeMenu.css");
 	Files.push("css/Announce.css");
+	Files.push("css/Help.css");
 
 	// Scripts Files to be loaded
 	Files.push("scripts/parser/parser_iq.js");
@@ -307,6 +308,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/challenge/adjourn.js");
 	Files.push("scripts/challenge/announce.js");
 	Files.push("scripts/interface/announce.js");
+	Files.push("scripts/interface/help.js");
 
 
 	if(MainData.Browser == 0) //IE
