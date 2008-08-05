@@ -76,9 +76,10 @@ function INTERFACE_CreateTop()
 	Item = UTILS_CreateElement("li", null, "help");
 	Item.title = ItemTitle;
 
+//	UTILS_AddListener(Item,"click",function() { WINDOW_Help(); }, "false");
 	Item.onclick = function () {
 		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
-	}
+	} 
 
 	IconsList.appendChild(Item);
 

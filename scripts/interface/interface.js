@@ -89,3 +89,25 @@ function INTERFACE_CreateLoadingBox(Id, Text)
 
 	return Div;
 }
+
+/**
+ * @brief	
+ *
+ * @return	boolean
+ * @author 	Danilo Yorinori
+ */
+function INTERFACE_DisableSelect(e)
+{
+	return false;
+}
+
+/**
+ * @brief	
+ *
+ * @return	boolean
+ * @author 	Danilo Yorinori
+ */
+function INTERFACE_ReEnableSelect()
+{
+	return true;
+}

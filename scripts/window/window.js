@@ -501,3 +501,22 @@ function WINDOW_AnnounceWindow(Username, Rating)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+function WINDOW_Help()
+{
+	if(document.getElementById("HelpDiv")!=null)
+	{
+		// Do nothing
+		return;
+	}
+
+	//Return Div and Button
+	var Div = INTERFACE_HelpWindow();
+
+	//Create New Window
+	var WindowObj = WINDOW_NewWindow(500, Div.Div, Div.Buttons, UTILS_GetText("help_title"));
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

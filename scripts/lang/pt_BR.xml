@@ -360,4 +360,37 @@
 		<admin_user_kick>Você foi desconectado.\nMotivo: </admin_user_kick>
 
 	</admin>
+	<help>
+		<help_title>Ajuda</help_title>
+		<help_t_1>Como?</help_t_1>
+		<help_t_1_1>Jogar</help_t_1_1>
+		<help_t_1_1_1>Aceitando um convite para jogar</help_t_1_1_1>
+		<help_c_1_1_1><![CDATA[<p>- Clique no botão “Aceitar” para iniciar a partida com as condições de partida definidas por quem te convidou.</p><br /><p>Obs.: Caso você queira jogar com o usuário que te convidou, mas com condições diferentes, faça as alterações desejadas e clique em “Redesafiar”. Assim, as novas condições são enviadas ao usuário que te convidou e ele poderá aceitar ou recusar sua proposta.</p>]]></help_c_1_1_1>
+		<help_t_1_1_2>Desafiando adversário específico</help_t_1_1_2>
+		<help_c_1_1_2><![CDATA[<p>Para convidar um usuário específico para jogar</p><p>- Clique no usuário que deseja convidar e, depois, em “Convidar para jogar”;</p><p>- Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</p><p>- Clique no botão "Convidar".</p><br /><p>Obs.: O usuário que você convidou pode:</p><p>- "Aceitar" seu convite e iniciar a partida;</p><p>- Redefinir as condições de jogo e te "Redesafiar" (assim você pode também “Aceitar”, “Redesafiar” ou “Rejeitar” as condições propostas por ele);</p><p>- ou "Rejeitar" seu convite para jogar.</p>]]></help_c_1_1_2>
+		<help_t_1_2>Conversar com um usuário</help_t_1_2>
+		<help_c_1_2><![CDATA[<p>Para conversar com um usuário específico</p><p>- Clique no usuário que deseja conversar;</p><p>- Clique na opção "Conversar";</p><p>- Digite a mensagem no campo de digitação de mensagem;</p><p>- Digite “Enter” para enviar a mensagem para a área de conversa.</p>]]></help_c_1_2>
+		<help_t_1_3>Conversar com vários usuários em uma sala</help_t_1_3>
+		<help_c_1_3><![CDATA[<p>Para conversar com vários usuários, escolha uma sala específica no menu “Salas” ou converse na sala Geral, que todos os usuários participam.</p><p>- Digite a mensagem no campo de digitação de mensagem;</p><p>- Digite “Enter” para enviar a mensagem para a área de conversa da sala.</p>]]></help_c_1_3>
+		<help_t_1_4>Ver perfil e informações de um usuário</help_t_1_4>
+		<help_c_1_4><![CDATA[<p>Para ver perfil e informações de um usuário</p><p>- Clique no usuário;</p><p>- Clique em "Ver perfil e informações".</p>]]></help_c_1_4>
+		<help_t_1_5>Adicionar um usuário na sua lista de contatos</help_t_1_5>
+		<help_c_1_5><![CDATA[<p>Para adicionar um usuário em sua lista de contatos</p><p>- Clique em “Online” para ver todos os usuários conectados no Xadrez Livre;</p><p>- Clique no usuário que deseja adicionar aos seus contatos;</p><p>- Clique em "Adicionar aos contatos".</p>]]></help_c_1_5>
+		<help_t_1_6>Remover um usuário de sua lista de contatos</help_t_1_6>
+		<help_c_1_6><![CDATA[<p>Para remover um usuário de sua lista de contatos</p><p>- Clique em “Contatos” para ver seus contatos no Xadrez Livre;</p><p>- Clique no usuário que deseja remover;</p><p>- Clique em "Remover contato"</p>]]></help_c_1_6>
+		<help_t_1_7>Alterar meu status</help_t_1_7>
+		<help_c_1_7><![CDATA[<p>Quando você se conecta ao Xadrez livre seu status é “Disponível”. Para alterar seu status</p><p>- (Áreal pessoal) Clique na setinha ao lado do seu status atual;</p><p>- Clique no status desejado.</p><br /><p>Obs.: Os status “Jogando”, "Observando" e "Examinando" são aferidos automaticamente pelo servidor. Quando um usuário já está jogando (status “Jogando”) ou está “Indisponível”, ele não pode ser convidado para jogar. Se está com status ocupado, pode jogar mas não pode conversar.</p>]]></help_c_1_7>
+		<help_t_1_8>Alterar meu perfil</help_t_1_8>
+		<help_c_1_8><![CDATA[<p>Para alterar seu perfil (área pessoal)</p><p>- Clique no seu nome de usuário na lista de usuário “online” (ou terá também na área pessoal);</p><p>- Clique em “Alterar perfil”</p>]]></help_c_1_8>
+		<help_t_1_9>Criar sala</help_t_1_9>
+		<help_c_1_9><![CDATA[<p>- Clique no menu “Salas”;</p><p>- Clique em “Criar sala”;</p><p>- Digite o nome da sala;</p><p>- Clique no botão “Criar sala”.</p>]]></help_c_1_9>
+		<help_t_1_10>Observar uma partida</help_t_1_10>
+		<help_c_1_10><![CDATA[<p>- Clique em “Partidas em andamento”, na Barra de contexto;</p><p>- Clique na partida que deseja observar;</p><p>- Clique em “Observar”.</p>]]></help_c_1_10>
+		<help_t_1_11>Buscar partidas</help_t_1_11>
+		<help_c_1_11><![CDATA[<a name="search_game_a" /><p>- Clique em “Buscar partida”, na Barra de Ferramentas;</p><p>- Defina os critérios de busca;</p><p>- Clique em “Buscar”;</p><p>Obs.: Use os botões de navegação “Avançar” e “Voltar” para ver outras partidas, caso não caibam todas as partidasa encontradas em uma única janela.</p>]]></help_c_1_11>
+		<help_t_1_12>Examinar uma partida</help_t_1_12>
+		<help_c_1_12><![CDATA[<p>- Busque uma partida (<a href="#search_game_a">Buscar partidas</a>);</p><p>- Clique na partida que deseja examinar;</p><p>- Use os botões avançar e voltar para visualizar os lances da partida.</p>]]></help_c_1_12>
+		<help_t_1_13>Anunciar uma partida</help_t_1_13>
+		<help_c_1_13><![CDATA[<p>Para anunciar uma partida para que ela possa ser vista e aceita por outros usuários</p><ul><li>Clique em “Partidas anunciadas”, na Barra de contexto;</li><li>Clique em “Anunciar partida”</li><li>Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</li><li>Clique em “Anunciar”.</li></ul><br /><p>Obs.: A partida anunciada ficará na lista de partidas anunciadas. Assim, outros usuários poderão vê-la e aceitar jogá-la. As partidas são apresentadas somente para os usuários com valor de rating dentro do intervalo definido no anúncio da partida.</p>]]></help_c_1_13>
+	</help>
 </language>

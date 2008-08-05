@@ -92,6 +92,7 @@ function LOAD_LoadFiles()
 	Files.push("css/Admin.css");
 	Files.push("css/ChallengeMenu.css");
 	Files.push("css/Announce.css");
+	Files.push("css/Help.css");
 
 	if(MainData.Browser == 0) //IE
 	{
@@ -137,9 +138,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/utils/dragwindow.js");
 	Files.push("scripts/game/oldgame.js");
 	Files.push("scripts/game/game.js");
-
-
-
+	Files.push("scripts/interface/help.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);
