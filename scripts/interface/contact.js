@@ -116,7 +116,15 @@ function INTERFACE_CreateGroup(GroupName)
 
 	GroupDiv = UTILS_CreateElement("div",null,"GroupDiv");
 
-	GroupTitle = UTILS_CreateElement("label",null,null,GroupName);
+	if(GroupName != "default")
+	{
+		GroupTitle = UTILS_CreateElement("label",null,null,GroupName);
+	}
+	else
+	{
+		GroupTitle = UTILS_CreateElement("label",null,null,UTILS_GetText("contact_default_group"));
+	}
+
 	GroupOnline = UTILS_CreateElement("div",null,"OnlineGroup");
 	GroupOffline = UTILS_CreateElement("div",null,"OfflineGroup");
 

@@ -37,41 +37,6 @@ function LOAD_StartLoad()
 }
 
 /**
-* Start to load css files
-*/
-/*
-function LOAD_Load2()
-{
-	// Loading scripts
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_scripts"), 3);
-	LOAD_LoadScripts();
-}
-*/
-/**
-* Start to load images
-*/
-/*
-function LOAD_Load3()
-{
-	// Loading Images
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_images"), 4);
-	LOAD_LoadImages();
-}
-*/
-/**
-* Finish load process
-*/
-/*
-function LOAD_Load4()
-{
-	// Ending connection steps
-	INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_user_list"), 5);
-	//MainData.ConnectionStatus++;
-	MainData.Load = 1;
-	START_Webclient();
-}
-*/
-/**
 * Remove load box from screen
 */
 function LOAD_EndLoad()
@@ -80,147 +45,6 @@ function LOAD_EndLoad()
 	MainData.Load.remove();
 	delete(MainData.Load);
 }
-
-/**
-* Load scripts files while interface is loading
-*/
-/*
-function LOAD_LoadScripts()
-{
-	var Scripts = new Array();
-	var Load;
-
-	// Files to be loaded
-	Scripts.push("scripts/parser/parser.js");
-	Scripts.push("scripts/parser/parser_iq.js");
-	Scripts.push("scripts/parser/parser_presence.js");
-	Scripts.push("scripts/parser/parser_chat.js");
-	Scripts.push("scripts/contact/contact.js");
-	Scripts.push("scripts/chat/chat.js");
-	Scripts.push("scripts/interface/interface.js");
-	Scripts.push("scripts/interface/top.js");
-	Scripts.push("scripts/interface/left.js");
-	Scripts.push("scripts/interface/room.js");
-	Scripts.push("scripts/interface/contact.js");
-	Scripts.push("scripts/room/room.js");
-	Scripts.push("scripts/contact/status.js");
-	Scripts.push("scripts/contact/invite.js");
-	Scripts.push("scripts/window/window.js");
-	Scripts.push("scripts/interface/window.js");
-	Scripts.push("scripts/interface/challenge.js");
-	Scripts.push("scripts/interface/game.js");
-	Scripts.push("scripts/game/game.js");
-	Scripts.push("scripts/utils/dragpiece.js");
-	Scripts.push("scripts/utils/dragwindow.js");
-	Scripts.push("scripts/contact/info.js");
-	Scripts.push("scripts/contact/search.js");
-	Scripts.push("scripts/game/oldgame.js");
-	Scripts.push("scripts/interface/chat.js");
-	Scripts.push("scripts/profile/profile.js");
-	Scripts.push("scripts/interface/profile.js");
-	Scripts.push("scripts/utils/images.js");
-	Scripts.push("scripts/interface/oldgame.js");
-	Scripts.push("scripts/interface/welcome.js");
-	Scripts.push("scripts/interface/user.js");
-	Scripts.push("scripts/admin/admin.js");
-	Scripts.push("scripts/interface/admin.js");
-	Scripts.push("scripts/challenge/challenge.js");
-	Scripts.push("scripts/interface/challengemenu.js");
-	Scripts.push("scripts/challenge/adjourn.js");
-	Scripts.push("scripts/challenge/announce.js");
-	Scripts.push("scripts/interface/announce.js");
-
-	Load = new Preloader(Scripts, "script", LOAD_Load3);
-}
-*/
-/**
-* Load css files while interface is loading
-*/
-/*
-function LOAD_LoadCss()
-{
-	var Tag, i, Head;
-	var Files = new Array();
-
-	// Searching head of document
-	Head = document.getElementsByTagName("head");
-	if (Head)
-	{
-		Head = Head[0];
-	}
-	else
-	{
-		return null;
-	}
-	
-	// Files to be loaded
-	Files.push("css/Top.css");
-	Files.push("css/Left.css");
-	Files.push("css/Contacts.css");
-	Files.push("css/Rooms.css");
-	Files.push("css/Window.css");
-	Files.push("css/TopMenus.css");
-	Files.push("css/Challenge.css");
-	Files.push("css/Board.css");
-	Files.push("css/Game.css");
-	Files.push("css/Chat.css");
-	Files.push("css/Profile.css");
-	Files.push("css/Oldgame.css");
-	Files.push("css/Welcome.css");
-	Files.push("css/User.css");
-	Files.push("css/Admin.css");
-	Files.push("css/ChallengeMenu.css");
-	Files.push("css/Announce.css");
-
-	if(MainData.Browser == 0) //IE
-	{
-		Files.push("css/IEFix.css");
-	}
-
-	for (i=0; i<Files.length; i++)
-	{
-		Tag = document.createElement("link");
-		Tag.href = Files[i]+"?"+NoCache;
-		Tag.type = "text/css";
-		Tag.rel = "stylesheet";
-
-		// Appending to head of document
-		Head.appendChild(Tag);
-	}
-	LOAD_Load2();
-
-	return true;
-}
-*/
-/**
-* Load images used in interface
-*/
-/*
-function LOAD_LoadImages()
-{
-	var Images = new Array();
-	var Load;
-
-	// Images to be loaded
-	Images.push("images/logochessd.png");
-	Images.push("images/search_game.png");
-	Images.push("images/search_user.png");
-	Images.push("images/news.png");
-	Images.push("images/preferences.png");
-	Images.push("images/help.png");
-	Images.push("images/exit.png");
-	Images.push("images/exit_selec.png");
-	
-	Images.push("images/available.png");
-	Images.push("images/unavailable.png");
-	Images.push("images/away.png");
-	Images.push("images/busy.png");
-	Images.push("images/close.png");
-	Images.push("images/invite_black_pawn.png");
-	Images.push("images/invite_white_pawn.png");
-	//Load = new Preloader(Images, "image", LOAD_Load4);
-}
-*/
 
 /**
 * Load scripts files while interface is loading
@@ -270,52 +94,51 @@ function LOAD_LoadFiles()
 	Files.push("css/Announce.css");
 	Files.push("css/Help.css");
 
-	// Scripts Files to be loaded
-	Files.push("scripts/parser/parser_iq.js");
-	Files.push("scripts/parser/parser_presence.js");
-	Files.push("scripts/parser/parser_chat.js");
-	Files.push("scripts/contact/contact.js");
-	Files.push("scripts/chat/chat.js");
-	Files.push("scripts/interface/interface.js");
-	Files.push("scripts/interface/top.js");
-	Files.push("scripts/interface/left.js");
-	Files.push("scripts/interface/room.js");
-	Files.push("scripts/interface/contact.js");
-	Files.push("scripts/room/room.js");
-	Files.push("scripts/contact/status.js");
-	Files.push("scripts/contact/invite.js");
-	Files.push("scripts/window/window.js");
-	Files.push("scripts/interface/window.js");
-	Files.push("scripts/interface/challenge.js");
-	Files.push("scripts/interface/game.js");
-	Files.push("scripts/game/game.js");
-	Files.push("scripts/utils/dragpiece.js");
-	Files.push("scripts/utils/dragwindow.js");
-	Files.push("scripts/contact/info.js");
-	Files.push("scripts/contact/search.js");
-	Files.push("scripts/game/oldgame.js");
-	Files.push("scripts/interface/chat.js");
-	Files.push("scripts/profile/profile.js");
-	Files.push("scripts/interface/profile.js");
-	Files.push("scripts/utils/images.js");
-	Files.push("scripts/interface/oldgame.js");
-	Files.push("scripts/interface/welcome.js");
-	Files.push("scripts/interface/user.js");
-	Files.push("scripts/admin/admin.js");
-	Files.push("scripts/interface/admin.js");
-	Files.push("scripts/challenge/challenge.js");
-	Files.push("scripts/interface/challengemenu.js");
-	Files.push("scripts/challenge/adjourn.js");
-	Files.push("scripts/challenge/announce.js");
-	Files.push("scripts/interface/announce.js");
-	Files.push("scripts/interface/help.js");
-
-
 	if(MainData.Browser == 0) //IE
 	{
 		Files.push("css/IEFix.css");
 	}
 
+	// Scripts Files to be loaded
+	Files.push("scripts/parser/parser_iq.js");
+	Files.push("scripts/parser/parser_presence.js");
+	Files.push("scripts/parser/parser_chat.js");
+	Files.push("scripts/admin/admin.js");
+	Files.push("scripts/contact/contact.js");
+	Files.push("scripts/chat/chat.js");
+	Files.push("scripts/challenge/challenge.js");
+	Files.push("scripts/challenge/adjourn.js");
+	Files.push("scripts/challenge/announce.js");
+	Files.push("scripts/contact/status.js");
+	Files.push("scripts/contact/invite.js");
+	Files.push("scripts/contact/info.js");
+	Files.push("scripts/contact/search.js");
+	Files.push("scripts/interface/interface.js");
+	Files.push("scripts/interface/top.js");
+	Files.push("scripts/interface/left.js");
+	Files.push("scripts/interface/room.js");
+	Files.push("scripts/interface/contact.js");
+	Files.push("scripts/interface/chat.js");
+	Files.push("scripts/interface/window.js");
+	Files.push("scripts/interface/challengemenu.js");
+	Files.push("scripts/interface/challenge.js");
+	Files.push("scripts/interface/oldgame.js");
+	Files.push("scripts/interface/welcome.js");
+	Files.push("scripts/interface/user.js");
+	Files.push("scripts/interface/admin.js");
+	Files.push("scripts/interface/announce.js");
+	Files.push("scripts/interface/profile.js");
+	Files.push("scripts/interface/board.js");
+	Files.push("scripts/interface/game.js");
+	Files.push("scripts/profile/profile.js");
+	Files.push("scripts/room/room.js");
+	Files.push("scripts/window/window.js");
+	Files.push("scripts/utils/dragpiece.js");
+	Files.push("scripts/utils/images.js");
+	Files.push("scripts/utils/dragwindow.js");
+	Files.push("scripts/game/oldgame.js");
+	Files.push("scripts/game/game.js");
+	Files.push("scripts/interface/help.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);
@@ -356,10 +179,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 				
 				//Quick fix -> CSS doesn't trigger onload event
 				//in FF2/FF3
-				if(MainData.Browser != 0 )
-				{
-					LOAD_NextFile(Files, NumFiles);
-				}
+				LOAD_NextFile(Files, NumFiles);
 				break;
 
 			case "images":
@@ -368,8 +188,6 @@ function LOAD_AppendFiles(Files, NumFiles)
 				break;
 		}
 	
-		
-		
 		// http://cain.supersized.org/archives/2-Dynamic-loading-of-external-JavaScript-.js-files.html	
 		// IE script onload doesn't work. To resolve this problem
 		// we used onreadystatechange event to know when script
@@ -377,8 +195,9 @@ function LOAD_AppendFiles(Files, NumFiles)
 		// This event work with CSS files too.
 		if(MainData.Browser == 0) //IE
 		{
+			
 			File.onreadystatechange = function(){
-				if(File.readyState == "loaded" || File.readyState == "complete")
+				if(File.readyState == "loaded" )
 				{
 					LOAD_NextFile(Files, NumFiles);
 				}
@@ -389,10 +208,8 @@ function LOAD_AppendFiles(Files, NumFiles)
 			File.onload = function(){LOAD_NextFile(Files, NumFiles)};
 		}
 
-		/*
 		File.onerror = function(){LOAD_NextFile(Files, NumFiles)};
 		File.onabort = function(){LOAD_NextFile(Files, NumFiles)};
-		*/
 	}
 	// All files has been loaded
 	else 

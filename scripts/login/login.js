@@ -125,39 +125,6 @@ function LOGIN_EndLogin()
 	document.body.removeAttribute("onresize");
 }
 
-
-/**
-* Clear Login window and start interface 
-*
-* @return none
-* @public
-*/
-/*
-function LOGIN_Interface()
-{
-	var All = INTERFACE_CreateInterface();
-
-	// Close load image
-	LOGIN_EndLoad();
-
-	// Open XadrezLivre game environment
-	INTERFACE_ShowInterface(All);
-	
-	// Create contact object and set values
-	CONTACT_StartContact();
-	CONTACT_LoadUserContactList();	
-
-	// Create challenge menu object
-	CHALLENGE_StartChallenge();
-
-	// Search for some game that player is playing
-	GAME_SearchCurrentGame();
-
-	// Set away counter
-	CONTACT_StartAwayCounter();
-}
-*/
-
 /**
 * Show a error message on login
 *
@@ -189,6 +156,10 @@ function LOGIN_LoginFailed(Code)
 			break;
 		case (MainData.Const.LOGIN_BannedUser):
 			ErrorLabel.innerHTML = UTILS_GetText("login_banned_user");
+			break;
+		case (MainData.Const.LOGIN_ConnectionClosed):
+			ErrorLabel.innerHTML = UTILS_GetText("login_connection_closed")
+
 			break;
 	}
 }

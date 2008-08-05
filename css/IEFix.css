@@ -1,22 +1,25 @@
 /*Left.css*/
+/*
 #Main #Left #User{
 	margin-left		: 0.5mm;
 	margin-top		: 0.5mm;
 }
-
 #Main #Left #User img{
 	margin			: 0.5mm;
 }
 
+*/
 
+/******************************/
 /*Top.css*/
+/******************************/
 
 #Top{
 }
 
 #Top h1{
-	margin			: 0.5mm;
 	background		: url("../images/ie/logo.gif") no-repeat;
+	margin			: 4px 4px 4px 18px;
 }
 
 #Top .icons li {
@@ -67,39 +70,63 @@
 	*/
 }
 
+/******************************/
 /* Room.css */
+/******************************/
 #Main #Left #Rooms .Room {
-	width : 202px;
+	width 			: 204px;
 }
+
+#Main #Left #Rooms #RoomList {
+	width			: 204px;
+}
+#Main #Left #Rooms #RoomList li {
+	width			: 89px;
+}
+
+#Main #Left #Rooms #RoomList .room_arrow{
+	height			: 20px;
+}
+
+/******************************/
 /* Challenge.css */
+/******************************/
 #ChallengeDiv #Layer1Div {
-	margin-bottom	:	60px;
+	margin-bottom		: 60px;
 }
 
 #ChallengeDiv #ButtonsDiv {
-	width : 300px;
+	width 			: 300px;
 }
 
 /*Contacts.css*/
+/*
 #Main #Left #Contact #Contacts table{
 	width			: 43.5mm;
 }
-
-#Main #Left #Contact #UserLists {
-	width : 196px;
-}
+*/
 
 #Main #Left #Contact #ContactTitle {
-	width			: 204px;
-	left : 0px;
+	left 			: 0px;
 }
 
 #Main #Left #Contact #ContactTitle li {
 	padding			: 3px 0px 3px 4px; 
-	width : 98px;
+	width			: 98px;
 }
 
+#Main #Left #Contact #ContactInside ,
+#Main #Left #Contact #ContactOnline {
+	width			: 102%;
+}
+
+/******************************/
 /* available */
+/******************************/
+#Main #Left #User{
+	width			: 204px;
+}
+
 #Main #Left .user_available {
 	background              : url('../images/ie/user_available.gif') no-repeat;
 }
@@ -208,7 +235,9 @@
 
 
 
+/******************************/
 /*Board.css*/
+/******************************/
 
 #PhotoDiv #PWPawn{
 	background-image	: url("../images/ie/pieces/wpawn.gif");
@@ -218,34 +247,35 @@
 	background-image	: url("../images/ie/pieces/bpawn.gif");
 }
 
+#InfoTab1.oldgame{
+	width			: 175px;
+}
+
 /*
-#InfoTab1{
-	width			: 24mm;
-}
-
-#GameOptionDiv, #MoveListDiv{
-	width			: 47mm;
-}
-
 #GameOptionsDiv select{
 	height			: 5mm;
 }
 */
+
+/******************************/
 /*Chat.css*/
+/******************************/
 #Chat{
-	height			: 4.5mm;
 	overflow		: visible;
 }
 
+#Chat #ChatList.title{
+	width			: 100%;
+}
+
 #Chat #ChatInner {
-	height                  : 20mm;
+	overflow		: hidden;
+	width			: 99%;
 }
 
-#Chat #ChatList {
-	height			: 4mm;
-}
-
+/******************************/
 /* Window.css */
+/******************************/
 #SubWindowBox{
 	overflow		: hidden;
 }

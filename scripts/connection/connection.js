@@ -44,38 +44,6 @@ function CONNECTION_ConnectJabber(XML)
 		case (3):
 			CONNECTION_SendJabber(MESSAGE_SendPasswd());
 			break;
-
-		/*
-		// Get user list
-		case (4):
-			CONNECTION_SendJabber(MESSAGE_UserList());
-			break;
-
-		// Send presence to Chessd Server an get user information
-		case (5):
-			CONNECTION_SendJabber(
-				MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host),
-				MESSAGE_UserListInfo()
-			);
-
-		// Get user profile
-		case (6):
-			CONNECTION_SendJabber(
-				MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile)
-			);
-			break;
-
-		// Send presence, enter in 'default_room'
-		case (7):
-			// Set interface as 'connected'
-			MainData.ConnectionStatus = 0;
-			CONNECTION_SendJabber(	
-				MESSAGE_Presence(), 
-				MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username)
-				);
-			LOGIN_Interface();
-			break;
-		*/
 	}
 
 	return "";
@@ -165,6 +133,7 @@ function CONNECTION_ReceiveConnection()
 {
 	var XML, XMLBuffer;
 	var Error, ErrorCode;
+	var BodyType;
 	var Status;
 
 	// Check ready state of HTTP Request
@@ -203,10 +172,22 @@ function CONNECTION_ReceiveConnection()
 					break;
 
 				case(2):
-					MainData.ConnectionStatus++;
-
-					// Send third step connection
-					CONNECTION_ConnectJabber();
+					// Check Bosh connection 
+					if(XML.getElementsByTagName("body")[0].getAttribute("type") != undefined)
+					{
+						BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
+						
+						if(BodyType == "terminate")
+						{
+							LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
+						}
+					}
+					else
+					{
+						MainData.ConnectionStatus++;
+						// Send third step connection
+						CONNECTION_ConnectJabber();
+					}
 					break;
 
 				case(3):
@@ -227,32 +208,45 @@ function CONNECTION_ReceiveConnection()
 								
 						}
 					}
+					// Check Bosh connection 
+					else if(XML.getElementsByTagName("body")[0].getAttribute("type") != undefined)
+					{
+						BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
+						
+						if(BodyType == "terminate")
+						{
+							LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
+						}
+					}
 					else
 					{
-						// Send a wait message to bind, to
-						// wait while loading scripts, css and images
-						CONNECTION_SendJabber(MESSAGE_Wait());
-						/******** LOAD FILES**********/
-						// Load scripts, css and images
-						if (MainData.Load == -1)
+						// User is connecting
+						if(MainData.ConnectionStatus > 0)
 						{
-							MainData.Load = 0;
+							// Send a wait message to bind, to
+							// wait while loading scripts, css and images
+							CONNECTION_SendJabber(MESSAGE_Wait());
+							/******** LOAD FILES**********/
+							// Start load scripts, css and images
 							LOAD_StartLoad();
+
+							// Set connected status
+							MainData.ConnectionStatus = 0;
+
+							CONNECTION_SendJabber(MESSAGE_Wait());
 						}
-
-						// Set connected status
-						MainData.ConnectionStatus = 0;
-
-						CONNECTION_SendJabber(MESSAGE_Wait());
+						/*
+						else
+						{
+							// User already connected
+							if(MainData.ConnectionStatus == 0)
+							{
+								//Do reconnection
+							}
+						}
+						*/
 					}
 					break;
-				/*
-			    default:
-					MainData.ConnectionStatus++;
-					XMLBuffer = PARSER_ParseXml(XML);
-					CONNECTION_ConnectJabber(XMLBuffer);
-				break;
-				*/
 			}
 		}
 		else if (MainData.HttpRequest.status == 503)

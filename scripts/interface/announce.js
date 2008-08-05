@@ -317,7 +317,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	// Submit the challenge
 	Announce = UTILS_CreateElement('input', null, 'button');
-	Announce.value = "Announce";
+	Announce.value = UTILS_GetText("challenge_announce_match");
 	Announce.type = "button";
 	Announce.onclick = function () {
 		// Checking the color
