@@ -71,7 +71,8 @@ function DATA(ConfFile, LangFile)
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
 	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
-	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	this.RID = null;
 	this.SID = -1;
 	this.Load = -1;
 	this.Lang = "";
