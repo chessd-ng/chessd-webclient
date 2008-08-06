@@ -63,6 +63,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
+	var DateTime = new Date();
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
 
@@ -85,7 +86,26 @@ function LOGIN_Logout()
 
 	// Show Login interface
 	//INTERFACE_StartLogin(Lang);
+	
+	// Get new timestamp
+	NoCacheTimeStamp = "";
+	NoCacheTimeStamp += DateTime.getMonth();
+	NoCacheTimeStamp += "/"+DateTime.getDate();
+	NoCacheTimeStamp += "/"+DateTime.getFullYear();
+	NoCacheTimeStamp += "-"+DateTime.getHours();
+	NoCacheTimeStamp += ":"+DateTime.getMinutes();
+	NoCacheTimeStamp += ":"+DateTime.getSeconds();
+
+	// Reload Scripts
+	LOAD_ReloadFiles();
+
 	START_StartPage();
+
+	// Verify browser and if IE then append related css file
+	if(MainData.Browser == 0)
+	{
+		LOAD_IECssFile();
+	}
 }
 
 

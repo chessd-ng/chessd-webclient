@@ -46,12 +46,12 @@ function START_StartPage()
 		//Lang = UTILS_GetLanguage();
 		
 		// Get default lang from configuration file
-		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml");
+		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml?"+NoCacheTimeStamp);
 		Lang = UTILS_GetTag(ConfTmp, "default-lang");
 	}
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData = new DATA("scripts/data/conf.xml?"+NoCacheTimeStamp, "scripts/lang/"+Lang+".xml?"+NoCacheTimeStamp);
 	MainData.Lang = Lang;
 	
 	INTERFACE_StartLogin(Lang);
@@ -71,7 +71,8 @@ function START_ChangeLanguage(Lang)
 	INTERFACE_EndLogin();
 
 	// Reload MainData with configurations and new language selected
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+//	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData = new DATA("scripts/data/conf.xml?"+NoCacheTimeStamp, "scripts/lang/"+Lang+".xml?"+NoCacheTimeStamp);
 	// Create cookie for new language
 	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
 
@@ -108,6 +109,9 @@ function START_Webclient()
 
 	// Close load image
 	LOAD_EndLoad();
+
+	// Delete global variable
+	delete NoCacheTimeStamp;
 
 	// Open XadrezLivre game environment
 	INTERFACE_ShowInterface(All);

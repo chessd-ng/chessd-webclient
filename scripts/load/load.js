@@ -165,14 +165,14 @@ function LOAD_AppendFiles(Files, NumFiles)
 		{
 			case "scripts":
 				File = UTILS_CreateElement("script");
-				File.src = Files[0]+"?"+NoCache;
+				File.src = Files[0]+"?"+NoCacheTimeStamp;
 				File.type = "text/javascript";
 				Head.appendChild(File);
 				break;
 
 			case "css":
 				File = UTILS_CreateElement("link");
-				File.href = Files[0]+"?"+NoCache;
+				File.href = Files[0]+"?"+NoCacheTimeStamp;
 				File.type = "text/css";
 				File.rel = "stylesheet";
 				Head.appendChild(File);
@@ -184,7 +184,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 
 			case "images":
 				File = UTILS_CreateElement("img");
-				File.src = Files[0]+"?"+NoCache;
+				File.src = Files[0]+"?"+NoCacheTimeStamp;
 				break;
 		}
 	
@@ -238,4 +238,45 @@ function LOAD_EndFile(Files, NumFiles)
 
 	// Start Webclient chess environment
 	setTimeout("START_Webclient()", 1500);
+}
+
+/*
+ * @brief Reload script, css files 
+ *
+ */
+function LOAD_ReloadFiles()
+{
+	var Head = document.getElementsByTagName("head")[0];
+
+	var CssFiles = document.getElementsByTagName("link");
+	var ScriptFiles = document.getElementsByTagName("script");
+
+	var File;
+
+	while (CssFiles.length > 0)
+	{
+		Head.removeChild(CssFiles[0]);
+	}
+	
+	while (ScriptFiles.length > 0)
+	{
+		Head.removeChild(ScriptFiles[0]);
+	}
+
+	File = UTILS_CreateElement("script");
+	File.src = "initial_files.js?"+NoCacheTimeStamp;
+	File.type = "text/javascript";
+	Head.appendChild(File);
+}
+
+function LOAD_IECssFile()
+{
+	var Head = document.getElementsByTagName("head")[0];
+	var File;
+
+	File = UTILS_CreateElement("link");
+	File.href = "css/LoadIE.css?"+NoCacheTimeStamp;
+	File.type = "text/css";
+	File.rel = "stylesheet";
+	Head.appendChild(File);
 }
