@@ -89,10 +89,14 @@ function DATA(ConfFile, LangFile)
 	this.UserList = new Array();
 
 	this.OrderBy = "0";
+
 	this.ChatList = new Array()
+	this.Chat = new Object();
+	this.Chat.ShowChat = new Array();
+	this.Chat.MaxChat = UTILS_GetTag(Params, "max-chats");
+
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
-	this.ChatList = new Array();
 
 	this.ChallengeList = new Array();
 	this.ChallengeSequence = 0;
@@ -164,6 +168,10 @@ DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
 DATA.prototype.FindChat = DATA_FindChat;
+DATA.prototype.GetChat = DATA_Getchat;
+DATA.prototype.SetMaxChat = DATA_SetMaxChat;
+DATA.prototype.AddShowChat = DATA_AddShowChat;
+DATA.prototype.RemoveShowChat = DATA_RemoveShowChat;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
@@ -1062,39 +1070,15 @@ function DATA_GetRoom(RoomName)
 * @return 		Boolean
 * @see 			DATA_FindChat
 */
-function DATA_AddChat (Username, Status)
+function DATA_AddChat (Username, ChatObj)
 {
 	var Chat = new Object();
 	var i;
 
-
-	// Limit chat number
-	if (this.MaxChats <= this.ChatList.length)
-	{
-		return false;
-	}
-
-	i = this.FindChat(Username);
-	
-	// Try to find the same chat in structure
-	if (i != null)
-	{
-		return null;
-	}
-
 	// Setting atributes
 	Chat.Username = Username;
-	Chat.State = "show";
+	Chat.Chat = ChatObj;
 	
-	if (Status == null)
-	{
-		Chat.Status = "available";
-	}
-	else 
-	{
-		Chat.Status = Status;
-	}
-
 	this.ChatList[this.ChatList.length] = Chat;
 
 	return true;
@@ -1142,22 +1126,63 @@ function DATA_RemoveChat(Username)
 */
 function DATA_FindChat(Username)
 {
-	var i;
+	var i = 0;
 	
-	for (i=0 ; i < this.ChatList.length ; i++)
+	while((i<this.ChatList.length) && (this.ChatList[i].Username != Username))
 	{
-		// A chat with the username given already exist on structure
-		if (this.ChatList[i].Username == Username)
-		{
-			return i;
-		}
+		i++;
 	}
 	
-	// User not found
-	return null;
-	
+	if( i >= this.ChatList.length)
+	{
+		// User not found
+		return null;
+	}
+	else
+	{
+		return i;
+	}
+
 }
 
+
+function DATA_Getchat(Username)
+{
+	var i;
+
+	i = this.FindChat(Username);
+
+	if(i != null)
+	{
+		return this.ChatList[i];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetMaxChat(NewMax)
+{
+	this.Chat.MaxChat = NewMax;
+}
+
+function DATA_AddShowChat(ChatObj)
+{
+	this.Chat.ShowChat.push(ChatObj);
+}
+
+function DATA_RemoveShowChat(Username)
+{
+	var i;
+
+	i = this.FindChat(Username);
+
+	if(i!= null)
+	{
+		this.Chat.ShowChat.splice(i, 1);
+	}
+}
 
 /**********************************
  * METHODS - CHALLENGES           *
