@@ -606,7 +606,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
 			Options[i].Func = function () { 
-				Button1.Name = UTILS_GetText("window_ok");
+				Button1.Name = UTILS_GetText("window_yes");
 				Button1.Func = function () {
 					CONTACT_SendRemoveUser(Username);
 				}
