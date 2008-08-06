@@ -339,8 +339,9 @@ function REGISTER_GetLanguage(URL)
 */
 function REGISTER_GetHost(){
 	
-	var CONF = UTILS_OpenXMLFile("scripts/data/conf.xml");
-	return UTILS_GetTag(CONF, "host");
+	return this.Host = window.location.href.split("/")[2].split(":")[0];
+//	var CONF = UTILS_OpenXMLFile("scripts/data/conf.xml");
+//	return UTILS_GetTag(CONF, "host");
 
 }
 
