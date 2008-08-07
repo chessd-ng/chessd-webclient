@@ -170,6 +170,12 @@
 		<challenge_error>Erro ao desafiar</challenge_error>
 		<challenge_announce_match>Anunciar</challenge_announce_match>
 	</challenge>
+	<announce>
+		<announce_title>Anunciar partida</announce_title>
+		<announce_rating_interval>Intervalo de rating:</announce_rating_interval>
+		<announce_rating_example>Exemplo:0000</announce_rating_example>
+		<announce_pieces>Peças:</announce_pieces>
+	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
