@@ -43,6 +43,9 @@
 		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 		<login_validate_user>Usuário inválido</login_validate_user>
 		<login_connection_closed>Conexão perdida. Tente novamente.</login_connection_closed>
+		<login_connection_start>Abrindo Conexão...</login_connection_start>
+		<login_connection_user>Verificando usuário...</login_connection_user>
+		<login_connection_passwd>Verificando senha...</login_connection_passwd>
 	</login>
 	<menu>
 		<menu_adjourn>Adjudicar</menu_adjourn>

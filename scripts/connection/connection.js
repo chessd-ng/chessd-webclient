@@ -28,22 +28,33 @@
 */
 function CONNECTION_ConnectJabber(XML)
 {
-	switch (MainData.ConnectionStatus)
+	if(XML == null)
 	{
-		// Start connection
-		case (1):
-			CONNECTION_SendJabber(MESSAGE_StartConnection());
-			break;
+		switch (MainData.ConnectionStatus)
+		{
+			// Start connection, open stream with bosh
+			case (1):
+				CONNECTION_SendJabber(MESSAGE_StartConnection());
+				LOGIN_LoginMsg(UTILS_GetText("login_connection_start"));
+				break;
 
-		// Send Username
-		case (2):
-			CONNECTION_SendJabber(MESSAGE_SendUsername());
-			break;
+			// Send Username
+			case (2):
+				CONNECTION_SendJabber(MESSAGE_SendUsername());
+				LOGIN_LoginMsg(UTILS_GetText("login_connection_user"));
+				break;
 
-		// Send password and resource
-		case (3):
-			CONNECTION_SendJabber(MESSAGE_SendPasswd());
-			break;
+			// Send password and resource to login
+			case (3):
+				CONNECTION_SendJabber(MESSAGE_SendPasswd());
+				LOGIN_LoginMsg(UTILS_GetText("login_connection_passwd"));
+				break;
+		}
+	}
+	else
+	{
+		// Send a wait message
+		CONNECTION_SendJabber();
 	}
 
 	return "";
@@ -134,6 +145,7 @@ function CONNECTION_ReceiveConnection()
 	var XML, XMLBuffer;
 	var Error, ErrorCode;
 	var BodyType;
+	var Iq, IqType;
 	var Status;
 
 	// Check ready state of HTTP Request
@@ -152,80 +164,87 @@ function CONNECTION_ReceiveConnection()
 		{
 			XML = MainData.HttpRequest.responseXML;
 
+			// Check Bosh connection 
+			BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
+			if(BodyType != null)
+			{
+				if(BodyType == "terminate")
+				{
+					LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
+					return "";
+				}
+			}
+
 			switch (MainData.ConnectionStatus)
 			{
 				 case (1):
-					// Get SID from first message
-					try
-					{
-						MainData.SID = XML.getElementsByTagName("body")[0].getAttribute("sid");
-					}
-					catch(e)
+					if(XML.getElementsByTagName("body")[0].getAttribute("sid") == null)
 					{
 						LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionRefused);
 						return "";
 					}
-					MainData.ConnectionStatus++;
-
-					// Send second step connection
-					CONNECTION_ConnectJabber();
-					break;
-
-				case(2):
-					// Check Bosh connection 
-					if(XML.getElementsByTagName("body")[0].getAttribute("type") != undefined)
+					else // Step one OK
 					{
-						BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
-						
-						if(BodyType == "terminate")
-						{
-							LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
-						}
-					}
-					else
-					{
+						// Get SID from first message
+						MainData.SID = XML.getElementsByTagName("body")[0].getAttribute("sid");
+
 						MainData.ConnectionStatus++;
-						// Send third step connection
+
+						// Send second step connection
 						CONNECTION_ConnectJabber();
 					}
 					break;
 
-				case(3):
-					// Check errors in username and passwd
-					Error = XML.getElementsByTagName("error");
-					if (Error.length > 0)
+				case(2):
+					Iq = XML.getElementsByTagName("iq")[0];
+					if(Iq != null)
 					{
-						ErrorCode = Error[0].getAttribute("code");
-						switch(ErrorCode)
+						IqType = Iq.getAttribute("type");
+						if(IqType == "result")
 						{
-							// Username and passwd invalid
-							case "401":
-								LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
-								break;
-							case "405":
-								LOGIN_LoginFailed(MainData.Const.LOGIN_BannedUser);
-								break;
-								
+							MainData.ConnectionStatus++;
+							// Send third step connection
+							CONNECTION_ConnectJabber();
 						}
 					}
-					// Check Bosh connection 
-					else if(XML.getElementsByTagName("body")[0].getAttribute("type") != undefined)
-					{
-						BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
-						
-						if(BodyType == "terminate")
-						{
-							LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
-						}
-					}
+					// this case should happen when server is very slow to response authentication;
 					else
 					{
-						// User is connecting
-						if(MainData.ConnectionStatus > 0)
+						// Send wait to bosh until server response the first message of authentication
+						CONNECTION_ConnectJabber(MESSAGE_Wait());
+					}
+					break;
+
+				case(3):
+					Iq = XML.getElementsByTagName("iq")[0];
+					if(Iq != null)
+					{
+						IqType = Iq.getAttribute("type");
+						// Check errors in username and passwd authentication
+						if(IqType == "error")
 						{
-							// Send a wait message to bind, to
+							Error = XML.getElementsByTagName("error")[0];
+							if (Error != null)
+							{
+								ErrorCode = Error.getAttribute("code");
+								switch(ErrorCode)
+								{
+									// Username and passwd invalid
+									case "401":
+										LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
+										break;
+									// User was banned by admin
+									case "405":
+										LOGIN_LoginFailed(MainData.Const.LOGIN_BannedUser);
+										break;
+								}
+							}
+						}
+						else //if(IqType == "result")
+						{
+							// Send a message to bosh, to
 							// wait while loading scripts, css and images
-							CONNECTION_SendJabber(MESSAGE_Wait());
+							//CONNECTION_SendJabber(MESSAGE_Wait());
 							/******** LOAD FILES**********/
 							// Start load scripts, css and images
 							LOAD_StartLoad();
@@ -235,20 +254,18 @@ function CONNECTION_ReceiveConnection()
 
 							CONNECTION_SendJabber(MESSAGE_Wait());
 						}
-						/*
-						else
-						{
-							// User already connected
-							if(MainData.ConnectionStatus == 0)
-							{
-								//Do reconnection
-							}
-						}
-						*/
 					}
+					// this case should happen when server is very slow to response authentication;
+					else
+					{
+						// Send wait to bosh until server response the second message of authentication
+						CONNECTION_ConnectJabber(MESSAGE_Wait());
+					}
+
 					break;
 			}
 		}
+		// Server offline
 		else if (MainData.HttpRequest.status == 503)
 		{
 			LOGIN_LoginFailed(MainData.Const.LOGIN_ServerDown);

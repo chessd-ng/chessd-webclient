@@ -39,6 +39,13 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	MainData.Username = Username;
 	MainData.Password = Passwd;
 
+	// Set connection status to conneting
+	MainData.ConnectionStatus = 1;
+
+	// Set new RID and reset SID
+	MainData.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	MainData.SID = -1;
+
 	// Login on Jabber Server
 	CONNECTION_ConnectJabber();
 
@@ -51,6 +58,15 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 		UTILS_CreateCookie("Passwd", Passwd, MainData.CookieValidity);
 	else
 		UTILS_DeleteCookie("Passwd");
+	
+	// Disable inputs
+	INTERFACE_LoginDisableInput();
+
+	// Clear error message
+	INTERFACE_ClearError();
+
+	// Show login message
+	INTERFACE_ShowLoginMessage();
 }
 
 
@@ -182,4 +198,21 @@ function LOGIN_LoginFailed(Code)
 
 			break;
 	}
+
+	//Enable inputs
+	INTERFACE_LoginEnableInput();
+
+	// Hide login message
+	INTERFACE_HideLoginMessage();
+}
+
+/**
+ * Show a connection string when start login
+ *
+ * @param	Msg	Message string
+ * @author	Rubens Suguimoto
+ */
+function LOGIN_LoginMsg(Msg)
+{
+	INTERFACE_ShowLoginMessage(Msg);
 }
