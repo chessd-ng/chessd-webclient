@@ -528,9 +528,13 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 
+	if (MainData.Browser == 0)
+	{
+		Offset = 0;
+	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 	// Contact List
-	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2;
@@ -546,10 +550,6 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		if (MainData.Browser == 2)
 		{
 			Offset = 1; //
-		}
-		else
-		{
-			Offset = 9; // ok
 		}
 	}
 
@@ -845,9 +845,13 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 	
+	if (MainData.Browser == 0)
+	{
+		Offset = 0;
+	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 	// Contact List
-	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2; //ok
