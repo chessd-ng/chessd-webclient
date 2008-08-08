@@ -3,13 +3,14 @@
 */
 #AnnounceDiv #Layer1Div,
 #AnnounceDiv #Layer2Div,
-#AnnounceDiv #Layer3Div, 
-#AnnounceDiv #ButtonsDiv {
-	padding			: 0px 28px;
+#AnnounceDiv #PieceDiv, 
+#AnnounceDiv #CategoryDiv, 
+#AnnounceDiv #IntervalDiv {
+	padding			: 0px 0px 0px 31px;
 }
 
-#AnnounceDiv #Layer1Div:after,
-#AnnounceDiv #Layer2Div:after {
+#AnnounceDiv #Layer1Div:after {
+/*#AnnounceDiv #Layer2Div:after {*/
 	content:".";
 	display:block;
 	clear:both;
@@ -18,40 +19,45 @@
 	overflow:hidden;
 }
 
-#AnnounceDiv #TopDiv {
-	padding-top		:	2mm;
-	margin-bottom	:	3mm;
+#AnnounceDiv #PieceDiv,
+#AnnounceDiv #CategoryDiv,
+#AnnounceDiv #IntervalDiv, 
+#AnnounceDiv #Layer1Div,
+#AnnounceDiv #Layer2Div {
+	padding-top		:	20px;
+}
+
+#AnnounceDiv #IntervalDiv #FromDiv {
+	float : left;
+	width :	140px;
+}
+
+#AnnounceDiv #IntervalDiv #ToDiv,
+#AnnounceDiv #IntervalDiv #FromDiv {
+	padding-top : 5px
+}
+
+#AnnounceDiv #IntervalDiv span.bold {
+	font-weight : bold;
+} 
+
+#AnnounceDiv #IntervalDiv input {
+	margin-left : 5px;
 }
 
 #AnnounceDiv #Layer1Div {
-	margin-bottom	:	0px;
-}
-
-#AnnounceDiv #Layer1Div #L1RightDiv {
-	float : left;
-}
-
-#AnnounceDiv #Layer3Div {
-	text-align	:	center;
+	margin-left	:	2px;
 }
 
 #AnnounceDiv .cx {
 	font-size	:	10px;
 	margin-right	:	3mm;
-}
-
-#AnnounceDiv h3 {
-	font-weight		: bold;
-	font-size		: 4mm;
-	color			: #216778;
-	text-align		: center;
-	padding-top		: 8px;
+	font-weight : bold;
 }
 
 #AnnounceDiv .leftDiv {
 	float			: left;
-	width			: 170px;
-	margin-left	:	13px;
+	width			: 140px;
 }
 
 #AnnounceDiv p {
@@ -61,24 +67,9 @@
 	color			: #216778;
 }
 
-#AnnounceDiv .rating {
-	margin-left		: 4mm;
-	font-size		: 10px;
-	font-weight	: normal;
-}
-
 #AnnounceDiv img {
-	margin-right	: 7mm;
-	margin-left		: 2mm;
-}
-
-#AnnounceDiv .label_information {
-	text-align		: center;
-	font-weight		: normal;
-	margin-top			: 1%;
-	font-size		: 2.6mm;
-	position		: relative;
-	width				:	102%;
+	margin-right	: 40px;
+	margin-left		: 8px;
 }
 
 #AnnounceDiv .drop_select {
@@ -105,8 +96,8 @@
 	padding-top	:	1mm;
 }
 
-#AnnounceDiv .radio {
-	margin-top	:	2mm;
+#AnnounceDiv .format {
+	font-size : 9px;
 }
 
 #AnnounceDiv input,

@@ -27,31 +27,29 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 {
 	var Div;
 
-	var TopDiv;
-	var UsernameH3, RatingLabel, Label;
-	var RatingTmp;
+	var PieceDiv;
+	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
+
+	var CategoryDiv;
+	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt;
 
 	var Layer1Div;
 	var L1LeftDiv;
-	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
+	var TimeLabel, TimeSelect, TimeOpt, TimeLabelMin,TimeBr;
 	var L1RightDiv;
-	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt;
-	var Br1;
+	var IncLabel, IncSelect, IncOpt, IncLabelSeg,IncBr;
 
 	var Layer2Div;
-	var L2LeftDiv;
-	var TimeLabel, TimeSelect, TimeOpt, TimeLabelMin,TimeBr;
-	var L2RightDiv;
-	var IncLabel, IncSelect, IncOpt, IncLabelSeg,IncBr;
-	var Br2;
-
-	var ChalRightDiv;
-
-	var Layer3Div;
+	var L2RightDiv, L2LeftDiv;
 	var RatingCheckbox, RatingLabel;
 	var PrivateCheckbox, PrivateLabel;
 	var AutoFlagCheckbox, AutoFlagLabel;
-	var Br3;
+	var Br2;
+
+	var IntervalDiv;
+	var IntervalLabel, Br3, FromLabel, FromInput, ToLabel, ToInput;
+	var FromDiv, ToDiv;
+	var FormatLabel1,FormatLabel2;
 
 	var ButtonsDiv;
 	var Announce, Cancel;
@@ -63,19 +61,10 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	// Main Div
 	Div = UTILS_CreateElement('div', 'AnnounceDiv');
 	
-	// Top Elments
-	TopDiv = UTILS_CreateElement('div', 'TopDiv');
-	UsernameH3 = UTILS_CreateElement('h3', null, null, Username);
-	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
-	UsernameH3.appendChild(RatingLabel);
-	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
-	
-	// Layer1 Elements
+	// Piece Elements
+	PieceDiv = UTILS_CreateElement('div', 'PieceDiv');
 
-	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
-
-	// Layer 1 Left Elements
-	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
+	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('announce_pieces'));
 
 	try
 	//Fix radio button for IE
@@ -90,12 +79,8 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 		ColorOptW.value = "colorW";
 	}
 	
-
-	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
-
 	ColorOptWImg = UTILS_CreateElement('img',null,'color');
 	ColorOptWImg.src = "images/invite_white_pawn.png"
-	BrW = UTILS_CreateElement('br');
 
 	try
 	//Fix radio button for IE
@@ -112,7 +97,6 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
 	ColorOptBImg.src = "images/invite_black_pawn.png"
-	BrB = UTILS_CreateElement('br');
 	
 	try
 	//Fix radio button for IE
@@ -129,7 +113,6 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
 	RandomColorOptImg.src = "images/random.png"
-	BrR = UTILS_CreateElement('br');
 	
 //	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
 
@@ -138,10 +121,10 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	AutoColorOpt.checked = true;
 	//defaultChecked is used to fix IE radio checked
 	AutoColorOpt.setAttribute("defaultChecked", "true");
-	//*End Layer 1 Left Elements*
+	//*End PieceDiv Elements*
 	
-	// Layer 1 Right Elements
-	L1RightDiv = UTILS_CreateElement('div', 'L1RightDiv');
+	// Category Div Elements
+	CategoryDiv = UTILS_CreateElement('div', 'CategoryDiv');
 
 	CatLabel = UTILS_CreateElement('p', null, null, UTILS_GetText('challenge_category'));
 	CatOptLi = UTILS_CreateElement('option', null, null, 'Lightning');
@@ -221,23 +204,15 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 			TimeSelect.appendChild(TimeOpt);
 			RatingTmp = Rating.Standard;
 		}
-	
-		UsernameH3.removeChild(UsernameH3.childNodes[1]);
-		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+RatingTmp);
-		UsernameH3.appendChild(RatingLabel);
 	}
 
-	//* End Layer1 Right Elements*
+	//* End Category Right Elements*
 	
-	Br1= UTILS_CreateElement('br');
+	// Layer 1 Elements
+	Layer1Div = UTILS_CreateElement('div','Layer1Div');
 
-	//* End Layer1*
-
-	// Layer 2 Elements
-	Layer2Div = UTILS_CreateElement('div','Layer2Div');
-
-	// Layer 2 Right Elements
-	L2RightDiv = UTILS_CreateElement('div','L2RightDiv');
+	// Layer 1 Right Elements
+	L1RightDiv = UTILS_CreateElement('div','L1RightDiv');
 	IncLabel =	UTILS_CreateElement('p', null, null, UTILS_GetText('challenge_inc_label'));
 	IncSelect = UTILS_CreateElement('select', null, 'drop_select');
 	IncLabelSeg =	UTILS_CreateElement('span', null, 'italic', UTILS_GetText('challenge_inc_label_seg'));
@@ -251,10 +226,10 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 		IncSelect.appendChild(IncOpt);
 	}
 	
-	//* End Layer2 Right Elements*
+	//* End Layer1 Right Elements*
 	
-	// L2 Left Elements
-	L2LeftDiv = UTILS_CreateElement('div','L2LeftDiv','leftDiv');
+	// L1 Left Elements
+	L1LeftDiv = UTILS_CreateElement('div','L1LeftDiv','leftDiv');
 
 	TimeLabel =	UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_time_label'));
 	TimeLabelMin =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_time_label_min'));
@@ -272,14 +247,14 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	CatSelect.options.selectedIndex = 1;
 
-	//* End Layer2 Left Elements*
-	Br2= UTILS_CreateElement('br');
-	// End Layer 2
+	//* End Layer1 Left Elements*
+	// End Layer 1
 	
-	// Layer 3
-	Layer3Div = UTILS_CreateElement('div','Layer3Div');
+	// Layer 2
+	Layer2Div = UTILS_CreateElement('div','Layer2Div');
 
 	// Private
+	L2RightDiv = UTILS_CreateElement('div','L2RightDiv');
 	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
 	PrivateCheckbox.type = "checkbox";
 	PrivateCheckbox.name = "private";
@@ -287,6 +262,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
 	// Rating
+	L2LeftDiv = UTILS_CreateElement('div','L2LeftDiv','leftDiv');
 	try
 	{
 		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
@@ -301,18 +277,31 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
 
-	// Auto-flag
-	AutoFlagCheckbox = UTILS_CreateElement('input',null,'rating_radio');
-	AutoFlagCheckbox.type = "checkbox";
-	AutoFlagCheckbox.name = "autoflag";
-	AutoFlagCheckbox.disabled = true;
-	AutoFlagLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_auto_flag'));
+	//*End Layer 2 Elements*
 
-	Br3 = UTILS_CreateElement('br');
-	//*End Layer 3 Elements*
+	// Interval Elements
 
-	// Bottom Elements
+	IntervalDiv= UTILS_CreateElement('div','IntervalDiv');
 
+	// Date Form
+	FromDiv = UTILS_CreateElement('div','FromDiv', 'leftDiv');
+	ToDiv = UTILS_CreateElement('div','ToDiv');
+	IntervalLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('announce_rating_interval'));
+
+	FromLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_from'));
+	FromInput	= UTILS_CreateElement('input');
+	FromInput.size = "5";
+	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_rating_example'));
+
+	ToLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_to'));
+	ToInput = UTILS_CreateElement('input');
+	ToInput.size = "5";
+	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_rating_example'));
+
+	Br2 = UTILS_CreateElement("br");
+	Br3 = UTILS_CreateElement("br");
+
+	// Buttons Elements
 	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
 	// Submit the challenge
@@ -354,71 +343,77 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	// Appending childs
 
+	// PieceDiv
+	PieceDiv.appendChild(ColorLabel);
+	PieceDiv.appendChild(ColorOptW);
+	PieceDiv.appendChild(ColorOptWImg);
+	PieceDiv.appendChild(ColorOptB);
+	PieceDiv.appendChild(ColorOptBImg);
+	PieceDiv.appendChild(AutoColorOpt);
+	PieceDiv.appendChild(RandomColorOptImg);
+	
+	// CategoryDiv
+	CategoryDiv.appendChild(CatLabel);
+	CategoryDiv.appendChild(CatSelect);
+
 	// Layer1
 	// Left
-	L1LeftDiv.appendChild(ColorLabel);
-	L1LeftDiv.appendChild(ColorOptW);
-	L1LeftDiv.appendChild(ColorOptWImg);
-	L1LeftDiv.appendChild(BrW);
-	L1LeftDiv.appendChild(ColorOptB);
-	L1LeftDiv.appendChild(ColorOptBImg);
-	L1LeftDiv.appendChild(BrB);
-	L1LeftDiv.appendChild(AutoColorOpt);
-	L1LeftDiv.appendChild(RandomColorOptImg);
-	L1LeftDiv.appendChild(BrR);
-//	L1LeftDiv.appendChild(AutoColorLabel);
-	
-	// Right
-	L1RightDiv.appendChild(CatLabel);
-	L1RightDiv.appendChild(CatSelect);
+	L1LeftDiv.appendChild(TimeLabel);
+	L1LeftDiv.appendChild(TimeSelect);
+	L1LeftDiv.appendChild(TimeLabelMin);
+	L1LeftDiv.appendChild(TimeBr);
 
+	// Right
+	L1RightDiv.appendChild(IncLabel);
+	L1RightDiv.appendChild(IncSelect);
+	L1RightDiv.appendChild(IncLabelSeg);
+	L1RightDiv.appendChild(IncBr);
+	
 	Layer1Div.appendChild(L1LeftDiv);
 	Layer1Div.appendChild(L1RightDiv);
 
 	// Layer2
-	// Left
-	L2LeftDiv.appendChild(TimeLabel);
-	L2LeftDiv.appendChild(TimeSelect);
-	L2LeftDiv.appendChild(TimeLabelMin);
-	L2LeftDiv.appendChild(TimeBr);
+	L2LeftDiv.appendChild(RatingCheckbox);
+	L2LeftDiv.appendChild(RatingLabel);
 
-	// Right
-	L2RightDiv.appendChild(IncLabel);
-	L2RightDiv.appendChild(IncSelect);
-	L2RightDiv.appendChild(IncLabelSeg);
-	L2RightDiv.appendChild(IncBr);
-	
+	L2RightDiv.appendChild(PrivateCheckbox);
+	L2RightDiv.appendChild(PrivateLabel);
+
 	Layer2Div.appendChild(L2LeftDiv);
 	Layer2Div.appendChild(L2RightDiv);
-
-	// Layer3
-	Layer3Div.appendChild(RatingCheckbox);
-	Layer3Div.appendChild(RatingLabel);
-
-	Layer3Div.appendChild(PrivateCheckbox);
-	Layer3Div.appendChild(PrivateLabel);
-
 	// Disabled
 //	Layer3Div.appendChild(AutoFlagCheckbox);
 //	Layer3Div.appendChild(AutoFlagLabel);
+	
+	// Interval Div
+	IntervalDiv.appendChild(IntervalLabel);
+
+	FromDiv.appendChild(FromLabel);
+	FromDiv.appendChild(FromInput);
+	FromDiv.appendChild(Br2);
+	FromDiv.appendChild(FormatLabel1);
+
+	ToDiv.appendChild(ToLabel);
+	ToDiv.appendChild(ToInput);
+	ToDiv.appendChild(Br3);
+	ToDiv.appendChild(FormatLabel2);
+
+	IntervalDiv.appendChild(FromDiv);
+	IntervalDiv.appendChild(ToDiv);
+	// End Interval
 
 	ButtonsDiv.appendChild(Announce);
 	Buttons.push(Announce);
 	ButtonsDiv.appendChild(Cancel);
 	Buttons.push(Cancel);
 
-	// TopDiv
-	TopDiv.appendChild(UsernameH3);
-	
 
 	// Mount Main Div
-	Div.appendChild(TopDiv);
+	Div.appendChild(PieceDiv);
+	Div.appendChild(CategoryDiv);
 	Div.appendChild(Layer1Div);
-	Div.appendChild(Br1);
 	Div.appendChild(Layer2Div);
-	Div.appendChild(Br2);
-	Div.appendChild(Layer3Div);
-	Div.appendChild(Br3);
+	Div.appendChild(IntervalDiv);
 	Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons}
