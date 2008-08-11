@@ -26,7 +26,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	var Tmp;
 
 	// Setting white and black players
-	if (this.MyColor == "white")
+	if (YourColor == "white")
 	{
 		if (Player1.Name == MainData.Username)
 		{
@@ -73,7 +73,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 
 
-	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, this.MyColor, this.PieceSize);
+	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, YourColor, this.PieceSize);
 
 	this.Time = new Object();
 	this.name = new Object();
