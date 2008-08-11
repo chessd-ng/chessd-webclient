@@ -57,7 +57,7 @@ function INTERFACE_HelpWindow()
 	// 1 - How Item
 	L1 = UTILS_CreateElement("li","How.1T","unselected",UTILS_GetText("help_t_1"));
 	INTERFACE_HelpDisplay(L1, "How.1");
-	C1 = UTILS_CreateElement("li","How.1C","hide_help");
+	C1 = UTILS_CreateElement("li","How.1C","show_help");
 
 		// 1.1 - Play
 		L2 = UTILS_CreateElement("li","How.1.1T","unselected",UTILS_GetText("help_t_1_1"));
