@@ -294,9 +294,9 @@ function INTERFACE_ShowRoomList(Rooms)
         // Create elements and insert rooms
         for (i=0; i < Rooms.length; i++)
         {
-                Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+                Room = UTILS_CreateElement("li", Rooms[i].Id, null, Rooms[i].Name);
                 Room.onclick = function () {
-									ROOM_EnterRoom(this.innerHTML);
+									ROOM_EnterRoom(this.id);
                 }
                 Node.appendChild(Room);
         }

@@ -209,8 +209,9 @@ function ROOM_HandleMessage(XML)
 */
 function ROOM_HandleRoomList(XML)
 {
-	var Items, Rooms, RoomName, ID,  i;
+	var Items, Rooms, Room, RoomName, ID, i;
 	var Buffer = "";
+	var Exp = new RegExp("^"+MainData.RoomDefault+"$");
 
 	Rooms = new Array();
 
@@ -222,7 +223,6 @@ function ROOM_HandleRoomList(XML)
 	{
 		Buffer += ROOM_HandleGameRoomList(XML);
 	}
-	
 	// Chat Room List
 	else
 	{
@@ -232,12 +232,17 @@ function ROOM_HandleRoomList(XML)
 		// Find room names
 		for (i=0; i < Items.length; i++)
 		{
-			Rooms[i] = Items[i].getAttribute("name");
+			Room = new Object();
+
+			Room.Id = Items[i].getAttribute("jid").split("@")[0];
+			Room.Name = Items[i].getAttribute("name").replace(/ /,"");;
+
+			Rooms[i] = Room;
 
 			// Change name for general room
-			if (Rooms[i].match(MainData.RoomDefault))
+			if (Rooms[i].Id.match(Exp))
 			{
-				Rooms[i]=Rooms[i].replace(MainData.RoomDefault,UTILS_GetText("room_default"));
+				Rooms[i].Name = UTILS_GetText("room_default") + "(" + Rooms[i].Name.split("(")[1];
 			}
 		}
 		INTERFACE_ShowRoomList(Rooms);
@@ -492,29 +497,20 @@ function ROOM_EnterRoom(RoomName)
 
 	var Room;
 
-	RoomName = RoomName.split(" ")[0];
-	
 	// Send Message to general room - must be change to Focus Room
-	if (RoomName == UTILS_GetText("room_default"))
+	Room = MainData.GetRoom(RoomName);
+
+	if (Room != null)
 	{
-		ROOM_FocusRoom(MainData.RoomDefault);
+		ROOM_FocusRoom(RoomName);
 	}
 	else
 	{
-		Room = MainData.GetRoom(RoomName);
+		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
 
-		if (Room != null)
-		{
-			ROOM_FocusRoom(RoomName);
-		}
-		else
-		{
-			To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+		XML = MESSAGE_Presence(To);
 
-			XML = MESSAGE_Presence(To);
-
-			CONNECTION_SendJabber(XML);
-		}
+		CONNECTION_SendJabber(XML);
 	}
 
 	return "";
