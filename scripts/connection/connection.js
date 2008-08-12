@@ -70,6 +70,7 @@ function CONNECTION_ConnectJabber(XML)
 function CONNECTION_SendJabber()
 {
 	var Post = "", DT, i;
+	var HttpRequest;
 
 	// If receive too many parameters, merge then
 	for (i=0; i<arguments.length; i++)
@@ -87,45 +88,54 @@ function CONNECTION_SendJabber()
 	if (window.XMLHttpRequest) 
 	{
 		// Mozilla, Opera, Galeon
-		MainData.HttpRequest = new XMLHttpRequest();
-		if (MainData.HttpRequest.overrideMimeType) 
-			MainData.HttpRequest.overrideMimeType("text/xml");
+		HttpRequest = new XMLHttpRequest();
+		if (HttpRequest.overrideMimeType) 
+			HttpRequest.overrideMimeType("text/xml");
 	}
 	else if (window.ActiveXObject) 
 	{
 		// Internet Explorer
 		try
 		{
-			MainData.HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
 		}
 		catch(e)
 		{
-			MainData.HttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			HttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 	}
 
 	// Avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	MainData.HttpRequest.open('POST','http://'+MainData.HostPost+'/jabber?id='+DT , true);
-	MainData.HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	//HttpRequest.open('POST','http://'+MainData.HostPost+'/http-bind?id='+DT , true);
+	HttpRequest.open('POST','http://'+MainData.HostPost+'/jabber?id='+DT , true);
+	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
 	// Normal parse messages
 	if (MainData.ConnectionStatus == 0)
 	{
-		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveXml;
+		HttpRequest.onreadystatechange = function(){
+			CONNECTION_ReceiveXml(HttpRequest);
+		}
 	}
 	// Conection parse messages
 	else if (MainData.ConnectionStatus > 0)
 	{
-		MainData.HttpRequest.onreadystatechange = CONNECTION_ReceiveConnection;
+		HttpRequest.onreadystatechange = function(){
+			CONNECTION_ReceiveConnection(HttpRequest);
+		}
 	}
 
 	// Send request to server
-	MainData.HttpRequest.send(Post);
+	HttpRequest.send(Post);
 
 	// Save last post in Data Struct
 	MainData.LastXML = Post;
+
+	// Add Post in data Struct
+	MainData.AddHttpPost(HttpRequest);
+
 
 	// Increment RID
 	MainData.RID++;
@@ -140,7 +150,7 @@ function CONNECTION_SendJabber()
 * @return 	Empty string
 * @author	Pedro Rocha
 */
-function CONNECTION_ReceiveConnection()
+function CONNECTION_ReceiveConnection(HttpRequest)
 {
 	var XML, XMLBuffer;
 	var Error, ErrorCode;
@@ -149,11 +159,11 @@ function CONNECTION_ReceiveConnection()
 	var Status;
 
 	// Check ready state of HTTP Request
-	if (MainData.HttpRequest.readyState == 4 )
+	if (HttpRequest.readyState == 4 )
 	{
 		try
 		{
-			Status = MainData.HttpRequest.status;
+			Status = HttpRequest.status;
 		}
 		catch(e)
 		{
@@ -162,7 +172,7 @@ function CONNECTION_ReceiveConnection()
 
 		if(Status == 200)
 		{
-			XML = MainData.HttpRequest.responseXML;
+			XML = HttpRequest.responseXML;
 
 			// Check Bosh connection 
 			BodyType = XML.getElementsByTagName("body")[0].getAttribute("type");
@@ -266,10 +276,13 @@ function CONNECTION_ReceiveConnection()
 			}
 		}
 		// Server offline
-		else if (MainData.HttpRequest.status == 503)
+		else if (HttpRequest.status == 503)
 		{
 			LOGIN_LoginFailed(MainData.Const.LOGIN_ServerDown);
 		}
+
+		// Remove post from data struct
+		MainData.RemoveHttpPost(HttpRequest);
 	}
 	return "";
 }
@@ -281,17 +294,18 @@ function CONNECTION_ReceiveConnection()
 * @return 	Empty string
 * @author	Pedro Rocha
 */
-function CONNECTION_ReceiveXml()
+function CONNECTION_ReceiveXml(HttpRequest)
 {
 	var XML, Buffer = "";
 	var State, Status;
 
 	//Check if HttpRequest Object exists
+	/*
 	if((MainData == null) || (MainData.HttpRequest == null))
 	{
 		return "";
 	}
-
+	*/
 	// User was disconnected 
 	if (MainData.ConnectionStatus == -1)
 	{
@@ -299,12 +313,13 @@ function CONNECTION_ReceiveXml()
 	}
 
 
-	if (MainData.HttpRequest.readyState == 4)
+	//if (MainData.HttpRequest.readyState == 4)
+	if (HttpRequest.readyState == 4)
 	{
 		// Try to get http request status
 		try
 		{
-			Status = MainData.HttpRequest.status;
+			Status = HttpRequest.status;
 		}
 		catch (e)
 		{
@@ -314,7 +329,7 @@ function CONNECTION_ReceiveXml()
 		if (Status == 200)
 		{
 			// Get Xml response
-			XML = MainData.HttpRequest.responseXML;
+			XML = HttpRequest.responseXML;
 
 			// User disconnected 
 			if (MainData.ConnectionStatus == -1)
@@ -332,19 +347,28 @@ function CONNECTION_ReceiveXml()
 			}
 			else
 			{
-				// Send a wait message to jabber
-				CONNECTION_SendJabber(MESSAGE_Wait());
+				// Remove post from data struct
+				MainData.RemoveHttpPost(HttpRequest);
+
+				// Send a wait message to jabber if is there 
+				// no pendend post
+				if(MainData.HttpRequest.length == 0)
+				{
+					CONNECTION_SendJabber(MESSAGE_Wait());
+				}
+
+				return "";
 			}
 		}
 
 		// Re-send last XML
-		else if (MainData.HttpRequest.status == 502)
+		else if (HttpRequest.status == 502)
 		{
 			CONNECTION_SendJabber(MainData.LastXML);
 		}
 
 		// Server down
-		else if (MainData.HttpRequest.status == 503)
+		else if (HttpRequest.status == 503)
 		{
 			// Show this message if user is connected
 			if(MainData.ConnectionStatus == 0)
@@ -352,6 +376,9 @@ function CONNECTION_ReceiveXml()
 				alert(UTILS_GetText("error_disconnected"));
 			}
 		}
+
+		// Remove post from data struct
+		MainData.RemoveHttpPost(HttpRequest);
 	}
 
 	return "";

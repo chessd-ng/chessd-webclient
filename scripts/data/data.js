@@ -41,7 +41,7 @@ function DATA(ConfFile, LangFile)
 	* > 1 -> Connecting
 	*/
 	this.ConnectionStatus = 1;
-	this.HttpRequest = null;
+	this.HttpRequest = new Array();
 	this.Browser = UTILS_IdentifyBrowser();
 	
 	// Get Host from configuration file
@@ -133,6 +133,10 @@ function DATA(ConfFile, LangFile)
 }
 
 // Adding methods
+DATA.prototype.AddHttpPost = DATA_AddHttpPost;
+DATA.prototype.RemoveHttpPost = DATA_RemoveHttpPost;
+DATA.prototype.FindHttpPost = DATA_FindHttpPost;
+
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
@@ -220,6 +224,49 @@ DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
 
 DATA.prototype.SetMyProfile = DATA_SetMyProfile;
+
+
+/**********************************
+ * METHODS - HTTP REQUEST         *
+ **********************************/
+
+function DATA_AddHttpPost(PostObj)
+{
+	this.HttpRequest.push(PostObj);
+}
+
+function DATA_RemoveHttpPost(PostObj)
+{
+	var i;
+
+	i = this.FindHttpPost(PostObj)
+
+	if(i != null)
+	{
+		this.HttpRequest.splice(i,1);
+	}
+
+	delete PostObj;
+}
+
+function DATA_FindHttpPost(PostObj)
+{
+	var i=0;
+
+	while((i < this.HttpRequest.length)&&(this.HttpRequest[i] != PostObj))
+	{
+		i++;
+	}
+
+	if(i >= this.HttpRequest.length)
+	{
+		return null;
+	}
+	else
+	{
+		return i;
+	}
+}
 
 /**********************************
  * METHODS - USER LIST            *
