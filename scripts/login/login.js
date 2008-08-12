@@ -84,8 +84,7 @@ function LOGIN_Logout()
 	MainData.ConnectionStatus = -1;
 
 	// Logout from jabber
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
@@ -128,8 +127,7 @@ function LOGIN_Logout()
 function LOGIN_LeavePage()
 {
 	var XMPP = "";
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 }
 
