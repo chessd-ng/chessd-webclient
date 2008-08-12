@@ -300,41 +300,52 @@ function UTILS_Capitalize(Word)
 /**
 * Put a <br /> tag at Obj.innerHTML if it pass the Width limit
 *
-* @param Word
-* 	String to be break
-* @param NumChars
-* 	max length of string
+* @param Obj
+* 	Cell table's object
+* @param Width
+* 	max Base object 
 * @return String
 * @author Danilo Kiyoshi Simizu Yorinori
 *
 */
 function UTILS_BreakString(Obj, Width)
 {
-	var text = Obj.innerHTML;
+	var Text = Obj.innerHTML;
+	var ObjWidth;
+	var Broke = false;
+	var Old;
 	var i;
-	var old;
-	var broke = 0;
+
+	// IE
+	if (MainData.Browser == 0)
+	{
+		Width = Width.offsetWidth;
+	}
+	else // Other browsers
+	{
+		Width = Width.clientWidth;
+	}
 
 	if (Obj.clientWidth > Width) {
 		Obj.innerHMTL = "";
 
-		for (i=0; i<=text.length; i++)
+		for (i=0; i<=Text.length; i++)
 		{
-			if (broke == 1)
+			if (Broke)
 			{
-				old =Obj.innerHTML;
-				Obj.innerHTML = Obj.innerHTML + text.slice(i-1,i); 
+				Old =Obj.innerHTML;
+				Obj.innerHTML = Obj.innerHTML + Text.slice(i-1,i); 
 			}
 			else
 			{
-				old = Obj.innerHTML;
-				Obj.innerHTML = text.slice(0,i);
+				Old = Obj.innerHTML;
+				Obj.innerHTML = Text.slice(0,i);
 			}
 
 			if (Obj.clientWidth > Width)
 			{
-				Obj.innerHTML = old +"<br />" + text.slice(i-1,i); 
-				broke = 1;
+				Obj.innerHTML = Old +"<br />" + Text.slice(i-1,i); 
+				Broke = true;
 			}
 		}
 	}

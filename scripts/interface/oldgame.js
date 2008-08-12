@@ -617,8 +617,8 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.removeChild(this.TBody.childNodes[0]);
 	}
 
-	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0].offsetWidth;
-	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1].offsetWidth;
+	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0];
+	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1];
 
 	// Append new results
 	for(i=0; i<GameLen ; i++)
