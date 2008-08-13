@@ -330,6 +330,8 @@
 	left			: 20px;
 }
 
-#room_loading span {
-	
+#Rooms #RoomList #RoomPrimary #general_occupants,
+#Rooms #RoomList #RoomSecondary #Sec_occupants {
+	font-weight : normal;
+	font-size : 9px;
 }
