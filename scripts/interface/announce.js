@@ -69,7 +69,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	try
 	//Fix radio button for IE
 	{
-		ColorOptW = document.createElement('<input class="radio" type="radio" name="color"/>');
+		ColorOptW = document.createElement('<input type="radio" name="color" />');
 	}
 	catch(err)
 	{ //FF
@@ -85,7 +85,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color'/>")
+		ColorOptB = document.createElement("<input type='radio' name='color' />")
 	}
 	catch(err)
 	{ //FF
@@ -101,20 +101,20 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color'/>")
+		AutoColorOpt = document.createElement("<input type='radio' name='color' />")
 	}
 	catch(err)
 	{ //FF
-		AutoColorOpt = UTILS_CreateElement('input',null,'radio');
+		AutoColorOpt = UTILS_CreateElement('input',null);
 		AutoColorOpt.type = "radio";
 		AutoColorOpt.name = "color";
 		AutoColorOpt.value = "auto";
 	}
 
-	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
+	RandomColorOptImg = UTILS_CreateElement('img',null,'auto_img');
 	RandomColorOptImg.src = "images/random.png"
 	
-//	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
+	AutoColorLabel= UTILS_CreateElement("span",null,'color_label',UTILS_GetText("challenge_color_auto"));
 
 	// Select player color
 	// Firefox fix
@@ -255,17 +255,24 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	// Private
 	L2RightDiv = UTILS_CreateElement('div','L2RightDiv');
-	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
-	PrivateCheckbox.type = "checkbox";
-	PrivateCheckbox.name = "private";
-	PrivateCheckbox.disabled = true;
+	try
+	{
+		PrivateCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='private' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
+		PrivateCheckbox.type = "checkbox";
+		PrivateCheckbox.name = "private";
+		PrivateCheckbox.disabled = true;
+	}
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
 	// Rating
 	L2LeftDiv = UTILS_CreateElement('div','L2LeftDiv','leftDiv');
 	try
 	{
-		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
+		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />");
 	}
 	catch(err)
 	{
@@ -291,11 +298,13 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	FromLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
 	FromInput.size = "5";
+	FromInput.maxLength = "4";
 	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_rating_example'));
 
 	ToLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
 	ToInput.size = "5";
+	ToInput.maxLength = "4";
 	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_rating_example'));
 
 	Br2 = UTILS_CreateElement("br");
@@ -334,7 +343,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 		}
 
 		// Create and send the chellenge message
-		ANNOUNCE_SendAnnounce(Username, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
+		ANNOUNCE_SendAnnounce(Username, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, FromInput.value, ToInput.value);
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -351,6 +360,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	PieceDiv.appendChild(ColorOptBImg);
 	PieceDiv.appendChild(AutoColorOpt);
 	PieceDiv.appendChild(RandomColorOptImg);
+	PieceDiv.appendChild(AutoColorLabel);
 	
 	// CategoryDiv
 	CategoryDiv.appendChild(CatLabel);
@@ -418,4 +428,3 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	return {Div:Div, Buttons:Buttons}
 }
-

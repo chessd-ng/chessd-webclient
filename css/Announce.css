@@ -68,7 +68,7 @@
 }
 
 #AnnounceDiv img {
-	margin-right	: 40px;
+	margin-right	: 25px;
 	margin-left		: 8px;
 }
 
@@ -90,6 +90,14 @@
 	text-align		: center;
 	padding-top		: 8mm;
 	margin-bottom	: 2mm;
+}
+
+#AnnounceDiv .auto_img {
+	margin-right	: 5px;
+}
+
+#AnnounceDiv .color_label {
+	font-size : 11px;
 }
 
 #AnnounceDiv .color {

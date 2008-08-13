@@ -178,6 +178,10 @@
 		<announce_rating_interval>Intervalo de rating:</announce_rating_interval>
 		<announce_rating_example>Exemplo:0000</announce_rating_example>
 		<announce_pieces>Peças:</announce_pieces>
+		<announce_error_title>Erro ao anunciar partida</announce_error_title>
+		<announce_invalid_min_rating>Valor de rating mínimo incorreto. Ex: 0000</announce_invalid_min_rating>
+		<announce_invalid_min_rating>Valor de rating máximo incorreto. Ex: 2349</announce_invalid_min_rating>
+		<announce_invalid_interval>Intervalo de rating incorreto. O valor mínimo deve ser menor que o valor máximo.</announce_invalid_interval>
 	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>

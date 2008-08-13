@@ -996,13 +996,22 @@ function MESSAGE_FetchOldGame(OldGameId)
  * MESSAGES - ANNOUNCE CHALLENGES
  **********************************/
 //Player object
-function MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag)
+function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 {
 	var XMPP = "";
 
 	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_AnnounceMatch+"'>";
 	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
-	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"'>";
+	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"' ";
+	if (Min != "")
+	{
+		XMPP += "minimum_rating='"+Min+"' ";
+	}
+	if (Max != "")
+	{
+		XMPP += "maximum_rating='"+Max+"' ";
+	}
+	XMPP += ">";
 
 	if(Player.Color == "")
 	{
