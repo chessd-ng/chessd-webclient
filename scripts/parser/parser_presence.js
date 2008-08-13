@@ -48,18 +48,30 @@ function PARSER_ParsePresence(XML)
 	// Room presence
 	else if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
 	{
-		Buffer += ROOM_HandleRoomPresence(XML);
-		
-		// Presence from general room
-		if(Jid.split("@")[0] == MainData.RoomDefault)
+		// This try is used when user has connection replaced.
+		// When finish connection steps, jabber send a replaced
+		// connection message, but parsers presence has not
+		// already loaded, and a error with undefined function
+		// is show
+		try
 		{
-			Buffer += CONTACT_HandleOnlinePresence(XML);
-			Buffer += CHALLENGE_HandlePresence(XML);
-			Buffer += CHAT_HandlePresence(XML);
+			Buffer += ROOM_HandleRoomPresence(XML);
+			
+			// Presence from general room
+			if(Jid.split("@")[0] == MainData.RoomDefault)
+			{
+				Buffer += CONTACT_HandleOnlinePresence(XML);
+				Buffer += CHALLENGE_HandlePresence(XML);
+				Buffer += CHAT_HandlePresence(XML);
+			}
+			else if(Jid.match(MainData.GameComponent))
+			{
+				Buffer += GAME_HandlePresence(XML);
+			}
 		}
-		else if(Jid.match(MainData.GameComponent))
+		catch(e)
 		{
-			Buffer += GAME_HandlePresence(XML);
+			Buffer = "";
 		}
 
 		return Buffer;
