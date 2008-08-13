@@ -283,7 +283,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 	else
 	{
-		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.User);
+		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') +" "+ Profile.User);
 		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(Profile.User); };
 	}
 
@@ -370,12 +370,20 @@ function INTERFACE_ShowProfileWindow(Profile)
 	
 	// Old games elements
 	OldGamesDiv.appendChild(OldGamesLabel);
-	
+
 	// Main Div elements
 	Div.appendChild(TopDiv);
 	Div.appendChild(WhoDiv);
 	Div.appendChild(RatingDiv);
 	Div.appendChild(BottomDiv);
+
+	// IE Fix
+	if (MainData.Browser == 0)
+	{
+		var Br = UTILS_CreateElement("br");
+		Div.appendChild(Br);
+	}
+
 	Div.appendChild(TimeDiv);
 	Div.appendChild(OldGamesDiv);
 	Div.appendChild(ButtonsDiv);

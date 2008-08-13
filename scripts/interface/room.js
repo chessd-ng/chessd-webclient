@@ -294,9 +294,9 @@ function INTERFACE_ShowRoomList(Rooms)
         // Create elements and insert rooms
         for (i=0; i < Rooms.length; i++)
         {
-                Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+                Room = UTILS_CreateElement("li", Rooms[i].Id, null, Rooms[i].Name);
                 Room.onclick = function () {
-                        ROOM_EnterRoom(this.innerHTML);
+									ROOM_EnterRoom(this.id);
                 }
                 Node.appendChild(Room);
         }
@@ -634,11 +634,18 @@ function INTERFACE_FocusRoom(RoomName)
 		Node.parentNode.onclick = function () {
 			ROOM_FocusRoom(RoomName);
 		}
-	
-		ShortName = UTILS_ShortString(RoomName, 4);
-		Node.innerHTML = ShortName;
-		Node.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-		Node.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+
+		if(RoomName.length > 4)
+		{
+			ShortName = UTILS_ShortString(RoomName, 4);
+			Node.innerHTML = ShortName;
+			Node.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
+			Node.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		}
+		else
+		{
+			Node.innerHTML = RoomName;
+		}
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
 		RoomClose = document.getElementById("CloseRoom");
@@ -659,9 +666,16 @@ function INTERFACE_CreateRoomInBar(RoomName)
 	//Create Room default
 	if(RoomList.childNodes.length == 1)
 	{
-		RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
-		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, UTILS_GetText("room_default")); }
-		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		if (UTILS_GetText("room_default") > 4)
+		{
+			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, UTILS_GetText("room_default")); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		}
+		else
+		{
+			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
+		}
 		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
@@ -676,10 +690,17 @@ function INTERFACE_CreateRoomInBar(RoomName)
 	else if(RoomList.childNodes.length == 2)
 	{
 		// Create a item and set focus to it
-		ShortName = UTILS_ShortString(RoomName, 4);
-		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
-		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		if(RoomName > 4)
+		{
+			ShortName = UTILS_ShortString(RoomName, 4);
+			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		}
+		else
+		{
+			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
+		}
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
@@ -719,7 +740,7 @@ function INTERFACE_ShowRoomFullName(Obj,RoomName)
 
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
-	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
+	Hint.style.top = (Pos.Y+16-ParentNode.scrollTop)+"px";
 	Hint.style.left = Pos.X+"px";
 	Hint.style.width = RoomName.length*6+'px';
 

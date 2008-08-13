@@ -310,39 +310,12 @@ function UTILS_Capitalize(Word)
 */
 function UTILS_BreakString(Obj, Width)
 {
-/*
-	var ShortWord=" ", Part;
-	var NumChs;
-
-	if(NumChars != null)
-	{
-		NumChs = NumChars;
-	}
-	else
-	{
-		NumChs = 5;
-	}
-
-	if (Word.length < NumChs)
-		ShortWord = Word;
-	else {
-		while (Word.length > NumChs)
-		{
-			Part = Word.slice(0,NumChs);
-			Word = Word.slice(NumChs);
-			ShortWord = ShortWord + " " + Part;
-		}
-		ShortWord = ShortWord + " " + Word;
-	}
-	return ShortWord;
-*/
 	var text = Obj.innerHTML;
 	var i;
 	var old;
 	var broke = 0;
-//	alert ("Inicial: "+Obj.clientWidth+ " :"+ Obj.innerHTML);
-	if (Obj.clientWidth > Width) {
 
+	if (Obj.clientWidth > Width) {
 		Obj.innerHMTL = "";
 
 		for (i=0; i<=text.length; i++)

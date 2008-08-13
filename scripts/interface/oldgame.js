@@ -209,11 +209,13 @@ function INTERFACE_ShowOldGameWindow(Id)
 	FromLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
 	FromInput.size = "11";
+	FromInput.maxLength = "10";
 	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 
 	ToLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
 	ToInput.size = "11";
+	ToInput.maxLength = "10";
 	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 
 	Br2 = UTILS_CreateElement("br");
@@ -615,8 +617,8 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.removeChild(this.TBody.childNodes[0]);
 	}
 
-	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0].clientWidth;
-	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1].clientWidth;
+	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0].offsetWidth;
+	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1].offsetWidth;
 
 	// Append new results
 	for(i=0; i<GameLen ; i++)
