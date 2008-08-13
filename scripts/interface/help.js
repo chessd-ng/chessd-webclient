@@ -55,7 +55,7 @@ function INTERFACE_HelpWindow()
 	PlayList = UTILS_CreateElement("ul", "PlayList");
 
 	// 1 - How Item
-	L1 = UTILS_CreateElement("li","How.1T","unselected",UTILS_GetText("help_t_1"));
+	L1 = UTILS_CreateElement("li","How.1T","selected",UTILS_GetText("help_t_1"));
 	INTERFACE_HelpDisplay(L1, "How.1");
 	C1 = UTILS_CreateElement("li","How.1C","show_help");
 
