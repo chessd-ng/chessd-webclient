@@ -7,6 +7,8 @@
 	<utils>
 		<not_implemented_title>Não implementada</not_implemented_title>
 		<not_implemented>Funcionalidade ainda não implementada para esta versão.</not_implemented>
+		<server_offline_title>Servidor offline</server_offline_title>
+		<server_offline>O servidor foi desligado</server_offline>
 	</utils>
 	<window>
 		<window_yes>Sim</window_yes>

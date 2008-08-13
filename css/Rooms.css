@@ -177,6 +177,10 @@
 	color			: #216778;
 }
 
+#Main #Left #Rooms .Room .MessageList li strong{
+	font-size		: 10px;
+}
+
 /* input box */
 #Main #Left #Rooms .Room input {
 	border			: 1px solid #216778;
