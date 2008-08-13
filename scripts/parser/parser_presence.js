@@ -41,7 +41,7 @@ function PARSER_ParsePresence(XML)
 		Type = XML.getAttribute('type');
 		if (Type == "unavailable") {
 			//TODO || Put text in lang/pt_BR
-			WINDOW_Alert("Servidor offline","O servidor foi desligado");
+			WINDOW_Alert(UTILS_GetText("server_offline_title"),UTILS_GetText("server_offline"));
 		}
 		return Buffer;
 	}
