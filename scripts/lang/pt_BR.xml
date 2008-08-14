@@ -164,7 +164,7 @@
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
-		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_announce_title>Desafios anunciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 		<challenge_menu_no_match>Não há desafios feitos.</challenge_menu_no_match>
