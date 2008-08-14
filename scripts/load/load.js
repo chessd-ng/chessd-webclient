@@ -165,14 +165,14 @@ function LOAD_AppendFiles(Files, NumFiles)
 		{
 			case "scripts":
 				File = UTILS_CreateElement("script");
-				File.src = Files[0]+"?"+NoCacheTimeStamp;
+				File.src = Files[0]+"?"+NoCache.TimeStamp;
 				File.type = "text/javascript";
 				Head.appendChild(File);
 				break;
 
 			case "css":
 				File = UTILS_CreateElement("link");
-				File.href = Files[0]+"?"+NoCacheTimeStamp;
+				File.href = Files[0]+"?"+NoCache.TimeStamp;
 				File.type = "text/css";
 				File.rel = "stylesheet";
 				Head.appendChild(File);
@@ -184,7 +184,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 
 			case "images":
 				File = UTILS_CreateElement("img");
-				File.src = Files[0]+"?"+NoCacheTimeStamp;
+				File.src = Files[0];
 				break;
 		}
 	
@@ -264,7 +264,7 @@ function LOAD_ReloadFiles()
 	}
 
 	File = UTILS_CreateElement("script");
-	File.src = "initial_files.js?"+NoCacheTimeStamp;
+	File.src = "initial_files.js?"+NoCache.TimeStamp;
 	File.type = "text/javascript";
 	Head.appendChild(File);
 }
@@ -275,7 +275,7 @@ function LOAD_IECssFile()
 	var File;
 
 	File = UTILS_CreateElement("link");
-	File.href = "css/LoadIE.css?"+NoCacheTimeStamp;
+	File.href = "css/LoadIE.css?"+NoCache.TimeStamp;
 	File.type = "text/css";
 	File.rel = "stylesheet";
 	Head.appendChild(File);

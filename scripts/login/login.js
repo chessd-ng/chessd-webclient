@@ -79,7 +79,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
-	var DateTime = new Date();
+	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
 
@@ -103,13 +103,13 @@ function LOGIN_Logout()
 	//INTERFACE_StartLogin(Lang);
 	
 	// Get new timestamp
-	NoCacheTimeStamp = "";
-	NoCacheTimeStamp += DateTime.getMonth();
-	NoCacheTimeStamp += "/"+DateTime.getDate();
-	NoCacheTimeStamp += "/"+DateTime.getFullYear();
-	NoCacheTimeStamp += "-"+DateTime.getHours();
-	NoCacheTimeStamp += ":"+DateTime.getMinutes();
-	NoCacheTimeStamp += ":"+DateTime.getSeconds();
+	NoCache.TimeStamp = "";
+	NoCache.TimeStamp += NoCache.DateTime.getMonth();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
+	NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
 
 	// Reload Scripts
 	LOAD_ReloadFiles();

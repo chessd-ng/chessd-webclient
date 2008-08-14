@@ -18,17 +18,17 @@
 * Append initial files
 */
 
-Head = document.getElementsByTagName("head")[0];
-	
-DateTime = new Date();
+// Create NoCache object
+var NoCache = new Object();
 
-NoCacheTimeStamp = "";
-NoCacheTimeStamp += DateTime.getMonth();
-NoCacheTimeStamp += "/"+DateTime.getDate();
-NoCacheTimeStamp += "/"+DateTime.getFullYear();
-NoCacheTimeStamp += "-"+DateTime.getHours();
-NoCacheTimeStamp += ":"+DateTime.getMinutes();
-NoCacheTimeStamp += ":"+DateTime.getSeconds();
+NoCache.DateTime = new Date();
+NoCache.TimeStamp = "";
+NoCache.TimeStamp += NoCache.DateTime.getMonth();
+NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
+NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
+NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
+NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
+NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
 
 /* 
  * @brief	Create script or link element and append file in head element
@@ -41,19 +41,20 @@ NoCacheTimeStamp += ":"+DateTime.getSeconds();
 function INITIAL_AppendFiles(FileType,Addr)
 {
 	var File;
+	var Head = document.getElementsByTagName("head")[0];
 
 	switch(FileType)
 	{
 		case "scripts":
 			File = document.createElement("script");
-			File.src = Addr+"?"+NoCacheTimeStamp;
+			File.src = Addr+"?"+NoCache.TimeStamp;
 			File.type = "text/javascript";
 			Head.appendChild(File);
 			break;
 
 		case "css":
 			File = document.createElement("link");
-			File.href = Addr+"?"+NoCacheTimeStamp;
+			File.href = Addr+"?"+NoCache.TimeStamp;
 			File.type = "text/css";
 			File.rel = "stylesheet";
 			Head.appendChild(File);
@@ -88,7 +89,3 @@ INITIAL_AppendFiles("scripts","scripts/parser/parser.js");
 INITIAL_AppendFiles("scripts","scripts/interface/login.js");
 INITIAL_AppendFiles("scripts","scripts/interface/load.js");
 INITIAL_AppendFiles("scripts","scripts/start.js");
-
-// Delete global variables
-delete Head;
-delete DateTime;
