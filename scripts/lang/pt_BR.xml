@@ -177,8 +177,9 @@
 	</challenge>
 	<announce>
 		<announce_title>Anunciar partida</announce_title>
-		<announce_rating_interval>Intervalo de rating:</announce_rating_interval>
-		<announce_rating_example>Exemplo:0000</announce_rating_example>
+		<announce_rating_interval>Limite de rating:</announce_rating_interval>
+		<announce_min_rating_example>Ex:1000</announce_min_rating_example>
+		<announce_max_rating_example>Ex:2300</announce_max_rating_example>
 		<announce_pieces>Peças:</announce_pieces>
 		<announce_error_title>Erro ao anunciar partida</announce_error_title>
 		<announce_invalid_min_rating>Valor de rating mínimo incorreto. Ex: 0000</announce_invalid_min_rating>

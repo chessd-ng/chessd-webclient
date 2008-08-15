@@ -69,7 +69,7 @@ function INTERFACE_CreateChallengeMenu()
 	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
 
 	AnnounceButton.onclick = function(){
-		WINDOW_AnnounceWindow(MainData.Username, MainData.GetUserRatingInRoom(MainData.RoomDefault,MainData.Username), "blitz");
+		WINDOW_AnnounceWindow();
 	}
 
 	MatchOfferList.appendChild(MatchOfferTitle);

@@ -280,3 +280,7 @@
 #SubWindowBox{
 	overflow		: hidden;
 }
+
+#AnnounceDiv #Layer2Div {
+	padding-top : 15px;
+}

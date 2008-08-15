@@ -1,16 +1,16 @@
 /**
 * Announce Window
-*/
+/
 #AnnounceDiv #Layer1Div,
 #AnnounceDiv #Layer2Div,
-#AnnounceDiv #PieceDiv, 
-#AnnounceDiv #CategoryDiv, 
-#AnnounceDiv #IntervalDiv {
+#AnnounceDiv #Layer3Div {
 	padding			: 0px 0px 0px 31px;
 }
 
-#AnnounceDiv #Layer1Div:after {
-/*#AnnounceDiv #Layer2Div:after {*/
+#AnnounceDiv #Layer1Div:after,
+#AnnounceDiv #Layer2Div:after,
+#AnnounceDiv #Layer3Div:after {
+/*#AnnounceDiv #Layer2Div:after {/
 	content:".";
 	display:block;
 	clear:both;
@@ -19,29 +19,34 @@
 	overflow:hidden;
 }
 
-#AnnounceDiv #PieceDiv,
-#AnnounceDiv #CategoryDiv,
-#AnnounceDiv #IntervalDiv, 
 #AnnounceDiv #Layer1Div,
-#AnnounceDiv #Layer2Div {
-	padding-top		:	20px;
+#AnnounceDiv #Layer2Div,
+#AnnounceDiv #Layer3Div {
 }
 
-#AnnounceDiv #IntervalDiv #FromDiv {
+#AnnounceDiv #Layer1Div {
+	margin-bottom : 0px;
+}
+
+#AnnounceDiv #Layer1Div #L1RightDiv {
+	float : left;
+}
+
+#AnnounceDiv #L2RightDiv #FromDiv {
 	float : left;
 	width :	140px;
 }
 
-#AnnounceDiv #IntervalDiv #ToDiv,
-#AnnounceDiv #IntervalDiv #FromDiv {
+#AnnounceDiv #L3RightDiv #ToDiv,
+#AnnounceDiv #L3RightDiv #FromDiv {
 	padding-top : 5px
 }
 
-#AnnounceDiv #IntervalDiv span.bold {
+#AnnounceDiv #L3RightDiv span.bold {
 	font-weight : bold;
 } 
 
-#AnnounceDiv #IntervalDiv input {
+#AnnounceDiv #L3RightDiv input {
 	margin-left : 5px;
 }
 
@@ -58,6 +63,11 @@
 #AnnounceDiv .leftDiv {
 	float			: left;
 	width			: 140px;
+}
+
+#AnnounceDiv #L3RightDiv .leftDiv {
+	float			: left;
+	width			: 75px;
 }
 
 #AnnounceDiv p {
@@ -120,4 +130,129 @@
 	font-size		: 10px;
 	color			: #216778;
 }
+*/
+#AnnounceDiv #Layer1Div,
+#AnnounceDiv #Layer2Div,
+#AnnounceDiv #Layer3Div {
+	padding			: 0px 0px 0px 25px;
+}
 
+#AnnounceDiv #Layer1Div {
+	padding-top : 25px;
+}
+
+#AnnounceDiv #Layer1Div:after,
+#AnnounceDiv #Layer2Div:after,
+#AnnounceDiv #Layer3Div:after {
+	content:".";
+	display:block;
+	clear:both;
+	visibility:hidden;
+	height:0;
+	overflow:hidden;
+}
+
+#AnnounceDiv #L1RightDiv {
+	width : 110px;
+}
+
+#AnnounceDiv #Layer1Div {
+	margin-bottom	:	0px;
+}
+
+#AnnounceDiv #Layer1Div #L1RightDiv {
+	float : left;
+}
+
+#AnnounceDiv #Layer3Div {
+	display : block;
+}
+
+#AnnounceDiv .cx {
+	font-size	:	10px;
+	margin-right	:	3mm;
+	font-weight		: bold;
+}
+
+#AnnounceDiv h3 {
+	font-weight		: bold;
+	font-size		: 4mm;
+	color			: #216778;
+	text-align		: center;
+	padding-top		: 8px;
+}
+
+#AnnounceDiv .leftDiv {
+	float			: left;
+	width			: 150px;
+	margin-left	:	5px;
+}
+
+#AnnounceDiv p {
+	margin-top		: 0mm;
+	font-weight		: bold;
+	font-size		: 10px;
+	color			: #216778;
+}
+
+#AnnounceDiv img {
+	margin-right	: 7mm;
+	margin-left		: 2mm;
+}
+
+#AnnounceDiv .drop_select {
+	margin-top		: 1mm;
+	margin-right	: 2mm;
+}
+
+#AnnounceDiv .rating_radio {
+	margin-top		: 3mm;
+	margin-right	: 1.5mm;
+}
+
+#AnnounceDiv .italic {
+	font-style		: italic;
+}
+
+#AnnounceDiv #ButtonsDiv {
+	text-align		: center;
+	padding-top		: 12px;
+	margin-bottom	: 4px;
+}
+
+#AnnounceDiv .color {
+	padding-top	:	1mm;
+}
+
+#AnnounceDiv .radio {
+	margin-top	:	2mm;
+}
+
+#AnnounceDiv input,
+#AnnounceDiv textarea,
+#AnnounceDiv select {
+	font-size		: 11px;
+	border			: 1px solid #216778;
+	color			: #216778;
+}
+
+#AnnounceDiv span {
+	font-size		: 10px;
+	color			: #216778;
+}
+
+#AnnounceDiv #L3RightDiv .leftDiv {
+	float			: left;
+	width			: 70px;
+	margin-left	:	0px;
+}
+
+#AnnounceDiv #FromDiv,
+#AnnounceDiv #ToDiv {
+	padding-top : 5px;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input,
+#AnnounceDiv #L3RightDiv #ToDiv input {
+	margin-left	:	2px;
+}
