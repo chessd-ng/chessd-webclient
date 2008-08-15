@@ -49,10 +49,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	var ChalRightDiv;
 
 	var Layer3Div;
+	var Layer3IDiv;
 	var RatingCheckbox, RatingLabel;
 	var PrivateCheckbox, PrivateLabel;
 	var AutoFlagCheckbox, AutoFlagLabel;
-	var Br3;
+	var Br3, Br4;
 
 	var ButtonsDiv;
 	var Invite, Accept, Decline, NewParameters, Cancel, Chat;
@@ -90,7 +91,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	try
 	//Fix radio button for IE
 	{
-		ColorOptW = document.createElement('<input class="radio" type="radio" name="color"/>');
+		ColorOptW = document.createElement('<input class="radio" type="radio" name="color" />');
 	}
 	catch(err)
 	{ //FF
@@ -108,7 +109,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color'/>")
+		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />")
 	}
 	catch(err)
 	{ //FF
@@ -125,7 +126,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color'/>")
+		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />")
 	}
 	catch(err)
 	{ //FF
@@ -409,12 +410,20 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	
 	// Layer 3
 	Layer3Div = UTILS_CreateElement('div','Layer3Div');
+	Layer3IDiv = UTILS_CreateElement('div','Layer3IDiv','leftDiv');
 
 	// Private
-	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
-	PrivateCheckbox.type = "checkbox";
-	PrivateCheckbox.name = "private";
-	PrivateCheckbox.disabled = true;
+	try
+	{
+		PrivateCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='private' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
+		PrivateCheckbox.type = "checkbox";
+		PrivateCheckbox.name = "private";
+		PrivateCheckbox.disabled = true;
+	}
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
 	// Rating
@@ -424,7 +433,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		{
 			try
 			{
-				RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>");
+				RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />");
 			}
 			catch(err)
 			{
@@ -438,7 +447,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		{
 			try
 			{
-				RatingCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='rating'/>");
+				RatingCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='rating' />");
 			}
 			catch(err)
 			{
@@ -453,7 +462,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	{
 		try
 		{
-			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
+			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />")
 		}
 		catch(err)
 		{
@@ -473,6 +482,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	AutoFlagLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_auto_flag'));
 
 	Br3 = UTILS_CreateElement('br');
+	Br4 = UTILS_CreateElement('br');
 	//*End Layer 3 Elements*
 
 	// Bottom Elements
@@ -610,11 +620,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	Layer2Div.appendChild(L2RightDiv);
 
 	// Layer3
-	Layer3Div.appendChild(RatingCheckbox);
-	Layer3Div.appendChild(RatingLabel);
+	Layer3IDiv.appendChild(RatingCheckbox);
+	Layer3IDiv.appendChild(RatingLabel);
+	Layer3IDiv.appendChild(Br4);
+	Layer3IDiv.appendChild(PrivateCheckbox);
+	Layer3IDiv.appendChild(PrivateLabel);
 
-	Layer3Div.appendChild(PrivateCheckbox);
-	Layer3Div.appendChild(PrivateLabel);
+	Layer3Div.appendChild(Layer3IDiv);
 
 	// Disabled
 //	Layer3Div.appendChild(AutoFlagCheckbox);
