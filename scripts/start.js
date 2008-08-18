@@ -100,7 +100,6 @@ function START_Webclient()
 
 	XMPP += MESSAGE_UserList();
 	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);
-	XMPP += MESSAGE_UserListInfo();
 	XMPP += MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
 	XMPP += MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username);

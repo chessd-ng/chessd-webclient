@@ -101,7 +101,12 @@ function CONTACT_SetUserType(Username, NewType)
 			MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
 			MainData.Contact.updateUser(Username,Status, null, NewType);
 		}
-
+		// Offline user
+		else
+		{
+			Status = "offline";
+			MainData.Contact.updateUser(Username,Status, null, NewType);
+		}
 	}
 	return true;
 }
@@ -136,6 +141,12 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 
 				// Update type in contact online and contact list
 				MainData.ContactOnline.userList.updateUser(Username,Status, Rating, Type);
+				MainData.Contact.updateUser(Username,Status, Rating, Type);
+			}
+			// Offline user
+			else
+			{
+				Status = "offline";
 				MainData.Contact.updateUser(Username,Status, Rating, Type);
 			}
 		}
