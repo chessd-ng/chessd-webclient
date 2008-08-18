@@ -305,7 +305,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// Mount Tree of Elements
 	
 	// Select Div
-	SelectDiv.appendChild(Select);
+//	SelectDiv.appendChild(Select);
 
 	// Layer 1 Left Div
 	L1LeftDiv.appendChild(Player1Label);
@@ -349,7 +349,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Layer2Div.appendChild(L2RightDiv);
 
 	// Form Div
-	FormDiv.appendChild(SelectDiv);
+//	FormDiv.appendChild(SelectDiv);
 	FormDiv.appendChild(Layer1Div);
 	FormDiv.appendChild(Layer2Div);
 
@@ -629,6 +629,8 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		UTILS_BreakString(this.TBody.rows[i].childNodes[0],getWidth1);
 		// Break string if its break table result layout - Black Player
 		UTILS_BreakString(this.TBody.rows[i].childNodes[1],getWidth2);
+
+		this.TBody.rows[i].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
 	}
 	this.Page.innerHTML = Start+" - "+End;
 	// Set buttons class

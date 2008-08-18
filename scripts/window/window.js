@@ -372,6 +372,7 @@ function WINDOW_OldGame(Id)
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(520, Div.Div, Div.Buttons, UTILS_GetText('oldgame_title'),35);
 	var Elements = Div.Elements;
+	Elements.WindowObj = WindowObj;
 
 	// Focus input player 1 - TODO expand this if more than one old game search window could be opened
 	document.getElementById('OldGameInput1').focus();
