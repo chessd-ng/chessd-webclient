@@ -93,34 +93,7 @@ function LOGIN_Logout()
 		MainData.CurrentGame.Game.StopTimer();
 	}
 
-	INTERFACE_StopInterface();
-
-	CONTACT_StopAwayStatus();
-
-	delete MainData;
-
-	// Show Login interface
-	//INTERFACE_StartLogin(Lang);
-	
-	// Get new timestamp
-	NoCache.TimeStamp = "";
-	NoCache.TimeStamp += NoCache.DateTime.getMonth();
-	NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
-	NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
-	NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
-	NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
-	NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
-
-	// Reload Scripts
-	LOAD_ReloadFiles();
-
-	START_StartPage();
-
-	// Verify browser and if IE then append related css file
-	if(MainData.Browser == 0)
-	{
-		LOAD_IECssFile();
-	}
+	START_Restart();
 }
 
 

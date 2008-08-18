@@ -125,3 +125,37 @@ function START_Webclient()
 	// Set away counter
 	CONTACT_StartAwayCounter();
 }
+/*
+*	@brief Stop interface and reload files
+*
+*	@author Danilo Yorinori
+*/
+function START_Restart()
+{
+	
+	INTERFACE_StopInterface();
+
+	CONTACT_StopAwayStatus();
+
+	delete MainData;
+
+	// Get new timestamp
+	NoCache.TimeStamp = "";
+	NoCache.TimeStamp += NoCache.DateTime.getMonth();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
+	NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
+
+	// Reload Scripts
+	LOAD_ReloadFiles();
+
+	START_StartPage();
+
+	// Verify browser and if IE then append related css file
+	if(MainData.Browser == 0)
+	{
+		LOAD_IECssFile();
+	}
+}

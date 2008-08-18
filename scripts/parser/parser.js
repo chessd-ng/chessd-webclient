@@ -44,6 +44,8 @@ function PARSER_ParseXml(XML)
 			MainData.ConnectionStatus = -1;
 			LOGIN_Disconnected();
 			alert(UTILS_GetText("error_disconnected"));
+
+			START_Restart();
 		}
 	}
 
