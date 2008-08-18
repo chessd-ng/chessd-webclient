@@ -262,7 +262,6 @@
 
 #CreateRoomDiv #OptionsDiv #CounterDiv {
 	margin-top : 3px;
-	text-align : right;
 }
 
 #CreateRoomDiv .counter_input {

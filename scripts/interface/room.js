@@ -867,7 +867,8 @@ function INTERFACE_ShowCreateRoomWindow()
 	CounterInput.value = 30;
 	CounterInput.setAttribute("size",2);
 	CounterInput.readOnly = true;
-	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character").replace(/%s/,"30"));
+	CounterLabel.innerHTML.replace(/%s/,"aaa");
 
 	Input.type = "text";
 	Input.setAttribute("size",22);
@@ -907,6 +908,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	Input.onkeyup = function() {
 		CounterInput.value = 30 - Input.value.length;
+		CounterLabel.innerHTML = UTILS_GetText("window_character").replace(/%s/,30 - Input.value.length);
 	}
 	
 	// TODO - not implemented
@@ -961,7 +963,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Mount elements tree
 	
 	// Counter Div
-	CounterDiv.appendChild(CounterInput);
+//	CounterDiv.appendChild(CounterInput);
 	CounterDiv.appendChild(CounterLabel);
 
 	// Options Div

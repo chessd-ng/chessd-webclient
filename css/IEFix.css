@@ -284,3 +284,7 @@
 #AnnounceDiv #Layer2Div {
 	padding-top : 15px;
 }
+
+#ProfileDiv #WhoDiv #CounterDiv {
+	padding-left	: 20px; 
+}

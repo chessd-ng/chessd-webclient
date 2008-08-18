@@ -20,7 +20,7 @@
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
 		<window_search>Buscar</window_search>
-		<window_character>caractere(s)</window_character>
+		<window_character>Caractere(s): %s</window_character>
 	</window>
 	<login>
 		<login_title>Seja bem-vindo ao Xadrez Livre! O servidor mais moderno para jogos de xadrez online totalmente de graça!</login_title>
