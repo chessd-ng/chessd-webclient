@@ -239,7 +239,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	{
 		PName = UTILS_CreateElement("p","name", null, Player.Name);
 	}
-	PTime = UTILS_CreateElement("p","time", null, Time);
+	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc);
 
 	/*// This feature is not implemented yet
