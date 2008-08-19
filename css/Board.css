@@ -425,6 +425,14 @@
 	cursor			: pointer;
 }
 
+#GameOptionDiv .press {
+	background-color: #DAF3F5;
+}
+
+#GameOptionDiv .release {
+	background-color: #FFF;
+}
+
 #GameOptionDiv li.promotion
 {
 	width			: 44mm;
