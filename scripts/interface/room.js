@@ -639,8 +639,8 @@ function INTERFACE_FocusRoom(RoomName)
 		{
 			ShortName = UTILS_ShortString(RoomName, 4);
 			Node.innerHTML = ShortName;
-			Node.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-			Node.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+			Node.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
+			Node.onmouseout = function() { INTERFACE_CloseFullName(); }
 		}
 		else
 		{
@@ -669,8 +669,8 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		if (UTILS_GetText("room_default") > 4)
 		{
 			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
-			RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, UTILS_GetText("room_default")); }
-			RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, UTILS_GetText("room_default")); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
 		}
 		else
 		{
@@ -694,8 +694,8 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		{
 			ShortName = UTILS_ShortString(RoomName, 4);
 			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
-			RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-			RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
 		}
 		else
 		{
@@ -717,41 +717,6 @@ function INTERFACE_CreateRoomInBar(RoomName)
 
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[1]);
 	}
-}
-
-/**
- * @author	Danilo
- *
- */
-function INTERFACE_ShowRoomFullName(Obj,RoomName)
-{
-	var Hint, Name, ParentNode, Pos, i;
-//	var Offset = 9;
-
-	Hint = UTILS_CreateElement("div", "RoomFullNameDiv");
-
-	Name = UTILS_CreateElement("p", null, null, RoomName);
-
-	Hint.appendChild(Name);
-	
-	// Get parent scrolling
-	
-	ParentNode = UTILS_GetParentDiv(Obj);
-
-	// Get position of user list item
-	Pos = UTILS_GetOffset(Obj);
-	Hint.style.top = (Pos.Y+16-ParentNode.scrollTop)+"px";
-	Hint.style.left = Pos.X+"px";
-	Hint.style.width = RoomName.length*6+'px';
-
-	document.body.appendChild(Hint);
-}
-
-function INTERFACE_CloseRoomFullName()
-{
-	var Hint = document.getElementById("RoomFullNameDiv");
-	if (Hint)
-		document.body.removeChild(Hint);
 }
 
 /**

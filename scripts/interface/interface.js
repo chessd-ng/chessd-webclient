@@ -111,3 +111,49 @@ function INTERFACE_ReEnableSelect()
 {
 	return true;
 }
+
+/**
+ *	@brief Create a hint to show full name
+ * 
+ *	@param	Obj
+ *		Obj that have name shorted
+ *	@param FullName
+ *		String to be displayed
+ *	@return void
+ *	@author	Danilo
+ */
+function INTERFACE_ShowFullName(Obj,FullName)
+{
+	var Hint, Name, ParentNode, Pos, i;
+
+	Hint = UTILS_CreateElement("div", "FullNameDiv");
+
+	Name = UTILS_CreateElement("p", null, null, FullName);
+
+	Hint.appendChild(Name);
+	
+	// Get parent scrolling
+	
+	ParentNode = UTILS_GetParentDiv(Obj);
+
+	// Get position of user list item
+	Pos = UTILS_GetOffset(Obj);
+	Hint.style.top = (Pos.Y+16-ParentNode.scrollTop)+"px";
+	Hint.style.left = Pos.X+"px";
+	Hint.style.width = FullName.length*6+'px';
+
+	document.body.appendChild(Hint);
+}
+
+/**
+ *	@brief Close a hint created by INTERFACE_ShowFullName function
+ * 
+ *	@return void
+ *	@author	Danilo
+ */
+function INTERFACE_CloseFullName()
+{
+	var Hint = document.getElementById("FullNameDiv");
+	if (Hint)
+		document.body.removeChild(Hint);
+}
