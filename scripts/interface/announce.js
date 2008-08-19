@@ -15,12 +15,9 @@
 */
 
 /**
-* Create elements to challenge invite or challenge offer
+* Create elements to announce a match 
 *
-* @param Username					Username's nickname 
-* @param Rating						Username's current rating
 * @return									Div; Array
-* @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_AnnounceWindow()
@@ -41,8 +38,6 @@ function INTERFACE_AnnounceWindow()
 	var IncLabel, IncSelect, IncOpt, IncLabelSeg,IncBr;
 	var Br2;
 
-	var ChalRightDiv;
-
 	var Layer3Div;
 	var L3RightDiv, L3LeftDiv;
 	var RatingCheckbox, RatingLabel;
@@ -55,6 +50,7 @@ function INTERFACE_AnnounceWindow()
 
 	var ButtonsDiv;
 	var Cancel, Announce;
+	
 	var Buttons = new Array();
 
 	var Type, Color;
@@ -64,7 +60,6 @@ function INTERFACE_AnnounceWindow()
 	Div = UTILS_CreateElement('div', 'AnnounceDiv');
 	
 	// Layer1 Elements
-
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
 
 	// Layer 1 Left Elements
@@ -75,7 +70,7 @@ function INTERFACE_AnnounceWindow()
 	try
 	//Fix radio button for IE
 	{
-		ColorOptW = document.createElement('<input class="radio" type="radio" name="color" />');
+		ColorOptW = document.createElement('<input class="radio" type="radio" name="color" value="colorW"  />');
 	}
 	catch(err)
 	{ //FF
@@ -87,13 +82,13 @@ function INTERFACE_AnnounceWindow()
 	
 
 	ColorOptWImg = UTILS_CreateElement('img',null,'color');
-	ColorOptWImg.src = "images/invite_white_pawn.png"
+	ColorOptWImg.src = "images/invite_white_pawn.png";
 	BrW = UTILS_CreateElement('br');
 
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />")
+		ColorOptB = document.createElement('<input class="radio" type="radio" name="color" value="colorB" />');
 	}
 	catch(err)
 	{ //FF
@@ -104,13 +99,13 @@ function INTERFACE_AnnounceWindow()
 	}
 
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
-	ColorOptBImg.src = "images/invite_black_pawn.png"
+	ColorOptBImg.src = "images/invite_black_pawn.png";
 	BrB = UTILS_CreateElement('br');
 	
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />")
+		AutoColorOpt = document.createElement('<input class="radio" type="radio" name="color" value="auto" />');
 	}
 	catch(err)
 	{ //FF
@@ -121,7 +116,7 @@ function INTERFACE_AnnounceWindow()
 	}
 
 	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
-	RandomColorOptImg.src = "images/random.png"
+	RandomColorOptImg.src = "images/random.png";
 	BrR = UTILS_CreateElement('br');
 	
 	// Firefox fix
@@ -168,7 +163,6 @@ function INTERFACE_AnnounceWindow()
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"lightning");
 		}
 
 		// Blitz = 1
@@ -181,7 +175,6 @@ function INTERFACE_AnnounceWindow()
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault, Oponent, "blitz");
 		}
 
 		// Standard = 2
@@ -208,12 +201,7 @@ function INTERFACE_AnnounceWindow()
 			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
-			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
 		}
-	
-		Username.removeChild(Username.childNodes[1]);
-		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
-		Username.appendChild(RatingLabel);
 	}
 
 	//* End Layer1 Right Elements*
@@ -292,7 +280,7 @@ function INTERFACE_AnnounceWindow()
 		RatingCheckbox = UTILS_CreateElement('input',null,'rating_radio');
 		RatingCheckbox.type = "checkbox";
 		RatingCheckbox.name = "rating";
-			RatingCheckbox.checked = true;
+		RatingCheckbox.checked = true;
 	}
 	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
 
