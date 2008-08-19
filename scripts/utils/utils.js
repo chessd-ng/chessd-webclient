@@ -740,12 +740,12 @@ function UTILS_ConvertTime(Seconds)
 	var TimeFormat = "";
 
 	Sec = Seconds % 60;
-	Min = Math.round((Seconds / 60) % 60);
-	Hour  = Math.round((Seconds / 3600) % 24);
+	Min = Math.floor(Seconds / 60) % 60;
+	Hour  = Math.floor(Seconds / 3600) % 24;
 
-	Day = Math.round((Seconds / (3600*24)) % 30);
-	Month = Math.round((Seconds / (3600*24*30)) % 12);
-	Year = Math.round(Seconds / (3600*24*30*12));
+	Day = Math.floor(Seconds / (3600*24)) % 30;
+	Month = Math.floor(Seconds / (3600*24*30)) % 12;
+	Year = Math.floor(Seconds / (3600*24*30*12));
 
 	// Concat Years
 	if(Year != 0)
