@@ -181,8 +181,11 @@ function ANNOUNCE_GetAnnounceGames()
 	var MinTime = "";
 	var MaxTime = "";
 	var Category = "";
+	var User = true;
 
-	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category);
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
+	User = false;
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
 
 	CONNECTION_SendJabber(XMPP);
 }

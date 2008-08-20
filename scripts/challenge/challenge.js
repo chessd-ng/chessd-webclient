@@ -600,7 +600,7 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	CHALLENGE_GetAdjournGames();
 	ANNOUNCE_GetAnnounceGames();
 	*/
-	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","",""));
+	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
 
 	return "";
 }

@@ -1027,7 +1027,7 @@ function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 	return XMPP;
 }
 
-function MESSAGE_GetAnnounceMatch(Username, Offset, NumResult, MinTime, MaxTime, Category)
+function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User)
 {
 	var XMPP = "";
 
@@ -1050,7 +1050,14 @@ function MESSAGE_GetAnnounceMatch(Username, Offset, NumResult, MinTime, MaxTime,
 		XMPP += "category='"+Category+"' ";
 	}
 
-	XMPP += "player='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'/>";
+	if (User == true)
+	{
+		XMPP += "player='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' />";
+	}
+	else
+	{
+		XMPP += "/>";
+	}
 	XMPP += "</search></iq>";
 
 	return XMPP;
