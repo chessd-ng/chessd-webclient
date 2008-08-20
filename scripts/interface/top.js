@@ -85,7 +85,7 @@ function INTERFACE_CreateTop()
 
 	// Exit
 	ItemTitle = UTILS_GetText("menu_exit");
-	Item = UTILS_CreateElement("li", null, "exit");
+	Item = UTILS_CreateElement("li", "ExitButton", "exit");
 	ExitText = UTILS_CreateElement("span","ExitText", null, ItemTitle);
 	Item.onclick = function () { 
 		LOGIN_Logout();

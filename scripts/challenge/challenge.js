@@ -589,6 +589,10 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 
 	UTILS_AddListener(document, "click",Func,false);
 
+	// TODO - Quick fix - but this will be removed
+	var Exit = document.getElementById("ExitButton");
+	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
+
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
 
 	// Get adjourn games list
