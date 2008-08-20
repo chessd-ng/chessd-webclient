@@ -101,7 +101,6 @@ function LOAD_LoadFiles()
 
 	// Scripts Files to be loaded
 	Files.push("scripts/parser/parser_iq.js");
-	Files.push("scripts/parser/parser_presence.js");
 	Files.push("scripts/parser/parser_chat.js");
 	Files.push("scripts/admin/admin.js");
 	Files.push("scripts/contact/contact.js");

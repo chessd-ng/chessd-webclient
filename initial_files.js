@@ -86,6 +86,7 @@ INITIAL_AppendFiles("scripts","scripts/load/load.js");
 INITIAL_AppendFiles("scripts","scripts/connection/connection.js");
 INITIAL_AppendFiles("scripts","scripts/xmpp_messages/message.js");
 INITIAL_AppendFiles("scripts","scripts/parser/parser.js");
+INITIAL_AppendFiles("scripts","scripts/parser/parser_presence.js");
 INITIAL_AppendFiles("scripts","scripts/interface/login.js");
 INITIAL_AppendFiles("scripts","scripts/interface/load.js");
 INITIAL_AppendFiles("scripts","scripts/start.js");
