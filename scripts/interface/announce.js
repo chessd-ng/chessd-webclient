@@ -53,7 +53,7 @@ function INTERFACE_AnnounceWindow()
 	
 	var Buttons = new Array();
 
-	var Type, Color;
+	var Type, Color, Rated;
 	var i; 
 
 	// Main Div
