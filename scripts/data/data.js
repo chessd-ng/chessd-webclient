@@ -424,7 +424,7 @@ function DATA_IsContact(Username)
 * Search user in default room and return user status. 
 *
 * @param		Username User name to search
-* @return 		If the user is not on Default room and Contact List, return null.
+* @return 		If the user is not on Default room and Contact List, return offline
 * 				Else return the user status.
 * @see			DATA_FindRoom, DATA_FindUser DATA_FindUserInRoom
 */
@@ -446,7 +446,7 @@ function DATA_GetStatus(Username)
 			return this.UserList[UserPos].Status;
 		}
 	}
-	return null;
+	return "offline";
 }
 
 /**
