@@ -311,7 +311,7 @@ function UTILS_Capitalize(Word)
 function UTILS_BreakString(Obj, Width)
 {
 	var Text = Obj.innerHTML;
-	var ObjWidth;
+	var ObjWidth, TrWidth;
 	var Broke = false;
 	var Old;
 	var i;
@@ -319,14 +319,14 @@ function UTILS_BreakString(Obj, Width)
 	// IE
 	if (MainData.Browser == 0)
 	{
-		Width = Width.offsetWidth;
+		TrWidth = Width.Offset;
 	}
 	else // Other browsers
 	{
-		Width = Width.clientWidth;
+		TrWidth = Width.Client;
 	}
 
-	if (Obj.clientWidth > Width) {
+	if (Obj.clientWidth > TrWidth) {
 		Obj.innerHMTL = "";
 
 		for (i=0; i<=Text.length; i++)
@@ -342,7 +342,7 @@ function UTILS_BreakString(Obj, Width)
 				Obj.innerHTML = Text.slice(0,i);
 			}
 
-			if (Obj.clientWidth > Width)
+			if (Obj.clientWidth > TrWidth)
 			{
 				Obj.innerHTML = Old +"<br />" + Text.slice(i-1,i); 
 				Broke = true;

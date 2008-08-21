@@ -253,6 +253,8 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	THead = UTILS_CreateElement('thead');
 	Tr = UTILS_CreateElement('tr');
+		TExamine = UTILS_CreateElement('td',null,'header_examine');
+		Tr.appendChild(TExamine);
 		TPlayer1Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_white_hd'));
 		Tr.appendChild(TPlayer1Label);
 		TPlayer2Label = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_black_hd'));
@@ -434,33 +436,38 @@ function INTERFACE_ShowOldGameWindow(Id)
 */
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
-	var Tr, Td;
+	var Tr, Td, Img;
 	
 	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'player1td',White);
+		Td = UTILS_CreateElement('td',null,'examine');
+
+			Img = UTILS_CreateElement("img",null,'examine_icon');
+			Img.src = "images/oldgame_examine.png";
+			Img.title ="Examinar partida";
+			UTILS_AddListener(Img, "click", function()
+					{
+						if(MainData.CurrentGame == null)
+						{
+							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
+						}
+						else
+						{
+							WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
+						}
+					}, false);
+
+		Td.appendChild(Img);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'player2td',Black);
+		Td = UTILS_CreateElement('td',null,null,White);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'datetd',Date);
+		Td = UTILS_CreateElement('td',null,null,Black);
 		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'cattd',GameType);
+		Td = UTILS_CreateElement('td',null,null,Date);
 		Tr.appendChild(Td);
-//		Td = UTILS_CreateElement('td',null,null,Winner);
-//		Tr.appendChild(Td);
+		Td = UTILS_CreateElement('td',null,null,GameType);
+		Tr.appendChild(Td);
 		Td = UTILS_CreateElement('td',null,'resulttd',WinType);
 		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function()
-		{
-			if(MainData.CurrentGame == null)
-			{
-				CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
-			}
-			else
-			{
-				WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
-			}
-
-		}, false);
 	
 	return(Tr);
 }
@@ -607,6 +614,8 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	var Start = SearchInfo.Offset;
 	var End = Start + GameLen; 
 	var ParentDiv = UTILS_GetParentDiv(this.TBody);
+	var P1Width = new Object();
+	var P2Width = new Object();
 
 	// Set the scroll bar to begin of result table
 	ParentDiv.scrollTop = 0;
@@ -617,8 +626,10 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.removeChild(this.TBody.childNodes[0]);
 	}
 
-	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0];
-	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1];
+	P1Width.Offset = this.Table.childNodes[0].rows[0].childNodes[1].offsetWidth;
+	P1Width.Client = this.Table.childNodes[0].rows[0].childNodes[1].clientWidth;
+	P2Width.Offset = this.Table.childNodes[0].rows[0].childNodes[2].offsetWidth;
+	P2Width.Client = this.Table.childNodes[0].rows[0].childNodes[2].clientWidth;
 
 	// Append new results
 	for(i=0; i<GameLen ; i++)
@@ -626,11 +637,11 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].date, GameList[i].gametype,  GameList[i].result, GameList[i].id));
 
 		// Break string if its break table result layout - White Player
-		UTILS_BreakString(this.TBody.rows[i].childNodes[0],getWidth1);
+		UTILS_BreakString(this.TBody.rows[i].childNodes[1],P1Width);
 		// Break string if its break table result layout - Black Player
-		UTILS_BreakString(this.TBody.rows[i].childNodes[1],getWidth2);
+		UTILS_BreakString(this.TBody.rows[i].childNodes[2],P2Width);
 
-		this.TBody.rows[i].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
+		this.TBody.rows[i].childNodes[0].childNodes[0].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
 	}
 	this.Page.innerHTML = Start+" - "+End;
 	// Set buttons class
