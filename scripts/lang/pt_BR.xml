@@ -196,8 +196,8 @@
 		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
 		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
 		<game_abort>Encerrar partida</game_abort>
-		<game_abort_text>%s deseja encerrar a partida, deseja aceitar?</game_abort_text>
-		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
+		<game_abort_text>%s deseja cancelar a partida, deseja aceitar?</game_abort_text>
+		<game_abort_denied>%s recusou sua requisição de cancelamento da partida.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
 		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
 		<game_checkmatew_text>Parabéns! Você ganhou de %s por xeque-mate.</game_checkmatew_text>
