@@ -335,7 +335,14 @@ function INTERFACE_ClearError()
 function INTERFACE_ShowLoginMessage(Msg)
 {
 	var LoginMsg = document.getElementById("LoginMessage");
-	LoginMsg.innerHTML = Msg;
+	if(Msg != null)
+	{
+		LoginMsg.innerHTML = Msg;
+	}
+	else
+	{
+		LoginMsg.innerHTML = "";
+	}
 	LoginMsg.style.display = "block";
 }
 

@@ -64,9 +64,6 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 
 	// Clear error message
 	INTERFACE_ClearError();
-
-	// Show login message
-	INTERFACE_ShowLoginMessage();
 }
 
 
