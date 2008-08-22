@@ -20,7 +20,7 @@
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
 		<window_search>Buscar</window_search>
-		<window_character>caractere(s)</window_character>
+		<window_character>Caractere(s): %s</window_character>
 	</window>
 	<login>
 		<login_title>Seja bem-vindo ao Xadrez Livre! O servidor mais moderno para jogos de xadrez online totalmente de graça!</login_title>
@@ -165,7 +165,7 @@
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
-		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_announce_title>Desafios anunciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 		<challenge_menu_no_match>Não há desafios feitos.</challenge_menu_no_match>
@@ -178,9 +178,14 @@
 	</challenge>
 	<announce>
 		<announce_title>Anunciar partida</announce_title>
-		<announce_rating_interval>Intervalo de rating:</announce_rating_interval>
-		<announce_rating_example>Exemplo:0000</announce_rating_example>
+		<announce_rating_interval>Limite de rating:</announce_rating_interval>
+		<announce_min_rating_example>Ex:1000</announce_min_rating_example>
+		<announce_max_rating_example>Ex:2300</announce_max_rating_example>
 		<announce_pieces>Peças:</announce_pieces>
+		<announce_error_title>Erro ao anunciar partida</announce_error_title>
+		<announce_invalid_min_rating>Valor de rating mínimo incorreto. Ex: 0000</announce_invalid_min_rating>
+		<announce_invalid_min_rating>Valor de rating máximo incorreto. Ex: 2349</announce_invalid_min_rating>
+		<announce_invalid_interval>Intervalo de rating incorreto. O valor mínimo deve ser menor que o valor máximo.</announce_invalid_interval>
 	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>

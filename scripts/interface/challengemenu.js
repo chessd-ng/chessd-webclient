@@ -69,7 +69,7 @@ function INTERFACE_CreateChallengeMenu()
 	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
 
 	AnnounceButton.onclick = function(){
-		WINDOW_AnnounceWindow(MainData.Username, MainData.GetUserRatingInRoom(MainData.RoomDefault,MainData.Username), "blitz");
+		WINDOW_AnnounceWindow();
 	}
 
 	MatchOfferList.appendChild(MatchOfferTitle);
@@ -105,7 +105,16 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 		Item = UTILS_CreateElement("li",null,Oponent.Color);
 	}
 
-	PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	if (Oponent.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,7));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	}
 	PTime = UTILS_CreateElement("p","time", null, Time+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc+'"');
 
@@ -220,9 +229,17 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		Item = UTILS_CreateElement("li",null,Player.Color);
 	}
 
-
-	PName = UTILS_CreateElement("p","name", null, Player.Name);
-	PTime = UTILS_CreateElement("p","time", null, Time);
+	if (Player.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Player.Name,6));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Player.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Player.Name);
+	}
+	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc);
 
 	/*// This feature is not implemented yet
@@ -324,7 +341,16 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	var ItemObj = new Object();
 
 	Item = UTILS_CreateElement("li",null,Oponent.Color);
-	PName = UTILS_CreateElement("p","name",null,Oponent.Name);
+	if (Oponent.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,6));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	}
 	PCategory = UTILS_CreateElement("p","category",null,Category);
 	PDate = UTILS_CreateElement("p","date",null,Date);
 	PButton = UTILS_CreateElement("p","button","inative");

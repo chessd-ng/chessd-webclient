@@ -96,6 +96,7 @@
 }
 
 #ChallengeDiv #ButtonsDiv {
+	padding-top : 30px;
 	width 			: 300px;
 }
 
@@ -278,4 +279,12 @@
 /******************************/
 #SubWindowBox{
 	overflow		: hidden;
+}
+
+#AnnounceDiv #Layer2Div {
+	padding-top : 15px;
+}
+
+#ProfileDiv #WhoDiv #CounterDiv {
+	padding-left	: 20px; 
 }

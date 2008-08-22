@@ -371,6 +371,8 @@ function CONTACT_HandleUserList(XML)
 		}
 	}
 
+	CONNECTION_SendJabber(MESSAGE_UserListInfo());
+
 	// two eggs
 	// a cup of milk 
 	// a spoon of sugar

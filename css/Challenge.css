@@ -9,7 +9,8 @@
 }
 
 #ChallengeDiv #Layer1Div:after,
-#ChallengeDiv #Layer2Div:after {
+#ChallengeDiv #Layer2Div:after,
+#ChallengeDiv #Layer3Div:after {
 	content:".";
 	display:block;
 	clear:both;
@@ -32,12 +33,13 @@
 }
 
 #ChallengeDiv #Layer3Div {
-	text-align	:	center;
+	display : block;
 }
 
 #ChallengeDiv .cx {
 	font-size	:	10px;
 	margin-right	:	3mm;
+	font-weight		: bold;
 }
 
 #ChallengeDiv h3 {
@@ -97,8 +99,8 @@
 
 #ChallengeDiv #ButtonsDiv {
 	text-align		: center;
-	padding-top		: 8mm;
-	margin-bottom	: 2mm;
+	padding-top		: 12px;
+	margin-bottom	: 4px;
 }
 
 #ChallengeDiv .color {

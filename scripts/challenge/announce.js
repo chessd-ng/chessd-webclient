@@ -139,7 +139,7 @@ function ANNOUNCE_HandleAnnounceError(XML)
 /*
  * Send a message to create a announce with players parameters
  */
-function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated)
+function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min, Max)
 {
 	var Autoflag = "true";
 	var Player = new Object();
@@ -148,8 +148,25 @@ function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated)
 	Player.Color = Color;
 	Player.Time = Time*60;
 	Player.Inc = Inc;
+
+	if (!Min.match(/^\d*$/))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_min_rating"));
+		return false;
+	}
+	if (!Max.match(/^\d*$/))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_min_rating"));
+		return false;
+	}
+	if (parseInt(Min) > parseInt(Max))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_interval"));
+		return false;
+	}
 	
-	CONNECTION_SendJabber(MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag));
+	CONNECTION_SendJabber(MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag));
+	return true;
 }
 
 /*
@@ -164,8 +181,11 @@ function ANNOUNCE_GetAnnounceGames()
 	var MinTime = "";
 	var MaxTime = "";
 	var Category = "";
+	var User = true;
 
-	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category);
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
+	User = false;
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
 
 	CONNECTION_SendJabber(XMPP);
 }

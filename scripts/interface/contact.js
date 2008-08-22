@@ -273,6 +273,10 @@ function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
 			this.removeUser(UserName);
 			this.addUser(Group.name, UserName, Status, Rating, Type);
 		}
+		else
+		{
+			Group.offline.updateUser(UserName, Status, Rating, Type);
+		}
 	}
 	return UserName;	
 }

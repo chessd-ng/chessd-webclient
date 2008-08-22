@@ -221,9 +221,17 @@ function INTERFACE_CreateGameOptions(GameID)
 
 	// Add listeners
 	UTILS_AddListener(OptionDraw, "click", function() {GAME_SendDraw(GameID);}, false);
+	UTILS_AddListener(OptionDraw, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionDraw, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionResign, "click", function() {GAME_SendResign(GameID);}, false);
+	UTILS_AddListener(OptionResign, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionResign, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionFinish, "click", function() {GAME_SendCancel(GameID);}, false);
+	UTILS_AddListener(OptionFinish, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionFinish, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
+	UTILS_AddListener(OptionStop, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionStop, "mouseup", function() { this.className = "release";}, false);
 
 	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); }
 	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); }

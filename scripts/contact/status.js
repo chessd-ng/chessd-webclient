@@ -137,6 +137,8 @@ function CONTACT_StartAwayCounter()
  */ 
 function CONTACT_SetAwayStatus()
 {
+	var Select = document.getElementById("UserStatusSelect");
+
 	MainData.AwayCounter = MainData.AwayCounter - 1;
 
 	if(MainData.AwayCounter == 0)
@@ -144,6 +146,9 @@ function CONTACT_SetAwayStatus()
 		if((MainData.Status != "playing")&&(MainData.Status != "unavailable"))
 		{
 			CONTACT_ChangeStatus("away");
+			
+			// Select away status 
+			Select.selectedIndex = 3;
 		}
 	}
 }
@@ -153,12 +158,17 @@ function CONTACT_SetAwayStatus()
  */
 function CONTACT_ResetAwayStatus()
 {
+	var Select = document.getElementById("UserStatusSelect");
+
 	// Away counter reset to 5 minutes
 	MainData.AwayCounter = 300;
 
 	if(MainData.Status == "away")
 	{
 		CONTACT_ChangeStatus("available");
+			
+		// Select available status 
+		Select.selectedIndex = 0;
 	}
 
 }

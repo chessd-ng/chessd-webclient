@@ -76,13 +76,12 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
-	var DateTime = new Date();
+	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
 
 	// Logout from jabber
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
@@ -91,42 +90,14 @@ function LOGIN_Logout()
 		MainData.CurrentGame.Game.StopTimer();
 	}
 
-	INTERFACE_StopInterface();
-
-	CONTACT_StopAwayStatus();
-
-	delete MainData;
-
-	// Show Login interface
-	//INTERFACE_StartLogin(Lang);
-	
-	// Get new timestamp
-	NoCacheTimeStamp = "";
-	NoCacheTimeStamp += DateTime.getMonth();
-	NoCacheTimeStamp += "/"+DateTime.getDate();
-	NoCacheTimeStamp += "/"+DateTime.getFullYear();
-	NoCacheTimeStamp += "-"+DateTime.getHours();
-	NoCacheTimeStamp += ":"+DateTime.getMinutes();
-	NoCacheTimeStamp += ":"+DateTime.getSeconds();
-
-	// Reload Scripts
-	LOAD_ReloadFiles();
-
-	START_StartPage();
-
-	// Verify browser and if IE then append related css file
-	if(MainData.Browser == 0)
-	{
-		LOAD_IECssFile();
-	}
+	START_Restart();
 }
 
 
 function LOGIN_LeavePage()
 {
 	var XMPP = "";
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 }
 

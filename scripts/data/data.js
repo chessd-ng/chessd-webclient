@@ -421,36 +421,32 @@ function DATA_IsContact(Username)
 * @brief		Get User status
 *
 * Get the user status on jabber.
-* If the given user is not on your list, then search through
-* the RoomList. 
+* Search user in default room and return user status. 
 *
 * @param		Username User name to search
-* @author		Danilo Yorinori
-* @return 		If the user is not on your list and the RoomList, false.
+* @return 		If the user is not on Default room and Contact List, return null.
 * 				Else return the user status.
-* @see			DATA_FindUser DATA_FindUserInRoom
+* @see			DATA_FindRoom, DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_GetStatus(Username)
 {
-	var i;
-	var UserPos = this.FindUser(Username);
+	var UserPos;
+	var Index = this.FindRoom(this.RoomDefault);
 
-	// If user not in your list
-	if (UserPos == null)
+	UserPos = this.FindUserInRoom(this.RoomList[Index].Name, Username);
+
+	if (UserPos != null)
 	{
-		for (i=0; i < this.RoomList.length; i++)
-		{
-			UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
-
-			if (UserPos != null)
-			{
-				return this.RoomList[i].UserList[UserPos].Status;
-			}
-		}
-		return false;
+		return this.RoomList[Index].UserList[UserPos].Status;
 	}
-		
-	return this.UserList[UserPos].Status;
+	else {
+		UserPos = this.FindUser(Username);
+		if (UserPos != null)
+		{
+			return this.UserList[UserPos].Status;
+		}
+	}
+	return null;
 }
 
 /**

@@ -3,14 +3,17 @@
 */
 #AnnounceDiv #Layer1Div,
 #AnnounceDiv #Layer2Div,
-#AnnounceDiv #PieceDiv, 
-#AnnounceDiv #CategoryDiv, 
-#AnnounceDiv #IntervalDiv {
-	padding			: 0px 0px 0px 31px;
+#AnnounceDiv #Layer3Div {
+	padding			: 0px 0px 0px 25px;
 }
 
-#AnnounceDiv #Layer1Div:after {
-/*#AnnounceDiv #Layer2Div:after {*/
+#AnnounceDiv #Layer1Div {
+	padding-top : 25px;
+}
+
+#AnnounceDiv #Layer1Div:after,
+#AnnounceDiv #Layer2Div:after,
+#AnnounceDiv #Layer3Div:after {
 	content:".";
 	display:block;
 	clear:both;
@@ -19,45 +22,40 @@
 	overflow:hidden;
 }
 
-#AnnounceDiv #PieceDiv,
-#AnnounceDiv #CategoryDiv,
-#AnnounceDiv #IntervalDiv, 
-#AnnounceDiv #Layer1Div,
-#AnnounceDiv #Layer2Div {
-	padding-top		:	20px;
-}
-
-#AnnounceDiv #IntervalDiv #FromDiv {
-	float : left;
-	width :	140px;
-}
-
-#AnnounceDiv #IntervalDiv #ToDiv,
-#AnnounceDiv #IntervalDiv #FromDiv {
-	padding-top : 5px
-}
-
-#AnnounceDiv #IntervalDiv span.bold {
-	font-weight : bold;
-} 
-
-#AnnounceDiv #IntervalDiv input {
-	margin-left : 5px;
+#AnnounceDiv #L1RightDiv {
+	width : 110px;
 }
 
 #AnnounceDiv #Layer1Div {
-	margin-left	:	2px;
+	margin-bottom	:	0px;
+}
+
+#AnnounceDiv #Layer1Div #L1RightDiv {
+	float : left;
+}
+
+#AnnounceDiv #Layer3Div {
+	display : block;
 }
 
 #AnnounceDiv .cx {
 	font-size	:	10px;
 	margin-right	:	3mm;
-	font-weight : bold;
+	font-weight		: bold;
+}
+
+#AnnounceDiv h3 {
+	font-weight		: bold;
+	font-size		: 4mm;
+	color			: #216778;
+	text-align		: center;
+	padding-top		: 8px;
 }
 
 #AnnounceDiv .leftDiv {
 	float			: left;
-	width			: 140px;
+	width			: 150px;
+	margin-left	:	5px;
 }
 
 #AnnounceDiv p {
@@ -68,8 +66,8 @@
 }
 
 #AnnounceDiv img {
-	margin-right	: 40px;
-	margin-left		: 8px;
+	margin-right	: 7mm;
+	margin-left		: 2mm;
 }
 
 #AnnounceDiv .drop_select {
@@ -88,16 +86,16 @@
 
 #AnnounceDiv #ButtonsDiv {
 	text-align		: center;
-	padding-top		: 8mm;
-	margin-bottom	: 2mm;
+	padding-top		: 12px;
+	margin-bottom	: 4px;
 }
 
 #AnnounceDiv .color {
 	padding-top	:	1mm;
 }
 
-#AnnounceDiv .format {
-	font-size : 9px;
+#AnnounceDiv .radio {
+	margin-top	:	2mm;
 }
 
 #AnnounceDiv input,
@@ -113,3 +111,26 @@
 	color			: #216778;
 }
 
+#AnnounceDiv #L3RightDiv .leftDiv {
+	float			: left;
+	width			: 70px;
+	margin-left	:	0px;
+}
+
+#AnnounceDiv #FromDiv,
+#AnnounceDiv #ToDiv {
+	padding-top : 5px;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input,
+#AnnounceDiv #L3RightDiv #ToDiv input {
+	margin-left	:	2px;
+}
+
+#AnnounceDiv #FromDiv span.format {
+	padding-left : 16px;
+}
+
+#AnnounceDiv #ToDiv span.format {
+	padding-left : 11px;
+}

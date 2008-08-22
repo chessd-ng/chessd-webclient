@@ -67,9 +67,9 @@ function MESSAGE_StartConnection()
 /**
 * End connection
 */
-function MESSAGE_EndConnection()
+function MESSAGE_EndConnection(Unavailable)
 {
-	var XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' />";
+	var XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
 
 	return XMPP;
 }
@@ -996,13 +996,22 @@ function MESSAGE_FetchOldGame(OldGameId)
  * MESSAGES - ANNOUNCE CHALLENGES
  **********************************/
 //Player object
-function MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag)
+function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 {
 	var XMPP = "";
 
 	XMPP += "<iq type='set' to='"+MainData.MatchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_AnnounceMatch+"'>";
 	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
-	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"'>";
+	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"' ";
+	if (Min != "")
+	{
+		XMPP += "minimum_rating='"+Min+"' ";
+	}
+	if (Max != "")
+	{
+		XMPP += "maximum_rating='"+Max+"' ";
+	}
+	XMPP += ">";
 
 	if(Player.Color == "")
 	{
@@ -1018,7 +1027,7 @@ function MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag)
 	return XMPP;
 }
 
-function MESSAGE_GetAnnounceMatch(Username, Offset, NumResult, MinTime, MaxTime, Category)
+function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User)
 {
 	var XMPP = "";
 
@@ -1041,7 +1050,14 @@ function MESSAGE_GetAnnounceMatch(Username, Offset, NumResult, MinTime, MaxTime,
 		XMPP += "category='"+Category+"' ";
 	}
 
-	XMPP += "player='"+Username+"@"+MainData.Host+"/"+MainData.Resource+"'/>";
+	if (User == true)
+	{
+		XMPP += "player='"+MainData.Username+"@"+MainData.Host+"/"+MainData.Resource+"' />";
+	}
+	else
+	{
+		XMPP += "/>";
+	}
 	XMPP += "</search></iq>";
 
 	return XMPP;

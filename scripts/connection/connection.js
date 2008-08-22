@@ -382,6 +382,8 @@ function CONNECTION_ReceiveXml(HttpRequest)
 			if(MainData.ConnectionStatus == 0)
 			{
 				alert(UTILS_GetText("error_disconnected"));
+			
+				START_Restart();	
 			}
 		}
 

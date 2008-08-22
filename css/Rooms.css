@@ -262,7 +262,6 @@
 
 #CreateRoomDiv #OptionsDiv #CounterDiv {
 	margin-top : 3px;
-	text-align : right;
 }
 
 #CreateRoomDiv .counter_input {
@@ -296,26 +295,6 @@
 	text-align		: center;
 }
 
-/**
-* USER MENU
-*/
-#RoomFullNameDiv {
-	position		: absolute;
-	/*width			: 3%;*/
-	padding			: 4px;
-	background-color	: #FFF;
-	border			: 1px solid #216778;
-	z-index : 2;
-}
-
-#RoomFullNameDiv p {
-	font-style		: italic;
-	font-size		: 10px;
-	color			: #216778;
-	cursor			: pointer;
-	margin-bottom		: 1px;
-}
-
 #room_loading {
 	position		: absolute;
 	width			: 125px;
@@ -334,6 +313,8 @@
 	left			: 20px;
 }
 
-#room_loading span {
-	
+#Rooms #RoomList #RoomPrimary #general_occupants,
+#Rooms #RoomList #RoomSecondary #Sec_occupants {
+	font-weight : normal;
+	font-size : 9px;
 }

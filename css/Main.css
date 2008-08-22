@@ -30,3 +30,23 @@ p, a, h1, h2, h3, h4, h5, h6, span, strong{
 	height			: 550px;
 	overflow		: hidden;
 }
+
+/**
+* FULL NAME HINT
+*/
+#FullNameDiv {
+	position		: absolute;
+	padding			: 4px;
+	background-color	: #FFF;
+	border			: 1px solid #216778;
+	z-index : 2;
+}
+
+#FullNameDiv p {
+	font-style		: italic;
+	font-size		: 10px;
+	color			: #216778;
+	cursor			: pointer;
+	margin-bottom		: 1px;
+}
+

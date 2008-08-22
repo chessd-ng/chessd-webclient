@@ -589,6 +589,10 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 
 	UTILS_AddListener(document, "click",Func,false);
 
+	// TODO - Quick fix - but this will be removed
+	var Exit = document.getElementById("ExitButton");
+	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
+
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
 
 	// Get adjourn games list
@@ -596,7 +600,7 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	CHALLENGE_GetAdjournGames();
 	ANNOUNCE_GetAnnounceGames();
 	*/
-	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","",""));
+	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
 
 	return "";
 }
