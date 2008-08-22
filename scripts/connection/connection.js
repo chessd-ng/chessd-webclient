@@ -282,7 +282,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 		}
 		else if (HttpRequest.status == 404)
 		{
-			LOGIN_LoginFailed(UTILS_GetText("login_server_down"));
+			LOGIN_LoginFailed(UTILS_GetText("login_server_not_founded"));
 		}
 		else
 		{	
