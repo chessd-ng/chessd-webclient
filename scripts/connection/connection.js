@@ -109,7 +109,7 @@ function CONNECTION_SendJabber()
 	DT = Math.floor(Math.random()*10000);
 
 	//HttpRequest.open('POST','http://'+MainData.HostPost+'/http-bind?id='+DT , true);
-	HttpRequest.open('POST','http://'+MainData.HostPost+'/jabberd?id='+DT , true);
+	HttpRequest.open('POST','http://'+MainData.HostPost+'/jabber?id='+DT , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
 	// Normal parse messages
