@@ -355,6 +355,7 @@
 		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
 		<oldgame_loading>Buscando partidas antigas...</oldgame_loading>
+		<oldgame_examine>Examinar partida</oldgame_examine>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>

@@ -443,7 +443,7 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 
 			Img = UTILS_CreateElement("img",null,'examine_icon');
 			Img.src = "images/oldgame_examine.png";
-			Img.title ="Examinar partida";
+			Img.title = UTILS_GetText("oldgame_examine");
 			UTILS_AddListener(Img, "click", function()
 					{
 						if(MainData.CurrentGame == null)
