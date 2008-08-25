@@ -190,6 +190,7 @@ DATA.prototype.FindPostpone = DATA_FindPostpone;
 
 DATA.prototype.AddAnnounce = DATA_AddAnnounce;
 DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
+DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
 DATA.prototype.FindAnnounce = DATA_FindAnnounce;
 
 DATA.prototype.AddGame = DATA_AddGame;
@@ -1572,6 +1573,19 @@ function DATA_FindAnnounce(AnnounceId)
 	
 }
 
+/**
+* @brief		Remove all announce in 'AnnounceList'
+* @author 		Rubens Suguimoto
+* @return 		void
+*/
+function DATA_ClearAnnounces()
+{
+	var size = this.AnnounceList.length;
+	
+	this.AnnounceList.splice(0, size);
+
+	return "";
+}
 
 /**********************************
  * METHODS - POSTPONE CHALLENGES  *

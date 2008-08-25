@@ -68,7 +68,7 @@ function INTERFACE_CreateChallengeMenu()
 	var NoAnnounce = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_announce"));
 	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
 
-	AnnounceButton.onclick = function(){
+	AnnounceButton.onmousedown = function(){
 		WINDOW_AnnounceWindow();
 	}
 
