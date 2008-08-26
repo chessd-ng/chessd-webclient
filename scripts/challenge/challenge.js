@@ -596,6 +596,10 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
 
 	CHALLENGE_ClearAnnounce();
+	
+	ANNOUNCE_HideNoAnnounce();
+	ANNOUNCE_ShowLoadingAnnounce();
+
 	// Get adjourn games list
 	/*
 	CHALLENGE_GetAdjournGames();
