@@ -301,17 +301,19 @@ function ROOM_HandleGameRoomList(XML)
 */
 function ROOM_HandleGameRoomInfoList(XML)
 {
-	var P1 = new Object();
-	var P2 = new Object();
+	var PW = new Object();
+	var PB = new Object();
 
 	var Iq;
-	var Identity;
+	var Identity, Name;
 	var Game, GameType;
-	var Name, WName, BName, Jid, GameId;
+	var WName, BName;
+	var Jid, GameId;
+	var Players;
 
 	
-	Identity = XML.getElementsByTagName("identity")[0];
-	Name = Identity.getAttribute("name");
+	//Identity = XML.getElementsByTagName("identity")[0];
+	//Name = Identity.getAttribute("name");
 
 	Jid = XML.getAttribute("from");
 	GameId = Jid.split("@")[0];
@@ -319,21 +321,37 @@ function ROOM_HandleGameRoomInfoList(XML)
 	Game = XML.getElementsByTagName("game")[0];
 	GameType = Game.getAttribute("category");
 
-	WName = Name.split("x")[0].split("@")[0].replace(" ","");
-	BName = Name.split("x")[1].split("@")[0].replace(" ","");
+	Players = XML.getElementsByTagName("player");
 
-	P1.Name = WName;
-	P1.Time = 0;
-	P1.Color = "white";
-	P1.Inc = 0;
+	//WName = Name.split(" x ")[0].split("@")[0].replace(" ","");
+	//BName = Name.split(" x ")[1].split("@")[0].replace(" ","");
+	if(Players[0].getAttribute("role") == "white")
+	{
+		PW.Name = Players[0].getAttribute("jid").split("@")[0];
+		PW.Time = Players[0].getAttribute("time");
+		PW.Color = "white";
+		PW.Inc = Players[0].getAttribute("inc");
 
-	P2.Name = BName;
-	P2.Time = 0;
-	P2.Color = "black";
-	P2.Inc = 0;
+		PB.Name = Players[1].getAttribute("jid").split("@")[0];
+		PB.Time = Players[1].getAttribute("time");
+		PB.Color = "black";
+		PB.Inc = Players[1].getAttribute("inc");
+	}
+	else
+	{
+		PW.Name = Players[1].getAttribute("jid").split("@")[0];
+		PW.Time = Players[1].getAttribute("time");
+		PW.Color = "white";
+		PW.Inc = Players[1].getAttribute("inc");
+
+		PB.Name = Players[0].getAttribute("jid").split("@")[0];
+		PB.Time = Players[0].getAttribute("time");
+		PB.Color = "black";
+		PW.Inc = Players[0].getAttribute("inc");
+	}
 
 	// interface/room.js
-	INTERFACE_ShowGameRoomList(GameId, Name, P1, P2, GameType);
+	INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
 
 	return "";
 }
