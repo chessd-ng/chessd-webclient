@@ -69,24 +69,143 @@ function INITIAL_AppendFiles(FileType,Addr)
 	}
 }
 
-// Append favicon
-INITIAL_AppendFiles("favicon","images/favicon.ico");
+/* 
+ * @brief	Create list of scripts to be load
+ *
+ * @return	void
+ * @author	Rubens Suguimoto
+ */
+function INITIAL_LoadScripts()
+{
+	var ScriptList = new Array();
 
-// Append css files
-INITIAL_AppendFiles("css","css/Main.css");
-INITIAL_AppendFiles("css","css/Login.css");
-INITIAL_AppendFiles("css","css/Load.css");
+	var ProgressText = document.createElement("p");
+	var LoadingText = document.createElement("p");
+	ProgressText.setAttribute("id","ProgressText");
+	LoadingText.setAttribute("id","LoadingText");
+	LoadingText.innerHTML = "Loading...";
 
-// Append script files
-INITIAL_AppendFiles("scripts","scripts/utils/utils.js");
-INITIAL_AppendFiles("scripts","scripts/data/data.js");
-INITIAL_AppendFiles("scripts","scripts/data/consts.js");
-INITIAL_AppendFiles("scripts","scripts/login/login.js");
-INITIAL_AppendFiles("scripts","scripts/load/load.js");
-INITIAL_AppendFiles("scripts","scripts/connection/connection.js");
-INITIAL_AppendFiles("scripts","scripts/xmpp_messages/message.js");
-INITIAL_AppendFiles("scripts","scripts/parser/parser.js");
-INITIAL_AppendFiles("scripts","scripts/parser/parser_presence.js");
-INITIAL_AppendFiles("scripts","scripts/interface/login.js");
-INITIAL_AppendFiles("scripts","scripts/interface/load.js");
-INITIAL_AppendFiles("scripts","scripts/start.js");
+	// Create Loading progress text
+	document.body.appendChild(LoadingText);
+	document.body.appendChild(ProgressText);
+
+	// Append favicon
+	INITIAL_AppendFiles("favicon","images/favicon.ico");
+
+	// Append css files
+	/*
+	INITIAL_AppendFiles("css","css/Main.css");
+	INITIAL_AppendFiles("css","css/Login.css");
+	INITIAL_AppendFiles("css","css/Load.css");
+	*/
+	// Append script files
+	ScriptList.push("scripts/utils/utils.js");
+	ScriptList.push("scripts/data/data.js");
+	ScriptList.push("scripts/data/consts.js");
+	ScriptList.push("scripts/login/login.js");
+	ScriptList.push("scripts/load/load.js");
+	ScriptList.push("scripts/connection/connection.js");
+	ScriptList.push("scripts/xmpp_messages/message.js");
+	ScriptList.push("scripts/parser/parser.js");
+	ScriptList.push("scripts/parser/parser_presence.js");
+	ScriptList.push("scripts/interface/login.js");
+	ScriptList.push("scripts/interface/load.js");
+	ScriptList.push("scripts/start.js");
+
+	INITIAL_AppendScript(ScriptList, ScriptList.length);
+}
+
+/* 
+ * @brief	Select last script in script list and load it.
+ * 
+ * Select the last script file name in script list that will be loaded. When
+ * script has already loaded, remove last script from script list and call
+ * this function again.
+ *
+ * @param	ScriptList	List of script url
+ * @param	NumFiles	Total number of files to be load
+ * @return	void
+ * @author	Rubens Suguimoto
+ */
+function INITIAL_AppendScript(ScriptList, NumFiles)
+{
+	var Script;
+	var Head = document.getElementsByTagName("head")[0];
+	var ProgressText, LoadingText;
+	var ScriptFile
+	var Perc;
+
+	if(ScriptList.length > 0)
+	{
+		// Select and remove last script from script list
+		ScriptFile = ScriptList.pop();
+
+		// Load remaing files script
+		Script = document.createElement("script");
+		Script.src = ScriptFile+"?"+NoCache.TimeStamp;
+		Script.type = "text/javascript";
+		Head.appendChild(Script);
+
+		Script.onload = function(){
+			INITIAL_AppendScript(ScriptList, NumFiles);
+			Perc = (NumFiles-ScriptList.length)/NumFiles;
+			INITIAL_SetProgressText(Math.round(Perc*100)+"% - "+ScriptFile);
+		}
+
+		Script.onreadystatechange = function(){
+			if(Script.readyState == "loaded")
+			{
+				INITIAL_AppendScript(ScriptList, NumFiles);
+				Perc = (NumFiles-ScriptList.length)/NumFiles;
+				INITIAL_SetProgressText(Math.round(Perc*100)+"% - "+ScriptFile);
+			}
+		}
+
+/*
+		Script.onerror = function(){
+			alert("Error while loading scripts\nFile: "+ScriptFile);
+		}
+
+		Script.onabort = function(){
+			alert("Abort loading scripts\nFile: "+ScriptFile);
+		}
+*/
+	}
+	else // All initial scripts has already loaded
+	{
+		// Remove loading texts and start login page
+		INITIAL_RemoveTexts();
+		START_StartPage();
+	}
+}
+
+/* 
+ * @brief	Change progress text
+ *
+ * @param	Text	Text string
+ * @return	void
+ * @author	Rubens Suguimoto
+ */
+function INITIAL_SetProgressText(Text)
+{
+	var ProgressText = document.getElementById("ProgressText");
+
+	if(ProgressText != null)
+	{
+		ProgressText.innerHTML = Text;
+	}
+}
+
+/* 
+ * @brief	Remove loading and progress text;
+ *
+ * @return	void
+ * @author	Rubens Suguimoto
+ */
+function INITIAL_RemoveTexts()
+{
+	var ProgressText = document.getElementById("ProgressText");
+	var LoadingText = document.getElementById("LoadingText");
+	document.body.removeChild(ProgressText);
+	document.body.removeChild(LoadingText);
+}
