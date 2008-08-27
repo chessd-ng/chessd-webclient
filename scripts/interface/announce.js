@@ -314,11 +314,11 @@ function INTERFACE_AnnounceWindow()
 	FromLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_from'));
 	try
 	{
-		FromInput = document.createElement("<input type='text' maxLength='4' size='5' disabled='disabled' />");
+		FromInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
 	}
 	catch(err)
 	{
-		FromInput	= UTILS_CreateElement('input');
+		FromInput	= UTILS_CreateElement('input',null,'disabled');
 		FromInput.size = "5";
 		FromInput.type = "text";
 		FromInput.maxLength = "4";
@@ -329,11 +329,11 @@ function INTERFACE_AnnounceWindow()
 	ToLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_to'));
 	try
 	{
-		ToInput = document.createElement("<input type='text' maxLength='4' size='5' disabled='disabled' />");
+		ToInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
 	}
 	catch(err)
 	{
-		ToInput	= UTILS_CreateElement('input');
+		ToInput	= UTILS_CreateElement('input',null,'disabled');
 		ToInput.size = "5";
 		ToInput.type = "text";
 		ToInput.maxLength = "4";
@@ -348,13 +348,17 @@ function INTERFACE_AnnounceWindow()
 		if (this.checked == true)
 		{
 			FromInput.disabled = false;
+			FromInput.className = "enabled";
 			ToInput.disabled = false;
+			ToInput.className = "enabled";
 		}
 		else
 		{
 			FromInput.disabled = true;
-			ToInput.disabled = true;
+			FromInput.className = "disabled";
 			FromInput.value = "";
+			ToInput.disabled = true;
+			ToInput.className = "disabled";
 			ToInput.value = "";
 		}
 	}

@@ -200,8 +200,8 @@
 		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
 		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
 		<game_abort>Encerrar partida</game_abort>
-		<game_abort_text>%s deseja encerrar a partida, deseja aceitar?</game_abort_text>
-		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
+		<game_abort_text>%s deseja cancelar a partida, deseja aceitar?</game_abort_text>
+		<game_abort_denied>%s recusou sua requisição de cancelamento da partida.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
 		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
 		<game_checkmatew_text>Parabéns! Você ganhou de %s por xeque-mate.</game_checkmatew_text>
@@ -351,7 +351,7 @@
 		<oldgame_result>Resultado</oldgame_result>
 		<oldgame_date>Data</oldgame_date>
 		<oldgame_prev>Anteriores</oldgame_prev>
-		<oldgame_next>Proximos</oldgame_next>
+		<oldgame_next>Próximas</oldgame_next>
 		<oldgame_format>Formato: dd/mm/aaaa</oldgame_format>
 		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
 		<oldgame_invalid_begin>Data inicial inválida!</oldgame_invalid_begin>
@@ -359,6 +359,7 @@
 		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
 		<oldgame_loading>Buscando partidas antigas...</oldgame_loading>
+		<oldgame_examine>Examinar partida</oldgame_examine>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>

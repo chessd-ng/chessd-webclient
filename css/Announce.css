@@ -134,3 +134,13 @@
 #AnnounceDiv #ToDiv span.format {
 	padding-left : 11px;
 }
+
+#AnnounceDiv #L3RightDiv #FromDiv input.disabled,
+#AnnounceDiv #L3RightDiv #ToDiv input.disabled {
+	background-color : #C0C0C0;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input.enabled,
+#AnnounceDiv #L3RightDiv #ToDiv input.enabled {
+	background-color : #FFF;
+}
