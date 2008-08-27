@@ -247,8 +247,8 @@ function LOAD_ReloadFiles()
 {
 	var Head = document.getElementsByTagName("head")[0];
 
-	var CssFiles = document.getElementsByTagName("link");
-	var ScriptFiles = document.getElementsByTagName("script");
+	var CssFiles = Head.getElementsByTagName("link");
+	var ScriptFiles = Head.getElementsByTagName("script");
 
 	var File;
 
@@ -266,6 +266,25 @@ function LOAD_ReloadFiles()
 	File.src = "initial_files.js?"+NoCache.TimeStamp;
 	File.type = "text/javascript";
 	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Main.css";
+	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Login.css";
+	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Load.css";
+	Head.appendChild(File);
+
 }
 
 function LOAD_IECssFile()

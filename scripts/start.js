@@ -132,7 +132,6 @@ function START_Webclient()
 */
 function START_Restart()
 {
-	
 	INTERFACE_StopInterface();
 
 	CONTACT_StopAwayStatus();
@@ -151,7 +150,8 @@ function START_Restart()
 	// Reload Scripts
 	LOAD_ReloadFiles();
 
-	START_StartPage();
+	//START_StartPage();
+	INITIAL_LoadScripts();
 
 	// Verify browser and if IE then append related css file
 	if(MainData.Browser == 0)
