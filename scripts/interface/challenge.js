@@ -36,7 +36,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	var L1LeftDiv;
 	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
 	var L1RightDiv;
-	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt;
+	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt, CatOptUt;
 	var Br1;
 
 	var Layer2Div;
@@ -186,11 +186,18 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	CatOptBl.value = "blitz";
 	CatOptSt = UTILS_CreateElement('option', null, null, 'Standard');
 	CatOptSt.value = "standard";
-	CatSelect =	UTILS_CreateElement('select',null,'drop_select');
+	
+	// UNTIMED category option
+	CatOptUt = UTILS_CreateElement('option', null, null, 'Untimed');
+	CatOptUt.value = "untimed";
 
+	CatSelect =	UTILS_CreateElement('select',null,'drop_select');
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
 	CatSelect.appendChild(CatOptSt);
+	
+	//Append untimed option
+	CatSelect.appendChild(CatOptUt);
 
 	CatSelect.onchange = function () 
 	{
@@ -202,7 +209,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		{
 			TimeSelect.removeChild (TimeSelect.firstChild);
 		}
-		
+
+		// Enable select time and select increment		
+		TimeSelect.disabled = false;
+		IncSelect.disabled = false;
+
 		// Lightning = 0 
 		if (Type == 0)
 		{
@@ -232,6 +243,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		// Standard = 2
 		else if (Type == 2)
 		{
+
 			for (i=11; i <=30; i++)
 			{
 				TimeOpt = UTILS_CreateElement('option',null,null,i);
@@ -250,12 +262,29 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeSelect.appendChild(TimeOpt);
 			TimeOpt = UTILS_CreateElement('option',null,null,"180");
 			TimeOpt.value = 180;
-			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
+			TimeSelect.appendChild(TimeOpt);
+			//TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
+			TimeOpt = UTILS_CreateElement('option',null,null,"190");
 			TimeOpt.value = 190;
+			TimeSelect.appendChild(TimeOpt);
+			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
+			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
 			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
 		}
-	
+		// Untimed = 3
+		else if (Type == 3)
+		{
+			// Disable select time and select increment
+			TimeSelect.disabled = true;
+			IncSelect.disabled = true;
+
+			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
+			TimeOpt.value = "untimed";
+			TimeSelect.appendChild(TimeOpt);
+
+		}
+
 		Username.removeChild(Username.childNodes[1]);
 		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
 		Username.appendChild(RatingLabel);
@@ -300,7 +329,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	TimeLabelMin =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_time_label_min'));
 	TimeBr = UTILS_CreateElement('br');
 	TimeSelect = UTILS_CreateElement('select',null,'drop_select');
-	
+
+
+	// Receive challenge from another player	
 	if (GameParameters != undefined)
 	{
 		if (GameParameters.Time)
@@ -357,12 +388,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				TimeOpt = UTILS_CreateElement('option',null,null,"180");
 				TimeOpt.value = 180;
 				TimeSelect.appendChild(TimeOpt);
-				TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
+				TimeOpt = UTILS_CreateElement('option',null,null,"190");
 				TimeOpt.value = 190;
 				TimeSelect.appendChild(TimeOpt);
 
+				
+				// Select option
 				CatSelect.options.selectedIndex = 2;
-
 				if (GameParameters.Time <= 30)
 				{
 					TimeSelect.options.selectedIndex = GameParameters.Time - 11;
@@ -383,10 +415,23 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				{
 					TimeSelect.options.selectedIndex = 23;
 				}
-				if (GameParameters.Time == 190) 
+				else if (GameParameters.Time == 190) 
 				{
 					TimeSelect.options.selectedIndex = 24;
 				}
+			}
+			else if (GameParameters.Time == "untimed")
+			{
+				TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
+				TimeOpt.value = "untimed";
+				TimeSelect.appendChild(TimeOpt);
+
+				CatSelect.options.selectedIndex = 3;
+				TimeSelect.options.selectedIndex = 0;
+			
+				// Disable select time and select increment
+				TimeSelect.disabled = true;
+				IncSelect.disabled = true;
 			}
 		}
 	}
