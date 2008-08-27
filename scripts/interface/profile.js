@@ -586,7 +586,7 @@ function INTERFACE_ProfileSetRatings(Ratings)
 	var Tr, Td;
 	var i,j;
 
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < Ratings.length; i++)
 	{
 		Tr = UTILS_CreateElement('tr');
 		
