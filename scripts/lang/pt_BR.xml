@@ -347,7 +347,7 @@
 		<oldgame_result>Resultado</oldgame_result>
 		<oldgame_date>Data</oldgame_date>
 		<oldgame_prev>Anteriores</oldgame_prev>
-		<oldgame_next>Próximos</oldgame_next>
+		<oldgame_next>Próximas</oldgame_next>
 		<oldgame_format>Formato: dd/mm/aaaa</oldgame_format>
 		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
 		<oldgame_invalid_begin>Data inicial inválida!</oldgame_invalid_begin>
