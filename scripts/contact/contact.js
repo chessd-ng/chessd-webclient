@@ -292,6 +292,9 @@ function CONTACT_OnlineSortUserByRating(Category)
 			case "standard":
 				Rating = Room.UserList[i].Rating.Standard;
 				break;
+			case "untimed":
+				Rating = Room.UserList[i].Rating.Untimed;
+				break;
 		}
 
 		//Show in contact online list
@@ -815,6 +818,9 @@ function CONTACT_SortUsersByRating(Category)
 				break;
 			case "standard":
 				Rating = User.Rating.Standard;
+				break;	
+			case "untimed":
+				Rating = User.Rating.Untimed;
 				break;	
 		}
 

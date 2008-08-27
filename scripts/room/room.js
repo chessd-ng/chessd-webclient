@@ -863,6 +863,9 @@ function ROOM_SortUsersByRating(Category)
 				case "standard":
 					Rating = Room.UserList[i].Rating.Standard;
 					break;
+				case "untimed":
+					Rating = Room.UserList[i].Rating.Untimed;
+					break;
 			}
 
 			Room.Room.userList.removeUser(UserName);

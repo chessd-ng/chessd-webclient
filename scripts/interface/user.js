@@ -386,6 +386,10 @@ function INTERFACE_CreateUserList(Element)
 	OrderRatingOpt.value = "standard";
 	OrderRating.appendChild(OrderRatingOpt);
 
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Untimed)");
+	OrderRatingOpt.value = "untimed";
+	OrderRating.appendChild(OrderRatingOpt);
+
 
 	OrderNick.onclick = function(){
 		OrderNick.className = "selected";

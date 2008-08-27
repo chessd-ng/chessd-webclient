@@ -997,6 +997,26 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
+	if (Type == "Untimed")
+	{
+		if (a.Rating.Untimed != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Untimed));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Untimed != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Untimed));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
