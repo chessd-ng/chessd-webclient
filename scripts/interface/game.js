@@ -710,16 +710,19 @@ function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 		{
 			Item = UTILS_CreateElement("li",this.Id+"_"+FullMove,"black",null);
 		}
-		Num = UTILS_CreateElement("span", null, null, FullMove+".");
+		Num = UTILS_CreateElement("p", null, null, FullMove+".");
 		Item.appendChild(Num);
 	}
 	else
 	{
-		// Get item from list
+		// TODO -> remove getElementById, and set list of pointer to
+		// li HTML element in board object;
+
+		// Get item from list 
 		Item = document.getElementById(this.Id+"_"+((NumTurn-1)/2));
 	}
 
-	MoveSpan = UTILS_CreateElement("span", null, "move", ShortMove);
+	MoveSpan = UTILS_CreateElement("p", null, "move", ShortMove);
 
 	Item.appendChild(MoveSpan);
 

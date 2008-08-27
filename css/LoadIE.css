@@ -1,3 +1,7 @@
+body {
+	font-family		: arial, sans-serif, Trebuchet MS;
+}
+
 #LoginDiv p{
 	font-size		: 12px;	
 	font-weight		: normal;

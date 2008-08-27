@@ -48,6 +48,7 @@
 		<login_connection_start>Abrindo Conexão...</login_connection_start>
 		<login_connection_user>Verificando usuário...</login_connection_user>
 		<login_connection_passwd>Verificando senha...</login_connection_passwd>
+		<login_server_not_founded>Servidor não encontrado.</login_server_not_founded>
 	</login>
 	<menu>
 		<menu_adjourn>Adjudicar</menu_adjourn>
@@ -174,6 +175,7 @@
 		<challenge_offer_opponent_offline>Oponente está jogando ou está desconectado do servidor de xadrez.</challenge_offer_opponent_offline>
 		<challenge_error>Erro ao desafiar</challenge_error>
 		<challenge_announce_match>Anunciar</challenge_announce_match>
+		<challenge_menu_loading_announce>Carregando partidas anunciadas...</challenge_menu_loading_announce>
 	</challenge>
 	<announce>
 		<announce_title>Anunciar partida</announce_title>
@@ -185,6 +187,8 @@
 		<announce_invalid_min_rating>Valor de rating mínimo incorreto. Ex: 0000</announce_invalid_min_rating>
 		<announce_invalid_min_rating>Valor de rating máximo incorreto. Ex: 2349</announce_invalid_min_rating>
 		<announce_invalid_interval>Intervalo de rating incorreto. O valor mínimo deve ser menor que o valor máximo.</announce_invalid_interval>
+		<announce_accept_error>Erro ao aceitar partida anunciada</announce_accept_error>
+		<announce_non_exist>Partida anunciada foi cancelada ou removida.</announce_non_exist>
 	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>

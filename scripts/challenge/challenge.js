@@ -575,25 +575,30 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	// This function is used to hide challenge menu
 	// TODO -> need fix
 	Func = function(){
-		Hide += 1;
+		//Hide += 1;
 
-		//if(MainData.ChallengeMenu.MenuVisible == true)
-		if(Hide == 2)
+		if(MainData.ChallengeMenu.MenuVisible == true)
+		//if(Hide == 2)
 		{
-			UTILS_RemoveListener(document,"click",Func,false);
+			UTILS_RemoveListener(document,"mousedown",Func,false);
 
 			// Hide Challenge menu from screen
 			CHALLENGE_HideChallengeMenu();
 		}
 	}
 
-	UTILS_AddListener(document, "click",Func,false);
+	UTILS_AddListener(document, "mousedown",Func,false);
 
 	// TODO - Quick fix - but this will be removed
 	var Exit = document.getElementById("ExitButton");
 	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
 
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
+
+	CHALLENGE_ClearAnnounce();
+	
+	ANNOUNCE_HideNoAnnounce();
+	ANNOUNCE_ShowLoadingAnnounce();
 
 	// Get adjourn games list
 	/*
@@ -653,4 +658,34 @@ function CHALLENGE_ClearChallenges()
 	MainData.ClearChallenges();
 
 	return "";
+}
+
+/**
+ * @brief	Remove all announces from main data and interface
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
+ */
+function CHALLENGE_ClearAnnounce()
+{
+	var i;
+	var AnnounceId;
+
+	// Remove all challenges from challenge menu
+	for(i=0;i<MainData.AnnounceList.length; i++)
+	{
+		AnnounceId = MainData.AnnounceList[i].Id;
+		ChallengeWindow = MainData.AnnounceList[i].Window;
+
+		if(AnnounceId != null)
+		{
+			//CHALLENGE_DeclineChallenge(MatchID);
+			MainData.ChallengeMenu.removeAnnounce(AnnounceId);
+		}
+
+	}
+
+	// Remove all challenges from main data
+	MainData.ClearAnnounces();
+
 }

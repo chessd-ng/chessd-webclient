@@ -180,7 +180,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 			{
 				if(BodyType == "terminate")
 				{
-					LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionClosed)
+					LOGIN_LoginFailed(UTILS_GetText("login_connection_closed"));
 					return "";
 				}
 			}
@@ -190,7 +190,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 				 case (1):
 					if(XML.getElementsByTagName("body")[0].getAttribute("sid") == null)
 					{
-						LOGIN_LoginFailed(MainData.Const.LOGIN_ConnectionRefused);
+						LOGIN_LoginFailed(UTILS_GetText("login_connection_refused"));
 						return "";
 					}
 					else // Step one OK
@@ -241,11 +241,11 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 								{
 									// Username and passwd invalid
 									case "401":
-										LOGIN_LoginFailed(MainData.Const.LOGIN_InvalidUser);
+										LOGIN_LoginFailed(UTILS_GetText("login_invalid_user"));
 										break;
 									// User was banned by admin
 									case "405":
-										LOGIN_LoginFailed(MainData.Const.LOGIN_BannedUser);
+										LOGIN_LoginFailed(UTILS_GetText("login_banned_user"));
 										break;
 								}
 							}
@@ -278,7 +278,15 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 		// Server offline
 		else if (HttpRequest.status == 503)
 		{
-			LOGIN_LoginFailed(MainData.Const.LOGIN_ServerDown);
+			LOGIN_LoginFailed(UTILS_GetText("login_server_down"));
+		}
+		else if (HttpRequest.status == 404)
+		{
+			LOGIN_LoginFailed(UTILS_GetText("login_server_not_founded"));
+		}
+		else
+		{	
+			LOGIN_LoginFailed(UTILS_GetText("login_server_down"));
 		}
 
 		// Remove post from data struct

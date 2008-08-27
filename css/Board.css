@@ -115,11 +115,11 @@
 #GameInfoDiv
 {
 	position		: relative;
-	width			: 180px;
+	width			: 177px;
 	height			: 304px;
 	float			: left;
 	border			: 3px solid #216778;
-	padding			: 0px 5px;
+	padding			: 0px 8px;
 }
 
 #GameClose {
@@ -337,6 +337,8 @@
 
 #MoveListDiv{
 	position		: relative;
+	height			: 115px;
+	width			: 175px;
 }
 
 #MoveList{
@@ -351,19 +353,26 @@
 #MoveList.oldgame{
 	/*height			: 22mm;*/
 	height			: 85px;
+	width			: 175px;
 }
 
+#MoveList li{
+	width			: 151px;
+	padding			: 0px 12px;
+	height			: 15px;
+}
 #MoveList li.black{
 	background-color	: #216778;
 	color			: #FFF;
 }
 
-#MoveList span{
-	margin-left		: 2mm;
+#MoveList p{
+	float			: left;
+	width			: 30px;
 }
 
-#MoveList span.move{
-	margin-left		: 5mm;
+#MoveList p.move{
+	width			: 60px
 }
 
 #MoveListDiv #MoveListButtons{
@@ -374,7 +383,7 @@
 
 	display                 : table;
 	/*width                   : 45.9mm;*/
-	width			: 174px;
+	width			: 175px;
 	/*height                  : 8mm;*/
 	height			: 28px;
 
@@ -508,7 +517,7 @@
 	border-color		: #216778;
 
 	/*width			: 23mm;*/
-	width			: 87px;
+	width			: 86px;
 	/*height		: 4.7mm;*/
 	height			: 18px;
 

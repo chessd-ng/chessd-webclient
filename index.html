@@ -8,13 +8,18 @@
 
 <script type="text/javascript" src="initial_files.js"></script>
 
+<link rel="stylesheet" type="text/css" href="css/Main.css" />
+<link rel="stylesheet" type="text/css" href="css/Login.css" />
+<link rel="stylesheet" type="text/css" href="css/Load.css" />
 <!--[if IE]>
 <link rel="stylesheet" type="text/css" href="css/LoadIE.css" />
 <![endif]-->
 
 </head>
-<!---INTERFACE_StartLogin() in scripts/interface/login.js-->
-<body onload="START_StartPage()">
+
+<body>
+<!--Load initial script to avoid cache -->
+<script>INITIAL_LoadScripts()</script>
 </body>
 
 </html>

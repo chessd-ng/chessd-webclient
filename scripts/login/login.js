@@ -64,9 +64,6 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 
 	// Clear error message
 	INTERFACE_ClearError();
-
-	// Show login message
-	INTERFACE_ShowLoginMessage();
 }
 
 
@@ -138,37 +135,10 @@ function LOGIN_EndLogin()
 * @return none
 * @public
 */
-function LOGIN_LoginFailed(Code)
+function LOGIN_LoginFailed(Msg)
 {
-	var ErrorLabel = document.getElementById("ErrorLabel");
-
-	// if login window is closed, then do nothing
-	if(ErrorLabel == null)
-	{
-		return;
-	}
-
-	switch (Code)
-	{
-		case (MainData.Const.LOGIN_ServerDown):
-			ErrorLabel.innerHTML = UTILS_GetText("login_server_down");
-			break;
-
-		case (MainData.Const.LOGIN_ConnectionRefused):
-			ErrorLabel.innerHTML = UTILS_GetText("login_connection_refused");
-			break;
-
-		case (MainData.Const.LOGIN_InvalidUser):
-			ErrorLabel.innerHTML = UTILS_GetText("login_invalid_user");
-			break;
-		case (MainData.Const.LOGIN_BannedUser):
-			ErrorLabel.innerHTML = UTILS_GetText("login_banned_user");
-			break;
-		case (MainData.Const.LOGIN_ConnectionClosed):
-			ErrorLabel.innerHTML = UTILS_GetText("login_connection_closed")
-
-			break;
-	}
+	//Show error message
+	INTERFACE_ShowErrorMessage(Msg);
 
 	//Enable inputs
 	INTERFACE_LoginEnableInput();

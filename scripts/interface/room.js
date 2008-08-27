@@ -353,7 +353,7 @@ function INTERFACE_HideGameRoomList()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
+function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 {
 	// Get game menu
 	var Node = document.getElementById("GameRoomMenuDiv");
@@ -377,23 +377,23 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 	}
 
 	// Create elements and insert rooms
-	Room = UTILS_CreateElement("li", null, null, GameName);
+	Room = UTILS_CreateElement("li", null, null, PW.Name+" x "+PB.Name);
 
 	Room.onclick = function(){
 		var Buffer="";
 		var To;
 
-		//if user is not playing or observe a game
+		//Check if user is not playing or observe a game
 		if(MainData.CurrentGame == null)
 		{
-			if((P1.Name!= MainData.Username) &&(P2.Name != MainData.Username))
+			if((PB.Name!= MainData.Username) &&(PW.Name != MainData.Username))
 			{
-				Buffer += GAME_StartObserverGame(GameId, P1, P2);				
+				Buffer += GAME_StartObserverGame(GameId, PW, PB);				
 			}
 			else
 			{
 				//Open game board and enter game in room
-				Buffer += GAME_StartGame(GameId, P1, P2);
+				Buffer += GAME_StartGame(GameId, PW, PB);
 				To = GameId+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
 				Buffer += MESSAGE_Presence(To)
 			}

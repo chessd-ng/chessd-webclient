@@ -335,7 +335,14 @@ function INTERFACE_ClearError()
 function INTERFACE_ShowLoginMessage(Msg)
 {
 	var LoginMsg = document.getElementById("LoginMessage");
-	LoginMsg.innerHTML = Msg;
+	if(Msg != null)
+	{
+		LoginMsg.innerHTML = Msg;
+	}
+	else
+	{
+		LoginMsg.innerHTML = "";
+	}
 	LoginMsg.style.display = "block";
 }
 
@@ -343,4 +350,32 @@ function INTERFACE_HideLoginMessage()
 {
 	var LoginMsg = document.getElementById("LoginMessage");
 	LoginMsg.style.display = "none";
+}
+
+function INTERFACE_ShowErrorMessage(Msg)
+{
+	var ErrorMsg = document.getElementById("ErrorLabel");
+
+	if(ErrorMsg == null)
+	{
+		return null;
+	}
+
+	if(Msg != null)
+	{
+		ErrorMsg.innerHTML = Msg;
+	}
+	else
+	{
+		ErrorMsg.innerHTML = "";
+	}
+
+	ErrorMsg.style.display = "block";
+}
+
+function INTERFACE_HideErrorMessage()
+{
+	var ErrorMsg = document.getElementById("ErrorLabel");
+
+	ErrorMsg.style.display = "none";
 }
