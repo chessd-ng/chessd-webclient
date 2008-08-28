@@ -812,8 +812,30 @@ function UTILS_ConvertTime(Seconds)
 	return TimeFormat;
 }
 
+/*
+* Disable selection text inside a element
+*
+* @param 	Element	HTML elements
+* @return 	False	Aways return false to disable seletion
+* @author	Rubens Suguimoto
+*/
 
+/* Code from:
+*http://ajaxcookbook.org/disable-text-selection/
+*/
+function UTILS_DisableSelection(Element)
+{
+	// IE disable selection method
+	Element.onselectstart = function() {
+		return false;
+	};
 
+	Element.unselectable = "on";
+	Element.style.MozUserSelect = "none";
+	Element.style.cursor = "default";
+	
+	return false;
+}
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
  ************************************/

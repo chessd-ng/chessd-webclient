@@ -192,6 +192,9 @@ function INTERFACE_CreateTimer()
 	TimerDiv.appendChild(PWTimer);
 	TimerDiv.appendChild(PBTimer);
 
+	// Set timer div text unselectable
+	UTILS_DisableSelection(TimerDiv);
+
 	return {Div:TimerDiv, WTimer:PWTimer, BTimer:PBTimer};
 }
 
@@ -314,6 +317,9 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	PhotoDiv.appendChild(PBPawn);
 	PhotoDiv.appendChild(PWName);
 	PhotoDiv.appendChild(PBName);
+
+	// Set photo div text unselectable
+	UTILS_DisableSelection(PhotoDiv);
 	
 	return {Div:PhotoDiv, WPhoto:PWPhoto, BPhoto:PBPhoto, WName:PWName, BName:PBName};
 }
@@ -394,6 +400,9 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 		IndexV.appendChild(IndexItem);
 	}
 
+	// Set vertical index text unselectable
+	UTILS_DisableSelection(IndexV);
+
 	return IndexV;
 }
 
@@ -427,6 +436,10 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 
 		IndexH.appendChild(IndexItem);
 	}
+
+	// Set vertical index text unselectable
+	UTILS_DisableSelection(IndexH);
+
 	return IndexH;
 }
 
