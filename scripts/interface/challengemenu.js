@@ -87,9 +87,9 @@ function INTERFACE_CreateChallengeMenu()
 	AnnounceList.appendChild(AnnounceLine);
 	AnnounceList.appendChild(AnnounceButton);
 	AnnounceList.appendChild(NoAnnounce);
+	AnnounceList.appendChild(LoadingAnnounce);
 	PostponeList.appendChild(PostponeTitle);
 	PostponeList.appendChild(NoPostpone);
-	PostponeList.appendChild(LoadingAnnounce);
 
 	ChallengeDiv.appendChild(MatchOfferList);
 	ChallengeDiv.appendChild(AnnounceList);
