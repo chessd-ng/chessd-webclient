@@ -1,5 +1,7 @@
 body {
 	font-family		: arial, sans-serif, Trebuchet MS;
+	/*Active hover property to IE*/
+	behavior:		: url("../css/csshover2.htc");
 }
 
 #LoginDiv p{
