@@ -122,6 +122,7 @@
 	border			: 1px solid #216778;
 	height			: 118px;
 	overflow		: auto;
+	padding			: 0px 5px;
 	/*
 	height			: 31mm;
 	*/
@@ -134,6 +135,10 @@
 	border			: 0px;
 	font-size		: 11px;
 	color			: #216778;
+}
+
+#Chat #ChatList li ul li.error {
+	color			: #FF1111;
 }
 
 #Chat #ChatList li input {

@@ -117,6 +117,7 @@
 		<room_hide_user_list>Ocultar usuários da sala</room_hide_user_list>
 		<room_counter>caractere(s)</room_counter>
 		<room_loading>Carregando sala...</room_loading>
+		<room_error_message_length>Número máximo de caracteres excedido(%s)</room_error_message_length>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>

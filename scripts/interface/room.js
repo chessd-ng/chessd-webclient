@@ -55,6 +55,7 @@ function RoomObj(Roomname)
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
+	this.addMsgError = INTERFACE_AddMsgErrorInRoom;
 	this.focus = INTERFACE_FocusRoomInput;
 	this.showUserList = INTERFACE_ShowRoomUserList;
 	this.hideUserList = INTERFACE_HideRoomUserList;
@@ -98,9 +99,16 @@ function INTERFACE_CreateRoom(RoomName)
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			// Send message to room
-			ROOM_SendMessage(RoomName, Input.value);
-			Input.value = "";
+			if( Input.value.length <= MainData.MaxChatChar)
+			{
+				// Send message to room
+				ROOM_SendMessage(RoomName, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				ROOM_ErrorMessageLength(RoomName);
+			}
 		}
 	}
 
@@ -117,9 +125,16 @@ function INTERFACE_CreateRoom(RoomName)
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			// Send message to room
-			ROOM_SendMessage(RoomName, Input.value);
-			Input.value = "";
+			if(Input.value.length < 2000)
+			{
+				// Send message to room
+				ROOM_SendMessage(RoomName, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				ROOM_ErrorMessageLength(RoomName);
+			}
 		}
 	}
 
@@ -215,6 +230,16 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	this.msgList.scrollTop += Item.clientHeight + 1000;
 
 	return true;
+}
+
+function INTERFACE_AddMsgErrorInRoom(Msg)
+{
+	var Item;
+
+	Item = UTILS_CreateElement("li", null, "error", Msg);
+
+	this.msgList.appendChild(Item);
+	this.msgList.scrollTop += Item.clientHeight + 1000;
 }
 
 /* Refresh room's occupants number

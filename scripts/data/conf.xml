@@ -9,6 +9,7 @@
 		<emoticon-num>35</emoticon-num>
 		<default-lang>pt_BR</default-lang>
 		<default-php>php</default-php>
+		<max-chat-char>2000</max-chat-char>
 	</general>
 	<jabber>
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>

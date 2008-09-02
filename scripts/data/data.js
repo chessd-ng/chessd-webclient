@@ -66,6 +66,7 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.RoomDefault = UTILS_GetTag(Params, "room-default");
+	this.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
 	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");

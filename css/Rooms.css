@@ -177,6 +177,9 @@
 	color			: #216778;
 }
 
+#Main #Left #Rooms .Room .MessageList li.error{
+	color			: #FF1111;
+}
 #Main #Left #Rooms .Room .MessageList li strong{
 	font-size		: 10px;
 }

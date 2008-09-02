@@ -45,6 +45,7 @@ function ChatObj(Username, Position)
 	this.maximize = INTERFACE_MaximizeChat;
 
 	this.addMessage = INTERFACE_AddChatMessage;
+	this.addMessageError = INTERFACE_AddChatMessageError;
 	this.inputFocus = INTERFACE_InputChatFocus;
 	this.setPosition = INTERFACE_SetChatPosition;
 	this.setTitle = INTERFACE_SetChatTitle;
@@ -162,6 +163,17 @@ function INTERFACE_AddChatMessage(Username, Message)
 	return true;
 }
 
+function INTERFACE_AddChatMessageError(Message)
+{
+	var Item;
+
+	Item = UTILS_CreateElement("li", null, "error", Message);
+
+	this.chatList.appendChild(Item);
+	this.chatList.scrollTop = this.chatList.scrollHeight + this.chatList.clientHeight;
+
+}
+
 /*
 * Set focus in input element 
 *
@@ -227,9 +239,16 @@ function INTERFACE_CreateChat(Username)
 	Input.onkeypress = function (event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			// Send chat message
-			CHAT_SendMessage(Username, Input.value);
-			Input.value = "";
+			if(Input.value.length <= MainData.MaxChatChar)
+			{
+				// Send chat message
+				CHAT_SendMessage(Username, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				CHAT_ErrorMessageLength(Username);
+			}
 		}
 	}
 	

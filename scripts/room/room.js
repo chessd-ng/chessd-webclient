@@ -607,6 +607,25 @@ function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 	return "";
 }
 
+function ROOM_ErrorMessageLength(RoomName)
+{
+	var Room = MainData.GetRoom(RoomName);
+	var Message;
+	var Limit = MainData.MaxChatChar;
+
+	if(Room == null)
+	{
+		return "";
+	}
+	
+	Message = UTILS_GetText("room_error_message_length");
+	Message = Message.replace("%s",Limit);
+	Room.Room.addMsgError(Message);
+
+	return "";
+
+}
+
 /** 
 * Insert user in room list 
 */ 

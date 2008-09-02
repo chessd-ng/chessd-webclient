@@ -323,6 +323,30 @@ function CHAT_ReceiveMessage(Username, Message)
 	return "";
 }
 
+function CHAT_ErrorMessageLength(Username)
+{
+	var ChatPos = MainData.FindChat(Username);
+	var ChatObj;
+	var Message;
+	var Limit = MainData.MaxChatChar;
+
+	if(ChatPos != null)
+	{
+		ChatObj = MainData.GetChat(Username);
+		//Quick fix
+		ChatObj = ChatObj.Chat;
+	}
+	else
+	{
+		return "";
+	}
+
+        Message = UTILS_GetText("room_error_message_length");
+        Message = Message.replace("%s",Limit);
+
+	ChatObj.addMessageError(Message);
+}
+
 function CHAT_ChangeUserChatStatus(Username, Status)
 {
 	var ChatObj;
