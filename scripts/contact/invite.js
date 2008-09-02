@@ -112,7 +112,7 @@ function CONTACT_ReceiveSubscribe(Username)
 	else 
 	{
 		Title = UTILS_GetText("contact_invite");
-		Text = UTILS_GetText("contact_invite_text").replace(/%s/, UTILS_Capitalize(Username));
+		Text = UTILS_GetText("contact_invite_text").replace(/%s/, "<strong>"+UTILS_Capitalize(Username)+"</strong>");
 		Button1 = new Object();
 		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {

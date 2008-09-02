@@ -449,8 +449,8 @@ function INTERFACE_CreateContact()
 
 	ContactTitleOnline = UTILS_CreateElement("li", null, "contact_selec");
 
-	ContactTitleContactsSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_contacts"));
-	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_online"));
+	ContactTitleContactsSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_contacts"));
+	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_online"));
 
 	ContactTitleContacts.onclick = function(){
 		ContactTitleContacts.className = "contact_selec";

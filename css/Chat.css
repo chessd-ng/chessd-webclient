@@ -28,7 +28,6 @@
 /* chat title */
 #Chat #ChatList .title {
 	background-color: #216778;
-	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
 	height			: 16px;
@@ -44,7 +43,6 @@
 
 #Chat #ChatList .title_selec {
 	background-color	: #FFA200;
-	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
 	text-indent		: 12px;
@@ -55,6 +53,11 @@
 	text-indent		: 3mm;
 	height			: 4mm;
 	*/
+}
+
+#Chat #ChatList .title_selec span,
+#Chat #ChatList .title span {
+	font-weight		: bold;
 }
 
 #Chat #ChatInner {
@@ -156,4 +159,8 @@
 	height			: 4mm;
 	top			: 0mm;
 	*/
+}
+
+#Chat #ChatList strong {
+	font-weight : bold;
 }

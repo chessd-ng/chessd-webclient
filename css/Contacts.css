@@ -45,9 +45,13 @@
 	*/
 	width			: 98px;
 	padding			: 3px 0px 2px 4px;
+	font-weight : bold;
 	overflow : hidden;
 }
 
+#Main #Left #Contact #ContactTitle span.bold {
+	font-weight : bold;
+}
 
 #Main #Left #Contact #ContactTitle li.contact_selec {
 	background-color	: #FFA200;

@@ -358,7 +358,7 @@ function INTERFACE_ShowErrorMessage(Msg)
 
 	if(ErrorMsg == null)
 	{
-		return null;
+		return false;
 	}
 
 	if(Msg != null)
@@ -371,6 +371,8 @@ function INTERFACE_ShowErrorMessage(Msg)
 	}
 
 	ErrorMsg.style.display = "block";
+
+	return true;
 }
 
 function INTERFACE_HideErrorMessage()
