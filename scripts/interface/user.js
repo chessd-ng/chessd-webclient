@@ -534,6 +534,11 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 
 	if (MainData.Browser == 0)
 	{
+		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+		{
+			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		}
 		Offset = 0;
 	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
@@ -851,6 +856,11 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	
 	if (MainData.Browser == 0)
 	{
+		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+		{
+			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		}
 		Offset = 0;
 	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
