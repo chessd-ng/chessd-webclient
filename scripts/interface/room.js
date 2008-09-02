@@ -676,6 +676,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		{
 			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
 		}
+		RoomItemTitle.style.fontWeight = "bold";
 		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
@@ -701,6 +702,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		{
 			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
 		}
+		RoomItemTitle.style.fontWeight = "bold";
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
