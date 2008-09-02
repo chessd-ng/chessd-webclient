@@ -444,7 +444,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			{
 				Item.className = "offline";
 				Button.className = "inative";
-				Button.onmousedown = false;
+				Button.onmousedown = "false";
 			}
 			else
 			{
