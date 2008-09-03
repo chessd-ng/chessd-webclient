@@ -637,27 +637,27 @@ function INTERFACE_ShowSearchUserWindow()
 	try
 	//Fix radio button for IE
 	{
-		Name = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
+		Name = document.createElement('<input class="radio" type="radio" name="search_user" />');
 	}
 	catch(err) 
 	{
 		Name = UTILS_CreateElement('input',null,'radio');
 		Name.type = "radio";
 		Name.name = "search_user";
-		Name.checked = true;
 	}
 	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
 
 	try
 	//Fix radio button for IE
 	{
-		User = document.createElement('<input class="radio" type="radio" name="search_user" />');
+		User = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
 	}
 	catch(err) 
 	{
 		User= UTILS_CreateElement('input',null,'radio');
 		User.type = "radio";
 		User.name = "search_user";
+		User.checked = true;
 	}
 	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
 
@@ -707,10 +707,10 @@ function INTERFACE_ShowSearchUserWindow()
 	// OptionDiv
 	OptionDiv.appendChild(OptionLabel);
 	OptionDiv.appendChild(Br1);
-	OptionDiv.appendChild(Name);
-	OptionDiv.appendChild(NameLabel);
 	OptionDiv.appendChild(User);
 	OptionDiv.appendChild(UserLabel);
+	OptionDiv.appendChild(Name);
+	OptionDiv.appendChild(NameLabel);
 
 //	OptionDiv.appendChild(Both);
 //	OptionDiv.appendChild(BothLabel);
