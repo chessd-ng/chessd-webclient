@@ -88,6 +88,18 @@
 	height			: 20px;
 }
 
+#Rooms div .UserList table{
+    width           : 140px;
+}
+
+#Rooms div .UserList td{
+    width           : 75px;
+}
+
+#Rooms div .UserList td.rating{
+    width           : 40px;
+}
+
 /******************************/
 /* Challenge.css */
 /******************************/
