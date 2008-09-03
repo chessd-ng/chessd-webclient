@@ -9,6 +9,10 @@ body {
 	font-weight		: normal;
 }
 
+#LoginDiv #FormDiv #checkbox {
+	border : 0px none;
+}
+
 #LoadDiv h1{
 	background		: url("../images/ie/logo.gif") no-repeat;
 	margin			: 10px 0px 30px 0px;

@@ -92,7 +92,7 @@ function INTERFACE_AnnounceWindow()
 	}
 	catch(err)
 	{ //FF
-		ColorOptB = UTILS_CreateElement('input',null);
+		ColorOptB = UTILS_CreateElement('input',null,'radio');
 		ColorOptB.type = "radio";
 		ColorOptB.name = "color";
 		ColorOptB.value = "colorB";

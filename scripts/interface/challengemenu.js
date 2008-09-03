@@ -430,7 +430,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 	var Item, Button;
 	var ItemObj;
 	var Id;
-	
+
 	for(i=0; i< this.PostponeList.length; i++)
 	{
 		if(this.PostponeList[i].OponentName == OponentName)
@@ -444,7 +444,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			{
 				Item.className = "offline";
 				Button.className = "inative";
-				Button.onmousedown = "false";
+				Button.onmousedown = function() {return false;};
 			}
 			else
 			{

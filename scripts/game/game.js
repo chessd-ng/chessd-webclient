@@ -242,7 +242,7 @@ function GAME_State(XML)
 	var History;
 	var HistoryStates;
 
-	var SPlayers;
+	var SPlayer;
 	var State;
 	var WTime, BTime;
 
@@ -985,7 +985,7 @@ function GAME_SendResign(GameID)
 function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 {
 	var i;
-	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort, HShortMove;
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;

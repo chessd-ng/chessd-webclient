@@ -78,6 +78,7 @@
 #AnnounceDiv .rating_radio {
 	margin-top		: 3mm;
 	margin-right	: 1.5mm;
+	border : 0px none;
 }
 
 #AnnounceDiv .italic {
@@ -96,6 +97,7 @@
 
 #AnnounceDiv .radio {
 	margin-top	:	2mm;
+	border : 0px none;
 }
 
 #AnnounceDiv input,

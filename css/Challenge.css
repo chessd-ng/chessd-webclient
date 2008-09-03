@@ -28,6 +28,10 @@
 	margin-bottom	:	0px;
 }
 
+#ChallengeDiv #Layer1Div .radio {
+	border : 0px none;
+}
+
 #ChallengeDiv #Layer1Div #L1RightDiv {
 	float : left;
 }
@@ -91,6 +95,7 @@
 #ChallengeDiv .rating_radio {
 	margin-top		: 3mm;
 	margin-right	: 1.5mm;
+	border : 0px none;
 }
 
 #ChallengeDiv .italic {

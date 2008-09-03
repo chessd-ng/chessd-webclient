@@ -637,11 +637,11 @@ function INTERFACE_ShowSearchUserWindow()
 	try
 	//Fix radio button for IE
 	{
-		Name = document.createElement('<input type="radio" name="search_user" checked="checked" />');
+		Name = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
 	}
 	catch(err) 
 	{
-		Name = UTILS_CreateElement('input');
+		Name = UTILS_CreateElement('input',null,'radio');
 		Name.type = "radio";
 		Name.name = "search_user";
 		Name.checked = true;
@@ -651,11 +651,11 @@ function INTERFACE_ShowSearchUserWindow()
 	try
 	//Fix radio button for IE
 	{
-		User = document.createElement('<input type="radio" name="search_user" />');
+		User = document.createElement('<input class="radio" type="radio" name="search_user" />');
 	}
 	catch(err) 
 	{
-		User= UTILS_CreateElement('input');
+		User= UTILS_CreateElement('input',null,'radio');
 		User.type = "radio";
 		User.name = "search_user";
 	}

@@ -108,11 +108,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		WRadio = document.createElement('<input type="radio" name="color" value="white" />');
+		WRadio = document.createElement('<input class="radio" type="radio" name="color" value="white" />');
 	}
 	catch(err)
 	{
-		WRadio = UTILS_CreateElement('input');
+		WRadio = UTILS_CreateElement('input',null,'radio');
 		WRadio.type = "radio";
 		WRadio.name = "color";
 		WRadio.value = "white";
@@ -124,11 +124,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		BRadio = document.createElement('<input type="radio" name="color" value="black" />');
+		BRadio = document.createElement('<input class="radio" type="radio" name="color" value="black" />');
 	}
 	catch(err)
 	{
-		BRadio = UTILS_CreateElement('input');
+		BRadio = UTILS_CreateElement('input',null,'radio');
 		BRadio.type = "radio";
 		BRadio.name = "color";
 		BRadio.value = "black";
@@ -140,11 +140,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		RRadio = document.createElement('<input type="radio" name="color" value="both" checked="checked" />');
+		RRadio = document.createElement('<input class="radio" type="radio" name="color" value="both" checked="checked" />');
 	}
 	catch(err)
 	{
-		RRadio = UTILS_CreateElement('input');
+		RRadio = UTILS_CreateElement('input',null,'radio');
 		RRadio.type = "radio";
 		RRadio.name = "color";
 		RRadio.value = "both";

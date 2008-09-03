@@ -341,10 +341,12 @@ function CHAT_ErrorMessageLength(Username)
 		return "";
 	}
 
-        Message = UTILS_GetText("room_error_message_length");
-        Message = Message.replace("%s",Limit);
+	Message = UTILS_GetText("room_error_message_length");
+	Message = Message.replace("%s",Limit);
 
 	ChatObj.addMessageError(Message);
+
+	return Message;
 }
 
 function CHAT_ChangeUserChatStatus(Username, Status)
