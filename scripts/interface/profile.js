@@ -521,7 +521,14 @@ function INTERFACE_ProfileSetUserImg(Img)
 	//No user image
 	if(Img != "images/no_photo.png")
 	{
-		this.UserImg.src = IMAGE_ImageDecode(Img);
+		try
+		{
+			this.UserImg.src = IMAGE_ImageDecode(Img);
+		}
+		catch(err)
+		{
+			this.UserImg.src = "images/no_photo.png";
+		}
 	}
 }
 

@@ -402,6 +402,10 @@
 	font-size 		: 10px;
 }
 
+#SearchUserDiv .radio {
+	border : 0px none;
+}
+
 #SearchUserDiv #TopDiv,
 #SearchUserDiv #FormDiv {
 	padding-left		: 20px;

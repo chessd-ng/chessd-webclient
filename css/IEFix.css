@@ -88,6 +88,12 @@
 	height			: 20px;
 }
 
+#Rooms div .UserList,
+#Main #Left #Rooms .Room #EmoticonDiv, 
+#Main #Left #Rooms #RoomListMenu {
+	left : 205px;
+}
+
 /******************************/
 /* Challenge.css */
 /******************************/
