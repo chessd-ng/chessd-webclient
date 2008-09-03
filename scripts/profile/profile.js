@@ -47,7 +47,7 @@ function PROFILE_HandleVCardProfile(XML)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
-		if((Binval == "") || (PhotoType == ""))
+		if(((Binval == undefined) && (PhotoType == undefined)) || ((Binval == "") || (PhotoType == "")))
 		{
 			Img = "images/no_photo.png";
 		}
