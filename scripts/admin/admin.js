@@ -162,10 +162,10 @@ function ADMIN_HandleUserNotification(XML)
 
 	switch(Node.tagName)
 	{
-		case "kick":
+		case "ban":
 			alert(UTILS_GetText("admin_user_ban")+Reason);
 			break;
-		case "ban":
+		case "kick":
 			alert(UTILS_GetText("admin_user_kick")+Reason);
 			break;
 	}	
