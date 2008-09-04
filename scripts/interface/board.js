@@ -192,6 +192,9 @@ function INTERFACE_CreateTimer()
 	TimerDiv.appendChild(PWTimer);
 	TimerDiv.appendChild(PBTimer);
 
+	// Set timer div text unselectable
+	UTILS_DisableSelection(TimerDiv);
+
 	return {Div:TimerDiv, WTimer:PWTimer, BTimer:PBTimer};
 }
 
@@ -221,9 +224,17 @@ function INTERFACE_CreateGameOptions(GameID)
 
 	// Add listeners
 	UTILS_AddListener(OptionDraw, "click", function() {GAME_SendDraw(GameID);}, false);
+	UTILS_AddListener(OptionDraw, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionDraw, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionResign, "click", function() {GAME_SendResign(GameID);}, false);
+	UTILS_AddListener(OptionResign, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionResign, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionFinish, "click", function() {GAME_SendCancel(GameID);}, false);
+	UTILS_AddListener(OptionFinish, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionFinish, "mouseup", function() { this.className = "release";}, false);
 	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
+	UTILS_AddListener(OptionStop, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionStop, "mouseup", function() { this.className = "release";}, false);
 
 	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); }
 	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); }
@@ -306,6 +317,9 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	PhotoDiv.appendChild(PBPawn);
 	PhotoDiv.appendChild(PWName);
 	PhotoDiv.appendChild(PBName);
+
+	// Set photo div text unselectable
+	UTILS_DisableSelection(PhotoDiv);
 	
 	return {Div:PhotoDiv, WPhoto:PWPhoto, BPhoto:PBPhoto, WName:PWName, BName:PBName};
 }
@@ -386,6 +400,9 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 		IndexV.appendChild(IndexItem);
 	}
 
+	// Set vertical index text unselectable
+	UTILS_DisableSelection(IndexV);
+
 	return IndexV;
 }
 
@@ -419,6 +436,10 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 
 		IndexH.appendChild(IndexItem);
 	}
+
+	// Set vertical index text unselectable
+	UTILS_DisableSelection(IndexH);
+
 	return IndexH;
 }
 

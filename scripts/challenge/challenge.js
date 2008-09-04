@@ -183,14 +183,28 @@ function CHALLENGE_HandleOffer(XML)
 		// Get information of player one
 		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
 		Player1.Inc = Players[0].getAttribute('inc');
-		Player1.Color = Players[0].getAttribute('color'); 
-		Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
+		Player1.Color = Players[0].getAttribute('color');
+		if(Players[0].getAttribute("time") == "untimed")
+		{
+			Player1.Time = Players[0].getAttribute('time');
+		}
+		else
+		{
+			Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
+		}
 		
 		// Get information of player two
 		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
 		Player2.Inc = Players[1].getAttribute('inc');
 		Player2.Color = Players[1].getAttribute('color');
-		Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
+		if(Players[1].getAttribute("time") == "untimed")
+		{
+			Player2.Time = Players[1].getAttribute('time');
+		}
+		else
+		{
+			Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
+		}
 
 
 		// Add the challenge in structure
@@ -397,7 +411,10 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	}
 
 	// Convert time in seconds
-	Time *= 60;
+	if(Time != "untimed")
+	{
+		Time *= 60;
+	}
 
 	// Setting attributes
 	Player1.Name = MainData.Username;
@@ -575,28 +592,37 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	// This function is used to hide challenge menu
 	// TODO -> need fix
 	Func = function(){
-		Hide += 1;
+		//Hide += 1;
 
-		//if(MainData.ChallengeMenu.MenuVisible == true)
-		if(Hide == 2)
+		if(MainData.ChallengeMenu.MenuVisible == true)
+		//if(Hide == 2)
 		{
-			UTILS_RemoveListener(document,"click",Func,false);
+			UTILS_RemoveListener(document,"mousedown",Func,false);
 
 			// Hide Challenge menu from screen
 			CHALLENGE_HideChallengeMenu();
 		}
 	}
 
-	UTILS_AddListener(document, "click",Func,false);
+	UTILS_AddListener(document, "mousedown",Func,false);
+
+	// TODO - Quick fix - but this will be removed
+	var Exit = document.getElementById("ExitButton");
+	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
 
 	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
+
+	CHALLENGE_ClearAnnounce();
+	
+	ANNOUNCE_HideNoAnnounce();
+	ANNOUNCE_ShowLoadingAnnounce();
 
 	// Get adjourn games list
 	/*
 	CHALLENGE_GetAdjournGames();
 	ANNOUNCE_GetAnnounceGames();
 	*/
-	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","",""));
+	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
 
 	return "";
 }
@@ -649,4 +675,34 @@ function CHALLENGE_ClearChallenges()
 	MainData.ClearChallenges();
 
 	return "";
+}
+
+/**
+ * @brief	Remove all announces from main data and interface
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
+ */
+function CHALLENGE_ClearAnnounce()
+{
+	var i;
+	var AnnounceId;
+
+	// Remove all challenges from challenge menu
+	for(i=0;i<MainData.AnnounceList.length; i++)
+	{
+		AnnounceId = MainData.AnnounceList[i].Id;
+		ChallengeWindow = MainData.AnnounceList[i].Window;
+
+		if(AnnounceId != null)
+		{
+			//CHALLENGE_DeclineChallenge(MatchID);
+			MainData.ChallengeMenu.removeAnnounce(AnnounceId);
+		}
+
+	}
+
+	// Remove all challenges from main data
+	MainData.ClearAnnounces();
+
 }

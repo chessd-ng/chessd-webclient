@@ -12,6 +12,8 @@ function ChallengeMenuObj()
 	this.NoAnnounce = Challenge.NoAnnounce; 
 	this.NoPostpone = Challenge.NoPostpone;
 
+	this.LoadingAnnounce = Challenge.LoadingAnnounce;
+
 	this.MenuVisible = false;
 	this.MatchVisible = false;
 	this.AnnounceVisible = false;
@@ -31,6 +33,8 @@ function ChallengeMenuObj()
 	this.removeAnnounce = INTERFACE_RemoveAnnounce;
 	this.showNoAnnounce = INTERFACE_ShowNoAnnounce;
 	this.hideNoAnnounce = INTERFACE_HideNoAnnounce;
+	this.showLoadingAnnounce = INTERFACE_ShowLoadingAnnounce;
+	this.hideLoadingAnnounce = INTERFACE_HideLoadingAnnounce;
 
 	this.addPostpone = INTERFACE_AddPostpone;
 	this.removePostpone = INTERFACE_RemovePostpone;
@@ -48,6 +52,9 @@ function ChallengeMenuObj()
 	this.hideMatch = INTERFACE_HideMatchOfferList;
 	this.hideAnnounce= INTERFACE_HideAnnounceList;
 	this.hidePostpone = INTERFACE_HidePostponeList;
+
+	//Action
+	this.hideLoadingAnnounce();
 }
 
 function INTERFACE_CreateChallengeMenu()
@@ -68,8 +75,10 @@ function INTERFACE_CreateChallengeMenu()
 	var NoAnnounce = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_announce"));
 	var NoPostpone = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_no_postpone"));
 
-	AnnounceButton.onclick = function(){
-		WINDOW_AnnounceWindow(MainData.Username, MainData.GetUserRatingInRoom(MainData.RoomDefault,MainData.Username), "blitz");
+	var LoadingAnnounce = UTILS_CreateElement("li",null,"text",UTILS_GetText("challenge_menu_loading_announce"));
+
+	AnnounceButton.onmousedown = function(){
+		WINDOW_AnnounceWindow();
 	}
 
 	MatchOfferList.appendChild(MatchOfferTitle);
@@ -78,6 +87,7 @@ function INTERFACE_CreateChallengeMenu()
 	AnnounceList.appendChild(AnnounceLine);
 	AnnounceList.appendChild(AnnounceButton);
 	AnnounceList.appendChild(NoAnnounce);
+	AnnounceList.appendChild(LoadingAnnounce);
 	PostponeList.appendChild(PostponeTitle);
 	PostponeList.appendChild(NoPostpone);
 
@@ -85,7 +95,7 @@ function INTERFACE_CreateChallengeMenu()
 	ChallengeDiv.appendChild(AnnounceList);
 	ChallengeDiv.appendChild(PostponeList);
 
-	return { Div:ChallengeDiv,  MatchList:MatchOfferList, AnnounceList:AnnounceList, PostponeList:PostponeList, NoMatch:NoMatch, NoAnnounce:NoAnnounce, NoPostpone:NoPostpone};
+	return { Div:ChallengeDiv,  MatchList:MatchOfferList, AnnounceList:AnnounceList, PostponeList:PostponeList, NoMatch:NoMatch, NoAnnounce:NoAnnounce, NoPostpone:NoPostpone, LoadingAnnounce:LoadingAnnounce};
 }
 
 function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
@@ -105,7 +115,16 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 		Item = UTILS_CreateElement("li",null,Oponent.Color);
 	}
 
-	PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	if (Oponent.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,7));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	}
 	PTime = UTILS_CreateElement("p","time", null, Time+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc+'"');
 
@@ -133,7 +152,7 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 
 	PButton = UTILS_CreateElement("p","button","decline");
 
-	PButton.onclick = function(){
+	PButton.onmousedown = function(){
 		CHALLENGE_DeclineChallenge(MatchId);
 	}
 
@@ -220,9 +239,17 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		Item = UTILS_CreateElement("li",null,Player.Color);
 	}
 
-
-	PName = UTILS_CreateElement("p","name", null, Player.Name);
-	PTime = UTILS_CreateElement("p","time", null, Time);
+	if (Player.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Player.Name,6));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Player.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Player.Name);
+	}
+	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc);
 
 	/*// This feature is not implemented yet
@@ -250,14 +277,14 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	if(Player.Name == MainData.Username)
 	{
 		PButton = UTILS_CreateElement("p","button","decline");
-		PButton.onclick = function(){
+		PButton.onmousedown = function(){
 			ANNOUNCE_RemoveAnnounce(Id);
 		}
 	}
 	else
 	{
 		PButton = UTILS_CreateElement("p","button","accept");
-		PButton.onclick = function(){
+		PButton.onmousedown = function(){
 			ANNOUNCE_AcceptAnnounce(Id);
 		}
 	}
@@ -324,13 +351,22 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	var ItemObj = new Object();
 
 	Item = UTILS_CreateElement("li",null,Oponent.Color);
-	PName = UTILS_CreateElement("p","name",null,Oponent.Name);
+	if (Oponent.Name.length > 9)
+	{
+		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,6));
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+	}
+	else
+	{
+		PName = UTILS_CreateElement("p","name", null, Oponent.Name);
+	}
 	PCategory = UTILS_CreateElement("p","category",null,Category);
 	PDate = UTILS_CreateElement("p","date",null,Date);
 	PButton = UTILS_CreateElement("p","button","inative");
 
 	/*
-	PButton.onclick = function(){
+	PButton.onmousedown = function(){
 		CHALLENGE_SendResumeGame(PostponeId);
 	}
 	*/
@@ -394,7 +430,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 	var Item, Button;
 	var ItemObj;
 	var Id;
-	
+
 	for(i=0; i< this.PostponeList.length; i++)
 	{
 		if(this.PostponeList[i].OponentName == OponentName)
@@ -408,14 +444,14 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			{
 				Item.className = "offline";
 				Button.className = "inative";
-				Button.onclick = false;
+				Button.onmousedown = function() {return false;};
 			}
 			else
 			{
 				//Item.className = ItemObj.OponentColor;
 				Item.className = this.PostponeList[i].OponentColor;
 				Button.className = "accept";
-				Button.onclick = function(){
+				Button.onmousedown = function(){
 					CHALLENGE_SendResumeGame(Id);
 				};
 			}
@@ -438,7 +474,15 @@ function INTERFACE_ShowChallengeMenu(Left, Top)
 	else
 	{
 		this.Menu.style.left = Left+"px";
-		this.Menu.style.top = Top+"px";
+		// Quick fix for IE
+		if (MainData.Browser == 0)
+		{
+			this.Menu.style.top = "80px";
+		}
+		else
+		{
+			this.Menu.style.top = Top+"px";
+		}
 	}
 
 	this.Menu.style.display = "block";
@@ -517,4 +561,14 @@ function INTERFACE_ShowNoPostpone()
 function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none";
+}
+
+function INTERFACE_ShowLoadingAnnounce()
+{
+	this.LoadingAnnounce.style.display = "block";
+}
+
+function INTERFACE_HideLoadingAnnounce()
+{
+	this.LoadingAnnounce.style.display = "none";
 }

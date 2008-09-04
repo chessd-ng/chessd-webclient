@@ -1,4 +1,4 @@
-/**
+/*
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -200,6 +200,8 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 
 	TitleBar.id = "TitleBar";
 	TitleBar.style.width = Width+"px";
+	//Set title bar text unselectable
+	UTILS_DisableSelection(TitleBar);
 
 	//Drag and Drop Window
 	UTILS_AddListener(TitleBar, "mousedown", function(event){ UTILS_StartDragWindow(event, WindowBox); }, false);

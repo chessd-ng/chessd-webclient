@@ -55,16 +55,16 @@ function INTERFACE_HelpWindow()
 	PlayList = UTILS_CreateElement("ul", "PlayList");
 
 	// 1 - How Item
-	L1 = UTILS_CreateElement("li","How.1T","unselected",UTILS_GetText("help_t_1"));
+	L1 = UTILS_CreateElement("li","How.1T","selected",UTILS_GetText("help_t_1"));
 	INTERFACE_HelpDisplay(L1, "How.1");
-	C1 = UTILS_CreateElement("li","How.1C","hide_help");
+	C1 = UTILS_CreateElement("li","How.1C","show_help");
 
 		// 1.1 - Play
 		L2 = UTILS_CreateElement("li","How.1.1T","unselected",UTILS_GetText("help_t_1_1"));
 		INTERFACE_HelpDisplay(L2, "How.1.1");
 		C2 = UTILS_CreateElement("li","How.1.1C","hide_help");
 
-			// 1.1.1 - Accept match offer
+			// 1.1.1 - Challenge unique user
 			L3 = UTILS_CreateElement("li","How.1.1.1T","unselected",UTILS_GetText("help_t_1_1_1"));
 			INTERFACE_HelpDisplay(L3, "How.1.1.1");
 			C3 = UTILS_CreateElement("li","How.1.1.1C","hide_help");
@@ -73,13 +73,21 @@ function INTERFACE_HelpWindow()
 			PlayList.appendChild(L3);
 			PlayList.appendChild(C3);
 
-
-			// 1.1.2 - Challenge unique user
+			// 1.1.2 - Accept match offer
 			L3 = UTILS_CreateElement("li","How.1.1.2T","unselected",UTILS_GetText("help_t_1_1_2"));
 			INTERFACE_HelpDisplay(L3, "How.1.1.2");
 			C3 = UTILS_CreateElement("li","How.1.1.2C","hide_help");
 			C3.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_1_2")));
 			// Appending elements of section 1.1.2
+			PlayList.appendChild(L3);
+			PlayList.appendChild(C3);
+
+			// 1.1.3 - Announce a game
+			L3 = UTILS_CreateElement("li","How.1.1.3T","unselected",UTILS_GetText("help_t_1_1_3"));
+			INTERFACE_HelpDisplay(L3, "How.1.1.3");
+			C3 = UTILS_CreateElement("li","How.1.1.3C","hide_help");
+			C3.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_1_3")));
+			// Appeding elements of section 1.1.3
 			PlayList.appendChild(L3);
 			PlayList.appendChild(C3);
 
@@ -90,7 +98,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.2 - Chat with user
+		// 1.2 - Search user
 		L2 = UTILS_CreateElement("li","How.1.2T","unselected",UTILS_GetText("help_t_1_2"));
 		INTERFACE_HelpDisplay(L2, "How.1.2");
 		C2 = UTILS_CreateElement("li","How.1.2C","hide_help");
@@ -99,7 +107,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.3 - Chat in room
+		// 1.3 - Chat with user
 		L2 = UTILS_CreateElement("li","How.1.3T","unselected",UTILS_GetText("help_t_1_3"));
 		INTERFACE_HelpDisplay(L2, "How.1.3");
 		C2 = UTILS_CreateElement("li","How.1.3C","hide_help");
@@ -108,7 +116,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.4 - View user's profile
+		// 1.4 - Chat in room 
 		L2 = UTILS_CreateElement("li","How.1.4T","unselected",UTILS_GetText("help_t_1_4"));
 		INTERFACE_HelpDisplay(L2, "How.1.4");
 		C2 = UTILS_CreateElement("li","How.1.4C","hide_help");
@@ -117,7 +125,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.5 - Add user in contact list
+		// 1.5 - Show or hide room's user list
 		L2 = UTILS_CreateElement("li","How.1.5T","unselected",UTILS_GetText("help_t_1_5"));
 		INTERFACE_HelpDisplay(L2, "How.1.5");
 		C2 = UTILS_CreateElement("li","How.1.5C","hide_help");
@@ -126,7 +134,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.6 - Remove user from contact list
+		// 1.6 - See another user's profile
 		L2 = UTILS_CreateElement("li","How.1.6T","unselected",UTILS_GetText("help_t_1_6"));
 		INTERFACE_HelpDisplay(L2, "How.1.6");
 		C2 = UTILS_CreateElement("li","How.1.6C","hide_help");
@@ -135,7 +143,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.7 - Change status
+		// 1.7 - Add user in contact list
 		L2 = UTILS_CreateElement("li","How.1.7T","unselected",UTILS_GetText("help_t_1_7"));
 		INTERFACE_HelpDisplay(L2, "How.1.7");
 		C2 = UTILS_CreateElement("li","How.1.7C","hide_help");
@@ -144,7 +152,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.8 - Change profile
+		// 1.8 - Remove user from contact list
 		L2 = UTILS_CreateElement("li","How.1.8T","unselected",UTILS_GetText("help_t_1_8"));
 		INTERFACE_HelpDisplay(L2, "How.1.8");
 		C2 = UTILS_CreateElement("li","How.1.8C","hide_help");
@@ -153,7 +161,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.9 - Create chat room
+		// 1.9 - Create status
 		L2 = UTILS_CreateElement("li","How.1.9T","unselected",UTILS_GetText("help_t_1_9"));
 		INTERFACE_HelpDisplay(L2, "How.1.9");
 		C2 = UTILS_CreateElement("li","How.1.9C","hide_help");
@@ -162,7 +170,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.10 - Watch game
+		// 1.10 - Change profile
 		L2 = UTILS_CreateElement("li","How.1.10T","unselected",UTILS_GetText("help_t_1_10"));
 		INTERFACE_HelpDisplay(L2, "How.1.10");
 		C2 = UTILS_CreateElement("li","How.1.10C","hide_help");
@@ -171,7 +179,7 @@ function INTERFACE_HelpWindow()
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 
-		// 1.11 - Search old game
+		// 1.11 - Enter chat room
 		L2 = UTILS_CreateElement("li","How.1.11T","unselected",UTILS_GetText("help_t_1_11"));
 		INTERFACE_HelpDisplay(L2, "How.1.11");
 		C2 = UTILS_CreateElement("li","How.1.11C","hide_help");
@@ -185,24 +193,46 @@ function INTERFACE_HelpWindow()
 		INTERFACE_HelpDisplay(L2, "How.1.12");
 		C2 = UTILS_CreateElement("li","How.1.12C","hide_help");
 		C2.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_12")));
-		// Add function to anchor element in C2 content (Display How 1.11 section content)
-		var Anchor = C2.getElementsByTagName("a");
-		Anchor[0].onclick = function() {
-			INTERFACE_ShowLinkContent("How.1.11");
-		}
 		// Appeding elements of section 1.12
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
 	
-		// 1.13 - Announce a game
+		// 1.13 - Watch game
 		L2 = UTILS_CreateElement("li","How.1.13T","unselected",UTILS_GetText("help_t_1_13"));
 		INTERFACE_HelpDisplay(L2, "How.1.13");
 		C2 = UTILS_CreateElement("li","How.1.13C","hide_help");
 		C2.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_13")));
-		// Appeding elements of section 1.3
+		// Appeding elements of section 1.13
 		HowList.appendChild(L2);
 		HowList.appendChild(C2);
-
+	
+		// 1.14 - Search old games
+		L2 = UTILS_CreateElement("li","How.1.14T","unselected",UTILS_GetText("help_t_1_14"));
+		INTERFACE_HelpDisplay(L2, "How.1.14");
+		C2 = UTILS_CreateElement("li","How.1.14C","hide_help");
+		C2.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_14")));
+		// Appeding elements of section 1.14
+		HowList.appendChild(L2);
+		HowList.appendChild(C2);
+	
+		// 1.15 - Examine game
+		L2 = UTILS_CreateElement("li","How.1.15T","unselected",UTILS_GetText("help_t_1_15"));
+		INTERFACE_HelpDisplay(L2, "How.1.15");
+		C2 = UTILS_CreateElement("li","How.1.15C","hide_help");
+		C2.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_15")));
+		// Appeding elements of section 1.15
+		HowList.appendChild(L2);
+		HowList.appendChild(C2);
+	
+		// 1.16 - Help
+		L2 = UTILS_CreateElement("li","How.1.16T","unselected",UTILS_GetText("help_t_1_16"));
+		INTERFACE_HelpDisplay(L2, "How.1.16");
+		C2 = UTILS_CreateElement("li","How.1.16C","hide_help");
+		C2.appendChild(INTERFACE_CreateHelpContent(UTILS_GetText("help_c_1_16")));
+		// Appeding elements of section 1.16
+		HowList.appendChild(L2);
+		HowList.appendChild(C2);
+	
 	// Appending how list 
 	C1.appendChild(HowList);
 

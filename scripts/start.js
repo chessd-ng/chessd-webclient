@@ -46,12 +46,12 @@ function START_StartPage()
 		//Lang = UTILS_GetLanguage();
 		
 		// Get default lang from configuration file
-		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml");
+		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml?"+NoCache.TimeStamp);
 		Lang = UTILS_GetTag(ConfTmp, "default-lang");
 	}
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
 	MainData.Lang = Lang;
 	
 	INTERFACE_StartLogin(Lang);
@@ -71,7 +71,8 @@ function START_ChangeLanguage(Lang)
 	INTERFACE_EndLogin();
 
 	// Reload MainData with configurations and new language selected
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+//	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
+	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
 	// Create cookie for new language
 	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
 
@@ -99,7 +100,6 @@ function START_Webclient()
 
 	XMPP += MESSAGE_UserList();
 	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);
-	XMPP += MESSAGE_UserListInfo();
 	XMPP += MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
 	XMPP += MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username);
@@ -124,4 +124,38 @@ function START_Webclient()
 
 	// Set away counter
 	CONTACT_StartAwayCounter();
+}
+/*
+*	@brief Stop interface and reload files
+*
+*	@author Danilo Yorinori
+*/
+function START_Restart()
+{
+	INTERFACE_StopInterface();
+
+	CONTACT_StopAwayStatus();
+
+	delete MainData;
+
+	// Get new timestamp
+	NoCache.TimeStamp = "";
+	NoCache.TimeStamp += NoCache.DateTime.getMonth();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
+	NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
+	NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
+	NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
+
+	// Reload Scripts
+	LOAD_ReloadFiles();
+
+	//START_StartPage();
+	INITIAL_LoadScripts();
+
+	// Verify browser and if IE then append related css file
+	if(MainData.Browser == 0)
+	{
+		LOAD_IECssFile();
+	}
 }

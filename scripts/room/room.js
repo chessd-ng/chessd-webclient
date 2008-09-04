@@ -209,8 +209,9 @@ function ROOM_HandleMessage(XML)
 */
 function ROOM_HandleRoomList(XML)
 {
-	var Items, Rooms, RoomName, ID,  i;
+	var Items, Rooms, Room, RoomName, ID, i;
 	var Buffer = "";
+	var Exp = new RegExp("^"+MainData.RoomDefault+"$");
 
 	Rooms = new Array();
 
@@ -222,7 +223,6 @@ function ROOM_HandleRoomList(XML)
 	{
 		Buffer += ROOM_HandleGameRoomList(XML);
 	}
-	
 	// Chat Room List
 	else
 	{
@@ -232,12 +232,17 @@ function ROOM_HandleRoomList(XML)
 		// Find room names
 		for (i=0; i < Items.length; i++)
 		{
-			Rooms[i] = Items[i].getAttribute("name");
+			Room = new Object();
+
+			Room.Id = Items[i].getAttribute("jid").split("@")[0];
+			Room.Name = Items[i].getAttribute("name").replace(/ /,"");;
+
+			Rooms[i] = Room;
 
 			// Change name for general room
-			if (Rooms[i].match(MainData.RoomDefault))
+			if (Rooms[i].Id.match(Exp))
 			{
-				Rooms[i]=Rooms[i].replace(MainData.RoomDefault,UTILS_GetText("room_default"));
+				Rooms[i].Name = UTILS_GetText("room_default") + "(" + Rooms[i].Name.split("(")[1];
 			}
 		}
 		INTERFACE_ShowRoomList(Rooms);
@@ -296,17 +301,19 @@ function ROOM_HandleGameRoomList(XML)
 */
 function ROOM_HandleGameRoomInfoList(XML)
 {
-	var P1 = new Object();
-	var P2 = new Object();
+	var PW = new Object();
+	var PB = new Object();
 
 	var Iq;
-	var Identity;
+	var Identity, Name;
 	var Game, GameType;
-	var Name, WName, BName, Jid, GameId;
+	var WName, BName;
+	var Jid, GameId;
+	var Players;
 
 	
-	Identity = XML.getElementsByTagName("identity")[0];
-	Name = Identity.getAttribute("name");
+	//Identity = XML.getElementsByTagName("identity")[0];
+	//Name = Identity.getAttribute("name");
 
 	Jid = XML.getAttribute("from");
 	GameId = Jid.split("@")[0];
@@ -314,21 +321,37 @@ function ROOM_HandleGameRoomInfoList(XML)
 	Game = XML.getElementsByTagName("game")[0];
 	GameType = Game.getAttribute("category");
 
-	WName = Name.split("x")[0].split("@")[0].replace(" ","");
-	BName = Name.split("x")[1].split("@")[0].replace(" ","");
+	Players = XML.getElementsByTagName("player");
 
-	P1.Name = WName;
-	P1.Time = 0;
-	P1.Color = "white";
-	P1.Inc = 0;
+	//WName = Name.split(" x ")[0].split("@")[0].replace(" ","");
+	//BName = Name.split(" x ")[1].split("@")[0].replace(" ","");
+	if(Players[0].getAttribute("role") == "white")
+	{
+		PW.Name = Players[0].getAttribute("jid").split("@")[0];
+		PW.Time = Players[0].getAttribute("time");
+		PW.Color = "white";
+		PW.Inc = Players[0].getAttribute("inc");
 
-	P2.Name = BName;
-	P2.Time = 0;
-	P2.Color = "black";
-	P2.Inc = 0;
+		PB.Name = Players[1].getAttribute("jid").split("@")[0];
+		PB.Time = Players[1].getAttribute("time");
+		PB.Color = "black";
+		PB.Inc = Players[1].getAttribute("inc");
+	}
+	else
+	{
+		PW.Name = Players[1].getAttribute("jid").split("@")[0];
+		PW.Time = Players[1].getAttribute("time");
+		PW.Color = "white";
+		PW.Inc = Players[1].getAttribute("inc");
+
+		PB.Name = Players[0].getAttribute("jid").split("@")[0];
+		PB.Time = Players[0].getAttribute("time");
+		PB.Color = "black";
+		PW.Inc = Players[0].getAttribute("inc");
+	}
 
 	// interface/room.js
-	INTERFACE_ShowGameRoomList(GameId, Name, P1, P2, GameType);
+	INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
 
 	return "";
 }
@@ -492,29 +515,20 @@ function ROOM_EnterRoom(RoomName)
 
 	var Room;
 
-	RoomName = RoomName.split(" ")[0];
-	
 	// Send Message to general room - must be change to Focus Room
-	if (RoomName == UTILS_GetText("room_default"))
+	Room = MainData.GetRoom(RoomName);
+
+	if (Room != null)
 	{
-		ROOM_FocusRoom(MainData.RoomDefault);
+		ROOM_FocusRoom(RoomName);
 	}
 	else
 	{
-		Room = MainData.GetRoom(RoomName);
+		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
 
-		if (Room != null)
-		{
-			ROOM_FocusRoom(RoomName);
-		}
-		else
-		{
-			To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+		XML = MESSAGE_Presence(To);
 
-			XML = MESSAGE_Presence(To);
-
-			CONNECTION_SendJabber(XML);
-		}
+		CONNECTION_SendJabber(XML);
 	}
 
 	return "";
@@ -591,6 +605,25 @@ function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 	Room.Room.addMsg(From, Message, Stamp);
 
 	return "";
+}
+
+function ROOM_ErrorMessageLength(RoomName)
+{
+	var Room = MainData.GetRoom(RoomName);
+	var Message;
+	var Limit = MainData.MaxChatChar;
+
+	if(Room == null)
+	{
+		return "";
+	}
+	
+	Message = UTILS_GetText("room_error_message_length");
+	Message = Message.replace("%s",Limit);
+	Room.Room.addMsgError(Message);
+
+	return "";
+
 }
 
 /** 
@@ -848,6 +881,9 @@ function ROOM_SortUsersByRating(Category)
 					break;
 				case "standard":
 					Rating = Room.UserList[i].Rating.Standard;
+					break;
+				case "untimed":
+					Rating = Room.UserList[i].Rating.Untimed;
 					break;
 			}
 

@@ -45,34 +45,51 @@ function ANNOUNCE_HandleAnnounce(XML)
 	if(Id == MainData.Const.IQ_ID_GetAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
-		for(i=0; i< Announces.length ; i++)
+		
+		// There is no announced match
+		if(Announces.length == 0)
 		{
-			Category = Announces[i].getAttribute("category");
-			AutoFlag = Announces[i].getAttribute("autoflag");
-			AnnounceId = Announces[i].getAttribute("id");
-			Rated = Announces[i].getAttribute("rated");
-			AnnounceId = Announces[i].getAttribute("id");
-
-			PlayerTag = Announces[i].getElementsByTagName("player")[0];
-			Username = PlayerTag.getAttribute("jid").split("@")[0];
-			Color = PlayerTag.getAttribute("color");
-			Time = PlayerTag.getAttribute("time");
-			Inc = PlayerTag.getAttribute("inc");
-
-			if(Color == null)
+			ANNOUNCE_HideLoadingAnnounce();
+			ANNOUNCE_ShowNoAnnounce();
+		}
+		else
+		{
+			for(i=0; i< Announces.length ; i++)
 			{
-				Color = "";
-			}
+				Category = Announces[i].getAttribute("category");
+				AutoFlag = Announces[i].getAttribute("autoflag");
+				AnnounceId = Announces[i].getAttribute("id");
+				Rated = Announces[i].getAttribute("rated");
+				AnnounceId = Announces[i].getAttribute("id");
 
-			ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId);
+				PlayerTag = Announces[i].getElementsByTagName("player")[0];
+				Username = PlayerTag.getAttribute("jid").split("@")[0];
+				Color = PlayerTag.getAttribute("color");
+				Time = PlayerTag.getAttribute("time");
+				Inc = PlayerTag.getAttribute("inc");
+
+				if(Color == null)
+				{
+					Color = "";
+				}
+
+				ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId);
+
+				// Hide loading and no announce message
+				ANNOUNCE_HideLoadingAnnounce();
+				ANNOUNCE_HideNoAnnounce();
+
+				// TODO -> Still show no announce message
+				// if come some announce from server
+			}
 		}
 	}
 	// Accepted announce
+	/*
 	else if(Id == MainData.Const.IQ_ID_AcceptAnnounceMatch)
 	{
-		//WINDOW_Alert("Announce accept","Announce accepted, start game!")
+		WINDOW_Alert("Announce accept","Announce accepted, start game!")
 	}
-	/*
 	else if(Id == MainData.Const.IQ_ID_RemoveAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
@@ -128,7 +145,8 @@ function ANNOUNCE_HandleAnnounceError(XML)
 		switch(Type)
 		{
 			case "modify":
-				WINDOW_Alert("Announce error","Announce non exists anymore");
+				//WINDOW_Alert("Announce error","Announce non exists anymore");
+				WINDOW_Alert(UTILS_GetText("announce_accept_error"),UTILS_GetText("announce_non_exist"));
 				// Remove announce
 				ANNOUNCE_RemoveAnnounce(AnnounceId);
 				break;
@@ -139,7 +157,7 @@ function ANNOUNCE_HandleAnnounceError(XML)
 /*
  * Send a message to create a announce with players parameters
  */
-function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated)
+function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min, Max)
 {
 	var Autoflag = "true";
 	var Player = new Object();
@@ -148,8 +166,25 @@ function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated)
 	Player.Color = Color;
 	Player.Time = Time*60;
 	Player.Inc = Inc;
+
+	if (!Min.match(/^\d*$/))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_min_rating"));
+		return false;
+	}
+	if (!Max.match(/^\d*$/))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_min_rating"));
+		return false;
+	}
+	if (parseInt(Min) > parseInt(Max))
+	{
+		WINDOW_Alert(UTILS_GetText("announce_error_title"),UTILS_GetText("announce_invalid_interval"));
+		return false;
+	}
 	
-	CONNECTION_SendJabber(MESSAGE_AnnounceMatch(Player, Rated, Category, Autoflag));
+	CONNECTION_SendJabber(MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag));
+	return true;
 }
 
 /*
@@ -164,8 +199,11 @@ function ANNOUNCE_GetAnnounceGames()
 	var MinTime = "";
 	var MaxTime = "";
 	var Category = "";
+	var User = true;
 
-	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category);
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
+	User = false;
+	XMPP += MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User);
 
 	CONNECTION_SendJabber(XMPP);
 }
@@ -223,4 +261,25 @@ function ANNOUNCE_AcceptAnnounce(Id)
 	XMPP += MESSAGE_AcceptAnnounceMatch(Id);
 
 	CONNECTION_SendJabber(XMPP);
+}
+
+
+function ANNOUNCE_ShowLoadingAnnounce()
+{
+	MainData.ChallengeMenu.showLoadingAnnounce();
+}
+
+function ANNOUNCE_HideLoadingAnnounce()
+{
+	MainData.ChallengeMenu.hideLoadingAnnounce();
+}
+
+function ANNOUNCE_ShowNoAnnounce()
+{
+	MainData.ChallengeMenu.showNoAnnounce();
+}
+
+function ANNOUNCE_HideNoAnnounce()
+{
+	MainData.ChallengeMenu.hideNoAnnounce();
 }

@@ -101,7 +101,6 @@ function LOAD_LoadFiles()
 
 	// Scripts Files to be loaded
 	Files.push("scripts/parser/parser_iq.js");
-	Files.push("scripts/parser/parser_presence.js");
 	Files.push("scripts/parser/parser_chat.js");
 	Files.push("scripts/admin/admin.js");
 	Files.push("scripts/contact/contact.js");
@@ -165,14 +164,14 @@ function LOAD_AppendFiles(Files, NumFiles)
 		{
 			case "scripts":
 				File = UTILS_CreateElement("script");
-				File.src = Files[0]+"?"+NoCache;
+				File.src = Files[0]+"?"+NoCache.TimeStamp;
 				File.type = "text/javascript";
 				Head.appendChild(File);
 				break;
 
 			case "css":
 				File = UTILS_CreateElement("link");
-				File.href = Files[0]+"?"+NoCache;
+				File.href = Files[0]+"?"+NoCache.TimeStamp;
 				File.type = "text/css";
 				File.rel = "stylesheet";
 				Head.appendChild(File);
@@ -184,7 +183,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 
 			case "images":
 				File = UTILS_CreateElement("img");
-				File.src = Files[0]+"?"+NoCache;
+				File.src = Files[0];
 				break;
 		}
 	
@@ -238,4 +237,64 @@ function LOAD_EndFile(Files, NumFiles)
 
 	// Start Webclient chess environment
 	setTimeout("START_Webclient()", 1500);
+}
+
+/*
+ * @brief Reload script, css files 
+ *
+ */
+function LOAD_ReloadFiles()
+{
+	var Head = document.getElementsByTagName("head")[0];
+
+	var CssFiles = Head.getElementsByTagName("link");
+	var ScriptFiles = Head.getElementsByTagName("script");
+
+	var File;
+
+	while (CssFiles.length > 0)
+	{
+		Head.removeChild(CssFiles[0]);
+	}
+	
+	while (ScriptFiles.length > 0)
+	{
+		Head.removeChild(ScriptFiles[0]);
+	}
+
+	File = UTILS_CreateElement("script");
+	File.src = "initial_files.js?"+NoCache.TimeStamp;
+	File.type = "text/javascript";
+	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Main.css";
+	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Login.css";
+	Head.appendChild(File);
+
+	File = UTILS_CreateElement("link");
+	File.rel = "stylesheet";
+	File.type = "text/css";
+	File.href = "css/Load.css";
+	Head.appendChild(File);
+
+}
+
+function LOAD_IECssFile()
+{
+	var Head = document.getElementsByTagName("head")[0];
+	var File;
+
+	File = UTILS_CreateElement("link");
+	File.href = "css/LoadIE.css?"+NoCache.TimeStamp;
+	File.type = "text/css";
+	File.rel = "stylesheet";
+	Head.appendChild(File);
 }

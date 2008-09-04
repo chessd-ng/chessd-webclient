@@ -47,7 +47,7 @@ function PROFILE_HandleVCardProfile(XML)
 	{
 		PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]);
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
-		if((Binval == "") || (PhotoType == ""))
+		if(((Binval == undefined) && (PhotoType == undefined)) || ((Binval == "") || (PhotoType == "")))
 		{
 			Img = "images/no_photo.png";
 		}
@@ -193,8 +193,11 @@ function PROFILE_HandleRatings(RatingNodes)
 	Rating[2] = new Array(); // standard
 	Rating[2][0] = "Standard";
 
+	Rating[3] = new Array(); // standard
+	Rating[3][0] = "Untimed";
+
 	// Set with "---" all fields
-	for (i=0; i < 3; i++)
+	for (i=0; i < Rating.length; i++)
 	{
 		for (j=1; j < 8; j++)
 		{
@@ -217,6 +220,9 @@ function PROFILE_HandleRatings(RatingNodes)
 				break;
 			case 'standard':
 				Index = 2;
+				break;
+			case 'untimed':
+				Index = 3;
 				break;
 			default:
 		}

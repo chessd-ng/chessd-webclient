@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <conf>
 	<general>
-		<version>Alpha 0.7</version>
+		<version>Alpha 0.8</version>
 		<cookie-validity>10</cookie-validity>
 		<room-default>general</room-default>
 		<max-rooms>100</max-rooms>
@@ -9,6 +9,7 @@
 		<emoticon-num>35</emoticon-num>
 		<default-lang>pt_BR</default-lang>
 		<default-php>php</default-php>
+		<max-chat-char>2000</max-chat-char>
 	</general>
 	<jabber>
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>

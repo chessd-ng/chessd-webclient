@@ -110,8 +110,9 @@
 	color			: #216778;
 	cursor			: pointer;
 	text-align		: center;
-	margin-top:	1px;
-	margin-bottom:	1px;
+	margin-top:	3px;
+	margin-bottom:	3px;
+	font-weight		: normal;
 }
 
 #DivLoadBox, #DivNoGames

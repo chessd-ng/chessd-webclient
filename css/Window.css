@@ -35,9 +35,11 @@
 	right		: 5px;
 	top				: 2px;
 	cursor	: pointer;
+	font-weight			: bold;
 }
 
 #TitleBar #Title{
+	font-weight			: bold;
 	position	: relative;
 	top				: 2px;
 }
@@ -81,6 +83,10 @@
 #WindowBox p {
 	font-size			: 11px;
 	color			: #216778;
+}
+
+#WindowBox strong {
+	font-weight : bold;
 }
 
 #WindowBox input,

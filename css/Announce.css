@@ -3,13 +3,17 @@
 */
 #AnnounceDiv #Layer1Div,
 #AnnounceDiv #Layer2Div,
-#AnnounceDiv #Layer3Div, 
-#AnnounceDiv #ButtonsDiv {
-	padding			: 0px 28px;
+#AnnounceDiv #Layer3Div {
+	padding			: 0px 0px 0px 25px;
+}
+
+#AnnounceDiv #Layer1Div {
+	padding-top : 25px;
 }
 
 #AnnounceDiv #Layer1Div:after,
-#AnnounceDiv #Layer2Div:after {
+#AnnounceDiv #Layer2Div:after,
+#AnnounceDiv #Layer3Div:after {
 	content:".";
 	display:block;
 	clear:both;
@@ -18,9 +22,8 @@
 	overflow:hidden;
 }
 
-#AnnounceDiv #TopDiv {
-	padding-top		:	2mm;
-	margin-bottom	:	3mm;
+#AnnounceDiv #L1RightDiv {
+	width : 110px;
 }
 
 #AnnounceDiv #Layer1Div {
@@ -32,12 +35,13 @@
 }
 
 #AnnounceDiv #Layer3Div {
-	text-align	:	center;
+	display : block;
 }
 
 #AnnounceDiv .cx {
 	font-size	:	10px;
 	margin-right	:	3mm;
+	font-weight		: bold;
 }
 
 #AnnounceDiv h3 {
@@ -50,8 +54,8 @@
 
 #AnnounceDiv .leftDiv {
 	float			: left;
-	width			: 170px;
-	margin-left	:	13px;
+	width			: 150px;
+	margin-left	:	5px;
 }
 
 #AnnounceDiv p {
@@ -61,24 +65,9 @@
 	color			: #216778;
 }
 
-#AnnounceDiv .rating {
-	margin-left		: 4mm;
-	font-size		: 10px;
-	font-weight	: normal;
-}
-
 #AnnounceDiv img {
 	margin-right	: 7mm;
 	margin-left		: 2mm;
-}
-
-#AnnounceDiv .label_information {
-	text-align		: center;
-	font-weight		: normal;
-	margin-top			: 1%;
-	font-size		: 2.6mm;
-	position		: relative;
-	width				:	102%;
 }
 
 #AnnounceDiv .drop_select {
@@ -89,6 +78,7 @@
 #AnnounceDiv .rating_radio {
 	margin-top		: 3mm;
 	margin-right	: 1.5mm;
+	border : 0px none;
 }
 
 #AnnounceDiv .italic {
@@ -97,8 +87,8 @@
 
 #AnnounceDiv #ButtonsDiv {
 	text-align		: center;
-	padding-top		: 8mm;
-	margin-bottom	: 2mm;
+	padding-top		: 12px;
+	margin-bottom	: 4px;
 }
 
 #AnnounceDiv .color {
@@ -107,6 +97,7 @@
 
 #AnnounceDiv .radio {
 	margin-top	:	2mm;
+	border : 0px none;
 }
 
 #AnnounceDiv input,
@@ -122,3 +113,36 @@
 	color			: #216778;
 }
 
+#AnnounceDiv #L3RightDiv .leftDiv {
+	float			: left;
+	width			: 70px;
+	margin-left	:	0px;
+}
+
+#AnnounceDiv #FromDiv,
+#AnnounceDiv #ToDiv {
+	padding-top : 5px;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input,
+#AnnounceDiv #L3RightDiv #ToDiv input {
+	margin-left	:	2px;
+}
+
+#AnnounceDiv #FromDiv span.format {
+	padding-left : 16px;
+}
+
+#AnnounceDiv #ToDiv span.format {
+	padding-left : 11px;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input.disabled,
+#AnnounceDiv #L3RightDiv #ToDiv input.disabled {
+	background-color : #C0C0C0;
+}
+
+#AnnounceDiv #L3RightDiv #FromDiv input.enabled,
+#AnnounceDiv #L3RightDiv #ToDiv input.enabled {
+	background-color : #FFF;
+}

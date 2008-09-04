@@ -41,7 +41,7 @@ function DATA(ConfFile, LangFile)
 	* > 1 -> Connecting
 	*/
 	this.ConnectionStatus = 1;
-	this.HttpRequest = null;
+	this.HttpRequest = new Array();
 	this.Browser = UTILS_IdentifyBrowser();
 	
 	// Get Host from configuration file
@@ -66,12 +66,14 @@ function DATA(ConfFile, LangFile)
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.RoomDefault = UTILS_GetTag(Params, "room-default");
+	this.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
 	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
 	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
-	this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	this.RID = null;
 	this.SID = -1;
 	this.Load = -1;
 	this.Lang = "";
@@ -88,10 +90,14 @@ function DATA(ConfFile, LangFile)
 	this.UserList = new Array();
 
 	this.OrderBy = "0";
+
 	this.ChatList = new Array()
+	this.Chat = new Object();
+	this.Chat.ShowChat = new Array();
+	this.Chat.MaxChat = UTILS_GetTag(Params, "max-chats");
+
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
-	this.ChatList = new Array();
 
 	this.ChallengeList = new Array();
 	this.ChallengeSequence = 0;
@@ -128,6 +134,10 @@ function DATA(ConfFile, LangFile)
 }
 
 // Adding methods
+DATA.prototype.AddHttpPost = DATA_AddHttpPost;
+DATA.prototype.RemoveHttpPost = DATA_RemoveHttpPost;
+DATA.prototype.FindHttpPost = DATA_FindHttpPost;
+
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
 DATA.prototype.FindUser = DATA_FindUser;
@@ -163,6 +173,10 @@ DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
 DATA.prototype.FindChat = DATA_FindChat;
+DATA.prototype.GetChat = DATA_Getchat;
+DATA.prototype.SetMaxChat = DATA_SetMaxChat;
+DATA.prototype.AddShowChat = DATA_AddShowChat;
+DATA.prototype.RemoveShowChat = DATA_RemoveShowChat;
 
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
@@ -177,6 +191,7 @@ DATA.prototype.FindPostpone = DATA_FindPostpone;
 
 DATA.prototype.AddAnnounce = DATA_AddAnnounce;
 DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
+DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
 DATA.prototype.FindAnnounce = DATA_FindAnnounce;
 
 DATA.prototype.AddGame = DATA_AddGame;
@@ -211,6 +226,49 @@ DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
 
 DATA.prototype.SetMyProfile = DATA_SetMyProfile;
+
+
+/**********************************
+ * METHODS - HTTP REQUEST         *
+ **********************************/
+
+function DATA_AddHttpPost(PostObj)
+{
+	this.HttpRequest.push(PostObj);
+}
+
+function DATA_RemoveHttpPost(PostObj)
+{
+	var i;
+
+	i = this.FindHttpPost(PostObj)
+
+	if(i != null)
+	{
+		this.HttpRequest.splice(i,1);
+	}
+
+	delete PostObj;
+}
+
+function DATA_FindHttpPost(PostObj)
+{
+	var i=0;
+
+	while((i < this.HttpRequest.length)&&(this.HttpRequest[i] != PostObj))
+	{
+		i++;
+	}
+
+	if(i >= this.HttpRequest.length)
+	{
+		return null;
+	}
+	else
+	{
+		return i;
+	}
+}
 
 /**********************************
  * METHODS - USER LIST            *
@@ -365,36 +423,32 @@ function DATA_IsContact(Username)
 * @brief		Get User status
 *
 * Get the user status on jabber.
-* If the given user is not on your list, then search through
-* the RoomList. 
+* Search user in default room and return user status. 
 *
 * @param		Username User name to search
-* @author		Danilo Yorinori
-* @return 		If the user is not on your list and the RoomList, false.
+* @return 		If the user is not on Default room and Contact List, return offline
 * 				Else return the user status.
-* @see			DATA_FindUser DATA_FindUserInRoom
+* @see			DATA_FindRoom, DATA_FindUser DATA_FindUserInRoom
 */
 function DATA_GetStatus(Username)
 {
-	var i;
-	var UserPos = this.FindUser(Username);
+	var UserPos;
+	var Index = this.FindRoom(this.RoomDefault);
 
-	// If user not in your list
-	if (UserPos == null)
+	UserPos = this.FindUserInRoom(this.RoomList[Index].Name, Username);
+
+	if (UserPos != null)
 	{
-		for (i=0; i < this.RoomList.length; i++)
-		{
-			UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
-
-			if (UserPos != null)
-			{
-				return this.RoomList[i].UserList[UserPos].Status;
-			}
-		}
-		return false;
+		return this.RoomList[Index].UserList[UserPos].Status;
 	}
-		
-	return this.UserList[UserPos].Status;
+	else {
+		UserPos = this.FindUser(Username);
+		if (UserPos != null)
+		{
+			return this.UserList[UserPos].Status;
+		}
+	}
+	return "offline";
 }
 
 /**
@@ -1061,39 +1115,15 @@ function DATA_GetRoom(RoomName)
 * @return 		Boolean
 * @see 			DATA_FindChat
 */
-function DATA_AddChat (Username, Status)
+function DATA_AddChat (Username, ChatObj)
 {
 	var Chat = new Object();
 	var i;
 
-
-	// Limit chat number
-	if (this.MaxChats <= this.ChatList.length)
-	{
-		return false;
-	}
-
-	i = this.FindChat(Username);
-	
-	// Try to find the same chat in structure
-	if (i != null)
-	{
-		return null;
-	}
-
 	// Setting atributes
 	Chat.Username = Username;
-	Chat.State = "show";
+	Chat.Chat = ChatObj;
 	
-	if (Status == null)
-	{
-		Chat.Status = "available";
-	}
-	else 
-	{
-		Chat.Status = Status;
-	}
-
 	this.ChatList[this.ChatList.length] = Chat;
 
 	return true;
@@ -1141,22 +1171,63 @@ function DATA_RemoveChat(Username)
 */
 function DATA_FindChat(Username)
 {
-	var i;
+	var i = 0;
 	
-	for (i=0 ; i < this.ChatList.length ; i++)
+	while((i<this.ChatList.length) && (this.ChatList[i].Username != Username))
 	{
-		// A chat with the username given already exist on structure
-		if (this.ChatList[i].Username == Username)
-		{
-			return i;
-		}
+		i++;
 	}
 	
-	// User not found
-	return null;
-	
+	if( i >= this.ChatList.length)
+	{
+		// User not found
+		return null;
+	}
+	else
+	{
+		return i;
+	}
+
 }
 
+
+function DATA_Getchat(Username)
+{
+	var i;
+
+	i = this.FindChat(Username);
+
+	if(i != null)
+	{
+		return this.ChatList[i];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetMaxChat(NewMax)
+{
+	this.Chat.MaxChat = NewMax;
+}
+
+function DATA_AddShowChat(ChatObj)
+{
+	this.Chat.ShowChat.push(ChatObj);
+}
+
+function DATA_RemoveShowChat(Username)
+{
+	var i;
+
+	i = this.FindChat(Username);
+
+	if(i!= null)
+	{
+		this.Chat.ShowChat.splice(i, 1);
+	}
+}
 
 /**********************************
  * METHODS - CHALLENGES           *
@@ -1503,6 +1574,19 @@ function DATA_FindAnnounce(AnnounceId)
 	
 }
 
+/**
+* @brief		Remove all announce in 'AnnounceList'
+* @author 		Rubens Suguimoto
+* @return 		void
+*/
+function DATA_ClearAnnounces()
+{
+	var size = this.AnnounceList.length;
+	
+	this.AnnounceList.splice(0, size);
+
+	return "";
+}
 
 /**********************************
  * METHODS - POSTPONE CHALLENGES  *

@@ -88,6 +88,24 @@
 	height			: 20px;
 }
 
+#Rooms div .UserList table{
+    width           : 140px;
+}
+
+#Rooms div .UserList td{
+    width           : 75px;
+}
+
+#Rooms div .UserList td.rating{
+    width           : 40px;
+}
+
+#Rooms div .UserList,
+#Main #Left #Rooms .Room #EmoticonDiv, 
+#Main #Left #Rooms #RoomListMenu {
+	left : 205px;
+}
+
 /******************************/
 /* Challenge.css */
 /******************************/
@@ -96,6 +114,7 @@
 }
 
 #ChallengeDiv #ButtonsDiv {
+	padding-top : 30px;
 	width 			: 300px;
 }
 
@@ -278,4 +297,16 @@
 /******************************/
 #SubWindowBox{
 	overflow		: hidden;
+}
+
+#AnnounceDiv #Layer2Div {
+	padding-top : 15px;
+}
+
+#ProfileDiv #WhoDiv #CounterDiv {
+	padding-left	: 20px; 
+}
+
+#OldGamesDiv #FormDiv {
+	padding-bottom : 20px;
 }

@@ -292,6 +292,9 @@ function CONTACT_OnlineSortUserByRating(Category)
 			case "standard":
 				Rating = Room.UserList[i].Rating.Standard;
 				break;
+			case "untimed":
+				Rating = Room.UserList[i].Rating.Untimed;
+				break;
 		}
 
 		//Show in contact online list
@@ -370,6 +373,8 @@ function CONTACT_HandleUserList(XML)
 				break;
 		}
 	}
+
+	CONNECTION_SendJabber(MESSAGE_UserListInfo());
 
 	// two eggs
 	// a cup of milk 
@@ -606,7 +611,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
 			Options[i].Func = function () { 
-				Button1.Name = UTILS_GetText("window_ok");
+				Button1.Name = UTILS_GetText("window_yes");
 				Button1.Func = function () {
 					CONTACT_SendRemoveUser(Username);
 				}
@@ -813,6 +818,9 @@ function CONTACT_SortUsersByRating(Category)
 				break;
 			case "standard":
 				Rating = User.Rating.Standard;
+				break;	
+			case "untimed":
+				Rating = User.Rating.Untimed;
 				break;	
 		}
 

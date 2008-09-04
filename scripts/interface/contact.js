@@ -273,6 +273,10 @@ function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
 			this.removeUser(UserName);
 			this.addUser(Group.name, UserName, Status, Rating, Type);
 		}
+		else
+		{
+			Group.offline.updateUser(UserName, Status, Rating, Type);
+		}
 	}
 	return UserName;	
 }
@@ -445,8 +449,8 @@ function INTERFACE_CreateContact()
 
 	ContactTitleOnline = UTILS_CreateElement("li", null, "contact_selec");
 
-	ContactTitleContactsSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_contacts"));
-	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, null, UTILS_GetText("contact_online"));
+	ContactTitleContactsSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_contacts"));
+	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_online"));
 
 	ContactTitleContacts.onclick = function(){
 		ContactTitleContacts.className = "contact_selec";

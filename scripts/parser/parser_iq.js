@@ -139,7 +139,16 @@ function PARSER_ParseIq(XML)
 			// Challenge messages
 			else if (Xmlns.match(/\/chessd#match/))
 			{
-				Buffer += CHALLENGE_HandleChallenge(XML);
+				// Quick fix to avoid error when login in
+				// enviroment and has a pendent challenge;
+				try
+				{
+					Buffer += CHALLENGE_HandleChallenge(XML);
+				}
+				catch(e)
+				{
+				}
+
 			}
 
 			// Game messages

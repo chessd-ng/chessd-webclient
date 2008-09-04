@@ -26,7 +26,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	var Tmp;
 
 	// Setting white and black players
-	if (this.MyColor == "white")
+	if (YourColor == "white")
 	{
 		if (Player1.Name == MainData.Username)
 		{
@@ -73,7 +73,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 
 
-	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, this.MyColor, this.PieceSize);
+	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, YourColor, this.PieceSize);
 
 	this.Time = new Object();
 	this.name = new Object();
@@ -710,16 +710,19 @@ function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 		{
 			Item = UTILS_CreateElement("li",this.Id+"_"+FullMove,"black",null);
 		}
-		Num = UTILS_CreateElement("span", null, null, FullMove+".");
+		Num = UTILS_CreateElement("p", null, null, FullMove+".");
 		Item.appendChild(Num);
 	}
 	else
 	{
-		// Get item from list
+		// TODO -> remove getElementById, and set list of pointer to
+		// li HTML element in board object;
+
+		// Get item from list 
 		Item = document.getElementById(this.Id+"_"+((NumTurn-1)/2));
 	}
 
-	MoveSpan = UTILS_CreateElement("span", null, "move", ShortMove);
+	MoveSpan = UTILS_CreateElement("p", null, "move", ShortMove);
 
 	Item.appendChild(MoveSpan);
 

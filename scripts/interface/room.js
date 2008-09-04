@@ -55,6 +55,7 @@ function RoomObj(Roomname)
 	this.hide = INTERFACE_HideRoom;
 	this.remove = INTERFACE_RemoveRoom;
 	this.addMsg = INTERFACE_AddMsgInRoom;
+	this.addMsgError = INTERFACE_AddMsgErrorInRoom;
 	this.focus = INTERFACE_FocusRoomInput;
 	this.showUserList = INTERFACE_ShowRoomUserList;
 	this.hideUserList = INTERFACE_HideRoomUserList;
@@ -98,9 +99,16 @@ function INTERFACE_CreateRoom(RoomName)
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			// Send message to room
-			ROOM_SendMessage(RoomName, Input.value);
-			Input.value = "";
+			if( Input.value.length <= MainData.MaxChatChar)
+			{
+				// Send message to room
+				ROOM_SendMessage(RoomName, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				ROOM_ErrorMessageLength(RoomName);
+			}
 		}
 	}
 
@@ -117,9 +125,16 @@ function INTERFACE_CreateRoom(RoomName)
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			// Send message to room
-			ROOM_SendMessage(RoomName, Input.value);
-			Input.value = "";
+			if(Input.value.length < 2000)
+			{
+				// Send message to room
+				ROOM_SendMessage(RoomName, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				ROOM_ErrorMessageLength(RoomName);
+			}
 		}
 	}
 
@@ -217,6 +232,16 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	return true;
 }
 
+function INTERFACE_AddMsgErrorInRoom(Msg)
+{
+	var Item;
+
+	Item = UTILS_CreateElement("li", null, "error", Msg);
+
+	this.msgList.appendChild(Item);
+	this.msgList.scrollTop += Item.clientHeight + 1000;
+}
+
 /* Refresh room's occupants number
 *
 * @param       RoomName
@@ -294,9 +319,9 @@ function INTERFACE_ShowRoomList(Rooms)
         // Create elements and insert rooms
         for (i=0; i < Rooms.length; i++)
         {
-                Room = UTILS_CreateElement("li", null, null, Rooms[i]);
+                Room = UTILS_CreateElement("li", Rooms[i].Id, null, Rooms[i].Name);
                 Room.onclick = function () {
-                        ROOM_EnterRoom(this.innerHTML);
+									ROOM_EnterRoom(this.id);
                 }
                 Node.appendChild(Room);
         }
@@ -353,7 +378,7 @@ function INTERFACE_HideGameRoomList()
 * @return 	bool
 * @author 	Ulysses
 */
-function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
+function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 {
 	// Get game menu
 	var Node = document.getElementById("GameRoomMenuDiv");
@@ -377,23 +402,23 @@ function INTERFACE_ShowGameRoomList(GameId, GameName, P1, P2, GameType)
 	}
 
 	// Create elements and insert rooms
-	Room = UTILS_CreateElement("li", null, null, GameName);
+	Room = UTILS_CreateElement("li", null, null, PW.Name+" x "+PB.Name);
 
 	Room.onclick = function(){
 		var Buffer="";
 		var To;
 
-		//if user is not playing or observe a game
+		//Check if user is not playing or observe a game
 		if(MainData.CurrentGame == null)
 		{
-			if((P1.Name!= MainData.Username) &&(P2.Name != MainData.Username))
+			if((PB.Name!= MainData.Username) &&(PW.Name != MainData.Username))
 			{
-				Buffer += GAME_StartObserverGame(GameId, P1, P2);				
+				Buffer += GAME_StartObserverGame(GameId, PW, PB);				
 			}
 			else
 			{
 				//Open game board and enter game in room
-				Buffer += GAME_StartGame(GameId, P1, P2);
+				Buffer += GAME_StartGame(GameId, PW, PB);
 				To = GameId+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
 				Buffer += MESSAGE_Presence(To)
 			}
@@ -634,11 +659,18 @@ function INTERFACE_FocusRoom(RoomName)
 		Node.parentNode.onclick = function () {
 			ROOM_FocusRoom(RoomName);
 		}
-	
-		ShortName = UTILS_ShortString(RoomName, 4);
-		Node.innerHTML = ShortName;
-		Node.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-		Node.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+
+		if(RoomName.length > 4)
+		{
+			ShortName = UTILS_ShortString(RoomName, 4);
+			Node.innerHTML = ShortName;
+			Node.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
+			Node.onmouseout = function() { INTERFACE_CloseFullName(); }
+		}
+		else
+		{
+			Node.innerHTML = RoomName;
+		}
 		RoomList.childNodes[1].className = "room_selec";
 		RoomList.childNodes[0].className = "";
 		RoomClose = document.getElementById("CloseRoom");
@@ -659,9 +691,17 @@ function INTERFACE_CreateRoomInBar(RoomName)
 	//Create Room default
 	if(RoomList.childNodes.length == 1)
 	{
-		RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
-		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, UTILS_GetText("room_default")); }
-		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		if (UTILS_GetText("room_default") > 4)
+		{
+			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, UTILS_GetText("room_default")); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
+		}
+		else
+		{
+			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
+		}
+		RoomItemTitle.style.fontWeight = "bold";
 		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
@@ -676,10 +716,18 @@ function INTERFACE_CreateRoomInBar(RoomName)
 	else if(RoomList.childNodes.length == 2)
 	{
 		// Create a item and set focus to it
-		ShortName = UTILS_ShortString(RoomName, 4);
-		RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
-		RoomItemTitle.onmouseover = function() { INTERFACE_ShowRoomFullName(this, RoomName); }
-		RoomItemTitle.onmouseout = function() { INTERFACE_CloseRoomFullName(); }
+		if(RoomName > 4)
+		{
+			ShortName = UTILS_ShortString(RoomName, 4);
+			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
+		}
+		else
+		{
+			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,RoomName);
+		}
+		RoomItemTitle.style.fontWeight = "bold";
 		RoomItem = UTILS_CreateElement("li", "RoomSecondary");
 		RoomItem.appendChild(RoomItemTitle);
 		RoomOccupants = UTILS_CreateElement('span',"Sec_occupants",null," (0)");
@@ -696,41 +744,6 @@ function INTERFACE_CreateRoomInBar(RoomName)
 
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[1]);
 	}
-}
-
-/**
- * @author	Danilo
- *
- */
-function INTERFACE_ShowRoomFullName(Obj,RoomName)
-{
-	var Hint, Name, ParentNode, Pos, i;
-//	var Offset = 9;
-
-	Hint = UTILS_CreateElement("div", "RoomFullNameDiv");
-
-	Name = UTILS_CreateElement("p", null, null, RoomName);
-
-	Hint.appendChild(Name);
-	
-	// Get parent scrolling
-	
-	ParentNode = UTILS_GetParentDiv(Obj);
-
-	// Get position of user list item
-	Pos = UTILS_GetOffset(Obj);
-	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop)+"px";
-	Hint.style.left = Pos.X+"px";
-	Hint.style.width = RoomName.length*6+'px';
-
-	document.body.appendChild(Hint);
-}
-
-function INTERFACE_CloseRoomFullName()
-{
-	var Hint = document.getElementById("RoomFullNameDiv");
-	if (Hint)
-		document.body.removeChild(Hint);
 }
 
 /**
@@ -846,7 +859,8 @@ function INTERFACE_ShowCreateRoomWindow()
 	CounterInput.value = 30;
 	CounterInput.setAttribute("size",2);
 	CounterInput.readOnly = true;
-	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+	CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character").replace(/%s/,"30"));
+	CounterLabel.innerHTML.replace(/%s/,"aaa");
 
 	Input.type = "text";
 	Input.setAttribute("size",22);
@@ -886,6 +900,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	Input.onkeyup = function() {
 		CounterInput.value = 30 - Input.value.length;
+		CounterLabel.innerHTML = UTILS_GetText("window_character").replace(/%s/,30 - Input.value.length);
 	}
 	
 	// TODO - not implemented
@@ -940,7 +955,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	// Mount elements tree
 	
 	// Counter Div
-	CounterDiv.appendChild(CounterInput);
+//	CounterDiv.appendChild(CounterInput);
 	CounterDiv.appendChild(CounterLabel);
 
 	// Options Div

@@ -386,6 +386,10 @@ function INTERFACE_CreateUserList(Element)
 	OrderRatingOpt.value = "standard";
 	OrderRating.appendChild(OrderRatingOpt);
 
+	OrderRatingOpt = UTILS_CreateElement("option", null, null, UTILS_GetText("contact_order_rating")+" (Untimed)");
+	OrderRatingOpt.value = "untimed";
+	OrderRating.appendChild(OrderRatingOpt);
+
 
 	OrderNick.onclick = function(){
 		OrderNick.className = "selected";
@@ -528,9 +532,18 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 
+	if (MainData.Browser == 0)
+	{
+		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+		{
+			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		}
+		Offset = 0;
+	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 	// Contact List
-	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2;
@@ -546,10 +559,6 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		if (MainData.Browser == 2)
 		{
 			Offset = 1; //
-		}
-		else
-		{
-			Offset = 9; // ok
 		}
 	}
 
@@ -628,27 +637,27 @@ function INTERFACE_ShowSearchUserWindow()
 	try
 	//Fix radio button for IE
 	{
-		Name = document.createElement('<input type="radio" name="search_user" checked="checked" />');
+		Name = document.createElement('<input class="radio" type="radio" name="search_user" />');
 	}
 	catch(err) 
 	{
-		Name = UTILS_CreateElement('input');
+		Name = UTILS_CreateElement('input',null,'radio');
 		Name.type = "radio";
 		Name.name = "search_user";
-		Name.checked = true;
 	}
 	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
 
 	try
 	//Fix radio button for IE
 	{
-		User = document.createElement('<input type="radio" name="search_user" />');
+		User = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
 	}
 	catch(err) 
 	{
-		User= UTILS_CreateElement('input');
+		User= UTILS_CreateElement('input',null,'radio');
 		User.type = "radio";
 		User.name = "search_user";
+		User.checked = true;
 	}
 	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
 
@@ -698,10 +707,10 @@ function INTERFACE_ShowSearchUserWindow()
 	// OptionDiv
 	OptionDiv.appendChild(OptionLabel);
 	OptionDiv.appendChild(Br1);
-	OptionDiv.appendChild(Name);
-	OptionDiv.appendChild(NameLabel);
 	OptionDiv.appendChild(User);
 	OptionDiv.appendChild(UserLabel);
+	OptionDiv.appendChild(Name);
+	OptionDiv.appendChild(NameLabel);
 
 //	OptionDiv.appendChild(Both);
 //	OptionDiv.appendChild(BothLabel);
@@ -845,9 +854,18 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 	
+	if (MainData.Browser == 0)
+	{
+		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+		{
+			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
+		}
+		Offset = 0;
+	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 	// Contact List
-	if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
+	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2; //ok

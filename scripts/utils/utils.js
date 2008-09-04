@@ -300,68 +300,52 @@ function UTILS_Capitalize(Word)
 /**
 * Put a <br /> tag at Obj.innerHTML if it pass the Width limit
 *
-* @param Word
-* 	String to be break
-* @param NumChars
-* 	max length of string
+* @param Obj
+* 	Cell table's object
+* @param Width
+* 	max Base object 
 * @return String
 * @author Danilo Kiyoshi Simizu Yorinori
 *
 */
 function UTILS_BreakString(Obj, Width)
 {
-/*
-	var ShortWord=" ", Part;
-	var NumChs;
-
-	if(NumChars != null)
-	{
-		NumChs = NumChars;
-	}
-	else
-	{
-		NumChs = 5;
-	}
-
-	if (Word.length < NumChs)
-		ShortWord = Word;
-	else {
-		while (Word.length > NumChs)
-		{
-			Part = Word.slice(0,NumChs);
-			Word = Word.slice(NumChs);
-			ShortWord = ShortWord + " " + Part;
-		}
-		ShortWord = ShortWord + " " + Word;
-	}
-	return ShortWord;
-*/
-	var text = Obj.innerHTML;
+	var Text = Obj.innerHTML;
+	var ObjWidth, TrWidth;
+	var Broke = false;
+	var Old;
 	var i;
-	var old;
-	var broke = 0;
-//	alert ("Inicial: "+Obj.clientWidth+ " :"+ Obj.innerHTML);
-	if (Obj.clientWidth > Width) {
 
+	// IE
+	if (MainData.Browser == 0)
+	{
+		TrWidth = Width.Offset;
+	}
+	else // Other browsers
+	{
+		TrWidth = Width.Client;
+	}
+
+	if (Obj.clientWidth > TrWidth) {
 		Obj.innerHMTL = "";
 
-		for (i=0; i<=text.length; i++)
+		for (i=0; i<=Text.length; i++)
 		{
-			if (broke == 1)
+			if (Broke)
 			{
-				old =Obj.innerHTML;
-				Obj.innerHTML = Obj.innerHTML + text.slice(i-1,i); 
+				Old =Obj.innerHTML;
+				Obj.innerHTML = Obj.innerHTML + Text.slice(i-1,i); 
 			}
 			else
 			{
-				old = Obj.innerHTML;
-				Obj.innerHTML = text.slice(0,i);
+				Old = Obj.innerHTML;
+				Obj.innerHTML = Text.slice(0,i);
 			}
 
-			if (Obj.clientWidth > Width)
+			if (Obj.clientWidth > TrWidth)
 			{
-				Obj.innerHTML = old +"<br />" + text.slice(i-1,i); 
-				broke = 1;
+				Obj.innerHTML = Old +"<br />" + Text.slice(i-1,i); 
+				Broke = true;
 			}
 		}
 	}
@@ -756,12 +740,12 @@ function UTILS_ConvertTime(Seconds)
 	var TimeFormat = "";
 
 	Sec = Seconds % 60;
-	Min = Math.round((Seconds / 60) % 60);
-	Hour  = Math.round((Seconds / 3600) % 24);
+	Min = Math.floor(Seconds / 60) % 60;
+	Hour  = Math.floor(Seconds / 3600) % 24;
 
-	Day = Math.round((Seconds / (3600*24)) % 30);
-	Month = Math.round((Seconds / (3600*24*30)) % 12);
-	Year = Math.round(Seconds / (3600*24*30*12));
+	Day = Math.floor(Seconds / (3600*24)) % 30;
+	Month = Math.floor(Seconds / (3600*24*30)) % 12;
+	Year = Math.floor(Seconds / (3600*24*30*12));
 
 	// Concat Years
 	if(Year != 0)
@@ -828,8 +812,30 @@ function UTILS_ConvertTime(Seconds)
 	return TimeFormat;
 }
 
+/*
+* Disable selection text inside a element
+*
+* @param 	Element	HTML elements
+* @return 	False	Aways return false to disable seletion
+* @author	Rubens Suguimoto
+*/
 
+/* Code from:
+*http://ajaxcookbook.org/disable-text-selection/
+*/
+function UTILS_DisableSelection(Element)
+{
+	// IE disable selection method
+	Element.onselectstart = function() {
+		return false;
+	};
 
+	Element.unselectable = "on";
+	Element.style.MozUserSelect = "none";
+	Element.style.cursor = "default";
+	
+	return false;
+}
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
  ************************************/
@@ -1013,6 +1019,26 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
+	if (Type == "Untimed")
+	{
+		if (a.Rating.Untimed != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Untimed));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Untimed != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Untimed));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 

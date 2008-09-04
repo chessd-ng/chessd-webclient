@@ -28,7 +28,6 @@
 /* chat title */
 #Chat #ChatList .title {
 	background-color: #216778;
-	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
 	height			: 16px;
@@ -44,7 +43,6 @@
 
 #Chat #ChatList .title_selec {
 	background-color	: #FFA200;
-	font-weight		: bold;
 	font-size		: 11px;
 	color 			: #FFF;
 	text-indent		: 12px;
@@ -55,6 +53,11 @@
 	text-indent		: 3mm;
 	height			: 4mm;
 	*/
+}
+
+#Chat #ChatList .title_selec span,
+#Chat #ChatList .title span {
+	font-weight		: bold;
 }
 
 #Chat #ChatInner {
@@ -122,6 +125,7 @@
 	border			: 1px solid #216778;
 	height			: 118px;
 	overflow		: auto;
+	padding			: 0px 5px;
 	/*
 	height			: 31mm;
 	*/
@@ -134,6 +138,10 @@
 	border			: 0px;
 	font-size		: 11px;
 	color			: #216778;
+}
+
+#Chat #ChatList li ul li.error {
+	color			: #FF1111;
 }
 
 #Chat #ChatList li input {
@@ -151,4 +159,8 @@
 	height			: 4mm;
 	top			: 0mm;
 	*/
+}
+
+#Chat #ChatList strong {
+	font-weight : bold;
 }

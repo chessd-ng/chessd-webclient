@@ -38,9 +38,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	var IdDiv;
 
-	var SelectDiv;
-	var Select, Opt;
-
 	var Layer1Div;
 	var L1LeftDiv;
 	var Player1Label,Player1Input;
@@ -62,9 +59,9 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var ResultDiv;
 	var SearchResultLabel;
 	var TableDiv;
-	var THead, TPlayer1Label, TPlayer2Label, TDateLabel, TResultLabel, TCategoryLabel;
-	var TBodyDiv,TBody, Table; 
-	var TFoot, Hr, Prev, PageLabel, Next, Tr,Td;
+	var THead, TPlayer1Label, TPlayer2Label, TDateLabel, TResultLabel, TCategoryLabel, TExamine;
+	var TBodyDiv,TBody, Table, TFoot; 
+	var Hr, Prev, PageLabel, Next, Tr,Td;
 	
 	var NoResultDiv;
 	var NoFound;
@@ -89,33 +86,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// Form Div
 	FormDiv = UTILS_CreateElement('div','FormDiv');
 
-	// SelectDiv
-	SelectDiv= UTILS_CreateElement('div','SelectDiv');
-
-	// Select
-	Select= UTILS_CreateElement('select');
-	Opt = UTILS_CreateElement('option',null,null,UTILS_GetText('oldgame_my_games'));
-	Select.appendChild(Opt);
-	Opt = UTILS_CreateElement('option',null,null,UTILS_GetText('oldgame_other_games'));
-	Opt.selected = true;
-	Select.appendChild(Opt);
-	Select.onchange = function() 
-	{
-		Who = Select.options.selectedIndex;	
-
-		if (Who == 0)
-		{
-			Player1Input.value = MainData.Username;
-			Player1Input.disabled = true;
-		}
-		else
-		{
-			Player1Input.disabled = false;
-		}
-	}
-	// End Select
-	// End Select Div
-
 	// Layer 1 Div
 	Layer1Div= UTILS_CreateElement('div','Layer1Div');
 
@@ -138,11 +108,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		WRadio = document.createElement('<input type="radio" name="color" value="white" />');
+		WRadio = document.createElement('<input class="radio" type="radio" name="color" value="white" />');
 	}
 	catch(err)
 	{
-		WRadio = UTILS_CreateElement('input');
+		WRadio = UTILS_CreateElement('input',null,'radio');
 		WRadio.type = "radio";
 		WRadio.name = "color";
 		WRadio.value = "white";
@@ -154,11 +124,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		BRadio = document.createElement('<input type="radio" name="color" value="black" />');
+		BRadio = document.createElement('<input class="radio" type="radio" name="color" value="black" />');
 	}
 	catch(err)
 	{
-		BRadio = UTILS_CreateElement('input');
+		BRadio = UTILS_CreateElement('input',null,'radio');
 		BRadio.type = "radio";
 		BRadio.name = "color";
 		BRadio.value = "black";
@@ -170,11 +140,11 @@ function INTERFACE_ShowOldGameWindow(Id)
 	try
 	//Fix radio button for IE
 	{
-		RRadio = document.createElement('<input type="radio" name="color" value="both" checked="checked" />');
+		RRadio = document.createElement('<input class="radio" type="radio" name="color" value="both" checked="checked" />');
 	}
 	catch(err)
 	{
-		RRadio = UTILS_CreateElement('input');
+		RRadio = UTILS_CreateElement('input',null,'radio');
 		RRadio.type = "radio";
 		RRadio.name = "color";
 		RRadio.value = "both";
@@ -209,11 +179,13 @@ function INTERFACE_ShowOldGameWindow(Id)
 	FromLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
 	FromInput.size = "11";
+	FromInput.maxLength = "10";
 	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 
 	ToLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
 	ToInput.size = "11";
+	ToInput.maxLength = "10";
 	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 
 	Br2 = UTILS_CreateElement("br");
@@ -231,7 +203,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	NewSearch	= UTILS_CreateElement('input',null,'button');
 	NewSearch.type = "button";
 	NewSearch.value = UTILS_GetText("oldgame_new_search");
-	UTILS_AddListener(NewSearch,"click",	function() { if(Select.options.selectedIndex != 0) Player1Input.value = ""; Player2Input.value = ""; RRadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
+	UTILS_AddListener(NewSearch,"click",	function() { Player1Input.value = ""; Player2Input.value = ""; RRadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
 	// End ButtonsDiv;
 
 	// Result Div
@@ -259,16 +231,29 @@ function INTERFACE_ShowOldGameWindow(Id)
 		Tr.appendChild(TDateLabel);
 		TCategoryLabel = UTILS_CreateElement('td',null,'header',UTILS_GetText('oldgame_category'));
 		Tr.appendChild(TCategoryLabel);
-		TResultLabel = UTILS_CreateElement('td',null,'resultheader',UTILS_GetText('oldgame_result'));
+		TResultLabel = UTILS_CreateElement('td',null,'result_header',UTILS_GetText('oldgame_result'));
 		Tr.appendChild(TResultLabel);
+		TExamine = UTILS_CreateElement('td',null,'header_examine');
+		Tr.appendChild(TExamine);
 	THead.appendChild(Tr);
 	Table.appendChild(THead);
 
 	TBody = UTILS_CreateElement('tbody');
 	Table.appendChild(TBody);
 
-	// TFoot Div
-	TFoot = UTILS_CreateElement('div','TFootDiv');
+	TFoot = UTILS_CreateElement('tfoot');
+	Tr = UTILS_CreateElement('tr');
+	
+	try
+	{
+			Td = document.createElement("<td class='tfoot_td' colspan='6' />");
+	}
+	catch(err)
+	{
+			Td = UTILS_CreateElement('td', null,'tfoot_td');
+			Td.colSpan = 6;
+	}
+
 	Hr = UTILS_CreateElement('hr');
 	Prev = UTILS_CreateElement('input', null, 'button');
 	Prev.type = "button";
@@ -278,10 +263,14 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Next.type = "button";
 	Next.value = UTILS_GetText("oldgame_next");
 
-//	TFoot.appendChild(Hr);
-	TFoot.appendChild(Prev);
-	TFoot.appendChild(PageLabel);
-	TFoot.appendChild(Next);
+	Td.appendChild(Hr);
+	Td.appendChild(Prev);
+	Td.appendChild(PageLabel);
+	Td.appendChild(Next);
+
+	Tr.appendChild(Td);
+	TFoot.appendChild(Tr);
+	Table.appendChild(TFoot);
 	
 	// End Table Div
 	
@@ -302,8 +291,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 
 	// Mount Tree of Elements
 	
-	// Select Div
-	SelectDiv.appendChild(Select);
 
 	// Layer 1 Left Div
 	L1LeftDiv.appendChild(Player1Label);
@@ -347,7 +334,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Layer2Div.appendChild(L2RightDiv);
 
 	// Form Div
-	FormDiv.appendChild(SelectDiv);
 	FormDiv.appendChild(Layer1Div);
 	FormDiv.appendChild(Layer2Div);
 
@@ -355,21 +341,12 @@ function INTERFACE_ShowOldGameWindow(Id)
 	ButtonsDiv.appendChild(Search);
 	ButtonsDiv.appendChild(NewSearch);
 
-	// THead Div
-//	THead.appendChild(TPlayer1Label);
-//	THead.appendChild(TPlayer2Label);
-//	THead.appendChild(TDateLabel);
-//	THead.appendChild(TCategoryLabel);
-//	THead.appendChild(TResultLabel);
-
 	// TBody
 	TBodyDiv.appendChild(Table);
 	
 	// Table Div
-//	TableDiv.appendChild(THead);
 	TableDiv.appendChild(TBodyDiv);
 	TableDiv.appendChild(LoadingBox);
-	TableDiv.appendChild(TFoot);
 
 	NoResultDiv.appendChild(NoFound);
 
@@ -432,34 +409,42 @@ function INTERFACE_ShowOldGameWindow(Id)
 */
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
-	var Tr, Td;
+	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, Img, i;
 	
 	Tr = UTILS_CreateElement('tr');
-		Td = UTILS_CreateElement('td',null,'player1td',White);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'player2td',Black);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'datetd',Date);
-		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'cattd',GameType);
-		Tr.appendChild(Td);
-//		Td = UTILS_CreateElement('td',null,null,Winner);
-//		Tr.appendChild(Td);
-		Td = UTILS_CreateElement('td',null,'resulttd',WinType);
-		Tr.appendChild(Td);
-		UTILS_AddListener(Tr, "click", function()
-		{
-			if(MainData.CurrentGame == null)
-			{
-				CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
-			}
-			else
-			{
-				WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
-			}
+		Td1 = UTILS_CreateElement('td',null,null,White);
+		Tr.appendChild(Td1);
+		Td2 = UTILS_CreateElement('td',null,null,Black);
+		Tr.appendChild(Td2);
+		Td3 = UTILS_CreateElement('td',null,null,Date);
+		Tr.appendChild(Td3);
+		Td4 = UTILS_CreateElement('td',null,null,GameType);
+		Tr.appendChild(Td4);
+		Td5 = UTILS_CreateElement('td',null,'resulttd',WinType);
+		Tr.appendChild(Td5);
+		Td6 = UTILS_CreateElement('td',null,'examine');
 
-		}, false);
+			Img = UTILS_CreateElement("img",null,'examine_icon');
+			Img.src = "images/oldgame_examine.png";
+			Img.title = UTILS_GetText("oldgame_examine");
+			UTILS_AddListener(Img, "click", function()
+					{
+						if(MainData.CurrentGame == null)
+						{
+							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
+						}
+						else
+						{
+							WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
+						}
+					}, false);
+
+			Td6.appendChild(Img);
+		Tr.appendChild(Td6);
 	
+	Tr.onmouseover = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
+	Tr.onmouseout = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
+
 	return(Tr);
 }
 
@@ -605,6 +590,8 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	var Start = SearchInfo.Offset;
 	var End = Start + GameLen; 
 	var ParentDiv = UTILS_GetParentDiv(this.TBody);
+	var P1Width = new Object();
+	var P2Width = new Object();
 
 	// Set the scroll bar to begin of result table
 	ParentDiv.scrollTop = 0;
@@ -615,8 +602,10 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.removeChild(this.TBody.childNodes[0]);
 	}
 
-	var getWidth1 = this.Table.childNodes[0].rows[0].childNodes[0].clientWidth;
-	var getWidth2 = this.Table.childNodes[0].rows[0].childNodes[1].clientWidth;
+	P1Width.Offset = this.Table.childNodes[0].rows[0].childNodes[0].offsetWidth;
+	P1Width.Client = this.Table.childNodes[0].rows[0].childNodes[0].clientWidth;
+	P2Width.Offset = this.Table.childNodes[0].rows[0].childNodes[1].offsetWidth;
+	P2Width.Client = this.Table.childNodes[0].rows[0].childNodes[1].clientWidth;
 
 	// Append new results
 	for(i=0; i<GameLen ; i++)
@@ -624,9 +613,11 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.appendChild(INTERFACE_AddOldGameResult(GameList[i].white, GameList[i].black, GameList[i].date, GameList[i].gametype,  GameList[i].result, GameList[i].id));
 
 		// Break string if its break table result layout - White Player
-		UTILS_BreakString(this.TBody.rows[i].childNodes[0],getWidth1);
+		UTILS_BreakString(this.TBody.rows[i].childNodes[0],P1Width);
 		// Break string if its break table result layout - Black Player
-		UTILS_BreakString(this.TBody.rows[i].childNodes[1],getWidth2);
+		UTILS_BreakString(this.TBody.rows[i].childNodes[1],P2Width);
+
+		this.TBody.rows[i].childNodes[5].childNodes[0].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
 	}
 	this.Page.innerHTML = Start+" - "+End;
 	// Set buttons class
@@ -740,7 +731,9 @@ function INTERFACE_SetSearchButton(Node)
 		}, "false");
 }
 
-
+/**
+* @author Rubens
+*/
 function INTERFACE_ShowOldgameLoading()
 {
 	var LoadingBox = document.getElementById("oldgame_loading");
@@ -751,6 +744,9 @@ function INTERFACE_ShowOldgameLoading()
 	}
 }
 
+/**
+* @author Rubens
+*/
 function INTERFACE_HideOldgameLoading()
 {
 	var LoadingBox = document.getElementById("oldgame_loading");

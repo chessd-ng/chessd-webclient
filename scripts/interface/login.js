@@ -36,6 +36,7 @@ function INTERFACE_StartLogin(Lang)
 	var LoginBoxDiv, LoginTextBoxDiv, LoginFormBoxDiv;
 	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
+	var LoginMessage;
 	//var Lang;
 	var ConfTmp;
 
@@ -97,10 +98,12 @@ function INTERFACE_StartLogin(Lang)
 	
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
+	LoginMessage = UTILS_CreateElement("span","LoginMessage");
+	LoginMessage.style.display = "none";
 	InputLogin = UTILS_CreateElement("input", "login");
 	InputPasswd = UTILS_CreateElement("input", "password");
-	InputSubmit = UTILS_CreateElement("input", null, "entrar");
-	CheckBox = UTILS_CreateElement("input", null, "checkbox");
+	InputSubmit = UTILS_CreateElement("input", "login_button", "entrar");
+	CheckBox = UTILS_CreateElement("input", "checkbox", "checkbox");
 	InputLogin.type = "text";
 	InputPasswd.type = "password";
 	InputLogin.value = UTILS_ReadCookie("Username");
@@ -159,6 +162,7 @@ function INTERFACE_StartLogin(Lang)
 	LoginFormBoxDiv.appendChild(Table);
 	LoginFormBoxDiv.appendChild(InputSubmit);
 	LoginFormBoxDiv.appendChild(Br);
+	LoginFormBoxDiv.appendChild(LoginMessage);
 	LoginFormBoxDiv.appendChild(ErrorLabel);
 	LoginFormBoxDiv.appendChild(SignIn);
 
@@ -292,3 +296,88 @@ function INTERFACE_LoginVerticalAlignMiddle()
         }
 }
 
+/**
+ *
+ *
+ */
+function INTERFACE_LoginDisableInput()
+{
+	var UsernameBox = document.getElementById("login");
+	var PassWBox = document.getElementById("password");
+	var CheckBox = document.getElementById("checkbox");
+	var OkButton = document.getElementById("login_button");
+
+	UsernameBox.disabled = true;
+	PassWBox.disabled = true;
+	CheckBox.disabled = true;
+	OkButton.disabled = true;
+}
+
+function INTERFACE_LoginEnableInput()
+{
+	var UsernameBox = document.getElementById("login");
+	var PassWBox = document.getElementById("password");
+	var CheckBox = document.getElementById("checkbox");
+	var OkButton = document.getElementById("login_button");
+
+	UsernameBox.disabled = false;
+	PassWBox.disabled = false;
+	CheckBox.disabled = false;
+	OkButton.disabled = false;
+}
+
+function INTERFACE_ClearError()
+{	
+	var ErrorLabel = document.getElementById("ErrorLabel");
+	ErrorLabel.innerHTML = "";
+}
+
+function INTERFACE_ShowLoginMessage(Msg)
+{
+	var LoginMsg = document.getElementById("LoginMessage");
+	if(Msg != null)
+	{
+		LoginMsg.innerHTML = Msg;
+	}
+	else
+	{
+		LoginMsg.innerHTML = "";
+	}
+	LoginMsg.style.display = "block";
+}
+
+function INTERFACE_HideLoginMessage()
+{
+	var LoginMsg = document.getElementById("LoginMessage");
+	LoginMsg.style.display = "none";
+}
+
+function INTERFACE_ShowErrorMessage(Msg)
+{
+	var ErrorMsg = document.getElementById("ErrorLabel");
+
+	if(ErrorMsg == null)
+	{
+		return false;
+	}
+
+	if(Msg != null)
+	{
+		ErrorMsg.innerHTML = Msg;
+	}
+	else
+	{
+		ErrorMsg.innerHTML = "";
+	}
+
+	ErrorMsg.style.display = "block";
+
+	return true;
+}
+
+function INTERFACE_HideErrorMessage()
+{
+	var ErrorMsg = document.getElementById("ErrorLabel");
+
+	ErrorMsg.style.display = "none";
+}

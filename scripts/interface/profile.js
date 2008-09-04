@@ -152,7 +152,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 		CounterInput.value = 200;
 		CounterInput.setAttribute("size",3);
 		CounterInput.readOnly = true;
-		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character").replace(/%s/,200));
 
 		WhoAmIUser = 	UTILS_CreateElement('textarea',null,'inf_whoami');
 		WhoAmIUser.value = Profile.Description;
@@ -164,6 +164,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 				WhoAmIUser.value = WhoAmIUser.value.substr(0,200);
 			}
 			CounterInput.value = 200 - WhoAmIUser.value.length;
+			CounterLabel.innerHTML = UTILS_GetText("window_character").replace(/%s/,200 - WhoAmIUser.value.length);
 		}
 	
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
@@ -283,7 +284,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	}
 	else
 	{
-		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') + Profile.User);
+		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games2') +" "+ Profile.User);
 		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(Profile.User); };
 	}
 
@@ -329,7 +330,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	
 	// Counter Div
 	if (User) {
-		CounterDiv.appendChild(CounterInput);
+//		CounterDiv.appendChild(CounterInput);
 		CounterDiv.appendChild(CounterLabel);
 	}
 	
@@ -370,12 +371,20 @@ function INTERFACE_ShowProfileWindow(Profile)
 	
 	// Old games elements
 	OldGamesDiv.appendChild(OldGamesLabel);
-	
+
 	// Main Div elements
 	Div.appendChild(TopDiv);
 	Div.appendChild(WhoDiv);
 	Div.appendChild(RatingDiv);
 	Div.appendChild(BottomDiv);
+
+	// IE Fix
+	if (MainData.Browser == 0)
+	{
+		var Br = UTILS_CreateElement("br");
+		Div.appendChild(Br);
+	}
+
 	Div.appendChild(TimeDiv);
 	Div.appendChild(OldGamesDiv);
 	Div.appendChild(ButtonsDiv);
@@ -392,7 +401,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.Group = GroupSpan;
 	Elements.Title = TitleSpan;
 	Elements.TitleImg = TypeImg;
-	Elements.Counter = CounterInput;
+	Elements.Counter = CounterLabel;
 	
 	Elements.SetUser = INTERFACE_ProfileSetUser;
 	Elements.SetUserImg = INTERFACE_ProfileSetUserImg;
@@ -512,7 +521,14 @@ function INTERFACE_ProfileSetUserImg(Img)
 	//No user image
 	if(Img != "images/no_photo.png")
 	{
-		this.UserImg.src = IMAGE_ImageDecode(Img);
+		try
+		{
+			this.UserImg.src = IMAGE_ImageDecode(Img);
+		}
+		catch(err)
+		{
+			this.UserImg.src = "images/no_photo.png";
+		}
 	}
 }
 
@@ -555,7 +571,7 @@ function INTERFACE_ProfileSetDesc(Desc)
 	}
 	if (this.Nick.innerHTML == MainData.Username)
 	{
-		this.Counter.value = 200 -this.Desc.value.length;
+		this.Counter.innerHTML = UTILS_GetText("window_character").replace(/%s/, 200 - this.Desc.value.length);
 	}
 }
 
@@ -577,7 +593,7 @@ function INTERFACE_ProfileSetRatings(Ratings)
 	var Tr, Td;
 	var i,j;
 
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < Ratings.length; i++)
 	{
 		Tr = UTILS_CreateElement('tr');
 		

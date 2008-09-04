@@ -7,6 +7,8 @@
 	<utils>
 		<not_implemented_title>Não implementada</not_implemented_title>
 		<not_implemented>Funcionalidade ainda não implementada para esta versão.</not_implemented>
+		<server_offline_title>Servidor offline</server_offline_title>
+		<server_offline>O servidor foi desligado</server_offline>
 	</utils>
 	<window>
 		<window_yes>Sim</window_yes>
@@ -18,10 +20,10 @@
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
 		<window_search>Buscar</window_search>
-		<window_character>caractere(s)</window_character>
+		<window_character>Caractere(s): %s</window_character>
 	</window>
 	<login>
-		<login_title>Seja bem-vindo ao Xadrez Livre!</login_title>
+		<login_title>Seja bem-vindo ao Xadrez Livre! O servidor mais moderno para jogos de xadrez online totalmente de graça!</login_title>
 		<login_text1>Aqui você pode jogar xadrez com outros usuários ou com robôs, além de interagir com os demais usuários através das salas de bate-papo. Para isso você não precisa instalar nenhum outro programa, basta fazer seu cadastro no link ao lado, entrar e jogar!</login_text1>
 		<login_text2>Este servidor faz parte do projeto "Apoio Computacional ao Ensino de Xadrez nas Escolas". Para saber mais sobre o projeto acesse </login_text2>
 		<login_text3><![CDATA[Recomendamos o uso do navegador <a href='http://www.firefox.com'>Firefox</a> para garantir o melhor funcionamento do servidor. Se você não tem a versão mais nova <a href='http://www.firefox.com'>clique aqui para baixá-la</a>.]]></login_text3>
@@ -43,6 +45,10 @@
 		<login_load_user_list>Carregando lista de usuários...</login_load_user_list>
 		<login_validate_user>Usuário inválido</login_validate_user>
 		<login_connection_closed>Conexão perdida. Tente novamente.</login_connection_closed>
+		<login_connection_start>Abrindo Conexão...</login_connection_start>
+		<login_connection_user>Verificando usuário...</login_connection_user>
+		<login_connection_passwd>Verificando senha...</login_connection_passwd>
+		<login_server_not_founded>Servidor não encontrado.</login_server_not_founded>
 	</login>
 	<menu>
 		<menu_adjourn>Adjudicar</menu_adjourn>
@@ -111,6 +117,7 @@
 		<room_hide_user_list>Ocultar usuários da sala</room_hide_user_list>
 		<room_counter>caractere(s)</room_counter>
 		<room_loading>Carregando sala...</room_loading>
+		<room_error_message_length>Número máximo de caracteres excedido(%s)</room_error_message_length>
 	</room>
 	<group>
 		<group_default>Amigos</group_default>
@@ -127,7 +134,7 @@
 		<usermenu_send_message>Conversar</usermenu_send_message>
 		<usermenu_send_offlinemessage>Deixar recado</usermenu_send_offlinemessage>
 		<usermenu_match>Convidar para jogar</usermenu_match>
-		<usermenu_add_contact>Adicionar contato</usermenu_add_contact>
+		<usermenu_add_contact>Adicionar aos contatos</usermenu_add_contact>
 		<usermenu_remove_contact>Remover contato</usermenu_remove_contact>
 		<usermenu_view_profile>Ver perfil e informações</usermenu_view_profile>
 		<usermenu_disconnect_user>Desconectar usuário</usermenu_disconnect_user>
@@ -159,7 +166,7 @@
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
-		<challenge_menu_announce_title>Desafios anúnciados</challenge_menu_announce_title>
+		<challenge_menu_announce_title>Desafios anunciados</challenge_menu_announce_title>
 		<challenge_menu_announce>Anunciar partida</challenge_menu_announce>
 		<challenge_menu_postpone_title>Partidas adiadas</challenge_menu_postpone_title>
 		<challenge_menu_no_match>Não há desafios feitos.</challenge_menu_no_match>
@@ -169,7 +176,21 @@
 		<challenge_offer_opponent_offline>Oponente está jogando ou está desconectado do servidor de xadrez.</challenge_offer_opponent_offline>
 		<challenge_error>Erro ao desafiar</challenge_error>
 		<challenge_announce_match>Anunciar</challenge_announce_match>
+		<challenge_menu_loading_announce>Carregando partidas anunciadas...</challenge_menu_loading_announce>
 	</challenge>
+	<announce>
+		<announce_title>Anunciar partida</announce_title>
+		<announce_rating_interval>Limite de rating:</announce_rating_interval>
+		<announce_min_rating_example>Ex:1000</announce_min_rating_example>
+		<announce_max_rating_example>Ex:2300</announce_max_rating_example>
+		<announce_pieces>Peças:</announce_pieces>
+		<announce_error_title>Erro ao anunciar partida</announce_error_title>
+		<announce_invalid_min_rating>Valor de rating mínimo incorreto. Ex: 0000</announce_invalid_min_rating>
+		<announce_invalid_min_rating>Valor de rating máximo incorreto. Ex: 2349</announce_invalid_min_rating>
+		<announce_invalid_interval>Intervalo de rating incorreto. O valor mínimo deve ser menor que o valor máximo.</announce_invalid_interval>
+		<announce_accept_error>Erro ao aceitar partida anunciada</announce_accept_error>
+		<announce_non_exist>Partida anunciada foi cancelada ou removida.</announce_non_exist>
+	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>
 		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
@@ -180,8 +201,8 @@
 		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
 		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
 		<game_abort>Encerrar partida</game_abort>
-		<game_abort_text>%s deseja encerrar a partida, deseja aceitar?</game_abort_text>
-		<game_abort_denied>%s recusou sua requisição de encerramento da partida.</game_abort_denied>
+		<game_abort_text>%s deseja cancelar a partida, deseja aceitar?</game_abort_text>
+		<game_abort_denied>%s recusou sua requisição de cancelamento da partida.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
 		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
 		<game_checkmatew_text>Parabéns! Você ganhou de %s por xeque-mate.</game_checkmatew_text>
@@ -273,7 +294,7 @@
 		<profile_lose>Derrotas</profile_lose>
 		<profile_edit_photo>Editar imagem</profile_edit_photo>
 		<profile_old_games1>Minhas partidas</profile_old_games1>
-		<profile_old_games2>Partidas de </profile_old_games2>
+		<profile_old_games2>Partidas de</profile_old_games2>
 		<profile_save>Salvar alterações</profile_save>
 		<profile_discard>Fechar sem salvar</profile_discard>
 		<profile_save_close>Salvar e fechar</profile_save_close>
@@ -331,7 +352,7 @@
 		<oldgame_result>Resultado</oldgame_result>
 		<oldgame_date>Data</oldgame_date>
 		<oldgame_prev>Anteriores</oldgame_prev>
-		<oldgame_next>Proximos</oldgame_next>
+		<oldgame_next>Próximas</oldgame_next>
 		<oldgame_format>Formato: dd/mm/aaaa</oldgame_format>
 		<oldgame_no_moves>Jogo sem movimentos feitos</oldgame_no_moves>
 		<oldgame_invalid_begin>Data inicial inválida!</oldgame_invalid_begin>
@@ -339,6 +360,7 @@
 		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
 		<oldgame_loading>Buscando partidas antigas...</oldgame_loading>
+		<oldgame_examine>Examinar partida</oldgame_examine>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>
@@ -361,33 +383,41 @@
 		<help_title>Ajuda</help_title>
 		<help_t_1>Como?</help_t_1>
 		<help_t_1_1>Jogar</help_t_1_1>
-		<help_t_1_1_1>Aceitando um convite para jogar</help_t_1_1_1>
-		<help_c_1_1_1><![CDATA[<p>- Clique no botão “Aceitar” para iniciar a partida com as condições de partida definidas por quem te convidou.</p><br /><p>Obs.: Caso você queira jogar com o usuário que te convidou, mas com condições diferentes, faça as alterações desejadas e clique em “Redesafiar”. Assim, as novas condições são enviadas ao usuário que te convidou e ele poderá aceitar ou recusar sua proposta.</p>]]></help_c_1_1_1>
-		<help_t_1_1_2>Desafiando adversário específico</help_t_1_1_2>
-		<help_c_1_1_2><![CDATA[<p>Para convidar um usuário específico para jogar</p><p>- Clique no usuário que deseja convidar e, depois, em “Convidar para jogar”;</p><p>- Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</p><p>- Clique no botão "Convidar".</p><br /><p>Obs.: O usuário que você convidou pode:</p><p>- "Aceitar" seu convite e iniciar a partida;</p><p>- Redefinir as condições de jogo e te "Redesafiar" (assim você pode também “Aceitar”, “Redesafiar” ou “Rejeitar” as condições propostas por ele);</p><p>- ou "Rejeitar" seu convite para jogar.</p>]]></help_c_1_1_2>
-		<help_t_1_2>Conversar com um usuário</help_t_1_2>
-		<help_c_1_2><![CDATA[<p>Para conversar com um usuário específico</p><p>- Clique no usuário que deseja conversar;</p><p>- Clique na opção "Conversar";</p><p>- Digite a mensagem no campo de digitação de mensagem;</p><p>- Digite “Enter” para enviar a mensagem para a área de conversa.</p>]]></help_c_1_2>
-		<help_t_1_3>Conversar com vários usuários em uma sala</help_t_1_3>
-		<help_c_1_3><![CDATA[<p>Para conversar com vários usuários, escolha uma sala específica no menu “Salas” ou converse na sala Geral, que todos os usuários participam.</p><p>- Digite a mensagem no campo de digitação de mensagem;</p><p>- Digite “Enter” para enviar a mensagem para a área de conversa da sala.</p>]]></help_c_1_3>
-		<help_t_1_4>Ver perfil e informações de um usuário</help_t_1_4>
-		<help_c_1_4><![CDATA[<p>Para ver perfil e informações de um usuário</p><p>- Clique no usuário;</p><p>- Clique em "Ver perfil e informações".</p>]]></help_c_1_4>
-		<help_t_1_5>Adicionar um usuário na sua lista de contatos</help_t_1_5>
-		<help_c_1_5><![CDATA[<p>Para adicionar um usuário em sua lista de contatos</p><p>- Clique em “Online” para ver todos os usuários conectados no Xadrez Livre;</p><p>- Clique no usuário que deseja adicionar aos seus contatos;</p><p>- Clique em "Adicionar aos contatos".</p>]]></help_c_1_5>
-		<help_t_1_6>Remover um usuário de sua lista de contatos</help_t_1_6>
-		<help_c_1_6><![CDATA[<p>Para remover um usuário de sua lista de contatos</p><p>- Clique em “Contatos” para ver seus contatos no Xadrez Livre;</p><p>- Clique no usuário que deseja remover;</p><p>- Clique em "Remover contato"</p>]]></help_c_1_6>
-		<help_t_1_7>Alterar meu status</help_t_1_7>
-		<help_c_1_7><![CDATA[<p>Quando você se conecta ao Xadrez livre seu status é “Disponível”. Para alterar seu status</p><p>- (Áreal pessoal) Clique na setinha ao lado do seu status atual;</p><p>- Clique no status desejado.</p><br /><p>Obs.: Os status “Jogando”, "Observando" e "Examinando" são aferidos automaticamente pelo servidor. Quando um usuário já está jogando (status “Jogando”) ou está “Indisponível”, ele não pode ser convidado para jogar. Se está com status ocupado, pode jogar mas não pode conversar.</p>]]></help_c_1_7>
-		<help_t_1_8>Alterar meu perfil</help_t_1_8>
-		<help_c_1_8><![CDATA[<p>Para alterar seu perfil (área pessoal)</p><p>- Clique no seu nome de usuário na lista de usuário “online” (ou terá também na área pessoal);</p><p>- Clique em “Alterar perfil”</p>]]></help_c_1_8>
-		<help_t_1_9>Criar sala</help_t_1_9>
-		<help_c_1_9><![CDATA[<p>- Clique no menu “Salas”;</p><p>- Clique em “Criar sala”;</p><p>- Digite o nome da sala;</p><p>- Clique no botão “Criar sala”.</p>]]></help_c_1_9>
-		<help_t_1_10>Observar uma partida</help_t_1_10>
-		<help_c_1_10><![CDATA[<p>- Clique em “Partidas em andamento”, na Barra de contexto;</p><p>- Clique na partida que deseja observar;</p><p>- Clique em “Observar”.</p>]]></help_c_1_10>
-		<help_t_1_11>Buscar partidas</help_t_1_11>
-		<help_c_1_11><![CDATA[<a name="search_game_a" /><p>- Clique em “Buscar partida”, na Barra de Ferramentas;</p><p>- Defina os critérios de busca;</p><p>- Clique em “Buscar”;</p><p>Obs.: Use os botões de navegação “Avançar” e “Voltar” para ver outras partidas, caso não caibam todas as partidasa encontradas em uma única janela.</p>]]></help_c_1_11>
-		<help_t_1_12>Examinar uma partida</help_t_1_12>
-		<help_c_1_12><![CDATA[<p>- Busque uma partida (<a href="#search_game_a">Buscar partidas</a>);</p><p>- Clique na partida que deseja examinar;</p><p>- Use os botões avançar e voltar para visualizar os lances da partida.</p>]]></help_c_1_12>
-		<help_t_1_13>Anunciar uma partida</help_t_1_13>
-		<help_c_1_13><![CDATA[<p>Para anunciar uma partida para que ela possa ser vista e aceita por outros usuários</p><ul><li>Clique em “Partidas anunciadas”, na Barra de contexto;</li><li>Clique em “Anunciar partida”</li><li>Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</li><li>Clique em “Anunciar”.</li></ul><br /><p>Obs.: A partida anunciada ficará na lista de partidas anunciadas. Assim, outros usuários poderão vê-la e aceitar jogá-la. As partidas são apresentadas somente para os usuários com valor de rating dentro do intervalo definido no anúncio da partida.</p>]]></help_c_1_13>
+		<help_t_1_1_1>Desafiando adversário específico</help_t_1_1_1>
+		<help_c_1_1_1><![CDATA[<p>Para convidar um usuário específico para jogar:</p><ul><li>Clique no usuário que deseja convidar e, depois, clique em “Convidar para jogar”;</li><li>Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</li><li>Clique no botão "Convidar".</li></ul><br /><p>Obs.: O usuário que você convidou pode:</p><ul><li>"Aceitar" seu convite e iniciar a partida;</li><li>Redefinir as condições de jogo e te "Redesafiar";</li><li>ou "Rejeitar" seu convite para jogar.</li></ul>]]></help_c_1_1_1>
+		<help_t_1_1_2>Aceitando um convite para jogar</help_t_1_1_2>
+		<help_c_1_1_2><![CDATA[<p>Quando você é convidado para jogar uma partida, a janela de convite para jogar abre-se para você.</p><p><ul><li>Clique no botão “Aceitar” para iniciar a partida com as condições de partida definidas por quem te convidou.</li></ul><br /><p>Obs.: Caso você queira jogar com o usuário que te convidou, mas com condições diferentes, faça as alterações desejadas e clique em “Redesafiar”. Assim, as novas condições são enviadas ao usuário que te convidou e ele poderá aceitar ou recusar sua proposta.</p>]]></help_c_1_1_2>
+		<help_t_1_1_3>Anunciar uma partida</help_t_1_1_3>
+		<help_c_1_1_3><![CDATA[<p>Para anunciar uma partida</p><ul><li>Clique em “Desafios”, na Barra de contexto;</li><li>Clique em “Anunciar partida”;</li><li>Defina as condições de jogo para a partida (Cor das peças; Tempo da partida etc.)</li><li>Clique em “Anunciar”.</li></ul><br /><p> Obs.: A partida anunciada ficará na lista de partidas anunciadas. Assim, outros usuários poderão vê-la e aceitar jogá-la. As partidas são apresentadas somente para os usuários com rating dentro do intervalo definido no anúncio da partida.</p>]]></help_c_1_1_3>
+		<help_t_1_2>Buscar usuários</help_t_1_2>
+		<help_c_1_2><![CDATA[<ul><li>Clique em “Buscar usuário”, na Barra de Ferramentas;</li><li>Defina os critérios de busca;</li><li>Clique em “Buscar”.</li></ul>]]></help_c_1_2>
+		<help_t_1_3>Conversar com um usuário</help_t_1_3>
+		<help_c_1_3><![CDATA[<p>Para conversar com um usuário específico</p><ul><li>Clique no usuário que deseja conversar e, depois, clique em "Conversar";</li></ul><p>Será aberta uma janela de conversa entre vocês dois.</p><ul><li>Digite a mensagem (no campo localizado no inferior da janela de conversa);</li><li>Digite “Enter” para enviar a mensagem.</li></ul>]]></help_c_1_3>
+		<help_t_1_4>Conversar com vários usuários em uma sala</help_t_1_4>
+		<help_c_1_4><![CDATA[<p>Para conversar com vários usuários, escolha uma sala específica no menu “Salas” ou converse na sala Geral, que todos os usuários participam.</p><ul><li>Digite a mensagem (no campo localizado no inferior da janela da sala);</li><li>Digite “Enter” para enviar a mensagem para sala.</li></ul>]]></help_c_1_4>
+		<help_t_1_5>Ver ou ocultar a lista de usuários de uma sala</help_t_1_5>
+		<help_c_1_5><![CDATA[<p>A sala deve estar aberta (Veja “Como -> Entrar em uma sala”) e ativa (estar na frente das outras salas e com a barra de título laranja) para ver sua lista de usuários:</p><ul><li>Clique em “Ver usuários da sala”, se a lista de usuários não estiver oculta, ou;</li><li>Clique em “Ocultar usuários da sala”, se a lista de usuários estiver sendo exibida.</li></ul>]]></help_c_1_5>
+		<help_t_1_6>Ver perfil e informações de um usuário</help_t_1_6>
+		<help_c_1_6><![CDATA[<p>Para ver perfil e informações de um usuário</p><ul><li>Clique no usuário e, depois, clique em "Ver perfil e informações".</li></ul>]]></help_c_1_6>
+		<help_t_1_7>Adicionar um usuário na sua lista de contatos</help_t_1_7>
+		<help_c_1_7><![CDATA[<p>Para adicionar um usuário em sua lista de contatos</p><ul><li>Clique no usuário e, depois, clique em "Adicionar aos contatos".</li></ul>]]></help_c_1_7>
+		<help_t_1_8>Remover um usuário de sua lista de contatos</help_t_1_8>
+		<help_c_1_8><![CDATA[<p>Para remover um usuário de sua lista de contatos</p><ul><li>Clique em “Contatos” para ver seus contatos no Xadrez Livre;</li><li>Clique no usuário que deseja remover e, depois, clique em "Remover contato"</li></ul>]]></help_c_1_8>
+		<help_t_1_9>Alterar meu status</help_t_1_9>
+		<help_c_1_9><![CDATA[<p>Quando você se conecta ao Xadrez Livre seu status é “Disponível”. Ele é mostrado na área pessoal, logo abaixo de seu login.<p/><p>Para alterar seu status:</p><ul><li>Clique na setinha ao lado do seu status atual;</li><li>Clique no status desejado.</li></ul><br /><p>Obs.: Os status “Jogando”, "Observando" e "Examinando" são aferidos automaticamente pelo servidor. Quando um usuário já está jogando (status “Jogando”) ou está “Indisponível”, ele não pode ser convidado para jogar. Se está com status ocupado, pode jogar mas não pode conversar.</p>]]></help_c_1_9>
+		<help_t_1_10>Alterar meu perfil</help_t_1_10>
+		<help_c_1_10><![CDATA[<p>Para alterar seu perfil:</p><ul><li>Clique em “Alterar meu perfil”, na área pessoal.</li></ul>]]></help_c_1_10>
+		<help_t_1_11>Entrar em uma sala</help_t_1_11>
+		<help_c_1_11><![CDATA[<ul><li>Clique em “Salas”, na Barra de contexto;</li><li>Clique na sala que deseja entrar.</li></ul><br /><p>Obs.: A sala que você entrou ficará aberta na lateral esquerda da tela.</p>]]></help_c_1_11>
+		<help_t_1_12>Criar sala</help_t_1_12>
+		<help_c_1_12><![CDATA[<ul><li>Clique em “Salas”, na Barra de contexto;</li><li>Clique em “Criar sala”;</li><li>Digite o nome da sala;</li><li>Clique no botão “Criar”.</li></ul><br /><p>Obs.: A sala criada aparece na lateral esquerda da tela.</p>]]></help_c_1_12>
+		<help_t_1_13>Observar uma partida</help_t_1_13>
+		<help_c_1_13><![CDATA[<ul><li>Clique em “Partidas em andamento”, na Barra de contexto;</li><li>Clique na partida que deseja observar.</li></ul>]]></help_c_1_13>
+		<help_t_1_14>Buscar partidas realizadas no Xadrez livre</help_t_1_14>
+		<help_c_1_14><![CDATA[<ul><li>Clique em “Buscar partida”, na Barra de Ferramentas;</li><li>Defina os critérios de busca;</li><li>Clique em “Buscar”;</li></ul><br /><p>Obs.: Use os botões de navegação “Próximas” e “Anteriores” para ver outras partidas, caso não caibam todas as partidas encontradas em uma única janela.</p>]]></help_c_1_14>
+		<help_t_1_15>Examinar uma partida</help_t_1_15>
+		<help_c_1_15><![CDATA[<ul><li>Busque uma partida (Veja “Como -> Buscar partidas realizadas no Xadrez Livre”);</li><li>Clique na partida que deseja examinar;</li><li>Use os botões de navegação, abaixo da lista de lances, para avançar e voltar para navegar pelos lances da partida.</li></ul>]]></help_c_1_15>
+		<help_t_1_16>Obter ajuda</help_t_1_16>
+		<help_c_1_16><![CDATA[<p>Para obter ajuda:</p><ul><li>Clique em “Ajuda”, na Barra de Ferramentas.</li></ul><br /><p>Obs.: Você pode obter ajuda de duas formas: usando a estrutura “Conteúdo”, que explica detalhadamente as informações contidas nas telas do Xadrez Livre, ou usando a estrutura “Como...”, que dá dicas rápidas sobre como utilizar as principais funcionalidades do Xadrez Livre.</p>]]></help_c_1_16>
 	</help>
 </language>

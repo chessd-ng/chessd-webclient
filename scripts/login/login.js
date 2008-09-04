@@ -39,6 +39,13 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	MainData.Username = Username;
 	MainData.Password = Passwd;
 
+	// Set connection status to conneting
+	MainData.ConnectionStatus = 1;
+
+	// Set new RID and reset SID
+	MainData.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	MainData.SID = -1;
+
 	// Login on Jabber Server
 	CONNECTION_ConnectJabber();
 
@@ -51,6 +58,12 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 		UTILS_CreateCookie("Passwd", Passwd, MainData.CookieValidity);
 	else
 		UTILS_DeleteCookie("Passwd");
+	
+	// Disable inputs
+	INTERFACE_LoginDisableInput();
+
+	// Clear error message
+	INTERFACE_ClearError();
 }
 
 
@@ -63,12 +76,12 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
+	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	MainData.ConnectionStatus = -1;
 
 	// Logout from jabber
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
@@ -77,23 +90,14 @@ function LOGIN_Logout()
 		MainData.CurrentGame.Game.StopTimer();
 	}
 
-	INTERFACE_StopInterface();
-
-	CONTACT_StopAwayStatus();
-
-	delete MainData;
-
-	// Show Login interface
-	//INTERFACE_StartLogin(Lang);
-	START_StartPage();
+	START_Restart();
 }
 
 
 function LOGIN_LeavePage()
 {
 	var XMPP = "";
-	XMPP += MESSAGE_Unavailable();
-	XMPP += MESSAGE_EndConnection();
+	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 }
 
@@ -131,35 +135,25 @@ function LOGIN_EndLogin()
 * @return none
 * @public
 */
-function LOGIN_LoginFailed(Code)
+function LOGIN_LoginFailed(Msg)
 {
-	var ErrorLabel = document.getElementById("ErrorLabel");
+	//Show error message
+	INTERFACE_ShowErrorMessage(Msg);
 
-	// if login window is closed, then do nothing
-	if(ErrorLabel == null)
-	{
-		return;
-	}
+	//Enable inputs
+	INTERFACE_LoginEnableInput();
 
-	switch (Code)
-	{
-		case (MainData.Const.LOGIN_ServerDown):
-			ErrorLabel.innerHTML = UTILS_GetText("login_server_down");
-			break;
+	// Hide login message
+	INTERFACE_HideLoginMessage();
+}
 
-		case (MainData.Const.LOGIN_ConnectionRefused):
-			ErrorLabel.innerHTML = UTILS_GetText("login_connection_refused");
-			break;
-
-		case (MainData.Const.LOGIN_InvalidUser):
-			ErrorLabel.innerHTML = UTILS_GetText("login_invalid_user");
-			break;
-		case (MainData.Const.LOGIN_BannedUser):
-			ErrorLabel.innerHTML = UTILS_GetText("login_banned_user");
-			break;
-		case (MainData.Const.LOGIN_ConnectionClosed):
-			ErrorLabel.innerHTML = UTILS_GetText("login_connection_closed")
-
-			break;
-	}
+/**
+ * Show a connection string when start login
+ *
+ * @param	Msg	Message string
+ * @author	Rubens Suguimoto
+ */
+function LOGIN_LoginMsg(Msg)
+{
+	INTERFACE_ShowLoginMessage(Msg);
 }

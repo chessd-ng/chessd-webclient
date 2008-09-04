@@ -18,45 +18,44 @@
 * Interface function for chat
 */ 
 
-
-/**
-* Show a message in a open chat
-*/
-function INTERFACE_ShowChatMessage(Username, Message, YourMessage)
+function ChatObj(Username, Position)
 {
-	var Node = document.getElementById("ChatMessages_"+Username);
-	var Item, Time, NewMessage;
+	var Tmp = INTERFACE_CreateChat(Username);
+	// Attributes
+	this.chatWindow = Tmp.ChatWindow;
+	this.chatInner = Tmp.ChatInner;
+	this.chatList = Tmp.ChatList;
+	this.chatTitle = Tmp.ChatTitle;
+	this.chatTitleText = Tmp.ChatTitleSpan;
+	this.chatInput = Tmp.Input;
+	this.minmax = Tmp.MinMax;
 
-	if (!Node)
-	{
-		return false;
-	}
+	this.username = Username;
+	this.position = Position;
 
-	// Get current time
-	Time = UTILS_GetTime();
+	this.visible = true;
 
-	if (YourMessage)
-	{
-		NewMessage = "<strong>"+Time+" "+MainData.Username+"</strong>: "+Message;
-	}
-	else
-	{
-		NewMessage = "<strong>"+Time+" "+Username+"</strong>: "+Message;
-	}
+	// Methods
+	this.show = INTERFACE_ShowChat;
+	this.hide = INTERFACE_HideChat;
+	this.close = INTERFACE_CloseChat;
+	this.focus = INTERFACE_FocusChat;
+	this.blur = INTERFACE_BlurChat;
+	this.minimize = INTERFACE_MinimizeChat;
+	this.maximize = INTERFACE_MaximizeChat;
 
-	Item = UTILS_CreateElement("li", null, null, NewMessage);
-	Node.appendChild(Item);
-	Node.scrollTop = Node.scrollHeight + Node.clientHeight;
-
-	INTERFACE_FocusChat(Username);
-
-	return true;
+	this.addMessage = INTERFACE_AddChatMessage;
+	this.addMessageError = INTERFACE_AddChatMessageError;
+	this.inputFocus = INTERFACE_InputChatFocus;
+	this.setPosition = INTERFACE_SetChatPosition;
+	this.setTitle = INTERFACE_SetChatTitle;
 }
 
 
 /**
 * Create chat elements
 */
+/*
 function INTERFACE_OpenChat(Username, Status)
 {
 	var Chat;
@@ -76,117 +75,234 @@ function INTERFACE_OpenChat(Username, Status)
 
 	return true;
 }
-
+*/
 /**
 * Show chat window
 */
-function INTERFACE_ShowChat(Item, Hide)
+function INTERFACE_ShowChat(Element)
 {
-	/*
-	if(MainData.Browser == 0)
+	var Pos = this.position;
+
+	if(Element != null)
 	{
-		Item.style.top = "-60mm";
+		Element.appendChild(this.chatWindow);
 	}
 	else
 	{
-		Item.style.top = "-40mm";
+		var ChatBar = document.getElementById("ChatList");
+		ChatBar.appendChild(this.chatWindow);
+		//document.body.appendChild(this.chatWindow);
 	}
-	*/
-	Item.style.top = "-155px";
-	Hide.style.display = "block";
+
+	//this.chatWindow.style.left = (Pos * 200) +"px";
+	this.chatWindow.style.display = "block";
 }
 
 /**
 * Hide chat window
 */
-function INTERFACE_HideChat(Item, Hide)
+function INTERFACE_HideChat()
 {
-	Item.style.top = "0mm";
-	Hide.style.display = "none";
+	this.chatWindow.style.display = "none";
 }
 
 /**
 * Close a chat
 */
-function INTERFACE_CloseChat(Username)
+function INTERFACE_CloseChat()
 {
-	var Node = document.getElementById("Chat_"+Username);
-
-	if (!Node)
-	{
-		return false;
-	}
-	Node.parentNode.removeChild(Node);
-	return true;
+	this.chatWindow.parentNode.removeChild(this.chatWindow);
 }
 
 /**
 * Giving focus to a chat window
 */
-function INTERFACE_FocusChat(Username)
+function INTERFACE_FocusChat()
 {
-	var Node = document.getElementById("Chat_"+Username);
-	var Title;
-
-	if (!Node)
-	{
-		return null;
-	}
-
-	Title = Node.getElementsByTagName("h3");
-
-	if (Title.length <= 0)
-	{
-		return null;
-	}
-
-	Title[0].className = "title_selec";
-	return true;
+	this.chatTitle.className = "title_selec";
 }
 
 /**
 * Remove focus of a chat window
 */
-function INTERFACE_UnfocusChat(Username)
+function INTERFACE_BlurChat()
 {
-	var Node = document.getElementById("Chat_"+Username);
-	var Title;
+	this.chatTitle.className = "title";
+}
 
-	if (!Node)
-	{
-		return null;
-	}
+function INTERFACE_MinimizeChat()
+{
+	this.chatInner.style.display = "none";
+	this.chatWindow.style.top = "0px";
+	this.visible = false
+}
 
-	Title = Node.getElementsByTagName("h3");
+function INTERFACE_MaximizeChat()
+{
+	this.chatWindow.style.top = "-155px";
+	this.chatInner.style.display = "block";
+	this.visible = true
+}
 
-	if (Title.length <= 0)
-	{
-		return null;
-	}
+/**
+* Show a message in a open chat
+*/
+function INTERFACE_AddChatMessage(Username, Message)
+{
+	var Item, Time, NewMessage;
 
-	Title[0].className = "title";
+	// Get current time
+	Time = UTILS_GetTime();
+
+	NewMessage = "<strong>"+Time+" "+Username+"</strong>: "+Message;
+
+	Item = UTILS_CreateElement("li", null, null, NewMessage);
+	this.chatList.appendChild(Item);
+	this.chatList.scrollTop = this.chatList.scrollHeight + this.chatList.clientHeight;
+
 	return true;
 }
 
-function INTERFACE_ChatChangeStatus(Username, Status)
+function INTERFACE_AddChatMessageError(Message)
 {
-	var Node = document.getElementById("ChatTitle_"+Username);
+	var Item;
 
-	if (!Node)
-	{
-		return null;
+	Item = UTILS_CreateElement("li", null, "error", Message);
+
+	this.chatList.appendChild(Item);
+	this.chatList.scrollTop = this.chatList.scrollHeight + this.chatList.clientHeight;
+
+}
+
+/*
+* Set focus in input element 
+*
+* @author Danilo
+*/
+function INTERFACE_InputChatFocus()
+{
+	this.chatInput.focus();
+}
+
+
+function INTERFACE_SetChatPosition(Num)
+{
+	this.position = Num;
+}
+
+function INTERFACE_SetChatTitle(Str)
+{
+	this.chatTitleText.innerHTML = Str;
+}
+
+
+/**
+* Create chat elements
+*/
+function INTERFACE_CreateChat(Username)
+{
+	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
+	var Close, Input, State;
+	var TitleSpan;
+
+	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
+
+	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
+
+	ChatTitle = UTILS_CreateElement("h3", null, "title");
+
+	TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username);
+
+	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
+	ChatInner = UTILS_CreateElement("div", "ChatInner");
+
+	State = UTILS_CreateElement("img",null,"minimize");
+	State.src = "./images/minimize_chat.png";
+
+	Close = UTILS_CreateElement("img",null,"close");
+	Close.src = "./images/close_chat.png";
+
+	// Show/hide chat
+	State.onclick = function () {
+		CHAT_ChangeChatState(Username);
 	}
 
-	if(Status == "online")
-	{
-		Node.innerHTML = Username;
-	}
-	else
-	{
-		Node.innerHTML = Username +" (offline)";
+	// Close chat
+	Close.onclick = function () {
+		CHAT_CloseChat(Username);
 	}
 
-	return true;
+	Input = UTILS_CreateElement("input");
+	Input.type = "text";
+	
+	// Send message
+	Input.onkeypress = function (event) {
+		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
+		{
+			if(Input.value.length <= MainData.MaxChatChar)
+			{
+				// Send chat message
+				CHAT_SendMessage(Username, Input.value);
+				Input.value = "";
+			}
+			else
+			{
+				CHAT_ErrorMessageLength(Username);
+			}
+		}
+	}
+	
+	// Remove focus
+	ChatItem.onclick = function(){
+		CHAT_BlurChat(Username);
+	}
+	ChatInner.onclick = function(){
+		CHAT_BlurChat(Username);
+	}
+	Input.onfocus = function(){
+		CHAT_BlurChat(Username);
+	}
+
+	ChatTitle.appendChild(TitleSpan);
+	ChatTitle.appendChild(State);
+	ChatTitle.appendChild(Close);
+
+	ChatInner.appendChild(ChatMessages);
+	ChatInner.appendChild(Input);
+
+	ChatInside.appendChild(ChatTitle);
+	ChatInside.appendChild(ChatInner);
+
+	ChatItem.appendChild(ChatInside);
+
+	return {ChatWindow:ChatItem, ChatInner:ChatInner, ChatList:ChatMessages, ChatTitle:ChatTitle, ChatTitleSpan:TitleSpan, ChatInput:Input, MinMax:State}
+}
+
+
+
+
+
+/***********************************
+ * CHAT BOTTOM BAR
+ * *********************************/
+/**
+* Create chat list elements
+*/
+function INTERFACE_CreateChatList()
+{
+	var ChatDiv, ChatList;
+	var ScreenHeight = document.documentElement.clientHeight;
+
+	ChatDiv = UTILS_CreateElement("div", "Chat");
+	ChatList = UTILS_CreateElement("ul", "ChatList");
+
+	ChatDiv.style.top = (ScreenHeight-20)+"px";
+	ChatDiv.appendChild(ChatList);
+
+	window.onresize = function() { INTERFACE_ChatListPositioning(); };
+	window.onscroll = function() { INTERFACE_ChatListPositioning(); };
+
+	return ChatDiv;
 }
 
 /**
@@ -206,124 +322,4 @@ function INTERFACE_ChatListPositioning()
 	Node.style.top = (ScreenHeight+ScreenScroll-20)+"px";
 
 	return true;
-}
-
-/**
-* Create chat elements
-*/
-function INTERFACE_CreateChat(Username, Status)
-{
-	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
-	var Close, Input, State;
-	var TitleSpan;
-
-	var Elements = new Object();
-
-	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
-	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
-
-	ChatTitle = UTILS_CreateElement("h3", null, "title");
-
-	if (Status == "offline")
-	{
-		TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username,null,Username+" (offline)");
-	}
-	else
-	{
-		TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username,null,Username);
-	}
-
-	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
-	ChatInner = UTILS_CreateElement("div", "ChatInner");
-	ChatInner.style.display = "none";
-	State = UTILS_CreateElement("img",null,"minimize");
-	State.src = "./images/minimize_chat.png";
-	Close = UTILS_CreateElement("img",null,"close");
-	Close.src = "./images/close_chat.png";
-
-	// Show chat
-	INTERFACE_ShowChat(ChatItem, ChatInner);
-
-	// Show/hide chat
-	State.onclick = function () {
-		CHAT_ChangeChatState(Username, ChatItem, ChatInner, State);
-	}
-
-	// Close chat
-	Close.onclick = function () {
-		CHAT_CloseChat(Username);
-	}
-
-	Input = UTILS_CreateElement("input");
-	Input.type = "text";
-	
-	// Send message
-	Input.onkeypress = function (event) {
-		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
-		{
-			// Send chat message
-			CHAT_SendMessage(Username, Input.value);
-			Input.value = "";
-		}
-	}
-	
-	// Remove focus
-	ChatItem.onclick = function(){
-		INTERFACE_UnfocusChat(Username);
-	}
-	ChatInner.onclick = function(){
-		INTERFACE_UnfocusChat(Username);
-	}
-	Input.onfocus = function(){
-		INTERFACE_UnfocusChat(Username);
-	}
-
-
-	ChatTitle.appendChild(TitleSpan);
-	ChatTitle.appendChild(State);
-	ChatTitle.appendChild(Close);
-
-	ChatInner.appendChild(ChatMessages);
-	ChatInner.appendChild(Input);
-
-	ChatInside.appendChild(ChatTitle);
-	ChatInside.appendChild(ChatInner);
-
-	ChatItem.appendChild(ChatInside);
-
-	Elements.Input = Input;
-
-	Elements.InputFocus = INTERFACE_InputChatFocus;
-
-	return {ChatItem:ChatItem, Elements:Elements};
-}
-
-/*
-* Set focus in input element 
-*
-* @author Danilo
-*/
-function INTERFACE_InputChatFocus()
-{
-	this.Input.focus();
-}
-
-/**
-* Create chat list elements
-*/
-function INTERFACE_CreateChatList()
-{
-	var ChatDiv, ChatList;
-	var ScreenHeight = document.documentElement.clientHeight;
-
-	ChatDiv = UTILS_CreateElement("div", "Chat");
-	ChatList = UTILS_CreateElement("ul", "ChatList");
-
-	ChatDiv.style.top = (ScreenHeight-20)+"px";
-	ChatDiv.appendChild(ChatList);
-
-	window.onresize = function() { INTERFACE_ChatListPositioning(); };
-	window.onscroll = function() { INTERFACE_ChatListPositioning(); };
-
-	return ChatDiv;
 }

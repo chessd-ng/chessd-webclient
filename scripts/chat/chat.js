@@ -87,7 +87,7 @@ function CHAT_HandlePresence(XML)
 		Status = "online";
 	}
 
-	INTERFACE_ChatChangeStatus(Username, Status);
+	CHAT_ChangeUserChatStatus(Username, Status);
 
 	return Buffer;
 }
@@ -139,20 +139,45 @@ function CHAT_HandleAnnounceMessage(XML)
 
 function CHAT_OpenChat(Username)
 {
-	var Title, Msg, Status = null;
+	var Title, Msg;
+	var Status;
+	var ChatObject = null;
+	var Position;
 
 	if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
 		Status = "offline";
 	}
-
-	// Try add in sctructure
-	if (MainData.AddChat(Username) == true)
-	{
-		// Show on interface
-		INTERFACE_OpenChat(Username, Status);
-	}
 	else
+	{
+		Status = "online";
+	}
+
+	Position = MainData.ChatList.length;
+
+	if(Position < MainData.MaxChats)
+	{
+		// Create a chat object
+		ChatObject = new ChatObj(Username, Position);
+
+		if(Status != "offline")
+		{
+			ChatObject.setTitle(Username)
+		}
+		else
+		{
+			ChatObject.setTitle(Username+" (offline)");
+		}
+
+		// Add chat in main data structure
+		MainData.AddChat(Username, ChatObject)
+
+		// Show window maximized
+		ChatObject.maximize();
+		ChatObject.show();
+
+	}
+	else //Max chats reached
 	{
 		// Show error message to user
 		Title = UTILS_GetText("chat_warning");
@@ -161,7 +186,7 @@ function CHAT_OpenChat(Username)
 		WINDOW_Alert(Title, Msg);
 	}
 
-	return "";
+	return ChatObject;
 }
 
 /**
@@ -173,10 +198,21 @@ function CHAT_OpenChat(Username)
 */
 function CHAT_CloseChat(Username)
 {
-	if (MainData.RemoveChat(Username) == true)
+	var ChatObj;
+
+	if(MainData.FindChat(Username) == null)
 	{
-		INTERFACE_CloseChat(Username);
+		return "";
 	}
+
+	ChatObj = MainData.GetChat(Username);
+	
+	// Close chat window
+	ChatObj.Chat.close();
+
+	// Remove from main data sctruct
+	MainData.RemoveChat(Username);
+
 	return "";
 }
 
@@ -191,29 +227,32 @@ function CHAT_CloseChat(Username)
  * @return	Empty string
  * @author	Pedro Rocha
 */
-function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
+function CHAT_ChangeChatState(Username)
 {
 	var i = MainData.FindChat(Username);
+	var ChatObj;
 
 	if (i == null)
 	{
 		return "";
 	}
 
+	ChatObj = MainData.GetChat(Username);
+
 	// Changing the visibility of chat window
-	if (MainData.ChatList[i].State == "hidden")
+	if (ChatObj.Chat.visible == false)
 	{
-		INTERFACE_ShowChat(Obj1, Obj2);
-		MainData.ChatList[i].State = "show";
-		State.className = "minimize";
-		State.src = "./images/minimize_chat.png";
+		ChatObj.Chat.maximize();
+		ChatObj.Chat.visible == true;
+		ChatObj.Chat.minmax.className = "minimize";
+		ChatObj.Chat.minmax.src = "./images/minimize_chat.png";
 	}
 	else
 	{
-		INTERFACE_HideChat(Obj1, Obj2);
-		MainData.ChatList[i].State = "hidden";
-		State.className = "maximize";
-		State.src = "./images/maximize_chat.png";
+		ChatObj.Chat.minimize();
+		ChatObj.Chat.visible == false;
+		ChatObj.Chat.minmax.className = "maximize";
+		ChatObj.Chat.minmax.src = "./images/maximize_chat.png";
 	}
 	
 	return "";
@@ -230,14 +269,22 @@ function CHAT_ChangeChatState(Username, Obj1, Obj2, State)
 */
 function CHAT_SendMessage(Username, Message)
 {
+	var ChatObj;
 	//Replace < and  >
 	var Msg = UTILS_ConvertChatString(Message)
 	var XML = MESSAGE_Chat(Username, Msg);
 
 	CONNECTION_SendJabber(XML);
 
-	// Show message in chat list
-	INTERFACE_ShowChatMessage(Username, Msg, true);
+	// Find and get Chat object
+	if(MainData.FindChat(Username) != null)
+	{
+		ChatObj = MainData.GetChat(Username);
+
+		// Show message in chat list
+		//INTERFACE_ShowChatMessage(Username, Msg, true);
+		ChatObj.Chat.addMessage(MainData.Username, UTILS_ConvertChatString(Message));
+	}
 
 	return "";
 }
@@ -253,25 +300,87 @@ function CHAT_SendMessage(Username, Message)
 function CHAT_ReceiveMessage(Username, Message)
 {
 	var ChatPos = MainData.FindChat(Username);
+	var ChatObj;
 
 	// Do not exists a opened chat session
 	if (ChatPos == null)
 	{
-		CHAT_OpenChat(Username);
-
-		INTERFACE_FocusChat(Username);
+		ChatObj = CHAT_OpenChat(Username);
 	}
 	else
 	{
-		// Set chat with focus
-		if (MainData.ChatList[ChatPos].State == "hidden")
-		{
-			INTERFACE_FocusChat(Username);
-		}
+		ChatObj = MainData.GetChat(Username);
+		//Quick fix
+		ChatObj = ChatObj.Chat;
 	}
 
 	// Show message in chat list
-	INTERFACE_ShowChatMessage(Username, Message);
+	ChatObj.addMessage(Username, Message);
+
+	// Set focus to chat window
+	ChatObj.focus();
 
 	return "";
+}
+
+function CHAT_ErrorMessageLength(Username)
+{
+	var ChatPos = MainData.FindChat(Username);
+	var ChatObj;
+	var Message;
+	var Limit = MainData.MaxChatChar;
+
+	if(ChatPos != null)
+	{
+		ChatObj = MainData.GetChat(Username);
+		//Quick fix
+		ChatObj = ChatObj.Chat;
+	}
+	else
+	{
+		return "";
+	}
+
+	Message = UTILS_GetText("room_error_message_length");
+	Message = Message.replace("%s",Limit);
+
+	ChatObj.addMessageError(Message);
+
+	return Message;
+}
+
+function CHAT_ChangeUserChatStatus(Username, Status)
+{
+	var ChatObj;
+
+	if(MainData.FindChat(Username) != null)
+	{
+		ChatObj = MainData.GetChat(Username);
+		
+		if(Status == "offline")
+		{
+			ChatObj.Chat.setTitle(Username + " (offline)");
+		}
+		else
+		{
+			ChatObj.Chat.setTitle(Username);
+		}
+	}
+
+	return "";
+}
+
+function CHAT_BlurChat(Username)
+{
+	var ChatObj;
+
+	if(MainData.FindChat(Username) != null)
+	{
+		ChatObj = MainData.GetChat(Username);
+	
+		ChatObj.Chat.blur();
+	}
+
+	return "";
+
 }

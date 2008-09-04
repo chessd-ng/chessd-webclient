@@ -242,6 +242,10 @@ function GAME_State(XML)
 	var History;
 	var HistoryStates;
 
+	var SPlayer;
+	var State;
+	var WTime, BTime;
+
 
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 	PlayerTag = XML.getElementsByTagName("player");
@@ -249,6 +253,23 @@ function GAME_State(XML)
 	// Get game move history
 	History = XML.getElementsByTagName("history")[0];
 	HistoryStates = History.getElementsByTagName("state");
+
+	// Get players time left
+	State = XML.getElementsByTagName("state")[0];
+	SPlayer = XML.getElementsByTagName("player");
+	if(SPlayer != null)
+	{
+		if(SPlayer[0].getAttribute("color") == "white")
+		{
+			WTime = SPlayer[0].getAttribute("time");
+			BTime = SPlayer[1].getAttribute("time");
+		}
+		else
+		{
+			WTime = SPlayer[1].getAttribute("time");
+			BTime = SPlayer[0].getAttribute("time");
+		}
+	}
 
 	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
@@ -272,10 +293,14 @@ function GAME_State(XML)
 		{
 			Buffer += GAME_StartGame(GameID, Player1, Player2);
 			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+			// Set time left for each player
+			Buffer += GAME_SetLeftTime(GameID, WTime, BTime)
 		}
 		else
 		{
 			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
+			// Set time left for each player
+			Buffer += GAME_SetLeftTime(GameID, WTime, BTime)
 		}
 	}
 
@@ -960,7 +985,7 @@ function GAME_SendResign(GameID)
 function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 {
 	var i;
-	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort, HShortMove;
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;
@@ -1059,14 +1084,28 @@ function GAME_HandleVCardPhoto(XML)
 		MainData.CurrentGame.BPhoto = Img;
 		MainData.CurrentGame.Game.SetBPhoto(Img);
 	}
+	/*
 	else
 	{
 		//This case should not happen
 	}
-	
+	*/
 	return "";
 }
 
+function GAME_SetLeftTime(GameID, WTime, BTime)
+{
+	var Game = MainData.GetGame(GameID);
+
+	if(Game != null)
+	{
+		Game.Game.UpdateWTime(WTime);
+		Game.Game.UpdateBTime(BTime);
+
+		Game.Game.SetWTime();
+		Game.Game.SetBTime();
+	}
+}
 
 function GAME_ShowLoadingMove(Id)
 {

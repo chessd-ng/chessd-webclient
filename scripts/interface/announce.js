@@ -15,21 +15,14 @@
 */
 
 /**
-* Create elements to challenge invite or challenge offer
+* Create elements to announce a match 
 *
-* @param Username					Username's nickname 
-* @param Rating						Username's current rating
 * @return									Div; Array
-* @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_AnnounceWindow(Username, Rating)
+function INTERFACE_AnnounceWindow()
 {
 	var Div;
-
-	var TopDiv;
-	var UsernameH3, RatingLabel, Label;
-	var RatingTmp;
 
 	var Layer1Div;
 	var L1LeftDiv;
@@ -45,42 +38,39 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	var IncLabel, IncSelect, IncOpt, IncLabelSeg,IncBr;
 	var Br2;
 
-	var ChalRightDiv;
-
 	var Layer3Div;
+	var L3RightDiv, L3LeftDiv;
 	var RatingCheckbox, RatingLabel;
 	var PrivateCheckbox, PrivateLabel;
 	var AutoFlagCheckbox, AutoFlagLabel;
-	var Br3;
+	var Br3, Br4, Br5, Br6;
+	var IntervalCheckbox, IntervalLabel, FromLabel, FromInput, ToLabel, ToInput;
+	var FromDiv, ToDiv;
+	var FormatLabel1,FormatLabel2;
 
 	var ButtonsDiv;
-	var Announce, Cancel;
+	var Cancel, Announce;
+	
 	var Buttons = new Array();
 
-	var Type, Color;
+	var Type, Color, Rated;
 	var i; 
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'AnnounceDiv');
 	
-	// Top Elments
-	TopDiv = UTILS_CreateElement('div', 'TopDiv');
-	UsernameH3 = UTILS_CreateElement('h3', null, null, Username);
-	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
-	UsernameH3.appendChild(RatingLabel);
-	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
-	
 	// Layer1 Elements
-
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
 
 	// Layer 1 Left Elements
 	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
 
+	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('announce_pieces'));
+
 	try
 	//Fix radio button for IE
 	{
-		ColorOptW = document.createElement('<input class="radio" type="radio" name="color"/>');
+		ColorOptW = document.createElement('<input class="radio" type="radio" name="color" value="colorW"  />');
 	}
 	catch(err)
 	{ //FF
@@ -91,33 +81,31 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	}
 	
 
-	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
-
 	ColorOptWImg = UTILS_CreateElement('img',null,'color');
-	ColorOptWImg.src = "images/invite_white_pawn.png"
+	ColorOptWImg.src = "images/invite_white_pawn.png";
 	BrW = UTILS_CreateElement('br');
 
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color'/>")
+		ColorOptB = document.createElement('<input class="radio" type="radio" name="color" value="colorB" />');
 	}
 	catch(err)
 	{ //FF
-		ColorOptB = UTILS_CreateElement('input',null);
+		ColorOptB = UTILS_CreateElement('input',null,'radio');
 		ColorOptB.type = "radio";
 		ColorOptB.name = "color";
 		ColorOptB.value = "colorB";
 	}
 
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
-	ColorOptBImg.src = "images/invite_black_pawn.png"
+	ColorOptBImg.src = "images/invite_black_pawn.png";
 	BrB = UTILS_CreateElement('br');
 	
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color'/>")
+		AutoColorOpt = document.createElement('<input class="radio" type="radio" name="color" value="auto" />');
 	}
 	catch(err)
 	{ //FF
@@ -128,16 +116,14 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	}
 
 	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
-	RandomColorOptImg.src = "images/random.png"
+	RandomColorOptImg.src = "images/random.png";
 	BrR = UTILS_CreateElement('br');
 	
-//	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
-
-	// Select player color
 	// Firefox fix
 	AutoColorOpt.checked = true;
 	//defaultChecked is used to fix IE radio checked
 	AutoColorOpt.setAttribute("defaultChecked", "true");
+	
 	//*End Layer 1 Left Elements*
 	
 	// Layer 1 Right Elements
@@ -177,8 +163,6 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		//RatingTmp = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username,"lightning");
-		RatingTmp = Rating.Lightning;
 		}
 
 		// Blitz = 1
@@ -191,8 +175,6 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		//RatingTmp = MainData.GetUserRatingInRoom(MainData.RoomDefault, Username, "blitz");
-			RatingTmp = Rating.Blitz;
 		}
 
 		// Standard = 2
@@ -219,12 +201,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
-			RatingTmp = Rating.Standard;
 		}
-	
-		UsernameH3.removeChild(UsernameH3.childNodes[1]);
-		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+RatingTmp);
-		UsernameH3.appendChild(RatingLabel);
 	}
 
 	//* End Layer1 Right Elements*
@@ -278,15 +255,22 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	
 	// Layer 3
 	Layer3Div = UTILS_CreateElement('div','Layer3Div');
+	L3LeftDiv = UTILS_CreateElement('div','L3LeftDiv','leftDiv');
 
 	// Private
-	PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
-	PrivateCheckbox.type = "checkbox";
-	PrivateCheckbox.name = "private";
-	PrivateCheckbox.disabled = true;
+	try
+	{
+		PrivateCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='private' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		PrivateCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
+		PrivateCheckbox.type = "checkbox";
+		PrivateCheckbox.name = "private";
+		PrivateCheckbox.disabled = true;
+	}
 	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
 	
-	// Rating
 	try
 	{
 		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
@@ -298,7 +282,6 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 		RatingCheckbox.name = "rating";
 		RatingCheckbox.checked = true;
 	}
-
 	RatingLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_rating'));
 
 	// Auto-flag
@@ -309,13 +292,83 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	AutoFlagLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_auto_flag'));
 
 	Br3 = UTILS_CreateElement('br');
+	Br4 = UTILS_CreateElement('br');
+	
+	L3RightDiv = UTILS_CreateElement('div','L3RightDiv');
+	try
+	{
+		IntervalCheckbox = document.createElement("<input class='rating_radio' type='checkbox' name='interval' />");
+	}
+	catch(err)
+	{
+		IntervalCheckbox =	UTILS_CreateElement('input', null, 'rating_radio');
+		IntervalCheckbox.type = "checkbox";
+		IntervalCheckbox.name = "interval";
+	}
+
+	// Date Form
+	FromDiv = UTILS_CreateElement('div','FromDiv', 'leftDiv');
+	ToDiv = UTILS_CreateElement('div','ToDiv');
+	IntervalLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('announce_rating_interval'));
+
+	FromLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_from'));
+	try
+	{
+		FromInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		FromInput	= UTILS_CreateElement('input',null,'disabled');
+		FromInput.size = "5";
+		FromInput.type = "text";
+		FromInput.maxLength = "4";
+		FromInput.disabled = true;
+	}
+	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_min_rating_example'));
+
+	ToLabel	= UTILS_CreateElement('span',null,'bold',UTILS_GetText('oldgame_to'));
+	try
+	{
+		ToInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		ToInput	= UTILS_CreateElement('input',null,'disabled');
+		ToInput.size = "5";
+		ToInput.type = "text";
+		ToInput.maxLength = "4";
+		ToInput.disabled = true;
+	}
+	FormatLabel2 = UTILS_CreateElement('span',null,'format',UTILS_GetText('announce_max_rating_example'));
+
+	Br5 = UTILS_CreateElement("br");
+	Br6 = UTILS_CreateElement("br");
+
+	IntervalCheckbox.onclick = function() {
+		if (this.checked == true)
+		{
+			FromInput.disabled = false;
+			FromInput.className = "enabled";
+			ToInput.disabled = false;
+			ToInput.className = "enabled";
+		}
+		else
+		{
+			FromInput.disabled = true;
+			FromInput.className = "disabled";
+			FromInput.value = "";
+			ToInput.disabled = true;
+			ToInput.className = "disabled";
+			ToInput.value = "";
+		}
+	}
+	
 	//*End Layer 3 Elements*
 
 	// Bottom Elements
 
 	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
-	// Submit the challenge
 	Announce = UTILS_CreateElement('input', null, 'button');
 	Announce.value = UTILS_GetText("challenge_announce_match");
 	Announce.type = "button";
@@ -345,7 +398,7 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 		}
 
 		// Create and send the chellenge message
-		ANNOUNCE_SendAnnounce(Username, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
+		ANNOUNCE_SendAnnounce(MainData.Username, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, FromInput.value, ToInput.value);
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
@@ -392,27 +445,41 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 	Layer2Div.appendChild(L2RightDiv);
 
 	// Layer3
-	Layer3Div.appendChild(RatingCheckbox);
-	Layer3Div.appendChild(RatingLabel);
-
-	Layer3Div.appendChild(PrivateCheckbox);
-	Layer3Div.appendChild(PrivateLabel);
+	L3LeftDiv.appendChild(RatingCheckbox);
+	L3LeftDiv.appendChild(RatingLabel);
+	L3LeftDiv.appendChild(Br4);
+	L3LeftDiv.appendChild(PrivateCheckbox);
+	L3LeftDiv.appendChild(PrivateLabel);
 
 	// Disabled
 //	Layer3Div.appendChild(AutoFlagCheckbox);
 //	Layer3Div.appendChild(AutoFlagLabel);
+
+	L3RightDiv.appendChild(IntervalCheckbox);
+	L3RightDiv.appendChild(IntervalLabel);
+
+	FromDiv.appendChild(FromLabel);
+	FromDiv.appendChild(FromInput);
+	FromDiv.appendChild(Br5);
+	FromDiv.appendChild(FormatLabel1);
+
+	ToDiv.appendChild(ToLabel);
+	ToDiv.appendChild(ToInput);
+	ToDiv.appendChild(Br6);
+	ToDiv.appendChild(FormatLabel2);
+
+	L3RightDiv.appendChild(FromDiv);
+	L3RightDiv.appendChild(ToDiv);
+
+	Layer3Div.appendChild(L3LeftDiv);
+	Layer3Div.appendChild(L3RightDiv);
 
 	ButtonsDiv.appendChild(Announce);
 	Buttons.push(Announce);
 	ButtonsDiv.appendChild(Cancel);
 	Buttons.push(Cancel);
 
-	// TopDiv
-	TopDiv.appendChild(UsernameH3);
-	
-
 	// Mount Main Div
-	Div.appendChild(TopDiv);
 	Div.appendChild(Layer1Div);
 	Div.appendChild(Br1);
 	Div.appendChild(Layer2Div);
@@ -423,4 +490,3 @@ function INTERFACE_AnnounceWindow(Username, Rating)
 
 	return {Div:Div, Buttons:Buttons}
 }
-
