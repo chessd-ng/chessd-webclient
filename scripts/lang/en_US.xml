@@ -17,15 +17,14 @@
 	        <window_accept>Accept</window_accept>
 	        <window_cancel>Cancel</window_cancel>
 	        <window_decline>Decline</window_decline>
-                <window_search>Search</window_search>	
+			<window_search>Search</window_search>	
+			<window_character>caracter(s)</window_character>
 	</window>
 	<login>
 		<login_title>Welcome to new Xadrez Livre Web Interface!</login_title>
 		<login_text1>Here you can play chess with other users or with robots, moreover you can interact with the users through the chat rooms. For that you don't need to install any other program, you just need to do your registration on the link, enter and play!</login_text1>
 		<login_text2>This server is part of the project "Apoio Computacional ao Ensino de Xadrez nas Escolas". To learn more about this project, access </login_text2>
 		<login_text3><![CDATA[We recommend using the browser <a href='http://www.firefox.com'>Firefox</a> to ensure the better functioning of the server. You can download the latest version of the browser <a href='http://www.firefox.com'>here</a>.]]></login_text3>
-
-
 		<login_footer>Have fun!</login_footer>
 		<login_remember_pass>Remember password</login_remember_pass>
 		<login_signin>Quick register</login_signin>
@@ -36,13 +35,14 @@
 		<login_invalid_user>User or password incorrect.</login_invalid_user>
 		<login_banned_user>Banned user</login_banned_user>
 		<login_lost_connection>Connection lost with the server.</login_lost_connection>
-		<login_load_wait>Wait...</login_load_wait>
+		<login_load_wait>Loading...</login_load_wait>
 		<login_load_start>Starting loader...</login_load_start>
 		<login_load_scripts>Loading scripts...</login_load_scripts>
 		<login_load_css>Loading css...</login_load_css>
 		<login_load_images>Loading images...</login_load_images>
 		<login_load_user_list>Loading user list</login_load_user_list>
 		<login_validate_user>Invalid User</login_validate_user>
+		<login_connection_closed>Conection Lost. Try again.</login_connection_closed>
 	</login>
 	<menu>
 		<menu_adjourn>Adjourn</menu_adjourn>
@@ -67,9 +67,9 @@
 		<contact_order_nick>Nick</contact_order_nick>
 		<contact_order_rating>Rating</contact_order_rating>
 		<contact_invite>Add user</contact_invite>
-		<contact_invite_text>%s added you, do you accept?</contact_invite_text>
+		<contact_invite_text>%s hass added you as a friend, do you accept?</contact_invite_text>
 		<contact_remove_title>Remove user</contact_remove_title>
-		<contact_remove_text>Are you really sure you want to remove the user?</contact_remove_text>
+		<contact_remove_text>Are you really sure you want to remove %s from your contacts?</contact_remove_text>
 		<contact_search_user>Search user</contact_search_user>
 		<contact_user_t>User:</contact_user_t>
 		<contact_no_user_found>No user found</contact_no_user_found>
@@ -83,8 +83,9 @@
 		<contact_by_user>Nick</contact_by_user>
 		<contact_both>Both</contact_both>
 		<contact_change_profile>Change my profile</contact_change_profile>
-		<contact_loading>Loading contacts list...</contact_loading>
+		<contact_loading>Loading contact list...</contact_loading>
 		<contact_online_loading>Loading online users list...</contact_online_loading>
+		<contact_default_group>Friends</contact_default_group>
 	</contact>
 	<chat>
 		<chat_warning>Warning</chat_warning>
@@ -142,8 +143,8 @@
 		<challenge_title_offer>Invite to play</challenge_title_offer>
 		<challenge_information>invite to play a game with the following characteristics:</challenge_information>
 		<challenge_my_pieces>My pieces:</challenge_my_pieces>
-		<challenge_op_pieces>Your picies:</challenge_op_pieces>
-		<challenge_time_label>Game time:</challenge_time_label>
+		<challenge_op_pieces>Opponent's pieces:</challenge_op_pieces>
+		<challenge_time_label>Time:</challenge_time_label>
 		<challenge_category>Game category:</challenge_category>
 		<challenge_inc_label>Increment:</challenge_inc_label>
 		<challenge_time_label_min>min</challenge_time_label_min>
@@ -167,6 +168,7 @@
 		<challenge_offer_user_offline>You are disconnected from the server. Try to connect again on the main page to go online</challenge_offer_user_offline>
 		<challenge_offer_opponent_offline>Your opponent is disconnected from the chess server.</challenge_offer_opponent_offline>
 		<challenge_error>Error in challenging</challenge_error>
+		<challenge_announce_match>Announce</challenge_announce_match>
 	</challenge>
 	<game>
 		<game_draw>Draw request</game_draw>
@@ -295,7 +297,7 @@
 		<register_user_inf>Use just lowercase characters, numbers, without spaces, '-', '.' and '_'</register_user_inf>
 		<register_mail1>E-mail </register_mail1>
 		<register_mail2>(optional)</register_mail2>
-		<register_mail_inf>Allow to recover your lost password.</register_mail_inf>
+		<register_mail_inf>Allows you to recover your lost password.</register_mail_inf>
 		<register_passwd>Password:</register_passwd>
 		<register_passwd_confirm1>Password</register_passwd_confirm1>
 		<register_passwd_confirm2>(Confirmation)</register_passwd_confirm2>
