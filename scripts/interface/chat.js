@@ -133,15 +133,19 @@ function INTERFACE_BlurChat()
 function INTERFACE_MinimizeChat()
 {
 	this.chatInner.style.display = "none";
-	this.chatWindow.style.top = "0px";
-	this.visible = false
+	this.chatWindow.style.top = "157px";
+	this.visible = false;
+
+	this.chatList.style.display = "none";
 }
 
 function INTERFACE_MaximizeChat()
 {
-	this.chatWindow.style.top = "-155px";
 	this.chatInner.style.display = "block";
-	this.visible = true
+	this.chatWindow.style.top = "0px";
+	this.visible = true;
+	
+	this.chatList.style.display = "block";
 }
 
 /**
@@ -213,14 +217,23 @@ function INTERFACE_CreateChat(Username)
 
 	TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username);
 
-	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username);
+	ChatMessages = UTILS_CreateElement("ul", "ChatMessages_"+Username,"MessageList");
 	ChatInner = UTILS_CreateElement("div", "ChatInner");
 
 	State = UTILS_CreateElement("img",null,"minimize");
-	State.src = "./images/minimize_chat.png";
 
 	Close = UTILS_CreateElement("img",null,"close");
-	Close.src = "./images/close_chat.png";
+
+	if (MainData.Browser == 0)
+	{
+		State.src = "./images/ie/minimize_chat.gif";
+		Close.src = "./images/ie/close_chat.gif";
+	}
+	else
+	{
+		State.src = "./images/minimize_chat.png";
+		Close.src = "./images/close_chat.png";
+	}
 
 	// Show/hide chat
 	State.onclick = function () {
@@ -296,7 +309,7 @@ function INTERFACE_CreateChatList()
 	ChatDiv = UTILS_CreateElement("div", "Chat");
 	ChatList = UTILS_CreateElement("ul", "ChatList");
 
-	ChatDiv.style.top = (ScreenHeight-20)+"px";
+	ChatDiv.style.top = (ScreenHeight-179)+"px";
 	ChatDiv.appendChild(ChatList);
 
 	window.onresize = function() { INTERFACE_ChatListPositioning(); };
@@ -319,7 +332,7 @@ function INTERFACE_ChatListPositioning()
 	}
 	ScreenHeight = document.documentElement.clientHeight;
 	ScreenScroll = document.documentElement.scrollTop;
-	Node.style.top = (ScreenHeight+ScreenScroll-20)+"px";
+	Node.style.top = (ScreenHeight+ScreenScroll-179)+"px";
 
 	return true;
 }

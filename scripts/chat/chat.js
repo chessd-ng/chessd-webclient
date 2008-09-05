@@ -245,14 +245,28 @@ function CHAT_ChangeChatState(Username)
 		ChatObj.Chat.maximize();
 		ChatObj.Chat.visible == true;
 		ChatObj.Chat.minmax.className = "minimize";
-		ChatObj.Chat.minmax.src = "./images/minimize_chat.png";
+		if(MainData.Browser == 0)
+		{
+			ChatObj.Chat.minmax.src = "./images/ie/minimize_chat.gif";
+		}
+		else
+		{
+			ChatObj.Chat.minmax.src = "./images/minimize_chat.png";
+		}
 	}
 	else
 	{
 		ChatObj.Chat.minimize();
 		ChatObj.Chat.visible == false;
 		ChatObj.Chat.minmax.className = "maximize";
-		ChatObj.Chat.minmax.src = "./images/maximize_chat.png";
+		if(MainData.Browser == 0)
+		{
+			ChatObj.Chat.minmax.src = "./images/ie/maximize_chat.gif";
+		}
+		else
+		{
+			ChatObj.Chat.minmax.src = "./images/maximize_chat.png";
+		}
 	}
 	
 	return "";

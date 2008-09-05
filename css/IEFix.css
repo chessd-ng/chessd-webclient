@@ -279,19 +279,38 @@
 /******************************/
 /*Chat.css*/
 /******************************/
-#Chat{
-	overflow		: visible;
+
+#Chat #ChatList li .MessageList {
+	width			: 94%;
 }
 
-#Chat #ChatList.title{
-	width			: 100%;
+#Chat #ChatList {	
+	margin-left : 212px;
+	height			: 175px;
 }
 
 #Chat #ChatInner {
-	overflow		: hidden;
-	width			: 99%;
+	width			: 100%;
 }
 
+#Chat #ChatList .title,
+#Chat #ChatList .title_selec {
+	width			: 105%;
+}
+
+#Chat .minimize {
+	padding-top		: 4px;
+	padding-right		: 15px;
+	width 			: 15px;
+	height			: 3px;
+}
+
+#Chat .maximize {
+	padding-right		: 16px;
+	padding-top		: 1px;
+	width 			: 15px;
+	height			: 9px;
+}
 /******************************/
 /* Window.css */
 /******************************/
