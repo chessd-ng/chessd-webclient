@@ -142,7 +142,14 @@ function CHAT_OpenChat(Username)
 	var Title, Msg;
 	var Status;
 	var ChatObject = null;
-	var Position;
+	var Position, ChatPos;
+
+	ChatPos = MainData.FindChat(Username);
+	if (ChatPos != null)
+	{
+		MainData.ChatList[ChatPos].Chat.chatTitle.className = "title_selec";
+		return null;
+	}
 
 	if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
