@@ -55,11 +55,11 @@ function DATA(ConfFile, LangFile)
 	this.Resource = UTILS_GetTag(Params, "resource");
 
 	this.Server = UTILS_GetTag(Params,"server");
-	this.MatchComponent = UTILS_GetTag(Params,"match-component");
+	this.MatchComponent = UTILS_GetTag(Params,"server");
 	this.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
-	this.GameComponent = UTILS_GetTag(Params, "game-component");
-	this.RatingComponent = UTILS_GetTag(Params, "rating-component");
-	this.AdminComponent = UTILS_GetTag(Params, "admin-component");
+	this.GameComponent = UTILS_GetTag(Params, "server");
+	this.RatingComponent = UTILS_GetTag(Params, "server");
+	this.AdminComponent = UTILS_GetTag(Params, "server");
 
 	this.Status = "available";
 	this.Type = null;
