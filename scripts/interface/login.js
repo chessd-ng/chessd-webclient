@@ -240,7 +240,7 @@ function INTERFACE_CreateLanguage()
 	var Ul = UTILS_CreateElement("ul","LangUl");
 	var i;
 
-	var Languages = UTILS_OpenXMLFile("scripts/data/lang.xml");
+	var Languages = UTILS_OpenXMLFile("conf/lang.xml");
 	var Langs = Languages.getElementsByTagName("lang");
 
 	for(i=0; i<Langs.length; i++)

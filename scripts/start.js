@@ -46,12 +46,12 @@ function START_StartPage()
 		//Lang = UTILS_GetLanguage();
 		
 		// Get default lang from configuration file
-		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml?"+NoCache.TimeStamp);
+		ConfTmp = UTILS_OpenXMLFile("conf/conf.xml?"+NoCache.TimeStamp);
 		Lang = UTILS_GetTag(ConfTmp, "default-lang");
 	}
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
+	MainData = new DATA("conf/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
 	MainData.Lang = Lang;
 	
 	INTERFACE_StartLogin(Lang);
@@ -72,7 +72,7 @@ function START_ChangeLanguage(Lang)
 
 	// Reload MainData with configurations and new language selected
 //	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
-	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
+	MainData = new DATA("data/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
 	// Create cookie for new language
 	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
 
