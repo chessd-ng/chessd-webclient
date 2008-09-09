@@ -213,7 +213,7 @@ function INTERFACE_CreateChat(Username)
 
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
 
-	ChatTitle = UTILS_CreateElement("h3", null, "title");
+	ChatTitle = UTILS_CreateElement("h3", null, "title_selec");
 
 	TitleSpan = UTILS_CreateElement("span","ChatTitle_"+Username);
 
