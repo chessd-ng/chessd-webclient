@@ -100,6 +100,7 @@ function UTILS_IdentifyBrowser()
 	// Internet Explorer
 	else if (BrowserName.match("Microsoft Internet Explorer"))
 	{
+		/*
 		var IEv = navigator.userAgent.split(";")[1].replace(/ /g,"");
 		
 		if (IEv == "MSIE6.0")
@@ -108,7 +109,8 @@ function UTILS_IdentifyBrowser()
 			BrowserValue = 3;
 		else
 			BrowserValue = 3;
-
+		*/
+		BrowserValue = 0;
 	}
 	// Other
 	else
