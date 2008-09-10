@@ -280,22 +280,27 @@
 /*Chat.css*/
 /******************************/
 
-#Chat #ChatList li .MessageList {
-	width			: 94%;
+#Chat {
+	width			: 100%;
+	width: expression( document.body.clientWidth < 801 ? "800px" : "auto");
+	min-width			: 800px; 
+/*	background-color : blue; */
+}
+
+/* chat list **/
+#Chat #ChatList {	
+/*	width			: 83%;*/
+	width: expression( document.body.clientWidth < 581 ? "580px" : "auto");
+	min-width			: 580px; 
+/*	background-color: red; */
+}
+#Chat #ChatList li {
+	width : 24%;
 }
 
 #Chat #ChatList {	
 	margin-left : 212px;
 	height			: 175px;
-}
-
-#Chat #ChatInner {
-	width			: 100%;
-}
-
-#Chat #ChatList .title,
-#Chat #ChatList .title_selec {
-	width			: 105%;
 }
 
 #Chat .minimize {
@@ -309,7 +314,7 @@
 	padding-right		: 16px;
 	padding-top		: 1px;
 	width 			: 15px;
-	height			: 9px;
+	height			: 7px;
 }
 /******************************/
 /* Window.css */

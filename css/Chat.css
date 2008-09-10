@@ -2,22 +2,52 @@
 /****** Chat.css *******/
 /***********************/
 
+/* ID */
+#Chat {
+	position		: absolute;
+	bottom			: 0px;
+	right			: 0px; 
+	height			: 179px;
+	width			: 100%;
+	min-width			: 800px; 
+/*	border : 1px solid blue; 
+	background-color : blue; */
+}
+
+/* chat list **/
+#Chat #ChatList {	
+	list-style		: none;
+	height			: 173px;
+	margin-left		: 208px;
+/*	border : 1px solid red;
+	background-color: red; */
+}
+
+#Chat #ChatInner {
+	background-color: #FFF;
+	padding			: 3px;
+	border			: 1px solid #216778;
+	height			: 145px;
+	position		: relative;
+}
+
 /* HTML Elemenets */
 #Chat #ChatList li {
 	float			: left;
 	width			: 25%;
 	position		: relative;
-/*	border : 1px solid green;*/
+/*	border : 1px solid green;
+	background-color : green; */
 }
 
 #Chat #ChatList li .MessageList {
+	background-color: #FFF;
 	border			: 1px solid #216778;
 	height			: 118px;
 	overflow		: auto;
 	display			: block;
-	padding			: 0px 5px;
 	position		: relative;
-	width			: 95%;
+	width : 98%;
 }
 
 #Chat #ChatList li .MessageList li {
@@ -31,15 +61,14 @@
 }
 
 #Chat #ChatList li input {
-	width			: 99%;
 	border			: 1px solid #216778;
 	font-size		: 11px;
 	color			: #216778;
-	padding			: 2px 0px;
 	position		: relative;
-	margin-top		: 4px;
+	margin-top		: 5px;
 	height			: 16px;
 	top			: 0px;
+	width : 98%;
 }
 
 #Chat #ChatList strong {
@@ -60,7 +89,6 @@
 	cursor			: pointer;
 }
 
-
 /* Class */
 
 /* chat title */
@@ -72,7 +100,6 @@
 	text-indent		: 12px;
 	position		: relative;
 	padding-top		: 2px;
-	width			: 100%;
 }
 
 #Chat #ChatList .title_selec {
@@ -83,42 +110,6 @@
 	height			: 16px;
 	position		: relative;
 	padding-top		: 2px;
-	width			: 100%;
-}
-
-/* chat box */
-#Chat #ChatList .ChatInside {
-	background-color: #FFF;
-	margin-right	: 2px;
-}
-
-#Chat #ChatList li .MessageList li.error {
-	color			: #FF1111;
-}
-
-/* ID */
-#Chat {
-	position		: absolute;
-	bottom			: 0px;
-	right			: 0px;
-	height			: 179px;
-	width			: 100%;
-/*	border : 1px solid blue;*/
-}
-
-/* chat list **/
-#Chat #ChatList {	
-	list-style		: none;
-	height			: 173px;
-	margin-left		: 208px;
-/*	border : 1px solid red;*/
-}
-
-#Chat #ChatInner {
-	padding			: 3px;
-	border			: 1px solid #216778;
-	height			: 145px;
-	position		: relative;
 }
 
 #Chat .minimize {
@@ -138,4 +129,14 @@
 #Chat .close {
 	width 			: 10px;
 	height			: 10px;
+}
+
+/* chat box */
+#Chat #ChatList .ChatInside {
+	background-color: #FFF;
+	margin-right	: 2px;
+}
+
+#Chat #ChatList li .MessageList li.error {
+	color			: #FF1111;
 }

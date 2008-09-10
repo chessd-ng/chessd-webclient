@@ -205,13 +205,15 @@ function INTERFACE_SetChatTitle(Str)
 */
 function INTERFACE_CreateChat(Username)
 {
-	var ChatItem, ChatInside, ChatInner, ChatTitle, ChatMessages;
+	var ChatItem, ChatInside, ChatInner, ChatTitleDiv, ChatTitle, ChatMessages;
 	var Close, Input, State;
 	var TitleSpan;
 
 	ChatItem = UTILS_CreateElement("li", "Chat_"+Username, "chat");
 
 	ChatInside = UTILS_CreateElement("div", null, "ChatInside");
+
+	ChatTitleDiv = UTILS_CreateElement("div", "ChatTitleDiv");
 
 	ChatTitle = UTILS_CreateElement("h3", null, "title_selec");
 
@@ -279,11 +281,13 @@ function INTERFACE_CreateChat(Username)
 	ChatTitle.appendChild(TitleSpan);
 	ChatTitle.appendChild(State);
 	ChatTitle.appendChild(Close);
+	
+	ChatTitleDiv.appendChild(ChatTitle);
 
 	ChatInner.appendChild(ChatMessages);
 	ChatInner.appendChild(Input);
 
-	ChatInside.appendChild(ChatTitle);
+	ChatInside.appendChild(ChatTitleDiv);
 	ChatInside.appendChild(ChatInner);
 
 	ChatItem.appendChild(ChatInside);
@@ -325,7 +329,7 @@ function INTERFACE_ChatListPositioning()
 {
 	var Node = document.getElementById("Chat");
 	var ScreenHeight, ScreenScroll;
-	
+
 	if (!Node)
 	{
 		return false;
