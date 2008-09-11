@@ -6,7 +6,7 @@
 #Chat {
 	position		: absolute;
 	bottom			: 0px;
-	right			: 0px; 
+	left			: 0px; 
 	height			: 179px;
 	width			: 100%;
 	min-width			: 800px; 
@@ -38,6 +38,10 @@
 	position		: relative;
 /*	border : 1px solid green;
 	background-color : green; */
+}
+
+#Chat #ChatList li #ChatTitleDiv {
+	width : 100%;
 }
 
 #Chat #ChatList li .MessageList {
@@ -100,6 +104,7 @@
 	text-indent		: 12px;
 	position		: relative;
 	padding-top		: 2px;
+	width				:	100%;
 }
 
 #Chat #ChatList .title_selec {
@@ -110,6 +115,7 @@
 	height			: 16px;
 	position		: relative;
 	padding-top		: 2px;
+	width				:	100%;
 }
 
 #Chat .minimize {

@@ -281,6 +281,7 @@
 /******************************/
 
 #Chat {
+	right			:	0px;
 	width			: 100%;
 	width: expression( document.body.clientWidth < 801 ? "800px" : "auto");
 	min-width			: 800px; 
@@ -296,6 +297,10 @@
 }
 #Chat #ChatList li {
 	width : 24%;
+}
+
+#Chat #ChatList li #ChatTitleDiv {
+	width : 100%;
 }
 
 #Chat #ChatList {	
