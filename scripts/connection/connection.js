@@ -30,7 +30,8 @@ function CONNECTION_ConnectJabber(XML)
 {
 	if(XML == null)
 	{
-		switch (MainData.ConnectionStatus)
+		//switch (MainData.ConnectionStatus)
+		switch (MainData.GetConnectionStatus())
 		{
 			// Start connection, open stream with bosh
 			case (1):
@@ -79,7 +80,8 @@ function CONNECTION_SendJabber()
 	}
 
 	// Check if connection status == "disconnected" or SID not initialized
-	if ((MainData.SID != -1) && (MainData.ConnectionStatus != -1))
+	//if ((MainData.SID != -1) && (MainData.ConnectionStatus != -1))
+	if ((MainData.GetSID() != -1) && (MainData.GetConnectionStatus() != -1))
 	{
 		Post = MESSAGE_MakeXMPP(Post);
 	}
@@ -113,14 +115,16 @@ function CONNECTION_SendJabber()
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
 	// Normal parse messages
-	if (MainData.ConnectionStatus == 0)
+	//if (MainData.ConnectionStatus == 0)
+	if (MainData.GetConnectionStatus() == 0)
 	{
 		HttpRequest.onreadystatechange = function(){
 			CONNECTION_ReceiveXml(HttpRequest);
 		}
 	}
 	// Conection parse messages
-	else if (MainData.ConnectionStatus > 0)
+	//else if (MainData.ConnectionStatus > 0)
+	else if (MainData.GetConnectionStatus() > 0)
 	{
 		HttpRequest.onreadystatechange = function(){
 			CONNECTION_ReceiveConnection(HttpRequest);
@@ -138,7 +142,7 @@ function CONNECTION_SendJabber()
 
 
 	// Increment RID
-	MainData.RID++;
+	MainData.SetRID(MainData.GetRID()+1);
 
 	return "";
 }
@@ -185,7 +189,8 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 				}
 			}
 
-			switch (MainData.ConnectionStatus)
+			//switch (MainData.ConnectionStatus)
+			switch (MainData.GetConnectionStatus())
 			{
 				 case (1):
 					if(XML.getElementsByTagName("body")[0].getAttribute("sid") == null)
@@ -196,9 +201,10 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 					else // Step one OK
 					{
 						// Get SID from first message
-						MainData.SID = XML.getElementsByTagName("body")[0].getAttribute("sid");
+						MainData.SetSID(XML.getElementsByTagName("body")[0].getAttribute("sid"));
 
-						MainData.ConnectionStatus++;
+						//MainData.ConnectionStatus++;
+						MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
 
 						// Send second step connection
 						CONNECTION_ConnectJabber();
@@ -212,7 +218,8 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 						IqType = Iq.getAttribute("type");
 						if(IqType == "result")
 						{
-							MainData.ConnectionStatus++;
+							//MainData.ConnectionStatus++;
+							MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
 							// Send third step connection
 							CONNECTION_ConnectJabber();
 						}
@@ -260,7 +267,8 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 							LOAD_StartLoad();
 
 							// Set connected status
-							MainData.ConnectionStatus = 0;
+							//MainData.ConnectionStatus = 0;
+							MainData.SetConnectionStatus(0);
 
 							CONNECTION_SendJabber(MESSAGE_Wait());
 						}
@@ -315,7 +323,8 @@ function CONNECTION_ReceiveXml(HttpRequest)
 	}
 	*/
 	// User was disconnected 
-	if (MainData.ConnectionStatus == -1)
+	//if (MainData.ConnectionStatus == -1)
+	if (MainData.GetConnectionStatus() == -1)
 	{
 		return "";
 	}
@@ -340,7 +349,8 @@ function CONNECTION_ReceiveXml(HttpRequest)
 			XML = HttpRequest.responseXML;
 
 			// User disconnected 
-			if (MainData.ConnectionStatus == -1)
+			//if (MainData.ConnectionStatus == -1)
+			if (MainData.GetConnectionStatus() == -1)
 			{
 				return "";
 			}
@@ -360,7 +370,7 @@ function CONNECTION_ReceiveXml(HttpRequest)
 
 				// Send a wait message to jabber if is there 
 				// no pendend post
-				if(MainData.HttpRequest.length == 0)
+				if(MainData.GetHttpRequestLength() == 0)
 				{
 					CONNECTION_SendJabber(MESSAGE_Wait());
 				}
@@ -379,7 +389,8 @@ function CONNECTION_ReceiveXml(HttpRequest)
 		else if (HttpRequest.status == 503)
 		{
 			// Show this message if user is connected
-			if(MainData.ConnectionStatus == 0)
+			//if(MainData.ConnectionStatus == 0)
+			if(MainData.GetConnectionStatus() == 0)
 			{
 				alert(UTILS_GetText("error_disconnected"));
 			

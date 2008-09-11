@@ -40,11 +40,12 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	MainData.Password = Passwd;
 
 	// Set connection status to conneting
-	MainData.ConnectionStatus = 1;
+	//MainData.ConnectionStatus = 1;
+	MainData.SetConnectionStatus(1);
 
 	// Set new RID and reset SID
-	MainData.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
-	MainData.SID = -1;
+	MainData.SetRID(Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) ));
+	MainData.SetSID(-1);
 
 	// Login on Jabber Server
 	CONNECTION_ConnectJabber();
@@ -78,7 +79,8 @@ function LOGIN_Logout()
 	var XMPP = "";
 	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
-	MainData.ConnectionStatus = -1;
+	//MainData.ConnectionStatus = -1;
+	MainData.SetConnectionStatus(-1);
 
 	// Logout from jabber
 	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
@@ -110,7 +112,8 @@ function LOGIN_LeavePage()
 function LOGIN_Disconnected()
 {
 	// Setting structure as disconnected
-	MainData.ConnectionStatus = -1;
+	//MainData.ConnectionStatus = -1;
+	MainData.SetConnectionStatus(-1);
 
 	INTERFACE_StopInterface();
 }

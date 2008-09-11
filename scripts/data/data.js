@@ -34,16 +34,20 @@ function DATA(ConfFile, LangFile)
 {
 	var Params = UTILS_OpenXMLFile(ConfFile);
 
+	/*CONNECTION DATA*/
+	this.Connection = new Object();
 	/*
 	* State in jabber server
 	*  -1 -> Disconnected
 	*   0 -> Connected
 	* > 1 -> Connecting
 	*/
-	this.ConnectionStatus = 1;
-	this.HttpRequest = new Array();
+	this.Connection.ConnectionStatus = 1;
+	this.Connection.HttpRequest = new Array();
+	this.Connection.RID = null;
+	this.Connection.SID = -1;
+
 	this.Browser = UTILS_IdentifyBrowser();
-	
 	// Get Host from configuration file
 	//this.Host = UTILS_GetTag(Params, "host");
 	//this.HostPost = UTILS_GetTag(Params, "host");
@@ -73,8 +77,6 @@ function DATA(ConfFile, LangFile)
 	this.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
-	this.RID = null;
-	this.SID = -1;
 	this.Load = -1;
 	this.Lang = "";
 
@@ -134,9 +136,17 @@ function DATA(ConfFile, LangFile)
 }
 
 // Adding methods
+/*CONNECTION METHODS***************************/
 DATA.prototype.AddHttpPost = DATA_AddHttpPost;
 DATA.prototype.RemoveHttpPost = DATA_RemoveHttpPost;
 DATA.prototype.FindHttpPost = DATA_FindHttpPost;
+DATA.prototype.GetHttpRequestLength =  DATA_GetHttpRequestLength;
+DATA.prototype.GetConnectionStatus = DATA_GetConnectionStatus;
+DATA.prototype.SetConnectionStatus = DATA_SetConnectionStatus;
+DATA.prototype.GetRID = DATA_GetRID;
+DATA.prototype.SetRID = DATA_SetRID;
+DATA.prototype.GetSID = DATA_GetSID;
+DATA.prototype.SetSID = DATA_SetSID;
 
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
@@ -234,7 +244,7 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 
 function DATA_AddHttpPost(PostObj)
 {
-	this.HttpRequest.push(PostObj);
+	this.Connection.HttpRequest.push(PostObj);
 }
 
 function DATA_RemoveHttpPost(PostObj)
@@ -245,7 +255,7 @@ function DATA_RemoveHttpPost(PostObj)
 
 	if(i != null)
 	{
-		this.HttpRequest.splice(i,1);
+		this.Connection.HttpRequest.splice(i,1);
 	}
 
 	delete PostObj;
@@ -255,12 +265,12 @@ function DATA_FindHttpPost(PostObj)
 {
 	var i=0;
 
-	while((i < this.HttpRequest.length)&&(this.HttpRequest[i] != PostObj))
+	while((i < this.Connection.HttpRequest.length)&&(this.Connection.HttpRequest[i] != PostObj))
 	{
 		i++;
 	}
 
-	if(i >= this.HttpRequest.length)
+	if(i >= this.Connection.HttpRequest.length)
 	{
 		return null;
 	}
@@ -268,6 +278,42 @@ function DATA_FindHttpPost(PostObj)
 	{
 		return i;
 	}
+}
+
+
+function DATA_GetHttpRequestLength()
+{
+	return this.Connection.HttpRequest.length;
+}
+
+function DATA_GetConnectionStatus()
+{
+	return this.Connection.ConnectionStatus;
+}
+
+function DATA_SetConnectionStatus(Value)
+{
+	this.Connection.ConnectionStatus = Value;
+}
+
+function DATA_GetRID()
+{
+	return this.Connection.RID;
+}
+
+function DATA_SetRID(Value)
+{
+	this.Connection.RID = Value;
+}
+
+function DATA_GetSID()
+{
+	return this.Connection.SID;
+}
+
+function DATA_SetSID(Value)
+{
+	this.Connection.SID = Value;
 }
 
 /**********************************

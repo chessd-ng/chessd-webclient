@@ -96,7 +96,8 @@ function START_Webclient()
 	var All = INTERFACE_CreateInterface();
 	var XMPP = "";
 
-	MainData.ConnectionStatus = 0;
+	//MainData.ConnectionStatus = 0;
+	MainData.SetConnectionStatus(0);
 
 	XMPP += MESSAGE_UserList();
 	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);

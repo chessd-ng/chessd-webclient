@@ -30,11 +30,11 @@ function MESSAGE_MakeXMPP(Msg, Type)
 
 	if (Msg != "")
 	{
-		XMPP = "<body rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
+		XMPP = "<body rid='"+MainData.GetRID()+"' sid='"+MainData.GetSID()+"' xmlns='http://jabber.org/protocol/httpbind'>"+Msg+"</body>";
 	}
 	else
 	{
-		XMPP = '<body rid="'+MainData.RID+'" sid="'+MainData.SID+'" xmlns="http://jabber.org/protocol/httpbind"/>';
+		XMPP = '<body rid="'+MainData.GetRID()+'" sid="'+MainData.GetSID()+'" xmlns="http://jabber.org/protocol/httpbind"/>';
 	}
 
 	return XMPP;
@@ -59,7 +59,7 @@ function MESSAGE_Wait()
 */
 function MESSAGE_StartConnection()
 {
-	var XMPP = "<body hold='1' rid='"+MainData.RID+"' to='"+MainData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
+	var XMPP = "<body hold='1' rid='"+MainData.GetRID()+"' to='"+MainData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
 
 	return XMPP;
 }
@@ -69,7 +69,7 @@ function MESSAGE_StartConnection()
 */
 function MESSAGE_EndConnection(Unavailable)
 {
-	var XMPP = "<body type='terminate' rid='"+MainData.RID+"' sid='"+MainData.SID+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
+	var XMPP = "<body type='terminate' rid='"+MainData.GetRID()+"' sid='"+MainData.GetSID()+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
 
 	return XMPP;
 }
