@@ -7,6 +7,8 @@
 	<utils>
 		<not_implemented_title>Not implemented</not_implemented_title>
 		<not_implemented>Feature not implemented on this version </not_implemented>
+		<server_offline_title>Server offline</server_offline_title>
+		<server_offline>Server was shot down</server_offline>
 	</utils>
 	<window>
 	        <window_yes>Yes</window_yes>
@@ -43,6 +45,10 @@
 		<login_load_user_list>Loading user list</login_load_user_list>
 		<login_validate_user>Invalid User</login_validate_user>
 		<login_connection_closed>Conection Lost. Try again.</login_connection_closed>
+		<login_connection_start>Opening Conexion...</login_connection_start>
+		<login_connection_user>Verifying user...</login_connection_user>
+		<login_connection_passwd>Verifying password...</login_connection_passwd>
+		<login_server_not_founded>Server not found.</login_server_not_founded>
 	</login>
 	<menu>
 		<menu_adjourn>Adjourn</menu_adjourn>
@@ -111,6 +117,7 @@
 		<room_hide_user_list>Hide users of the room</room_hide_user_list>
 		<room_counter>caracter(s)</room_counter>
 		<room_loading>Loading room...</room_loading>
+		<room_error_message_length>Maximum number of caracters exceeded (%s)</room_error_message_length>
 	</room>
 	<group>
 		<group_default>Friends</group_default>
@@ -141,7 +148,7 @@
 	<challenge>
 		<challenge_title_invite>Invite to play</challenge_title_invite>
 		<challenge_title_offer>Invite to play</challenge_title_offer>
-		<challenge_information>invite to play a game with the following characteristics:</challenge_information>
+		<challenge_information>invite to play a game with the following attributes:</challenge_information>
 		<challenge_my_pieces>My pieces:</challenge_my_pieces>
 		<challenge_op_pieces>Opponent's pieces:</challenge_op_pieces>
 		<challenge_time_label>Time:</challenge_time_label>
@@ -169,7 +176,21 @@
 		<challenge_offer_opponent_offline>Your opponent is disconnected from the chess server.</challenge_offer_opponent_offline>
 		<challenge_error>Error in challenging</challenge_error>
 		<challenge_announce_match>Announce</challenge_announce_match>
+		<challenge_menu_loading_announce>Loading announced games...</challenge_menu_loading_announce>
 	</challenge>
+	<announce>
+		<announce_title>Announce Game</announce_title>
+		<announce_rating_interval>Rating limit:</announce_rating_interval>
+		<announce_min_rating_example>Ex:1000</announce_min_rating_example>
+		<announce_max_rating_example>Ex:2300</announce_max_rating_example>
+		<announce_pieces>Pieces:</announce_pieces>
+		<announce_error_title>Error on game announcement</announce_error_title>
+		<announce_invalid_min_rating>Incorrect minimum rating value. Ex: 0000</announce_invalid_min_rating>
+		<announce_invalid_min_rating>Incorrect maximum rating value. Ex: 2349</announce_invalid_min_rating>
+		<announce_invalid_interval>Incorrect rating range. The minimum rating value mudy be higher than the maximum.</announce_invalid_interval>
+		<announce_accept_error>Error in accept announced game</announce_accept_error>
+		<announce_non_exist>Announced game was canceled or removed.</announce_non_exist>
+	</announce>
 	<game>
 		<game_draw>Draw request</game_draw>
 		<game_draw_text>%s requested a draw, do you accept?</game_draw_text>
@@ -278,11 +299,11 @@
 		<profile_discard>Close without saving</profile_discard>
 		<profile_save_close>Close and Save</profile_save_close>
 		<profile_confirm>Are you sure you want to close without saving the profile?</profile_confirm>
-		<profile_confirm_close>Close confirm</profile_confirm_close>
+		<profile_confirm_close>Close</profile_confirm_close>
 		<profile_change_image>Pick the photo</profile_change_image>
 		<profile_change_image_title>Change photo</profile_change_image_title>
 		<profile_load_error>Error</profile_load_error>
-		<profile_load_error_title>It wasn't possible upload the photo</profile_load_error_title>
+		<profile_load_error_title>It wasn't possible to upload the photo</profile_load_error_title>
 		<profile_year>y</profile_year>
 		<profile_month>m</profile_month>
 		<profile_day>d</profile_day>
@@ -321,7 +342,7 @@
 		<oldgame_from>from:</oldgame_from>
 		<oldgame_to>to:</oldgame_to>
 		<oldgame_new_search>New search</oldgame_new_search>
-		<oldgame_search_result>Finded:</oldgame_search_result>
+		<oldgame_search_result>Found:</oldgame_search_result>
 		<oldgame_no_result>No old game founded.</oldgame_no_result>
 		<oldgame_player1_hd>Player 1</oldgame_player1_hd>
 		<oldgame_player2_hd>Player 2</oldgame_player2_hd>
@@ -339,14 +360,15 @@
 		<oldgame_invalid_interval>Invalid interval!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Invalid data!</oldgame_invalid_date>
 		<oldgame_loading>Searching old games...</oldgame_loading>
+		<oldgame_examine>Analyze game</oldgame_examine>
 	</oldgame>
 	<welcome>
 		<welcome_title>Welcome!</welcome_title>
 		<welcome_text1>This is the environment of game/interaction of Xadrez Livre. Here, among other possibilities, you can:</welcome_text1>
 		<welcome_text2>For further information about the use of the environment, see the "Help" on the top menu.</welcome_text2>
 		<welcome_instruction>
-			<welcome_item><![CDATA[<b>Start a game:</b> click on a user of the environment and choose "Invite to play". All online users of the environment are shown in the room "General". Window found at the bottom left of the environment.]]></welcome_item>
-			<welcome_item><![CDATA[<b>Start a game:</b> your list of contacts is in the top left of the environment. To add new contacts click on a user in the room General and choose "Add contact". The user will be in your list of contacts, if he authorizes that..]]></welcome_item>
+			<welcome_item><![CDATA[<b>Start a game:</b> click on a user and choose "Invite to play". All online users are shown in the room "General" window witch can be found at the bottom left of the screen.]]></welcome_item>
+			<welcome_item><![CDATA[<b>Start a game:</b> your list of contacts is in the top left of the screen. To add new contacts click on a user in the room "General" and choose "Add contact". The user will be in your list of contacts when he authorize.]]></welcome_item>
 		</welcome_instruction>
 	</welcome>
 	<admin>
@@ -357,4 +379,45 @@
 		<admin_user_kick>You were kicked. \nReason: </admin_user_kick>
 
 	</admin>
+	<help>
+		<help_title>Help</help_title>
+		<help_t_1>How?</help_t_1>
+		<help_t_1_1>Play</help_t_1_1>
+		<help_t_1_1_1>Challenge opponent</help_t_1_1_1>
+		<help_c_1_1_1><![CDATA[<p>To invite a specific user to play:</p><ul><li> Click on the user to invite and then click on "Invite to play";</li><li> Define the attributes of the game (Pieces's color; time of game...). </ li> <li> Click on "Invite to Play".</li></ul><br/> <p> Note: The user you invited can:</p><ul><li> "accept" the invitation and start the game;</li><li> Redefine the attributes of the game and challenge you with his attributes;</li><li> or "Cancel" your invitation.</li></ul>]]></help_c_1_1_1>
+		<help_t_1_1_2>Accept a challenge</help_t_1_1_2>
+		<help_c_1_1_2><![CDATA[<p>When you are invited to play a game, a window will pop out.</p><p><ul><li>Click on “Accept” to play a game with it's attributes defined by the user who invited you.</li></ul><br /><p>Obs.: If you want to play with the user who invited you, but with other game attributes, make the necessary changes and click on "Challenge". The new attributes will be sent to the user who invited you first and the he can accept or deny your challenge.</p>]]></help_c_1_1_2>
+		<help_t_1_1_3>Announce a Game</help_t_1_1_3>
+		<help_c_1_1_3><![CDATA[<p>To announce a game</p><ul><li> Click on "Challenges",on the context menu;</li><li>Click on “Announce game”;</li><li>Set the game attributes (Color; time of game...)</li><li>Click on "Announce".</li></ul><br /><p> Obs.: The game will be in announced games list in order to other players see and accept the game. The games can be accepted only by the players witch rating is in the range defined by who created the announcement.</p>]]></help_c_1_1_3>
+		<help_t_1_2>Search users</help_t_1_2>
+		<help_c_1_2><![CDATA[<ul><li>Click on "Search user" in tools bar;</li><li>Set the attributes of the search;</li><li>Click on "Search".</li></ul>]]></help_c_1_2>
+		<help_t_1_3>Talk with a user</help_t_1_3>
+		<help_c_1_3><![CDATA[<p>Talk to a user</p><ul><li>Click on the user you wish to talk and click on "Talk";</li></ul><p>A window will pop out.</p><ul><li>Type the message (on the field in the window);</li><li>Type “Enter” to send the message.</li></ul>]]></help_c_1_3>
+		<help_t_1_4>Talk with multiple users in a room</help_t_1_4>
+		<help_c_1_4><![CDATA[<p>If you want to talk with multiple users, choose a room in "Rooms" menu or just send messagens in "General" room.</p><ul><li>Type the message in the lower left field of the rooms window.;</li><li>Type "Enter" to send a message to the room.</li></ul>]]></help_c_1_4>
+		<help_t_1_5>See or hide the users list of a room</help_t_1_5>
+		<help_c_1_5><![CDATA[<p>The room must be opened (See “How -> Enter in a room”) and active (with the title bar orange) to see your user list:</p><ul><li>Click on "See room users", if the users list is not hidden, or;</li><li>Click on "Hide users list", if the users list is being seen.</li></ul>]]></help_c_1_5>
+		<help_t_1_6>See profile and user info</help_t_1_6>
+		<help_c_1_6><![CDATA[<p>To see a profile and a user info</p><ul><li>Click on the user and click on "Profile and user info".</li></ul>]]></help_c_1_6>
+		<help_t_1_7>Add a user to your buddy list</help_t_1_7>
+		<help_c_1_7><![CDATA[<p>To add a user in your buddy list</p><ul><li>Click on user and click on "Add as a friend".</li></ul>]]></help_c_1_7>
+		<help_t_1_8>Remove a user from your buddy list</help_t_1_8>
+		<help_c_1_8><![CDATA[<p>To remove a user from your buddy list</p><ul><li>Click on "Buddies" to see your buddies in Xadrez Livre;</li><li>Click on the user you want to remove and click on "Remove a user"</li></ul>]]></help_c_1_8>
+		<help_t_1_9>Change my status</help_t_1_9>
+		<help_c_1_9><![CDATA[<p>When you connect to Xadrez Livre your status is set to "Avaible". It can be seen in below your user name.<p/><p>To change your status:</p><ul><li>Clock on the arrow beside your status;</li><li>Click on you desired status.</li></ul><br /><p>Obs.: The status “Playing”, "Watching" and "Analyzing" are automaticaly set by the server. When a user is playing (status “Playing”) or is “Unavaible”, he can't be invited to play. If a user status is "Occupied", he can play but can't talk.</p>]]></help_c_1_9>
+		<help_t_1_10>Change my profile</help_t_1_10>
+		<help_c_1_10><![CDATA[<p>To change your profile:</p><ul><li>Click on "Change my profile", in your personal area.</li></ul>]]></help_c_1_10>
+		<help_t_1_11>Enter in a room</help_t_1_11>
+		<help_c_1_11><![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on the room you want to enter.</li></ul><br /><p>Obs.: The room that you entered will be oppened on the left side of the screen.</p>]]></help_c_1_11>
+		<help_t_1_12>Create a room</help_t_1_12>
+		<help_c_1_12><![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on "Create room";</li><li>Type the name of the room;</li><li>Click on "Create" button.</li></ul><br /><p>Obs.: The room you created will be opened on the left side of the screen.</p>]]></help_c_1_12>
+		<help_t_1_13>Watch a game</help_t_1_13>
+		<help_c_1_13><![CDATA[<ul><li>Click on "Current Games" in the context menu;</li><li>Click on the game you want to watch.</li></ul>]]></help_c_1_13>
+		<help_t_1_14>Search games</help_t_1_14>
+		<help_c_1_14><![CDATA[<ul><li>Click on "Search game" on the tools menu;</li><li>Set the attributes of the search;</li><li>Click on "Search";</li></ul><br /><p>Obs.: Use the navigation buttons “Next” and “Previous” to navigate through the games that matched you criteria.</p>]]></help_c_1_14>
+		<help_t_1_15>Analyze a game</help_t_1_15>
+		<help_c_1_15><![CDATA[<ul><li>Search a game (See “How -> Search games”);</li><li>Click on the game you want do analyze;</li><li>Use the navigations buttons below the move list to analyze the moves of the game.</li></ul>]]></help_c_1_15>
+		<help_t_1_16>Help</help_t_1_16>
+		<help_c_1_16><![CDATA[<p>Help:</p><ul><li>Click on "Help" on the tools menu.</li></ul><br /><p>Obs.: You can find help in two ways: using the mode "Content", that explains with details the information about everything in Xadrez Livre, or using the mode "How...", which you can find tips on how to use all the feature contained in Xadrez Livre.</p>]]></help_c_1_16>
+	</help>
 </language>
