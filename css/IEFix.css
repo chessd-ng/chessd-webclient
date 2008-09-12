@@ -279,19 +279,48 @@
 /******************************/
 /*Chat.css*/
 /******************************/
-#Chat{
-	overflow		: visible;
-}
 
-#Chat #ChatList.title{
+#Chat {
+	right			:	0px;
 	width			: 100%;
+	width: expression( document.body.clientWidth < 801 ? "800px" : "auto");
+	min-width			: 800px; 
+/*	background-color : blue; */
 }
 
-#Chat #ChatInner {
-	overflow		: hidden;
-	width			: 99%;
+/* chat list **/
+#Chat #ChatList {	
+/*	width			: 83%;*/
+	width: expression( document.body.clientWidth < 581 ? "580px" : "auto");
+	min-width			: 580px; 
+/*	background-color: red; */
+}
+#Chat #ChatList li {
+	width : 24%;
 }
 
+#Chat #ChatList li #ChatTitleDiv {
+	width : 100%;
+}
+
+#Chat #ChatList {	
+	margin-left : 212px;
+	height			: 175px;
+}
+
+#Chat .minimize {
+	padding-top		: 4px;
+	padding-right		: 15px;
+	width 			: 15px;
+	height			: 3px;
+}
+
+#Chat .maximize {
+	padding-right		: 16px;
+	padding-top		: 1px;
+	width 			: 15px;
+	height			: 7px;
+}
 /******************************/
 /* Window.css */
 /******************************/

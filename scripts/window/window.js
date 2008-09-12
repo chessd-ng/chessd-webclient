@@ -169,7 +169,7 @@ function WINDOW_Challenge(User, Rating, GameParameters, Rated, MatchId)
 		// NewParameters Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// Chat Button
-		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ return false;}, false);
 		// Decline Button
 		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	}

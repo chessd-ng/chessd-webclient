@@ -738,7 +738,14 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		}
 
 		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
-		RoomClose.src = "./images/close_chat.png";
+		if (MainData.Browser == 0)
+		{
+			RoomClose.src = "./images/ie/close_chat.gif";
+		}
+		else
+		{
+			RoomClose.src = "./images/close_chat.png";
+		}
 		RoomClose.onclick = function() { ROOM_ExitRoom(RoomName); };
 		RoomItem.appendChild(RoomClose);
 

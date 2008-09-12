@@ -39,8 +39,8 @@ function INTERFACE_CreateInterface()
 	Main.appendChild(Left);
 	Main.appendChild(Center);
 	Page.appendChild(Top);
-	Page.appendChild(Main);
 	Page.appendChild(Chat);
+	Page.appendChild(Main);
 
 	// Logout from jabber when close or reload page;
 	document.body.setAttribute("onbeforeunload","LOGIN_LeavePage()");

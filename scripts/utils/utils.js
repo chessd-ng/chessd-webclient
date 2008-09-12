@@ -97,9 +97,19 @@ function UTILS_IdentifyBrowser()
 		}
 			
 	}
-	// Explorer
+	// Internet Explorer
 	else if (BrowserName.match("Microsoft Internet Explorer"))
 	{
+		/*
+		var IEv = navigator.userAgent.split(";")[1].replace(/ /g,"");
+		
+		if (IEv == "MSIE6.0")
+			BrowserValue = 0;
+		else if (IEv == "MSIE7.0")
+			BrowserValue = 3;
+		else
+			BrowserValue = 3;
+		*/
 		BrowserValue = 0;
 	}
 	// Other
