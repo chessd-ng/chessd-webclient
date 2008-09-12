@@ -248,10 +248,14 @@ DATA.prototype.RemoveSearchGameInfo = DATA_RemoveSearchGameInfo;
 DATA.prototype.FindSearchGameInfo = DATA_FindSearchGameInfo;
 DATA.prototype.GetSearchGameInfo = DATA_GetSearchGameInfo;
 
+/*WINDOW METHODS ******************************/
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
-DATA.prototype.ChangeWindowFocus = DATA_ChangeWindowFocus;
 DATA.prototype.FindWindow = DATA_FindWindow;
+DATA.prototype.GetWindow = DATA_GetWindow;
+DATA.prototype.SetWindowFocus = DATA_SetWindowFocus;
+DATA.prototype.GetWindowFocus = DATA_GetWindowFocus;
+DATA.prototype.GetWindowListLength = DATA_GetWindowListLength;
 
 DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
@@ -2318,17 +2322,39 @@ function DATA_AddWindow(WindowObj)
 /**
 * Set Window Object Focus
 */
-function DATA_ChangeWindowFocus(WindowObj)
+function DATA_SetWindowFocus(WindowObj)
 {
 	if(this.Windows.Focus == WindowObj)
 	{
 		return null;
 	}
-
-	//Set new top window
-	this.Windows.Focus = WindowObj;
-
+	else
+	{
+		//Set new top window
+		this.Windows.Focus = WindowObj;
+	}
 	return WindowObj;
+}
+
+/*
+* Get Window Object Focus
+*/
+function DATA_GetWindowFocus()
+{
+	return this.Windows.Focus;
+}
+
+/*
+* Get Window Object List length
+*/
+function DATA_GetWindowListLength()
+{
+	return this.Windows.WindowList.length;
+}
+
+function DATA_GetWindow(Index)
+{
+	return this.Windows.WindowList[Index];
 }
 
 /**
@@ -2337,16 +2363,15 @@ function DATA_ChangeWindowFocus(WindowObj)
 function DATA_RemoveWindow(WindowObj)
 {
 	var WindowIndex = this.FindWindow(WindowObj);
-	var WindowListLen = this.Windows.WindowList.length;
-
-	if (WindowListLen == WindowIndex)
-	{
-		return
-	}
+	var WindowListLen = this.GetWindowListLength();
 
 	//Remove Window from WindowList
 	this.Windows.WindowList.splice(WindowIndex,1);
 
+	if(WindowListLen == 1)
+	{
+		this.SetWindowFocus(null);
+	}
 }
 
 /**
