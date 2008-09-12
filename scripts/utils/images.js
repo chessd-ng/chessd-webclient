@@ -65,7 +65,7 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 */
 function IMAGE_ImageDecode(ImgSrc){
 	//DefaultPHP is loaded from conf.xml
-	return "php/base64_decode."+MainData.DefaultPHP+"?"+ImgSrc.slice(5);
+	return "php/base64_decode."+MainData.GetDefaultPHP()+"?"+ImgSrc.slice(5);
 }
 
 /**
@@ -109,7 +109,7 @@ function IMAGE_B64Img(Image, Type){
 	Img = "data:"+Type+";base64,"+Image;
 
 	// Update user profile image
-	Profile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);
+	Profile = MainData.GetProfile(MainData.Username+"@"+MainData.GetHost());
 	if(Profile != null)
 	{
 		Profile.Profile.SetImgType(Type);

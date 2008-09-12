@@ -27,6 +27,8 @@ function PARSER_ParseIq(XML)
 	var Buffer = "";
 	var Xmlns = "";
 
+	var Consts = MainData.GetConst();
+
 	if(FirstNode != undefined)
 	{
 		Xmlns = FirstNode.getAttribute("xmlns");
@@ -109,11 +111,11 @@ function PARSER_ParseIq(XML)
 			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
-				if (ID == MainData.Const.IQ_ID_GamePhoto)
+				if (ID == Consts.IQ_ID_GamePhoto)
 				{
 					Buffer += GAME_HandleVCardPhoto(XML);
 				}
-				else if (ID == MainData.Const.IQ_ID_OldGamePhoto)				{
+				else if (ID == Consts.IQ_ID_OldGamePhoto)				{
 					Buffer += OLDGAME_HandleVCardPhoto(XML);
 				}
 				else
@@ -210,8 +212,10 @@ function PARSER_ParseIqById(XML)
 	var ID = XML.getAttribute("id");
 	var Buffer = "";
 
+	var Consts = MainData.GetConst();
+
 	// Received an empty vcard. Need to create a basic profile
-	if (ID == MainData.Const.IQ_ID_GetMyProfile)
+	if (ID == Consts.IQ_ID_GetMyProfile)
 	{
 		Buffer += PROFILE_CreateProfile();
 	}

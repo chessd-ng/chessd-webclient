@@ -115,7 +115,7 @@ function ROOM_HandleRoomPresence(XML)
 		ROOM_CreateRoom(RoomName);
 
 		// Show room user list if room is a room game
-		if(Component == MainData.GameComponent)
+		if(Component == MainData.GetServer())
 		{
 			Room = MainData.GetRoom(RoomName);
 			Room.Room.showUserList();
@@ -212,6 +212,7 @@ function ROOM_HandleRoomList(XML)
 	var Items, Rooms, Room, RoomName, ID, i;
 	var Buffer = "";
 	var Exp = new RegExp("^"+MainData.RoomDefault+"$");
+	var Consts = MainData.GetConst();
 
 	Rooms = new Array();
 
@@ -219,7 +220,7 @@ function ROOM_HandleRoomList(XML)
 	ID = XML.getAttribute("id");
 	
 	// XML with all games rooms
-	if (ID == MainData.Const.IQ_ID_GetGamesList)
+	if (ID == Consts.IQ_ID_GetGamesList)
 	{
 		Buffer += ROOM_HandleGameRoomList(XML);
 	}
@@ -524,7 +525,7 @@ function ROOM_EnterRoom(RoomName)
 	}
 	else
 	{
-		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+		To = RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username;
 
 		XML = MESSAGE_Presence(To);
 
@@ -582,7 +583,7 @@ function ROOM_EnterRoomGame(RoomName)
 {
 	var XML, To;
 
-	To = RoomName+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
 
 	XML = MESSAGE_Presence(To);
 
@@ -829,7 +830,7 @@ function ROOM_SortUsersByNick()
 		}
 		// TODO - Fix user menu position in FF3
 		// Proposital hide
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Room.Room.hideUserList();
 		}
@@ -893,7 +894,7 @@ function ROOM_SortUsersByRating(Category)
 
 		// TODO - Fix user menu position in FF3
 		// Proposital hide
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Room.Room.hideUserList();
 		}

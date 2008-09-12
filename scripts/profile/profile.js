@@ -254,10 +254,12 @@ function PROFILE_StartProfile(Username)
 {	
 	var ProfileInfo = new Object();
 
-	var Jid = Username+"@"+MainData.Host;
+	var Jid = Username+"@"+MainData.GetHost();
 
 	var Elements;
 	
+	var Consts = MainData.GetConst();
+
 	if (MainData.FindProfile(Jid) != null)
 	{
 		return false;
@@ -276,7 +278,7 @@ function PROFILE_StartProfile(Username)
 
 	MainData.AddProfile(Jid, Username, Elements);
 		
-	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,MainData.Const.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
+	CONNECTION_SendJabber(MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
 
 	//TODO MESSAGE_GetChessProfile();
 	//CONNECTION_SendJabber(MESSAGE_GetProfile(Username), MESSAGE_GetChessProfile(Username));
@@ -294,7 +296,7 @@ function PROFILE_StartProfile(Username)
 */
 function PROFILE_RemoveProfile(Username)
 {
-	var Jid = Username+"@"+MainData.Host;
+	var Jid = Username+"@"+MainData.GetHost();
 
 	MainData.RemoveProfile(Jid);
 }
@@ -312,7 +314,7 @@ function PROFILE_SaveMyProfile()
 	var FN, Desc, PhotoType, Binval;
 	var MyProfile;
 
-	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.Host);	
+	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.GetHost());	
 
 	FN = MyProfile.Profile.GetUser();
 	Desc = MyProfile.Profile.GetDesc();

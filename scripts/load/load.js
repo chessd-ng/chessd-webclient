@@ -94,7 +94,7 @@ function LOAD_LoadFiles()
 	Files.push("css/Announce.css");
 	Files.push("css/Help.css");
 
-	if(MainData.Browser == 0) //IE
+	if(MainData.GetBrowser() == 0) //IE
 	{
 		Files.push("css/IEFix.css");
 	}
@@ -192,7 +192,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 		// we used onreadystatechange event to know when script
 		// was loaded and ready to use.
 		// This event work with CSS files too.
-		if(MainData.Browser == 0) //IE
+		if(MainData.GetBrowser() == 0) //IE
 		{
 			
 			File.onreadystatechange = function(){

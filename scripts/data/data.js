@@ -47,41 +47,44 @@ function DATA(ConfFile, LangFile)
 	this.Connection.RID = null;
 	this.Connection.SID = -1;
 
-	this.Browser = UTILS_IdentifyBrowser();
+	/*CONFIGURATION DATA*/
+	this.Conf = new Object();
 	// Get Host from configuration file
 	//this.Host = UTILS_GetTag(Params, "host");
 	//this.HostPost = UTILS_GetTag(Params, "host");
-	
 	// Get Host from url
-	this.Host = window.location.href.split("/")[2].split(":")[0];
-	this.HostPost = window.location.href.split("/")[2];
+	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
+	this.Conf.HostPost = window.location.href.split("/")[2];
+	this.Conf.Browser = UTILS_IdentifyBrowser();
+	this.Conf.Resource = UTILS_GetTag(Params, "resource");
 
-	this.Resource = UTILS_GetTag(Params, "resource");
-
-	this.Server = UTILS_GetTag(Params,"server");
-	this.MatchComponent = UTILS_GetTag(Params,"server");
-	this.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
-	this.GameComponent = UTILS_GetTag(Params, "server");
-	this.RatingComponent = UTILS_GetTag(Params, "server");
-	this.AdminComponent = UTILS_GetTag(Params, "server");
+	this.Conf.Server = UTILS_GetTag(Params,"server");
+	this.Conf.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
+	this.Conf.SearchComponent = UTILS_GetTag(Params, "search-component");
+/*
+	this.Conf.MatchComponent = UTILS_GetTag(Params,"server");
+	this.Conf.GameComponent = UTILS_GetTag(Params, "server");
+	this.Conf.RatingComponent = UTILS_GetTag(Params, "server");
+	this.Conf.AdminComponent = UTILS_GetTag(Params, "server");
+*/
+	this.Conf.GetText = UTILS_OpenXMLFile(LangFile);
+	this.Conf.Const = DATA_SetConsts();
+	this.Conf.Xmlns = UTILS_GetTag(Params, "Xmlns");
+	this.Conf.Version = UTILS_GetTag(Params, "version");
+	this.Conf.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
+	this.Conf.Lang = "";
+	//Default php version
+	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
 	this.Status = "available";
 	this.Type = null;
-	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
-	this.Version = UTILS_GetTag(Params, "version");
 	this.RoomDefault = UTILS_GetTag(Params, "room-default");
 	this.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
 	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
-	this.SearchComponent = UTILS_GetTag(Params, "search-component");
-	this.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.Load = -1;
-	this.Lang = "";
-
-	//Default php version
-	this.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
 	/**
 	* DATA STRUCTURE
@@ -126,8 +129,6 @@ function DATA(ConfFile, LangFile)
 	this.Photo = null;
 	this.AwayCounter = null;
 
-	this.GetText = UTILS_OpenXMLFile(LangFile);
-	this.Const = DATA_SetConsts();
 
 	this.Windows = new Object();
 	this.Windows.Focus = null;
@@ -147,6 +148,25 @@ DATA.prototype.GetRID = DATA_GetRID;
 DATA.prototype.SetRID = DATA_SetRID;
 DATA.prototype.GetSID = DATA_GetSID;
 DATA.prototype.SetSID = DATA_SetSID;
+
+/*CONFIGURATION METHODS************************/
+DATA.prototype.GetHost = DATA_GetHost;
+DATA.prototype.GetHostPost = DATA_GetHostPost;
+DATA.prototype.GetBrowser = DATA_GetBrowser;
+DATA.prototype.GetResource = DATA_Getresource;
+DATA.prototype.GetServer = DATA_GetServer;
+DATA.prototype.GetConferenceComponent = DATA_GetConferenceComponent;
+DATA.prototype.GetSearchComponent = DATA_GetSearchComponent;
+DATA.prototype.GetText = DATA_GetText;
+DATA.prototype.SetText = DATA_SetText;
+DATA.prototype.GetConst = DATA_GetConst;
+DATA.prototype.GetXmlns = DATA_GetXmlns;
+DATA.prototype.GetVersion = DATA_GetVersion;
+DATA.prototype.GetCookieValidity = DATA_GetCookieValidity;
+DATA.prototype.GetLang = DATA_GetLang;
+DATA.prototype.SetLang = DATA_SetLang;
+DATA.prototype.GetDefaultPHP = DATA_GetDefaultPHP;
+
 
 DATA.prototype.AddUser = DATA_AddUser;
 DATA.prototype.DelUser = DATA_DelUser;
@@ -314,6 +334,75 @@ function DATA_GetSID()
 function DATA_SetSID(Value)
 {
 	this.Connection.SID = Value;
+}
+
+
+/**********************************
+ * METHODS - CONFIGURATON DATA    *
+ **********************************/
+function DATA_GetHost()
+{
+	return this.Conf.Host;
+}
+function DATA_GetHostPost()
+{
+	return this.Conf.HostPost;
+}
+function DATA_GetBrowser()
+{
+	return this.Conf.Browser;
+}
+function DATA_Getresource()
+{
+	return this.Conf.Resource;
+}
+function DATA_GetServer()
+{
+	return this.Conf.Server;
+}
+function DATA_GetConferenceComponent()
+{
+	return this.Conf.ConferenceComponent;
+}
+function DATA_GetSearchComponent()
+{
+	return this.Conf.SearchComponent;
+}
+function DATA_GetText()
+{
+	return this.Conf.GetText;
+}
+function DATA_SetText(FileXML)
+{
+	this.Conf.GetText = FileXML;
+}
+function DATA_GetConst()
+{
+	return this.Conf.Const;
+}
+function DATA_GetXmlns()
+{
+	return this.Conf.Xmlns;
+}
+function DATA_GetVersion()
+{
+	return this.Conf.Version;
+}
+function DATA_GetCookieValidity()
+{
+	return this.Conf.CookieValidity;
+}
+function DATA_GetLang()
+{
+	return this.Conf.Lang;
+}
+function DATA_SetLang(Lang)
+{
+	this.Conf.Lang = Lang;
+}
+function DATA_GetDefaultPHP()
+{
+	return this.Conf.DefaultPHP;
 }
 
 /**********************************

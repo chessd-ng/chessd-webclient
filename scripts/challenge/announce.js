@@ -41,8 +41,10 @@ function ANNOUNCE_HandleAnnounce(XML)
 
 	var Buffer = "";
 
+	var Consts =  MainData.GetConst();
+
 	// Get Announce list
-	if(Id == MainData.Const.IQ_ID_GetAnnounceMatch)
+	if(Id == Consts.IQ_ID_GetAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
 		
@@ -86,11 +88,11 @@ function ANNOUNCE_HandleAnnounce(XML)
 	}
 	// Accepted announce
 	/*
-	else if(Id == MainData.Const.IQ_ID_AcceptAnnounceMatch)
+	else if(Id == Consts.IQ_ID_AcceptAnnounceMatch)
 	{
 		WINDOW_Alert("Announce accept","Announce accepted, start game!")
 	}
-	else if(Id == MainData.Const.IQ_ID_RemoveAnnounceMatch)
+	else if(Id == Consts.IQ_ID_RemoveAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
 
@@ -134,7 +136,9 @@ function ANNOUNCE_HandleAnnounceError(XML)
 	var Type;
 	var AnnounceId, Announces;
 
-	if(Id == MainData.Const.IQ_ID_AcceptAnnounceMatch)
+	var Consts = MainData.GetConst();
+
+	if(Id == Consts.IQ_ID_AcceptAnnounceMatch)
 	{
 		Error = XML.getElementsByTagName("error")[0];
 		Type = Error.getAttribute("type");

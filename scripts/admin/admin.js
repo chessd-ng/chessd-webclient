@@ -49,29 +49,30 @@ function ADMIN_HandleAdmin(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Buffer = "";
+	var Consts = MainData.GetConst();
 
 	switch(Id)
 	{
 		// Show banned user's list
-		case MainData.Const.IQ_ID_GetBanList:
+		case Consts.IQ_ID_GetBanList:
 			ADMIN_HandleBanList(XML);
 			break;
 
 		// Show a window alert with banned user confirmation 
 		/*
-		case MainData.Const.IQ_ID_BanUser:
+		case Consts.IQ_ID_BanUser:
 			ADMIN_Notification(XML)
 			break;
 		*/
 
 		// Show a window alert with unbanned user confirmation 
-		case MainData.Const.IQ_ID_UnbanUser:
+		case Consts.IQ_ID_UnbanUser:
 			ADMIN_Notification(XML)
 			break;
 
 		// Show a window alert with kiked user confirmation 
 		/*
-		case MainData.Const.IQ_ID_KickUser:
+		case Consts.IQ_ID_KickUser:
 			ADMIN_Notification(XML)
 			break;
 		*/

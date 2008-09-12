@@ -204,10 +204,11 @@ function GAME_HandleGameResult(XML)
 	var GameTag;
 	var i;
 	var To;
+	var Consts = MainData.GetConst();
 
 	// The code above is used to parse games that player is playing;
 	// 
-	if(Id == MainData.Const.IQ_ID_SearchCurrentGame)
+	if(Id == Consts.IQ_ID_SearchCurrentGame)
 	{
 		var GameTag = XML.getElementsByTagName("game");
 
@@ -217,7 +218,7 @@ function GAME_HandleGameResult(XML)
 			{
 				Room = GameTag[i].getAttribute("room");
 				MainData.Status = "playing"
-				To = Room+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}
@@ -611,6 +612,8 @@ function GAME_StartGame(GameId, P1, P2)
 	var Buffer="";
 	var RoomPos; 
 
+	var Consts = MainData.GetConst();
+
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
@@ -660,8 +663,8 @@ function GAME_StartGame(GameId, P1, P2)
 	GameDiv.Show();
 
 	// Get Players Photo
-	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
-	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
 
 	// Set status to playing
 	return CONTACT_ChangeStatus("playing", "return") + Buffer;
@@ -682,6 +685,8 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var GameDiv;
 	var RoomPos;
 	var Buffer = "";
+
+	var Consts = MainData.GetConst();
 
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
@@ -717,8 +722,8 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv.SetBTime();
 
 	// Get players Photos
-	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
-	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
 
 	// Send message to leave from old game observer room;
 	CONNECTION_SendJabber(Buffer);

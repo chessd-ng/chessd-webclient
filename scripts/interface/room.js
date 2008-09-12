@@ -419,7 +419,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(GameId, PW, PB);
-				To = GameId+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+				To = GameId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
 				Buffer += MESSAGE_Presence(To)
 			}
 		}
@@ -893,7 +893,7 @@ function INTERFACE_ShowCreateRoomWindow()
 			// message to create room
 			else
 			{
-				CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.Host+"/"+MainData.Username));
+				CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username));
 			}
 		}
 	};
@@ -943,7 +943,7 @@ function INTERFACE_ShowCreateRoomWindow()
 		// Send a message to create room
 		else
 		{
-			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.Host+"/"+MainData.Username));
+			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username));
 		}
 	};
 

@@ -52,7 +52,7 @@ function START_StartPage()
 
 	// Read xml config files and starting data structure
 	MainData = new DATA("conf/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
-	MainData.Lang = Lang;
+	MainData.SetLang(Lang);
 	
 	INTERFACE_StartLogin(Lang);
 }
@@ -72,12 +72,14 @@ function START_ChangeLanguage(Lang)
 
 	// Reload MainData with configurations and new language selected
 //	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
-	MainData = new DATA("data/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
+//	MainData = new DATA("data/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
+	MainData.SetText(UTILS_OpenXMLFile("lang/"+Lang+".xml?"+NoCache.TimeStamp))
+
 	// Create cookie for new language
-	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
+	UTILS_CreateCookie("lang", Lang, MainData.GetCookieValidity());
 
 	// Set language
-	MainData.Lang = Lang;
+	MainData.SetLang(Lang);
 	
 	// Show new login div with language selected
 	INTERFACE_StartLogin(Lang);
@@ -96,14 +98,16 @@ function START_Webclient()
 	var All = INTERFACE_CreateInterface();
 	var XMPP = "";
 
+	var Consts = MainData.GetConst();
+
 	//MainData.ConnectionStatus = 0;
 	MainData.SetConnectionStatus(0);
 
 	XMPP += MESSAGE_UserList();
-	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);
-	XMPP += MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile);
+	XMPP += MESSAGE_Presence(MainData.GetServer()+"."+MainData.GetHost());
+	XMPP += MESSAGE_GetProfile(MainData.Username, Consts.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
-	XMPP += MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username);
+	XMPP += MESSAGE_Presence("general@"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"/"+MainData.Username);
 
 	CONNECTION_SendJabber(XMPP);
 
@@ -155,7 +159,7 @@ function START_Restart()
 	INITIAL_LoadScripts();
 
 	// Verify browser and if IE then append related css file
-	if(MainData.Browser == 0)
+	if(MainData.GetBrowser() == 0)
 	{
 		LOAD_IECssFile();
 	}

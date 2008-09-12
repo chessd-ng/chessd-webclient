@@ -475,7 +475,7 @@ function INTERFACE_ShowChallengeMenu(Left, Top)
 	{
 		this.Menu.style.left = Left+"px";
 		// Quick fix for IE
-		if (MainData.Browser == 0)
+		if (MainData.GetBrowser() == 0)
 		{
 			this.Menu.style.top = "80px";
 		}

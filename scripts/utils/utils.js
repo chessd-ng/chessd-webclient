@@ -168,7 +168,7 @@ function UTILS_GetTag(XML, TagName)
 */
 function UTILS_GetText(TagName)
 {
-	return UTILS_GetTag(MainData.GetText, TagName);
+	return UTILS_GetTag(MainData.GetText(), TagName);
 }
 
 
@@ -317,7 +317,7 @@ function UTILS_BreakString(Obj, Width)
 	var i;
 
 	// IE
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		TrWidth = Width.Offset;
 	}
@@ -441,7 +441,7 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 
 function UTILS_ReturnEvent(event)
 {
-	if(MainData.Browser == 0) // IE
+	if(MainData.GetBrowser() == 0) // IE
 	{
 		return window.event;
 	}
@@ -455,7 +455,7 @@ function UTILS_ReturnKeyCode(event)
 {
 	var KeyNum;
 
-	if(MainData.Browser == 0) // IE
+	if(MainData.GetBrowser() == 0) // IE
 	{
 		KeyNum = window.event.keyCode;
 	}

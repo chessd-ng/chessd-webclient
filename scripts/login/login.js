@@ -51,12 +51,12 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	CONNECTION_ConnectJabber();
 
 	// Create Cookies
-	UTILS_CreateCookie("Username", Username, MainData.CookieValidity);
-	UTILS_CreateCookie("RememberPass", RememberPass, MainData.CookieValidity);
+	UTILS_CreateCookie("Username", Username, MainData.GetCookieValidity());
+	UTILS_CreateCookie("RememberPass", RememberPass, MainData.GetCookieValidity());
 
 	//TODO -> Fix to IE
 	if (RememberPass)
-		UTILS_CreateCookie("Passwd", Passwd, MainData.CookieValidity);
+		UTILS_CreateCookie("Passwd", Passwd, MainData.GetCookieValidity());
 	else
 		UTILS_DeleteCookie("Passwd");
 	

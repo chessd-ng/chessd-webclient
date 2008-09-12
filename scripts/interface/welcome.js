@@ -27,7 +27,8 @@ function INTERFACE_CreateWelcome()
 
 	WelcomeClose.onclick = function(){ INTERFACE_RemoveWelcome();};
 
-	XMLInstruction = MainData.GetText.getElementsByTagName("welcome_item");
+	// TODO -> Change welcome texto to CDATA
+	XMLInstruction = MainData.Conf.GetText.getElementsByTagName("welcome_item");
 
 	for(i=0; i<XMLInstruction.length ; i++)
 	{

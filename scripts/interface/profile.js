@@ -379,7 +379,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Div.appendChild(BottomDiv);
 
 	// IE Fix
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		var Br = UTILS_CreateElement("br");
 		Div.appendChild(Br);

@@ -108,7 +108,7 @@ function CHAT_HandleAnnounceMessage(XML)
 	From = XML.getAttribute('from').replace(/@.*/,"");
 
 	// Show Annouce message only if sender is host server
-	if (From != MainData.Host)
+	if (From != MainData.GetHost())
 		return "";
 
 	// Announce's subject

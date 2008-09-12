@@ -50,7 +50,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	BoardPieceOffset = new Object;
 
 	// PS: FF3 use same values as IE to drag piece
-	if(MainData.Browser != 1) //is not FF2
+	if(MainData.GetBrowser() != 1) //is not FF2
 	{
 		BoardPieceOffset.y = -335;
 		BoardPieceOffset.x = 260;
