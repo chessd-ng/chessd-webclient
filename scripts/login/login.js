@@ -77,6 +77,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
+	var CurrentGame = MainData.GetCurrentGame();
 	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	//MainData.ConnectionStatus = -1;
@@ -87,9 +88,9 @@ function LOGIN_Logout()
 	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
-	if(MainData.CurrentGame != null)
+	if(CurrentGame != null)
 	{
-		MainData.CurrentGame.Game.StopTimer();
+		CurrentGame.Game.StopTimer();
 	}
 
 	START_Restart();

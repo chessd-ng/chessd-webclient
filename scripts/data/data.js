@@ -86,9 +86,6 @@ function DATA(ConfFile, LangFile)
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.Load = -1;
 
-	/**
-	* DATA STRUCTURE
-	*/
 	//Contact
 	this.Contact = null;
 	this.ContactOnline = null;
@@ -112,11 +109,15 @@ function DATA(ConfFile, LangFile)
 
 	this.CurrentRoom = null;
 
-	this.CurrentGame = null;
-	this.GameList = new Array();
+	/*GAME DATA *********/
+	this.Game = new Object();
+	this.Game.Current = null;
+	this.Game.GameList = new Array();
 
-	this.CurrentOldGame = null;
-	this.OldGameList = new Array();
+	/*OLDGAME DATA*******/
+	this.OldGame = new Object();
+	this.OldGame.Current = null;
+	this.OldGame.OldGameList = new Array();
 
 	this.SearchGameMaxId = 0;
 	this.SearchGameInfoList = new Array();
@@ -224,21 +225,23 @@ DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
 DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
 DATA.prototype.FindAnnounce = DATA_FindAnnounce;
 
+/*GAME METHODS ********************************/
 DATA.prototype.AddGame = DATA_AddGame;
 DATA.prototype.RemoveGame = DATA_RemoveGame;
 DATA.prototype.FindGame = DATA_FindGame;
 DATA.prototype.AddGameMove = DATA_AddGameMove;
 DATA.prototype.SetCurrentGame = DATA_SetCurrentGame;
+DATA.prototype.GetCurrentGame = DATA_GetCurrentGame;
 DATA.prototype.SetTurn = DATA_SetTurnGame;
+DATA.prototype.GetGame = DATA_GetGame;
 
+/*OLDGAME METHODS *****************************/
 DATA.prototype.AddOldGame = DATA_AddOldGame;
 DATA.prototype.RemoveOldGame = DATA_RemoveOldGame;
 DATA.prototype.SetCurrentOldGame = DATA_SetCurrentOldGame;
+DATA.prototype.GetCurrentOldGame = DATA_GetCurrentOldGame;
 DATA.prototype.PushOldGame = DATA_PushGameToOldGame;
-
 DATA.prototype.GetOldGame = DATA_GetOldGame;
-DATA.prototype.GetGame = DATA_GetGame;
-DATA.prototype.GetOponent = DATA_GetOponent;
 
 DATA.prototype.AddSearchGameInfo = DATA_AddSearchGameInfo;
 DATA.prototype.RemoveSearchGameInfo = DATA_RemoveSearchGameInfo;
@@ -1832,12 +1835,22 @@ function DATA_SetCurrentGame(Game)
 {
 	if(Game != undefined)
 	{
-		this.CurrentGame = Game;
+		this.Game.Current = Game;
 	}
 	else
 	{
-		this.CurrentGame = null;
+		this.Game.Current = null;
 	}
+}
+
+/**
+* @brief		Get current game 
+* @author 		Rubens Sugimoto
+* @return 		Game object
+*/
+function DATA_GetCurrentGame()
+{
+	return this.Game.Current;
 }
 
 /**
@@ -1909,7 +1922,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 	NewGame.SetTurn = this.SetTurn;
 	NewGame.AddMove = this.AddGameMove;
 
-	this.GameList.push(NewGame);
+	this.Game.GameList.push(NewGame);
 
 	return NewGame;
 
@@ -1934,16 +1947,16 @@ function DATA_RemoveGame(Id)
 	}
 	else //Remove
 	{
-		RemovedGame = this.GameList[GamePosition];
-		this.GameList.splice(GamePosition, 1);
+		RemovedGame = this.Game.GameList[GamePosition];
+		this.Game.GameList.splice(GamePosition, 1);
 
 		//Set next game on GameList to current game
-		MainData.SetCurrentGame(this.GameList[GamePosition]);
+		MainData.SetCurrentGame(this.Game.GameList[GamePosition]);
 		//If next game is null, set previous game to current game, else
 		//there is no game on GameList
-		if(MainData.CurrentGame == null)
+		if(MainData.Game.Current == null)
 		{
-			MainData.SetCurrentGame(this.GameList[GamePosition-1]);
+			MainData.SetCurrentGame(this.Game.GameList[GamePosition-1]);
 		}
 
 		return RemovedGame;
@@ -1961,11 +1974,11 @@ function DATA_RemoveGame(Id)
 function DATA_FindGame(Id)
 {
 	var i;
-	var GameListLen = this.GameList.length;
+	var GameListLen = this.Game.GameList.length;
 
 	for(i=0; i<GameListLen; i++)
 	{
-		if(this.GameList[i].Id == Id)
+		if(this.Game.GameList[i].Id == Id)
 		{
 			return i;
 		}
@@ -2031,11 +2044,11 @@ function DATA_GetGame(Id)
 {
 	var i=0;
 	//Search game from game list
-	while(i<this.GameList.length)
+	while(i<this.Game.GameList.length)
 	{
-		if(this.GameList[i].Id == Id)
+		if(this.Game.GameList[i].Id == Id)
 		{
-			return(this.GameList[i])
+			return(this.Game.GameList[i])
 		}
 		i++;
 	}
@@ -2043,59 +2056,6 @@ function DATA_GetGame(Id)
 
 	return null;
 }
-
-
-/**
-* @brief		Search for a game in OldGameList
-* @param		Id	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		The game structure
-*/
-function DATA_GetOldGame(Id)
-{
-	/*
-	var i=0;
-
-	//Search game from old game list
-	while(i<this.OldGameList.length)
-	{
-		if(this.OldGameList[i].Id == Id)
-		{
-			return(this.OldGameList[i])
-		}
-		i++;
-	}
-	return null;
-	*/
-	return this.OldGameList[Id];
-}
-
-/**
-* @brief		Return the oponent's name
-* @param		GameId	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		Opponent's name
-* @see 			DATA_GetGame
-*/
-function DATA_GetOponent(GameID)
-{
-	var Game = this.GetGame(GameID);
-
-	if (Game == null)
-	{
-		return null;
-	}
-
-	if (Game.YourColor == "white")
-	{
-		return Game.PB;
-	}
-	else
-	{
-		return Game.PW;
-	}
-}
-
 
 /**********************************
  * METHODS - OLDGAME              *
@@ -2112,12 +2072,22 @@ function DATA_SetCurrentOldGame(Game)
 {
 	if(Game != undefined)
 	{
-		this.CurrentOldGame = Game;
+		this.OldGame.Current= Game;
 	}
 	else
 	{
-		this.CurrentOldGame = null;
+		this.OldGame.Current= null;
 	}
+}
+
+/**
+* @brief		Get current oldgame 
+* @author 		Rubens Sugimoto
+* @return 		Game Object
+*/
+function DATA_GetCurrentOldGame()
+{
+	return this.OldGame.Current;
 }
 
 /**
@@ -2134,7 +2104,7 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 {
 	var NewOldGame = new Object();
 
-	if(this.OldGameList.length == 0)
+	if(this.OldGame.OldGameList.length == 0)
 	{
 		MainData.SetCurrentOldGame(NewOldGame);
 	}
@@ -2162,7 +2132,7 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 
 	//this.OldGameList.push(NewOldGame);
 	// This version, user can only see one OldGame
-	this.OldGameList[0] = NewOldGame;
+	this.OldGame.OldGameList[0] = NewOldGame;
 
 	//return this.OldGameList.length -1;
 	return 0;
@@ -2181,27 +2151,52 @@ function DATA_RemoveOldGame(Id)
 	var GamePosition = Id;
 	var RemovedOldGame;
 
-	if(this.OldGameList[GamePosition] == undefined)
+	if(this.OldGame.OldGameList[GamePosition] == undefined)
 	{
 		return null;
 	}
 	else //Remove
 	{
-		RemovedOldGame = this.OldGameList[GamePosition];
-		this.OldGameList.splice(GamePosition, 1);
+		RemovedOldGame = this.OldGame.OldGameList[GamePosition];
+		this.OldGame.OldGameList.splice(GamePosition, 1);
 
 		//Set next game on GameList to current game
-		MainData.SetCurrentOldGame(this.OldGameList[GamePosition]);
+		MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition]);
 		//If next game is null, set previous game to current game, else
 		//there is no game on GameList
-		if(MainData.CurrentOldGame == null)
+		if(this.GetCurrentOldGame() == null)
 		{
-			MainData.SetCurrentOldGame(this.OldGameList[GamePosition-1]);
+			MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition-1]);
 		}
 
 		return RemovedOldGame;
 	}
 	
+}
+
+/**
+* @brief		Search for a game in OldGameList
+* @param		Id	   Game Id
+* @author 		Rubens Sugimoto
+* @return 		The game structure
+*/
+function DATA_GetOldGame(Id)
+{
+	/*
+	var i=0;
+
+	//Search game from old game list
+	while(i<this.OldGameList.length)
+	{
+		if(this.OldGameList[i].Id == Id)
+		{
+			return(this.OldGameList[i])
+		}
+		i++;
+	}
+	return null;
+	*/
+	return this.OldGame.OldGameList[Id];
 }
 
 
@@ -2215,7 +2210,7 @@ function DATA_RemoveOldGame(Id)
 function DATA_PushGameToOldGame(GameObj)
 {
 	var Pos;
-	Pos = this.OldGameList.push(GameObj);
+	Pos = this.OldGame.OldGameList.push(GameObj);
 	MainData.SetCurrentOldGame(GameObj);
 
 	return Pos -1;

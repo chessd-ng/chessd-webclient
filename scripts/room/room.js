@@ -550,6 +550,7 @@ function ROOM_ExitRoom(RoomName)
 
 	var XML;
 	var Room = MainData.GetRoom(RoomName)
+	var CurrentGame = MainData.GetCurrentGame();
 	
 	// If RoomName isn't in sctructure
 	if (Room == null)
@@ -558,11 +559,11 @@ function ROOM_ExitRoom(RoomName)
 	}
 
 	// if user is playing, show a message and don't close room
-	if(MainData.CurrentGame != null)
+	if(CurrentGame != null)
 	{
-		if(RoomName == MainData.CurrentGame.Id)
+		if(RoomName == CurrentGame.Id)
 		{
-			if(MainData.CurrentGame.Finished == false)
+			if(CurrentGame.Finished == false)
 			{
 				WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
 				return "";

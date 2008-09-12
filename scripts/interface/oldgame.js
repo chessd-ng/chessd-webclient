@@ -410,6 +410,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
 	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, Img, i;
+	var CurrentGame = MainData.GetCurrentGame();
 	
 	Tr = UTILS_CreateElement('tr');
 		Td1 = UTILS_CreateElement('td',null,null,White);
@@ -429,7 +430,7 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 			Img.title = UTILS_GetText("oldgame_examine");
 			UTILS_AddListener(Img, "click", function()
 					{
-						if(MainData.CurrentGame == null)
+						if(CurrentGame == null)
 						{
 							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
 						}

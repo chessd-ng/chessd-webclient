@@ -506,15 +506,17 @@ function INTERFACE_SetTurn(Color)
 */
 function INTERFACE_DecreaseTime()
 {
-	if (MainData.CurrentGame.Game.Turn == "white")
+	var CurrentGame = MainData.GetCurrentGame();
+
+	if (CurrentGame.Game.Turn == "white")
 	{
-		MainData.CurrentGame.Game.WhitePlayer.Time -= 1;
-		MainData.CurrentGame.Game.SetWTime();
+		CurrentGame.Game.WhitePlayer.Time -= 1;
+		CurrentGame.Game.SetWTime();
 	}
 	else
 	{
-		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
-		MainData.CurrentGame.Game.SetBTime();
+		CurrentGame.Game.BlackPlayer.Time -= 1;
+		CurrentGame.Game.SetBTime();
 	}
 }
 
@@ -696,6 +698,8 @@ function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 	var MoveSpan;
 	var Item;
 
+	var CurrentGame = MainData.GetCurrentGame();
+
 	// NumTurn-1 is a Quickfix to display moves in move list 
 	// without the first board of game (contains no move and shortmove)
 	FullMove = Math.ceil((NumTurn-1)/2);
@@ -727,9 +731,9 @@ function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 	Item.appendChild(MoveSpan);
 
 	//Players can see old moves when game is finished
-	//MainData.CurrentGame.Finished is not used here because
+	//CurrentGame.Finished is not used here because
 	//observer game set Finished = true;
-	if(MainData.CurrentGame == null)
+	if(CurrentGame == null)
 	{
 		UTILS_AddListener(MoveSpan, "click", function(){ OLDGAME_GotoBoard(NumTurn); }, false);
 	}

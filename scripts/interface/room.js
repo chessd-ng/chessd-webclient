@@ -407,9 +407,10 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 	Room.onclick = function(){
 		var Buffer="";
 		var To;
+		var CurrentGame = MainData.GetCurrentGame();
 
 		//Check if user is not playing or observe a game
-		if(MainData.CurrentGame == null)
+		if(CurrentGame == null)
 		{
 			if((PB.Name!= MainData.Username) &&(PW.Name != MainData.Username))
 			{
