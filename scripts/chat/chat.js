@@ -328,7 +328,7 @@ function CHAT_ErrorMessageLength(Username)
 	var ChatPos = MainData.FindChat(Username);
 	var ChatObj;
 	var Message;
-	var Limit = MainData.MaxChatChar;
+	var Limit = MainData.GetMaxChatChar();
 
 	if(ChatPos != null)
 	{
