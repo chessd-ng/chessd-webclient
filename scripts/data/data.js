@@ -49,31 +49,21 @@ function DATA(ConfFile, LangFile)
 
 	/*CONFIGURATION DATA*/
 	this.Conf = new Object();
-	// Get Host from configuration file
-	//this.Host = UTILS_GetTag(Params, "host");
-	//this.HostPost = UTILS_GetTag(Params, "host");
 	// Get Host from url
 	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
 	this.Conf.HostPost = window.location.href.split("/")[2];
 	this.Conf.Browser = UTILS_IdentifyBrowser();
 	this.Conf.Resource = UTILS_GetTag(Params, "resource");
-
 	this.Conf.Server = UTILS_GetTag(Params,"server");
 	this.Conf.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
 	this.Conf.SearchComponent = UTILS_GetTag(Params, "search-component");
-/*
-	this.Conf.MatchComponent = UTILS_GetTag(Params,"server");
-	this.Conf.GameComponent = UTILS_GetTag(Params, "server");
-	this.Conf.RatingComponent = UTILS_GetTag(Params, "server");
-	this.Conf.AdminComponent = UTILS_GetTag(Params, "server");
-*/
 	this.Conf.GetText = UTILS_OpenXMLFile(LangFile);
 	this.Conf.Const = DATA_SetConsts();
 	this.Conf.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Conf.Version = UTILS_GetTag(Params, "version");
 	this.Conf.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.Conf.Lang = "";
-	//Default php version
+	//Default php version - php4 or php5
 	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
 	this.Status = "available";
@@ -81,7 +71,6 @@ function DATA(ConfFile, LangFile)
 	this.RoomDefault = UTILS_GetTag(Params, "room-default");
 	this.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
-	this.MaxChats = UTILS_GetTag(Params, "max-chats");
 	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.Load = -1;
@@ -93,10 +82,11 @@ function DATA(ConfFile, LangFile)
 
 	this.OrderBy = "0";
 
-	this.ChatList = new Array()
 	this.Chat = new Object();
+	this.Chat.ChatList = new Array()
 	this.Chat.ShowChat = new Array();
-	this.Chat.MaxChat = UTILS_GetTag(Params, "max-chats");
+	this.Chat.MaxChats = UTILS_GetTag(Params, "max-chats");
+	this.Chat.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 
 	this.RoomList = new Array();
 	this.RoomCurrentRating ="blitz"
@@ -201,11 +191,16 @@ DATA.prototype.GetRoom = DATA_GetRoom;
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
 
+/*CHAT METHODS ********************************/
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
 DATA.prototype.FindChat = DATA_FindChat;
-DATA.prototype.GetChat = DATA_Getchat;
-DATA.prototype.SetMaxChat = DATA_SetMaxChat;
+DATA.prototype.GetChat = DATA_GetChat;
+DATA.prototype.GetChatListLength = DATA_GetChatListLength;
+DATA.prototype.SetMaxChats = DATA_SetMaxChats;
+DATA.prototype.GetMaxChats = DATA_GetMaxChats;
+DATA.prototype.SetMaxChatChar = DATA_SetMaxChatChar;
+DATA.prototype.GetMaxChatChar = DATA_GetMaxChatChar;
 DATA.prototype.AddShowChat = DATA_AddShowChat;
 DATA.prototype.RemoveShowChat = DATA_RemoveShowChat;
 
@@ -1266,7 +1261,7 @@ function DATA_AddChat (Username, ChatObj)
 	Chat.Username = Username;
 	Chat.Chat = ChatObj;
 	
-	this.ChatList[this.ChatList.length] = Chat;
+	this.Chat.ChatList.push(Chat);
 
 	return true;
 }
@@ -1296,7 +1291,7 @@ function DATA_RemoveChat(Username)
 	else 
 	{
 		// Remove from the list the chat with the user
-		this.ChatList.splice(i, 1);
+		this.Chat.ChatList.splice(i, 1);
 	}
 
 	return true;
@@ -1315,12 +1310,12 @@ function DATA_FindChat(Username)
 {
 	var i = 0;
 	
-	while((i<this.ChatList.length) && (this.ChatList[i].Username != Username))
+	while((i<this.Chat.ChatList.length) && (this.Chat.ChatList[i].Username != Username))
 	{
 		i++;
 	}
 	
-	if( i >= this.ChatList.length)
+	if( i >= this.Chat.ChatList.length)
 	{
 		// User not found
 		return null;
@@ -1333,7 +1328,7 @@ function DATA_FindChat(Username)
 }
 
 
-function DATA_Getchat(Username)
+function DATA_GetChat(Username)
 {
 	var i;
 
@@ -1341,7 +1336,7 @@ function DATA_Getchat(Username)
 
 	if(i != null)
 	{
-		return this.ChatList[i];
+		return this.Chat.ChatList[i];
 	}
 	else
 	{
@@ -1349,9 +1344,29 @@ function DATA_Getchat(Username)
 	}
 }
 
-function DATA_SetMaxChat(NewMax)
+function DATA_GetChatListLength()
 {
-	this.Chat.MaxChat = NewMax;
+	return this.Chat.ChatList.length;
+}
+
+function DATA_SetMaxChats(NewMax)
+{
+	this.Chat.MaxChats = NewMax;
+}
+
+function DATA_GetMaxChats()
+{
+	return this.Chat.MaxChats;
+}
+
+function DATA_SetMaxChatChar(MaxChar)
+{
+	this.Chat.MaxChatChar = MaxChar;
+}
+
+function DATA_GetMaxChatChar()
+{
+	return this.Chat.MaxChatChar;
 }
 
 function DATA_AddShowChat(ChatObj)

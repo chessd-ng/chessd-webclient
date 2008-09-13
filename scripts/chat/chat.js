@@ -153,9 +153,9 @@ function CHAT_OpenChat(Username)
 		Status = "online";
 	}
 
-	Position = MainData.ChatList.length;
+	Position = MainData.GetChatListLength();
 
-	if(Position < MainData.MaxChats)
+	if(Position < MainData.GetMaxChats())
 	{
 		// Create a chat object
 		ChatObject = new ChatObj(Username, Position);
@@ -182,7 +182,7 @@ function CHAT_OpenChat(Username)
 		// Show error message to user
 		Title = UTILS_GetText("chat_warning");
 		Msg = UTILS_GetText("chat_max_exceeded");
-		Msg = Msg.replace(/%i/, MainData.MaxChats);
+		Msg = Msg.replace(/%i/, MainData.GetMaxChats());
 		WINDOW_Alert(Title, Msg);
 	}
 
