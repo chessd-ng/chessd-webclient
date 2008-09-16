@@ -235,7 +235,13 @@ function INTERFACE_CreateGameOptions(GameID)
 	UTILS_AddListener(OptionStop, "click", function() {GAME_SendAdjourn(GameID);}, false);
 	UTILS_AddListener(OptionStop, "mousedown", function() { this.className = "press";}, false);
 	UTILS_AddListener(OptionStop, "mouseup", function() { this.className = "release";}, false);
-
+	UTILS_AddListener(OptionGiveTime, "click", function() {
+			WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+			}, 
+	false);
+	UTILS_AddListener(OptionGiveTime, "mousedown", function() { this.className = "press";}, false);
+	UTILS_AddListener(OptionGiveTime, "mouseup", function() { this.className = "release";}, false);
+	
 	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); }
 	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); }
 	OptionSelectB.onclick = function (){ GAME_ChangePromotion("b"); }
