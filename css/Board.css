@@ -423,23 +423,15 @@
 	border-color		: #FFF;
 
 	width			: 41mm;
-}
-
-#GameOptionDiv li:hover
-{
-	border-style		: solid;
-	border-width		: 1px;
-	border-color		: #216778;
-
 	cursor			: pointer;
 }
 
 #GameOptionDiv .press {
-	background-color: #DAF3F5;
+	background-color: #FFF;
 }
 
 #GameOptionDiv .release {
-	background-color: #FFF;
+	background-color: #DAF3F5;
 }
 
 #GameOptionDiv li.promotion
