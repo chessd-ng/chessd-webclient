@@ -193,22 +193,22 @@
 	</announce>
 	<game>
 		<game_draw>Requisição de empate</game_draw>
-		<game_draw_text>%s requisitou empate, deseja aceitar?</game_draw_text>
-		<game_draw_denied>%s recusou sua requisição de empate.</game_draw_denied>
+		<game_draw_text>%s propôs empate.</game_draw_text>
+		<game_draw_denied>%s recusou o empate.</game_draw_denied>
 		<game_end_game>Fim de jogo</game_end_game>
-		<game_resign_text>%s desistiu da partida.</game_resign_text>
+		<game_resign_text>%s desistiu! Você venceu a partida.</game_resign_text>
 		<game_adjourn>Adiar partida</game_adjourn>
-		<game_adjourn_text>%s deseja adiar a partida, deseja aceitar?</game_adjourn_text>
-		<game_adjourn_denied>%s recusou sua requisição de adiamento.</game_adjourn_denied>
-		<game_abort>Encerrar partida</game_abort>
-		<game_abort_text>%s deseja cancelar a partida, deseja aceitar?</game_abort_text>
-		<game_abort_denied>%s recusou sua requisição de cancelamento da partida.</game_abort_denied>
+		<game_adjourn_text>%s propôs adiar a partida.</game_adjourn_text>
+		<game_adjourn_denied>%s recusou adiar a partida.</game_adjourn_denied>
+		<game_abort>Cancelar partida</game_abort>
+		<game_abort_text>%s propôs cancelamento da partida.</game_abort_text>
+		<game_abort_denied>%s recusou o cancelamento.</game_abort_denied>
 		<game_resign>Desistir da partida</game_resign>
-		<game_resign_confirm>Deseja desistir da partida?</game_resign_confirm>
+		<game_resign_confirm>Ao desistir da partida a vitória é dada ao seu adversário. Deseja desistir?</game_resign_confirm>
 		<game_checkmatew_text>Parabéns! Você ganhou de %s por xeque-mate.</game_checkmatew_text>
 		<game_checkmatel_text>Você perdeu para %s por xeque-mate.</game_checkmatel_text>
-		<game_timew_text>Você ganhou de %s por tempo.</game_timew_text>
-		<game_timel_text>O seu tempo acabou. Você perdeu para %s.</game_timel_text>
+		<game_timew_text>O tempo do %s acabou. Você venceu a partida!</game_timew_text>
+		<game_timel_text>Seu tempo acabou. %s venceu a partida.</game_timel_text>
 		<game_remove_game>A sala de uma partida que você está jogando não pode ser fechada. Para fechá-la, conclua a partida ou a interrompa escolhendo uma das opções ao lado do tabuleiro.</game_remove_game>
 		<game_remove_game_title>Atenção</game_remove_game_title>
 
@@ -257,15 +257,15 @@
 		<game_result_black-mated>As pretas ganharam por xeque-mate</game_result_black-mated>
 		<game_result_white-resigned>As brancas desistiram da partida</game_result_white-resigned>
 		<game_result_black-resigned>As pretas desistiram da partida</game_result_black-resigned>
-		<game_result_draw-agreement>Os jogadores concordaram em um empate</game_result_draw-agreement>
+		<game_result_draw-agreement>Os jogadores concordaram em um empate.</game_result_draw-agreement>
 		<game_result_stalemate>Empate por afogamento</game_result_stalemate>
 		<game_result_draw-repetition>Empate por repetição de posição</game_result_draw-repetition>
 		<game_result_draw-fifty-moves>Empate pela regra dos 50 lances</game_result_draw-fifty-moves>
 		<game_result_draw-impossible-mate>Empate por insuficiência de material</game_result_draw-impossible-mate>
 		<game_result_draw-timeover>O tempo dos dois jogadores acabaram</game_result_draw-timeover>
-		<game_result_canceled-agreement>Os jogadores concordaram em cancelar a partida</game_result_canceled-agreement>
+		<game_result_canceled-agreement>Os jogadores concordaram em cancelar a partida.</game_result_canceled-agreement>
 		<game_result_canceled-timed-out>A partida foi cancelada por inatividade</game_result_canceled-timed-out>
-		<game_result_adjourned-agreement>Os jogadores concordaram em adiar a partida</game_result_adjourned-agreement>
+		<game_result_adjourned-agreement>Os jogadores concordaram em adiar a partida.</game_result_adjourned-agreement>
 		<game_result_adjourned-shutdown>A partida foi adiada porque o servidor está sendo desligado</game_result_adjourned-shutdown>
 		<game_result_white-wo>As brancas ganharam por W.O.</game_result_white-wo>
 		<game_result_black-wo>As pretas ganharam por W.O.</game_result_black-wo>
