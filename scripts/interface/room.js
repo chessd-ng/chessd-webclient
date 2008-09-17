@@ -908,6 +908,7 @@ function INTERFACE_ShowCreateRoomWindow()
 	Input.onkeyup = function() {
 		CounterInput.value = 30 - Input.value.length;
 		CounterLabel.innerHTML = UTILS_GetText("window_character").replace(/%s/,30 - Input.value.length);
+		Input.value = Input.value.toLowerCase();
 	}
 	
 	// TODO - not implemented
