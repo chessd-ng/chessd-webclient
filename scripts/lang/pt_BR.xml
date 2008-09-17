@@ -209,7 +209,7 @@
 		<game_checkmatel_text>Você perdeu para %s por xeque-mate.</game_checkmatel_text>
 		<game_timew_text>Você ganhou de %s por tempo.</game_timew_text>
 		<game_timel_text>O seu tempo acabou. Você perdeu para %s.</game_timel_text>
-		<game_remove_game>Você não pode fechar um jogo em andamento</game_remove_game>
+		<game_remove_game>A sala de uma partida que você está jogando não pode ser fechada. Para fechá-la, conclua a partida ou a interrompa escolhendo uma das opções ao lado do tabuleiro.</game_remove_game>
 		<game_remove_game_title>Atenção</game_remove_game_title>
 
 		<game_canceled>O jogo foi cancelado.</game_canceled>
