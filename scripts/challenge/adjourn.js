@@ -119,7 +119,7 @@ function CHALLENGE_HandlePresence(XML)
 	var Buffer = "";
 
 	// Get presence from general room (where all user is connected)
-	if(GeneralRoom == MainData.RoomDefault)
+	if(GeneralRoom == MainData.GetRoomDefault())
 	{
 		Username = XML.getAttribute("from").split("/")[1];
 		CHALLENGE_PostponePresence(Username);
@@ -139,10 +139,12 @@ function CHALLENGE_HandlePresence(XML)
  */
 function CHALLENGE_PostponePresence(Username)
 {
-	var i = MainData.FindUserInRoom(MainData.RoomDefault, Username);
+	// TODO -> FIX IT TO WORK WITH USERLIST
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
+	var User = Room.FindUser(Username);
 
 	//If user is founded, set adjourn game to available, else unavailable
-	if(i != null)
+	if(User != null)
 	{
 		MainData.ChallengeMenu.updatePostpone(Username, "online");
 	}

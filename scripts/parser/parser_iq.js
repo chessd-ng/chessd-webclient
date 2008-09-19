@@ -62,7 +62,6 @@ function PARSER_ParseIq(XML)
 				Buffer += ROOM_HandleGameRoomInfoList(XML);
 			}
 
-
 			// Receive information of user list
 			else if (Xmlns.match(/\/chessd#info/))
 			{

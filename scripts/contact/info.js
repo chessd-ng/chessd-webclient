@@ -82,20 +82,20 @@ function CONTACT_SetUserType(Username, NewType)
 	var Status, Rating;
 	var User;
 	
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
 
 	// update on interface
 	if(MainData.SetType(Username, NewType))
 	{
 		// RoomList[0] = general room where is all user online
-		if(MainData.RoomList[0] == null)
+		if(Room == null)
 		{
 			return "";
 		}		
-		User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+		User = Room.GetUser(Username);
 		if(User != null)
 		{
-			Room = MainData.RoomList[0]; 
-			Status = Room.UserList[User].Status;
+			Status = User.Status;
 
 			// Update type in contact online and contact list
 			MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
@@ -117,27 +117,28 @@ function CONTACT_SetUserType(Username, NewType)
 function CONTACT_SetUserRating(Username, Category, Rating)
 {
 	var i;
-	var Room;
 	var Status, Type;
 	var User;
 	
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
 
 	// update on interface
 	if(MainData.SetRating(Username, Category, Rating))
 	{
+		// TODO -> FIX IT TO WORK WITH CONTACT LIST
 		if (Category == MainData.CurrentRating)
 		{
-			if(MainData.RoomList[0] == null)
+			if(Room == null)
 			{
 				return "";
-			}		
-			User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+			}
+
+			User = Room.GetUser(Username);
 			if(User != null)
 			{
 				// General Room
-				Room = MainData.RoomList[0]; 
-				Status = Room.UserList[User].Status;
-				Type = Room.UserList[User].Type;
+				Status = User.Status;
+				Type = User.Type;
 
 				// Update type in contact online and contact list
 				MainData.ContactOnline.userList.updateUser(Username,Status, Rating, Type);

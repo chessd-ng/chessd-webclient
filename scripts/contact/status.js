@@ -28,13 +28,16 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	var i, XML, Status, StatusItem;
 	var Select;
 		
+	var RoomList = MainData.GetRoomList();
+	var Room;
 	// Change user status for contacts
 	XML = MESSAGE_ChangeStatus(NewStatus);
 	
 	// Change user status for rooms
-	for (i=0 ; i<MainData.RoomList.length ; i++)
+	for (i=0 ; i<RoomList.length ; i++)
 	{
-		XML += MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
+		Room = RoomList[i];
+		XML += MESSAGE_ChangeStatus(NewStatus, Room.MsgTo);
 	}
 	
 	// Change status in select menu

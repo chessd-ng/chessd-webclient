@@ -69,7 +69,7 @@ function CONTACT_HandleOnlinePresence(XML)
 		return "";
 
 
-	if(RoomName != MainData.RoomDefault)
+	if(RoomName != MainData.GetRoomDefault())
 	{
 		return "";
 	}
@@ -126,9 +126,13 @@ function CONTACT_AddUserOnlineList(User, Status)
 	var UserPos;
 	var ContactOnline = MainData.ContactOnline;
 
-	// Find user in online user struct == find in General user list
-	UserPos = MainData.FindUserInRoom(MainData.RoomDefault, User);
 
+	// Find user in online user struct == find in General user list
+	// TODO -> FIX IT TO WORK WITH USERLIST
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
+	UserPos = Room.FindUser(User);
+
+	// TODO -> FIX IT TO WORK WITH USERLIST
 	// Get user Type and Current rating
 	Type = MainData.GetType(User);
 	RatingTmp = MainData.GetRating(User);
@@ -144,6 +148,9 @@ function CONTACT_AddUserOnlineList(User, Status)
 				break;
 			case "standard":
 				Rating = RatingTmp.Standard;
+				break;	
+			case "untimed":
+				Rating = RatingTmp.Untimed;
 				break;	
 		}
 	}
@@ -182,7 +189,7 @@ function CONTACT_OnlineSortUserByNick()
 	var ContactOnline = MainData.ContactOnline;
 	
 	// General room
-	Room = MainData.RoomList[0];
+	Room = MainData.GetRoom(MainData.GetRoomDefault());
 
 	if(Room == null)
 	{
@@ -191,18 +198,11 @@ function CONTACT_OnlineSortUserByNick()
 		
 	// Test the current order mode 
 	// If ordered into ascending order, change to descending order
-	if (Room.OrderBy == "0")
-	{
-		Room.OrderBy = "1";
-	}
 	// other modes, change to ascending order
-	else
-	{
-		Room.OrderBy = "0";
-	}
+	Room.OrderBy = (Room.OrderBy + 1) % 2;
 	
 	// Sort user list by nick name in data struct
-	MainData.SortUserByNickInRoom(MainData.RoomDefault);
+	Room.SortUserListNick()
 
 	// Show new user list sorted
 	for(i=0; i<Room.UserList.length; i++)
@@ -212,7 +212,7 @@ function CONTACT_OnlineSortUserByNick()
 		Type = Room.UserList[i].Type;
 
 		// Get rating
-		switch(MainData.RoomCurrentRating)
+		switch(Room.GetRoomCurrentRating())
 		{
 			case "blitz":
 				Rating = Room.UserList[i].Rating.Blitz;
@@ -222,6 +222,9 @@ function CONTACT_OnlineSortUserByNick()
 				break;
 			case "standard":
 				Rating = Room.UserList[i].Rating.Standard;
+				break;
+			case "untimed":
+				Rating = Room.UserList[i].Rating.Untimed;
 				break;
 		}
 	
@@ -248,10 +251,12 @@ function CONTACT_OnlineSortUserByRating(Category)
 	var i, j;
 	var UserName, Status, Rating, Type;
 	var ContactOnline = MainData.ContactOnline;
+	var RoomTmp;
 
-	MainData.RoomCurrentRating = Category;	
+	Room = MainData.GetRoom(MainData.GetRoomDefault());
 
-	Room = MainData.RoomList[0];
+	Room.SetRoomCurrentRating(Category);
+
 	if(Room == null)
 	{
 		return false;
@@ -259,19 +264,11 @@ function CONTACT_OnlineSortUserByRating(Category)
 	
 	// Test the current order mode (order == sort)
 	// If ordered into ascending order, change to descending order
-	if (Room.OrderBy == "0")
-	{
-		Room.OrderBy = "1";
-	}
-	// other modes, change to ascending order
-	else
-	{
-		Room.OrderBy = "0";
-	}
+	Room.OrderBy = (Room.OrderBy + 1) % 2;
 	
 	RoomName = Room.Name;
 	// Sort user list by nick name in data struct
-	MainData.SortUserByRatingInRoom(RoomName);
+	Room.SortUserListRating();
 
 	// Show new user list sorted
 	for(i=0; i<Room.UserList.length; i++)
@@ -281,7 +278,7 @@ function CONTACT_OnlineSortUserByRating(Category)
 		Type = Room.UserList[i].Type;
 
 		// Get rating
-		switch(MainData.RoomCurrentRating)
+		switch(Room.GetRoomCurrentRating())
 		{
 			case "blitz":
 				Rating = Room.UserList[i].Rating.Blitz;
@@ -595,7 +592,9 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		if ( ((MainData.GetStatus(Username) != "offline") && (MainData.GetStatus(Username) != "playing") && (MainData.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
 		{
 			Options[i].Func = function () {
-				Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username);
+				// TODO -> FIX IT TO WORK WITH USERLIST
+//				Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username);
+				Rating = 0;
 				WINDOW_Challenge(Username, Rating);
 			};
 		}
@@ -734,15 +733,7 @@ function CONTACT_SortUsersByNick()
 
 	// Test the current order mode
 	// If ordered into ascending order, change to descending order
-	if (MainData.OrderBy == "0")
-	{
-		MainData.OrderBy = "1";
-	}
-	// other modes, change to ascending order
-	else
-	{
-		MainData.OrderBy = "0";
-	}
+	MainData.OrderBy = (MainData.OrderBy + 1) % 2;
 	
 	MainData.SortUserByNick();
 
@@ -761,6 +752,9 @@ function CONTACT_SortUsersByNick()
 				break;
 			case "standard":
 				Rating = User.Rating.Standard;
+				break;	
+			case "untimed":
+				Rating = User.Rating.Untimed;
 				break;	
 		}
 
@@ -786,20 +780,10 @@ function CONTACT_SortUsersByRating(Category)
 
 	// Test the current order mode
 	// If ordered into ascending order, change to descending order
-	/*
-	if (MainData.OrderBy == "0")
-	{
-		MainData.OrderBy = "1";
-	}
 	// other modes, change to ascending order
-	else
-	{
-		MainData.OrderBy = "0";
-	}
-	*/
 	MainData.CurrentRating = Category;
 
-	MainData.OrderBy = "2";
+	MainData.OrderBy = (MainData.OrderBy + 1) % 2;
 
 	MainData.SortUserByRating();
 

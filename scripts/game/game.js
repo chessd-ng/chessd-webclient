@@ -611,7 +611,7 @@ function GAME_StartGame(GameId, P1, P2)
 	var GameDiv;
 	var YourColor;
 	var Buffer="";
-	var RoomPos; 
+	var Room; 
 
 	var Consts = MainData.GetConst();
 	var CurrentGame = MainData.GetCurrentGame();
@@ -626,8 +626,8 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(CurrentGame.Id)
-		Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+		Room = MainData.GetRoom(CurrentGame.Id);
+		Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		CurrentGame.Game.Hide();
 		MainData.RemoveGame(CurrentGame.Id);
 	}
@@ -635,10 +635,10 @@ function GAME_StartGame(GameId, P1, P2)
 	if (CurrentOldGame != null)
 	{
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(CurrentOldGame.Id)
-		if(RoomPos != null)
+		Room = MainData.GetRoom(CurrentGame.Id);
+		if(Room != null)
 		{
-			Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+			Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		}
 
 		CurrentOldGame.Game.Hide();

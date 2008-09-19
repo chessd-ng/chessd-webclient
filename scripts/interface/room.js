@@ -99,7 +99,7 @@ function INTERFACE_CreateRoom(RoomName)
 	Input.onkeypress = function(event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			if( Input.value.length <= MainData.MaxChatChar)
+			if( Input.value.length <= MainData.GetMaxRoomChar())
 			{
 				// Send message to room
 				ROOM_SendMessage(RoomName, Input.value);
@@ -283,8 +283,9 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 	// If Room is showed at interface, refresh the number of occupants
 	if(Node)
 	{
+		var Room = MainData.GetRoom(RoomName);
 		// Get number of occupants in room data struct
-		N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
+		N_Occupants = Room.UserList.length;
 		Node.innerHTML= " ("+N_Occupants+")";
 	}
 }
@@ -451,6 +452,9 @@ function INTERFACE_ChangeRoomListVisibility()
 	var Menu = document.getElementById('RoomListMenu'); 
 	var Node = document.getElementById('RoomList'); 
 
+	var RoomList = MainData.GetRoomList();
+	var Room;
+
 	// If already exists room list menu, hide it 
 	if (Menu != null) 
 	{ 
@@ -464,21 +468,23 @@ function INTERFACE_ChangeRoomListVisibility()
 	Div.style.position = "absolute"; 
 	 
 	// Population list with user's rooms 
-	for (i=0; i < MainData.RoomList.length; i++) 
+	for (i=0; i < RoomList.length; i++) 
 	{ 
+		Room = RoomList[i];
+
 		Item = UTILS_CreateElement('li'); 
-		if (MainData.RoomList[i].Name == MainData.RoomDefault)
+		if (Room.Name == MainData.GetRoomDefault())
 		{
 			Item.innerHTML = UTILS_GetText("room_default"); 
 		}
 		else
 		{
-			Item.innerHTML = MainData.RoomList[i].Name; 
+			Item.innerHTML = Room.Name; 
 		}
 		Item.onclick = function () { 
 			if (this.innerHTML == UTILS_GetText("room_default"))
 			{
-				ROOM_FocusRoom(MainData.RoomDefault); 
+				ROOM_FocusRoom(MainData.GetRoomDefault());
 			}
 			else
 			{
@@ -638,7 +644,7 @@ function INTERFACE_FocusRoom(RoomName)
 	}
 
 	// Focus to default room
-	if (RoomName == MainData.RoomDefault)
+	if (RoomName == MainData.GetRoomDefault())
 	{
 		RoomList.childNodes[0].className = "room_selec";
 
@@ -705,7 +711,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		RoomItemTitle.style.fontWeight = "bold";
 		RoomItem = UTILS_CreateElement("li","RoomPrimary");
 		RoomItem.appendChild(RoomItemTitle);
-		RoomOccupants = UTILS_CreateElement("span",MainData.RoomDefault+"_occupants",null," (0)");
+		RoomOccupants = UTILS_CreateElement("span",MainData.GetRoomDefault()+"_occupants",null," (0)");
 		RoomItem.appendChild(RoomOccupants);
 
 		RoomItem.onclick = function () {

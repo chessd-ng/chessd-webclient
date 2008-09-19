@@ -925,7 +925,7 @@ function UTILS_SortByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Standard")
+	else if (Type == "Standard")
 	{
 		if (a.Rating.Standard != undefined)
 		{
@@ -944,6 +944,26 @@ function UTILS_SortByRatingDsc(a, b)
 			y = 0;
 		}
 	}
+	else if (Type == "Untimed")
+	{
+		if (a.Rating.Untimed != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Untimed));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Untimed != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Untimed));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
@@ -958,7 +978,8 @@ function UTILS_SortByRatingDsc(a, b)
 */
 function UTILS_SortRoomByRatingDsc(a, b) 
 {
-	var Type = UTILS_Capitalize(MainData.RoomCurrentRating);
+	var Room = MainData.GetCurrentRoom();
+	var Type = UTILS_Capitalize(Room.GetRoomCurrentRating());
 	var x;
 	var y;
 
@@ -1000,7 +1021,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Standard")
+	else if (Type == "Standard")
 	{
 		if (a.Rating.Standard != undefined)
 		{
@@ -1019,7 +1040,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Untimed")
+	else if (Type == "Untimed")
 	{
 		if (a.Rating.Untimed != undefined)
 		{

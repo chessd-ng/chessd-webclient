@@ -144,7 +144,12 @@ function CHAT_OpenChat(Username)
 	var ChatObject = null;
 	var Position;
 
-	if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
+	// TODO -> FIX IT TO WORK WITH USERLIST
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
+	var User = Room.GetUser(Username);
+
+	if (User == null)
+	//if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
 		Status = "offline";
 	}

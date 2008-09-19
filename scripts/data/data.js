@@ -34,7 +34,7 @@ function DATA(ConfFile, LangFile)
 {
 	var Params = UTILS_OpenXMLFile(ConfFile);
 
-	/*CONNECTION DATA*/
+	/************************ CONNECTION DATA ************************/
 	this.Connection = new Object();
 	/*
 	* State in jabber server
@@ -47,7 +47,7 @@ function DATA(ConfFile, LangFile)
 	this.Connection.RID = null;
 	this.Connection.SID = -1;
 
-	/*CONFIGURATION DATA*/
+	/************************ CONFIGURATION DATA ************************/
 	this.Conf = new Object();
 	// Get Host from url
 	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
@@ -68,10 +68,6 @@ function DATA(ConfFile, LangFile)
 
 	this.Status = "available";
 	this.Type = null;
-	this.RoomDefault = UTILS_GetTag(Params, "room-default");
-	this.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
-	this.MaxRooms = UTILS_GetTag(Params, "max-rooms");
-	this.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.Load = -1;
 
@@ -86,10 +82,18 @@ function DATA(ConfFile, LangFile)
 	this.Chat.ChatList = new Array()
 	this.Chat.ShowChat = new Array();
 	this.Chat.MaxChats = UTILS_GetTag(Params, "max-chats");
+	// Max chat input length
 	this.Chat.MaxChatChar = UTILS_GetTag(Params, "max-chat-char");
 
-	this.RoomList = new Array();
-	this.RoomCurrentRating ="blitz"
+	/************************ ROOM DATA************************/
+	this.Room = new Object();
+	this.Room.RoomList = new Array();
+	this.Room.Current = null;
+	this.Room.MaxRooms = UTILS_GetTag(Params, "max-rooms");
+	this.Room.EmoticonNum = UTILS_GetTag(Params, "emoticon-num");
+	this.Room.RoomDefault = UTILS_GetTag(Params, "room-default");
+	// Max chat input length
+	this.Room.MaxRoomChar = UTILS_GetTag(Params, "max-chat-char");
 
 	this.ChallengeList = new Array();
 	this.ChallengeSequence = 0;
@@ -97,14 +101,13 @@ function DATA(ConfFile, LangFile)
 	this.AnnounceList = new Array();
 	this.PostponeList = new Array();
 
-	this.CurrentRoom = null;
 
-	/*GAME DATA *********/
+	/************************ GAME DATA *************************/
 	this.Game = new Object();
 	this.Game.Current = null;
 	this.Game.GameList = new Array();
 
-	/*OLDGAME DATA*******/
+	/************************ OLDGAME DATA***********************/
 	this.OldGame = new Object();
 	this.OldGame.Current = null;
 	this.OldGame.OldGameList = new Array();
@@ -176,21 +179,35 @@ DATA.prototype.SetType = DATA_SetType;
 DATA.prototype.SortUserByNick = DATA_SortUserByNick;
 DATA.prototype.SortUserByRating = DATA_SortUserByRating;
 
+/*ROOM METHODS ********************************/
 DATA.prototype.AddRoom = DATA_AddRoom;
-DATA.prototype.DelRoom = DATA_DelRoom;
+DATA.prototype.RemoveRoom = DATA_RemoveRoom;
 DATA.prototype.FindRoom = DATA_FindRoom;
-DATA.prototype.SetRoom = DATA_SetRoom;
+DATA.prototype.SetRoomInformation = DATA_SetRoomInformation;
+
+DATA.prototype.GetRoomList = DATA_GetRoomList;
+DATA.prototype.GetEmoticonNum = DATA_GetEmoticonNum;
+DATA.prototype.GetMaxRooms = DATA_GetMaxRooms;
+DATA.prototype.GetMaxRoomChar = DATA_GetMaxRoomChar;
+DATA.prototype.GetRoomDefault = DATA_GetRoomDefault;
+DATA.prototype.SetCurrentRoom = DATA_SetCurrentRoom;
+DATA.prototype.GetCurrentRoom = DATA_GetCurrentRoom;
+
+/*
+DATA.prototype.SetRoomCurrentRating = DATA_SetRoomCurrentRating;
+DATA.prototype.GetRoomCurrentRating = DATA_GetRoomCurrentRating;
 DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
 DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
 DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
 DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
-DATA.prototype.DelUserInRoom = DATA_DelUserInRoom;
+DATA.prototype.RemoveUserInRoom = DATA_RemoveUserInRoom;
 DATA.prototype.GetUserRatingInRoom = DATA_GetUserRatingInRoom;
+*/
 DATA.prototype.GetRoom = DATA_GetRoom;
-
+/*
 DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
 DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
-
+*/
 /*CHAT METHODS ********************************/
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
@@ -569,20 +586,21 @@ function DATA_IsContact(Username)
 */
 function DATA_GetStatus(Username)
 {
-	var UserPos;
-	var Index = this.FindRoom(this.RoomDefault);
+	var User;
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
 
-	UserPos = this.FindUserInRoom(this.RoomList[Index].Name, Username);
+	// TODO -> FIX IT TO WORK WITH USERLIST
+	User = Room.GetUser(Username);
 
-	if (UserPos != null)
+	if (User != null)
 	{
-		return this.RoomList[Index].UserList[UserPos].Status;
+		return User.Status;
 	}
 	else {
-		UserPos = this.FindUser(Username);
-		if (UserPos != null)
+		User = this.FindUser(Username);
+		if (User != null)
 		{
-			return this.UserList[UserPos].Status;
+			return this.UserList[User].Status;
 		}
 	}
 	return "offline";
@@ -604,20 +622,26 @@ function DATA_GetRating(Username)
 {
 	var UserPos = this.FindUser(Username);
 	var i;
+	var Room;
+	var RoomList = MainData.GetRoomList();
+	var User;
 
 	if (UserPos)
 	{
 		return this.UserList[UserPos].Rating;
 	}
 
+	// TODO -> FIX IT TO WORK WITH USERLIST
 	// Update rating in room user lists
-	for (i=0; i<this.RoomList.length; i++)
+	for (i=0; i<RoomList.length; i++)
 	{
-		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+		Room = RoomList[i];
 
-		if (UserPos)
+		User = Room.GetUser(Username);
+
+		if (User != null)
 		{
-			return this.RoomList[i].UserList[UserPos].Rating;
+			return User.Rating;
 		}
 	}
 	return null;
@@ -636,20 +660,25 @@ function DATA_GetType(Username)
 {
 	var UserPos = this.FindUser(Username);
 	var i;
+	var User;
+	var Room;
+	var RoomList = MainData.GetRoomList();
 
 	if (UserPos != null)
 	{
 		return this.UserList[UserPos].Type;
 	}
 
+	// TODO -> FIX IT TO WORK WITH USERLIST
 	// Find type in room user lists
-	for (i=0; i<this.RoomList.length; i++)
+	for (i=0; i<RoomList.length; i++)
 	{
-		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+		Room = RoomList[i];
+		User = Room.GetUser(Username);
 
-		if (UserPos != null)
+		if (User!= null)
 		{
-			return this.RoomList[i].UserList[UserPos].Type;
+			return User.Type;
 		}
 	}
 	return null;
@@ -727,7 +756,10 @@ function DATA_SetSubs(Username, NewSubs)
 function DATA_SetType(Username, NewType)
 {
 	var UserPos = this.FindUser(Username);
-	var i, RoomPos;
+	var i;
+	var User;
+	var RoomList = MainData.GetRoomList();
+	var Room;
 
 	// If it's your type
 	if (Username == MainData.Username)
@@ -739,17 +771,19 @@ function DATA_SetType(Username, NewType)
 	// Update in contact list
 	if (UserPos != null)
 	{
+		// TODO -> FIX IT TO WORK WITH CONTACT LIST
 		this.UserList[UserPos].Type = NewType;
 	}
 
 	// Update in room user list
-	for (i=0; i<this.RoomList.length; i++)
+	for (i=0; i<RoomList.length; i++)
 	{
-		RoomPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+		Room = RoomList[i];
+		User = Room.GetUser(Username);
 
-		if (RoomPos != null)
+		if(User != null)
 		{
-			this.RoomList[i].UserList[RoomPos].Type = NewType;
+			User.Type = NewType;
 		}
 	}
 
@@ -773,7 +807,7 @@ function DATA_SetType(Username, NewType)
 function DATA_SetRating(Username, Category, Rating)
 {
 	var UserPos, Obj, i;
-
+	var RoomList, Room;
 	// Set correct object to append rating
 	if (MainData.Username == Username)
 	{
@@ -790,14 +824,17 @@ function DATA_SetRating(Username, Category, Rating)
 		eval("Obj.Rating."+UTILS_Capitalize(Category)+" = Rating");
 	}
 	
+	RoomList = this.GetRoomList();
 	// Update rating in room user lists
-	for (i=0; i<this.RoomList.length; i++)
+	for (i=0; i<RoomList.length; i++)
 	{
-		UserPos = this.FindUserInRoom(this.RoomList[i].Name, Username);
+		Room = RoomList[i];
+		//TODO -> FIX IT TO WORK WITH USERLIST
+		UserPos = Room.FindUser(Username);
 
 		if (UserPos != null)
 		{
-			eval("this.RoomList["+i+"].UserList["+UserPos+"].Rating."+UTILS_Capitalize(Category)+" = Rating");
+			eval("this.Room.RoomList["+i+"].UserList["+UserPos+"].Rating."+UTILS_Capitalize(Category)+" = Rating");
 		}
 	}
 	return true;
@@ -867,10 +904,25 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 	Room.MsgTo = MsgTo;
 	Room.Role = Role;
 	Room.Affiliation = Affiliation;
-	Room.OrderBy = "0";
+	Room.OrderBy = 0;
 	Room.Room = RoomObj;
+	Room.CurrentRating = "blitz";
 
-	this.RoomList[this.RoomList.length] = Room;
+	// Setting Methods
+	Room.AddUser = DATA_AddUserInRoom;
+	Room.RemoveUser = DATA_RemoveUserInRoom;
+	Room.FindUser = DATA_FindUserInRoom;
+	Room.GetUser = DATA_GetUserInRoom;
+	Room.SetUserInformation = DATA_SetUserInfoInRoom;
+	Room.GetUserRating = DATA_GetUserRatingInRoom;
+	Room.SortUserListNick = DATA_SortUserByNickInRoom;
+	Room.SortUserListRating = DATA_SortUserByRatingInRoom;
+	Room.SetRoomCurrentRating = DATA_SetRoomCurrentRating;
+	Room.GetRoomCurrentRating = DATA_GetRoomCurrentRating;
+	Room.SetOrderBy = DATA_SetRoomOrderBy;
+	Room.GetOrderBy = DATA_GetRoomOrderBy;
+
+	this.Room.RoomList.push(Room);
 	return Room;
 }
 
@@ -882,7 +934,7 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 * @return		Boolean
 * @see			DATA_FindRoom
 */
-function DATA_DelRoom(RoomName)
+function DATA_RemoveRoom(RoomName)
 {
 	var i = this.FindRoom(RoomName);
 
@@ -891,7 +943,7 @@ function DATA_DelRoom(RoomName)
 		return null;
 
 	// Removing room from room list
-	this.RoomList.splice(i, 1);
+	this.Room.RoomList.splice(i, 1);
 	return true;
 }
 
@@ -906,9 +958,9 @@ function DATA_FindRoom(RoomName)
 {
 	var i;
 
-	for (i=0; i<this.RoomList.length; i++)
+	for (i=0; i<this.Room.RoomList.length; i++)
 	{
-		if (this.RoomList[i].Name == RoomName)
+		if (this.Room.RoomList[i].Name == RoomName)
 			return i;
 	}
 	return null;
@@ -927,7 +979,7 @@ function DATA_FindRoom(RoomName)
 * @return		null, if the room doesn't exist, true otherwise
 * @see			DATA_FindRoom
 */
-function DATA_SetRoom(RoomName, From, Affiliation, Role)
+function DATA_SetRoomInformation(RoomName, From, Affiliation, Role)
 {
 	var i = this.FindRoom(RoomName);
 
@@ -936,12 +988,42 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 		return null;
 	}
 
-	MainData.RoomList[i].MsgTo = From;
-	MainData.RoomList[i].Affiliation = Affiliation;
-	MainData.RoomList[i].Role = Role;
+	MainData.Room.RoomList[i].MsgTo = From;
+	MainData.Room.RoomList[i].Affiliation = Affiliation;
+	MainData.Room.RoomList[i].Role = Role;
 	
 	return true;
 }
+
+function DATA_GetRoomList()
+{
+	return this.Room.RoomList;
+}
+function DATA_GetEmoticonNum()
+{
+	return this.Room.EmoticonNum;
+}
+function DATA_GetMaxRooms()
+{
+	return this.Room.MaxRooms;
+}
+function DATA_GetMaxRoomChar()
+{
+	return this.Room.MaxRoomChar;
+}
+function DATA_GetRoomDefault()
+{
+	return this.Room.RoomDefault;
+}
+function DATA_SetCurrentRoom(RoomObj)
+{
+	this.Room.Current = RoomObj;
+}
+function DATA_GetCurrentRoom()
+{
+	return this.Room.Current;
+}
+
 
 /**
 * @brief		Add user in user list of a room
@@ -955,33 +1037,34 @@ function DATA_SetRoom(RoomName, From, Affiliation, Role)
 * @return		true
 * @see			DATA_FindRoom DATA_FindUser
 */
-function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
+function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 {
-	var RoomPos = this.FindRoom(RoomName);
 	var User = new Object();
-	var UserPos = this.FindUser(Username);
-
+	var UserPos = MainData.FindUser(Username);
+	var Room;
 	// If room doesnt exists in data structure
+/*
 	if (RoomPos == null)
 	{
 		throw "RoomNotCreatedException";
 	}
-
-	if (this.FindUserInRoom(RoomName, Username) != null)
+	if (UserPos != null)
 	{
 		throw "UserAlreadyInRoomException";
 	}
+*/
 
 	User.Username = Username;
 	User.Status = Status;
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 	User.Type = Type;
-	
-	// Searching if interface already has its rating
-	if (Username == this.Username)
+
+	//TODO -> FIX IT TO WORK WITH USERLIST	
+	// Searching if interface already has user's rating
+	if (Username == MainData.Username)
 	{
-		User.Rating = this.Rating;
+		User.Rating = MainData.Rating;
 	}
 	else if (UserPos == null)
 	{
@@ -989,11 +1072,13 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 	}
 	else
 	{
-		User.Rating = this.UserList[UserPos].Rating;
+		// Get rating from general room
+		Room = MainData.GetRoom(MainData.GetRoomDefault());
+		User.Rating = Room.UserList[UserPos].Rating;
 	}
 
 	// Insert user in room's user list
-	this.RoomList[RoomPos].UserList[this.RoomList[RoomPos].UserList.length] = User;
+	this.UserList.push(User);
 	return true;
 }
 
@@ -1005,53 +1090,37 @@ function DATA_AddUserInRoom(RoomName, Username, Status, Type, Role, Affiliation)
 * @return		User's position on Room UserList vector, or null, if not found
 * @see			DATA_FindRoom 
 */
-function DATA_FindUserInRoom(RoomName, Username)
+function DATA_FindUserInRoom(Username)
 {
-	var j, i = this.FindRoom(RoomName);
-
-
-	// If room doesnt exists in data structure
-	if (i == null)
-		return null;
+	var i = 0;
 
 	// Search user in room user list
-	for (j=0; j<this.RoomList[i].UserList.length; j++)
+	while ((i<this.UserList.length)&&(this.UserList[i].Username != Username))
 	{
-		if (this.RoomList[i].UserList[j].Username == Username)
-		{
-			return j;
-		}
+		i++;
 	}
-	return null;
-}
 
-/**
-* @brief		Find next user in room user list
-*
-* @param		RoomName	Name of room to search the next user
-* @param 		Username	Base user to search the next
-* @param 		Status		Status of user to search the next 
-* @author		Danilo Yorinori
-* @return 		Next user's position
-* @see			DATA_FindRoom DATA_FindUserInRoom
-*/
-function DATA_FindNextUserInRoom(RoomName, Username)
-{
-	var i = this.FindRoom(RoomName);
-	var j, Index;
-
-	// Get the user's index in struct
-	Index = this.FindUserInRoom(RoomName, Username);
-
-	// If user isn't the last item in struct
-	if (Index < this.RoomList[i].UserList.length-1)
+	if( i == this.UserList.length)
 	{
-		Index++;
-		return Index;
+		return null;
 	}
 	else
 	{
+		return i;
+	}
+}
+
+function DATA_GetUserInRoom(Username)
+{
+	var UserPos = this.FindUser(Username);
+
+	if(UserPos == null)
+	{
 		return null;
+	}
+	else
+	{
+		return this.UserList[UserPos];
 	}
 }
 
@@ -1066,27 +1135,28 @@ function DATA_FindNextUserInRoom(RoomName, Username)
 * @return 		Boolean
 * @see			DATA_FindRoom DATA_FindUserInRoom
 */
-function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
+function DATA_SetUserInfoInRoom(Username, Status, Role, Affiliation)
 {
-	var j = this.FindRoom(RoomName)
-	var i = this.FindUserInRoom(RoomName, Username)
+	var User = this.GetUser(Username)
 
-	if (i == null || j == null)
+	if (User == null)
+	{
 		return false;
+	}
 
 	if (Status != "")
 	{
-		this.RoomList[j].UserList[i].Status = Status;
+		User.Status = Status;
 	}
 	
 	if (Role != "")
 	{
-		this.RoomList[j].UserList[i].Role = Role;
+		User.Role = Role;
 	}
 	
 	if (Affiliation != "")
 	{
-		this.RoomList[j].UserList[i].Affiliation = Affiliation;
+		User.Affiliation = Affiliation;
 	}
 	
 	return true;
@@ -1100,15 +1170,17 @@ function DATA_SetUserAttrInRoom(RoomName, Username, Status, Role, Affiliation)
 * @return 		Boolean
 * @see			DATA_FindRoom DATA_FindUserInRoom
 */
-function DATA_DelUserInRoom(RoomName, Username)
+function DATA_RemoveUserInRoom(Username)
 {
-	var j = this.FindRoom(RoomName)
-	var i = this.FindUserInRoom(RoomName, Username)
+	var i = this.FindUser(Username)
 
-	if (i == null || j == null)
+	if (i == null)
+	{
 		return false;
+	}
 
-	this.RoomList[j].UserList.splice(i, 1);
+	this.UserList.splice(i, 1);
+
 	return true;
 }
 
@@ -1125,24 +1197,18 @@ function DATA_DelUserInRoom(RoomName, Username)
 * @return		Rating's value
 * @see			DATA_FindRoom DATA_FinUserInRoom
 */
-function DATA_GetUserRatingInRoom(RoomName, Username, Category)
+/*TODO -> REMOVE THIS FUNCTION WHEN USERSLIST IS DONE**/
+function DATA_GetUserRatingInRoom(Username, Category)
 {
 	var RatingList, Rating, PosRoom;
 
-	PosRoom = this.FindRoom(RoomName);
+	var User = this.GetUser(Username);
 
-	if (this.FindUserInRoom(RoomName,Username) != null)
-	{
-		RatingList = this.RoomList[PosRoom].UserList[this.FindUserInRoom(RoomName,Username)].Rating;
-	}
-	else
-	{
-		return Rating = "---";
-	}
+	RatingList = User.Rating;
 
 	if (Category == null)
 	{
-		Category = this.CurrentRating;
+		Category = MainData.GetRoomCurrentRating();
 	}
 
 	switch (Category)
@@ -1191,17 +1257,15 @@ function DATA_GetUserRatingInRoom(RoomName, Username, Category)
 * @return		Boolean
 * @see			DATA_FindRoom UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
 */
-function DATA_SortUserByNickInRoom(RoomName)
+function DATA_SortUserByNickInRoom()
 {
-	var i = this.FindRoom(RoomName);
-
-	if (this.RoomList[i].OrderBy == "0")
+	if (this.OrderBy == 0)
 	{
-		this.RoomList[i].UserList.sort(UTILS_SortByUsernameAsc);
+		this.UserList.sort(UTILS_SortByUsernameAsc);
 	}
 	else
 	{
-		this.RoomList[i].UserList.sort(UTILS_SortByUsernameDsc);
+		this.UserList.sort(UTILS_SortByUsernameDsc);
 	}
 	return true;
 }
@@ -1212,11 +1276,10 @@ function DATA_SortUserByNickInRoom(RoomName)
 * @return		Boolean
 * @see			DATA_FindRoom UTILS_SortByUsernameDsc
 */
-function DATA_SortUserByRatingInRoom(RoomName)
+function DATA_SortUserByRatingInRoom()
 {
-	var i = this.FindRoom(RoomName);
+	this.UserList.sort(UTILS_SortRoomByRatingDsc);
 
-	this.RoomList[i].UserList.sort(UTILS_SortRoomByRatingDsc);
 	return true;
 }
 
@@ -1236,8 +1299,27 @@ function DATA_GetRoom(RoomName)
 		return null
 	}
 
-	return this.RoomList[RoomPos];
+	return this.Room.RoomList[RoomPos];
 }
+
+
+function DATA_SetRoomOrderBy(Value)
+{
+	this.OrderBy = Value;
+}
+function DATA_GetRoomOrderBy()
+{
+	return this.OrderBy;
+}
+function DATA_SetRoomCurrentRating(RatingType)
+{
+	this.CurrentRating = RatingType;
+}
+function DATA_GetRoomCurrentRating()
+{
+	return this.CurrentRating;
+}
+
 
 /**********************************
  * METHODS - CHAT  *

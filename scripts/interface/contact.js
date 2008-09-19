@@ -361,44 +361,6 @@ function INTERFACE_HideOnlineList()
 }
 
 
-
-/**
-* Set type of user in interface
-*
-* @public
-*/
-/*
-function INTERFACE_SetUserType(Username, NewType)
-{
-	var User = document.getElementById("contact-"+Username);
-	var List, Node, i;
-
-
-	// Updating user's type
-	if (User)
-	{
-		User.className = User.className.replace(/.*_/, NewType+"_");
-	}
-
-	// Updating in room lists
-	for (i=0; i<MainData.RoomList.length; i++)
-	{
-		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
-		{
-			// Search user node in room user list
-			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username);
-
-			if (Node)
-			{
-				Node.className = Node.className.replace(/.*_/, NewType+"_");
-			}
-		}
-	}
-
-	return true;
-}
-*/
-
 /**
 * Show or hide contact groups
 *

@@ -58,7 +58,7 @@ function PARSER_ParsePresence(XML)
 			Buffer += ROOM_HandleRoomPresence(XML);
 			
 			// Presence from general room
-			if(Jid.split("@")[0] == MainData.RoomDefault)
+			if(Jid.split("@")[0] == MainData.GetRoomDefault())
 			{
 				Buffer += CONTACT_HandleOnlinePresence(XML);
 				Buffer += CHALLENGE_HandlePresence(XML);

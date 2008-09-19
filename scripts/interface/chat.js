@@ -239,7 +239,7 @@ function INTERFACE_CreateChat(Username)
 	Input.onkeypress = function (event) {
 		if ((UTILS_ReturnKeyCode(event) == 13) && (Input.value != ""))
 		{
-			if(Input.value.length <= MainData.MaxChatChar)
+			if(Input.value.length <= MainData.GetMaxChatChar())
 			{
 				// Send chat message
 				CHAT_SendMessage(Username, Input.value);

@@ -223,8 +223,10 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				TimeOpt.value = i;
 				
 				TimeSelect.appendChild(TimeOpt);
-			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"lightning");
+			}
+		// TODO -> FIX IT TO WORK WITH USERLIST	
+//		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"lightning");
+			Rating = 0;
 		}
 
 		// Blitz = 1
@@ -237,7 +239,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault, Oponent, "blitz");
+		// TODO -> FIX IT TO WORK WITH USERLIST	
+//		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault, Oponent, "blitz");
+			Rating = 0;
 		}
 
 		// Standard = 2
@@ -270,7 +274,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
-			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
+		// TODO -> FIX IT TO WORK WITH USERLIST	
+//			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
+			Rating = 0;
 		}
 		// Untimed = 3
 		else if (Type == 3)
@@ -282,6 +288,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
+		// TODO -> FIX IT TO WORK WITH USERLIST	
+			//Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"untimed");
+			Rating = 0;
 
 		}
 

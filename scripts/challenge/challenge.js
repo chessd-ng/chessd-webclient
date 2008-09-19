@@ -145,6 +145,7 @@ function CHALLENGE_HandleOffer(XML)
 	var ChallengeObj;
 	var ChallengePos;
 	var ChallengedPlayer;
+	var Room, User;
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -206,6 +207,7 @@ function CHALLENGE_HandleOffer(XML)
 			Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
 		}
 
+		Room = MainData.GetRoom(MainData.GetRoomDefault());
 
 		// Add the challenge in structure
 		if (Player1.Name == MainData.Username)
@@ -224,7 +226,9 @@ function CHALLENGE_HandleOffer(XML)
 			}
 
 			//Quick fix to get oponent rating
-			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player2.Name,Category);
+			// TODO -> FIX IT TO WORK WITH USERLIST;
+			//Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player2.Name,Category);
+			Rating = 0;
 			// Show challenge window for user
 			WINDOW_Challenge(Player2.Name, Rating, Player2, Rated, MatchID);
 		}
@@ -242,7 +246,9 @@ function CHALLENGE_HandleOffer(XML)
 			}
 
 			//Quick fix to get oponent rating
-			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player1.Name,Category);
+			// TODO -> FIX IT TO WORK WITH USERLIST;
+			//Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Player1.Name,Category);
+			Rating = 0;
 			// Show challenge window for user
 			WINDOW_Challenge(Player1.Name, Rating, Player1, Rated, MatchID);
 
