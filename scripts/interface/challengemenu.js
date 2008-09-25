@@ -141,8 +141,12 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 	{
 		PName = UTILS_CreateElement("p","name", null, Oponent.Name);
 	}
+
 	PTime = UTILS_CreateElement("p","time", null, Time+"'");
+	PTime.title = UTILS_GetText("challenge_time");
+
 	PInc = UTILS_CreateElement("p","inc", null, Inc+'"');
+	PInc.title = UTILS_GetText("challenge_inc");
 
 	/*// This feature is not implemented yet
 	if(Private == false)
@@ -155,18 +159,22 @@ function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 	}
 	*/
 
-	PPrivate = UTILS_CreateElement("p","private","true");
-	
-	if(Rated == false)
+	PPrivate = UTILS_CreateElement("p","private","false");
+	PPrivate.title = UTILS_GetText("challenge_public");
+
+	if(Rated == "true")
 	{
-		PRated = UTILS_CreateElement("p","rated","false","rating");
+		PRated = UTILS_CreateElement('p','rated','true','rating');
+		PRated.title = UTILS_GetText("challenge_rated");
 	}
 	else
 	{
-		PRated = UTILS_CreateElement("p","rated","true","rating");
+		PRated = UTILS_CreateElement('p','rated','false','rating');
+		PRated.title = UTILS_GetText("challenge_unrated");
 	}
 
 	PButton = UTILS_CreateElement("p","button","decline");
+	PButton.title = UTILS_GetText("window_cancel");
 
 	PButton.onmousedown = function(){
 		CHALLENGE_DeclineChallenge(MatchId);
@@ -266,7 +274,10 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		PName = UTILS_CreateElement("p","name", null, Player.Name);
 	}
 	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
+	PTime.title = UTILS_GetText("challenge_time");
 	PInc = UTILS_CreateElement("p","inc", null, Inc);
+	PInc.title = UTILS_GetText("challenge_inc");
+
 
 	/*// This feature is not implemented yet
 	if(Private == false)
@@ -279,20 +290,24 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	}
 	*/
 
-	PPrivate = UTILS_CreateElement("p","private","true");
+	PPrivate = UTILS_CreateElement("p","private","false");
+	PPrivate.title = UTILS_GetText("challenge_public");
 	
-	if(Rated == false)
+	if(Rated == "false")
 	{
 		PRated = UTILS_CreateElement("p","rated","false","rating");
+		PRated.title = UTILS_GetText("challenge_unrated");
 	}
 	else
 	{
 		PRated = UTILS_CreateElement("p","rated","true","rating");
+		PRated.title = UTILS_GetText("challenge_rated");
 	}
 
 	if(Player.Name == MainData.Username)
 	{
 		PButton = UTILS_CreateElement("p","button","decline");
+		PButton.title = UTILS_GetText("window_cancel");
 		PButton.onmousedown = function(){
 			ANNOUNCE_RemoveAnnounce(Id);
 		}
@@ -300,6 +315,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	else
 	{
 		PButton = UTILS_CreateElement("p","button","accept");
+		PButton.title = UTILS_GetText("window_accept");
 		PButton.onmousedown = function(){
 			ANNOUNCE_AcceptAnnounce(Id);
 		}

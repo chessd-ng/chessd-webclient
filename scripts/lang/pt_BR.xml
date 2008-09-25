@@ -152,18 +152,23 @@
 		<challenge_my_pieces>Minhas peças:</challenge_my_pieces>
 		<challenge_op_pieces>Peças do oponente:</challenge_op_pieces>
 		<challenge_time_label>Tempo da partida:</challenge_time_label>
+		<challenge_time>Tempo da partida (min)</challenge_time>
 		<challenge_category>Categoria de jogo:</challenge_category>
 		<challenge_inc_label>Incremento:</challenge_inc_label>
+		<challenge_inc>Incremento (seg)</challenge_inc>
 		<challenge_time_label_min>min</challenge_time_label_min>
 		<challenge_inc_label_seg>seg</challenge_inc_label_seg>
 		<challenge_rating>Valendo rating</challenge_rating>
 		<challenge_private>Partida privada</challenge_private>
+		<challenge_public>Partida pública</challenge_public>
 		<challenge_invite>Convidar</challenge_invite>
 		<challenge_chat>Abrir chat</challenge_chat>
 		<challenge_new_parameters>Redesafiar</challenge_new_parameters>
 		<challenge_no_time>Sem tempo</challenge_no_time>
 		<challenge_color_auto>Automática</challenge_color_auto>
 		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
+		<challenge_rated>Valendo rating</challenge_rated>
+		<challenge_unrated>Não valendo rating</challenge_unrated>
 
 		<challenge_menu_match_title>Meus desafios</challenge_menu_match_title>
 		<challenge_menu_announce_title>Desafios anunciados</challenge_menu_announce_title>
