@@ -10,6 +10,7 @@
 	height			: 179px;
 	width			: 100%;
 	min-width			: 800px; 
+	z-index				: auto;
 /*	border : 1px solid blue; 
 	background-color : blue; */
 }
