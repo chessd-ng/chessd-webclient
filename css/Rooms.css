@@ -29,12 +29,17 @@
 	background-color	: #216778;
 }
 
+#Main #Left #Rooms #RoomUserDiv {
+	text-align : right;
+	margin-right : 20px;
+}
+
 #Main #Left #Rooms span.UserListVisibility{
 	font-size		: 11px;
 	color			: #216778;
 
 	position		: relative;
-	left			: 55px;
+/*	left			: 55px; */
 
 	border-bottom		: 1px solid #216778;
 
@@ -110,6 +115,7 @@
 #Main #Left #Rooms .RoomInside {
 	padding-left		: 12px;
 	/*
+	background-color : blue;
 	padding-left		: 3mm;
 	*/
 }

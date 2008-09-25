@@ -76,6 +76,7 @@ function RoomObj(Roomname)
 function INTERFACE_CreateRoom(RoomName)
 {
 	var RoomDiv, RoomInside;
+	var RoomUserDiv;
 	var MessageList;
 	var Input, Emoticon;
 	var UserListVisibility;
@@ -86,6 +87,7 @@ function INTERFACE_CreateRoom(RoomName)
 	RoomInside = UTILS_CreateElement("div", "RoomInside_"+RoomName, "RoomInside");
 
 	// Show/Hide user list
+	RoomUserDiv = UTILS_CreateElement("div", "RoomUserDiv");
 	UserListVisibility = UTILS_CreateElement("span",null,"UserListVisibility",UTILS_GetText("room_show_user_list"));
 	UserListVisibility.onclick = function(){
 		ROOM_ShowHideUserList(RoomName);
@@ -144,7 +146,9 @@ function INTERFACE_CreateRoom(RoomName)
 		INTERFACE_ShowEmoticonList(RoomName);
 	}
 
-	RoomInside.appendChild(UserListVisibility);
+	RoomUserDiv.appendChild(UserListVisibility);
+
+	RoomInside.appendChild(RoomUserDiv);
 	RoomInside.appendChild(MessageList);
 	RoomInside.appendChild(Input);
 	RoomInside.appendChild(Emoticon);
