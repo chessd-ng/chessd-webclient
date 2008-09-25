@@ -325,7 +325,7 @@ function GAME_HandleDraw(XML, Xmlns)
 	if (Xmlns.match(/-decline/))
 	{
 		Text = UTILS_GetText("game_draw_denied");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
@@ -334,7 +334,7 @@ function GAME_HandleDraw(XML, Xmlns)
 	else
 	{
 		Text = UTILS_GetText("game_draw_text");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 		Button1 = new Object();
 		Button2 = new Object();
 
@@ -375,7 +375,7 @@ function GAME_HandleCancel(XML, Xmlns)
 	if (Xmlns.match(/-decline/))
 	{
 		Text = UTILS_GetText("game_abort_denied");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
@@ -384,7 +384,7 @@ function GAME_HandleCancel(XML, Xmlns)
 	else
 	{
 		Text = UTILS_GetText("game_abort_text");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 		Button1 = new Object();
 		Button2 = new Object();
 
@@ -425,7 +425,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 	if (Xmlns.match(/-decline/))
 	{
 		Text = UTILS_GetText("game_adjourn_denied");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
@@ -434,7 +434,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 	else
 	{
 		Text = UTILS_GetText("game_adjourn_text");
-		Text = Text.replace(/%s/, UTILS_Capitalize(Oponent));
+		Text = Text.replace(/%s/, "<b>"+Oponent+"</b>");
 		Button1 = new Object();
 		Button2 = new Object();
 
