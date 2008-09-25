@@ -132,3 +132,17 @@
 #ChallengeDiv #ButtonsDiv .button {
 	width : 71px;
 }
+
+#ChallengeDiv #ButtonsDiv .button_disabled {
+	padding-bottom	: 5px;
+	border					: 0px;
+	font-weight			: bold;
+	font-size			: 10px;
+	color						: #FFF;
+	margin					: 0px 0px 5px 2px;
+	padding					: 1px 2px;
+	position				: relative;
+	bottom					: 10px;
+	background			: #C0C0C0;
+	width : 71px;
+}

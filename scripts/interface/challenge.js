@@ -72,6 +72,15 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	Username.appendChild(RatingLabel);
 	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
 	
+	// Accept challenge
+	// Only if you receive a challenge
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.value = UTILS_GetText('window_accept');
+	Accept.type = "button";
+	Accept.onclick = function () {
+		CHALLENGE_AcceptChallenge(MatchId);
+	}	
+
 	// Layer1 Elements
 
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
@@ -288,6 +297,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		Username.removeChild(Username.childNodes[1]);
 		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
 		Username.appendChild(RatingLabel);
+
+		if (GameParameters != undefined)
+		{
+			Accept.className = "button_disabled";
+			Accept.onclick = function () { return false } ;
+			Accept.disabled = true;
+		}
 	}
 
 	//* End Layer1 Right Elements*
@@ -366,7 +382,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				TimeSelect.options.selectedIndex = GameParameters.Time - 3;
 			}
 
-			// Standart
+			// Standard
 			else if (GameParameters.Time>=11)
 			{
 				for (i=11; i <= 30; i++)
@@ -567,15 +583,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		CHALLENGE_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
 	}
 
-	// Accept challenge
-	// Only if you receive a challenge
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.value = UTILS_GetText('window_accept');
-	Accept.type = "button";
-	Accept.onclick = function () {
-		CHALLENGE_AcceptChallenge(MatchId);
-	}	
-
 	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
 	NewParameters.type = "button";
@@ -680,6 +687,72 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	// Buttons
 	if (GameParameters != undefined)
 	{
+		// Game parameters change
+		PrivateCheckbox.onclick = function() {
+			Accept.className = "button_disabled";
+			Accept.disabled = true;
+			Accept.onclick = function () {
+				return false;
+			}
+		}	
+
+		RatingCheckbox.onclick = function() {
+			Accept.className = "button_disabled";
+			Accept.disabled = true;
+			Accept.onclick = function () {
+				return false;
+			}
+		}	
+
+		IncSelect.onchange = function() {
+			Accept.className = "button_disabled";
+			Accept.disabled = true;
+			Accept.onclick = function () {
+				return false;
+			}
+		}	
+
+		TimeSelect.onchange = function() {
+			Accept.className = "button_disabled";
+			Accept.disabled = true;
+			Accept.onclick = function () {
+				return false;
+			}
+		}	
+
+		AutoColorOpt.onclick = function() {
+			if (AutoColorOpt.checked == true)
+			{
+				Accept.className = "button_disabled";
+				Accept.disabled = true;
+				Accept.onclick = function () {
+					return false;
+				}
+			}
+		}	
+
+		ColorOptB.onclick = function() {
+			if (ColorOptB.checked == true)
+			{
+				Accept.className = "button_disabled";
+				Accept.disabled = true;
+				Accept.onclick = function () {
+					return false;
+				}
+			}
+		}	
+
+		ColorOptW.onclick = function() {
+			if (ColorOptW.checked == true)
+			{
+				Accept.className = "button_disabled";
+				Accept.disabled = true;
+				Accept.onclick = function () {
+					return false;
+				}
+			}
+		}	
+
 		ButtonsDiv.appendChild(Accept);
 		Buttons.push(Accept);
 		ButtonsDiv.appendChild(NewParameters);
