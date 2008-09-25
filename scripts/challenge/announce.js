@@ -49,8 +49,8 @@ function ANNOUNCE_HandleAnnounce(XML)
 		// There is no announced match
 		if(Announces.length == 0)
 		{
+			// Remove loading message
 			ANNOUNCE_HideLoadingAnnounce();
-			ANNOUNCE_ShowNoAnnounce();
 		}
 		else
 		{
@@ -78,11 +78,14 @@ function ANNOUNCE_HandleAnnounce(XML)
 				// Hide loading and no announce message
 				ANNOUNCE_HideLoadingAnnounce();
 				ANNOUNCE_HideNoAnnounce();
-
-				// TODO -> Still show no announce message
-				// if come some announce from server
 			}
 		}
+	}
+
+	// Quick Fix - Show No Announce message
+	if (MainData.ChallengeMenu.AnnounceList.length == 0)
+	{
+		ANNOUNCE_ShowNoAnnounce();
 	}
 	// Accepted announce
 	/*
