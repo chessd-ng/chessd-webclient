@@ -687,6 +687,7 @@ function CHALLENGE_ClearAnnounce()
 {
 	var i;
 	var AnnounceId;
+	var ChallengeWindow;
 
 	// Remove all challenges from challenge menu
 	for(i=0;i<MainData.AnnounceList.length; i++)
@@ -702,7 +703,7 @@ function CHALLENGE_ClearAnnounce()
 
 	}
 
-	// Remove all challenges from main data
+	// Remove all announces from main data
 	MainData.ClearAnnounces();
 
 }
