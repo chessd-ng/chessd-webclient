@@ -715,11 +715,17 @@ function ROOM_CreateRoom(RoomName)
 function ROOM_FocusRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
+	var Login = false;
 
 	if((Room != MainData.CurrentRoom)&&(MainData.CurrentRoom != null))
 	{
 		// Hide current room div;
 		MainData.CurrentRoom.Room.hide();
+	}
+	// If null, user just logged in interface
+	else if (MainData.CurrentRoom == null)
+	{
+		Login = true;
 	}
 
 	// Show new room and set it to current
@@ -727,7 +733,11 @@ function ROOM_FocusRoom(RoomName)
 	Room.Room.show();
 	INTERFACE_RefreshOccupantsNumber(RoomName);
 	MainData.CurrentRoom = Room;
-	Room.Room.focus();
+	// Don't focus input room if user just logged in interface
+	if (!Login)
+	{
+		Room.Room.focus();
+	}
 }
 
 function ROOM_RemoveRoom(RoomName)
