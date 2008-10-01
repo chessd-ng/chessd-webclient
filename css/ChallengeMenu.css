@@ -43,6 +43,11 @@
 	cursor		: pointer;
 }
 
+#ChallengeMenu ul #announce:hover {
+	color : #FFA200;
+	border-bottom	: 1px solid #FFA200;
+}
+
 #ChallengeMenu li
 {
 	margin-top	: 5px;

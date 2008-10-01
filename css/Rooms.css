@@ -46,6 +46,11 @@
 	cursor			: pointer;
 }
 
+#Main #Left #Rooms span.UserListVisibility:hover {
+	color			: #FFA200;
+	border-bottom		: 1px solid #FFA200;
+}
+
 #Main #Left #Rooms span.UserListVisibilityOn{
 	font-size		: 11px;
 	color			: #FFA200;
