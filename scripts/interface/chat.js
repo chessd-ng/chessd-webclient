@@ -27,7 +27,7 @@ function ChatObj(Username, Position)
 	this.chatList = Tmp.ChatList;
 	this.chatTitle = Tmp.ChatTitle;
 	this.chatTitleText = Tmp.ChatTitleSpan;
-	this.chatInput = Tmp.Input;
+	this.chatInput = Tmp.ChatInput;
 	this.minmax = Tmp.MinMax;
 
 	this.username = Username;
@@ -40,6 +40,7 @@ function ChatObj(Username, Position)
 	this.hide = INTERFACE_HideChat;
 	this.close = INTERFACE_CloseChat;
 	this.focus = INTERFACE_FocusChat;
+	this.focusInput = INTERFACE_InputChatFocus;
 	this.blur = INTERFACE_BlurChat;
 	this.minimize = INTERFACE_MinimizeChat;
 	this.maximize = INTERFACE_MaximizeChat;
@@ -96,6 +97,8 @@ function INTERFACE_ShowChat(Element)
 
 	//this.chatWindow.style.left = (Pos * 200) +"px";
 	this.chatWindow.style.display = "block";
+
+	this.focusInput();
 }
 
 /**
