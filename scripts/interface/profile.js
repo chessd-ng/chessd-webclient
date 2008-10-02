@@ -362,12 +362,14 @@ function INTERFACE_ShowProfileWindow(Profile)
 	BottomDiv.appendChild(BottomRightDiv);
 
 	// Time Left and Right elements
-	TimeLeftDiv.appendChild(OnlineTimeLabel);
-	TimeRightDiv.appendChild(TotalTimeLabel);
+//	TimeLeftDiv.appendChild(OnlineTimeLabel);
+//	TimeRightDiv.appendChild(TotalTimeLabel);
 
 	// Time elements
-	TimeDiv.appendChild(TimeLeftDiv);
-	TimeDiv.appendChild(TimeRightDiv);
+//	TimeDiv.appendChild(TimeLeftDiv);
+//	TimeDiv.appendChild(TimeRightDiv);
+	TimeDiv.appendChild(OnlineTimeLabel);
+	TimeDiv.appendChild(TotalTimeLabel);
 	
 	// Old games elements
 	OldGamesDiv.appendChild(OldGamesLabel);
