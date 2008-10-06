@@ -181,9 +181,6 @@ function INTERFACE_StartLogin(Lang)
 	// Setting document title
 	document.title = UTILS_GetText("general_title");
 
-	// Focus to login input
-	InputLogin.focus()
-
 	// Block context menu
 	document.oncontextmenu = function() { return false; };
 
@@ -191,6 +188,9 @@ function INTERFACE_StartLogin(Lang)
 	document.body.setAttribute("onresize", "INTERFACE_LoginVerticalAlignMiddle()");
 	// Align main div in the center
 	INTERFACE_LoginVerticalAlignMiddle();
+	
+	// Focus to login input
+	InputLogin.focus()
 }
 
 /**
