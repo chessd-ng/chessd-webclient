@@ -70,8 +70,6 @@
 }
 
 #Page #RoomMenuDiv li:hover,
-#Page #RoomMenuDiv p:hover,
-#Page #RoomMenuDiv span:hover,
 #Page #ChallengeMenuDiv li:hover,
 #Page #ChallengeMenuDiv p:hover,
 #Page #GameRoomMenuDiv li:hover,
@@ -92,6 +90,10 @@
 	cursor			: pointer;
 }
 
+#Page #RoomMenuDiv #createRoom:hover {
+	color	: #FFA200;
+	border-bottom	:	1px solid #FFA200;
+}
 
 #Page #GameRoomMenuDiv ul
 {
