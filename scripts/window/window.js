@@ -266,21 +266,22 @@ function WINDOW_SearchUser()
 
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowSearchUserWindow();
+	var Elements = Div.Elements;
 
 	//Create New Window
-	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
+	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
 
 	// Focus search input
 	document.getElementById('SearchUserInput').focus();
 
 	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ MainData.RemoveSearchUserInfo(); WINDOW_RemoveWindow(WindowObj);}, false);
 	// Search Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Cancel Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ MainData.AddSearchUserInfo(Elements); }, false);
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ MainData.RemoveSearchUserInfo(); WINDOW_RemoveWindow(WindowObj);}, false);
 }
-
+/*
 function WINDOW_SearchUserResult(UserList)
 {
 	//Return Div and Buttons;
@@ -294,7 +295,7 @@ function WINDOW_SearchUserResult(UserList)
 	// Add Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
-
+*/
 function WINDOW_Profile(Profile)
 {
 	//Return Div, Buttons and Elements;

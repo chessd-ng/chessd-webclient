@@ -118,6 +118,8 @@ function DATA(ConfFile, LangFile)
 
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
+
+	this.SearchUserInfo = null;
 	
 	this.ProfileList = new Array();
 	this.MyProfile = new Object();
@@ -214,6 +216,11 @@ DATA.prototype.AddSearchGameInfo = DATA_AddSearchGameInfo;
 DATA.prototype.RemoveSearchGameInfo = DATA_RemoveSearchGameInfo;
 DATA.prototype.FindSearchGameInfo = DATA_FindSearchGameInfo;
 DATA.prototype.GetSearchGameInfo = DATA_GetSearchGameInfo;
+
+DATA.prototype.AddSearchUserInfo = DATA_AddSearchUserInfo;
+DATA.prototype.RemoveSearchUserInfo = DATA_RemoveSearchUserInfo;
+DATA.prototype.SortSearchUserByNick = DATA_SortSearchUserByNick;
+DATA.prototype.SortSearchUserByName = DATA_SortSearchUserByName;
 
 DATA.prototype.AddWindow = DATA_AddWindow;
 DATA.prototype.RemoveWindow = DATA_RemoveWindow;
@@ -2347,4 +2354,83 @@ function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
 	{
 		this.MyProfile.Img64 = Img64;
 	}
+}
+
+/**********************************
+ * METHODS - SEARCHUSER           *
+ **********************************/
+
+/**
+* @brief		Add search user window parameters
+* @param		Elements   
+* @author		Danilo Yorinori
+* @return		boolean
+*/
+function DATA_AddSearchUserInfo(Elements)
+{
+	var Search = new Object();
+
+	Search.Elements = Elements;
+
+	this.SearchUserInfo= Search;
+
+	return true;
+}
+
+/**
+* @brief		Remove search user window
+* @author		Danilo Yorinori
+* @return		boolean
+*/
+function DATA_RemoveSearchUserInfo()
+{
+	if (this.SearchUserInfo != null)
+	{
+		this.SearchUserInfo = null;
+	}
+
+	return true;
+}
+
+/**
+* @brief		Sort Userlist into ascending or descending order
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
+*/
+function DATA_SortSearchUserByNick()
+{
+	if (this.SearchUserInfo.Elements.OrderBy != "1")
+	{
+		this.SearchUserInfo.Elements.Result.sort(UTILS_SortByUsernameAsc);
+	}
+	else if (this.SearchUserInfo.Elements.OrderBy == "1")
+	{
+		this.SearchUserInfo.Elements.Result.sort(UTILS_SortByUsernameDsc);
+	}
+	
+	return true;
+}
+
+/**
+* @brief		Sort Userlist into descending order by Rating selected in interface
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByRatingDsc
+*/
+function DATA_SortSearchUserByName()
+{
+	if (this.SearchUserInfo.Elements.OrderBy != "3")
+	{
+		this.SearchUserInfo.Elements.Result.sort(UTILS_SortByFullnameAsc);
+	}
+	else if (this.SearchUserInfo.Elements.OrderBy == "3") 
+	{
+		this.SearchUserInfo.Elements.Result.sort(UTILS_SortByFullnameDsc);
+	}
+
+
+	return true;
 }

@@ -30,11 +30,11 @@
 function CONTACT_HandleSearchUser(XML)
 {
 	var Itens;
-	var Result, Fields;
+	var Result, Fields, Item;
 	var i,j;
 
 	Itens = XML.getElementsByTagName("item");
-	Result = new Array ();
+	Result = new Array();
 
 	if (Itens.length == 0)
 	{
@@ -46,18 +46,27 @@ function CONTACT_HandleSearchUser(XML)
 		for (i=0; i < Itens.length; i++)
 		{
 			Fields = Itens[i].getElementsByTagName("field");
+			Item = new Object();
 			for (j=0; j < Fields.length; j++)
 			{
 				if (Fields[j].getAttribute("var") == "jid")
 				{
-					Result.push(UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@.*/,""));
+					Item.Username = UTILS_GetNodeText(Fields[j].childNodes[0]).replace(/@.*/,"");
 				}
+				else if (Fields[j].getAttribute("var") == "fn")
+				{
+					Item.Fullname = UTILS_GetNodeText(Fields[j].childNodes[0]);
+				}
+			}
+			if (Item != null)
+			{
+				Result.push(Item);
 			}
 		}
 	}
 
 	// Display the result
-	WINDOW_SearchUserResult(Result);
+	MainData.SearchUserInfo.Elements.SetResult(Result);
 
 	return "";
 }

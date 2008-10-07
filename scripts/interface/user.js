@@ -501,6 +501,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i;
 	var Offset = 9;
+	var Left = 0;
 
 	Menu = UTILS_CreateElement("div", "UserMenuDiv");
 
@@ -539,6 +540,10 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		{
 			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		}
+		else if (ParentNode.id.match("TableResultDiv") != null) 
+		{
+			Left = 9;
+		}
 		Offset = 0;
 	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
@@ -549,9 +554,10 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		Offset = 2;
 	}
 	// Search User Result
-	else if (ParentNode.id.match("ListDiv") != null) 
+	else if (ParentNode.id.match("TableResultDiv") != null) 
 	{
 		Offset= 3;
+		Left = 9;
 	}
 	// Room and Online User List
 	else if (ParentNode.className.match("UserTable") != null) 
@@ -565,7 +571,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
 	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
-	Menu.style.left = Pos.X+"px";
+	Menu.style.left = Pos.X+Left+"px";
 	
 //	alert(ParentNode.scrollTop+" "+Pos.Y+" "+Offset+" "+Menu.style.top+"-"+Pos.X);
 
@@ -601,7 +607,7 @@ function INTERFACE_HideUserMenu()
 * @return	Div; Array
 * @see		WINDOW_Invite();
 * @author Danilo Kiyoshi Simizu Yorinori
-*/
+*
 function INTERFACE_ShowSearchUserWindow()
 {
 	// Variables
@@ -727,7 +733,7 @@ function INTERFACE_ShowSearchUserWindow()
 
 	return {Div:Div, Buttons:Buttons};
 }
-
+*/
 
 
 /**
@@ -737,24 +743,42 @@ function INTERFACE_ShowSearchUserWindow()
 * @return	Tr
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_CreateUserElement(Username)
+function INTERFACE_CreateUserElement(Obj)
 {
-	var Tr, Td;
+	var Tr, Td,i;
 
 	Tr = UTILS_CreateElement("tr");
 
-	if (Username.length > 14)
+	if (Obj.Username.length > 14)
 	{
-		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Username,14));
-		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Username); }
+		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Obj.Username,14));
+		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Username); }
 		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); }
 	}
 	else
 	{
-		Td = UTILS_CreateElement("td", null, null, Username);
+		Td = UTILS_CreateElement("td", null, null, Obj.Username);
 	}
-	Td.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Obj.Username); };
 	Tr.appendChild(Td);
+	
+	if (Obj.Fullname.length > 14)
+	{
+		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Obj.Fullname,14));
+		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Fullname); }
+		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+	}
+	else
+	{
+		Td = UTILS_CreateElement("td", null, null, Obj.Fullname);
+	}
+	
+	Td.onclick = function () { CONTACT_ShowUserMenu(this, Obj.Username); };
+	Tr.appendChild(Td);
+
+	Tr.onmouseover = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
+	Tr.onmouseout = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
 
 	return Tr;
 }
@@ -766,7 +790,7 @@ function INTERFACE_CreateUserElement(Username)
 * @return	Div; Array
 * @see		WINDOW_Invite();
 * @author Danilo Kiyoshi Simizu Yorinori
-*/
+*
 function INTERFACE_ShowSearchUserResultWindow(UserList)
 {
 	// Variables
@@ -834,15 +858,18 @@ function INTERFACE_ShowSearchUserResultWindow(UserList)
 
 	return {Div:Div, Buttons:Buttons};
 }
-
+*/
 /**
- * @author	Danilo
- *
+*	Create a hint showing complete name of an user whose nick was shorted to fit in interface
+*
+* @author	Danilo
+*
  */
 function INTERFACE_ShowUserFullName(Obj,UserName)
 {
 	var Hint, Name, ParentNode, Pos, i;
 	var Offset = 9;
+	var Left = 0;
 
 	Hint = UTILS_CreateElement("div", "UserFullNameDiv");
 
@@ -861,6 +888,10 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 		{
 			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		}
+		else if (ParentNode.id.match("TableResultDiv") != null) 
+		{
+			Left = 9;
+		}
 		Offset = 0;
 	}
 	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
@@ -869,11 +900,6 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	{
 		ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
 		Offset = 2; //ok
-	}
-	// Search User Result List
-	else if (ParentNode.id.match("ListDiv") != null) 
-	{
-		Offset = 3; // ok
 	}
 	// Online and Room User List
 	else if (ParentNode.className.match("UserTable") != null) 
@@ -886,6 +912,12 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 		{
 			Offset = 9; // ok
 		}
+	}
+	// Search User Result
+	else if (ParentNode.id.match("TableResultDiv") != null) 
+	{
+		Offset= 3;
+		Left = 9;
 	}
 	// User Nickname
 	else if (ParentNode.id.match("UserInf") != null)
@@ -904,16 +936,436 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	// Get position of user list item
 	Pos = UTILS_GetOffset(Obj);
 	Hint.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
-	Hint.style.left = Pos.X+"px";
-	Hint.style.width = UserName.length*6+'px';
+	Hint.style.left = Pos.X+Left+"px";
+	Hint.style.width = 20+UserName.length*5+'px';
 
 
 	document.body.appendChild(Hint);
 }
 
+/*
+*	Remove hint opened by INTERFACE_ShowUserFullName function
+*
+*	@author Danilo Yorinori
+*/
 function INTERFACE_CloseUserFullName()
 {
 	var Hint = document.getElementById("UserFullNameDiv");
 	if (Hint)
+	{
 		document.body.removeChild(Hint);
+	}
+}
+
+/*	
+*	Create elements of search user window and returns div, array of buttons and object of elements
+*
+* @return	Div; Array; Elements
+* @author Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ShowSearchUserWindow()
+{
+	// Variables
+	var Div;
+
+	var FormDiv;
+
+	var InputDiv;
+	var UserLabel, Br1, Input;
+
+	var TypeDiv;
+	var SearchLabel, Br2, NickRadio, NickLabel, NameRadio, NameLabel;
+
+	var Button1Div;
+	var SearchButton;
+
+	var ResultDiv;
+
+	var InfoDiv;
+	var InfoLabel;
+	var TableDiv;
+	var TableHeadDiv;
+	var THead, Head;
+	var OrderNick, OrderName;
+	var Tr,Td;
+	var TableResultDiv;
+	var HrTop, HrBottom;
+	var BorderDiv;
+	var Table, TBody;
+	
+	var Button2Div;
+	var CloseButton;
+
+	var Buttons = new Array();
+	var Elements = new Object();
+
+	// Main div
+	Div = UTILS_CreateElement('div', 'SearchUserDiv');
+
+	// FormDiv elements
+	FormDiv = UTILS_CreateElement('div', 'FormDiv');
+
+	// InputDiv Elements
+	InputDiv = UTILS_CreateElement('div', 'InputDiv');
+
+	UserLabel = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_t"));
+	Br1 = UTILS_CreateElement('br');
+	Input = UTILS_CreateElement('input', 'SearchUserInput');
+	Input.size = "16";
+
+	// TypeDiv Elements
+	TypeDiv = UTILS_CreateElement('div','TypeDiv');
+
+	SearchLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_by"));
+	Br2 = UTILS_CreateElement('br');
+	
+	try
+	//Fix radio button for IE
+	{
+		NameRadio = document.createElement('<input class="radio" type="radio" name="search_user" />');
+	}
+	catch(err) 
+	{
+		NameRadio = UTILS_CreateElement('input',null,'radio');
+		NameRadio.type = "radio";
+		NameRadio.name = "search_user";
+	}
+	NameLabel= UTILS_CreateElement('span',null,'label',UTILS_Capitalize(UTILS_GetText("contact_by_name")));
+
+	try
+	//Fix radio button for IE
+	{
+		NickRadio = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
+	}
+	catch(err) 
+	{
+		NickRadio = UTILS_CreateElement('input',null,'radio');
+		NickRadio.type = "radio";
+		NickRadio.name = "search_user";
+		NickRadio.checked = true;
+	}
+	NickLabel= UTILS_CreateElement('span',null,'label',UTILS_Capitalize(UTILS_GetText("contact_by_nick")));
+
+	/* Both Search
+	Both= UTILS_CreateElement('input');
+	Both.type = "radio";
+	Both.name = "search_user";
+	BothLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_both"));
+*/
+
+	// Buttons1Div elements
+	Button1Div = UTILS_CreateElement('div','Button1Div');
+
+	SearchButton = UTILS_CreateElement('input',null,'button');
+	SearchButton.type = "button";
+	SearchButton.value = UTILS_GetText("window_search");
+	UTILS_AddListener(SearchButton,"click",	function() { 
+		var Option;
+		if (NickRadio.checked == true)
+		{
+			Option = 0;
+		}
+		else if (NameRadio.checked == true)
+		{
+			Option = 1;
+		}
+		else
+		{
+			Option = 0;
+		}
+		CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,Option)); }, "false");
+	Buttons.push(SearchButton);
+
+	// ResultDiv elements
+	ResultDiv = UTILS_CreateElement('div','ResultDiv');
+
+	// InfoDiv elements
+	InfoDiv = UTILS_CreateElement('div','InfoDiv');
+	InfoLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_default"));
+//	InfoLabel = UTILS_CreateElement('span',null,null,"contact_search_default");
+
+	// TableDiv elements
+	TableDiv = UTILS_CreateElement('div','TableDiv');
+
+	// TableHeadDiv elements	
+	TableHeadDiv = UTILS_CreateElement('div','TableHeadDiv');
+
+	THead = UTILS_CreateElement('table');
+	Head = UTILS_CreateElement('thead');	
+	Tr = UTILS_CreateElement('tr');
+
+	Td = UTILS_CreateElement('td');
+	OrderNick = UTILS_CreateElement('span',null,'disabled',UTILS_Capitalize(UTILS_GetText("contact_by_nick")));
+	OrderNick.disabled = true;
+	Td.appendChild(OrderNick);
+	Tr.appendChild(Td);
+	
+	Td = UTILS_CreateElement('td');
+	OrderName = UTILS_CreateElement('span',null,'disabled',UTILS_Capitalize(UTILS_GetText("contact_by_name")));
+	OrderName.disabled = true;
+	Td.appendChild(OrderName);
+	Tr.appendChild(Td);
+	Head.appendChild(Tr);
+	THead.appendChild(Head);
+
+	// BorderDiv elements
+	BorderDiv = UTILS_CreateElement('div','BorderDiv');
+	HrTop = UTILS_CreateElement('hr','TopBorder');
+	TableResultDiv = UTILS_CreateElement('div','TableResultDiv');
+	HrBottom = UTILS_CreateElement('hr','BottomBorder');
+
+	// TableResultDiv elements
+	Table = UTILS_CreateElement('table');
+	TBody = UTILS_CreateElement('tbody');
+	Table.appendChild(TBody);
+
+	// Button2Div elements
+	Button2Div = UTILS_CreateElement('div','Button2Div');
+	CloseButton = UTILS_CreateElement('input',null,'button');
+	CloseButton.type = "button";
+	CloseButton.value = UTILS_GetText("window_close");
+
+	// Mount elements tree
+	// ButtonsDiv elements
+	Button1Div.appendChild(SearchButton);
+	Button2Div.appendChild(CloseButton);
+	Buttons.push(CloseButton);
+
+	// OptionDiv
+	TypeDiv.appendChild(SearchLabel);
+	TypeDiv.appendChild(Br2);
+	TypeDiv.appendChild(NickRadio)
+	TypeDiv.appendChild(NickLabel);
+	TypeDiv.appendChild(NameRadio)
+	TypeDiv.appendChild(NameLabel);
+
+//	OptionDiv.appendChild(Both);
+//	OptionDiv.appendChild(BothLabel);
+	
+	// InputDiv elements
+	InputDiv.appendChild(UserLabel);
+	InputDiv.appendChild(Br1);
+	InputDiv.appendChild(Input);
+
+	// FormDiv elements
+	FormDiv.appendChild(InputDiv);
+	FormDiv.appendChild(TypeDiv);
+
+	// TableHeadDiv elements
+	TableHeadDiv.appendChild(THead);
+
+	// TableResultDiv elements
+	TableResultDiv.appendChild(Table);
+
+	// BorderDiv elements
+//	BorderDiv.appendChild(HrTop);
+	BorderDiv.appendChild(TableResultDiv);
+//	BorderDiv.appendChild(HrBottom);
+
+	// TableDiv elements
+	TableDiv.appendChild(TableHeadDiv);
+	TableDiv.appendChild(BorderDiv);
+
+	//InfoDiv elements
+	InfoDiv.appendChild(InfoLabel);
+
+	//ResultDiv elements
+	ResultDiv.appendChild(InfoDiv);
+	ResultDiv.appendChild(TableDiv);
+
+	// Main div elements
+	Div.appendChild(FormDiv);
+	Div.appendChild(Button1Div);
+	Div.appendChild(ResultDiv);
+	Div.appendChild(Button2Div);
+
+	Elements.Input = Input;
+	Elements.NickRadio = NickRadio;
+	Elements.NameRadio = NameRadio;
+	Elements.InfoLabel = InfoLabel;
+	Elements.OrderNick = OrderNick;
+	Elements.OrderName = OrderName;
+	Elements.TBody = TBody;
+	Elements.OrderBy = "0";
+
+	Elements.SetResult = INTERFACE_SearchUserSetResult;
+	Elements.SortByNick = INTERFACE_SortSearchUserByNick;
+	Elements.SortByName = INTERFACE_SortSearchUserByName;
+
+	return {Div:Div, Buttons:Buttons, Elements:Elements};
+}
+
+/*
+*	Set result of a user search in window
+*
+*	@param Result	Array of usernames
+*	@see	CONTACT_HandleSearchUser;
+*	@return	void
+*	@author Danilo Yorinori
+*/
+function INTERFACE_SearchUserSetResult(Result)
+{
+	var Tr, i;
+	var Obj = this;
+
+	// Save Result array in Search User Object
+	this.Result = Result;
+
+	// Remove previous items
+	while(this.TBody.rows.length >0)
+	{
+		this.TBody.removeChild(this.TBody.rows[0]);
+	}
+
+	// If list of names is empty
+	if (Result == null)
+	{
+		// Set apropriate text info
+		this.InfoLabel.innerHTML = UTILS_GetText("contact_not_found");
+		if (this.NickRadio.checked == true)
+		{
+			this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%t/,UTILS_GetText("contact_by_nick"));
+		}
+		else if (this.NameRadio.checked == true)
+		{
+			this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%t/,UTILS_GetText("contact_by_name"));
+		}
+
+		this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%s/," <b>"+this.Input.value+"*</b>");
+
+		// Set class for sort buttons
+		this.OrderNick.className = 'disabled';
+		this.OrderName.className = 'disabled';
+		this.OrderNick.disabled = true;
+		this.OrderName.disabled = true;
+		
+		// Disable Order nick and Order name buttons 
+		this.OrderNick.onclick = function()
+		{
+			return false;
+		}
+
+		this.OrderName.onclick = function()
+		{
+			return false;
+		}
+	}
+	else 
+	{
+		// Set apropriate text info
+		this.InfoLabel.innerHTML = UTILS_GetText("contact_user_found");
+		if (this.NickRadio.checked == true)
+		{
+			this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%t/,UTILS_GetText("contact_by_nick"));
+		}
+		else if (this.NameRadio.checked == true)
+		{
+			this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%t/,UTILS_GetText("contact_by_name"));
+		}
+		this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%s/," <b>"+this.Input.value+"*</b>");
+
+		// Set default sort order
+		this.OrderBy = "0";
+
+		// Call function that sort Result list
+		MainData.SortSearchUserByNick();
+
+		for(i=0; i< this.Result.length; i++)
+		{
+			// Insert each item of the user founded list in interface
+			Tr = INTERFACE_CreateUserElement(this.Result[i]);
+			this.TBody.appendChild(Tr);
+		}
+		
+		// Set class for sort buttons
+		this.OrderNick.className = 'selected';
+		this.OrderNick.disabled = false;
+		this.OrderName.className = 'unselected';
+		this.OrderName.disabled = false;
+
+		// Set functions for sort buttons
+		this.OrderNick.onclick = function()
+		{
+			Obj.SortByNick();
+		}
+
+		this.OrderName.onclick = function()
+		{
+			Obj.SortByName();
+		}
+	}
+}
+
+/**
+* Change sort order and display result list order by nick
+*
+* @author Danilo Yorinori
+*/
+function INTERFACE_SortSearchUserByNick() {
+	var Tr, i;
+
+	// Change sort order
+	if (this.OrderBy == "0")
+	{
+		this.OrderBy = "1";
+	}
+	else
+	{
+		this.OrderBy = "0";
+	}
+
+	MainData.SortSearchUserByNick();
+
+	this.OrderNick.className = 'selected';
+	this.OrderName.className = 'unselected';
+	
+	// Remove previous items
+	while(this.TBody.rows.length >0)
+	{
+		this.TBody.removeChild(this.TBody.rows[0]);
+	}
+
+	for(i=0; i< this.Result.length; i++)
+	{
+		// Insert each item of the user founded list in interface
+		Tr = INTERFACE_CreateUserElement(this.Result[i]);
+		this.TBody.appendChild(Tr);
+	}
+}
+
+/**
+* Change sort order and display result list order by name
+*
+* @author Danilo Yorinori
+*/
+function INTERFACE_SortSearchUserByName() {
+	var Tr, i;
+
+	// Change sort order
+	if (this.OrderBy == "2")
+	{
+		this.OrderBy = "3";
+	}
+	else
+	{
+		this.OrderBy = "2";
+	}
+
+	MainData.SortSearchUserByName();
+
+	this.OrderName.className = 'selected';
+	this.OrderNick.className = 'unselected';
+	
+	// Remove previous items
+	while(this.TBody.rows.length >0)
+	{
+		this.TBody.removeChild(this.TBody.rows[0]);
+	}
+
+	for(i=0; i< this.Result.length; i++)
+	{
+		// Insert each item of the user founded list in interface
+		Tr = INTERFACE_CreateUserElement(this.Result[i]);
+		this.TBody.appendChild(Tr);
+	}
 }

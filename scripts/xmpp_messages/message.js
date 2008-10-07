@@ -750,13 +750,13 @@ function MESSAGE_SearchUser(Username, Option)
 	XMPP = "<iq xml:lang='"+UTILS_JabberLang(MainData.Lang)+"' type='set' to='"+MainData.SearchComponent+"."+MainData.Host+"' id='"+MainData.Const.IQ_ID_SearchUser+"' >";
 	XMPP +=	"<query xmlns='jabber:iq:search'>";
 	XMPP += "<x xmlns='jabber:x:data' type='submit' >";
-	if (Option == 1)
+	if (Option == 0)
 	{
 		XMPP += "<field type='text-single' var='user' >";
 		XMPP += "<value>"+Username+"*</value>";
 		XMPP += "</field>";
 	}
-	if (Option == 0)
+	if (Option == 1)
 	{
 		XMPP += "<field type='text-single' var='fn' >";
 		XMPP += "<value>"+Username+"*</value>";

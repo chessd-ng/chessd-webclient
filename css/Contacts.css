@@ -366,6 +366,9 @@
 	position		: relative;
 }
 
+/**
+*	Search User 
+*
 #SearchUserDiv {
 	padding-top		: 15px;
 }
@@ -445,7 +448,7 @@
 	text-align		: center;
 	position		: relative;
 }
-
+*/
 #contact_loading, #contact_online_loading
 {
 	width			: 125px;
@@ -462,4 +465,195 @@
 
 	top			: 60px;
 	left			: 20px;
+}
+
+
+/* Search User */
+
+/* Id */
+#SearchUserDiv {
+	padding-top		: 20px;
+}
+
+#SearchUserDiv #FormDiv {
+	padding-left		: 48px;
+	margin-bottom : 5px;
+}
+
+#SearchUserDiv #InputDiv {
+		float : left;
+		width : 140px;
+}
+
+#SearchUserDiv #Button1Div,
+#SearchUserDiv #Button2Div {
+	padding-top 		: 15px;
+	padding-right		: 10px;
+	text-align		: center;
+	position		: relative;
+	display : block;
+}
+
+#SearchUserDiv #Button1Div {
+	padding-top 		: 30px;
+}
+
+#SearchUserDiv #ResultDiv {
+	margin-top : 10px;
+}
+
+#SearchUserDiv #InfoDiv {
+	text-align:center;
+	width : 300px;
+	margin-left : 30px;
+}
+
+#SearchUserDiv #TableDiv {
+	margin : 5px 30px 10px 30px;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv {
+	border : 1px solid #216778;
+	border-bottom-width : 0px;
+	background-color	: #DAF3F5;
+	width : 286px;
+	text-align : center;
+}
+
+#SearchUserDiv #BorderDiv {
+	border : 1px solid #216778;
+	height : 220px;
+	width : 286px;
+}
+
+#SearchUserDiv #TableResultDiv {
+	height : 220px;
+	overflow-y : auto;
+	overflow-x : hidden;
+/*margin : 0px 9px;*/
+	width : 286px;
+	text-align : center;
+}
+/*
+#SearchUserDiv #TopBorder{
+	margin-top : 5px;
+}
+
+#SearchUserDiv #BottomBorder{
+	margin-bottom : 5px;
+}
+*/
+
+/* HTML Elemeuus */
+#SearchUserDiv #InfoDiv span {
+	font-weight : normal;
+}
+
+#SearchUserDiv span {
+	padding-top		: 20px;
+	margin-right		: 10px;
+	font-size 		: 11px;
+	font-weight		: bold;
+	color			: #216778;
+}
+
+#SearchUserDiv table {
+	width			: 286px; 
+	border-collapse	: collapse;
+	empty-cells		: show;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv tr {
+	font-size 		: 12px;
+	color			: #216778;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv td {
+	width : 143px;
+	padding : 5px 10px 5px 0px;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv td:hover {
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv span {
+	font-size 		: 11px;
+	color			: #216778;
+	font-weight : normal;
+	padding-top		: 0px;
+	margin-right		: 0px;
+}
+
+#SearchUserDiv #TableDiv #TableResultDiv tr {
+	cursor			: pointer;
+	font-size 		: 11px;
+	color			: #216778;
+}
+
+#SearchUserDiv #TableDiv #TableResultDiv td {
+	width : 143px;
+	padding : 3px 10px 3px 0px; 
+}
+
+#SearchUserDiv input {
+	margin-top		: 5px;
+}
+
+#SearchUserDiv #InputDiv input {
+	border-color : #FFA200;
+}
+
+/*
+#SearchUserDiv hr {
+	background-color : #FFA200;
+	color : #FFA200;
+	border-width : 0px;
+	margin : 0px 25px 0px 5px;
+	height : 1px;
+}
+*/
+
+/* Classes */
+#SearchUserDiv .header {
+	color			: #216778;
+}
+
+#SearchUserDiv .radio {
+	border : 0px none;
+}
+
+#SearchUserDiv .label {
+	margin-top		: 5px;
+	margin-left		: 5px;
+	font-size		: 10px;
+	font-weight		: normal;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv span.selected {
+	font-weight : bold;
+	color : #FFA200;
+	border-bottom : 1px solid #FFA200;
+	cursor : pointer;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv span.unselected {
+	border-bottom : 0px;
+	font-weight : normal;
+	cursor : pointer;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv span.disabled {
+	color : #216778;
+	border-bottom : 0px;
+	font-weight : normal;
+}
+
+#SearchUserDiv #TableDiv #TableHeadDiv span.unselected:hover {
+	color : #FFA200;
+	border-bottom : 1px solid #FFA200;
+}
+
+#SearchUserDiv #Button1Div .button,
+#SearchUserDiv #Button2Div .button {
+	font-size : 12px;
 }

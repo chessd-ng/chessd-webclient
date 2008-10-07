@@ -883,6 +883,38 @@ function UTILS_SortByUsernameDsc(a, b)
 }
 
 /**
+* Use to sort Userlist into ascendent order
+* If x < y return -1
+*    x > y return  1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortByFullnameAsc(a, b) 
+{
+	var x = a.Fullname.toLowerCase();
+	var y = b.Fullname.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
+/**
+* Use to sort Userlist into descendent order
+* If x < y return  1
+*    x > y return -1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortByFullnameDsc(a, b) 
+{
+	var x = a.Fullname.toLowerCase();
+	var y = b.Fullname.toLowerCase();
+	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+}
+
+/**
 * Use to sort Userlist into descendent order by Rating
 * If x < y return  1
 *    x > y return -1

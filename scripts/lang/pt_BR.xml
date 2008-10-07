@@ -78,20 +78,21 @@
 		<contact_remove_text>Tem certeza que deseja remover %s da sua lista?</contact_remove_text>
 		<contact_search_user>Buscar usuário</contact_search_user>
 		<contact_user_t>Usuário:</contact_user_t>
-		<contact_no_user_found>Nenhum usuário encontrado</contact_no_user_found>
-		<contact_user_found>Usuários encontrados:</contact_user_found>
 		<contact_user>Usuário</contact_user>
 		<contact_teacher>Professor</contact_teacher>
 		<contact_admin>Administrador</contact_admin>
 		<contact_robot>Robô</contact_robot>
 		<contact_search_by>Buscar por:</contact_search_by>
-		<contact_by_name>Nome</contact_by_name>
-		<contact_by_user>Apelido</contact_by_user>
+		<contact_by_name>nome</contact_by_name>
+		<contact_by_nick>apelido</contact_by_nick>
 		<contact_both>Ambos</contact_both>
 		<contact_change_profile>Alterar meu perfil</contact_change_profile>
 		<contact_loading>Carregando lista de contatos...</contact_loading>
 		<contact_online_loading>Carregando lista de usuários online...</contact_online_loading>
 		<contact_default_group>Amigos</contact_default_group>
+		<contact_search_default>Nenhuma busca realizada</contact_search_default>
+		<contact_not_found>Nenhum resultado encontrado com %t %s</contact_not_found>
+		<contact_user_found>Resultados encontrados com %t %s</contact_user_found>
 	</contact>
 	<chat>
 		<chat_warning>Atenção</chat_warning>
