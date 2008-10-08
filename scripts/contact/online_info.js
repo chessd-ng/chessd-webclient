@@ -18,10 +18,11 @@
 * Control user information (rating an type)
 */
 
+//TODO -> acertar o parser para redirecionar mensagens para esse controlador
 /**
 * Receive a info message and set it in user list
 */
-function CONTACT_HandleInfo(XML)
+function ONLINE_HandleInfo(XML)
 {
 	var RatingNodes, TypeNodes;
 	
@@ -29,8 +30,8 @@ function CONTACT_HandleInfo(XML)
 	TypeNodes = XML.getElementsByTagName('type');
 
 	// Update contacts 
-	CONTACT_HandleRating(RatingNodes);
-	CONTACT_HandleType(TypeNodes);
+	ONLINE_HandleRating(RatingNodes);
+	ONLINE_HandleType(TypeNodes);
 
 	return "";
 }
@@ -38,7 +39,7 @@ function CONTACT_HandleInfo(XML)
 /**
 * Handle user rating, update the structure and interface
 */
-function CONTACT_HandleRating(NodeList)
+function ONLINE_HandleRating(NodeList)
 {
 	var Username, Rating, Category, i;
 
@@ -50,14 +51,14 @@ function CONTACT_HandleRating(NodeList)
 		Rating = NodeList[i].getAttribute('rating');
 
 		// Set rating on structure
-		CONTACT_SetUserRating(Username, Category, Rating);
+		ONLINE_SetUserRating(Username, Category, Rating);
 	}
 }
 
 /**
 * Handle user types, update the structure and interface
 */
-function CONTACT_HandleType(NodeList)
+function ONLINE_HandleType(NodeList)
 {
 	var Jid, Type, i;
 
@@ -68,43 +69,34 @@ function CONTACT_HandleType(NodeList)
 		Type = NodeList[i].getAttribute('type');
 
 		// Set type on sctructure
-		CONTACT_SetUserType(Jid, Type);
+		ONLINE_SetUserType(Jid, Type);
 	}
 }
 
 /**
 * Change type of 'Username' in structure and interface
 */
-function CONTACT_SetUserType(Username, NewType)
+function ONLINE_SetUserType(Username, NewType)
 {
-	var Room;
 	var Status, Rating;
 	
-	//var Room = MainData.GetRoom(MainData.GetRoomDefault());
 	var User = MainData.GetUser(Username);
-	var ContactUser;
-	var ContactObj = MainData.GetContactObj();
+	var OnlineUser;
+	var OnlineObj= MainData.GetOnlineObj();
 
 	// update on interface
 	if(User != null)
 	{
-		Status = User.Status;
+		Rating = User.Rating.GetRatingValue(MainData.GetOnlineCurrentRating());
 
-		ContactUser = MainData.GetContactUser(Username);
-
-		if(ContactUser != null)
+		OnlineUser = MainData.GetOnlineUser(Username);
+		if(OnlineUser != null)
 		{
-			ContactUser.SetType(NewType);
+			Status = OnlineUser.GetStatus();
+			OnlineUser.SetType(NewType);
 
 			// Update type in contact online and contact list
-			//MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
-			ContactObj.updateUser(Username,Status, null, NewType);
-		}
-		// Offline user
-		else
-		{
-			Status = "offline";
-			ContactObj.updateUser(Username,Status, null, NewType);
+			OnlineObj.userList.updateUser(Username, Status, Rating, NewType);
 		}
 	}
 	return true;
@@ -113,48 +105,42 @@ function CONTACT_SetUserType(Username, NewType)
 /**
 * Change rating of 'Username' in structure and interface
 */
-function CONTACT_SetUserRating(Username, Category, Rating)
+function ONLINE_SetUserRating(Username, Category, Rating)
 {
 	var Status, Type;
 	//var User;
 	
 	//var Room = MainData.GetRoom(MainData.GetRoomDefault());
 	var User = MainData.GetUser(Username);
-	var ContactUser;
-	var ContactObj = MainData.GetContactObj();
+	var OnlineUser;
+	var OnlineObj = MainData.GetOnlineObj();
 
 	// update on interface
-	//if(MainData.SetRating(Username, Category, Rating))
 	if(User != null)
 	{
-		Type = User.Type;
+		Status = User.GetStatus();
+		Type = User.GetType();
 
-		ContactUser = MainData.GetContactUser(Username);
+		OnlineUser = MainData.GetOnlineUser(Username);
 
-		if(ContactUser != null)
+		if(OnlineUser != null)
 		{
-			Status = User.Status;
-
 			// Update in data struct
-			if(ContactUser.Rating.FindRating(Category) == null)
+			if(OnlineUser.Rating.FindRating(Category) == null)
 			{
-				ContactUser.Rating.AddRating(Category, Rating);
+				OnlineUser.Rating.AddRating(Category, Rating);
 			}
 			else
 			{
-				ContactUser.Rating.SetRatingValue(Category, Rating);
+				OnlineUser.Rating.SetRatingValue(Category, Rating);
 			}
-		}
-		else
-		{
-			// Offline user
-			Status = "offline";
+
 		}
 
-		if (Category == MainData.GetContactCurrentRating())
+		if (Category == MainData.GetOnlineCurrentRating())
 		{
 			// Update type in contact online and contact list
-			ContactObj.updateUser(Username,Status, Rating, Type);
+			OnlineObj.userList.updateUser(Username, Status, Rating, Type);
 		}
 
 	}

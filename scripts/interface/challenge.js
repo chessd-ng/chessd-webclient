@@ -25,7 +25,7 @@
 * @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, MatchId)
+function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
 	var Div;
 
@@ -68,7 +68,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	// Top Elments
 	TopDiv = UTILS_CreateElement('div', 'TopDiv');
 	Username = UTILS_CreateElement('h3', null, null, Oponent);
-	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
+	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+RatingObj.GetRatingValue("blitz"));
 	Username.appendChild(RatingLabel);
 	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
 	
@@ -224,9 +224,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				
 				TimeSelect.appendChild(TimeOpt);
 			}
-		// TODO -> FIX IT TO WORK WITH USERLIST	
-//		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"lightning");
-			Rating = 0;
+			Rating = RatingObj.GetRatingValue("lightning");
 		}
 
 		// Blitz = 1
@@ -239,9 +237,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		// TODO -> FIX IT TO WORK WITH USERLIST	
-//		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault, Oponent, "blitz");
-			Rating = 0;
+			Rating = RatingObj.GetRatingValue("blitz");
 		}
 
 		// Standard = 2
@@ -271,12 +267,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"190");
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
+/*
+			// Infinit symbol
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
-		// TODO -> FIX IT TO WORK WITH USERLIST	
-//			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
-			Rating = 0;
+*/
+			Rating = RatingObj.GetRatingValue("standard");
 		}
 		// Untimed = 3
 		else if (Type == 3)
@@ -288,9 +285,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
-		// TODO -> FIX IT TO WORK WITH USERLIST	
-			//Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"untimed");
-			Rating = 0;
+			Rating = RatingObj.GetRatingValue("untimed");
 
 		}
 

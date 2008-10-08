@@ -303,6 +303,7 @@ function MESSAGE_InfoProfile(User)
 /**
 * Message to get users ratings
 */
+/*
 function MESSAGE_UserListInfo()
 {
 	var XMPP, i;
@@ -323,7 +324,7 @@ function MESSAGE_UserListInfo()
 
 	return XMPP;
 }
-
+*/
 /**********************************
  * MESSAGES - INVITE
  **********************************/

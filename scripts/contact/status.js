@@ -19,7 +19,7 @@
 * Handle users status
 */
 
-
+// TODO --> SEPARAR OS CHANGE STATUS PARA ONLINE, ROOM E CONTACT
 /**
 * Change User Status 
 */
@@ -85,39 +85,44 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 function CONTACT_SetUserStatus(Username, NewStatus)
 {
 	var Rating, Type;
-	var UserPos;
+	var User = MainData.GetUser(Username);
+	var ContactUser;
+	var ContactObj = MainData.GetContactObj();
 
 	// Update new user status in data struct
-	MainData.SetUserStatus(Username, NewStatus)
-
-	// Update user status in interface
-	if(MainData.Contact != null)
+	if(User != null)
 	{
-		// Find user in data struct 
-		UserPos = MainData.FindUser(Username);
+		User.SetStatus(NewStatus);
+	}
 
-		if(UserPos != null)
+	// Find user in data struct 
+	ContactUser = MainData.GetContactUser(Username);
+
+	if(ContactUser != null)
+	{
+		// Update new user status in data struct
+		ContactUser.SetStatus(NewStatus);
+
+		// Get user type
+		Type = ContactUser.Type;
+		// Get user rating
+		Rating = ContactUser.Rating.GetRatingValue(MainData.GetContactCurrentRating());
+/*
+		switch(MainData.CurrentRating)
 		{
-			// Get user type
-			Type = MainData.UserList[UserPos].Type;
-
-			// Get user rating
-			switch(MainData.CurrentRating)
-			{
-				case "blitz":
-					Rating = MainData.UserList[UserPos].Rating.Blitz;
-					break;
-				case "lightning":
-					Rating = MainData.UserList[UserPos].Rating.Lightning;
-					break;
-				case "standard":
-					Rating = MainData.UserList[UserPos].Rating.Standard;
-					break;
-			}
-			// Update user status in contact list
-			MainData.Contact.updateUser(Username, NewStatus, Rating, Type);
+			case "blitz":
+				Rating = MainData.UserList[UserPos].Rating.Blitz;
+				break;
+			case "lightning":
+				Rating = MainData.UserList[UserPos].Rating.Lightning;
+				break;
+			case "standard":
+				Rating = MainData.UserList[UserPos].Rating.Standard;
+				break;
 		}
-
+*/
+		// Update user status in contact list
+		ContactObj.updateUser(Username, NewStatus, Rating, Type);
 	}
 	return "";
 }

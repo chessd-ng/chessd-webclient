@@ -138,6 +138,9 @@ function LOAD_LoadFiles()
 	Files.push("scripts/game/oldgame.js");
 	Files.push("scripts/game/game.js");
 	Files.push("scripts/interface/help.js");
+	Files.push("scripts/contact/online.js");
+	Files.push("scripts/contact/online_info.js");
+	Files.push("scripts/contact/user.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);

@@ -71,13 +71,26 @@ function DATA(ConfFile, LangFile)
 	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
 	this.Load = -1;
 
-	//Contact
-	this.Contact = null;
-	this.ContactOnline = null;
-	this.UserList = new Array();
+	/************************ CONTACT DATA*********************/
+	this.Contact = new Object();
+	this.Contact.Obj = null;
+	this.Contact.UserList = new Array();
+	this.Contact.OrderBy = 0;
+	this.Contact.CurrentRating = "blitz";
 
-	this.OrderBy = "0";
+	/************************ ONLINE DATA**********************/
+	this.Online = new Object();
+	this.Online.Obj = null;
+	this.Online.UserList = new Array();
+	this.Online.OrderBy = 0;
+	this.Online.CurrentRating = "blitz";
 
+	/************************ USERLIST DATA*********************/
+	this.Users = new Object();
+	this.Users.UserList = new Array();
+	this.Users.UpdateTimer = null;
+
+	/************************ CHAT DATA************************/
 	this.Chat = new Object();
 	this.Chat.ChatList = new Array()
 	this.Chat.ShowChat = new Array();
@@ -122,6 +135,7 @@ function DATA(ConfFile, LangFile)
 	this.MyProfile = new Object();
 	this.Photo = null;
 	this.AwayCounter = null;
+	this.Type = "user";
 
 
 	this.Windows = new Object();
@@ -162,11 +176,52 @@ DATA.prototype.SetLang = DATA_SetLang;
 DATA.prototype.GetDefaultPHP = DATA_GetDefaultPHP;
 
 
+/*CONTACT METHODS************************/
+DATA.prototype.AddContactUser = DATA_AddContactUser;
+DATA.prototype.RemoveContactUser = DATA_RemoveContactUser;
+DATA.prototype.FindContactUser = DATA_FindContactUser;
+DATA.prototype.GetContactUser = DATA_GetContactUser;
+DATA.prototype.SortContactUserByNick = DATA_SortContactUserByNick;
+DATA.prototype.SortContactUserByRating = DATA_SortContactUserByRating;
+//DATA.prototype.IsContact = DATA_IsContact; -> Fazer no contact.js
+
+// TODO --> TERMINAR DE FAZER OS METODOS DO USER LIST
+// TODO --> ADAPTAR AS FUNCOES DOS CONTROLADORES PARA OS METODOS
+DATA.prototype.GetContactUserList = DATA_GetContactUserList;
+DATA.prototype.SetContactObj = DATA_SetContactObj;
+DATA.prototype.GetContactObj = DATA_GetContactObj;
+DATA.prototype.SetContactOrderBy = DATA_SetContactOrderBy;
+DATA.prototype.GetContactOrderBy = DATA_GetContactOrderBy;
+DATA.prototype.SetContactCurrentRating = DATA_SetContactCurrentRating;
+DATA.prototype.GetContactCurrentRating = DATA_GetContactCurrentRating;
+
+/*ONLINE LIST METHODS************************/
+DATA.prototype.AddOnlineUser = DATA_AddOnlineUser;
+DATA.prototype.RemoveOnlineUser = DATA_RemoveOnlineUser;
+DATA.prototype.FindOnlineUser = DATA_FindOnlineUser;
+DATA.prototype.GetOnlineUser = DATA_GetOnlineUser;
+DATA.prototype.SortOnlineUserByNick = DATA_SortOnlineUserByNick;
+DATA.prototype.SortOnlineUserByRating = DATA_SortOnlineUserByRating;
+
+DATA.prototype.GetOnlineUserList = DATA_GetOnlineUserList;
+DATA.prototype.SetOnlineObj = DATA_SetOnlineObj;
+DATA.prototype.GetOnlineObj = DATA_GetOnlineObj;
+DATA.prototype.SetOnlineOrderBy = DATA_SetOnlineOrderBy;
+DATA.prototype.GetOnlineOrderBy = DATA_GetOnlineOrderBy;
+DATA.prototype.SetOnlineCurrentRating = DATA_SetOnlineCurrentRating;
+DATA.prototype.GetOnlineCurrentRating = DATA_GetOnlineCurrentRating;
+
+/*USERLIST METHODS***********************/
 DATA.prototype.AddUser = DATA_AddUser;
-DATA.prototype.DelUser = DATA_DelUser;
+DATA.prototype.RemoveUser = DATA_RemoveUser;
 DATA.prototype.FindUser = DATA_FindUser;
-DATA.prototype.FindNextUser = DATA_FindNextUser;
-DATA.prototype.IsContact = DATA_IsContact;
+DATA.prototype.GetUser = DATA_GetUser;
+DATA.prototype.GetUserList = DATA_GetUserList;
+
+DATA.prototype.SetUpdateTimer = DATA_SetUpdateTimer;
+DATA.prototype.GetUpdateTimer = DATA_GetUpdateTimer;
+
+/*
 DATA.prototype.GetStatus = DATA_GetStatus;
 DATA.prototype.GetRating = DATA_GetRating;
 DATA.prototype.GetType = DATA_GetType;
@@ -175,9 +230,7 @@ DATA.prototype.SetUserStatus = DATA_SetUserStatus;
 DATA.prototype.SetSubs = DATA_SetSubs;
 DATA.prototype.SetRating = DATA_SetRating;
 DATA.prototype.SetType = DATA_SetType;
-
-DATA.prototype.SortUserByNick = DATA_SortUserByNick;
-DATA.prototype.SortUserByRating = DATA_SortUserByRating;
+*/
 
 /*ROOM METHODS ********************************/
 DATA.prototype.AddRoom = DATA_AddRoom;
@@ -424,6 +477,477 @@ function DATA_GetDefaultPHP()
 	return this.Conf.DefaultPHP;
 }
 
+
+/**********************************
+ * METHODS - CONTACT USER LIST    *
+ **********************************/
+function DATA_AddContactUser(Username, Status, Subs, Group)
+{
+	// Creating a new object
+	var User = new Object();
+
+	// Setting atributes
+	// The user's rating will be seted after
+	User.Username = Username;
+	User.Status = Status;
+	User.Subs = Subs;
+	User.Group = Group;
+	User.Rating = DATA_RatingObject();
+	User.Type = "";
+	
+	User.GetUsername = DATA_GetUsername;
+	User.SetStatus = DATA_SetStatus;
+	User.GetStatus = DATA_GetStatus;
+	User.SetSubs = DATA_SetSubs;
+	User.GetSubs = DATA_GetSubs;
+	User.GetGroup = DATA_GetGroup;
+	User.SetGroup = DATA_SetGroup;
+ 
+	User.GetRating = DATA_GetRating;
+	User.SetType = DATA_SetType;
+	User.GetType = DATA_GetType;
+
+	return this.Contact.UserList.push(User);
+
+}
+function DATA_RemoveContactUser(Username)
+{
+	var Pos = MainData.FindContactUser(Username)
+	
+	if(Pos != null)
+	{
+		return this.Contact.UserList.splice(Pos,1);
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_FindContactUser(Username)
+{
+	var i;
+	
+	for(i = 0; i < this.Contact.UserList.length; i++)
+	{
+		if(this.Contact.UserList[i].Username == Username)
+		{
+			return i;
+		}
+	}
+	return null;
+}
+function DATA_GetContactUser(Username)
+{
+	var Pos = MainData.FindContactUser(Username);
+	
+	if(Pos != null)
+	{
+		return this.Contact.UserList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+/**
+* @brief		Sort Userlist into ascending or descending order
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
+*/
+function DATA_SortContactUserByNick()
+{
+	if (this.Contact.OrderBy == "0")
+	{
+		this.Contact.UserList.sort(UTILS_SortByUsernameAsc);
+	}
+	else
+	{
+		this.Contact.UserList.sort(UTILS_SortByUsernameDsc);
+	}
+	return true;
+}
+
+/**
+* @brief		Sort Userlist into descending order by Rating selected in interface
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByRatingDsc
+*/
+function DATA_SortContactUserByRating()
+{
+	this.Contact.UserList.sort(UTILS_SortContactByRatingDsc);
+
+	return true;
+}
+
+function DATA_GetContactUserList()
+{
+	return this.Contact.UserList;
+}
+
+
+function DATA_SetContactObj(Obj)
+{
+	this.Contact.Obj = Obj;
+}
+
+function DATA_GetContactObj()
+{
+	return this.Contact.Obj;
+}
+
+function DATA_SetContactOrderBy(NewValue)
+{
+	this.Contact.OrderBy = NewValue;
+}
+
+function DATA_GetContactOrderBy()
+{
+	return this.Contact.OrderBy;
+}
+
+function DATA_SetContactCurrentRating(NewCategory)
+{
+	this.Contact.CurrentRating = NewCategory;
+}
+
+function DATA_GetContactCurrentRating()
+{
+	return this.Contact.CurrentRating;
+}
+
+/**********************************
+ * METHODS - CONTACT USER LIST    *
+ **********************************/
+function DATA_AddOnlineUser(Username, Status, Type)
+{
+	// Creating a new object
+	var User = new Object();
+
+	// Setting atributes
+	// The user's rating will be seted after
+	User.Username = Username;
+	User.Status = Status;
+	User.Rating = DATA_RatingObject();
+	User.Type = Type;
+	
+	User.GetUsername = DATA_GetUsername;
+	User.SetStatus = DATA_SetStatus;
+	User.GetStatus = DATA_GetStatus;
+ 
+	User.GetRating = DATA_GetRating;
+	User.SetType = DATA_SetType;
+	User.GetType = DATA_GetType;
+
+	return this.Online.UserList.push(User);
+
+}
+function DATA_RemoveOnlineUser(Username)
+{
+	var Pos = MainData.FindOnlineUser(Username)
+	
+	if(Pos != null)
+	{
+		return this.Online.UserList.splice(Pos,1);
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_FindOnlineUser(Username)
+{
+	var i;
+	
+	for(i = 0; i < this.Online.UserList.length; i++)
+	{
+		if(this.Online.UserList[i].Username == Username)
+		{
+			return i;
+		}
+	}
+	return null;
+}
+function DATA_GetOnlineUser(Username)
+{
+	var Pos = MainData.FindOnlineUser(Username);
+	
+	if(Pos != null)
+	{
+		return this.Online.UserList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+/**
+* @brief		Sort Userlist into ascending or descending order
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
+*/
+function DATA_SortOnlineUserByNick()
+{
+	if (this.Online.OrderBy == "0")
+	{
+		this.Online.UserList.sort(UTILS_SortByUsernameAsc);
+	}
+	else
+	{
+		this.Online.UserList.sort(UTILS_SortByUsernameDsc);
+	}
+	return true;
+}
+
+/**
+* @brief		Sort Userlist into descending order by Rating selected in interface
+*
+* @author		Danilo Yorinori
+* @return		boolean
+* @see			UTILS_SortByRatingDsc
+*/
+function DATA_SortOnlineUserByRating()
+{
+	this.Online.UserList.sort(UTILS_SortOnlineByRatingDsc);
+
+	return true;
+}
+
+function DATA_GetOnlineUserList()
+{
+	return this.Online.UserList;
+}
+
+function DATA_SetOnlineObj(Obj)
+{
+	this.Online.Obj = Obj;
+}
+
+function DATA_GetOnlineObj()
+{
+	return this.Online.Obj;
+}
+
+function DATA_SetOnlineOrderBy(NewValue)
+{
+	this.Online.OrderBy = NewValue;
+}
+
+function DATA_GetOnlineOrderBy()
+{
+	return this.Online.OrderBy;
+}
+
+function DATA_SetOnlineCurrentRating(NewCategory)
+{
+	this.Online.CurrentRating = NewCategory;
+}
+
+function DATA_GetOnlineCurrentRating()
+{
+	return this.Online.CurrentRating;
+}
+
+
+
+/**********************************
+ * METHODS - USER OBJECT          *
+ **********************************/
+function DATA_GetUsername()
+{
+	return this.Username;
+}
+function DATA_SetStatus(NewStatus)
+{
+	this.Username.Status = NewStatus;
+}
+function DATA_GetStatus()
+{
+	return this.Status;
+}
+function DATA_SetSubs(NewSubs)
+{
+	this.Subs = NewSubs;
+}
+function DATA_GetSubs()
+{
+	return this.Subs;
+}
+function DATA_SetGroup(NewGroup)
+{
+	this.Group = NewGroup;
+}
+function DATA_GetGroup()
+{
+	return this.Group;
+}
+ 
+function DATA_SetPhoto(NewPhoto)
+{
+	this.Photo = NewPhoto;
+}
+function DATA_GetPhoto()
+{
+	return this.Photo;
+}
+
+function DATA_GetRating()
+{
+	return this.Rating;
+}
+function DATA_SetType(NewType)
+{
+	this.Type = NewType;
+}
+function DATA_GetType()
+{
+	return this.Type;
+}
+
+function DATA_SetRole(NewRole)
+{
+	this.Role = NewRole;
+}
+
+function DATA_GetRole()
+{
+	return this.Role;
+}
+
+function DATA_SetAfilliation(NewAfilliation)
+{
+	this.Afilliation = NewAfilliation;
+}
+
+function DATA_GetAfilliation()
+{
+	return this.Afilliation;
+}
+
+function DATA_GetUpdateRating()
+{
+	return this.UpdateRating;
+}
+
+function DATA_SetUpdateRating(Bool)
+{
+	this.UpdateRating = Bool;
+}
+/**
+* @brief		Change the user's subscription
+*
+* @param		Username  User name 
+* @param		NewSubs   New Username subscriptioon 
+* @author		Ulysses Bonfim
+* @return 		false if the user is not on your list, true otherwise
+* @see			DATA_FindUser 
+*/
+/*
+function DATA_SetSubs(Username, NewSubs)
+{
+	var UserPos = this.FindUser(Username);
+
+	if (UserPos == null)
+		return false;
+		
+	this.UserList[UserPos].Subs = NewSubs;
+	return true;
+}
+*/
+/**********************************
+ * METHODS - RATING OBJECT        *
+ **********************************/
+/*
+* Rating Object is used to manage user's rating;
+* This object contains a list of rating with rating type (obj.Category)
+* and this type value (obj.Value)
+*/
+function DATA_RatingObject()
+{
+	var RatingObj = new Object();
+
+	RatingObj.RatingList = new Array();
+
+	RatingObj.AddRating = DATA_AddRating;
+	RatingObj.RemoveRating = DATA_RemoveRating;
+	RatingObj.FindRating = DATA_FindRating;
+	RatingObj.GetRatingValue = DATA_GetRatingValue;
+	RatingObj.SetRatingValue = DATA_SetRatingValue;
+
+	return RatingObj;
+}
+
+function DATA_AddRating(Category, Value)
+{
+	var Rating = new Object();
+	
+	Rating.Category = Category;
+	Rating.Value = Value;
+	
+	this.RatingList.push(Rating);
+}
+
+function DATA_RemoveRating(Category)
+{
+	var Pos = this.FindRating(Category);
+
+	if(Pos != null)
+	{
+		this.RatingList.splice(Pos,i);
+	}
+}
+
+function DATA_FindRating(Category)
+{
+	var i;
+
+	for (i = 0; i<this.RatingList.length; i++)
+	{
+		if (this.RatingList[i].Category == Category)
+		{
+			return i;
+		}
+	}
+	return null;
+
+}
+function DATA_GetRatingValue(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRatingValue(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+
+	if(Pos != null)
+	{
+		this.RatingList[Pos].Value = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -440,7 +964,7 @@ function DATA_GetDefaultPHP()
 * @author		Ulysses Bonfim
 * @return 		false - User already on list, true otherwise
 */
-function DATA_AddUser(Username, Status, Subs, Group)
+function DATA_AddUser(Username, Status)
 {
 	// Creating a new object
 	var User = new Object();
@@ -450,11 +974,23 @@ function DATA_AddUser(Username, Status, Subs, Group)
 	User.Username = Username;
 	User.Photo = "";
 	User.Status = Status;
-	User.Subs = Subs;
-	User.Rating = new Object();
-	User.Group = Group;
+	User.Rating = DATA_RatingObject();
 	User.Type = "";
-	this.UserList[this.UserList.length] = User;
+	User.UpdateRating = true;
+
+	User.GetUsername = DATA_GetUsername;
+	User.SetStatus = DATA_SetStatus;
+	User.GetStatus = DATA_GetStatus;
+
+	User.SetPhoto = DATA_SetPhoto;
+	User.GetPhoto = DATA_GetPhoto; 
+	User.GetRating = DATA_GetRating;
+	User.SetType = DATA_SetType;
+	User.GetType = DATA_GetType;
+	User.SetUpdateRating = DATA_SetUpdateRating;
+	User.GetUpdateRating = DATA_GetUpdateRating;
+
+	this.Users.UserList.push(User);
 }
 
 /**
@@ -467,7 +1003,7 @@ function DATA_AddUser(Username, Status, Subs, Group)
 * @return 		null if user is not on your list, true otherwise
 * @see 			DATA_FindUser
 */
-function DATA_DelUser(Username)
+function DATA_RemoveUser(Username)
 {
 	var i;
 
@@ -476,10 +1012,11 @@ function DATA_DelUser(Username)
 
 	// If user do not exist
 	if (i == null)
+	{
 		return null;
-
+	}
 	// Removing user from user list
-	this.UserList.splice(i, 1);
+	this.Users.UserList.splice(i, 1);
 	return true;
 }
 
@@ -494,12 +1031,40 @@ function DATA_FindUser(Username)
 {
 	var i;
 
-	for (i=0; i<this.UserList.length; i++)
+	for (i=0; i<this.Users.UserList.length; i++)
 	{
-		if (this.UserList[i].Username == Username)
+		if (this.Users.UserList[i].Username == Username)
 			return i;
 	}
 	return null;
+}
+
+function DATA_GetUser(Username)
+{
+	var i = this.FindUser(Username);
+
+	if(i!=null)
+	{
+		return this.Users.UserList[i];
+	}
+
+	return null;
+}
+
+function DATA_GetUserList()
+{
+	return this.Users.UserList;
+}
+
+
+function DATA_SetUpdateTimer(Interval)
+{
+	this.Users.UpdateTimer = Interval;
+}
+
+function DATA_GetUpdateTimer()
+{
+	return this.Users.UpdateTimer;
 }
 
 /**
@@ -512,6 +1077,7 @@ function DATA_FindUser(Username)
 * @return 		The struct user founded, null otherwise
 * @see			DATA_FindUser
 */
+/*
 function DATA_FindNextUser(Username, Status)
 {
 	var i, Index;
@@ -547,7 +1113,7 @@ function DATA_FindNextUser(Username, Status)
 		return null;
 	}
 }
-
+*/
 
 /**
 * @brief		Is 'Username' in your contact list?
@@ -557,6 +1123,7 @@ function DATA_FindNextUser(Username, Status)
 * @return 		Boolean
 * @see			DATA_FindUser
 */
+/*
 function DATA_IsContact(Username)
 {
 	var i;
@@ -572,7 +1139,7 @@ function DATA_IsContact(Username)
 		return true;
 	}
 }
-
+*/
 /**
 * @brief		Get User status
 *
@@ -584,6 +1151,7 @@ function DATA_IsContact(Username)
 * 				Else return the user status.
 * @see			DATA_FindRoom, DATA_FindUser DATA_FindUserInRoom
 */
+/*
 function DATA_GetStatus(Username)
 {
 	var User;
@@ -605,7 +1173,7 @@ function DATA_GetStatus(Username)
 	}
 	return "offline";
 }
-
+*/
 /**
 * @brief		Get the User's rating
 *
@@ -618,6 +1186,7 @@ function DATA_GetStatus(Username)
 * 				Else return the user's rating in a structure.
 * @see			DATA_FindUser DATA_FindUserInRoom
 */
+/*
 function DATA_GetRating(Username)
 {
 	var UserPos = this.FindUser(Username);
@@ -646,7 +1215,7 @@ function DATA_GetRating(Username)
 	}
 	return null;
 }
-
+*/
 /**
 * @brief		Get the User's type
 *
@@ -656,6 +1225,7 @@ function DATA_GetRating(Username)
 * 				Else return the user's type.
 * @see			DATA_FindUser DATA_FindUserInRoom
 */
+/*
 function DATA_GetType(Username)
 {
 	var UserPos = this.FindUser(Username);
@@ -683,7 +1253,7 @@ function DATA_GetType(Username)
 	}
 	return null;
 }
-
+*/
 /**
 * @brief		Set default values to use
 *
@@ -691,6 +1261,7 @@ function DATA_GetType(Username)
 *
 * @author		Pedro Eugenio
 */
+/*
 function DATA_SetDefault(Username)
 {
 	this.Type = "user";
@@ -708,6 +1279,7 @@ function DATA_SetDefault(Username)
 * @return 		false if the user is not on your list, true otherwise
 * @see			DATA_FindUser 
 */
+/*
 function DATA_SetUserStatus(Username, NewStatus)
 {
 	var UserPos = this.FindUser(Username);
@@ -718,27 +1290,8 @@ function DATA_SetUserStatus(Username, NewStatus)
 	this.UserList[UserPos].Status = NewStatus;
 	return true;
 }
-
-
-/**
-* @brief		Change the user's subscription
-*
-* @param		Username  User name 
-* @param		NewSubs   New Username subscriptioon 
-* @author		Ulysses Bonfim
-* @return 		false if the user is not on your list, true otherwise
-* @see			DATA_FindUser 
 */
-function DATA_SetSubs(Username, NewSubs)
-{
-	var UserPos = this.FindUser(Username);
 
-	if (UserPos == null)
-		return false;
-		
-	this.UserList[UserPos].Subs = NewSubs;
-	return true;
-}
 
 /**
 * @brief		Change user's type
@@ -753,6 +1306,7 @@ function DATA_SetSubs(Username, NewSubs)
 * @return 		true
 * @see			DATA_FindUser DATA_FindUserInRoom
 */
+/*
 function DATA_SetType(Username, NewType)
 {
 	var UserPos = this.FindUser(Username);
@@ -789,7 +1343,7 @@ function DATA_SetType(Username, NewType)
 
 	return true;
 }
-
+*/
 
 /**
 * @brief		Change user's rating 
@@ -804,6 +1358,7 @@ function DATA_SetType(Username, NewType)
 * @return 		true
 * @see			DATA_FindUser DATA_FindUserInRoom UTILS_Capitalize
 */
+/*
 function DATA_SetRating(Username, Category, Rating)
 {
 	var UserPos, Obj, i;
@@ -839,41 +1394,7 @@ function DATA_SetRating(Username, Category, Rating)
 	}
 	return true;
 }
-
-/**
-* @brief		Sort Userlist into ascending or descending order
-*
-* @author		Danilo Yorinori
-* @return		boolean
-* @see			UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
 */
-function DATA_SortUserByNick()
-{
-	if (this.OrderBy == "0")
-	{
-		this.UserList.sort(UTILS_SortByUsernameAsc);
-	}
-	else
-	{
-		this.UserList.sort(UTILS_SortByUsernameDsc);
-	}
-	return true;
-}
-
-/**
-* @brief		Sort Userlist into descending order by Rating selected in interface
-*
-* @author		Danilo Yorinori
-* @return		boolean
-* @see			UTILS_SortByRatingDsc
-*/
-function DATA_SortUserByRating()
-{
-	this.UserList.sort(UTILS_SortByRatingDsc);
-
-	return true;
-}
-
 /**********************************
  * METHODS - ROOM LIST            *
  **********************************/
@@ -1042,6 +1563,7 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 	var User = new Object();
 	var UserPos = MainData.FindUser(Username);
 	var Room;
+	var UserObj;
 	// If room doesnt exists in data structure
 /*
 	if (RoomPos == null)
@@ -1059,9 +1581,9 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 	User.Role = Role;
 	User.Affiliation = Affiliation;
 	User.Type = Type;
+	User.Rating = DATA_RatingObject();
 
-	//TODO -> FIX IT TO WORK WITH USERLIST	
-	// Searching if interface already has user's rating
+/*
 	if (Username == MainData.Username)
 	{
 		User.Rating = MainData.Rating;
@@ -1076,6 +1598,22 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 		Room = MainData.GetRoom(MainData.GetRoomDefault());
 		User.Rating = Room.UserList[UserPos].Rating;
 	}
+*/
+	User.GetUsername = DATA_GetUsername;
+	User.SetStatus = DATA_SetStatus;
+	User.GetStatus = DATA_GetStatus;
+
+	User.SetPhoto = DATA_SetPhoto;
+	User.GetPhoto = DATA_GetPhoto; 
+	User.GetRating = DATA_GetRating;
+	User.SetType = DATA_SetType;
+	User.GetType = DATA_GetType;
+
+	User.SetRole = DATA_SetRole;
+	User.GetRole = DATA_GetRole;
+	User.SetAffiliation = DATA_SetAfilliation;
+	User.GetAffiliation = DATA_GetAfilliation;
+
 
 	// Insert user in room's user list
 	this.UserList.push(User);

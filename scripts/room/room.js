@@ -54,7 +54,7 @@ function ROOM_HandleRoomPresence(XML)
 	Component = From.split("@")[1].split("/")[0].split(".")[0];
 
 
-	// Check if the type is error
+	// Check if the type is an error
 	if (Type == "error")
 	{
 		// Check if error is a inexist room; -> QuickFix to close room
@@ -394,8 +394,18 @@ function ROOM_HandleInfo(XML)
 			User = Room.GetUser(Username);
 			if (User != null)
 			{
-				Status = User.Status;
-				Type = User.Type;
+				// Update in data struct
+				if (User.Rating.FindRating(Category) == null)
+				{
+					User.Rating.AddRating(Category, Rating);
+				}
+				else
+				{
+					User.Rating.SetRatingValue(Category, Rating);
+				}
+
+				Status = User.GetStatus();
+				Type = User.GetType();
 
 				// Update in interface 
 				if (Category == Room.GetRoomCurrentRating())
@@ -422,14 +432,17 @@ function ROOM_HandleInfo(XML)
 			User = Room.GetUser(Username);
 			if (User != null)
 			{
-				Status = User.Status;
-				User.Type = NewType;
+				// Update in data struct
+				User.SetType(NewType);
+
+				Status = User.GetStatus();
+				Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
 
 				// Update in interface
 				if(NewType != "user")
 				{
 					// Search user node in room user list
-					Room.Room.userList.updateUser(Username, Status, null, NewType);	
+					Room.Room.userList.updateUser(Username, Status, Rating, NewType);	
 				}
 			}
 		}
@@ -636,14 +649,31 @@ function ROOM_ErrorMessageLength(RoomName)
 */ 
 function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation) 
 { 
-	var Type = "user", Rating = ""; 
+	var Type = "user", Rating; 
+	var UserObj = MainData.GetUser(Jid);
 	var Buffer = "";
 	var Room;
+
+	/*
+	if(UserObj == null)
+	{
+		return null;
+	}
+	*/
 
 	Room = MainData.GetRoom(RoomName);
 	if(Room == null)
 	{
 		return null;
+	}
+
+	if(UserObj != null)
+	{
+		Rating = UserObj.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+	}
+	else
+	{
+		Rating = "";
 	}
 
 	// Check if user has already inserted. 
@@ -669,7 +699,7 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 		*/
 
 		// Get user rating and type information
-		Buffer += MESSAGE_Info(Jid); 
+		//Buffer += MESSAGE_Info(Jid); 
 
 		//Add user in data struct
 		Room.AddUser(Jid, Status, Type, Role, Affiliation); 
@@ -784,6 +814,7 @@ function ROOM_SortUsersByNick()
 	var Room, RoomName;
 	var i, j;
 	var UserName, Status, Rating, Type;
+	var User;
 	var RoomList = MainData.GetRoomList();
 
 	// Get all rooms
@@ -808,10 +839,13 @@ function ROOM_SortUsersByNick()
 		// Show new user list sorted
 		for(i=0; i<Room.UserList.length; i++)
 		{
-			UserName = Room.UserList[i].Username;
-			Status = Room.UserList[i].Status;
-			Type = Room.UserList[i].Type;
+			User = Room.UserList[i];
 
+			UserName = User.Username;
+			Status = User.Status;
+			Type = User.Type;
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+/*
 			// Get rating
 			switch(Room.GetRoomCurrentRating())
 			{
@@ -828,7 +862,7 @@ function ROOM_SortUsersByNick()
 					Rating = Room.UserList[i].Rating.Untimed;
 					break;
 			}
-
+*/
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
@@ -880,7 +914,8 @@ function ROOM_SortUsersByRating(Category)
 			UserName = User.Username;
 			Status = User.Status;
 			Type = User.Type;
-
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+/*
 			// Get rating
 			switch(Room.GetRoomCurrentRating())
 			{
@@ -897,11 +932,11 @@ function ROOM_SortUsersByRating(Category)
 					Rating = User.Rating.Untimed;
 					break;
 			}
+*/
 
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
-
 		// TODO - Fix user menu position in FF3
 		// Proposital hide
 		if (MainData.GetBrowser() == 2)

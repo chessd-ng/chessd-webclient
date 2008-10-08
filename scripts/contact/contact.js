@@ -20,20 +20,20 @@
 */
 
 /**
- * @brief	Show contact and contact online Div
+ * @brief	Show contact list Div
  *
- * Create contact list object and contact online list object. Hide contact list and show online list.
+ * Create contact list object and hide contact list.
 *
 * @author Rubens Suguimoto
 */
-function CONTACT_StartContact()
+function CONTACT_StartContactList()
 {
-	MainData.Contact = new ContactObj();
-	MainData.ContactOnline = new ContactOnlineObj();
+	var ContactObjTmp = new ContactObj()
 
 	//Hide user contact list and show online list
-	MainData.Contact.hide();
-	MainData.ContactOnline.show();
+	ContactObjTmp.hide();
+
+	MainData.SetContactObj(ContactObjTmp);
 }
 
 
@@ -49,21 +49,24 @@ function CONTACT_StartContact()
 *
 * @author       Ulysses Bonfim
 */
+/*
 function CONTACT_HandleOnlinePresence(XML)
 {
 	var From, User, Type, Show, Status;
 	var Buffer = "";
-	var ContactOnline = MainData.ContactOnline;
+	var ContactOnline = MainData.GetOnlineObj();
 	var RoomName;
 
 	// Get Attributes from XML
 	Show = XML.getElementsByTagName("show");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
-	RoomName = From.replace(/@.*/, "");
-	User = From.replace(/.*\//, "");
+//	RoomName = From.replace(/@.*/
+/*, "");*/
 
+//	User = From.replace(/.*\//, "");
 
+/*
 	// Check if the type is error
 	if (Type == "error")
 		return "";
@@ -108,7 +111,7 @@ function CONTACT_HandleOnlinePresence(XML)
 
 	return Buffer;
 }
-
+*/
 /**
  * @brief 	Add user in the online list
  * 
@@ -119,25 +122,36 @@ function CONTACT_HandleOnlinePresence(XML)
  *
  * @author	Rubens Suguimoto
  */
+/*
 function CONTACT_AddUserOnlineList(User, Status)
 {
-	var RatingTmp;
-	var Rating, Type;
-	var UserPos;
-	var ContactOnline = MainData.ContactOnline;
-
-
+	var Rating;
+	var UserRating, UserType;
+	var ContactOnline = MainData.GetOnlineObj();
+	var UserObj = MainData.GetUser(User);
+*/
 	// Find user in online user struct == find in General user list
-	// TODO -> FIX IT TO WORK WITH USERLIST
+/*
 	var Room = MainData.GetRoom(MainData.GetRoomDefault());
+	var UserPos;
 	UserPos = Room.FindUser(User);
-
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	// Get user Type and Current rating
-	Type = MainData.GetType(User);
-	RatingTmp = MainData.GetRating(User);
-	if(RatingTmp != null)
+*/
+/*
+	// If user object was not founded; 
+	if(UserObj == null)
 	{
+		return null;
+	}
+
+	// Get user Type and Current rating
+	UserType = UserObj.GetType(User);
+	UserRating = UserObj.GetRating(User);
+
+	if(UserRating != null)
+	{
+		Rating = User.Rating.GetRating(MainData.GetOnlineCurrentRating());
+*/
+/*
 		switch(MainData.CurrentRating)
 		{
 			case "blitz":
@@ -153,6 +167,8 @@ function CONTACT_AddUserOnlineList(User, Status)
 				Rating = RatingTmp.Untimed;
 				break;	
 		}
+*/
+/*
 	}
 	else
 	{
@@ -173,7 +189,7 @@ function CONTACT_AddUserOnlineList(User, Status)
 	// Hide loading box
 	ContactOnline.hideLoading();
 }
-
+*/
 /**
  * @brief 	Sort online list by nick name
  * 
@@ -181,12 +197,13 @@ function CONTACT_AddUserOnlineList(User, Status)
  *
  * @author	Rubens Suguimoto
  */
+/*
 function CONTACT_OnlineSortUserByNick()
 {
 	var Room, RoomName;
 	var i, j;
 	var UserName, Status, Rating, Type;
-	var ContactOnline = MainData.ContactOnline;
+	var ContactOnline = MainData.GetOnlineObj();
 	
 	// General room
 	Room = MainData.GetRoom(MainData.GetRoomDefault());
@@ -235,7 +252,7 @@ function CONTACT_OnlineSortUserByNick()
 
 	return true;
 }
-
+*/
 /**
  * @brief 	Sort online list by rating category
  * 
@@ -245,12 +262,13 @@ function CONTACT_OnlineSortUserByNick()
  *
  * @author	Rubens Suguimoto
  */
+/*
 function CONTACT_OnlineSortUserByRating(Category)
 {
 	var Room, RoomName;
 	var i, j;
 	var UserName, Status, Rating, Type;
-	var ContactOnline = MainData.ContactOnline;
+	var ContactOnline = MainData.GetOnlineObj();
 	var RoomTmp;
 
 	Room = MainData.GetRoom(MainData.GetRoomDefault());
@@ -301,7 +319,7 @@ function CONTACT_OnlineSortUserByRating(Category)
 
 	return true;
 }
-
+*/
 /************************************
 *** FUNCTIONS - CONTACT LIST
 *************************************/
@@ -315,7 +333,7 @@ function CONTACT_OnlineSortUserByRating(Category)
 *
 * @author Ulysses Bonfim
 */
-function CONTACT_HandleUserList(XML)
+function CONTACT_HandleContactUserList(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
 	var Group;
@@ -343,21 +361,21 @@ function CONTACT_HandleUserList(XML)
 			case("to"):
 				// If there's a pending invite send a accept
 				Pending += MESSAGE_InviteAccept(Jid);
-				CONTACT_InsertUser(Jid, "offline", "both", Group);
+				CONTACT_AddUser(Jid, "offline", "both", Group);
 				break;
 
 			// Insert users and group in data structure
 			case("both"):
 				if (MainData.Username != Jid)
 				{
-					CONTACT_InsertUser(Jid, "offline", Subs, Group);	
+					CONTACT_AddUser(Jid, "offline", Subs, Group);	
 				}
 				break;
 
 			// Store the contact on structure with subs "none"
 			case("none"):
 				// If there's a pending invite send a accept
-				CONTACT_InsertUser(Jid, "offline", Subs, Group);
+				CONTACT_AddUser(Jid, "offline", Subs, Group);
 				break;
 			
 			// Remove user from contact list
@@ -371,7 +389,7 @@ function CONTACT_HandleUserList(XML)
 		}
 	}
 
-	CONNECTION_SendJabber(MESSAGE_UserListInfo());
+//	CONNECTION_SendJabber(MESSAGE_UserListInfo());
 
 	// two eggs
 	// a cup of milk 
@@ -513,22 +531,38 @@ function CONTACT_HandleUserPresence(XML)
 * @param	Group	User's group in contact list
 * @author Pedro Rocha
 */
-function CONTACT_InsertUser(User, Status, Subs, Group)
+function CONTACT_AddUser(User, Status, Subs, Group)
 {
-	if(MainData.FindUser(User) == null)
+	var ContactObj = MainData.GetContactObj();
+
+	if(MainData.FindContactUser(User) == null)
 	{
 		//Add in data struct
-		MainData.AddUser(User, Status, Subs, Group)
-		MainData.SortUserByNick();
+		MainData.AddContactUser(User, Status, Subs, Group)
+		MainData.SortContactUserByNick();
 
 		//Show in interface
-		if(MainData.Contact != null)
+		if(ContactObj != null)
 		{
-			MainData.Contact.addUser(Group, User, Status);
+			ContactObj.addUser(Group, User, Status);
 		}
 	}
 }
 
+/**
+* Remove user form your list
+*/
+function CONTACT_RemoveUser(Username)
+{
+	var ContactObj = MainData.GetContactObj();
+	// Remove user from data structure
+	MainData.RemoveContactUser(Username);
+
+	// Remove user from interface
+	ContactObj.removeUser(Username);
+
+	return true;
+}
 
 /**
  * @brief	Show user menu options
@@ -546,6 +580,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	var i = 0, Hide = 0;
 	var Rating;
 	var Button1 = new Object(), Button2 = new Object();
+	var User;
 
 	Func = function () {
 		Hide += 1;
@@ -566,9 +601,19 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	// If isn't your name
 	if (MainData.Username != Username)
 	{
+		User = MainData.GetUser(Username);
+	
+		// If users doesn't exists, create in user list data struct	
+		if(User == null)
+		{
+			USER_AddUser(Username, "offline");
+			User = MainData.GetUser(Username);
+		}
+
+
 		// Send message
 		Options[i] = new Object();
-		if (MainData.GetStatus(Username) != "offline")
+		if (User.GetStatus() != "offline")
 		{
 			Options[i].Name = UTILS_GetText("usermenu_send_message");
 		}
@@ -589,12 +634,10 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		// Request for match is possible only if the status
 		// of opponent is (avaiable, away, busy) and the user
 		// isn't playing a game
-		if ( ((MainData.GetStatus(Username) != "offline") && (MainData.GetStatus(Username) != "playing") && (MainData.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
+		if ( ((User.GetStatus(Username) != "offline") && (User.GetStatus(Username) != "playing") && (User.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
 		{
 			Options[i].Func = function () {
-				// TODO -> FIX IT TO WORK WITH USERLIST
-//				Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Username);
-				Rating = 0;
+				Rating = User.GetRating(); // Get user rating object
 				WINDOW_Challenge(Username, Rating);
 			};
 		}
@@ -605,7 +648,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		i += 1;
 
 		// Add or remove contact
-		if (MainData.IsContact(Username))
+		//if (MainData.IsContact(Username))
+		if(CONTACT_IsContact(Username) == true)
 		{
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_remove_contact");
@@ -694,23 +738,26 @@ function CONTACT_LoadUserContactList()
 {
 	var i;
 	var User;
+	
+	var ContactObj = MainData.GetContactObj();
+	var ContactUserList = MainData.GetContactUserList();
 
 	// Loading user list
-	for (i=0; i < MainData.UserList.length; i++)
+	for (i=0; i < ContactUserList.length; i++)
 	{
-		User = MainData.UserList[i];
+		User = ContactUserList[i];
 
 		// Find user group, if not exists create group
-		if(MainData.Contact.findGroup(User.Group) == null)
+		if(ContactObj.findGroup(User.Group) == null)
 		{
-			MainData.Contact.addGroup(User.Group);
+			ContactObj.addGroup(User.Group);
 		}
 
-		MainData.Contact.addUser(User.Group, User.Username, User.Status, User.Rating.Blitz, User.Type);
+		ContactObj.addUser(User.Group, User.Username, User.Status, User.Rating.Blitz, User.Type);
 
 	}
 
-	MainData.Contact.hideLoading();
+	ContactObj.hideLoading();
 
 }
 
@@ -731,17 +778,22 @@ function CONTACT_SortUsersByNick()
 	var User;
 	var Rating;
 
+	var ContactObj = MainData.GetContactObj();
+	var ContactUserList = MainData.GetContactUserList();
+
 	// Test the current order mode
 	// If ordered into ascending order, change to descending order
-	MainData.OrderBy = (MainData.OrderBy + 1) % 2;
+	MainData.SetContactOrderBy((MainData.GetContactOrderBy() + 1) % 2);
 	
-	MainData.SortUserByNick();
+	MainData.SortContactUserByNick();
 
-	for(i=0; i<MainData.UserList.length; i++)
+	for(i=0; i<ContactUserList.length; i++)
 	{
-		User = MainData.UserList[i];
+		User = ContactUserList[i];
 		
-		switch(MainData.CurrentRating)
+		Rating = User.Rating.GetRatingValue(MainData.GetContactCurrentRating());
+/*
+		switch(MainData.GetContactCurrentRating())
 		{
 
 			case "blitz":
@@ -757,9 +809,9 @@ function CONTACT_SortUsersByNick()
 				Rating = User.Rating.Untimed;
 				break;	
 		}
-
-		MainData.Contact.removeUser(User.Username);
-		MainData.Contact.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
+*/
+		ContactObj.removeUser(User.Username);
+		ContactObj.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
 	}
 }
 
@@ -778,24 +830,28 @@ function CONTACT_SortUsersByRating(Category)
 	var User;
 	var Rating;
 
+	var ContactObj = MainData.GetContactObj();
+	var ContactUserList = MainData.GetContactUserList();
+
 	// Test the current order mode
 	// If ordered into ascending order, change to descending order
 	// other modes, change to ascending order
-	MainData.CurrentRating = Category;
+	MainData.SetContactCurrentRating(Category);
 
-	MainData.OrderBy = (MainData.OrderBy + 1) % 2;
+//	MainData.SetContactOrderBy((MainData.GetContactOrderBy() + 1) % 2);
 
-	MainData.SortUserByRating();
+	MainData.SortContactUserByRating();
 
-	for(i=0; i<MainData.UserList.length; i++)
+	for(i=0; i<ContactUserList.length; i++)
 	{
-		User = MainData.UserList[i];
+		User = ContactUserList[i];
 		
-		switch(MainData.CurrentRating)
+		Rating = User.Rating.GetRatingValue(MainData.GetContactCurrentRating());
+/*
+		switch(MainData.GetContactCurrentRating())
 		{
 
 			case "blitz":
-				Rating = User.Rating.Blitz;
 				break;
 			case "lightning":
 				Rating = User.Rating.Lightning;
@@ -807,8 +863,23 @@ function CONTACT_SortUsersByRating(Category)
 				Rating = User.Rating.Untimed;
 				break;	
 		}
+*/
+		ContactObj.removeUser(User.Username);
+		ContactObj.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
+	}
+}
 
-		MainData.Contact.removeUser(User.Username);
-		MainData.Contact.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
+
+function CONTACT_IsContact(Username)
+{
+	var User = MainData.GetContactUser(Username);
+
+	if(User != null)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }

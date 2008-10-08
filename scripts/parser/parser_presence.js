@@ -56,16 +56,22 @@ function PARSER_ParsePresence(XML)
 		try
 		{
 			Buffer += ROOM_HandleRoomPresence(XML);
-			
+
 			// Presence from general room
 			if(Jid.split("@")[0] == MainData.GetRoomDefault())
 			{
-				Buffer += CONTACT_HandleOnlinePresence(XML);
+				// Add user to UserList
+				Buffer += USER_HandleRoomPresence(XML)
+
+				Buffer += ONLINE_HandleOnlinePresence(XML);
 				Buffer += CHALLENGE_HandlePresence(XML);
 				Buffer += CHAT_HandlePresence(XML);
 			}
 			else if(Jid.match(MainData.GetServer()))
 			{
+				// Add user to UserList
+				Buffer += USER_HandlePresence(XML)
+
 				Buffer += GAME_HandlePresence(XML);
 			}
 		}
@@ -73,7 +79,6 @@ function PARSER_ParsePresence(XML)
 		{
 			Buffer = "";
 		}
-
 		return Buffer;
 	}
 	// User presence

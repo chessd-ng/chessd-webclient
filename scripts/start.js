@@ -117,8 +117,9 @@ function START_Webclient()
 	// Open XadrezLivre game environment
 	INTERFACE_ShowInterface(All);
 	
-	// Create contact object and set values
-	CONTACT_StartContact();
+	// Create contact object and online list and set values
+	ONLINE_StartOnlineList();
+	CONTACT_StartContactList();
 	CONTACT_LoadUserContactList();	
 
 	// Create challenge menu object
@@ -129,7 +130,12 @@ function START_Webclient()
 
 	// Set away counter
 	CONTACT_StartAwayCounter();
+
+	// Set update user list timer 
+	USER_StartUpdateUserList();
+	USER_AddUser(MainData.Username, "online");
 }
+
 /*
 *	@brief Stop interface and reload files
 *
@@ -140,6 +146,7 @@ function START_Restart()
 	INTERFACE_StopInterface();
 
 	CONTACT_StopAwayStatus();
+	USER_StopUpdateUserList();
 
 	delete MainData;
 
