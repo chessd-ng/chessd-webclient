@@ -237,8 +237,10 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
  */
 function ANNOUNCE_RemoveAnnounce(Id)
 {
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
 	MainData.RemoveAnnounce(Id);
-	MainData.ChallengeMenu.removeAnnounce(Id);
+	ChallengeMenu.removeAnnounce(Id);
 
 	ANNOUNCE_CancelAnnounce(Id);
 }
@@ -269,21 +271,51 @@ function ANNOUNCE_AcceptAnnounce(Id)
 
 
 function ANNOUNCE_ShowLoadingAnnounce()
-{
-	MainData.ChallengeMenu.showLoadingAnnounce();
+{	
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.showLoadingAnnounce();
 }
 
 function ANNOUNCE_HideLoadingAnnounce()
 {
-	MainData.ChallengeMenu.hideLoadingAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.hideLoadingAnnounce();
 }
 
 function ANNOUNCE_ShowNoAnnounce()
 {
-	MainData.ChallengeMenu.showNoAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.showNoAnnounce();
 }
 
 function ANNOUNCE_HideNoAnnounce()
 {
-	MainData.ChallengeMenu.hideNoAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.hideNoAnnounce();
+}
+
+/**
+ * @brief	Remove all announces from main data and interface
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
+ */
+function ANNOUNCE_ClearAnnounce()
+{
+	var i;
+	var AnnounceId;
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
+	// Remove all announce from challenge menu and data struct
+	for(i=0;i<MainData.AnnounceList.length; i++)
+	{
+		AnnounceId = MainData.AnnounceList[i].Id;
+		ChallengeWindow = MainData.AnnounceList[i].Window;
+
+		if(AnnounceId != null)
+		{
+			ANNOUNCE_RemoveAnnounce(Id);
+		}
+
+	}
 }

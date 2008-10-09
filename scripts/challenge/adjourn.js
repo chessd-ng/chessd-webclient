@@ -44,6 +44,7 @@ function CHALLENGE_HandleAdjourn(XML)
 	var Game, Players;
 	var Player1, Player2;
 	var AdjournId, Category, Date;
+	var ChallengeMenu = MainData.GetChallengeMenu();
 
 	var i;
 
@@ -78,7 +79,7 @@ function CHALLENGE_HandleAdjourn(XML)
 				MainData.AddPostpone(Player2, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				MainData.ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
 
 				CHALLENGE_PostponePresence(Player2.Name);
 			}
@@ -88,7 +89,7 @@ function CHALLENGE_HandleAdjourn(XML)
 				MainData.AddPostpone(Player1, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				MainData.ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
 
 				CHALLENGE_PostponePresence(Player1.Name);
 			}
@@ -96,7 +97,7 @@ function CHALLENGE_HandleAdjourn(XML)
 	}
 
 	// Show postpone games
-	MainData.ChallengeMenu.showPostpone();
+	ChallengeMenu.showPostpone();
 
 	return Buffer;
 }
@@ -142,15 +143,16 @@ function CHALLENGE_PostponePresence(Username)
 	// TODO -> FIX IT TO WORK WITH USERLIST
 	var Room = MainData.GetRoom(MainData.GetRoomDefault());
 	var User = Room.FindUser(Username);
+	var ChallengeMenu = MainData.GetChallengeMenu();
 
 	//If user is founded, set adjourn game to available, else unavailable
 	if(User != null)
 	{
-		MainData.ChallengeMenu.updatePostpone(Username, "online");
+		ChallengeMenu.updatePostpone(Username, "online");
 	}
 	else
 	{
-		MainData.ChallengeMenu.updatePostpone(Username, "offline");
+		ChallengeMenu.updatePostpone(Username, "offline");
 	}
 
 	return "";
@@ -229,8 +231,10 @@ function CHALLENGE_GetAdjournGames()
 
 function CHALLENGE_RemovePostpone(Id)
 {
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
 	MainData.RemovePostpone(Id);
-	MainData.ChallengeMenu.removePostpone(Id);
+	ChallengeMenu.removePostpone(Id);
 
 	return "";
 }

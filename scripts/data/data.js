@@ -108,10 +108,17 @@ function DATA(ConfFile, LangFile)
 	// Max chat input length
 	this.Room.MaxRoomChar = UTILS_GetTag(Params, "max-chat-char");
 
-	this.ChallengeList = new Array();
-	this.ChallengeSequence = 0;
-	this.ChallengeMenu = null;
+	/************************ CHALLENGE DATA ********************/
+	this.Challenge = new Object();
+	this.Challenge.ChallengeList = new Array();
+	this.Challenge.ChallengeSequence = 0;
+	this.Challenge.ChallengeMenu = null;
+
+	/************************ ANNOUNCE DATA *********************/
+	//this.Announce = new Object();
 	this.AnnounceList = new Array();
+
+	/************************ POSTPONE DATA *********************/
 	this.PostponeList = new Array();
 
 
@@ -277,9 +284,18 @@ DATA.prototype.RemoveShowChat = DATA_RemoveShowChat;
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
+DATA.prototype.GetChallenge = DATA_GetChallenge;
 DATA.prototype.UpdateChallenge = DATA_UpdateChallenge;
-DATA.prototype.ClearChallenges = DATA_ClearChallenges;
+/*
+DATA.prototype.ClearChallenges = DATA_ClearChallenges; //--> TODO Fazer no challenge.js
+*/
 DATA.prototype.AddChallengeWindow = DATA_AddChallengeWindow;
+
+DATA.prototype.GetChallengeList = DATA_GetChallengeList;
+DATA.prototype.SetChallengeMenu = DATA_SetChallengeMenu;
+DATA.prototype.GetChallengeMenu = DATA_GetChallengeMenu;
+DATA.prototype.SetChallengeSequence = DATA_SetChallengeSequence;
+DATA.prototype.GetChallengeSequence = DATA_GetChallengeSequence;
 
 DATA.prototype.AddPostpone = DATA_AddPostpone;
 DATA.prototype.RemovePostpone = DATA_RemovePostpone;
@@ -768,7 +784,7 @@ function DATA_GetUsername()
 }
 function DATA_SetStatus(NewStatus)
 {
-	this.Username.Status = NewStatus;
+	this.Status = NewStatus;
 }
 function DATA_GetStatus()
 {
@@ -2063,7 +2079,7 @@ function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated,
 
 	Challenge.Window = null;
 
-	this.ChallengeList[this.ChallengeList.length] = Challenge;
+	this.Challenge.ChallengeList.push(Challenge);
 
 	return true;
 }	
@@ -2075,17 +2091,14 @@ function DATA_UpdateChallenge(ChallengeId, Challenger, Challenged, Category, Rat
 {
 	// Creating a new object
 	var Challenge;
-	var i;
 
-	i = this.FindChallenge(ChallengeId, MatchId);
+	Challenge = this.GetChallenge(ChallengeId, MatchId);
 	
 	// Challenge already exist on structure
-	if (i == null)
+	if (Challenge == null)
 	{
-			return null;
+		return null;
 	}
-
-	Challenge = MainData.ChallengeList[i];
 
 	// Setting atributes
 	if(ChallengeId != null)
@@ -2143,7 +2156,7 @@ function DATA_RemoveChallenge(ChallengeId, MatchId)
 	}
 
 	// Remove from the list the position of the challenge
-	this.ChallengeList.splice(i, 1);
+	this.Challenge.ChallengeList.splice(i, 1);
 
 	return "";
 }	
@@ -2185,6 +2198,7 @@ function DATA_RemoveChallengeById(ID)
 * @author 		Ulysses Bonfim
 * @return 		void
 */
+/*
 function DATA_ClearChallenges()
 {
 	var size = this.ChallengeList.length;
@@ -2193,7 +2207,7 @@ function DATA_ClearChallenges()
 
 	return "";
 }
-
+*/
 /**
 * Find a challenge in 'ChallengeList'
 * You can find a challenge by ChallengeId or MatchId;
@@ -2211,9 +2225,9 @@ function DATA_FindChallenge(ChallengeId, MatchId)
 	// If match id exists, find by match id
 	if(MatchId != null)
 	{
-		for (i=0 ; i < this.ChallengeList.length ; i++)
+		for (i=0 ; i < this.Challenge.ChallengeList.length ; i++)
 		{
-			if (this.ChallengeList[i].MatchId == MatchId)
+			if (this.Challenge.ChallengeList[i].MatchId == MatchId)
 			{
 				return i;
 			}
@@ -2221,9 +2235,9 @@ function DATA_FindChallenge(ChallengeId, MatchId)
 	}
 
 	// By default, find by challenge id
-	for (i=0 ; i < this.ChallengeList.length ; i++)
+	for (i=0 ; i < this.Challenge.ChallengeList.length ; i++)
 	{
-		if (this.ChallengeList[i].ChallengeId == ChallengeId)
+		if (this.Challenge.ChallengeList[i].ChallengeId == ChallengeId)
 		{
 			return i;
 		}
@@ -2234,6 +2248,25 @@ function DATA_FindChallenge(ChallengeId, MatchId)
 	
 }
 
+/**
+* Update a challenge in 'ChallengeList'
+*/
+function DATA_GetChallenge(ChallengeId, MatchId)
+{
+	var i;
+
+	i = this.FindChallenge(ChallengeId, MatchId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return this.Challenge.ChallengeList[i];
+	}
+	else
+	{
+		return null;
+	}
+}
 
 /**
 * @brief		Find a challenge by ID in 'ChallengeList'
@@ -2269,14 +2302,39 @@ function DATA_FindChallengeById(ID)
 */
 function DATA_AddChallengeWindow (Id, WindowObj)
 {
-	var i = this.FindChallenge(Id, Id);
+	var Challenge = this.GetChallenge(Id, Id);
 
-	if (i != null)
+	if (Challenge != null)
 	{
-		this.ChallengeList[i].Window = WindowObj;
+		Challenge.Window = WindowObj;
 	}
 }
 
+function DATA_GetChallengeList()
+{
+	return this.Challenge.ChallengeList;
+}
+
+function DATA_SetChallengeMenu(MenuObj)
+{
+	this.Challenge.ChallengeMenu = MenuObj;
+}
+
+function DATA_GetChallengeMenu()
+{
+	return this.Challenge.ChallengeMenu;
+}
+
+
+function DATA_SetChallengeSequence(NewValue)
+{
+	this.Challenge.ChallengeSequence = NewValue;
+}
+
+function DATA_GetChallengeSequence()
+{
+	return this.Challenge.ChallengeSequence;
+}
 
 /**********************************
  * METHODS - ANNOUNCE CHALLENGES  *
