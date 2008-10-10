@@ -62,7 +62,7 @@ function DATA(ConfFile, LangFile)
 	this.AdminComponent = UTILS_GetTag(Params, "admin-component");
 
 	this.Status = "available";
-	this.Type = null;
+	this.Type = "user";
 	this.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Version = UTILS_GetTag(Params, "version");
 	this.RoomDefault = UTILS_GetTag(Params, "room-default");
@@ -306,7 +306,7 @@ function DATA_AddUser(Username, Status, Subs, Group)
 	User.Subs = Subs;
 	User.Rating = new Object();
 	User.Group = Group;
-	User.Type = "";
+	User.Type = "user";
 	this.UserList[this.UserList.length] = User;
 }
 
