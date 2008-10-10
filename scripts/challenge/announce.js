@@ -218,6 +218,7 @@ function ANNOUNCE_GetAnnounceGames()
 function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
 {
 	var Player = new Object();
+	var ChallengeMenu = MainData.GetChallengeMenu();
 
 	if(MainData.FindAnnounce(AnnounceId) == null)
 	{
@@ -227,7 +228,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 		Player.Inc = Inc;
 
 		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
-		MainData.ChallengeMenu.addAnnounce(Player, Time, Inc, Rated, "true", AnnounceId);
+		ChallengeMenu.addAnnounce(Player, Time, Inc, Rated, "true", AnnounceId);
 	}
 }
 
@@ -305,16 +306,17 @@ function ANNOUNCE_ClearAnnounce()
 	var i;
 	var AnnounceId;
 	var ChallengeMenu = MainData.GetChallengeMenu();
+	var AnnounceList = MainData.GetAnnounceList();
 
 	// Remove all announce from challenge menu and data struct
-	for(i=0;i<MainData.AnnounceList.length; i++)
+	for(i=0;i< AnnounceList.length; i++)
 	{
-		AnnounceId = MainData.AnnounceList[i].Id;
-		ChallengeWindow = MainData.AnnounceList[i].Window;
+		AnnounceId = AnnounceList[i].Id;
+		//ChallengeWindow = AnnounceList[i].Window;
 
 		if(AnnounceId != null)
 		{
-			ANNOUNCE_RemoveAnnounce(Id);
+			ANNOUNCE_RemoveAnnounce(AnnounceId);
 		}
 
 	}

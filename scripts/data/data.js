@@ -115,8 +115,8 @@ function DATA(ConfFile, LangFile)
 	this.Challenge.ChallengeMenu = null;
 
 	/************************ ANNOUNCE DATA *********************/
-	//this.Announce = new Object();
-	this.AnnounceList = new Array();
+	this.Announce = new Object();
+	this.Announce.AnnounceList = new Array();
 
 	/************************ POSTPONE DATA *********************/
 	this.PostponeList = new Array();
@@ -281,6 +281,7 @@ DATA.prototype.GetMaxChatChar = DATA_GetMaxChatChar;
 DATA.prototype.AddShowChat = DATA_AddShowChat;
 DATA.prototype.RemoveShowChat = DATA_RemoveShowChat;
 
+/*CHALLENGE METHODS ********************************/
 DATA.prototype.AddChallenge = DATA_AddChallenge;
 DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
@@ -301,10 +302,15 @@ DATA.prototype.AddPostpone = DATA_AddPostpone;
 DATA.prototype.RemovePostpone = DATA_RemovePostpone;
 DATA.prototype.FindPostpone = DATA_FindPostpone;
 
+/*ANNOUNCE METHODS ********************************/
 DATA.prototype.AddAnnounce = DATA_AddAnnounce;
 DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
-DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
 DATA.prototype.FindAnnounce = DATA_FindAnnounce;
+DATA.prototype.GetAnnounce = DATA_GetAnnounce;
+DATA.prototype.GetAnnounceList = DATA_GetAnnounceList;
+/*
+DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
+*/
 
 /*GAME METHODS ********************************/
 DATA.prototype.AddGame = DATA_AddGame;
@@ -2367,7 +2373,7 @@ function DATA_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag,
 	Announce.AutoFlag = AutoFlag;
 	Announce.Private = false;
 
-	this.AnnounceList[this.AnnounceList.length] = Announce;
+	this.Announce.AnnounceList.push(Announce);
 
 	return true;
 }
@@ -2385,7 +2391,7 @@ function DATA_RemoveAnnounce(AnnounceId)
 	}
 
 	// Remove challenge from list
-	this.AnnounceList.splice(i, 1);
+	this.Announce.AnnounceList.splice(i, 1);
 
 	return "";
 
@@ -2396,9 +2402,9 @@ function DATA_FindAnnounce(AnnounceId)
 	var i;
 
 	// If match id exists, find by match id
-	for (i=0 ; i < this.AnnounceList.length ; i++)
+	for (i=0 ; i < this.Announce.AnnounceList.length ; i++)
 	{
-		if (this.AnnounceList[i].Id == AnnounceId)
+		if (this.Announce.AnnounceList[i].Id == AnnounceId)
 		{
 			return i;
 		}
@@ -2409,11 +2415,26 @@ function DATA_FindAnnounce(AnnounceId)
 	
 }
 
+function DATA_GetAnnounce(AnnounceId)
+{
+	var Pos = this.FindAnnounce(AnnounceId);
+	
+	if(Pos != null)
+	{
+		return this.Announce.AnnounceList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
 /**
 * @brief		Remove all announce in 'AnnounceList'
 * @author 		Rubens Suguimoto
 * @return 		void
 */
+/*
 function DATA_ClearAnnounces()
 {
 	var size = this.AnnounceList.length;
@@ -2421,6 +2442,11 @@ function DATA_ClearAnnounces()
 	this.AnnounceList.splice(0, size);
 
 	return "";
+}
+*/
+function DATA_GetAnnounceList()
+{
+	return this.Announce.AnnounceList;
 }
 
 /**********************************
