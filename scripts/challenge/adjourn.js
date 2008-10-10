@@ -115,16 +115,13 @@ function CHALLENGE_HandleAdjourn(XML)
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
-	var UserRoom;
-	var Item, Username, i;
+	var Type, Username;
 	var Buffer = "";
 
-	// Get presence from general room (where all user is connected)
-	if(GeneralRoom == MainData.GetRoomDefault())
-	{
-		Username = XML.getAttribute("from").split("/")[1];
-		CHALLENGE_PostponePresence(Username);
-	}
+	Username = XML.getAttribute("from").split("/")[1];
+	Type = XML.getAttribute("type");
+
+	CHALLENGE_PostponePresence(Username, Type);
 
 	return Buffer;
 }
@@ -138,23 +135,19 @@ function CHALLENGE_HandlePresence(XML)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_PostponePresence(Username)
+function CHALLENGE_PostponePresence(Username, PresenceType)
 {
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	var Room = MainData.GetRoom(MainData.GetRoomDefault());
-	var User = Room.FindUser(Username);
 	var ChallengeMenu = MainData.GetChallengeMenu();
-
+// --> TODO Arrumar para pegar usuarios desconectados
 	//If user is founded, set adjourn game to available, else unavailable
-	if(User != null)
-	{
-		ChallengeMenu.updatePostpone(Username, "online");
-	}
-	else
+	if(PresenceType == "unavailable")
 	{
 		ChallengeMenu.updatePostpone(Username, "offline");
 	}
-
+	else
+	{
+		ChallengeMenu.updatePostpone(Username, "online");
+	}
 	return "";
 }
 
@@ -170,8 +163,7 @@ function CHALLENGE_SendResumeGame(AdjournId)
 {
 	var XMPP = "";
 	
-	var PostponePos = MainData.FindPostpone(AdjournId);
-	var Postpone = MainData.PostponeList[PostponePos];
+	var Postpone = MainData.GetPostpone(AdjournId);
 
 	var Challenger = new Object();
 	var Challenged = new Object();

@@ -138,7 +138,7 @@ function USER_HandleRoomPresence(XML)
 	}
 	else
 	{
-		USER_AddUser(Username, Status);
+		USER_AddUser(Username, Status, "user");
 	}
 
 	return "";
@@ -202,7 +202,7 @@ function USER_AddUser(Username, Status)
 
 	if( User == null)
 	{
-		MainData.AddUser(Username, Status);
+		MainData.AddUser(Username, Status, "user");
 	}
 }
 

@@ -107,20 +107,7 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 		Type = ContactUser.Type;
 		// Get user rating
 		Rating = ContactUser.Rating.GetRatingValue(MainData.GetContactCurrentRating());
-/*
-		switch(MainData.CurrentRating)
-		{
-			case "blitz":
-				Rating = MainData.UserList[UserPos].Rating.Blitz;
-				break;
-			case "lightning":
-				Rating = MainData.UserList[UserPos].Rating.Lightning;
-				break;
-			case "standard":
-				Rating = MainData.UserList[UserPos].Rating.Standard;
-				break;
-		}
-*/
+
 		// Update user status in contact list
 		ContactObj.updateUser(Username, NewStatus, Rating, Type);
 	}

@@ -79,6 +79,7 @@ function PARSER_ParsePresence(XML)
 		{
 			Buffer = "";
 		}
+
 		return Buffer;
 	}
 	// User presence

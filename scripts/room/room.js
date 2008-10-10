@@ -680,23 +680,6 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	// If not inserted, add user, else update information
 	if(Room.FindUser(Jid) == null)
 	{
-		/* //Review this code to be more 
-		if (UserPos != null) 
-		{ 
-			Type = MainData.UserList[UserPos].Type; 
-			Rating = eval("MainData.UserList["+UserPos+"].Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
-		} 
-		else if (Jid == MainData.Username) 
-		{ 
-			Type = MainData.Type; 
-			Rating = eval("MainData.Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
-		} 
-		else 
-		{
-			// Ask user info, if it's not your contact 
-			Buffer += MESSAGE_Info(Jid); 
-		} 
-		*/
 
 		// Get user rating and type information
 		//Buffer += MESSAGE_Info(Jid); 

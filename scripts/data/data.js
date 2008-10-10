@@ -119,7 +119,8 @@ function DATA(ConfFile, LangFile)
 	this.Announce.AnnounceList = new Array();
 
 	/************************ POSTPONE DATA *********************/
-	this.PostponeList = new Array();
+	this.Postpone = new Object();
+	this.Postpone.PostponeList = new Array();
 
 
 	/************************ GAME DATA *************************/
@@ -298,9 +299,12 @@ DATA.prototype.GetChallengeMenu = DATA_GetChallengeMenu;
 DATA.prototype.SetChallengeSequence = DATA_SetChallengeSequence;
 DATA.prototype.GetChallengeSequence = DATA_GetChallengeSequence;
 
+/*POSTPONE METHODS ********************************/
 DATA.prototype.AddPostpone = DATA_AddPostpone;
 DATA.prototype.RemovePostpone = DATA_RemovePostpone;
 DATA.prototype.FindPostpone = DATA_FindPostpone;
+DATA.prototype.GetPostpone = DATA_GetPostpone;
+DATA.prototype.GetPostponeList = DATA_GetPostponeList;
 
 /*ANNOUNCE METHODS ********************************/
 DATA.prototype.AddAnnounce = DATA_AddAnnounce;
@@ -515,7 +519,7 @@ function DATA_AddContactUser(Username, Status, Subs, Group)
 	User.Subs = Subs;
 	User.Group = Group;
 	User.Rating = DATA_RatingObject();
-	User.Type = "";
+	User.Type = "user";
 	
 	User.GetUsername = DATA_GetUsername;
 	User.SetStatus = DATA_SetStatus;
@@ -997,7 +1001,7 @@ function DATA_AddUser(Username, Status)
 	User.Photo = "";
 	User.Status = Status;
 	User.Rating = DATA_RatingObject();
-	User.Type = "";
+	User.Type = "user";
 	User.UpdateRating = true;
 
 	User.GetUsername = DATA_GetUsername;
@@ -2458,18 +2462,18 @@ function DATA_GetAnnounceList()
 * @param		Oponent		The oponent
 * @param		Category	Game category
 * @param		Date		Date of adjourned match
-* @param		AdjournId	Adjourned game Id 
+* @param		PostponeId	Adjourned game Id 
 * @author 		Rubens Suguimoto
 * @return 		Boolean
 */
-function DATA_AddPostpone(Oponent, Category, Date, AdjournId)
+function DATA_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	// Creating a new object
 	var Challenge = new Object();
 	var ChallengedObj = new Object();
 	var i;
 
-	i = this.FindPostpone(AdjournId);
+	i = this.FindPostpone(PostponeId);
 	
 	// Challenge already exist on structure
 	if (i != null)
@@ -2483,32 +2487,32 @@ function DATA_AddPostpone(Oponent, Category, Date, AdjournId)
 	ChallengedObj.Color  = Oponent.Color;
 
 	// Setting atributes
-	Challenge.Id = AdjournId;
+	Challenge.Id = PostponeId;
 	Challenge.Challenged = ChallengedObj;
 	Challenge.Category = Category;
 	Challenge.Private = false;
 
 	Challenge.Window = null;
 
-	this.PostponeList[this.PostponeList.length] = Challenge;
+	this.Postpone.PostponeList.push(Challenge);
 
 	return true;
 }	
 
 /*
 * @brief		Find a postpone challenge in 'PostponeList'
-* @param		AdjournId	Adjourned game Id 
+* @param		PostponeId	Adjourned game Id 
 * @author 		Rubens Suguimoto
 * @return 		Boolean
 */
-function DATA_FindPostpone(AdjournId)
+function DATA_FindPostpone(PostponeId)
 {
 	var i;
 
 	// If match id exists, find by match id
-	for (i=0 ; i < this.PostponeList.length ; i++)
+	for (i=0 ; i < this.Postpone.PostponeList.length ; i++)
 	{
-		if (this.PostponeList[i].Id == AdjournId)
+		if (this.Postpone.PostponeList[i].Id == PostponeId)
 		{
 			return i;
 		}
@@ -2526,11 +2530,11 @@ function DATA_FindPostpone(AdjournId)
 * @return 		Boolean
 * @see			DATA_FindPostpone
 */
-function DATA_RemovePostpone(AdjournId)
+function DATA_RemovePostpone(PostponeId)
 {
 	var i;
 
-	i = this.FindPostpone(AdjournId);
+	i = this.FindPostpone(PostponeId);
 
 	// No postpone challenge with id founded
 	if (i == null)
@@ -2539,11 +2543,29 @@ function DATA_RemovePostpone(AdjournId)
 	}
 
 	// Remove challenge from list
-	this.PostponeList.splice(i, 1);
+	this.Postpone.PostponeList.splice(i, 1);
 
 	return "";
 }
 
+function DATA_GetPostpone(PostponeId)
+{
+	var Pos = this.FindPostpone(PostponeId);
+
+	if (Pos != null) 
+	{
+		return this.Postpone.PostponeList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetPostponeList()
+{
+	return this.Postpone.PostponeList;
+}
 /**********************************
  * METHODS - GAME                 *
  **********************************/

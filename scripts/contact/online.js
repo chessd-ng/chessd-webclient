@@ -146,29 +146,12 @@ function ONLINE_AddUser(User, Status)
 	}
 
 	// Get user Type and Current rating
-	UserType = UserObj.GetType(User);
+	UserType = UserObj.GetType();
 	UserRating = UserObj.GetRating();
 
 	if(UserRating != null)
 	{
 		Rating = UserRating.GetRatingValue(MainData.GetOnlineCurrentRating());
-/*
-		switch(MainData.CurrentRating)
-		{
-			case "blitz":
-				Rating = RatingTmp.Blitz;
-				break;
-			case "lightning":
-				Rating = RatingTmp.Lightning;
-				break;
-			case "standard":
-				Rating = RatingTmp.Standard;
-				break;	
-			case "untimed":
-				Rating = RatingTmp.Untimed;
-				break;	
-		}
-*/
 	}
 	else
 	{
