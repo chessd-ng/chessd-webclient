@@ -79,8 +79,8 @@ function CONTACT_SetUserType(Username, NewType)
 {
 	var i;
 	var Room;
-	var Status, Rating;
-	var User;
+	var StatusRoom, StatusList, Rating;
+	var UserRoom, UserList;
 	
 
 	// update on interface
@@ -91,21 +91,33 @@ function CONTACT_SetUserType(Username, NewType)
 		{
 			return "";
 		}		
-		User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
-		if(User != null)
+
+		// Get user position in room's userlist
+		UserRoom = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+		if(UserRoom != null)
 		{
 			Room = MainData.RoomList[0]; 
-			Status = Room.UserList[User].Status;
+			StatusRoom = Room.UserList[UserRoom].Status;
 
-			// Update type in contact online and contact list
-			MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
-			MainData.Contact.updateUser(Username,Status, null, NewType);
+			// Update type in contact online 
+			MainData.ContactOnline.userList.updateUser(Username, StatusRoom, null, NewType);
+		}
+
+		// Get user position in userlist
+		UserList = MainData.FindUser(Username);
+		if (UserList != null)
+		{
+			StatusList = MainData.UserList[UserList].Status;
+
+			// Update type in contact list 
+			MainData.Contact.updateUser(Username, StatusList, null, NewType);
 		}
 		// Offline user
 		else
 		{
-			Status = "offline";
-			MainData.Contact.updateUser(Username,Status, null, NewType);
+			StatusList = "offline";
+
+			MainData.Contact.updateUser(Username, StatusList, null, NewType);
 		}
 	}
 	return true;
@@ -118,8 +130,8 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 {
 	var i;
 	var Room;
-	var Status, Type;
-	var User;
+	var StatusRoom, StatusList, TypeRoom, TypeList;
+	var UserRoom, UserList;
 	
 
 	// update on interface
@@ -127,27 +139,42 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 	{
 		if (Category == MainData.CurrentRating)
 		{
+			// RoomList[0] = general room where is all user online
 			if(MainData.RoomList[0] == null)
 			{
 				return "";
-			}		
-			User = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
-			if(User != null)
+			}	
+
+			// Get user position in room's userlist
+			UserRoom = MainData.FindUserInRoom(MainData.RoomList[0].Name,Username);
+			if(UserRoom != null)
 			{
 				// General Room
 				Room = MainData.RoomList[0]; 
-				Status = Room.UserList[User].Status;
-				Type = Room.UserList[User].Type;
+				StatusRoom = Room.UserList[UserRoom].Status;
+				TypeRoom = Room.UserList[UserRoom].Type;
 
 				// Update type in contact online and contact list
-				MainData.ContactOnline.userList.updateUser(Username,Status, Rating, Type);
-				MainData.Contact.updateUser(Username,Status, Rating, Type);
+				MainData.ContactOnline.userList.updateUser(Username, StatusRoom, Rating, TypeRoom);
+			}
+		
+			// Get user position in userlist
+			UserList = MainData.FindUser(Username);
+			if (UserList != null)
+			{
+				StatusList = MainData.UserList[UserList].Status;
+				TypeList = MainData.UserList[UserList].Type;
+
+				// Update type in contact list 
+				MainData.Contact.updateUser(Username, StatusList, Rating, TypeList);
 			}
 			// Offline user
 			else
 			{
-				Status = "offline";
-				MainData.Contact.updateUser(Username,Status, Rating, Type);
+				StatusList = "offline";
+				TypeList = "user";
+
+				MainData.Contact.updateUser(Username, StatusList, Rating, TypeList);
 			}
 		}
 	}
