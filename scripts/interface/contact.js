@@ -438,6 +438,7 @@ function INTERFACE_CreateContact()
 	var ContactDiv, ContactTitle;
 	var ContactTitleOnline, ContactTitleContacts;
 	var ContactTitleOnlineSpan, ContactTitleContactsSpan;
+	var ContactTitleOnlineNumber, ContactTitleContactsNumber;
 	var Lists;
 
 	// Main div
@@ -450,7 +451,9 @@ function INTERFACE_CreateContact()
 	ContactTitleOnline = UTILS_CreateElement("li", null, "contact_selec");
 
 	ContactTitleContactsSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_contacts"));
+	ContactTitleContactsNumber = UTILS_CreateElement("span",'ContactNumber',null," (0)");
 	ContactTitleOnlineSpan = UTILS_CreateElement("span", null, 'bold', UTILS_GetText("contact_online"));
+	ContactTitleOnlineNumber = UTILS_CreateElement("span",'OnlineNumber',null," (0)");
 
 	ContactTitleContacts.onclick = function(){
 		ContactTitleContacts.className = "contact_selec";
@@ -471,7 +474,9 @@ function INTERFACE_CreateContact()
 
 	// Creating DOM tree
 	ContactTitleOnline.appendChild(ContactTitleOnlineSpan);
+	ContactTitleOnline.appendChild(ContactTitleOnlineNumber);
 	ContactTitleContacts.appendChild(ContactTitleContactsSpan);
+	ContactTitleContacts.appendChild(ContactTitleContactsNumber);
 	ContactTitle.appendChild(ContactTitleOnline);
 	ContactTitle.appendChild(ContactTitleContacts);
 
@@ -558,3 +563,32 @@ function INTERFACE_CreateOnlineContent()
 	return { Div:ContactInside, LoadingDiv:LoadingDiv};
 }
 
+/* Refresh room's occupants number
+*
+* @param       RoomName
+*              Room's name
+* @return void
+* @author Danilo 
+*/
+function INTERFACE_RefreshContactOnlineNumber()
+{
+	var N_Occupants=0;
+	var ListLength, i;
+	var Node;
+
+	Node = document.getElementById("ContactNumber");
+
+	ListLength = MainData.UserList.length;
+	for (i=0; i<ListLength; i++)
+	{
+		if (MainData.UserList[i].Status != "offline")
+		{
+			N_Occupants++;
+		}
+	}
+
+	if(Node)
+	{	
+		Node.innerHTML = " ("+N_Occupants+")";
+	}
+}

@@ -76,6 +76,12 @@
 	overflow : hidden;
 }
 
+#Main #Left #Contact #ContactTitle #ContactNumber,
+#Main #Left #Contact #ContactTitle #OnlineNumber {
+	font-weight : normal;
+	font-size : 9px;
+}
+
 /* User list */
 /*
 #Main #Left #Contact #Contacts {

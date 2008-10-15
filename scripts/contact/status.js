@@ -116,6 +116,10 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 		}
 
 	}
+
+	// Refresh number of contacts online	
+	INTERFACE_RefreshContactOnlineNumber();
+
 	return "";
 }
 

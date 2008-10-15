@@ -246,7 +246,7 @@ function INTERFACE_AddMsgErrorInRoom(Msg)
 	this.msgList.scrollTop += Item.clientHeight + 1000;
 }
 
-/* Refresh room's occupants number
+/* Refresh room's occupants and online users number
 *
 * @param       RoomName
 *              Room's name
@@ -257,13 +257,14 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 {
 	var N_Occupants;
 	var Focused;
-	var Node;
+	var Node, Node2 = null;
 
 	// If general room
 	if (RoomName == "general")
 	{
 		// Get element in interface that will be refreshed
 		Node = document.getElementById("general_occupants");
+		Node2 = document.getElementById("OnlineNumber");
 	}
 	else {
 		// else get name of focused room
@@ -290,6 +291,10 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 		// Get number of occupants in room data struct
 		N_Occupants = MainData.RoomList[MainData.FindRoom(RoomName)].UserList.length;
 		Node.innerHTML= " ("+N_Occupants+")";
+		if (Node2)
+		{
+			Node2.innerHTML= " ("+N_Occupants+")";
+		}
 	}
 }
 
