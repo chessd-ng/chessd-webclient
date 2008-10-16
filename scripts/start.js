@@ -105,6 +105,12 @@ function START_Webclient()
 	//MainData.ConnectionStatus = 0;
 	MainData.SetConnectionStatus(0);
 
+	// Add MyUsername in User list
+	USER_AddUser(MyUsername, "available");
+
+	// Create messages to get my user contact list,
+	// get my profile and presence to chessd server, jabber and
+	// general room
 	XMPP += MESSAGE_UserList();
 	XMPP += MESSAGE_Presence(MainData.GetServer()+"."+MainData.GetHost());
 	XMPP += MESSAGE_GetProfile(MyUsername, Consts.IQ_ID_GetMyProfile);
@@ -113,8 +119,6 @@ function START_Webclient()
 
 	CONNECTION_SendJabber(XMPP);
 
-	// Add MyUsername in User list
-	USER_AddUser(MyUsername, "online");
 
 	// Close load image
 	LOAD_EndLoad();

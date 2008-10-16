@@ -297,9 +297,10 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	var i = 0, Hide = 0;
 	var Rating;
 	var Button1 = new Object(), Button2 = new Object();
-	var User;
+	var User, UserStatus;
 	var MyUser;
-	var MyUsername = MainData.Username;	
+	var MyUsername = MainData.Username;
+	var MyUserStatus;
 
 	Func = function () {
 		Hide += 1;
@@ -321,6 +322,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	if (MyUsername != Username)
 	{
 		User = MainData.GetUser(Username);
+		MyUser = MainData.GetUser(MyUsername);
 	
 		// If users doesn't exists, create in user list data struct	
 		if(User == null)
@@ -353,7 +355,9 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		// Request for match is possible only if the status
 		// of opponent is (avaiable, away, busy) and the user
 		// isn't playing a game
-		if ( ((User.GetStatus(Username) != "offline") && (User.GetStatus(Username) != "playing") && (User.GetStatus(Username) != "unavailable")) && (MainData.Status != "playing"))
+		UserStatus = User.GetStatus();
+		MyUserStatus = MyUser.GetStatus();
+		if ( ((UserStatus != "offline") && (UserStatus != "playing") && (UserStatus != "unavailable")) && (MyUserStatus != "playing"))
 		{
 			Options[i].Func = function () {
 				Rating = User.GetRating(); // Get user rating object
@@ -394,7 +398,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		}
 
 		// Administrative functions
-		MyUser = MainData.GetUser(MyUsername);
 		if (MyUser.GetType() == "admin")
 		{
 			// Disconnet user

@@ -132,20 +132,21 @@ function DATA(ConfFile, LangFile)
 	this.SearchGameMaxId = 0;
 	this.SearchGameInfoList = new Array();
 
+	/* // Not used
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
+	this.Status = "available";
+	this.Type = "user";
+	*/
 
 	this.Password = "";
 	this.Username = "";	
 	this.ProfileList = new Array();
 	this.MyProfile = new Object();
 	this.Photo = null;
-	this.Type = "user";
 	this.AwayCounter = null;
 
-	this.Status = "available";
-	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
-	this.Load = -1;
+	this.Load = null;
 
 	this.Windows = new Object();
 	this.Windows.Focus = null;

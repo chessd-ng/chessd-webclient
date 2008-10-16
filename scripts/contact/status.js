@@ -30,6 +30,10 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 		
 	var RoomList = MainData.GetRoomList();
 	var Room;
+
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
+
 	// Change user status for contacts
 	XML = MESSAGE_ChangeStatus(NewStatus);
 	
@@ -54,9 +58,9 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	
 		Select.disabled = true;
 	}
-	// If current status is playing, remove playing option from select box, enable select box and 
-	// select avaiable status(Index 0)
-	else if (MainData.Status == "playing")
+	// If current status is playing, remove playing option from
+	// select box, enable select box and  select avaiable status(Index 0)
+	else if (MyUserStatus == "playing")
 	{
 		Select.disabled = false;
 		StatusItem = document.getElementById('status_playing_op');
@@ -65,7 +69,7 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	}
 	
 	// Update your status in structure
-	MainData.Status = NewStatus;
+	MyUser.SetStatus(NewStatus);
 
 	// Send to jabber or return the message
 	if (DontSend == null)
@@ -133,12 +137,14 @@ function CONTACT_StartAwayCounter()
 function CONTACT_SetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
 
 	MainData.AwayCounter = MainData.AwayCounter - 1;
 
 	if(MainData.AwayCounter == 0)
 	{
-		if((MainData.Status != "playing")&&(MainData.Status != "unavailable"))
+		if((MyUserStatus != "playing")&&(MyUserStatus != "unavailable"))
 		{
 			CONTACT_ChangeStatus("away");
 			
@@ -154,11 +160,13 @@ function CONTACT_SetAwayStatus()
 function CONTACT_ResetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
 
 	// Away counter reset to 5 minutes
 	MainData.AwayCounter = 300;
 
-	if(MainData.Status == "away")
+	if(MyUserStatus == "away")
 	{
 		CONTACT_ChangeStatus("available");
 			

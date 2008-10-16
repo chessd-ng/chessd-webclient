@@ -153,6 +153,8 @@ function MESSAGE_Presence(To)
 {
 	var XMPP;
 	var MyUsername = MainData.Username;
+	var MyUser = MainData.GetUser(MyUsername);
+	var MyUserStatus = MyUser.GetStatus();
 
 	XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' from='"+MyUsername+"@"+MainData.GetHost()+"' ";
 
@@ -164,9 +166,9 @@ function MESSAGE_Presence(To)
 	XMPP += ">";
 
 	// Setting user status
-	if (MainData.Status != "available")
+	if (MyUserStatus != "available")
 	{
-		XMPP += "<show>"+MainData.Status+"</show>";
+		XMPP += "<show>"+MyUserStatus+"</show>";
 	}
 
 	XMPP += "</presence>";

@@ -206,6 +206,7 @@ function GAME_HandleGameResult(XML)
 	var To;
 	var Consts = MainData.GetConst();
 	var MyUsername = MainData.Username;
+	var MyUser = MainData.GetUser(MyUsername);
 
 	// The code above is used to parse games that player is playing;
 	// 
@@ -218,7 +219,7 @@ function GAME_HandleGameResult(XML)
 			for(i=0; i< GameTag.length; i++)
 			{
 				Room = GameTag[i].getAttribute("room");
-				MainData.Status = "playing"
+				MyUser.SetStatus("playing");
 				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
