@@ -4,8 +4,8 @@
 
 /* HTML Elements */
 #OldGamesDiv img {
-	margin-right	: 11px;
-	margin-left		: 7px;
+	margin-right	: 20px;
+	margin-left		: 0px;
 }
 
 #OldGamesDiv p {
@@ -22,7 +22,7 @@
 
 #OldGamesDiv input {
 	margin-right	:	4px;
-	margin-top		:	11px;
+	margin-top		:	4px;
 	padding-left	:	2px;
 }
 
@@ -164,6 +164,7 @@
 }
 
 #OldGamesDiv #Layer2Div {
+	padding-top : 10px;
 	padding-left : 83px;
 }
 
