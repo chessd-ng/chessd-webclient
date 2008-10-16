@@ -146,6 +146,7 @@ function CHALLENGE_HandleOffer(XML)
 	var ChallengeMenu = MainData.GetChallengeMenu();
 	var ChallengedPlayer;
 	var Room, User;
+	var MyUsername = MainData.Username;
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -208,7 +209,7 @@ function CHALLENGE_HandleOffer(XML)
 		}
 
 		// Add the challenge in structure
-		if (Player1.Name == MainData.Username)
+		if (Player1.Name == MyUsername)
 		{
 
 			if(MainData.FindChallenge(ChallengeID, MatchID) == null)
@@ -412,6 +413,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	var Players = new Array();
 	var ChallengeID;
 	var ChalllengeSeq;
+	var MyUsername = MainData.Username;
 
 	Player1 = new Object();
 	Player2 = new Object();
@@ -437,7 +439,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	}
 
 	// Setting attributes
-	Player1.Name = MainData.Username;
+	Player1.Name = MyUsername;
 	Player1.Color = Color;
 	Player1.Time = Time;
 	Player1.Inc = Inc;
@@ -486,6 +488,7 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 {
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
+	var MyUsername = MainData.Username;
 
 	Player1 = new Object();
 	Player2 = new Object();
@@ -508,7 +511,7 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 	Time *= 60;
 
 	// Setting attributes
-	Player1.Name = MainData.Username;
+	Player1.Name = MyUsername;
 	Player1.Color = Color;
 	Player1.Time = Time;
 	Player1.Inc = Inc;

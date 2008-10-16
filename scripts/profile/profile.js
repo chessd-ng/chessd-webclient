@@ -34,6 +34,8 @@ function PROFILE_HandleVCardProfile(XML)
 	var Profile;
 	var Img;
 
+	var MyUsername = MainData.Username;
+	
 	FullName = UTILS_GetNodeText(XML.getElementsByTagName("FN")[0]);
 	NickName = UTILS_GetNodeText(XML.getElementsByTagName("NICKNAME")[0]);
 	Desc = UTILS_GetNodeText(XML.getElementsByTagName("DESC")[0]);
@@ -61,7 +63,7 @@ function PROFILE_HandleVCardProfile(XML)
 		Img = "images/no_photo.png";
 	}
 
-	if (UserFrom == MainData.Username)
+	if (UserFrom == MyUsername)
 	{
 		// Update user image
 		if (MainData.Photo != Img)
@@ -313,8 +315,9 @@ function PROFILE_SaveMyProfile()
 {
 	var FN, Desc, PhotoType, Binval;
 	var MyProfile;
+	var MyUsername = MainData.Username;
 
-	MyProfile = MainData.GetProfile(MainData.Username+"@"+MainData.GetHost());	
+	MyProfile = MainData.GetProfile(MyUsername+"@"+MainData.GetHost());	
 
 	FN = MyProfile.Profile.GetUser();
 	Desc = MyProfile.Profile.GetDesc();
@@ -326,7 +329,7 @@ function PROFILE_SaveMyProfile()
 	PhotoType = MyProfile.Profile.GetImgType();
 	Binval = MyProfile.Profile.GetImg64();
 
-	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MainData.Username));
+	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MyUsername));
 
 	return true;
 }
@@ -338,5 +341,6 @@ function PROFILE_SaveMyProfile()
 */
 function PROFILE_CreateProfile()
 {
-	return MESSAGE_SetProfile("", MainData.Username, "", "", "");
+	var MyUsername = MainData.Username;
+	return MESSAGE_SetProfile("", MyUsername, "", "", "");
 }

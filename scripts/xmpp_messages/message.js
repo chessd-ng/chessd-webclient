@@ -80,10 +80,11 @@ function MESSAGE_EndConnection(Unavailable)
 function MESSAGE_SendUsername()
 {
 	var XMPP;
+	var MyUsername = MainData.Username;
 
 	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='auth_1' to='"+MainData.GetHost()+"'>";
 	XMPP += "<query xmlns='jabber:iq:auth'>";
-	XMPP += "<username>"+MainData.Username+"</username>";
+	XMPP += "<username>"+MyUsername+"</username>";
 	XMPP += "</query></iq>";
 
 	return XMPP;
@@ -95,10 +96,11 @@ function MESSAGE_SendUsername()
 function MESSAGE_SendPasswd()
 {
 	var XMPP;
+	var MyUsername = MainData.Username;
 	
 	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' id='auth_2' to='"+MainData.GetHost()+"' >";
 	XMPP += "<query xmlns='jabber:iq:auth'>";
-	XMPP += "<username>"+MainData.Username+"</username>";
+	XMPP += "<username>"+MyUsername+"</username>";
 	XMPP += "<password>"+MainData.Password+"</password>";
 	XMPP += "<resource>"+MainData.GetResource()+"</resource></query></iq>";
 
@@ -150,8 +152,9 @@ function MESSAGE_RoomList()
 function MESSAGE_Presence(To)
 {
 	var XMPP;
+	var MyUsername = MainData.Username;
 
-	XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' from='"+MainData.Username+"@"+MainData.GetHost()+"' ";
+	XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' from='"+MyUsername+"@"+MainData.GetHost()+"' ";
 
 	// Presence to someone
 	if (To != null)
@@ -177,17 +180,18 @@ function MESSAGE_Presence(To)
 function MESSAGE_ChangeStatus(NewStatus, RoomName)
 {
 	var XMPP;
+	var MyUsername = MainData.Username;
 
 	// Message to room
 	if (RoomName)
 	{
 		if (NewStatus == "available")
 		{
-			XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+RoomName+"/"+MainData.Username+"' />";
+			XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+RoomName+"/"+MyUsername+"' />";
 		}
 		else
 		{
-			XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+RoomName+"/"+MainData.Username+"' ><show>"+NewStatus+"</show></presence>";
+			XMPP = "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+RoomName+"/"+MyUsername+"' ><show>"+NewStatus+"</show></presence>";
 		}
 	}
 	
@@ -272,8 +276,9 @@ function MESSAGE_Info(User)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MainData.Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#info'>";
 	XMPP += "<rating jid='"+User+"@"+MainData.GetHost()+"' />";
 	XMPP += "<type jid='"+User+"@"+MainData.GetHost()+"' />";
@@ -290,8 +295,9 @@ function MESSAGE_InfoProfile(User)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MainData.Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#profile'>";
 	XMPP += "<profile jid='"+User+"@"+MainData.GetHost()+"' />";
 	XMPP += "</query></iq>";
@@ -300,31 +306,6 @@ function MESSAGE_InfoProfile(User)
 }
 
 
-/**
-* Message to get users ratings
-*/
-/*
-function MESSAGE_UserListInfo()
-{
-	var XMPP, i;
-	var Consts = MainData.GetConst();
-
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MainData.Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
-	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#info'>";
-	XMPP += "<rating jid='"+MainData.Username+"@"+MainData.GetHost()+"' />";
-	XMPP += "<type jid='"+MainData.Username+"@"+MainData.GetHost()+"' />";
-
-	// Ask for all contact list
-	for (i=0; i<MainData.UserList.length; i++)
-	{
-		XMPP += "<rating jid='"+MainData.UserList[i].Username+"@"+MainData.GetHost()+"' />";
-		XMPP += "<type jid='"+MainData.UserList[i].Username+"@"+MainData.GetHost()+"' />";
-	}
-	XMPP += "</query></iq>"
-
-	return XMPP;
-}
-*/
 /**********************************
  * MESSAGES - INVITE
  **********************************/
@@ -402,16 +383,6 @@ function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 		Id = ChallengeID;
 	}
 
-	/*
-	for (i=0; i < Players.length; i++)
-	{
-		if (Players[i].Name == MainData.Username)
-		{
-			continue;
-		}
-		Id += "_"+Players[i].Name;
-	}
-	*/
 	// Tag the id with the challenged player's name
 	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Id+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#match#offer'>";
@@ -719,12 +690,13 @@ function MESSAGE_GameSearchCurrentGame()
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
 
 	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_SearchCurrentGame+"'>";
 	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd#game'>";
 	XMPP += "<game>";
 
-	XMPP += "<player jid='"+MainData.Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"'/>";
+	XMPP += "<player jid='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"'/>";
 
 	XMPP += "</game></search></iq>";
 
@@ -1056,6 +1028,7 @@ function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category,
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
 
 	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetAnnounceMatch+"'>";
 	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd#match_announcement'>";
@@ -1078,7 +1051,7 @@ function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category,
 
 	if (User == true)
 	{
-		XMPP += "player='"+MainData.Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' />";
+		XMPP += "player='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' />";
 	}
 	else
 	{

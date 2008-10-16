@@ -385,6 +385,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 	var Node = document.getElementById("GameRoomMenuDiv");
 	var List;
 	var Room, i;
+	var MyUsername = MainData.Username;
 
 	if (Node == null)
 	{
@@ -413,7 +414,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 		//Check if user is not playing or observe a game
 		if(CurrentGame == null)
 		{
-			if((PB.Name!= MainData.Username) &&(PW.Name != MainData.Username))
+			if((PB.Name!= MyUsername) &&(PW.Name != MyUsername))
 			{
 				Buffer += GAME_StartObserverGame(GameId, PW, PB);				
 			}
@@ -421,7 +422,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(GameId, PW, PB);
-				To = GameId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
+				To = GameId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To)
 			}
 		}
@@ -848,6 +849,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	var RoomName;
 	var Buttons = new Array();
+	var MyUsername = MainData.Username;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'CreateRoomDiv');
@@ -900,7 +902,7 @@ function INTERFACE_ShowCreateRoomWindow()
 			// message to create room
 			else
 			{
-				CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username));
+				CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MyUsername));
 			}
 		}
 	};
@@ -950,7 +952,7 @@ function INTERFACE_ShowCreateRoomWindow()
 		// Send a message to create room
 		else
 		{
-			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username));
+			CONNECTION_SendJabber(MESSAGE_Presence(RoomName+"@conference."+MainData.GetHost()+"/"+MyUsername));
 		}
 	};
 

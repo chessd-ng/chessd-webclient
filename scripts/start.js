@@ -95,26 +95,32 @@ function START_ChangeLanguage(Lang)
 */
 function START_Webclient()
 {
-	var All = INTERFACE_CreateInterface();
+	var All;
 	var XMPP = "";
 
 	var Consts = MainData.GetConst();
+	
+	var MyUsername = MainData.Username;
 
 	//MainData.ConnectionStatus = 0;
 	MainData.SetConnectionStatus(0);
 
 	XMPP += MESSAGE_UserList();
 	XMPP += MESSAGE_Presence(MainData.GetServer()+"."+MainData.GetHost());
-	XMPP += MESSAGE_GetProfile(MainData.Username, Consts.IQ_ID_GetMyProfile);
+	XMPP += MESSAGE_GetProfile(MyUsername, Consts.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
-	XMPP += MESSAGE_Presence("general@"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"/"+MainData.Username);
+	XMPP += MESSAGE_Presence("general@"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"/"+MyUsername);
 
 	CONNECTION_SendJabber(XMPP);
+
+	// Add MyUsername in User list
+	USER_AddUser(MyUsername, "online");
 
 	// Close load image
 	LOAD_EndLoad();
 
 	// Open XadrezLivre game environment
+	All = INTERFACE_CreateInterface();
 	INTERFACE_ShowInterface(All);
 	
 	// Create contact object and online list and set values
@@ -133,7 +139,6 @@ function START_Webclient()
 
 	// Set update user list timer 
 	USER_StartUpdateUserList();
-	USER_AddUser(MainData.Username, "online");
 }
 
 /*

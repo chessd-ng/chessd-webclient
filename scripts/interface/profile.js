@@ -96,7 +96,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 	var User;
 	var Elements = new Object();
 
-	if (Profile.User == MainData.Username)
+	var MyUsername = MainData.Username;
+
+	if (Profile.User == MyUsername)
 	{
 		User = true;
 	}
@@ -280,7 +282,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	if (User)
 	{
 		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games1'));
-		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(MainData.Username); };
+		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(MyUsername); };
 	}
 	else
 	{
@@ -540,6 +542,8 @@ function INTERFACE_ProfileSetNick(Nick)
 */
 function INTERFACE_ProfileSetDesc(Desc)
 {
+	var MyUsername = MainData.Username;
+
 	if(this.Desc.tagName == "TEXTAREA")
 	{
 		if (Desc != undefined)
@@ -562,7 +566,7 @@ function INTERFACE_ProfileSetDesc(Desc)
 			this.Desc.innerHTML = "";
 		}
 	}
-	if (this.Nick.innerHTML == MainData.Username)
+	if (this.Nick.innerHTML == MyUsername)
 	{
 		this.Counter.innerHTML = UTILS_GetText("window_character").replace(/%s/, 200 - this.Desc.value.length);
 	}

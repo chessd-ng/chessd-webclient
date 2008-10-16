@@ -205,6 +205,7 @@ function GAME_HandleGameResult(XML)
 	var i;
 	var To;
 	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
 
 	// The code above is used to parse games that player is playing;
 	// 
@@ -218,7 +219,7 @@ function GAME_HandleGameResult(XML)
 			{
 				Room = GameTag[i].getAttribute("room");
 				MainData.Status = "playing"
-				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
+				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}
@@ -474,6 +475,8 @@ function GAME_End(XML)
 	var Text;
 	var CurrentGame = MainData.GetCurrentGame();
 
+	var MyUsername = MainData.Username;
+
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
@@ -511,7 +514,7 @@ function GAME_End(XML)
 		WINDOW_Alert(Title, UTILS_GetText("game_result_"+Result));
 	}
 
-	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
+	if ((Game.PB != MyUsername) && (Game.PW != MyUsername))
 	{
 		Playing = false;
 	}
@@ -617,6 +620,7 @@ function GAME_StartGame(GameId, P1, P2)
 	var CurrentGame = MainData.GetCurrentGame();
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 
+	var MyUsername = MainData.Username;
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
@@ -648,7 +652,7 @@ function GAME_StartGame(GameId, P1, P2)
 
 	}
 
-	if (P1.Name == MainData.Username)
+	if (P1.Name == MyUsername)
 	{
 		YourColor = P1.Color;
 	}

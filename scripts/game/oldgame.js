@@ -142,6 +142,8 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var Color;
 	var Buffer = "";
 	var Consts = MainData.GetConst();
+	
+	var MyUsername = MainData.Username;
 
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 
@@ -158,11 +160,11 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	}
 
 	// Check if player is watch own old game
-	if(P1.Name == MainData.Username)
+	if(P1.Name == MyUsername)
 	{
 		Color = P1.Color;
 	}
-	else if (P2.Name == MainData.Username)
+	else if (P2.Name == MyUsername)
 	{
 		Color = P2.Color;
 	}

@@ -46,6 +46,8 @@ function CHALLENGE_HandleAdjourn(XML)
 	var AdjournId, Category, Date;
 	var ChallengeMenu = MainData.GetChallengeMenu();
 
+	var MyUsername = MainData.Username;
+
 	var i;
 
 	for(i=0; i< AdjournList.length; i++)
@@ -73,7 +75,7 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2.Time = Players[1].getAttribute("time");
 			Player2.Inc  = Players[1].getAttribute("inc");
 
-			if(Player1.Name == MainData.Username)
+			if(Player1.Name == MyUsername)
 			{
 				// Add in main data postpone list
 				MainData.AddPostpone(Player2, Category, Date, AdjournId);
@@ -168,13 +170,15 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	var Challenger = new Object();
 	var Challenged = new Object();
 
+	var MyUsername = MainData.Username;
+
 	// Create challenge in challenge list
 	Challenged.Name = Postpone.Challenged.Name;
 	Challenged.Color = Postpone.Challenged.Color;
 	Challenged.Time = Postpone.Challenged.Time;
 	Challenged.Inc = Postpone.Challenged.Inc;
 
-	Challenger.Name = MainData.Username;
+	Challenger.Name = MyUsername;
 	Challenger.Color = "undefined";
 	Challenged.Time = 0;
 	Challenged.Inc = 0;

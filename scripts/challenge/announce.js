@@ -114,12 +114,14 @@ function ANNOUNCE_HandleAnnounceGame(XML)
 	var GameRoomTag, Room;
 
 	var Buffer = "";
+	//FIX IT TO GET USERNAME FROM PREFERENCES
+	var MyUsername = MainData.Username
 
 	// Accepted announce, start game
 	GameRoom = XML.getElementsByTagName("game_room")[0];
 
 	Room = GameRoom.getAttribute("jid");
-	Room += "/"+MainData.Username;
+	Room += "/"+MyUsername;
 
 	Buffer += CONTACT_ChangeStatus("playing", false);
 	Buffer += MESSAGE_Presence(Room);

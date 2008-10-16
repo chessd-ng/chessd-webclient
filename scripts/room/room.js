@@ -42,6 +42,8 @@ function ROOM_HandleRoomPresence(XML)
 
 	var RoomNotFound;
 
+	var MyUsername = MainData.Username;
+
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
@@ -123,7 +125,7 @@ function ROOM_HandleRoomPresence(XML)
 	}
 
 	// If its your presence
-	if (Jid == MainData.Username)
+	if (Jid == MyUsername)
 	{
 		if (Type == "unavailable")
 		{
@@ -532,6 +534,8 @@ function ROOM_EnterRoom(RoomName)
 
 	var Room;
 
+	var MyUsername = MainData.Username;
+
 	// Send Message to general room - must be change to Focus Room
 	Room = MainData.GetRoom(RoomName);
 
@@ -541,7 +545,7 @@ function ROOM_EnterRoom(RoomName)
 	}
 	else
 	{
-		To = RoomName+"@conference."+MainData.GetHost()+"/"+MainData.Username;
+		To = RoomName+"@conference."+MainData.GetHost()+"/"+MyUsername;
 
 		XML = MESSAGE_Presence(To);
 
@@ -599,8 +603,9 @@ function ROOM_ExitRoom(RoomName)
 function ROOM_EnterRoomGame(RoomName)
 {
 	var XML, To;
+	var MyUsername = MainData.Username;
 
-	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.Username;
+	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 
 	XML = MESSAGE_Presence(To);
 

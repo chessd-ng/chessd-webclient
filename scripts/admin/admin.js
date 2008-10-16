@@ -93,13 +93,14 @@ function ADMIN_HandleAdmin(XML)
 function ADMIN_HandleInfo(XML)
 {
 	var Items = XML.getElementsByTagName("type");
-	var Username;
+	//FIX IT TO GET USERNAME FROM PREFERENCES
+	var MyUsername = MainData.Username;
 	var i =0;
 	var Type;
 	var Buffer = "";
 
 	// Find user
-	while((i<Items.length) &&(Items[i].getAttribute("jid").split("@")[0])!= MainData.Username)
+	while((i<Items.length) &&(Items[i].getAttribute("jid").split("@")[0])!= MyUsername)
 	{
 		i++;
 	}

@@ -24,16 +24,17 @@
 function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 {
 	var Tmp;
+	var MyUsername = MainData.Username;
 
 	// Setting white and black players
 	if (YourColor == "white")
 	{
-		if (Player1.Name == MainData.Username)
+		if (Player1.Name == MyUsername)
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;
 		}
-		else if(Player2.Name == MainData.Username)
+		else if(Player2.Name == MyUsername)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
@@ -46,12 +47,12 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 	else
 	{
-		if (Player1.Name == MainData.Username)
+		if (Player1.Name == MyUsername)
 		{
 			this.WhitePlayer = Player2;
 			this.BlackPlayer = Player1;
 		}
-		else if(Player2.Name == MainData.Username)
+		else if(Player2.Name == MyUsername)
 		{
 			this.WhitePlayer = Player1;
 			this.BlackPlayer = Player2;

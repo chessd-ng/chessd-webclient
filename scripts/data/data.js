@@ -66,10 +66,6 @@ function DATA(ConfFile, LangFile)
 	//Default php version - php4 or php5
 	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php")
 
-	this.Status = "available";
-	this.Type = null;
-	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
-	this.Load = -1;
 
 	/************************ CONTACT DATA*********************/
 	this.Contact = new Object();
@@ -138,13 +134,18 @@ function DATA(ConfFile, LangFile)
 
 	this.Rating = new Object();
 	this.CurrentRating = "blitz";
-	
+
+	this.Password = "";
+	this.Username = "";	
 	this.ProfileList = new Array();
 	this.MyProfile = new Object();
 	this.Photo = null;
-	this.AwayCounter = null;
 	this.Type = "user";
+	this.AwayCounter = null;
 
+	this.Status = "available";
+	//this.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
+	this.Load = -1;
 
 	this.Windows = new Object();
 	this.Windows.Focus = null;
@@ -1319,108 +1320,6 @@ function DATA_SetUserStatus(Username, NewStatus)
 */
 
 
-/**
-* @brief		Change user's type
-*
-* Search in your contact list and in all rooms that the user 
-* is, and change his/her status. If the given username is your 
-* own name, change on DATA the user type.
-*
-* @param		Username  User name 
-* @param		NewType   New Username Type
-* @author		Danilo Yorinori
-* @return 		true
-* @see			DATA_FindUser DATA_FindUserInRoom
-*/
-/*
-function DATA_SetType(Username, NewType)
-{
-	var UserPos = this.FindUser(Username);
-	var i;
-	var User;
-	var RoomList = MainData.GetRoomList();
-	var Room;
-
-	// If it's your type
-	if (Username == MainData.Username)
-	{
-		MainData.Type = NewType;
-		return true;
-	}
-
-	// Update in contact list
-	if (UserPos != null)
-	{
-		// TODO -> FIX IT TO WORK WITH CONTACT LIST
-		this.UserList[UserPos].Type = NewType;
-	}
-
-	// Update in room user list
-	for (i=0; i<RoomList.length; i++)
-	{
-		Room = RoomList[i];
-		User = Room.GetUser(Username);
-
-		if(User != null)
-		{
-			User.Type = NewType;
-		}
-	}
-
-	return true;
-}
-*/
-
-/**
-* @brief		Change user's rating 
-*
-* Search in your contact list and in all rooms that the user 
-* is, and change his/her rating.
-*
-* @param		Username  User name 
-* @param		Category  Category of rating   
-* @param		Rating    The new rating value
-* @author		Danilo Yorinori
-* @return 		true
-* @see			DATA_FindUser DATA_FindUserInRoom UTILS_Capitalize
-*/
-/*
-function DATA_SetRating(Username, Category, Rating)
-{
-	var UserPos, Obj, i;
-	var RoomList, Room;
-	// Set correct object to append rating
-	if (MainData.Username == Username)
-	{
-		Obj = MainData;
-	}
-	else
-	{
-		UserPos = MainData.FindUser(Username);
-		Obj = MainData.UserList[UserPos];
-	}
-	
-	if (Obj)
-	{
-		eval("Obj.Rating."+UTILS_Capitalize(Category)+" = Rating");
-	}
-	
-	RoomList = this.GetRoomList();
-	// Update rating in room user lists
-	for (i=0; i<RoomList.length; i++)
-	{
-		Room = RoomList[i];
-		//TODO -> FIX IT TO WORK WITH USERLIST
-		UserPos = Room.FindUser(Username);
-
-		if (UserPos != null)
-		{
-			eval("this.Room.RoomList["+i+"].UserList["+UserPos+"].Rating."+UTILS_Capitalize(Category)+" = Rating");
-		}
-	}
-	return true;
-}
-*/
 /**********************************
  * METHODS - ROOM LIST            *
  **********************************/
@@ -1609,22 +1508,6 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 	User.Type = Type;
 	User.Rating = DATA_RatingObject();
 
-/*
-	if (Username == MainData.Username)
-	{
-		User.Rating = MainData.Rating;
-	}
-	else if (UserPos == null)
-	{
-		User.Rating = new Object();
-	}
-	else
-	{
-		// Get rating from general room
-		Room = MainData.GetRoom(MainData.GetRoomDefault());
-		User.Rating = Room.UserList[UserPos].Rating;
-	}
-*/
 	User.GetUsername = DATA_GetUsername;
 	User.SetStatus = DATA_SetStatus;
 	User.GetStatus = DATA_GetStatus;

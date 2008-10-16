@@ -53,6 +53,7 @@ function CONTACT_HandleContactUserList(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
 	var Group;
+	var MyUsername = MainData.Username;	
 
 	Users = XML.getElementsByTagName("item");
 
@@ -82,7 +83,7 @@ function CONTACT_HandleContactUserList(XML)
 
 			// Insert users and group in data structure
 			case("both"):
-				if (MainData.Username != Jid)
+				if (MyUsername != Jid)
 				{
 					CONTACT_AddUser(Jid, "offline", Subs, Group);	
 				}
@@ -297,6 +298,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	var Rating;
 	var Button1 = new Object(), Button2 = new Object();
 	var User;
+	var MyUser;
+	var MyUsername = MainData.Username;	
 
 	Func = function () {
 		Hide += 1;
@@ -315,7 +318,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	*/
 
 	// If isn't your name
-	if (MainData.Username != Username)
+	if (MyUsername != Username)
 	{
 		User = MainData.GetUser(Username);
 	
@@ -391,7 +394,8 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		}
 
 		// Administrative functions
-		if (MainData.Type == "admin")
+		MyUser = MainData.GetUser(MyUsername);
+		if (MyUser.GetType() == "admin")
 		{
 			// Disconnet user
 			Options[i] = new Object();

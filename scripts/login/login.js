@@ -35,7 +35,8 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 		return;
 	}
 
-	// Store user infomations 
+	// Store user infomations
+	// FIX IT TO WORK WITH PREFERENCE OBJECT 
 	MainData.Username = Username;
 	MainData.Password = Passwd;
 

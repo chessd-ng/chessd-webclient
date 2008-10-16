@@ -279,6 +279,8 @@ function CHAT_SendMessage(Username, Message)
 	var Msg = UTILS_ConvertChatString(Message)
 	var XML = MESSAGE_Chat(Username, Msg);
 
+	var MyUsername = MainData.Username;
+
 	CONNECTION_SendJabber(XML);
 
 	// Find and get Chat object
@@ -288,7 +290,7 @@ function CHAT_SendMessage(Username, Message)
 
 		// Show message in chat list
 		//INTERFACE_ShowChatMessage(Username, Msg, true);
-		ChatObj.Chat.addMessage(MainData.Username, UTILS_ConvertChatString(Message));
+		ChatObj.Chat.addMessage(MyUsername, UTILS_ConvertChatString(Message));
 	}
 
 	return "";

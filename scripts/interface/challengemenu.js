@@ -229,6 +229,8 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	var ItemObj = new Object();
 	var Id = MatchId;
 
+	var MyUsername = MainData.Username;
+
 	// Random color
 	if(Player.Color == "")
 	{
@@ -274,7 +276,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		PRated = UTILS_CreateElement("p","rated","true","rating");
 	}
 
-	if(Player.Name == MainData.Username)
+	if(Player.Name == MyUsername)
 	{
 		PButton = UTILS_CreateElement("p","button","decline");
 		PButton.onmousedown = function(){
