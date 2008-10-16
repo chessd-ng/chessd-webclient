@@ -146,7 +146,7 @@ function DATA(ConfFile, LangFile)
 	this.Photo = null;
 	this.AwayCounter = null;
 
-	this.Load = null;
+	this.LoadObj = null;
 
 	this.Windows = new Object();
 	this.Windows.Focus = null;
@@ -349,6 +349,11 @@ DATA.prototype.GetWindow = DATA_GetWindow;
 DATA.prototype.SetWindowFocus = DATA_SetWindowFocus;
 DATA.prototype.GetWindowFocus = DATA_GetWindowFocus;
 DATA.prototype.GetWindowListLength = DATA_GetWindowListLength;
+
+
+/*LOAD OBJECT METHODS*************************/
+DATA.prototype.SetLoadObj = DATA_SetLoadObj;
+DATA.prototype.GetLoadObj = DATA_GetLoadObj;
 
 DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
@@ -3017,6 +3022,18 @@ function DATA_FindWindow(WindowObj)
 	return null;
 }
 
+/**********************************
+ * METHODS - LOAD OBJECT          *
+ **********************************/
+function DATA_SetLoadObj(Obj)
+{
+	this.LoadObj = Obj;
+}
+
+function DATA_GetLoadObj()
+{
+	return this.LoadObj;
+}
 
 /**********************************
  * METHODS - PROFILE              *
