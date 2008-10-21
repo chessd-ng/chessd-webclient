@@ -186,8 +186,8 @@ function INTERFACE_CreateBoard(MyColor, PieceSize)
 function INTERFACE_CreateTimer()
 {
 	var TimerDiv = UTILS_CreateElement("div", "TimerDiv");
-	var PWTimer = UTILS_CreateElement("span", "PWTimer", null, "00:00");
-	var PBTimer = UTILS_CreateElement("span", "PBTimer", null, "00:00");
+	var PWTimer = UTILS_CreateElement("span", "PWTimer", null, "-- : --");
+	var PBTimer = UTILS_CreateElement("span", "PBTimer", null, "-- : --");
 	
 	TimerDiv.appendChild(PWTimer);
 	TimerDiv.appendChild(PBTimer);

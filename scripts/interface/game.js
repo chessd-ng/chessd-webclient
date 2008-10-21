@@ -508,13 +508,19 @@ function INTERFACE_DecreaseTime()
 {
 	if (MainData.CurrentGame.Game.Turn == "white")
 	{
-		MainData.CurrentGame.Game.WhitePlayer.Time -= 1;
-		MainData.CurrentGame.Game.SetWTime();
+		if(MainData.CurrentGame.Game.WhitePlayer.Time != null)
+		{
+			MainData.CurrentGame.Game.WhitePlayer.Time -= 1;
+			MainData.CurrentGame.Game.SetWTime();
+		}
 	}
 	else
 	{
-		MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
-		MainData.CurrentGame.Game.SetBTime();
+		if(MainData.CurrentGame.Game.BlackPlayer.Time != null)
+		{
+			MainData.CurrentGame.Game.BlackPlayer.Time -= 1;
+			MainData.CurrentGame.Game.SetBTime();
+		}
 	}
 }
 
@@ -582,33 +588,39 @@ function INTERFACE_SetWTime()
 	var min, sec;
 	var minStr, secStr;
 
-	if (this.WhitePlayer.Time <= 0)
+	if(this.WhitePlayer.Time == null)
 	{
-		this.Timer = clearInterval(this.Timer);
+		this.WhitePlayer.Time == "-- : --";
 	}
+	else {
+		if (this.WhitePlayer.Time <= 0)
+		{
+			this.Timer = clearInterval(this.Timer);
+		}
 
-	min = Math.floor(this.WhitePlayer.Time / 60);
-	sec = this.WhitePlayer.Time % 60;
+		min = Math.floor(this.WhitePlayer.Time / 60);
+		sec = this.WhitePlayer.Time % 60;
 
-	if(min < 10)
-	{
-		minStr = "0"+min;
-	}
-	else
-	{
-		minStr = min;
-	}
+		if(min < 10)
+		{
+			minStr = "0"+min;
+		}
+		else
+		{
+			minStr = min;
+		}
 
-	if(sec < 10)
-	{
-		secStr = "0"+sec;
-	}
-	else
-	{
-		secStr = sec;
-	}
+		if(sec < 10)
+		{
+			secStr = "0"+sec;
+		}
+		else
+		{
+			secStr = sec;
+		}
 
-	this.Time.WTime.innerHTML = minStr+":"+secStr;
+		this.Time.WTime.innerHTML = minStr+":"+secStr;
+	}
 }
 
 /**
@@ -623,33 +635,39 @@ function INTERFACE_SetBTime()
 	var min, sec;
 	var minStr, secStr;
 
-	if (this.BlackPlayer.Time <= 0)
+	if(this.BlackPlayer.Time == null)
 	{
-		this.Timer = clearInterval(this.Timer);
+		this.BlackPlayer.Time == "-- : --";
 	}
+	else {
+		if (this.BlackPlayer.Time <= 0)
+		{
+			this.Timer = clearInterval(this.Timer);
+		}
 
-	min = Math.floor(this.BlackPlayer.Time / 60);
-	sec = this.BlackPlayer.Time % 60;
+		min = Math.floor(this.BlackPlayer.Time / 60);
+		sec = this.BlackPlayer.Time % 60;
 
-	if(min < 10)
-	{
-		minStr = "0"+min;
-	}
-	else
-	{
-		minStr = min;
-	}
+		if(min < 10)
+		{
+			minStr = "0"+min;
+		}
+		else
+		{
+			minStr = min;
+		}
 
-	if(sec < 10)
-	{
-		secStr = "0"+sec;
-	}
-	else
-	{
-		secStr = sec;
-	}
+		if(sec < 10)
+		{
+			secStr = "0"+sec;
+		}
+		else
+		{
+			secStr = sec;
+		}
 
-	this.Time.BTime.innerHTML = minStr+":"+secStr;
+		this.Time.BTime.innerHTML = minStr+":"+secStr;
+	}
 }
 
 /**
