@@ -140,7 +140,6 @@ function CHALLENGE_HandlePresence(XML)
 function CHALLENGE_PostponePresence(Username, PresenceType)
 {
 	var ChallengeMenu = MainData.GetChallengeMenu();
-// --> TODO Arrumar para pegar usuarios desconectados
 	//If user is founded, set adjourn game to available, else unavailable
 	if(PresenceType == "unavailable")
 	{

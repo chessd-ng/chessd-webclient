@@ -19,8 +19,6 @@
 * Handle user messages
 */
 
- //TODO -> COLOCAR AS CHAMADAS DESSAS FUNCOES NO PARSER
-
 /**
  * @brief	Handle user contact list
  *

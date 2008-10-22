@@ -355,8 +355,6 @@ function PROFILE_StartProfile(Username)
 
 	User.SetProfileObj(ProfileObj);
 
-	//TODO -> PEGAR TIPO E RATING ATRAVES DA MENSAGEM DO PROFILE
-	//TODO -> FAZER ISSO EM TODAS OS PARSERS DE RATING E TYPE
 	if(User.GetUpdateProfile() == true)
 	{
 		CONNECTION_SendJabber(MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
@@ -526,6 +524,3 @@ function PROFILE_ConvertUserRatingList(RatingList)
 
 	return Rating;
 }
-//TODO -> ARRUMAR TODAS AS FUNCOES PARA ACESSAR O USER LIST PARA PROFILE
-// TODO -> MODIFICAR A MENSAGEM PRA BUSCAR RATING PARA O RATING DO PROFILE
-// TODO -> modificar o utils

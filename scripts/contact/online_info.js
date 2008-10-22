@@ -18,7 +18,6 @@
 * Control user information (rating an type)
 */
 
-//TODO -> acertar o parser para redirecionar mensagens para esse controlador
 /**
 * Receive a info message and set it in user list
 */
