@@ -136,7 +136,8 @@ function CHALLENGE_HandleErrorChallenge (XML)
  */
 function CHALLENGE_HandleOffer(XML)
 {
-	var Players, Match, MatchID, Category, Type, Rating, Rated;
+	var Players, Match, MatchID, Category, Type, Rated;
+	var RatingObj;
 	var MatchTag;
 	var Player1 = new Object();
 	var Player2 = new Object();
@@ -227,15 +228,15 @@ function CHALLENGE_HandleOffer(XML)
 			User = MainData.GetUser(Player2.Name);
 			if(User != null)
 			{
-				Rating = User.Rating.GetRatingValue(Category);
+				RatingObj = User.GetRatingList();
 			}
 			else
 			{
-				Rating = "";
+				Rating = null;
 			}
 
 			// Show challenge window for user
-			WINDOW_Challenge(Player2.Name, Rating, Player2, Rated, MatchID);
+			WINDOW_Challenge(Player2.Name, RatingObj, Player2, Rated, MatchID);
 		}
 		else 
 		{
@@ -253,15 +254,15 @@ function CHALLENGE_HandleOffer(XML)
 			User = MainData.GetUser(Player1.Name);
 			if(User != null)
 			{
-				Rating = User.Rating.GetRatingValue(Category);
+				RatingObj = User.GetRatingList();
 			}
 			else
 			{
-				Rating = "";
+				RatingObj = null;
 			}
 
 			// Show challenge window for user
-			WINDOW_Challenge(Player1.Name, Rating, Player1, Rated, MatchID);
+			WINDOW_Challenge(Player1.Name, RatingObj, Player1, Rated, MatchID);
 
 		}
 
@@ -412,7 +413,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
 	var ChallengeID;
-	var ChalllengeSeq;
+	var ChallengeSeq;
 	var MyUsername = MainData.Username;
 
 	Player1 = new Object();

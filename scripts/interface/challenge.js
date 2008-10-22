@@ -75,10 +75,8 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 	// Layer1 Elements
 
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
-
 	// Layer 1 Left Elements
 	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
-
 	if (GameParameters != undefined)
 	{
 		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_op_pieces'));
@@ -118,7 +116,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 		ColorOptB.name = "color";
 		ColorOptB.value = "colorB";
 	}
-
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
 	ColorOptBImg.src = "images/invite_black_pawn.png"
 	BrB = UTILS_CreateElement('br');
@@ -224,6 +221,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 				
 				TimeSelect.appendChild(TimeOpt);
 			}
+			
 			Rating = RatingObj.GetRatingValue("lightning");
 		}
 
@@ -287,6 +285,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 			TimeSelect.appendChild(TimeOpt);
 			Rating = RatingObj.GetRatingValue("untimed");
 
+		}
+
+		if(Rating == null)
+		{
+			Rating = "---";
 		}
 
 		Username.removeChild(Username.childNodes[1]);
