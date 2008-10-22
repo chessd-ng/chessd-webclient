@@ -360,7 +360,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		if ( ((UserStatus != "offline") && (UserStatus != "playing") && (UserStatus != "unavailable")) && (MyUserStatus != "playing"))
 		{
 			Options[i].Func = function () {
-				Rating = User.GetRating(); // Get user rating object
+				Rating = User.GetRatingList(); // Get user rating object
 				WINDOW_Challenge(Username, Rating);
 			};
 		}

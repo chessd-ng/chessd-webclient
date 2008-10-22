@@ -147,7 +147,7 @@ function ONLINE_AddUser(User, Status)
 
 	// Get user Type and Current rating
 	UserType = UserObj.GetType();
-	UserRating = UserObj.GetRating();
+	UserRating = UserObj.GetRatingList();
 
 	if(UserRating != null)
 	{

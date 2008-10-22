@@ -137,17 +137,18 @@ function DATA(ConfFile, LangFile)
 	this.CurrentRating = "blitz";
 	this.Status = "available";
 	this.Type = "user";
+	this.Photo = null;
+	this.ProfileList = new Array();
+	this.MyProfile = new Object();
 	*/
 
 	this.Password = "";
-	this.Username = "";	
-	this.ProfileList = new Array();
-	this.MyProfile = new Object();
-	this.Photo = null;
+	this.Username = "";
 	this.AwayCounter = null;
 
 	this.LoadObj = null;
 
+	/************************ WINDO DATA*************************/
 	this.Windows = new Object();
 	this.Windows.Focus = null;
 	this.Windows.WindowList = new Array();
@@ -536,7 +537,7 @@ function DATA_AddContactUser(Username, Status, Subs, Group)
 	User.GetGroup = DATA_GetGroup;
 	User.SetGroup = DATA_SetGroup;
  
-	User.GetRating = DATA_GetRating;
+	User.GetRatingList = DATA_GetRatingList;
 	User.SetType = DATA_SetType;
 	User.GetType = DATA_GetType;
 
@@ -673,7 +674,7 @@ function DATA_AddOnlineUser(Username, Status, Type)
 	User.SetStatus = DATA_SetStatus;
 	User.GetStatus = DATA_GetStatus;
  
-	User.GetRating = DATA_GetRating;
+	User.GetRatingList = DATA_GetRatingList;
 	User.SetType = DATA_SetType;
 	User.GetType = DATA_GetType;
 
@@ -833,7 +834,28 @@ function DATA_GetPhoto()
 	return this.Photo;
 }
 
-function DATA_GetRating()
+
+function DATA_SetImg64(Image)
+{
+	this.Img64 = Image;
+} 
+
+function DATA_GetImg64() 
+{
+	return this.Img64;
+} 
+
+function DATA_SetImgType(ImageType)
+{
+	this.ImgType = ImageType;
+} 
+
+function DATA_GetImgType()
+{
+	return this.ImgType;
+} 
+
+function DATA_GetRatingList()
 {
 	return this.Rating;
 }
@@ -875,6 +897,96 @@ function DATA_SetUpdateRating(Bool)
 {
 	this.UpdateRating = Bool;
 }
+
+function DATA_GetUpdateProfile()
+{
+	return this.UpdateProfile;
+}
+
+function DATA_SetUpdateProfile(Bool)
+{
+	this.UpdateProfile = Bool;
+}
+
+function DATA_SetFullname(NewName)
+{
+	this.Fullname = NewName;
+}
+
+function DATA_GetFullname()
+{
+	return this.Fullname;
+}
+
+function DATA_SetDesc(NewDesc)
+{
+	this.Desc = NewDesc;
+}
+
+function DATA_GetDesc()
+{
+	return this.Desc;
+}
+
+function DATA_SetLastGame(LastGame)
+{
+	this.LastGame = LastGame;
+}
+
+function DATA_GetLastGame()
+{
+	return this.LastGame;
+}
+
+function DATA_SetOnlineTime(Time)
+{
+	this.OnlineTime = Time;
+}
+
+function DATA_GetOnlineTime()
+{
+	return this.OnlineTime;
+}
+
+function DATA_SetTotalTime(Time)
+{
+	this.TotalTime = Time;
+}
+
+function DATA_GetTotalTime()
+{
+	return this.TotalTime;
+}
+
+function DATA_SetWarning(Warning)
+{
+	this.Warning = Warning;
+}
+
+function DATA_GetWarning()
+{
+	return this.Warning;
+}
+
+function DATA_SetTypeTitle(Title)
+{
+	this.TypeTitle = Title;
+}
+
+function DATA_GetTypeTitle()
+{
+	return this.TypeTitle;
+}
+
+function DATA_SetProfileObj(ProfileObj)
+{
+	this.ProfileObj = ProfileObj;
+}
+
+function DATA_GetProfileObj()
+{
+	return this.ProfileObj;
+}
 /**
 * @brief		Change the user's subscription
 *
@@ -913,18 +1025,35 @@ function DATA_RatingObject()
 	RatingObj.AddRating = DATA_AddRating;
 	RatingObj.RemoveRating = DATA_RemoveRating;
 	RatingObj.FindRating = DATA_FindRating;
+	RatingObj.GetRating = DATA_GetRating;
+
 	RatingObj.GetRatingValue = DATA_GetRatingValue;
 	RatingObj.SetRatingValue = DATA_SetRatingValue;
+	RatingObj.GetRecordValue = DATA_GetRecordValue;
+	RatingObj.SetRecordValue = DATA_SetRecordValue;
+	RatingObj.GetRecordTime = DATA_GetRecordTime;
+	RatingObj.SetRecordTime = DATA_SetRecordTime;
+	RatingObj.GetRatingWin = DATA_GetRatingWin;
+	RatingObj.SetRatingWin = DATA_SetRatingWin;
+	RatingObj.GetRatingDraw = DATA_GetRatingDraw;
+	RatingObj.SetRatingDraw = DATA_SetRatingDraw;
+	RatingObj.GetRatingLosses = DATA_GetRatingLosses;
+	RatingObj.SetRatingLosses = DATA_SetRatingLosses;
 
 	return RatingObj;
 }
 
-function DATA_AddRating(Category, Value)
+function DATA_AddRating(Category, Value, RecordValue, RecordTime, Win, Draw, Losses)
 {
 	var Rating = new Object();
 	
 	Rating.Category = Category;
 	Rating.Value = Value;
+	Rating.RecordValue = RecordValue;
+	Rating.RecordTime = RecordTime;
+	Rating.Win = Win;
+	Rating.Draw = Draw;
+	Rating.Losses = Losses;
 	
 	this.RatingList.push(Rating);
 }
@@ -953,6 +1082,20 @@ function DATA_FindRating(Category)
 	return null;
 
 }
+
+function DATA_GetRating(Category)
+{
+	var Pos = this.FindRating(Category);
+	if(Pos != null)
+	{
+		return this.RatingList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
 function DATA_GetRatingValue(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -981,6 +1124,176 @@ function DATA_SetRatingValue(Category, Value)
 	}
 }
 
+function DATA_GetRecordValue(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].RecordValue;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRecordValue(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].RecordValue = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetRecordTime(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].RecordTime;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRecordTime(Category, Time)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].RecordTime = Time;
+	}
+	else
+	{
+		return null;
+	}
+}
+/*
+function DATA_GetRecordNumGames(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].NumGames;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRecordNumGames(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].NumGames = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+*/
+function DATA_GetRatingWin(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].Win;
+	}
+	else
+	{
+		return null;
+	}
+
+}
+
+function DATA_SetRatingWin(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].Win = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetRatingDraw(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].Draw;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRatingDraw(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].Draw = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetRatingLosses(Category)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		return this.RatingList[Pos].Losses;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_SetRatingLosses(Category, Value)
+{
+	var Pos = this.FindRating(Category);
+	
+	if(Pos != null)
+	{
+		this.RatingList[Pos].Losses = Value;
+	}
+	else
+	{
+		return null;
+	}
+}
+
+
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
@@ -1002,26 +1315,69 @@ function DATA_AddUser(Username, Status)
 	// Creating a new object
 	var User = new Object();
 
-	// Setting atributes
-	// The user's rating will be seted after
+	//////////// Setting atributes
+	// General user attributes
 	User.Username = Username;
-	User.Photo = "";
 	User.Status = Status;
+	// The user's rating will be set after
 	User.Rating = DATA_RatingObject();
 	User.Type = "user";
 	User.UpdateRating = true;
+	User.UpdateProfile = true;
+	User.ProfileObj = null;
 
+	///// Profile user attributes
+	// vCard
+	User.Fullname = "---";
+	User.Desc = "---";
+	User.Photo = null;
+	User.Img64 = null;
+	User.ImgType = null;
+	// Chess Data
+	User.LastGame = "---";
+	User.OnlineTime = "---";
+	User.TotalTime = "---";
+	User.Warning = "";
+	User.TypeTitle = "---";
+
+	//Methods
 	User.GetUsername = DATA_GetUsername;
 	User.SetStatus = DATA_SetStatus;
 	User.GetStatus = DATA_GetStatus;
 
 	User.SetPhoto = DATA_SetPhoto;
 	User.GetPhoto = DATA_GetPhoto; 
-	User.GetRating = DATA_GetRating;
+	User.SetImg64 = DATA_SetImg64;
+	User.GetImg64 = DATA_GetImg64; 
+	User.SetImgType = DATA_SetImgType;
+	User.GetImgType = DATA_GetImgType; 
+	User.GetRatingList = DATA_GetRatingList;
 	User.SetType = DATA_SetType;
 	User.GetType = DATA_GetType;
+
+	User.SetFullname = DATA_SetFullname;
+	User.GetFullname = DATA_GetFullname;
+	User.SetDesc = DATA_SetDesc;
+	User.GetDesc = DATA_GetDesc;
+	User.SetLastGame = DATA_SetLastGame;
+	User.GetLastGame = DATA_GetLastGame;
+	User.SetOnlineTime = DATA_SetOnlineTime;
+	User.GetOnlineTime = DATA_GetOnlineTime;
+	User.SetTotalTime = DATA_SetTotalTime;
+	User.GetTotalTime = DATA_GetTotalTime;
+	User.SetWarning = DATA_SetWarning;
+	User.GetWarning = DATA_GetWarning;
+	User.SetTypeTitle = DATA_SetTypeTitle;
+	User.GetTypeTitle = DATA_GetTypeTitle;
+
+	User.SetProfileObj = DATA_SetProfileObj;
+	User.GetProfileObj = DATA_GetProfileObj;
+
 	User.SetUpdateRating = DATA_SetUpdateRating;
 	User.GetUpdateRating = DATA_GetUpdateRating;
+
+	User.SetUpdateProfile = DATA_SetUpdateProfile;
+	User.GetUpdateProfile = DATA_GetUpdateProfile;
 
 	this.Users.UserList.push(User);
 }
@@ -1520,7 +1876,7 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 
 	User.SetPhoto = DATA_SetPhoto;
 	User.GetPhoto = DATA_GetPhoto; 
-	User.GetRating = DATA_GetRating;
+	User.GetRatingList = DATA_GetRatingList;
 	User.SetType = DATA_SetType;
 	User.GetType = DATA_GetType;
 

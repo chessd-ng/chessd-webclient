@@ -93,18 +93,18 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	var Buttons = new Array();
 	var i,j, Time;
-	var User;
+	var MyUser;
 	var Elements = new Object();
 
 	var MyUsername = MainData.Username;
 
 	if (Profile.User == MyUsername)
 	{
-		User = true;
+		MyUser = true;
 	}
 	else
 	{
-		User = false;
+		MyUser = false;
 	}
 
 	// Main Div
@@ -139,7 +139,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	Nickname = 	UTILS_CreateElement('span', null, 'inf', Profile.User);
 
-	if (User)
+	if (MyUser)
 	{
 		// Change photo label
 		EditPhotoLabel = UTILS_CreateElement('span',null,'edit_photo',UTILS_GetText('profile_edit_photo'));
@@ -258,7 +258,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	// Left Div <Online Time>
 	TimeLeftDiv = UTILS_CreateElement('div','TimeLeftDiv');
 
-	if (Profile.OnlineTime == 'None')
+	if (Profile.OnlineTime == null)
 	{
 		Time = "Off-line";
 	}
@@ -274,12 +274,22 @@ function INTERFACE_ShowProfileWindow(Profile)
 	// Time Div <Total Time>
 	TimeRightDiv = UTILS_CreateElement('div','TimeRightDiv');
 	TotalTimeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_total_time'));
-	TotalTimeSpan = UTILS_CreateElement('span',null,'value',Profile.Total);
+	TotalTimeSpan = UTILS_CreateElement('span',null,'value');
+	
+	if(Profile.Total != null)
+	{
+		TotalTimeSpan.innerHTML = Profile.Total;
+	}
+	else
+	{
+		TotalTimeSpan.innerHTML = "---";
+	}
+
 	TotalTimeLabel.appendChild(TotalTimeSpan);
 
 	// Old Games Div <Old Games Div>
 	OldGamesDiv = UTILS_CreateElement('div','OldGameDiv');
-	if (User)
+	if (MyUser)
 	{
 		OldGamesLabel = UTILS_CreateElement('span',null,'oldgames',UTILS_GetText('profile_old_games1'));
 		OldGamesLabel.onclick = function() { OLDGAME_OpenOldGameWindow(MyUsername); };
@@ -302,7 +312,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	
 	// Mount tree elements
 	// Append Salve profile
-	if (User)
+	if (MyUser)
 	{
 		ButtonsDiv.appendChild(SaveProfile);
 		Buttons.push(SaveProfile);
@@ -331,7 +341,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	TopDiv.appendChild(TopRightDiv);
 	
 	// Counter Div
-	if (User) {
+	if (MyUser) {
 //		CounterDiv.appendChild(CounterInput);
 		CounterDiv.appendChild(CounterLabel);
 	}
@@ -339,7 +349,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	// Who Left and Right elements
 	WhoLeftDiv.appendChild(WhoAmILabel);
 	WhoRightDiv.appendChild(WhoAmIUser);
-	if (User)
+	if (MyUser)
 	{
 		WhoRightDiv.appendChild(CounterDiv);
 	}
@@ -521,10 +531,15 @@ function INTERFACE_ProfileGetUser()
 function INTERFACE_ProfileSetUserImg(Img)
 {
 	//No user image
-	if(Img != "images/no_photo.png")
+	if(Img != null)
 	{
 		this.UserImg.src = IMAGE_ImageDecode(Img);
 	}
+	else
+	{
+		this.UserImg.src = "images/no_photo.png";
+	}
+
 }
 
 /**
@@ -610,7 +625,14 @@ function INTERFACE_ProfileSetRatings(Ratings)
 */
 function INTERFACE_ProfileSetTotalTime(Time)
 {
-	this.TotalTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
+	if(Time != null)
+	{
+		this.TotalTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
+	}
+	else
+	{
+		this.TotalTime.innerHTML = "---";
+	}
 }
 
 /**
@@ -619,7 +641,14 @@ function INTERFACE_ProfileSetTotalTime(Time)
 */
 function INTERFACE_ProfileSetOnlineTime(Time)
 {
-	this.OnlineTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
+	if(Time != null)
+	{
+		this.OnlineTime.innerHTML = UTILS_ConvertTime(parseInt(Time));
+	}
+	else
+	{
+		this.OnlineTime.innerHTML = "---";
+	}
 }
 
 /**

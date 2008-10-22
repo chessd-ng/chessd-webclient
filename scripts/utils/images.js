@@ -101,6 +101,7 @@ function IMAGE_B64Img(Image, Type){
 	var Img;
 
 	var MyUsername = MainData.Username;
+	var MyUser;
 	
 	//if type == ""; error!!!!
 	if(Type == "")
@@ -110,13 +111,18 @@ function IMAGE_B64Img(Image, Type){
 	}
 	Img = "data:"+Type+";base64,"+Image;
 
+	MyUser = MainData.GetUser(MyUsername);
 	// Update user profile image
-	Profile = MainData.GetProfile(MyUsername+"@"+MainData.GetHost());
-	if(Profile != null)
+	//Profile = MainData.GetProfile(MyUsername+"@"+MainData.GetHost());
+	if(MyUser != null)
 	{
-		Profile.Profile.SetImgType(Type);
-		Profile.Profile.SetImg64(Image);
-		Profile.Profile.SetUserImg(Img);
+		Profile = MyUser.GetProfileObj();
+		if(Profile != null)
+		{
+			Profile.Profile.SetImgType(Type);
+			Profile.Profile.SetImg64(Image);
+			Profile.Profile.SetUserImg(Img);
+		}
 	}
 	return true;
 }
