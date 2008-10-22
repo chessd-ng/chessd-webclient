@@ -161,10 +161,11 @@ function PROFILE_HandleInfoProfile(XML)
 		{
 			Type = 'user';
 		}
-
+		/*
 		User.SetOnlineTime(UpTime);
 		User.SetTotalTime(OnlineTime);
 		User.SetType(Type);
+		/*/
 		//Update Rating
 		Rating = PROFILE_HandleRatings(From, RatingNodes);
 
@@ -280,9 +281,9 @@ function PROFILE_HandleRatings(Username, RatingNodes)
 		Rating[Index][6] = TotalDraw;
 		Rating[Index][7] = TotalLosses;
 
-
+		/*
 		User = MainData.GetUser(Username);
-		// Update in data struct
+		// Update in data struct 
 		if(User != null)
 		{
 			if(User.Rating.FindRating(Category) == null)
@@ -300,7 +301,7 @@ function PROFILE_HandleRatings(Username, RatingNodes)
 				User.Rating.SetRatingLosses(Category, TotalLosses);
 			}
 		}
-
+		*/
 	}
 
 	// return array of rating to show in profile window

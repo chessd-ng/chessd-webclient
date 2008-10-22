@@ -66,17 +66,17 @@ function PARSER_ParseIq(XML)
 			// Receive information of user list
 			else if (Xmlns.match(/\/chessd#info/))
 			{
-				Buffer += USER_HandleInfo(XML);
 				Buffer += ADMIN_HandleInfo(XML);
 				// contact/info.js
-				Buffer += CONTACT_HandleInfo(XML);
-				Buffer += ONLINE_HandleInfo(XML);
 				Buffer += ROOM_HandleInfo(XML);
 			}
 
 			// Receive profile information of user
 			else if (Xmlns.match(/\/chessd#profile/))
 			{
+				Buffer += USER_HandleInfo(XML);
+				Buffer += CONTACT_HandleInfo(XML);
+				Buffer += ONLINE_HandleInfo(XML);
 				Buffer += PROFILE_HandleInfoProfile(XML);
 			}
 			else if (Xmlns.match(/\/chessd#match_announcement/))

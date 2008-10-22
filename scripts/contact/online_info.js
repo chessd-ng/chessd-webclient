@@ -23,14 +23,114 @@
 */
 function ONLINE_HandleInfo(XML)
 {
-	var RatingNodes, TypeNodes;
-	
+	var RatingNodes, TypeNode;
+	var Jid, Type, Rating;
+	var User;
+	var From;
+	//Rating variables
+	var i;
+        var RatingValue;
+        var RecordValue, RecordTime;
+	var TimeStamp;
+	var ProfileNode;
+
+	/*
+	var OnlineNode, UptimeNode;
+	var OnlineTime, UpTime;
+        var TotalWin,TotalDraw,TotalLosses, TotalGames;
+	OnlineNode = XML.getElementsByTagName('online_time')[0];
+	UptimeNode = XML.getElementsByTagName('uptime')[0];
+	*/
+
+	ProfileNode = XML.getElementsByTagName('profile')[0];
 	RatingNodes = XML.getElementsByTagName('rating');
-	TypeNodes = XML.getElementsByTagName('type');
+	TypeNode = XML.getElementsByTagName('type')[0];
+
+	Jid = ProfileNode.getAttribute('jid');
+	From = Jid.split('@')[0];
+	User = MainData.GetOnlineUser(From);
+
+	if(User != null)
+	{
+		/*
+		if(UptimeNode != null)
+		{
+			UpTime = UptimeNode.getAttribute("seconds");
+		}
+		else
+		{
+			UpTime = null;
+		}
+
+		if(OnlineNode != null)
+		{
+			OnlineTime = OnlineNode.getAttribute("seconds");
+		}
+		else
+		{
+			OnlineTime = null;
+		}
+		*/
+		if(TypeNode != null)
+		{
+			Type = TypeNode.getAttribute('type');
+		}
+		else
+		{
+			Type = 'user';
+		}
+		/*
+		// Set user uptime
+		User.SetOnlineTime(UpTime);
+		// Set user total uptime
+		User.SetTotalTime(OnlineTime);
+		*/
+
+		// Set user type
+		//User.SetType(Type);
+		ONLINE_SetUserType(From, Type);
+
+		// Set rating	
+		for(i=0; i< RatingNodes.length; i++)
+		{
+                	Category = RatingNodes[i].getAttribute('category');
+
+			RatingValue = RatingNodes[i].getAttribute('rating');
+			/*
+			RecordValue = RatingNodes[i].getAttribute('max_rating');
+			TotalWin   = parseInt(RatingNodes[i].getAttribute('wins'));
+			TotalDraw  = parseInt(RatingNodes[i].getAttribute('draws'));
+			TotalLosses= parseInt(RatingNodes[i].getAttribute('losses'));
+			TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
+			RecordTime= UTILS_ConvertTimeStamp(TimeStamp);
+			*/
+			ONLINE_SetUserRating(From, Category, RatingValue);
+
+			/*
+			if(User.Rating.FindRating(Category) == null)
+			{
+				User.Rating.AddRating(Category, RatingValue);
+			}
+			else
+			{
+				User.Rating.SetRatingValue( Category, RatingValue);
+				User.Rating.SetRecordValue( Category, RecordValue);
+				User.Rating.SetRecordTime(  Category, RecordTime);
+				User.Rating.SetRatingWin(   Category, TotalWin);
+				User.Rating.SetRatingDraw(  Category, TotalDraw);
+				User.Rating.SetRatingLosses(Category, TotalLosses);
+			}
+
+			*/
+		}
+	
+	}
 
 	// Update contacts 
+	/*
 	ONLINE_HandleRating(RatingNodes);
 	ONLINE_HandleType(TypeNodes);
+	*/
 
 	return "";
 }
@@ -38,6 +138,7 @@ function ONLINE_HandleInfo(XML)
 /**
 * Handle user rating, update the structure and interface
 */
+/*
 function ONLINE_HandleRating(NodeList)
 {
 	var Username, Rating, Category, i;
@@ -45,7 +146,9 @@ function ONLINE_HandleRating(NodeList)
 	// Getting ratings
 	for (i=0 ; i<NodeList.length ; i++)
 	{
-		Username = NodeList[i].getAttribute('jid').replace(/@.*/,"");
+		Username = NodeList[i].getAttribute('jid').replace(/@.*/
+//,"");
+/*
 		Category = NodeList[i].getAttribute('category');
 		Rating = NodeList[i].getAttribute('rating');
 
@@ -53,10 +156,11 @@ function ONLINE_HandleRating(NodeList)
 		ONLINE_SetUserRating(Username, Category, Rating);
 	}
 }
-
+*/
 /**
 * Handle user types, update the structure and interface
 */
+/*
 function ONLINE_HandleType(NodeList)
 {
 	var Jid, Type, i;
@@ -64,14 +168,16 @@ function ONLINE_HandleType(NodeList)
 	// Getting user type
 	for (i=0 ; i<NodeList.length ; i++)
 	{
-		Jid = NodeList[i].getAttribute('jid').replace(/@.*/,"");
+		Jid = NodeList[i].getAttribute('jid').replace(/@.*/
+//,"");
+/*
 		Type = NodeList[i].getAttribute('type');
 
 		// Set type on sctructure
 		ONLINE_SetUserType(Jid, Type);
 	}
 }
-
+*/
 /**
 * Change type of 'Username' in structure and interface
 */
