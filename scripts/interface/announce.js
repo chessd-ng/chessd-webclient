@@ -82,7 +82,6 @@ function INTERFACE_AnnounceWindow()
 	
 
 	ColorOptWImg = UTILS_CreateElement('img',null,'color');
-	ColorOptWImg.src = "images/invite_white_pawn.png";
 	BrW = UTILS_CreateElement('br');
 
 	try
@@ -99,7 +98,6 @@ function INTERFACE_AnnounceWindow()
 	}
 
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
-	ColorOptBImg.src = "images/invite_black_pawn.png";
 	BrB = UTILS_CreateElement('br');
 	
 	try
@@ -116,7 +114,6 @@ function INTERFACE_AnnounceWindow()
 	}
 
 	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
-	RandomColorOptImg.src = "images/random.png";
 	BrR = UTILS_CreateElement('br');
 	
 	// Firefox fix
@@ -124,6 +121,19 @@ function INTERFACE_AnnounceWindow()
 	//defaultChecked is used to fix IE radio checked
 	AutoColorOpt.setAttribute("defaultChecked", "true");
 	
+	// Set imagens according to browser type
+	if (MainData.Browser == 0)
+	{
+		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
+		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";
+		RandomColorOptImg.src = "images/ie/random.gif";
+	}
+	else
+	{
+		ColorOptWImg.src = "images/invite_white_pawn.png";
+		ColorOptBImg.src = "images/invite_black_pawn.png";
+		RandomColorOptImg.src = "images/random.png";
+	}
 	//*End Layer 1 Left Elements*
 	
 	// Layer 1 Right Elements

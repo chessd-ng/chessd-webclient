@@ -112,7 +112,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	
 
 	ColorOptWImg = UTILS_CreateElement('img',null,'color');
-	ColorOptWImg.src = "images/invite_white_pawn.png"
 	BrW = UTILS_CreateElement('br');
 
 	try
@@ -129,7 +128,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	}
 
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
-	ColorOptBImg.src = "images/invite_black_pawn.png"
 	BrB = UTILS_CreateElement('br');
 	
 	try
@@ -146,9 +144,21 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	}
 
 	RandomColorOptImg = UTILS_CreateElement('img',null,'color');
-	RandomColorOptImg.src = "images/random.png"
 	BrR = UTILS_CreateElement('br');
 	
+	// Set imagens according to browser type
+	if (MainData.Browser == 0)
+	{
+		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
+		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";
+		RandomColorOptImg.src = "images/ie/random.gif";
+	}
+	else
+	{
+		ColorOptWImg.src = "images/invite_white_pawn.png";
+		ColorOptBImg.src = "images/invite_black_pawn.png";
+		RandomColorOptImg.src = "images/random.png";
+	}
 //	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
 
 	// Select player color

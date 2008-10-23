@@ -119,7 +119,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	}
 
 	WImg = UTILS_CreateElement('img');
-	WImg.src = "images/invite_white_pawn.png";
 	
 	try
 	//Fix radio button for IE
@@ -135,7 +134,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	}
 
 	BImg = UTILS_CreateElement('img');
-	BImg.src = "images/invite_black_pawn.png";
 	
 	try
 	//Fix radio button for IE
@@ -152,7 +150,21 @@ function INTERFACE_ShowOldGameWindow(Id)
 	}
 
 	RImg = UTILS_CreateElement('img');
-	RImg.src = "images/random.png";
+
+	// Set imagens according to browser type
+	if (MainData.Browser == 0)
+	{
+		WImg.src = "images/ie/invite_white_pawn.gif";
+		BImg.src = "images/ie/invite_black_pawn.gif";
+		RImg.src = "images/ie/random.gif";
+	}
+	else
+	{
+		WImg.src = "images/invite_white_pawn.png";
+		BImg.src = "images/invite_black_pawn.png";
+		RImg.src = "images/random.png";
+	}
+
 	// End Pieces Form
 
 	// Layer 2 Div
