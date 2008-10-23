@@ -363,7 +363,7 @@ function PROFILE_StartProfile(Username)
 
 		//Wait for 30 minutes to get profile again
 		//TODO -> Store this timer
-		setInterval("PROFILE_ResetUpdateProfile("+Username+")",1800000);
+		setInterval("PROFILE_ResetUpdateProfile('"+Username+"')",1800000);
 	}
 	else //Get profile data from user list
 	{

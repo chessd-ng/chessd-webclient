@@ -364,7 +364,7 @@ function ROOM_HandleGameRoomInfoList(XML)
 */
 function ROOM_HandleInfo(XML)
 {
-	var RatingNodes, TypeNodes;
+	var RatingNodes, TypeNode;
 
         var Username, Rating, Category
 	var i,j;
@@ -375,15 +375,20 @@ function ROOM_HandleInfo(XML)
 
 	var RoomList = MainData.GetRoomList();
 	var Room;
+	var ProfileNode;
 
 	RatingNodes = XML.getElementsByTagName('rating');
-	TypeNodes = XML.getElementsByTagName('type');
+	TypeNode = XML.getElementsByTagName('type')[0];
+	ProfileNode = XML.getElementsByTagName("profile")[0];
 
+	// Get user name
+	Username = ProfileNode.getAttribute('jid').split("@")[0];
+	// Get user type nodes
+	NewType = TypeNode.getAttribute('type');
 
 	// Getting ratings nodes
 	for (i=0 ; i<RatingNodes.length ; i++)
 	{
-		Username = RatingNodes[i].getAttribute('jid').replace(/@.*/,"");
 		Category = RatingNodes[i].getAttribute('category');
 		Rating = RatingNodes[i].getAttribute('rating');
 
@@ -419,36 +424,31 @@ function ROOM_HandleInfo(XML)
 
 	}
 
-	// Getting users type nodes
-	for (i=0 ; i<TypeNodes.length ; i++)
+
+	// Updating type in room lists
+	for (j=0; j<RoomList.length; j++)
 	{
-		Username = TypeNodes[i].getAttribute('jid').replace(/@.*/,"");
-		NewType = TypeNodes[i].getAttribute('type');
-	
-		// Updating type in room lists
-		for (j=0; j<RoomList.length; j++)
+		Room = RoomList[j];
+
+		// Search user node in room user list
+		User = Room.GetUser(Username);
+		if (User != null)
 		{
-			Room = RoomList[j];
+			// Update in data struct
+			User.SetType(NewType);
 
-			// Search user node in room user list
-			User = Room.GetUser(Username);
-			if (User != null)
+			Status = User.GetStatus();
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+
+			// Update in interface
+			if(NewType != "user")
 			{
-				// Update in data struct
-				User.SetType(NewType);
-
-				Status = User.GetStatus();
-				Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
-
-				// Update in interface
-				if(NewType != "user")
-				{
-					// Search user node in room user list
-					Room.Room.userList.updateUser(Username, Status, Rating, NewType);	
-				}
+				// Search user node in room user list
+				Room.Room.userList.updateUser(Username, Status, Rating, NewType);	
 			}
 		}
 	}
+
 	return "";
 }
 
