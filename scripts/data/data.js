@@ -85,6 +85,7 @@ function DATA(ConfFile, LangFile)
 	this.Users = new Object();
 	this.Users.UserList = new Array();
 	this.Users.UpdateTimer = null;
+	this.Users.UpdateProfileTimer = null;
 
 	/************************ CHAT DATA************************/
 	this.Chat = new Object();
@@ -196,8 +197,6 @@ DATA.prototype.SortContactUserByNick = DATA_SortContactUserByNick;
 DATA.prototype.SortContactUserByRating = DATA_SortContactUserByRating;
 //DATA.prototype.IsContact = DATA_IsContact; -> Fazer no contact.js
 
-// TODO --> TERMINAR DE FAZER OS METODOS DO USER LIST
-// TODO --> ADAPTAR AS FUNCOES DOS CONTROLADORES PARA OS METODOS
 DATA.prototype.GetContactUserList = DATA_GetContactUserList;
 DATA.prototype.SetContactObj = DATA_SetContactObj;
 DATA.prototype.GetContactObj = DATA_GetContactObj;
@@ -231,6 +230,8 @@ DATA.prototype.GetUserList = DATA_GetUserList;
 
 DATA.prototype.SetUpdateTimer = DATA_SetUpdateTimer;
 DATA.prototype.GetUpdateTimer = DATA_GetUpdateTimer;
+DATA.prototype.SetUpdateProfileTimer = DATA_SetUpdateProfileTimer;
+DATA.prototype.GetUpdateProfileTimer = DATA_GetUpdateProfileTimer;
 
 /*
 DATA.prototype.GetStatus = DATA_GetStatus;
@@ -356,12 +357,13 @@ DATA.prototype.GetWindowListLength = DATA_GetWindowListLength;
 DATA.prototype.SetLoadObj = DATA_SetLoadObj;
 DATA.prototype.GetLoadObj = DATA_GetLoadObj;
 
+/*
 DATA.prototype.AddProfile = DATA_AddProfile;
 DATA.prototype.RemoveProfile = DATA_RemoveProfile;
 DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
-
 DATA.prototype.SetMyProfile = DATA_SetMyProfile;
+*/
 
 
 /**********************************
@@ -1454,6 +1456,16 @@ function DATA_SetUpdateTimer(Interval)
 function DATA_GetUpdateTimer()
 {
 	return this.Users.UpdateTimer;
+}
+
+function DATA_SetUpdateProfileTimer(Interval)
+{
+	this.Users.UpdateProfileTimer = Interval;
+}
+
+function DATA_GetUpdateProfileTimer()
+{
+	return this.Users.UpdateProfileTimer;
 }
 
 /**

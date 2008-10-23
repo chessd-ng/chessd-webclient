@@ -362,8 +362,7 @@ function PROFILE_StartProfile(Username)
 		User.SetUpdateProfile(false);
 
 		//Wait for 30 minutes to get profile again
-		//TODO -> Store this timer
-		setInterval("PROFILE_ResetUpdateProfile('"+Username+"')",1800000);
+		MainData.SetUpdateProfile(setInterval("PROFILE_ResetUpdateProfile()",1800000));
 	}
 	else //Get profile data from user list
 	{
@@ -448,11 +447,20 @@ function PROFILE_CreateProfile()
 	return MESSAGE_SetProfile("", MyUsername, "", "", "");
 }
 
-function PROFILE_ResetUpdateProfile(Username)
+function PROFILE_ResetUpdateProfile()
 {
-	var User = MainData.GetUser(Username);
-	
-	User.SetUpdateProfile(true);
+	var User;
+	var UserList = MainData.GetUserList();
+	var i;
+
+	for(i=0; i<UserList.length; i++)
+	{
+		User = UserList[i];
+		if(User.GetUpdateProfile() == false)
+		{
+			User.SetUpdateProfile(true);
+		}
+	}
 }
 
 
