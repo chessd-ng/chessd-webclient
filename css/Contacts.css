@@ -35,7 +35,8 @@
 }
 
 #Main #Left #Contact #ContactTitle li {
-	background-color	: #216778;
+/*	background-color	: #216778; */
+	background-image: url('../images/left_title_bg_inactive.png');
 	cursor			: pointer;
 	float			: left;
 	height			: 14px;
@@ -54,7 +55,8 @@
 }
 
 #Main #Left #Contact #ContactTitle li.contact_selec {
-	background-color	: #FFA200;
+	border-color	: #FFA200;
+	background-image: url('../images/left_title_bg.png');
 }
 
 #Main #Left #Contact #UserLists {

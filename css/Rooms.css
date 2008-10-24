@@ -6,7 +6,6 @@
 	position		: relative;
 	height : 305px; 
 	width : 200px;
-	/*height			: 320px;*/
 }
 
 #Main #Left #Rooms .Room {
@@ -14,10 +13,6 @@
 	padding-top		: 4px;
 	position		: relative;
 	width : 200px;
-	/*
-	height			: 84mm;
-	padding-top		: 1mm;
-	*/
 }
 
 /* Room title list */
@@ -26,7 +21,7 @@
 	display			: table;
 	position		: relative;
 	left			: -2px;
-	background-color	: #216778;
+	background-image: url('../images/left_title_bg_inactive.png');
 }
 
 #Main #Left #Rooms #RoomUserDiv {
@@ -39,7 +34,6 @@
 	color			: #216778;
 
 	position		: relative;
-/*	left			: 55px; */
 
 	border-bottom		: 1px solid #216778;
 
@@ -56,7 +50,6 @@
 	color			: #FFA200;
 
 	position		: relative;
-/*	left			: 33px; */
 
 	border-bottom		: 1px solid #FFA200;
 
@@ -73,14 +66,9 @@
 	font-weight		: bold;
 	font-size		: 11px;
 	color			: #FFF;
-	background-color	: #216778;
+	background-image: url('../images/left_title_bg_inactive.png');
 	border-right		: 1px solid #FFF;
 	cursor			: pointer;
-
-	/*
-	width			: 38%;
-	padding-left		: 3mm;
-	*/
 }
 
 
@@ -91,16 +79,10 @@
 	width			: 10px;
 	height			: 8px;
 	cursor			: pointer;
-	/*
-	right			: 3%;
-	top			: 25%;
-	width			: 11%;
-	height			: 43%;
-	*/
 }
 
 #Main #Left #Rooms #RoomList .room_selec {
-	background-color: #FFA200;
+	background-image: url('../images/left_title_bg.png');
 }
 
 #Main #Left #Rooms #RoomList .room_arrow {
@@ -112,17 +94,10 @@
 	overflow		: hidden;
 	border			: 0px;
 	border-left		: 1px solid #FFF;
-	/*
-	height			: 4.8mm;
-	*/
 }
 
 #Main #Left #Rooms .RoomInside {
 	padding-left		: 12px;
-	/*
-	background-color : blue;
-	padding-left		: 3mm;
-	*/
 }
 
 /* Room List menu */
@@ -135,11 +110,6 @@
 	background-color	: #EAF4F5;
 	cursor			: pointer;
 	z-index			: 3;
-	/*
-	left			: 100%;
-	width			: 28mm;
-	height			: 35mm;
-	*/
 }
 
 #Main #Left #Rooms #RoomListMenu li:hover {
@@ -150,9 +120,6 @@
 	padding			: 5px 10px;
 	height			: 120px;
 	overflow		: auto;
-	/*
-	height			: 32mm;
-	*/
 }
 
 #Main #Left #Rooms #RoomListMenu li {
@@ -160,9 +127,6 @@
 	margin-bottom		: 4px;
 	font-size		: 11px;
 	color			: #216778;
-	/*
-	margin-bottom		: 1mm;
-	*/
 }
 
 /* Room messages */
@@ -175,11 +139,6 @@
 	width			: 164px;
 	overflow		: auto;
 	margin-top		: 5px;
-	/*
-	margin-right		: 3mm;
-	height			: 35mm;
-	width			: 89%;
-	*/
 }
 
 #Main #Left #Rooms .Room .MessageList li {
@@ -205,10 +164,6 @@
 	color			: #216778;
 	width			: 164px;
 	margin-bottom		: 4px;
-	/*
-	width			: 89%;
-	margin-bottom		: 1mm;
-	*/
 }
 
 /* Emoticons */
@@ -216,9 +171,6 @@
 	position		: relative;
 	margin-left		: 145px;
 	cursor			: pointer;
-	/*
-	margin-left		: 81%;
-	*/
 }
 
 #Main #Left #Rooms .Room #EmoticonDiv {
@@ -230,12 +182,6 @@
 	border			: 1px solid #216778;
 	background-color	: #FFF;
 	overflow		: auto;
-	/*
-	left			: 100%;
-	top			: 50mm;
-	width			: 75%;
-	height			: 44%;
-	*/
 }
 
 #Main #Left #Rooms .Room #EmoticonList li {

@@ -7,14 +7,15 @@
 }
 
 #TitleBar.focus{
-	border-color	: #ffa200;
+	border-color	: #FFA200;
 	background-image: url('../images/window_title_bg.png');
 }
 
 #TitleBar{
-	background-repeat		: repeat-x;
+	background-image: url('../images/window_title_bg_inactive.png');
+/*	background-repeat		: repeat-x;
 	background-image		: none;
-	background-color		: #216778;
+	background-color		: #216778;*/
 	width				: 100px;
 	height				: 21px;
 	position			: relative;
