@@ -79,6 +79,9 @@ function LOGIN_Logout()
 {
 	var XMPP = "";
 	var CurrentGame = MainData.GetCurrentGame();
+	var UpdateProfile = MainData.GetUpdateProfileTimer();
+	var UpdateRating = MainData.GetUpdateTimer(); 
+
 	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	//MainData.ConnectionStatus = -1;
@@ -92,6 +95,18 @@ function LOGIN_Logout()
 	if(CurrentGame != null)
 	{
 		CurrentGame.Game.StopTimer();
+	}
+
+	if(UpdateProfile != null)
+	{
+		clearInterval(UpdateProfile);
+		MainData.SetUpdateProfile(null);
+	}
+	
+	if(UpdateRating != null)
+	{
+		clearInterval(UpdateRating);
+		MainData.SetUpdateTimer(null);
 	}
 
 	START_Restart();

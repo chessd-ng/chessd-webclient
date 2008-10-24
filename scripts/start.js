@@ -119,7 +119,6 @@ function START_Webclient()
 
 	CONNECTION_SendJabber(XMPP);
 
-
 	// Close load image
 	LOAD_EndLoad();
 
