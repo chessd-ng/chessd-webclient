@@ -50,9 +50,9 @@
 	background-image	: url('../images/board/square_select.png');
 }
 
-#Board div:hover {
+/*#Board div:hover {
 	background-image	: url('../images/board/square_select.png');
-}
+}*/
 
 
 #BoardPiece{
@@ -126,7 +126,7 @@
 	position		: absolute;
 	right			: -3px;
 	/*top			: -5mm;*/
-	top			: -20px;
+	top			: -18px;
 	/*width			: 4mm;*/
 	width			: 16px;
 	font-weight		: bold;
@@ -136,6 +136,7 @@
 	color			: #FFF;
 	padding			: 2px;
 	cursor			: pointer;
+	height			: 12px;
 }
 
 #PhotoDiv

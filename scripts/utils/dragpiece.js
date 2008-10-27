@@ -80,8 +80,8 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		OldPos.x = Obj.style.left.replace(/px/, "");
 		OldPos.y = Obj.style.top.replace(/px/, "");
 
-		// Show block border of origin
-		GAME_SetBlockBorder((8 - OldPos.y/Size), (OldPos.x/Size + 1));
+		// Set block class of origin
+		GAME_SetBlockClass((8 - OldPos.y/Size), (OldPos.x/Size + 1));
 	
 		document.body.onmousemove = function (ev) {
 			MousePos = UTILS_GetMouseCoords(ev);
@@ -207,14 +207,13 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 			// Show loading move message
 			GAME_ShowLoadingMove(MainData.CurrentGame.Id);
-
 		}
 
 		// Return to deafult cursor
 		document.body.style.cursor = "default";
 
-		// Remove block border of origin
-		GAME_RemoveBlockBorder(OldLine, OldCol);
+		// Remove block class of origin
+		GAME_RemoveBlockClass(OldLine, OldCol);
 
 		delete OldPos;
 

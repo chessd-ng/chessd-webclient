@@ -169,7 +169,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	}
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1, P2, Color, 38);
+	GameDiv = new INTERFACE_GameBoardObj(OldGameId, P1, P2, Color, 38, true);
 	Index = MainData.AddOldGame(P1, P2, "none", GameDiv);
 
 	// Show New Game
@@ -386,6 +386,9 @@ function OLDGAME_EndGame(Id)
 	Index = MainData.PushOldGame(EndedGame);
 
 	MainData.CurrentOldGame.Color = "none";
+
+	// Remove on mouse over and on mouse out events from blocks
+	MainData.CurrentOldGame.Game.RemoveBlockEvents();
 
 	PWName = MainData.CurrentOldGame.PW;
 	PBName = MainData.CurrentOldGame.PB;

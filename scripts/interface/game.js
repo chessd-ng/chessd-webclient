@@ -21,7 +21,7 @@
 /***************************
 ** GAME BOARD OBJECT
 *****************************/
-function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
+function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, Observer)
 {
 	var Tmp;
 
@@ -73,7 +73,7 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	}
 
 
-	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, YourColor, this.PieceSize);
+	Tmp = INTERFACE_CreateGame(GameID, this.WhitePlayer.Name, this.BlackPlayer.Name, YourColor, this.PieceSize, Observer);
 
 	this.Time = new Object();
 	this.name = new Object();
@@ -144,7 +144,10 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize)
 	this.SetLastMove = INTERFACE_LastMove;
 	this.FindBlock = INTERFACE_FindBlock;
 	this.SetBlockBorder = INTERFACE_SetBlockBorder;
+	this.SetBlockClass = INTERFACE_SetBlockClass;
 	this.RemoveBlockBorder = INTERFACE_RemoveBlockBorder;
+	this.RemoveBlockClass = INTERFACE_RemoveBlockClass;
+	this.RemoveBlockEvents = INTERFACE_RemoveBlockEvents;
 
 	this.ShowLoadingMove = INTERFACE_ShowLoadingMove;
 	this.HideLoadingMove = INTERFACE_HideLoadingMove;

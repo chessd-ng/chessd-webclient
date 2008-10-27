@@ -26,7 +26,7 @@
 * @return	void
 * @author	Rubens and Pedro
 */
-function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize)
+function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer)
 {
 	var GameDiv = UTILS_CreateElement("div","GameDiv");
 	var GameInfo = UTILS_CreateElement("div","GameInfoDiv");
@@ -36,7 +36,7 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize)
 	var GameID = GameId;
 	
 	// Creating board
-	var BoardBlocks = INTERFACE_CreateBoard(MyColor, PieceSize);
+	var BoardBlocks = INTERFACE_CreateBoard(MyColor, PieceSize, Observer);
 
 	// Create div for pieces
 	var BoardPiece = UTILS_CreateElement("div","BoardPiece",null,null);
@@ -123,10 +123,11 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize)
 *
 * @param 	MyColor is player color in the game
 * @param 	PieceSize is the board piece size
+* @param 	Observer is true if game will be observed, false if game will be played
 * @return	board html div
 * @author	Rubens and Pedro
 */
-function INTERFACE_CreateBoard(MyColor, PieceSize)
+function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 {
 	var Board = UTILS_CreateElement("div", "Board");
 	var X, Y;
@@ -147,10 +148,22 @@ function INTERFACE_CreateBoard(MyColor, PieceSize)
 			if ((X+Y) % 2 == 1)
 			{
 				Block = UTILS_CreateElement("div", null, "black");
+				// If not observer, set block to change color if mouse is over or out of its
+				if(!Observer)
+				{
+					Block.onmouseover = function() { this.className = "select" };
+					Block.onmouseout = function() { this.className = "black" };
+				}
 			}
 			else
 			{
 				Block = UTILS_CreateElement("div", null, "white");
+				// If not observer, set block to change color if mouse is over or out of its
+				if(!Observer)
+				{
+					Block.onmouseover = function() { this.className = "select" };
+					Block.onmouseout = function() { this.className = "white" };
+				}
 			}
 			
 			// Blocks size
@@ -174,6 +187,24 @@ function INTERFACE_CreateBoard(MyColor, PieceSize)
 		}
 	}
 	return Board;
+}
+
+/**
+* Remove mouse event associated to board blocks
+
+* @return	void
+* @author	Danilo
+*/
+function INTERFACE_RemoveBlockEvents()
+{
+	var i;
+
+	// Creating board block
+	for (i=0; i < 64; i++)
+	{
+			this.BoardBlocks.childNodes[i].onmouseover = function() { return false; };
+			this.BoardBlocks.childNodes[i].onmouseout = function() { return false; };
+	}
 }
 
 /**
@@ -692,6 +723,7 @@ function INTERFACE_LastMove(Move)
 		OldBlockOrig = this.FindBlock(OldPosOrig);
 		OldBlockDest = this.FindBlock(OldPosDest);
 
+		this.RemoveBlockBorder(OldBlockOrig);
 		if((parseInt(UTILS_HorizontalIndex(OldPosOrig.charAt(0))) + parseInt(OldPosOrig.charAt(1))) % 2 == 0)
 		{
 			OldBlockOrig.className = "black";
@@ -701,6 +733,7 @@ function INTERFACE_LastMove(Move)
 			OldBlockOrig.className = "white";
 		}
 
+		this.RemoveBlockBorder(OldBlockDest);
 		if((parseInt(UTILS_HorizontalIndex(OldPosDest.charAt(0))) + parseInt(OldPosDest.charAt(1))) % 2 == 0)
 		{
 			OldBlockDest.className = "black";
@@ -716,9 +749,8 @@ function INTERFACE_LastMove(Move)
 	{
 		BlockOrig = this.FindBlock(PosOrig);
 		BlockDest = this.FindBlock(PosDest);
-
-		BlockDest.className = "select";
-		BlockOrig.className = "select";
+		this.SetBlockBorder(BlockOrig);
+		this.SetBlockBorder(BlockDest);
 
 		this.LastMove = Move;
 	}
@@ -806,9 +838,15 @@ function INTERFACE_HideLeaveUser()
 	this.LeaveUser.style.display = "none";
 }
 
-function INTERFACE_SetBlockBorder(BlockId)
+/**
+* Set a border to block
+*
+*	@param Block - block element
+* @return void
+* @author Danilo
+*/
+function INTERFACE_SetBlockBorder(Block)
 {
-	var Block = this.FindBlock(BlockId);
 	var Border = UTILS_CreateElement("div","BlockBoard");
 
 	Border.style.width = (this.PieceSize - 4)+"px";
@@ -816,12 +854,52 @@ function INTERFACE_SetBlockBorder(BlockId)
 	Block.appendChild(Border);
 }
 
-function INTERFACE_RemoveBlockBorder(BlockId)
+/**
+* Set block class as selected
+*
+*	@param BlockId - Id of block to search and change
+* @return void
+* @author Danilo
+*/
+function INTERFACE_SetBlockClass(BlockId)
 {
 	var Block = this.FindBlock(BlockId);
 
+	Block.className = "select";
+}
+
+/**
+* Remove border from block
+*
+*	@param Block - block element
+* @return void
+* @author Danilo
+*/
+function INTERFACE_RemoveBlockBorder(Block)
+{
 	if(Block.firstChild != null)
 	{
 		Block.removeChild(Block.firstChild);
+	}
+}
+
+/**
+* Remove select class from block and set its real color (black/white)
+*
+*	@param BlockId - Id of block to search and change
+* @return void
+* @author Danilo
+*/
+function INTERFACE_RemoveBlockClass(BlockId)
+{
+	var Block = this.FindBlock(BlockId);
+
+	if((parseInt(UTILS_HorizontalIndex(BlockId.charAt(0))) + parseInt(BlockId.charAt(1))) % 2 == 0)
+	{
+		Block.className = "black";
+	}
+	else
+	{
+		Block.className = "white";
 	}
 }

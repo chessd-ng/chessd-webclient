@@ -651,7 +651,7 @@ function GAME_StartGame(GameId, P1, P2)
 		YourColor = P2.Color;
 	}
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor);
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor, 38, false);
 
 	// Add game to data struct and set it to current game
 	MainData.AddGame(GameId, P1.Name, P2.Name, YourColor, GameDiv);
@@ -700,7 +700,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	}
 
 	// 38 -> default piece size
-	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38);
+	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38, true);
 	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
 	MainData.CurrentGame.Finished = true;
@@ -1139,6 +1139,24 @@ function GAME_SetBlockBorder(Line, Col)
 	Game.Game.SetBlockBorder(BlockId);
 }
 
+function GAME_SetBlockClass(Line, Col)
+{
+	var Game = MainData.CurrentGame;
+	var BlockId;
+
+	// Create long notation
+	if (MainData.CurrentGame.YourColor == "white")
+	{
+		BlockId = UTILS_HorizontalIndex(Col)+Line;
+	}
+	else
+	{
+		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
+	}
+
+	Game.Game.SetBlockClass(BlockId);
+}
+
 function GAME_RemoveBlockBorder(Line, Col)
 {
 	var Game = MainData.CurrentGame;
@@ -1155,4 +1173,22 @@ function GAME_RemoveBlockBorder(Line, Col)
 	}
 
 	Game.Game.RemoveBlockBorder(BlockId);
+}
+
+function GAME_RemoveBlockClass(Line, Col)
+{
+	var Game = MainData.CurrentGame;
+	var BlockId;
+
+	// Create long notation
+	if (MainData.CurrentGame.YourColor == "white")
+	{
+		BlockId = UTILS_HorizontalIndex(Col)+Line;
+	}
+	else
+	{
+		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
+	}
+
+	Game.Game.RemoveBlockClass(BlockId);
 }
