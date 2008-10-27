@@ -108,12 +108,21 @@
 
 #OldGamesDiv #ResultDiv #TBodyDiv .resulttd, 
 #OldGamesDiv #ResultDiv #TBodyDiv .result_header {
-	width: 134px;
+	width: 120px;
 }
 
 #OldGamesDiv #ResultDiv #TBodyDiv .header_examine,
 #OldGamesDiv #ResultDiv #TBodyDiv .examine {
-	width : 40px;
+	width : 50px;
+}
+
+#OldGamesDiv #ResultDiv #TBodyDiv .examine_text {
+	border-bottom: 1px solid #216778;
+	cursor : pointer;
+	text-align: center;
+	padding-right : 0px;
+	font-style : italic;
+	font-size : 9px;
 }
 
 #OldGamesDiv #ResultDiv #TBodyDiv .examine_icon {
