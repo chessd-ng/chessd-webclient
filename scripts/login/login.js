@@ -99,14 +99,12 @@ function LOGIN_Logout()
 
 	if(UpdateProfile != null)
 	{
-		clearInterval(UpdateProfile);
-		MainData.SetUpdateProfile(null);
+		USER_StopUpdateUserProfile();
 	}
 	
 	if(UpdateRating != null)
 	{
-		clearInterval(UpdateRating);
-		MainData.SetUpdateTimer(null);
+		USER_StopUpdateUserList();
 	}
 
 	START_Restart();

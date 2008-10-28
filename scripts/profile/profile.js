@@ -360,9 +360,6 @@ function PROFILE_StartProfile(Username)
 	{
 		CONNECTION_SendJabber(MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
 		User.SetUpdateProfile(false);
-
-		//Wait for 30 minutes to get profile again
-		MainData.SetUpdateProfile(setInterval("PROFILE_ResetUpdateProfile()",1800000));
 	}
 	else //Get profile data from user list
 	{

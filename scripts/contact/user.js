@@ -351,6 +351,19 @@ function USER_StartUpdateUserList()
 function USER_StopUpdateUserList()
 {
 	clearInterval(MainData.GetUpdateTimer());
+	MainData.SetUpdateTimer(null);
+}
+
+function USER_StartUpdateUserProfile()
+{
+	//Wait for 30 minutes to get profile again
+	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",1800000));
+}
+
+function USER_StopUpdateUserProfile()
+{
+	clearInterval(MainData.GetUpdateProfileTimer());
+	MainData.SetUpdateProfileTimer(null);
 }
 
 function USER_UpdateUserList()

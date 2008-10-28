@@ -142,6 +142,9 @@ function START_Webclient()
 
 	// Set update user list timer 
 	USER_StartUpdateUserList();
+
+	// Set update user profile timer 
+	USER_StartUpdateUserProfile();
 }
 
 /*
