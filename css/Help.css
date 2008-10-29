@@ -17,7 +17,7 @@
 }
 
 #WindowBox #HelpDiv li.selected {
-	list-style-image: url('../images/arrow_up.png');
+	list-style-image: url('../images/arrow_right.png');
 	cursor : pointer;
 	color : #FFA200; 
 }
