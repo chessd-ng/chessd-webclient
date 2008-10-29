@@ -369,7 +369,7 @@
 		<oldgame_invalid_interval>Intervalo inválido!</oldgame_invalid_interval>
 		<oldgame_invalid_date>Data inválida!</oldgame_invalid_date>
 		<oldgame_loading>Buscando partidas antigas...</oldgame_loading>
-		<oldgame_examine>Examinar</oldgame_examine>
+		<oldgame_analyze>Analisar</oldgame_analyze>
 	</oldgame>
 	<welcome>
 		<welcome_title>Bem-vindo!</welcome_title>

@@ -438,7 +438,7 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 		Td6 = UTILS_CreateElement('td',null,'examine');
 
 			P=UTILS_CreateElement("p");
-			Span = UTILS_CreateElement('span',null,'examine_text',UTILS_GetText("oldgame_examine"));
+			Span = UTILS_CreateElement('span',null,'examine_text',UTILS_GetText("oldgame_analyze"));
 			Span.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
 			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
 				UTILS_AddListener(Span, "click", function()
