@@ -826,7 +826,7 @@ function GAME_RemoveGame(GameID)
 		}
 		else
 		{
-			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
+			WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_board"));
 		}
 	}
 }

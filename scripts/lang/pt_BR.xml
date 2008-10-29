@@ -217,7 +217,8 @@
 		<game_checkmatel_text>Você perdeu para %s por xeque-mate.</game_checkmatel_text>
 		<game_timew_text>O tempo do %s acabou. Você venceu a partida!</game_timew_text>
 		<game_timel_text>Seu tempo acabou. %s venceu a partida.</game_timel_text>
-		<game_remove_game>A sala de uma partida que você está jogando não pode ser fechada. Para fechá-la, conclua a partida ou a interrompa escolhendo uma das opções ao lado do tabuleiro.</game_remove_game>
+		<game_remove_room><![CDATA[A sala de uma partida que você está jogando não pode ser fechada. <br />Para fechá-la, conclua a partida ou a interrompa escolhendo uma das opções ao lado do tabuleiro.]]></game_remove_room>
+		<game_remove_board><![CDATA[O tabuleiro de uma partida que você está jogando não pode ser fechado.<br /> Para fechá-lo, conclua a partida ou a interrompa escolhendo uma das opções ao lado do tabuleiro.]]></game_remove_board>
 		<game_remove_game_title>Atenção</game_remove_game_title>
 
 		<game_canceled>O jogo foi cancelado.</game_canceled>

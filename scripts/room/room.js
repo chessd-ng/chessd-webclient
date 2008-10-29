@@ -563,7 +563,7 @@ function ROOM_ExitRoom(RoomName)
 		{
 			if(MainData.CurrentGame.Finished == false)
 			{
-				WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_game"));
+				WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_room"));
 				return "";
 			}
 		}
