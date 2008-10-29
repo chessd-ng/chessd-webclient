@@ -6,7 +6,7 @@
 	border-width	: 2px;
 	border-color	: #216778;
 
-	width		: 240px;
+	width		: 265px;
 	height		: 270px;
 
 	overflow-y	: auto;
@@ -56,7 +56,7 @@
 	padding-top	: 5px;
 	display		: block;
 	height		: 20px;
-	width		: 210px;
+	width		: 250px;
 }
 
 #ChallengeMenu li:hover
@@ -79,19 +79,19 @@
 
 #ChallengeMenu li.random
 {
-	background-image: url('../images/challenge_menu/random.png');
+	background-image: url('../images/random.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li.white
 {
-	background-image: url('../images/challenge_menu/white_enable.png');
+	background-image: url('../images/invite_white_pawn.png');
 	background-repeat: no-repeat;
 }
 
 #ChallengeMenu li.black
 {
-	background-image: url('../images/challenge_menu/black_enable.png');
+	background-image: url('../images/invite_black_pawn.png');
 	background-repeat: no-repeat;
 }
 
@@ -149,27 +149,36 @@
 
 #ChallengeMenu li #button
 {
-	width		: 10px;
-	height		: 10px;
+	width	: 50px;
+	font-style : italic;
+	font-size : 9px;
 	cursor		: pointer;
 }
 
-#ChallengeMenu li #button.accept
+#ChallengeMenu li #button.active
 {
-	background-image: url('../images/challenge_menu/accept.png');
-	background-repeat: no-repeat;
+	border-bottom : 1px solid #216778;
+	color : #216678;
 }
 
-#ChallengeMenu li #button.decline
+#ChallengeMenu li #button.over
 {
-	background-image: url('../images/challenge_menu/decline.png');
-	background-repeat: no-repeat;
+	color : #FFA200;
+	border-bottom : 1px solid #FFA200;
+	cursor		: pointer;
 }
 
-#ChallengeMenu li #button.inative
+#ChallengeMenu li #button.out
 {
-	background-image: url('../images/challenge_menu/accept_disable.png');
-	background-repeat: no-repeat;
+	color : #216778;
+	border-bottom : 1px solid #216778;
+	cursor		: pointer;
+}
+
+#ChallengeMenu li #button.inactive
+{
+	color : #777777;
+	border-bottom : 1px solid #777777;
 	cursor		: default;
 }
 

@@ -610,7 +610,7 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	var Exit = document.getElementById("ExitButton");
 	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
 
-	MainData.ChallengeMenu.showMenu(Left-80, Top+20);
+	MainData.ChallengeMenu.showMenu(Left-90, Top+20);
 
 	CHALLENGE_ClearAnnounce();
 	

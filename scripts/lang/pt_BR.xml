@@ -17,6 +17,8 @@
 		<window_close>Fechar</window_close>
 		<window_save>Salvar</window_save>
 		<window_accept>Aceitar</window_accept>
+		<window_play>Jogar</window_play>
+		<window_continue>Continuar</window_continue>
 		<window_cancel>Cancelar</window_cancel>
 		<window_decline>Recusar</window_decline>
 		<window_search>Buscar</window_search>
