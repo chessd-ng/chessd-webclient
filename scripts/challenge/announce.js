@@ -42,6 +42,7 @@ function ANNOUNCE_HandleAnnounce(XML)
 	var Buffer = "";
 
 	var Consts =  MainData.GetConst();
+	var ChallengeMenu = MainData.GetChallengeMenu();
 
 	// Get Announce list
 	if(Id == Consts.IQ_ID_GetAnnounceMatch)
@@ -85,7 +86,7 @@ function ANNOUNCE_HandleAnnounce(XML)
 	}
 
 	// Quick Fix - Show No Announce message
-	if (MainData.ChallengeMenu.AnnounceList.length == 0)
+	if (ChallengeMenu.AnnounceList.length == 0)
 	{
 		ANNOUNCE_ShowNoAnnounce();
 	}

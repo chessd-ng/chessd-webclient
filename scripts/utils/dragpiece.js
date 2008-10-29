@@ -40,7 +40,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	}
 
 	// If ut's not your turn, don't drag
-	if ((!CurrentGame.IsYourTurn) || (CurrentGame.Finished))
+	if ((CurrentGame.IsYourTurn == false) || (CurrentGame.Finished == true))
 	{
 		return false;
 	}

@@ -1161,11 +1161,11 @@ function GAME_SetBlockBorder(Line, Col)
 
 function GAME_SetBlockClass(Line, Col)
 {
-	var Game = MainData.CurrentGame;
+	var Game = MainData.GetCurrentGame();
 	var BlockId;
 
 	// Create long notation
-	if (MainData.CurrentGame.YourColor == "white")
+	if (Game.YourColor == "white")
 	{
 		BlockId = UTILS_HorizontalIndex(Col)+Line;
 	}
@@ -1216,11 +1216,11 @@ function GAME_GetOponent(GameId)
 
 function GAME_RemoveBlockClass(Line, Col)
 {
-	var Game = MainData.CurrentGame;
+	var Game = MainData.GetCurrentGame();
 	var BlockId;
 
 	// Create long notation
-	if (MainData.CurrentGame.YourColor == "white")
+	if (Game.YourColor == "white")
 	{
 		BlockId = UTILS_HorizontalIndex(Col)+Line;
 	}

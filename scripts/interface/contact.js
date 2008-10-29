@@ -543,13 +543,14 @@ function INTERFACE_RefreshContactOnlineNumber()
 	var N_Occupants=0;
 	var ListLength, i;
 	var Node;
+	var UserList = MainData.GetContactUserList();
 
 	Node = document.getElementById("ContactNumber");
 
-	ListLength = MainData.UserList.length;
+	ListLength = UserList.length;
 	for (i=0; i<ListLength; i++)
 	{
-		if (MainData.UserList[i].Status != "offline")
+		if (UserList[i].Status != "offline")
 		{
 			N_Occupants++;
 		}

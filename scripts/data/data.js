@@ -3155,12 +3155,9 @@ function DATA_RemoveOldGame(Id)
 	}
 	else //Remove
 	{
-		RemovedOldGame = this.OldGameList[GamePosition];
-		this.OldGameList.splice(GamePosition, 1);
-/*
 		RemovedOldGame = this.OldGame.OldGameList[GamePosition];
 		this.OldGame.OldGameList.splice(GamePosition, 1);
-
+/*
 		//Set next game on GameList to current game
 		MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition]);
 		//If next game is null, set previous game to current game, else
@@ -3169,7 +3166,8 @@ function DATA_RemoveOldGame(Id)
 		{
 			MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition-1]);
 		}
-*/	MainData.SetCurrentOldGame(null);
+*/
+		MainData.SetCurrentOldGame(null);
 
 		return RemovedOldGame;
 	}

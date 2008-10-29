@@ -215,7 +215,6 @@ function CONTACT_SetUserType(Username, NewType)
 			MainData.Contact.updateUser(Username, StatusList, null, NewType);
 			Status = "offline";
 			ContactObj.updateUser(Username,Status, null, NewType);
->>>>>>> dev:scripts/contact/info.js
 		}
 	}
 	return true;
