@@ -36,7 +36,7 @@ function PARSER_ParsePresence(XML)
 		return Buffer;
 	}
 
-	Pattern = new RegExp("^"+MainData.Server+"."+MainData.Host+"$");
+	Pattern = new RegExp("^"+MainData.GetServer()+"."+MainData.GetHost()+"$");
 	if (Jid.match(Pattern) != null) {
 		Type = XML.getAttribute('type');
 		if (Type == "unavailable") {
@@ -46,7 +46,7 @@ function PARSER_ParsePresence(XML)
 		return Buffer;
 	}
 	// Room presence
-	else if (Jid.match(MainData.ConferenceComponent) || (Jid.match(MainData.GameComponent)))
+	else if (Jid.match(MainData.GetConferenceComponent()) || (Jid.match(MainData.GetServer())))
 	{
 		// This try is used when user has connection replaced.
 		// When finish connection steps, jabber send a replaced
@@ -56,16 +56,22 @@ function PARSER_ParsePresence(XML)
 		try
 		{
 			Buffer += ROOM_HandleRoomPresence(XML);
-			
+
 			// Presence from general room
-			if(Jid.split("@")[0] == MainData.RoomDefault)
+			if(Jid.split("@")[0] == MainData.GetRoomDefault())
 			{
-				Buffer += CONTACT_HandleOnlinePresence(XML);
+				// Add user to UserList
+				Buffer += USER_HandleRoomPresence(XML)
+
+				Buffer += ONLINE_HandleOnlinePresence(XML);
 				Buffer += CHALLENGE_HandlePresence(XML);
 				Buffer += CHAT_HandlePresence(XML);
 			}
-			else if(Jid.match(MainData.GameComponent))
+			else if(Jid.match(MainData.GetServer()))
 			{
+				// Add user to UserList
+				Buffer += USER_HandlePresence(XML)
+
 				Buffer += GAME_HandlePresence(XML);
 			}
 		}

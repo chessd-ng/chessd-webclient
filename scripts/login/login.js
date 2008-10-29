@@ -35,27 +35,29 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 		return;
 	}
 
-	// Store user infomations 
+	// Store user infomations
+	// FIX IT TO WORK WITH PREFERENCE OBJECT 
 	MainData.Username = Username;
 	MainData.Password = Passwd;
 
 	// Set connection status to conneting
-	MainData.ConnectionStatus = 1;
+	//MainData.ConnectionStatus = 1;
+	MainData.SetConnectionStatus(1);
 
 	// Set new RID and reset SID
-	MainData.RID = Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) );
-	MainData.SID = -1;
+	MainData.SetRID(Math.round( 100000.5 + ( ( (900000.49999) - (100000.5) ) * Math.random() ) ));
+	MainData.SetSID(-1);
 
 	// Login on Jabber Server
 	CONNECTION_ConnectJabber();
 
 	// Create Cookies
-	UTILS_CreateCookie("Username", Username, MainData.CookieValidity);
-	UTILS_CreateCookie("RememberPass", RememberPass, MainData.CookieValidity);
+	UTILS_CreateCookie("Username", Username, MainData.GetCookieValidity());
+	UTILS_CreateCookie("RememberPass", RememberPass, MainData.GetCookieValidity());
 
 	//TODO -> Fix to IE
 	if (RememberPass)
-		UTILS_CreateCookie("Passwd", Passwd, MainData.CookieValidity);
+		UTILS_CreateCookie("Passwd", Passwd, MainData.GetCookieValidity());
 	else
 		UTILS_DeleteCookie("Passwd");
 	
@@ -76,18 +78,33 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
+	var CurrentGame = MainData.GetCurrentGame();
+	var UpdateProfile = MainData.GetUpdateProfileTimer();
+	var UpdateRating = MainData.GetUpdateTimer(); 
+
 	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
-	MainData.ConnectionStatus = -1;
+	//MainData.ConnectionStatus = -1;
+	MainData.SetConnectionStatus(-1);
 
 	// Logout from jabber
 	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
 
 	//Stop game count timer of current game 
-	if(MainData.CurrentGame != null)
+	if(CurrentGame != null)
 	{
-		MainData.CurrentGame.Game.StopTimer();
+		CurrentGame.Game.StopTimer();
+	}
+
+	if(UpdateProfile != null)
+	{
+		USER_StopUpdateUserProfile();
+	}
+	
+	if(UpdateRating != null)
+	{
+		USER_StopUpdateUserList();
 	}
 
 	START_Restart();
@@ -110,7 +127,8 @@ function LOGIN_LeavePage()
 function LOGIN_Disconnected()
 {
 	// Setting structure as disconnected
-	MainData.ConnectionStatus = -1;
+	//MainData.ConnectionStatus = -1;
+	MainData.SetConnectionStatus(-1);
 
 	INTERFACE_StopInterface();
 }

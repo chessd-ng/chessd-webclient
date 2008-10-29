@@ -204,10 +204,13 @@ function GAME_HandleGameResult(XML)
 	var GameTag;
 	var i;
 	var To;
+	var Consts = MainData.GetConst();
+	var MyUsername = MainData.Username;
+	var MyUser = MainData.GetUser(MyUsername);
 
 	// The code above is used to parse games that player is playing;
 	// 
-	if(Id == MainData.Const.IQ_ID_SearchCurrentGame)
+	if(Id == Consts.IQ_ID_SearchCurrentGame)
 	{
 		var GameTag = XML.getElementsByTagName("game");
 
@@ -216,8 +219,8 @@ function GAME_HandleGameResult(XML)
 			for(i=0; i< GameTag.length; i++)
 			{
 				Room = GameTag[i].getAttribute("room");
-				MainData.Status = "playing"
-				To = Room+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+				MyUser.SetStatus("playing");
+				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}
@@ -316,7 +319,7 @@ function GAME_State(XML)
 function GAME_HandleDraw(XML, Xmlns)
 {
 	var GameID = XML.getAttribute("from").replace(/@.*/,"");
-	var Oponent = MainData.GetOponent(GameID);
+	var Oponent = GAME_GetOponent(GameID);
 	var Title = UTILS_GetText("game_draw");
 	var Text;
 	var Button1, Button2;
@@ -366,7 +369,7 @@ function GAME_HandleDraw(XML, Xmlns)
 function GAME_HandleCancel(XML, Xmlns)
 {
 	var GameID = XML.getAttribute("from").replace(/@.*/,"");
-	var Oponent = MainData.GetOponent(GameID);
+	var Oponent = GAME_GetOponent(GameID);
 	var Title = UTILS_GetText("game_abort");
 	var Text;
 	var Button1, Button2;
@@ -416,7 +419,7 @@ function GAME_HandleCancel(XML, Xmlns)
 function GAME_HandleAdjourn(XML, Xmlns)
 {
 	var GameID = XML.getAttribute("from").replace(/@.*/,"");
-	var Oponent = MainData.GetOponent(GameID);
+	var Oponent = GAME_GetOponent(GameID);
 	var Title = UTILS_GetText("game_adjourn");
 	var Text;
 	var Button1, Button2;
@@ -471,6 +474,9 @@ function GAME_End(XML)
 	var Title = UTILS_GetText("game_end_game");
 	var Playing;
 	var Text;
+	var CurrentGame = MainData.GetCurrentGame();
+
+	var MyUsername = MainData.Username;
 
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
@@ -491,7 +497,7 @@ function GAME_End(XML)
 
 	// If this end game message is from a current game then
 	// show message
-	if(MainData.CurrentGame.Id == GameID)
+	if(CurrentGame.Id == GameID)
 	{
 		// Get the reason 
 		EndTag = XML.getElementsByTagName("end");
@@ -509,7 +515,7 @@ function GAME_End(XML)
 		WINDOW_Alert(Title, UTILS_GetText("game_result_"+Result));
 	}
 
-	if ((Game.PB != MainData.Username) && (Game.PW != MainData.Username))
+	if ((Game.PB != MyUsername) && (Game.PW != MyUsername))
 	{
 		Playing = false;
 	}
@@ -609,40 +615,45 @@ function GAME_StartGame(GameId, P1, P2)
 	var GameDiv;
 	var YourColor;
 	var Buffer="";
-	var RoomPos; 
+	var Room; 
 
+	var Consts = MainData.GetConst();
+	var CurrentGame = MainData.GetCurrentGame();
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+
+	var MyUsername = MainData.Username;
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
 	// Hide current game (this case should happen when player
 	// is observing a game)
-	if (MainData.CurrentGame != null)
+	if (CurrentGame != null)
 	{
 
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(MainData.CurrentGame.Id)
-		Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
-		MainData.CurrentGame.Game.Hide();
-		MainData.RemoveGame(MainData.CurrentGame.Id);
+		Room = MainData.GetRoom(CurrentGame.Id);
+		Buffer  += MESSAGE_Unavailable(Room.MsgTo);
+		CurrentGame.Game.Hide();
+		MainData.RemoveGame(CurrentGame.Id);
 	}
 
-	if (MainData.CurrentOldGame != null)
+	if (CurrentOldGame != null)
 	{
 		//Quickfix to leave room when observer
-		RoomPos = MainData.FindRoom(MainData.CurrentOldGame.Id)
-		if(RoomPos != null)
+		Room = MainData.GetRoom(CurrentGame.Id);
+		if(Room != null)
 		{
-			Buffer  += MESSAGE_Unavailable(MainData.RoomList[RoomPos].MsgTo);
+			Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		}
 
-		MainData.CurrentOldGame.Game.Hide();
+		CurrentOldGame.Game.Hide();
 		// In this version, player can see only one oldgame
-		//MainData.RemoveOldGame(MainData.CurrentOldGame.Id);
+		//MainData.RemoveOldGame(CurrentOldGame.Id);
 		MainData.RemoveOldGame(0);
 
 	}
 
-	if (P1.Name == MainData.Username)
+	if (P1.Name == MyUsername)
 	{
 		YourColor = P1.Color;
 	}
@@ -660,8 +671,8 @@ function GAME_StartGame(GameId, P1, P2)
 	GameDiv.Show();
 
 	// Get Players Photo
-	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
-	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
 
 	// Set status to playing
 	return CONTACT_ChangeStatus("playing", "return") + Buffer;
@@ -683,18 +694,22 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var RoomPos;
 	var Buffer = "";
 
+	var Consts = MainData.GetConst();
+	var CurrentGame = MainData.GetCurrentGame();
+	var OldCurrentGame = MainData.GetCurrentOldGame();
+
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
 	// Hide current game
-	if (MainData.CurrentGame != null)
+	if (CurrentGame != null)
 	{
 		// In this version, player should be able to
 		// observer just one game.
-		GAME_RemoveGame(MainData.CurrentGame.Id);
+		GAME_RemoveGame(CurrentGame.Id);
 	}
 
-	if (MainData.CurrentOldGame != null)
+	if (CurrentOldGame != null)
 	{
 		OLDGAME_RemoveOldGame(0);
 	}
@@ -703,7 +718,7 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38, true);
 	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
-	MainData.CurrentGame.Finished = true;
+	CurrentGame.Finished = true;
 
 	// Show New Game
 	GameDiv.Show();
@@ -717,8 +732,8 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv.SetBTime();
 
 	// Get players Photos
-	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_GamePhoto);
-	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
 
 	// Send message to leave from old game observer room;
 	CONNECTION_SendJabber(Buffer);
@@ -843,14 +858,16 @@ function GAME_RemoveGame(GameID)
 */
 function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 {
-	var GameID = MainData.CurrentGame.Id;
 	var Move;
-	var CurrentMove = MainData.CurrentGame.CurrentMove;
-	var CurrentBoard = MainData.CurrentGame.Moves[CurrentMove].Board;
 	var Promotion = "";
 
+	var CurrentGame = MainData.GetCurrentGame();
+	var GameID = CurrentGame.Id;
+	var CurrentMove = CurrentGame.CurrentMove;
+	var CurrentBoard = CurrentGame.Moves[CurrentMove].Board;
+
 	// Create long notation
-	if (MainData.CurrentGame.YourColor == "white")
+	if (CurrentGame.YourColor == "white")
 	{
 		Move = UTILS_HorizontalIndex(OldCol)+OldLine+UTILS_HorizontalIndex(NewCol)+NewLine;
 
@@ -864,11 +881,11 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 	// Check for pawn promotion.
 	if(NewLine == 8)
 	{
-		if(MainData.CurrentGame.YourColor == "white")
+		if(CurrentGame.YourColor == "white")
 		{
 			if(CurrentBoard[8-OldLine][OldCol-1] == "P")
 			{
-				Promotion = MainData.CurrentGame.Promotion;
+				Promotion = CurrentGame.Promotion;
 			}
 
 //		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[8-OldLine][OldCol-1] +"\n"+ Promotion +"\n"+CurrentBoard[8-OldLine])
@@ -878,7 +895,7 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 		{
 			if(CurrentBoard[OldLine-1][8-OldCol] == "p")
 			{
-				Promotion = MainData.CurrentGame.Promotion;
+				Promotion = CurrentGame.Promotion;
 			}
 
 //		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[OldLine-1][8-OldCol] +"\n"+Promotion+"\n"+CurrentBoard[OldLine-1])
@@ -886,7 +903,7 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 	}
 
 	// Send move for the current game
-	CONNECTION_SendJabber(MESSAGE_GameMove(Move, MainData.CurrentGame.Id, Promotion));
+	CONNECTION_SendJabber(MESSAGE_GameMove(Move, CurrentGame.Id, Promotion));
 }
 
 /**
@@ -939,7 +956,8 @@ function GAME_SearchCurrentGame()
 */
 function GAME_ChangePromotion(Piece)
 {
-	MainData.CurrentGame.Promotion = Piece;
+	var CurrentGame = MainData.GetCurrentGame();
+	CurrentGame.Promotion = Piece;
 }
 
 /**
@@ -1049,8 +1067,10 @@ function GAME_HandleVCardPhoto(XML)
 	var PhotoType;
 	var Img;
 
+	var CurrentGame = MainData.GetCurrentGame();
+
 	// If there is no game opened, do nothing;
-	if( MainData.CurrentGame == null)
+	if(CurrentGame == null)
 	{
 		return "";
 	}
@@ -1073,16 +1093,16 @@ function GAME_HandleVCardPhoto(XML)
 
 	// Update current game player image
 	// Player White
-	if(MainData.CurrentGame.PW == Player)
+	if(CurrentGame.PW == Player)
 	{
-		MainData.CurrentGame.WPhoto = Img;
-		MainData.CurrentGame.Game.SetWPhoto(Img);
+		CurrentGame.WPhoto = Img;
+		CurrentGame.Game.SetWPhoto(Img);
 	}
 	// Player Black
-	else if(MainData.CurrentGame.PB == Player)
+	else if(CurrentGame.PB == Player)
 	{
-		MainData.CurrentGame.BPhoto = Img;
-		MainData.CurrentGame.Game.SetBPhoto(Img);
+		CurrentGame.BPhoto = Img;
+		CurrentGame.Game.SetBPhoto(Img);
 	}
 	/*
 	else
@@ -1123,11 +1143,11 @@ function GAME_HideLoadingMove(Id)
 
 function GAME_SetBlockBorder(Line, Col)
 {
-	var Game = MainData.CurrentGame;
+	var CurrentGame = MainData.GetCurrentGame();
 	var BlockId;
 
 	// Create long notation
-	if (MainData.CurrentGame.YourColor == "white")
+	if (CurrentGame.YourColor == "white")
 	{
 		BlockId = UTILS_HorizontalIndex(Col)+Line;
 	}
@@ -1136,7 +1156,7 @@ function GAME_SetBlockBorder(Line, Col)
 		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
 	}
 
-	Game.Game.SetBlockBorder(BlockId);
+	CurrentGame.Game.SetBlockBorder(BlockId);
 }
 
 function GAME_SetBlockClass(Line, Col)
@@ -1159,11 +1179,11 @@ function GAME_SetBlockClass(Line, Col)
 
 function GAME_RemoveBlockBorder(Line, Col)
 {
-	var Game = MainData.CurrentGame;
+	var CurrentGame = MainData.GetCurrentGame();
 	var BlockId;
 
 	// Create long notation
-	if (MainData.CurrentGame.YourColor == "white")
+	if (CurrentGame.YourColor == "white")
 	{
 		BlockId = UTILS_HorizontalIndex(Col)+Line;
 	}
@@ -1172,7 +1192,26 @@ function GAME_RemoveBlockBorder(Line, Col)
 		BlockId = UTILS_HorizontalIndex(9-Col)+(9-Line);
 	}
 
-	Game.Game.RemoveBlockBorder(BlockId);
+	CurrentGame.Game.RemoveBlockBorder(BlockId);
+}
+
+function GAME_GetOponent(GameId)
+{
+	var Game = MainData.GetGame(GameId);
+
+	if(Game == null)
+	{
+		return null;
+	}
+
+	if(Game.YourColor == "white")
+	{
+		return Game.PB;
+	}
+	else
+	{
+		return Game.PW;
+	}
 }
 
 function GAME_RemoveBlockClass(Line, Col)

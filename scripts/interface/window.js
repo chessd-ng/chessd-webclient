@@ -58,7 +58,7 @@ function WINDOW_ShowWindow(Element, Top, Left)
 		RandomLeft = (Math.floor((Math.random()*10000)) % 60) * ((-1)*Math.floor(Math.random()*10000)%2);
 
 		// Check Internet Explorer
-		if(MainData.Browser == 0)
+		if(MainData.GetBrowser() == 0)
 		{
 
 			if(Top != null)
@@ -392,7 +392,7 @@ function WINDOW_CreateImageSend()
 	TextDiv.appendChild(Label);
 
 	Div.appendChild(TextDiv);
-	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm", "php/base64."+MainData.DefaultPHP));
+	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm", "php/base64."+MainData.GetDefaultPHP()));
 	Div.appendChild(ButtonsDiv);
 	
 	return {Div:Div, Buttons:Buttons};

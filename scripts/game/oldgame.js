@@ -141,25 +141,30 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var Index;
 	var Color;
 	var Buffer = "";
+	var Consts = MainData.GetConst();
+	
+	var MyUsername = MainData.Username;
+
+	var CurrentOldGame = MainData.GetCurrentOldGame();
 
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
 	// Hide current game
-	if (MainData.CurrentOldGame != null)
+	if (CurrentOldGame != null)
 	{
 		//In this version, user can only see one OldGame
-		//MainData.CurrentOldGame.Game.Hide();
+		//CurrentOldGame.Game.Hide();
 		Buffer += OLDGAME_RemoveOldGame(OldGameId);
 
 	}
 
 	// Check if player is watch own old game
-	if(P1.Name == MainData.Username)
+	if(P1.Name == MyUsername)
 	{
 		Color = P1.Color;
 	}
-	else if (P2.Name == MainData.Username)
+	else if (P2.Name == MyUsername)
 	{
 		Color = P2.Color;
 	}
@@ -180,8 +185,8 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	//Change "X" close board button function when clicked
 	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
 
-	Buffer += MESSAGE_GetProfile(P1.Name,MainData.Const.IQ_ID_OldGamePhoto);
-	Buffer += MESSAGE_GetProfile(P2.Name,MainData.Const.IQ_ID_OldGamePhoto);
+	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_OldGamePhoto);
+	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_OldGamePhoto);
 
 	//Change user status to observer
 	//Buffer += CONTACT_ChangeStatus("","return");
@@ -253,6 +258,8 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 	var HistoryMoves;
 	var Buffer;
 
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+
 	if(HistoryXml == undefined)
 	{
 		return "";
@@ -302,7 +309,7 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 		OLDGAME_FirstBoard();
 	}
 
-	MainData.CurrentOldGame.Game.HideLoadingMove();
+	CurrentOldGame.Game.HideLoadingMove();
 	return Buffer;
 }
 
@@ -327,7 +334,7 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnCol
 	// Get game from GameList
 	//Game = MainData.GetOldGame(GamePos);
 	// In this version, user can only see one OldGame
-	Game = MainData.CurrentOldGame;
+	Game = MainData.GetCurrentOldGame();
 	
 	if (Game.CurrentMove != null)
 	{
@@ -379,22 +386,26 @@ function OLDGAME_EndGame(Id)
 	var MoveObj;
 	var Index;
 	
+	var CurrentOldGame;
+
 	EndedGame = MainData.RemoveGame(Id);
 
 	//Add game to oldgamelist, set this game to CurrentOldGame
 	//and return EndedGame Pos;
 	Index = MainData.PushOldGame(EndedGame);
 
-	MainData.CurrentOldGame.Color = "none";
+	CurrentOldGame = MainData.GetCurrentOldGame();
+
+	CurrentOldGame.Color = "none";
 
 	// Remove on mouse over and on mouse out events from blocks
-	MainData.CurrentOldGame.Game.RemoveBlockEvents();
+	CurrentOldGame.Game.RemoveBlockEvents();
 
-	PWName = MainData.CurrentOldGame.PW;
-	PBName = MainData.CurrentOldGame.PB;
-	Color = MainData.CurrentOldGame.BoardColor;
+	PWName = CurrentOldGame.PW;
+	PBName = CurrentOldGame.PB;
+	Color = CurrentOldGame.BoardColor;
 
-	NewOldGame = MainData.CurrentOldGame.Game;
+	NewOldGame = CurrentOldGame.Game;
 	NewOldGame.OldGameMode();
 
 	//Change "X" close board button function when clicked
@@ -403,9 +414,9 @@ function OLDGAME_EndGame(Id)
 	OLDGAME_LastBoard();
 	
 	//Reload all moves done in MoveList
-	for(i=1 ; i<MainData.CurrentOldGame.Moves.length; i++)
+	for(i=1 ; i<CurrentOldGame.Moves.length; i++)
 	{
-		MoveObj = MainData.CurrentOldGame.Moves[i];
+		MoveObj = CurrentOldGame.Moves[i];
 		// i+1 is a QuickFix
 		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime)
 	}
@@ -429,7 +440,9 @@ function OLDGAME_HandleVCardPhoto(XML)
 	var PhotoType;
 	var Img;
 
-	if( MainData.CurrentOldGame == null)
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+
+	if( CurrentOldGame == null)
 	{
 		return "";
 	}
@@ -451,15 +464,15 @@ function OLDGAME_HandleVCardPhoto(XML)
 	Player = XML.getAttribute("from").split("@")[0];
 
 	// Update current old game player image
-	if(MainData.CurrentOldGame.PW.Name == Player)
+	if(CurrentOldGame.PW.Name == Player)
 	{
-		MainData.CurrentOldGame.WPhoto = Img;
-		MainData.CurrentOldGame.Game.SetWPhoto(Img);
+		CurrentOldGame.WPhoto = Img;
+		CurrentOldGame.Game.SetWPhoto(Img);
 	}
-	else if(MainData.CurrentOldGame.PB.Name == Player)
+	else if(CurrentOldGame.PB.Name == Player)
 	{
-		MainData.CurrentOldGame.BPhoto = Img;
-		MainData.CurrentOldGame.Game.SetBPhoto(Img);
+		CurrentOldGame.BPhoto = Img;
+		CurrentOldGame.Game.SetBPhoto(Img);
 	}
 
 	return "";
@@ -480,7 +493,7 @@ function OLDGAME_RemoveOldGame(Index)
 	var Buffer = "";
 	var OldGame;
 
-	OldGame = MainData.OldGameList[Index];
+	OldGame = MainData.GetOldGame(Index);
 
 	//Remove Board from interface
 	OldGame.Game.Remove();
@@ -508,25 +521,27 @@ function OLDGAME_RemoveOldGame(Index)
 function OLDGAME_FirstBoard()
 {
 	var Color, Board;
-	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
 	var Move;
 
-	Color = MainData.CurrentOldGame.BoardColor;
-	Board = MainData.CurrentOldGame.Moves[0].Board;
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+	var MovePos = CurrentOldGame.CurrentMove;
 
-	Move = MainData.CurrentOldGame.Moves[0].Move;
+	Color = CurrentOldGame.BoardColor;
+	Board = CurrentOldGame.Moves[0].Board;
 
-	WTime = MainData.CurrentOldGame.Moves[ 0 ].PWTime;
-	BTime = MainData.CurrentOldGame.Moves[ 0 ].PBTime;
+	Move = CurrentOldGame.Moves[0].Move;
 
-	MainData.CurrentOldGame.CurrentMove = 0;
-	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
-	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
-	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
-	MainData.CurrentOldGame.Game.SetWTime();
-	MainData.CurrentOldGame.Game.SetBTime();
-	MainData.CurrentOldGame.Game.SetLastMove(Move);
+	WTime = CurrentOldGame.Moves[ 0 ].PWTime;
+	BTime = CurrentOldGame.Moves[ 0 ].PBTime;
+
+	CurrentOldGame.CurrentMove = 0;
+	CurrentOldGame.Game.SetBoard(Board, Color, 38);
+	CurrentOldGame.Game.UpdateWTime(WTime);
+	CurrentOldGame.Game.UpdateBTime(BTime);
+	CurrentOldGame.Game.SetWTime();
+	CurrentOldGame.Game.SetBTime();
+	CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /** 
@@ -540,30 +555,32 @@ function OLDGAME_FirstBoard()
 function OLDGAME_PrevBoard()
 {
 	var Color, OldBoard, Board;
-	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
 	var Move; 
+
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+	var MovePos = CurrentOldGame.CurrentMove;
 
 	if(MovePos == 0)
 	{
 		return false;
 	}
 
-	Color = MainData.CurrentOldGame.BoardColor;
-	OldBoard = MainData.CurrentOldGame.Moves[MovePos].Board;
-	Board = MainData.CurrentOldGame.Moves[MovePos -1].Board;
-	Move = MainData.CurrentOldGame.Moves[MovePos - 1].Move;
+	Color = CurrentOldGame.BoardColor;
+	OldBoard = CurrentOldGame.Moves[MovePos].Board;
+	Board = CurrentOldGame.Moves[MovePos -1].Board;
+	Move = CurrentOldGame.Moves[MovePos - 1].Move;
 
-	WTime = MainData.CurrentOldGame.Moves[ MovePos - 1 ].PWTime;
-	BTime = MainData.CurrentOldGame.Moves[ MovePos - 1 ].PBTime;
+	WTime = CurrentOldGame.Moves[ MovePos - 1 ].PWTime;
+	BTime = CurrentOldGame.Moves[ MovePos - 1 ].PBTime;
 
-	MainData.CurrentOldGame.CurrentMove = MovePos - 1;
-	MainData.CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
-	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
-	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
-	MainData.CurrentOldGame.Game.SetWTime();
-	MainData.CurrentOldGame.Game.SetBTime();
-	MainData.CurrentOldGame.Game.SetLastMove(Move);
+	CurrentOldGame.CurrentMove = MovePos - 1;
+	CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
+	CurrentOldGame.Game.UpdateWTime(WTime);
+	CurrentOldGame.Game.UpdateBTime(BTime);
+	CurrentOldGame.Game.SetWTime();
+	CurrentOldGame.Game.SetBTime();
+	CurrentOldGame.Game.SetLastMove(Move);
 
 	return true;
 }
@@ -580,30 +597,32 @@ function OLDGAME_NextBoard()
 {
 	var Color, OldBoard, Board;
 
-	var MovePos = MainData.CurrentOldGame.CurrentMove;
 	var WTime, BTime;
 	var Move; 
 
-	if(MovePos == MainData.CurrentOldGame.Moves.length-1)
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+	var MovePos = CurrentOldGame.CurrentMove;
+
+	if(MovePos == CurrentOldGame.Moves.length-1)
 	{
 		return false;
 	}
 
-	Color = MainData.CurrentOldGame.BoardColor;
-	OldBoard = MainData.CurrentOldGame.Moves[MovePos].Board;
-	Board = MainData.CurrentOldGame.Moves[ MovePos + 1 ].Board;
-	Move = MainData.CurrentOldGame.Moves[MovePos + 1].Move;
+	Color = CurrentOldGame.BoardColor;
+	OldBoard = CurrentOldGame.Moves[MovePos].Board;
+	Board = CurrentOldGame.Moves[ MovePos + 1 ].Board;
+	Move = CurrentOldGame.Moves[MovePos + 1].Move;
 
-	WTime = MainData.CurrentOldGame.Moves[ MovePos + 1 ].PWTime;
-	BTime = MainData.CurrentOldGame.Moves[ MovePos + 1 ].PBTime;
+	WTime = CurrentOldGame.Moves[ MovePos + 1 ].PWTime;
+	BTime = CurrentOldGame.Moves[ MovePos + 1 ].PBTime;
 
-	MainData.CurrentOldGame.CurrentMove = MovePos + 1;
-	MainData.CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
-	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
-	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
-	MainData.CurrentOldGame.Game.SetWTime();
-	MainData.CurrentOldGame.Game.SetBTime();
-	MainData.CurrentOldGame.Game.SetLastMove(Move);
+	CurrentOldGame.CurrentMove = MovePos + 1;
+	CurrentOldGame.Game.UpdateBoard(OldBoard, Board, Color, 38);
+	CurrentOldGame.Game.UpdateWTime(WTime);
+	CurrentOldGame.Game.UpdateBTime(BTime);
+	CurrentOldGame.Game.SetWTime();
+	CurrentOldGame.Game.SetBTime();
+	CurrentOldGame.Game.SetLastMove(Move);
 
 	return true;
 }
@@ -619,24 +638,26 @@ function OLDGAME_NextBoard()
 function OLDGAME_LastBoard()
 {
 	var Color, Board;
-	var MoveListLen = MainData.CurrentOldGame.Moves.length;
 	var WTime, BTime;
 	var Move; 
 
-	Color = MainData.CurrentOldGame.BoardColor;
-	Board = MainData.CurrentOldGame.Moves[MoveListLen-1].Board;
-	Move = MainData.CurrentOldGame.Moves[MoveListLen -1].Move;
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+	var MoveListLen = CurrentOldGame.Moves.length;
 
-	WTime = MainData.CurrentOldGame.Moves[ MoveListLen - 1 ].PWTime;
-	BTime = MainData.CurrentOldGame.Moves[ MoveListLen - 1 ].PBTime;
+	Color = CurrentOldGame.BoardColor;
+	Board = CurrentOldGame.Moves[MoveListLen-1].Board;
+	Move = CurrentOldGame.Moves[MoveListLen -1].Move;
 
-	MainData.CurrentOldGame.CurrentMove = MoveListLen-1;
-	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
-	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
-	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
-	MainData.CurrentOldGame.Game.SetWTime();
-	MainData.CurrentOldGame.Game.SetBTime();
-	MainData.CurrentOldGame.Game.SetLastMove(Move);
+	WTime = CurrentOldGame.Moves[ MoveListLen - 1 ].PWTime;
+	BTime = CurrentOldGame.Moves[ MoveListLen - 1 ].PBTime;
+
+	CurrentOldGame.CurrentMove = MoveListLen-1;
+	CurrentOldGame.Game.SetBoard(Board, Color, 38);
+	CurrentOldGame.Game.UpdateWTime(WTime);
+	CurrentOldGame.Game.UpdateBTime(BTime);
+	CurrentOldGame.Game.SetWTime();
+	CurrentOldGame.Game.SetBTime();
+	CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /** 
@@ -653,20 +674,22 @@ function OLDGAME_GotoBoard(NumBoard)
 	var WTime, BTime;
 	var Move; 
 
-	Color = MainData.CurrentOldGame.BoardColor;
-	Board = MainData.CurrentOldGame.Moves[NumBoard-1].Board;
-	Move = MainData.CurrentOldGame.Moves[NumBoard -1].Move;
+	var CurrentOldGame = MainData.GetCurrentOldGame();
 
-	WTime = MainData.CurrentOldGame.Moves[ NumBoard - 1 ].PWTime;
-	BTime = MainData.CurrentOldGame.Moves[ NumBoard - 1 ].PBTime;
+	Color = CurrentOldGame.BoardColor;
+	Board = CurrentOldGame.Moves[NumBoard-1].Board;
+	Move = CurrentOldGame.Moves[NumBoard -1].Move;
 
-	MainData.CurrentOldGame.CurrentMove = NumBoard-1;
-	MainData.CurrentOldGame.Game.SetBoard(Board, Color, 38);
-	MainData.CurrentOldGame.Game.UpdateWTime(WTime);
-	MainData.CurrentOldGame.Game.UpdateBTime(BTime);
-	MainData.CurrentOldGame.Game.SetWTime();
-	MainData.CurrentOldGame.Game.SetBTime();
-	MainData.CurrentOldGame.Game.SetLastMove(Move);
+	WTime = CurrentOldGame.Moves[ NumBoard - 1 ].PWTime;
+	BTime = CurrentOldGame.Moves[ NumBoard - 1 ].PBTime;
+
+	CurrentOldGame.CurrentMove = NumBoard-1;
+	CurrentOldGame.Game.SetBoard(Board, Color, 38);
+	CurrentOldGame.Game.UpdateWTime(WTime);
+	CurrentOldGame.Game.UpdateBTime(BTime);
+	CurrentOldGame.Game.SetWTime();
+	CurrentOldGame.Game.SetBTime();
+	CurrentOldGame.Game.SetLastMove(Move);
 }
 
 /**

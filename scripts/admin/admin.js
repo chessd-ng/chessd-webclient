@@ -49,29 +49,30 @@ function ADMIN_HandleAdmin(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Buffer = "";
+	var Consts = MainData.GetConst();
 
 	switch(Id)
 	{
 		// Show banned user's list
-		case MainData.Const.IQ_ID_GetBanList:
+		case Consts.IQ_ID_GetBanList:
 			ADMIN_HandleBanList(XML);
 			break;
 
 		// Show a window alert with banned user confirmation 
 		/*
-		case MainData.Const.IQ_ID_BanUser:
+		case Consts.IQ_ID_BanUser:
 			ADMIN_Notification(XML)
 			break;
 		*/
 
 		// Show a window alert with unbanned user confirmation 
-		case MainData.Const.IQ_ID_UnbanUser:
+		case Consts.IQ_ID_UnbanUser:
 			ADMIN_Notification(XML)
 			break;
 
 		// Show a window alert with kiked user confirmation 
 		/*
-		case MainData.Const.IQ_ID_KickUser:
+		case Consts.IQ_ID_KickUser:
 			ADMIN_Notification(XML)
 			break;
 		*/
@@ -91,26 +92,38 @@ function ADMIN_HandleAdmin(XML)
 */
 function ADMIN_HandleInfo(XML)
 {
-	var Items = XML.getElementsByTagName("type");
-	var Username;
+	var TypeNode = XML.getElementsByTagName("type");
+	var Type = TypeNode[0].getAttribute("type");
+	//FIX IT TO GET USERNAME FROM PREFERENCES
+	var MyUsername = MainData.Username;
 	var i =0;
-	var Type;
 	var Buffer = "";
+	var ProfileNode = XML.getElementsByTagName("profile")[0];
+	var Username = ProfileNode.getAttribute("jid").split("@")[0];
 
-	// Find user
-	while((i<Items.length) &&(Items[i].getAttribute("jid").split("@")[0])!= MainData.Username)
+	if(Username == MyUsername)
 	{
-		i++;
-	}
-	
-	if( i != Items.length)
-	{
-		Type = Items[i].getAttribute("type");
 		if(Type == "admin")
 		{
 			INTERFACE_ShowAdminIcon();
 		}
 	}
+
+	// Find user
+	/*
+	while((i < TypeNodes.length) &&(Username != MyUsername)
+	{
+		i++;
+	}
+	if( i != TypeNodes.length)
+	{
+		Type = TypeNodes[i].getAttribute("type");
+		if(Type == "admin")
+		{
+			INTERFACE_ShowAdminIcon();
+		}
+	}
+	*/
 
 	return Buffer;
 }

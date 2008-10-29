@@ -44,8 +44,13 @@ function INTERFACE_CreateUserBox()
 	var Profile, ProfileP;
 	var UserType;
 
-	UserType = MainData.Type;
-
+	var MyUsername = MainData.Username;
+	//FIX IT TO GET USERNAME IN PREFERENCES OBJECT
+	var User = MainData.GetUser(MyUsername);
+	
+	var UserImageLink;
+	
+	UserType = User.GetType();
 	if (!UserType)
 	{
 		UserType = "user";
@@ -53,27 +58,28 @@ function INTERFACE_CreateUserBox()
  
 	UserDiv = UTILS_CreateElement("div", "User");
 	UserImg = UTILS_CreateElement("img","UserImg");
-	UserImg.title = MainData.Username;
+	UserImg.title = User.GetUsername();
 
-	if (MainData.Photo == null)
+	UserImageLink = User.GetPhoto();
+	if (UserImageLink == null)
 	{
 		UserImg.src = "images/no_photo.png";
 	}
 	else
 	{
-		UserImg.src = MainData.Photo;
+		UserImg.src = UserImageLink;
 	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");
-	if (MainData.Username.length > 10)
+	if (MyUsername.length > 10)
 	{
-		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(MainData.Username,10));
-		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MainData.Username); }
+		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(Username,10));
+		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MyUsername); }
 		Name.onmouseout = function () { INTERFACE_CloseUserFullName(); }
 	}
 	else
 	{
-		Name = UTILS_CreateElement("h2", null, null, MainData.Username);
+		Name = UTILS_CreateElement("h2", null, null, MyUsername);
 	}
 	Status = UTILS_CreateElement("select", "UserStatusSelect");
 
@@ -102,7 +108,7 @@ function INTERFACE_CreateUserBox()
 	ProfileP = UTILS_CreateElement("p");
 	Profile = UTILS_CreateElement("span",null,null,UTILS_GetText("contact_change_profile"));
 	ProfileP.appendChild(Profile);
-	UTILS_AddListener(Profile,"click", function() { PROFILE_StartProfile(MainData.Username); }, "false");
+	UTILS_AddListener(Profile,"click", function() { PROFILE_StartProfile(MyUsername); }, "false");
 
 	UserInf.appendChild(Name);
 	UserInf.appendChild(Status);

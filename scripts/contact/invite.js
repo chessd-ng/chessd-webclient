@@ -26,39 +26,30 @@
 function CONTACT_InviteUser(Username)
 {
 	var XML;
+	var ContactObj = MainData.GetContactObj();
 
 	// Create a invite message
 	XML = MESSAGE_Invite(Username);
 
+	// Insert user in structure and interface
+	CONTACT_AddUser(Username, "offline", "none", "default");
+/*
 	// Insert user in structure
-	MainData.AddUser(Username, "offline", "", "default");
+	MainData.AddContactUser(Username, "offline", "", "default");
 
 	// Insert user in interface
-	MainData.Contact.addUser("default",Username, "offline");
+	ContactObj.addUser("default",Username, "offline");
+*/
 
 	// Send it to jabber
 	CONNECTION_SendJabber(XML);
 
 	// Sort userlist
-	MainData.SortUserByNick();
+	MainData.SortContactUserByNick();
 
 	return "";
 }
 
-/**
-* Remove user form your list
-*/
-function CONTACT_RemoveUser(Username)
-{
-	// Remove user from data structure
-	MainData.DelUser(Username);
-
-	// Remove user from interface
-	MainData.Contact.removeUser(Username);
-	//INTERFACE_RemoveContact(Username);
-
-	return true;
-}
 
 function CONTACT_SendRemoveUser(Username)
 {
@@ -77,19 +68,20 @@ function CONTACT_SendRemoveUser(Username)
 */
 function CONTACT_ReceiveSubscribe(Username)
 {
-	var XML = "", i;
+	var XML = "";
+	var User;
 	var Title, Text, Button1, Button2;
 
 	// Search user in sctructure
-	i = MainData.FindUser(Username);
+	User = MainData.GetContactUser(Username);
 
 	// If user is in your list
-	if (i != null)
+	if (User != null)
 	{
 		// Try to add a removed user
-		if (MainData.UserList[i].Subs == "none")
+		if (User.GetSubs() == "none")
 		{
-			MainData.SetSubs(Username, "from");
+			User.SetSubs("from");
 			
 			// Send a subscribe and a subscribed to user
 			XML += MESSAGE_InviteAccept(Username);
@@ -98,7 +90,7 @@ function CONTACT_ReceiveSubscribe(Username)
 			return XML;
 		}
 		// Last confirmation
-		else if (MainData.UserList[i].Subs != "from")
+		else if (User.GetSubs() != "from")
 		{
 			// Send a subscribed to user
 			XML = MESSAGE_InviteAccept(Username);
@@ -122,7 +114,7 @@ function CONTACT_ReceiveSubscribe(Username)
 			//MainData.AddUser(Username, "offline", "from");
 
 			// See contact/contact.js
-			CONTACT_InsertUser(Username, "offline","from","default");
+			CONTACT_AddUser(Username, "offline","from","default");
 
 			// Send a subscribe and a subscribed to user
 			XML += MESSAGE_InviteAccept(Username);
@@ -148,19 +140,18 @@ function CONTACT_ReceiveSubscribe(Username)
 */
 function CONTACT_ReceiveSubscribed(Username)
 {
+	var User = MainData.GetContactUser(Username);
+
 	// Setting user subscription state to 'both'
-	if (MainData.SetSubs(Username, "both"))
-	{
-		//INTERFACE_AddContact(Username, "available");
-		//MainData.Contact.addUser(Username, "available");
+	User.SetSubs("both")
+	//INTERFACE_AddContact(Username, "available");
+	//MainData.Contact.addUser(Username, "available");
 
-		// See contact/contact.js
-		CONTACT_InsertUser(Username, "online","from","default");
+	// See contact/contact.js
+	CONTACT_AddUser(Username, "online","from","default");
 
-		// Ask user type and rating
-		return MESSAGE_Info(Username);
-	}
-	return "";
+	// Ask user type and rating
+	return MESSAGE_Info(Username);
 }
 
 /**
@@ -168,33 +159,36 @@ function CONTACT_ReceiveSubscribed(Username)
 */
 function CONTACT_ReceiveUnsubscribed(Username)
 {
-	var XML, i;
+	var XML = "";
+	var User;
+	var ContactObj = MainData.GetContactObj();
 
-	i = MainData.FindUser(Username);
+	User = MainData.GetContactUser(Username);
 
-	// If user is not in your list, something wrong! =D
-	if (i == null)
+	// If user is not in your list, something's wrong! =D
+/*
+	if (User == null)
 	{
 		return "";
 	}
-
+*/
 	// User has removed you, do nothing
-	if (MainData.UserList[i].Subs == "both")
+	if (User.GetSubs() == "both")
 	{
 		// Changing subscription state to none
-		MainData.SetSubs(Username, "none");
+		User.SetSubs("none");
 
 		// Set user as offline
 		CONTACT_SetUserStatus(Username, "offline");
-		return "";
 	}
-
 	// Deny user invite
-	if (MainData.DelUser(Username))
+	else if (MainData.FindContactUser(Username) != null)
 	{
+		MainData.RemoveContactUser(Username);
+
 		// Create a remove message
 		XML = MESSAGE_RemoveContact(Username);
-		return XML;
 	}
-	return "";
+
+	return XML;
 }

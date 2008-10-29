@@ -28,8 +28,9 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 {
 	var Height, Width;
 	var Win;
+	var CurrentWindow;
 	
-	var zIndex = MainData.Windows.WindowList.length;
+	var zIndex = MainData.GetWindowListLength();
 	Width = WinSize;
 	Height = null; //auto
 
@@ -37,20 +38,25 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 	Win = new WindowObj(Height, Width, Div, Title);
 
 	// Window Focus Event
-	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_ChangeFocus(Win)},false);
+	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_Focus(Win)},false);
 
-	//Show Windows on browser
+	// Show Windows on browser
+	// param: Parent Node, Top in pixels, Left in pixels
 	Win.show(null,Top,Left);
 
-	if(MainData.Windows.Focus != null)
+	// Remove focus from current window, if exists
+	CurrentWindow = MainData.GetWindowFocus();
+	if(CurrentWindow != null)
 	{
-		MainData.Windows.Focus.blur();
+		CurrentWindow.blur();
 	}
 
 	// Set focus on Browser
 	Win.focus();
 	Win.setZIndex(zIndex);
 
+	// Add content buttons in event buttons list
+	// This struct is used to access window content buttons
 	Win.pushEventButtons(DivButtons);
 
 	// Add Window on WindowList 
@@ -59,27 +65,31 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 	return Win; // WindowObj
 }
 
-function WINDOW_ChangeFocus(WindowObj)
+function WINDOW_Focus(WindowObj)
 {
 	var zIndex = WindowObj.getZIndex();
 	var i;
 	var WindowTmp;
+	var CurrentWindow = MainData.GetWindowFocus();
 
-	MainData.Windows.Focus.blur();
+	// Remove focus from current window
+	CurrentWindow.blur();
 
-	MainData.ChangeWindowFocus(WindowObj);
+	// Set focus to new window
+	MainData.SetWindowFocus(WindowObj);
 	WindowObj.focus();
 
-	for(i=0; i<MainData.Windows.WindowList.length; i++)
+	for(i=0; i<MainData.GetWindowListLength(); i++)
 	{
-		WindowTmp = MainData.Windows.WindowList[i];
+		WindowTmp = MainData.GetWindow(i);
 		if(WindowTmp.getZIndex() > zIndex)
 		{
 			WindowTmp.setZIndex(WindowTmp.getZIndex()-1);
 		}
 	}
+	
+	// Change layer position
 	WindowObj.setZIndex(i-1);
-
 }
 
 function WINDOW_RemoveWindow(WindowObj)
@@ -90,9 +100,9 @@ function WINDOW_RemoveWindow(WindowObj)
 	MainData.RemoveWindow(WindowObj);
 
 	// Reset zIndex of others windows
-	for(i=0; i<MainData.Windows.WindowList.length; i++)
+	for(i=0; i<MainData.GetWindowListLength(); i++)
 	{
-		WindowTmp = MainData.Windows.WindowList[i]
+		WindowTmp = MainData.GetWindow(i);
 		if(WindowTmp.getZIndex() > WindowObj.getZIndex())
 		{
 			WindowTmp.setZIndex(WindowTmp.getZIndex()-1);
@@ -137,10 +147,10 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-function WINDOW_Challenge(User, Rating, GameParameters, Rated, MatchId)
+function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
-	var Div = INTERFACE_ShowChallengeWindow(User, Rating, GameParameters, Rated, MatchId);
+	var Div = INTERFACE_ShowChallengeWindow(User, RatingObj, GameParameters, Rated, MatchId);
 	var Title;
 
 	if (GameParameters)

@@ -29,7 +29,7 @@ function LOAD_StartLoad()
 
 	// Show load screen to user
 	//INTERFACE_StartLoad();
-	MainData.Load = new LoadObj();
+	MainData.SetLoadObj(new LoadObj());
 
 	// Loading css files
 	//INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_css"), 2);
@@ -41,9 +41,10 @@ function LOAD_StartLoad()
 */
 function LOAD_EndLoad()
 {
+	var LoadObj = MainData.GetLoadObj();
 	//INTERFACE_EndLoad();
-	MainData.Load.remove();
-	delete(MainData.Load);
+	LoadObj.remove();
+	delete(LoadObj);
 }
 
 /**
@@ -94,7 +95,7 @@ function LOAD_LoadFiles()
 	Files.push("css/Announce.css");
 	Files.push("css/Help.css");
 
-	if(MainData.Browser == 0) //IE
+	if(MainData.GetBrowser() == 0) //IE
 	{
 		Files.push("css/IEFix.css");
 	}
@@ -138,6 +139,9 @@ function LOAD_LoadFiles()
 	Files.push("scripts/game/oldgame.js");
 	Files.push("scripts/game/game.js");
 	Files.push("scripts/interface/help.js");
+	Files.push("scripts/contact/online.js");
+	Files.push("scripts/contact/online_info.js");
+	Files.push("scripts/contact/user.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);
@@ -151,6 +155,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 	var FileType;
 	var File;
 	var Head = document.getElementsByTagName("head")[0];
+	var LoadObj = MainData.GetLoadObj();
 
 	if(Files.length > 0)
 	{
@@ -158,7 +163,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 		FileType = Files[0].split("/")[0];
 		
 		//Show file to be load
-		MainData.Load.setLabel(Files[0])
+		LoadObj.setLabel(Files[0])
 			
 		switch(FileType)
 		{
@@ -192,7 +197,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 		// we used onreadystatechange event to know when script
 		// was loaded and ready to use.
 		// This event work with CSS files too.
-		if(MainData.Browser == 0) //IE
+		if(MainData.GetBrowser() == 0) //IE
 		{
 			
 			File.onreadystatechange = function(){
@@ -220,9 +225,10 @@ function LOAD_AppendFiles(Files, NumFiles)
 
 function LOAD_NextFile(Files, NumFiles)
 {
+	var LoadObj = MainData.GetLoadObj();
 	var Num = (1/ NumFiles)*300;
 	// Fill the loading bar progress
-	MainData.Load.LoadBar.add(Num)
+	LoadObj.LoadBar.add(Num)
 
 	// Remove first file from list and load next file
 	Files.splice(0,1);
@@ -231,9 +237,10 @@ function LOAD_NextFile(Files, NumFiles)
 
 function LOAD_EndFile(Files, NumFiles)
 {
+	var LoadObj = MainData.GetLoadObj();
 	var Num = (1/ NumFiles)*300;
 	// Complete load bar
-	MainData.Load.LoadBar.add(Num)
+	LoadObj.LoadBar.add(Num)
 
 	// Start Webclient chess environment
 	setTimeout("START_Webclient()", 1500);

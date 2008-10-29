@@ -27,6 +27,8 @@ function PARSER_ParseIq(XML)
 	var Buffer = "";
 	var Xmlns = "";
 
+	var Consts = MainData.GetConst();
+
 	if(FirstNode != undefined)
 	{
 		Xmlns = FirstNode.getAttribute("xmlns");
@@ -45,7 +47,8 @@ function PARSER_ParseIq(XML)
 			// Receive user list
 			if (Xmlns.match(/jabber:iq:roster/))
 			{
-				Buffer += CONTACT_HandleUserList(XML);
+				Buffer += USER_HandleContactUserList(XML);
+				Buffer += CONTACT_HandleContactUserList(XML);
 			}
 
 			// Receive room list
@@ -60,19 +63,24 @@ function PARSER_ParseIq(XML)
 				Buffer += ROOM_HandleGameRoomInfoList(XML);
 			}
 
-
 			// Receive information of user list
+			/*
 			else if (Xmlns.match(/\/chessd#info/))
 			{
 				Buffer += ADMIN_HandleInfo(XML);
 				// contact/info.js
-				Buffer += CONTACT_HandleInfo(XML);
 				Buffer += ROOM_HandleInfo(XML);
 			}
-
+			*/
 			// Receive profile information of user
 			else if (Xmlns.match(/\/chessd#profile/))
 			{
+				Buffer += USER_HandleInfo(XML);
+				Buffer += ADMIN_HandleInfo(XML);
+				// contact/info.js
+				Buffer += ROOM_HandleInfo(XML);
+				Buffer += CONTACT_HandleInfo(XML);
+				Buffer += ONLINE_HandleInfo(XML);
 				Buffer += PROFILE_HandleInfoProfile(XML);
 			}
 			else if (Xmlns.match(/\/chessd#match_announcement/))
@@ -109,11 +117,11 @@ function PARSER_ParseIq(XML)
 			}
 			else if (Xmlns.match(/vcard-temp/))
 			{
-				if (ID == MainData.Const.IQ_ID_GamePhoto)
+				if (ID == Consts.IQ_ID_GamePhoto)
 				{
 					Buffer += GAME_HandleVCardPhoto(XML);
 				}
-				else if (ID == MainData.Const.IQ_ID_OldGamePhoto)				{
+				else if (ID == Consts.IQ_ID_OldGamePhoto)				{
 					Buffer += OLDGAME_HandleVCardPhoto(XML);
 				}
 				else
@@ -210,8 +218,10 @@ function PARSER_ParseIqById(XML)
 	var ID = XML.getAttribute("id");
 	var Buffer = "";
 
+	var Consts = MainData.GetConst();
+
 	// Received an empty vcard. Need to create a basic profile
-	if (ID == MainData.Const.IQ_ID_GetMyProfile)
+	if (ID == Consts.IQ_ID_GetMyProfile)
 	{
 		Buffer += PROFILE_CreateProfile();
 	}

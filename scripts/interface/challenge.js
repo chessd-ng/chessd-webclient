@@ -25,7 +25,7 @@
 * @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, MatchId)
+function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
 	var Div;
 
@@ -68,7 +68,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	// Top Elments
 	TopDiv = UTILS_CreateElement('div', 'TopDiv');
 	Username = UTILS_CreateElement('h3', null, null, Oponent);
-	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
+	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+RatingObj.GetRatingValue("blitz"));
 	Username.appendChild(RatingLabel);
 	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
 	
@@ -84,10 +84,8 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 	// Layer1 Elements
 
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
-
 	// Layer 1 Left Elements
 	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
-
 	if (GameParameters != undefined)
 	{
 		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_op_pieces'));
@@ -126,7 +124,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 		ColorOptB.name = "color";
 		ColorOptB.value = "colorB";
 	}
-
 	ColorOptBImg = UTILS_CreateElement('img',null,'color');
 	BrB = UTILS_CreateElement('br');
 	
@@ -242,8 +239,9 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				TimeOpt.value = i;
 				
 				TimeSelect.appendChild(TimeOpt);
-			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"lightning");
+			}
+			
+			Rating = RatingObj.GetRatingValue("lightning");
 		}
 
 		// Blitz = 1
@@ -256,7 +254,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 				
 				TimeSelect.appendChild(TimeOpt);
 			}	
-		Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault, Oponent, "blitz");
+			Rating = RatingObj.GetRatingValue("blitz");
 		}
 
 		// Standard = 2
@@ -286,10 +284,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"190");
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
+/*
+			// Infinit symbol
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
-			Rating = MainData.GetUserRatingInRoom(MainData.RoomDefault,Oponent,"standard");
+*/
+			Rating = RatingObj.GetRatingValue("standard");
 		}
 		// Untimed = 3
 		else if (Type == 3)
@@ -301,7 +302,13 @@ function INTERFACE_ShowChallengeWindow(Oponent, Rating, GameParameters, Rated, M
 			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
 			TimeOpt.value = "untimed";
 			TimeSelect.appendChild(TimeOpt);
+			Rating = RatingObj.GetRatingValue("untimed");
 
+		}
+
+		if(Rating == null)
+		{
+			Rating = "---";
 		}
 
 		Username.removeChild(Username.childNodes[1]);

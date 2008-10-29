@@ -42,6 +42,8 @@ function ROOM_HandleRoomPresence(XML)
 
 	var RoomNotFound;
 
+	var MyUsername = MainData.Username;
+
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
@@ -54,7 +56,7 @@ function ROOM_HandleRoomPresence(XML)
 	Component = From.split("@")[1].split("/")[0].split(".")[0];
 
 
-	// Check if the type is error
+	// Check if the type is an error
 	if (Type == "error")
 	{
 		// Check if error is a inexist room; -> QuickFix to close room
@@ -80,7 +82,7 @@ function ROOM_HandleRoomPresence(XML)
 	}
 
 	// Remove loading box if user enter in general room;
-	if(RoomName == MainData.RoomDefault)
+	if(RoomName == MainData.GetRoomDefault())
 	{
 		LoadingBox = document.getElementById("room_loading");
 		if(LoadingBox != null)
@@ -115,7 +117,7 @@ function ROOM_HandleRoomPresence(XML)
 		ROOM_CreateRoom(RoomName);
 
 		// Show room user list if room is a room game
-		if(Component == MainData.GameComponent)
+		if(Component == MainData.GetServer())
 		{
 			Room = MainData.GetRoom(RoomName);
 			Room.Room.showUserList();
@@ -123,7 +125,7 @@ function ROOM_HandleRoomPresence(XML)
 	}
 
 	// If its your presence
-	if (Jid == MainData.Username)
+	if (Jid == MyUsername)
 	{
 		if (Type == "unavailable")
 		{
@@ -134,7 +136,7 @@ function ROOM_HandleRoomPresence(XML)
 			// Insert you in room user list
 			Buffer += ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation);
 			// Set your role and affiliation in data struct
-			MainData.SetRoom(RoomName, MsgTo, Role, Affiliation);
+			MainData.SetRoomInformation(RoomName, MsgTo, Role, Affiliation);
 			INTERFACE_RefreshOccupantsNumber(RoomName);
 		}
 	}
@@ -143,8 +145,6 @@ function ROOM_HandleRoomPresence(XML)
 	{
 		if (Type == "unavailable")
 		{
-			//MainData.DelUserInRoom(RoomName, Jid);
-			//INTERFACE_DelUserInRoom(RoomName, Jid);
 			ROOM_RemoveUser(RoomName, Jid);
 			INTERFACE_RefreshOccupantsNumber(RoomName);
 		}
@@ -211,7 +211,8 @@ function ROOM_HandleRoomList(XML)
 {
 	var Items, Rooms, Room, RoomName, ID, i;
 	var Buffer = "";
-	var Exp = new RegExp("^"+MainData.RoomDefault+"$");
+	var Exp = new RegExp("^"+MainData.GetRoomDefault()+"$");
+	var Consts = MainData.GetConst();
 
 	Rooms = new Array();
 
@@ -219,7 +220,7 @@ function ROOM_HandleRoomList(XML)
 	ID = XML.getAttribute("id");
 	
 	// XML with all games rooms
-	if (ID == MainData.Const.IQ_ID_GetGamesList)
+	if (ID == Consts.IQ_ID_GetGamesList)
 	{
 		Buffer += ROOM_HandleGameRoomList(XML);
 	}
@@ -363,7 +364,7 @@ function ROOM_HandleGameRoomInfoList(XML)
 */
 function ROOM_HandleInfo(XML)
 {
-	var RatingNodes, TypeNodes;
+	var RatingNodes, TypeNode;
 
         var Username, Rating, Category
 	var i,j;
@@ -372,30 +373,49 @@ function ROOM_HandleInfo(XML)
 	var User;
 	var NewType, Type;
 
-	RatingNodes = XML.getElementsByTagName('rating');
-	TypeNodes = XML.getElementsByTagName('type');
+	var RoomList = MainData.GetRoomList();
+	var Room;
+	var ProfileNode;
 
+	RatingNodes = XML.getElementsByTagName('rating');
+	TypeNode = XML.getElementsByTagName('type')[0];
+	ProfileNode = XML.getElementsByTagName("profile")[0];
+
+	// Get user name
+	Username = ProfileNode.getAttribute('jid').split("@")[0];
+	// Get user type nodes
+	NewType = TypeNode.getAttribute('type');
 
 	// Getting ratings nodes
 	for (i=0 ; i<RatingNodes.length ; i++)
 	{
-		Username = RatingNodes[i].getAttribute('jid').replace(/@.*/,"");
 		Category = RatingNodes[i].getAttribute('category');
 		Rating = RatingNodes[i].getAttribute('rating');
 
 		// Updating ratings in room lists
-		for (j=0; j<MainData.RoomList.length; j++)
+		for (j=0; j<RoomList.length; j++)
 		{
+			Room = RoomList[j];
+
 			// Search user node in room user list
-			User = MainData.FindUserInRoom(MainData.RoomList[j].Name, Username);
+			User = Room.GetUser(Username);
 			if (User != null)
 			{
-				Room = MainData.RoomList[j];
-				Status = Room.UserList[User].Status;
-				Type = Room.UserList[User].Type;
+				// Update in data struct
+				if (User.Rating.FindRating(Category) == null)
+				{
+					User.Rating.AddRating(Category, Rating);
+				}
+				else
+				{
+					User.Rating.SetRatingValue(Category, Rating);
+				}
+
+				Status = User.GetStatus();
+				Type = User.GetType();
 
 				// Update in interface 
-				if (Category == MainData.RoomCurrentRating)
+				if (Category == Room.GetRoomCurrentRating())
 				{
 					Room.Room.userList.updateUser(Username, Status, Rating, Type);
 				}
@@ -404,32 +424,31 @@ function ROOM_HandleInfo(XML)
 
 	}
 
-	// Getting users type nodes
-	for (i=0 ; i<TypeNodes.length ; i++)
-	{
-		Username = TypeNodes[i].getAttribute('jid').replace(/@.*/,"");
-		NewType = TypeNodes[i].getAttribute('type');
-	
-		// Updating type in room lists
-		for (j=0; j<MainData.RoomList.length; j++)
-		{
-			// Search user node in room user list
-			User = MainData.FindUserInRoom(MainData.RoomList[j].Name, Username);
-			if (User != null)
-			{
-				Room = MainData.RoomList[j];
-				Status = Room.UserList[User].Status;
-				Room.UserList[User].Type = NewType;
 
-				// Update in interface
-				if(NewType != "user")
-				{
-					// Search user node in room user list
-					Room.Room.userList.updateUser(Username, Status, null, NewType);	
-				}
+	// Updating type in room lists
+	for (j=0; j<RoomList.length; j++)
+	{
+		Room = RoomList[j];
+
+		// Search user node in room user list
+		User = Room.GetUser(Username);
+		if (User != null)
+		{
+			// Update in data struct
+			User.SetType(NewType);
+
+			Status = User.GetStatus();
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+
+			// Update in interface
+			if(NewType != "user")
+			{
+				// Search user node in room user list
+				Room.Room.userList.updateUser(Username, Status, Rating, NewType);	
 			}
 		}
 	}
+
 	return "";
 }
 
@@ -443,19 +462,19 @@ function ROOM_HandleInfo(XML)
 */
 function ROOM_SendMessage(RoomName, Message)
 {
-	var To, i;
+	var To, Room;
 
 	// Search room in sctructure
-	i = MainData.FindRoom(RoomName);
+	Room = MainData.GetRoom(RoomName);
 
 	// If room doesnt exists
-	if (i == null)
+	if (Room == null)
 	{
 		return false;
 	}
 
 	// Send message to room
-	To = MainData.RoomList[i].MsgTo;
+	To = Room.MsgTo;
 	CONNECTION_SendJabber(MESSAGE_GroupChat(To, UTILS_ConvertChatString(Message)));
 	return true;
 }
@@ -515,6 +534,8 @@ function ROOM_EnterRoom(RoomName)
 
 	var Room;
 
+	var MyUsername = MainData.Username;
+
 	// Send Message to general room - must be change to Focus Room
 	Room = MainData.GetRoom(RoomName);
 
@@ -524,7 +545,7 @@ function ROOM_EnterRoom(RoomName)
 	}
 	else
 	{
-		To = RoomName+"@conference."+MainData.Host+"/"+MainData.Username;
+		To = RoomName+"@conference."+MainData.GetHost()+"/"+MyUsername;
 
 		XML = MESSAGE_Presence(To);
 
@@ -549,6 +570,7 @@ function ROOM_ExitRoom(RoomName)
 
 	var XML;
 	var Room = MainData.GetRoom(RoomName)
+	var CurrentGame = MainData.GetCurrentGame();
 	
 	// If RoomName isn't in sctructure
 	if (Room == null)
@@ -557,11 +579,11 @@ function ROOM_ExitRoom(RoomName)
 	}
 
 	// if user is playing, show a message and don't close room
-	if(MainData.CurrentGame != null)
+	if(CurrentGame != null)
 	{
-		if(RoomName == MainData.CurrentGame.Id)
+		if(RoomName == CurrentGame.Id)
 		{
-			if(MainData.CurrentGame.Finished == false)
+			if(CurrentGame.Finished == false)
 			{
 				WINDOW_Alert(UTILS_GetText("game_remove_game_title"), UTILS_GetText("game_remove_room"));
 				return "";
@@ -581,8 +603,9 @@ function ROOM_ExitRoom(RoomName)
 function ROOM_EnterRoomGame(RoomName)
 {
 	var XML, To;
+	var MyUsername = MainData.Username;
 
-	To = RoomName+"@"+MainData.GameComponent+"."+MainData.Host+"/"+MainData.Username;
+	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 
 	XML = MESSAGE_Presence(To);
 
@@ -611,7 +634,7 @@ function ROOM_ErrorMessageLength(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	var Message;
-	var Limit = MainData.MaxChatChar;
+	var Limit = MainData.GetMaxRoomChar();
 
 	if(Room == null)
 	{
@@ -631,10 +654,17 @@ function ROOM_ErrorMessageLength(RoomName)
 */ 
 function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation) 
 { 
-	var UserPos = MainData.FindUser(Jid); 
-	var Type = "user", Rating = ""; 
+	var Type = "user", Rating; 
+	var UserObj = MainData.GetUser(Jid);
 	var Buffer = "";
 	var Room;
+
+	/*
+	if(UserObj == null)
+	{
+		return null;
+	}
+	*/
 
 	Room = MainData.GetRoom(RoomName);
 	if(Room == null)
@@ -642,34 +672,26 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 		return null;
 	}
 
+	if(UserObj != null)
+	{
+		Rating = UserObj.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+	}
+	else
+	{
+		Rating = "";
+	}
+
 	// Check if user has already inserted. 
 	// If not inserted, add user, else update information
-	if(Room.Room.userList.findUser(Jid) == null)
+	if(Room.FindUser(Jid) == null)
 	{
-		/* //Review this code to be more 
-		if (UserPos != null) 
-		{ 
-			Type = MainData.UserList[UserPos].Type; 
-			Rating = eval("MainData.UserList["+UserPos+"].Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
-		} 
-		else if (Jid == MainData.Username) 
-		{ 
-			Type = MainData.Type; 
-			Rating = eval("MainData.Rating."+UTILS_Capitalize(MainData.CurrentRating)); 
-		} 
-		else 
-		{
-			// Ask user info, if it's not your contact 
-			Buffer += MESSAGE_Info(Jid); 
-		} 
-		*/
 
 		// Get user rating and type information
-		Buffer += MESSAGE_Info(Jid); 
+		//Buffer += MESSAGE_Info(Jid); 
 
 		//Add user in data struct
-		MainData.AddUserInRoom(RoomName, Jid, Status, Type, Role, Affiliation); 
-		MainData.SortUserByNickInRoom(RoomName); 
+		Room.AddUser(Jid, Status, Type, Role, Affiliation); 
+		Room.SortUserListNick(); 
 	
 		//Add user in interface
 		Room.Room.userList.addUser(Jid, Status, Rating, Type); 
@@ -677,7 +699,7 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	else
 	{
 		//Update user information in data struct
-		MainData.SetUserAttrInRoom(RoomName, Jid, Status, Role, Affiliation) 
+		Room.SetUserInformation(Jid, Status, Role, Affiliation) 
 		//Update user information in interface
 		Room.Room.userList.updateUser(Jid, Status); 
 	} 
@@ -688,7 +710,7 @@ function ROOM_RemoveUser(RoomName, UserName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	
-	MainData.DelUserInRoom(RoomName,UserName)
+	Room.RemoveUser(UserName)
 	
 	// Remove user from interface
 	Room.Room.userList.removeUser(UserName);
@@ -716,11 +738,12 @@ function ROOM_FocusRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	var Login = false;
+	var CurrentRoom = MainData.GetCurrentRoom();
 
-	if((Room != MainData.CurrentRoom)&&(MainData.CurrentRoom != null))
+	if((Room != CurrentRoom)&&(CurrentRoom != null))
 	{
 		// Hide current room div;
-		MainData.CurrentRoom.Room.hide();
+		CurrentRoom.Room.hide();
 	}
 	// If null, user just logged in interface
 	else if (MainData.CurrentRoom == null)
@@ -732,7 +755,8 @@ function ROOM_FocusRoom(RoomName)
 	INTERFACE_FocusRoom(RoomName);
 	Room.Room.show();
 	INTERFACE_RefreshOccupantsNumber(RoomName);
-	MainData.CurrentRoom = Room;
+
+	MainData.SetCurrentRoom(Room);
 	// Don't focus input room if user just logged in interface
 	if (!Login)
 	{
@@ -744,6 +768,7 @@ function ROOM_RemoveRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	var NextRoom, NextRoomPos;
+	var RoomList = MainData.GetRoomList();
 
 	if(Room == null)
 	{
@@ -757,15 +782,15 @@ function ROOM_RemoveRoom(RoomName)
 	Room.Room.hide();
 
 	//Remove from data struct
-	MainData.DelRoom(RoomName)
+	MainData.RemoveRoom(RoomName);
 
 
-	if(MainData.RoomList.length > 1)
+	if(RoomList.length > 1)
 	{
 		//Get next room from data struct
 		//RoomList[0] == General Room
-		NextRoomPos = MainData.RoomList.length - 1;
-		NextRoom = MainData.RoomList[NextRoomPos];
+		NextRoomPos = RoomList.length - 1;
+		NextRoom = RoomList[NextRoomPos];
 	
 		//Show next room in interface
 		INTERFACE_CreateRoomInBar(NextRoom.Name);
@@ -775,23 +800,26 @@ function ROOM_RemoveRoom(RoomName)
 	else
 	{
 		//Set focus to general room
-		ROOM_FocusRoom(MainData.RoomDefault);
+		ROOM_FocusRoom(MainData.GetRoomDefault());
 	}
 
 	return RoomName;
 }
 
 //Sort all user in all rooms by nick name
+// TODO -> Change this function to get room parameter
 function ROOM_SortUsersByNick()
 {
 	var Room, RoomName;
 	var i, j;
 	var UserName, Status, Rating, Type;
+	var User;
+	var RoomList = MainData.GetRoomList();
 
 	// Get all rooms
-	for(j=0; j<MainData.RoomList.length; j++)
+	for(j=0; j<RoomList.length; j++)
 	{
-		Room = MainData.RoomList[j];
+		Room = RoomList[j];
 		if(Room == null)
 		{
 			return false;
@@ -799,89 +827,26 @@ function ROOM_SortUsersByNick()
 		
 		// Test the current order mode (order == sort)
 		// If ordered into ascending order, change to descending order
-		if (Room.OrderBy == "0")
-		{
-			Room.OrderBy = "1";
-		}
 		// other modes, change to ascending order
-		else
-		{
-			Room.OrderBy = "0";
-		}
-		
+		Room.SetOrderBy((Room.GetOrderBy() + 1) % 2);
+
 		RoomName = Room.Name;
+
 		// Sort user list by nick name in data struct
-		MainData.SortUserByNickInRoom(RoomName);
+		Room.SortUserListNick();
 
 		// Show new user list sorted
 		for(i=0; i<Room.UserList.length; i++)
 		{
-			UserName = Room.UserList[i].Username;
-			Status = Room.UserList[i].Status;
-			Type = Room.UserList[i].Type;
+			User = Room.UserList[i];
 
+			UserName = User.Username;
+			Status = User.Status;
+			Type = User.Type;
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+/*
 			// Get rating
-			switch(MainData.RoomCurrentRating)
-			{
-				case "blitz":
-					Rating = Room.UserList[i].Rating.Blitz;
-					break;
-				case "lightning":
-					Rating = Room.UserList[i].Rating.Lightning;
-					break;
-				case "standard":
-					Rating = Room.UserList[i].Rating.Standard;
-					break;
-			}
-
-			Room.Room.userList.removeUser(UserName);
-			Room.Room.userList.addUser(UserName, Status, Rating, Type);
-		}
-		// TODO - Fix user menu position in FF3
-		// Proposital hide
-		if (MainData.Browser == 2)
-		{
-			Room.Room.hideUserList();
-		}
-	}
-
-	return true;
-}
-
-//Sort all user in all rooms by rating name
-function ROOM_SortUsersByRating(Category)
-{
-	var Room, RoomName;
-	var i, j;
-	var UserName, Status, Rating, Type;
-
-	MainData.RoomCurrentRating = Category;	
-
-	// Get all rooms
-	for(j=0; j<MainData.RoomList.length; j++)
-	{
-		Room = MainData.RoomList[j];
-		if(Room == null)
-		{
-			return false;
-		}
-		
-		// If ordered into ascending order, change to descending order
-		Room.OrderBy = "2";
-		
-		RoomName = Room.Name;
-		// Sort user list by nick name in data struct
-		MainData.SortUserByRatingInRoom(RoomName);
-
-		// Show new user list sorted
-		for(i=0; i<Room.UserList.length; i++)
-		{
-			UserName = Room.UserList[i].Username;
-			Status = Room.UserList[i].Status;
-			Type = Room.UserList[i].Type;
-
-			// Get rating
-			switch(MainData.RoomCurrentRating)
+			switch(Room.GetRoomCurrentRating())
 			{
 				case "blitz":
 					Rating = Room.UserList[i].Rating.Blitz;
@@ -896,14 +861,84 @@ function ROOM_SortUsersByRating(Category)
 					Rating = Room.UserList[i].Rating.Untimed;
 					break;
 			}
+*/
+			Room.Room.userList.removeUser(UserName);
+			Room.Room.userList.addUser(UserName, Status, Rating, Type);
+		}
+		// TODO - Fix user menu position in FF3
+		// Proposital hide
+		if (MainData.GetBrowser() == 2)
+		{
+			Room.Room.hideUserList();
+		}
+	}
+
+	return true;
+}
+
+//Sort all user in all rooms by rating name
+function ROOM_SortUsersByRating(Category)
+{
+	var Room, RoomName;
+	var i, j;
+	var UserName, Status, Rating, Type;
+	var User;
+
+	var RoomList = MainData.GetRoomList();
+
+
+	// Get all rooms
+	for(i=0; i<RoomList.length; i++)
+	{
+		Room = RoomList[i];
+
+		if(Room == null)
+		{
+			return false;
+		}
+		
+		// If ordered into ascending order, change to descending order
+		Room.SetOrderBy((Room.GetOrderBy() + 1) % 2);
+		
+		Room.SetRoomCurrentRating(Category);
+
+		RoomName = Room.Name;
+		// Sort user list by nick name in data struct
+		Room.SortUserListRating();
+
+		// Show new user list sorted
+		for(j=0; j<Room.UserList.length; j++)
+		{
+			User = Room.UserList[j]
+			UserName = User.Username;
+			Status = User.Status;
+			Type = User.Type;
+			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
+/*
+			// Get rating
+			switch(Room.GetRoomCurrentRating())
+			{
+				case "blitz":
+					Rating = User.Rating.Blitz;
+					break;
+				case "lightning":
+					Rating = User.Rating.Lightning;
+					break;
+				case "standard":
+					Rating = User.Rating.Standard;
+					break;
+				case "untimed":
+					Rating = User.Rating.Untimed;
+					break;
+			}
+*/
 
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
-
 		// TODO - Fix user menu position in FF3
 		// Proposital hide
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Room.Room.hideUserList();
 		}

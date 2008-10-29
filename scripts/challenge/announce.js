@@ -41,8 +41,10 @@ function ANNOUNCE_HandleAnnounce(XML)
 
 	var Buffer = "";
 
+	var Consts =  MainData.GetConst();
+
 	// Get Announce list
-	if(Id == MainData.Const.IQ_ID_GetAnnounceMatch)
+	if(Id == Consts.IQ_ID_GetAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
 		
@@ -89,11 +91,11 @@ function ANNOUNCE_HandleAnnounce(XML)
 	}
 	// Accepted announce
 	/*
-	else if(Id == MainData.Const.IQ_ID_AcceptAnnounceMatch)
+	else if(Id == Consts.IQ_ID_AcceptAnnounceMatch)
 	{
 		WINDOW_Alert("Announce accept","Announce accepted, start game!")
 	}
-	else if(Id == MainData.Const.IQ_ID_RemoveAnnounceMatch)
+	else if(Id == Consts.IQ_ID_RemoveAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
 
@@ -115,12 +117,14 @@ function ANNOUNCE_HandleAnnounceGame(XML)
 	var GameRoomTag, Room;
 
 	var Buffer = "";
+	//FIX IT TO GET USERNAME FROM PREFERENCES
+	var MyUsername = MainData.Username
 
 	// Accepted announce, start game
 	GameRoom = XML.getElementsByTagName("game_room")[0];
 
 	Room = GameRoom.getAttribute("jid");
-	Room += "/"+MainData.Username;
+	Room += "/"+MyUsername;
 
 	Buffer += CONTACT_ChangeStatus("playing", false);
 	Buffer += MESSAGE_Presence(Room);
@@ -137,7 +141,9 @@ function ANNOUNCE_HandleAnnounceError(XML)
 	var Type;
 	var AnnounceId, Announces;
 
-	if(Id == MainData.Const.IQ_ID_AcceptAnnounceMatch)
+	var Consts = MainData.GetConst();
+
+	if(Id == Consts.IQ_ID_AcceptAnnounceMatch)
 	{
 		Error = XML.getElementsByTagName("error")[0];
 		Type = Error.getAttribute("type");
@@ -217,6 +223,7 @@ function ANNOUNCE_GetAnnounceGames()
 function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
 {
 	var Player = new Object();
+	var ChallengeMenu = MainData.GetChallengeMenu();
 
 	if(MainData.FindAnnounce(AnnounceId) == null)
 	{
@@ -226,7 +233,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 		Player.Inc = Inc;
 
 		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
-		MainData.ChallengeMenu.addAnnounce(Player, Time, Inc, Rated, "true", AnnounceId);
+		ChallengeMenu.addAnnounce(Player, Time, Inc, Rated, "true", AnnounceId);
 	}
 }
 
@@ -236,8 +243,10 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
  */
 function ANNOUNCE_RemoveAnnounce(Id)
 {
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
 	MainData.RemoveAnnounce(Id);
-	MainData.ChallengeMenu.removeAnnounce(Id);
+	ChallengeMenu.removeAnnounce(Id);
 
 	ANNOUNCE_CancelAnnounce(Id);
 }
@@ -268,21 +277,52 @@ function ANNOUNCE_AcceptAnnounce(Id)
 
 
 function ANNOUNCE_ShowLoadingAnnounce()
-{
-	MainData.ChallengeMenu.showLoadingAnnounce();
+{	
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.showLoadingAnnounce();
 }
 
 function ANNOUNCE_HideLoadingAnnounce()
 {
-	MainData.ChallengeMenu.hideLoadingAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.hideLoadingAnnounce();
 }
 
 function ANNOUNCE_ShowNoAnnounce()
 {
-	MainData.ChallengeMenu.showNoAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.showNoAnnounce();
 }
 
 function ANNOUNCE_HideNoAnnounce()
 {
-	MainData.ChallengeMenu.hideNoAnnounce();
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	ChallengeMenu.hideNoAnnounce();
+}
+
+/**
+ * @brief	Remove all announces from main data and interface
+ *
+ * @return	Empty string
+ * @author	Rubens Suguimoto
+ */
+function ANNOUNCE_ClearAnnounce()
+{
+	var i;
+	var AnnounceId;
+	var ChallengeMenu = MainData.GetChallengeMenu();
+	var AnnounceList = MainData.GetAnnounceList();
+
+	// Remove all announce from challenge menu and data struct
+	for(i=0;i< AnnounceList.length; i++)
+	{
+		AnnounceId = AnnounceList[i].Id;
+		//ChallengeWindow = AnnounceList[i].Window;
+
+		if(AnnounceId != null)
+		{
+			ANNOUNCE_RemoveAnnounce(AnnounceId);
+		}
+
+	}
 }

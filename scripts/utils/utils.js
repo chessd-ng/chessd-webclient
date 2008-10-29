@@ -178,7 +178,7 @@ function UTILS_GetTag(XML, TagName)
 */
 function UTILS_GetText(TagName)
 {
-	return UTILS_GetTag(MainData.GetText, TagName);
+	return UTILS_GetTag(MainData.GetText(), TagName);
 }
 
 
@@ -327,7 +327,7 @@ function UTILS_BreakString(Obj, Width)
 	var i;
 
 	// IE
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		TrWidth = Width.Offset;
 	}
@@ -451,7 +451,7 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 
 function UTILS_ReturnEvent(event)
 {
-	if(MainData.Browser == 0) // IE
+	if(MainData.GetBrowser() == 0) // IE
 	{
 		return window.event;
 	}
@@ -465,7 +465,7 @@ function UTILS_ReturnKeyCode(event)
 {
 	var KeyNum;
 
-	if(MainData.Browser == 0) // IE
+	if(MainData.GetBrowser() == 0) // IE
 	{
 		KeyNum = window.event.keyCode;
 	}
@@ -882,6 +882,119 @@ function UTILS_SortByUsernameDsc(a, b)
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
+
+function UTILS_SortOnlineByRatingDsc(a, b) 
+{
+	var Category = MainData.GetOnlineCurrentRating();
+	return UTILS_SortByRatingDsc(Category, a, b); 
+}
+
+function UTILS_SortContactByRatingDsc(a, b) 
+{
+	var Category = MainData.GetContactCurrentRating();
+	return UTILS_SortByRatingDsc(Category, a, b); 
+}
+
+/**
+* Use to sort Rooms's userlist into descendent order by Rating
+* If x < y return  1
+*    x > y return -1
+*    x = y return  0
+*
+* @return integer	
+* @author Danilo Yorinori
+*/
+function UTILS_SortRoomByRatingDsc(a, b) 
+{
+	var Room = MainData.GetCurrentRoom();
+	var Category = Room.GetRoomCurrentRating();
+
+	return UTILS_SortByRatingDsc(Category, a, b); 
+/*
+	var x;
+	var y;
+	if (Type == "Lightning")
+	{
+		if (a.Rating.Lightning != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Lightning));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Lightning != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Lightning));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	else if (Type == "Blitz")
+	{
+		if (a.Rating.Blitz != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Blitz));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Blitz != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Blitz));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	else if (Type == "Standard")
+	{
+		if (a.Rating.Standard != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Standard));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Standard != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Standard));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+	else if (Type == "Untimed")
+	{
+		if (a.Rating.Untimed != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Untimed));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Untimed != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Untimed));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+
+	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+*/
+}
+
+
 /**
 * Use to sort Userlist into ascendent order
 * If x < y return -1
@@ -923,12 +1036,32 @@ function UTILS_SortByFullnameDsc(a, b)
 * @return integer	
 * @author Danilo Yorinori
 */
-function UTILS_SortByRatingDsc(a, b) 
+function UTILS_SortByRatingDsc(Category, a, b) 
 {
-	var Type = UTILS_Capitalize(MainData.CurrentRating);
 	var x;
 	var y;
+	
+	x = a.Rating.GetRatingValue(Category);
+	y = b.Rating.GetRatingValue(Category);
 
+	if(x == null)
+	{
+		x = 0;
+	}
+	else
+	{
+		x = parseInt(x);
+	}
+
+	if(y == null)
+	{
+		y = 0;
+	}
+	else
+	{
+		y = parseInt(y);
+	}
+/*
 	if (Type == "Lightning")
 	{
 		if (a.Rating.Lightning != undefined)
@@ -967,7 +1100,7 @@ function UTILS_SortByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Standard")
+	else if (Type == "Standard")
 	{
 		if (a.Rating.Standard != undefined)
 		{
@@ -986,6 +1119,26 @@ function UTILS_SortByRatingDsc(a, b)
 			y = 0;
 		}
 	}
+	else if (Type == "Untimed")
+	{
+		if (a.Rating.Untimed != undefined)
+		{
+			x = parseInt(parseFloat(a.Rating.Untimed));
+		}
+		else
+		{
+			x = 0;
+		}
+		if (b.Rating.Untimed != undefined)
+		{
+			y = parseInt(parseFloat(b.Rating.Untimed));
+		}
+		else
+		{
+			y = 0;
+		}
+	}
+*/
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
@@ -998,9 +1151,11 @@ function UTILS_SortByRatingDsc(a, b)
 * @return integer	
 * @author Danilo Yorinori
 */
+/*
 function UTILS_SortRoomByRatingDsc(a, b) 
 {
-	var Type = UTILS_Capitalize(MainData.RoomCurrentRating);
+	var Room = MainData.GetCurrentRoom();
+	var Type = UTILS_Capitalize(Room.GetRoomCurrentRating());
 	var x;
 	var y;
 
@@ -1042,7 +1197,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Standard")
+	else if (Type == "Standard")
 	{
 		if (a.Rating.Standard != undefined)
 		{
@@ -1061,7 +1216,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 			y = 0;
 		}
 	}
-	if (Type == "Untimed")
+	else if (Type == "Untimed")
 	{
 		if (a.Rating.Untimed != undefined)
 		{
@@ -1083,7 +1238,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
-
+*/
 /************************************
  * FUNCTIONS - BROWSER LANGUAGE     *
  ************************************/

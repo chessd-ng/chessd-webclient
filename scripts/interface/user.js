@@ -533,7 +533,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
@@ -562,7 +562,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	// Room and Online User List
 	else if (ParentNode.className.match("UserTable") != null) 
 	{
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Offset = 1; //
 		}
@@ -881,7 +881,7 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	
 	ParentNode = UTILS_GetParentDiv(Obj);
 	
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
 		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
@@ -904,7 +904,7 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	// Online and Room User List
 	else if (ParentNode.className.match("UserTable") != null) 
 	{
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Offset = 1; //
 		}
@@ -922,7 +922,7 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 	// User Nickname
 	else if (ParentNode.id.match("UserInf") != null)
 	{
-		if (MainData.Browser == 2)
+		if (MainData.GetBrowser() == 2)
 		{
 			Offset = 3;
 		}

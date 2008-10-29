@@ -19,7 +19,7 @@
 * Handle users status
 */
 
-
+// TODO --> SEPARAR OS CHANGE STATUS PARA ONLINE, ROOM E CONTACT
 /**
 * Change User Status 
 */
@@ -28,13 +28,20 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	var i, XML, Status, StatusItem;
 	var Select;
 		
+	var RoomList = MainData.GetRoomList();
+	var Room;
+
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
+
 	// Change user status for contacts
 	XML = MESSAGE_ChangeStatus(NewStatus);
 	
 	// Change user status for rooms
-	for (i=0 ; i<MainData.RoomList.length ; i++)
+	for (i=0 ; i<RoomList.length ; i++)
 	{
-		XML += MESSAGE_ChangeStatus(NewStatus, MainData.RoomList[i].MsgTo);
+		Room = RoomList[i];
+		XML += MESSAGE_ChangeStatus(NewStatus, Room.MsgTo);
 	}
 	
 	// Change status in select menu
@@ -51,9 +58,9 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	
 		Select.disabled = true;
 	}
-	// If current status is playing, remove playing option from select box, enable select box and 
-	// select avaiable status(Index 0)
-	else if (MainData.Status == "playing")
+	// If current status is playing, remove playing option from
+	// select box, enable select box and  select avaiable status(Index 0)
+	else if (MyUserStatus == "playing")
 	{
 		Select.disabled = false;
 		StatusItem = document.getElementById('status_playing_op');
@@ -62,7 +69,7 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	}
 	
 	// Update your status in structure
-	MainData.Status = NewStatus;
+	MyUser.SetStatus(NewStatus);
 
 	// Send to jabber or return the message
 	if (DontSend == null)
@@ -82,39 +89,31 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 function CONTACT_SetUserStatus(Username, NewStatus)
 {
 	var Rating, Type;
-	var UserPos;
+	var User = MainData.GetUser(Username);
+	var ContactUser;
+	var ContactObj = MainData.GetContactObj();
 
 	// Update new user status in data struct
-	MainData.SetUserStatus(Username, NewStatus)
-
-	// Update user status in interface
-	if(MainData.Contact != null)
+	if(User != null)
 	{
-		// Find user in data struct 
-		UserPos = MainData.FindUser(Username);
+		User.SetStatus(NewStatus);
+	}
 
-		if(UserPos != null)
-		{
-			// Get user type
-			Type = MainData.UserList[UserPos].Type;
+	// Find user in data struct 
+	ContactUser = MainData.GetContactUser(Username);
 
-			// Get user rating
-			switch(MainData.CurrentRating)
-			{
-				case "blitz":
-					Rating = MainData.UserList[UserPos].Rating.Blitz;
-					break;
-				case "lightning":
-					Rating = MainData.UserList[UserPos].Rating.Lightning;
-					break;
-				case "standard":
-					Rating = MainData.UserList[UserPos].Rating.Standard;
-					break;
-			}
-			// Update user status in contact list
-			MainData.Contact.updateUser(Username, NewStatus, Rating, Type);
-		}
+	if(ContactUser != null)
+	{
+		// Update new user status in data struct
+		ContactUser.SetStatus(NewStatus);
 
+		// Get user type
+		Type = ContactUser.Type;
+		// Get user rating
+		Rating = ContactUser.Rating.GetRatingValue(MainData.GetContactCurrentRating());
+
+		// Update user status in contact list
+		ContactObj.updateUser(Username, NewStatus, Rating, Type);
 	}
 
 	// Refresh number of contacts online	
@@ -142,12 +141,14 @@ function CONTACT_StartAwayCounter()
 function CONTACT_SetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
 
 	MainData.AwayCounter = MainData.AwayCounter - 1;
 
 	if(MainData.AwayCounter == 0)
 	{
-		if((MainData.Status != "playing")&&(MainData.Status != "unavailable"))
+		if((MyUserStatus != "playing")&&(MyUserStatus != "unavailable"))
 		{
 			CONTACT_ChangeStatus("away");
 			
@@ -163,11 +164,13 @@ function CONTACT_SetAwayStatus()
 function CONTACT_ResetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
+	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUserStatus = MyUser.GetStatus();
 
 	// Away counter reset to 5 minutes
 	MainData.AwayCounter = 300;
 
-	if(MainData.Status == "away")
+	if(MyUserStatus == "away")
 	{
 		CONTACT_ChangeStatus("available");
 			

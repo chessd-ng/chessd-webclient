@@ -324,11 +324,11 @@ function REGISTER_GetLanguage(URL)
 		QString = URL.split('=');
 		if(QString[1])
 		{
-			return "./scripts/lang/"+QString[1];
+			return "./lang/"+QString[1];
 		}
 	}
 
-	return "./scripts/lang/pt_BR.xml"
+	return "./lang/pt_BR.xml"
 }
 
 /*

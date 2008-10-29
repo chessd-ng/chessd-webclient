@@ -62,26 +62,7 @@ function INTERFACE_StartLogin(Lang)
 
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
-/*
-	// What language show?
-	// Find lang in cookie
-	Lang = UTILS_ReadCookie("lang");
-	// if language is not found in cookie
-	if (Lang == "")
-	{
-		// Get from browser language
-		//Lang = UTILS_GetLanguage();
-		
-		// QuickFix!
-		// Get default lang from configuration file
-		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml");
-		Lang = UTILS_GetTag(ConfTmp, "default-lang");
-	}
 
-	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
-	MainData.Lang = Lang;
-*/
 	// Creating elements and setting properties
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
 	LoginTextBoxDiv = UTILS_CreateElement("div", "TextDiv");
@@ -94,7 +75,7 @@ function INTERFACE_StartLogin(Lang)
 	Link = UTILS_CreateElement("a", null, "link", "http://xadrezlivre.c3sl.ufpr.br/projeto");
 	Link.href = "http://xadrezlivre.c3sl.ufpr.br/projeto";
 
-	Version = UTILS_CreateElement("p", "version", null, MainData.Version);
+	Version = UTILS_CreateElement("p", "version", null, MainData.GetVersion());
 	
 	LoginLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_user")+":");
 	PasswdLabel = UTILS_CreateElement("span", null, "Label", UTILS_GetText("login_passwd")+":");
@@ -240,7 +221,7 @@ function INTERFACE_CreateLanguage()
 	var Ul = UTILS_CreateElement("ul","LangUl");
 	var i;
 
-	var Languages = UTILS_OpenXMLFile("scripts/data/lang.xml");
+	var Languages = UTILS_OpenXMLFile("conf/lang.xml");
 	var Langs = Languages.getElementsByTagName("lang");
 
 	for(i=0; i<Langs.length; i++)

@@ -43,6 +43,9 @@ function CHALLENGE_HandleAdjourn(XML)
 	var Game, Players;
 	var Player1, Player2;
 	var AdjournId, Category, Date;
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
+	var MyUsername = MainData.Username;
 
 	var i;
 
@@ -71,13 +74,13 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2.Time = Players[1].getAttribute("time");
 			Player2.Inc  = Players[1].getAttribute("inc");
 
-			if(Player1.Name == MainData.Username)
+			if(Player1.Name == MyUsername)
 			{
 				// Add in main data postpone list
 				MainData.AddPostpone(Player2, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				MainData.ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
 
 				CHALLENGE_PostponePresence(Player2.Name);
 			}
@@ -87,7 +90,7 @@ function CHALLENGE_HandleAdjourn(XML)
 				MainData.AddPostpone(Player1, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				MainData.ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
 
 				CHALLENGE_PostponePresence(Player1.Name);
 			}
@@ -95,7 +98,7 @@ function CHALLENGE_HandleAdjourn(XML)
 	}
 
 	// Show postpone games
-	MainData.ChallengeMenu.showPostpone();
+	ChallengeMenu.showPostpone();
 
 	return Buffer;
 }
@@ -113,16 +116,13 @@ function CHALLENGE_HandleAdjourn(XML)
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
-	var UserRoom;
-	var Item, Username, i;
+	var Type, Username;
 	var Buffer = "";
 
-	// Get presence from general room (where all user is connected)
-	if(GeneralRoom == MainData.RoomDefault)
-	{
-		Username = XML.getAttribute("from").split("/")[1];
-		CHALLENGE_PostponePresence(Username);
-	}
+	Username = XML.getAttribute("from").split("/")[1];
+	Type = XML.getAttribute("type");
+
+	CHALLENGE_PostponePresence(Username, Type);
 
 	return Buffer;
 }
@@ -136,20 +136,18 @@ function CHALLENGE_HandlePresence(XML)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_PostponePresence(Username)
+function CHALLENGE_PostponePresence(Username, PresenceType)
 {
-	var i = MainData.FindUserInRoom(MainData.RoomDefault, Username);
-
+	var ChallengeMenu = MainData.GetChallengeMenu();
 	//If user is founded, set adjourn game to available, else unavailable
-	if(i != null)
+	if(PresenceType == "unavailable")
 	{
-		MainData.ChallengeMenu.updatePostpone(Username, "online");
+		ChallengeMenu.updatePostpone(Username, "offline");
 	}
 	else
 	{
-		MainData.ChallengeMenu.updatePostpone(Username, "offline");
+		ChallengeMenu.updatePostpone(Username, "online");
 	}
-
 	return "";
 }
 
@@ -165,11 +163,12 @@ function CHALLENGE_SendResumeGame(AdjournId)
 {
 	var XMPP = "";
 	
-	var PostponePos = MainData.FindPostpone(AdjournId);
-	var Postpone = MainData.PostponeList[PostponePos];
+	var Postpone = MainData.GetPostpone(AdjournId);
 
 	var Challenger = new Object();
 	var Challenged = new Object();
+
+	var MyUsername = MainData.Username;
 
 	// Create challenge in challenge list
 	Challenged.Name = Postpone.Challenged.Name;
@@ -177,7 +176,7 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	Challenged.Time = Postpone.Challenged.Time;
 	Challenged.Inc = Postpone.Challenged.Inc;
 
-	Challenger.Name = MainData.Username;
+	Challenger.Name = MyUsername;
 	Challenger.Color = "undefined";
 	Challenged.Time = 0;
 	Challenged.Inc = 0;
@@ -226,8 +225,10 @@ function CHALLENGE_GetAdjournGames()
 
 function CHALLENGE_RemovePostpone(Id)
 {
+	var ChallengeMenu = MainData.GetChallengeMenu();
+
 	MainData.RemovePostpone(Id);
-	MainData.ChallengeMenu.removePostpone(Id);
+	ChallengeMenu.removePostpone(Id);
 
 	return "";
 }

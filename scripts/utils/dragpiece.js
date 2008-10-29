@@ -32,14 +32,15 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	var Offset, OffsetLeft, OffsetTop, OffsetBoard;
 	
 	var BoardPieceOffset;
+	var CurrentGame = MainData.GetCurrentGame();
 
-	if(MainData.CurrentGame == null)
+	if(CurrentGame == null)
 	{
 		return false;
 	}
 
 	// If ut's not your turn, don't drag
-	if ((!MainData.CurrentGame.IsYourTurn) || (MainData.CurrentGame.Finished))
+	if ((!CurrentGame.IsYourTurn) || (CurrentGame.Finished))
 	{
 		return false;
 	}
@@ -50,7 +51,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	BoardPieceOffset = new Object;
 
 	// PS: FF3 use same values as IE to drag piece
-	if(MainData.Browser != 1) //is not FF2
+	if(MainData.GetBrowser() != 1) //is not FF2
 	{
 		BoardPieceOffset.y = -335;
 		BoardPieceOffset.x = 260;
@@ -63,7 +64,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 	// Getting offsets
 	Offset = Size / 2;
-	OffsetBoard = UTILS_GetOffset(MainData.CurrentGame.Game.Board);
+	OffsetBoard = UTILS_GetOffset(CurrentGame.Game.Board);
 
 
 	// Add half of the piece size and others elements margin and borders
@@ -99,6 +100,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			document.body.onmouseup = function(evt){
 				var NewPos = new Object();
 				var NewCol, NewLine, OldCol, OldLine;
+				var CurrentGame = MainData.GetCurrentGame();
 
 				// Getting mouse coord
 				MousePos = UTILS_GetMouseCoords(evt);
@@ -142,7 +144,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 					// Send movement
 					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 					// Show loading move message
-					GAME_ShowLoadingMove(MainData.CurrentGame.Id);
+					GAME_ShowLoadingMove(CurrentGame.Id);
 				}
 
 				// Return to deafult cursor
@@ -162,6 +164,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 	{
 		var NewPos = new Object();
 		var NewCol, NewLine, OldCol, OldLine;
+		var CurrentGame = MainData.GetCurrentGame();
 
 		// Getting mouse coord
 		MousePos = UTILS_GetMouseCoords(event);
@@ -206,7 +209,8 @@ function UTILS_StartDragPiece(Obj, Size, event)
 			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 
 			// Show loading move message
-			GAME_ShowLoadingMove(MainData.CurrentGame.Id);
+			GAME_ShowLoadingMove(CurrentGame.Id);
+
 		}
 
 		// Return to deafult cursor

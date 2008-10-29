@@ -256,6 +256,8 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	var ItemObj = new Object();
 	var Id = MatchId;
 
+	var MyUsername = MainData.Username;
+
 	// Random color
 	if(Player.Color == "")
 	{
@@ -307,7 +309,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		PRated.title = UTILS_GetText("challenge_rated");
 	}
 
-	if(Player.Name == MainData.Username)
+	if(Player.Name == MyUsername)
 	{
 		PButton = UTILS_CreateElement("p");
 		Button = UTILS_CreateElement('span',"button","active",UTILS_GetText("window_cancel"));
@@ -525,7 +527,7 @@ function INTERFACE_ShowChallengeMenu(Left, Top)
 	{
 		this.Menu.style.left = Left+"px";
 		// Quick fix for IE
-		if (MainData.Browser == 0)
+		if (MainData.GetBrowser() == 0)
 		{
 			this.Menu.style.top = "80px";
 		}

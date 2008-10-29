@@ -46,13 +46,13 @@ function START_StartPage()
 		//Lang = UTILS_GetLanguage();
 		
 		// Get default lang from configuration file
-		ConfTmp = UTILS_OpenXMLFile("scripts/data/conf.xml?"+NoCache.TimeStamp);
+		ConfTmp = UTILS_OpenXMLFile("conf/conf.xml?"+NoCache.TimeStamp);
 		Lang = UTILS_GetTag(ConfTmp, "default-lang");
 	}
 
 	// Read xml config files and starting data structure
-	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
-	MainData.Lang = Lang;
+	MainData = new DATA("conf/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
+	MainData.SetLang(Lang);
 	
 	INTERFACE_StartLogin(Lang);
 }
@@ -72,12 +72,14 @@ function START_ChangeLanguage(Lang)
 
 	// Reload MainData with configurations and new language selected
 //	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
-	MainData = new DATA("scripts/data/conf.xml?"+NoCache.TimeStamp, "scripts/lang/"+Lang+".xml?"+NoCache.TimeStamp);
+//	MainData = new DATA("data/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
+	MainData.SetText(UTILS_OpenXMLFile("lang/"+Lang+".xml?"+NoCache.TimeStamp))
+
 	// Create cookie for new language
-	UTILS_CreateCookie("lang", Lang, MainData.CookieValidity);
+	UTILS_CreateCookie("lang", Lang, MainData.GetCookieValidity());
 
 	// Set language
-	MainData.Lang = Lang;
+	MainData.SetLang(Lang);
 	
 	// Show new login div with language selected
 	INTERFACE_StartLogin(Lang);
@@ -93,16 +95,27 @@ function START_ChangeLanguage(Lang)
 */
 function START_Webclient()
 {
-	var All = INTERFACE_CreateInterface();
+	var All;
 	var XMPP = "";
 
-	MainData.ConnectionStatus = 0;
+	var Consts = MainData.GetConst();
+	
+	var MyUsername = MainData.Username;
 
+	//MainData.ConnectionStatus = 0;
+	MainData.SetConnectionStatus(0);
+
+	// Add MyUsername in User list
+	USER_AddUser(MyUsername, "available");
+
+	// Create messages to get my user contact list,
+	// get my profile and presence to chessd server, jabber and
+	// general room
 	XMPP += MESSAGE_UserList();
-	XMPP += MESSAGE_Presence(MainData.RatingComponent+"."+MainData.Host);
-	XMPP += MESSAGE_GetProfile(MainData.Username, MainData.Const.IQ_ID_GetMyProfile);
+	XMPP += MESSAGE_Presence(MainData.GetServer()+"."+MainData.GetHost());
+	XMPP += MESSAGE_GetProfile(MyUsername, Consts.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
-	XMPP += MESSAGE_Presence("general@"+MainData.ConferenceComponent+"."+MainData.Host+"/"+MainData.Username);
+	XMPP += MESSAGE_Presence("general@"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"/"+MyUsername);
 
 	CONNECTION_SendJabber(XMPP);
 
@@ -110,10 +123,12 @@ function START_Webclient()
 	LOAD_EndLoad();
 
 	// Open XadrezLivre game environment
+	All = INTERFACE_CreateInterface();
 	INTERFACE_ShowInterface(All);
 	
-	// Create contact object and set values
-	CONTACT_StartContact();
+	// Create contact object and online list and set values
+	ONLINE_StartOnlineList();
+	CONTACT_StartContactList();
 	CONTACT_LoadUserContactList();	
 
 	// Create challenge menu object
@@ -124,7 +139,14 @@ function START_Webclient()
 
 	// Set away counter
 	CONTACT_StartAwayCounter();
+
+	// Set update user list timer 
+	USER_StartUpdateUserList();
+
+	// Set update user profile timer 
+	USER_StartUpdateUserProfile();
 }
+
 /*
 *	@brief Stop interface and reload files
 *
@@ -135,6 +157,7 @@ function START_Restart()
 	INTERFACE_StopInterface();
 
 	CONTACT_StopAwayStatus();
+	USER_StopUpdateUserList();
 
 	delete MainData;
 
@@ -154,7 +177,7 @@ function START_Restart()
 	INITIAL_LoadScripts();
 
 	// Verify browser and if IE then append related css file
-	if(MainData.Browser == 0)
+	if(MainData.GetBrowser() == 0)
 	{
 		LOAD_IECssFile();
 	}

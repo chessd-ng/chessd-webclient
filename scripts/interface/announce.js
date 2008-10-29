@@ -56,6 +56,8 @@ function INTERFACE_AnnounceWindow()
 	var Type, Color, Rated;
 	var i; 
 
+	var MyUsername = MainData.Username;
+
 	// Main Div
 	Div = UTILS_CreateElement('div', 'AnnounceDiv');
 	
@@ -408,7 +410,7 @@ function INTERFACE_AnnounceWindow()
 		}
 
 		// Create and send the chellenge message
-		ANNOUNCE_SendAnnounce(MainData.Username, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, FromInput.value, ToInput.value);
+		ANNOUNCE_SendAnnounce(MyUsername, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, FromInput.value, ToInput.value);
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');

@@ -108,7 +108,7 @@ function CHAT_HandleAnnounceMessage(XML)
 	From = XML.getAttribute('from').replace(/@.*/,"");
 
 	// Show Annouce message only if sender is host server
-	if (From != MainData.Host)
+	if (From != MainData.GetHost())
 		return "";
 
 	// Announce's subject
@@ -151,7 +151,12 @@ function CHAT_OpenChat(Username)
 		return null;
 	}
 
-	if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
+	// TODO -> FIX IT TO WORK WITH USERLIST
+	var Room = MainData.GetRoom(MainData.GetRoomDefault());
+	var User = Room.GetUser(Username);
+
+	if (User == null)
+	//if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
 		Status = "offline";
 	}
@@ -160,9 +165,9 @@ function CHAT_OpenChat(Username)
 		Status = "online";
 	}
 
-	Position = MainData.ChatList.length;
+	Position = MainData.GetChatListLength();
 
-	if(Position < MainData.MaxChats)
+	if(Position < MainData.GetMaxChats())
 	{
 		// Create a chat object
 		ChatObject = new ChatObj(Username, Position);
@@ -189,7 +194,7 @@ function CHAT_OpenChat(Username)
 		// Show error message to user
 		Title = UTILS_GetText("chat_warning");
 		Msg = UTILS_GetText("chat_max_exceeded");
-		Msg = Msg.replace(/%i/, MainData.MaxChats);
+		Msg = Msg.replace(/%i/, MainData.GetMaxChats());
 		WINDOW_Alert(Title, Msg);
 	}
 
@@ -295,6 +300,8 @@ function CHAT_SendMessage(Username, Message)
 	var Msg = UTILS_ConvertChatString(Message)
 	var XML = MESSAGE_Chat(Username, Msg);
 
+	var MyUsername = MainData.Username;
+
 	CONNECTION_SendJabber(XML);
 
 	// Find and get Chat object
@@ -304,7 +311,7 @@ function CHAT_SendMessage(Username, Message)
 
 		// Show message in chat list
 		//INTERFACE_ShowChatMessage(Username, Msg, true);
-		ChatObj.Chat.addMessage(MainData.Username, UTILS_ConvertChatString(Message));
+		ChatObj.Chat.addMessage(MyUsername, UTILS_ConvertChatString(Message));
 	}
 
 	return "";
@@ -349,7 +356,7 @@ function CHAT_ErrorMessageLength(Username)
 	var ChatPos = MainData.FindChat(Username);
 	var ChatObj;
 	var Message;
-	var Limit = MainData.MaxChatChar;
+	var Limit = MainData.GetMaxChatChar();
 
 	if(ChatPos != null)
 	{

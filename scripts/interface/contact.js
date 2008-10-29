@@ -328,8 +328,8 @@ function ContactOnlineObj()
 
 	this.userList = new UserListObj(this.div);
 	this.userList.show();
-	this.userList.setSortUserFunction(CONTACT_OnlineSortUserByNick);
-	this.userList.setSortRatingFunction(CONTACT_OnlineSortUserByRating);
+	this.userList.setSortUserFunction(ONLINE_SortUserByNick);
+	this.userList.setSortRatingFunction(ONLINE_SortUserByRating);
 
 	this.show = INTERFACE_ShowOnlineList;
 	this.hide = INTERFACE_HideOnlineList;
@@ -360,44 +360,6 @@ function INTERFACE_HideOnlineList()
 	this.div.style.display = "none";
 }
 
-
-
-/**
-* Set type of user in interface
-*
-* @public
-*/
-/*
-function INTERFACE_SetUserType(Username, NewType)
-{
-	var User = document.getElementById("contact-"+Username);
-	var List, Node, i;
-
-
-	// Updating user's type
-	if (User)
-	{
-		User.className = User.className.replace(/.*_/, NewType+"_");
-	}
-
-	// Updating in room lists
-	for (i=0; i<MainData.RoomList.length; i++)
-	{
-		if (MainData.FindUserInRoom(MainData.RoomList[i].Name, Username) != null)
-		{
-			// Search user node in room user list
-			Node = document.getElementById(MainData.RoomList[i].Name+"_"+Username);
-
-			if (Node)
-			{
-				Node.className = Node.className.replace(/.*_/, NewType+"_");
-			}
-		}
-	}
-
-	return true;
-}
-*/
 
 /**
 * Show or hide contact groups
@@ -456,18 +418,24 @@ function INTERFACE_CreateContact()
 	ContactTitleOnlineNumber = UTILS_CreateElement("span",'OnlineNumber',null," (0)");
 
 	ContactTitleContacts.onclick = function(){
+		var ContactObj = MainData.GetContactObj();
+		var OnlineObj = MainData.GetOnlineObj();
+
 		ContactTitleContacts.className = "contact_selec";
 		ContactTitleOnline.className = "";
 
-		MainData.Contact.show();
-		MainData.ContactOnline.hide();
+		ContactObj.show();
+		OnlineObj.hide();
 	};
 	ContactTitleOnline.onclick = function(){
+		var ContactObj = MainData.GetContactObj();
+		var OnlineObj = MainData.GetOnlineObj();
+
 		ContactTitleContacts.className = "";
 		ContactTitleOnline.className = "contact_selec";
 
-		MainData.Contact.hide();
-		MainData.ContactOnline.show();
+		ContactObj.hide();
+		OnlineObj.show();
 	};
 
 	Lists = UTILS_CreateElement("div","UserLists");

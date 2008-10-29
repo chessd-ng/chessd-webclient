@@ -422,6 +422,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
 	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, P, Span, Img, i;
+	var CurrentGame = MainData.GetCurrentGame();
 	
 	Tr = UTILS_CreateElement('tr');
 		Td1 = UTILS_CreateElement('td',null,null,White);
@@ -442,7 +443,7 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
 				UTILS_AddListener(Span, "click", function()
 					{
-						if(MainData.CurrentGame == null)
+						if(CurrentGame == null)
 						{
 							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
 						}
