@@ -369,10 +369,10 @@ function PROFILE_StartProfile(Username)
 		ProfileObj.SetUser(User.GetFullname());
 		ProfileObj.SetDesc(User.GetDesc());
 		ProfileObj.SetGroup(User.GetType());
-		//TODO -> ProfileObj.Type = User.GetType();;
 		ProfileObj.SetOnlineTime(User.GetOnlineTime());
-		//ProfileObj.Online = "---";
 		ProfileObj.SetTotalTime(User.GetTotalTime());
+		//Set user's image
+		ProfileObj.SetUserImg(User.GetPhoto());
 
 	}
 
