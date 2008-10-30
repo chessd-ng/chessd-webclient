@@ -328,68 +328,69 @@ function PROFILE_StartProfile(Username)
 	
 	var Consts = MainData.GetConst();
 	var Msg = "";
-/*
-	if (MainData.FindProfile(Jid) != null)
-	{
-		return false;
-	}
-*/
 
+	// Check if user's exists in user list;
+	// This case should happen when find some user;
 	if(User == null)
 	{
 		USER_AddUser(Username, "offline");
 		User = MainData.GetUser(Username);
 	}
 
-	// Initialize profile data
-	ProfileInfo.User = Username;
-	ProfileInfo.Name = "---";
-	ProfileInfo.Description = "---";
-	ProfileInfo.Group = "---";
-	ProfileInfo.Type = "---";
-	ProfileInfo.OnlineTime = "---";
-	ProfileInfo.Online = null;
-	ProfileInfo.Total = null;
-
-	ProfileObj = WINDOW_Profile(ProfileInfo);
-
-	//MainData.AddProfile(Jid, Username, Elements);
-
-	User.SetProfileObj(ProfileObj);
-
-	if(User.GetUpdateProfile() == true)
+	// Open only one profile window by user;
+	if(User.GetProfileObj() == null)
 	{
-		Msg += MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile);
-		User.SetUpdateProfile(false);
-	}
-	else //Get profile data from user list
-	{
-	
-		ProfileObj.SetNick(User.GetUsername());
-		ProfileObj.SetUser(User.GetFullname());
-		ProfileObj.SetDesc(User.GetDesc());
-		ProfileObj.SetGroup(User.GetType());
-		ProfileObj.SetOnlineTime(User.GetOnlineTime());
-		ProfileObj.SetTotalTime(User.GetTotalTime());
-		//Set user's image
-		ProfileObj.SetUserImg(User.GetPhoto());
+		// Initialize profile data
+		ProfileInfo.User = Username;
+		ProfileInfo.Name = "---";
+		ProfileInfo.Description = "---";
+		ProfileInfo.Group = "---";
+		ProfileInfo.Type = "---";
+		ProfileInfo.OnlineTime = "---";
+		ProfileInfo.Online = null;
+		ProfileInfo.Total = null;
 
+		ProfileObj = WINDOW_Profile(ProfileInfo);
+
+		//MainData.AddProfile(Jid, Username, Elements);
+
+		User.SetProfileObj(ProfileObj);
+
+		if(User.GetUpdateProfile() == true)
+		{
+			Msg += MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile);
+			User.SetUpdateProfile(false);
+		}
+		else //Get profile data from user list
+		{
+		
+			ProfileObj.SetNick(User.GetUsername());
+			ProfileObj.SetUser(User.GetFullname());
+			ProfileObj.SetDesc(User.GetDesc());
+			ProfileObj.SetGroup(User.GetType());
+			ProfileObj.SetOnlineTime(User.GetOnlineTime());
+			ProfileObj.SetTotalTime(User.GetTotalTime());
+			//Set user's image
+			ProfileObj.SetUserImg(User.GetPhoto());
+
+		}
+
+		if(User.GetUpdateRating() == true)
+		{
+			Msg += MESSAGE_InfoProfile(Username);
+			User.SetUpdateProfile(false);
+		}
+		else
+		{
+			ProfileObj.SetRatings(PROFILE_ConvertUserRatingList(User.GetRatingList()));
+		}
+
+		if(Msg != "")
+		{
+			CONNECTION_SendJabber(Msg);
+		}
 	}
 
-	if(User.GetUpdateRating() == true)
-	{
-		Msg += MESSAGE_InfoProfile(Username);
-		User.SetUpdateProfile(false);
-	}
-	else
-	{
-		ProfileObj.SetRatings(PROFILE_ConvertUserRatingList(User.GetRatingList()));
-	}
-
-	if(Msg != "")
-	{
-		CONNECTION_SendJabber(Msg);
-	}
 	return true;
 }
 
