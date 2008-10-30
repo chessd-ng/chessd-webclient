@@ -228,9 +228,10 @@ function USER_HandleInfo(XML)
 				User.Rating.SetRatingDraw(  Category, TotalDraw);
 				User.Rating.SetRatingLosses(Category, TotalLosses);
 			}
-
 		}
-	
+
+		// Don't get rating information until this variable turn true 
+		User.SetUpdateRating(false);
 	}
 
 
@@ -300,6 +301,7 @@ function USER_AddUser(Username, Status)
 /**
 * Change type of 'Username' in structure and interface
 */
+/*
 function USER_SetUserType(Username, NewType)
 {
 	var Rating;
@@ -315,10 +317,11 @@ function USER_SetUserType(Username, NewType)
 	// Update in data struct
 	User.SetType(NewType);
 }
-
+*/
 /**
 * Change rating of 'Username' in structure and interface
 */
+/*
 function USER_SetUserRating(Username, Category, Rating)
 {
 	var User = MainData.GetUser(Username);
@@ -342,7 +345,7 @@ function USER_SetUserRating(Username, Category, Rating)
 
 	return "";
 }
-
+*/
 function USER_StartUpdateUserList()
 {
 	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", 5000));

@@ -327,6 +327,7 @@ function PROFILE_StartProfile(Username)
 	var ProfileObj;
 	
 	var Consts = MainData.GetConst();
+	var Msg = "";
 /*
 	if (MainData.FindProfile(Jid) != null)
 	{
@@ -358,7 +359,7 @@ function PROFILE_StartProfile(Username)
 
 	if(User.GetUpdateProfile() == true)
 	{
-		CONNECTION_SendJabber(MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile), MESSAGE_InfoProfile(Username));
+		Msg += MESSAGE_GetProfile(Username,Consts.IQ_ID_GetProfile);
 		User.SetUpdateProfile(false);
 	}
 	else //Get profile data from user list
@@ -373,7 +374,21 @@ function PROFILE_StartProfile(Username)
 		//ProfileObj.Online = "---";
 		ProfileObj.SetTotalTime(User.GetTotalTime());
 
+	}
+
+	if(User.GetUpdateRating() == true)
+	{
+		Msg += MESSAGE_InfoProfile(Username);
+		User.SetUpdateProfile(false);
+	}
+	else
+	{
 		ProfileObj.SetRatings(PROFILE_ConvertUserRatingList(User.GetRatingList()));
+	}
+
+	if(Msg != "")
+	{
+		CONNECTION_SendJabber(Msg);
 	}
 	return true;
 }
