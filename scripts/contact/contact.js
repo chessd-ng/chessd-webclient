@@ -248,20 +248,46 @@ function CONTACT_HandleUserPresence(XML)
 * @param	Group	User's group in contact list
 * @author Pedro Rocha
 */
-function CONTACT_AddUser(User, Status, Subs, Group)
+function CONTACT_AddUser(Username, Status, Subs, Group)
 {
 	var ContactObj = MainData.GetContactObj();
+	var User = MainData.GetUser(Username);
+	var UserRatingObj;
+	var UserRatingList;
+	var ContactUser;
+	var i;
 
-	if(MainData.FindContactUser(User) == null)
+	if(MainData.FindContactUser(Username) == null)
 	{
 		//Add in data struct
-		MainData.AddContactUser(User, Status, Subs, Group)
+		MainData.AddContactUser(Username, Status, Subs, Group)
 		MainData.SortContactUserByNick();
 
 		//Show in interface
 		if(ContactObj != null)
 		{
-			ContactObj.addUser(Group, User, Status);
+			ContactObj.addUser(Group, Username, Status);
+		}
+	
+		// Get rating from user list, if user exists;
+		if(User != null)
+		{
+			ContactUser = MainData.GetContactUser(Username);
+			UserRatingObj = User.GetRatingList();
+			UserRatingList = UserRatingObj.RatingList;
+
+			for( i=0; i< UserRatingList.length; i++)
+			{
+				if(ContactUser.Rating.FindRating(UserRatingList[i].Category) == null)
+				{
+					ContactUser.Rating.AddRating(UserRatingList[i].Category, UserRatingList[i].Value)
+				}
+				else
+				{
+					ContactUser.Rating.SetRatingValue(UserRatingList[i].Category, UserRatingList[i].Value);
+				}
+			}
+	
 		}
 	}
 }
