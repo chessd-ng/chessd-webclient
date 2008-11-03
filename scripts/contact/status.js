@@ -164,18 +164,25 @@ function CONTACT_SetAwayStatus()
 function CONTACT_ResetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
-	var MyUser = MainData.GetUser(MainData.Username);
-	var MyUserStatus = MyUser.GetStatus();
+	var MyUsername = MainData.Username;
+	var MyUser = MainData.GetUser(MyUsername);
+	var MyUserStatus;
 
 	// Away counter reset to 5 minutes
 	MainData.AwayCounter = 300;
 
-	if(MyUserStatus == "away")
+	// Quick fix to solve the problem when remove events from body tag
+	// in CONTACT_StopAwayStatus();
+	if(MyUser != null)
 	{
-		CONTACT_ChangeStatus("available");
+		MyUserStatus = MyUser.GetStatus();
+		if(MyUserStatus == "away")
+		{
+			CONTACT_ChangeStatus("available");
 			
-		// Select available status 
-		Select.selectedIndex = 0;
+			// Select available status 
+			Select.selectedIndex = 0;
+		}
 	}
 
 }
