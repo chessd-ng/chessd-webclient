@@ -44,8 +44,10 @@ function CHALLENGE_HandleAdjourn(XML)
 	var Player1, Player2;
 	var AdjournId, Category, Date;
 	var ChallengeMenu = MainData.GetChallengeMenu();
+	var Status;
 
 	var MyUsername = MainData.Username;
+	var User;
 
 	var i;
 
@@ -82,7 +84,19 @@ function CHALLENGE_HandleAdjourn(XML)
 				// Add in challenge menu
 				ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
 
-				CHALLENGE_PostponePresence(Player2.Name);
+				// Get oponent status
+	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
+				User = MainData.GetUser(Player2.Name);
+				if(User != null)
+				{
+					Status = User.GetStatus();
+				}
+				else
+				{
+					Status = "offline";
+				}				
+
+				CHALLENGE_PostponePresence(Player2.Name, Status);
 			}
 			else
 			{
@@ -91,8 +105,18 @@ function CHALLENGE_HandleAdjourn(XML)
 
 				// Add in challenge menu
 				ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
-
-				CHALLENGE_PostponePresence(Player1.Name);
+				// Get oponent status
+	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
+				User = MainData.GetUser(Player1.Name);
+				if(User != null)
+				{
+					Status = User.GetStatus();
+				}
+				else
+				{
+					Status = "offline";
+				}				
+				CHALLENGE_PostponePresence(Player1.Name, Status);
 			}
 		}
 	}
@@ -116,13 +140,24 @@ function CHALLENGE_HandleAdjourn(XML)
 function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
-	var Type, Username;
+	var StatusType, Username;
+	var Status;
 	var Buffer = "";
 
 	Username = XML.getAttribute("from").split("/")[1];
-	Type = XML.getAttribute("type");
+	StatusType = XML.getAttribute("type");
 
-	CHALLENGE_PostponePresence(Username, Type);
+	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
+	if(StatusType == "unavailable")
+	{
+		Status = "offline";
+	}
+	else
+	{
+		Status = "available";
+	}
+	
+	CHALLENGE_PostponePresence(Username, Status);
 
 	return Buffer;
 }
@@ -139,8 +174,9 @@ function CHALLENGE_HandlePresence(XML)
 function CHALLENGE_PostponePresence(Username, PresenceType)
 {
 	var ChallengeMenu = MainData.GetChallengeMenu();
+	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
 	//If user is founded, set adjourn game to available, else unavailable
-	if(PresenceType == "unavailable")
+	if(PresenceType == "offline")
 	{
 		ChallengeMenu.updatePostpone(Username, "offline");
 	}
