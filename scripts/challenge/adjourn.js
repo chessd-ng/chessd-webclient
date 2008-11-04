@@ -85,7 +85,6 @@ function CHALLENGE_HandleAdjourn(XML)
 				ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
 
 				// Get oponent status
-	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
 				User = MainData.GetUser(Player2.Name);
 				if(User != null)
 				{
@@ -106,7 +105,6 @@ function CHALLENGE_HandleAdjourn(XML)
 				// Add in challenge menu
 				ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
 				// Get oponent status
-	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
 				User = MainData.GetUser(Player1.Name);
 				if(User != null)
 				{
