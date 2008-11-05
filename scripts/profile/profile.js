@@ -161,11 +161,7 @@ function PROFILE_HandleInfoProfile(XML)
 		{
 			Type = 'user';
 		}
-		/*
-		User.SetOnlineTime(UpTime);
-		User.SetTotalTime(OnlineTime);
-		User.SetType(Type);
-		/*/
+
 		//Update Rating
 		Rating = PROFILE_HandleRatings(From, RatingNodes);
 
@@ -352,8 +348,6 @@ function PROFILE_StartProfile(Username)
 
 		ProfileObj = WINDOW_Profile(ProfileInfo);
 
-		//MainData.AddProfile(Jid, Username, Elements);
-
 		User.SetProfileObj(ProfileObj);
 
 		if(User.GetUpdateProfile() == true)
@@ -363,13 +357,10 @@ function PROFILE_StartProfile(Username)
 		}
 		else //Get profile data from user list
 		{
-		
+			//Set vCard informations	
 			ProfileObj.SetNick(User.GetUsername());
 			ProfileObj.SetUser(User.GetFullname());
 			ProfileObj.SetDesc(User.GetDesc());
-			ProfileObj.SetGroup(User.GetType());
-			ProfileObj.SetOnlineTime(User.GetOnlineTime());
-			ProfileObj.SetTotalTime(User.GetTotalTime());
 			//Set user's image
 			ProfileObj.SetUserImg(User.GetPhoto());
 
@@ -382,7 +373,12 @@ function PROFILE_StartProfile(Username)
 		}
 		else
 		{
+			//Set Chess user informations
 			ProfileObj.SetRatings(PROFILE_ConvertUserRatingList(User.GetRatingList()));
+			ProfileObj.SetGroup(User.GetType());
+			ProfileObj.SetOnlineTime(User.GetOnlineTime());
+			ProfileObj.SetTotalTime(User.GetTotalTime());
+
 		}
 
 		if(Msg != "")
