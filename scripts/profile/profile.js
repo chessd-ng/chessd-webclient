@@ -69,24 +69,22 @@ function PROFILE_HandleVCardProfile(XML)
 	User = MainData.GetUser(UserFrom);
 	if(User != null)
 	{
-		// Update profile data struct
-		//MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
-		User.SetFullname(FullName);
-		User.SetDesc(Desc);
-		User.SetPhoto(Img);
-		User.SetImg64(Binval);
-		User.SetImgType(PhotoType);
-
+		// Update user image in left box
 		if (UserFrom == MyUsername)
 		{
 			// Update user image
 			if (User.GetPhoto() != Img)
 			{
-				//MainData.MyProfile.Img64 = Binval;
-				//MainData.MyProfile.ImgType = PhotoType;
 				INTERFACE_SetUserImage(Img);
 			}
 		}
+
+		// Update profile data struct
+		User.SetFullname(FullName);
+		User.SetDesc(Desc);
+		User.SetPhoto(Img);
+		User.SetImg64(Binval);
+		User.SetImgType(PhotoType);
 
 		// Update profile window
 		Profile = User.GetProfileObj();
@@ -437,8 +435,9 @@ function PROFILE_SaveMyProfile()
 		WINDOW_Alert(UTILS_GetText('profile_error'),UTILS_GetText('profile_desc_limit'));
 		return false;
 	}
-	PhotoType = MyUser.GetImgType();
-	Binval = MyUser.GetImg64();
+
+	PhotoType = MyProfile.GetImgType();
+	Binval = MyProfile.GetImg64();
 
 	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MyUsername));
 
