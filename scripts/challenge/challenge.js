@@ -351,10 +351,10 @@ function CHALLENGE_HandleDecline (XML)
 	// search challenge postion in data struct
 	ChallengeObj = MainData.GetChallenge(null, MatchID);
 
-	if(Challenge != null)
+	if(ChallengeObj != null)
 	{
 		// get window object
-		WindowObj = Challenge.Window;
+		WindowObj = ChallengeObj.Window;
 
 		// close challenge window if exists.
 		if(WindowObj != null)
