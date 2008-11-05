@@ -1128,6 +1128,7 @@ function DATA_SetRatingValue(Category, Value)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].Value = Value;
+		return Pos;
 	}
 	else
 	{
@@ -1156,6 +1157,7 @@ function DATA_SetRecordValue(Category, Value)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].RecordValue = Value;
+		return Pos;
 	}
 	else
 	{
@@ -1184,6 +1186,7 @@ function DATA_SetRecordTime(Category, Time)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].RecordTime = Time;
+		return Pos;
 	}
 	else
 	{
@@ -1241,6 +1244,7 @@ function DATA_SetRatingWin(Category, Value)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].Win = Value;
+		return Pos;
 	}
 	else
 	{
@@ -1269,6 +1273,7 @@ function DATA_SetRatingDraw(Category, Value)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].Draw = Value;
+		return Pos;
 	}
 	else
 	{
@@ -1297,6 +1302,7 @@ function DATA_SetRatingLosses(Category, Value)
 	if(Pos != null)
 	{
 		this.RatingList[Pos].Losses = Value;
+		return Pos;
 	}
 	else
 	{
