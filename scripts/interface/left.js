@@ -73,7 +73,7 @@ function INTERFACE_CreateUserBox()
 	UserInf = UTILS_CreateElement("div", "UserInf");
 	if (MyUsername.length > 10)
 	{
-		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(Username,10));
+		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(MyUsername,10));
 		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MyUsername); }
 		Name.onmouseout = function () { INTERFACE_CloseUserFullName(); }
 	}
