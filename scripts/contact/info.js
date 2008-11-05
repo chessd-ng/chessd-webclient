@@ -230,7 +230,7 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 	//var User;
 	
 	//var Room = MainData.GetRoom(MainData.GetRoomDefault());
-	var User = MainData.GetUser(Username);
+	var User = MainData.GetContactUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
 	var Category;
