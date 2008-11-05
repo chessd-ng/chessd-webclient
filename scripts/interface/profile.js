@@ -96,7 +96,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 	var MyUser;
 	var Elements = new Object();
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	if (Profile.User == MyUsername)
 	{
@@ -566,7 +566,7 @@ function INTERFACE_ProfileSetNick(Nick)
 */
 function INTERFACE_ProfileSetDesc(Desc)
 {
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	if(this.Desc.tagName == "TEXTAREA")
 	{

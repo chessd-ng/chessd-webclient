@@ -205,7 +205,7 @@ function GAME_HandleGameResult(XML)
 	var i;
 	var To;
 	var Consts = MainData.GetConst();
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var MyUser = MainData.GetUser(MyUsername);
 
 	// The code above is used to parse games that player is playing;
@@ -476,7 +476,7 @@ function GAME_End(XML)
 	var Text;
 	var CurrentGame = MainData.GetCurrentGame();
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Get the room name
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
@@ -621,7 +621,7 @@ function GAME_StartGame(GameId, P1, P2)
 	var CurrentGame = MainData.GetCurrentGame();
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 

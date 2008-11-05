@@ -53,7 +53,7 @@ function CONTACT_HandleContactUserList(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
 	var Group;
-	var MyUsername = MainData.Username;	
+	var MyUsername = MainData.GetUsername();
 
 	Users = XML.getElementsByTagName("item");
 
@@ -325,7 +325,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	var Button1 = new Object(), Button2 = new Object();
 	var User, UserStatus;
 	var MyUser;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var MyUserStatus;
 
 	Func = function () {

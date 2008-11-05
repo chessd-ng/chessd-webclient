@@ -24,7 +24,7 @@
 function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, Observer)
 {
 	var Tmp;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Setting white and black players
 	if (YourColor == "white")

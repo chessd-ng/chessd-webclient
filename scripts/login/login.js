@@ -36,9 +36,8 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	}
 
 	// Store user infomations
-	// FIX IT TO WORK WITH PREFERENCE OBJECT 
-	MainData.Username = Username;
-	MainData.Password = Passwd;
+	MainData.SetUsername(Username);
+	MainData.SetPassword(Passwd);
 
 	// Set connection status to conneting
 	//MainData.ConnectionStatus = 1;
@@ -78,10 +77,11 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 function LOGIN_Logout()
 {
 	var XMPP = "";
+	/*
 	var CurrentGame = MainData.GetCurrentGame();
 	var UpdateProfile = MainData.GetUpdateProfileTimer();
 	var UpdateRating = MainData.GetUpdateTimer(); 
-
+	*/
 	NoCache.DateTime = new Date();
 	// Setting structure as disconnected
 	//MainData.ConnectionStatus = -1;
@@ -90,7 +90,7 @@ function LOGIN_Logout()
 	// Logout from jabber
 	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
-
+/*
 	//Stop game count timer of current game 
 	if(CurrentGame != null)
 	{
@@ -106,7 +106,7 @@ function LOGIN_Logout()
 	{
 		USER_StopUpdateUserList();
 	}
-
+*/
 	START_Restart();
 }
 

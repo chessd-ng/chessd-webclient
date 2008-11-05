@@ -100,7 +100,7 @@ function START_Webclient()
 
 	var Consts = MainData.GetConst();
 	
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	//MainData.ConnectionStatus = 0;
 	MainData.SetConnectionStatus(0);
@@ -154,11 +154,34 @@ function START_Webclient()
 */
 function START_Restart()
 {
+        var CurrentGame = MainData.GetCurrentGame();
+        var UpdateProfile = MainData.GetUpdateProfileTimer();
+        var UpdateRating = MainData.GetUpdateTimer();
+
 	INTERFACE_StopInterface();
 
-	CONTACT_StopAwayStatus();
-	USER_StopUpdateUserList();
+	//Stop game count timer of current game 
+	if(CurrentGame != null)
+	{
+		CurrentGame.Game.StopTimer();
+	}
 
+	//Stop profile update interval
+	if(UpdateProfile != null)
+	{
+		USER_StopUpdateUserProfile();
+	}
+
+	//Stop rating update interval
+	if(UpdateRating != null)
+	{
+		USER_StopUpdateUserList();
+	}
+
+	//Stop away counter interval
+	CONTACT_StopAwayStatus();
+
+	// Clear MainData
 	delete MainData;
 
 	// Get new timestamp

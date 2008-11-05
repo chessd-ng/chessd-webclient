@@ -44,7 +44,7 @@ function INTERFACE_CreateUserBox()
 	var Profile, ProfileP;
 	var UserType;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	//FIX IT TO GET USERNAME IN PREFERENCES OBJECT
 	var User = MainData.GetUser(MyUsername);
 	

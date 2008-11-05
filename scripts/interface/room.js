@@ -394,7 +394,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 	var Node = document.getElementById("GameRoomMenuDiv");
 	var List;
 	var Room, i;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	if (Node == null)
 	{
@@ -865,7 +865,7 @@ function INTERFACE_ShowCreateRoomWindow()
 
 	var RoomName;
 	var Buttons = new Array();
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'CreateRoomDiv');

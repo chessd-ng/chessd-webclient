@@ -56,7 +56,7 @@ function INTERFACE_AnnounceWindow()
 	var Type, Color, Rated;
 	var i; 
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'AnnounceDiv');

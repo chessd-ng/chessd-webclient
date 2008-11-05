@@ -143,7 +143,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var Buffer = "";
 	var Consts = MainData.GetConst();
 	
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 

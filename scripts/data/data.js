@@ -133,13 +133,17 @@ function DATA(ConfFile, LangFile)
 	this.SearchGameMaxId = 0;
 	this.SearchGameInfoList = new Array();
 
-	this.Password = "";
-	this.Username = "";
-	this.AwayCounter = null;
+	/************************ PREFERENCES DATA*******************/
+	this.Preferences = new Object();
+	this.Preferences.Password = "";
+	this.Preferences.Username = "";
+	this.Preferences.AwayCounter = 300;
+	this.Preferences.AwayInterval = null;
 
+	/************************ LOAD DATAi*************************/
 	this.LoadObj = null;
 
-	/************************ WINDO DATA*************************/
+	/************************ WINDOW DATA************************/
 	this.Windows = new Object();
 	this.Windows.Focus = null;
 	this.Windows.WindowList = new Array();
@@ -337,6 +341,16 @@ DATA.prototype.AddSearchUserInfo = DATA_AddSearchUserInfo;
 DATA.prototype.RemoveSearchUserInfo = DATA_RemoveSearchUserInfo;
 DATA.prototype.SortSearchUserByNick = DATA_SortSearchUserByNick;
 DATA.prototype.SortSearchUserByName = DATA_SortSearchUserByName;
+
+/*PREFERENCES METHODS *************************/
+DATA.prototype.SetPassword = DATA_SetPassword;
+DATA.prototype.GetPassword = DATA_GetPassword;
+DATA.prototype.SetUsername = DATA_SetMyUsername;
+DATA.prototype.GetUsername = DATA_GetMyUsername;
+DATA.prototype.SetAwayCounter = DATA_SetAwayCounter;
+DATA.prototype.GetAwayCounter = DATA_GetAwayCounter;
+DATA.prototype.SetAwayInterval = DATA_SetAwayInterval;
+DATA.prototype.GetAwayInterval = DATA_GetAwayInterval;
 
 /*WINDOW METHODS ******************************/
 DATA.prototype.AddWindow = DATA_AddWindow;
@@ -3298,6 +3312,49 @@ function DATA_GetSearchGameInfo(Id)
 		i++;
 	}
 	return null;
+}
+
+/**********************************
+ * METHODS - PREFERENCES          *
+ **********************************/
+function DATA_SetPassword(NewPassword)
+{
+	this.Preferences.Password = NewPassword;
+}
+
+function DATA_GetPassword()
+{
+	return this.Preferences.Password;
+}
+
+function DATA_SetMyUsername(Username)
+{
+	this.Preferences.Username = Username;
+}
+
+function DATA_GetMyUsername()
+{
+	return this.Preferences.Username;
+}
+
+function DATA_SetAwayCounter(Counter)
+{
+	this.Preferences.AwayCounter = Counter;
+}
+
+function DATA_GetAwayCounter()
+{
+	return this.Preferences.AwayCounter;
+}
+
+function DATA_SetAwayInterval(Interval)
+{
+	this.Preferences.AwayInterval = Interval;
+}
+
+function DATA_GetAwayInterval()
+{
+	return this.Preferences.AwayInterval;
 }
 
 /**********************************

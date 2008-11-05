@@ -118,8 +118,7 @@ function ANNOUNCE_HandleAnnounceGame(XML)
 	var GameRoomTag, Room;
 
 	var Buffer = "";
-	//FIX IT TO GET USERNAME FROM PREFERENCES
-	var MyUsername = MainData.Username
+	var MyUsername = MainData.GetUsername();
 
 	// Accepted announce, start game
 	GameRoom = XML.getElementsByTagName("game_room")[0];

@@ -147,7 +147,7 @@ function CHALLENGE_HandleOffer(XML)
 	var ChallengeMenu = MainData.GetChallengeMenu();
 	var ChallengedPlayer;
 	var Room, User;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -414,7 +414,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	var Players = new Array();
 	var ChallengeID;
 	var ChallengeSeq;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	Player1 = new Object();
 	Player2 = new Object();
@@ -489,7 +489,7 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 {
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	Player1 = new Object();
 	Player2 = new Object();

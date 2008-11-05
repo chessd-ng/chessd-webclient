@@ -100,7 +100,7 @@ function IMAGE_B64Img(Image, Type){
 	var Profile;
 	var Img;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var MyUser;
 	
 	//if type == ""; error!!!!

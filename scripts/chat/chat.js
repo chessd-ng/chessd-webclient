@@ -143,26 +143,32 @@ function CHAT_OpenChat(Username)
 	var Status;
 	var ChatObject = null;
 	var Position, ChatPos;
+	var User = MainData.GetUser(Username);
+	var Chat;
 
-	ChatPos = MainData.FindChat(Username);
-	if (ChatPos != null)
+	//Check if chat exists
+	Chat = MainData.GetChat(Username);
+	if (Chat != null)
 	{
-		MainData.ChatList[ChatPos].Chat.chatTitle.className = "title_selec";
+		Chat.Chat.chatTitle.className = "title_selec";
 		return null;
 	}
 
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	var Room = MainData.GetRoom(MainData.GetRoomDefault());
-	var User = Room.GetUser(Username);
-
+	// Get user status from user list
 	if (User == null)
-	//if (MainData.FindUserInRoom(MainData.RoomDefault, Username) == null)
 	{
 		Status = "offline";
 	}
 	else
 	{
-		Status = "online";
+		if(User.GetStatus() == "offline")
+		{
+			Status = "offline";
+		}
+		else
+		{
+			Status = "online"
+		}
 	}
 
 	Position = MainData.GetChatListLength();
@@ -300,7 +306,7 @@ function CHAT_SendMessage(Username, Message)
 	var Msg = UTILS_ConvertChatString(Message)
 	var XML = MESSAGE_Chat(Username, Msg);
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	CONNECTION_SendJabber(XML);
 
