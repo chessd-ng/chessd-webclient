@@ -34,6 +34,7 @@ function CONTACT_HandleInfo(XML)
         var RatingValue;
         var RecordValue, RecordTime;
 	var TimeStamp;
+	var Category;
 
 	/*
 	var OnlineNode, UptimeNode;
@@ -232,6 +233,7 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 	var User = MainData.GetUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
+	var Category;
 
 	// update on interface
 	//if(MainData.SetRating(Username, Category, Rating))

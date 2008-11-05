@@ -140,10 +140,12 @@ function ONLINE_AddUser(User, Status)
 */
 	// If user object was not founded;
 	// --> This case shouldn't happen 
+	/*
 	if(UserObj == null)
 	{
-		return null;
+		return;
 	}
+	*/
 
 	// Get user Type and Current rating
 	UserType = UserObj.GetType();
