@@ -94,8 +94,7 @@ function ADMIN_HandleInfo(XML)
 {
 	var TypeNode = XML.getElementsByTagName("type");
 	var Type = TypeNode[0].getAttribute("type");
-	//FIX IT TO GET USERNAME FROM PREFERENCES
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var i =0;
 	var Buffer = "";
 	var ProfileNode = XML.getElementsByTagName("profile")[0];

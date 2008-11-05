@@ -31,7 +31,8 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 	var RoomList = MainData.GetRoomList();
 	var Room;
 
-	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUsername = MainData.GetUsername();
+	var MyUser = MainData.GetUser(MyUsername);
 	var MyUserStatus = MyUser.GetStatus();
 
 	// Change user status for contacts
@@ -127,9 +128,9 @@ function CONTACT_SetUserStatus(Username, NewStatus)
  */
 function CONTACT_StartAwayCounter()
 {
-	MainData.AwayCounter = 300;
+	MainData.SetAwayCounter(300);
 
-	MainData.AwayTimeout = setInterval("CONTACT_SetAwayStatus()", 1000);
+	MainData.SetAwayInterval(setInterval("CONTACT_SetAwayStatus()", 1000));
 
 	document.body.setAttribute("onmousedown","CONTACT_ResetAwayStatus()");
 	document.body.setAttribute("onkeypress","CONTACT_ResetAwayStatus()");
@@ -141,12 +142,14 @@ function CONTACT_StartAwayCounter()
 function CONTACT_SetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
-	var MyUser = MainData.GetUser(MainData.Username);
+	var MyUsername = MainData.GetUsername();
+	var MyUser = MainData.GetUser(MyUsername);
 	var MyUserStatus = MyUser.GetStatus();
+	var AwayCounter = MainData.GetAwayCounter()
 
-	MainData.AwayCounter = MainData.AwayCounter - 1;
+	MainData.SetAwayCounter(AwayCounter - 1);
 
-	if(MainData.AwayCounter == 0)
+	if(AwayCounter-1 == 0)
 	{
 		if((MyUserStatus != "playing")&&(MyUserStatus != "unavailable"))
 		{
@@ -164,12 +167,12 @@ function CONTACT_SetAwayStatus()
 function CONTACT_ResetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var MyUser = MainData.GetUser(MyUsername);
 	var MyUserStatus;
 
 	// Away counter reset to 5 minutes
-	MainData.AwayCounter = 300;
+	MainData.SetAwayCounter(300);
 
 	// Quick fix to solve the problem when remove events from body tag
 	// in CONTACT_StopAwayStatus();
@@ -192,7 +195,8 @@ function CONTACT_ResetAwayStatus()
  */
 function CONTACT_StopAwayStatus()
 {
-	clearInterval(MainData.AwayTimeout);
+	clearInterval(MainData.GetAwayInterval());
+	MainData.SetAwayInterval(null);
 
 	document.body.removeAttribute("onmousedown");
 	document.body.removeAttribute("onkeypress");

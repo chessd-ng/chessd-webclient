@@ -256,7 +256,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	var ItemObj = new Object();
 	var Id = MatchId;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Random color
 	if(Player.Color == "")

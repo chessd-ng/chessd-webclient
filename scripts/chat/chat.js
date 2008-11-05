@@ -306,7 +306,7 @@ function CHAT_SendMessage(Username, Message)
 	var Msg = UTILS_ConvertChatString(Message)
 	var XML = MESSAGE_Chat(Username, Msg);
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	CONNECTION_SendJabber(XML);
 

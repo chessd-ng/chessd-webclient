@@ -42,7 +42,7 @@ function ROOM_HandleRoomPresence(XML)
 
 	var RoomNotFound;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Get Attributes from XML
 	Item = XML.getElementsByTagName("item");
@@ -534,7 +534,7 @@ function ROOM_EnterRoom(RoomName)
 
 	var Room;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Send Message to general room - must be change to Focus Room
 	Room = MainData.GetRoom(RoomName);
@@ -603,7 +603,7 @@ function ROOM_ExitRoom(RoomName)
 function ROOM_EnterRoomGame(RoomName)
 {
 	var XML, To;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 

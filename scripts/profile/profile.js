@@ -35,7 +35,7 @@ function PROFILE_HandleVCardProfile(XML)
 	var Img;
 
 	var User;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	
 	FullName = UTILS_GetNodeText(XML.getElementsByTagName("FN")[0]);
 	NickName = UTILS_GetNodeText(XML.getElementsByTagName("NICKNAME")[0]);
@@ -429,7 +429,7 @@ function PROFILE_SaveMyProfile()
 {
 	var FN, Desc, PhotoType, Binval;
 	var MyProfile;
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var MyUser = MainData.GetUser(MyUsername);
 
 	MyProfile = MyUser.GetProfileObj();	
@@ -456,7 +456,7 @@ function PROFILE_SaveMyProfile()
 */
 function PROFILE_CreateProfile()
 {
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	return MESSAGE_SetProfile("", MyUsername, "", "", "");
 }
 

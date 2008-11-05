@@ -36,9 +36,8 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	}
 
 	// Store user infomations
-	// FIX IT TO WORK WITH PREFERENCE OBJECT 
-	MainData.Username = Username;
-	MainData.Password = Passwd;
+	MainData.SetUsername(Username);
+	MainData.SetPassword(Passwd);
 
 	// Set connection status to conneting
 	//MainData.ConnectionStatus = 1;

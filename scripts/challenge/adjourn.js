@@ -46,7 +46,7 @@ function CHALLENGE_HandleAdjourn(XML)
 	var ChallengeMenu = MainData.GetChallengeMenu();
 	var Status;
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 	var User;
 
 	var i;
@@ -202,7 +202,7 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	var Challenger = new Object();
 	var Challenged = new Object();
 
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	// Create challenge in challenge list
 	Challenged.Name = Postpone.Challenged.Name;

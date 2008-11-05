@@ -100,7 +100,7 @@ function START_Webclient()
 
 	var Consts = MainData.GetConst();
 	
-	var MyUsername = MainData.Username;
+	var MyUsername = MainData.GetUsername();
 
 	//MainData.ConnectionStatus = 0;
 	MainData.SetConnectionStatus(0);
