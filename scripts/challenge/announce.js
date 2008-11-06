@@ -247,8 +247,6 @@ function ANNOUNCE_RemoveAnnounce(Id)
 
 	MainData.RemoveAnnounce(Id);
 	ChallengeMenu.removeAnnounce(Id);
-
-	ANNOUNCE_CancelAnnounce(Id);
 }
 
 /*
@@ -257,6 +255,8 @@ function ANNOUNCE_RemoveAnnounce(Id)
 function ANNOUNCE_CancelAnnounce(Id)
 {
 	var XMPP = "";
+	
+	ANNOUNCE_RemoveAnnounce(Id);
 
 	XMPP += MESSAGE_RemoveAnnounceMatch(Id);
 

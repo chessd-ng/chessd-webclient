@@ -124,7 +124,7 @@ function INTERFACE_AnnounceWindow()
 	AutoColorOpt.setAttribute("defaultChecked", "true");
 	
 	// Set imagens according to browser type
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
 		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";

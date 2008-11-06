@@ -316,7 +316,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
 		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
 		Button.onmousedown = function(){
-			ANNOUNCE_RemoveAnnounce(Id);
+			ANNOUNCE_CancelAnnounce(Id);
 		}
 		PButton.appendChild(Button);
 	}
