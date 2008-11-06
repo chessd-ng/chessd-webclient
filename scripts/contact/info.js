@@ -233,7 +233,6 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 	var User = MainData.GetContactUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
-	var Category;
 
 	// update on interface
 	//if(MainData.SetRating(Username, Category, Rating))
