@@ -61,6 +61,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 
 	var Type, Color;
 	var i; 
+	var Rating;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'ChallengeDiv');

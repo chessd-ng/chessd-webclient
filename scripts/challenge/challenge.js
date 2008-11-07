@@ -237,7 +237,7 @@ function CHALLENGE_HandleOffer(XML)
 			}
 			else
 			{
-				Rating = null;
+				RatingObj = null;
 			}
 
 			// Show challenge window for user
