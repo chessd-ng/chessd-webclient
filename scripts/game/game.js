@@ -640,7 +640,7 @@ function GAME_StartGame(GameId, P1, P2)
 	if (CurrentOldGame != null)
 	{
 		//Quickfix to leave room when observer
-		Room = MainData.GetRoom(CurrentGame.Id);
+		Room = MainData.GetRoom(CurrentOldGame.Id);
 		if(Room != null)
 		{
 			Buffer  += MESSAGE_Unavailable(Room.MsgTo);
