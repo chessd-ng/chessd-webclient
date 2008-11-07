@@ -43,6 +43,7 @@ function ONLINE_HandleInfo(XML)
 	UptimeNode = XML.getElementsByTagName('uptime')[0];
 	*/
 
+
 	ProfileNode = XML.getElementsByTagName('profile')[0];
 	RatingNodes = XML.getElementsByTagName('rating');
 	TypeNode = XML.getElementsByTagName('type')[0];

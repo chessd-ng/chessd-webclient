@@ -156,6 +156,7 @@ function USER_HandleInfo(XML)
         var TotalWin,TotalDraw,TotalLosses, TotalGames;
         var RecordValue, RecordTime;
 	var TimeStamp;
+	var Category;
 
 	OnlineNode = XML.getElementsByTagName('online_time')[0];
 	UptimeNode = XML.getElementsByTagName('uptime')[0];
