@@ -285,9 +285,9 @@ function CHALLENGE_HandleOffer(XML)
 		ChallengedPlayer = ChallengeObj.Challenged;
 	
 		// Check challenge time if category is untimed or not	
-		if(ChallengedPlayer.Time != "untimed")
+		if(ChallengeObj.Category != "untimed")
 		{
-			ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			ChallengeMenu.addMatch(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 		else
 		{
