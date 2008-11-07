@@ -115,7 +115,7 @@ function ANNOUNCE_HandleAnnounceGame(XML)
 {
 	var Id = XML.getAttribute("id");
 
-	var GameRoomTag, Room;
+	var GameRoom, Room;
 
 	var Buffer = "";
 	var MyUsername = MainData.GetUsername();

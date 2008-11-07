@@ -33,6 +33,7 @@ function ONLINE_HandleInfo(XML)
         var RecordValue, RecordTime;
 	var TimeStamp;
 	var ProfileNode;
+	var Category;
 
 	/*
 	var OnlineNode, UptimeNode;
