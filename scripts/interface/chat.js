@@ -229,7 +229,7 @@ function INTERFACE_CreateChat(Username)
 
 	Close = UTILS_CreateElement("img",null,"close");
 
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		State.src = "./images/ie/minimize_chat.gif";
 		Close.src = "./images/ie/close_chat.gif";

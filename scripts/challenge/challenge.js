@@ -187,19 +187,12 @@ function CHALLENGE_HandleOffer(XML)
 		Player1.Name = Players[0].getAttribute('jid').replace(/@.*/,"");
 		Player1.Inc = Players[0].getAttribute('inc');
 		Player1.Color = Players[0].getAttribute('color');
-		if(Players[0].getAttribute("time") == "untimed")
-		{
-			Player1.Time = Players[0].getAttribute('time');
-		}
-		else
-		{
-			Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
-		}
 		
-		// Get information of player two
+		
 		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
 		Player2.Inc = Players[1].getAttribute('inc');
 		Player2.Color = Players[1].getAttribute('color');
+		/*
 		if(Players[1].getAttribute("time") == "untimed")
 		{
 			Player2.Time = Players[1].getAttribute('time');
@@ -208,7 +201,19 @@ function CHALLENGE_HandleOffer(XML)
 		{
 			Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
 		}
+		*/
 
+		// Get players time
+		if(Category == "untimed")
+		{
+			Player1.Time = "untimed";
+			Player2.Time = "untimed";
+		}
+		else
+		{
+			Player1.Time = parseInt(Players[0].getAttribute('time')) / 60;
+			Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
+		}
 		// Add the challenge in structure
 		if (Player1.Name == MyUsername)
 		{
@@ -268,8 +273,8 @@ function CHALLENGE_HandleOffer(XML)
 
 	}
 	// You received a challenge confirm with match id
-	// -> Challenge id is used when user send a challlenge to another player but there is
-	//    no match id defined. 
+	// -> Challenge id is used when user send a challlenge to another
+	// player but there is no match id defined. 
 	else 
 	{
 		// Set match id in challenge
@@ -278,8 +283,17 @@ function CHALLENGE_HandleOffer(XML)
 		// Add offered challenge in challenge menu
 		ChallengeObj = MainData.GetChallenge(ChallengeID,MatchID);
 		ChallengedPlayer = ChallengeObj.Challenged;
-
-		ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+	
+		// Check challenge time if category is untimed or not	
+		if(ChallengedPlayer.Time != "untimed")
+		{
+			ChallengeMenu.addMatch(ChallengedPlayer, (ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+		}
+		else
+		{
+			// Put a infinit symbol
+			ChallengeMenu.addMatch(ChallengedPlayer, "&#8734", ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+		}
 	}
 
 
@@ -508,8 +522,15 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 		OpColor = "";
 	}
 
-	// Convert time in seconds
-	Time *= 60;
+	if(Category != "untimed")
+	{
+		// Convert time in seconds
+		Time *= 60;
+	}
+	else
+	{
+		Time = "untimed";
+	}
 
 	// Setting attributes
 	Player1.Name = MyUsername;

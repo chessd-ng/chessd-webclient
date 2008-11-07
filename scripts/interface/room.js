@@ -755,7 +755,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		}
 
 		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
-		if (MainData.Browser == 0)
+		if (MainData.GetBrowser() == 0)
 		{
 			RoomClose.src = "./images/ie/close_chat.gif";
 		}
