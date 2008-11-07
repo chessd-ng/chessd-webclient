@@ -173,8 +173,16 @@ function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min,
 
 	Player.Name = Username;
 	Player.Color = Color;
-	Player.Time = Time*60;
 	Player.Inc = Inc;
+
+	if(Category != "untimed")
+	{
+		Player.Time = Time*60;
+	}
+	else
+	{
+		Player.Time = "untimed";
+	}
 
 	if (!Min.match(/^\d*$/))
 	{
@@ -229,11 +237,20 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 	{
 		Player.Name = Username;
 		Player.Color = Color;
-		Player.Time = Time
 		Player.Inc = Inc;
-
+		Player.Time = Time;
+		
 		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
-		ChallengeMenu.addAnnounce(Player, Time, Inc, Rated, "true", AnnounceId);
+		if(Category != "untimed")
+		{
+			ChallengeMenu.addAnnounce(Player, Time/60, Inc, Rated, "true", AnnounceId);
+		}
+		else
+		{
+			// Infinit symbol
+			ChallengeMenu.addAnnounce(Player, "&#8734", Inc, Rated, "true", AnnounceId);
+		}
+
 	}
 }
 

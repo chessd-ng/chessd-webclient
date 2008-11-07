@@ -278,9 +278,9 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	{
 		PName = UTILS_CreateElement("p","name", null, Player.Name);
 	}
-	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
+	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
 	PTime.title = UTILS_GetText("challenge_time");
-	PInc = UTILS_CreateElement("p","inc", null, Inc);
+	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
 	PInc.title = UTILS_GetText("challenge_inc");
 
 
