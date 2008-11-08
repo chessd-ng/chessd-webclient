@@ -73,7 +73,10 @@ function WINDOW_Focus(WindowObj)
 	var CurrentWindow = MainData.GetWindowFocus();
 
 	// Remove focus from current window
-	CurrentWindow.blur();
+	if(CurrentWindow != null)
+	{
+		CurrentWindow.blur();
+	}
 
 	// Set focus to new window
 	MainData.SetWindowFocus(WindowObj);
