@@ -486,7 +486,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			Item = this.PostponeList[i].Item;
 			Button = this.PostponeList[i].Button;
 			ItemObj = this.PostponeList[i];
-			Id = this.PostponeList[i].Id;
+			Id = parseInt(this.PostponeList[i].Id);
 
 			if(OponentStatus == "offline")
 			{
@@ -503,12 +503,25 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 				Button.className = "active";
 				Button.onmouseover = function() { this.className = "over"; }
 				Button.onmouseout = function() { this.className = "out"; }
+				/*
 				Button.onmousedown = function() {
 					CHALLENGE_SendResumeGame(Id);
 				}
+				*/
+				// This function is used because Id is the
+				// same to all Postpone item when click to
+				// resume
+				INTERFACE_UpdatePostponeItem(Button,Id);
 			}
 		}
 	}
+}
+
+function INTERFACE_UpdatePostponeItem(Button, AdjournId)
+{
+	Button.onmousedown = function() {
+		CHALLENGE_SendResumeGame(AdjournId);
+	}	
 }
 
 function INTERFACE_ShowChallengeMenu(Left, Top)

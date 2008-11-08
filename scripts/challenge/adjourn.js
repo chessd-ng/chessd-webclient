@@ -204,6 +204,8 @@ function CHALLENGE_SendResumeGame(AdjournId)
 
 	var Category = Postpone.Category;
 	var MyUsername = MainData.GetUsername();
+	var ChallengeSequence = MainData.GetChallengeSequence();
+	var ChallengeId = "offer_adj"+ChallengeSequence;
 
 	// Create challenge in challenge list
 	Challenged.Name = Postpone.Challenged.Name;
@@ -217,10 +219,11 @@ function CHALLENGE_SendResumeGame(AdjournId)
 	Challenger.Inc = 0;
 
 	// Add challenge in challenge list
-	MainData.AddChallenge("offer_adj", Challenger, Challenged, Category, "false", null);
+	MainData.AddChallenge(ChallengeId, Challenger, Challenged, Category, "false", null);
+	MainData.SetChallengeSequence(ChallengeSequence + 1);
 
 	// Create and send message to resume adjourned game
-	XMPP += MESSAGE_ChallengeResumeGame(AdjournId);
+	XMPP += MESSAGE_ChallengeResumeGame(AdjournId, ChallengeId);
 	CONNECTION_SendJabber(XMPP);
 
 	// Remove adjourned game from postponed list;
