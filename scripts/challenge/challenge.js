@@ -148,6 +148,7 @@ function CHALLENGE_HandleOffer(XML)
 	var ChallengedPlayer;
 	var Room, User;
 	var MyUsername = MainData.GetUsername();
+	var MatchType;
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -168,6 +169,7 @@ function CHALLENGE_HandleOffer(XML)
 
 	MatchID = Match.getAttribute('id');
 	Category = Match.getAttribute('category');
+	MatchType = Match.getAttribute('type');
 
 	if (Type == 'set')
 	{
@@ -240,8 +242,16 @@ function CHALLENGE_HandleOffer(XML)
 				RatingObj = null;
 			}
 
-			// Show challenge window for user
-			WINDOW_Challenge(Player2.Name, RatingObj, Player2, Rated, MatchID);
+			if(MatchType != "adjourned")
+			{
+				// Show challenge window for user
+				WINDOW_Challenge(Player2.Name, RatingObj, Player2, Rated, MatchID);
+			}
+			else
+			{
+				// Show resume postpone window
+				WINDOW_Postpone(Player2.Name, RatingObj, Player2, Rated, MatchID);
+			}
 		}
 		else 
 		{
@@ -266,8 +276,16 @@ function CHALLENGE_HandleOffer(XML)
 				RatingObj = null;
 			}
 
-			// Show challenge window for user
-			WINDOW_Challenge(Player1.Name, RatingObj, Player1, Rated, MatchID);
+			if(MatchType != "adjourned")
+			{
+				// Show challenge window for user
+				WINDOW_Challenge(Player1.Name, RatingObj, Player1, Rated, MatchID);
+			}
+			else
+			{
+				// Show resume postpone window
+				WINDOW_Postpone(Player1.Name, RatingObj, Player1, Rated, MatchID);
+			}
 
 		}
 

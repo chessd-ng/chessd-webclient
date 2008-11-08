@@ -429,4 +429,8 @@
 		<help_t_1_16>Obter ajuda</help_t_1_16>
 		<help_c_1_16><![CDATA[<p>Para obter ajuda:</p><ul><li>Clique em “Ajuda”, na Barra de Ferramentas.</li></ul><br /><p>Obs.: Você pode obter ajuda de duas formas: usando a estrutura “Conteúdo”, que explica detalhadamente as informações contidas nas telas do Xadrez Livre, ou usando a estrutura “Como...”, que dá dicas rápidas sobre como utilizar as principais funcionalidades do Xadrez Livre.</p>]]></help_c_1_16>
 	</help>
+	<postpone>
+		<postpone_title_offer>Continuar uma partida adiada</postpone_title_offer>
+		<postpone_information>convidou para continuar uma partida com as seguintes características:</postpone_information>
+	</postpone>
 </language>

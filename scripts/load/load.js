@@ -130,6 +130,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/interface/profile.js");
 	Files.push("scripts/interface/board.js");
 	Files.push("scripts/interface/game.js");
+	Files.push("scripts/interface/postpone.js");
 	Files.push("scripts/profile/profile.js");
 	Files.push("scripts/room/room.js");
 	Files.push("scripts/window/window.js");
