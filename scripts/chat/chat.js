@@ -263,7 +263,7 @@ function CHAT_ChangeChatState(Username)
 		ChatObj.Chat.maximize();
 		ChatObj.Chat.visible == true;
 		ChatObj.Chat.minmax.className = "minimize";
-		if(MainData.Browser == 0)
+		if(MainData.GetBrowser() == 0)
 		{
 			ChatObj.Chat.minmax.src = "./images/ie/minimize_chat.gif";
 		}
@@ -277,7 +277,7 @@ function CHAT_ChangeChatState(Username)
 		ChatObj.Chat.minimize();
 		ChatObj.Chat.visible == false;
 		ChatObj.Chat.minmax.className = "maximize";
-		if(MainData.Browser == 0)
+		if(MainData.GetBrowser() == 0)
 		{
 			ChatObj.Chat.minmax.src = "./images/ie/maximize_chat.gif";
 		}

@@ -90,16 +90,17 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 function CONTACT_SetUserStatus(Username, NewStatus)
 {
 	var Rating, Type;
-	var User = MainData.GetUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
 
 	// Update new user status in data struct
+	/*
+	var User = MainData.GetUser(Username);
 	if(User != null)
 	{
 		User.SetStatus(NewStatus);
 	}
-
+	*/
 	// Find user in data struct 
 	ContactUser = MainData.GetContactUser(Username);
 

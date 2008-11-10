@@ -69,24 +69,22 @@ function PROFILE_HandleVCardProfile(XML)
 	User = MainData.GetUser(UserFrom);
 	if(User != null)
 	{
-		// Update profile data struct
-		//MainData.SetMyProfile(UserFrom, FullName, Desc, PhotoType, Binval);
-		User.SetFullname(FullName);
-		User.SetDesc(Desc);
-		User.SetPhoto(Img);
-		User.SetImg64(Binval);
-		User.SetImgType(PhotoType);
-
+		// Update user image in left box
 		if (UserFrom == MyUsername)
 		{
 			// Update user image
 			if (User.GetPhoto() != Img)
 			{
-				//MainData.MyProfile.Img64 = Binval;
-				//MainData.MyProfile.ImgType = PhotoType;
 				INTERFACE_SetUserImage(Img);
 			}
 		}
+
+		// Update profile data struct
+		User.SetFullname(FullName);
+		User.SetDesc(Desc);
+		User.SetPhoto(Img);
+		User.SetImg64(Binval);
+		User.SetImgType(PhotoType);
 
 		// Update profile window
 		Profile = User.GetProfileObj();
@@ -161,11 +159,7 @@ function PROFILE_HandleInfoProfile(XML)
 		{
 			Type = 'user';
 		}
-		/*
-		User.SetOnlineTime(UpTime);
-		User.SetTotalTime(OnlineTime);
-		User.SetType(Type);
-		/*/
+
 		//Update Rating
 		Rating = PROFILE_HandleRatings(From, RatingNodes);
 
@@ -352,8 +346,6 @@ function PROFILE_StartProfile(Username)
 
 		ProfileObj = WINDOW_Profile(ProfileInfo);
 
-		//MainData.AddProfile(Jid, Username, Elements);
-
 		User.SetProfileObj(ProfileObj);
 
 		if(User.GetUpdateProfile() == true)
@@ -363,13 +355,10 @@ function PROFILE_StartProfile(Username)
 		}
 		else //Get profile data from user list
 		{
-		
+			//Set vCard informations	
 			ProfileObj.SetNick(User.GetUsername());
 			ProfileObj.SetUser(User.GetFullname());
 			ProfileObj.SetDesc(User.GetDesc());
-			ProfileObj.SetGroup(User.GetType());
-			ProfileObj.SetOnlineTime(User.GetOnlineTime());
-			ProfileObj.SetTotalTime(User.GetTotalTime());
 			//Set user's image
 			ProfileObj.SetUserImg(User.GetPhoto());
 
@@ -382,7 +371,12 @@ function PROFILE_StartProfile(Username)
 		}
 		else
 		{
+			//Set Chess user informations
 			ProfileObj.SetRatings(PROFILE_ConvertUserRatingList(User.GetRatingList()));
+			ProfileObj.SetGroup(User.GetType());
+			ProfileObj.SetOnlineTime(User.GetOnlineTime());
+			ProfileObj.SetTotalTime(User.GetTotalTime());
+
 		}
 
 		if(Msg != "")
@@ -441,8 +435,9 @@ function PROFILE_SaveMyProfile()
 		WINDOW_Alert(UTILS_GetText('profile_error'),UTILS_GetText('profile_desc_limit'));
 		return false;
 	}
-	PhotoType = MyUser.GetImgType();
-	Binval = MyUser.GetImg64();
+
+	PhotoType = MyProfile.GetImgType();
+	Binval = MyProfile.GetImg64();
 
 	CONNECTION_SendJabber(MESSAGE_SetProfile("", FN, Desc, PhotoType, Binval), MESSAGE_GetProfile(MyUsername));
 

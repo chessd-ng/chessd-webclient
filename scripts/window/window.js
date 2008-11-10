@@ -73,7 +73,10 @@ function WINDOW_Focus(WindowObj)
 	var CurrentWindow = MainData.GetWindowFocus();
 
 	// Remove focus from current window
-	CurrentWindow.blur();
+	if(CurrentWindow != null)
+	{
+		CurrentWindow.blur();
+	}
 
 	// Set focus to new window
 	MainData.SetWindowFocus(WindowObj);
@@ -532,3 +535,29 @@ function WINDOW_Help()
 	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+
+function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
+{
+	// Return Div and Buttons;
+	var Div = INTERFACE_ShowPostponeWindow(User, RatingObj, GameParameters, Rated, MatchId);
+	var Title;
+
+	Title = UTILS_GetText('postpone_title_offer');
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(350, Div.Div, Div.Buttons, Title);
+
+	// Add Window Object in challenge's list
+	MainData.AddChallengeWindow(MatchId, WindowObj);
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ CHALLENGE_DeclineChallenge(MatchId); }, false);
+	// Accept Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	// Chat Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ return false;}, false);
+	// Decline Button
+	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}
+

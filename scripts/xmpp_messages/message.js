@@ -465,10 +465,10 @@ function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 	return XMPP;
 }
 
-function MESSAGE_ChallengeResumeGame(Id)
+function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
 {
 	var XMPP = "";
-	XMPP += "<iq to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='set' id='offer_adj'>";
+	XMPP += "<iq to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='set' id='"+ChallengeId+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#match#offer'>";
 	XMPP += "<match adjourned_id='"+Id+"'/>";
 	XMPP += "</query></iq>";

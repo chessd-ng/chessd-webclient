@@ -28,7 +28,7 @@ function INTERFACE_AnnounceWindow()
 	var L1LeftDiv;
 	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
 	var L1RightDiv;
-	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt;
+	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt, CatOptUt;
 	var Br1;
 
 	var Layer2Div;
@@ -124,7 +124,7 @@ function INTERFACE_AnnounceWindow()
 	AutoColorOpt.setAttribute("defaultChecked", "true");
 	
 	// Set imagens according to browser type
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
 		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";
@@ -150,9 +150,15 @@ function INTERFACE_AnnounceWindow()
 	CatOptSt.value = "standard";
 	CatSelect =	UTILS_CreateElement('select',null,'drop_select');
 
+	// UNTIMED category option
+	CatOptUt = UTILS_CreateElement('option', null, null, 'Untimed');
+	CatOptUt.value = "untimed";
+
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
 	CatSelect.appendChild(CatOptSt);
+	//Append untimed option
+	CatSelect.appendChild(CatOptUt);
 
 	CatSelect.onchange = function () 
 	{
@@ -165,6 +171,10 @@ function INTERFACE_AnnounceWindow()
 			TimeSelect.removeChild (TimeSelect.firstChild);
 		}
 		
+		// Enable select time and select increment		
+		TimeSelect.disabled = false;
+		IncSelect.disabled = false;
+
 		// Lightning = 0 
 		if (Type == 0)
 		{
@@ -213,6 +223,18 @@ function INTERFACE_AnnounceWindow()
 			TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
+		}
+		// Untimed = 3
+		else if (Type == 3)
+		{
+			// Disable select time and select increment
+			TimeSelect.disabled = true;
+			IncSelect.disabled = true;
+
+			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
+			TimeOpt.value = "untimed";
+			TimeSelect.appendChild(TimeOpt);
+
 		}
 	}
 

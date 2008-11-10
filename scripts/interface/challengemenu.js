@@ -278,9 +278,9 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	{
 		PName = UTILS_CreateElement("p","name", null, Player.Name);
 	}
-	PTime = UTILS_CreateElement("p","time", null, Time/60+"'");
+	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
 	PTime.title = UTILS_GetText("challenge_time");
-	PInc = UTILS_CreateElement("p","inc", null, Inc);
+	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
 	PInc.title = UTILS_GetText("challenge_inc");
 
 
@@ -316,7 +316,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
 		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
 		Button.onmousedown = function(){
-			ANNOUNCE_RemoveAnnounce(Id);
+			ANNOUNCE_CancelAnnounce(Id);
 		}
 		PButton.appendChild(Button);
 	}
@@ -486,7 +486,7 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			Item = this.PostponeList[i].Item;
 			Button = this.PostponeList[i].Button;
 			ItemObj = this.PostponeList[i];
-			Id = this.PostponeList[i].Id;
+			Id = parseInt(this.PostponeList[i].Id);
 
 			if(OponentStatus == "offline")
 			{
@@ -503,12 +503,25 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 				Button.className = "active";
 				Button.onmouseover = function() { this.className = "over"; }
 				Button.onmouseout = function() { this.className = "out"; }
+				/*
 				Button.onmousedown = function() {
 					CHALLENGE_SendResumeGame(Id);
 				}
+				*/
+				// This function is used because Id is the
+				// same to all Postpone item when click to
+				// resume
+				INTERFACE_UpdatePostponeItem(Button,Id);
 			}
 		}
 	}
+}
+
+function INTERFACE_UpdatePostponeItem(Button, AdjournId)
+{
+	Button.onmousedown = function() {
+		CHALLENGE_SendResumeGame(AdjournId);
+	}	
 }
 
 function INTERFACE_ShowChallengeMenu(Left, Top)

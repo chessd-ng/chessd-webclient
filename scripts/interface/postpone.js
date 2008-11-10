@@ -15,7 +15,7 @@
 */
 
 /**
-* Create elements to challenge invite or challenge offer
+* Create elements to challenge invite from a postpone game
 *
 * @param Oponent					Oponent's nickname 
 * @param Rating						Oponent's current rating
@@ -25,7 +25,7 @@
 * @see										WINDOW_Challenge();
 * @author									Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
+function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
 	var Div;
 
@@ -71,32 +71,14 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 	Username = UTILS_CreateElement('h3', null, null, Oponent);
 	RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+RatingObj.GetRatingValue("blitz"));
 	Username.appendChild(RatingLabel);
-	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('challenge_information'));
+	Label = UTILS_CreateElement('p', null, 'label_information', UTILS_GetText('postpone_information'));
 	
-	// Accept challenge
-	// Only if you receive a challenge
-	Accept = UTILS_CreateElement('input',null,'button');
-	Accept.value = UTILS_GetText('window_accept');
-	Accept.type = "button";
-	Accept.onclick = function () {
-		CHALLENGE_AcceptChallenge(MatchId);
-	}	
 
 	// Layer1 Elements
 
 	Layer1Div = UTILS_CreateElement('div', 'Layer1Div');
 	// Layer 1 Left Elements
 	L1LeftDiv = UTILS_CreateElement('div', 'L1LeftDiv','leftDiv');
-	/*
-	if (GameParameters != undefined)
-	{
-		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
-	}
-	else
-	{
-		ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
-	}
-	*/
 
 	ColorLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_my_pieces'));
 
@@ -164,36 +146,26 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 //	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
 
 	// Select player color
-	if (GameParameters != undefined)
+	if (GameParameters.Color == "white")
 	{
-		if (GameParameters.Color == "white")
-		{
-			// Firefox fix
-			ColorOptB.checked = true;
-			//defaultChecked is used to fix IE radio checked
-			ColorOptB.setAttribute("defaultChecked", "true");
-		}
-		else if (GameParameters.Color == "black")
-		{
-			// Firefox fix
-			ColorOptW.checked = true;
-			//defaultChecked is used to fix IE radio checked
-			ColorOptW.setAttribute("defaultChecked", "true");
-		}
-		else
-		{
-			// Firefox fix
-			AutoColorOpt.checked = true;
-			//defaultChecked is used to fix IE radio checked
-			AutoColorOpt.setAttribute("defaultChecked", "true");
-		}
+		// Firefox fix
+		ColorOptB.checked = true;
+		//defaultChecked is used to fix IE radio checked
+		ColorOptB.setAttribute("defaultChecked", "true");
 	}
-	else 
+	else if (GameParameters.Color == "black")
 	{
-			// Firefox fix
-			AutoColorOpt.checked = true;
-			//defaultChecked is used to fix IE radio checked
-			AutoColorOpt.setAttribute("defaultChecked", "true");
+		// Firefox fix
+		ColorOptW.checked = true;
+		//defaultChecked is used to fix IE radio checked
+		ColorOptW.setAttribute("defaultChecked", "true");
+	}
+	else
+	{
+		// Firefox fix
+		AutoColorOpt.checked = true;
+		//defaultChecked is used to fix IE radio checked
+		AutoColorOpt.setAttribute("defaultChecked", "true");
 	}
 	//*End Layer 1 Left Elements*
 	
@@ -220,113 +192,6 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 	//Append untimed option
 	CatSelect.appendChild(CatOptUt);
 
-	CatSelect.onchange = function () 
-	{
-		Type = CatSelect.options.selectedIndex;
-		i=0;
-		
-		// Remove todos os filhos
-		while (TimeSelect.firstChild)
-		{
-			TimeSelect.removeChild (TimeSelect.firstChild);
-		}
-
-		// Enable select time and select increment		
-		TimeSelect.disabled = false;
-		IncSelect.disabled = false;
-
-		// Lightning = 0 
-		if (Type == 0)
-		{
-			for (i=1; i <= 2; i++)
-			{
-				TimeOpt = UTILS_CreateElement('option',null,null,i);
-				TimeOpt.value = i;
-				
-				TimeSelect.appendChild(TimeOpt);
-			}
-			
-			Rating = RatingObj.GetRatingValue("lightning");
-		}
-
-		// Blitz = 1
-		else if (Type == 1)
-		{
-			for (i=3; i <= 10; i++)
-			{
-				TimeOpt = UTILS_CreateElement('option',null,null,i);
-				TimeOpt.value = i;
-				
-				TimeSelect.appendChild(TimeOpt);
-			}	
-			Rating = RatingObj.GetRatingValue("blitz");
-		}
-
-		// Standard = 2
-		else if (Type == 2)
-		{
-
-			for (i=11; i <=30; i++)
-			{
-				TimeOpt = UTILS_CreateElement('option',null,null,i);
-				TimeOpt.value = i;
-				
-				TimeSelect.appendChild(TimeOpt);
-			}	
-			TimeOpt = UTILS_CreateElement('option',null,null,"40");
-			TimeOpt.value = 40;
-			TimeSelect.appendChild(TimeOpt);
-			TimeOpt = UTILS_CreateElement('option',null,null,"60");
-			TimeOpt.value = 60;
-			TimeSelect.appendChild(TimeOpt);
-			TimeOpt = UTILS_CreateElement('option',null,null,"120");
-			TimeOpt.value = 120;
-			TimeSelect.appendChild(TimeOpt);
-			TimeOpt = UTILS_CreateElement('option',null,null,"180");
-			TimeOpt.value = 180;
-			TimeSelect.appendChild(TimeOpt);
-			//TimeOpt = UTILS_CreateElement('option',null,null,UTILS_GetText("challenge_notime"));
-			TimeOpt = UTILS_CreateElement('option',null,null,"190");
-			TimeOpt.value = 190;
-			TimeSelect.appendChild(TimeOpt);
-/*
-			// Infinit symbol
-			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
-			TimeOpt.value = "untimed";
-			TimeSelect.appendChild(TimeOpt);
-*/
-			Rating = RatingObj.GetRatingValue("standard");
-		}
-		// Untimed = 3
-		else if (Type == 3)
-		{
-			// Disable select time and select increment
-			TimeSelect.disabled = true;
-			IncSelect.disabled = true;
-
-			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
-			TimeOpt.value = "untimed";
-			TimeSelect.appendChild(TimeOpt);
-			Rating = RatingObj.GetRatingValue("untimed");
-
-		}
-
-		if(Rating == null)
-		{
-			Rating = "---";
-		}
-
-		Username.removeChild(Username.childNodes[1]);
-		RatingLabel = UTILS_CreateElement('span',null,'rating',"Rating: "+Rating);
-		Username.appendChild(RatingLabel);
-
-		if (GameParameters != undefined)
-		{
-			Accept.className = "button_disabled";
-			Accept.onclick = function () { return false } ;
-			Accept.disabled = true;
-		}
-	}
 
 	//* End Layer1 Right Elements*
 	
@@ -370,121 +235,105 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 
 
 	// Receive challenge from another player	
-	if (GameParameters != undefined)
+	if (GameParameters.Time)
 	{
-		if (GameParameters.Time)
+		// Lightning
+		if (GameParameters.Time<=2)
 		{
-			// Lightning
-			if (GameParameters.Time<=2)
+			for (i=1; i <= 2; i++)
 			{
-				for (i=1; i <= 2; i++)
-				{
-					TimeOpt = UTILS_CreateElement('option',null,null,i);
-					TimeOpt.value = i;
+				TimeOpt = UTILS_CreateElement('option',null,null,i);
+				TimeOpt.value = i;
 
-					TimeSelect.appendChild(TimeOpt);
-				}	
-				CatSelect.options.selectedIndex = 0;
-
-				TimeSelect.options.selectedIndex = GameParameters.Time - 1;
-			}
-			// Blitz
-			else if ((GameParameters.Time>=3) && (GameParameters.Time<=10))
-			{
-				for (i=3; i <= 10; i++)
-				{
-					TimeOpt = UTILS_CreateElement('option',null,null,i);
-					TimeOpt.value = i;
-
-					TimeSelect.appendChild(TimeOpt);
-				}	
-
-				CatSelect.options.selectedIndex = 1;
-
-				TimeSelect.options.selectedIndex = GameParameters.Time - 3;
-			}
-
-			// Standard
-			else if (GameParameters.Time>=11)
-			{
-				for (i=11; i <= 30; i++)
-				{
-					TimeOpt = UTILS_CreateElement('option',null,null,i);
-					TimeOpt.value = i;
-
-					TimeSelect.appendChild(TimeOpt);
-				}	
-				TimeOpt = UTILS_CreateElement('option',null,null,"40");
-				TimeOpt.value = 40;
 				TimeSelect.appendChild(TimeOpt);
-				TimeOpt = UTILS_CreateElement('option',null,null,"60");
-				TimeOpt.value = 60;
-				TimeSelect.appendChild(TimeOpt);
-				TimeOpt = UTILS_CreateElement('option',null,null,"120");
-				TimeOpt.value = 120;
-				TimeSelect.appendChild(TimeOpt);
-				TimeOpt = UTILS_CreateElement('option',null,null,"180");
-				TimeOpt.value = 180;
-				TimeSelect.appendChild(TimeOpt);
-				TimeOpt = UTILS_CreateElement('option',null,null,"190");
-				TimeOpt.value = 190;
-				TimeSelect.appendChild(TimeOpt);
+			}	
+			CatSelect.options.selectedIndex = 0;
 
-				
-				// Select option
-				CatSelect.options.selectedIndex = 2;
-				if (GameParameters.Time <= 30)
-				{
-					TimeSelect.options.selectedIndex = GameParameters.Time - 11;
-				}
-				else if (GameParameters.Time == 40) 
-				{
-					TimeSelect.options.selectedIndex = 20;
-				}
-				else if (GameParameters.Time == 60) 
-				{
-					TimeSelect.options.selectedIndex = 21;
-				}
-				else if (GameParameters.Time == 120) 
-				{
-					TimeSelect.options.selectedIndex = 22;
-				}
-				else if (GameParameters.Time == 180) 
-				{
-					TimeSelect.options.selectedIndex = 23;
-				}
-				else if (GameParameters.Time == 190) 
-				{
-					TimeSelect.options.selectedIndex = 24;
-				}
-			}
-			else if (GameParameters.Time == "untimed")
-			{
-				TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
-				TimeOpt.value = "untimed";
-				TimeSelect.appendChild(TimeOpt);
-
-				CatSelect.options.selectedIndex = 3;
-				TimeSelect.options.selectedIndex = 0;
-			
-				// Disable select time and select increment
-				TimeSelect.disabled = true;
-				IncSelect.disabled = true;
-			}
+			TimeSelect.options.selectedIndex = GameParameters.Time - 1;
 		}
-	}
-	else
-	{
-		for (i=3; i <= 10; i++)
+		// Blitz
+		else if ((GameParameters.Time>=3) && (GameParameters.Time<=10))
 		{
-			TimeOpt = document.createElement("option");
-			TimeOpt.innerHTML = i;
-			TimeOpt.value = i;
+			for (i=3; i <= 10; i++)
+			{
+				TimeOpt = UTILS_CreateElement('option',null,null,i);
+				TimeOpt.value = i;
 
+				TimeSelect.appendChild(TimeOpt);
+			}	
+
+			CatSelect.options.selectedIndex = 1;
+
+			TimeSelect.options.selectedIndex = GameParameters.Time - 3;
+		}
+
+		// Standard
+		else if (GameParameters.Time>=11)
+		{
+			for (i=11; i <= 30; i++)
+			{
+				TimeOpt = UTILS_CreateElement('option',null,null,i);
+				TimeOpt.value = i;
+
+				TimeSelect.appendChild(TimeOpt);
+			}	
+			TimeOpt = UTILS_CreateElement('option',null,null,"40");
+			TimeOpt.value = 40;
 			TimeSelect.appendChild(TimeOpt);
-		}
+			TimeOpt = UTILS_CreateElement('option',null,null,"60");
+			TimeOpt.value = 60;
+			TimeSelect.appendChild(TimeOpt);
+			TimeOpt = UTILS_CreateElement('option',null,null,"120");
+			TimeOpt.value = 120;
+			TimeSelect.appendChild(TimeOpt);
+			TimeOpt = UTILS_CreateElement('option',null,null,"180");
+			TimeOpt.value = 180;
+			TimeSelect.appendChild(TimeOpt);
+			TimeOpt = UTILS_CreateElement('option',null,null,"190");
+			TimeOpt.value = 190;
+			TimeSelect.appendChild(TimeOpt);
 
-		CatSelect.options.selectedIndex = 1;
+			
+			// Select option
+			CatSelect.options.selectedIndex = 2;
+			if (GameParameters.Time <= 30)
+			{
+				TimeSelect.options.selectedIndex = GameParameters.Time - 11;
+			}
+			else if (GameParameters.Time == 40) 
+			{
+				TimeSelect.options.selectedIndex = 20;
+			}
+			else if (GameParameters.Time == 60) 
+			{
+				TimeSelect.options.selectedIndex = 21;
+			}
+			else if (GameParameters.Time == 120) 
+			{
+				TimeSelect.options.selectedIndex = 22;
+			}
+			else if (GameParameters.Time == 180) 
+			{
+				TimeSelect.options.selectedIndex = 23;
+			}
+			else if (GameParameters.Time == 190) 
+			{
+				TimeSelect.options.selectedIndex = 24;
+			}
+		}
+		else if (GameParameters.Time == "untimed")
+		{
+			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
+			TimeOpt.value = "untimed";
+			TimeSelect.appendChild(TimeOpt);
+
+			CatSelect.options.selectedIndex = 3;
+			TimeSelect.options.selectedIndex = 0;
+		
+			// Disable select time and select increment
+			TimeSelect.disabled = true;
+			IncSelect.disabled = true;
+		}
 	}
 
 	//* End Layer2 Left Elements*
@@ -572,74 +421,17 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 
 	ButtonsDiv = UTILS_CreateElement('div', 'ButtonsDiv');
 
-	// Submit the challenge
-	Invite = UTILS_CreateElement('input', null, 'button');
-	Invite.value = UTILS_GetText('challenge_invite');
-	Invite.type = "button";
-	Invite.onclick = function () {
-		// Checking the color
-		if (ColorOptW.checked)
-		{
-			Color = "white";
-		}
-		else if (ColorOptB.checked)
-		{
-			Color = "black";
-		}
-		else
-		{
-			Color = "";
-		}
 
-		// Rated or unrated?
-		if (RatingCheckbox.checked)
-		{
-			Rated = "true";
-		}
-		else
-		{
-			Rated = "false";
-		}
+	// Accept challenge
+	// Only if you receive a challenge
+	Accept = UTILS_CreateElement('input',null,'button');
+	Accept.value = UTILS_GetText('window_accept');
+	Accept.type = "button";
+	Accept.onclick = function () {
+		CHALLENGE_AcceptChallenge(MatchId);
+	}	
 
-		// Create and send the chellenge message
-		CHALLENGE_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
-	}
-
-	NewParameters = UTILS_CreateElement('input',null,'button');
-	NewParameters.value = UTILS_GetText('challenge_new_parameters');
-	NewParameters.type = "button";
-	NewParameters.onclick = function () {
-		// Checking the color
-		if (ColorOptW.checked)
-		{
-			Color = "white";
-		}
-		else if (ColorOptB.checked)
-		{
-			Color = "black";
-		}
-		else
-		{
-			Color = "";
-		}
-
-		// Rated or unrated?
-		if (RatingCheckbox.checked)
-		{
-			Rated = "true";
-		}
-		else
-		{
-			Rated = "false";
-		}
-
-		CHALLENGE_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
-	}
-
-	Cancel = UTILS_CreateElement('input',null,'button');
-	Cancel.value = UTILS_GetText('window_cancel');
-	Cancel.type = "button";
-
+	// SET CHAT EVENT
 	Chat = UTILS_CreateElement('input',null,'button');
 	Chat.value = UTILS_GetText('challenge_chat');
 	Chat.type = "button";
@@ -647,12 +439,22 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 		CHAT_OpenChat(Oponent);
 	}
 
+	// SET DECLINE EVENT
 	Decline = UTILS_CreateElement('input',null,'button');
 	Decline.value = UTILS_GetText('window_decline');
 	Decline.type = "button";
 	Decline.onclick = function () {
 		CHALLENGE_DeclineChallenge(MatchId);
 	}	
+
+	// DISABLE INPUTS
+	TimeSelect.disabled = true;
+	IncSelect.disabled = true;
+	RatingCheckbox.disabled = true;
+	CatSelect.disabled = true;
+	ColorOptW.disabled = true;
+	ColorOptB.disabled = true;
+	AutoColorOpt.disabled = true;
 
 	// Appending childs
 
@@ -707,90 +509,12 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 //	Layer3Div.appendChild(AutoFlagLabel);
 
 	// Buttons
-	if (GameParameters != undefined)
-	{
-		// Game parameters change
-		PrivateCheckbox.onclick = function() {
-			Accept.className = "button_disabled";
-			Accept.disabled = true;
-			Accept.onclick = function () {
-				return false;
-			}
-		}	
-
-		RatingCheckbox.onclick = function() {
-			Accept.className = "button_disabled";
-			Accept.disabled = true;
-			Accept.onclick = function () {
-				return false;
-			}
-		}	
-
-		IncSelect.onchange = function() {
-			Accept.className = "button_disabled";
-			Accept.disabled = true;
-			Accept.onclick = function () {
-				return false;
-			}
-		}	
-
-		TimeSelect.onchange = function() {
-			Accept.className = "button_disabled";
-			Accept.disabled = true;
-			Accept.onclick = function () {
-				return false;
-			}
-		}	
-
-		AutoColorOpt.onclick = function() {
-			if (AutoColorOpt.checked == true)
-			{
-				Accept.className = "button_disabled";
-				Accept.disabled = true;
-				Accept.onclick = function () {
-					return false;
-				}
-			}
-		}	
-
-		ColorOptB.onclick = function() {
-			if (ColorOptB.checked == true)
-			{
-				Accept.className = "button_disabled";
-				Accept.disabled = true;
-				Accept.onclick = function () {
-					return false;
-				}
-			}
-		}	
-
-		ColorOptW.onclick = function() {
-			if (ColorOptW.checked == true)
-			{
-				Accept.className = "button_disabled";
-				Accept.disabled = true;
-				Accept.onclick = function () {
-					return false;
-				}
-			}
-		}	
-
-		ButtonsDiv.appendChild(Accept);
-		Buttons.push(Accept);
-		ButtonsDiv.appendChild(NewParameters);
-		Buttons.push(NewParameters);
-		ButtonsDiv.appendChild(Chat);
-		Buttons.push(Chat);
-		ButtonsDiv.appendChild(Decline);
-		Buttons.push(Decline);
-	}
-	else
-	{
-		ButtonsDiv.appendChild(Invite);
-		Buttons.push(Invite);
-		ButtonsDiv.appendChild(Cancel);
-		Buttons.push(Cancel);
-	}
+	ButtonsDiv.appendChild(Accept);
+	Buttons.push(Accept);
+	ButtonsDiv.appendChild(Chat);
+	Buttons.push(Chat);
+	ButtonsDiv.appendChild(Decline);
+	Buttons.push(Decline);
 
 	// TopDiv
 	TopDiv.appendChild(Username);

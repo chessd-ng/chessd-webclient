@@ -640,7 +640,7 @@ function GAME_StartGame(GameId, P1, P2)
 	if (CurrentOldGame != null)
 	{
 		//Quickfix to leave room when observer
-		Room = MainData.GetRoom(CurrentGame.Id);
+		Room = MainData.GetRoom(CurrentOldGame.Id);
 		if(Room != null)
 		{
 			Buffer  += MESSAGE_Unavailable(Room.MsgTo);
@@ -696,7 +696,8 @@ function GAME_StartObserverGame(GameId, P1, P2)
 
 	var Consts = MainData.GetConst();
 	var CurrentGame = MainData.GetCurrentGame();
-	var OldCurrentGame = MainData.GetCurrentOldGame();
+	var CurrentOldGame = MainData.GetCurrentOldGame();
+	var NewCurrentGame;
 
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
@@ -718,7 +719,8 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, "white", 38, true);
 	MainData.AddGame(GameId, P1.Name, P2.Name, "none", GameDiv);
 
-	CurrentGame.Finished = true;
+	NewCurrentGame = MainData.GetCurrentGame();
+	NewCurrentGame.Finished = true;
 
 	// Show New Game
 	GameDiv.Show();

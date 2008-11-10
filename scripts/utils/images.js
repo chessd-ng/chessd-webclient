@@ -119,9 +119,10 @@ function IMAGE_B64Img(Image, Type){
 		Profile = MyUser.GetProfileObj();
 		if(Profile != null)
 		{
-			Profile.Profile.SetImgType(Type);
-			Profile.Profile.SetImg64(Image);
-			Profile.Profile.SetUserImg(Img);
+			// Update in profile window
+			Profile.SetImgType(Type);
+			Profile.SetImg64(Image);
+			Profile.SetUserImg(Img);
 		}
 	}
 	return true;

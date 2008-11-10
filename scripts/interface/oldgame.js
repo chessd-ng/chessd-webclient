@@ -152,7 +152,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	RImg = UTILS_CreateElement('img');
 
 	// Set imagens according to browser type
-	if (MainData.Browser == 0)
+	if (MainData.GetBrowser() == 0)
 	{
 		WImg.src = "images/ie/invite_white_pawn.gif";
 		BImg.src = "images/ie/invite_black_pawn.gif";

@@ -116,7 +116,7 @@ function INTERFACE_AddUser(Username, Status, Rating, Type)
 	var UserObj = new Object();
 
 	// Create tr element
-	User = INTERFACE_CreateUser(Username, Status, Rating, Type, this.roomName);
+	User = INTERFACE_CreateUser(Username, Status, Rating, Type)
 
 	// Add user in users struct
 	UserObj.Id = Username;

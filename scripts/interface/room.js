@@ -571,6 +571,7 @@ function INTERFACE_ShowEmoticonList(RName)
 	var Div, List, Item, Img, i;
 	var Func, Hide = 0;
 	var RoomName = RName;
+	var EmoticonNum = MainData.GetEmoticonNum();
 
 	Func = function () {
 		Hide += 1;
@@ -585,7 +586,7 @@ function INTERFACE_ShowEmoticonList(RName)
 	Div = UTILS_CreateElement("div", "EmoticonDiv");
 	List = UTILS_CreateElement("ul", "EmoticonList");
 
-	for (i=0; i<MainData.EmoticonNum; i++)
+	for (i=0; i<EmoticonNum; i++)
 	{
 		Item = UTILS_CreateElement("li");
 		Img = UTILS_CreateElement("img", null, i);
@@ -755,7 +756,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 		}
 
 		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
-		if (MainData.Browser == 0)
+		if (MainData.GetBrowser() == 0)
 		{
 			RoomClose.src = "./images/ie/close_chat.gif";
 		}

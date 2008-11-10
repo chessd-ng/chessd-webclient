@@ -2902,7 +2902,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 	// Setting users colors
 	if (Color == "white")
 	{
-		if (Player1 == this.Username)
+		if (Player1 == MainData.GetUsername())
 		{
 			NewGame.PW = Player1;
 			NewGame.PB = Player2;
@@ -2915,7 +2915,7 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 	}
 	else
 	{
-		if (Player1 == this.Username)
+		if (Player1 == MainData.GetUsername())
 		{
 			NewGame.PW = Player2;
 			NewGame.PB = Player1;

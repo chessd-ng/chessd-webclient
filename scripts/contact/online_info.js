@@ -33,6 +33,7 @@ function ONLINE_HandleInfo(XML)
         var RecordValue, RecordTime;
 	var TimeStamp;
 	var ProfileNode;
+	var Category;
 
 	/*
 	var OnlineNode, UptimeNode;
@@ -41,6 +42,7 @@ function ONLINE_HandleInfo(XML)
 	OnlineNode = XML.getElementsByTagName('online_time')[0];
 	UptimeNode = XML.getElementsByTagName('uptime')[0];
 	*/
+
 
 	ProfileNode = XML.getElementsByTagName('profile')[0];
 	RatingNodes = XML.getElementsByTagName('rating');
