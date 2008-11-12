@@ -514,13 +514,19 @@ function INTERFACE_DecreaseTime()
 
 	if (CurrentGame.Game.Turn == "white")
 	{
-		CurrentGame.Game.WhitePlayer.Time -= 1;
-		CurrentGame.Game.SetWTime();
+		if (CurrentGame.Game.WhitePlayer.Time != null)
+		{
+			CurrentGame.Game.WhitePlayer.Time -= 1;
+			CurrentGame.Game.SetWTime();
+		}
 	}
 	else
 	{
-		CurrentGame.Game.BlackPlayer.Time -= 1;
-		CurrentGame.Game.SetBTime();
+		if (CurrentGame.Game.BlackPlayer.Time != null)
+		{
+			CurrentGame.Game.BlackPlayer.Time -= 1;
+			CurrentGame.Game.SetBTime();
+		}
 	}
 }
 
@@ -592,6 +598,10 @@ function INTERFACE_SetWTime()
 	{
 		this.WhitePlayer.Time == "-- : --";
 	}
+	else if (This.WhitePlayer.Time < 0)
+	{
+		this.WhitePlayer.Time == "-- : --";
+	}
 	else {
 		if (this.WhitePlayer.Time <= 0)
 		{
@@ -636,6 +646,10 @@ function INTERFACE_SetBTime()
 	var minStr, secStr;
 
 	if(this.BlackPlayer.Time == null)
+	{
+		this.BlackPlayer.Time == "-- : --";
+	}
+	else if (This.BlackPlayer.Time < 0)
 	{
 		this.BlackPlayer.Time == "-- : --";
 	}
