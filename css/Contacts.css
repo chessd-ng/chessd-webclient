@@ -162,6 +162,7 @@
 	overflow-y		: auto;
 	overflow-x		: hidden;
 	height			: 120px;
+	padding-left : 3px;
 	/*
 	height			: 32mm;
 	*/
