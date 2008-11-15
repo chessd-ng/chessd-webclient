@@ -598,7 +598,7 @@ function INTERFACE_SetWTime()
 	{
 		this.WhitePlayer.Time == "-- : --";
 	}
-	else if (This.WhitePlayer.Time < 0)
+	else if (this.WhitePlayer.Time < 0)
 	{
 		this.WhitePlayer.Time == "-- : --";
 	}
@@ -649,7 +649,7 @@ function INTERFACE_SetBTime()
 	{
 		this.BlackPlayer.Time == "-- : --";
 	}
-	else if (This.BlackPlayer.Time < 0)
+	else if (this.BlackPlayer.Time < 0)
 	{
 		this.BlackPlayer.Time == "-- : --";
 	}
