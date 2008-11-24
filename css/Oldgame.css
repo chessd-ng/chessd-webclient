@@ -57,10 +57,13 @@
 }
 
 #OldGamesDiv tbody,
+#OldGamesDiv thead,
+#OldGamesDiv tfoot,
 #OldGamesDiv table {
 	border-collapse	: collapse;
 	empty-cells		: show;
 	font-weight : bold;
+	width : 478px;
 }
 
 #OldGamesDiv #ResultDiv hr {
@@ -108,7 +111,7 @@
 
 #OldGamesDiv #ResultDiv #TBodyDiv .resulttd, 
 #OldGamesDiv #ResultDiv #TBodyDiv .result_header {
-	width: 120px;
+	width: auto;
 }
 
 #OldGamesDiv #ResultDiv #TBodyDiv .header_examine,
