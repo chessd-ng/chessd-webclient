@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language name="cs_CZ">
+	<general>
+		<general_title>Webový klient ChessD</general_title>
+	        <general_name>ChessD</general_name>
+	</general>
+	<utils>
+		<not_implemented_title>Zatím není implementováno</not_implemented_title>
+		<not_implemented>Vlastnost není v současné verzi implementována</not_implemented>
+	</utils>
+	<window>
+	        <window_yes>Ano</window_yes>
+	        <window_no>Ne</window_no>
+	        <window_ok>OK</window_ok>
+	        <window_close>Zavřít</window_close>
+	        <window_save>Uložit</window_save>
+	        <window_accept>Přijmout</window_accept>
+	        <window_cancel>Zrušit</window_cancel>
+	        <window_decline>Odmítnout</window_decline>
+          <window_search>Hledat</window_search>	
+	</window>
+	<login>
+		<login_title>Vítejte v novém webovém rozhraní Xadrez Livre!</login_title>
+		<login_text1>Můžete zde hrát šachy s ostaními uživateli nebo šachovými roboty, navíc můžete s ostatními uživateli komunikovat v chatovacích místnostech. Nemusíte instalovat žádný program, stačí se zaregistrovat, přihlásit a hrát!</login_text1>
+		<login_text2>Tento server je součástí projektu "Apoio Computacional ao Ensino de Xadrez nas Escolas". Více se múže se můžete dozvědět na následující adrese: </login_text2>
+		<login_text3><![CDATA[Pro správný chod doporučujeme používat internetový prohlížeč <a href='http://www.firefox.com'>Firefox</a>, jehož nejnovější verzi můžete stáhnout <a href='http://www.firefox.com'>zde</a>.]]></login_text3>
+
+
+		<login_footer>Přejeme hodně zábavy!</login_footer>
+		<login_remember_pass>Zapamatovat heslo</login_remember_pass>
+		<login_signin>Rychlá registrace</login_signin>
+		<login_user>Uživatelské jméno</login_user>
+		<login_passwd>Heslo</login_passwd>
+		<login_server_down>Server je dočasně nedostupný, zkuste to prosím později.</login_server_down>
+		<login_connection_refused>Jabber server je dočasně nedostupný, zkuste to prosím později.</login_connection_refused>
+		<login_invalid_user>Bylo zadáno neplatné uživatelské jméno nebo heslo.</login_invalid_user>
+		<login_banned_user>Uživatel bez práva na přístup</login_banned_user>
+		<login_lost_connection>Spojení se serverem bylo přerušeno.</login_lost_connection>
+		<login_load_wait>Čekejte čekejte...</login_load_wait>
+		<login_load_start>Spouštění nahrávání...</login_load_start>
+		<login_load_scripts>Nahrávání skriptů...</login_load_scripts>
+		<login_load_css>Nahrávání css stylů...</login_load_css>
+		<login_load_images>Nahrávání obrázků...</login_load_images>
+		<login_load_user_list>Nahrávání seznamu uživatelů...</login_load_user_list>
+		<login_validate_user>Neplatné uživatelské jméno</login_validate_user>
+	</login>
+	<menu>
+		<menu_adjourn>Odložit partii</menu_adjourn>
+		<menu_search_game>Hledání partií</menu_search_game>
+		<menu_search_user>Hledání uživatelů</menu_search_user>
+		<menu_news>Novinky</menu_news>
+		<menu_preferences>Nastavení</menu_preferences>
+		<menu_help>Pomoc</menu_help>
+		<menu_exit>Odhlášení</menu_exit>
+		<menu_current_games>Probíhající partie</menu_current_games>
+		<menu_challenges>Výzvy</menu_challenges>
+		<menu_tourneys>Turnaje</menu_tourneys>
+		<menu_rooms>Místnosti</menu_rooms>
+		<menu_history>Historie</menu_history>
+		<menu_loading>Nahrávání...</menu_loading>
+		<menu_no_games>Momentálně neprobíhají žádné partie</menu_no_games>
+	</menu>
+	<contact>
+		<contact_contacts>Kontakty</contact_contacts>
+  	<contact_online>Online</contact_online> <!-- todo: find the meaning in context -->
+		<contact_offline>Offline</contact_offline> <!-- todo: ask if there will be another kind of users -->
+		<contact_order_nick>Uživatelské jméno</contact_order_nick>
+		<contact_order_rating>Rating</contact_order_rating>
+		<contact_invite>Přidat do kontaktů</contact_invite>
+		<contact_invite_text>Uživatel %s Vás chce přidat do kontaktů, přijímáte?</contact_invite_text>
+		<contact_remove_title>Odebrat z kontaktů</contact_remove_title>
+		<contact_remove_text>Jste si jist, že chcete odebrat tento kontakt?</contact_remove_text>
+		<contact_search_user>Hledání uživatelů</contact_search_user>
+		<contact_user_t>Uživatel:</contact_user_t>
+		<contact_no_user_found>Uživatel nebyl nalezen</contact_no_user_found>
+		<contact_user_found>Nalezení uživatelé:</contact_user_found>
+		<contact_user>Uživatel</contact_user>
+		<contact_teacher>Učitel</contact_teacher>
+		<contact_admin>Administrátor</contact_admin>
+		<contact_robot>Robot</contact_robot>
+		<contact_search_by>Hledat podle:</contact_search_by>
+		<contact_by_name>Jméno</contact_by_name>
+		<contact_by_user>Uživatelské jméno</contact_by_user>
+		<contact_both>Obojí</contact_both>
+		<contact_change_profile>Upravit profil</contact_change_profile>
+		<contact_loading>Nahrávání seznamu kontaktů...</contact_loading>
+		<contact_online_loading>Nahrávání seznamu online uživatelů...</contact_online_loading> <!-- todo: reference to Online users -->
+	</contact>
+	<chat>
+		<chat_warning>Varování</chat_warning>
+		<chat_max_exceeded>Je otevřen maximální počet %i chatovacích oken</chat_max_exceeded>
+	</chat>
+	<room>
+		<room_default>Hlavní</room_default>
+		<room_contacts>Kontakty</room_contacts>
+		<room_all>Online</room_all>
+		<room_order_nick>Uživatelské jméno</room_order_nick>
+		<room_order_rating>Hodnocení</room_order_rating>
+		<room_create_room>Vytvořit místnost</room_create_room>
+		<room_create_rooms>Vytvořit místnosti</room_create_rooms>
+		<room_cancel_room>Zrušit místnost</room_cancel_room>
+		<room_name>Název: </room_name>
+		<room_description>Popis: </room_description>
+		<room_create>Vytvořit</room_create>
+		<room_cancel_text>Jste si jist, že chcete přerušit vytváření místnosti?</room_cancel_text>
+		<room_error>Chyba, nepodařilo se otevřít místnost</room_error>
+		<room_invalid_name>Neplatný název místnosti</room_invalid_name>
+		<room_invalid_length>Maximální délka je 30 znaků</room_invalid_length>
+		<room_show_user_list>Zobrazit uživatele v místnosti</room_show_user_list>
+		<room_hide_user_list>Skrýt uživatele v místnosti</room_hide_user_list>
+		<room_counter>caracter(s)</room_counter> <!-- todo: find the meaning in context -->
+		<room_loading>Nahrávání místnosti...</room_loading>
+	</room>
+	<group>
+		<group_default>Přátelé</group_default>
+	</group>
+	<status>
+		<status_offline>odpojený</status_offline>
+		<status_available>dostupný</status_available>
+		<status_unavailable>nedostupný</status_unavailable>
+		<status_busy>zaneprázdněný</status_busy>
+		<status_away>pryč</status_away>
+		<status_playing>hraje</status_playing>
+	</status>
+	<usermenu>
+		<usermenu_send_message>Poslat zprávu</usermenu_send_message>
+		<usermenu_send_offlinemessage>Zanechat zprávu</usermenu_send_offlinemessage>
+		<usermenu_match>Vyzvat</usermenu_match>
+		<usermenu_add_contact>Přidat do kontaktů</usermenu_add_contact>
+		<usermenu_remove_contact>Odebrat z kontaktů</usermenu_remove_contact>
+		<usermenu_view_profile>Zobrazit profil</usermenu_view_profile>
+		<usermenu_disconnect_user>Odpojit uživatele</usermenu_disconnect_user>
+		<usermenu_ban>Zablokovat přístup</usermenu_ban> <!-- todo: find the meaning in context -->
+		<usermenu_mute>Zablokovat chat</usermenu_mute> <!-- todo: find the meaning in context -->
+		<usermenu_abusive>Abusive</usermenu_abusive> <!-- todo: find the meaning in context -->
+	</usermenu>
+	<error>
+		<error_disconnected>Spojení se serverem bylo přerušeno. Připojte se prosím znovu.</error_disconnected>
+	</error>
+	<challenge>
+		<challenge_title_invite>Výzva</challenge_title_invite>
+		<challenge_title_offer>Výzva</challenge_title_offer>
+		<challenge_information>Jste vyzván k partii s následujícími podmínkami:</challenge_information>
+		<challenge_my_pieces>Moje figury:</challenge_my_pieces>
+		<challenge_op_pieces>Vaše figury:</challenge_op_pieces>
+		<challenge_time_label>Čas hráče na partii:</challenge_time_label>
+		<challenge_category>Časová kategorie:</challenge_category>
+		<challenge_inc_label>Bonus za tah:</challenge_inc_label>
+		<challenge_time_label_min>min.</challenge_time_label_min>
+		<challenge_inc_label_seg>sek.</challenge_inc_label_seg>
+		<challenge_rating>Započítávat do ratingu</challenge_rating>
+		<challenge_private>Neveřejná hra</challenge_private>
+		<challenge_invite>Vyzvat</challenge_invite>
+		<challenge_chat>Zahájit chat</challenge_chat>
+		<challenge_new_parameters>Odveta</challenge_new_parameters>
+		<challenge_no_time>Neomezený čas</challenge_no_time>
+		<challenge_color_auto>Automaticky</challenge_color_auto>
+		<challenge_auto_flag>Automatická kontrola praporku</challenge_auto_flag>
+
+		<challenge_menu_match_title>Moje výzvy</challenge_menu_match_title>
+		<challenge_menu_announce_title>Ohlášené výzvy</challenge_menu_announce_title>
+		<challenge_menu_announce>Ohlásit výzvu</challenge_menu_announce>
+		<challenge_menu_postpone_title>Odložené partie</challenge_menu_postpone_title>
+		<challenge_menu_no_match>Nemáte žádné výzvy.</challenge_menu_no_match>
+		<challenge_menu_no_announce>Žádné výzvy nejsou ohlášeny.</challenge_menu_no_announce>
+		<challenge_menu_no_postpone>Žádné partie nesjou odloženy.</challenge_menu_no_postpone>
+		<challenge_offer_user_offline>You are disconnected from the server. Try to connect again on the main page to go online</challenge_offer_user_offline>
+		<challenge_offer_opponent_offline>Your opponent is disconnected from the chess server.</challenge_offer_opponent_offline>
+		<challenge_error>Error in challenging</challenge_error>
+	</challenge>
+	<game>
+		<game_draw>Nabídka remízy</game_draw>
+		<game_draw_text>Uživatel %s nabízí remízu, přijímáte?</game_draw_text>
+		<game_draw_denied>Uživatel %s nabídku odmítl.</game_draw_denied>
+		<game_end_game>Konec partie</game_end_game>
+		<game_resign_text>Uživatel %s se vzdal.</game_resign_text>
+		<game_adjourn>Odložení partie</game_adjourn>
+		<game_adjourn_text>Uživatel %s chce odložit tuto partii, přijímáte?</game_adjourn_text>
+		<game_adjourn_denied>Uživatel %s odmítl odložit partii.</game_adjourn_denied>
+		<game_abort>Zrušení partie</game_abort>
+		<game_abort_text>Uživatel %s chce zrušit tuto partii, přijímáte?</game_abort_text>
+		<game_abort_denied>Uživatel %s odmítl zrušit partii.</game_abort_denied>
+		<game_resign>Vzdání partie</game_resign>
+		<game_resign_confirm>Opravdu si přejete vzdát partii?</game_resign_confirm>
+		<game_checkmatew_text>Mat, zvítězil jste nad uživatelem %s.</game_checkmatew_text>
+		<game_checkmatel_text>Mat, prohrál jste s uživatelem %s.</game_checkmatel_text>
+		<game_timew_text>Vyhrál jste na čas nad uživatelem %s.</game_timew_text>
+		<game_timel_text>Prohrál jste na čas s uživatelem %s.</game_timel_text>
+		<game_remove_game>Nemůžete zavřít probíhající partii.</game_remove_game>
+		<game_remove_game_title>Upozornění</game_remove_game_title>
+
+		<game_canceled>Partie byla zrušena.</game_canceled>
+
+		<game_options>Možnosti</game_options>
+		<game_moves>Partiář</game_moves>
+		<game_send_draw>Nabídnout remízu</game_send_draw>
+		<game_send_resign>Vzdát se</game_send_resign>
+		<game_send_terminate>Terminate</game_send_terminate> <!-- todo: find the meaning in context -->
+		<game_send_adjourn>Odložit partii</game_send_adjourn>
+		<game_give_time>Přidat čas soupeři</game_give_time>
+		<game_pawn_promotion>Proměna pěšce</game_pawn_promotion>
+		<game_promotion_queen>Dáma</game_promotion_queen>
+		<game_promotion_rook>Věž</game_promotion_rook>
+		<game_promotion_bishop>Střelec</game_promotion_bishop>
+		<game_promotion_knight>Jezdec</game_promotion_knight>
+		
+		<game_observer_alert>Nemůžete sledovat další partii mezitímco hrajete nebo sledujete jinou.</game_observer_alert>
+		<game_observer_alert_title>Upozornění</game_observer_alert_title>
+
+		<game_white_pawn>Bílý pěšec</game_white_pawn>
+		<game_white_rook>Bílá věž</game_white_rook>
+		<game_white_knight>Bílý jezdec</game_white_knight>
+		<game_white_bishop>Bílý střelec</game_white_bishop>
+		<game_white_queen>Bílá dáma</game_white_queen>
+		<game_white_king>Bílý král</game_white_king>
+
+		<game_black_pawn>Černý pěšec</game_black_pawn>
+		<game_black_rook>Černá věž</game_black_rook>
+		<game_black_knight>Černý jezdec</game_black_knight>
+		<game_black_bishop>Černý střelec</game_black_bishop>
+		<game_black_queen>Černá dáma</game_black_queen>
+		<game_black_king>Černý král</game_black_king>
+
+		<game_button_first>První</game_button_first>
+		<game_button_prev>Předchozí</game_button_prev>
+		<game_button_next>Další</game_button_next>
+		<game_button_last>Poslední</game_button_last>
+		
+		<game_oldgame_alert>Nemůžete si prohlížet další partii mezitímco hrajete nebo si prohlížíte jinou.</game_oldgame_alert>
+
+		<game_result_white-timeover>Bílému vypršel čas</game_result_white-timeover>
+		<game_result_black-timeover>Černému vypršel čas</game_result_black-timeover>
+		<game_result_white-mated>Bílý dal mat</game_result_white-mated>
+		<game_result_black-mated>Černý dal mat</game_result_black-mated>
+		<game_result_white-resigned>Bílý se vzdal</game_result_white-resigned>
+		<game_result_black-resigned>Černý se vzdal</game_result_black-resigned>
+		<game_result_draw-agreement>Soupeři se dohodli na remíze</game_result_draw-agreement>
+		<game_result_stalemate>Pat</game_result_stalemate>
+		<game_result_draw-repetition>Remíza trojím opakováním pozice</game_result_draw-repetition>
+		<game_result_draw-fifty-moves>Remíza, pravidlo 50 tahů</game_result_draw-fifty-moves>
+		<game_result_draw-impossible-mate>Remíza, nedostatek matícího materiálu</game_result_draw-impossible-mate>
+		<game_result_draw-timeover>Čas obou hráčů vypršel</game_result_draw-timeover>
+		<game_result_canceled-agreement>Soupeři se dohodli na zrušení partie</game_result_canceled-agreement>
+		<game_result_canceled-timed-out>Partie byla pro neaktivitu zrušena</game_result_canceled-timed-out>
+		<game_result_adjourned-agreement>Soupeři se dohodli na odložení partie</game_result_adjourned-agreement>
+		<game_result_adjourned-shutdown>Dojde k odstávce serveru, partie bude odložena</game_result_adjourned-shutdown>
+		<game_result_white-wo>White has won by W.O.</game_result_white-wo> <!-- todo: find the meaning in context -->
+		<game_result_black-wo>Black has won by W.O.</game_result_black-wo> <!-- todo: find the meaning in context -->
+		<game_result_closed>Konec partie, výsledek se nezobrazil.</game_result_closed> <!-- todo: find the meaning in context -->
+		<game_loading_move>Nahrávání tahu...</game_loading_move>
+		<game_white_player_leave>Bílý odešel od partie. Pokud se do několika minut nevrátí, černý vyhraje kontumačně.</game_white_player_leave>
+		<game_black_player_leave>Černý odešel od partie. Pokud se do několika minut nevrátí, bílý vyhraje kontumačně.</game_black_player_leave>
+	</game>
+	<profile>
+		<profile_window>Profil a informace</profile_window>
+		<profile_name>Jméno: </profile_name>
+		<profile_nick>Uživatelské jméno: </profile_nick>
+		<profile_whoami>O mě: </profile_whoami>
+		<profile_level>Úroveň: </profile_level>
+		<profile_group>Skupina: </profile_group>
+		<profile_type>Typ: </profile_type>
+		<profile_online_time>Čas online: </profile_online_time>
+		<profile_total_time>Čas celkem: </profile_total_time>
+		<profile_category>Kategorie</profile_category>
+		<profile_current_rating>Aktuální rating</profile_current_rating>
+		<profile_best_rating>Nejlepší rating</profile_best_rating>
+		<profile_record_date>Datum nej. ratingu</profile_record_date>
+		<profile_games_number>Počet partií</profile_games_number>
+		<profile_win>Výhry</profile_win>
+		<profile_draw>Remízy</profile_draw>
+		<profile_lose>Prohry</profile_lose>
+		<profile_edit_photo>Změnit obrázek</profile_edit_photo>
+		<profile_old_games1>Moje partie</profile_old_games1>
+		<profile_old_games2>Partie</profile_old_games2> <!-- todo: find the meaning in context -->
+		<profile_save>Uložit profil</profile_save>
+		<profile_discard>Zavřít bez uložení</profile_discard>
+		<profile_save_close>Uložit a zavřít</profile_save_close>
+		<profile_confirm>Jste si jist, že chcete odejít, bez uložení změn v profilu?</profile_confirm>
+		<profile_confirm_close>OK</profile_confirm_close>
+		<profile_change_image>Vyberte obrázek</profile_change_image>
+		<profile_change_image_title>Změnit obrázek</profile_change_image_title>
+		<profile_load_error>Chyba</profile_load_error>
+		<profile_load_error_title>Nebylo možné nahrát obrázek</profile_load_error_title>
+		<profile_year>r</profile_year>
+		<profile_month>m</profile_month>
+		<profile_day>d</profile_day>
+		<profile_error>Chyba při ukládání profilu</profile_error>
+		<profile_desc_limit>Maximální povolená délka popisu je 200 znaků.</profile_desc_limit>
+	</profile>
+	<register>
+		<register_inf>Pro vytvoření účtu na Xadrez Livre vyplňte prosím následující formulář:</register_inf>
+		<register_title>Registrace</register_title>
+		<register_login>Uživatelské jméno </register_login>
+		<register_max_char>(max. 14 znaků)</register_max_char>
+		<register_user_inf>Povolena jsou pouze malá písmena, čísla, pomlčka (-) a podtržítko (_).</register_user_inf>
+		<register_mail1>E-mail </register_mail1>
+		<register_mail2>(nepovinný)</register_mail2>
+		<register_mail_inf>Na tento e-mail je zasíláno zapomenuté heslo.</register_mail_inf>
+		<register_passwd>Heslo:</register_passwd>
+		<register_passwd_confirm1>Heslo</register_passwd_confirm1>
+		<register_passwd_confirm2> (pro ověření)</register_passwd_confirm2>
+		<register_bt_confirm>Potvrdit</register_bt_confirm>
+		<register_invalid_user_name>Neplatné uživatelské jméno</register_invalid_user_name>
+		<register_invalid_user_name_len>Uživatelské jméno nesmí být delší než 14 znaků</register_invalid_user_name_len>
+		<register_invalid_mail>Neplatný email</register_invalid_mail>
+		<register_invalid_password>Neplatné heslo</register_invalid_password>
+		<register_error_409>Uživatelské jméno je již zabrané</register_error_409>
+		<register_sucess_message>Registrace proběhla úspěšně</register_sucess_message>
+	</register>
+	<oldgame>
+		<oldgame_title>Hledání partií</oldgame_title>
+		<oldgame_my_games>Moje partie</oldgame_my_games>
+		<oldgame_other_games>Partie ostatních uživatelů</oldgame_other_games>
+		<oldgame_player1>Hráč 1:</oldgame_player1>
+		<oldgame_pieces>Figury:</oldgame_pieces>
+		<oldgame_both>Jakékoliv</oldgame_both>
+		<oldgame_player2>Hráč 2:</oldgame_player2>
+		<oldgame_date_form>Data:</oldgame_date_form>
+		<oldgame_from>od:</oldgame_from>
+		<oldgame_to>do:</oldgame_to>
+		<oldgame_new_search>Nové hledání</oldgame_new_search>
+		<oldgame_search_result>Nalezené partie:</oldgame_search_result>
+		<oldgame_no_result>Nebyla nalezena žádná partie.</oldgame_no_result>
+		<oldgame_player1_hd>Hráč 1</oldgame_player1_hd>
+		<oldgame_player2_hd>Hráč 2</oldgame_player2_hd>
+		<oldgame_white_hd>Bílý</oldgame_white_hd>
+		<oldgame_black_hd>Černý</oldgame_black_hd>
+		<oldgame_category>Kategorie</oldgame_category>
+		<oldgame_result>Výsledek</oldgame_result>
+		<oldgame_date>Datum</oldgame_date>
+		<oldgame_prev>Předchozí</oldgame_prev>
+		<oldgame_next>Další</oldgame_next>
+		<oldgame_format>Formát: dd/mm/rrrr</oldgame_format>
+		<oldgame_no_moves>Partie bez tahů</oldgame_no_moves>
+		<oldgame_invalid_begin>Neplatná počáteční data!</oldgame_invalid_begin>
+		<oldgame_invalid_end>Neplatná konečná data!</oldgame_invalid_end>
+		<oldgame_invalid_interval>Neplatný interval!</oldgame_invalid_interval>
+		<oldgame_invalid_date>Neplatná data!</oldgame_invalid_date>
+		<oldgame_loading>Hledání partií...</oldgame_loading>
+	</oldgame>
+	<welcome>
+		<welcome_title>Vítejte!</welcome_title>
+		<welcome_text1>Zde v interaktivním prostředí Xadrez Livre můžete:</welcome_text1>
+		<welcome_text2>Další informace o tomto prostředí můžete najít v hlavní nabídce v sekci "Pomoc".</welcome_text2>
+		<welcome_instruction>
+			<welcome_item><![CDATA[<b>Hrát partie:</b> klikněte na jméno uživatele a vyberte "Vyzvat". Všichni připojení uživatelé jsou zobrazení vlevo dole v "Hlavní" místnosti.]]></welcome_item>
+			<welcome_item><![CDATA[<b>Spravovat kontakty:</b> seznam Vašich kontaktů je nad "Hlavní" místností. Pro přidání nového kontaktu klikněte na jméno uživatele a vyberte "Přidat do kontaktů". K přidání uživatele do kontaktů dojde po úspěšné autorizaci.]]></welcome_item>
+		</welcome_instruction>
+	</welcome>
+	<admin>
+		<admin_kick_ok>Uživatel byl vyhozen</admin_kick_ok>
+		<admin_ban_ok>Uživateli byl odebrán přístup</admin_ban_ok>
+		<admin_unban_ok>Uživateli bylo navráceno právo přístupu</admin_unban_ok>
+		<admin_user_ban>Máte zakázán přístup. \nDůvod: </admin_user_ban>
+		<admin_user_kick>Byl jste vyhozen. \nDůvod: </admin_user_kick>
+
+	</admin>
+</language>

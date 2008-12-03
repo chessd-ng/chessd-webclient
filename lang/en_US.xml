@@ -17,10 +17,13 @@
 	        <window_close>Close</window_close>
 	        <window_save>Save</window_save>
 	        <window_accept>Accept</window_accept>
+		<window_play>Play</window_play>
+		<window_continue>Continue</window_continue>
 	        <window_cancel>Cancel</window_cancel>
 	        <window_decline>Decline</window_decline>
-			<window_search>Search</window_search>	
-			<window_character>caracter(s)</window_character>
+		<window_search>Search</window_search>	
+		<window_character>caracter(s)</window_character>
+		
 	</window>
 	<login>
 		<login_title>Welcome to new Xadrez Livre Web Interface!</login_title>
@@ -79,7 +82,6 @@
 		<contact_search_user>Search user</contact_search_user>
 		<contact_user_t>User:</contact_user_t>
 		<contact_no_user_found>No user found</contact_no_user_found>
-		<contact_user_found>Users found:</contact_user_found>
 		<contact_user>User</contact_user>
 		<contact_teacher>Teacher</contact_teacher>
 		<contact_admin>Admin</contact_admin>
@@ -92,6 +94,9 @@
 		<contact_loading>Loading contact list...</contact_loading>
 		<contact_online_loading>Loading online users list...</contact_online_loading>
 		<contact_default_group>Friends</contact_default_group>
+		<contact_search_default>No search done</contact_search_default>
+		<contact_not_found>Nenhum resultado encontrado com %t %s</contact_not_found>
+		<contact_user_found>Users found:</contact_user_found>
 	</contact>
 	<chat>
 		<chat_warning>Warning</chat_warning>
