@@ -178,7 +178,27 @@ function UTILS_GetTag(XML, TagName)
 */
 function UTILS_GetText(TagName)
 {
-	return UTILS_GetTag(MainData.GetText(), TagName);
+	var Text = UTILS_GetTag(MainData.GetText(), TagName);
+	var i=0;
+
+	if(Text == null)
+	{
+		Text = UTILS_GetTag(MainData.GetDefaultText(), TagName);
+		
+		//Find tag name in log struct
+		while( (!TagName.match(TranslationLog[i])) && (i< TranslationLog.length) )
+		{
+			i++;
+		}
+
+		//If not founded, push tagName in translation log array	
+		if(i == TranslationLog.length)
+		{
+			TranslationLog.push("<"+TagName+">");
+		}
+		
+	}
+	return Text;
 }
 
 

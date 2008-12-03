@@ -58,6 +58,7 @@ function DATA(ConfFile, LangFile)
 	this.Conf.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
 	this.Conf.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.Conf.GetText = UTILS_OpenXMLFile(LangFile);
+	this.Conf.DefaultText = UTILS_OpenXMLFile("lang/pt_BR.xml");
 	this.Conf.Const = DATA_SetConsts();
 	this.Conf.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Conf.Version = UTILS_GetTag(Params, "version");
@@ -173,6 +174,7 @@ DATA.prototype.GetConferenceComponent = DATA_GetConferenceComponent;
 DATA.prototype.GetSearchComponent = DATA_GetSearchComponent;
 DATA.prototype.GetText = DATA_GetText;
 DATA.prototype.SetText = DATA_SetText;
+DATA.prototype.GetDefaultText = DATA_GetDefaultText;
 DATA.prototype.GetConst = DATA_GetConst;
 DATA.prototype.GetXmlns = DATA_GetXmlns;
 DATA.prototype.GetVersion = DATA_GetVersion;
@@ -492,6 +494,10 @@ function DATA_GetText()
 function DATA_SetText(FileXML)
 {
 	this.Conf.GetText = FileXML;
+}
+function DATA_GetDefaultText()
+{
+	return this.Conf.DefaultText;
 }
 function DATA_GetConst()
 {

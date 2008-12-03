@@ -23,6 +23,7 @@
 * by interface
 */
 var MainData;
+var TranslationLog = new Array();
 
 /*
 * @brief	Start main data and show login page
