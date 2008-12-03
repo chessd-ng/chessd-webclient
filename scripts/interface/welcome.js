@@ -45,6 +45,11 @@ function INTERFACE_CreateWelcome()
 
 	// TODO -> Change welcome texto to CDATA
 	XMLInstruction = MainData.Conf.GetText.getElementsByTagName("welcome_item");
+	// Quick fix to get text in default language 
+	if(XMLInstruction.length == 0)
+	{
+		XMLInstruction = MainData.Conf.DefaultText.getElementsByTagName("welcome_item");
+	}
 
 	for(i=0; i<XMLInstruction.length ; i++)
 	{
