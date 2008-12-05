@@ -58,7 +58,7 @@ function DATA(ConfFile, LangFile)
 	this.Conf.ConferenceComponent = UTILS_GetTag(Params,"conference-component");
 	this.Conf.SearchComponent = UTILS_GetTag(Params, "search-component");
 	this.Conf.GetText = UTILS_OpenXMLFile(LangFile);
-	this.Conf.DefaultText = UTILS_OpenXMLFile("lang/pt_BR.xml");
+	this.Conf.DefaultText = UTILS_OpenXMLFile("lang/en_US.xml");
 	this.Conf.Const = DATA_SetConsts();
 	this.Conf.Xmlns = UTILS_GetTag(Params, "Xmlns");
 	this.Conf.Version = UTILS_GetTag(Params, "version");
