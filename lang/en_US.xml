@@ -1,428 +1,1175 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" ?>
 <language name="en_US">
 	<general>
-		<general_title>Web ChessD Client</general_title>
-	        <general_name>ChessD</general_name>
+		<general_title>
+			Web ChessD Client
+		</general_title>
+		<general_name>
+			ChessD
+		</general_name>
 	</general>
 	<utils>
-		<not_implemented_title>Not implemented</not_implemented_title>
-		<not_implemented>Feature not implemented on this version </not_implemented>
-		<server_offline_title>Server offline</server_offline_title>
-		<server_offline>Server was shot down</server_offline>
+		<not_implemented_title>
+			Not implemented
+		</not_implemented_title>
+		<not_implemented>
+			Feature not implemented on this version 
+		</not_implemented>
+		<server_offline_title>
+			Server offline
+		</server_offline_title>
+		<server_offline>
+			Server was shot down
+		</server_offline>
 	</utils>
 	<window>
-	        <window_yes>Yes</window_yes>
-	        <window_no>No</window_no>
-	        <window_ok>Ok</window_ok>
-	        <window_close>Close</window_close>
-	        <window_save>Save</window_save>
-	        <window_accept>Accept</window_accept>
-		<window_play>Play</window_play>
-		<window_continue>Continue</window_continue>
-	        <window_cancel>Cancel</window_cancel>
-	        <window_decline>Decline</window_decline>
-		<window_search>Search</window_search>	
-		<window_character>caracter(s)</window_character>
-		
+		<window_yes>
+			Yes
+		</window_yes>
+		<window_no>
+			No
+		</window_no>
+		<window_ok>
+			Ok
+		</window_ok>
+		<window_close>
+			Close
+		</window_close>
+		<window_save>
+			Save
+		</window_save>
+		<window_accept>
+			Accept
+		</window_accept>
+		<window_play>
+			Play
+		</window_play>
+		<window_continue>
+			Continue
+		</window_continue>
+		<window_cancel>
+			Cancel
+		</window_cancel>
+		<window_decline>
+			Decline
+		</window_decline>
+		<window_search>
+			Search
+		</window_search>
+		<window_character>
+			caracter(s)
+		</window_character>
 	</window>
 	<login>
-		<login_title>Welcome to new Xadrez Livre Web Interface!</login_title>
-		<login_text1>Here you can play chess with other users or with robots, moreover you can interact with the users through the chat rooms. For that you don't need to install any other program, you just need to do your registration on the link, enter and play!</login_text1>
-		<login_text2>This server is part of the project "Apoio Computacional ao Ensino de Xadrez nas Escolas". To learn more about this project, access </login_text2>
-		<login_text3><![CDATA[We recommend using the browser <a href='http://www.firefox.com'>Firefox</a> to ensure the better functioning of the server. You can download the latest version of the browser <a href='http://www.firefox.com'>here</a>.]]></login_text3>
-		<login_footer>Have fun!</login_footer>
-		<login_remember_pass>Remember password</login_remember_pass>
-		<login_signin>Quick register</login_signin>
-		<login_user>User</login_user>
-		<login_passwd>Password</login_passwd>
-		<login_server_down>Server off-line. Try again later.</login_server_down>
-		<login_connection_refused>Jabber server off-line. Try again later.</login_connection_refused>
-		<login_invalid_user>User or password incorrect.</login_invalid_user>
-		<login_banned_user>Banned user</login_banned_user>
-		<login_lost_connection>Connection lost with the server.</login_lost_connection>
-		<login_load_wait>Loading...</login_load_wait>
-		<login_load_start>Starting loader...</login_load_start>
-		<login_load_scripts>Loading scripts...</login_load_scripts>
-		<login_load_css>Loading css...</login_load_css>
-		<login_load_images>Loading images...</login_load_images>
-		<login_load_user_list>Loading user list</login_load_user_list>
-		<login_validate_user>Invalid User</login_validate_user>
-		<login_connection_closed>Conection Lost. Try again.</login_connection_closed>
-		<login_connection_start>Opening Conexion...</login_connection_start>
-		<login_connection_user>Verifying user...</login_connection_user>
-		<login_connection_passwd>Verifying password...</login_connection_passwd>
-		<login_server_not_founded>Server not found.</login_server_not_founded>
+		<login_title>
+			Welcome to new Xadrez Livre Web Interface!
+		</login_title>
+		<login_text1>
+			Here you can play chess with other users or with robots, moreover you can interact with the users through the chat rooms. For that you don't need to install any other program, you just need to do your registration on the link, enter and play!
+		</login_text1>
+		<login_text2>
+			This server is part of the project &quot;Apoio Computacional ao Ensino de Xadrez nas Escolas&quot;. To learn more about this project, access 
+		</login_text2>
+		<login_text3>
+<![CDATA[We recommend using the browser <a href='http://www.firefox.com'>Firefox</a> to ensure the better functioning of the server. You can download the latest version of the browser <a href='http://www.firefox.com'>here</a>.]]>		</login_text3>
+		<login_footer>
+			Have fun!
+		</login_footer>
+		<login_remember_pass>
+			Remember password
+		</login_remember_pass>
+		<login_signin>
+			Quick register
+		</login_signin>
+		<login_user>
+			User
+		</login_user>
+		<login_passwd>
+			Password
+		</login_passwd>
+		<login_server_down>
+			Server off-line. Try again later.
+		</login_server_down>
+		<login_connection_refused>
+			Jabber server off-line. Try again later.
+		</login_connection_refused>
+		<login_invalid_user>
+			User or password incorrect.
+		</login_invalid_user>
+		<login_banned_user>
+			Banned user
+		</login_banned_user>
+		<login_lost_connection>
+			Connection lost with the server.
+		</login_lost_connection>
+		<login_load_wait>
+			Loading...
+		</login_load_wait>
+		<login_load_start>
+			Starting loader...
+		</login_load_start>
+		<login_load_scripts>
+			Loading scripts...
+		</login_load_scripts>
+		<login_load_css>
+			Loading css...
+		</login_load_css>
+		<login_load_images>
+			Loading images...
+		</login_load_images>
+		<login_load_user_list>
+			Loading user list
+		</login_load_user_list>
+		<login_validate_user>
+			Invalid User
+		</login_validate_user>
+		<login_connection_closed>
+			Conection Lost. Try again.
+		</login_connection_closed>
+		<login_connection_start>
+			Opening Conexion...
+		</login_connection_start>
+		<login_connection_user>
+			Verifying user...
+		</login_connection_user>
+		<login_connection_passwd>
+			Verifying password...
+		</login_connection_passwd>
+		<login_server_not_founded>
+			Server not found.
+		</login_server_not_founded>
 	</login>
 	<menu>
-		<menu_adjourn>Adjourn</menu_adjourn>
-		<menu_search_game>Search game</menu_search_game>
-		<menu_search_user>Search user</menu_search_user>
-		<menu_news>News</menu_news>
-		<menu_preferences>Preferences</menu_preferences>
-		<menu_help>Help</menu_help>
-		<menu_exit>Exit</menu_exit>
-		<menu_current_games>Current games</menu_current_games>
-		<menu_challenges>Challenges</menu_challenges>
-		<menu_tourneys>Tourneys</menu_tourneys>
-		<menu_rooms>Rooms</menu_rooms>
-		<menu_history>History</menu_history>
-		<menu_loading>Loading...</menu_loading>
-		<menu_no_games>There are no matches in progress</menu_no_games>
+		<menu_adjourn>
+			Adjourn
+		</menu_adjourn>
+		<menu_search_game>
+			Search game
+		</menu_search_game>
+		<menu_search_user>
+			Search user
+		</menu_search_user>
+		<menu_news>
+			News
+		</menu_news>
+		<menu_preferences>
+			Preferences
+		</menu_preferences>
+		<menu_help>
+			Help
+		</menu_help>
+		<menu_exit>
+			Exit
+		</menu_exit>
+		<menu_current_games>
+			Current games
+		</menu_current_games>
+		<menu_challenges>
+			Challenges
+		</menu_challenges>
+		<menu_tourneys>
+			Tourneys
+		</menu_tourneys>
+		<menu_rooms>
+			Rooms
+		</menu_rooms>
+		<menu_history>
+			History
+		</menu_history>
+		<menu_loading>
+			Loading...
+		</menu_loading>
+		<menu_no_games>
+			There are no matches in progress
+		</menu_no_games>
 	</menu>
 	<contact>
-		<contact_contacts>Contacts</contact_contacts>
-		<contact_online>Online</contact_online>
-		<contact_offline>Offline</contact_offline>
-		<contact_order_nick>Nick</contact_order_nick>
-		<contact_order_rating>Rating</contact_order_rating>
-		<contact_invite>Add user</contact_invite>
-		<contact_invite_text>%s hass added you as a friend, do you accept?</contact_invite_text>
-		<contact_remove_title>Remove user</contact_remove_title>
-		<contact_remove_text>Are you really sure you want to remove %s from your contacts?</contact_remove_text>
-		<contact_search_user>Search user</contact_search_user>
-		<contact_user_t>User:</contact_user_t>
-		<contact_no_user_found>No user found</contact_no_user_found>
-		<contact_user>User</contact_user>
-		<contact_teacher>Teacher</contact_teacher>
-		<contact_admin>Admin</contact_admin>
-		<contact_robot>Robot</contact_robot>
-		<contact_search_by>Search by:</contact_search_by>
-		<contact_by_name>Name</contact_by_name>
-		<contact_by_user>Nick</contact_by_user>
-		<contact_both>Both</contact_both>
-		<contact_change_profile>Change my profile</contact_change_profile>
-		<contact_loading>Loading contact list...</contact_loading>
-		<contact_online_loading>Loading online users list...</contact_online_loading>
-		<contact_default_group>Friends</contact_default_group>
-		<contact_search_default>No search done</contact_search_default>
-		<contact_not_found>Nenhum resultado encontrado com %t %s</contact_not_found>
-		<contact_user_found>Users found:</contact_user_found>
+		<contact_contacts>
+			Contacts
+		</contact_contacts>
+		<contact_online>
+			Online
+		</contact_online>
+		<contact_offline>
+			Offline
+		</contact_offline>
+		<contact_order_nick>
+			Nick
+		</contact_order_nick>
+		<contact_order_rating>
+			Rating
+		</contact_order_rating>
+		<contact_invite>
+			Add user
+		</contact_invite>
+		<contact_invite_text>
+			%s hass added you as a friend, do you accept?
+		</contact_invite_text>
+		<contact_remove_title>
+			Remove user
+		</contact_remove_title>
+		<contact_remove_text>
+			Are you really sure you want to remove %s from your contacts?
+		</contact_remove_text>
+		<contact_search_user>
+			Search user
+		</contact_search_user>
+		<contact_user_t>
+			User:
+		</contact_user_t>
+		<contact_no_user_found>
+			No user found
+		</contact_no_user_found>
+		<contact_user>
+			User
+		</contact_user>
+		<contact_teacher>
+			Teacher
+		</contact_teacher>
+		<contact_admin>
+			Admin
+		</contact_admin>
+		<contact_robot>
+			Robot
+		</contact_robot>
+		<contact_search_by>
+			Search by:
+		</contact_search_by>
+		<contact_by_name>
+			Name
+		</contact_by_name>
+		<contact_by_user>
+			Nick
+		</contact_by_user>
+		<contact_both>
+			Both
+		</contact_both>
+		<contact_change_profile>
+			Change my profile
+		</contact_change_profile>
+		<contact_loading>
+			Loading contact list...
+		</contact_loading>
+		<contact_online_loading>
+			Loading online users list...
+		</contact_online_loading>
+		<contact_default_group>
+			Friends
+		</contact_default_group>
+		<contact_search_default>
+			No search done
+		</contact_search_default>
+		<contact_not_found>
+			Nenhum resultado encontrado com %t %s
+		</contact_not_found>
+		<contact_user_found>
+			Users found:
+		</contact_user_found>
+		<contact_by_nick>
+			undefined_text
+		</contact_by_nick>
 	</contact>
 	<chat>
-		<chat_warning>Warning</chat_warning>
-		<chat_max_exceeded>Maximum %i chats opens</chat_max_exceeded>
+		<chat_warning>
+			Warning
+		</chat_warning>
+		<chat_max_exceeded>
+			Maximum %i chats opens
+		</chat_max_exceeded>
 	</chat>
 	<room>
-		<room_default>General</room_default>
-		<room_contacts>Contacts</room_contacts>
-		<room_all>Online</room_all>
-		<room_order_nick>Nick</room_order_nick>
-		<room_order_rating>Rating</room_order_rating>
-		<room_create_room>Create room</room_create_room>
-		<room_create_rooms>Create rooms</room_create_rooms>
-		<room_cancel_room>Cancel room</room_cancel_room>
-		<room_name>Name: </room_name>
-		<room_description>Description: </room_description>
-		<room_create>Create</room_create>
-		<room_cancel_text>Are you sure you want to cancel the creation of this room?</room_cancel_text>
-		<room_error>Error to open a room</room_error>
-		<room_invalid_name>Invalid room name</room_invalid_name>
-		<room_invalid_length>Maximum length of 30 characters</room_invalid_length>
-		<room_show_user_list>See users of the room</room_show_user_list>
-		<room_hide_user_list>Hide users of the room</room_hide_user_list>
-		<room_counter>caracter(s)</room_counter>
-		<room_loading>Loading room...</room_loading>
-		<room_error_message_length>Maximum number of caracters exceeded (%s)</room_error_message_length>
+		<room_default>
+			General
+		</room_default>
+		<room_contacts>
+			Contacts
+		</room_contacts>
+		<room_all>
+			Online
+		</room_all>
+		<room_order_nick>
+			Nick
+		</room_order_nick>
+		<room_order_rating>
+			Rating
+		</room_order_rating>
+		<room_create_room>
+			Create room
+		</room_create_room>
+		<room_create_rooms>
+			Create rooms
+		</room_create_rooms>
+		<room_cancel_room>
+			Cancel room
+		</room_cancel_room>
+		<room_name>
+			Name: 
+		</room_name>
+		<room_description>
+			Description: 
+		</room_description>
+		<room_create>
+			Create
+		</room_create>
+		<room_cancel_text>
+			Are you sure you want to cancel the creation of this room?
+		</room_cancel_text>
+		<room_error>
+			Error to open a room
+		</room_error>
+		<room_invalid_name>
+			Invalid room name
+		</room_invalid_name>
+		<room_invalid_length>
+			Maximum length of 30 characters
+		</room_invalid_length>
+		<room_show_user_list>
+			See users of the room
+		</room_show_user_list>
+		<room_hide_user_list>
+			Hide users of the room
+		</room_hide_user_list>
+		<room_counter>
+			caracter(s)
+		</room_counter>
+		<room_loading>
+			Loading room...
+		</room_loading>
+		<room_error_message_length>
+			Maximum number of caracters exceeded (%s)
+		</room_error_message_length>
 	</room>
 	<group>
-		<group_default>Friends</group_default>
+		<group_default>
+			Friends
+		</group_default>
 	</group>
 	<status>
-		<status_offline>offline</status_offline>
-		<status_available>available</status_available>
-		<status_unavailable>unavailable</status_unavailable>
-		<status_busy>busy</status_busy>
-		<status_away>away</status_away>
-		<status_playing>playing</status_playing>
+		<status_offline>
+			offline
+		</status_offline>
+		<status_available>
+			available
+		</status_available>
+		<status_unavailable>
+			unavailable
+		</status_unavailable>
+		<status_busy>
+			busy
+		</status_busy>
+		<status_away>
+			away
+		</status_away>
+		<status_playing>
+			playing
+		</status_playing>
 	</status>
 	<usermenu>
-		<usermenu_send_message>Send Message</usermenu_send_message>
-		<usermenu_send_offlinemessage>Leave a message</usermenu_send_offlinemessage>
-		<usermenu_match>Invite to play</usermenu_match>
-		<usermenu_add_contact>Add contact</usermenu_add_contact>
-		<usermenu_remove_contact>Remove contact</usermenu_remove_contact>
-		<usermenu_view_profile>View profile</usermenu_view_profile>
-		<usermenu_disconnect_user>Disconnect user</usermenu_disconnect_user>
-		<usermenu_ban>Ban</usermenu_ban>
-		<usermenu_mute>Mute</usermenu_mute>
-		<usermenu_abusive>Abusive</usermenu_abusive>
+		<usermenu_send_message>
+			Send Message
+		</usermenu_send_message>
+		<usermenu_send_offlinemessage>
+			Leave a message
+		</usermenu_send_offlinemessage>
+		<usermenu_match>
+			Invite to play
+		</usermenu_match>
+		<usermenu_add_contact>
+			Add contact
+		</usermenu_add_contact>
+		<usermenu_remove_contact>
+			Remove contact
+		</usermenu_remove_contact>
+		<usermenu_view_profile>
+			View profile
+		</usermenu_view_profile>
+		<usermenu_disconnect_user>
+			Disconnect user
+		</usermenu_disconnect_user>
+		<usermenu_ban>
+			Ban
+		</usermenu_ban>
+		<usermenu_mute>
+			Mute
+		</usermenu_mute>
+		<usermenu_abusive>
+			Abusive
+		</usermenu_abusive>
 	</usermenu>
 	<error>
-		<error_disconnected>Lost contact with server. Please reconnect.</error_disconnected>
+		<error_disconnected>
+			Lost contact with server. Please reconnect.
+		</error_disconnected>
 	</error>
 	<challenge>
-		<challenge_title_invite>Invite to play</challenge_title_invite>
-		<challenge_title_offer>Invite to play</challenge_title_offer>
-		<challenge_information>invite to play a game with the following attributes:</challenge_information>
-		<challenge_my_pieces>My pieces:</challenge_my_pieces>
-		<challenge_op_pieces>Opponent's pieces:</challenge_op_pieces>
-		<challenge_time_label>Time:</challenge_time_label>
-		<challenge_category>Game category:</challenge_category>
-		<challenge_inc_label>Increment:</challenge_inc_label>
-		<challenge_time_label_min>min</challenge_time_label_min>
-		<challenge_inc_label_seg>seg</challenge_inc_label_seg>
-		<challenge_rating>Rated</challenge_rating>
-		<challenge_private>Private game</challenge_private>
-		<challenge_invite>Invite</challenge_invite>
-		<challenge_chat>Open chat</challenge_chat>
-		<challenge_new_parameters>Rematch</challenge_new_parameters>
-		<challenge_no_time>Without time</challenge_no_time>
-		<challenge_color_auto>Automatic</challenge_color_auto>
-		<challenge_auto_flag>Auto-flag</challenge_auto_flag>
-
-		<challenge_menu_match_title>My challenges</challenge_menu_match_title>
-		<challenge_menu_announce_title>Announced challenges</challenge_menu_announce_title>
-		<challenge_menu_announce>Announce challange</challenge_menu_announce>
-		<challenge_menu_postpone_title>Postpone games</challenge_menu_postpone_title>
-		<challenge_menu_no_match>There are no challenges made.</challenge_menu_no_match>
-		<challenge_menu_no_announce>There are no matches announced.</challenge_menu_no_announce>
-		<challenge_menu_no_postpone>There are no adjourned games.</challenge_menu_no_postpone>
-		<challenge_offer_user_offline>You are disconnected from the server. Try to connect again on the main page to go online</challenge_offer_user_offline>
-		<challenge_offer_opponent_offline>Your opponent is disconnected from the chess server.</challenge_offer_opponent_offline>
-		<challenge_error>Error in challenging</challenge_error>
-		<challenge_announce_match>Announce</challenge_announce_match>
-		<challenge_menu_loading_announce>Loading announced games...</challenge_menu_loading_announce>
+		<challenge_title_invite>
+			Invite to play
+		</challenge_title_invite>
+		<challenge_title_offer>
+			Invite to play
+		</challenge_title_offer>
+		<challenge_information>
+			invite to play a game with the following attributes:
+		</challenge_information>
+		<challenge_my_pieces>
+			My pieces:
+		</challenge_my_pieces>
+		<challenge_op_pieces>
+			Opponent's pieces:
+		</challenge_op_pieces>
+		<challenge_time_label>
+			Time:
+		</challenge_time_label>
+		<challenge_category>
+			Game category:
+		</challenge_category>
+		<challenge_inc_label>
+			Increment:
+		</challenge_inc_label>
+		<challenge_time_label_min>
+			min
+		</challenge_time_label_min>
+		<challenge_inc_label_seg>
+			seg
+		</challenge_inc_label_seg>
+		<challenge_rating>
+			Rated
+		</challenge_rating>
+		<challenge_private>
+			Private game
+		</challenge_private>
+		<challenge_invite>
+			Invite
+		</challenge_invite>
+		<challenge_chat>
+			Open chat
+		</challenge_chat>
+		<challenge_new_parameters>
+			Rematch
+		</challenge_new_parameters>
+		<challenge_no_time>
+			Without time
+		</challenge_no_time>
+		<challenge_color_auto>
+			Automatic
+		</challenge_color_auto>
+		<challenge_auto_flag>
+			Auto-flag
+		</challenge_auto_flag>
+		<challenge_menu_match_title>
+			My challenges
+		</challenge_menu_match_title>
+		<challenge_menu_announce_title>
+			Announced challenges
+		</challenge_menu_announce_title>
+		<challenge_menu_announce>
+			Announce 
+		</challenge_menu_announce>
+		<challenge_menu_postpone_title>
+			Postpone games
+		</challenge_menu_postpone_title>
+		<challenge_menu_no_match>
+			There are no challenges made.
+		</challenge_menu_no_match>
+		<challenge_menu_no_announce>
+			There are no matches announced.
+		</challenge_menu_no_announce>
+		<challenge_menu_no_postpone>
+			There are no adjourned games.
+		</challenge_menu_no_postpone>
+		<challenge_offer_user_offline>
+			You are disconnected from the server. Try to connect again on the main page to go online
+		</challenge_offer_user_offline>
+		<challenge_offer_opponent_offline>
+			Your opponent is disconnected from the chess server.
+		</challenge_offer_opponent_offline>
+		<challenge_error>
+			Error in challenging
+		</challenge_error>
+		<challenge_announce_match>
+			Announce
+		</challenge_announce_match>
+		<challenge_menu_loading_announce>
+			Loading announced games...
+		</challenge_menu_loading_announce>
+		<challenge_time>
+			Challenge time (min)
+		</challenge_time>
+		<challenge_inc>
+			Increment (sec)
+		</challenge_inc>
+		<challenge_public>
+			Public challenge
+		</challenge_public>
+		<challenge_rated>
+			Rated
+		</challenge_rated>
+		<challenge_unrated>
+			Unrated
+		</challenge_unrated>
 	</challenge>
 	<announce>
-		<announce_title>Announce Game</announce_title>
-		<announce_rating_interval>Rating limit:</announce_rating_interval>
-		<announce_min_rating_example>Ex:1000</announce_min_rating_example>
-		<announce_max_rating_example>Ex:2300</announce_max_rating_example>
-		<announce_pieces>Pieces:</announce_pieces>
-		<announce_error_title>Error on game announcement</announce_error_title>
-		<announce_invalid_min_rating>Incorrect minimum rating value. Ex: 0000</announce_invalid_min_rating>
-		<announce_invalid_min_rating>Incorrect maximum rating value. Ex: 2349</announce_invalid_min_rating>
-		<announce_invalid_interval>Incorrect rating range. The minimum rating value mudy be higher than the maximum.</announce_invalid_interval>
-		<announce_accept_error>Error in accept announced game</announce_accept_error>
-		<announce_non_exist>Announced game was canceled or removed.</announce_non_exist>
+		<announce_title>
+			Announce Game
+		</announce_title>
+		<announce_rating_interval>
+			Rating limit:
+		</announce_rating_interval>
+		<announce_min_rating_example>
+			Ex:1000
+		</announce_min_rating_example>
+		<announce_max_rating_example>
+			Ex:2300
+		</announce_max_rating_example>
+		<announce_pieces>
+			Pieces:
+		</announce_pieces>
+		<announce_error_title>
+			Error on game announcement
+		</announce_error_title>
+		<announce_invalid_min_rating>
+			Incorrect minimum rating value. Ex: 0000
+		</announce_invalid_min_rating>
+		<announce_invalid_min_rating>
+			Incorrect maximum rating value. Ex: 2349
+		</announce_invalid_min_rating>
+		<announce_invalid_interval>
+			Incorrect rating range. The minimum rating value mudy be higher than the maximum.
+		</announce_invalid_interval>
+		<announce_accept_error>
+			Error in accept announced game
+		</announce_accept_error>
+		<announce_non_exist>
+			Announced game was canceled or removed.
+		</announce_non_exist>
 	</announce>
 	<game>
-		<game_draw>Draw request</game_draw>
-		<game_draw_text>%s requested a draw, do you accept?</game_draw_text>
-		<game_draw_denied>%s declined your draw request.</game_draw_denied>
-		<game_end_game>Game over</game_end_game>
-		<game_resign_text>%s resigned the game.</game_resign_text>
-		<game_adjourn>Adjourn game</game_adjourn>
-		<game_adjourn_text>%s want to adjourn this game, do you accept?</game_adjourn_text>
-		<game_adjourn_denied>%s declined your adjourn request.</game_adjourn_denied>
-		<game_abort>Abort game</game_abort>
-		<game_abort_text>%s want to abort this game,do you accept?</game_abort_text>
-		<game_abort_denied>%s declined your abort request.</game_abort_denied>
-		<game_resign>Resign the game</game_resign>
-		<game_resign_confirm>Do you want to resign the game?</game_resign_confirm>
-		<game_checkmatew_text>Congratulations! You won %s by checkmate.</game_checkmatew_text>
-		<game_checkmatel_text>You lost to %s by checkmate.</game_checkmatel_text>
-		<game_timew_text>You won %s by time.</game_timew_text>
-		<game_timel_text>Your time is over. You have lost to %s.</game_timel_text>
-		<game_remove_game>You can't close a game in progress</game_remove_game>
-		<game_remove_game_title>Warning</game_remove_game_title>
-
-		<game_canceled>The game was canceled.</game_canceled>
-
-		<game_options>Options</game_options>
-		<game_moves>Moves</game_moves>
-		<game_send_draw>Draw</game_send_draw>
-		<game_send_resign>Resign</game_send_resign>
-		<game_send_terminate>Terminate</game_send_terminate>
-		<game_send_adjourn>Adjourn</game_send_adjourn>
-		<game_give_time>Give time to opponent</game_give_time>
-		<game_pawn_promotion>Pawn promotion</game_pawn_promotion>
-		<game_promotion_queen>Queen</game_promotion_queen>
-		<game_promotion_rook>Rook</game_promotion_rook>
-		<game_promotion_bishop>Bishop</game_promotion_bishop>
-		<game_promotion_knight>Knight</game_promotion_knight>
-		
-		<game_observer_alert>You can't observe a new game while you are still playing or observing a game.</game_observer_alert>
-		<game_observer_alert_title>Alert</game_observer_alert_title>
-
-		<game_white_pawn>White Pawn</game_white_pawn>
-		<game_white_rook>White Rook</game_white_rook>
-		<game_white_knight>White Knight</game_white_knight>
-		<game_white_bishop>White Bishop</game_white_bishop>
-		<game_white_queen>White Queen</game_white_queen>
-		<game_white_king>White King</game_white_king>
-
-		<game_black_pawn>Black Pawn</game_black_pawn>
-		<game_black_rook>Black Rook</game_black_rook>
-		<game_black_knight>Black Knight</game_black_knight>
-		<game_black_bishop>Black Bishop</game_black_bishop>
-		<game_black_queen>Black Queen</game_black_queen>
-		<game_black_king>Black King</game_black_king>
-
-		<game_button_first>First</game_button_first>
-		<game_button_prev>Previous</game_button_prev>
-		<game_button_next>Next</game_button_next>
-		<game_button_last>Last</game_button_last>
-		
-		<game_oldgame_alert>You can't watch a game while you are still playing or watching another game</game_oldgame_alert>
-
-		<game_result_white-timeover>White's time is over</game_result_white-timeover>
-		<game_result_black-timeover>Black's time is over</game_result_black-timeover>
-		<game_result_white-mated>White has won by checkmate</game_result_white-mated>
-		<game_result_black-mated>Black has won by checkmate</game_result_black-mated>
-		<game_result_white-resigned>White has resigned</game_result_white-resigned>
-		<game_result_black-resigned>Black has resigned</game_result_black-resigned>
-		<game_result_draw-agreement>The players agreed on a draw</game_result_draw-agreement>
-		<game_result_stalemate>Draw by stalemate</game_result_stalemate>
-		<game_result_draw-repetition>Draw by three fold repetition rule</game_result_draw-repetition>
-		<game_result_draw-fifty-moves>Draw by fifty move rule</game_result_draw-fifty-moves>
-		<game_result_draw-impossible-mate>Draw by impossibility of checkmate</game_result_draw-impossible-mate>
-		<game_result_draw-timeover>The time of both players has ended</game_result_draw-timeover>
-		<game_result_canceled-agreement>The players agreed in cancel the game</game_result_canceled-agreement>
-		<game_result_canceled-timed-out>The game was canceled by inactivity</game_result_canceled-timed-out>
-		<game_result_adjourned-agreement>The players agreed in adjourning the game</game_result_adjourned-agreement>
-		<game_result_adjourned-shutdown>The game was adjourned because the server will shut down</game_result_adjourned-shutdown>
-		<game_result_white-wo>White has won by W.O.</game_result_white-wo>
-		<game_result_black-wo>Black has won by W.O.</game_result_black-wo>
-		<game_result_closed>The game is over. However the result was not shown on screen.</game_result_closed>
-		<game_loading_move>Loading move...</game_loading_move>
-		<game_white_player_leave>White has left the room. If he doesn't return in a few minutes the Black player will win.</game_white_player_leave>
-		<game_black_player_leave>Black has left the room. If he doesn't return in a few minutes the White player will win.</game_black_player_leave>
+		<game_draw>
+			Draw request
+		</game_draw>
+		<game_draw_text>
+			%s requested a draw, do you accept?
+		</game_draw_text>
+		<game_draw_denied>
+			%s declined your draw request.
+		</game_draw_denied>
+		<game_end_game>
+			Game over
+		</game_end_game>
+		<game_resign_text>
+			%s resigned the game.
+		</game_resign_text>
+		<game_adjourn>
+			Adjourn game
+		</game_adjourn>
+		<game_adjourn_text>
+			%s want to adjourn this game, do you accept?
+		</game_adjourn_text>
+		<game_adjourn_denied>
+			%s declined your adjourn request.
+		</game_adjourn_denied>
+		<game_abort>
+			Abort game
+		</game_abort>
+		<game_abort_text>
+			%s want to abort this game,do you accept?
+		</game_abort_text>
+		<game_abort_denied>
+			%s declined your abort request.
+		</game_abort_denied>
+		<game_resign>
+			Resign the game
+		</game_resign>
+		<game_resign_confirm>
+			Do you want to resign the game?
+		</game_resign_confirm>
+		<game_checkmatew_text>
+			Congratulations! You won %s by checkmate.
+		</game_checkmatew_text>
+		<game_checkmatel_text>
+			You lost to %s by checkmate.
+		</game_checkmatel_text>
+		<game_timew_text>
+			You won %s by time.
+		</game_timew_text>
+		<game_timel_text>
+			Your time is over. You have lost to %s.
+		</game_timel_text>
+		<game_remove_game>
+			You can't close a game in progress
+		</game_remove_game>
+		<game_remove_game_title>
+			Warning
+		</game_remove_game_title>
+		<game_canceled>
+			The game was canceled.
+		</game_canceled>
+		<game_options>
+			Options
+		</game_options>
+		<game_moves>
+			Moves
+		</game_moves>
+		<game_send_draw>
+			Draw
+		</game_send_draw>
+		<game_send_resign>
+			Resign
+		</game_send_resign>
+		<game_send_terminate>
+			Terminate
+		</game_send_terminate>
+		<game_send_adjourn>
+			Adjourn
+		</game_send_adjourn>
+		<game_give_time>
+			Give time to opponent
+		</game_give_time>
+		<game_pawn_promotion>
+			Pawn promotion
+		</game_pawn_promotion>
+		<game_promotion_queen>
+			Queen
+		</game_promotion_queen>
+		<game_promotion_rook>
+			Rook
+		</game_promotion_rook>
+		<game_promotion_bishop>
+			Bishop
+		</game_promotion_bishop>
+		<game_promotion_knight>
+			Knight
+		</game_promotion_knight>
+		<game_observer_alert>
+			You can't observe a new game while you are still playing or observing a game.
+		</game_observer_alert>
+		<game_observer_alert_title>
+			Alert
+		</game_observer_alert_title>
+		<game_white_pawn>
+			White Pawn
+		</game_white_pawn>
+		<game_white_rook>
+			White Rook
+		</game_white_rook>
+		<game_white_knight>
+			White Knight
+		</game_white_knight>
+		<game_white_bishop>
+			White Bishop
+		</game_white_bishop>
+		<game_white_queen>
+			White Queen
+		</game_white_queen>
+		<game_white_king>
+			White King
+		</game_white_king>
+		<game_black_pawn>
+			Black Pawn
+		</game_black_pawn>
+		<game_black_rook>
+			Black Rook
+		</game_black_rook>
+		<game_black_knight>
+			Black Knight
+		</game_black_knight>
+		<game_black_bishop>
+			Black Bishop
+		</game_black_bishop>
+		<game_black_queen>
+			Black Queen
+		</game_black_queen>
+		<game_black_king>
+			Black King
+		</game_black_king>
+		<game_button_first>
+			First
+		</game_button_first>
+		<game_button_prev>
+			Previous
+		</game_button_prev>
+		<game_button_next>
+			Next
+		</game_button_next>
+		<game_button_last>
+			Last
+		</game_button_last>
+		<game_oldgame_alert>
+			You can't watch a game while you are still playing or watching another game
+		</game_oldgame_alert>
+		<game_result_white-timeover>
+			White's time is over
+		</game_result_white-timeover>
+		<game_result_black-timeover>
+			Black's time is over
+		</game_result_black-timeover>
+		<game_result_white-mated>
+			White has won by checkmate
+		</game_result_white-mated>
+		<game_result_black-mated>
+			Black has won by checkmate
+		</game_result_black-mated>
+		<game_result_white-resigned>
+			White has resigned
+		</game_result_white-resigned>
+		<game_result_black-resigned>
+			Black has resigned
+		</game_result_black-resigned>
+		<game_result_draw-agreement>
+			The players agreed on a draw
+		</game_result_draw-agreement>
+		<game_result_stalemate>
+			Draw by stalemate
+		</game_result_stalemate>
+		<game_result_draw-repetition>
+			Draw by three fold repetition rule
+		</game_result_draw-repetition>
+		<game_result_draw-fifty-moves>
+			Draw by fifty move rule
+		</game_result_draw-fifty-moves>
+		<game_result_draw-impossible-mate>
+			Draw by impossibility of checkmate
+		</game_result_draw-impossible-mate>
+		<game_result_draw-timeover>
+			The time of both players has ended
+		</game_result_draw-timeover>
+		<game_result_canceled-agreement>
+			The players agreed in cancel the game
+		</game_result_canceled-agreement>
+		<game_result_canceled-timed-out>
+			The game was canceled by inactivity
+		</game_result_canceled-timed-out>
+		<game_result_adjourned-agreement>
+			The players agreed in adjourning the game
+		</game_result_adjourned-agreement>
+		<game_result_adjourned-shutdown>
+			The game was adjourned because the server will shut down
+		</game_result_adjourned-shutdown>
+		<game_result_white-wo>
+			White has won by W.O.
+		</game_result_white-wo>
+		<game_result_black-wo>
+			Black has won by W.O.
+		</game_result_black-wo>
+		<game_result_closed>
+			The game is over. However the result was not shown on screen.
+		</game_result_closed>
+		<game_loading_move>
+			Loading move...
+		</game_loading_move>
+		<game_white_player_leave>
+			White has left the room. If he doesn't return in a few minutes the Black player will win.
+		</game_white_player_leave>
+		<game_black_player_leave>
+			Black has left the room. If he doesn't return in a few minutes the White player will win.
+		</game_black_player_leave>
+		<game_remove_room>
+			undefined_text
+		</game_remove_room>
+		<game_remove_board>
+			undefined_text
+		</game_remove_board>
+		<game_send_cancel>
+			undefined_text
+		</game_send_cancel>
 	</game>
 	<profile>
-		<profile_window>Profile and informations</profile_window>
-		<profile_name>Name: </profile_name>
-		<profile_nick>Nick: </profile_nick>
-		<profile_whoami>Who am I: </profile_whoami>
-		<profile_level>User level: </profile_level>
-		<profile_group>Group: </profile_group>
-		<profile_type>Type: </profile_type>
-		<profile_online_time>Online time: </profile_online_time>
-		<profile_total_time>Total time: </profile_total_time>
-		<profile_category>Category</profile_category>
-		<profile_current_rating>Current rating</profile_current_rating>
-		<profile_best_rating>Best rating</profile_best_rating>
-		<profile_record_date>Record date</profile_record_date>
-		<profile_games_number>Number of games</profile_games_number>
-		<profile_win>Wins</profile_win>
-		<profile_draw>Draws</profile_draw>
-		<profile_lose>Loses</profile_lose>
-		<profile_edit_photo>Edit Photo</profile_edit_photo>
-		<profile_old_games1>My games</profile_old_games1>
-		<profile_old_games2>Games of </profile_old_games2>
-		<profile_save>Save Profile</profile_save>
-		<profile_discard>Close without saving</profile_discard>
-		<profile_save_close>Close and Save</profile_save_close>
-		<profile_confirm>Are you sure you want to close without saving the profile?</profile_confirm>
-		<profile_confirm_close>Close</profile_confirm_close>
-		<profile_change_image>Pick the photo</profile_change_image>
-		<profile_change_image_title>Change photo</profile_change_image_title>
-		<profile_load_error>Error</profile_load_error>
-		<profile_load_error_title>It wasn't possible to upload the photo</profile_load_error_title>
-		<profile_year>y</profile_year>
-		<profile_month>m</profile_month>
-		<profile_day>d</profile_day>
-		<profile_error>Error while saving profile</profile_error>
-		<profile_desc_limit>The description must have at most 200 characters.</profile_desc_limit>
+		<profile_window>
+			Profile and informations
+		</profile_window>
+		<profile_name>
+			Name: 
+		</profile_name>
+		<profile_nick>
+			Nick: 
+		</profile_nick>
+		<profile_whoami>
+			Who am I: 
+		</profile_whoami>
+		<profile_level>
+			User level: 
+		</profile_level>
+		<profile_group>
+			Group: 
+		</profile_group>
+		<profile_type>
+			Type: 
+		</profile_type>
+		<profile_online_time>
+			Online time: 
+		</profile_online_time>
+		<profile_total_time>
+			Total time: 
+		</profile_total_time>
+		<profile_category>
+			Category
+		</profile_category>
+		<profile_current_rating>
+			Current rating
+		</profile_current_rating>
+		<profile_best_rating>
+			Best rating
+		</profile_best_rating>
+		<profile_record_date>
+			Record date
+		</profile_record_date>
+		<profile_games_number>
+			Number of games
+		</profile_games_number>
+		<profile_win>
+			Wins
+		</profile_win>
+		<profile_draw>
+			Draws
+		</profile_draw>
+		<profile_lose>
+			Loses
+		</profile_lose>
+		<profile_edit_photo>
+			Edit Photo
+		</profile_edit_photo>
+		<profile_old_games1>
+			My games
+		</profile_old_games1>
+		<profile_old_games2>
+			Games of 
+		</profile_old_games2>
+		<profile_save>
+			Save Profile
+		</profile_save>
+		<profile_discard>
+			Close without saving
+		</profile_discard>
+		<profile_save_close>
+			Close and Save
+		</profile_save_close>
+		<profile_confirm>
+			Are you sure you want to close without saving the profile?
+		</profile_confirm>
+		<profile_confirm_close>
+			Close
+		</profile_confirm_close>
+		<profile_change_image>
+			Pick the photo
+		</profile_change_image>
+		<profile_change_image_title>
+			Change photo
+		</profile_change_image_title>
+		<profile_load_error>
+			Error
+		</profile_load_error>
+		<profile_load_error_title>
+			It wasn't possible to upload the photo
+		</profile_load_error_title>
+		<profile_year>
+			y
+		</profile_year>
+		<profile_month>
+			m
+		</profile_month>
+		<profile_day>
+			d
+		</profile_day>
+		<profile_error>
+			Error while saving profile
+		</profile_error>
+		<profile_desc_limit>
+			The description must have at most 200 characters.
+		</profile_desc_limit>
 	</profile>
 	<register>
-		<register_inf>Please fill out the information below to create your Xadrez Livre account</register_inf>
-		<register_title>Register</register_title>
-		<register_login>Login </register_login>
-		<register_max_char>(max. 14 characters)</register_max_char>
-		<register_user_inf>Use just lowercase characters, numbers, without spaces, '-', '.' and '_'</register_user_inf>
-		<register_mail1>E-mail </register_mail1>
-		<register_mail2>(optional)</register_mail2>
-		<register_mail_inf>Allows you to recover your lost password.</register_mail_inf>
-		<register_passwd>Password:</register_passwd>
-		<register_passwd_confirm1>Password</register_passwd_confirm1>
-		<register_passwd_confirm2>(Confirmation)</register_passwd_confirm2>
-		<register_bt_confirm>Confirm</register_bt_confirm>
-		<register_invalid_user_name>Invalid username</register_invalid_user_name>
-		<register_invalid_user_name_len>Your login must have at most 14 characters</register_invalid_user_name_len>
-		<register_invalid_mail>Invalid email</register_invalid_mail>
-		<register_invalid_password>Invalid password</register_invalid_password>
-		<register_error_409>User already exists</register_error_409>
-		<register_sucess_message>User registered successfully</register_sucess_message>
+		<register_inf>
+			Please fill out the information below to create your Xadrez Livre account
+		</register_inf>
+		<register_title>
+			Register
+		</register_title>
+		<register_login>
+			Login 
+		</register_login>
+		<register_max_char>
+			(max. 14 characters)
+		</register_max_char>
+		<register_user_inf>
+			Use just lowercase characters, numbers, without spaces, '-', '.' and '_'
+		</register_user_inf>
+		<register_mail1>
+			E-mail 
+		</register_mail1>
+		<register_mail2>
+			(optional)
+		</register_mail2>
+		<register_mail_inf>
+			Allows you to recover your lost password.
+		</register_mail_inf>
+		<register_passwd>
+			Password:
+		</register_passwd>
+		<register_passwd_confirm1>
+			Password
+		</register_passwd_confirm1>
+		<register_passwd_confirm2>
+			(Confirmation)
+		</register_passwd_confirm2>
+		<register_bt_confirm>
+			Confirm
+		</register_bt_confirm>
+		<register_invalid_user_name>
+			Invalid username
+		</register_invalid_user_name>
+		<register_invalid_user_name_len>
+			Your login must have at most 14 characters
+		</register_invalid_user_name_len>
+		<register_invalid_mail>
+			Invalid email
+		</register_invalid_mail>
+		<register_invalid_password>
+			Invalid password
+		</register_invalid_password>
+		<register_error_409>
+			User already exists
+		</register_error_409>
+		<register_sucess_message>
+			User registered successfully
+		</register_sucess_message>
 	</register>
 	<oldgame>
-		<oldgame_title>Old games</oldgame_title>
-		<oldgame_my_games>My games</oldgame_my_games>
-		<oldgame_other_games>Another user's games</oldgame_other_games>
-		<oldgame_player1>Player 1:</oldgame_player1>
-		<oldgame_pieces>Pieces:</oldgame_pieces>
-		<oldgame_both>Any</oldgame_both>
-		<oldgame_player2>Player 2:</oldgame_player2>
-		<oldgame_date_form>Data:</oldgame_date_form>
-		<oldgame_from>from:</oldgame_from>
-		<oldgame_to>to:</oldgame_to>
-		<oldgame_new_search>New search</oldgame_new_search>
-		<oldgame_search_result>Found:</oldgame_search_result>
-		<oldgame_no_result>No old game founded.</oldgame_no_result>
-		<oldgame_player1_hd>Player 1</oldgame_player1_hd>
-		<oldgame_player2_hd>Player 2</oldgame_player2_hd>
-		<oldgame_white_hd>White</oldgame_white_hd>
-		<oldgame_black_hd>Black</oldgame_black_hd>
-		<oldgame_category>Category</oldgame_category>
-		<oldgame_result>Result</oldgame_result>
-		<oldgame_date>Date</oldgame_date>
-		<oldgame_prev>Previous</oldgame_prev>
-		<oldgame_next>Next</oldgame_next>
-		<oldgame_format>Format: dd/mm/yyyy</oldgame_format>
-		<oldgame_no_moves>Game without moves</oldgame_no_moves>
-		<oldgame_invalid_begin>Invalid begining data!</oldgame_invalid_begin>
-		<oldgame_invalid_end>Invalid ending data!</oldgame_invalid_end>
-		<oldgame_invalid_interval>Invalid interval!</oldgame_invalid_interval>
-		<oldgame_invalid_date>Invalid data!</oldgame_invalid_date>
-		<oldgame_loading>Searching old games...</oldgame_loading>
-		<oldgame_examine>Analyze game</oldgame_examine>
+		<oldgame_title>
+			Old games
+		</oldgame_title>
+		<oldgame_my_games>
+			My games
+		</oldgame_my_games>
+		<oldgame_other_games>
+			Another user's games
+		</oldgame_other_games>
+		<oldgame_player1>
+			Player 1:
+		</oldgame_player1>
+		<oldgame_pieces>
+			Pieces:
+		</oldgame_pieces>
+		<oldgame_both>
+			Any
+		</oldgame_both>
+		<oldgame_player2>
+			Player 2:
+		</oldgame_player2>
+		<oldgame_date_form>
+			Data:
+		</oldgame_date_form>
+		<oldgame_from>
+			from:
+		</oldgame_from>
+		<oldgame_to>
+			to:
+		</oldgame_to>
+		<oldgame_new_search>
+			New search
+		</oldgame_new_search>
+		<oldgame_search_result>
+			Found:
+		</oldgame_search_result>
+		<oldgame_no_result>
+			No old game founded.
+		</oldgame_no_result>
+		<oldgame_player1_hd>
+			Player 1
+		</oldgame_player1_hd>
+		<oldgame_player2_hd>
+			Player 2
+		</oldgame_player2_hd>
+		<oldgame_white_hd>
+			White
+		</oldgame_white_hd>
+		<oldgame_black_hd>
+			Black
+		</oldgame_black_hd>
+		<oldgame_category>
+			Category
+		</oldgame_category>
+		<oldgame_result>
+			Result
+		</oldgame_result>
+		<oldgame_date>
+			Date
+		</oldgame_date>
+		<oldgame_prev>
+			Previous
+		</oldgame_prev>
+		<oldgame_next>
+			Next
+		</oldgame_next>
+		<oldgame_format>
+			Format: dd/mm/yyyy
+		</oldgame_format>
+		<oldgame_no_moves>
+			Game without moves
+		</oldgame_no_moves>
+		<oldgame_invalid_begin>
+			Invalid begining data!
+		</oldgame_invalid_begin>
+		<oldgame_invalid_end>
+			Invalid ending data!
+		</oldgame_invalid_end>
+		<oldgame_invalid_interval>
+			Invalid interval!
+		</oldgame_invalid_interval>
+		<oldgame_invalid_date>
+			Invalid data!
+		</oldgame_invalid_date>
+		<oldgame_loading>
+			Searching old games...
+		</oldgame_loading>
+		<oldgame_examine>
+			Analyze game
+		</oldgame_examine>
+		<oldgame_analyze>
+			undefined_text
+		</oldgame_analyze>
 	</oldgame>
 	<welcome>
-		<welcome_title>Welcome!</welcome_title>
-		<welcome_text1>This is the environment of game/interaction of Xadrez Livre. Here, among other possibilities, you can:</welcome_text1>
-		<welcome_text2>For further information about the use of the environment, see the "Help" on the top menu.</welcome_text2>
+		<welcome_title>
+			Welcome!
+		</welcome_title>
+		<welcome_text1>
+			This is the environment of game/interaction of Xadrez Livre. Here, among other possibilities, you can:
+		</welcome_text1>
+		<welcome_text2>
+			For further information about the use of the environment, see the &quot;Help&quot; on the top menu.
+		</welcome_text2>
 		<welcome_instruction>
-			<welcome_item><![CDATA[<b>Start a game:</b> click on a user and choose "Invite to play". All online users are shown in the room "General" window witch can be found at the bottom left of the screen.]]></welcome_item>
-			<welcome_item><![CDATA[<b>Start a game:</b> your list of contacts is in the top left of the screen. To add new contacts click on a user in the room "General" and choose "Add contact". The user will be in your list of contacts when he authorize.]]></welcome_item>
+			<welcome_item>
+<![CDATA[<b>Start a game:</b> click on a user and choose "Invite to play". All online users are shown in the room "General" window witch can be found at the bottom left of the screen.]]>			</welcome_item>
+			<welcome_item>
+<![CDATA[<b>Start a game:</b> your list of contacts is in the top left of the screen. To add new contacts click on a user in the room "General" and choose "Add contact". The user will be in your list of contacts when he authorize.]]>			</welcome_item>
 		</welcome_instruction>
 	</welcome>
 	<admin>
-		<admin_kick_ok>You kicked the user successfully</admin_kick_ok>
-		<admin_ban_ok>You banned the user successfully</admin_ban_ok>
-		<admin_unban_ok>You unbanned the user successfully</admin_unban_ok>
-		<admin_user_ban>You were banned. \nReason: </admin_user_ban>
-		<admin_user_kick>You were kicked. \nReason: </admin_user_kick>
-
+		<admin_kick_ok>
+			You kicked the user successfully
+		</admin_kick_ok>
+		<admin_ban_ok>
+			You banned the user successfully
+		</admin_ban_ok>
+		<admin_unban_ok>
+			You unbanned the user successfully
+		</admin_unban_ok>
+		<admin_user_ban>
+			You were banned. \nReason: 
+		</admin_user_ban>
+		<admin_user_kick>
+			You were kicked. \nReason: 
+		</admin_user_kick>
 	</admin>
 	<help>
-		<help_title>Help</help_title>
-		<help_t_1>How?</help_t_1>
-		<help_t_1_1>Play</help_t_1_1>
-		<help_t_1_1_1>Challenge opponent</help_t_1_1_1>
-		<help_c_1_1_1><![CDATA[<p>To invite a specific user to play:</p><ul><li> Click on the user to invite and then click on "Invite to play";</li><li> Define the attributes of the game (Pieces's color; time of game...). </ li> <li> Click on "Invite to Play".</li></ul><br/> <p> Note: The user you invited can:</p><ul><li> "accept" the invitation and start the game;</li><li> Redefine the attributes of the game and challenge you with his attributes;</li><li> or "Cancel" your invitation.</li></ul>]]></help_c_1_1_1>
-		<help_t_1_1_2>Accept a challenge</help_t_1_1_2>
-		<help_c_1_1_2><![CDATA[<p>When you are invited to play a game, a window will pop out.</p><p><ul><li>Click on “Accept” to play a game with it's attributes defined by the user who invited you.</li></ul><br /><p>Obs.: If you want to play with the user who invited you, but with other game attributes, make the necessary changes and click on "Challenge". The new attributes will be sent to the user who invited you first and the he can accept or deny your challenge.</p>]]></help_c_1_1_2>
-		<help_t_1_1_3>Announce a Game</help_t_1_1_3>
-		<help_c_1_1_3><![CDATA[<p>To announce a game</p><ul><li> Click on "Challenges",on the context menu;</li><li>Click on “Announce game”;</li><li>Set the game attributes (Color; time of game...)</li><li>Click on "Announce".</li></ul><br /><p> Obs.: The game will be in announced games list in order to other players see and accept the game. The games can be accepted only by the players witch rating is in the range defined by who created the announcement.</p>]]></help_c_1_1_3>
-		<help_t_1_2>Search users</help_t_1_2>
-		<help_c_1_2><![CDATA[<ul><li>Click on "Search user" in tools bar;</li><li>Set the attributes of the search;</li><li>Click on "Search".</li></ul>]]></help_c_1_2>
-		<help_t_1_3>Talk with a user</help_t_1_3>
-		<help_c_1_3><![CDATA[<p>Talk to a user</p><ul><li>Click on the user you wish to talk and click on "Talk";</li></ul><p>A window will pop out.</p><ul><li>Type the message (on the field in the window);</li><li>Type “Enter” to send the message.</li></ul>]]></help_c_1_3>
-		<help_t_1_4>Talk with multiple users in a room</help_t_1_4>
-		<help_c_1_4><![CDATA[<p>If you want to talk with multiple users, choose a room in "Rooms" menu or just send messagens in "General" room.</p><ul><li>Type the message in the lower left field of the rooms window.;</li><li>Type "Enter" to send a message to the room.</li></ul>]]></help_c_1_4>
-		<help_t_1_5>See or hide the users list of a room</help_t_1_5>
-		<help_c_1_5><![CDATA[<p>The room must be opened (See “How -> Enter in a room”) and active (with the title bar orange) to see your user list:</p><ul><li>Click on "See room users", if the users list is not hidden, or;</li><li>Click on "Hide users list", if the users list is being seen.</li></ul>]]></help_c_1_5>
-		<help_t_1_6>See profile and user info</help_t_1_6>
-		<help_c_1_6><![CDATA[<p>To see a profile and a user info</p><ul><li>Click on the user and click on "Profile and user info".</li></ul>]]></help_c_1_6>
-		<help_t_1_7>Add a user to your buddy list</help_t_1_7>
-		<help_c_1_7><![CDATA[<p>To add a user in your buddy list</p><ul><li>Click on user and click on "Add as a friend".</li></ul>]]></help_c_1_7>
-		<help_t_1_8>Remove a user from your buddy list</help_t_1_8>
-		<help_c_1_8><![CDATA[<p>To remove a user from your buddy list</p><ul><li>Click on "Buddies" to see your buddies in Xadrez Livre;</li><li>Click on the user you want to remove and click on "Remove a user"</li></ul>]]></help_c_1_8>
-		<help_t_1_9>Change my status</help_t_1_9>
-		<help_c_1_9><![CDATA[<p>When you connect to Xadrez Livre your status is set to "Avaible". It can be seen in below your user name.<p/><p>To change your status:</p><ul><li>Clock on the arrow beside your status;</li><li>Click on you desired status.</li></ul><br /><p>Obs.: The status “Playing”, "Watching" and "Analyzing" are automaticaly set by the server. When a user is playing (status “Playing”) or is “Unavaible”, he can't be invited to play. If a user status is "Occupied", he can play but can't talk.</p>]]></help_c_1_9>
-		<help_t_1_10>Change my profile</help_t_1_10>
-		<help_c_1_10><![CDATA[<p>To change your profile:</p><ul><li>Click on "Change my profile", in your personal area.</li></ul>]]></help_c_1_10>
-		<help_t_1_11>Enter in a room</help_t_1_11>
-		<help_c_1_11><![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on the room you want to enter.</li></ul><br /><p>Obs.: The room that you entered will be oppened on the left side of the screen.</p>]]></help_c_1_11>
-		<help_t_1_12>Create a room</help_t_1_12>
-		<help_c_1_12><![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on "Create room";</li><li>Type the name of the room;</li><li>Click on "Create" button.</li></ul><br /><p>Obs.: The room you created will be opened on the left side of the screen.</p>]]></help_c_1_12>
-		<help_t_1_13>Watch a game</help_t_1_13>
-		<help_c_1_13><![CDATA[<ul><li>Click on "Current Games" in the context menu;</li><li>Click on the game you want to watch.</li></ul>]]></help_c_1_13>
-		<help_t_1_14>Search games</help_t_1_14>
-		<help_c_1_14><![CDATA[<ul><li>Click on "Search game" on the tools menu;</li><li>Set the attributes of the search;</li><li>Click on "Search";</li></ul><br /><p>Obs.: Use the navigation buttons “Next” and “Previous” to navigate through the games that matched you criteria.</p>]]></help_c_1_14>
-		<help_t_1_15>Analyze a game</help_t_1_15>
-		<help_c_1_15><![CDATA[<ul><li>Search a game (See “How -> Search games”);</li><li>Click on the game you want do analyze;</li><li>Use the navigations buttons below the move list to analyze the moves of the game.</li></ul>]]></help_c_1_15>
-		<help_t_1_16>Help</help_t_1_16>
-		<help_c_1_16><![CDATA[<p>Help:</p><ul><li>Click on "Help" on the tools menu.</li></ul><br /><p>Obs.: You can find help in two ways: using the mode "Content", that explains with details the information about everything in Xadrez Livre, or using the mode "How...", which you can find tips on how to use all the feature contained in Xadrez Livre.</p>]]></help_c_1_16>
+		<help_title>
+			Help
+		</help_title>
+		<help_t_1>
+			How?
+		</help_t_1>
+		<help_t_1_1>
+			Play
+		</help_t_1_1>
+		<help_t_1_1_1>
+			Challenge opponent
+		</help_t_1_1_1>
+		<help_c_1_1_1>
+<![CDATA[<p>To invite a specific user to play:</p><ul><li> Click on the user to invite and then click on "Invite to play";</li><li> Define the attributes of the game (Pieces's color; time of game...). </ li> <li> Click on "Invite to Play".</li></ul><br/> <p> Note: The user you invited can:</p><ul><li> "accept" the invitation and start the game;</li><li> Redefine the attributes of the game and challenge you with his attributes;</li><li> or "Cancel" your invitation.</li></ul>]]>		</help_c_1_1_1>
+		<help_t_1_1_2>
+			Accept a challenge
+		</help_t_1_1_2>
+		<help_c_1_1_2>
+<![CDATA[<p>When you are invited to play a game, a window will pop out.</p><p><ul><li>Click on “Accept” to play a game with it's attributes defined by the user who invited you.</li></ul><br /><p>Obs.: If you want to play with the user who invited you, but with other game attributes, make the necessary changes and click on "Challenge". The new attributes will be sent to the user who invited you first and the he can accept or deny your challenge.</p>]]>		</help_c_1_1_2>
+		<help_t_1_1_3>
+			Announce a Game
+		</help_t_1_1_3>
+		<help_c_1_1_3>
+<![CDATA[<p>To announce a game</p><ul><li> Click on "Challenges",on the context menu;</li><li>Click on “Announce game”;</li><li>Set the game attributes (Color; time of game...)</li><li>Click on "Announce".</li></ul><br /><p> Obs.: The game will be in announced games list in order to other players see and accept the game. The games can be accepted only by the players witch rating is in the range defined by who created the announcement.</p>]]>		</help_c_1_1_3>
+		<help_t_1_2>
+			Search users
+		</help_t_1_2>
+		<help_c_1_2>
+<![CDATA[<ul><li>Click on "Search user" in tools bar;</li><li>Set the attributes of the search;</li><li>Click on "Search".</li></ul>]]>		</help_c_1_2>
+		<help_t_1_3>
+			Talk with a user
+		</help_t_1_3>
+		<help_c_1_3>
+<![CDATA[<p>Talk to a user</p><ul><li>Click on the user you wish to talk and click on "Talk";</li></ul><p>A window will pop out.</p><ul><li>Type the message (on the field in the window);</li><li>Type “Enter” to send the message.</li></ul>]]>		</help_c_1_3>
+		<help_t_1_4>
+			Talk with multiple users in a room
+		</help_t_1_4>
+		<help_c_1_4>
+<![CDATA[<p>If you want to talk with multiple users, choose a room in "Rooms" menu or just send messagens in "General" room.</p><ul><li>Type the message in the lower left field of the rooms window.;</li><li>Type "Enter" to send a message to the room.</li></ul>]]>		</help_c_1_4>
+		<help_t_1_5>
+			See or hide the users list of a room
+		</help_t_1_5>
+		<help_c_1_5>
+<![CDATA[<p>The room must be opened (See “How -> Enter in a room”) and active (with the title bar orange) to see your user list:</p><ul><li>Click on "See room users", if the users list is not hidden, or;</li><li>Click on "Hide users list", if the users list is being seen.</li></ul>]]>		</help_c_1_5>
+		<help_t_1_6>
+			See profile and user info
+		</help_t_1_6>
+		<help_c_1_6>
+<![CDATA[<p>To see a profile and a user info</p><ul><li>Click on the user and click on "Profile and user info".</li></ul>]]>		</help_c_1_6>
+		<help_t_1_7>
+			Add a user to your buddy list
+		</help_t_1_7>
+		<help_c_1_7>
+<![CDATA[<p>To add a user in your buddy list</p><ul><li>Click on user and click on "Add as a friend".</li></ul>]]>		</help_c_1_7>
+		<help_t_1_8>
+			Remove a user from your buddy list
+		</help_t_1_8>
+		<help_c_1_8>
+<![CDATA[<p>To remove a user from your buddy list</p><ul><li>Click on "Buddies" to see your buddies in Xadrez Livre;</li><li>Click on the user you want to remove and click on "Remove a user"</li></ul>]]>		</help_c_1_8>
+		<help_t_1_9>
+			Change my status
+		</help_t_1_9>
+		<help_c_1_9>
+<![CDATA[<p>When you connect to Xadrez Livre your status is set to "Avaible". It can be seen in below your user name.<p/><p>To change your status:</p><ul><li>Clock on the arrow beside your status;</li><li>Click on you desired status.</li></ul><br /><p>Obs.: The status “Playing”, "Watching" and "Analyzing" are automaticaly set by the server. When a user is playing (status “Playing”) or is “Unavaible”, he can't be invited to play. If a user status is "Occupied", he can play but can't talk.</p>]]>		</help_c_1_9>
+		<help_t_1_10>
+			Change my profile
+		</help_t_1_10>
+		<help_c_1_10>
+<![CDATA[<p>To change your profile:</p><ul><li>Click on "Change my profile", in your personal area.</li></ul>]]>		</help_c_1_10>
+		<help_t_1_11>
+			Enter in a room
+		</help_t_1_11>
+		<help_c_1_11>
+<![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on the room you want to enter.</li></ul><br /><p>Obs.: The room that you entered will be oppened on the left side of the screen.</p>]]>		</help_c_1_11>
+		<help_t_1_12>
+			Create a room
+		</help_t_1_12>
+		<help_c_1_12>
+<![CDATA[<ul><li>Click on "Rooms" in the context menu;</li><li>Click on "Create room";</li><li>Type the name of the room;</li><li>Click on "Create" button.</li></ul><br /><p>Obs.: The room you created will be opened on the left side of the screen.</p>]]>		</help_c_1_12>
+		<help_t_1_13>
+			Watch a game
+		</help_t_1_13>
+		<help_c_1_13>
+<![CDATA[<ul><li>Click on "Current Games" in the context menu;</li><li>Click on the game you want to watch.</li></ul>]]>		</help_c_1_13>
+		<help_t_1_14>
+			Search games
+		</help_t_1_14>
+		<help_c_1_14>
+<![CDATA[<ul><li>Click on "Search game" on the tools menu;</li><li>Set the attributes of the search;</li><li>Click on "Search";</li></ul><br /><p>Obs.: Use the navigation buttons “Next” and “Previous” to navigate through the games that matched you criteria.</p>]]>		</help_c_1_14>
+		<help_t_1_15>
+			Analyze a game
+		</help_t_1_15>
+		<help_c_1_15>
+<![CDATA[<ul><li>Search a game (See “How -> Search games”);</li><li>Click on the game you want do analyze;</li><li>Use the navigations buttons below the move list to analyze the moves of the game.</li></ul>]]>		</help_c_1_15>
+		<help_t_1_16>
+			Help
+		</help_t_1_16>
+		<help_c_1_16>
+<![CDATA[<p>Help:</p><ul><li>Click on "Help" on the tools menu.</li></ul><br /><p>Obs.: You can find help in two ways: using the mode "Content", that explains with details the information about everything in Xadrez Livre, or using the mode "How...", which you can find tips on how to use all the feature contained in Xadrez Livre.</p>]]>		</help_c_1_16>
 	</help>
+	<postpone>
+		<postpone_title_offer>
+			Continue postponed match
+		</postpone_title_offer>
+		<postpone_information>
+			invited to continue a game with following attributes:
+		</postpone_information>
+	</postpone>
 </language>
+
