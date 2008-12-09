@@ -200,7 +200,10 @@ function CHAT_OpenChat(Username)
 		// Show error message to user
 		Title = UTILS_GetText("chat_warning");
 		Msg = UTILS_GetText("chat_max_exceeded");
-		Msg = Msg.replace(/%i/, MainData.GetMaxChats());
+		if (Msg != null)
+		{
+			Msg = Msg.replace(/%i/, MainData.GetMaxChats());
+		}
 		WINDOW_Alert(Title, Msg);
 	}
 
@@ -376,7 +379,10 @@ function CHAT_ErrorMessageLength(Username)
 	}
 
 	Message = UTILS_GetText("room_error_message_length");
-	Message = Message.replace("%s",Limit);
+	if (Message != null)
+	{
+		Message = Message.replace(/%s/,Limit);
+	}
 
 	ChatObj.addMessageError(Message);
 

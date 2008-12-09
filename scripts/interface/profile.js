@@ -154,7 +154,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 		CounterInput.value = 200;
 		CounterInput.setAttribute("size",3);
 		CounterInput.readOnly = true;
-		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character").replace(/%s/,200));
+		CounterLabel = UTILS_CreateElement("span",null,null,UTILS_GetText("window_character"));
+		CounterLabel.innerHTML = CounterLabel.innerHTML.replace(/%s/,200);
 
 		WhoAmIUser = 	UTILS_CreateElement('textarea',null,'inf_whoami');
 		WhoAmIUser.value = Profile.Description;
@@ -166,7 +167,8 @@ function INTERFACE_ShowProfileWindow(Profile)
 				WhoAmIUser.value = WhoAmIUser.value.substr(0,200);
 			}
 			CounterInput.value = 200 - WhoAmIUser.value.length;
-			CounterLabel.innerHTML = UTILS_GetText("window_character").replace(/%s/,200 - WhoAmIUser.value.length);
+			CounterLabel.innerHTML = UTILS_GetText("window_character");
+			CounterLabel.innerHTML = CounterLabel.innerHTML.replace(/%s/,200 - WhoAmIUser.value.length);
 		}
 	
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
@@ -592,7 +594,8 @@ function INTERFACE_ProfileSetDesc(Desc)
 	}
 	if (this.Nick.innerHTML == MyUsername)
 	{
-		this.Counter.innerHTML = UTILS_GetText("window_character").replace(/%s/, 200 - this.Desc.value.length);
+		this.Counter.innerHTML = UTILS_GetText("window_character");
+		this.Counter.innerHTML = this.Counter.innerHTML.replace(/%s/, 200 - this.Desc.value.length);
 	}
 }
 

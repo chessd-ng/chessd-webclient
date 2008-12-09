@@ -1262,6 +1262,7 @@ function INTERFACE_SearchUserSetResult(Result)
 		{
 			this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%t/,UTILS_GetText("contact_by_name"));
 		}
+		
 		this.InfoLabel.innerHTML = this.InfoLabel.innerHTML.replace(/%s/," <b>"+this.Input.value+"*</b>");
 
 		// Set default sort order

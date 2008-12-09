@@ -409,7 +409,12 @@ function CONTACT_ShowUserMenu(Obj, Username)
 				}
 				Button2.Name = UTILS_GetText("window_cancel");
 				Button2.Func = null;
-				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), UTILS_GetText("contact_remove_text").replace("%s", "<strong>"+Username+"</strong>"), Button1, Button2);
+				var Text = UTILS_GetText("contact_remove_text");
+				if (Text != null)
+				{
+					Text = Text.replace(/%s/,"<strong>"+Username+"</strong>");
+				}
+				WINDOW_Confirm (UTILS_GetText("contact_remove_title"), Text, Button1, Button2);
 			};
 			i += 1;
 		}
