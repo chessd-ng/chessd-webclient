@@ -217,9 +217,6 @@
 		<contact_user_t>
 			User:
 		</contact_user_t>
-		<contact_no_user_found>
-			No user found
-		</contact_no_user_found>
 		<contact_user>
 			User
 		</contact_user>
@@ -236,11 +233,11 @@
 			Search by:
 		</contact_search_by>
 		<contact_by_name>
-			Name
+			name
 		</contact_by_name>
-		<contact_by_user>
-			Nick
-		</contact_by_user>
+		<contact_by_nick>
+			nick
+		</contact_by_nick>
 		<contact_both>
 			Both
 		</contact_both>
@@ -265,9 +262,6 @@
 		<contact_user_found>
 			Results found with %t %s
 		</contact_user_found>
-		<contact_by_nick>
-			Nick
-		</contact_by_nick>
 	</contact>
 	<chat>
 		<chat_warning>
@@ -417,17 +411,23 @@
 		<challenge_time_label>
 			Time:
 		</challenge_time_label>
+		<challenge_time>
+			Game time (min)
+		</challenge_time>
 		<challenge_category>
 			Game category:
 		</challenge_category>
 		<challenge_inc_label>
 			Increment:
 		</challenge_inc_label>
+		<challenge_inc>
+			Increment (sec)
+		</challenge_inc>
 		<challenge_time_label_min>
 			min
 		</challenge_time_label_min>
 		<challenge_inc_label_seg>
-			seg
+			sec
 		</challenge_inc_label_seg>
 		<challenge_rating>
 			Rated
@@ -435,6 +435,9 @@
 		<challenge_private>
 			Private game
 		</challenge_private>
+		<challenge_public>
+			Public game
+		</challenge_public>
 		<challenge_invite>
 			Invite
 		</challenge_invite>
@@ -453,6 +456,12 @@
 		<challenge_auto_flag>
 			Auto-flag
 		</challenge_auto_flag>
+		<challenge_rated>
+			Rated
+		</challenge_rated>
+		<challenge_unrated>
+			Unrated
+		</challenge_unrated>
 		<challenge_menu_match_title>
 			My challenges
 		</challenge_menu_match_title>
@@ -489,21 +498,6 @@
 		<challenge_menu_loading_announce>
 			Loading announced games...
 		</challenge_menu_loading_announce>
-		<challenge_time>
-			Challenge time (min)
-		</challenge_time>
-		<challenge_inc>
-			Increment (sec)
-		</challenge_inc>
-		<challenge_public>
-			Public challenge
-		</challenge_public>
-		<challenge_rated>
-			Rated
-		</challenge_rated>
-		<challenge_unrated>
-			Unrated
-		</challenge_unrated>
 	</challenge>
 	<announce>
 		<announce_title>
@@ -592,9 +586,12 @@
 		<game_timel_text>
 			Your time is over. You have lost to %s.
 		</game_timel_text>
-		<game_remove_game>
-			You can't close a game in progress
-		</game_remove_game>
+		<game_remove_room>
+			undefined_text
+		</game_remove_room>
+		<game_remove_board>
+			undefined_text
+		</game_remove_board>
 		<game_remove_game_title>
 			Warning
 		</game_remove_game_title>
@@ -608,16 +605,16 @@
 			Moves
 		</game_moves>
 		<game_send_draw>
-			Draw
+			Draw offer
 		</game_send_draw>
 		<game_send_resign>
 			Resign
 		</game_send_resign>
-		<game_send_terminate>
-			Terminate
-		</game_send_terminate>
+		<game_send_cancel>
+			Abort offer
+		</game_send_cancel>
 		<game_send_adjourn>
-			Adjourn
+			Adjourn offer
 		</game_send_adjourn>
 		<game_give_time>
 			Give time to opponent
@@ -760,15 +757,6 @@
 		<game_black_player_leave>
 			Black has left the room. If he doesn't return in a few minutes the White player will win.
 		</game_black_player_leave>
-		<game_remove_room>
-			undefined_text
-		</game_remove_room>
-		<game_remove_board>
-			undefined_text
-		</game_remove_board>
-		<game_send_cancel>
-			undefined_text
-		</game_send_cancel>
 	</game>
 	<profile>
 		<profile_window>
@@ -965,10 +953,10 @@
 			New search
 		</oldgame_new_search>
 		<oldgame_search_result>
-			Found:
+			Results:
 		</oldgame_search_result>
 		<oldgame_no_result>
-			No old game founded.
+			No old game were found.
 		</oldgame_no_result>
 		<oldgame_player1_hd>
 			Player 1
