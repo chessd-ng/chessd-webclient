@@ -323,9 +323,6 @@
 		<room_hide_user_list>
 			Ocultar usuários da sala
 		</room_hide_user_list>
-		<room_counter>
-			caractere(s)
-		</room_counter>
 		<room_loading>
 			Carregando sala...
 		</room_loading>

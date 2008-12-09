@@ -57,7 +57,7 @@
 			Search
 		</window_search>
 		<window_character>
-			caracter(s)
+			Character(s): %s
 		</window_character>
 	</window>
 	<login>
@@ -203,7 +203,7 @@
 			Add user
 		</contact_invite>
 		<contact_invite_text>
-			%s hass added you as a friend, do you accept?
+			%s has added you as a friend, do you accept?
 		</contact_invite_text>
 		<contact_remove_title>
 			Remove user
@@ -260,13 +260,13 @@
 			No search done
 		</contact_search_default>
 		<contact_not_found>
-			Nenhum resultado encontrado com %t %s
+			No results were found with %t %s
 		</contact_not_found>
 		<contact_user_found>
-			Users found:
+			Results found with %t %s
 		</contact_user_found>
 		<contact_by_nick>
-			undefined_text
+			Nick
 		</contact_by_nick>
 	</contact>
 	<chat>
@@ -329,9 +329,6 @@
 		<room_hide_user_list>
 			Hide users of the room
 		</room_hide_user_list>
-		<room_counter>
-			caracter(s)
-		</room_counter>
 		<room_loading>
 			Loading room...
 		</room_loading>
@@ -478,7 +475,7 @@
 			There are no adjourned games.
 		</challenge_menu_no_postpone>
 		<challenge_offer_user_offline>
-			You are disconnected from the server. Try to connect again on the main page to go online
+			You are disconnected from the server. Try to connect again on the main page to go online.
 		</challenge_offer_user_offline>
 		<challenge_offer_opponent_offline>
 			Your opponent is disconnected from the chess server.
@@ -1021,11 +1018,8 @@
 		<oldgame_loading>
 			Searching old games...
 		</oldgame_loading>
-		<oldgame_examine>
-			Analyze game
-		</oldgame_examine>
 		<oldgame_analyze>
-			undefined_text
+			Analyze
 		</oldgame_analyze>
 	</oldgame>
 	<welcome>
