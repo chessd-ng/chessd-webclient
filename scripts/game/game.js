@@ -625,6 +625,9 @@ function GAME_StartGame(GameId, P1, P2)
 	// Remove welcome div
 	INTERFACE_RemoveWelcome();
 
+	// Remove all challenges
+	CHALLENGE_ClearChallenges();
+
 	// Hide current game (this case should happen when player
 	// is observing a game)
 	if (CurrentGame != null)

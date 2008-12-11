@@ -741,6 +741,8 @@ function CHALLENGE_ClearChallenges()
 			WINDOW_RemoveWindow(ChallengeWindow);
 		}
 		
+		//Send a message to decline challenges
+		CHALLENGE_DeclineChallenge(MatchId);
 	}
 
 	// Remove all challenges from main data
