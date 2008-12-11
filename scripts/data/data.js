@@ -66,6 +66,8 @@ function DATA(ConfFile, LangFile)
 	this.Conf.Lang = "";
 	//Default php version - php4 or php5
 	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php")
+	this.Conf.UpdateRatingInterval = UTILS_GetTag(Params, "update-rating-interval");
+	this.Conf.UpdateGetMaxProfiles = UTILS_GetTag(Params, "update-get-max-profiles");
 
 
 	/************************ CONTACT DATA*********************/
@@ -182,6 +184,8 @@ DATA.prototype.GetCookieValidity = DATA_GetCookieValidity;
 DATA.prototype.GetLang = DATA_GetLang;
 DATA.prototype.SetLang = DATA_SetLang;
 DATA.prototype.GetDefaultPHP = DATA_GetDefaultPHP;
+DATA.prototype.GetUpdateRatingInterval = DATA_GetUpdateRatingInterval;
+DATA.prototype.GetUpdateGetMaxProfiles = DATA_GetUpdateGetMaxProfiles;
 
 
 /*CONTACT METHODS************************/
@@ -528,6 +532,14 @@ function DATA_GetDefaultPHP()
 	return this.Conf.DefaultPHP;
 }
 
+function DATA_GetUpdateRatingInterval()
+{
+	return this.Conf.UpdateRatingInterval;
+}
+function DATA_GetUpdateGetMaxProfiles()
+{
+	return this.Conf.UpdateGetMaxProfiles;
+}
 
 /**********************************
  * METHODS - CONTACT USER LIST    *

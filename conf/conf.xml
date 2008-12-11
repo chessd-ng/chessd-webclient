@@ -10,6 +10,8 @@
 		<default-lang>pt_BR</default-lang>
 		<default-php>php</default-php>
 		<max-chat-char>2000</max-chat-char>
+		<update-rating-interval>2</update-rating-interval>
+		<update-get-max-profiles>20</update-get-max-profiles>
 	</general>
 	<jabber>
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>

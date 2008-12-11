@@ -349,7 +349,8 @@ function USER_SetUserRating(Username, Category, Rating)
 */
 function USER_StartUpdateUserList()
 {
-	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", 5000));
+	var Time = MainData.GetUpdateRatingInterval();
+	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", Time*1000));
 }
 
 function USER_StopUpdateUserList()
@@ -361,7 +362,7 @@ function USER_StopUpdateUserList()
 function USER_StartUpdateUserProfile()
 {
 	//Wait for 30 minutes to get profile again
-	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",1800000));
+	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",90000));
 }
 
 function USER_StopUpdateUserProfile()
@@ -379,9 +380,8 @@ function USER_UpdateUserList()
 	var NameList = new Array();
 	var UserList = MainData.GetUserList();
 
-	/********** TODO --> Put a attribute in conf file*/
-	var Max = 10;
-	/**********/
+	var Max = MainData.GetUpdateGetMaxProfiles();
+
 	i = 0;
 	while((NameList.length < Max) && (i < UserList.length))
 	{	
