@@ -587,10 +587,10 @@
 			Your time is over. You have lost to %s.
 		</game_timel_text>
 		<game_remove_room>
-<![CDATA[The game room that you are playing can't be closed.<br />If you want to close it you need to finish your game first or use the buttons on the side of the board.]]>		</game_remove_room>
+			<![CDATA[The game room that you are playing can't be closed.<br />If you want to close it you need to finish your game first or use the buttons on the side of the board.]]>		
 		</game_remove_room>
 		<game_remove_board>
-<![CDATA[The board of the game you are playing can't be closed.<br /> If you want to close ir you need to end your game first or use the buttons on the side of the board.]]>		</game_remove_board>
+			<![CDATA[The board of the game you are playing can't be closed.<br /> If you want to close ir you need to end your game first or use the buttons on the side of the board.]]>		
 		</game_remove_board>
 		<game_remove_game_title>
 			Warning
