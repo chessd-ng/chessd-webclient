@@ -642,7 +642,10 @@ function ROOM_ErrorMessageLength(RoomName)
 	}
 	
 	Message = UTILS_GetText("room_error_message_length");
-	Message = Message.replace("%s",Limit);
+	if (Message != null)
+	{
+		Message = Message.replace("%s",Limit);
+	}
 	Room.Room.addMsgError(Message);
 
 	return "";
