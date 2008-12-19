@@ -1,0 +1,873 @@
+#GameCenter
+{
+	position	: absolute;
+	left		: 50%;
+
+	margin-top	: 50px;
+	margin-left	: -22%;
+
+	color		: #216778;
+}
+
+#MenuDiv 
+{
+	width		: 560px;
+}
+
+#MenuDiv #MenuList
+{
+	list-style	: none;
+	height		: 20px;
+	
+}
+
+#MenuDiv #MenuList li
+{
+	background-color: #216778;
+	color		: #FFFFFF;
+	float		: left;
+	margin-right	: 2px;
+	height		: 10px;
+	padding		: 5px 10px;
+
+	font-size	: 10px;
+	cursor		: pointer;
+	text-align	: center;
+}
+
+#MenuDiv #MenuList li:hover
+{
+	background-color: #FFA200;
+}
+
+#MenuDiv #MenuList li.disable
+{
+	cursor		: default;
+	background-color: #666;
+	color		: #999;
+}
+
+#MenuDiv #MenuList #announce
+{
+	width		: 100px;
+}
+
+#MenuDiv #MenuList #tourney
+{
+	width		: 60px;
+}
+
+#MenuDiv #MenuList #current_games
+{
+	width		: 130px;
+}
+
+#MenuDiv #MenuList #postpone
+{
+	width		: 95px;
+}
+
+#MenuDiv #MenuList #challenge
+{
+	width		: 61px;
+	margin-right	: 0px;
+}
+
+/**************************/
+
+#CenterAnnounce,
+#CenterPostpone,
+#CenterMatch,
+#CenterCurrentGames
+{
+	width		: 530px;
+	/*height		: 310px;*/
+	border		: 2px solid #216778;
+	border-top	: 0px;
+	padding		: 0px 10px 25px 10px;
+	background-color: #edf7f6;
+	
+	overflow	: hidden;
+}
+
+#CenterOptions
+{
+	width		: 530px;
+	height		: 15px;
+	padding		: 20px 0px
+}
+
+#CenterResult
+{
+	width		: 510px;
+	height		: 250px;
+	padding		: 5px 8px 20px 8px;
+	border		: 2px solid #216778;
+	background-color: #FFF;
+}
+
+/*********************************************/
+/*OPTIONS*/
+#CenterAnnounce #CenterOptions ul
+{
+	list-style	: none;
+	width		: 530px;
+	height		: 15px;
+}
+
+#CenterAnnounce #CenterOptions ul li
+{
+	float 		: left;
+	text-align	: center;
+	font-size	: 11px;
+	/*margin	: 0px 35px;*/
+	cursor		: pointer;
+
+	font-style	: italic;
+
+	/*border-bottom	: 1px solid #216778;*/
+	width		: 175px;
+	text-decoration	: underline;
+}
+
+/*RESULT*/
+#CenterAnnounce #CenterResult ul
+{
+	width		: 510px;
+	list-style	: none;
+	font-size	: 11px;
+}
+
+#CenterAnnounce #CenterResult ul li
+{
+	height		: 17px;
+	text-align	: center;
+	margin-top	: 1px;
+}
+
+#CenterAnnounce #CenterResult li p
+{
+	float		: left;
+}
+
+#CenterAnnounce #CenterResult li img
+{
+	float		: left;
+	width		: 17px;
+	height		: 16px;
+	margin		: 0px 5px;
+	position	: relative;
+	bottom		: 3px;
+}
+
+#CenterAnnounce #CenterResult li #piece
+{
+	width		: 40px;
+}
+
+#CenterAnnounce #CenterResult li #player
+{
+	width		: 80px;
+	text-align	: left;
+}
+#CenterAnnounce #CenterResult li #abusive
+{
+	width		: 9px;
+	height		: 9px;
+	margin		: 0px 2px;
+	background-image: url('../images/gamecenter/abusive.png');
+	background-repeat: no-repeat;
+}
+#CenterAnnounce #CenterResult li #abusive.disable
+{
+	background-image: none;
+}
+
+#CenterAnnounce #CenterResult li #time
+{
+	width		: 50px;
+}
+
+#CenterAnnounce #CenterResult li #inc
+{
+	width		: 40px;
+}
+
+#CenterAnnounce #CenterResult li #category
+{
+	width		: 65px;
+}
+
+#CenterAnnounce #CenterResult li #rating
+{
+	width		: 50px;
+}
+
+#CenterAnnounce #CenterResult li #rated
+{
+	width		: 10px;
+	height		: 10px;
+	margin		: 0px 15px;
+	background-image: url('../images/gamecenter/rated.png');
+	background-repeat: no-repeat;
+}
+
+#CenterAnnounce #CenterResult li #rated.disable
+{
+	background-image: url('../images/gamecenter/rated_disable.png');
+}
+
+#CenterAnnounce #CenterResult li #private
+{
+	width		: 25px;
+	height		: 15px;
+	margin		: 0px 25px;
+	background-image: url('../images/gamecenter/observer.png');
+	background-repeat: no-repeat;
+}
+
+#CenterAnnounce #CenterResult li #private.disable
+{
+	background-image: url('../images/gamecenter/observer_disable.png');
+}
+
+#CenterAnnounce #CenterResult li #action
+{
+	cursor		: pointer;
+	text-decoration	: underline;
+	font-style	: italic;
+	width		: 55px;
+
+}
+
+#CenterAnnounce #CenterResult li.header
+{
+	font-weight	: bold;
+}
+
+#CenterAnnounce #CenterResult li.header #player
+{
+	text-align	: center;
+	width		: 117px;
+}
+
+#CenterAnnounce #CenterResult li.header #category
+{
+	width		: 65px;
+}
+
+#CenterAnnounce #CenterResult li.header #rating
+{
+	width		: 50px;
+}
+
+#CenterAnnounce #CenterResult li.header #time
+{
+	width		: 50px;
+}
+
+#CenterAnnounce #CenterResult li.header #inc
+{
+	width		: 40px;
+}
+
+#CenterAnnounce #CenterResult li.header #private
+{
+	width		: 75px;
+	margin		: 0px;
+	background-image : none;
+}
+
+#CenterAnnounce #CenterResult li.header #rated
+{
+	width		: 40px;
+	margin		: 0px;
+	background-image : none;
+}
+
+#CenterAnnounce #CenterResult li #white
+{
+	background-image: url('../images/challenge_menu/white_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterAnnounce #CenterResult li #black
+{
+	background-image: url('../images/challenge_menu/black_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterAnnounce #CenterResult li #random
+{
+	background-image: url('../images/challenge_menu/random.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterAnnounce #CenterResult #ListResult
+{
+	height		: 225px;
+	overflow-y	: auto;
+	border-width	: 1px 0px;
+	border-style	: solid;
+	border-color	: #ffa200;
+}
+#CenterAnnounce #CenterResult #ListResult li
+{
+	margin		: 5px 0px 0px 0px;
+}
+
+/***********************************/
+/*OPTIONS*/
+#CenterMatch #CenterOptions ul
+{
+	list-style	: none;
+	width		: 530px;
+	height		: 15px;
+}
+
+#CenterMatch #CenterOptions ul li
+{
+	float 		: left;
+	text-align	: center;
+	font-size	: 11px;
+	/*margin	: 0px 35px;*/
+	cursor		: pointer;
+
+	font-style	: italic;
+
+	/*border-bottom	: 1px solid #216778;*/
+	width		: 530px;
+	text-decoration	: underline;
+}
+
+/*RESULT*/
+#CenterMatch #CenterResult ul
+{
+	width		: 510px;
+	list-style	: none;
+	font-size	: 11px;
+}
+
+#CenterMatch #CenterResult ul li
+{
+	height		: 17px;
+	text-align	: center;
+	margin-top	: 1px;
+}
+
+#CenterMatch #CenterResult li p
+{
+	float		: left;
+}
+
+#CenterMatch #CenterResult li img
+{
+	float		: left;
+	width		: 17px;
+	height		: 16px;
+	margin		: 0px 5px;
+	position	: relative;
+	bottom		: 3px;
+}
+
+#CenterMatch #CenterResult li #piece
+{
+	width		: 40px;
+}
+
+#CenterMatch #CenterResult li #player
+{
+	width		: 80px;
+	text-align	: left;
+}
+#CenterMatch #CenterResult li #abusive
+{
+	width		: 9px;
+	height		: 9px;
+	margin		: 0px 2px;
+	background-image: url('../images/gamecenter/abusive.png');
+	background-repeat: no-repeat;
+}
+#CenterMatch #CenterResult li #abusive.disable
+{
+	background-image: none;
+}
+
+#CenterMatch #CenterResult li #time
+{
+	width		: 60px;
+}
+
+#CenterMatch #CenterResult li #inc
+{
+	width		: 80px;
+}
+
+#CenterMatch #CenterResult li #category
+{
+	width		: 65px;
+}
+
+#CenterMatch #CenterResult li #rated
+{
+	width		: 10px;
+	height		: 10px;
+	margin		: 0px 15px;
+	background-image: url('../images/gamecetner/rated.png');
+	background-repeat: no-repeat;
+}
+
+#CenterMatch #CenterResult li #rated.disable
+{
+	background-image: url('../images/gamecenter/rated_disable.png');
+}
+
+#CenterMatch #CenterResult li #private
+{
+	width		: 25px;
+	height		: 15px;
+	margin		: 0px 25px;
+	background-image: url('../images/gamecenter/observer.png');
+	background-repeat: no-repeat;
+}
+
+#CenterMatch #CenterResult li #private.disable
+{
+	background-image: url('../images/gamecenter/observer_disable.png');
+}
+
+#CenterMatch #CenterResult li #action
+{
+	cursor		: pointer;
+	text-decoration	: underline;
+	font-style	: italic;
+	width		: 50px;
+
+}
+
+#CenterMatch #CenterResult li.header
+{
+	font-weight	: bold;
+}
+
+#CenterMatch #CenterResult li.header #player
+{
+	text-align	: center;
+	width		: 120px;
+}
+
+#CenterMatch #CenterResult li.header #category
+{
+	width		: 65px;
+}
+
+#CenterMatch #CenterResult li.header #time
+{
+	width		: 60px;
+}
+
+#CenterMatch #CenterResult li.header #inc
+{
+	width		: 80px;
+}
+
+#CenterMatch #CenterResult li.header #private
+{
+	width		: 75px;
+	margin		: 0px;
+	background-image : none;
+}
+
+#CenterMatch #CenterResult li.header #rated
+{
+	width		: 40px;
+	margin		: 0px;
+	background-image : none;
+}
+
+#CenterMatch #CenterResult li #white
+{
+	background-image: url('../images/challenge_menu/white_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterMatch #CenterResult li #black
+{
+	background-image: url('../images/challenge_menu/black_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterMatch #CenterResult li #random
+{
+	background-image: url('../images/challenge_menu/random.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterMatch #CenterResult #ListResult
+{
+	height		: 225px;
+	overflow-y	: auto;
+	border-width	: 1px 0px;
+	border-style	: solid;
+	border-color	: #ffa200;
+}
+#CenterMatch #CenterResult #ListResult li
+{
+	margin		: 5px 0px 0px 0px;
+}
+
+
+
+/***********************************/
+/*OPTIONS*/
+#CenterPostpone #CenterOptions ul
+{
+	list-style	: none;
+	width		: 530px;
+	height		: 15px;
+}
+
+#CenterPostpone #CenterOptions ul li
+{
+	float 		: left;
+	text-align	: center;
+	font-size	: 11px;
+	/*margin	: 0px 35px;*/
+	cursor		: pointer;
+
+	font-style	: italic;
+
+	/*border-bottom	: 1px solid #216778;*/
+	width		: 530px;
+	text-decoration	: underline;
+}
+
+/*RESULT*/
+#CenterPostpone #CenterResult ul
+{
+	width		: 510px;
+	list-style	: none;
+	font-size	: 11px;
+}
+
+#CenterPostpone #CenterResult ul li
+{
+	height		: 17px;
+	text-align	: center;
+	margin-top	: 1px;
+}
+
+#CenterPostpone #CenterResult li p
+{
+	float		: left;
+}
+
+#CenterPostpone #CenterResult li img
+{
+	float		: left;
+	width		: 17px;
+	height		: 16px;
+	margin		: 0px 5px;
+	position	: relative;
+	bottom		: 3px;
+}
+
+#CenterPostpone #CenterResult li #piece
+{
+	width		: 40px;
+}
+
+#CenterPostpone #CenterResult li #player
+{
+	width		: 70px;
+	text-align	: left;
+}
+#CenterPostpone #CenterResult li #abusive
+{
+	width		: 9px;
+	height		: 9px;
+	margin		: 0px 2px;
+	background-image: url('../images/gamecenter/abusive.png');
+	background-repeat: no-repeat;
+}
+#CenterPostpone #CenterResult li #abusive.disable
+{
+	background-image: none;
+}
+
+#CenterPostpone #CenterResult li #time
+{
+	width		: 60px;
+}
+
+#CenterPostpone #CenterResult li #inc
+{
+	width		: 65px;
+}
+
+#CenterPostpone #CenterResult li #category
+{
+	width		: 65px;
+}
+
+#CenterPostpone #CenterResult li #rating
+{
+	width		: 55px;
+}
+
+#CenterPostpone #CenterResult li #date
+{
+	width		: 80px;
+}
+
+#CenterPostpone #CenterResult li #action
+{
+	cursor		: pointer;
+	text-decoration	: underline;
+	font-style	: italic;
+	width		: 70px;
+
+}
+
+#CenterPostpone #CenterResult li.header
+{
+	font-weight	: bold;
+}
+
+#CenterPostpone #CenterResult li.header #player
+{
+	text-align	: center;
+	width		: 105px;
+}
+
+#CenterPostpone #CenterResult li.header #category
+{
+	width		: 80px;
+}
+
+#CenterPostpone #CenterResult li.header #time
+{
+	width		: 45px;
+}
+
+#CenterPostpone #CenterResult li.header #inc
+{
+	width		: 80px;
+}
+
+#CenterPostpone #CenterResult li.header #rating
+{
+	width		: 40px;
+}
+
+#CenterPostpone #CenterResult li.header #date
+{
+	width		: 60px;
+}
+
+#CenterPostpone #CenterResult li.disable
+{
+	color		: #999;
+}
+
+#CenterPostpone #CenterResult li #white
+{
+	background-image: url('../images/challenge_menu/white_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterPostpone #CenterResult li #black
+{
+	background-image: url('../images/challenge_menu/black_enable.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterPostpone #CenterResult li #random
+{
+	background-image: url('../images/challenge_menu/random.png');
+	background-repeat: no-repeat;
+	width		: 25px;
+	height		: 25px;
+	margin		: 0px 10px;
+}
+
+#CenterPostpone #CenterResult #ListResult
+{
+	height		: 225px;
+	overflow-y	: auto;
+	border-width	: 1px 0px;
+	border-style	: solid;
+	border-color	: #ffa200;
+}
+#CenterPostpone #CenterResult #ListResult li
+{
+	margin		: 5px 0px 0px 0px;
+}
+
+
+
+/*********************************************/
+/*OPTIONS*/
+#CenterCurrentGames #CenterOptions ul
+{
+	list-style	: none;
+	width		: 530px;
+}
+
+#CenterCurrentGames #CenterOptions ul li
+{
+	float 		: left;
+	text-align	: center;
+	font-size	: 11px;
+	cursor		: pointer;
+	width		: 530px;
+	font-style	: italic;
+	text-decoration	: underline;
+}
+/*RESULT*/
+#CenterCurrentGames #CenterResult ul
+{
+	width		: 510px;
+	list-style	: none;
+	font-size	: 11px;
+}
+
+#CenterCurrentGames #CenterResult ul li
+{
+	height		: 25px;
+	text-align	: center;
+	margin-top	: 1px;
+}
+
+#CenterCurrentGames #CenterResult li p
+{
+	float		: left;
+}
+#CenterCurrentGames #CenterResult li img
+{
+	float		: left;
+	width		: 16px;
+	height		: 17px;
+}
+
+#CenterCurrentGames #CenterResult li #wrating,
+#CenterCurrentGames #CenterResult li #brating
+{
+	width		: 50px;
+}
+#CenterCurrentGames #CenterResult li #wtime,
+#CenterCurrentGames #CenterResult li #btime
+{
+	width		: 60px;
+}
+
+#CenterCurrentGames #CenterResult li #vs
+{
+	font-size	: 12px;
+	font-weight	: bold;
+	width		: 80px;
+}
+#CenterCurrentGames #CenterResult li #category
+{
+	width		: 70px;
+}
+
+#CenterCurrentGames #CenterResult li #time
+{
+	width		: 45px;
+}
+
+#CenterCurrentGames #CenterResult li #rated
+{
+	width		: 10px;
+	height		: 10px;
+	margin		: 0px 15px;
+	background-image: url('../images/gamecenter/rated.png');
+	background-repeat: no-repeat;
+}
+
+#CenterCurrentGames #CenterResult li #rated.disable
+{
+	background-image: url('../images/gamecenter/rated_disable.png');
+}
+#CenterCurrentGames #CenterResult li #moves
+{
+	width		: 55px;
+}
+#CenterCurrentGames #CenterResult li #action
+{
+	cursor		: pointer;
+	text-decoration	: underline;
+	font-style	: italic;
+	width		: 70px;
+}
+
+#CenterCurrentGames #CenterResult li.header
+{
+	font-weight	: bold;
+}
+#CenterCurrentGames #CenterResult li.header #category
+{
+	width		: 65px;
+}
+
+#CenterCurrentGames #CenterResult li.header #rated
+{
+	width		: 45px;
+	background-image: none;
+	margin		: 0px;
+}
+
+#CenterCurrentGames #CenterResult li.disable
+{
+	color		: #999;
+}
+
+#CenterCurrentGames #CenterResult #ListResult
+{
+	height		: 225px;
+	overflow-y	: auto;
+	border-width	: 1px 0px;
+	border-style	: solid;
+	border-color	: #ffa200;
+}
+
+
+#CenterCurrentGames #CenterResult #ListResult li #player
+{
+	width		: 98px;
+}
+#CenterCurrentGames #CenterResult #ListResult li #player.white
+{
+	text-align	: right;
+}
+#CenterCurrentGames #CenterResult #ListResult li #player.black
+{
+	margin-left	: 15px;
+	text-align	: left;
+}
+

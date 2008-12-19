@@ -641,10 +641,13 @@ function GAME_StartGame(GameId, P1, P2)
 
 	var MyUsername = MainData.GetUsername();
 	// Remove welcome div
-	INTERFACE_RemoveWelcome();
+	//INTERFACE_RemoveWelcome();
 
 	// Remove all challenges
 	CHALLENGE_ClearChallenges();
+
+	// Cancel all announces
+	ANNOUNCE_CancelAllAnnounce();
 
 	// Hide current game (this case should happen when player
 	// is observing a game)
@@ -695,6 +698,9 @@ function GAME_StartGame(GameId, P1, P2)
 	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
 	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
 
+	// Hide gamecenter
+	GAMECENTER_HideGameCenter();
+
 	// Set status to playing
 	return CONTACT_ChangeStatus("playing", "return") + Buffer;
 
@@ -721,7 +727,10 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var NewCurrentGame;
 
 	// Remove welcome div
-	INTERFACE_RemoveWelcome();
+	//INTERFACE_RemoveWelcome();
+
+	// Hide gamecenter
+	GAMECENTER_HideGameCenter();
 
 	// Hide current game
 	if (CurrentGame != null)
@@ -861,6 +870,9 @@ function GAME_RemoveGame(GameID)
 
 			// Send message to leave room
 			ROOM_ExitRoom(GameID)
+
+			// Show gamecenter again
+			GAMECENTER_ShowGameCenter();
 		}
 		else
 		{

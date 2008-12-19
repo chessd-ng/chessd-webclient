@@ -148,7 +148,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 
 	// Remove welcome div
-	INTERFACE_RemoveWelcome();
+	//INTERFACE_RemoveWelcome();
 
 	// Hide current game
 	if (CurrentOldGame != null)
@@ -190,6 +190,9 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 
 	//Change user status to observer
 	//Buffer += CONTACT_ChangeStatus("","return");
+
+	// Hide gamecenter
+	GAMECENTER_HideGameCenter();
 
 	return Buffer;
 }
@@ -508,6 +511,8 @@ function OLDGAME_RemoveOldGame(Index)
 
 	MainData.RemoveOldGame(Index);
 
+	// Show gamecenter again
+	GAMECENTER_ShowGameCenter();
 }
 
 /** 
