@@ -512,21 +512,28 @@ function INTERFACE_DecreaseTime()
 {
 	var CurrentGame = MainData.GetCurrentGame();
 
-	if (CurrentGame.Game.Turn == "white")
+	if (CurrentGame != null)
 	{
-		if (CurrentGame.Game.WhitePlayer.Time != null)
+		if (CurrentGame.Game.Turn == "white")
 		{
-			CurrentGame.Game.WhitePlayer.Time -= 1;
-			CurrentGame.Game.SetWTime();
+			if (CurrentGame.Game.WhitePlayer.Time != null)
+			{
+				CurrentGame.Game.WhitePlayer.Time -= 1;
+				CurrentGame.Game.SetWTime();
+			}
+		}
+		else
+		{
+			if (CurrentGame.Game.BlackPlayer.Time != null)
+			{
+				CurrentGame.Game.BlackPlayer.Time -= 1;
+				CurrentGame.Game.SetBTime();
+			}
 		}
 	}
 	else
 	{
-		if (CurrentGame.Game.BlackPlayer.Time != null)
-		{
-			CurrentGame.Game.BlackPlayer.Time -= 1;
-			CurrentGame.Game.SetBTime();
-		}
+		alert("Game error - Current game is null, no timer to decrease");
 	}
 }
 

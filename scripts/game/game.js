@@ -500,6 +500,8 @@ function GAME_End(XML)
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
 	Game = MainData.GetGame(GameID);
+
+	// Stop timer
 	Game.Game.StopTimer();
 
 	// Hide loading box
@@ -655,6 +657,7 @@ function GAME_StartGame(GameId, P1, P2)
 		Room = MainData.GetRoom(CurrentGame.Id);
 		Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		CurrentGame.Game.Hide();
+		CurrentGame.Game.StopTimer();
 		MainData.RemoveGame(CurrentGame.Id);
 	}
 
