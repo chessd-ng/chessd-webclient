@@ -1208,6 +1208,11 @@ function GAME_RemoveBlockBorder(Line, Col)
 	var CurrentGame = MainData.GetCurrentGame();
 	var BlockId;
 
+	if (CurrentGame == null)
+	{
+		CurrentGame = MainData.GetCurrentOldGame();
+	}
+
 	// Create long notation
 	if (CurrentGame.YourColor == "white")
 	{
@@ -1244,6 +1249,11 @@ function GAME_RemoveBlockClass(Line, Col)
 {
 	var Game = MainData.GetCurrentGame();
 	var BlockId;
+
+	if (Game == null)
+	{
+		Game = MainData.GetCurrentOldGame();
+	}
 
 	// Create long notation
 	if (Game.YourColor == "white")

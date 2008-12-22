@@ -138,13 +138,16 @@ function UTILS_StartDragPiece(Obj, Size, event)
 				document.body.onmousemove = null;
 				document.body.onmouseup = null;
 
-				// If piece has been moved
-				if ((NewCol != OldCol) || (NewLine != OldLine))
+				if (CurrentGame != null)
 				{
-					// Send movement
-					GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
-					// Show loading move message
-					GAME_ShowLoadingMove(CurrentGame.Id);
+					// If piece has been moved
+					if ((NewCol != OldCol) || (NewLine != OldLine))
+					{
+						// Send movement
+						GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+						// Show loading move message
+						GAME_ShowLoadingMove(CurrentGame.Id);
+					}
 				}
 
 				// Return to deafult cursor
@@ -152,6 +155,9 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 				// Remove block border of origin
 				GAME_RemoveBlockBorder(OldLine, OldCol);
+
+				// If game time over while making a move, remove block class from selected block
+				GAME_RemoveBlockClass(OldLine, OldCol);
 
 				delete OldPos;
 
@@ -202,15 +208,18 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		document.body.onmousemove = null;
 		document.body.onmouseup = null;
 
-		// If piece has been moved
-		if ((NewCol != OldCol) || (NewLine != OldLine))
+		if (CurrentGame != null)
 		{
-			// Send movement
-			GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
+			// If piece has been moved
+			if ((NewCol != OldCol) || (NewLine != OldLine))
+			{
+				// Send movement
+				GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 
-			// Show loading move message
-			GAME_ShowLoadingMove(CurrentGame.Id);
+				// Show loading move message
+				GAME_ShowLoadingMove(CurrentGame.Id);
 
+			}
 		}
 
 		// Return to deafult cursor
