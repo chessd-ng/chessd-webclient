@@ -405,7 +405,7 @@ function ANNOUNCE_AcceptRandomAnnounce()
 	// Check if exists some announce
 	if( TmpAnnounceList.length == 0)
 	{
-		WINDOW_Alert("Erro", "Nao ha partidas anunciadas");
+		WINDOW_Alert(UTILS_GetText("gamecenter_no_announce"),UTILS_GetText("gamecenter_no_announce"));
 	}
 	else
 	{
