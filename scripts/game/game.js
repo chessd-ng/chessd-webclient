@@ -645,9 +645,6 @@ function GAME_StartGame(GameId, P1, P2)
 	// Remove welcome div
 	//INTERFACE_RemoveWelcome();
 
-	// Remove all challenges
-	CHALLENGE_ClearChallenges();
-
 	// Cancel all announces
 	ANNOUNCE_CancelAllAnnounce();
 
@@ -703,6 +700,9 @@ function GAME_StartGame(GameId, P1, P2)
 
 	// Hide gamecenter
 	GAMECENTER_HideGameCenter();
+
+	// Remove all challenges
+	CHALLENGE_ClearChallenges();
 
 	// Set status to playing
 	return CONTACT_ChangeStatus("playing", "return") + Buffer;

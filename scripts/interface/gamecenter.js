@@ -479,7 +479,7 @@ function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, Ma
 		PRated.title = UTILS_GetText("gamecenter_rated_game");
 	}
 
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GEtText("window_cancel"));
+	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("window_cancel"));
 	
 	PButton.onclick = function(){
 		CHALLENGE_DeclineChallenge(Id);

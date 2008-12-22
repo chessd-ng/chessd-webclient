@@ -335,21 +335,26 @@ function CHALLENGE_HandleAccept (XML)
 	var Match, GameRoom;
 	var MatchTag;
 	var Buffer = "";
-
+	var MatchID;
+	var GameCenter = MainData.GetGamecenter();
+	
 	// Try to get the Match tag
 	MatchTag = XML.getElementsByTagName('match');
 	if(MatchTag == null)
 	{
 		return Buffer;
 	}
+
 	Match = MatchTag[0];
-		
+	MatchID = Match.getAttribute("id");
+
+	// Remove this match from challenge list
+	// and game center
+	MainData.RemoveChallenge(MatchID, MatchID);
+	GameCenter.MatchOffer.remove(MatchID);
+
 	// Get the game room name
 	GameRoom = Match.getAttribute('room');
-
-	// Remove all challanges on structure
-	//MainData.ClearChallenges();
-	CHALLENGE_ClearChallenges();
 
 	// TODO
 	// Warn the player's interface
@@ -725,18 +730,21 @@ function CHALLENGE_ClearChallenges()
 {
 	var i;
 	var MatchId;
-	var ChallengeWindow;
+//	var ChallengeWindow;
 	var ChallengeList = MainData.GetChallengeList();
 //	var ChallengeMenu = MainData.GetChallengeMenu();
-	var GameCenter = MainData.GetGamecenter();
-	var XMPP = "";
+//	var GameCenter = MainData.GetGamecenter();
+//	var XMPP = "";
 
 	// Remove all challenges from challenge menu and challenge list
 	for(i=ChallengeList.length-1 ; i>=0; i--)
 	{
 		MatchId = ChallengeList[i].MatchId;
+		/*
 		ChallengeWindow = ChallengeList[i].Window;
-
+		
+		// This commands is done when receive response from
+		// decline messsage
 		if(MatchId != null)
 		{
 			//CHALLENGE_DeclineChallenge(MatchID);
@@ -750,6 +758,7 @@ function CHALLENGE_ClearChallenges()
 		{
 			WINDOW_RemoveWindow(ChallengeWindow);
 		}
+		*/
 		
 		//Send a message to decline challenges
 		CHALLENGE_DeclineChallenge(MatchId);

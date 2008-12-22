@@ -24,6 +24,7 @@
 #MenuDiv #MenuList li
 {
 	background-color: #216778;
+	background-image: url("../images/left_title_bg_inactive.png");
 	color		: #FFFFFF;
 	float		: left;
 	margin-right	: 2px;
@@ -38,11 +39,13 @@
 #MenuDiv #MenuList li:hover
 {
 	background-color: #FFA200;
+	background-image: url("../images/left_title_bg.png");
 }
 
 #MenuDiv #MenuList li.disable
 {
 	cursor		: default;
+	background-image: none;
 	background-color: #666;
 	color		: #999;
 }
