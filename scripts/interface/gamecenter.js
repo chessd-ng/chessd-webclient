@@ -62,11 +62,11 @@ function INTERFACE_CreateGameCenter()
 
 	var MainCenter = UTILS_CreateElement("div");
 
-	var AnnounceButton = UTILS_CreateElement("li","announce",null,UTILS_GetText("gamecenter_announce_title"));
-	var PostponeButton = UTILS_CreateElement("li","postpone",null,UTILS_GetText("gamecenter_postpone_title"));
-	var MatchOfferButton = UTILS_CreateElement("li","challenge",null,UTILS_GetText("gamecenter_match_title"));
-	var TourneyButton = UTILS_CreateElement("li","tourney","disable",UTILS_GetText("gamecenter_tourneys_title"));
-	var CurrentGamesButton = UTILS_CreateElement("li","current_games",null,UTILS_GetText("gamecenter_current_games_title"));
+	var AnnounceButton = UTILS_CreateElement("li","announce",null,"Partidas Anunciadas");
+	var PostponeButton = UTILS_CreateElement("li","postpone",null,"Partidas Adiadas");
+	var MatchOfferButton = UTILS_CreateElement("li","challenge",null,"Desafios");
+	var TourneyButton = UTILS_CreateElement("li","tourney","disable","Torneios");
+	var CurrentGamesButton = UTILS_CreateElement("li","current_games",null,"Partidas em andamento");
 
 	AnnounceButton.onclick = function(){
 		GAMECENTER_ShowAnnounce();
@@ -161,7 +161,7 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 		PAbusive = UTILS_CreateElement("p","abusive", "disable", null);
 	}
 
-	PAbusive.title = UTILS_GetText("gamecenter_abusive");
+	PAbusive.title = "Usuario abusivo";
 
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name, 10));
 	PRating = UTILS_CreateElement("p","rating", null, Rating);
@@ -173,32 +173,32 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 	if(Private == false)
 	{
 		PPrivate = UTILS_CreateElement("p","private","false");
-		PPrivate.title = UTILS_GetText("gamecenter_public");
+		PPrivate.title = "Publico";
 	}
 	else
 	{
 		PPrivate = UTILS_CreateElement("p","private","true");
-		PPrivate.title = UTILS_GetText("gamecenter_private");
+		PPrivate.title = "Privado";
 	}
 	*/
 
 	PPrivate = UTILS_CreateElement("p","private","disable", null);
-	PPrivate.title = UTILS_GetText("gamecenter_public");
+	PPrivate.title = "Publico";
 	
 	if(Rated == "false")
 	{
 		PRated = UTILS_CreateElement("p","rated","disable", null);
-		PRated.title = UTILS_GetText("gamecenter_not_rated_game");
+		PRated.title = "Não valendo rating";
 	}
 	else
 	{
 		PRated = UTILS_CreateElement("p","rated",null, null);
-		PRated.title = UTILS_GetText("gamecenter_rated_game");
+		PRated.title = "Valendo rating";
 	}
 
 	if(Player.Name == MainData.GetUsername())
 	{
-		PButton = UTILS_CreateElement("p","button","decline",UTILS_GetText("window_cancel"));
+		PButton = UTILS_CreateElement("p","button","decline","cancelar");
 		PButton.onclick = function(){
 			//ANNOUNCE_RemoveAnnounce(Id);
 			ANNOUNCE_CancelAnnounce(Id);
@@ -206,7 +206,7 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 	}
 	else
 	{
-		PButton = UTILS_CreateElement("p","button","accept",UTILS_GetText("window_play"));
+		PButton = UTILS_CreateElement("p","button","accept","jogar");
 		PButton.onclick = function(){
 			ANNOUNCE_AcceptAnnounce(Id);
 		}
@@ -312,26 +312,27 @@ function INTERFACE_CreateGameCenterAnnounce()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
+	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var AnnouncePlayer = UTILS_CreateElement("p","player",null,UTILS_GetText("gamecenter_announcer"));
-	var Time = UTILS_CreateElement("p","time",null,UTILS_GetText("gamecenter_time"));
-	var Inc = UTILS_CreateElement("p","inc",null,UTILS_GetText("gamecenter_inc"));
-	var Category = UTILS_CreateElement("p","category",null,UTILS_GetText("gamecenter_category"));
-	var Rating = UTILS_CreateElement("p","rating",null,UTILS_GetText("gamecenter_rating"));
-	var Rated = UTILS_CreateElement("p","rated",null,UTILS_GetText("gamecenter_rated"));
-	var Private = UTILS_CreateElement("p","private",null,UTILS_GetText("gamecenter_privacity"));
+	var AnnouncePlayer = UTILS_CreateElement("p","player",null,"Anunciante");
+	var Time = UTILS_CreateElement("p","time",null,"Tempo");
+	var Inc = UTILS_CreateElement("p","inc",null,"Inc.");
+	var Category = UTILS_CreateElement("p","category",null,"Categoria");
+	var Rating = UTILS_CreateElement("p","rating",null,"Rating");
+	var Rated = UTILS_CreateElement("p","rated",null,"Rated");
+	var Private = UTILS_CreateElement("p","private",null,"Privacidade");
 //	var Action = UTILS_CreateElement("p","action",null,"Acao");
 
 
 	// Options list
-	var AcceptRandom = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_play_now"));
-	var AnnounceMatch = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_announce_match"));
-//	var SeeGraphic = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_see_graphic"));
-	var UpdateAnnounce = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_update"));
+	var AcceptRandom = UTILS_CreateElement("li",null,null,"Jogar agora");
+	var AnnounceMatch = UTILS_CreateElement("li",null,null,"Anunciar partida")
+//	var SeeGraphic = UTILS_CreateElement("li",null,null,"Ver grafico de anuncios");
+	var UpdateAnnounce = UTILS_CreateElement("li",null,null,"Atualizar");
 
 	// No Announce element
-	var NoAnnounce = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_announce"));
+	var NoAnnounce = UTILS_CreateElement("p",null,null, "Nao ha partidas anunciadas");
 
 	AcceptRandom.onclick = function(){
 		ANNOUNCE_AcceptRandomAnnounce();
@@ -445,7 +446,7 @@ function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, Ma
 		PAbusive = UTILS_CreateElement("p","abusive", "disable", null);
 	}
 
-	PAbusive.title = UTILS_GetText("gamecenter_abusive");
+	PAbusive.title = "Usuario abusivo";
 
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name,10));
 	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
@@ -466,20 +467,20 @@ function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, Ma
 	*/
 
 	PPrivate = UTILS_CreateElement("p","private","disable",null);
-	PPrivate.title = UTILS_GetText("gamecenter_public");
+	PPrivate.title = "Publico";
 	
 	if(Rated == false)
 	{
 		PRated = UTILS_CreateElement("p","rated","disable",null);
-		PRated.title = UTILS_GetText("gamecenter_rated_game");
+		PRated.title = "Não valendo rating";
 	}
 	else
 	{
 		PRated = UTILS_CreateElement("p","rated",null, null);
-		PRated.title = UTILS_GetText("gamecenter_not_rated_game");
+		PRated.title = "Valendo rating";
 	}
 
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("window_cancel"));
+	PButton = UTILS_CreateElement("p","action","accept","cancelar");
 	
 	PButton.onclick = function(){
 		CHALLENGE_DeclineChallenge(Id);
@@ -583,20 +584,21 @@ function INTERFACE_CreateGameCenterMatch()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
+	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var MatchPlayer = UTILS_CreateElement("p","player",null,UTILS_GetText("gamecenter_announcer"));
-	var Time = UTILS_CreateElement("p","time",null,UTILS_GetText("gamecenter_time"));
-	var Inc = UTILS_CreateElement("p","inc",null,UTILS_GetText("gamecenter_inc"));
-	var Category = UTILS_CreateElement("p","category",null,UTILS_GetText("gamecenter_inc"));
-	var Rated = UTILS_CreateElement("p","rated",null,UTILS_GetText("gamecenter_rated"));
-	var Private = UTILS_CreateElement("p","private",null,UTILS_GetText("gamecenter_privacity"));
+	var MatchPlayer = UTILS_CreateElement("p","player",null,"Anunciante");
+	var Time = UTILS_CreateElement("p","time",null,"Tempo");
+	var Inc = UTILS_CreateElement("p","inc",null,"Incremento");
+	var Category = UTILS_CreateElement("p","category",null,"Categoria");
+	var Rated = UTILS_CreateElement("p","rated",null,"Rated");
+	var Private = UTILS_CreateElement("p","private",null,"Privacidade");
 
 
 	// No Match element
-	var NoMatch = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_match"));
+	var NoMatch = UTILS_CreateElement("p",null,null, "Nao ha partidas anunciadas");
 
-	var CancelMatches = UTILS_CreateElement("li",null,null, UTILS_GetText("gamecenter_cancel_matches"));
+	var CancelMatches = UTILS_CreateElement("li",null,null, "Cancelar todos os meus desafios");
 
 	CancelMatches.onclick = function(){
 		CHALLENGE_ClearChallenges();
@@ -688,8 +690,6 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 		PAbusive = UTILS_CreateElement("p","abusive", "disable", null);
 	}
 
-	PAbusive.title = UTILS_GetText("gamecenter_abusive");
-
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name,10));
 	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
@@ -697,11 +697,24 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	PRating = UTILS_CreateElement("p","rating", null, Rating);
 
 	PDate = UTILS_CreateElement("p","date",null,Date);
+/*
+	if(Player.Name == MainData.Username)
+	{
+		PButton = UTILS_CreateElement("p","button","decline");
+		PButton.onclick = function(){
+			ANNOUNCE_RemovePostpone(Id);
+		}
+	}
+	else
+	{
+		PButton = UTILS_CreateElement("p","button","accept");
+		PButton.onclick = function(){
+			ANNOUNCE_AcceptPostpone(Id);
+		}
+	}
+*/
+	PButton = UTILS_CreateElement("p","action","accept","continuar");
 
-	//Button action is set before get opponent's presence
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("window_continue"));
-	
-	
 	Item.appendChild(PPieceColor);
 	Item.appendChild(PName);
 	Item.appendChild(PRating);
@@ -836,18 +849,19 @@ function INTERFACE_CreateGameCenterPostpone()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
+	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var PostponePlayer = UTILS_CreateElement("p","player",null,UTILS_GetText("gamecenter_opponent"));
-	var Rating = UTILS_CreateElement("p","rating",null,UTILS_GetText("gamecenter_rating"));
-	var Category = UTILS_CreateElement("p","category",null,UTILS_GetText("gamecenter_category"));
-	var Time = UTILS_CreateElement("p","time",null,UTILS_GetText("gamecenter_time"));
-	var Inc = UTILS_CreateElement("p","inc",null,UTILS_GetText("gamecenter_inc"));
-	var Date = UTILS_CreateElement("p","date",null,UTILS_GetText("gamecenter_date"));
+	var PostponePlayer = UTILS_CreateElement("p","player",null,"Adversario");
+	var Rating = UTILS_CreateElement("p","rating",null,"Rating");
+	var Category = UTILS_CreateElement("p","category",null,"Categoria");
+	var Time = UTILS_CreateElement("p","time",null,"Tempo");
+	var Inc = UTILS_CreateElement("p","inc",null,"Incremento");
+	var Date = UTILS_CreateElement("p","date",null,"Data");
 
 
 	// No Postpone element
-	var NoPostpone = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_postpone"));
+	var NoPostpone = UTILS_CreateElement("p",null,null, "Nao ha partidas adiadas");
 
 	//ListResultHeader.appendChild(PieceColor);
 	ListResultHeader.appendChild(PostponePlayer);
@@ -925,17 +939,17 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 	PGameTime = UTILS_CreateElement("p","time",null,GameTime+"\"");
 	GameMoves = UTILS_CreateElement("p","moves",null,Moves);
 
-	Button = UTILS_CreateElement("p","action","inative", UTILS_GetText("gamecenter_observe"));
+	Button = UTILS_CreateElement("p","action","inative", "observar");
 
 	if(Rated == "true")
 	{
 		PRated = UTILS_CreateElement("p","rated",null,null);
-		PRated.title = UTILS_GetText("gamecenter_rated_game");
+		PRated.title = "Valendo rating";
 	}
 	else
 	{
 		PRated = UTILS_CreateElement("p","rated","disable",null);
-		PRated.title = UTILS_GetText("gamecenter_not_rated_game");
+		PRated.title = "Não valendo rating";
 	}
 
 	Button.onclick = function(){
@@ -979,7 +993,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 	Item.appendChild(PW);
 	Item.appendChild(PB);
 	Item.appendChild(Category);
-	Item.appendChild(PGameTime);
+	Item.appendChild(GameTime);
 	Item.appendChild(PRated);
 	Item.appendChild(GameMoves);
 
@@ -1083,24 +1097,25 @@ function INTERFACE_CreateGameCenterCurrentGames()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
+	// TODO -> trocar p/ XML
 	// Result headers
-	var WRating = UTILS_CreateElement("p","wrating",null,UTILS_GetText("gamecenter_rating"));
+	var WRating = UTILS_CreateElement("p","wrating",null,"Rating");
 	var WPiece = UTILS_CreateElement("img","wpiece");
 
 	var VS = UTILS_CreateElement("p","vs",null,"X");
 	
-	var BRating = UTILS_CreateElement("p","brating",null,UTILS_GetText("gamecenter_rating"));
+	var BRating = UTILS_CreateElement("p","brating",null,"Rating");
 	var BPiece = UTILS_CreateElement("img","bpiece");
 
-	var Category = UTILS_CreateElement("p","category",null,UTILS_GetText("gamecenter_category"));
-	var Time = UTILS_CreateElement("p","time",null,UTILS_GetText("gamecenter_time"));
-	var Moves = UTILS_CreateElement("p","moves",null,UTILS_GetText("gamecenter_moves"));
-	var Rated = UTILS_CreateElement("p","rated",null,UTILS_GetText("gamecenter_rated"));
+	var Category = UTILS_CreateElement("p","category",null,"Categoria");
+	var Time = UTILS_CreateElement("p","time",null,"Tempo");
+	var Moves = UTILS_CreateElement("p","moves",null,"Lances");
+	var Rated = UTILS_CreateElement("p","rated",null,"Rated");
 
-	var UpdateList = UTILS_CreateElement("li","update",null,UTILS_GetText("gamecenter_update"));
+	var UpdateList = UTILS_CreateElement("li","update",null,"Atualizar");
 	
 	// No Announce element
-	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_current_games"));
+	var NoResult = UTILS_CreateElement("p",null,null, "Nao ha partidas adiadas");
 
 	UpdateList.onclick = function(){
 		// Remove all current games
