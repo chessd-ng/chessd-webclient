@@ -80,7 +80,16 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2.Inc  = Players[1].getAttribute("inc");
 
 			P1Rating = MainData.GetUser(Player1.Name).GetRatingList().GetRatingValue(Category);
+			if(P1Rating == null)
+			{
+				P1Rating = 1500;
+			}
+
 			P2Rating = MainData.GetUser(Player2.Name).GetRatingList().GetRatingValue(Category);
+			if(P2Rating == null)
+			{
+				P2Rating = 1500;
+			}
 
 			if(Player1.Name == MyUsername)
 			{

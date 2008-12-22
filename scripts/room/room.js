@@ -357,18 +357,25 @@ function ROOM_HandleGameRoomInfoList(XML)
 	PWRating = MainData.GetUser(PW.Name).GetRatingList().GetRatingValue(GameType);
 	if(PWRating == null)
 	{
-		PWRating = "0";
+		PWRating = 1500;
 	}
 
 	PBRating = MainData.GetUser(PB.Name).GetRatingList().GetRatingValue(GameType);
 	if(PBRating == null)
 	{
-		PBRating = "0";
+		PBRating = 1500;
 	}
 
 	// interface/room.js
 	//INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
-	GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, PW.Time, "false", Moves, GameId);
+	if(GameType != "untimed")
+	{
+		GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, Math.floor(PW.Time/60), "false", Moves, GameId);
+	}
+	else
+	{
+		GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, "&#8734", "false", Moves, GameId);
+	}
 
 	return "";
 }

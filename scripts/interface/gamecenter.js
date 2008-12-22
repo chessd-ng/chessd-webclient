@@ -993,7 +993,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 	Item.appendChild(PW);
 	Item.appendChild(PB);
 	Item.appendChild(Category);
-	Item.appendChild(GameTime);
+	Item.appendChild(PGameTime);
 	Item.appendChild(PRated);
 	Item.appendChild(GameMoves);
 

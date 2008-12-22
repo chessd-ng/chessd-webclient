@@ -254,7 +254,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 		Rating = MainData.GetUser(Username).GetRatingList().GetRatingValue(Category);
 		if(Rating == null)
 		{
-			Rating = 0;
+			Rating = 1500;
 		}	
 	
 		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
