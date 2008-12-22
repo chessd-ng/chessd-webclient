@@ -466,7 +466,7 @@
 			Meus desafios
 		</challenge_menu_match_title>
 		<challenge_menu_announce_title>
-			Desafios anunciados
+			Partidas anunciadas
 		</challenge_menu_announce_title>
 		<challenge_menu_announce>
 			Anunciar partida
@@ -1151,5 +1151,97 @@
 			convidou para continuar uma partida com as seguintes características:
 		</postpone_information>
 	</postpone>
+	<gamecenter>
+		<gamecenter_announce_title>
+			Partidas anunciadas
+		</gamecenter_announce_title>
+		<gamecenter_postpone_title>
+			Partidas adiadas
+		</gamecenter_postpone_title>
+		<gamecenter_tourneys_title>
+			Torneios
+		</gamecenter_tourneys_title>
+		<gamecenter_current_games_title>
+			Partidas em andamento
+		</gamecenter_current_games_title>
+		<gamecenter_match_title>
+			Desafios
+		</gamecenter_match_title>
+		<gamecenter_announcer>
+			Anunciante
+		</gamecenter_announcer>
+		<gamecenter_opponent>
+			Adversário
+		</gamecenter_opponent>
+		<gamecenter_time>
+			Tempo
+		</gamecenter_time>
+		<gamecenter_inc>
+			Inc.
+		</gamecenter_inc>
+		<gamecenter_category>
+			Categoria
+		</gamecenter_category>
+		<gamecenter_rating>
+			Rating
+		</gamecenter_rating>
+		<gamecenter_rated>
+			Rated
+		</gamecenter_rated>
+		<gamecenter_privacity>
+			Privacidade
+		</gamecenter_privacity>
+		<gamecenter_date>
+			Data
+		</gamecenter_date>
+		<gamecenter_moves>
+			Lances
+		</gamecenter_moves>
+		<gamecenter_observe>
+			Observar
+		</gamecenter_observe>
+		<gamecenter_play_now>
+			Jogar agora
+		</gamecenter_play_now>
+		<gamecenter_announce_match>
+			Anunciar partida
+		</gamecenter_announce_match>
+		<gamecenter_see_graphic>
+			Ver gráfico de anuncios
+		</gamecenter_see_graphic>
+		<gamecenter_update>
+			Atualizar
+		</gamecenter_update>
+		<gamecenter_abusive>
+			Usuário abusivo
+		</gamecenter_abusive>
+		<gamecenter_private>
+			Privado
+		</gamecenter_private>
+		<gamecenter_public>
+			Público
+		</gamecenter_public>
+		<gamecenter_rated_game>
+			Valendo rating
+		</gamecenter_rated_game>
+		<gamecenter_not_rated_game>
+			Não valendo rating
+		</gamecenter_not_rated_game>
+		<gamecenter_cancel_matches>
+			Cancelar todos os meus desafios
+		</gamecenter_cancel_matches>
+		<gamecenter_no_announce>
+			Não há partidas anunciadas
+		</gamecenter_no_announce>
+		<gamecenter_no_match>
+			Não há desafios anunciados
+		</gamecenter_no_match>
+		<gamecenter_no_postpone>
+			Não há partidas adiadas
+		</gamecenter_no_postpone>
+		<gamecenter_no_current_games>
+			Não há partidas em andamento
+		</gamecenter_no_current_games>
+	</gamecenter>
 </language>
 
