@@ -184,8 +184,8 @@ function UTILS_GetText(TagName)
 	if(Text == null)
 	{
 		Text = UTILS_GetTag(MainData.GetDefaultText(), TagName);
-		
 		//Find tag name in log struct
+		/*
 		while( (!TagName.match(TranslationLog[i])) && (i< TranslationLog.length) )
 		{
 			i++;
@@ -196,8 +196,11 @@ function UTILS_GetText(TagName)
 		{
 			TranslationLog.push("<"+TagName+">");
 		}
-		
+		*/
 	}
+
+	Text = Text.replace(/\t/g,"").replace(/\n/g,"");
+
 	return Text;
 }
 

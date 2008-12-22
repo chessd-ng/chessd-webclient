@@ -34,7 +34,8 @@ function INTERFACE_CreateInterface()
 	Left = INTERFACE_CreateLeft();
 	Chat = INTERFACE_CreateChatList();
 
-	Center.appendChild(INTERFACE_CreateWelcome());
+	// Create welcome window
+	//Center.appendChild(INTERFACE_CreateWelcome());
 
 	Main.appendChild(Left);
 	Main.appendChild(Center);

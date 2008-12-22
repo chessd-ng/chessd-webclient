@@ -130,10 +130,13 @@ function START_Webclient()
 	// Create contact object and online list and set values
 	ONLINE_StartOnlineList();
 	CONTACT_StartContactList();
-	CONTACT_LoadUserContactList();	
+	CONTACT_LoadUserContactList();
+
+	// Create gamecenter
+	GAMECENTER_StartGameCenter();
 
 	// Create challenge menu object
-	CHALLENGE_StartChallenge();
+	//CHALLENGE_StartChallenge();
 
 	// Search for some game that player is playing
 	GAME_SearchCurrentGame();

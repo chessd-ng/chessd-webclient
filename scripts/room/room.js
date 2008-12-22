@@ -311,7 +311,9 @@ function ROOM_HandleGameRoomInfoList(XML)
 	var WName, BName;
 	var Jid, GameId;
 	var Players;
-
+	var GameCenter = MainData.GetGamecenter();
+	var PWRating, PBRating;
+	var Moves;
 	
 	//Identity = XML.getElementsByTagName("identity")[0];
 	//Name = Identity.getAttribute("name");
@@ -321,6 +323,7 @@ function ROOM_HandleGameRoomInfoList(XML)
 
 	Game = XML.getElementsByTagName("game")[0];
 	GameType = Game.getAttribute("category");
+	Moves = Game.getAttribute("moves");
 
 	Players = XML.getElementsByTagName("player");
 
@@ -351,8 +354,28 @@ function ROOM_HandleGameRoomInfoList(XML)
 		PW.Inc = Players[0].getAttribute("inc");
 	}
 
+	PWRating = MainData.GetUser(PW.Name).GetRatingList().GetRatingValue(GameType);
+	if(PWRating == null)
+	{
+		PWRating = 1500;
+	}
+
+	PBRating = MainData.GetUser(PB.Name).GetRatingList().GetRatingValue(GameType);
+	if(PBRating == null)
+	{
+		PBRating = 1500;
+	}
+
 	// interface/room.js
-	INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
+	//INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
+	if(GameType != "untimed")
+	{
+		GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, Math.floor(PW.Time/60), "false", Moves, GameId);
+	}
+	else
+	{
+		GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, "&#8734", "false", Moves, GameId);
+	}
 
 	return "";
 }

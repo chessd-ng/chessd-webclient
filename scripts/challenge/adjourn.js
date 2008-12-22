@@ -43,13 +43,16 @@ function CHALLENGE_HandleAdjourn(XML)
 	var Game, Players;
 	var Player1, Player2;
 	var AdjournId, Category, Date;
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 	var Status;
 
 	var MyUsername = MainData.GetUsername();
 	var User;
 
 	var i;
+	
+	var P1Rating, P2Rating;
 
 	for(i=0; i< AdjournList.length; i++)
 	{
@@ -76,13 +79,26 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2.Time = Players[1].getAttribute("time");
 			Player2.Inc  = Players[1].getAttribute("inc");
 
+			P1Rating = MainData.GetUser(Player1.Name).GetRatingList().GetRatingValue(Category);
+			if(P1Rating == null)
+			{
+				P1Rating = 1500;
+			}
+
+			P2Rating = MainData.GetUser(Player2.Name).GetRatingList().GetRatingValue(Category);
+			if(P2Rating == null)
+			{
+				P2Rating = 1500;
+			}
+
 			if(Player1.Name == MyUsername)
 			{
 				// Add in main data postpone list
 				MainData.AddPostpone(Player2, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				//ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				GameCenter.Postpone.add(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, AdjournId);
 
 				// Get oponent status
 				User = MainData.GetUser(Player2.Name);
@@ -103,7 +119,9 @@ function CHALLENGE_HandleAdjourn(XML)
 				MainData.AddPostpone(Player1, Category, Date, AdjournId);
 
 				// Add in challenge menu
-				ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				//ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				GameCenter.Postpone.add(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, AdjournId);
+
 				// Get oponent status
 				User = MainData.GetUser(Player1.Name);
 				if(User != null)
@@ -120,7 +138,7 @@ function CHALLENGE_HandleAdjourn(XML)
 	}
 
 	// Show postpone games
-	ChallengeMenu.showPostpone();
+	//ChallengeMenu.showPostpone();
 
 	return Buffer;
 }
@@ -171,16 +189,19 @@ function CHALLENGE_HandlePresence(XML)
  */
 function CHALLENGE_PostponePresence(Username, PresenceType)
 {
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
 	//If user is founded, set adjourn game to available, else unavailable
 	if(PresenceType == "offline")
 	{
-		ChallengeMenu.updatePostpone(Username, "offline");
+//		ChallengeMenu.updatePostpone(Username, "offline");
+		GameCenter.Postpone.update(Username, "offline");
 	}
 	else
 	{
-		ChallengeMenu.updatePostpone(Username, "online");
+//		ChallengeMenu.updatePostpone(Username, "online");
+		GameCenter.Postpone.update(Username, "online");
 	}
 	return "";
 }
@@ -263,10 +284,12 @@ function CHALLENGE_GetAdjournGames()
 
 function CHALLENGE_RemovePostpone(Id)
 {
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 
 	MainData.RemovePostpone(Id);
-	ChallengeMenu.removePostpone(Id);
+	//ChallengeMenu.removePostpone(Id);
+	GameCenter.Postpone.remove(Id);
 
 	return "";
 }

@@ -144,11 +144,12 @@ function CHALLENGE_HandleOffer(XML)
 	var Buffer = "";
 	var ChallengeID;
 	var ChallengeObj;
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var ChallengedPlayer;
 	var Room, User;
 	var MyUsername = MainData.GetUsername();
 	var MatchType;
+	var GameCenter = MainData.GetGamecenter();
 
 	ChallengeID = XML.getAttribute("id");
 	Type = XML.getAttribute("type");
@@ -228,8 +229,8 @@ function CHALLENGE_HandleOffer(XML)
 			{
 				MainData.UpdateChallenge(ChallengeID, Player2, Player1, Category, Rated, MatchID);
 				// Remove offer from challenge menu
-				ChallengeMenu.removeMatch(MatchID);
-				
+				//ChallengeMenu.removeMatch(MatchID);
+				GameCenter.MatchOffer.remove(MatchID);
 			}
 
 			User = MainData.GetUser(Player2.Name);
@@ -263,7 +264,8 @@ function CHALLENGE_HandleOffer(XML)
 			{
 				MainData.UpdateChallenge(ChallengeID, Player1, Player2, Category, Rated, MatchID);
 				// Remove offer from challenge menu
-				ChallengeMenu.removeMatch(MatchID);
+				//ChallengeMenu.removeMatch(MatchID);
+				GameCenter.MatchOffer.remove(MatchID);
 			}
 
 			User = MainData.GetUser(Player1.Name);
@@ -305,12 +307,14 @@ function CHALLENGE_HandleOffer(XML)
 		// Check challenge time if category is untimed or not	
 		if(ChallengeObj.Category != "untimed")
 		{
-			ChallengeMenu.addMatch(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			//ChallengeMenu.addMatch(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			GameCenter.MatchOffer.add(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 		else
 		{
 			// Put a infinit symbol
-			ChallengeMenu.addMatch(ChallengedPlayer, "&#8734", ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			//ChallengeMenu.addMatch(ChallengedPlayer, "&#8734", ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			GameCenter.MatchOffer.add(ChallengedPlayer, "&#8734",0, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 	}
 
@@ -369,7 +373,8 @@ function CHALLENGE_HandleDecline (XML)
 	var Match, MatchID, WindowObj,i;
 	var Buffer = "";
 	var ChallengeObj;
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 
 	// If there's no match, there's nothing to do (again)
 	Match = XML.getElementsByTagName('match')[0];
@@ -402,7 +407,8 @@ function CHALLENGE_HandleDecline (XML)
 		MainData.RemoveChallenge(null, MatchID);
 
 		// Remove from challenge menu
-		ChallengeMenu.removeMatch(MatchID);
+		//ChallengeMenu.removeMatch(MatchID);
+		GameCenter.MatchOffer.remove(MatchID);
 
 		// TODO -> ?
 		// Warn the interface that the challenge was declined
@@ -586,9 +592,6 @@ function CHALLENGE_AcceptChallenge(MatchID)
 {
 	var XML;
 	
-	//Remove all challenges
-	CHALLENGE_ClearChallenges()
-
 	// Create accept message
 	XML = MESSAGE_ChallengeAccept(MatchID);
 
@@ -625,6 +628,7 @@ function CHALLENGE_DeclineChallenge(MatchID)
  * @see		scripts/interface/challengemenu.js
  * @author	Rubens Suguimoto
  */
+/*
 function CHALLENGE_StartChallenge()
 {
 	var ChallengeMenu = new ChallengeMenuObj();
@@ -640,7 +644,7 @@ function CHALLENGE_StartChallenge()
 	
 	return "";
 }
-
+*/
 
 /*
  * @brief	Show challenge menu, set menu position and click function to hide it.
@@ -650,6 +654,7 @@ function CHALLENGE_StartChallenge()
  * @return	Empty string
  * @author	Rubens Suguimoto
  */
+/*
 function CHALLENGE_ShowChallengeMenu(Left, Top)
 {
 	var Func;
@@ -688,17 +693,19 @@ function CHALLENGE_ShowChallengeMenu(Left, Top)
 	CHALLENGE_GetAdjournGames();
 	ANNOUNCE_GetAnnounceGames();
 	*/
+/*
 	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
 
 	return "";
 }
-
+*/
 /**
  * @brief	Hide challenge menu from screen
  *
  * @return	Empty string
  * @author	Rubens Suguimoto
  */
+/*
 function CHALLENGE_HideChallengeMenu()
 {
 	var ChallengeMenu = MainData.GetChallengeMenu();
@@ -707,7 +714,7 @@ function CHALLENGE_HideChallengeMenu()
 
 	return "";
 }
-
+*/
 /**
  * @brief	Remove all challenges from main data and interface
  *
@@ -720,10 +727,12 @@ function CHALLENGE_ClearChallenges()
 	var MatchId;
 	var ChallengeWindow;
 	var ChallengeList = MainData.GetChallengeList();
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
+	var XMPP = "";
 
 	// Remove all challenges from challenge menu and challenge list
-	for(i=0;i<ChallengeList.length; i++)
+	for(i=ChallengeList.length-1 ; i>=0; i--)
 	{
 		MatchId = ChallengeList[i].MatchId;
 		ChallengeWindow = ChallengeList[i].Window;
@@ -731,7 +740,8 @@ function CHALLENGE_ClearChallenges()
 		if(MatchId != null)
 		{
 			//CHALLENGE_DeclineChallenge(MatchID);
-			ChallengeMenu.removeMatch(MatchId);
+			//ChallengeMenu.removeMatch(MatchId);
+			GameCenter.MatchOffer.remove(MatchId);
 			MainData.RemoveChallenge(MatchId, MatchId);
 		}
 
@@ -747,7 +757,7 @@ function CHALLENGE_ClearChallenges()
 
 	// Remove all challenges from main data
 	//MainData.ClearChallenges();
-
+	
 	return "";
 }
 

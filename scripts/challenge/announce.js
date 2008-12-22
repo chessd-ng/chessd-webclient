@@ -42,21 +42,26 @@ function ANNOUNCE_HandleAnnounce(XML)
 	var Buffer = "";
 
 	var Consts =  MainData.GetConst();
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 
 	// Get Announce list
 	if(Id == Consts.IQ_ID_GetAnnounceMatch)
 	{
 		Announces = XML.getElementsByTagName("announcement");
 		
+		
 		// There is no announced match
+/*
 		if(Announces.length == 0)
 		{
 			// Remove loading message
-			ANNOUNCE_HideLoadingAnnounce();
+			//ANNOUNCE_HideLoadingAnnounce();
+			//GameCenter.Announce.showNoAnnounce();
 		}
 		else
 		{
+*/
 			for(i=0; i< Announces.length ; i++)
 			{
 				Category = Announces[i].getAttribute("category");
@@ -79,16 +84,19 @@ function ANNOUNCE_HandleAnnounce(XML)
 				ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId);
 
 				// Hide loading and no announce message
-				ANNOUNCE_HideLoadingAnnounce();
-				ANNOUNCE_HideNoAnnounce();
+				//ANNOUNCE_HideLoadingAnnounce();
+				//ANNOUNCE_HideNoAnnounce();
+				GameCenter.Announce.hideNoAnnounce();
 			}
-		}
+//		}
 	}
 
 	// Quick Fix - Show No Announce message
-	if (ChallengeMenu.AnnounceList.length == 0)
+	//if (ChallengeMenu.AnnounceList.length == 0)
+	if (GameCenter.Announce.AnnounceList.length == 0)
 	{
-		ANNOUNCE_ShowNoAnnounce();
+		//ANNOUNCE_ShowNoAnnounce();
+		GameCenter.Announce.showNoAnnounce();
 	}
 	// Accepted announce
 	/*
@@ -231,7 +239,9 @@ function ANNOUNCE_GetAnnounceGames()
 function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
 {
 	var Player = new Object();
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
+	var Rating;
 
 	if(MainData.FindAnnounce(AnnounceId) == null)
 	{
@@ -240,15 +250,24 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 		Player.Inc = Inc;
 		Player.Time = Time;
 		
+		// Get user rating by category
+		Rating = MainData.GetUser(Username).GetRatingList().GetRatingValue(Category);
+		if(Rating == null)
+		{
+			Rating = 1500;
+		}	
+	
 		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
 		if(Category != "untimed")
 		{
-			ChallengeMenu.addAnnounce(Player, Time/60, Inc, Rated, "true", AnnounceId);
+			//ChallengeMenu.addAnnounce(Player, Time/60, Inc, Rated, "true", AnnounceId);
+			GameCenter.Announce.add(Player, Rating, Time/60, Inc, Category, Rated, "false", AnnounceId);
 		}
 		else
 		{
 			// Infinit symbol
-			ChallengeMenu.addAnnounce(Player, "&#8734", Inc, Rated, "true", AnnounceId);
+			//ChallengeMenu.addAnnounce(Player, "&#8734", Inc, Rated, "true", AnnounceId);
+			GameCenter.Announce.add(Player, Rating, "&#8734", Inc, Category, Rated, "false", AnnounceId);
 		}
 
 	}
@@ -260,10 +279,12 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
  */
 function ANNOUNCE_RemoveAnnounce(Id)
 {
-	var ChallengeMenu = MainData.GetChallengeMenu();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+	var GameCenter = MainData.GetGamecenter();
 
 	MainData.RemoveAnnounce(Id);
-	ChallengeMenu.removeAnnounce(Id);
+//	ChallengeMenu.removeAnnounce(Id);
+	GameCenter.Announce.remove(Id);
 }
 
 /*
@@ -292,17 +313,17 @@ function ANNOUNCE_AcceptAnnounce(Id)
 	CONNECTION_SendJabber(XMPP);
 }
 
-
+/*
 function ANNOUNCE_ShowLoadingAnnounce()
 {	
-	var ChallengeMenu = MainData.GetChallengeMenu();
-	ChallengeMenu.showLoadingAnnounce();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+//	ChallengeMenu.showLoadingAnnounce();
 }
 
 function ANNOUNCE_HideLoadingAnnounce()
 {
-	var ChallengeMenu = MainData.GetChallengeMenu();
-	ChallengeMenu.hideLoadingAnnounce();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+//	ChallengeMenu.hideLoadingAnnounce();
 }
 
 function ANNOUNCE_ShowNoAnnounce()
@@ -313,10 +334,10 @@ function ANNOUNCE_ShowNoAnnounce()
 
 function ANNOUNCE_HideNoAnnounce()
 {
-	var ChallengeMenu = MainData.GetChallengeMenu();
-	ChallengeMenu.hideNoAnnounce();
+//	var ChallengeMenu = MainData.GetChallengeMenu();
+//	ChallengeMenu.hideNoAnnounce();
 }
-
+*/
 /**
  * @brief	Remove all announces from main data and interface
  *
@@ -327,11 +348,10 @@ function ANNOUNCE_ClearAnnounce()
 {
 	var i;
 	var AnnounceId;
-	var ChallengeMenu = MainData.GetChallengeMenu();
 	var AnnounceList = MainData.GetAnnounceList();
 
 	// Remove all announce from challenge menu and data struct
-	for(i=0;i< AnnounceList.length; i++)
+	for(i=AnnounceList.length-1;i>= 0; i--)
 	{
 		AnnounceId = AnnounceList[i].Id;
 		//ChallengeWindow = AnnounceList[i].Window;
@@ -341,5 +361,60 @@ function ANNOUNCE_ClearAnnounce()
 			ANNOUNCE_RemoveAnnounce(AnnounceId);
 		}
 
+	}
+}
+
+function ANNOUNCE_CancelAllAnnounce()
+{
+	var i;
+	var AnnounceId;
+	var AnnounceList = MainData.GetAnnounceList();
+
+	// Remove all announce from challenge menu and data struct
+	for(i=AnnounceList.length-1;i>= 0; i--)
+	{
+		AnnounceId = AnnounceList[i].Id;
+		//ChallengeWindow = AnnounceList[i].Window;
+
+		if(AnnounceId != null)
+		{
+			ANNOUNCE_CancelAnnounce(AnnounceId);
+		}
+
+	}
+}
+
+// Accept a random announce in announce list;
+function ANNOUNCE_AcceptRandomAnnounce()
+{
+	var AnnounceList = MainData.GetAnnounceList();
+	var i;
+	var MyUsername = MainData.GetUsername();
+	var TmpAnnounceList = new Array();
+	
+	// Get all others players announces in announce list
+	i=0;
+	for(i=0; i<AnnounceList.length ; i++)
+	{
+		if(AnnounceList[i].Player.Name != MyUsername)
+		{
+			TmpAnnounceList.push(AnnounceList[i]);
+		}
+	}
+
+	// Check if exists some announce
+	if( TmpAnnounceList.length == 0)
+	{
+		WINDOW_Alert(UTILS_GetText("gamecenter_no_announce"),UTILS_GetText("gamecenter_no_announce"));
+	}
+	else
+	{
+		i = (Math.floor(Math.random()*10) % TmpAnnounceList.length)
+		while(TmpAnnounceList[i].Player.Name == MyUsername)
+		{
+			i = (Math.floor(Math.random()*10) % TmpAnnounceList.length)
+		}
+		WINDOW_Alert(i, "Iniciando jogo com: "+TmpAnnounceList[i].Player.Name);
+		ANNOUNCE_AcceptAnnounce(TmpAnnounceList[i].Id)
 	}
 }
