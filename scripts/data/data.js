@@ -2869,7 +2869,7 @@ function DATA_GetPostponeList()
 */
 function DATA_SetCurrentGame(Game)
 {
-	if(Game != undefined)
+	if(Game != null)
 	{
 		this.Game.Current = Game;
 	}
@@ -2987,12 +2987,22 @@ function DATA_RemoveGame(Id)
 		this.Game.GameList.splice(GamePosition, 1);
 
 		//Set next game on GameList to current game
-		MainData.SetCurrentGame(this.Game.GameList[GamePosition]);
+		if(this.Game.GameList.length > 0)
+		{
+			MainData.SetCurrentGame(this.Game.GameList[GamePosition]);
+		}
+		else
+		{
+			MainData.SetCurrentGame(null);
+		}
 		//If next game is null, set previous game to current game, else
 		//there is no game on GameList
 		if(MainData.Game.Current == null)
 		{
-			MainData.SetCurrentGame(this.Game.GameList[GamePosition-1]);
+			if(this.Game.GameList.length > 0)
+			{
+				MainData.SetCurrentGame(this.Game.GameList[GamePosition-1]);
+			}
 		}
 
 		return RemovedGame;
