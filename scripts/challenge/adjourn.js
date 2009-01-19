@@ -79,17 +79,28 @@ function CHALLENGE_HandleAdjourn(XML)
 			Player2.Time = Players[1].getAttribute("time");
 			Player2.Inc  = Players[1].getAttribute("inc");
 
-			P1Rating = MainData.GetUser(Player1.Name).GetRatingList().GetRatingValue(Category);
-			if(P1Rating == null)
+			//Search for player1's rating
+			if(MainData.GetUser(Player1.Name) != null)
 			{
+				P1Rating = MainData.GetUser(Player1.Name).GetRatingList().GetRatingValue(Category);
+			}
+			else
+			{
+				USER_AddUser(Player1.Name, "offline");
 				P1Rating = 1500;
 			}
 
-			P2Rating = MainData.GetUser(Player2.Name).GetRatingList().GetRatingValue(Category);
-			if(P2Rating == null)
+			//Search for player2's rating
+			if(MainData.GetUser(Player2.Name) != null)
 			{
+				P2Rating = MainData.GetUser(Player2.Name).GetRatingList().GetRatingValue(Category);
+			}
+			else
+			{
+				USER_AddUser(Player2.Name, "offline");
 				P2Rating = 1500;
 			}
+
 
 			if(Player1.Name == MyUsername)
 			{
