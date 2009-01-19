@@ -664,6 +664,22 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	var ItemObj = new Object();
 	var Id = PostponeId;
 	var PAbusive;
+	var TmpTime = "";
+	var TimeMin, TimeSec;
+
+	// Set time to minutes and seconds format
+	TimeMin = Math.floor(Time / 60);
+	TimeSec = Time % 60;
+	
+	if(TimeMin != 0)
+	{
+		TmpTime += TimeMin+"\'";
+	}
+
+	if(TimeSec != 0)
+	{
+		TmpTime += TimeSec+"\"";
+	}
 
 	Item = UTILS_CreateElement("li");
 
@@ -691,7 +707,7 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	PAbusive.title = UTILS_GetText("gamecenter_abusive");
 
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name,10));
-	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
+	PTime = UTILS_CreateElement("p","time", null, TmpTime);
 	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
 	PCategory = UTILS_CreateElement("p","category", null, Category);
 	PRating = UTILS_CreateElement("p","rating", null, Rating);
