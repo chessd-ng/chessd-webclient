@@ -275,7 +275,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 
 /*
  * Remove a announce in data struct and challenge menu using announce id
- * and send a message to cancel anounce
+ * but don't send a message to cancel anounce
  */
 function ANNOUNCE_RemoveAnnounce(Id)
 {
@@ -357,7 +357,8 @@ function ANNOUNCE_ClearAnnounce()
 		//ChallengeWindow = AnnounceList[i].Window;
 
 		if(AnnounceId != null)
-		{
+		{	
+			// Remove without send message to cancel announce
 			ANNOUNCE_RemoveAnnounce(AnnounceId);
 		}
 
@@ -378,6 +379,7 @@ function ANNOUNCE_CancelAllAnnounce()
 
 		if(AnnounceId != null)
 		{
+			// Remove and send a message to cancel announce
 			ANNOUNCE_CancelAnnounce(AnnounceId);
 		}
 
