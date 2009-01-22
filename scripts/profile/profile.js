@@ -361,6 +361,8 @@ function PROFILE_StartProfile(Username)
 			ProfileObj.SetDesc(User.GetDesc());
 			//Set user's image
 			ProfileObj.SetUserImg(User.GetPhoto());
+			ProfileObj.SetImgType(User.GetImgType());
+			ProfileObj.SetImg64(User.GetImg64());
 
 		}
 
@@ -540,4 +542,45 @@ function PROFILE_ConvertUserRatingList(RatingList)
 	}
 
 	return Rating;
+}
+
+/**
+* Verify if any change occurs in profile's data
+*
+* @param Elements	Profile window's Object
+* @return		boolean
+* @author		Danilo Yorinori
+*/
+function PROFILE_ChangeVerification(Elements) {
+	// Verify only editable data
+	var FN, Desc, PhotoType, Binval;
+	var MyUsername = MainData.GetUsername();
+	var MyUser = MainData.GetUser(MyUsername);
+
+	// Get data in MainData
+	FN = MyUser.GetFullname();
+	Desc = MyUser.GetDesc();
+	PhotoType = MyUser.GetImgType();
+	Binval = MyUser.GetImg64();
+
+	if (FN != Elements.Username.value)
+	{
+		return true;
+	}
+	else if (Desc != Elements.Desc.value)
+	{
+		return true;
+	}
+	else if (PhotoType != Elements.ImgType)
+	{
+		return true;
+	}
+	else if (Binval != Elements.Img64)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

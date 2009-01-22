@@ -174,12 +174,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
 		SaveProfile.type = "button";
 		SaveProfile.value = UTILS_GetText("profile_save");
-		SaveProfile.onclick = function() {
-			// Send messages with changes
-			PROFILE_SaveMyProfile();
-			//TODO
-			// Show the window confirmation
-		};
 	}
 	else
 	{
@@ -310,7 +304,6 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Close.value = UTILS_GetText("window_close");
 
 	Buttons.push(Close);
-	Buttons.push(SaveProfile);
 	
 	// Mount tree elements
 	// Append Salve profile
@@ -407,6 +400,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 
 	Elements.Username = Username;
 	Elements.UserImg = Photo;
+	Elements.PhotoLabel = EditPhotoLabel;
 	Elements.ImgType = "";
 	Elements.Img64 = "";
 	Elements.Nick = Nickname;
@@ -418,6 +412,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.Title = TitleSpan;
 	Elements.TitleImg = TypeImg;
 	Elements.Counter = CounterLabel;
+	Elements.CloseConfirm = false;
+	Elements.Close = Close;
+	Elements.Save = SaveProfile;
 	
 	Elements.SetUser = INTERFACE_ProfileSetUser;
 	Elements.SetUserImg = INTERFACE_ProfileSetUserImg;
@@ -435,6 +432,10 @@ function INTERFACE_ShowProfileWindow(Profile)
 	Elements.GetImg64 = INTERFACE_ProfileGetImg64;
 	Elements.SetImgType = INTERFACE_ProfileSetImgType;
 	Elements.SetImg64 = INTERFACE_ProfileSetImg64;
+	Elements.SetClose = INTERFACE_ProfileSetClose;
+	Elements.GetClose = INTERFACE_ProfileGetClose;
+	Elements.SetButtonsAvailable = INTERFACE_ProfileSetAvailable;
+	Elements.SetButtonsUnavailable = INTERFACE_ProfileSetUnavailable;
 
 	return {Div:Div, Buttons:Buttons, Elements:Elements}
 }
@@ -475,6 +476,10 @@ function INTERFACE_ShowProfileConfirmWindow()
 	Save.value = UTILS_GetText('profile_save_close');
 	// TODO
 	// save changes functions
+	Save.onclick = function() {
+		// Send messages with changes
+		PROFILE_SaveMyProfile();
+	}
 
 	Cancel = UTILS_CreateElement("input", null,"button_big");
 	Cancel.type = "button";
@@ -759,4 +764,59 @@ function INTERFACE_ProfileSetImg64(Img64)
 function INTERFACE_ProfileGetImg64()
 {
 	return this.Img64;
+}
+
+/**
+*	Set status of close confirm window
+*	true - opened
+*	false - closed
+*
+* @param Bool boolean
+* @author Danilo
+*/
+function INTERFACE_ProfileSetClose(Bool)
+{
+	this.CloseConfirm = Bool;
+}
+
+/**
+* Get CloseConfirm value
+*
+* @return Bool
+* @see INTERFACE_ProfileSetClose
+* @author Danilo
+*/
+function INTERFACE_ProfileGetClose()
+{
+	return this.CloseConfirm;
+}
+	
+/**
+* Set Profile window buttons as available
+*
+* @author Danilo
+*/
+function INTERFACE_ProfileSetAvailable()
+{
+	this.Close.className = "button";
+	this.Save.className = "button_big";
+	this.Desc.disabled = false;
+	this.Username.disabled = false;
+	this.PhotoLabel.className = "edit_photo";
+	this.PhotoLabel.onclick = function() { WINDOW_ProfileImage(); };
+}
+
+/**
+* Set Profile window buttons as unavailable
+*
+* @author Danilo
+*/
+function INTERFACE_ProfileSetUnavailable()
+{
+	this.Close.className = "button_disabled";
+	this.Save.className = "button_big_disabled";
+	this.Desc.disabled = true;
+	this.Username.disabled = true;
+	this.PhotoLabel.className = "edit_photo_disabled";
+	this.PhotoLabel.onclick = function() { return false };
 }

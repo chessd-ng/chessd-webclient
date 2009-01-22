@@ -155,13 +155,19 @@
 	padding : 1px;
 }
 
-#ProfileConfirmDiv p,
 #ProfileDiv p {
 	font-weight		: bold;
 /*	font-size		: 12px;*/
 	color			: #216778;
-	margin-top		: 3mm;
+	margin-top		: 11px;
 }
+
+#ProfileConfirmDiv p {
+	font-size		: 11px;
+	color			: #216778;
+	margin-top		: 11px;
+}
+
 /* Class */
 
 #ProfileDiv .edit_photo {
@@ -170,6 +176,13 @@
 	font-style: italic;
 	color			: #216778;
 	border-bottom		:	1px solid #216778;
+}
+
+#ProfileDiv .edit_photo_disabled {
+	cursor		:	default;
+	font-size		: 9px;
+	font-style: normal;
+	color			: #C0C0C0;
 }
 
 #ProfileDiv .edit_photo:hover {
@@ -232,6 +245,34 @@
 	width						: 120px;
 }
 
+#WindowBox .button_big_disabled {
+	border-color : #C0C0C0;
+	padding-bottom		: 5px;
+	border			: 0px;
+	font-weight		: bold;
+	font-size		: 10px;
+	color : #216778;
+	cursor					: default;
+	margin					: 0px 0px 5px 2px;
+	padding					: 1px 2px;
+	position				: relative;
+	bottom					: 10px;
+	background-color: #C0C0C0;
+	width						: 120px;
+}
+
+#WindowBox .button_disabled {
+	bottom			:	10px;
+	border-color : #C0C0C0;
+	background-color: #C0C0C0;
+	font-size: 10px;
+	font-weight: bold;
+	color : #216778;
+	margin: 0 0px 5px 2px;
+	width: 70px;
+	position				: relative;
+}
+
 #WindowBox .button_big:hover {
 	background-color: #FFA200;
 }
@@ -257,13 +298,9 @@
 	text-align	: center;
 }
 
-#ProfileConfirmDiv #ButtonsDiv .button_big {
+#ProfileConfirmDiv #ButtonsDiv .button_big,
+#ProfileConfirmDiv #ButtonsDiv .button,
+#ProfileConfirmDiv #ButtonsDiv .button_big_disabled {
 	bottom			:	5px;
 }
 
-#ProfileConfirmDiv p {
-	font-weight		: bold;
-	font-size		: 14px;
-	color			: #216778;
-	margin-top		: 3mm;
-}
