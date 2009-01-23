@@ -208,10 +208,10 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 		// NewParameters Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// Chat Button
-		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ return false;}, false);
+		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ CHAT_OpenChat(User); }, false);
 
 		// Decline Button
-		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ CHALLENGE_DeclineChallenge(MatchId); WINDOW_RemoveWindow(WindowObj);}, false);
 	}
 	// If you are the challenger
 	else

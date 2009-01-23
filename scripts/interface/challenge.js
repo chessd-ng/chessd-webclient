@@ -643,16 +643,10 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 	Chat = UTILS_CreateElement('input',null,'button');
 	Chat.value = UTILS_GetText('challenge_chat');
 	Chat.type = "button";
-	Chat.onclick = function () {
-		CHAT_OpenChat(Oponent);
-	}
-
+	
 	Decline = UTILS_CreateElement('input',null,'button');
 	Decline.value = UTILS_GetText('window_decline');
 	Decline.type = "button";
-	Decline.onclick = function () {
-		CHALLENGE_DeclineChallenge(MatchId);
-	}	
 
 	// Appending childs
 
