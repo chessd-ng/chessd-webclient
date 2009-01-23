@@ -651,7 +651,7 @@
 			Bispo Branco
 		</game_white_bishop>
 		<game_white_queen>
-			Rainha Branca
+			Dama Branca
 		</game_white_queen>
 		<game_white_king>
 			Rei Branco
@@ -669,7 +669,7 @@
 			Bispo Preto
 		</game_black_bishop>
 		<game_black_queen>
-			Rainha Preta
+			Dama Preta
 		</game_black_queen>
 		<game_black_king>
 			Rei Preto
