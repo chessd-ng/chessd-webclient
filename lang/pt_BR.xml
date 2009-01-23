@@ -1233,8 +1233,6 @@
 		<gamecenter_observe>
 			Observar
 		</gamecenter_observe>
-		
-
 		<gamecenter_no_postpone>
 			Não há partidas adiadas
 		</gamecenter_no_postpone>
@@ -1247,6 +1245,12 @@
 		<gamecenter_no_current_games>
 			Não há partidas em andamento
 		</gamecenter_no_current_games>
+		<gamecenter_game_not_found>
+			A partida já terminou ou não existe
+		</gamecenter_game_not_found>
+		<gamecenter_game_not_found_title>
+			Erro ao observar uma partida
+		</gamecenter_game_not_found_title>
 	</gamecenter>
 </language>
 

@@ -1242,6 +1242,12 @@
 		<gamecenter_no_current_games>
 			There are no current games
 		</gamecenter_no_current_games>
+		<gamecenter_game_not_found>
+			The match is over or not exist
+		</gamecenter_game_not_found>
+		<gamecenter_game_not_found_title>
+			Error when try to observe match
+		</gamecenter_game_not_found_title>
 	</gamecenter>
 </language>
 

@@ -515,6 +515,23 @@ function MESSAGE_GameRoomInfoList(Room)
 }
 
 /**
+* Message used to check if some game exists
+* 
+* @return 	XMPP with iq to get information about some game
+* @author 	Rubens
+*/
+function MESSAGE_GameEnterRoom(Room)
+{
+	var XMPP;
+	var Consts = MainData.GetConst();
+
+	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameEnterRoom+"'>";
+	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
+
+	return XMPP;
+}
+
+/**
 * Send a game moviment
 */
 function MESSAGE_GameMove(Move, GameID, Promotion)

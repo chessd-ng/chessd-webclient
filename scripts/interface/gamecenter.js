@@ -978,9 +978,17 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 		{
 			if((BPlayer.Name!= MyUsername) &&(WPlayer.Name != MyUsername))
 			{
-				Buffer += GAME_StartObserverGame(CurrentGamesId, WPlayer, BPlayer);
+				//Buffer += GAME_StartObserverGame(CurrentGamesId, WPlayer, BPlayer);
+				// Send a message to check if this game
+				// exists;
+				// If exists, start observer... else show a
+				// error message
+				Buffer += MESSAGE_GameEnterRoom(CurrentGamesId);
 			}
 			else
+			// Continue some game -> this case should not happen
+			// If you reconnect in middle of some game, when enter
+			// in web interface the game will start autommatically
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(CurrentGamesId, WPlayer, BPlayer);
