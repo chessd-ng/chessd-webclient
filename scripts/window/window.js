@@ -702,3 +702,29 @@ function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+* Open Create Tourney window
+*
+* @return	Elements Create Tourney window's object
+* @author Danilo
+*/
+function WINDOW_CreateTourney()
+{
+	// Return Div and Buttons;
+	var Div = INTERFACE_ShowCreateTourneyWindow();
+	var Title;
+
+	Title = UTILS_GetText('tourney_create');
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(400, Div.Div, Div.Buttons, Title);
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); }, false);
+	
+	// Create Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

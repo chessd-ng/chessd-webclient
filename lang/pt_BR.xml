@@ -59,6 +59,15 @@
 		<window_character>
 			Caractere(s): %s
 		</window_character>
+		<window_from>
+			de:
+		</window_from>
+		<window_to>
+			a:
+		</window_to>
+		<window_min>
+			min
+		</window_min>
 	</window>
 	<login>
 		<login_title>
@@ -1151,5 +1160,73 @@
 			convidou para continuar uma partida com as seguintes características:
 		</postpone_information>
 	</postpone>
+	<tourney>
+		<tourney_create>
+			Criar torneio
+		</tourney_create>
+		<tourney_name>
+			Nome do torneio:
+		</tourney_name>
+		<tourney_category>
+			Categoria:
+		</tourney_category>
+		<tourney_rounds>
+			Número de rodadas:
+		</tourney_rounds>
+		<tourney_auto>
+			Automático
+		</tourney_auto>
+		<tourney_define>
+			Definir:
+		</tourney_define>
+		<tourney_init>
+			Data de início:
+		</tourney_init>
+		<tourney_day>
+			Data:
+		</tourney_day>
+		<tourney_hour>
+			Hora:
+		</tourney_hour>
+		<tourney_day_format>
+			(dd/mm/aaaa)
+		</tourney_day_format>
+		<tourney_hour_format>
+			(hh:mm)
+		</tourney_hour_format>
+		<tourney_see_advanced>
+			Ver opções avançadas
+		</tourney_see_advanced>
+		<tourney_hide_advanced>
+			Ocultar opções avançadas
+		</tourney_hide_advanced>
+		<tourney_description>
+			Descrição: 
+		</tourney_description>
+		<tourney_subscribe>
+			Número máximo de inscritos: 
+		</tourney_subscribe>
+		<tourney_rating_interval>
+			Intervalo de rating:
+		</tourney_rating_interval>
+		<tourney_restrict>
+			Acesso restrito:
+		</tourney_restrict>
+		<tourney_passwd>
+			Senha:
+		</tourney_passwd>
+		<tourney_delay>
+			Tolerância de atraso: 
+		</tourney_delay>
+		<tourney_submit_period>
+			Período de inscrição: 
+		</tourney_submit_period>
+		<tourney_sequenced_rounds>
+			Rodadas sequenciais:
+		</tourney_sequenced_rounds>
+		<tourney_add_round>
+			Adicionar rodada
+		</tourney_add_round>
+	</tourney>
 </language>
 

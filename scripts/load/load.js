@@ -94,6 +94,7 @@ function LOAD_LoadFiles()
 	Files.push("css/ChallengeMenu.css");
 	Files.push("css/Announce.css");
 	Files.push("css/Help.css");
+	Files.push("css/Tourney.css");
 
 	if(MainData.GetBrowser() == 0) //IE
 	{
@@ -143,6 +144,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/contact/online.js");
 	Files.push("scripts/contact/online_info.js");
 	Files.push("scripts/contact/user.js");
+	Files.push("scripts/interface/tourney.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);
