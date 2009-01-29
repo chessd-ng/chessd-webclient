@@ -230,7 +230,8 @@
 	border-bottom		:	1px solid #FFA200;
 }
 
-#WindowBox .button_big {
+#WindowBox  #ProfileDiv .button_big,
+#WindowBox  #ProfileConfirmDiv .button_big {
 	padding-bottom		: 5px;
 	border			: 0px;
 	font-weight		: bold;
@@ -245,7 +246,8 @@
 	width						: 120px;
 }
 
-#WindowBox .button_big_disabled {
+#WindowBox #ProfileDiv .button_big_disabled,
+#WindowBox #ProfileConfirmDiv .button_big_disabled {
 	border-color : #C0C0C0;
 	padding-bottom		: 5px;
 	border			: 0px;
@@ -261,7 +263,8 @@
 	width						: 120px;
 }
 
-#WindowBox .button_disabled {
+#WindowBox #ProfileDiv .button_disabled,
+#WindowBox #ProfileConfirmDiv .button_disabled {
 	bottom			:	10px;
 	border-color : #C0C0C0;
 	background-color: #C0C0C0;
@@ -273,7 +276,8 @@
 	position				: relative;
 }
 
-#WindowBox .button_big:hover {
+#WindowBox #ProfileDiv .button_big:hover,
+#WindowBox #ProfileConfirmDiv .button_big:hover {
 	background-color: #FFA200;
 }
 
