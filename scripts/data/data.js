@@ -151,6 +151,8 @@ function DATA(ConfFile, LangFile)
 	this.Windows.Focus = null;
 	this.Windows.WindowList = new Array();
 
+	/************************ GAMECENTER DATA************************/
+	this.Gamecenter = null;
 }
 
 // Adding methods
@@ -379,6 +381,10 @@ DATA.prototype.FindProfile = DATA_FindProfile;
 DATA.prototype.GetProfile = DATA_GetProfile;
 DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 */
+
+/*GAMECENTER OBJECT METHODS*************************/
+DATA.prototype.SetGamecenter = DATA_SetGamecenter;
+DATA.prototype.GetGamecenter = DATA_GetGamecenter;
 
 
 /**********************************
@@ -3680,4 +3686,18 @@ function DATA_SortSearchUserByName()
 
 
 	return true;
+}
+
+
+/**********************************
+ * METHODS - GAMECENTER           *
+ **********************************/
+function DATA_SetGamecenter(Obj)
+{
+	this.Gamecenter = Obj;
+}
+
+function DATA_GetGamecenter()
+{
+	return this.Gamecenter;
 }

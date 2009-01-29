@@ -199,6 +199,12 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += GAME_HandleGameError(XML);
 			}
+			// Receive room info -> used to running games
+			else if (Xmlns.match(/disco#info/))
+			{
+				Buffer += ROOM_HandleGameRoomInfoError(XML);
+			}
+
 			break;
 		    
 		default: break;

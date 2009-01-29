@@ -32,6 +32,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_Challenge = "Challenge";
 	Const.IQ_ID_GameMove = "GameMove";
 	Const.IQ_ID_GameInfo = "GameInfo";
+	Const.IQ_ID_GameEnterRoom = "GameEnterRoom";
 	Const.IQ_ID_GameDraw = "GameDraw";
 	Const.IQ_ID_GameCancel = "GameCancel";
 	Const.IQ_ID_GameAdjourn = "GameAdjourn";

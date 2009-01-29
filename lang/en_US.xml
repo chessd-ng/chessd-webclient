@@ -587,11 +587,9 @@
 			Your time is over. You have lost to %s.
 		</game_timel_text>
 		<game_remove_room>
-			<![CDATA[The game room that you are playing can't be closed.<br />If you want to close it you need to finish your game first or use the buttons on the side of the board.]]>		
-		</game_remove_room>
+<![CDATA[The game room that you are playing can't be closed.<br />If you want to close it you need to finish your game first or use the buttons on the side of the board.]]>		</game_remove_room>
 		<game_remove_board>
-			<![CDATA[The board of the game you are playing can't be closed.<br /> If you want to close ir you need to end your game first or use the buttons on the side of the board.]]>		
-		</game_remove_board>
+<![CDATA[The board of the game you are playing can't be closed.<br /> If you want to close ir you need to end your game first or use the buttons on the side of the board.]]>		</game_remove_board>
 		<game_remove_game_title>
 			Warning
 		</game_remove_game_title>
@@ -1153,5 +1151,103 @@
 			invited to continue a game with following attributes:
 		</postpone_information>
 	</postpone>
+	<gamecenter>
+		<gamecenter_announce_title>
+			Announced Matches
+		</gamecenter_announce_title>
+		<gamecenter_postpone_title>
+			Postpone Matches
+		</gamecenter_postpone_title>
+		<gamecenter_match_title>
+			Challenges
+		</gamecenter_match_title>
+		<gamecenter_tourney_title>
+			Tourney
+		</gamecenter_tourney_title>
+		<gamecenter_current_games_title>
+			Current games
+		</gamecenter_current_games_title>
+		<gamecenter_announcer>
+			Announcer
+		</gamecenter_announcer>
+		<gamecenter_opponent>
+			Opponent
+		</gamecenter_opponent>
+		<gamecenter_time>
+			Time
+		</gamecenter_time>
+		<gamecenter_inc>
+			Inc.
+		</gamecenter_inc>
+		<gamecenter_category>
+			Category
+		</gamecenter_category>
+		<gamecenter_rated>
+			Rated
+		</gamecenter_rated>
+		<gamecenter_rating>
+			Rating
+		</gamecenter_rating>
+		<gamecenter_privacity>
+			Privacity
+		</gamecenter_privacity>
+		<gamecenter_date>
+			Date
+		</gamecenter_date>
+		<gamecenter_moves>
+			Moves
+		</gamecenter_moves>
+		<gamecenter_abusive>
+			Abusive player
+		</gamecenter_abusive>
+		<gamecenter_rated_game>
+			Rated game
+		</gamecenter_rated_game>
+		<gamecenter_not_rated_game>
+			Not rated game
+		</gamecenter_not_rated_game>
+		<gamecenter_private>
+			Private
+		</gamecenter_private>
+		<gamecenter_public>
+			Public
+		</gamecenter_public>
+		<gamecenter_update>
+			Update
+		</gamecenter_update>
+		<gamecenter_play_now>
+			Play now
+		</gamecenter_play_now>
+		<gamecenter_announce_match>
+			Announce Match
+		</gamecenter_announce_match>
+		<gamecenter_see_graphic>
+			See graphic
+		</gamecenter_see_graphic>
+		<gamecenter_cancel_matches>
+			Cancel all my challenges
+		</gamecenter_cancel_matches>
+		<gamecenter_observe>
+			Observe
+		</gamecenter_observe>
+		<gamecenter_no_postpone>
+			There are no adjourned games
+		</gamecenter_no_postpone>
+		<gamecenter_no_match>
+			There are no challenges made
+		</gamecenter_no_match>
+		<gamecenter_no_announce>
+			There are no matches announced
+		</gamecenter_no_announce>
+		<gamecenter_no_current_games>
+			There are no current games
+		</gamecenter_no_current_games>
+		<gamecenter_game_not_found>
+			The match is over or not exist
+		</gamecenter_game_not_found>
+		<gamecenter_game_not_found_title>
+			Error when try to observe match
+		</gamecenter_game_not_found_title>
+	</gamecenter>
 </language>
 

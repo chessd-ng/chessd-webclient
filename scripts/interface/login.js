@@ -160,7 +160,8 @@ function INTERFACE_StartLogin(Lang)
 	document.body.appendChild(Version);
 
 	// Setting document title
-	document.title = UTILS_GetText("general_title").replace(/\t/g,"").replace(/\n/g,"");
+//	document.title = UTILS_GetText("general_title").replace(/\t/g,"").replace(/\n/g,"");
+	document.title = UTILS_GetText("general_title");
 
 	// Block context menu
 	document.oncontextmenu = function() { return false; };

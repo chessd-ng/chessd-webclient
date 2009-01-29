@@ -1160,6 +1160,107 @@
 			convidou para continuar uma partida com as seguintes características:
 		</postpone_information>
 	</postpone>
+	<gamecenter>
+		<gamecenter_announce_title>
+			Partidas anunciadas
+		</gamecenter_announce_title>
+		<gamecenter_postpone_title>
+			Partidas adiadas
+		</gamecenter_postpone_title>
+		<gamecenter_match_title>
+			Desafios
+		</gamecenter_match_title>
+		<gamecenter_tourney_title>
+			Torneio
+		</gamecenter_tourney_title>
+		<gamecenter_current_games_title>
+			Partidas em andamento
+		</gamecenter_current_games_title>
+
+		<gamecenter_announcer>
+			Anunciante
+		</gamecenter_announcer>
+		<gamecenter_opponent>
+			Adversário
+		</gamecenter_opponent>
+		<gamecenter_time>
+			Tempo
+		</gamecenter_time>
+		<gamecenter_inc>
+			Inc.
+		</gamecenter_inc>
+		<gamecenter_category>
+			Categoria	
+		</gamecenter_category>
+		<gamecenter_rated>
+			Rated
+		</gamecenter_rated>
+		<gamecenter_rating>
+			Rating
+		</gamecenter_rating>
+		<gamecenter_privacity>
+			Privacidade
+		</gamecenter_privacity>
+		<gamecenter_date>
+			Data
+		</gamecenter_date>
+		<gamecenter_moves>
+			Lances
+		</gamecenter_moves>
+
+		<gamecenter_abusive>
+			Abusivo
+		</gamecenter_abusive>
+		<gamecenter_rated_game>
+			Valendo rating
+		</gamecenter_rated_game>
+		<gamecenter_not_rated_game>
+			Não valendo rating
+		</gamecenter_not_rated_game>
+		<gamecenter_private>
+			Privado
+		</gamecenter_private>
+		<gamecenter_public>
+			Público
+		</gamecenter_public>
+
+		<gamecenter_update>
+			Atualizar
+		</gamecenter_update>
+		<gamecenter_play_now>
+			Jogar agora
+		</gamecenter_play_now>
+		<gamecenter_announce_match>
+			Anunciar partida
+		</gamecenter_announce_match>
+		<gamecenter_see_graphic>
+			Ver gráfico de anuncios
+		</gamecenter_see_graphic>
+		<gamecenter_cancel_matches>
+			Cancelar todos os meus desafios
+		</gamecenter_cancel_matches>
+		<gamecenter_observe>
+			Observar
+		</gamecenter_observe>
+		<gamecenter_no_postpone>
+			Não há partidas adiadas
+		</gamecenter_no_postpone>
+		<gamecenter_no_match>
+			Não há desafios feitos
+		</gamecenter_no_match>
+		<gamecenter_no_announce>
+			Não há partidas anunciadas
+		</gamecenter_no_announce>
+		<gamecenter_no_current_games>
+			Não há partidas em andamento
+		</gamecenter_no_current_games>
+		<gamecenter_game_not_found>
+			A partida já terminou ou não existe
+		</gamecenter_game_not_found>
+		<gamecenter_game_not_found_title>
+			Erro ao observar uma partida
+		</gamecenter_game_not_found_title>
+	</gamecenter>
 	<tourney>
 		<tourney_create>
 			Criar torneio

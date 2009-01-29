@@ -94,6 +94,7 @@ function LOAD_LoadFiles()
 	Files.push("css/ChallengeMenu.css");
 	Files.push("css/Announce.css");
 	Files.push("css/Help.css");
+	Files.push("css/GameCenter.css");
 	Files.push("css/Tourney.css");
 
 	if(MainData.GetBrowser() == 0) //IE
@@ -121,7 +122,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/interface/contact.js");
 	Files.push("scripts/interface/chat.js");
 	Files.push("scripts/interface/window.js");
-	Files.push("scripts/interface/challengemenu.js");
+//	Files.push("scripts/interface/challengemenu.js");
 	Files.push("scripts/interface/challenge.js");
 	Files.push("scripts/interface/oldgame.js");
 	Files.push("scripts/interface/welcome.js");
@@ -144,6 +145,8 @@ function LOAD_LoadFiles()
 	Files.push("scripts/contact/online.js");
 	Files.push("scripts/contact/online_info.js");
 	Files.push("scripts/contact/user.js");
+	Files.push("scripts/interface/gamecenter.js");
+	Files.push("scripts/gamecenter/gamecenter.js");
 	Files.push("scripts/interface/tourney.js");
 
 	NumFiles = Files.length;

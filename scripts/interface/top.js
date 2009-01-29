@@ -99,7 +99,8 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Item);
 		Item.onclick = function () {
 		Pos = UTILS_GetOffset(this);
-		CHALLENGE_ShowChallengeMenu(Pos.X, Pos.Y);
+		//CHALLENGE_ShowChallengeMenu(Pos.X, Pos.Y);
+	        CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
 	}
 
 	MenuList.appendChild(Item);

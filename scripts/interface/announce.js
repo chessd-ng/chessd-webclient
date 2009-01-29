@@ -431,8 +431,14 @@ function INTERFACE_AnnounceWindow()
 			Rated = "false";
 		}
 
-		// Create and send the chellenge message
+		// Remove all announces
+		ANNOUNCE_ClearAnnounce();
+
+		// Create and send the announce message
 		ANNOUNCE_SendAnnounce(MyUsername, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, FromInput.value, ToInput.value);
+
+		// Refresh announce list
+		ANNOUNCE_GetAnnounceGames();
 	}
 
 	Cancel = UTILS_CreateElement('input',null,'button');
