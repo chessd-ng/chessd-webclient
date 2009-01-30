@@ -51,6 +51,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var L2RightDiv;
 	var DateLabel, Br3, FromLabel, FromInput, ToLabel, ToInput;
 	var FromDiv, ToDiv;
+	var FromRightDiv, FromLeftDiv, ToRightDiv, ToLeftDiv;
 	var FormatLabel1,FormatLabel2;
 
 	var ButtonsDiv;
