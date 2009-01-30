@@ -55,6 +55,14 @@
 	font-size		: 10px;
 	color			: #FFA200;
 	border			: 1px solid #FFA200;
+	background-color : #FFF;
+}
+
+#Main #Left #User select.enabled {
+	background-color : #FFF;
+}
+#Main #Left #User select.disabled {
+	background-color : #E0E0E0;
 }
 
 #Main #Left #User option {
