@@ -86,8 +86,6 @@ function OLDGAME_HandleSearchOldGame(XML)
 	// Remove loading message
 	INTERFACE_HideOldgameLoading();
 
-//	WINDOW_OldGameResult(GameList);
-
 	SearchGameWindow.Elements.SetResult(Id, GameList, More);
 	SearchGameWindow.Elements.SetPlayer1(SearchGameWindow.P1);
 	SearchGameWindow.Elements.SetPlayer2(SearchGameWindow.P2);

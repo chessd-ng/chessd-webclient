@@ -993,7 +993,7 @@
 			Próximas
 		</oldgame_next>
 		<oldgame_format>
-			Formato: dd/mm/aaaa
+			(dd/mm/aaaa)
 		</oldgame_format>
 		<oldgame_no_moves>
 			Jogo sem movimentos feitos
@@ -1330,4 +1330,3 @@
 		</tourney_add_round>
 	</tourney>
 </language>
-

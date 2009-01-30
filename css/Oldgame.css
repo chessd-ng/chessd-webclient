@@ -99,7 +99,7 @@
 
 #OldGamesDiv #L2RightDiv #FromDiv .format,
 #OldGamesDiv #L2RightDiv #ToDiv .format {
-	font-size : 8px;
+	font-size : 9px;
 	font-weight: normal;
 }
 
@@ -150,17 +150,20 @@
 	font-size: 9px;
 	font-weight: normal;
 	margin: 0px;
-	width: 55px;
+	width: 60px;
 	border-color : #DAF3F5;
+	padding : 0px;
 }
 
 #OldGamesDiv #ResultDiv .button_disabled {
 	border-color : #C0C0C0;
 	background-color: #C0C0C0;
+	color : #FFF;
 	font-size: 9px;
 	font-weight: normal;
 	margin: 0px;
-	width: 55px;
+	width: 60px;
+	padding : 0px;
 }
 
 /* ID */
@@ -180,8 +183,16 @@
 	padding-left : 83px;
 }
 
-#OldGamesDiv #L2RightDiv #FromDiv {
+#OldGamesDiv #L2RightDiv #FromDiv,  
+#OldGamesDiv #L2RightDiv #FromDiv #FromLeftDiv,
+#OldGamesDiv #L2RightDiv #FromDiv #FromRightDiv,
+#OldGamesDiv #L2RightDiv #ToDiv,  
+#OldGamesDiv #L2RightDiv #ToDiv #ToLeftDiv,
+#OldGamesDiv #L2RightDiv #ToDiv #ToRightDiv {
 	float: left;
+}
+
+#OldGamesDiv #L2RightDiv #FromDiv {
 	margin-right: 20px;
 }
 
@@ -217,7 +228,7 @@
 	display : block;
 }
 
-#oldgame_loading, #oldgame_not_found{
+#OldGamesDiv #oldgame_not_found{
 	width			: 464px;
 	border-style		: solid;
 	border-width		: 0px thin;
