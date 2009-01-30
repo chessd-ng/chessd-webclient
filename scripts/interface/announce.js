@@ -303,7 +303,7 @@ function INTERFACE_AnnounceWindow()
 		PrivateCheckbox.name = "private";
 		PrivateCheckbox.disabled = true;
 	}
-	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
+	PrivateLabel = UTILS_CreateElement('span',null,'cx_disabled',UTILS_GetText('challenge_private'));
 	
 	try
 	{

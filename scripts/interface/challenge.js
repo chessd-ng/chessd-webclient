@@ -507,7 +507,7 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 		PrivateCheckbox.name = "private";
 		PrivateCheckbox.disabled = true;
 	}
-	PrivateLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_private'));
+	PrivateLabel = UTILS_CreateElement('span',null,'cx_disabled',UTILS_GetText('challenge_private'));
 	
 	// Rating
 	if (Rated != undefined)

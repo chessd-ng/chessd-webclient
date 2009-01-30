@@ -44,6 +44,13 @@
 	font-weight		: bold;
 }
 
+#AnnounceDiv .cx_disabled {
+	font-size	:	10px;
+	margin-right	:	3mm;
+	font-weight		: bold;
+	color : #E0E0E0;
+}
+
 #AnnounceDiv h3 {
 	font-weight		: bold;
 	font-size		: 4mm;
