@@ -113,13 +113,14 @@
 }
 
 #Main #Left #Rooms #RoomListMenu li:hover {
-	background-color	: #FFF;
+	background-color	: #EAF4F5;
 }
 
 #Main #Left #Rooms #RoomListMenu ul {
 	padding			: 5px 10px;
-	height			: 120px;
+	height			: 110px;
 	overflow		: auto;
+	background-color : #FFF;
 }
 
 #Main #Left #Rooms #RoomListMenu li {
