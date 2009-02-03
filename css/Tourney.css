@@ -1,0 +1,261 @@
+/*#CreateTourneyDiv*/
+#CreateTourneyDiv {
+	padding : 15px;
+}
+
+#CreateTourneyDiv p {
+	font-weight : bold;
+}
+
+#CreateTourneyDiv #DefaultDiv #TNameDiv #TNameLeftDiv  {
+	float : left;
+	width : 120px;
+}
+
+#CreateTourneyDiv p {
+	font-weight : bold;
+	margin-top : 0px;
+	font-size : 11px;
+	color : #216678;
+}
+
+#CreateTourneyDiv span {
+	font-size : 10px;
+	color : #216678;
+}
+
+#CreateTourneyDiv .italic {
+	font-style : italic;
+}
+
+#CreateTourneyDiv #CatTimeDiv,
+#CreateTourneyDiv #RoundDiv,
+#CreateTourneyDiv #DateInitDiv {
+	padding-top : 5px;
+}
+
+#CreateTourneyDiv #AdvancedDiv,
+#CreateTourneyDiv #AdvancedDiv #SequencedRoundInput {
+	padding-top : 10px;
+}
+
+#CreateTourneyDiv #DefaultDiv #TNameDiv #TNameRightDiv input {
+	width : 240px;
+	margin-bottom : 2px;
+}
+
+#CreateTourneyDiv #TNameDiv #TNameRightDiv,
+#CreateTourneyDiv #CatTimeDiv #CatLeftDiv,
+#CreateTourneyDiv #CatTimeDiv #CatRightDiv,
+#CreateTourneyDiv #CatTimeDiv #TimeLeftDiv,
+#CreateTourneyDiv #DateInitDiv #DateInitLeftDiv,
+#CreateTourneyDiv #DateInitDiv #DateInitRightDiv #DateLeftDiv,
+#CreateTourneyDiv #DateInitDiv #DateInitRightDiv #DateRightDiv,
+#CreateTourneyDiv #DateInitDiv #DateInitRightDiv #HourLeftDiv,
+#CreateTourneyDiv #DateInitDiv #DateInitRightDiv #HourRightDiv,
+#CreateTourneyDiv #AdvancedDiv #DescDiv #DescLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #DescDiv #DescRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubscribeDiv #SubscribeLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #SubscribeDiv #SubscribeRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #ToRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #ToDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #FromDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #ToLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #FromRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #FromLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictRightDiv,
+#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeRightDiv,
+#CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPFromLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPFromRightDiv #SPFromDateDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPFromRightDiv #SPFromHourDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPToLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPToRightDiv #SPToDateDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv #SPToRightDiv #SPToHourDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateRightDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourRightDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv,
+#CreateTourneyDiv #RoundDiv #RoundLeftDiv {
+	float: left;
+}
+
+#CreateTourneyDiv #CatTimeDiv #CatLeftDiv {
+width : 70px;
+}
+
+#CreateTourneyDiv #CatTimeDiv #CatRightDiv {
+width : 110px;
+}
+
+#CreateTourneyDiv #CatTimeDiv #TimeLeftDiv {
+width : 120px;
+}
+
+#CreateTourneyDiv #RoundDiv #RoundLeftDiv {
+width : 135px;
+}
+
+#CreateTourneyDiv #DateInitDiv {
+	display : block;
+	height : 20px;
+}
+
+#CreateTourneyDiv #DateInitDiv #DateRightDiv,
+#CreateTourneyDiv #DateInitDiv #HourRightDiv,
+#CreateTourneyDiv #AdvancedDiv #DescDiv #DescRightDiv, 
+#CreateTourneyDiv #AdvancedDiv #SubscribeDiv #SubscribeRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #ToRightDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #FromRightDiv {
+	padding-left : 5px;
+}
+
+#CreateTourneyDiv #DateInitDiv #DateDiv {
+	padding-left : 110px;
+}
+
+#CreateTourneyDiv #DateInitDiv #HourDiv {
+	padding-left : 235px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv {
+	padding-left : 125px;
+}
+
+#CreateTourneyDiv #AdvancedLabelDiv {
+	display : block;
+	padding-top : 10px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #DescDiv {
+	height : 65px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SubscribeDiv {
+	height : 25px;
+	padding-top : 30px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv,
+#CreateTourneyDiv #AdvancedDiv #RestrictDiv,
+#CreateTourneyDiv #AdvancedDiv #WaitTimeDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv {
+	height : 30px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv {
+	height : 70px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #FromLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #IntervalDiv #ToLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictRightDiv,
+#CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPFromRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPToRightDiv {
+	padding-left : 10px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv {
+	padding-top : 10px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourRightDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateRightDiv,
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv {
+	padding-left : 4px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv .button{
+	width : 105px;
+	bottom : 0px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPFromRightDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPToRightDiv {
+	padding-left : 25px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPFromHourDiv,
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPToHourDiv {
+	padding-left : 15px;
+}
+
+#CreateTourneyDiv .help  {
+	padding-right : 10px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SPToDiv {
+	padding-top : 15px;
+}
+
+#CreateTourneyDiv .counter  {
+	font-size : 9px;
+	font-style : italic;
+	color: #216678;
+}
+
+#CreateTourneyDiv .format_enabled  {
+	font-size : 9px;
+	font-style : italic;
+	color: #216678;
+}
+
+#CreateTourneyDiv .format_disabled  {
+	font-size : 9px;
+	font-style : italic;
+	color: #D0D0D0;
+}
+
+#CreateTourneyDiv .advanced  {
+	font-size : 10px;
+	color: #216678;
+	border-bottom : 1px solid #216678;
+}
+
+#CreateTourneyDiv .disabled  {
+	background-color : #C0C0C0;
+}
+
+#CreateTourneyDiv input, 
+#CreateTourneyDiv textarea, 
+#CreateTourneyDiv select {
+	border-color : #FFA200;
+}
+
+#CreateTourneyDiv input, 
+#CreateTourneyDiv input.enabled  {
+	background-color : #FFF;
+}
+
+#CreateTourneyDiv #ButtonsDiv {
+	position: relative;
+	padding-top : 10px;
+	text-align : center;
+}
+
+#CreateTourneyDiv #ButtonsDiv .button {
+	width : 85px;
+	bottom : 0px;
+}
+
+#CreateTourneyDiv .advopt_disabled {
+	font-weight : bold;
+	margin-top : 0px;
+	font-size : 11px;
+	color : #D0D0D0;
+}
+
+#CreateTourneyDiv .advopt_enabled {
+	font-weight : bold;
+	margin-top : 0px;
+	font-size : 11px;
+	color : #216678;
+}

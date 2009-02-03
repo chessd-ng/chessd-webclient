@@ -22,7 +22,8 @@
 //Window Object is defined in interface/windows.js
 
 /**
-* 
+*
+* @author Rubens
 */
 function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 {
@@ -65,6 +66,10 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 	return Win; // WindowObj
 }
 
+/**
+*
+* @author Rubens
+*/
 function WINDOW_Focus(WindowObj)
 {
 	var zIndex = WindowObj.getZIndex();
@@ -95,6 +100,10 @@ function WINDOW_Focus(WindowObj)
 	WindowObj.setZIndex(i-1);
 }
 
+/**
+*
+* @author Rubens
+*/
 function WINDOW_RemoveWindow(WindowObj)
 {
 	var i;
@@ -119,6 +128,12 @@ function WINDOW_RemoveWindow(WindowObj)
 **************************************************
 *************************************************/
 
+/**
+* Open Alert window
+*
+* @return void
+* @author Danilo
+*/
 function WINDOW_Alert(Title,Text)
 {
 	// Return Div and Buttons;
@@ -134,6 +149,11 @@ function WINDOW_Alert(Title,Text)
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/**
+* Open Confirm Window
+*
+* @author Danilo
+*/
 function WINDOW_Confirm(Title, Text, Button1, Button2)
 {
 	// Return Div and Buttons;
@@ -150,12 +170,18 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/**
+* Open Challenge window
+*
+* @author Danilo
+*/
 function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowChallengeWindow(User, RatingObj, GameParameters, Rated, MatchId);
 	var Title;
 
+	// Change window's title depend on GameParameters presence, which denotes making a invitation or be invited to play a game
 	if (GameParameters)
 	{
 		Title = UTILS_GetText('challenge_title_offer');
@@ -171,7 +197,7 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 	// Add Window Object in challenge's list
 	MainData.AddChallengeWindow(MatchId, WindowObj);
 
-
+	// Set button's actions
 	// If you receive a challenge
 	if (GameParameters != null)
 	{
@@ -182,9 +208,10 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 		// NewParameters Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 		// Chat Button
-		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ return false;}, false);
+		UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ CHAT_OpenChat(User); }, false);
+
 		// Decline Button
-		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+		UTILS_AddListener(WindowObj.eventButtons[4],"click", function(){ CHALLENGE_DeclineChallenge(MatchId); WINDOW_RemoveWindow(WindowObj);}, false);
 	}
 	// If you are the challenger
 	else
@@ -199,6 +226,11 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 	}
 }
 
+/**
+* Open Create Room window
+*
+* @author Danilo
+*/
 function WINDOW_CreateRoom()
 {
 	// If another create room window is opened, exit function
@@ -239,6 +271,11 @@ function WINDOW_CreateRoom()
 	}, false);
 }
 
+/**
+* Open Cancel Room window
+*
+* @author Danilo
+*/
 function WINDOW_CancelRoom()
 {
 	//Return Div and Buttons;
@@ -255,6 +292,11 @@ function WINDOW_CancelRoom()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/**
+* Open Invite User window
+*
+* @author Danilo
+*/
 function WINDOW_Invite(User)
 {
 	//Return Div and Buttons;
@@ -271,11 +313,18 @@ function WINDOW_Invite(User)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/**
+* Open Search User window
+*
+* @author Danilo
+*/
 function WINDOW_SearchUser()
 {
-	// If another search user window is opened, return
+	// If another search user window is opened, do nothing
 	if (document.getElementById("SearchUserDiv"))
+	{
 		return;
+	}
 
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowSearchUserWindow();
@@ -289,11 +338,14 @@ function WINDOW_SearchUser()
 
 	//Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ MainData.RemoveSearchUserInfo(); WINDOW_RemoveWindow(WindowObj);}, false);
+
 	// Search Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ MainData.AddSearchUserInfo(Elements); }, false);
+
 	// Close Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ MainData.RemoveSearchUserInfo(); WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
 /*
 function WINDOW_SearchUserResult(UserList)
 {
@@ -309,6 +361,13 @@ function WINDOW_SearchUserResult(UserList)
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 */
+
+/**
+* Open Profile window
+*
+*	@return Elements	Profile's object
+* @author Danilo
+*/
 function WINDOW_Profile(Profile)
 {
 	//Return Div, Buttons and Elements;
@@ -320,28 +379,69 @@ function WINDOW_Profile(Profile)
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
-	// Cancel Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
 
-	if (Div.Buttons.length > 1)
+	// If Profile window isn't User's profile
+	if (Div.Buttons.length < 2)
 	{
+		// Close Button
+		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+	}
+	// If Profile window is User's profile
+	else
+	{
+		// Close Button
+		UTILS_AddListener(WindowObj.eventButtons[1],"click", 
+			function(){
+		 		// If Close confirm window is closed	
+				if (!Elements.GetClose())
+				{
+					if (Elements.Desc.value.length <= 200) 
+					{
+						// If any change occurs, open Close Confirm window
+						if (PROFILE_ChangeVerification(Elements) == true) 
+						{
+							Elements.SetClose(true);
+							Elements.SetButtonsUnavailable();
+							WINDOW_ProfileConfirm(WindowObj, Profile, Elements);
+						}
+						else // Close profile window
+						{
+							WINDOW_RemoveWindow(WindowObj); 
+							PROFILE_RemoveProfile(Profile.User)
+						}
+					}
+				}
+			}, false);
+
 		// Save Profile Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", 
 			function(){ 
-				if (Elements.Desc.value.length <= 200) {
-					WINDOW_RemoveWindow(WindowObj); 
-					PROFILE_RemoveProfile(Profile.User);
+		 		// If Close confirm window is closed	
+				if (!Elements.GetClose())
+				{
+					// Save profile changes and close window
+					if (Elements.Desc.value.length <= 200) {
+						PROFILE_SaveMyProfile();
+						WINDOW_RemoveWindow(WindowObj); 
+						PROFILE_RemoveProfile(Profile.User);
+					}
 				}
-		}, false);
+			}, false);
 	}
 
 	return Elements;
 }
 
-function WINDOW_ProfileConfirm(Profile)
+/**
+* Open Profile Close Confirmation window
+* 	Open if any changes occurs in user's profile
+*
+* @author Danilo
+*/
+function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
 {
 	//Return Div and Buttons;
-	var Div = INTERFACE_ShowProfileConfirmWindow(Profile);
+	var Div = INTERFACE_ShowProfileConfirmWindow();
 
 	//Create New Window
 	var WindowObj = WINDOW_NewWindow(380, Div.Div, Div.Buttons, UTILS_GetText('profile_confirm_close'));
@@ -349,13 +449,19 @@ function WINDOW_ProfileConfirm(Profile)
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 	// Discard Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ PROFILE_RemoveProfile(Profile.User); WINDOW_RemoveWindow(WinObj); WINDOW_RemoveWindow(WindowObj);}, false);
+
 	// Save Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ PROFILE_RemoveProfile(Profile.User) ;WINDOW_RemoveWindow(WinObj); WINDOW_RemoveWindow(WindowObj);}, false);
+
 	// Cancel Button
-	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ Elements.SetButtonsAvailable(); Elements.SetClose(false); WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/**
+*
+* @author Rubens
+*/
 function WINDOW_ProfileImage()
 {
 	//Return Div and Buttons;
@@ -372,6 +478,13 @@ function WINDOW_ProfileImage()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+* Open Oldgame window
+*
+*	@param Id Window's Id (in case of more than one oldgame windows are opened)
+* @return	Elements Oldgame window's object
+* @author Danilo
+*/
 function WINDOW_OldGame(Id)
 {
 	// Verify if exist old game window opened
@@ -399,6 +512,10 @@ function WINDOW_OldGame(Id)
 	return Elements;
 }
 
+/*
+*
+* @author Rubens
+*/
 function WINDOW_UnbanUser()
 {
 	if(document.getElementById("UnbanDiv")!=null)
@@ -424,6 +541,10 @@ function WINDOW_UnbanUser()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+*
+* @author Rubens
+*/
 function WINDOW_BanUser(Username)
 {
 	if(document.getElementById("BanDiv")!=null)
@@ -449,6 +570,10 @@ function WINDOW_BanUser(Username)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+*
+* @author Rubens
+*/
 function WINDOW_KickUser(Username)
 {
 	if(document.getElementById("BanDiv")!=null)
@@ -474,6 +599,10 @@ function WINDOW_KickUser(Username)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+*
+* @author Rubens
+*/
 function WINDOW_AdminWindow()
 {
 	if(document.getElementById("AdminDiv")!=null)
@@ -494,6 +623,10 @@ function WINDOW_AdminWindow()
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+*
+* @author Rubens
+*/
 function WINDOW_AnnounceWindow(Username, Rating)
 {
 	if(document.getElementById("AnnounceDiv")!=null)
@@ -516,6 +649,11 @@ function WINDOW_AnnounceWindow(Username, Rating)
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+* Open Help window
+*
+* @author Danilo
+*/
 function WINDOW_Help()
 {
 	if(document.getElementById("HelpDiv")!=null)
@@ -536,7 +674,10 @@ function WINDOW_Help()
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-
+/*
+*
+* @author Rubens
+*/
 function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
@@ -561,3 +702,29 @@ function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 	UTILS_AddListener(WindowObj.eventButtons[3],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
+/*
+* Open Create Tourney window
+*
+* @return	Elements Create Tourney window's object
+* @author Danilo
+*/
+function WINDOW_CreateTourney()
+{
+	// Return Div and Buttons;
+	var Div = INTERFACE_ShowCreateTourneyWindow();
+	var Title;
+
+	Title = UTILS_GetText('tourney_create');
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(400, Div.Div, Div.Buttons, Title);
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); }, false);
+	
+	// Create Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+
+	// Cancel Button
+	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

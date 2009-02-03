@@ -66,6 +66,7 @@
 }
 
 #Chat #ChatList li input {
+	background-color: #FFF;
 	border			: 1px solid #216778;
 	font-size		: 11px;
 	color			: #216778;
