@@ -278,3 +278,79 @@ function ADMIN_GetBanList()
 	
 	return "";
 }
+
+
+function ADMINCENTER_StartAdminCenter()
+{
+	var ACenterObj = new AdminCenterObj();
+	
+	MainData.SetAdmincenter(ACenterObj);
+
+	//Get forbidden words list
+	//TODO -> make get forbidden words
+}
+
+function ADMINCENTER_ShowPunish()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Punish)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Punish.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Punish;
+	}
+}
+
+function ADMINCENTER_ShowAdminLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.AdminLevel)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.AdminLevel.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.AdminLevel;
+	}
+}
+
+function ADMINCENTER_ShowLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Level)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Level.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Level;
+	}
+}
+
+function ADMINCENTER_ShowAdjourn()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Adjourn)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Adjourn.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Adjourn;
+	}
+}
+
+function ADMINCENTER_ShowWords()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Words)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Words.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Words;
+	}
+}

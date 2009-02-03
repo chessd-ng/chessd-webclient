@@ -728,3 +728,28 @@ function WINDOW_CreateTourney()
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
 }
+
+/*
+* Open Admin tools window
+*
+* @return	Elements Create Tourney window's object
+* @author Rubens
+*/
+function WINDOW_CreateAdminCenter()
+{
+	// Return Div and Buttons;
+	var Div = INTERFACE_ShowCreateAdminCenterWindow();
+	var Title;
+
+	//Title = UTILS_GetText('tourney_create');
+	Title = "Administracao";
+
+	// Create New Window
+	var WindowObj = WINDOW_NewWindow(600, Div.Div, Div.Buttons, Title);
+
+	// Close Button (X)
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); }, false);
+	
+	// Close Button
+	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+}

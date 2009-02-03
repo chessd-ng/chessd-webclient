@@ -153,6 +153,9 @@ function DATA(ConfFile, LangFile)
 
 	/************************ GAMECENTER DATA************************/
 	this.Gamecenter = null;
+
+	/************************ ADMINCENTER DATA************************/
+	this.Admincenter = null;
 }
 
 // Adding methods
@@ -386,6 +389,9 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 DATA.prototype.SetGamecenter = DATA_SetGamecenter;
 DATA.prototype.GetGamecenter = DATA_GetGamecenter;
 
+/*GAMECENTER OBJECT METHODS*************************/
+DATA.prototype.SetAdmincenter = DATA_SetAdmincenter;
+DATA.prototype.GetAdmincenter = DATA_GetAdmincenter;
 
 /**********************************
  * METHODS - HTTP REQUEST         *
@@ -3700,4 +3706,17 @@ function DATA_SetGamecenter(Obj)
 function DATA_GetGamecenter()
 {
 	return this.Gamecenter;
+}
+
+/**********************************
+ * METHODS - ADMINCENTER          *
+ **********************************/
+function DATA_SetAdmincenter(Obj)
+{
+	this.Admincenter = Obj;
+}
+
+function DATA_GetAdmincenter()
+{
+	return this.Admincenter;
 }

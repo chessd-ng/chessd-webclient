@@ -135,6 +135,9 @@ function START_Webclient()
 	// Create gamecenter
 	GAMECENTER_StartGameCenter();
 
+	// Create admincenter object
+	ADMINCENTER_StartAdminCenter();
+
 	// Create challenge menu object
 	//CHALLENGE_StartChallenge();
 

@@ -278,7 +278,7 @@ function INTERFACE_ShowAdminIcon()
 		Item.title = ItemTitle;
 		Item.className = "adjourn_game";
 		Item.id = "";
-		UTILS_AddListener(Item,"click",function() { WINDOW_AdminWindow(); ADMIN_GetBanList(); }, "false");
+		UTILS_AddListener(Item,"click",function() { WINDOW_CreateAdminCenter(); }, "false");
 	}
 }
 
