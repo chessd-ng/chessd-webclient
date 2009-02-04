@@ -76,6 +76,16 @@ function ADMIN_HandleAdmin(XML)
 			ADMIN_Notification(XML)
 			break;
 		*/
+
+		case Consts.IQ_ID_AddBannedWords:
+			ADMIN_HandleAddWord(XML)
+			break;
+		case Consts.IQ_ID_RemoveBannedWords:
+			ADMIN_HandleRemoveWord(XML)
+			break;
+		case Consts.IQ_ID_GetBannedWords:
+			ADMIN_HandleBannedWordsList(XML)
+			break;
 	}
 	
 	return Buffer;
@@ -210,6 +220,33 @@ function ADMIN_HandleBanList(XML)
 	return Buffer;
 }
 
+function ADMIN_HandleAddWord(XML)
+{
+	
+}
+
+function ADMIN_HandleRemoveWord(XML)
+{
+
+}
+
+function ADMIN_HandleBannedWordsList(XML)
+{
+	var Words;
+	var i;	
+	var ACenter = MainData.GetAdmincenter();
+
+	Words = XML.getElementsByTagName("word");
+
+	for(i=0; i<Words.length ; i++)
+	{
+		ACenter.Words.add(Words[i].getAttribute("word"));
+	}
+	
+	return "";
+}
+
+
 /************************
  * ADMIN - MESSAGES
  * **********************/
@@ -279,6 +316,26 @@ function ADMIN_GetBanList()
 	return "";
 }
 
+function ADMIN_BanWord(Word)
+{
+	CONNECTION_SendJabber(MESSAGE_AddBannedWord(Word));
+
+	return "";
+}
+
+function ADMIN_RemoveBannedWord(Word)
+{
+	CONNECTION_SendJabber(MESSAGE_RemoveBannedWord(Word));
+
+	return "";
+}
+
+function ADMIN_GetBannedWords()
+{
+	CONNECTION_SendJabber(MESSAGE_GetBannedWords());
+
+	return "";
+}
 
 function ADMINCENTER_StartAdminCenter()
 {
@@ -352,5 +409,17 @@ function ADMINCENTER_ShowWords()
 		AdminCenterObj.Words.show(AdminCenterObj.AdminCenterDiv);
 
 		AdminCenterObj.CurrentDiv = AdminCenterObj.Words;
+	}
+}
+
+function ADMINCENTER_ClearBannedWordsList()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var Word;
+	
+	for(i=AdminCenterObj.Words.WordsList.length-1; i>=0; i--)
+	{
+		Word = AdminCenterObj.Words.WordsList[i].Id;
+		AdminCenterObj.Words.remove(Word);
 	}
 }

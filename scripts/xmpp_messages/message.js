@@ -932,6 +932,7 @@ function MESSAGE_GetBannedWords()
 function MESSAGE_AddBannedWord(Word)
 {
 	var XMPP = "";
+	var Consts = MainData.GetConst();
 	
 	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_AddBannedWords+"'>";
 	XMPP += "<ban-word xmlns='"+MainData.GetXmlns()+"/chessd#admin'>";
@@ -945,9 +946,10 @@ function MESSAGE_AddBannedWord(Word)
 function MESSAGE_RemoveBannedWord(Word)
 {
 	var XMPP = "";
+	var Consts = MainData.GetConst();
 	
 	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_RemoveBannedWords+"'>";
-	XMPP += "<unban-word xmlns='http://"+MainData.GetXmlns()+"/chessd#admin'>";
+	XMPP += "<unban-word xmlns='"+MainData.GetXmlns()+"/chessd#admin'>";
 	XMPP += "<word word='"+Word+"'/>";
 	XMPP += "</unban-word></iq>";
 

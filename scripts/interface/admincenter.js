@@ -150,6 +150,8 @@ function INTERFACE_CreateAdminCenter()
 	}
 	WordsButton.onclick = function(){
 		ADMINCENTER_ShowWords();
+		ADMINCENTER_ClearBannedWordsList();
+		ADMIN_GetBannedWords();
 	}
 
 	MenuList.appendChild(PunishButton);
@@ -1003,6 +1005,9 @@ function INTERFACE_AddWords(Word)
 
 	PButton = UTILS_CreateElement("p","action",null,"Remover palavra");
 
+	PButton.onclick = function(){
+		ADMIN_RemoveBannedWord(Word);
+	}
 
 	Item.appendChild(PWord);
 	Item.appendChild(PButton);
@@ -1105,6 +1110,10 @@ function INTERFACE_CreateAdminCenterWords()
 	// No Words element
 	var NoWords = UTILS_CreateElement("p",null,null, "Nao ha usuarios com nivel administrativo");
 	
+
+	InputButton.onclick = function() {
+		ADMIN_BanWord(InputBox.value);
+	}
 
 	InputDiv.appendChild(InputLabel);
 	InputDiv.appendChild(InputBox);
