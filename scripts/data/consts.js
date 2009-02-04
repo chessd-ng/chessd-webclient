@@ -53,6 +53,9 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetAnnounceMatch = "GetAnnounceMatch";
 	Const.IQ_ID_RemoveAnnounceMatch = "RemoveAnnounceMatch";
 	Const.IQ_ID_AcceptAnnounceMatch = "AcceptAnnounceMatch";
+	Const.IQ_ID_GetBannedWords = "GetBannedWords";
+	Const.IQ_ID_AddBannedWords = "AddBannedWords";
+	Const.IQ_ID_RemoveBannedWords = "RemoveBannedWords";
 
 	
 	// Login errors
