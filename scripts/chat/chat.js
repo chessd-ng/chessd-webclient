@@ -320,7 +320,7 @@ function CHAT_SendMessage(Username, Message)
 
 		// Show message in chat list
 		//INTERFACE_ShowChatMessage(Username, Msg, true);
-		ChatObj.Chat.addMessage(MyUsername, UTILS_ConvertChatString(Message));
+		ChatObj.Chat.addMessage(MyUsername, UTILS_BannedWords(UTILS_ConvertChatString(Message)));
 	}
 
 	return "";
@@ -352,7 +352,7 @@ function CHAT_ReceiveMessage(Username, Message)
 	}
 
 	// Show message in chat list
-	ChatObj.addMessage(Username, Message);
+	ChatObj.addMessage(Username, UTILS_BannedWords(Message));
 
 	// Set focus to chat window
 	ChatObj.focus();

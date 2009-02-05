@@ -343,8 +343,8 @@ function ADMINCENTER_StartAdminCenter()
 	
 	MainData.SetAdmincenter(ACenterObj);
 
-	//Get forbidden words list
-	//TODO -> make get forbidden words
+	//Get banned words list
+	ADMIN_GetBannedWords();
 }
 
 function ADMINCENTER_ShowPunish()

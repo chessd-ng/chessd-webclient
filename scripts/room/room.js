@@ -679,13 +679,14 @@ function ROOM_EnterRoomGame(RoomName)
 function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 {
 	var Room = MainData.GetRoom(RoomName);
+	var ReplacedMessage = UTILS_BannedWords(Message);
 
 	if(Room == null)
 	{
 		return "";
 	}
 	
-	Room.Room.addMsg(From, Message, Stamp);
+	Room.Room.addMsg(From, ReplacedMessage, Stamp);
 
 	return "";
 }

@@ -413,6 +413,31 @@ function UTILS_ShortString(Word, NumChars)
 	return ShortWord;
 }
 
+function UTILS_BannedWords(Str)
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var i,j;
+	var StrResult = Str;
+	var Tmp, Word;
+	var Expr;
+	
+	for(i=0; i<AdminCenterObj.Words.WordsList.length; i++)
+	{
+		Tmp = "";
+		Word = AdminCenterObj.Words.WordsList[i].Id;
+
+		for(j=0; j<Word.length; j++)
+		{
+			Tmp += "*";
+		}
+
+		Expr = new RegExp(Word,"g");
+		StrResult = StrResult.replace(Expr, Tmp);
+	}
+
+	return StrResult;
+}
+
 /**********************************
  * FUNCTIONS - EVENT LISTENERS
  ************************************/
