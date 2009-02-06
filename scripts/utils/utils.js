@@ -431,7 +431,7 @@ function UTILS_BannedWords(Str)
 			Tmp += "*";
 		}
 
-		Expr = new RegExp(Word,"g");
+		Expr = new RegExp("\\b"+Word+"\\b","gi");
 		StrResult = StrResult.replace(Expr, Tmp);
 	}
 
