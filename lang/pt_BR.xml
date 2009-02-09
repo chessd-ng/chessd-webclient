@@ -1329,5 +1329,103 @@
 			Adicionar rodada
 		</tourney_add_round>
 	</tourney>
+	<admincenter>
+		<admincenter_punish_button>
+			Usuários punidos
+		</admincenter_punish_button>
+		<admincenter_level_button>
+			Titulação
+		</admincenter_level_button>
+		<admincenter_adminlevel_button>
+			Nível
+		</admincenter_adminlevel_button>
+		<admincenter_adjourn_button>
+			Partidas pendentes
+		</admincenter_adjourn_button>
+		<admincenter_words_button>
+			Palavras proibidas
+		</admincenter_words_button>
+		<admincenter_acquit>
+			Absolver
+		</admincenter_acquit>
+		<admincenter_name>
+			Nome
+		</admincenter_name>
+		<admincenter_punish>
+			Punição
+		</admincenter_punish>
+		<admincenter_incident>
+			Incidencia
+		</admincenter_incident>
+		<admincenter_date>
+			Data
+		</admincenter_date>
+		<admincenter_period>
+			Período
+		</admincenter_period>
+		<admincenter_reason>
+			Motivo
+		</admincenter_reason>
+		<admincenter_no_punish>
+			Não há usuários punidos
+		</admincenter_no_punish>
+		<admincenter_edit>
+			Editar
+		</admincenter_edit>
+		<admincenter_adminlevel>
+			Nível administrativo
+		</admincenter_adminlevel>
+		<admincenter_no_adminlevel>
+			Não há usuários com nível administrativo
+		</admincenter_no_adminlevel>
+		<admincenter_level>
+			Titulação
+		</admincenter_level>
+		<admincenter_no_level>
+			Não há usuários com titulação
+		</admincenter_no_level>
+		<admincenter_observer>
+			Observar
+		</admincenter_observer>
+		<admincenter_rated>
+			Valendo rating
+		</admincenter_rated>
+		<admincenter_not_rated>
+			Não valendo rating
+		</admincenter_not_rated>
+		<admincenter_time>
+			Tempo
+		</admincenter_time>
+		<admincenter_increment>
+			Inc.
+		</admincenter_increment>
+		<admincenter_rated_header>
+			Rated
+		</admincenter_rated_header>
+		<admincenter_category>
+			Categoria
+		</admincenter_category>
+		<admincenter_rating>
+			Rating
+		</admincenter_rating>
+		<admincenter_no_adjourn>
+			Não há partidas adiadas
+		</admincenter_no_adjourn>
+		<admincenter_word>
+			Palavra:
+		</admincenter_word>
+		<admincenter_add_word>
+			Adicionar
+		</admincenter_add_word>
+		<admincenter_remove_word>
+			Remover palavra
+		</admincenter_remove_word>
+		<admincenter_banned_words>
+			Palavras proibidas no bate-papo
+		</admincenter_banned_words>
+		<admincenter_no_banned_words>
+			Não há palavras proibidas
+		</admincenter_no_banned_words>
+	</admincenter>
 </language>
 

@@ -130,11 +130,11 @@ function INTERFACE_CreateAdminCenter()
 
 	var MainCenter = UTILS_CreateElement("div", "Center");
 
-	var PunishButton = UTILS_CreateElement("li","punish",null,"Usuarios punidos");
-	var LevelButton = UTILS_CreateElement("li","level",null,"Titulacao");
-	var AdminLvlButton = UTILS_CreateElement("li","adminlvl",null,"Nivel");
-	var AdjournButton = UTILS_CreateElement("li","adjourn",null,"Partidas pendentes");
-	var WordsButton = UTILS_CreateElement("li","words",null,"Palavras proibidas");
+	var PunishButton = UTILS_CreateElement("li","punish",null,UTILS_GetText("admincenter_punish_button"));
+	var LevelButton = UTILS_CreateElement("li","level",null,UTILS_GetText("admincenter_level_button"));
+	var AdminLvlButton = UTILS_CreateElement("li","adminlvl",null,UTILS_GetText("admincenter_adminlevel_button"));
+	var AdjournButton = UTILS_CreateElement("li","adjourn",null,UTILS_GetText("admincenter_adjourn_button"));
+	var WordsButton = UTILS_CreateElement("li","words",null,UTILS_GetText("admincenter_words_button"));
 
 	PunishButton.onclick = function(){
 		ADMINCENTER_ShowPunish();
@@ -245,7 +245,7 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 		}
 	}
 */
-	PButton = UTILS_CreateElement("p","action","accept","absolver");
+	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
 
 
 	Item.appendChild(PName);
@@ -342,19 +342,18 @@ function INTERFACE_CreateAdminCenterPunish()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
-	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var PunishedPlayer = UTILS_CreateElement("p","player",null,"Nome");
-	var Punish = UTILS_CreateElement("p","punish",null,"Punicao");
-	var Inc = UTILS_CreateElement("p","incidence",null,"Incidencia");
-	var Date = UTILS_CreateElement("p","date",null,"Data");
-	var Period = UTILS_CreateElement("p","period",null,"Periodo");
-	var Reason = UTILS_CreateElement("p","reason",null,"Motivo");
+	var PunishedPlayer = UTILS_CreateElement("p","player",null,UTILS_GetText("admincenter_name"));
+	var Punish = UTILS_CreateElement("p","punish",null,UTILS_GetText("admincenter_punish"));
+	var Inc = UTILS_CreateElement("p","incidence",null,UTILS_GetText("admincenter_incident"));
+	var Date = UTILS_CreateElement("p","date",null,UTILS_GetText("admincenter_date"));
+	var Period = UTILS_CreateElement("p","period",null,UTILS_GetText("admincenter_period"));
+	var Reason = UTILS_CreateElement("p","reason",null,UTILS_GetText("admincenter_reason"));
 
 
 	// No Punish element
-	var NoPunish = UTILS_CreateElement("p",null,null, "Nao ha usuarios punidos");
+	var NoPunish = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_punish"));
 	
 
 	ListResultHeader.appendChild(PunishedPlayer);
@@ -418,37 +417,7 @@ function INTERFACE_AddAdminLevel(Name, AdminLevel)
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Name, 10));
 	PAdminLevel = UTILS_CreateElement("p","level", null, AdminLevel);
 
-
-/*
-	// This feature is not implemented yet
-	if(Private == false)
-	{
-		PPrivate = UTILS_CreateElement("p","private","false");
-		PPrivate.title = "Publico";
-	}
-	else
-	{
-		PPrivate = UTILS_CreateElement("p","private","true");
-		PPrivate.title = "Privado";
-	}
-	*/
-/*
-	if(Player.Name == MainData.Username)
-	{
-		PButton = UTILS_CreateElement("p","button","decline");
-		PButton.onclick = function(){
-			ANNOUNCE_RemoveAdminLevel(Id);
-		}
-	}
-	else
-	{
-		PButton = UTILS_CreateElement("p","button","accept");
-		PButton.onclick = function(){
-			ANNOUNCE_AcceptAdminLevel(Id);
-		}
-	}
-*/
-	PButton = UTILS_CreateElement("p","action","accept","editar");
+	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
 
 
 	Item.appendChild(PName);
@@ -541,14 +510,13 @@ function INTERFACE_CreateAdminCenterAdminLevel()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
-	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var Player = UTILS_CreateElement("p","player",null,"Nome");
-	var AdminLevel = UTILS_CreateElement("p","level",null,"Nivel administrativo");
+	var Player = UTILS_CreateElement("p","player",null,UTILS_GetText("admincenter_name"));
+	var AdminLevel = UTILS_CreateElement("p","level",null,UTILS_GetText("admincenter_adminlevel"));
 
 	// No AdminLevel element
-	var NoAdminLevel = UTILS_CreateElement("p",null,null, "Nao ha usuarios com nivel administrativo");
+	var NoAdminLevel = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adminlevel"));
 	
 
 	ListResultHeader.appendChild(Player);
@@ -607,36 +575,7 @@ function INTERFACE_AddLevel(Name, Level)
 	PLevel = UTILS_CreateElement("p","level", null, Level);
 
 
-/*
-	// This feature is not implemented yet
-	if(Private == false)
-	{
-		PPrivate = UTILS_CreateElement("p","private","false");
-		PPrivate.title = "Publico";
-	}
-	else
-	{
-		PPrivate = UTILS_CreateElement("p","private","true");
-		PPrivate.title = "Privado";
-	}
-	*/
-/*
-	if(Player.Name == MainData.Username)
-	{
-		PButton = UTILS_CreateElement("p","button","decline");
-		PButton.onclick = function(){
-			ANNOUNCE_RemoveLevel(Id);
-		}
-	}
-	else
-	{
-		PButton = UTILS_CreateElement("p","button","accept");
-		PButton.onclick = function(){
-			ANNOUNCE_AcceptLevel(Id);
-		}
-	}
-*/
-	PButton = UTILS_CreateElement("p","action","accept","editar");
+	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
 
 
 	Item.appendChild(PName);
@@ -729,14 +668,13 @@ function INTERFACE_CreateAdminCenterLevel()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
-	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var Player = UTILS_CreateElement("p","player",null,"Nome");
-	var Level = UTILS_CreateElement("p","level",null,"Titulacao");
+	var Player = UTILS_CreateElement("p","player",null,UTILS_GetText("admincenter_name"));
+	var Level = UTILS_CreateElement("p","level",null,UTILS_GetText("admincenter_level"));
 
 	// No Level element
-	var NoLevel = UTILS_CreateElement("p",null,null, "Nao ha usuarios com nivel administrativo");
+	var NoLevel = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_level"));
 	
 
 	ListResultHeader.appendChild(Player);
@@ -795,17 +733,17 @@ function INTERFACE_AddAdjourn(WPlayerName, WRating, BPlayerName, BRating, Catego
 	GameTime = UTILS_CreateElement("p","time",null,(GameTime/60)+"\"");
 	GameInc = UTILS_CreateElement("p","inc",null,Inc);
 
-	Button = UTILS_CreateElement("p","action","inative", "observar");
+	Button = UTILS_CreateElement("p","action","inative", UTILS_GetText("admincenter_observer"));
 
 	if(Rated == "true")
 	{
 		PRated = UTILS_CreateElement("p","rated",null,null);
-		PRated.title = "Valendo rating";
+		PRated.title = UTILS_GetText("admincenter_rated");
 	}
 	else
 	{
 		PRated = UTILS_CreateElement("p","rated","disable",null);
-		PRated.title = "Não valendo rating";
+		PRated.title = UTILS_GetText("admincenter_not_rated");
 	}
 
 	/*
@@ -916,26 +854,25 @@ function INTERFACE_CreateAdminCenterAdjourn()
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
-	// TODO -> trocar p/ XML
 	// Result headers
-	var WRating = UTILS_CreateElement("p","wrating",null,"Rating");
+	var WRating = UTILS_CreateElement("p","wrating",null,UTILS_GetText("admincenter_rating"));
 	var WPiece = UTILS_CreateElement("img","wpiece");
 
 	var VS = UTILS_CreateElement("p","vs",null,"X");
 	
-	var BRating = UTILS_CreateElement("p","brating",null,"Rating");
+	var BRating = UTILS_CreateElement("p","brating",null,UTILS_GetText("admincenter_rating"));
 	var BPiece = UTILS_CreateElement("img","bpiece");
 
-	var Category = UTILS_CreateElement("p","category",null,"Categoria");
-	var Time = UTILS_CreateElement("p","time",null,"Tempo");
-	var Inc = UTILS_CreateElement("p","Inc",null,"Inc.");
-	var Rated = UTILS_CreateElement("p","rated",null,"Rated");
+	var Category = UTILS_CreateElement("p","category",null,UTILS_GetText("admincenter_category"));
+	var Time = UTILS_CreateElement("p","time",null,UTILS_GetText("admincenter_time"));
+	var Inc = UTILS_CreateElement("p","Inc",null,UTILS_GetText("admincenter_increment"));
+	var Rated = UTILS_CreateElement("p","rated",null,UTILS_GetText("admincenter_rated_header"));
 
 //	var Action = UTILS_CreateElement("p","action",null,"Observar");
 
 
 	// No Announce element
-	var NoResult = UTILS_CreateElement("p",null,null, "Nao ha partidas adiadas");
+	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adjourn"));
 
 	WPiece.src = "./images/challenge_menu/white_enable.png";
 	BPiece.src = "./images/challenge_menu/black_enable.png";
@@ -1003,7 +940,7 @@ function INTERFACE_AddWords(Word)
 
 	PWord = UTILS_CreateElement("p","word", null, Word);
 
-	PButton = UTILS_CreateElement("p","action",null,"Remover palavra");
+	PButton = UTILS_CreateElement("p","action",null,UTILS_GetText("admincenter_remove_word"));
 
 	PButton.onclick = function(){
 		ADMIN_RemoveBannedWord(Word);
@@ -1094,21 +1031,20 @@ function INTERFACE_CreateAdminCenterWords()
 	var CenterResult = UTILS_CreateElement("div", "CenterResultWords");
 
 	var InputDiv = UTILS_CreateElement("div", "InputDiv");
-	var InputLabel = UTILS_CreateElement("p","InputLabel",null,"Palavra:");
+	var InputLabel = UTILS_CreateElement("p","InputLabel",null,UTILS_GetText("admincenter_word"));
 	var InputBox = UTILS_CreateElement("input","InputBox");
-	var InputButton = UTILS_CreateElement("div","InputButton",null,"Adicionar");
+	var InputButton = UTILS_CreateElement("div","InputButton",null,UTILS_GetText("admincenter_add_word"));
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
 	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
-	// TODO -> trocar p/ XML
 	// Result headers
 	//var PieceColor = UTILS_CreateElement("p","piece",null,"Peca");
-	var Words = UTILS_CreateElement("p","words",null,"Palavras proibidas no bate-papo");
+	var Words = UTILS_CreateElement("p","words",null,UTILS_GetText("admincenter_banned_words"));
 
 	// No Words element
-	var NoWords = UTILS_CreateElement("p",null,null, "Nao ha usuarios com nivel administrativo");
+	var NoWords = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_banned_words"));
 	
 
 	InputButton.onclick = function() {
