@@ -138,6 +138,8 @@ function INTERFACE_CreateAdminCenter()
 
 	PunishButton.onclick = function(){
 		ADMINCENTER_ShowPunish();
+		ADMINCENTER_ClearPunishList();
+		ADMIN_GetBanList();
 	}
 	AdminLvlButton.onclick = function(){
 		ADMINCENTER_ShowAdminLevel();
@@ -246,7 +248,9 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	}
 */
 	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
-
+	PButton.onclick = function(){
+		ADMIN_UnbanUser(Name,"Acquit - absolvido");
+	}
 
 	Item.appendChild(PName);
 	Item.appendChild(PPunish);
@@ -268,13 +272,13 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	}
 }
 
-function INTERFACE_RemovePunish(MatchId)
+function INTERFACE_RemovePunish(Name)
 {
 	var i=0;
 	var Item;
 	
-	// Find match
-	while(( i < this.PunishList.length)&&(this.PunishList[i].Id != MatchId))
+	// Find name
+	while(( i < this.PunishList.length)&&(this.PunishList[i].Id != Name))
 	{
 		i++;
 	}

@@ -209,12 +209,17 @@ function ADMIN_HandleBanList(XML)
 	var i;
 	var Username;
 	var Buffer = "";
+	var ACenter = MainData.GetAdmincenter();
+	var Reason;
 
 	//Get all users in the message and show;
 	for(i=0;i<Users.length;i++)
 	{
 		Username = Users[i].getAttribute("jid").split("@")[0];
-		INTERFACE_AddBannedUser(Username);
+		//INTERFACE_AddBannedUser(Username);
+		Reason = UTILS_GetNodeText(Users[i]);
+	
+		ACenter.Punish.add(Username, "---","---","---","---",Reason);
 	}
 
 	return Buffer;
@@ -421,5 +426,17 @@ function ADMINCENTER_ClearBannedWordsList()
 	{
 		Word = AdminCenterObj.Words.WordsList[i].Id;
 		AdminCenterObj.Words.remove(Word);
+	}
+}
+
+function ADMINCENTER_ClearPunishList()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var Punish;
+	
+	for(i=AdminCenterObj.Punish.PunishList.length-1; i>=0; i--)
+	{
+		Punish = AdminCenterObj.Punish.PunishList[i].Id;
+		AdminCenterObj.Punish.remove(Punish);
 	}
 }
