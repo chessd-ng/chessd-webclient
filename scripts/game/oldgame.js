@@ -69,36 +69,11 @@ function OLDGAME_HandleSearchOldGame(XML)
 			GameInfoTmp.white = Players[0].getAttribute("jid").split("@")[0];
 			GameInfoTmp.black = Players[1].getAttribute("jid").split("@")[0];
 
-			if(Players[0].getAttribute("score")=="1")
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
-			}
-			else if(Players[1].getAttribute("score")=="1")
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
-			}
-			else
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
-			}
 		}
 		else
 		{
 			GameInfoTmp.white = Players[1].getAttribute("jid").split("@")[0];
 			GameInfoTmp.black = Players[0].getAttribute("jid").split("@")[0];
-
-			if(Players[0].getAttribute("score")=="1")
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_black");
-			}
-			else if(Players[1].getAttribute("score")=="1")
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_white");
-			}
-			else
-			{
-				GameInfoTmp.winner = UTILS_GetText("oldgame_draw");
-			}
 
 		}
 
