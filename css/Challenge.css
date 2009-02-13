@@ -44,6 +44,7 @@
 	font-size	:	10px;
 	margin-right	:	3mm;
 	font-weight		: bold;
+	vertical-align : bottom;
 }
 
 #ChallengeDiv .cx_disabled {
@@ -51,6 +52,7 @@
 	margin-right	:	3mm;
 	font-weight		: bold;
 	color : #E0E0E0;
+	vertical-align : bottom;
 }
 
 #ChallengeDiv h3 {
