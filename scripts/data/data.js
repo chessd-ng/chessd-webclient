@@ -115,13 +115,15 @@ function DATA(ConfFile, LangFile)
 	this.Challenge.ChallengeMenu = null;
 
 	/************************ ANNOUNCE DATA *********************/
+	/*
 	this.Announce = new Object();
 	this.Announce.AnnounceList = new Array();
-
+	*/
 	/************************ POSTPONE DATA *********************/
+	/*
 	this.Postpone = new Object();
 	this.Postpone.PostponeList = new Array();
-
+	*/
 
 	/************************ GAME DATA *************************/
 	this.Game = new Object();
@@ -152,7 +154,13 @@ function DATA(ConfFile, LangFile)
 	this.Windows.WindowList = new Array();
 
 	/************************ GAMECENTER DATA************************/
-	this.Gamecenter = null;
+	this.Gamecenter = new Object();
+	this.Gamecenter.Gamecenter = null;
+	this.Gamecenter.AnnounceList = new Array();
+	this.Gamecenter.PostponeList = new Array();
+	this.Gamecenter.MatchOfferList = new Array();
+	this.Gamecenter.TorneyList = null;
+	this.Gamecenter.CurrentGamesList = new Array();
 
 	/************************ ADMINCENTER DATA************************/
 	this.Admincenter = null;
@@ -309,18 +317,21 @@ DATA.prototype.SetChallengeSequence = DATA_SetChallengeSequence;
 DATA.prototype.GetChallengeSequence = DATA_GetChallengeSequence;
 
 /*POSTPONE METHODS ********************************/
+/*
 DATA.prototype.AddPostpone = DATA_AddPostpone;
 DATA.prototype.RemovePostpone = DATA_RemovePostpone;
 DATA.prototype.FindPostpone = DATA_FindPostpone;
 DATA.prototype.GetPostpone = DATA_GetPostpone;
 DATA.prototype.GetPostponeList = DATA_GetPostponeList;
-
+*/
 /*ANNOUNCE METHODS ********************************/
+/*
 DATA.prototype.AddAnnounce = DATA_AddAnnounce;
 DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
 DATA.prototype.FindAnnounce = DATA_FindAnnounce;
 DATA.prototype.GetAnnounce = DATA_GetAnnounce;
 DATA.prototype.GetAnnounceList = DATA_GetAnnounceList;
+*/
 /*
 DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
 */
@@ -388,6 +399,31 @@ DATA.prototype.SetMyProfile = DATA_SetMyProfile;
 /*GAMECENTER OBJECT METHODS*************************/
 DATA.prototype.SetGamecenter = DATA_SetGamecenter;
 DATA.prototype.GetGamecenter = DATA_GetGamecenter;
+/*GAMECENTER OBJECT POSTPONE METHODS ***************/
+DATA.prototype.AddPostpone = DATA_AddPostpone;
+DATA.prototype.RemovePostpone = DATA_RemovePostpone;
+DATA.prototype.FindPostpone = DATA_FindPostpone;
+DATA.prototype.GetPostpone = DATA_GetPostpone;
+DATA.prototype.GetPostponeList = DATA_GetPostponeList;
+DATA.prototype.SetPostponeStatus = DATA_SetPostponeStatus;
+/*GAMCENTER OBJECT ANNOUNCE METHODS ****************/
+DATA.prototype.AddAnnounce = DATA_AddAnnounce;
+DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
+DATA.prototype.FindAnnounce = DATA_FindAnnounce;
+DATA.prototype.GetAnnounce = DATA_GetAnnounce;
+DATA.prototype.GetAnnounceList = DATA_GetAnnounceList;
+/*GAMECENTER OBJECT CURRENTGAMES METHODS ***************/
+DATA.prototype.AddCurrentGames = DATA_AddCurrentGames;
+DATA.prototype.RemoveCurrentGames = DATA_RemoveCurrentGames;
+DATA.prototype.FindCurrentGames = DATA_FindCurrentGames;
+DATA.prototype.GetCurrentGames = DATA_GetCurrentGames;
+DATA.prototype.GetCurrentGamesList = DATA_GetCurrentGamesList;
+/*GAMECENTER OBJECT MATCHOFFER METHODS ***************/
+DATA.prototype.AddMatchOffer = DATA_AddMatchOffer;
+DATA.prototype.RemoveMatchOffer = DATA_RemoveMatchOffer;
+DATA.prototype.FindMatchOffer = DATA_FindMatchOffer;
+DATA.prototype.GetMatchOffer = DATA_GetMatchOffer;
+DATA.prototype.GetMatchOfferList = DATA_GetMatchOfferList;
 
 /*GAMECENTER OBJECT METHODS*************************/
 DATA.prototype.SetAdmincenter = DATA_SetAdmincenter;
@@ -2652,6 +2688,7 @@ function DATA_GetChallengeSequence()
 /**********************************
  * METHODS - ANNOUNCE CHALLENGES  *
  **********************************/
+/*
 function DATA_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId)
 {
 	// Creating a new object
@@ -2735,7 +2772,7 @@ function DATA_GetAnnounce(AnnounceId)
 		return null;
 	}
 }
-
+*/
 /**
 * @brief		Remove all announce in 'AnnounceList'
 * @author 		Rubens Suguimoto
@@ -2751,11 +2788,12 @@ function DATA_ClearAnnounces()
 	return "";
 }
 */
+/*
 function DATA_GetAnnounceList()
 {
 	return this.Announce.AnnounceList;
 }
-
+*/
 /**********************************
  * METHODS - POSTPONE CHALLENGES  *
  **********************************/
@@ -2769,6 +2807,7 @@ function DATA_GetAnnounceList()
 * @author 		Rubens Suguimoto
 * @return 		Boolean
 */
+/*
 function DATA_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	// Creating a new object
@@ -2801,13 +2840,13 @@ function DATA_AddPostpone(Oponent, Category, Date, PostponeId)
 
 	return true;
 }	
-
 /*
 * @brief		Find a postpone challenge in 'PostponeList'
 * @param		PostponeId	Adjourned game Id 
 * @author 		Rubens Suguimoto
 * @return 		Boolean
 */
+/*
 function DATA_FindPostpone(PostponeId)
 {
 	var i;
@@ -2833,6 +2872,7 @@ function DATA_FindPostpone(PostponeId)
 * @return 		Boolean
 * @see			DATA_FindPostpone
 */
+/*
 function DATA_RemovePostpone(PostponeId)
 {
 	var i;
@@ -2869,6 +2909,7 @@ function DATA_GetPostponeList()
 {
 	return this.Postpone.PostponeList;
 }
+*/
 /**********************************
  * METHODS - GAME                 *
  **********************************/
@@ -3700,12 +3741,437 @@ function DATA_SortSearchUserByName()
  **********************************/
 function DATA_SetGamecenter(Obj)
 {
-	this.Gamecenter = Obj;
+	this.Gamecenter.Gamecenter = Obj;
 }
 
 function DATA_GetGamecenter()
 {
-	return this.Gamecenter;
+	return this.Gamecenter.Gamecenter;
+}
+
+/*********************************************
+ * METHODS - GAMECENTER ANNOUNCE CHALLENGES  *
+ ********************************************/
+function DATA_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId)
+{
+	// Creating a new object
+	var Announce = new Object();
+	var i;
+
+	i = this.FindAnnounce(AnnounceId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Announce.Id = AnnounceId;
+	Announce.Time = Time;
+	Announce.Inc = Inc;
+	Announce.Rating = Rating;
+	Announce.Category = Category;
+	Announce.Player =Player;
+	Announce.Username =Player.Name;
+	Announce.Rated = Rated;
+	Announce.Private = Private;
+
+	this.Gamecenter.AnnounceList.push(Announce);
+
+	return true;
+}
+
+function DATA_RemoveAnnounce(AnnounceId)
+{
+	var i;
+
+	i = this.FindAnnounce(AnnounceId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Gamecenter.AnnounceList.splice(i, 1);
+
+	return "";
+
+}
+
+function DATA_FindAnnounce(AnnounceId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Gamecenter.AnnounceList.length ; i++)
+	{
+		if (this.Gamecenter.AnnounceList[i].Id == AnnounceId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
+}
+
+function DATA_GetAnnounce(AnnounceId)
+{
+	var Pos = this.FindAnnounce(AnnounceId);
+	
+	if(Pos != null)
+	{
+		return this.Gamecenter.AnnounceList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetAnnounceList()
+{
+	return this.Gamecenter.AnnounceList;
+}
+/*********************************************
+ * METHODS - GAMECENTER POSTPONE CHALLENGES  *
+ ********************************************/
+
+/**
+* @brief		Add a challenge in 'PosponeList'
+* @param		Oponent		The oponent
+* @param		Category	Game category
+* @param		Date		Date of adjourned match
+* @param		PostponeId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_AddPostpone(Player, Time, Inc, Category, Rating, Date, Status, PostponeId)
+{
+	// Creating a new object
+	var Postpone = new Object();
+	var i;
+
+	i = this.FindPostpone(PostponeId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Postpone.Id = PostponeId;
+	Postpone.Category = Category;
+	Postpone.Player = Player;
+	Postpone.Time = Time;
+	Postpone.Inc = Inc;
+	Postpone.Date = Date;
+	Postpone.Rating = Rating;
+	Postpone.Status = Status;
+	Postpone.Username = Player.Name;
+
+	Postpone.Window = null;
+
+	this.Gamecenter.PostponeList.push(Postpone);
+
+	return true;
+}	
+/*
+* @brief		Find a postpone challenge in 'PostponeList'
+* @param		PostponeId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_FindPostpone(PostponeId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Gamecenter.PostponeList.length ; i++)
+	{
+		if (this.Gamecenter.PostponeList[i].Id == PostponeId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
+}
+
+/**
+* @brief		Remove a postpone challenge in 'PostponeList'
+* @param		Username	The oponent
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+* @see			DATA_FindPostpone
+*/
+function DATA_RemovePostpone(PostponeId)
+{
+	var i;
+
+	i = this.FindPostpone(PostponeId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Gamecenter.PostponeList.splice(i, 1);
+
+	return "";
+}
+
+function DATA_GetPostpone(PostponeId)
+{
+	var Pos = this.FindPostpone(PostponeId);
+
+	if (Pos != null) 
+	{
+		return this.Gamecenter.PostponeList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetPostponeList()
+{
+	return this.Gamecenter.PostponeList;
+}
+
+function DATA_SetPostponeStatus(PostponeId, Status)
+{
+	//TODO -> ARRUMA PRA MUDAR O STATUS DO JOGADOR!!!
+	var PostponeItem = this.GetPostpone(PostponeId);
+	PostponeItem.Status = Status;
+}
+
+/*********************************************
+ * METHODS - GAMECENTER CURRENTGAMES CHALLENGES  *
+ ********************************************/
+
+/**
+* @brief		Add a current games in 'CurrentGamesList'
+* @param		Oponent		The oponent
+* @param		Category	Game category
+* @param		Date		Date of adjourned match
+* @param		CurrentGameId	Current game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category, Time, Rated, Moves, CurrentGamesId)
+{
+	// Creating a new object
+	var CurrentGames = new Object();
+	var i;
+
+	i = this.FindCurrentGames(CurrentGamesId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	CurrentGames.Id = CurrentGamesId;
+	CurrentGames.Category = Category;
+	CurrentGames.WPlayer = WPlayer;
+	CurrentGames.BPlayer = BPlayer;
+	CurrentGames.Time = Time;
+	CurrentGames.Rated = Rated;
+	CurrentGames.WRating = WRating;
+	CurrentGames.BRating = BRating;
+	CurrentGames.Moves = Moves;
+
+	this.Gamecenter.CurrentGamesList.push(CurrentGames);
+
+	return true;
+}	
+/*
+* @brief		Find a postpone challenge in 'CurrentGamesList'
+* @param		CurrentGamesId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_FindCurrentGames(CurrentGamesId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Gamecenter.CurrentGamesList.length ; i++)
+	{
+		if (this.Gamecenter.CurrentGamesList[i].Id == CurrentGamesId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
+}
+
+/**
+* @brief		Remove a postpone challenge in 'CurrentGamesList'
+* @param		Username	The oponent
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+* @see			DATA_FindCurrentGames
+*/
+function DATA_RemoveCurrentGames(CurrentGamesId)
+{
+	var i;
+
+	i = this.FindCurrentGames(CurrentGamesId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Gamecenter.CurrentGamesList.splice(i, 1);
+
+	return "";
+}
+
+function DATA_GetCurrentGames(CurrentGamesId)
+{
+	var Pos = this.FindCurrentGames(CurrentGamesId);
+
+	if (Pos != null) 
+	{
+		return this.Gamecenter.CurrentGamesList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetCurrentGamesList()
+{
+	return this.Gamecenter.CurrentGamesList;
+}
+/*********************************************
+ * METHODS - GAMECENTER MATCH OFFER          *
+ ********************************************/
+
+/**
+* @brief		Add a offered match in 'MatchOfferList'
+* @param		Oponent		The oponent
+* @param		Category	Game category
+* @param		Date		Date of adjourned match
+* @param		CurrentGameId	Current game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchOfferId)
+{
+	// Creating a new object
+	var MatchOffer = new Object();
+	var i;
+
+	i = this.FindMatchOffer(MatchOfferId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	MatchOffer.Id = MatchOfferId;
+	MatchOffer.Player = Player;
+	MatchOffer.Time = Time;
+	MatchOffer.Inc = Inc;
+	MatchOffer.Category = Category;
+	MatchOffer.Rated = Rated;
+	MatchOffer.Private = Private;
+	MatchOffer.Username = Player.Name;
+
+	this.Gamecenter.MatchOfferList.push(MatchOffer);
+
+	return true;
+}	
+/*
+* @brief		Find a postpone challenge in 'MatchOfferList'
+* @param		MatchOfferId	Adjourned game Id 
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+*/
+function DATA_FindMatchOffer(MatchOfferId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Gamecenter.MatchOfferList.length ; i++)
+	{
+		if (this.Gamecenter.MatchOfferList[i].Id == MatchOfferId)
+		{
+			return i;
+		}
+	}
+
+	// Challenge not found
+	return null;
+	
+}
+
+/**
+* @brief		Remove a postpone challenge in 'MatchOfferList'
+* @param		Username	The oponent
+* @author 		Rubens Suguimoto
+* @return 		Boolean
+* @see			DATA_FindMatchOffer
+*/
+function DATA_RemoveMatchOffer(MatchOfferId)
+{
+	var i;
+
+	i = this.FindMatchOffer(MatchOfferId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Gamecenter.MatchOfferList.splice(i, 1);
+
+	return "";
+}
+
+function DATA_GetMatchOffer(MatchOfferId)
+{
+	var Pos = this.FindMatchOffer(MatchOfferId);
+
+	if (Pos != null) 
+	{
+		return this.Gamecenter.MatchOfferList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+}
+
+function DATA_GetMatchOfferList()
+{
+	return this.Gamecenter.MatchOfferList;
 }
 
 /**********************************

@@ -384,10 +384,12 @@ function ROOM_HandleGameRoomInfoList(XML)
 		if(GameType != "untimed")
 		{
 			GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, Math.floor(PW.Time/60), "false", Moves, GameId);
+			MainData.AddCurrentGames(PW, PWRating, PB, PBRating, GameType, PW.Time, "false", Moves, GameId);
 		}
 		else
 		{
 			GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, "&#8734", "false", Moves, GameId);
+			MainData.AddCurrentGames(PW, PWRating, PB, PBRating, GameType, 0, "false", Moves, GameId);
 		}
 	}
 

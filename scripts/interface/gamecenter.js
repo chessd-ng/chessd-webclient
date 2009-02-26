@@ -127,7 +127,6 @@ function AnnounceObj()
 	this.hide= INTERFACE_HideAnnounceCenter;
 }
 
-
 function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
@@ -332,6 +331,78 @@ function INTERFACE_CreateGameCenterAnnounce()
 
 	// No Announce element
 	var NoAnnounce = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_announce"));
+
+	AnnouncePlayer.onclick = function(){
+		GAMECENTER_AnnounceSortByUsername();
+		AnnouncePlayer.className = "selected";
+		Inc.className = "";
+		Category.className = "";
+		Time.className = "";
+		Rating.className = "";
+		Private.className = "";
+		Rated.className = "";
+	}
+	Inc.onclick = function(){
+		GAMECENTER_AnnounceSortByInc();
+		AnnouncePlayer.className = "";
+		Inc.className = "selected";
+		Category.className = "";
+		Time.className = "";
+		Rating.className = "";
+		Private.className = "";
+		Rated.className = "";
+	}
+	Category.onclick = function(){
+		GAMECENTER_AnnounceSortByCategory();
+		AnnouncePlayer.className = "";
+		Inc.className = "";
+		Category.className = "selected";
+		Time.className = "";
+		Rating.className = "";
+		Private.className = "";
+		Rated.className = "";
+	}
+
+	Time.onclick = function(){
+		GAMECENTER_AnnounceSortByTime();
+		AnnouncePlayer.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Time.className = "selected";
+		Rating.className = "";
+		Private.className = "";
+		Rated.className = "";
+	}
+	Rating.onclick = function(){
+		GAMECENTER_AnnounceSortByRating();
+		AnnouncePlayer.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Time.className = "";
+		Rating.className = "selected";
+		Private.className = "";
+		Rated.className = "";
+	}
+	Rated.onclick = function(){
+		GAMECENTER_AnnounceSortByRated();
+		AnnouncePlayer.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Time.className = "";
+		Rating.className = "";
+		Private.className = "";
+		Rated.className = "selected";
+	}
+	Private.onclick = function(){
+		GAMECENTER_AnnounceSortByPrivate();
+		AnnouncePlayer.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Time.className = "";
+		Rating.className = "";
+		Private.className = "selected";
+		Rated.className = "";
+	}
 
 	AcceptRandom.onclick = function(){
 		ANNOUNCE_AcceptRandomAnnounce();
@@ -597,6 +668,77 @@ function INTERFACE_CreateGameCenterMatch()
 	var NoMatch = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_match"));
 
 	var CancelMatches = UTILS_CreateElement("li",null,null, UTILS_GetText("gamecenter_cancel_matches"));
+
+	MatchPlayer.onclick = function(){
+		GAMECENTER_MatchOfferSortByUsername();
+		MatchPlayer.className = "selected";
+		Time.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Rating.className = "";
+		Rated.className = "";
+		Private.className = "";		
+	}
+	Time.onclick = function(){
+		GAMECENTER_MatchOfferSortByTime();
+		MatchPlayer.className = "";
+		Time.className = "selected";
+		Inc.className = "";
+		Category.className = "";
+		Rating.className = "";
+		Rated.className = "";
+		Private.className = "";		
+	}
+	Inc.onclick = function(){
+		GAMECENTER_MatchOfferSortByInc();
+		MatchPlayer.className = "";
+		Time.className = "";
+		Inc.className = "selected";
+		Category.className = "";
+		Rating.className = "";
+		Rated.className = "";
+		Private.className = "";		
+	}
+	Category.onclick = function(){
+		GAMECENTER_MatchOfferSortByCategory();
+		MatchPlayer.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Category.className = "selected";
+		Rating.className = "";
+		Rated.className = "";
+		Private.className = "";		
+	}
+	Rating.onclick = function(){
+		GAMECENTER_MatchOfferSortByRating();
+		MatchPlayer.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Rating.className = "selected";
+		Rated.className = "";
+		Private.className = "";		
+	}
+	Rated.onclick = function(){
+		GAMECENTER_MatchOfferSortByRated();
+		MatchPlayer.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Rating.className = "";
+		Rated.className = "selected";
+		Private.className = "";		
+	}
+	Private.onclick = function(){
+		GAMECENTER_MatchOfferSortByPrivate();
+		MatchPlayer.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Category.className = "";
+		Rating.className = "";
+		Rated.className = "";
+		Private.className = "selected";		
+	}
 
 	CancelMatches.onclick = function(){
 		CHALLENGE_ClearChallenges();
@@ -875,6 +1017,61 @@ function INTERFACE_CreateGameCenterPostpone()
 	var Date = UTILS_CreateElement("p","date",null,UTILS_GetText("gamecenter_date"));
 
 
+	PostponePlayer.onclick = function(){
+		GAMECENTER_PostponeSortByUsername();
+		PostponePlayer.className = "selected";
+		Rating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Date.className = "";
+	}
+	Rating.onclick = function(){
+		GAMECENTER_PostponeSortByRating();
+		PostponePlayer.className = "";
+		Rating.className = "selected";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Date.className = "";
+	}
+	Category.onclick = function(){
+		GAMECENTER_PostponeSortByCategory();
+		PostponePlayer.className = "";
+		Rating.className = "";
+		Category.className = "selected";
+		Time.className = "";
+		Inc.className = "";
+		Date.className = "";
+	}
+	Time.onclick = function(){
+		GAMECENTER_PostponeSortByTime();
+		PostponePlayer.className = "";
+		Rating.className = "";
+		Category.className = "";
+		Time.className = "selected";
+		Inc.className = "";
+		Date.className = "";
+	}
+	Inc.onclick = function(){
+		GAMECENTER_PostponeSortByInc();
+		PostponePlayer.className = "";
+		Rating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "selected";
+		Date.className = "";
+	}
+	Date.onclick = function(){
+		GAMECENTER_PostponeSortByDate();
+		PostponePlayer.className = "";
+		Rating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Date.className = "selected";
+	}
+
 	// No Postpone element
 	var NoPostpone = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_postpone"));
 
@@ -1138,6 +1335,79 @@ function INTERFACE_CreateGameCenterCurrentGames()
 	
 	// No Announce element
 	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_current_games"));
+
+	WRating.onclick = function (){
+		GAMECENTER_CurrentGamesSortByWRating();
+		WRating.className = "selected";
+		BRating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	WPiece.onclick = function (){
+		GAMECENTER_CurrentGamesSortByWRating();
+		WRating.className = "selected";
+		BRating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	BRating.onclick = function (){
+		GAMECENTER_CurrentGamesSortByBRating();
+		WRating.className = "";
+		BRating.className = "selected";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	BPiece.onclick = function (){
+		GAMECENTER_CurrentGamesSortByBRating();
+		WRating.className = "";
+		BRating.className = "selected";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	Category.onclick = function (){
+		GAMECENTER_CurrentGamesSortByCategory();
+		WRating.className = "";
+		BRating.className = "";
+		Category.className = "selected";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	Time.onclick = function (){
+		GAMECENTER_CurrentGamesSortByTime();
+		WRating.className = "";
+		BRating.className = "";
+		Category.className = "";
+		Time.className = "selected";
+		Moves.className = "";
+		Rated.className = "";
+	}
+	Moves.onclick = function (){
+		GAMECENTER_CurrentGamesSortByMoves();
+		WRating.className = "";
+		BRating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "selected";
+		Rated.className = "";
+	}
+	Rated.onclick = function (){
+		GAMECENTER_CurrentGamesSortByRated();
+		WRating.className = "";
+		BRating.className = "";
+		Category.className = "";
+		Time.className = "";
+		Moves.className = "";
+		Rated.className = "selected";
+	}
 
 	UpdateList.onclick = function(){
 		// Remove all current games

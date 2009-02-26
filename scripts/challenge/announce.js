@@ -66,22 +66,21 @@ function ANNOUNCE_HandleAnnounce(XML)
 			{
 				Category = Announces[i].getAttribute("category");
 				AutoFlag = Announces[i].getAttribute("autoflag");
-				AnnounceId = Announces[i].getAttribute("id");
+				AnnounceId = parseInt(Announces[i].getAttribute("id"));
 				Rated = Announces[i].getAttribute("rated");
-				AnnounceId = Announces[i].getAttribute("id");
 
 				PlayerTag = Announces[i].getElementsByTagName("player")[0];
 				Username = PlayerTag.getAttribute("jid").split("@")[0];
 				Color = PlayerTag.getAttribute("color");
-				Time = PlayerTag.getAttribute("time");
-				Inc = PlayerTag.getAttribute("inc");
+				Time = parseInt(PlayerTag.getAttribute("time"));
+				Inc = parseInt(PlayerTag.getAttribute("inc"));
 
 				if(Color == null)
 				{
 					Color = "";
 				}
 
-				ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId);
+				ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, "false", AnnounceId);
 
 				// Hide loading and no announce message
 				//ANNOUNCE_HideLoadingAnnounce();
@@ -236,7 +235,7 @@ function ANNOUNCE_GetAnnounceGames()
 /*
  * Add a announce in data struct and show in challenge menu
  */
-function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
+function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Private, AnnounceId)
 {
 	var Player = new Object();
 //	var ChallengeMenu = MainData.GetChallengeMenu();
@@ -257,17 +256,17 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autof
 			Rating = 1500;
 		}	
 	
-		MainData.AddAnnounce(Username, Color, Time, Inc, Category, Rated, Autoflag, AnnounceId)
+		MainData.AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId)
 		if(Category != "untimed")
 		{
 			//ChallengeMenu.addAnnounce(Player, Time/60, Inc, Rated, "true", AnnounceId);
-			GameCenter.Announce.add(Player, Rating, Time/60, Inc, Category, Rated, "false", AnnounceId);
+			GameCenter.Announce.add(Player, Rating, Time/60, Inc, Category, Rated, Private, AnnounceId);
 		}
 		else
 		{
 			// Infinit symbol
 			//ChallengeMenu.addAnnounce(Player, "&#8734", Inc, Rated, "true", AnnounceId);
-			GameCenter.Announce.add(Player, Rating, "&#8734", Inc, Category, Rated, "false", AnnounceId);
+			GameCenter.Announce.add(Player, Rating, "&#8734", Inc, Category, Rated, Private, AnnounceId);
 		}
 
 	}
