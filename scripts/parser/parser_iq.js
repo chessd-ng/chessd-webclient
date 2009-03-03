@@ -204,6 +204,11 @@ function PARSER_ParseIq(XML)
 			{
 				Buffer += ROOM_HandleGameRoomInfoError(XML);
 			}
+				else if (Xmlns.match(/\/chessd#admin/))
+			{
+				Buffer += ADMIN_HandleAdminError(XML);
+			}
+
 
 			break;
 		    

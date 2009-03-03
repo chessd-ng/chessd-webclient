@@ -76,7 +76,60 @@ function ADMIN_HandleAdmin(XML)
 			ADMIN_Notification(XML)
 			break;
 		*/
+		case Consts.IQ_ID_AddBannedWords:
+			ADMIN_HandleAddWord(XML)
+			break;
+		case Consts.IQ_ID_RemoveBannedWords:
+			ADMIN_HandleRemoveWord(XML)
+			break;
+		case Consts.IQ_ID_GetBannedWords:
+			ADMIN_HandleBannedWordsList(XML)
+			break;
+	}
+	
+	return Buffer;
+}
 
+/**
+ * @brief	Parser administrative messages errors for admin
+ *
+* Parser messages with administrative commands result errors
+* 
+* @param 	XML 	Xml with the messages
+* @return 	Buffer with other XMPP to send
+* @author 	Rubens Suguimoto
+*/
+function ADMIN_HandleAdminError(XML)
+{
+	var Id = XML.getAttribute("id");
+	var Buffer = "";
+	var Consts = MainData.GetConst();
+
+	switch(Id)
+	{
+		// Show banned user's list
+		case Consts.IQ_ID_GetBanList:
+			ADMIN_HandleBanList(XML);
+			break;
+
+		// Show a window alert with banned user confirmation 
+		/*
+		case Consts.IQ_ID_BanUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
+
+		// Show a window alert with unbanned user confirmation 
+		case Consts.IQ_ID_UnbanUser:
+			ADMIN_Notification(XML)
+			break;
+
+		// Show a window alert with kiked user confirmation 
+		/*
+		case Consts.IQ_ID_KickUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
 		case Consts.IQ_ID_AddBannedWords:
 			ADMIN_HandleAddWord(XML)
 			break;
@@ -162,7 +215,6 @@ function ADMIN_Notification(XML)
 			WINDOW_Alert("Unban",UTILS_GetText("admin_unban_ok"));
 			break;
 	}
-
 	return "";
 }
 
@@ -227,17 +279,58 @@ function ADMIN_HandleBanList(XML)
 
 function ADMIN_HandleAddWord(XML)
 {
+	var Words;
+	var WordTmp;
+	var ACenter = MainData.GetAdmincenter();
+	var IqType;
 	
+	IqType = XML.getAttribute("type");
+
+	if(IqType == "result")
+	{
+		Words = XML.getElementsByTagName("word")[0];
+		WordTmp = Words.getAttribute("word");
+
+		ACenter.Words.add(WordTmp);
+//		MainData.AddWords(WordTmp);
+	}
+	else //if (IqType == "error")
+	{
+		WINDOW_Alert("Error", "Error to add word. Check if chess server is online or word was added before");
+	}
+	
+	return "";
 }
 
 function ADMIN_HandleRemoveWord(XML)
 {
+	var Words;
+	var WordTmp;
+	var ACenter = MainData.GetAdmincenter();
+	var IqType;
+	
+	IqType = XML.getAttribute("type");
 
+	if(IqType == "result")
+	{
+		Words = XML.getElementsByTagName("word")[0];
+		WordTmp = Words.getAttribute("word");
+
+		ACenter.Words.remove(WordTmp);
+//		MainData.RemoveWords(WordTmp);
+	}	
+	else //if (IqType == "error")
+	{
+		WINDOW_Alert("Error", "Error to remove word. Check if chess server is online or word was removed before");
+	}
+
+	return "";
 }
 
 function ADMIN_HandleBannedWordsList(XML)
 {
 	var Words;
+	var WordTmp;
 	var i;	
 	var ACenter = MainData.GetAdmincenter();
 
@@ -245,7 +338,9 @@ function ADMIN_HandleBannedWordsList(XML)
 
 	for(i=0; i<Words.length ; i++)
 	{
-		ACenter.Words.add(Words[i].getAttribute("word"));
+		WordTmp = Words[i].getAttribute("word");
+		ACenter.Words.add(WordTmp);
+		MainData.AddWords(WordTmp);
 	}
 	
 	return "";
