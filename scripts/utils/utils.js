@@ -1287,11 +1287,52 @@ function UTILS_SortRoomByRatingDsc(a, b)
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 */
-
+function UTILS_SortByWUsername(a,b)
+{
+	var x = a.WPlayer.toLowerCase();
+	var y = b.WPlayer.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByBUsername(a,b)
+{
+	var x = a.BPlayer.toLowerCase();
+	var y = b.BPlayer.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
 function UTILS_SortByCategory(a,b)
 {
 	var x = a.Category.toLowerCase();
 	var y = b.Category.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByPunish(a,b)
+{
+	var x = a.Punish.toLowerCase();
+	var y = b.Punish.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByIncident(a,b)
+{
+	var x = a.Incident.toLowerCase();
+	var y = b.Incident.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByReason(a,b)
+{
+	var x = a.Reason.toLowerCase();
+	var y = b.Reason.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByPeriod(a,b)
+{
+	var x = a.Period.toLowerCase();
+	var y = b.Period.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByLevel(a,b)
+{
+	var x = a.Level.toLowerCase();
+	var y = b.Level.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
 function UTILS_SortByDate(a,b)

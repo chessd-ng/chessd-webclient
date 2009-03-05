@@ -272,6 +272,7 @@ function ADMIN_HandleBanList(XML)
 		Reason = UTILS_GetNodeText(Users[i]);
 	
 		ACenter.Punish.add(Username, "---","---","---","---",Reason);
+		MainData.AddPunish(Username, "---","---","---","---",Reason);
 	}
 
 	return Buffer;
@@ -292,7 +293,7 @@ function ADMIN_HandleAddWord(XML)
 		WordTmp = Words.getAttribute("word");
 
 		ACenter.Words.add(WordTmp);
-//		MainData.AddWords(WordTmp);
+		MainData.AddWords(WordTmp);
 	}
 	else //if (IqType == "error")
 	{
@@ -317,7 +318,7 @@ function ADMIN_HandleRemoveWord(XML)
 		WordTmp = Words.getAttribute("word");
 
 		ACenter.Words.remove(WordTmp);
-//		MainData.RemoveWords(WordTmp);
+		MainData.RemoveWords(WordTmp);
 	}	
 	else //if (IqType == "error")
 	{
@@ -533,5 +534,337 @@ function ADMINCENTER_ClearPunishList()
 	{
 		Punish = AdminCenterObj.Punish.PunishList[i].Id;
 		AdminCenterObj.Punish.remove(Punish);
+	}
+}
+/////////////////////////////
+function ADMINCENTER_PunishSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+}
+function ADMINCENTER_PunishSortByPunish()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByPunish;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+}
+function ADMINCENTER_PunishSortByIncident()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByIncident;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByDate()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByDate;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByPeriod()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByPeriod;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByReason()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByReason;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+/////////////////////////////////////
+function ADMINCENTER_AdminLevelSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdminLevelList = MainData.GetAdminLevelList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var AdminLevelItem;
+
+	AdminLevelList.sort(SortMethod);
+
+	for(i=0; i<AdminLevelList.length; i++)
+	{
+		AdminLevelItem = AdminLevelList[i];
+		AdminCenterObj.AdminLevel.remove(AdminLevelItem.Id);
+
+		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
+	}
+}
+function ADMINCENTER_AdminLevelSortByLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdminLevelList = MainData.GetAdminLevelList();
+	var SortMethod = UTILS_SortByLevel;
+	var i;
+	var AdminLevelItem;
+
+	AdminLevelList.sort(SortMethod);
+
+	for(i=0; i<AdminLevelList.length; i++)
+	{
+		AdminLevelItem = AdminLevelList[i];
+		AdminCenterObj.AdminLevel.remove(AdminLevelItem.Id);
+
+		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
+	}
+}
+//////////////////////////////////////
+function ADMINCENTER_LevelSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var LevelList = MainData.GetLevelList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var LevelItem;
+
+	LevelList.sort(SortMethod);
+
+	for(i=0; i<LevelList.length; i++)
+	{
+		LevelItem = LevelList[i];
+		AdminCenterObj.Level.remove(LevelItem.Id);
+
+		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
+	}
+}
+function ADMINCENTER_LevelSortByLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var LevelList = MainData.GetLevelList();
+	var SortMethod = UTILS_SortByLevel;
+	var i;
+	var LevelItem;
+
+	LevelList.sort(SortMethod);
+
+	for(i=0; i<LevelList.length; i++)
+	{
+		LevelItem = LevelList[i];
+		AdminCenterObj.Level.remove(LevelItem.Id);
+
+		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
+	}
+}
+//////////////////////////////////////////
+function ADMINCENTER_AdjournSortByWRating()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByWRatingValue;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByBRating()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByBRatingValue;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByWUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByWUsername;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByBUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByBUsername;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByCategory()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByCategory;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByTime()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByTime;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByInc()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByInc;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByRated()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByRated;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }

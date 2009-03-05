@@ -127,6 +127,11 @@ td, li{
 	float		: left;
 }
 
+#CenterPunish #CenterAdminResult li p.selected
+{
+	color		: #ffa200;
+}
+
 #CenterPunish #CenterAdminResult li #player
 {
 	width		: 80px;
@@ -168,9 +173,10 @@ td, li{
 
 }
 
-#CenterPunish #CenterAdminResult li.header
+#CenterPunish #CenterAdminResult li.header p
 {
 	font-weight	: bold;
+	cursor		: pointer;
 }
 
 #CenterPunish #CenterAdminResult #ListResult
@@ -212,6 +218,12 @@ td, li{
 	float		: left;
 }
 
+#CenterAdminLevel #CenterAdminResult li p.selected,
+#CenterLevel #CenterAdminResult li p.selected
+{
+	color		: #ffa200;
+}
+
 #CenterAdminLevel #CenterAdminResult li #player,
 #CenterLevel #CenterAdminResult li #player
 {
@@ -234,10 +246,11 @@ td, li{
 
 }
 
-#CenterAdminLevel #CenterAdminResult li.header,
-#CenterLevel #CenterAdminResult li.header
+#CenterAdminLevel #CenterAdminResult li.header p,
+#CenterLevel #CenterAdminResult li.header p
 {
 	font-weight	: bold;
+	cursor		: pointer;
 }
 
 #CenterAdminLevel #CenterAdminResult #ListResult,
@@ -293,6 +306,12 @@ td, li{
 {
 	float		: left;
 }
+
+#CenterAdjourn #CenterAdminResult li p.selected
+{
+	color		: #ffa200;
+}
+
 #CenterAdjourn #CenterAdminResult li img
 {
 	float		: left;
@@ -354,9 +373,11 @@ td, li{
 	width		: 70px;
 }
 
-#CenterAdjourn #CenterAdminResult li.header
+#CenterAdjourn #CenterAdminResult li.header p,
+#CenterAdjourn #CenterAdminResult li.header img
 {
 	font-weight	: bold;
+	cursor		: pointer;
 }
 #CenterAdjourn #CenterAdminResult li.header #category
 {
@@ -393,7 +414,6 @@ td, li{
 	border-style	: solid;
 	border-color	: #ffa200;
 }
-
 
 #CenterAdjourn #CenterAdminResult #ListResult li #player
 {

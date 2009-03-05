@@ -356,6 +356,65 @@ function INTERFACE_CreateAdminCenterPunish()
 	var Reason = UTILS_CreateElement("p","reason",null,UTILS_GetText("admincenter_reason"));
 
 
+	PunishedPlayer.onclick = function(){
+		PunishedPlayer.className = "selected";
+		Punish.className = "";
+		Inc.className = "";
+		Date.className = "";
+		Period.className = "";
+		Reason.className = "";
+		ADMINCENTER_PunishSortByUsername();
+	}
+
+	Punish.onclick = function(){
+		PunishedPlayer.className = "";
+		Punish.className = "selected";
+		Inc.className = "";
+		Date.className = "";
+		Period.className = "";
+		Reason.className = "";
+		ADMINCENTER_PunishSortByPunish();
+	}
+	Inc.onclick = function(){
+		PunishedPlayer.className = "";
+		Punish.className = "";
+		Inc.className = "selected";
+		Date.className = "";
+		Period.className = "";
+		Reason.className = "";
+		ADMINCENTER_PunishSortByIncident();
+
+	}
+	Date.onclick = function(){
+		PunishedPlayer.className = "";
+		Punish.className = "";
+		Inc.className = "";
+		Date.className = "selected";
+		Period.className = "";
+		Reason.className = "";
+
+		ADMINCENTER_PunishSortByDate();
+	}
+	Period.onclick = function(){
+		PunishedPlayer.className = "";
+		Punish.className = "";
+		Inc.className = "";
+		Date.className = "";
+		Period.className = "selected";
+		Reason.className = "";
+
+		ADMINCENTER_PunishSortByPeriod();
+	}
+	Reason.onclick = function(){
+		PunishedPlayer.className = "";
+		Punish.className = "";
+		Inc.className = "";
+		Date.className = "";
+		Period.className = "";
+		Reason.className = "selected";
+		ADMINCENTER_PunishSortByReason();
+	}
+
 	// No Punish element
 	var NoPunish = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_punish"));
 	
@@ -522,6 +581,16 @@ function INTERFACE_CreateAdminCenterAdminLevel()
 	// No AdminLevel element
 	var NoAdminLevel = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adminlevel"));
 	
+	Player.onclick = function(){
+		Player.className = "selected";
+		AdminLevel.className = "";
+		ADMINCENTER_AdminLevelSortByUsername();
+	}
+	AdminLevel.onclick = function(){
+		Player.className = "";
+		AdminLevel.className = "selected";
+		ADMINCENTER_AdminLevelSortByLevel();
+	}
 
 	ListResultHeader.appendChild(Player);
 	ListResultHeader.appendChild(AdminLevel);
@@ -680,6 +749,16 @@ function INTERFACE_CreateAdminCenterLevel()
 	// No Level element
 	var NoLevel = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_level"));
 	
+	Player.onclick = function(){
+		Player.className = "selected";
+		Level.className = "";
+		ADMINCENTER_LevelSortByUsername();
+	}
+	Level.onclick = function(){
+		Player.className = "";
+		Level.className = "selected";
+		ADMINCENTER_LevelSortByLevel();
+	}
 
 	ListResultHeader.appendChild(Player);
 	ListResultHeader.appendChild(Level);
@@ -874,6 +953,95 @@ function INTERFACE_CreateAdminCenterAdjourn()
 
 //	var Action = UTILS_CreateElement("p","action",null,"Observar");
 
+
+	WRating.onclick = function(){
+		WRating.className = "selected";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByWRating();
+	}
+	BRating.onclick = function(){
+		WRating.className = "";
+		BRating.className = "selected";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Time.className = "";
+		Inc.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByBRating();
+	}
+	WPiece.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "selected";
+		Time.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Inc.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortWUsername();
+	}
+	BPiece.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "selected";
+		Time.className = "";
+		Category.className = "";
+		Inc.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByBUsername();
+	}
+	Category.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "selected";
+		Time.className = "";
+		Inc.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByCategory();
+	}
+	Inc.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Inc.className = "selected";
+		Time.className = "";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByInc();
+	}
+	Time.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Inc.className = "";
+		Time.className = "selected";
+		Rated.className = "";
+		ADMINCENTER_AdjournSortByTime();
+	}
+	Rated.onclick = function(){
+		WRating.className = "";
+		BRating.className = "";
+		WPiece.className = "";
+		BPiece.className = "";
+		Category.className = "";
+		Inc.className = "";
+		Time.className = "";
+		Rated.className = "selected";
+		ADMINCENTER_AdjournSortByRated();
+	}
 
 	// No Announce element
 	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adjourn"));

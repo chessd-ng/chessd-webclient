@@ -163,7 +163,13 @@ function DATA(ConfFile, LangFile)
 	this.Gamecenter.CurrentGamesList = new Array();
 
 	/************************ ADMINCENTER DATA************************/
-	this.Admincenter = null;
+	this.Admincenter = new Object();
+	this.Admincenter.Admincenter = null;
+	this.Admincenter.PunishList = new Array();
+	this.Admincenter.LevelList = new Array();
+	this.Admincenter.AdminLevelList = new Array();
+	this.Admincenter.AdjournList = new Array();
+	this.Admincenter.WordsList = new Array();
 }
 
 // Adding methods
@@ -425,9 +431,41 @@ DATA.prototype.FindMatchOffer = DATA_FindMatchOffer;
 DATA.prototype.GetMatchOffer = DATA_GetMatchOffer;
 DATA.prototype.GetMatchOfferList = DATA_GetMatchOfferList;
 
-/*GAMECENTER OBJECT METHODS*************************/
+
+
+/*ADMINCENTER OBJECT METHODS*************************/
 DATA.prototype.SetAdmincenter = DATA_SetAdmincenter;
 DATA.prototype.GetAdmincenter = DATA_GetAdmincenter;
+/*ADMINCENTER OBJECT PUNISH LIST METHODS****************/
+DATA.prototype.AddPunish = DATA_AddPunish;
+DATA.prototype.RemovePunish = DATA_RemovePunish;
+DATA.prototype.FindPunish = DATA_FindPunish;
+DATA.prototype.GetPunish = DATA_GetPunish;
+DATA.prototype.GetPunishList = DATA_GetPunishList;
+/*ADMINCENTER OBJECT LEVEL LIST METHODS****************/
+DATA.prototype.AddLevel = DATA_AddLevel;
+DATA.prototype.RemoveLevel = DATA_RemoveLevel;
+DATA.prototype.FindLevel = DATA_FindLevel;
+DATA.prototype.GetLevel = DATA_GetLevel;
+DATA.prototype.GetLevelList = DATA_GetLevelList;
+/*ADMINCENTER OBJECT ADMIN LEVEL LIST METHODS****************/
+DATA.prototype.AddAdminLevel = DATA_AddAdminLevel;
+DATA.prototype.RemoveAdminLevel = DATA_RemoveAdminLevel;
+DATA.prototype.FindAdminLevel = DATA_FindAdminLevel;
+DATA.prototype.GetAdminLevel = DATA_GetAdminLevel;
+DATA.prototype.GetAdminLevelList = DATA_GetAdminLevelList;
+/*ADMINCENTER OBJECT ADJOURN LIST METHODS****************/
+DATA.prototype.AddAdjourn = DATA_AddAdjourn;
+DATA.prototype.RemoveAdjourn = DATA_RemoveAdjourn;
+DATA.prototype.FindAdjourn = DATA_FindAdjourn;
+DATA.prototype.GetAdjourn = DATA_GetAdjourn;
+DATA.prototype.GetAdjournList = DATA_GetAdjournList;
+/*ADMINCENTER OBJECT WORDS LIST METHODS****************/
+DATA.prototype.AddWords = DATA_AddWords;
+DATA.prototype.RemoveWords = DATA_RemoveWords;
+DATA.prototype.FindWords = DATA_FindWords;
+DATA.prototype.GetWords = DATA_GetWords;
+DATA.prototype.GetWordsList = DATA_GetWordsList;
 
 /**********************************
  * METHODS - HTTP REQUEST         *
@@ -4179,10 +4217,416 @@ function DATA_GetMatchOfferList()
  **********************************/
 function DATA_SetAdmincenter(Obj)
 {
-	this.Admincenter = Obj;
+	this.Admincenter.Admincenter = Obj;
 }
 
 function DATA_GetAdmincenter()
 {
-	return this.Admincenter;
+	return this.Admincenter.Admincenter;
+}
+/*********************************************
+ * METHODS - GAMECENTER PUNISH LIST          *
+ ********************************************/
+function DATA_AddPunish(Name, Punish, Incident, Date, Period, Reason)
+{
+	// Creating a new object
+	var PunishObj = new Object();
+	var i;
+
+	i = this.FindPunish(Name);
+	
+	// Punish item already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	PunishObj.Id = Name;
+	PunishObj.Username = Name;
+	PunishObj.Punish = Punish;
+	PunishObj.Incident = Incident;
+	PunishObj.Date = Date;
+	PunishObj.Period = Period;
+	PunishObj.Reason = Reason;
+
+	this.Admincenter.PunishList.push(PunishObj);
+
+	return true;
+
+}
+function DATA_RemovePunish(PunishId)
+{
+	var i;
+
+	i = this.FindPunish(PunishId);
+
+	// No punish with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove punish from list
+	this.Admincenter.PunishList.splice(i, 1);
+
+	return "";
+
+}
+function DATA_FindPunish(PunishId)
+{
+	var i;
+
+	//find punish item by punish id
+	for (i=0 ; i < this.Admincenter.PunishList.length ; i++)
+	{
+		if (this.Admincenter.PunishList[i].Id == PunishId)
+		{
+			return i;
+		}
+	}
+
+	// not founded
+	return null;
+	
+}
+function DATA_GetPunish(PunishId)
+{
+	var Pos = this.FindPunish(PunishId);
+
+	if (Pos != null) 
+	{
+		return this.Admincenter.PunishList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+
+}
+function DATA_GetPunishList()
+{
+	return this.Admincenter.PunishList;
+}
+/*ADMINCENTER OBJECT LEVEL LIST METHODS****************/
+function DATA_AddLevel(Name, Level)
+{
+	// Creating a new object
+	var Punish = new Object();
+	var i;
+	var LevelId = Name;
+
+	i = this.FindLevel(LevelId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Level.Id = LevelId;
+	Level.Username = Name;
+	Level.Level = Level;
+
+	this.Admincenter.LevelList.push(Level);
+
+	return true;
+
+}
+function DATA_RemoveLevel(LevelId)
+{
+	var i;
+
+	i = this.FindLevel(LevelId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Admincenter.LevelList.splice(i, 1);
+
+	return "";
+
+
+}
+function DATA_FindLevel(LevelId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Admincenter.LevelList.length ; i++)
+	{
+		if (this.Admincenter.LevelList[i].Id == LevelId)
+		{
+			return i;
+		}
+	}
+
+	// not founded
+	return null;
+
+}
+function DATA_GetLevel(LevelId)
+{
+	var Pos = this.FindLevel(LevelId);
+
+	if (Pos != null) 
+	{
+		return this.Admincenter.LevelList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+
+}
+function DATA_GetLevelList()
+{
+	return this.Admincenter.LevelList;
+}
+/*ADMINCENTER OBJECT ADMIN LEVEL LIST METHODS****************/
+function DATA_AddAdminLevel(Name, Level)
+{
+	// Creating a new object
+	var AdminLvl = new Object();
+	var i;
+	var AdminLevelId = Name;
+	
+	i = this.FindAdminLevel(AdminLevelId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	AdminLevel.Id = AdminLevelId;
+	AdminLevel.Username = Name;
+	AdminLevel.Level = Level;
+
+	this.Admincenter.AdminLevelList.push(AdminLevel);
+
+	return true;
+
+
+}
+function DATA_RemoveAdminLevel(AdminLevelId)
+{
+	var i;
+
+	i = this.FindAdminLevel(AdminLevelId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Admincenter.AdminLevelList.splice(i, 1);
+
+	return "";
+
+
+}
+function DATA_FindAdminLevel(AdminLevelId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Admincenter.AdminLevelList.length ; i++)
+	{
+		if (this.Admincenter.AdminLevelList[i].Id == AdminLevelId)
+		{
+			return i;
+		}
+	}
+
+	// not founded
+	return null;
+
+}
+function DATA_GetAdminLevel(AdminLevelId)
+{
+	var Pos = this.FindAdminLevel(AdminLevelId);
+
+	if (Pos != null) 
+	{
+		return this.Admincenter.AdminLevelList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+
+}
+function DATA_GetAdminLevelList()
+{
+	return this.Admincenter.AdminLevelList;
+}
+/*ADMINCENTER OBJECT ADJOURN LIST METHODS****************/
+function DATA_AddAdjourn(WName, WRating, BName, BRating, Category, GameTime, Inc, Rated, AdjournId)
+{
+	// Creating a new object
+	var Adjourn = new Object();
+	var i;
+
+	i = this.FindAdjourn(AdjournId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Adjourn.Id = AdjournId;
+	Adjourn.WName = WName;
+	Adjourn.BName = BName;
+	Adjourn.WRating = WRating;
+	Adjourn.BRating = BRating;
+	Adjourn.Time = GameTime;
+	Adjourn.Inc = Inc;
+	Adjourn.Category = Category;
+	Adjourn.Rated = Rated;
+
+	this.Admincenter.AdjournList.push(Adjourn);
+
+	return true;
+
+
+}
+function DATA_RemoveAdjourn(AdjournId)
+{
+	var i;
+
+	i = this.FindAdjourn(AdjournId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Admincenter.AdjournList.splice(i, 1);
+
+	return "";
+}
+function DATA_FindAdjourn(AdjournId)
+{
+	var i;
+
+	// If match id exists, find by match id
+	for (i=0 ; i < this.Admincenter.AdjournList.length ; i++)
+	{
+		if (this.Admincenter.AdjournList[i].Id == AdjournId)
+		{
+			return i;
+		}
+	}
+
+	// Not found
+	return null;
+
+}
+function DATA_GetAdjourn(AdjournId)
+{
+	var Pos = this.FindAdjourn(AdjournId);
+
+	if (Pos != null) 
+	{
+		return this.Admincenter.AdjournList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+
+}
+function DATA_GetAdjournList()
+{
+	return this.Admincenter.AdjournList;
+}
+/*ADMINCENTER OBJECT WORDS LIST METHODS****************/
+function DATA_AddWords(WordString)
+{
+	// Creating a new object
+	var Word = new Object();
+	var i;
+	var WordId = WordString;
+
+	i = this.FindWords(WordId);
+	
+	// Challenge already exist on structure
+	if (i != null)
+	{
+		return null;
+	}
+
+	// Setting atributes
+	Word.Id = WordId;
+	Word.Word = WordString;
+
+	this.Admincenter.WordsList.push(Word);
+
+	return true;
+
+
+}
+function DATA_RemoveWords(WordId)
+{
+	var i;
+
+	i = this.FindWords(WordId);
+
+	// No postpone challenge with id founded
+	if (i == null)
+	{
+		return null;
+	}
+
+	// Remove challenge from list
+	this.Admincenter.WordsList.splice(i, 1);
+
+	return "";
+}
+function DATA_FindWords(WordId)
+{
+	var i;
+	// find word by word id
+	for (i=0 ; i < this.Admincenter.WordsList.length ; i++)
+	{
+		if (this.Admincenter.WordsList[i].Id == WordId)
+		{
+			return i;
+		}
+	}
+
+	// Not found
+	return null;
+
+}
+function DATA_GetWords(WordId)
+{
+	var Pos = this.FindWords(WordId);
+
+	if (Pos != null) 
+	{
+		return this.Admincenter.WordsList[Pos];
+	}
+	else
+	{
+		return null;
+	}
+
+}
+function DATA_GetWordsList()
+{
+	return this.Admincenter.WordsList;
 }
