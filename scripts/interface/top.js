@@ -21,106 +21,67 @@
 
 function INTERFACE_CreateTop()
 {
-	var MainDiv, Logo, MenuDiv, IconsList, MenuList, Item, ItemTitle;
+	var MainDiv, Logo, MenuDiv, MenuList, Item, ItemTitle;
 	var Pos;
 	var ExitText;
+	var Admin, Room, Pref, Game, Help;
 
 	MainDiv = UTILS_CreateElement("div", "Top");
 	Logo = UTILS_CreateElement("h1", null, null, UTILS_GetText("general_name"));
 	MenuDiv = UTILS_CreateElement("div", "TopMenu");
-	IconsList = UTILS_CreateElement("ul", null, "icons");
 	MenuList = UTILS_CreateElement("ul", null, "menu");
 
 	// Append icons to list
 	// Admin tools
 	// Create a invisible button, and show icon after get user's type;
-	Item = UTILS_CreateElement("li", "admin_icon", "null", null);
-	IconsList.appendChild(Item);
+	Admin = UTILS_CreateElement("li", "admin_icon", "null", null);
 
-	// Search game
-	ItemTitle = UTILS_GetText("menu_search_game")
-	Item = UTILS_CreateElement("li", null, "search_game");
-	Item.title = ItemTitle;
-	UTILS_AddListener(Item,"click",function() { OLDGAME_OpenOldGameWindow(); }, "false");
-	IconsList.appendChild(Item);
-	
-	// Search user
-	ItemTitle = UTILS_GetText("menu_search_user")
-	Item = UTILS_CreateElement("li", null, "search_user");
-	Item.title = ItemTitle;
-	UTILS_AddListener(Item,"click",function() { WINDOW_SearchUser(); }, "false");
-	IconsList.appendChild(Item);
-
-	// Preferences
-	ItemTitle = UTILS_GetText("menu_preferences")
-	Item = UTILS_CreateElement("li", null, "preferences");
-	Item.title = ItemTitle;
-
-	Item.onclick = function () {
-		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
-	}
-
-	IconsList.appendChild(Item);
-
-	// Help
-	ItemTitle = UTILS_GetText("menu_help")
-	Item = UTILS_CreateElement("li", null, "help");
-	Item.title = ItemTitle;
-
-	UTILS_AddListener(Item,"click",function() { WINDOW_Help(); }, "false");
-/*	Item.onclick = function () {
-		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
-	} 
-*/
-	IconsList.appendChild(Item);
-
-	// Exit
-	ItemTitle = UTILS_GetText("menu_exit");
-	Item = UTILS_CreateElement("li", "ExitButton", "exit");
-	ExitText = UTILS_CreateElement("span","ExitText", null, ItemTitle);
-	Item.onclick = function () { 
-		LOGIN_Logout();
-	}
-	Item.title = ItemTitle;
-	Item.appendChild(ExitText);
-	IconsList.appendChild(Item);
-
-	// Appending itens to menu
-	// Current games
-	Item = UTILS_CreateElement("li", null, "currentGames", UTILS_GetText("menu_current_games"));
-	Item.onclick = function () {
-		Pos = UTILS_GetOffset(this);
-		ROOM_ShowGameRoomList(Pos.X);
-	}
-	MenuList.appendChild(Item);
-	
-	// Challenges
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_challenges"));
-	MenuList.appendChild(Item);
-		Item.onclick = function () {
-		Pos = UTILS_GetOffset(this);
-		//CHALLENGE_ShowChallengeMenu(Pos.X, Pos.Y);
-	        CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
-	}
-
-	MenuList.appendChild(Item);
-	// Tourneys
-	Item = UTILS_CreateElement("li", null, null, UTILS_GetText("menu_tourneys"));
-	Item.onclick = function () {
-		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
-	}
-
-	MenuList.appendChild(Item);
-	
 	// Rooms
-	Item = UTILS_CreateElement("li", null, "rooms", UTILS_GetText("menu_rooms"));
-	Item.onclick = function () {
+	Room = UTILS_CreateElement("li", null, "rooms", UTILS_GetText("menu_rooms"));
+	Room.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowRoomList(Pos.X);
 	}
-	MenuList.appendChild(Item);
+
+	// Search game
+	ItemTitle = UTILS_GetText("menu_search_game")
+	Game = UTILS_CreateElement("li", null, "search_game",ItemTitle);
+	UTILS_AddListener(Game,"click",function() { OLDGAME_OpenOldGameWindow(); }, "false");
+
+	// Preferences
+	ItemTitle = UTILS_GetText("menu_preferences")
+	Pref = UTILS_CreateElement("li", null, "preferences",ItemTitle);
+
+	Pref.onclick = function () {
+		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
+	}
+
+	// Help
+	ItemTitle = UTILS_GetText("menu_help")
+	Help = UTILS_CreateElement("li", null, "help",ItemTitle);
+	//Item.title = ItemTitle;
+
+	UTILS_AddListener(Help,"click",function() { WINDOW_Help(); }, "false");
+
+	// Exit
+	ItemTitle = UTILS_GetText("menu_exit");
+	Exit = UTILS_CreateElement("li", "ExitButton", "exit");
+	ExitText = UTILS_CreateElement("p","ExitText", null, ItemTitle);
+	Exit.onclick = function () { 
+		LOGIN_Logout();
+	}
+	Exit.appendChild(ExitText);
+
+	MenuList.appendChild(Exit);
+	MenuList.appendChild(Help);
+	MenuList.appendChild(Pref);
+	MenuList.appendChild(Game);
+	MenuList.appendChild(Room);
+	MenuList.appendChild(Admin);
+
+
 	
-	MenuDiv.appendChild(IconsList);
+//	MenuDiv.appendChild(IconsList);
 	MenuDiv.appendChild(MenuList);
 	MainDiv.appendChild(Logo);
 	MainDiv.appendChild(MenuDiv);
@@ -275,9 +236,8 @@ function INTERFACE_ShowAdminIcon()
 	if(Item != null)
 	{
 		ItemTitle = UTILS_GetText("menu_adjourn")
-		Item.title = ItemTitle;
-		Item.className = "adjourn_game";
-		Item.id = "";
+		Item.innerHTML = ItemTitle;
+		Item.className = "admin";
 		UTILS_AddListener(Item,"click",function() { WINDOW_CreateAdminCenter(); }, "false");
 	}
 }
