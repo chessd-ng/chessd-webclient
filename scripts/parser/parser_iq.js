@@ -55,12 +55,13 @@ function PARSER_ParseIq(XML)
 			else if (Xmlns.match(/disco#items/))
 			{
 				Buffer += ROOM_HandleRoomList(XML);
+				Buffer += CURRENTGAME_HandleGameRoomList(XML);
 			}
 
 			// Receive room info -> used to running games
 			else if (Xmlns.match(/disco#info/))
 			{
-				Buffer += ROOM_HandleGameRoomInfoList(XML);
+				Buffer += CURRENTGAME_HandleGameRoomInfoList(XML);
 			}
 
 			// Receive information of user list
@@ -202,7 +203,7 @@ function PARSER_ParseIq(XML)
 			// Receive room info -> used to running games
 			else if (Xmlns.match(/disco#info/))
 			{
-				Buffer += ROOM_HandleGameRoomInfoError(XML);
+				Buffer += CURRENTGAME_HandleGameRoomInfoError(XML);
 			}
 				else if (Xmlns.match(/\/chessd#admin/))
 			{
