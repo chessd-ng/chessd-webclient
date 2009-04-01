@@ -96,6 +96,7 @@ function LOAD_LoadFiles()
 	Files.push("css/Help.css");
 	Files.push("css/GameCenter.css");
 	Files.push("css/Tourney.css");
+	Files.push("css/AdminCenter.css");
 
 	if(MainData.GetBrowser() == 0) //IE
 	{
@@ -149,6 +150,8 @@ function LOAD_LoadFiles()
 	Files.push("scripts/gamecenter/gamecenter.js");
 	Files.push("scripts/tourney/tourney.js");
 	Files.push("scripts/interface/tourney.js");
+	Files.push("scripts/interface/admincenter.js");
+	Files.push("scripts/game/currentgame.js");
 
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);

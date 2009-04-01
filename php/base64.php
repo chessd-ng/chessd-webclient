@@ -125,7 +125,7 @@ class Image{
 	}
 	
 	private function readNewImage(){
-		$type = $image["type"];
+		$type = $this->type;
 		//Open temporary file
 		$fd = fopen($this->image.".png", "rb");
 		$convert=fread($fd, $this->size);
@@ -150,11 +150,11 @@ class Image{
 				}
 			}else{
 				$this->result = 2;
-				$this->error="Error: Invalid file size ".$image['size'];
+				$this->error="Error: Invalid file size ".$this->size;
 			}
 		}else{
 			$this->result = 3;
-			$this->error="Error: Invalid file type ".$image['type'];
+			$this->error="Error: Invalid file type ".$this->type;
 		}
 	}
 

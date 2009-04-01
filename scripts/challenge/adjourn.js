@@ -104,13 +104,6 @@ function CHALLENGE_HandleAdjourn(XML)
 
 			if(Player1.Name == MyUsername)
 			{
-				// Add in main data postpone list
-				MainData.AddPostpone(Player2, Category, Date, AdjournId);
-
-				// Add in challenge menu
-				//ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
-				GameCenter.Postpone.add(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, AdjournId);
-
 				// Get oponent status
 				User = MainData.GetUser(Player2.Name);
 				if(User != null)
@@ -122,17 +115,18 @@ function CHALLENGE_HandleAdjourn(XML)
 					Status = "offline";
 				}				
 
+				// Add in main data postpone list
+				MainData.AddPostpone(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, Status, AdjournId);
+
+				// Add in challenge menu
+				//ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				GameCenter.Postpone.add(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, AdjournId);
+
+
 				CHALLENGE_PostponePresence(Player2.Name, Status);
 			}
 			else
 			{
-				// Add in main data postpone list
-				MainData.AddPostpone(Player1, Category, Date, AdjournId);
-
-				// Add in challenge menu
-				//ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
-				GameCenter.Postpone.add(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, AdjournId);
-
 				// Get oponent status
 				User = MainData.GetUser(Player1.Name);
 				if(User != null)
@@ -143,6 +137,14 @@ function CHALLENGE_HandleAdjourn(XML)
 				{
 					Status = "offline";
 				}				
+
+				// Add in main data postpone list
+				MainData.AddPostpone(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, Status, AdjournId);
+
+				// Add in challenge menu
+				//ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				GameCenter.Postpone.add(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, AdjournId);
+
 				CHALLENGE_PostponePresence(Player1.Name, Status);
 			}
 		}
@@ -183,6 +185,8 @@ function CHALLENGE_HandlePresence(XML)
 	{
 		Status = "available";
 	}
+
+	MainData.SetPostponeStatus(Username, Status);
 	
 	CHALLENGE_PostponePresence(Username, Status);
 

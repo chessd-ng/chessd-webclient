@@ -59,6 +59,15 @@
 		<window_character>
 			Character(s): %s
 		</window_character>
+		<window_from>
+			undefined_text
+		</window_from>
+		<window_to>
+			undefined_text
+		</window_to>
+		<window_min>
+			undefined_text
+		</window_min>
 	</window>
 	<login>
 		<login_title>
@@ -1249,5 +1258,171 @@
 			Error when try to observe match
 		</gamecenter_game_not_found_title>
 	</gamecenter>
+	<tourney>
+		<tourney_create>
+			Create tourney
+		</tourney_create>
+		<tourney_name>
+			Tourney's name
+		</tourney_name>
+		<tourney_category>
+			Category:
+		</tourney_category>
+		<tourney_rounds>
+			Number of rounds:
+		</tourney_rounds>
+		<tourney_auto>
+			Automatic
+		</tourney_auto>
+		<tourney_define>
+			Define:
+		</tourney_define>
+		<tourney_init>
+			Initial date:
+		</tourney_init>
+		<tourney_day>
+			Data:
+		</tourney_day>
+		<tourney_hour>
+			Hour:
+		</tourney_hour>
+		<tourney_day_format>
+			(dd/mm/yyyy)
+		</tourney_day_format>
+		<tourney_hour_format>
+			(hh:mm)
+		</tourney_hour_format>
+		<tourney_see_advanced>
+			See advanced options
+		</tourney_see_advanced>
+		<tourney_hide_advanced>
+			Hide advanced options
+		</tourney_hide_advanced>
+		<tourney_description>
+			Description:
+		</tourney_description>
+		<tourney_subscribe>
+			Maximun number of players:
+		</tourney_subscribe>
+		<tourney_rating_interval>
+			Rating interval:
+		</tourney_rating_interval>
+		<tourney_restrict>
+			Restrict access:
+		</tourney_restrict>
+		<tourney_passwd>
+			Password:
+		</tourney_passwd>
+		<tourney_delay>
+			Delay tolerance:
+		</tourney_delay>
+		<tourney_submit_period>
+			Subscribe period:
+		</tourney_submit_period>
+		<tourney_sequenced_rounds>
+			Sequenced rounds:
+		</tourney_sequenced_rounds>
+		<tourney_add_round>
+			Add round
+		</tourney_add_round>
+	</tourney>
+	<admincenter>
+		<admincenter_punish_button>
+			Punished Users
+		</admincenter_punish_button>
+		<admincenter_level_button>
+				Player Level
+		</admincenter_level_button>
+		<admincenter_adminlevel_button>
+			Admin Level
+		</admincenter_adminlevel_button>
+		<admincenter_adjourn_button>
+			Adjourn Matches
+		</admincenter_adjourn_button>
+		<admincenter_words_button>
+			Banned Words
+		</admincenter_words_button>
+		<admincenter_acquit>
+			Acquit
+		</admincenter_acquit>
+		<admincenter_name>
+			Name
+		</admincenter_name>
+		<admincenter_punish>
+			Punishment
+		</admincenter_punish>
+		<admincenter_incident>
+			Indent
+		</admincenter_incident>
+		<admincenter_date>
+			Date
+		</admincenter_date>
+		<admincenter_period>
+			Period
+		</admincenter_period>
+		<admincenter_reason>
+			Reason
+		</admincenter_reason>
+		<admincenter_no_punish>
+			There are no punished users
+		</admincenter_no_punish>
+		<admincenter_edit>
+			Edit
+		</admincenter_edit>
+		<admincenter_adminlevel>
+			Administration Level
+		</admincenter_adminlevel>
+		<admincenter_no_adminlevel>
+			There are no users with administration level
+		</admincenter_no_adminlevel>
+		<admincenter_level>
+			Player Level
+		</admincenter_level>
+		<admincenter_no_level>
+			There are no players with some level
+		</admincenter_no_level>
+		<admincenter_observer>
+			Observe
+		</admincenter_observer>
+		<admincenter_rated>
+			Rated
+		</admincenter_rated>
+		<admincenter_not_rated>
+			Not rated
+		</admincenter_not_rated>
+		<admincenter_time>
+			Time
+		</admincenter_time>
+		<admincenter_increment>
+			Inc.
+		</admincenter_increment>
+		<admincenter_rated_header>
+			Rated
+		</admincenter_rated_header>
+		<admincenter_category>
+			Category
+		</admincenter_category>
+		<admincenter_rating>
+			Rating
+		</admincenter_rating>
+		<admincenter_no_adjourn>
+			There are no adjourned match
+		</admincenter_no_adjourn>
+		<admincenter_word>
+			Word:
+		</admincenter_word>
+		<admincenter_add_word>
+			Add Word
+		</admincenter_add_word>
+		<admincenter_remove_word>
+			Remove
+		</admincenter_remove_word>
+		<admincenter_banned_words>
+			Banned words in chat
+		</admincenter_banned_words>
+		<admincenter_no_banned_words>
+			There are no banned words
+		</admincenter_no_banned_words>
+	</admincenter>
 </language>
 

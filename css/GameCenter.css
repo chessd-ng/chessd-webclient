@@ -243,6 +243,16 @@
 
 }
 
+#CenterAnnounce #CenterResult li.header p
+{
+	cursor		: pointer;
+}
+
+#CenterAnnounce #CenterResult li.header p.selected
+{
+	color		: #FFA200;
+}
+
 #CenterAnnounce #CenterResult li.header
 {
 	font-weight	: bold;
@@ -524,6 +534,16 @@
 	margin		: 0px 10px;
 }
 
+#CenterMatch #CenterResult li.header p
+{
+	cursor		: pointer;
+}
+
+#CenterMatch #CenterResult li.header p.selected
+{
+	color		: #FFA200;
+}
+
 #CenterMatch #CenterResult #ListResult
 {
 	height		: 225px;
@@ -718,6 +738,16 @@
 	margin		: 0px 10px;
 }
 
+#CenterPostpone #CenterResult li.header p
+{
+	cursor		: pointer;
+}
+
+#CenterPostpone #CenterResult li.header p.selected
+{
+	color		: #FFA200;
+}
+
 #CenterPostpone #CenterResult #ListResult
 {
 	height		: 225px;
@@ -848,6 +878,16 @@
 #CenterCurrentGames #CenterResult li.disable
 {
 	color		: #999;
+}
+
+#CenterCurrentGames #CenterResult li.header p
+{
+	cursor		: pointer;
+}
+
+#CenterCurrentGames #CenterResult li.header p.selected
+{
+	color		: #FFA200;
 }
 
 #CenterCurrentGames #CenterResult #ListResult

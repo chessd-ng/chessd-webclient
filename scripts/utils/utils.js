@@ -413,6 +413,31 @@ function UTILS_ShortString(Word, NumChars)
 	return ShortWord;
 }
 
+function UTILS_BannedWords(Str)
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var i,j;
+	var StrResult = Str;
+	var Tmp, Word;
+	var Expr;
+	
+	for(i=0; i<AdminCenterObj.Words.WordsList.length; i++)
+	{
+		Tmp = "";
+		Word = AdminCenterObj.Words.WordsList[i].Id;
+
+		for(j=0; j<Word.length; j++)
+		{
+			Tmp += "*";
+		}
+
+		Expr = new RegExp("\\b"+Word+"\\b","gi");
+		StrResult = StrResult.replace(Expr, Tmp);
+	}
+
+	return StrResult;
+}
+
 /**********************************
  * FUNCTIONS - EVENT LISTENERS
  ************************************/
@@ -1262,6 +1287,109 @@ function UTILS_SortRoomByRatingDsc(a, b)
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 */
+function UTILS_SortByWUsername(a,b)
+{
+	var x = a.WPlayer.toLowerCase();
+	var y = b.WPlayer.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByBUsername(a,b)
+{
+	var x = a.BPlayer.toLowerCase();
+	var y = b.BPlayer.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByCategory(a,b)
+{
+	var x = a.Category.toLowerCase();
+	var y = b.Category.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByPunish(a,b)
+{
+	var x = a.Punish.toLowerCase();
+	var y = b.Punish.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByIncident(a,b)
+{
+	var x = a.Incident.toLowerCase();
+	var y = b.Incident.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByReason(a,b)
+{
+	var x = a.Reason.toLowerCase();
+	var y = b.Reason.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByPeriod(a,b)
+{
+	var x = a.Period.toLowerCase();
+	var y = b.Period.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByLevel(a,b)
+{
+	var x = a.Level.toLowerCase();
+	var y = b.Level.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByDate(a,b)
+{
+	var x = a.Date.toLowerCase();
+	var y = b.Date.toLowerCase();
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByRatingValue(a,b)
+{
+	var x = parseInt(a.Rating);
+	var y = parseInt(b.Rating);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByTime(a,b)
+{
+	var x = parseInt(a.Time);
+	var y = parseInt(b.Time);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByInc(a,b)
+{
+	var x = parseInt(a.Inc);
+	var y = parseInt(b.Inc);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByMoves(a,b)
+{
+	var x = parseInt(a.Moves);
+	var y = parseInt(b.Moves);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByRated(a,b)
+{
+	var x = a.Rated;
+	var y = b.Rated;
+	return ((x != y) ? -1 : ((x == y) ? 1 : 0));
+}
+function UTILS_SortByPrivate(a,b)
+{
+	var x = a.Private;
+	var y = b.Private;
+	return ((x != y) ? -1 : ((x == y) ? 1 : 0));
+}
+function UTILS_SortByWRatingValue(a,b)
+{
+	var x = parseInt(a.WRating);
+	var y = parseInt(b.WRating);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+function UTILS_SortByBRatingValue(a,b)
+{
+	var x = parseInt(a.BRating);
+	var y = parseInt(b.BRating);
+	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+}
+
 /************************************
  * FUNCTIONS - BROWSER LANGUAGE     *
  ************************************/

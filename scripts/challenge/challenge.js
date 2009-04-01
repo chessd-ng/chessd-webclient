@@ -231,6 +231,7 @@ function CHALLENGE_HandleOffer(XML)
 				// Remove offer from challenge menu
 				//ChallengeMenu.removeMatch(MatchID);
 				GameCenter.MatchOffer.remove(MatchID);
+				MainData.RemoveMatchOffer(MatchID);
 			}
 
 			User = MainData.GetUser(Player2.Name);
@@ -266,6 +267,7 @@ function CHALLENGE_HandleOffer(XML)
 				// Remove offer from challenge menu
 				//ChallengeMenu.removeMatch(MatchID);
 				GameCenter.MatchOffer.remove(MatchID);
+				MainData.RemoveMatchOffer(MatchID);
 			}
 
 			User = MainData.GetUser(Player1.Name);
@@ -309,12 +311,14 @@ function CHALLENGE_HandleOffer(XML)
 		{
 			//ChallengeMenu.addMatch(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 			GameCenter.MatchOffer.add(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			MainData.AddMatchOffer(ChallengedPlayer, ChallengedPlayer.Time, ChallengedPlayer.Inc, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 		else
 		{
 			// Put a infinit symbol
 			//ChallengeMenu.addMatch(ChallengedPlayer, "&#8734", ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 			GameCenter.MatchOffer.add(ChallengedPlayer, "&#8734",0, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			MainData.AddMatchOffer(ChallengedPlayer, "&#8734",0, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 	}
 
@@ -351,6 +355,7 @@ function CHALLENGE_HandleAccept (XML)
 	// Remove this match from challenge list
 	// and game center
 	MainData.RemoveChallenge(MatchID, MatchID);
+	MainData.RemoveMatchOfer(MatchID);
 	GameCenter.MatchOffer.remove(MatchID);
 
 	// Get the game room name
@@ -413,6 +418,7 @@ function CHALLENGE_HandleDecline (XML)
 
 		// Remove from challenge menu
 		//ChallengeMenu.removeMatch(MatchID);
+		MainData.RemoveMatchOffer(MatchID);
 		GameCenter.MatchOffer.remove(MatchID);
 
 		// TODO -> ?

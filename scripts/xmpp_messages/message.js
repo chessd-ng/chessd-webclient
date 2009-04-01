@@ -909,12 +909,52 @@ function MESSAGE_GetBanList()
 	var Consts = MainData.GetConst();
 
 	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBanList+"'>"
-	XMPP += "<banned-list xmlns='http://c3sl.ufpr.br/chessd#admin'/>"
+	XMPP += "<banned-list xmlns='"+MainData.GetXmlns()+"/chessd#admin'/>"
 	XMPP += "</iq>"
 
 	return XMPP;
 }
 
+
+function MESSAGE_GetBannedWords()
+{
+	var XMPP = "";
+	var Consts = MainData.GetConst();
+
+
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBannedWords+"'>";
+	XMPP += "<banned-words-list xmlns='"+MainData.GetXmlns()+"/chessd#admin'/>";
+	XMPP += "</iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_AddBannedWord(Word)
+{
+	var XMPP = "";
+	var Consts = MainData.GetConst();
+	
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_AddBannedWords+"'>";
+	XMPP += "<ban-word xmlns='"+MainData.GetXmlns()+"/chessd#admin'>";
+	XMPP += "<word word='"+Word+"' />";
+	XMPP += "</ban-word>";
+	XMPP += "</iq>";
+
+	return XMPP;
+}
+
+function MESSAGE_RemoveBannedWord(Word)
+{
+	var XMPP = "";
+	var Consts = MainData.GetConst();
+	
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_RemoveBannedWords+"'>";
+	XMPP += "<unban-word xmlns='"+MainData.GetXmlns()+"/chessd#admin'>";
+	XMPP += "<word word='"+Word+"'/>";
+	XMPP += "</unban-word></iq>";
+
+	return XMPP;
+}
 
 /**********************************
  * MESSAGES - PROFILE - vCard

@@ -76,6 +76,69 @@ function ADMIN_HandleAdmin(XML)
 			ADMIN_Notification(XML)
 			break;
 		*/
+		case Consts.IQ_ID_AddBannedWords:
+			ADMIN_HandleAddWord(XML)
+			break;
+		case Consts.IQ_ID_RemoveBannedWords:
+			ADMIN_HandleRemoveWord(XML)
+			break;
+		case Consts.IQ_ID_GetBannedWords:
+			ADMIN_HandleBannedWordsList(XML)
+			break;
+	}
+	
+	return Buffer;
+}
+
+/**
+ * @brief	Parser administrative messages errors for admin
+ *
+* Parser messages with administrative commands result errors
+* 
+* @param 	XML 	Xml with the messages
+* @return 	Buffer with other XMPP to send
+* @author 	Rubens Suguimoto
+*/
+function ADMIN_HandleAdminError(XML)
+{
+	var Id = XML.getAttribute("id");
+	var Buffer = "";
+	var Consts = MainData.GetConst();
+
+	switch(Id)
+	{
+		// Show banned user's list
+		case Consts.IQ_ID_GetBanList:
+			ADMIN_HandleBanList(XML);
+			break;
+
+		// Show a window alert with banned user confirmation 
+		/*
+		case Consts.IQ_ID_BanUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
+
+		// Show a window alert with unbanned user confirmation 
+		case Consts.IQ_ID_UnbanUser:
+			ADMIN_Notification(XML)
+			break;
+
+		// Show a window alert with kiked user confirmation 
+		/*
+		case Consts.IQ_ID_KickUser:
+			ADMIN_Notification(XML)
+			break;
+		*/
+		case Consts.IQ_ID_AddBannedWords:
+			ADMIN_HandleAddWord(XML)
+			break;
+		case Consts.IQ_ID_RemoveBannedWords:
+			ADMIN_HandleRemoveWord(XML)
+			break;
+		case Consts.IQ_ID_GetBannedWords:
+			ADMIN_HandleBannedWordsList(XML)
+			break;
 	}
 	
 	return Buffer;
@@ -152,7 +215,6 @@ function ADMIN_Notification(XML)
 			WINDOW_Alert("Unban",UTILS_GetText("admin_unban_ok"));
 			break;
 	}
-
 	return "";
 }
 
@@ -199,16 +261,92 @@ function ADMIN_HandleBanList(XML)
 	var i;
 	var Username;
 	var Buffer = "";
+	var ACenter = MainData.GetAdmincenter();
+	var Reason;
 
 	//Get all users in the message and show;
 	for(i=0;i<Users.length;i++)
 	{
 		Username = Users[i].getAttribute("jid").split("@")[0];
-		INTERFACE_AddBannedUser(Username);
+		//INTERFACE_AddBannedUser(Username);
+		Reason = UTILS_GetNodeText(Users[i]);
+	
+		ACenter.Punish.add(Username, "---","---","---","---",Reason);
+		MainData.AddPunish(Username, "---","---","---","---",Reason);
 	}
 
 	return Buffer;
 }
+
+function ADMIN_HandleAddWord(XML)
+{
+	var Words;
+	var WordTmp;
+	var ACenter = MainData.GetAdmincenter();
+	var IqType;
+	
+	IqType = XML.getAttribute("type");
+
+	if(IqType == "result")
+	{
+		Words = XML.getElementsByTagName("word")[0];
+		WordTmp = Words.getAttribute("word");
+
+		ACenter.Words.add(WordTmp);
+		MainData.AddWords(WordTmp);
+	}
+	else //if (IqType == "error")
+	{
+		WINDOW_Alert("Error", "Error to add word. Check if chess server is online or word was added before");
+	}
+	
+	return "";
+}
+
+function ADMIN_HandleRemoveWord(XML)
+{
+	var Words;
+	var WordTmp;
+	var ACenter = MainData.GetAdmincenter();
+	var IqType;
+	
+	IqType = XML.getAttribute("type");
+
+	if(IqType == "result")
+	{
+		Words = XML.getElementsByTagName("word")[0];
+		WordTmp = Words.getAttribute("word");
+
+		ACenter.Words.remove(WordTmp);
+		MainData.RemoveWords(WordTmp);
+	}	
+	else //if (IqType == "error")
+	{
+		WINDOW_Alert("Error", "Error to remove word. Check if chess server is online or word was removed before");
+	}
+
+	return "";
+}
+
+function ADMIN_HandleBannedWordsList(XML)
+{
+	var Words;
+	var WordTmp;
+	var i;	
+	var ACenter = MainData.GetAdmincenter();
+
+	Words = XML.getElementsByTagName("word");
+
+	for(i=0; i<Words.length ; i++)
+	{
+		WordTmp = Words[i].getAttribute("word");
+		ACenter.Words.add(WordTmp);
+		MainData.AddWords(WordTmp);
+	}
+	
+	return "";
+}
+
 
 /************************
  * ADMIN - MESSAGES
@@ -277,4 +415,456 @@ function ADMIN_GetBanList()
 	CONNECTION_SendJabber(MESSAGE_GetBanList());
 	
 	return "";
+}
+
+function ADMIN_BanWord(Word)
+{
+	CONNECTION_SendJabber(MESSAGE_AddBannedWord(Word));
+
+	return "";
+}
+
+function ADMIN_RemoveBannedWord(Word)
+{
+	CONNECTION_SendJabber(MESSAGE_RemoveBannedWord(Word));
+
+	return "";
+}
+
+function ADMIN_GetBannedWords()
+{
+	CONNECTION_SendJabber(MESSAGE_GetBannedWords());
+
+	return "";
+}
+
+function ADMINCENTER_StartAdminCenter()
+{
+	var ACenterObj = new AdminCenterObj();
+	
+	MainData.SetAdmincenter(ACenterObj);
+
+	//Get banned words list
+	ADMIN_GetBannedWords();
+}
+
+function ADMINCENTER_ShowPunish()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Punish)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Punish.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Punish;
+	}
+}
+
+function ADMINCENTER_ShowAdminLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.AdminLevel)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.AdminLevel.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.AdminLevel;
+	}
+}
+
+function ADMINCENTER_ShowLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Level)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Level.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Level;
+	}
+}
+
+function ADMINCENTER_ShowAdjourn()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Adjourn)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Adjourn.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Adjourn;
+	}
+}
+
+function ADMINCENTER_ShowWords()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+
+	if (AdminCenterObj.CurrentDiv != AdminCenterObj.Words)
+	{
+		AdminCenterObj.CurrentDiv.hide();
+		AdminCenterObj.Words.show(AdminCenterObj.AdminCenterDiv);
+
+		AdminCenterObj.CurrentDiv = AdminCenterObj.Words;
+	}
+}
+
+function ADMINCENTER_ClearBannedWordsList()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var Word;
+	
+	for(i=AdminCenterObj.Words.WordsList.length-1; i>=0; i--)
+	{
+		Word = AdminCenterObj.Words.WordsList[i].Id;
+		AdminCenterObj.Words.remove(Word);
+	}
+}
+
+function ADMINCENTER_ClearPunishList()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var Punish;
+	
+	for(i=AdminCenterObj.Punish.PunishList.length-1; i>=0; i--)
+	{
+		Punish = AdminCenterObj.Punish.PunishList[i].Id;
+		AdminCenterObj.Punish.remove(Punish);
+	}
+}
+/////////////////////////////
+function ADMINCENTER_PunishSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+}
+function ADMINCENTER_PunishSortByPunish()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByPunish;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+}
+function ADMINCENTER_PunishSortByIncident()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByIncident;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByDate()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByDate;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByPeriod()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByPeriod;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+function ADMINCENTER_PunishSortByReason()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var PunishList = MainData.GetPunishList();
+	var SortMethod = UTILS_SortByReason;
+	var i;
+	var PunishItem;
+
+	PunishList.sort(SortMethod);
+
+	for(i=0; i<PunishList.length; i++)
+	{
+		PunishItem = PunishList[i];
+		AdminCenterObj.Punish.remove(PunishItem.Id);
+
+		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
+	}
+
+}
+/////////////////////////////////////
+function ADMINCENTER_AdminLevelSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdminLevelList = MainData.GetAdminLevelList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var AdminLevelItem;
+
+	AdminLevelList.sort(SortMethod);
+
+	for(i=0; i<AdminLevelList.length; i++)
+	{
+		AdminLevelItem = AdminLevelList[i];
+		AdminCenterObj.AdminLevel.remove(AdminLevelItem.Id);
+
+		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
+	}
+}
+function ADMINCENTER_AdminLevelSortByLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdminLevelList = MainData.GetAdminLevelList();
+	var SortMethod = UTILS_SortByLevel;
+	var i;
+	var AdminLevelItem;
+
+	AdminLevelList.sort(SortMethod);
+
+	for(i=0; i<AdminLevelList.length; i++)
+	{
+		AdminLevelItem = AdminLevelList[i];
+		AdminCenterObj.AdminLevel.remove(AdminLevelItem.Id);
+
+		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
+	}
+}
+//////////////////////////////////////
+function ADMINCENTER_LevelSortByUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var LevelList = MainData.GetLevelList();
+	var SortMethod = UTILS_SortByUsernameAsc;
+	var i;
+	var LevelItem;
+
+	LevelList.sort(SortMethod);
+
+	for(i=0; i<LevelList.length; i++)
+	{
+		LevelItem = LevelList[i];
+		AdminCenterObj.Level.remove(LevelItem.Id);
+
+		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
+	}
+}
+function ADMINCENTER_LevelSortByLevel()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var LevelList = MainData.GetLevelList();
+	var SortMethod = UTILS_SortByLevel;
+	var i;
+	var LevelItem;
+
+	LevelList.sort(SortMethod);
+
+	for(i=0; i<LevelList.length; i++)
+	{
+		LevelItem = LevelList[i];
+		AdminCenterObj.Level.remove(LevelItem.Id);
+
+		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
+	}
+}
+//////////////////////////////////////////
+function ADMINCENTER_AdjournSortByWRating()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByWRatingValue;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByBRating()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByBRatingValue;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByWUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByWUsername;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByBUsername()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByBUsername;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByCategory()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByCategory;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByTime()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByTime;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByInc()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByInc;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
+}
+function ADMINCENTER_AdjournSortByRated()
+{
+	var AdminCenterObj = MainData.GetAdmincenter();
+	var AdjournList = MainData.GetAdjournList();
+	var SortMethod = UTILS_SortByRated;
+	var i;
+	var AdjournItem;
+
+	AdjournList.sort(SortMethod);
+
+	for(i=0; i<AdjournList.length; i++)
+	{
+		AdjournItem = AdjournList[i];
+		AdminCenterObj.Adjourn.remove(AdjournItem.Id);
+
+		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
+	}
 }
