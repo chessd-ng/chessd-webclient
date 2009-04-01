@@ -713,11 +713,13 @@ function WINDOW_CreateTourney()
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowCreateTourneyWindow();
 	var Title;
+	var Elements;
 
 	Title = UTILS_GetText('tourney_create');
 
 	// Create New Window
 	var WindowObj = WINDOW_NewWindow(400, Div.Div, Div.Buttons, Title);
+	Elements = Div.Elements;
 
 	// Close Button (X)
 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); }, false);
@@ -727,4 +729,6 @@ function WINDOW_CreateTourney()
 
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+
+	return Elements;
 }

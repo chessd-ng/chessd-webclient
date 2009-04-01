@@ -147,6 +147,7 @@ function LOAD_LoadFiles()
 	Files.push("scripts/contact/user.js");
 	Files.push("scripts/interface/gamecenter.js");
 	Files.push("scripts/gamecenter/gamecenter.js");
+	Files.push("scripts/tourney/tourney.js");
 	Files.push("scripts/interface/tourney.js");
 
 	NumFiles = Files.length;

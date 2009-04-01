@@ -1272,7 +1272,7 @@
 			Categoria:
 		</tourney_category>
 		<tourney_rounds>
-			Número de rodadas:
+			Número de rodadas automáticas
 		</tourney_rounds>
 		<tourney_auto>
 			Automático
@@ -1323,10 +1323,13 @@
 			Período de inscrição: 
 		</tourney_submit_period>
 		<tourney_sequenced_rounds>
-			Rodadas sequenciais:
+			Rodadas sequenciais
 		</tourney_sequenced_rounds>
 		<tourney_add_round>
-			Adicionar rodada
+			Adicionar
 		</tourney_add_round>
+		<tourney_remove_round>
+			Remover
+		</tourney_remove_round>
 	</tourney>
 </language>

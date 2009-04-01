@@ -1,47 +1,49 @@
 /*#CreateTourneyDiv*/
+
+/* CSS CreateTourneyDiv */
+/* ID */
 #CreateTourneyDiv {
 	padding : 15px;
 }
 
-#CreateTourneyDiv p {
-	font-weight : bold;
-}
-
 #CreateTourneyDiv #DefaultDiv #TNameDiv #TNameLeftDiv  {
 	float : left;
-	width : 120px;
-}
-
-#CreateTourneyDiv p {
-	font-weight : bold;
-	margin-top : 0px;
-	font-size : 11px;
-	color : #216678;
-}
-
-#CreateTourneyDiv span {
-	font-size : 10px;
-	color : #216678;
-}
-
-#CreateTourneyDiv .italic {
-	font-style : italic;
+	width : 125px;
 }
 
 #CreateTourneyDiv #CatTimeDiv,
-#CreateTourneyDiv #RoundDiv,
-#CreateTourneyDiv #DateInitDiv {
+#CreateTourneyDiv #RoundDiv {
 	padding-top : 5px;
+}
+
+#CreateTourneyDiv #DateInitDiv {
+	padding-top : 10px;
+}
+
+#CreateTourneyDiv #DefaultDiv #TNameDiv {
+	height : 30px;
+}
+
+#CreateTourneyDiv #CatTimeDiv {
+	height : 20px;
+}
+
+#CreateTourneyDiv #RoundDiv {
+	height : 25px;
+}
+
+#CreateTourneyDiv #RoundButtonDiv {
+	height : 20px;
+	text-align : center;
+}
+
+#CreateTourneyDiv #DefaultDiv #SequencedRoundDiv {
+	height : 110px;
 }
 
 #CreateTourneyDiv #AdvancedDiv,
 #CreateTourneyDiv #AdvancedDiv #SequencedRoundInput {
 	padding-top : 10px;
-}
-
-#CreateTourneyDiv #DefaultDiv #TNameDiv #TNameRightDiv input {
-	width : 240px;
-	margin-bottom : 2px;
 }
 
 #CreateTourneyDiv #TNameDiv #TNameRightDiv,
@@ -80,31 +82,25 @@
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateLeftDiv,
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateRightDiv,
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourLeftDiv,
-#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourRightDiv,
-#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv,
-#CreateTourneyDiv #RoundDiv #RoundLeftDiv {
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourRightDiv {
 	float: left;
 }
 
 #CreateTourneyDiv #CatTimeDiv #CatLeftDiv {
-width : 70px;
+	width : 75px;
 }
 
 #CreateTourneyDiv #CatTimeDiv #CatRightDiv {
-width : 110px;
+	width : 95px;
 }
 
 #CreateTourneyDiv #CatTimeDiv #TimeLeftDiv {
-width : 120px;
-}
-
-#CreateTourneyDiv #RoundDiv #RoundLeftDiv {
-width : 135px;
+	width : 125px;
 }
 
 #CreateTourneyDiv #DateInitDiv {
 	display : block;
-	height : 20px;
+	height : 30px;
 }
 
 #CreateTourneyDiv #DateInitDiv #DateRightDiv,
@@ -121,7 +117,7 @@ width : 135px;
 }
 
 #CreateTourneyDiv #DateInitDiv #HourDiv {
-	padding-left : 235px;
+	padding-left : 263px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv {
@@ -134,12 +130,11 @@ width : 135px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #DescDiv {
-	height : 65px;
+	height : 95px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #SubscribeDiv {
 	height : 25px;
-	padding-top : 30px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv,
@@ -168,14 +163,8 @@ width : 135px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundHourDiv #RoundHourRightDiv,
-#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateRightDiv,
-#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv {
+#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #RoundDateDiv #RoundDateRightDiv {
 	padding-left : 4px;
-}
-
-#CreateTourneyDiv #AdvancedDiv #AddRoundDiv #AddRoundButtonDiv .button{
-	width : 105px;
-	bottom : 0px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPFromRightDiv,
@@ -188,12 +177,64 @@ width : 135px;
 	padding-left : 15px;
 }
 
-#CreateTourneyDiv .help  {
-	padding-right : 10px;
+#CreateTourneyDiv #SequencedRoundTableDiv  {
+	height : 70px;
+	border: 1px solid #216678;
+	width : 365px;
 }
 
 #CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SPToDiv {
 	padding-top : 15px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv {
+	font-size : 12px;
+	color: #216678;
+	height : 75px;
+	margin-top : 2px;
+}
+
+#CreateTourneyDiv #ButtonsDiv {
+	position: relative;
+	padding-top : 20px;
+	text-align : center;
+}
+
+#CreateTourneyDiv #DateInitDiv #DateRightInputDiv,
+#CreateTourneyDiv #DateInitDiv #HourRightInputDiv {
+	background-color : #FFF;
+}
+
+#CreateTourneyDiv #DateInitDiv #DateRightInputDiv,
+#CreateTourneyDiv #DateInitDiv #HourRightInputDiv,
+#CreateTourneyDiv #AdvancedDiv #SPFromDateInputDiv,
+#CreateTourneyDiv #AdvancedDiv #SPFromHourInputDiv,
+#CreateTourneyDiv #AdvancedDiv #SPToDateInputDiv,
+#CreateTourneyDiv #AdvancedDiv #SPToHourInputDiv {
+	border : 1px solid #FFA200;
+	padding : 2px;
+}
+
+/* Class */
+#CreateTourneyDiv .italic {
+	font-style : italic;
+	margin-left : 5px;
+}
+
+#CreateTourneyDiv .checkbox {
+	margin-right : 5px;
+}
+
+#CreateTourneyDiv #DefaultDiv #RoundButtonDiv .button {
+	bottom : 0px;
+}
+
+#CreateTourneyDiv #DefaultDiv #RoundButtonDiv .button_disabled {
+	bottom : 0px;
+}
+
+#CreateTourneyDiv .help  {
+	padding-left : 5px;
 }
 
 #CreateTourneyDiv .counter  {
@@ -224,21 +265,42 @@ width : 135px;
 	background-color : #C0C0C0;
 }
 
-#CreateTourneyDiv input, 
-#CreateTourneyDiv textarea, 
-#CreateTourneyDiv select {
-	border-color : #FFA200;
+#CreateTourneyDiv #SequencedRoundTableDiv thead .th_disable,
+#CreateTourneyDiv #SequencedRoundTableDiv tbody td.disable {
+	color: #C0C0C0;
 }
 
-#CreateTourneyDiv input, 
-#CreateTourneyDiv input.enabled  {
-	background-color : #FFF;
+#CreateTourneyDiv #SequencedRoundTableDiv thead .th_enable,
+#CreateTourneyDiv #SequencedRoundTableDiv tbody td.enable {
+	color: #216778;
 }
 
-#CreateTourneyDiv #ButtonsDiv {
-	position: relative;
-	padding-top : 10px;
-	text-align : center;
+#CreateTourneyDiv #DateInitDiv input.no_board,
+#CreateTourneyDiv #SequencedRoundTableDiv input.no_board_dis {
+	border : 0px;
+	color : #C0C0C0;
+	font-size : 11px;
+}
+
+#CreateTourneyDiv #DateInitDiv input.no_board,
+#CreateTourneyDiv #SequencedRoundTableDiv input.no_board_en {
+	border : 0px;
+	color : #216778;
+	font-size : 11px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv span.disable {
+	color : #C0C0C0;
+	font-size : 11px;
+	font-weight :	bold;
+	padding-right : 4px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv span.enable {
+	color : #216778;
+	font-size : 11px;
+	font-weight :	bold;
+	padding-right : 4px;
 }
 
 #CreateTourneyDiv #ButtonsDiv .button {
@@ -246,16 +308,169 @@ width : 135px;
 	bottom : 0px;
 }
 
+#CreateTourneyDiv .min_disabled {
+	margin-top : 0px;
+	font-size : 11px;
+	color : #D0D0D0;
+	padding : 0px 0px 0px 4px;
+}
+
+#CreateTourneyDiv .min_enabled {
+	margin-top : 0px;
+	font-size : 11px;
+	color : #216678;
+	padding : 0px 0px 0px 4px;
+}
+
 #CreateTourneyDiv .advopt_disabled {
 	font-weight : bold;
 	margin-top : 0px;
 	font-size : 11px;
 	color : #D0D0D0;
+	vertical-align : top;
 }
 
 #CreateTourneyDiv .advopt_enabled {
+	vertical-align : top;
 	font-weight : bold;
 	margin-top : 0px;
 	font-size : 11px;
 	color : #216678;
+}
+
+#CreateTourneyDiv .space {
+	padding-right : 4px;
+	font-weight : bold;
+}
+
+#CreateTourneyDiv .colon {
+	font-weight : bold;
+	padding-right : 4px;
+	font-size : 11px
+}
+
+#CreateTourneyDiv .select_enabled {
+	background-color : #FFF;
+	width : 45px;
+}
+
+#CreateTourneyDiv .select_disabled {
+	background-color : #C0C0C0;
+	width : 45px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv thead td.cb_cell,
+#CreateTourneyDiv #SequencedRoundTableDiv tbody td.cb_cell {
+	width : 30px;
+}
+
+#CreateTourneyDiv hr.invisible {
+	display : block;
+	color : #C0C0C0;
+	background-color : #C0C0C0;
+}
+
+#CreateTourneyDiv hr.visible {
+	display : block;
+	color : #FFA200;
+	background-color : #FFA200;
+}
+
+#CreateTourneyDiv input.enabled  {
+	background-color : #FFF;
+}
+
+/* Tag */
+#CreateTourneyDiv p {
+	font-weight : bold;
+	margin-top : 0px;
+	font-size : 11px;
+	color : #216678;
+}
+
+#CreateTourneyDiv span {
+	font-size : 10px;
+	color : #216678;
+}
+
+#CreateTourneyDiv #DefaultDiv #TNameDiv #TNameRightDiv input {
+	width : 240px;
+	margin-bottom : 2px;
+}
+
+#CreateTourneyDiv #DefaultDiv #SequencedRoundDiv textarea {
+	margin-top : 3px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv thead{
+	font-weight : bold;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv tbody{
+	height : 50px;
+	overflow-y : auto;
+	overflow-x : hidden;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv hr {
+	height : 1px;
+	width : 360px;
+	border : 0px;
+}
+
+#CreateTourneyDiv select {
+	width : 80px;
+}
+
+#CreateTourneyDiv input, 
+#CreateTourneyDiv textarea, 
+#CreateTourneyDiv select {
+	border-color : #FFA200;
+}
+
+#CreateTourneyDiv input {
+	background-color : #FFF;
+}
+
+#CreateTourneyDiv table {
+	width : 365px;
+	text-align : center;
+	vertical-align : top;
+}
+
+#CreateTourneyDiv thead {
+	height : 17px;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv thead tr, 
+#CreateTourneyDiv #SequencedRoundTableDiv tbody tr {
+	vertical-align : top;
+}
+
+#CreateTourneyDiv #SequencedRoundTableDiv tbody tr {
+	height : 10px;
+}
+#CreateTourneyDiv #SequencedRoundTableDiv thead td,
+#CreateTourneyDiv #SequencedRoundTableDiv tbody td {
+	width : 110px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #DescDiv textarea {
+	margin-bottom : 2px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SPFromDateInputDiv input,
+#CreateTourneyDiv #AdvancedDiv #SPFromHourInputDiv input,
+#CreateTourneyDiv #AdvancedDiv #SPToDateInputDiv input,
+#CreateTourneyDiv #AdvancedDiv #SPToHourInputDiv input {
+	border : 0px;
+}
+
+#CreateTourneyDiv #AdvancedDiv #SPFromDateInputDiv span,
+#CreateTourneyDiv #AdvancedDiv #SPFromHourInputDiv span,
+#CreateTourneyDiv #AdvancedDiv #SPToDateInputDiv span,
+#CreateTourneyDiv #AdvancedDiv #SPToHourInputDiv span {
+	padding-left: 2px;
+	padding-right: 2px;
+	font-weight : bold;
 }
