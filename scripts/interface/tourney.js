@@ -27,6 +27,7 @@
 */
 function INTERFACE_ShowCreateTourneyWindow()
 {
+	// Variables
 	var Div;
 
 	var DefaultDiv;
@@ -46,7 +47,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 	var RoundDiv;
 	var RoundRightDiv, RoundLeftDiv;
 	var RoundLabel;
-	var AutoLabel, AutoRadio, AutoHelpLabel, DefineLabel, DefineRadio, DefineSelect, DefineOpt;
+	var RoundHelpImg;
 
 	var DateInitDiv;
 	var DateInitLeftDiv, DateInitRightDiv;
@@ -54,11 +55,13 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 	var DateDiv;
 	var DateRightDiv, DateLeftDiv;
-	var DateLabel, DateInput, DateBr, DateFormatLabel;
+	var DateRightInputDiv, HourRightInputDiv;
+	var DateLabel, DateInputD, DateInputM, DateInputY, DateBarSpan1, DateBarSpan2, DateBr, DateFormatLabel;
 
 	var HourDiv;
 	var HourRightDiv, HourLeftDiv;
-	var HourLabel, HourInput, HourBr, HourFormatLabel;
+	var HourightInputDiv;
+	var HourLabel, HourInputH, HourInputM, HourColonSpan, HourBr, HourFormatLabel;
 	
 	var AdvancedLabelDiv;
 	var AdvancedLabel;
@@ -89,7 +92,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 	var WaitTimeDiv;
 	var WaitTimeRightDiv, WaitTimeLeftDiv;
-	var WaitTimeLabel, WaitTimeCheckbox, WaitTimeInput, WaitTimeHelpLabel, WaitTimeMinLabel;
+	var WaitTimeLabel, WaitTimeCheckbox, WaitTimeInput, WaitTimeHelpImg, WaitTimeMinLabel;
 
 	var SubmitPeriodDiv
 	var SubmitPeriodLeftDiv;
@@ -100,36 +103,40 @@ function INTERFACE_ShowCreateTourneyWindow()
 	var SPFromLeftDiv, SPFromRightDiv;
 	var SPFromLabel;
 	var SPFromDateDiv, SPFromHourDiv;
-	var SPFromDateInput ,SPFromDateBr, SPFromDateFormatLabel;
-	var SPFromHourInput, SPFromHourBr, SPFromHourFormatLabel;
+	var SPFromDateRightDiv, SPFromHourRightDiv;
+	var SPFromDateInputD, SPFromDateInputM, SPFromDateInputY, SPFromDateFormatLabel;
+	var SPFromHourInputH, SPFromHourInputM, SPFromHourFormatLabel;
+	var SPFromDateBar1, SPFromDateBar2, SPFromHourColon, SPFromDateInputDiv, SPFromHourInputDiv;
 	var SPBr;
 	var SPToDiv;
 	var SPToLeftDiv, SPToRightDiv;
 	var SPToLabel;
 	var SPToDateDiv, SPToHourDiv;
-	var SPToDateInput, SPToDateBr, SPToDateFormatLabel;
-	var SPToHourInput, SPToHourBr, SPToHourFormatLabel;
+	var SPToDateRightDiv, SPToHourRightDiv;
+	var SPToDateInputD, SPToDateInputM, SPToDateInputY, SPToDateFormatLabel;
+	var SPToHourInputH, SPToHourInputM, SPToHourFormatLabel;
+	var SPToDateBar1, SPToDateBar2, SPToHourColon, SPToHourInputDiv, SPToDateInputDiv;
 
 	var SequencedRoundDiv;
-	var SequencedRoundCheckbox, SequencedRoundLabel, SequencedRoundInput, SequencedRoundBr;
+	var SequencedRoundCheckbox, SequencedRoundLabel, SequencedRoundBr;
+	var SequencedRoundTableDiv, SequencedRoundTable;
+	var RTd, DTd, HTd, Tr, Td, Hr, Checkbox;
+	var RoundCheckbox;
 
-	var AddRoundDiv;
-	var RoundDateDiv, RoundHourDiv, AddRoundButtonDiv;
-	var RoundDateDiv;
-	var RoundDateRightDiv, RoundDateLeftDiv;
-	var RoundDateLabel, RoundDateInput, RoundDateBr, RoundDateFormatLabel;
+	var THead, TBody;
+	var RoundTd, RoundDInput, RoundMInput, RoundYInput, RoundHInput, RoundMiInput, RoundSpan1, RoundSpan2, RoundColon;
+	var DInput, MInput, YInput, HInput, MiInput, Span1, Span2;
 
-	var RoundHourDiv;
-	var RoundHourRightDiv, RoundHourLeftDiv;
-	var RoundHourLabel, RoundHourInput, RoundHourBr, RoundHourFormatLabel;
-	var AddButton;
+	var RoundButtonDiv;
+	var AddButton, RemoveButton;
 
 	var ButtonsDiv;
 	var Create, Cancel;
 	
 	var Buttons = new Array();
+	var Elements = new Object();
 
-	var Type, i;
+	var Type, i, RNumber;
 
 	// Main Div
 	Div = UTILS_CreateElement('div', 'CreateTourneyDiv');
@@ -170,24 +177,17 @@ function INTERFACE_ShowCreateTourneyWindow()
 	CatOptSt = UTILS_CreateElement('option', null, null, 'Standard');
 	CatOptSt.value = "standard";
 	
-	// UNTIMED category option
-	CatOptUt = UTILS_CreateElement('option', null, null, 'Untimed');
-	CatOptUt.value = "untimed";
-
-	CatSelect =	UTILS_CreateElement('select',null,'drop_select');
+	CatSelect =	UTILS_CreateElement('select');
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
 	CatSelect.appendChild(CatOptSt);
 	
-	//Append untimed option
-	CatSelect.appendChild(CatOptUt);
-
 	CatSelect.onchange = function () 
 	{
 		Type = CatSelect.options.selectedIndex;
 		i=0;
 		
-		// Remove todos os filhos
+		// Remove all childs 
 		while (TimeSelect.firstChild)
 		{
 			TimeSelect.removeChild (TimeSelect.firstChild);
@@ -195,6 +195,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 		// Enable select time and select increment		
 		TimeSelect.disabled = false;
+		TimeSelect.className = "select_enabled";
 
 		// Lightning = 0 
 		if (Type == 0)
@@ -248,17 +249,6 @@ function INTERFACE_ShowCreateTourneyWindow()
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
 		}
-		// Untimed = 3
-		else if (Type == 3)
-		{
-			// Disable select time and select increment
-			TimeSelect.disabled = true;
-
-			TimeOpt = UTILS_CreateElement('option',null,null,"&#8734");
-			TimeOpt.value = "untimed";
-			TimeSelect.appendChild(TimeOpt);
-
-		}
 	}
 
 	TimeLeftDiv = UTILS_CreateElement('div','TimeLeftDiv');
@@ -267,7 +257,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 	TimeRightDiv = UTILS_CreateElement('div','TimeRightDiv');
 
 	TimeLabelMin =	UTILS_CreateElement('span',null,'italic',UTILS_GetText('challenge_time_label_min'));
-	TimeSelect = UTILS_CreateElement('select',null,'drop_select');
+	TimeSelect = UTILS_CreateElement('select',null,'select_enabled');
 	
 	for (i=3; i <= 10; i++)
 	{
@@ -282,72 +272,21 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 	// RoundDiv
 	RoundDiv =	UTILS_CreateElement('div', 'RoundDiv');
-	
-	RoundLeftDiv = UTILS_CreateElement('div', 'RoundLeftDiv');
-	RoundLabel = UTILS_CreateElement('p', null,null, UTILS_GetText("tourney_rounds"));
-
-	RoundRightDiv = UTILS_CreateElement('div', 'RoundRightDiv');
 	try
 	{
-		AutoRadio = document.createElement("<input class='round_radio' type='radio' name='round' checked='checked' />");
+		RoundCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='auto' checked='checked' />");
 	}
 	catch(err)
 	{
-		AutoRadio =	UTILS_CreateElement('input', null, 'round_radio');
-		AutoRadio.type = "radio";
-		AutoRadio.name = "round";
-		AutoRadio.checked = true;
+		RoundCheckbox =	UTILS_CreateElement('input', null);
+		RoundCheckbox.type = "checkbox";
+		RoundCheckbox.name = "auto";
+		RoundCheckbox.className = "checkbox";
+		RoundCheckbox.checked = true;
 	}
-	AutoLabel = UTILS_CreateElement('span',null,null,UTILS_GetText('tourney_auto'));
-	AutoHelpLabel = UTILS_CreateElement('span',null,'help','?');
-	try
-	{
-		DefineRadio = document.createElement("<input class='round_radio' type='radio' name='round' />");
-	}
-	catch(err)
-	{
-		DefineRadio =	UTILS_CreateElement('input', null, 'round_radio');
-		DefineRadio.type = "radio";
-		DefineRadio.name = "round";
-	}
-	DefineLabel = UTILS_CreateElement('span',null,null,UTILS_GetText('tourney_define'));
-	DefineSelect = UTILS_CreateElement('select',null,'drop_select');
-	DefineSelect.disabled = true;
-	DefineSelect.style.backgroundColor = "#C0C0C0";
-	
-	for (i=1; i <= 99; i++)
-	{
-		DefineOpt = document.createElement("option");
-		DefineOpt.innerHTML = i;
-		DefineOpt.value = i;
-
-		DefineSelect.appendChild(DefineOpt);
-	}
-	
-	AutoRadio.onchange = function () {
-		if (AutoRadio.checked == true)
-		{
-			DefineSelect.disabled = true;
-			DefineSelect.style.backgroundColor = "#C0C0C0";
-		}
-		else 
-		{
-			DefineSelect.disabled = false;
-			DefineSelect.style.backgroundColor = "#C0C0C0";
-		}
-	}
-	DefineRadio.onchange = function () {
-		if (DefineRadio.checked == true)
-		{
-			DefineSelect.disabled = false;
-			DefineSelect.style.backgroundColor = "#FFF";
-		}
-		else 
-		{
-			DefineSelect.disabled = true;
-			DefineSelect.style.backgroundColor = "#FFF";
-		}
-	}
+	RoundLabel = UTILS_CreateElement('span', null,'advopt_enabled', UTILS_GetText("tourney_rounds"));
+	RoundHelpImg = UTILS_CreateElement('img',null,'help');
+	RoundHelpImg.src= "images/help-icon.png";
 
 	// DateInitDiv
 	DateInitDiv =	UTILS_CreateElement('div', 'DateInitDiv');
@@ -360,9 +299,21 @@ function INTERFACE_ShowCreateTourneyWindow()
 	DateLeftDiv = UTILS_CreateElement('div','DateLeftDiv');
 	DateLabel = UTILS_CreateElement('p', null,null,UTILS_GetText('tourney_day'));
 	DateRightDiv = UTILS_CreateElement('div','DateRightDiv');
-	DateInput = UTILS_CreateElement('input');
-	DateInput.size = "11";
-	DateInput.maxLength = "10";
+	DateRightInputDiv = UTILS_CreateElement('div','DateRightInputDiv');
+	DateInputD = UTILS_CreateElement('input', null,'no_board');
+	DateInputD.size = "1";
+	DateInputD.maxLength = "2";
+	DateInputD.value = "__";
+	DateInputM = UTILS_CreateElement('input', null,'no_board');
+	DateBarSpan1 = UTILS_CreateElement('span',null,'space','/');
+	DateInputM.size = "1";
+	DateInputM.maxLength = "2";
+	DateInputM.value = "__";
+	DateInputY = UTILS_CreateElement('input', null, 'no_board');
+	DateBarSpan2 = UTILS_CreateElement('span',null,'space','/');
+	DateInputY.size = "3";
+	DateInputY.maxLength = "4";
+	DateInputY.value = "____";
 	DateBr = UTILS_CreateElement("br");
 	DateFormatLabel = UTILS_CreateElement('span',null,'format_enabled',UTILS_GetText('tourney_day_format'));
 
@@ -370,12 +321,19 @@ function INTERFACE_ShowCreateTourneyWindow()
 	HourLeftDiv = UTILS_CreateElement('div','HourLeftDiv');
 	HourLabel = UTILS_CreateElement('p', null,null,UTILS_GetText('tourney_hour'));
 	HourRightDiv = UTILS_CreateElement('div','HourRightDiv');
-	HourInput = UTILS_CreateElement('input');
-	HourInput.size = "11";
-	HourInput.maxLength = "5";
+	HourRightInputDiv = UTILS_CreateElement('div','HourRightInputDiv');
+	HourInputH = UTILS_CreateElement('input', null, 'no_board');
+	HourInputH.size = "1";
+	HourInputH.maxLength = "2";
+	HourInputH.value = "__";
+	HourColonSpan = UTILS_CreateElement('span',null,'colon',':');
+	HourInputM = UTILS_CreateElement('input', null, 'no_board');
+	HourInputM.size = "1";
+	HourInputM.maxLength = "2";
+	HourInputM.value = "__";
 	HourBr = UTILS_CreateElement("br");
 	HourFormatLabel = UTILS_CreateElement('span',null,'format_enabled',UTILS_GetText('tourney_hour_format'));
-
+	
 	// AdvancedDiv
 	AdvancedLabelDiv = UTILS_CreateElement('div',"AdvancedLabelDiv");
 	AdvancedDiv = UTILS_CreateElement('div',"AdvancedDiv");
@@ -429,13 +387,14 @@ function INTERFACE_ShowCreateTourneyWindow()
 	SubscribeInput.className = "disabled";
 	try
 	{
-		SubscribeCheckbox = document.createElement("<input type='checkbox' name='subscribe' />");
+		SubscribeCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subscribe' />");
 	}
 	catch(err)
 	{
 		SubscribeCheckbox =	UTILS_CreateElement('input', null);
 		SubscribeCheckbox.type = "checkbox";
 		SubscribeCheckbox.name = "subscribe";
+		SubscribeCheckbox.className = "checkbox";
 		SubscribeCheckbox.checked = false;
 	}
 	SubscribeLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_subscribe'));
@@ -461,12 +420,13 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 	try
 	{
-		IntervalCheckbox = document.createElement("<input type='checkbox' name='interval' />");
+		IntervalCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='interval' />");
 	}
 	catch(err)
 	{
 		IntervalCheckbox =	UTILS_CreateElement('input', null);
 		IntervalCheckbox.type = "checkbox";
+		IntervalCheckbox.className = "checkbox";
 		IntervalCheckbox.name = "interval";
 	}
 	IntervalLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_rating_interval'));
@@ -547,15 +507,17 @@ function INTERFACE_ShowCreateTourneyWindow()
 	RestrictInput.type = "text";
 	RestrictInput.disabled = true;
 	RestrictInput.size = 10; 
+	RestrictInput.style.marginLeft = "5px";
 	RestrictInput.className = "disabled";
 	try
 	{
-		RestrictCheckbox = document.createElement("<input type='checkbox' name='subscribe' />");
+		RestrictCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subscribe' />");
 	}
 	catch(err)
 	{
 		RestrictCheckbox =	UTILS_CreateElement('input', null);
 		RestrictCheckbox.type = "checkbox";
+		RestrictCheckbox.className = "checkbox";
 		RestrictCheckbox.name = "subscribe";
 		RestrictCheckbox.checked = false;
 	}
@@ -589,32 +551,34 @@ function INTERFACE_ShowCreateTourneyWindow()
 	WaitTimeInput.className = "disabled";
 	try
 	{
-		WaitTimeCheckbox = document.createElement("<input type='checkbox' name='subscribe' />");
+		WaitTimeCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subscribe' />");
 	}
 	catch(err)
 	{
 		WaitTimeCheckbox =	UTILS_CreateElement('input', null);
 		WaitTimeCheckbox.type = "checkbox";
+		WaitTimeCheckbox.className = "checkbox";
 		WaitTimeCheckbox.name = "subscribe";
 		WaitTimeCheckbox.checked = false;
 	}
 	WaitTimeLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_delay'));
-	WaitTimeMinLabel = UTILS_CreateElement('span',null,'advopt_disabled',UTILS_GetText('window_min'));
-	WaitTimeHelpLabel = UTILS_CreateElement('span',null,'advopt_enabled','?');
+	WaitTimeMinLabel = UTILS_CreateElement('span',null,'min_disabled',UTILS_GetText('window_min'));
+	WaitTimeHelpImg = UTILS_CreateElement('img',null,'help');
+	WaitTimeHelpImg.src= "images/help-icon.png";
 
 	WaitTimeCheckbox.onchange = function () {
 		if (this.checked == true)
 		{
 			WaitTimeInput.disabled = false;
 			WaitTimeInput.className = "enabled";
-			WaitTimeMinLabel.className = "advopt_enabled";
+			WaitTimeMinLabel.className = "min_enabled";
 		}
 		else
 		{
 			WaitTimeInput.disabled = true;
 			WaitTimeInput.value = "";
 			WaitTimeInput.className = "disabled";
-			WaitTimeMinLabel.className = "advopt_disabled";
+			WaitTimeMinLabel.className = "min_disabled";
 		}
 	}
 
@@ -625,12 +589,13 @@ function INTERFACE_ShowCreateTourneyWindow()
 	SubmitPeriodLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_submit_period'));
 	try
 	{
-		SubmitPeriodCheckbox = document.createElement("<input type='checkbox' name='subperiod' />");
+		SubmitPeriodCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subperiod' />");
 	}
 	catch(err)
 	{
 		SubmitPeriodCheckbox =	UTILS_CreateElement('input', null);
 		SubmitPeriodCheckbox.type = "checkbox";
+		SubmitPeriodCheckbox.className = "checkbox";
 		SubmitPeriodCheckbox.name = "subperiod";
 		SubmitPeriodCheckbox.checked = false;
 	}
@@ -638,116 +603,258 @@ function INTERFACE_ShowCreateTourneyWindow()
 	SPFromDiv = UTILS_CreateElement('div','SPFromDiv');
 	SPFromRightDiv = UTILS_CreateElement('div','SPFromRightDiv');
 	SPFromDateDiv = UTILS_CreateElement('div','SPFromDateDiv');
+	SPFromDateInputDiv = UTILS_CreateElement('div','SPFromDateInputDiv','disabled');
 	SPFromHourDiv = UTILS_CreateElement('div','SPFromHourDiv');
+	SPFromHourInputDiv = UTILS_CreateElement('div','SPFromHourInputDiv','disabled');
 	SPFromLeftDiv = UTILS_CreateElement('div','SPFromLeftDiv');
 	SPToDiv = UTILS_CreateElement('div','SPToDiv');
 	SPToRightDiv = UTILS_CreateElement('div','SPToRightDiv');
 	SPToDateDiv = UTILS_CreateElement('div','SPToDateDiv');
+	SPToDateInputDiv = UTILS_CreateElement('div','SPToDateInputDiv','disabled');
 	SPToHourDiv = UTILS_CreateElement('div','SPToHourDiv');
+	SPToHourInputDiv = UTILS_CreateElement('div','SPToHourInputDiv','disabled');
 	SPToLeftDiv = UTILS_CreateElement('div','SPToLeftDiv');
 
 	SPFromLabel	= UTILS_CreateElement('span',null,'advopt_disabled',UTILS_GetText('window_from'));
 	try
 	{
-		SPFromDateInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+		SPFromDateInputD = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' value='__' />");
+		SPFromDateInputM = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' value='__' />");
+		SPFromDateInputY = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' value='__' />");
 	}
 	catch(err)
 	{
-		SPFromDateInput	= UTILS_CreateElement('input',null,'disabled');
-		SPFromDateInput.size = "11";
-		SPFromDateInput.type = "text";
-		SPFromDateInput.maxLength = "10";
-		SPFromDateInput.disabled = true;
+		SPFromDateInputD	= UTILS_CreateElement('input',null,'disabled');
+		SPFromDateInputD.size = "1";
+		SPFromDateInputD.type = "text";
+		SPFromDateInputD.maxLength = "2";
+		SPFromDateInputD.value = "__";
+		SPFromDateInputD.disabled = true;
+		
+		SPFromDateInputM	= UTILS_CreateElement('input',null,'disabled');
+		SPFromDateInputM.size = "1";
+		SPFromDateInputM.type = "text";
+		SPFromDateInputM.maxLength = "2";
+		SPFromDateInputM.value = "__";
+		SPFromDateInputM.disabled = true;
+		
+		SPFromDateInputY	= UTILS_CreateElement('input',null,'disabled');
+		SPFromDateInputY.size = "3";
+		SPFromDateInputY.type = "text";
+		SPFromDateInputY.maxLength = "4";
+		SPFromDateInputY.value = "____";
+		SPFromDateInputY.disabled = true;
 	}
-	SPFromDateBr = UTILS_CreateElement("br");
+	SPFromDateBar1 = UTILS_CreateElement("span",null,'disabled',"/");
+	SPFromDateBar2 = UTILS_CreateElement("span",null,'disabled',"/");
 	SPFromDateFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_day_format'));
 
 	try
 	{
-		SPFromHourInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+		SPFromHourInputH = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
+		SPFromHourInputM = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
 	}
 	catch(err)
 	{
-		SPFromHourInput	= UTILS_CreateElement('input',null,'disabled');
-		SPFromHourInput.size = "11";
-		SPFromHourInput.type = "text";
-		SPFromHourInput.maxLength = "5";
-		SPFromHourInput.disabled = true;
+		SPFromHourInputH	= UTILS_CreateElement('input',null,'disabled');
+		SPFromHourInputH.size = "1";
+		SPFromHourInputH.type = "text";
+		SPFromHourInputH.maxLength = "2";
+		SPFromHourInputH.value = "__";
+		SPFromHourInputH.disabled = true;
+		
+		SPFromHourInputM	= UTILS_CreateElement('input',null,'disabled');
+		SPFromHourInputM.size = "1";
+		SPFromHourInputM.type = "text";
+		SPFromHourInputM.maxLength = "2";
+		SPFromHourInputM.value = "__";
+		SPFromHourInputM.disabled = true;
 	}
-	SPFromHourBr = UTILS_CreateElement("br");
+	SPFromHourColon = UTILS_CreateElement("span",null,'colon',":");
 	SPFromHourFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_hour_format'));
 
 	SPToLabel	= UTILS_CreateElement('span',null,'advopt_disabled',UTILS_GetText('window_to'));
 	try
 	{
-		SPToDateInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+		SPToDateInputD = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
+		SPToDateInputM = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
+		SPToDateInputY = document.createElement("<input class='disabled' type='text' maxLength='4' size='3' disabled='disabled' />");
 	}
 	catch(err)
 	{
-		SPToDateInput	= UTILS_CreateElement('input',null,'disabled');
-		SPToDateInput.size = "11";
-		SPToDateInput.type = "text";
-		SPToDateInput.maxLength = "10";
-		SPToDateInput.disabled = true;
+		SPToDateInputD	= UTILS_CreateElement('input',null,'disabled');
+		SPToDateInputD.size = "1";
+		SPToDateInputD.type = "text";
+		SPToDateInputD.maxLength = "2";
+		SPToDateInputD.value = "__";
+		SPToDateInputD.disabled = true;
+
+		SPToDateInputM	= UTILS_CreateElement('input',null,'disabled');
+		SPToDateInputM.size = "1";
+		SPToDateInputM.type = "text";
+		SPToDateInputM.maxLength = "2";
+		SPToDateInputM.value = "__";
+		SPToDateInputM.disabled = true;
+
+		SPToDateInputY	= UTILS_CreateElement('input',null,'disabled');
+		SPToDateInputY.size = "3";
+		SPToDateInputY.type = "text";
+		SPToDateInputY.maxLength = "4";
+		SPToDateInputY.value = "____";
+		SPToDateInputY.disabled = true;
 	}
-	SPToDateBr = UTILS_CreateElement("br");
+	SPToDateBar1 = UTILS_CreateElement("span",null,'disabled',"/");
+	SPToDateBar2 = UTILS_CreateElement("span",null,'disabled',"/");
 	SPToDateFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_day_format'));
 
 	try
 	{
-		SPToHourInput = document.createElement("<input class='disabled' type='text' maxLength='4' size='5' disabled='disabled' />");
+		SPToHourInputH = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
+		SPToHourInputM = document.createElement("<input class='disabled' type='text' maxLength='2' size='1' disabled='disabled' />");
 	}
 	catch(err)
 	{
-		SPToHourInput	= UTILS_CreateElement('input',null,'disabled');
-		SPToHourInput.size = "11";
-		SPToHourInput.type = "text";
-		SPToHourInput.maxLength = "5";
-		SPToHourInput.disabled = true;
+		SPToHourInputH	= UTILS_CreateElement('input',null,'disabled');
+		SPToHourInputH.size = "1";
+		SPToHourInputH.type = "text";
+		SPToHourInputH.maxLength = "2";
+		SPToHourInputH.value = "__";
+		SPToHourInputH.disabled = true;
+		
+		SPToHourInputM	= UTILS_CreateElement('input',null,'disabled');
+		SPToHourInputM.size = "1";
+		SPToHourInputM.type = "text";
+		SPToHourInputM.maxLength = "2";
+		SPToHourInputM.value = "__";
+		SPToHourInputM.disabled = true;
 	}
-	SPToHourBr = UTILS_CreateElement("br");
+	SPToHourColon = UTILS_CreateElement("span",null,'colon',":");
 	SPToHourFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_hour_format'));
 
 	SubmitPeriodCheckbox.onchange = function () {
 		if (this.checked == true)
 		{
-			SPFromDateInput.disabled = false;
-			SPFromHourInput.disabled = false;
-			SPToDateInput.disabled = false;
-			SPToHourInput.disabled = false;
-			SPFromDateInput.className = "enabled";
-			SPFromHourInput.className = "enabled";
-			SPToDateInput.className = "enabled";
-			SPToHourInput.className = "enabled";
+			SPFromDateInputD.disabled = false;
+			SPFromDateInputM.disabled = false;
+			SPFromDateInputY.disabled = false;
+
+			SPFromHourInputH.disabled = false;
+			SPFromHourInputM.disabled = false;
+
+			SPToDateInputD.disabled = false;
+			SPToDateInputM.disabled = false;
+			SPToDateInputY.disabled = false;
+
+			SPToHourInputH.disabled = false;
+			SPToHourInputM.disabled = false;
+
+			SPFromDateInputD.className = "enabled";
+			SPFromDateInputM.className = "enabled";
+			SPFromDateInputY.className = "enabled";
+
+			SPFromHourInputH.className = "enabled";
+			SPFromHourInputM.className = "enabled";
+
+			SPToDateInputD.className = "enabled";
+			SPToDateInputM.className = "enabled";
+			SPToDateInputY.className = "enabled";
+
+			SPToHourInputH.className = "enabled";
+			SPToHourInputM.className = "enabled";
+
 			SPFromLabel.className = "advopt_enabled";
+
 			SPToLabel.className = "advopt_enabled";
-			SPFromHourInput.value = "00:00";
-			SPToHourInput.value = "23:59";
+
+			SPFromHourInputH.value = "00";
+			SPFromHourInputM.value = "00";
+
+			SPToHourInputH.value = "23";
+			SPToHourInputM.value = "59";
+
 			SPFromDateFormatLabel.className = 'format_enabled';
 			SPFromHourFormatLabel.className = 'format_enabled';
 			SPToDateFormatLabel.className = 'format_enabled';
 			SPToHourFormatLabel.className = 'format_enabled';
+
+			SPFromDateInputDiv.className = "enabled";
+			SPFromHourInputDiv.className = "enabled";
+			SPToDateInputDiv.className = "enabled";
+			SPToHourInputDiv.className = "enabled";
+	
+			SPFromDateBar1.className = "enabled";
+			SPFromDateBar2.className = "enabled";
+			SPFromHourColon.className = "enabled";
+			SPToDateBar1.className = "enabled";
+			SPToDateBar2.className = "enabled";
+			SPToHourColon.className = "enabled";
 		}
 		else
 		{
-			SPFromDateInput.disabled = true;
-			SPFromHourInput.disabled = true;
-			SPToDateInput.disabled = true;
-			SPToHourInput.disabled = true;
-			SPFromDateInput.className = "disabled";
-			SPFromHourInput.className = "disabled";
-			SPToDateInput.className = "disabled";
-			SPToHourInput.className = "disabled";
-			SPFromDateInput.value = "";
-			SPFromHourInput.value = "";
-			SPToDateInput.value = "";
-			SPToHourInput.value = "";
+			SPFromDateInputD.disabled = true;
+			SPFromDateInputM.disabled = true;
+			SPFromDateInputY.disabled = true;
+
+			SPFromHourInputH.disabled = true;
+			SPFromHourInputM.disabled = true;
+
+			SPToDateInputD.disabled = true;
+			SPToDateInputM.disabled = true;
+			SPToDateInputY.disabled = true;
+
+			SPToHourInputH.disabled = true;
+			SPToDateInputM.disabled = true;
+
+			SPFromDateInputD.className = "disabled";
+			SPFromDateInputM.className = "disabled";
+			SPFromDateInputY.className = "disabled";
+
+			SPFromHourInputH.className = "disabled";
+			SPFromHourInputM.className = "disabled";
+
+			SPToDateInputD.className = "disabled";
+			SPToDateInputM.className = "disabled";
+			SPToDateInputY.className = "disabled";
+
+			SPToHourInputH.className = "disabled";
+			SPToHourInputM.className = "disabled";
+
+			SPFromDateInputD.value = "__";
+			SPFromDateInputM.value = "__";
+			SPFromDateInputY.value = "____";
+
+			SPFromHourInputH.value = "__";
+			SPFromHourInputM.value = "__";
+
+			SPToDateInputD.value = "__";
+			SPToDateInputM.value = "__";
+			SPToDateInputY.value = "____";
+
+			SPToHourInputH.value = "__";
+			SPToHourInputM.value = "__";
+
 			SPFromLabel.className = "advopt_disabled";
+
 			SPToLabel.className = "advopt_disabled";
+
 			SPFromDateFormatLabel.className = 'format_disabled';
+
 			SPFromHourFormatLabel.className = 'format_disabled';
+
 			SPToDateFormatLabel.className = 'format_disabled';
 			SPToHourFormatLabel.className = 'format_disabled';
+			
+			SPFromDateInputDiv.className = "disabled";
+			SPFromHourInputDiv.className = "disabled";
+			SPToDateInputDiv.className = "disabled";
+			SPToHourInputDiv.className = "disabled";
+			
+			SPFromDateBar1.className = "disabled";
+			SPFromDateBar2.className = "disabled";
+			SPFromHourColon.className = "disabled";
+			SPToDateBar1.className = "disabled";
+			SPToDateBar2.className = "disabled";
+			SPToHourColon.className = "disabled";
 		}
 	}
 	
@@ -755,83 +862,471 @@ function INTERFACE_ShowCreateTourneyWindow()
 	
 	// SequencedRoundDiv
 	SequencedRoundDiv = UTILS_CreateElement('div','SequencedRoundDiv');
-	SequencedRoundInput = UTILS_CreateElement('textarea');
-	SequencedRoundInput.disabled = true;
-	SequencedRoundInput.cols = 48; 
-	SequencedRoundInput.rows = 4; 
-	SequencedRoundInput.className = "disabled";
-	SequencedRoundBr = UTILS_CreateElement("br");
+	SequencedRoundTableDiv = UTILS_CreateElement('div','SequencedRoundTableDiv');
+	SequencedRoundTable = UTILS_CreateElement('table');
+	THead = UTILS_CreateElement('thead');
+
+	Tr = UTILS_CreateElement('tr');
+
+	Td = UTILS_CreateElement('td',null,'cb_cell');
+	Tr.appendChild(Td);
+
+	RTd = UTILS_CreateElement('td',null,'th_disable','Rodada');
+	Tr.appendChild(RTd);
+
+	DTd = UTILS_CreateElement('td',null,'th_disable','Data');
+	Tr.appendChild(DTd);
+
+	HTd = UTILS_CreateElement('td',null,'th_disable','Hora');
+	Tr.appendChild(HTd);
+
+	THead.appendChild(Tr);
+
+	Tr = UTILS_CreateElement('tr');
+	Td = UTILS_CreateElement('td');
+	Td.colSpan = "4";
+	Hr= UTILS_CreateElement('hr',null,'invisible');
+	Td.appendChild(Hr);
+	Tr.appendChild(Td);
+
+	THead.appendChild(Tr);
+
+	SequencedRoundTable.appendChild(THead);
+	
+	TBody = UTILS_CreateElement('tbody');
+	// First row
+	Tr = UTILS_CreateElement('tr');
+	Tr.vAlign = "top";
+
+	Td= UTILS_CreateElement('td',null,'cb_cell');
 	try
 	{
-		SequencedRoundCheckbox = document.createElement("<input type='checkbox' name='sequenced' />");
+		Checkbox = document.createElement("<input class='checkbox' type='checkbox' disabled='disabled' />");
+	}
+	catch(err)
+	{
+		Checkbox =	UTILS_CreateElement('input');
+		Checkbox.type = "checkbox";
+		Checkbox.className = "checkbox";
+		Checkbox.disabled = true;
+	}
+	Td.appendChild(Checkbox);
+	Tr.appendChild(Td)
+
+	RNumber = TBody.rows.length + 1;
+	RoundTd = UTILS_CreateElement('td',null, 'disable',"Rodada " + RNumber);
+	Tr.appendChild(RoundTd)
+
+	Td = UTILS_CreateElement('td');
+	RoundDInput = UTILS_CreateElement('input',null, 'no_board_dis');
+	RoundDInput.type = "text";
+	RoundDInput.size = "1";
+	RoundDInput.maxLength="2";
+	RoundDInput.value= DateInputD.value;
+					
+	RoundMInput = UTILS_CreateElement('input',null,'no_board_dis');
+	RoundMInput.type = "text";
+	RoundMInput.size = "1";
+	RoundMInput.maxLength="2";
+	RoundMInput.value=DateInputM.value;
+					
+	RoundYInput = UTILS_CreateElement('input',null,'no_board_dis');
+	RoundYInput.type= "text";
+	RoundYInput.size = "3";
+	RoundYInput.maxLength="4";
+	RoundYInput.value=DateInputY.value;
+					
+	RoundSpan1 = UTILS_CreateElement("span",null,'disable',"/");
+	RoundSpan2 = UTILS_CreateElement("span",null,'disable',"/");
+	Td.appendChild(RoundDInput);
+	Td.appendChild(RoundSpan1);
+	Td.appendChild(RoundMInput);
+	Td.appendChild(RoundSpan2);
+	Td.appendChild(RoundYInput);
+	Tr.appendChild(Td);
+
+	Td = UTILS_CreateElement('td');
+	RoundHInput = UTILS_CreateElement('input',null,'no_board_dis');
+	RoundHInput.type = "text";
+	RoundHInput.size = "1";
+	RoundHInput.maxLength="2";
+	RoundHInput.value=HourInputH.value;
+					
+	RoundMiInput = UTILS_CreateElement('input',null,'no_board_dis');
+	RoundMiInput.type = "text";
+	RoundMiInput.size = "1";
+	RoundMiInput.maxLength="2";
+	RoundMiInput.value=HourInputM.value;
+					
+	RoundColon = UTILS_CreateElement("span",null,'disable',":");
+	Td.appendChild(RoundHInput);
+	Td.appendChild(RoundColon);
+	Td.appendChild(RoundMiInput);
+	Tr.appendChild(Td);
+	// End first row
+
+	TBody.appendChild(Tr);
+	SequencedRoundTable.appendChild(TBody);
+
+	SequencedRoundBr = UTILS_CreateElement("br");
+
+	try
+	{
+		SequencedRoundCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='sequenced' disabled='disabled' />");
 	}
 	catch(err)
 	{
 		SequencedRoundCheckbox =	UTILS_CreateElement('input', null);
 		SequencedRoundCheckbox.type = "checkbox";
+		SequencedRoundCheckbox.className = "checkbox";
 		SequencedRoundCheckbox.name = "sequenced";
 		SequencedRoundCheckbox.checked = true;
+		SequencedRoundCheckbox.disabled = true;
 	}
 	SequencedRoundLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_sequenced_rounds'));
 
-	// AddRoundDiv
-	AddRoundDiv = UTILS_CreateElement('div','AddRoundDiv');
-	RoundDateDiv = UTILS_CreateElement('div','RoundDateDiv');
-	RoundHourDiv = UTILS_CreateElement('div','RoundHourDiv');
-	RoundDateLeftDiv = UTILS_CreateElement('div','RoundDateLeftDiv');
-	RoundDateLabel = UTILS_CreateElement('span', null,'advopt_disabled',UTILS_GetText('tourney_day'));
-	RoundDateRightDiv = UTILS_CreateElement('div','RoundDateRightDiv');
-	RoundDateInput = UTILS_CreateElement('input');
-	RoundDateInput.size = "11";
-	RoundDateInput.maxLength = "10";
-	RoundDateInput.disabled = true;
-	RoundDateInput.className = 'disabled';
-	RoundDateBr = UTILS_CreateElement("br");
-	RoundDateFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_day_format'));
-
-	RoundHourLeftDiv = UTILS_CreateElement('div','RoundHourLeftDiv');
-	RoundHourLabel = UTILS_CreateElement('span', null,'advopt_disabled',UTILS_GetText('tourney_hour'));
-	RoundHourRightDiv = UTILS_CreateElement('div','RoundHourRightDiv');
-	RoundHourInput = UTILS_CreateElement('input');
-	RoundHourInput.size = "11";
-	RoundHourInput.maxLength = "5";
-	RoundHourInput.disabled = true;
-	RoundHourInput.className = 'disabled';
-	RoundHourBr = UTILS_CreateElement("br");
-	RoundHourFormatLabel = UTILS_CreateElement('span',null,'format_disabled',UTILS_GetText('tourney_hour_format'));
-	
-	AddRoundButtonDiv = UTILS_CreateElement('div','AddRoundButtonDiv');
-	AddButton = UTILS_CreateElement('input', null, 'button');
+	// RoundButtonDiv
+	RoundButtonDiv = UTILS_CreateElement('div','RoundButtonDiv');
+	AddButton = UTILS_CreateElement('input', null, 'button_disabled');
 	AddButton.value = UTILS_GetText("tourney_add_round");
 	AddButton.type = "button";
+	AddButton.onclick = function () {
+		if (SequencedRoundCheckbox.checked == true) {
+			return false;
+		}
+
+		Tr = UTILS_CreateElement('tr');
+		Tr.vAlign = "top";
+
+		Td= UTILS_CreateElement('td',null,'cb_cell');
+		try
+		{
+			Checkbox = document.createElement("<input class='checkbox' type='checkbox' />");
+		}
+		catch(err)
+		{
+			Checkbox =	UTILS_CreateElement('input');
+			Checkbox.type = "checkbox";
+			Checkbox.className = "checkbox";
+		}
+		Td.appendChild(Checkbox);
+		Tr.appendChild(Td)
+
+		var RNumber = TBody.rows.length + 1;
+		Td = UTILS_CreateElement('td',null, 'enable', "Rodada " + RNumber);
+		Tr.appendChild(Td)
+
+		DInput = UTILS_CreateElement('input',null, 'no_board_en');
+		MInput = UTILS_CreateElement('input',null,'no_board_en');
+		YInput = UTILS_CreateElement('input',null,'no_board_en');
+		HInput = UTILS_CreateElement('input',null,'no_board_en');
+		MiInput = UTILS_CreateElement('input',null,'no_board_en');
+
+		Td = UTILS_CreateElement('td');
+		DInput.type = "text";
+		DInput.size = "1";
+		DInput.maxLength="2";
+		DInput.value="__";
+		DInput.onfocus = function () 
+		{ 
+			if (DInput.value == "__")
+			{
+				DInput.value="";
+			}
+		}
+		DInput.onblur = function () 
+		{ 
+			if (DInput.value == "")
+			{
+				DInput.value="__";
+			}
+		}
+		MInput.type = "text";
+		MInput.size = "1";
+		MInput.maxLength="2";
+		MInput.value="__";
+		MInput.onfocus = function () 
+		{ 
+			if (MInput.value == "__")
+			{
+				MInput.value="";
+			}
+		}
+		MInput.onblur = function () 
+		{ 
+			if (MInput.value == "")
+			{
+				MInput.value="__";
+			}
+		}
+		YInput.type= "text";
+		YInput.size = "3";
+		YInput.maxLength="4";
+		YInput.value="____";
+		YInput.onfocus = function () 
+		{ 
+			if (YInput.value == "____")
+			{
+				YInput.value="";
+			}
+		}
+		YInput.onblur = function () 
+		{ 
+			if (YInput.value == "")
+			{
+				YInput.value="____";
+			}
+		}
+		Span1 = UTILS_CreateElement("span",null,'enable',"/");
+		Span2 = UTILS_CreateElement("span",null,'enable',"/");
+		DInput.onkeyup = function () 
+		{
+			if (DInput.value.length == DInput.maxLength)
+			{
+				if ((MInput.value == "__") || (MInput.value == "____"))
+				{
+					MInput.focus();
+				}
+				else
+				{
+					MInput.select();
+				}
+			}
+		}
+		MInput.onkeyup = function () 
+		{
+			if (MInput.value.length == MInput.maxLength)
+			{
+				if ((YInput.value == "__") || (YInput.value == "____"))
+				{
+					YInput.focus();
+				}
+				else
+				{
+					YInput.select();
+				}
+			}
+		}
+		YInput.onkeyup = function () 
+		{
+			if (YInput.value.length == YInput.maxLength)
+			{
+				if ((HInput.value == "__") || (HInput.value == "____"))
+				{
+					HInput.focus();
+				}
+				else
+				{
+					HInput.select();
+				}
+			}
+		}
+		Td.appendChild(DInput);
+		Td.appendChild(Span1);
+		Td.appendChild(MInput);
+		Td.appendChild(Span2);
+		Td.appendChild(YInput);
+		Tr.appendChild(Td);
+
+		Td = UTILS_CreateElement('td');
+		HInput.type = "text";
+		HInput.size = "1";
+		HInput.maxLength="2";
+		HInput.value="__";
+		HInput.onfocus = function () 
+		{ 
+			if (HInput.value == "__")
+			{
+				HInput.value="";
+			}
+		}
+		HInput.onblur = function () 
+		{ 
+			if (HInput.value == "")
+			{
+				HInput.value="__";
+			}
+		}
+		MiInput.type = "text";
+		MiInput.size = "1";
+		MiInput.maxLength="2";
+		MiInput.value="__";
+		MiInput.onfocus = function () 
+		{ 
+			if (MiInput.value == "__")
+			{
+				MiInput.value="";
+			}
+		}
+		MiInput.onblur = function () 
+		{ 
+			if (MiInput.value == "")
+			{
+				MiInput.value="__";
+			}
+		}
+		Span1 = UTILS_CreateElement("span",null,'enable',":");
+		HInput.onkeyup = function () 
+		{
+			if (HInput.value.length == HInput.maxLength)
+			{
+				if ((MiInput.value == "__") || (MiInput.value == "____"))
+				{
+					MiInput.focus();
+				}
+				else
+				{
+					MiInput.select();
+				}
+			}
+		}
+		Td.appendChild(HInput);
+		Td.appendChild(Span1);
+		Td.appendChild(MiInput);
+		Tr.appendChild(Td);
+
+		TBody.appendChild(Tr);
+	}
+	
+	RemoveButton = UTILS_CreateElement('input', null, 'button_disabled');
+	RemoveButton.value = UTILS_GetText("tourney_remove_round");
+	RemoveButton.type = "button";
+	RemoveButton.onclick = function () {
+		if (SequencedRoundCheckbox.checked == true) {
+			return false;
+		}
+
+		var i, tam, Row, RNumber;
+	 	tam	= TBody.rows.length;
+	 	Row = TBody.rows;
+
+		// Remove checked rows
+		for (i=tam-1; i>=0; i--)
+		{
+			if (Row[i].childNodes[0].childNodes[0].checked == true)
+			{
+				TBody.removeChild(Row[i]);
+			}
+		}
+	 	
+		// Fix round numbers
+		tam	= TBody.rows.length;
+		for (i=tam-1; i>=0; i--)
+		{
+			RNumber = i+1;
+			Row[i].childNodes[1].innerHTML = "Rodada "+ RNumber;
+		}
+	}
 	
 	SequencedRoundCheckbox.onchange = function () {
 		if (this.checked == true)
 		{
-			SequencedRoundInput.disabled = true;
-			SequencedRoundInput.value = "";
-			SequencedRoundInput.className = "disabled";
+			RoundTd.className = 'disable';
+			RoundDInput.className = 'no_board_dis';
+			RoundMInput.className = 'no_board_dis';
+			RoundYInput.className = 'no_board_dis';
+			RoundSpan1.className = 'disable';
+			RoundSpan2.className = 'disable';
+			RoundHInput.className = 'no_board_dis';
+			RoundMiInput.className = 'no_board_dis';
+			RoundColon.className = 'disable';
 
-			RoundHourInput.disabled = true;
-			RoundHourInput.className = "disabled";
-			RoundDateInput.disabled = true;
-			RoundDateInput.className = "disabled";
+			Hr.className = "invisible";
+			DTd.className = "th_disable";
+			HTd.className = "th_disable";
+			RTd.className = "th_disable";
 
-			RoundDateFormatLabel.className = 'format_disabled';
-			RoundHourFormatLabel.className = 'format_disabled';
+			AddButton.className = "button_disabled";
+			RemoveButton.className = "button_disabled";
+		
+			var i, tam, Row, RNumber;
+			tam	= TBody.rows.length;
+			Row = TBody.rows;
+
+			// Remove checked rows
+			for (i=tam-1; i>=1; i--)
+			{
+				TBody.removeChild(Row[i]);
+			}
 		}
 		else
 		{
-			SequencedRoundInput.disabled = false;
-			SequencedRoundInput.className = "enabled";
-			
-			RoundHourInput.disabled = false;
-			RoundHourInput.className = "enabled";
-			RoundDateInput.disabled = false;
-			RoundDateInput.className = "enabled";
+			RoundTd.className = 'enable';
+			RoundDInput.className = 'no_board_en';
+			RoundMInput.className = 'no_board_en';
+			RoundYInput.className = 'no_board_en';
+			RoundSpan1.className = 'enable';
+			RoundSpan2.className = 'enable';
+			RoundHInput.className = 'no_board_en';
+			RoundMiInput.className = 'no_board_en';
+			RoundColon.className = 'enable';
 
-			RoundDateFormatLabel.className = 'format_enabled';
-			RoundHourFormatLabel.className = 'format_enabled';
+			Hr.className = "visible";
+			RTd.className = "th_enable";
+			HTd.className = "th_enable";
+			DTd.className = "th_enable";
+			
+			AddButton.className = "button";
+			RemoveButton.className = "button";
+		}
+	}
+	
+	RoundCheckbox.onchange = function () {
+		if (this.checked == true)
+		{
+			SequencedRoundCheckbox.checked = true;
+			SequencedRoundCheckbox.disabled = true;
+			
+			RoundTd.className = 'disable';
+			RoundDInput.className = 'no_board_dis';
+			RoundMInput.className = 'no_board_dis';
+			RoundYInput.className = 'no_board_dis';
+			RoundSpan1.className = 'disable';
+			RoundSpan2.className = 'disable';
+			RoundHInput.className = 'no_board_dis';
+			RoundMiInput.className = 'no_board_dis';
+			RoundColon.className = 'disable';
+
+			Hr.className = "invisible";
+			DTd.className = "th_disable";
+			HTd.className = "th_disable";
+			RTd.className = "th_disable";
+
+			AddButton.className = "button_disabled";
+			RemoveButton.className = "button_disabled";
+		
+			var i, tam, Row, RNumber;
+			tam	= TBody.rows.length;
+			Row = TBody.rows;
+
+			// Remove checked rows
+			for (i=tam-1; i>=1; i--)
+			{
+				TBody.removeChild(Row[i]);
+			}
+		}
+		else
+		{
+			SequencedRoundCheckbox.checked = false;
+			SequencedRoundCheckbox.disabled = false;
+
+			RoundTd.className = 'enable';
+			RoundDInput.className = 'no_board_en';
+			RoundMInput.className = 'no_board_en';
+			RoundYInput.className = 'no_board_en';
+			RoundSpan1.className = 'enable';
+			RoundSpan2.className = 'enable';
+			RoundHInput.className = 'no_board_en';
+			RoundMiInput.className = 'no_board_en';
+			RoundColon.className = 'enable';
+
+			Hr.className = "visible";
+			RTd.className = "th_enable";
+			HTd.className = "th_enable";
+			DTd.className = "th_enable";
+			
+			AddButton.className = "button";
+			RemoveButton.className = "button";
 		}
 	}
 
@@ -875,20 +1370,10 @@ function INTERFACE_ShowCreateTourneyWindow()
 	CatTimeDiv.appendChild(TimeLeftDiv);
 	CatTimeDiv.appendChild(TimeRightDiv);
 
-	// RoundLeftDiv
-	RoundLeftDiv.appendChild(RoundLabel);
-	
-	// RoundRightDiv
-	RoundRightDiv.appendChild(AutoRadio);
-	RoundRightDiv.appendChild(AutoLabel);
-	RoundRightDiv.appendChild(AutoHelpLabel);
-	RoundRightDiv.appendChild(DefineRadio);
-	RoundRightDiv.appendChild(DefineLabel);
-	RoundRightDiv.appendChild(DefineSelect);
-
 	// RoundDiv
-	RoundDiv.appendChild(RoundLeftDiv);
-	RoundDiv.appendChild(RoundRightDiv);
+	RoundDiv.appendChild(RoundCheckbox);
+	RoundDiv.appendChild(RoundLabel);
+	RoundDiv.appendChild(RoundHelpImg);
 
 	// DateInitLeftDiv
 	DateInitLeftDiv.appendChild(DateInitLabel);
@@ -897,8 +1382,13 @@ function INTERFACE_ShowCreateTourneyWindow()
 	DateLeftDiv.appendChild(DateLabel);
 
 	// DateRightDiv
-	DateRightDiv.appendChild(DateInput);
-	DateRightDiv.appendChild(DateBr);
+	DateRightInputDiv.appendChild(DateInputD);
+	DateRightInputDiv.appendChild(DateBarSpan1);
+	DateRightInputDiv.appendChild(DateInputM);
+	DateRightInputDiv.appendChild(DateBarSpan2);
+	DateRightInputDiv.appendChild(DateInputY);
+
+	DateRightDiv.appendChild(DateRightInputDiv);
 	DateRightDiv.appendChild(DateFormatLabel);
 
 	// DateDiv
@@ -909,8 +1399,11 @@ function INTERFACE_ShowCreateTourneyWindow()
 	HourLeftDiv.appendChild(HourLabel);
 	
 	// HourRightDiv
-	HourRightDiv.appendChild(HourInput);
-	HourRightDiv.appendChild(HourBr);
+	HourRightInputDiv.appendChild(HourInputH);
+	HourRightInputDiv.appendChild(HourColonSpan);
+	HourRightInputDiv.appendChild(HourInputM);
+
+	HourRightDiv.appendChild(HourRightInputDiv);
 	HourRightDiv.appendChild(HourFormatLabel);
 
 	// HourDiv
@@ -1006,7 +1499,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 	// WaitTimeRightDiv
 	WaitTimeRightDiv.appendChild(WaitTimeInput);
 	WaitTimeRightDiv.appendChild(WaitTimeMinLabel);
-	WaitTimeRightDiv.appendChild(WaitTimeHelpLabel);
+	WaitTimeRightDiv.appendChild(WaitTimeHelpImg);
 	
 	// WaitTimeDiv
 	WaitTimeDiv.appendChild(WaitTimeLeftDiv);
@@ -1020,13 +1513,21 @@ function INTERFACE_ShowCreateTourneyWindow()
 	SPFromLeftDiv.appendChild(SPFromLabel);
 	
 	// SPFromDateDiv
-	SPFromDateDiv.appendChild(SPFromDateInput);
-	SPFromDateDiv.appendChild(SPFromDateBr);
+	SPFromDateInputDiv.appendChild(SPFromDateInputD);
+	SPFromDateInputDiv.appendChild(SPFromDateBar1);
+	SPFromDateInputDiv.appendChild(SPFromDateInputM);
+	SPFromDateInputDiv.appendChild(SPFromDateBar2);
+	SPFromDateInputDiv.appendChild(SPFromDateInputY);
+
+	SPFromDateDiv.appendChild(SPFromDateInputDiv);
 	SPFromDateDiv.appendChild(SPFromDateFormatLabel);
 
 	// SPFromHourDiv
-	SPFromHourDiv.appendChild(SPFromHourInput);
-	SPFromHourDiv.appendChild(SPFromHourBr);
+	SPFromHourInputDiv.appendChild(SPFromHourInputH);
+	SPFromHourInputDiv.appendChild(SPFromHourColon);
+	SPFromHourInputDiv.appendChild(SPFromHourInputM);
+
+	SPFromHourDiv.appendChild(SPFromHourInputDiv);
 	SPFromHourDiv.appendChild(SPFromHourFormatLabel);
 
 	// SPFromRightDiv
@@ -1041,13 +1542,21 @@ function INTERFACE_ShowCreateTourneyWindow()
 	SPToLeftDiv.appendChild(SPToLabel);
 
 	// SPToDateDiv
-	SPToDateDiv.appendChild(SPToDateInput);
-	SPToDateDiv.appendChild(SPToDateBr);
+	SPToDateInputDiv.appendChild(SPToDateInputD);
+	SPToDateInputDiv.appendChild(SPToDateBar1);
+	SPToDateInputDiv.appendChild(SPToDateInputM);
+	SPToDateInputDiv.appendChild(SPToDateBar2);
+	SPToDateInputDiv.appendChild(SPToDateInputY);
+
+	SPToDateDiv.appendChild(SPToDateInputDiv);
 	SPToDateDiv.appendChild(SPToDateFormatLabel);
 
 	// SPToHourDiv
-	SPToHourDiv.appendChild(SPToHourInput);
-	SPToHourDiv.appendChild(SPToHourBr);
+	SPToHourInputDiv.appendChild(SPToHourInputH);
+	SPToHourInputDiv.appendChild(SPToHourColon);
+	SPToHourInputDiv.appendChild(SPToHourInputM);
+
+	SPToHourDiv.appendChild(SPToHourInputDiv);
 	SPToHourDiv.appendChild(SPToHourFormatLabel);
 
 	// SPToRightDiv
@@ -1066,44 +1575,19 @@ function INTERFACE_ShowCreateTourneyWindow()
 	// SubmitPeriod Div
 	SubmitPeriodDiv.appendChild(SubmitPeriodLeftDiv);
 	SubmitPeriodDiv.appendChild(SubmitPeriodRightDiv);
+	
+	// Sequenced Round Table Div
+	SequencedRoundTableDiv.appendChild(SequencedRoundTable);
 
 	// Sequenced Round Div
 	SequencedRoundDiv.appendChild(SequencedRoundCheckbox);
 	SequencedRoundDiv.appendChild(SequencedRoundLabel);
 	SequencedRoundDiv.appendChild(SequencedRoundBr);
-	SequencedRoundDiv.appendChild(SequencedRoundInput);
-
-	// RoundDateLeftDiv
-	RoundDateLeftDiv.appendChild(RoundDateLabel);
-
-	// RoundDateRightDiv
-	RoundDateRightDiv.appendChild(RoundDateInput);
-	RoundDateRightDiv.appendChild(RoundDateBr);
-	RoundDateRightDiv.appendChild(RoundDateFormatLabel);
-
-	// RoundDateDiv
-	RoundDateDiv.appendChild(RoundDateLeftDiv)
-	RoundDateDiv.appendChild(RoundDateRightDiv)
-
-	// RoundHourLeftDiv
-	RoundHourLeftDiv.appendChild(RoundHourLabel);
-	
-	// RoundHourRightDiv
-	RoundHourRightDiv.appendChild(RoundHourInput);
-	RoundHourRightDiv.appendChild(RoundHourBr);
-	RoundHourRightDiv.appendChild(RoundHourFormatLabel);
-
-	// RoundHourDiv
-	RoundHourDiv.appendChild(RoundHourLeftDiv)
-	RoundHourDiv.appendChild(RoundHourRightDiv)
+	SequencedRoundDiv.appendChild(SequencedRoundTableDiv);
 
 	// AddRoundRoundDiv
-	AddRoundButtonDiv.appendChild(AddButton);
-
-	// Add Round Div
-	AddRoundDiv.appendChild(RoundDateDiv);
-	AddRoundDiv.appendChild(RoundHourDiv);
-	AddRoundDiv.appendChild(AddRoundButtonDiv);
+	RoundButtonDiv.appendChild(AddButton);
+	RoundButtonDiv.appendChild(RemoveButton);
 
 	// AdvancedDiv
 	AdvancedDiv.appendChild(DescDiv);
@@ -1112,14 +1596,14 @@ function INTERFACE_ShowCreateTourneyWindow()
 	AdvancedDiv.appendChild(RestrictDiv);
 	AdvancedDiv.appendChild(WaitTimeDiv);
 	AdvancedDiv.appendChild(SubmitPeriodDiv);
-	AdvancedDiv.appendChild(SequencedRoundDiv);
-	AdvancedDiv.appendChild(AddRoundDiv);
 
 	// DefaultDiv
 	DefaultDiv.appendChild(TNameDiv);
 	DefaultDiv.appendChild(CatTimeDiv);
-	DefaultDiv.appendChild(RoundDiv);
 	DefaultDiv.appendChild(DateInitDiv);
+	DefaultDiv.appendChild(RoundDiv);
+	DefaultDiv.appendChild(SequencedRoundDiv);
+	DefaultDiv.appendChild(RoundButtonDiv);
 	DefaultDiv.appendChild(AdvancedLabelDiv);
 	DefaultDiv.appendChild(AdvancedDiv);
 
@@ -1133,5 +1617,96 @@ function INTERFACE_ShowCreateTourneyWindow()
 	Div.appendChild(DefaultDiv);
 	Div.appendChild(ButtonsDiv);
 
-	return {Div:Div, Buttons:Buttons}
+	Elements.TNameInput = TNameInput;
+	Elements.DateInputD = DateInputD;
+	Elements.DateInputM = DateInputM;
+	Elements.DateInputY = DateInputY;
+	Elements.HourInputH = HourInputH;
+	Elements.HourInputM = HourInputM;
+
+	Elements.RoundDInput = RoundDInput;
+	Elements.RoundMInput = RoundMInput;
+	Elements.RoundYInput = RoundYInput;
+	Elements.RoundHInput = RoundHInput;
+	Elements.RoundMiInput = RoundMiInput;
+
+	Elements.SPFromDateInputD = SPFromDateInputD;
+	Elements.SPFromDateInputM = SPFromDateInputM;
+	Elements.SPFromDateInputY = SPFromDateInputY;
+	Elements.SPFromHourInputH = SPFromHourInputH;
+	Elements.SPFromHourInputM = SPFromHourInputM;
+
+	Elements.SPToDateInputD = SPToDateInputD;
+	Elements.SPToDateInputM = SPToDateInputM;
+	Elements.SPToDateInputY = SPToDateInputY;
+	Elements.SPToHourInputH = SPToHourInputH;
+	Elements.SPToHourInputM = SPToHourInputM;
+
+	Elements.TBody = TBody;
+
+	Elements.NextField = INTERFACE_NextField;
+	Elements.ClearField = INTERFACE_ClearField;
+	Elements.FillField = INTERFACE_FillField;
+
+	return {Div:Div, Buttons:Buttons, Elements:Elements}
+}
+
+/**
+* Jump to next form field if maxLength of current field was reached
+*
+* @param	Field	Current Field
+* @param	NextField Field to be jumped
+* @return									none
+* @author									Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_NextField(Field,NextField)
+{
+		if (Field.value.length == Field.maxLength)
+		{
+			if ((NextField.value == "__") || (NextField.value == "____"))
+			{
+				NextField.focus();
+			}
+			else
+			{
+				NextField.select();
+			}
+		}
+}
+
+/**
+* Clear field passed by parameter
+*
+* @param Field Field to be cleared
+* @return									none
+* @author									Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ClearField(Field) 
+{
+	if ((Field.value == "__") || (Field.value == "____"))
+	{
+		Field.value = "";
+	}
+}
+
+/**
+* If Fields leaves empty then it will be filled
+*
+* @param Field Field to be filled
+* @return									none
+* @author									Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_FillField(Field) 
+{ 
+	if (Field.value == "")
+	{
+		if (Field.maxLength == 2)
+		{
+			Field.value = "__";
+		}
+		else if (Field.maxLength == 4)
+		{
+			Field.value = "____";
+		}
+	}
 }

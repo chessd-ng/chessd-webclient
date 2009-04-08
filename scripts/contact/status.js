@@ -67,12 +67,14 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 		Select.appendChild(StatusItem);
 	
 		Select.disabled = true;
+		Select.className = "disabled";
 	}
 	// If current status is playing, remove playing option from
 	// select box, enable select box and  select avaiable status(Index 0)
 	else if (MyUserStatus == "playing")
 	{
 		Select.disabled = false;
+		Select.className = "enabled";
 		StatusItem = document.getElementById('status_playing_op');
 		Select.removeChild(StatusItem);
 		Select.selectedIdex = 0;

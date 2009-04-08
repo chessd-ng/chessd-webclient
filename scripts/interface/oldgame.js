@@ -52,6 +52,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	var L2RightDiv;
 	var DateLabel, Br3, FromLabel, FromInput, ToLabel, ToInput;
 	var FromDiv, ToDiv;
+	var FromRightDiv, FromLeftDiv, ToRightDiv, ToLeftDiv;
 	var FormatLabel1,FormatLabel2;
 
 	var ButtonsDiv;
@@ -189,12 +190,16 @@ function INTERFACE_ShowOldGameWindow(Id)
 	ToDiv = UTILS_CreateElement('div','ToDiv');
 	DateLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('oldgame_date_form'));
 
+	FromLeftDiv = UTILS_CreateElement('div','FromLeftDiv');
+	FromRightDiv = UTILS_CreateElement('div','FromRightDiv');
 	FromLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_from'));
 	FromInput	= UTILS_CreateElement('input');
 	FromInput.size = "11";
 	FromInput.maxLength = "10";
 	FormatLabel1 = UTILS_CreateElement('span',null,'format',UTILS_GetText('oldgame_format'));
 
+	ToLeftDiv = UTILS_CreateElement('div','ToLeftDiv');
+	ToRightDiv = UTILS_CreateElement('div','ToRightDiv');
 	ToLabel	= UTILS_CreateElement('span',null,null,UTILS_GetText('oldgame_to'));
 	ToInput = UTILS_CreateElement('input');
 	ToInput.size = "11";
@@ -255,8 +260,25 @@ function INTERFACE_ShowOldGameWindow(Id)
 	Table.appendChild(TBody);
 
 	TFoot = UTILS_CreateElement('tfoot');
+	Tr = UTILS_CreateElement('tr', 'OldgameLoadingBox');
+	try
+	{
+			Td = document.createElement("<td class='tfoot_td' colspan='6' />");
+	}
+	catch(err)
+	{
+			Td = UTILS_CreateElement('td', null,'tfoot_td');
+			Td.colSpan = 6;
+	}
+	// Loading Box
+	LoadingBox = INTERFACE_CreateLoadingBox("oldgame_loading",UTILS_GetText("oldgame_loading"));
+	LoadingBox.style.display = "block";
+	Td.appendChild(LoadingBox);
+	Tr.appendChild(Td);
+	TFoot.appendChild(Tr);
+
+	// Next and Previous Buttons	
 	Tr = UTILS_CreateElement('tr');
-	
 	try
 	{
 			Td = document.createElement("<td class='tfoot_td' colspan='6' />");
@@ -298,12 +320,7 @@ function INTERFACE_ShowOldGameWindow(Id)
 	
 	CloseDiv = UTILS_CreateElement('div','CloseDiv');
 
-	// Loading Box
-	LoadingBox = INTERFACE_CreateLoadingBox("oldgame_loading",UTILS_GetText("oldgame_loading"));
-	LoadingBox.style.display = "block";
-
 	// Mount Tree of Elements
-	
 
 	// Layer 1 Left Div
 	L1LeftDiv.appendChild(Player1Label);
@@ -329,15 +346,21 @@ function INTERFACE_ShowOldGameWindow(Id)
 	// Layer 2 Right Div
 	L2RightDiv.appendChild(DateLabel);
 
-	FromDiv.appendChild(FromLabel);
-	FromDiv.appendChild(FromInput);
-	FromDiv.appendChild(Br2);
-	FromDiv.appendChild(FormatLabel1);
+	FromLeftDiv.appendChild(FromLabel);
+	FromRightDiv.appendChild(FromInput);
+	FromRightDiv.appendChild(Br2);
+	FromRightDiv.appendChild(FormatLabel1);
 
-	ToDiv.appendChild(ToLabel);
-	ToDiv.appendChild(ToInput);
-	ToDiv.appendChild(Br3);
-	ToDiv.appendChild(FormatLabel2);
+	ToLeftDiv.appendChild(ToLabel);
+	ToRightDiv.appendChild(ToInput);
+	ToRightDiv.appendChild(Br3);
+	ToRightDiv.appendChild(FormatLabel2);
+
+	FromDiv.appendChild(FromLeftDiv);
+	FromDiv.appendChild(FromRightDiv);
+
+	ToDiv.appendChild(ToLeftDiv);
+	ToDiv.appendChild(ToRightDiv);
 
 	L2RightDiv.appendChild(FromDiv);
 	L2RightDiv.appendChild(ToDiv);
@@ -359,7 +382,6 @@ function INTERFACE_ShowOldGameWindow(Id)
 	
 	// Table Div
 	TableDiv.appendChild(TBodyDiv);
-	TableDiv.appendChild(LoadingBox);
 
 	NoResultDiv.appendChild(NoFound);
 
@@ -765,11 +787,11 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 */
 function INTERFACE_ShowOldgameLoading()
 {
-	var LoadingBox = document.getElementById("oldgame_loading");
+	var LoadingBoxTr = document.getElementById("OldgameLoadingBox");
 
-	if(LoadingBox != null)
+	if(LoadingBoxTr != null)
 	{
-		LoadingBox.style.display = "block";
+		LoadingBoxTr.style.display = "block";
 	}
 }
 
@@ -781,12 +803,11 @@ function INTERFACE_ShowOldgameLoading()
 */
 function INTERFACE_HideOldgameLoading()
 {
-	var LoadingBox = document.getElementById("oldgame_loading");
+	var LoadingBoxTr = document.getElementById("OldgameLoadingBox");
 
-	if(LoadingBox != null)
+	if(LoadingBoxTr != null)
 	{
-		LoadingBox.style.display = "none";
+		LoadingBoxTr.style.display = "none";
 	}
 
 }
-

@@ -84,8 +84,6 @@ function INTERFACE_CreateTop()
 	MenuList.appendChild(Room);
 	MenuList.appendChild(Admin);
 
-
-	
 	MenuDiv.appendChild(MenuList);
 	MainDiv.appendChild(Logo);
 	MainDiv.appendChild(MenuDiv);

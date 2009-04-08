@@ -522,20 +522,23 @@ function INTERFACE_ChangeRoomListVisibility()
 		Item = UTILS_CreateElement('li'); 
 		if (Room.Name == MainData.GetRoomDefault())
 		{
-			Item.innerHTML = UTILS_GetText("room_default"); 
+			Item.innerHTML = UTILS_GetText("room_default")+" ("+Room.UserList.length+")"; 
 		}
 		else
 		{
-			Item.innerHTML = Room.Name; 
+			Item.innerHTML = Room.Name+" ("+Room.UserList.length+")"; 
 		}
 		Item.onclick = function () { 
-			if (this.innerHTML == UTILS_GetText("room_default"))
+			var RoomName;
+			// Get name from innerHTML without number of users
+			RoomName = this.innerHTML.split(" (")[0];
+			if (RoomName == UTILS_GetText("room_default"))
 			{
 				ROOM_FocusRoom(MainData.GetRoomDefault());
 			}
 			else
 			{
-				ROOM_FocusRoom(this.innerHTML); 
+				ROOM_FocusRoom(RoomName); 
 			}
 			INTERFACE_ChangeRoomListVisibility(); 
 		} 

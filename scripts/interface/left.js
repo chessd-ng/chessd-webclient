@@ -93,7 +93,7 @@ function INTERFACE_CreateUserBox()
 	{
 		Name = UTILS_CreateElement("h2", null, null, MyUsername);
 	}
-	Status = UTILS_CreateElement("select", "UserStatusSelect");
+	Status = UTILS_CreateElement("select", "UserStatusSelect",'enabled');
 
 	// Available
 	StatusItem = UTILS_CreateElement("option", null, UserType+"_available", "("+UTILS_Capitalize(UTILS_GetText("status_available"))+")");

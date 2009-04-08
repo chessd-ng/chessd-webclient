@@ -61,7 +61,7 @@ function OLDGAME_HandleSearchOldGame(XML)
 	for(i=0; i<Games.length; i++)
 	{
 		// Create a game object and set attributes (white, black,
-		// winner, date, id, gametype, wintype)
+		// date, id, gametype, wintype)
 		GameInfoTmp = new Object();
 		Players = Games[i].getElementsByTagName("player");
 
@@ -69,15 +69,12 @@ function OLDGAME_HandleSearchOldGame(XML)
 		{
 			GameInfoTmp.white = Players[0].getAttribute("jid").split("@")[0];
 			GameInfoTmp.black = Players[1].getAttribute("jid").split("@")[0];
-
 		}
 		else
 		{
 			GameInfoTmp.white = Players[1].getAttribute("jid").split("@")[0];
 			GameInfoTmp.black = Players[0].getAttribute("jid").split("@")[0];
-
 		}
-
 
 		GameInfoTmp.date = UTILS_ConvertTimeStamp(Games[i].getAttribute("time_stamp"));
 		GameInfoTmp.gametype = Games[i].getAttribute("category");
