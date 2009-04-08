@@ -1,0 +1,153 @@
+\section{/home/www/rubens/webclient/scripts/challenge/adjourn.js File Reference}
+\label{adjourn_8js}\index{/home/www/rubens/webclient/scripts/challenge/adjourn.js@{/home/www/rubens/webclient/scripts/challenge/adjourn.js}}
+Functions to parse adjourned games message and show result in interface. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf CHALLENGE\_\-HandleAdjourn} (XML)
+\begin{CompactList}\small\item\em Parse XML with adjourned games list and show in interface. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-HandlePresence} (XML)
+\begin{CompactList}\small\item\em Parse presence to adjourn game user;. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-PostponePresence} (Username, PresenceType)
+\begin{CompactList}\small\item\em Update status of user in postpone list. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-SendResumeGame} (AdjournId)
+\begin{CompactList}\small\item\em Create and send a message to resume a game with some player. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-GetAdjournGames} ()
+\begin{CompactList}\small\item\em Create and send message to get adjourned games list. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-RemovePostpone} (Id)
+\begin{CompactList}\small\item\em Remove post pone from maindata and challenge menu. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions to parse adjourned games message and show result in interface. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software
+
+See interface challenge menu (\doxyref{scripts/interface/challengemenu.js}{p.}{challengemenu_8js}) and data methods to adjourn/postpone game list (\doxyref{scripts/data/data.js}{p.}{data_8js})
+
+PS: Currently, adjourn and postpone games are considered the same thing. 
+
+\subsection{Function Documentation}
+\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-GetAdjournGames@{CHALLENGE\_\-GetAdjournGames}}
+\index{CHALLENGE\_\-GetAdjournGames@{CHALLENGE\_\-GetAdjournGames}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-GetAdjournGames]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-GetAdjournGames ()}\label{adjourn_8js_ab4b7e2afb8e1263327ba2585071baea}
+
+
+Create and send message to get adjourned games list. 
+
+\begin{Desc}
+\item[Returns:]Empty string; \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-ChallengeGetAdjournList().\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-HandleAdjourn@{CHALLENGE\_\-HandleAdjourn}}
+\index{CHALLENGE\_\-HandleAdjourn@{CHALLENGE\_\-HandleAdjourn}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-HandleAdjourn]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleAdjourn ( {\em XML})}\label{adjourn_8js_f1fa3820000640554302bae5c10cae5e}
+
+
+Parse XML with adjourned games list and show in interface. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with adjourned games \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with other XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHALLENGE\_\-PostponePresence(), MainData, and USER\_\-AddUser().
+
+Referenced by PARSER\_\-ParseIq().\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-HandlePresence@{CHALLENGE\_\-HandlePresence}}
+\index{CHALLENGE\_\-HandlePresence@{CHALLENGE\_\-HandlePresence}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-HandlePresence]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandlePresence ( {\em XML})}\label{adjourn_8js_61ef9404cbf8ae63f44f439ab43e135c}
+
+
+Parse presence to adjourn game user;. 
+
+Parse presence to user in challenge list. I.E.: if user comes offline the adjourn game with this user turn unavailable to play.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with adjourned games \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with other XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHALLENGE\_\-PostponePresence(), and MainData.
+
+Referenced by PARSER\_\-ParsePresence().\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-PostponePresence@{CHALLENGE\_\-PostponePresence}}
+\index{CHALLENGE\_\-PostponePresence@{CHALLENGE\_\-PostponePresence}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-PostponePresence]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-PostponePresence ( {\em Username}, \/   {\em PresenceType})}\label{adjourn_8js_f8e889031bb038edb9fbe3e2c89c9d1c}
+
+
+Update status of user in postpone list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \item[{\em PresenceType}]User status (offline or others status) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string; \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-HandleAdjourn(), CHALLENGE\_\-HandlePresence(), GAMECENTER\_\-PostponeSortByCategory(), GAMECENTER\_\-PostponeSortByDate(), GAMECENTER\_\-PostponeSortByInc(), GAMECENTER\_\-PostponeSortByRating(), GAMECENTER\_\-PostponeSortByTime(), and GAMECENTER\_\-PostponeSortByUsername().\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-RemovePostpone@{CHALLENGE\_\-RemovePostpone}}
+\index{CHALLENGE\_\-RemovePostpone@{CHALLENGE\_\-RemovePostpone}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-RemovePostpone]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-RemovePostpone ( {\em Id})}\label{adjourn_8js_0be722787e364a1fde40155baa824105}
+
+
+Remove post pone from maindata and challenge menu. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Id}]Adjourned/Postpone game Id \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string; \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-SendResumeGame().\index{adjourn.js@{adjourn.js}!CHALLENGE\_\-SendResumeGame@{CHALLENGE\_\-SendResumeGame}}
+\index{CHALLENGE\_\-SendResumeGame@{CHALLENGE\_\-SendResumeGame}!adjourn.js@{adjourn.js}}
+\subsubsection[CHALLENGE\_\-SendResumeGame]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-SendResumeGame ( {\em AdjournId})}\label{adjourn_8js_5498e7e354aa16bc391e250c92e15422}
+
+
+Create and send a message to resume a game with some player. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em AdjournId}]Adjourned game Id; \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string; \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHALLENGE\_\-RemovePostpone(), CONNECTION\_\-SendJabber(), MainData, and MESSAGE\_\-ChallengeResumeGame().
+
+Referenced by INTERFACE\_\-UpdatePostpone(), and INTERFACE\_\-UpdatePostponeItem().

@@ -16,8 +16,17 @@
 
 
 /**
-* Create elements of the left side
-* of screen
+* @file		interface/left.js
+* @brief	Create elements of the left side of game enviromemnt
+*/
+
+/*
+* @brief	Create left box
+* 
+* Create user information, contact list/online list and rooms
+*
+* @return	Left box HTML DOM Div
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_CreateLeft()
 {
@@ -36,7 +45,10 @@ function INTERFACE_CreateLeft()
 }
 
 /**
-* Create user box (left side of the screen)
+* @brief	Create user box (left side of the screen)
+*
+* @return	User HTML DOM Div element
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_CreateUserBox()
 {
@@ -121,7 +133,10 @@ function INTERFACE_CreateUserBox()
 
 
 /**
-* Change user's image
+* @brief	Change user's image
+*
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_SetUserImage(Img)
 {

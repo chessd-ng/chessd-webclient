@@ -1,0 +1,130 @@
+\section{/home/www/rubens/webclient/scripts/interface/help.js File Reference}
+\label{help_8js}\index{/home/www/rubens/webclient/scripts/interface/help.js@{/home/www/rubens/webclient/scripts/interface/help.js}}
+Create window content to show help and auxiliar functions. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf INTERFACE\_\-HelpWindow} ()
+\begin{CompactList}\small\item\em Create temporary help window content. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CreateHelpContent} (Text)
+\begin{CompactList}\small\item\em Create help content div and set text passed as parameter. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowHideHelpContent} (ObjId)
+\begin{CompactList}\small\item\em Show or hide help content of section with Id passed as parameter. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowLinkContent} (ObjId)
+\begin{CompactList}\small\item\em Show help content of linked section with Id passed as parameter. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-HelpDisplay} (Obj, Id)
+\begin{CompactList}\small\item\em Set help section title element action to open content and not be selected when clicked. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Create window content to show help and auxiliar functions. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{help.js@{help.js}!INTERFACE\_\-CreateHelpContent@{INTERFACE\_\-CreateHelpContent}}
+\index{INTERFACE\_\-CreateHelpContent@{INTERFACE\_\-CreateHelpContent}!help.js@{help.js}}
+\subsubsection[INTERFACE\_\-CreateHelpContent]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateHelpContent ( {\em Text})}\label{help_8js_eff921d486f22d5eb41074d820004813}
+
+
+Create help content div and set text passed as parameter. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Text}]Text to be insert in div content \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]HTML DOM Div Element \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{INTERFACE\_\-HelpWindow}{p.}{help_8js_89dc00317c08ab57ff885b443e227539} \end{Desc}
+
+
+References UTILS\_\-CreateElement().
+
+Referenced by INTERFACE\_\-HelpWindow().\index{help.js@{help.js}!INTERFACE\_\-HelpDisplay@{INTERFACE\_\-HelpDisplay}}
+\index{INTERFACE\_\-HelpDisplay@{INTERFACE\_\-HelpDisplay}!help.js@{help.js}}
+\subsubsection[INTERFACE\_\-HelpDisplay]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HelpDisplay ( {\em Obj}, \/   {\em Id})}\label{help_8js_2d8be497c88b975036ddb9d63a8e235b}
+
+
+Set help section title element action to open content and not be selected when clicked. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Obj}]Help section title element \item[{\em Id}]Section's Id \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{INTERFACE\_\-HelpWindow}{p.}{help_8js_89dc00317c08ab57ff885b443e227539} \end{Desc}
+
+
+References INTERFACE\_\-DisableSelect(), INTERFACE\_\-ReEnableSelect(), and INTERFACE\_\-ShowHideHelpContent().
+
+Referenced by INTERFACE\_\-HelpWindow().\index{help.js@{help.js}!INTERFACE\_\-HelpWindow@{INTERFACE\_\-HelpWindow}}
+\index{INTERFACE\_\-HelpWindow@{INTERFACE\_\-HelpWindow}!help.js@{help.js}}
+\subsubsection[INTERFACE\_\-HelpWindow]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HelpWindow ()}\label{help_8js_89dc00317c08ab57ff885b443e227539}
+
+
+Create temporary help window content. 
+
+\begin{Desc}
+\item[Returns:]Main Div content and Buttons array \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+\begin{Desc}
+\item[See also:]Texts (lang), \doxyref{WINDOW\_\-Help()}{p.}{window_2window_8js_dcaaab8438c3993a9195bec5503b7d5c}; \end{Desc}
+
+
+References INTERFACE\_\-CreateHelpContent(), INTERFACE\_\-HelpDisplay(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by WINDOW\_\-Help().\index{help.js@{help.js}!INTERFACE\_\-ShowHideHelpContent@{INTERFACE\_\-ShowHideHelpContent}}
+\index{INTERFACE\_\-ShowHideHelpContent@{INTERFACE\_\-ShowHideHelpContent}!help.js@{help.js}}
+\subsubsection[INTERFACE\_\-ShowHideHelpContent]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowHideHelpContent ( {\em ObjId})}\label{help_8js_0ff16dcedf2af48b72805b1c0c83619a}
+
+
+Show or hide help content of section with Id passed as parameter. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ObjId}]Section's Id \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]True if sucess or false if not found ObjId \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{INTERFACE\_\-HelpDisplay}{p.}{help_8js_2d8be497c88b975036ddb9d63a8e235b} \end{Desc}
+
+
+Referenced by INTERFACE\_\-HelpDisplay().\index{help.js@{help.js}!INTERFACE\_\-ShowLinkContent@{INTERFACE\_\-ShowLinkContent}}
+\index{INTERFACE\_\-ShowLinkContent@{INTERFACE\_\-ShowLinkContent}!help.js@{help.js}}
+\subsubsection[INTERFACE\_\-ShowLinkContent]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowLinkContent ( {\em ObjId})}\label{help_8js_a632cfe65d8d309174109b80edfa5493}
+
+
+Show help content of linked section with Id passed as parameter. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ObjId}]Section's Id \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]True if sucess or false if not found ObjId \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{INTERFACE\_\-HelpWindow}{p.}{help_8js_89dc00317c08ab57ff885b443e227539} \end{Desc}

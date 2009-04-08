@@ -15,12 +15,23 @@
 */
 
 /**
-* Interface functions that control game
+* @file		interface/game.js
+* @brief	Interface functions that control game
 */ 
 
-/***************************
-** GAME BOARD OBJECT
-*****************************/
+// GAME BOARD OBJECT
+/*
+* @class	GameBoard
+* @brief	Create interface game object
+*
+* @param	GameID		Game identification field
+* @param	Player1		First player object
+* @param	Player2		Second player object
+* @param	YourColor	Your color in game
+* @param	PieceSize	Board piece size
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, Observer)
 {
 	var Tmp;
@@ -163,12 +174,10 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, 
 
 
 /**
-* Show this game in the interface
+* @brief	Show this game in the interface
 *
-* @public
-* @param	void
 * @return	true if game is showed with sucess, else false
-* @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_ShowGame()
 {
@@ -184,12 +193,10 @@ function INTERFACE_ShowGame()
 
 
 /**
-* Hide this game in the interface
+* @brief	Hide this game in the interface
 *
-* @public
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_HideGame()
 {
@@ -200,12 +207,12 @@ function INTERFACE_HideGame()
 
 
 /**
+* @brief	Set game as finished
+*
 * Disable options and drag pieces
 *
-* @public
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_FinishGame()
 {
@@ -214,12 +221,10 @@ function INTERFACE_FinishGame()
 
 
 /**
-* Remove this game
+* @brief	Remove this game
 *
-* @public
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_RemoveGame()
 {
@@ -250,12 +255,12 @@ function INTERFACE_RemoveGame()
 }
 
 /*
-* Set game interface to observer mode (Move list without options)
+* @brief	Set game interface to observer mode
 *
-* @public
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* Show move list and remove game options
+*
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_ObserverMode()
 {
@@ -272,12 +277,12 @@ function INTERFACE_ObserverMode()
 }
 
 /*
-* Set game interface to oldgame mode(Observer mode with buttons to review(?) game)
+* @brief	Set game interface to oldgame mode
 *
-* @public
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* Show move list with buttons to review game moves and remove game options
+*
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_OldGameMode()
 {
@@ -294,11 +299,10 @@ function INTERFACE_OldGameMode()
 }
 
 /**
-* Clean all pieces of a board
+* @brief	Remove all pieces from board
 *
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_ClearBoard()
 {
@@ -314,11 +318,11 @@ function INTERFACE_ClearBoard()
 }
 
 /**
-* Clean the board and show 'BoardArray' in the screen
+* @brief	Clean the board and show new board
 *
-* @param	BoardArray is board in array of array format
-* @return	void
-* @author	Rubens and Pedro
+* @param	BoardArray 	Board in arrays format
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetBoard(BoardArray)
 {
@@ -342,13 +346,13 @@ function INTERFACE_SetBoard(BoardArray)
 
 
 /**
-* Display a piece in specified Line and Col of the board
+* @brief	Display a piece in specified line and column of the board
 *
-* @param	Piece is piece char
-* @param 	Line is line where is the piece will be place
-* @param 	Col is column where is the piece will be place
-* @return	void
-* @author	Rubens and Pedro
+* @param	Piece 	Piece char
+* @param 	Line 	Line where is the piece will be place
+* @param 	Col 	Column where is the piece will be place
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_InsertPiece(Piece, Line, Col)
 {
@@ -368,20 +372,18 @@ function INTERFACE_InsertPiece(Piece, Line, Col)
 		PieceImg.style.top  = ((8 - Line) * this.PieceSize)+"px";
 	}
 	PieceImg.id = this.Id+"_piece_"+UTILS_HorizontalIndex(Col)+(9-Line);
-	
 
-	//alert(Line+","+Col +"///"+ PieceImg.style.top +" - "+ PieceImg.style.left);
 	Board.appendChild(PieceImg);
 }
 
 
 /**
-* Remove a piece from the board
+* @brief	Remove a piece from the board
 *
-* @param 	Line is line where the piece was placed
-* @param 	Col is column where the piece was placed
-* @return	void
-* @author	Rubens and Pedro
+* @param 	Line 	Line where the piece was placed
+* @param 	Col 	Column where the piece was placed
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_RemovePiece(Line, Col)
 {
@@ -400,12 +402,15 @@ function INTERFACE_RemovePiece(Line, Col)
 }
 
 /**
-* Update the board on the screen, where the pieces is diferrent
+* @brief	Update the board on the screen
 *
-* @param 	OldBoard is current Board
-* @param 	NewBoard is new board that will be show
+* Get diff between old board and new board and update
+*
+* @param 	OldBoard 	Current Board
+* @param 	NewBoard 	New board that will be show
 * @return	void
 * @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 {
@@ -437,11 +442,10 @@ function INTERFACE_UpdateBoard(OldBoard, NewBoard)
 }
 
 /**
-* Undo the last move done by the user
+* @brief	Undo the last move done by you
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	True if sucess or false if game not found
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_UndoMove()
 {
@@ -464,11 +468,11 @@ function INTERFACE_UndoMove()
 }
 
 /**
-* Show turn info to user
+* @brief	Set and show current player turn
 *
 * @param 	Color is the player color
 * @return	void
-* @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetTurn(Color)
 {
@@ -502,11 +506,12 @@ function INTERFACE_SetTurn(Color)
 }
 
 /**
-* Decrease user time. Executed each second
+* @brief	Decrease players time
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* Executed in each second and accordly to game turn color
+*
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_DecreaseTime()
 {
@@ -538,11 +543,10 @@ function INTERFACE_DecreaseTime()
 }
 
 /**
-* Start timer
+* @brief	Start timer
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_StartTimer()
 {
@@ -550,11 +554,10 @@ function INTERFACE_StartTimer()
 }
 
 /**
-* Stop timer
+* @brief	Stop timer
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_StopTimer()
 {
@@ -566,11 +569,11 @@ function INTERFACE_StopTimer()
 
 
 /**
-* Update white timer
+* @brief	Update white player time value
 *
-* @param 	NewTime is the new time to be update
-* @return	void
-* @author	Rubens and Pedro
+* @param 	NewTime 	New time to be update
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_UpdateWTime(NewTime)
 {
@@ -578,11 +581,11 @@ function INTERFACE_UpdateWTime(NewTime)
 }
 
 /**
-* Update black timer
+* @brief	Update black player time value
 *
-* @param 	NewTime is the new time to be update
-* @return	void
-* @author	Rubens and Pedro
+* @param 	NewTime 	New time to be update
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_UpdateBTime(NewTime)
 {
@@ -590,11 +593,10 @@ function INTERFACE_UpdateBTime(NewTime)
 }
 
 /**
-* Show white timer on interface
+* @brief	Show white player time on interface
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetWTime()
 {
@@ -641,11 +643,10 @@ function INTERFACE_SetWTime()
 }
 
 /**
-* Show black timer on interface
+* @brief	Show black player time on interface
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetBTime()
 {
@@ -692,12 +693,11 @@ function INTERFACE_SetBTime()
 }
 
 /**
-* Show white avatar image (in base64)
+* @brief	Show white player image
 *
-* @param 	PhotoType is the image type (png/gif)
-* @param 	PhotoStr is the image in base64 format string
-* @return	void
-* @author	Rubens and Pedro
+* @param 	Img	Image with type concatenated with iamge in base64
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetWPhoto(Img)
 {
@@ -705,12 +705,11 @@ function INTERFACE_SetWPhoto(Img)
 }
 
 /**
-* Show black avatar image (in base64)
+* @brief	Show black player image
 *
-* @param 	PhotoType is the image type (png/gif)
-* @param 	PhotoStr is the image in base64 format string
-* @return	void
-* @author	Rubens and Pedro
+* @param 	Img	Image with type concatenated with iamge in base64
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_SetBPhoto(Img)
 {
@@ -718,14 +717,15 @@ function INTERFACE_SetBPhoto(Img)
 }
 
 /**
-* Show a new move in Move List
+* @brief	Show a new move in Move List
 *
-* @param 	NumTurn is the turn number
-* @param 	Move is the move done
-* @param 	WTime is white time when move is done
-* @param 	BTime is black time when move is done
-* @return	void
-* @author	Rubens and Pedro
+* @param 	NumTurn 	Turn number
+* @param 	Move 		Move done
+* @param	ShortMove	Move done in short format
+* @param 	WTime 		White player time when move was done
+* @param 	BTime 		Black time when move was done
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 {
@@ -789,11 +789,12 @@ function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
 }
 
 /**
-* Remove last move in Move List (this is should be used when players agree to return one move)
+* @brief	Remove last move in Move List
 *
-* @param 	void
-* @return	void
-* @author	Rubens and Pedro
+* This is should be used when players agree to return one move
+*
+* @return	none
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_RemoveMove()
 {

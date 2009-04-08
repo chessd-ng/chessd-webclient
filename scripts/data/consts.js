@@ -16,9 +16,17 @@
 
 
 /**
-* Constants definition
+* @file		data/consts.js
+* @brief	All constants definition
 */
 
+/**
+* @class	Constants
+*
+* @brief	Constants definitions object
+*
+* Object with all constants definitions
+*/
 function DATA_SetConsts()
 {
 	var Const = new Object();

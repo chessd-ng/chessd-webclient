@@ -1,0 +1,88 @@
+\section{/home/www/rubens/webclient/scripts/contact/info.js File Reference}
+\label{info_8js}\index{/home/www/rubens/webclient/scripts/contact/info.js@{/home/www/rubens/webclient/scripts/contact/info.js}}
+Handle user information to contact list(rating an type). 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf CONTACT\_\-HandleInfo} (XML)
+\begin{CompactList}\small\item\em Receive a info message and update new information in contact list. \item\end{CompactList}\item 
+function {\bf CONTACT\_\-SetUserType} (Username, NewType)
+\begin{CompactList}\small\item\em Change user's type of some user in contact list. \item\end{CompactList}\item 
+function {\bf CONTACT\_\-SetUserRating} (Username, Category, Rating)
+\begin{CompactList}\small\item\em Change user's rating of some user in contact list. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Handle user information to contact list(rating an type). 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{info.js@{info.js}!CONTACT\_\-HandleInfo@{CONTACT\_\-HandleInfo}}
+\index{CONTACT\_\-HandleInfo@{CONTACT\_\-HandleInfo}!info.js@{info.js}}
+\subsubsection[CONTACT\_\-HandleInfo]{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-HandleInfo ( {\em XML})}\label{info_8js_40fd163b2a7192238e6339e6c353afce}
+
+
+Receive a info message and update new information in contact list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with chess server user's info \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONTACT\_\-SetUserRating(), CONTACT\_\-SetUserType(), and MainData.
+
+Referenced by PARSER\_\-ParseIq().\index{info.js@{info.js}!CONTACT\_\-SetUserRating@{CONTACT\_\-SetUserRating}}
+\index{CONTACT\_\-SetUserRating@{CONTACT\_\-SetUserRating}!info.js@{info.js}}
+\subsubsection[CONTACT\_\-SetUserRating]{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-SetUserRating ( {\em Username}, \/   {\em Category}, \/   {\em Rating})}\label{info_8js_cfe04b0f835f6bf6c8e46a7bc6f7f688}
+
+
+Change user's rating of some user in contact list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Category}]Rating game category \item[{\em Rating}]Rating value to be update \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ContactObj(), and MainData.
+
+Referenced by CONTACT\_\-HandleInfo().\index{info.js@{info.js}!CONTACT\_\-SetUserType@{CONTACT\_\-SetUserType}}
+\index{CONTACT\_\-SetUserType@{CONTACT\_\-SetUserType}!info.js@{info.js}}
+\subsubsection[CONTACT\_\-SetUserType]{\setlength{\rightskip}{0pt plus 5cm}function CONTACT\_\-SetUserType ( {\em Username}, \/   {\em NewType})}\label{info_8js_4aa77385acda3e8efe17f6f033bd83a3}
+
+
+Change user's type of some user in contact list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em NewType}]New user's type \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ContactObj(), and MainData.
+
+Referenced by CONTACT\_\-HandleInfo().

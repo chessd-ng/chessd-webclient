@@ -16,7 +16,7 @@
 
 
 /**
-* @file data.js
+* @file		data/data.js
 * @brief Class definition for main data structure
 * 
 * Read the config file (scripts/data/conf.xml) and load all data 
@@ -114,17 +114,6 @@ function DATA(ConfFile, LangFile)
 	this.Challenge.ChallengeSequence = 0;
 	this.Challenge.ChallengeMenu = null;
 
-	/************************ ANNOUNCE DATA *********************/
-	/*
-	this.Announce = new Object();
-	this.Announce.AnnounceList = new Array();
-	*/
-	/************************ POSTPONE DATA *********************/
-	/*
-	this.Postpone = new Object();
-	this.Postpone.PostponeList = new Array();
-	*/
-
 	/************************ GAME DATA *************************/
 	this.Game = new Object();
 	this.Game.Current = null;
@@ -189,7 +178,7 @@ DATA.prototype.SetSID = DATA_SetSID;
 DATA.prototype.GetHost = DATA_GetHost;
 DATA.prototype.GetHostPost = DATA_GetHostPost;
 DATA.prototype.GetBrowser = DATA_GetBrowser;
-DATA.prototype.GetResource = DATA_Getresource;
+DATA.prototype.GetResource = DATA_GetResource;
 DATA.prototype.GetServer = DATA_GetServer;
 DATA.prototype.GetConferenceComponent = DATA_GetConferenceComponent;
 DATA.prototype.GetSearchComponent = DATA_GetSearchComponent;
@@ -214,7 +203,6 @@ DATA.prototype.FindContactUser = DATA_FindContactUser;
 DATA.prototype.GetContactUser = DATA_GetContactUser;
 DATA.prototype.SortContactUserByNick = DATA_SortContactUserByNick;
 DATA.prototype.SortContactUserByRating = DATA_SortContactUserByRating;
-//DATA.prototype.IsContact = DATA_IsContact; -> Fazer no contact.js
 
 DATA.prototype.GetContactUserList = DATA_GetContactUserList;
 DATA.prototype.SetContactObj = DATA_SetContactObj;
@@ -252,17 +240,6 @@ DATA.prototype.GetUpdateTimer = DATA_GetUpdateTimer;
 DATA.prototype.SetUpdateProfileTimer = DATA_SetUpdateProfileTimer;
 DATA.prototype.GetUpdateProfileTimer = DATA_GetUpdateProfileTimer;
 
-/*
-DATA.prototype.GetStatus = DATA_GetStatus;
-DATA.prototype.GetRating = DATA_GetRating;
-DATA.prototype.GetType = DATA_GetType;
-DATA.prototype.SetDefault = DATA_SetDefault;
-DATA.prototype.SetUserStatus = DATA_SetUserStatus;
-DATA.prototype.SetSubs = DATA_SetSubs;
-DATA.prototype.SetRating = DATA_SetRating;
-DATA.prototype.SetType = DATA_SetType;
-*/
-
 /*ROOM METHODS ********************************/
 DATA.prototype.AddRoom = DATA_AddRoom;
 DATA.prototype.RemoveRoom = DATA_RemoveRoom;
@@ -277,21 +254,8 @@ DATA.prototype.GetRoomDefault = DATA_GetRoomDefault;
 DATA.prototype.SetCurrentRoom = DATA_SetCurrentRoom;
 DATA.prototype.GetCurrentRoom = DATA_GetCurrentRoom;
 
-/*
-DATA.prototype.SetRoomCurrentRating = DATA_SetRoomCurrentRating;
-DATA.prototype.GetRoomCurrentRating = DATA_GetRoomCurrentRating;
-DATA.prototype.AddUserInRoom = DATA_AddUserInRoom;
-DATA.prototype.FindUserInRoom = DATA_FindUserInRoom;
-DATA.prototype.FindNextUserInRoom = DATA_FindNextUserInRoom;
-DATA.prototype.SetUserAttrInRoom = DATA_SetUserAttrInRoom;
-DATA.prototype.RemoveUserInRoom = DATA_RemoveUserInRoom;
-DATA.prototype.GetUserRatingInRoom = DATA_GetUserRatingInRoom;
-*/
 DATA.prototype.GetRoom = DATA_GetRoom;
-/*
-DATA.prototype.SortUserByNickInRoom = DATA_SortUserByNickInRoom;
-DATA.prototype.SortUserByRatingInRoom = DATA_SortUserByRatingInRoom;
-*/
+
 /*CHAT METHODS ********************************/
 DATA.prototype.AddChat = DATA_AddChat;
 DATA.prototype.RemoveChat = DATA_RemoveChat;
@@ -311,9 +275,7 @@ DATA.prototype.RemoveChallenge = DATA_RemoveChallenge;
 DATA.prototype.FindChallenge = DATA_FindChallenge;
 DATA.prototype.GetChallenge = DATA_GetChallenge;
 DATA.prototype.UpdateChallenge = DATA_UpdateChallenge;
-/*
-DATA.prototype.ClearChallenges = DATA_ClearChallenges; //--> TODO Fazer no challenge.js
-*/
+
 DATA.prototype.AddChallengeWindow = DATA_AddChallengeWindow;
 
 DATA.prototype.GetChallengeList = DATA_GetChallengeList;
@@ -321,26 +283,6 @@ DATA.prototype.SetChallengeMenu = DATA_SetChallengeMenu;
 DATA.prototype.GetChallengeMenu = DATA_GetChallengeMenu;
 DATA.prototype.SetChallengeSequence = DATA_SetChallengeSequence;
 DATA.prototype.GetChallengeSequence = DATA_GetChallengeSequence;
-
-/*POSTPONE METHODS ********************************/
-/*
-DATA.prototype.AddPostpone = DATA_AddPostpone;
-DATA.prototype.RemovePostpone = DATA_RemovePostpone;
-DATA.prototype.FindPostpone = DATA_FindPostpone;
-DATA.prototype.GetPostpone = DATA_GetPostpone;
-DATA.prototype.GetPostponeList = DATA_GetPostponeList;
-*/
-/*ANNOUNCE METHODS ********************************/
-/*
-DATA.prototype.AddAnnounce = DATA_AddAnnounce;
-DATA.prototype.RemoveAnnounce = DATA_RemoveAnnounce;
-DATA.prototype.FindAnnounce = DATA_FindAnnounce;
-DATA.prototype.GetAnnounce = DATA_GetAnnounce;
-DATA.prototype.GetAnnounceList = DATA_GetAnnounceList;
-*/
-/*
-DATA.prototype.ClearAnnounces = DATA_ClearAnnounces;
-*/
 
 /*GAME METHODS ********************************/
 DATA.prototype.AddGame = DATA_AddGame;
@@ -394,14 +336,6 @@ DATA.prototype.GetWindowListLength = DATA_GetWindowListLength;
 DATA.prototype.SetLoadObj = DATA_SetLoadObj;
 DATA.prototype.GetLoadObj = DATA_GetLoadObj;
 
-/*
-DATA.prototype.AddProfile = DATA_AddProfile;
-DATA.prototype.RemoveProfile = DATA_RemoveProfile;
-DATA.prototype.FindProfile = DATA_FindProfile;
-DATA.prototype.GetProfile = DATA_GetProfile;
-DATA.prototype.SetMyProfile = DATA_SetMyProfile;
-*/
-
 /*GAMECENTER OBJECT METHODS*************************/
 DATA.prototype.SetGamecenter = DATA_SetGamecenter;
 DATA.prototype.GetGamecenter = DATA_GetGamecenter;
@@ -430,8 +364,6 @@ DATA.prototype.RemoveMatchOffer = DATA_RemoveMatchOffer;
 DATA.prototype.FindMatchOffer = DATA_FindMatchOffer;
 DATA.prototype.GetMatchOffer = DATA_GetMatchOffer;
 DATA.prototype.GetMatchOfferList = DATA_GetMatchOfferList;
-
-
 
 /*ADMINCENTER OBJECT METHODS*************************/
 DATA.prototype.SetAdmincenter = DATA_SetAdmincenter;
@@ -471,11 +403,25 @@ DATA.prototype.GetWordsList = DATA_GetWordsList;
  * METHODS - HTTP REQUEST         *
  **********************************/
 
+/*
+* @brief	Add XMLHttpResquest object in HttpRequest list
+*
+* @param	XMLHttpRequest object
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_AddHttpPost(PostObj)
 {
 	this.Connection.HttpRequest.push(PostObj);
 }
 
+/*
+* @brief	Remove XMLHttpResquest object from HttpRequest list
+*
+* @param	XMLHttpRequest object
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveHttpPost(PostObj)
 {
 	var i;
@@ -490,6 +436,13 @@ function DATA_RemoveHttpPost(PostObj)
 	delete PostObj;
 }
 
+/*
+* @brief	Find XMLHttpResquest object in HttpRequest list
+*
+* @param	XMLHttpRequest object
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_FindHttpPost(PostObj)
 {
 	var i=0;
@@ -510,36 +463,81 @@ function DATA_FindHttpPost(PostObj)
 }
 
 
+/*
+* @brief	Get HttpRequest length
+*
+* @return 	HttpRequest list length (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetHttpRequestLength()
 {
 	return this.Connection.HttpRequest.length;
 }
 
+/*
+* @brief	Get connection status number
+*
+* @return 	Connection status number (-1 = disconnected, 0 = connect, 1 = connecting)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetConnectionStatus()
 {
 	return this.Connection.ConnectionStatus;
 }
 
+/*
+* @brief	Set connection status number
+*
+* @param	Value	Status value
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetConnectionStatus(Value)
 {
 	this.Connection.ConnectionStatus = Value;
 }
 
+/*
+* @brief	Get RID number
+*
+* @return 	RID number
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRID()
 {
 	return this.Connection.RID;
 }
 
+/*
+* @brief	Set RID number
+*
+* @param	RID value
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRID(Value)
 {
 	this.Connection.RID = Value;
 }
 
+/*
+* @brief	Get SID number
+*
+* @return 	SID number
+* @author	Rubens Suguimoto
+*/
 function DATA_GetSID()
 {
 	return this.Connection.SID;
 }
 
+/*
+* @brief	Set SID number
+*
+* @param	SID number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetSID(Value)
 {
 	this.Connection.SID = Value;
@@ -549,79 +547,217 @@ function DATA_SetSID(Value)
 /**********************************
  * METHODS - CONFIGURATON DATA    *
  **********************************/
+
+/*
+* @brief	Get hostname
+*
+* @return 	Hostname string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetHost()
 {
 	return this.Conf.Host;
 }
+
+/*
+* @brief	Get Bosh host to post XMPP messages
+*
+* @return 	Bosh host string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetHostPost()
 {
 	return this.Conf.HostPost;
 }
+
+/*
+* @brief	Get browser
+*
+* Browser Number (-1=Not identified,  0=IE, 1=FF2[gecko != 1.9], 2=FF3[gecko1.9])
+* @return 	Browser number
+* @author	Rubens Suguimoto
+*/
 function DATA_GetBrowser()
 {
 	return this.Conf.Browser;
 }
-function DATA_Getresource()
+
+/*
+* @brief	Get jabber client resource
+*
+* @return 	Resource name string
+* @author	Rubens Suguimoto
+*/
+function DATA_GetResource()
 {
 	return this.Conf.Resource;
 }
+
+/*
+* @brief	Get chess server name
+*
+* @return 	Chess server string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetServer()
 {
 	return this.Conf.Server;
 }
+
+/*
+* @brief	Get conference component name
+*
+* @return 	Conference component name
+* @author	Rubens Suguimoto
+*/
 function DATA_GetConferenceComponent()
 {
 	return this.Conf.ConferenceComponent;
 }
+
+/*
+* @brief	Get search component name
+*
+* @return 	Conference component string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetSearchComponent()
 {
 	return this.Conf.SearchComponent;
 }
+
+/*
+* @brief	Get DOM tree with all web interface text
+*
+* @return 	DOM tree with all text language
+* @author	Rubens Suguimoto
+*/
 function DATA_GetText()
 {
 	return this.Conf.GetText;
 }
+
+/*
+* @brief	Set DOM tree with all web interface text
+*
+* @param	FileXML		DOM tree with all text language
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetText(FileXML)
 {
 	this.Conf.GetText = FileXML;
 }
+
+/*
+* @brief	Get default DOM tree text language
+*
+* The default language is English
+*
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_GetDefaultText()
 {
 	return this.Conf.DefaultText;
 }
+
+/*
+* @brief	Get defined constants
+*
+* @return 	Constants defined struct
+* @author	Rubens Suguimoto
+*/
 function DATA_GetConst()
 {
 	return this.Conf.Const;
 }
+
+/*
+* @brief	Get Xmlns
+*
+* @return	Xmlns string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetXmlns()
 {
 	return this.Conf.Xmlns;
 }
+
+/*
+* @brief	Get web client version
+*
+* @return 	Version string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetVersion()
 {
 	return this.Conf.Version;
 }
+
+/*
+* @brief	Get cookie validity
+*
+* @return 	Cookie validity value (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetCookieValidity()
 {
 	return this.Conf.CookieValidity;
 }
+
+/*
+* @brief	Get current language used
+*
+* @return	Language used (ex: pt_BR, en_US, zh_CN...)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetLang()
 {
 	return this.Conf.Lang;
 }
+
+/*
+* @brief	Set current language used
+*
+* @param	Lang	Language (ex: pt_BR, en_US, zh_CN...)
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetLang(Lang)
 {
 	this.Conf.Lang = Lang;
 }
+
+/*
+* @brief	Get default PHP extension
+*
+* @return 	PHP extension string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetDefaultPHP()
 {
 	return this.Conf.DefaultPHP;
 }
 
+
+/*
+* @brief	Get rating update interval time
+*
+* @return 	Rating update interval time (seconds)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateRatingInterval()
 {
 	return this.Conf.UpdateRatingInterval;
 }
+
+/*
+* @brief	Get max number of users by update
+*
+* @return 	Max number of users to be update (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateGetMaxProfiles()
 {
 	return this.Conf.UpdateGetMaxProfiles;
@@ -630,6 +766,17 @@ function DATA_GetUpdateGetMaxProfiles()
 /**********************************
  * METHODS - CONTACT USER LIST    *
  **********************************/
+
+/*
+* @brief	Add a user in contact list
+*
+* @param	Username	User's name
+* @param	Status		User's status
+* @param	Subs		User's subscription status
+* @param	Group		User's contact group
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_AddContactUser(Username, Status, Subs, Group)
 {
 	// Creating a new object
@@ -657,8 +804,15 @@ function DATA_AddContactUser(Username, Status, Subs, Group)
 	User.GetType = DATA_GetType;
 
 	return this.Contact.UserList.push(User);
-
 }
+
+/*
+* @brief	Remove some user from contact list
+*
+* @param	Username	User's name
+* @return 	User object removed or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveContactUser(Username)
 {
 	var Pos = MainData.FindContactUser(Username)
@@ -673,6 +827,14 @@ function DATA_RemoveContactUser(Username)
 	}
 }
 
+
+/*
+* @brief	Find some user in contact list
+*
+* @param	Username	User's name
+* @return 	User object position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindContactUser(Username)
 {
 	var i;
@@ -686,6 +848,14 @@ function DATA_FindContactUser(Username)
 	}
 	return null;
 }
+
+/*
+* @brief	Get contact user object
+*
+* @param	Username	User's name
+* @return 	Contact user object or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetContactUser(Username)
 {
 	var Pos = MainData.FindContactUser(Username);
@@ -734,45 +904,106 @@ function DATA_SortContactUserByRating()
 	return true;
 }
 
+
+/*
+* @brief	Get contact user list
+*
+* @return 	Contact user list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetContactUserList()
 {
 	return this.Contact.UserList;
 }
 
 
+
+/*
+* @brief	Set contact object
+*
+* @param	Obj	Contact object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetContactObj(Obj)
 {
 	this.Contact.Obj = Obj;
 }
 
+
+/*
+* @brief	Get contact object
+*
+* @return 	Contact object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetContactObj()
 {
 	return this.Contact.Obj;
 }
 
+
+/*
+* @brief	Set contact sort order
+*
+* @param	Order value (should be 0 or 1)
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetContactOrderBy(NewValue)
 {
 	this.Contact.OrderBy = NewValue;
 }
 
+
+/*
+* @brief	Get contact sort order
+*
+* @return 	Contact sort order number (integer, 0 or 1)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetContactOrderBy()
 {
 	return this.Contact.OrderBy;
 }
 
+
+/*
+* @brief	Set contact current rating category
+*
+* @param	NewCategory	Game category rating
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetContactCurrentRating(NewCategory)
 {
 	this.Contact.CurrentRating = NewCategory;
 }
 
+
+/*
+* @brief	Get contact current rating category
+*
+* @return 	Contact current rating category string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetContactCurrentRating()
 {
 	return this.Contact.CurrentRating;
 }
 
 /**********************************
- * METHODS - CONTACT USER LIST    *
+ * METHODS - ONLINE  USER LIST    *
  **********************************/
+/*
+* @brief	Add some user in online user list
+*	
+* @param	Username	User's name
+* @param	Status		User's status
+* @param	Type		User's type
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_AddOnlineUser(Username, Status, Type)
 {
 	// Creating a new object
@@ -796,6 +1027,14 @@ function DATA_AddOnlineUser(Username, Status, Type)
 	return this.Online.UserList.push(User);
 
 }
+
+/*
+* @brief	Remove some user from online user list
+*
+* @param	Username	User's name
+* @return 	User object removed or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveOnlineUser(Username)
 {
 	var Pos = MainData.FindOnlineUser(Username)
@@ -810,6 +1049,14 @@ function DATA_RemoveOnlineUser(Username)
 	}
 }
 
+
+/*
+* @brief	Find some user in online list
+*
+* @param	Username	User's name
+* @return 	User object position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindOnlineUser(Username)
 {
 	var i;
@@ -823,6 +1070,14 @@ function DATA_FindOnlineUser(Username)
 	}
 	return null;
 }
+
+/*
+* @brief	Get contact user object
+*
+* @param	Username	User's name
+* @return 	Online user object or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineUser(Username)
 {
 	var Pos = MainData.FindOnlineUser(Username);
@@ -871,36 +1126,90 @@ function DATA_SortOnlineUserByRating()
 	return true;
 }
 
+
+/*
+* @brief	Get online user list
+*
+* @return 	Online user list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineUserList()
 {
 	return this.Online.UserList;
 }
 
+
+/*
+* @brief	Set online object
+*
+* @param	Obj	Contact object
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetOnlineObj(Obj)
 {
 	this.Online.Obj = Obj;
 }
 
+
+/*
+* @brief	Get online object
+*
+* @return 	Online object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineObj()
 {
 	return this.Online.Obj;
 }
 
+
+/*
+* @brief	Set online sort order
+*
+* @param	Order value (should be 0 or 1)
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetOnlineOrderBy(NewValue)
 {
 	this.Online.OrderBy = NewValue;
 }
 
+
+/*
+* @brief	Get online sort order
+*
+* @return 	Online sort order number (integer, 0 or 1)
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineOrderBy()
 {
 	return this.Online.OrderBy;
 }
 
+
+/*
+* @brief	Set online current rating category
+*
+* @param	NewCategory	Game category rating
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetOnlineCurrentRating(NewCategory)
 {
 	this.Online.CurrentRating = NewCategory;
 }
 
+
+/*
+* @brief	Get online current rating category
+*
+* @return 	Online current rating category string
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineCurrentRating()
 {
 	return this.Online.CurrentRating;
@@ -911,225 +1220,511 @@ function DATA_GetOnlineCurrentRating()
 /**********************************
  * METHODS - USER OBJECT          *
  **********************************/
+
+/*
+* @brief	Get usarname from user object
+*
+* @return 	Username string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUsername()
 {
 	return this.Username;
 }
+
+/*
+* @brief	Set user's status from user object
+*
+* @param	NewStatus	Status string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetStatus(NewStatus)
 {
 	this.Status = NewStatus;
 }
+
+/*
+* @brief	Set user's status from user object
+*
+* @return 	User object status
+* @author	Rubens Suguimoto
+*/
 function DATA_GetStatus()
 {
 	return this.Status;
 }
+
+/*
+* @brief	Set user subscription
+*
+* @param	NewSubs		New subscription status
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetSubs(NewSubs)
 {
 	this.Subs = NewSubs;
 }
+
+/*
+* @brief	Get user subscription
+*
+* @return 	User's subscription status
+* @author	Rubens Suguimoto
+*/
 function DATA_GetSubs()
 {
 	return this.Subs;
 }
+
+/*
+* @brief	Set user contact group
+*
+* @param	NewGroup	User's new group
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetGroup(NewGroup)
 {
 	this.Group = NewGroup;
 }
+
+/*
+* @brief	Get user contact group
+*
+* @return 	Group string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetGroup()
 {
 	return this.Group;
 }
  
+
+/*
+* @brief	Set user's image
+*
+* @param	NewPhoto	Image in base64 format and image type
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetPhoto(NewPhoto)
 {
 	this.Photo = NewPhoto;
 }
+
+/*
+* @brief	Get user's image
+*
+* @return 	Image in base64 format and image type 
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPhoto()
 {
 	return this.Photo;
 }
 
 
+
+/*
+* @brief	Set user's image in base64 format
+*
+* @param	Image	Image in base64 format
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetImg64(Image)
 {
 	this.Img64 = Image;
 } 
 
+
+/*
+* @brief	Get user's image in base64 format
+*
+* @return 	Image in base64 format string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetImg64() 
 {
 	return this.Img64;
 } 
 
+
+/*
+* @brief	Set user's image type
+*
+* @param	ImageType	Image type
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetImgType(ImageType)
 {
 	this.ImgType = ImageType;
 } 
 
+
+/*
+* @brief	Get user's image type
+*
+* @return 	User's image type string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetImgType()
 {
 	return this.ImgType;
 } 
 
+
+/*
+* @brief 	Get rating list object
+*
+* @return 	Rating list object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRatingList()
 {
 	return this.Rating;
 }
+
+/*
+* @brief	Set user's type
+*
+* @param	NewType		User's type
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetType(NewType)
 {
 	this.Type = NewType;
 }
+
+/*
+* @brief	Get user's type
+*
+* @return	User's type
+* @author	Rubens Suguimoto
+*/
 function DATA_GetType()
 {
 	return this.Type;
 }
 
+
+/*
+* @brief	Set user's room role
+*
+* @param	NewRole		User's role
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRole(NewRole)
 {
 	this.Role = NewRole;
 }
 
+
+/*
+* @brief	Get user's room role
+*
+* @return 	User's role
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRole()
 {
 	return this.Role;
 }
 
+
+/*
+* @brief	Set user's room afilliation
+*
+* @param	NewAffiliation	User's afilliation in some room
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetAfilliation(NewAfilliation)
 {
 	this.Afilliation = NewAfilliation;
 }
 
+
+/*
+* @brief	Get user's affiliation
+*
+* @return 	User's affiliation
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAfilliation()
 {
 	return this.Afilliation;
 }
 
+
+/*
+* @brief	Get user's update rating flag
+*
+* @return 	Get user's update rating flag
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateRating()
 {
 	return this.UpdateRating;
 }
 
+
+/*
+* @brief	Set user's update rating flag
+*
+* @param	Bool	True or False
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetUpdateRating(Bool)
 {
 	this.UpdateRating = Bool;
 }
 
+
+/*
+* @brief	Get user's update profile flag
+*
+* @return 	Get user's update profile flag
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateProfile()
 {
 	return this.UpdateProfile;
 }
 
+
+/*
+* @brief	Set user's update profile flag
+*
+* @param	Bool	True or False
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetUpdateProfile(Bool)
 {
 	this.UpdateProfile = Bool;
 }
 
+
+/*
+* @brief	Set user's full name
+*
+* @param	NewName		Full name string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetFullname(NewName)
 {
 	this.Fullname = NewName;
 }
 
+
+/*
+* @brief	Get user's full name
+*
+* @return 	User's full name string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetFullname()
 {
 	return this.Fullname;
 }
 
+
+/*
+* @brief	Set user's description
+*
+* @param	NewDesc		Description string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetDesc(NewDesc)
 {
 	this.Desc = NewDesc;
 }
 
+
+/*
+* @brief	Get user's description
+*
+* @return 	User's description string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetDesc()
 {
 	return this.Desc;
 }
 
+
+/*
+* @brief	Set user's last game date and hour
+*
+* @param	LastGame 	Last game time
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetLastGame(LastGame)
 {
 	this.LastGame = LastGame;
 }
 
+
+/*
+* @brief	Get user's last game date and hour
+*
+* @return 	User's last game time
+* @author	Rubens Suguimoto
+*/
 function DATA_GetLastGame()
 {
 	return this.LastGame;
 }
 
+
+/*
+* @brief	Set user's online time
+*
+* @param	Time	Online time in seconds
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetOnlineTime(Time)
 {
 	this.OnlineTime = Time;
 }
 
+
+/*
+* @brief	Get user's online time
+*
+* @return 	User's online time in seconds
+* @author	Rubens Suguimoto
+*/
 function DATA_GetOnlineTime()
 {
 	return this.OnlineTime;
 }
 
+
+/*
+* @brief	Set user's total online time
+*
+* @param	Time 	Online total time in seconds
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetTotalTime(Time)
 {
 	this.TotalTime = Time;
 }
 
+
+/*
+* @brief	Get user's total online time
+*
+* @return 	User's online total time in seconds
+* @author	Rubens Suguimoto
+*/
 function DATA_GetTotalTime()
 {
 	return this.TotalTime;
 }
 
+
+/*
+* @brief	Set user's abusive or warnings
+*
+* @param	Warning		Warning string
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetWarning(Warning)
 {
 	this.Warning = Warning;
 }
 
+
+/*
+* @brief	Get user's abusive or warning
+*
+* @return 	User's abusive or warning string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetWarning()
 {
 	return this.Warning;
 }
 
+
+/*
+* @brief	Set user's level
+*
+* @param	Title	User level
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetTypeTitle(Title)
 {
 	this.TypeTitle = Title;
 }
 
+
+/*
+* @brief	Get user's level
+*
+* @return 	User's level string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetTypeTitle()
 {
 	return this.TypeTitle;
 }
 
+
+/*
+* @brief	Set user's profile window object
+*
+* @param	ProfileObj	Window profile object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetProfileObj(ProfileObj)
 {
 	this.ProfileObj = ProfileObj;
 }
 
+
+/*
+* @brief	Get user's profile window object
+*
+* @return	User's profile window object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetProfileObj()
 {
 	return this.ProfileObj;
 }
-/**
-* @brief		Change the user's subscription
-*
-* @param		Username  User name 
-* @param		NewSubs   New Username subscriptioon 
-* @author		Ulysses Bonfim
-* @return 		false if the user is not on your list, true otherwise
-* @see			DATA_FindUser 
-*/
-/*
-function DATA_SetSubs(Username, NewSubs)
-{
-	var UserPos = this.FindUser(Username);
 
-	if (UserPos == null)
-		return false;
-		
-	this.UserList[UserPos].Subs = NewSubs;
-	return true;
-}
-*/
 /**********************************
  * METHODS - RATING OBJECT        *
  **********************************/
+
 /*
+* @class	Rating object
+* @brief	Class definition to manage user's ratings
+*
 * Rating Object is used to manage user's rating;
 * This object contains a list of rating with rating type (obj.Category)
 * and this type value (obj.Value)
+*
+* @return 	Rating object
+* @author	Rubens Suguimoto
 */
 function DATA_RatingObject()
 {
@@ -1158,6 +1753,20 @@ function DATA_RatingObject()
 	return RatingObj;
 }
 
+
+/*
+* @brief	Add rating struct in rating list
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's category value
+* @param	RecordValue	Rating's category user's record value
+* @param	RecordTime	Rating's category user's record time
+* @param	Win		Rating's category user's wins
+* @param	Draw		Rating's category user's draws
+* @param	Loss		Rating's category user's losses
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_AddRating(Category, Value, RecordValue, RecordTime, Win, Draw, Losses)
 {
 	var Rating = new Object();
@@ -1173,6 +1782,14 @@ function DATA_AddRating(Category, Value, RecordValue, RecordTime, Win, Draw, Los
 	this.RatingList.push(Rating);
 }
 
+
+/*
+* @brief	Remove rating from rating list
+*
+* @param	Category	Rating's category
+* @return	Removed rating category struct
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveRating(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1183,6 +1800,14 @@ function DATA_RemoveRating(Category)
 	}
 }
 
+
+/*
+* @brief	Find rating category
+*
+* @param	Category	Rating's category
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindRating(Category)
 {
 	var i;
@@ -1198,6 +1823,14 @@ function DATA_FindRating(Category)
 
 }
 
+
+/*
+* @brief	Get rating category
+*
+* @param	Category	Rating's category
+* @return 	Rating category struct
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRating(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1211,6 +1844,14 @@ function DATA_GetRating(Category)
 	}
 }
 
+
+/*
+* @brief	Get rating category value
+*
+* @param	Category	Rating's category
+* @return 	Rating category value
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRatingValue(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1225,6 +1866,15 @@ function DATA_GetRatingValue(Category)
 	}
 }
 
+
+/*
+* @brief	Set rating category value
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's value
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRatingValue(Category, Value)
 {
 	var Pos = this.FindRating(Category);
@@ -1240,6 +1890,14 @@ function DATA_SetRatingValue(Category, Value)
 	}
 }
 
+
+/*
+* @brief	Get rating category record value
+*
+* @param	Category	Rating's category
+* @return 	Rating's category record value
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRecordValue(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1254,6 +1912,15 @@ function DATA_GetRecordValue(Category)
 	}
 }
 
+
+/*
+* @brief	Set rating category record value
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's value
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRecordValue(Category, Value)
 {
 	var Pos = this.FindRating(Category);
@@ -1269,6 +1936,14 @@ function DATA_SetRecordValue(Category, Value)
 	}
 }
 
+
+/*
+* @brief	Get rating category record time
+*
+* @param	Category	Rating's category
+* @return 	Rating category's record time
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRecordTime(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1283,6 +1958,15 @@ function DATA_GetRecordTime(Category)
 	}
 }
 
+
+/*
+* @brief	Set rating category record time
+*
+* @param	Category	Rating's category
+* @param	Time		Rating's record time
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRecordTime(Category, Time)
 {
 	var Pos = this.FindRating(Category);
@@ -1297,34 +1981,13 @@ function DATA_SetRecordTime(Category, Time)
 		return null;
 	}
 }
-/*
-function DATA_GetRecordNumGames(Category)
-{
-	var Pos = this.FindRating(Category);
-	
-	if(Pos != null)
-	{
-		return this.RatingList[Pos].NumGames;
-	}
-	else
-	{
-		return null;
-	}
-}
 
-function DATA_SetRecordNumGames(Category, Value)
-{
-	var Pos = this.FindRating(Category);
-	
-	if(Pos != null)
-	{
-		this.RatingList[Pos].NumGames = Value;
-	}
-	else
-	{
-		return null;
-	}
-}
+/*
+* @brief	Get rating category wins
+*
+* @param	Category	Rating's category
+* @return 	Wins numbers
+* @author	Rubens Suguimoto
 */
 function DATA_GetRatingWin(Category)
 {
@@ -1341,6 +2004,15 @@ function DATA_GetRatingWin(Category)
 
 }
 
+
+/*
+* @brief	Set rating category wins
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's wins value
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRatingWin(Category, Value)
 {
 	var Pos = this.FindRating(Category);
@@ -1356,6 +2028,14 @@ function DATA_SetRatingWin(Category, Value)
 	}
 }
 
+
+/*
+* @brief	Get rating category draws
+*
+* @param	Category	Rating's category
+* @return 	Draws numbers
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRatingDraw(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1370,6 +2050,15 @@ function DATA_GetRatingDraw(Category)
 	}
 }
 
+
+/*
+* @brief	Set rating category draws
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's draws value
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRatingDraw(Category, Value)
 {
 	var Pos = this.FindRating(Category);
@@ -1385,6 +2074,14 @@ function DATA_SetRatingDraw(Category, Value)
 	}
 }
 
+
+/*
+* @brief	Get rating category losses
+*
+* @param	Category	Rating's category
+* @return 	Losses numbers
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRatingLosses(Category)
 {
 	var Pos = this.FindRating(Category);
@@ -1399,6 +2096,15 @@ function DATA_GetRatingLosses(Category)
 	}
 }
 
+
+/*
+* @brief	Set rating category losses
+*
+* @param	Category	Rating's category
+* @param	Value		Rating's losses value
+* @return 	Rating position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRatingLosses(Category, Value)
 {
 	var Pos = this.FindRating(Category);
@@ -1418,7 +2124,6 @@ function DATA_SetRatingLosses(Category, Value)
 /**********************************
  * METHODS - USER LIST            *
  **********************************/
-
 /**
 * @brief		Add user to user list
 *
@@ -1427,9 +2132,8 @@ function DATA_SetRatingLosses(Category, Value)
 *
 * @param 		Username The user's name to add in structure
 * @param		Status 	 The user's status
-* @param 		Subs 	 User's subscription
-* @author		Ulysses Bonfim
 * @return 		false - User already on list, true otherwise
+* @author		Ulysses Bonfim and Rubens Suguimoto
 */
 function DATA_AddUser(Username, Status)
 {
@@ -1505,12 +2209,12 @@ function DATA_AddUser(Username, Status)
 }
 
 /**
-* @brief		Delete user from user list
+* @brief		Remove user from user list
 * 
 * Search and remove the user of DATA.UserList 
 * 
 * @param		Username User's name to remove of structure
-* @author		Pedro
+* @author		Pedro Rocha and Rubens Suguimoto
 * @return 		null if user is not on your list, true otherwise
 * @see 			DATA_FindUser
 */
@@ -1535,7 +2239,7 @@ function DATA_RemoveUser(Username)
 * @brief		Find user in user list
 * 
 * @param		Username User's name to search
-* @author		Pedro
+* @author		Pedro Rocha
 * @return 		null if user is not on your list, the structure User otherwise
 */
 function DATA_FindUser(Username)
@@ -1550,6 +2254,14 @@ function DATA_FindUser(Username)
 	return null;
 }
 
+
+/*
+* @brief	Get user from in user list
+*
+* @param	Username	User's name
+* @return 	User object position (integer) or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUser(Username)
 {
 	var i = this.FindUser(Username);
@@ -1562,256 +2274,68 @@ function DATA_GetUser(Username)
 	return null;
 }
 
+
+/*
+* @brief	Get list of users
+*
+* @return 	User list object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUserList()
 {
 	return this.Users.UserList;
 }
 
-
+/*
+* @brief	Set your Interval timer to update users list ratings
+*
+* @param	Interval	Interval counter value
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetUpdateTimer(Interval)
 {
 	this.Users.UpdateTimer = Interval;
 }
 
+/*
+* @brief	Get your interval timer to update users list ratings 
+*
+* @return	Your interval counter value
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateTimer()
 {
 	return this.Users.UpdateTimer;
 }
 
+
+/*
+* @brief	Set update profile interval timer profile
+*
+* @param	Interval	Interval counter value
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetUpdateProfileTimer(Interval)
 {
 	this.Users.UpdateProfileTimer = Interval;
 }
 
+
+/*
+* @brief	Get your interval timer to update users list profile
+*
+* @return	Your interval counter value
+*
+* @param
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_GetUpdateProfileTimer()
 {
 	return this.Users.UpdateProfileTimer;
 }
-
-/**
-* @brief		Find next user in user list	
-* @deprecated
-*
-* @param		Username Base user to search the next
-* @param 		Status	 Status of user to search the next 
-* @author		Danilo Yorinori
-* @return 		The struct user founded, null otherwise
-* @see			DATA_FindUser
-*/
-/*
-function DATA_FindNextUser(Username, Status)
-{
-	var i, Index;
-
-	// Take the index in struct of user
-	Index = this.FindUser(Username);
-	
-	// 
-	if ((this.OrderBy == "0") || (this.OrderBy == "1"))
-	{
-		Index++;
-		for (i=Index; i<this.UserList.length; i++)
-		{
-			if (Status != "offline")
-			{
-				if (this.UserList[i].Status != "offline")
-				{
-					return i;
-				}
-			}
-			else
-			{
-				if (this.UserList[i].Status == "offline")
-				{
-					return i;
-				}
-			}
-		}
-		return null;
-	}
-	else
-	{
-		return null;
-	}
-}
-*/
-
-/**
-* @brief		Is 'Username' in your contact list?
-*
-* @param		Username User name to search
-* @author		Danilo Yorinori
-* @return 		Boolean
-* @see			DATA_FindUser
-*/
-/*
-function DATA_IsContact(Username)
-{
-	var i;
-
-	i = this.FindUser(Username);
-
-	if (i == null)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-*/
-/**
-* @brief		Get User status
-*
-* Get the user status on jabber.
-* Search user in default room and return user status. 
-*
-* @param		Username User name to search
-* @return 		If the user is not on Default room and Contact List, return offline
-* 				Else return the user status.
-* @see			DATA_FindRoom, DATA_FindUser DATA_FindUserInRoom
-*/
-/*
-function DATA_GetStatus(Username)
-{
-	var User;
-	var Room = MainData.GetRoom(MainData.GetRoomDefault());
-
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	User = Room.GetUser(Username);
-
-	if (User != null)
-	{
-		return User.Status;
-	}
-	else {
-		User = this.FindUser(Username);
-		if (User != null)
-		{
-			return this.UserList[User].Status;
-		}
-	}
-	return "offline";
-}
-*/
-/**
-* @brief		Get the User's rating
-*
-* Get the user's rating (in a structure, with all types of reating) 
-* on chess server.
-*
-* @param		Username User name to search
-* @author		Danilo Yorinori
-* @return 		If the user is not on your list and the RoomList, false.
-* 				Else return the user's rating in a structure.
-* @see			DATA_FindUser DATA_FindUserInRoom
-*/
-/*
-function DATA_GetRating(Username)
-{
-	var UserPos = this.FindUser(Username);
-	var i;
-	var Room;
-	var RoomList = MainData.GetRoomList();
-	var User;
-
-	if (UserPos)
-	{
-		return this.UserList[UserPos].Rating;
-	}
-
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	// Update rating in room user lists
-	for (i=0; i<RoomList.length; i++)
-	{
-		Room = RoomList[i];
-
-		User = Room.GetUser(Username);
-
-		if (User != null)
-		{
-			return User.Rating;
-		}
-	}
-	return null;
-}
-*/
-/**
-* @brief		Get the User's type
-*
-* @param		Username User name to search
-* @author		Danilo Yorinori
-* @return 		If the user is not on your list and the RoomList, false.
-* 				Else return the user's type.
-* @see			DATA_FindUser DATA_FindUserInRoom
-*/
-/*
-function DATA_GetType(Username)
-{
-	var UserPos = this.FindUser(Username);
-	var i;
-	var User;
-	var Room;
-	var RoomList = MainData.GetRoomList();
-
-	if (UserPos != null)
-	{
-		return this.UserList[UserPos].Type;
-	}
-
-	// TODO -> FIX IT TO WORK WITH USERLIST
-	// Find type in room user lists
-	for (i=0; i<RoomList.length; i++)
-	{
-		Room = RoomList[i];
-		User = Room.GetUser(Username);
-
-		if (User!= null)
-		{
-			return User.Type;
-		}
-	}
-	return null;
-}
-*/
-/**
-* @brief		Set default values to use
-*
-* Set "user" to DATA.Type and 0 to rating types.
-*
-* @author		Pedro Eugenio
-*/
-/*
-function DATA_SetDefault(Username)
-{
-	this.Type = "user";
-	this.RatingBlitz = "0";
-	this.RatingStandard = "0";
-	this.RatingLightning = "0";
-}
-
-/**
-* @brief		Change the user's status
-*
-* @param		Username  User name 
-* @param		NewStatus New Username status
-* @author		Danilo Yorinori
-* @return 		false if the user is not on your list, true otherwise
-* @see			DATA_FindUser 
-*/
-/*
-function DATA_SetUserStatus(Username, NewStatus)
-{
-	var UserPos = this.FindUser(Username);
-
-	if (UserPos == null)
-		return false;
-		
-	this.UserList[UserPos].Status = NewStatus;
-	return true;
-}
-*/
 
 
 /**********************************
@@ -1826,7 +2350,7 @@ function DATA_SetUserStatus(Username, NewStatus)
 * @param		Role		Your role in room
 * @param		Affiliation	Your affiliation in room
 * @param		RoomObj		Room object, used to control the interface
-* @author		Pedro Eugenio
+* @author		Pedro Rocha
 * @return		The new room object
 * @see			DATA_FindRoom
 */
@@ -1834,9 +2358,6 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 {
 	// Creating a new object
 	var Room = new Object();
-
-	//if (this.FindRoom(RoomName) != null || this.MaxRooms <= this.RoomList.length)
-	//	return false;
 
 	// Setting atributes
 	Room.UserList = new Array();
@@ -1870,8 +2391,8 @@ function DATA_AddRoom(RoomName, MsgTo, Role, Affiliation, RoomObj)
 * @brief		Delete a room in room list
 *
 * @param		RoomName	Room name to remove
-* @author		Pedro Eugenio
-* @return		Boolean
+* @author		Pedro Rucha
+* @return		True if removed, or False if not found
 * @see			DATA_FindRoom
 */
 function DATA_RemoveRoom(RoomName)
@@ -1880,7 +2401,9 @@ function DATA_RemoveRoom(RoomName)
 
 	// If room do not exist
 	if (i == null)
+	{
 		return null;
+	}
 
 	// Removing room from room list
 	this.Room.RoomList.splice(i, 1);
@@ -1890,7 +2413,7 @@ function DATA_RemoveRoom(RoomName)
 /**
 * @brief		Find room in room list
 *
-* @param		RoomName	Room name to remove
+* @param		RoomName	Room name to find
 * @author		Pedro Eugenio
 * @return		Room structure founded or null
 */
@@ -1901,7 +2424,9 @@ function DATA_FindRoom(RoomName)
 	for (i=0; i<this.Room.RoomList.length; i++)
 	{
 		if (this.Room.RoomList[i].Name == RoomName)
+		{
 			return i;
+		}
 	}
 	return null;
 }
@@ -1911,9 +2436,9 @@ function DATA_FindRoom(RoomName)
 *
 * Only for interface user
 *
-* @param		RoomName	Room name 
+* @param		RoomName	Room's name 
 * @param		From		Where the messages will be send 
-* @param		Affiliation New room's affiliation 	
+* @param		Affiliation 	New room's affiliation 	
 * @param		Role		New room's role
 * @author		Pedro Eugenio
 * @return		null, if the room doesn't exist, true otherwise
@@ -1935,30 +2460,82 @@ function DATA_SetRoomInformation(RoomName, From, Affiliation, Role)
 	return true;
 }
 
+
+/*
+* @brief	Get list of rooms
+*
+* @return 	List of rooms
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRoomList()
 {
 	return this.Room.RoomList;
 }
+
+/*
+* @brief	Get numbers of emoticons
+*
+* This number is used to put emoticons in rooms
+*
+* @return 	Numbers of emoticons (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetEmoticonNum()
 {
 	return this.Room.EmoticonNum;
 }
+
+/*
+* @brief	Get max number of rooms opened
+*
+* @return 	Max number of rooms opened (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMaxRooms()
 {
 	return this.Room.MaxRooms;
 }
+
+/*
+* @brief	Get max numbers of chars of user message
+*
+* @return	Max numbers of characters of user message (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMaxRoomChar()
 {
 	return this.Room.MaxRoomChar;
 }
+
+/*
+* @brief	Get room default name
+*
+* @return 	Room default name string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRoomDefault()
 {
 	return this.Room.RoomDefault;
 }
+
+/*
+* @brief	Get current room to show
+*
+* @param	RoomObj		Room object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetCurrentRoom(RoomObj)
 {
 	this.Room.Current = RoomObj;
 }
+
+/*
+* @brief	Get current room opened
+*
+* @return 	Current room object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetCurrentRoom()
 {
 	return this.Room.Current;
@@ -1967,13 +2544,13 @@ function DATA_GetCurrentRoom()
 
 /**
 * @brief		Add user in user list of a room
-* @param		RoomName	Room name 
-* @param		Username 	The new user
+*
+* @param		Username 	User's name
 * @param		Status		New user's status
 * @param		Type		New user's type
 * @param		Role		New user's role
 * @param		Affiliation	New user's affiliation
-* @author		Pedro Eugenio
+* @author		Pedro Rocha and Rubens Suguimoto
 * @return		true
 * @see			DATA_FindRoom DATA_FindUser
 */
@@ -1983,17 +2560,6 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 	var UserPos = MainData.FindUser(Username);
 	var Room;
 	var UserObj;
-	// If room doesnt exists in data structure
-/*
-	if (RoomPos == null)
-	{
-		throw "RoomNotCreatedException";
-	}
-	if (UserPos != null)
-	{
-		throw "UserAlreadyInRoomException";
-	}
-*/
 
 	User.Username = Username;
 	User.Status = Status;
@@ -2025,10 +2591,10 @@ function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 
 /**
 * @brief		Find user in user list of a room
-* @param		RoomName  Room to search 
+*
 * @param		Username  User to find
-* @author		Pedro Eugenio
-* @return		User's position on Room UserList vector, or null, if not found
+* @author		Pedro Rocha and Rubens Suguimoto
+* @return		User's position on room user list, or null, if not found
 * @see			DATA_FindRoom 
 */
 function DATA_FindUserInRoom(Username)
@@ -2051,6 +2617,13 @@ function DATA_FindUserInRoom(Username)
 	}
 }
 
+/**
+* @brief		Get user object in user list of room
+*
+* @param		Username  	User's name to find
+* @author		Pedro Rocha and Rubens Suguimoto
+* @return		User object or null, if not found
+*/
 function DATA_GetUserInRoom(Username)
 {
 	var UserPos = this.FindUser(Username);
@@ -2067,7 +2640,7 @@ function DATA_GetUserInRoom(Username)
 
 /**
 * @brief		Set user attibutes in 'RoomName'
-* @param		RoomName	Room to set attribute
+*
 * @param 		Username	Base user to set
 * @param 		Status		New user's status
 * @param 		Role		New user's Role
@@ -2105,7 +2678,7 @@ function DATA_SetUserInfoInRoom(Username, Status, Role, Affiliation)
 
 /**
 * @brief		Delete user from user list of a room
-* @param		RoomName	Room name
+*
 * @param 		Username	User to remove
 * @author		Danilo Yorinori
 * @return 		Boolean
@@ -2131,14 +2704,14 @@ function DATA_RemoveUserInRoom(Username)
 * Return Category's Rating from Username in Room
 * (Based on fact that's all online users are connected to 'geral' room
 *
-* @param		RoomName	Room name
+*TODO -> REMOVE THIS FUNCTION WHEN USERSLIST WAS DONE*
+*
 * @param 		Username	User name
 * @param 		Category	Category which rating will be returned
 * @author		Danilo Yorinori
 * @return		Rating's value
 * @see			DATA_FindRoom DATA_FinUserInRoom
 */
-/*TODO -> REMOVE THIS FUNCTION WHEN USERSLIST IS DONE**/
 function DATA_GetUserRatingInRoom(Username, Category)
 {
 	var RatingList, Rating, PosRoom;
@@ -2193,7 +2766,6 @@ function DATA_GetUserRatingInRoom(Username, Category)
 /**
 * @brief		Sort Userlist from Room into ascending or descending order
 *
-* @param		RoomName	Room to sort
 * @author		Danilo Yorinori
 * @return		Boolean
 * @see			DATA_FindRoom UTILS_SortByUsernameAsc UTILS_SortByUsernameDsc
@@ -2227,6 +2799,7 @@ function DATA_SortUserByRatingInRoom()
 /**
 * @brief		Get room from room list
 *
+* @param		RoomName	Room's name
 * @author		Danilo Yorinori
 * @return		Boolean
 * @see			DATA_FindRooom
@@ -2244,18 +2817,48 @@ function DATA_GetRoom(RoomName)
 }
 
 
+
+/*
+* @brief	Set room sort order value
+*
+* @param	Value 	Sort order value (0 or 1)
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRoomOrderBy(Value)
 {
 	this.OrderBy = Value;
 }
+
+/*
+* @brief	Get room sort order value
+*
+* @return	Sort order value (0 or 1)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRoomOrderBy()
 {
 	return this.OrderBy;
 }
+
+/*
+* @brief	Set current room rating
+*
+* @param	RatingType	Rating category string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetRoomCurrentRating(RatingType)
 {
 	this.CurrentRating = RatingType;
 }
+
+/*
+* @brief	Get current room rating
+*
+* @return 	Rating category string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetRoomCurrentRating()
 {
 	return this.CurrentRating;
@@ -2269,9 +2872,9 @@ function DATA_GetRoomCurrentRating()
 /**
 * @brief		Add a chat in interface structure, with the other user name and his status
 *
-* @param		Username The user that you are chating with
-* @param 		Status 	 User's current status
-* @author 		Ulysses Bonfim
+* @param		Username 	User's name
+* @param 		ChatObj	 	Chat window object
+* @author 		Ulysses Bonfim and Rubens Suguimoto
 * @return 		Boolean
 * @see 			DATA_FindChat
 */
@@ -2293,9 +2896,9 @@ function DATA_AddChat (Username, ChatObj)
 /**
 * @brief		Remove a chat with the user given from the structure
 *
-* @param		Username	The user that the chat will be removed
-* @author 		Ulysses Bonfim
-* @return 		void
+* @param		Username	User's name
+* @author 		Ulysses Bonfim and Rubens Suguimoto
+* @return 		True if removed or null if not founded
 * @see 			DATA_FindChat
 */
 function DATA_RemoveChat(Username)
@@ -2323,11 +2926,11 @@ function DATA_RemoveChat(Username)
 
 
 /**
-* @brief		Find a chat with the user's name
+* @brief		Find a chat with ohter user
 *
-* @param		Username	The user that you are chating with
-* @author 		Ulysses Bonfim
-* @return 		interger the position of the chat in structure
+* @param		Username	User's name
+* @author 		Ulysses Bonfim and Rubens Suguimoto
+* @return 		Position of the chat in chat list (integer)
 */
 function DATA_FindChat(Username)
 {
@@ -2351,6 +2954,14 @@ function DATA_FindChat(Username)
 }
 
 
+
+/*
+* @brief	Get chat object
+*
+* @param	Username	User's name
+* @return 	Chat object or null if chat object not founded
+* @author	Rubens Suguimoto
+*/
 function DATA_GetChat(Username)
 {
 	var i;
@@ -2367,36 +2978,89 @@ function DATA_GetChat(Username)
 	}
 }
 
+
+/*
+* @brief	Get chat list length
+*
+* @return 	Caht list length (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetChatListLength()
 {
 	return this.Chat.ChatList.length;
 }
 
+
+/*
+* @brief	Set max chats opened
+*
+* @param	NewMax	Max numbers os chat opened
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetMaxChats(NewMax)
 {
 	this.Chat.MaxChats = NewMax;
 }
 
+
+/*
+* @brief	Get max chats opened
+*
+* @return	Max chats opened number (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMaxChats()
 {
 	return this.Chat.MaxChats;
 }
 
+
+/*
+* @brief	Set max chat characters number
+*
+* @param	MaxChar		Max characters numbers (integer)
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetMaxChatChar(MaxChar)
 {
 	this.Chat.MaxChatChar = MaxChar;
 }
 
+
+/*
+* @brief	Get max chat characters number
+*
+* @return 	Max characters in a chat message(integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMaxChatChar()
 {
 	return this.Chat.MaxChatChar;
 }
 
+
+/*
+* @brief	Add a chat to be show chat
+*
+* @param	ChatObj 	Chat object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_AddShowChat(ChatObj)
 {
 	this.Chat.ShowChat.push(ChatObj);
 }
 
+
+/*
+* @brief	Remove chat from show chat list
+*
+* @param	Username	User's name
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveShowChat(Username)
 {
 	var i;
@@ -2412,14 +3076,20 @@ function DATA_RemoveShowChat(Username)
 /**********************************
  * METHODS - CHALLENGES           *
  **********************************/
-
 /**
-* @brief		Add a challenge in 'ChallengeList'
-* @param		Username	The oponent
-* @param		Id			Challenge ID
-* @param		Challenger	The challenge challenger
-* @author 		Ulysses Bonfim
-* @return 		Boolean
+* @brief	Add a challenge in 'ChallengeList'
+*
+* ChallengeID is used temporary to identify challenge
+* in challenge list when match id was not defined
+*
+* @param	ChallengeId	Identification number of challenge in maindata
+* @param	Challenged	Who receive a challenge
+* @param	Challenger	Who make a challenge
+* @param	Category	Game category
+* @param	Rated		Flag to set rated game
+* @param	MatchId		Identification number of challenge in chess server
+* @author 	Ulysses Bonfim and Rubens Suguimoto
+* @return 	Boolean
 */
 function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated, MatchId)
 {
@@ -2471,8 +3141,17 @@ function DATA_AddChallenge(ChallengeId, Challenger, Challenged, Category, Rated,
 	return true;
 }	
 
-/**
-* Update a challenge in 'ChallengeList'
+/*
+* @brief	Update a challenge
+*
+* @param	ChallengeId	Identification number of challenge in maindata
+* @param	Challenged	Who receive a challenge
+* @param	Challenger	Who make a challenge
+* @param	Category	Game category
+* @param	Rated		Flag to set rated game
+* @param	MatchId		Identification number of challenge in chess server
+* @return 	Boolean	
+* @author	Rubens Suguimoto
 */
 function DATA_UpdateChallenge(ChallengeId, Challenger, Challenged, Category, Rated, MatchId)
 {
@@ -2524,11 +3203,13 @@ function DATA_UpdateChallenge(ChallengeId, Challenger, Challenged, Category, Rat
 }
 
 /**
-* @brief		Remove a challenge in 'ChallengeList'
-* @param		Username	The oponent
-* @author 		Ulysses Bonfim
-* @return 		Boolean
-* @see			DATA_FindChallenge
+* @brief	Remove a challenge
+*
+* @param	MatchId		Identification number of challenge in chess server
+* @param	ChallengeId	Identification number of challenge in maindata
+* @author	Ulysses Bonfim and Rubens Suguimoto
+* @return	Empty string
+* @see		DATA_FindChallenge
 */
 function DATA_RemoveChallenge(ChallengeId, MatchId)
 {
@@ -2550,61 +3231,17 @@ function DATA_RemoveChallenge(ChallengeId, MatchId)
 
 
 /**
-* Remove a challenge by ID in 'ChallengeList'
-* @param		ID	 Challenge ID
-* @author 		Ulysses Bonfim
-* @return 		Boolean
-* @see			DATA_FindChallengeById
-*/
-/*
-function DATA_RemoveChallengeById(ID)
-{
-	var i;
-
-	// Try to find ID on ChallengeList
-	i = this.FindChallengeById(ID);
-
-	// No challenge with the user given
-	if (i == null)
-	{
-		return null;
-	}
-
-	else 
-	{
-		// Remove from the list the position of the challenge
-		this.ChallengeList.splice(i, 1);
-	}
-
-	return "";
-}	
-*/
-
-/**
-* @brief		Remove all challenges in 'ChallengeList'
-* @author 		Ulysses Bonfim
-* @return 		void
-*/
-/*
-function DATA_ClearChallenges()
-{
-	var size = this.ChallengeList.length;
-	
-	this.ChallengeList.splice(0, size);
-
-	return "";
-}
-*/
-/**
-* Find a challenge in 'ChallengeList'
+* @brief	Find a challenge
+*
 * You can find a challenge by ChallengeId or MatchId;
 * This is used because interface create a instance of challenge
 * before get match id from server. If server send a error, this function
 * is able to find challenge in challenge list;
-* @brief		Find a challenge in 'ChallengeList'
-* @param		Username	Challenge opponent
-* @author 		Ulysses Bonfim
-* @return 		Boolean
+*
+* @param	MatchId		Identification number of challenge in chess server
+* @param	ChallengeId	Identification number of challenge in maindata
+* @return 	Challenge position (integer) or null if not founded
+* @author 	Ulysses Bonfim
 */
 function DATA_FindChallenge(ChallengeId, MatchId)
 {
@@ -2635,8 +3272,13 @@ function DATA_FindChallenge(ChallengeId, MatchId)
 	
 }
 
-/**
-* Update a challenge in 'ChallengeList'
+/*
+* @brief	Get challenge item
+*
+* @param	MatchId		Identification number of challenge in chess server
+* @param	ChallengeId	Identification number of challenge in maindata
+* @return	Challenge object or null (if was not founded)
+* @author	Rubens Suguimoto
 */
 function DATA_GetChallenge(ChallengeId, MatchId)
 {
@@ -2656,36 +3298,12 @@ function DATA_GetChallenge(ChallengeId, MatchId)
 }
 
 /**
-* @brief		Find a challenge by ID in 'ChallengeList'
-* @param		Username	Challenge opponent
-* @author 		Ulysses Bonfim
-* @return 		Challenge list index or null (user not found)
-*/
-/*
-function DATA_FindChallengeById(ID)
-{
-	var i;
-	
-	for (i=0 ; i < this.ChallengeList.length ; i++)
-	{
-		if (this.ChallengeList[i].Id == ID)
-		{
-			return i;
-		}
-	}
-	
-	// ID not found
-	return null;
-}
-*/
-
-/**
-* @brief		Add a Challenge window on structure
-* @param		Id	  		Challenge id
-* @param		WindowObj	Window Object shown on interface
-* @author 		Ulysses Bonfim
-* @return 		null
-* @see			DATA_FindChallengeById
+* @brief	Set a Challenge window pointer in challenge item
+* @param	Id	  	Challenge identification number
+* @param	WindowObj	Window Object with challenge content
+* @author 	Ulysses Bonfim and Rubens Suguimoto
+* @return 	none
+* @see		DATA_FindChallengeById
 */
 function DATA_AddChallengeWindow (Id, WindowObj)
 {
@@ -2697,266 +3315,80 @@ function DATA_AddChallengeWindow (Id, WindowObj)
 	}
 }
 
+
+/*
+* @brief	Get challenge list
+*
+* @return 	Challenge list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetChallengeList()
 {
 	return this.Challenge.ChallengeList;
 }
 
+
+/*
+* @brief	Set challenge menu object
+*
+* @param	MenuObj		Challenge menu object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetChallengeMenu(MenuObj)
 {
 	this.Challenge.ChallengeMenu = MenuObj;
 }
 
+
+/*
+* @brief	Get challenge menu
+*
+* @return	Challenge menu object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetChallengeMenu()
 {
 	return this.Challenge.ChallengeMenu;
 }
 
 
+/*
+* @brief	Set challenge sequence number
+*
+* This number is used to set challenge id (challenge identification number in data struct)
+*
+* @param	NewValue	New challenge id value
+* @return	none
+* @author	Rubens Suguimoto
+*/
+
 function DATA_SetChallengeSequence(NewValue)
 {
 	this.Challenge.ChallengeSequence = NewValue;
 }
 
+
+/*
+* @brief	Get challenge sequence number
+*
+* @return	Challenge identification number (integer)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetChallengeSequence()
 {
 	return this.Challenge.ChallengeSequence;
 }
 
 /**********************************
- * METHODS - ANNOUNCE CHALLENGES  *
- **********************************/
-/*
-function DATA_AddAnnounce(Username, Color, Time, Inc, Category, Rated, AutoFlag, AnnounceId)
-{
-	// Creating a new object
-	var Announce = new Object();
-	var User = new Object();
-	var i;
-
-	i = this.FindAnnounce(AnnounceId);
-	
-	// Challenge already exist on structure
-	if (i != null)
-	{
-		return null;
-	}
-
-	User.Name = Username;
-	User.Color = Color;
-	User.Time = Time;
-	User.Inc = Inc;
-
-	// Setting atributes
-	Announce.Id = AnnounceId;
-	Announce.Category = Category;
-	Announce.Player = User;
-	Announce.Rated = Rated;
-	Announce.AutoFlag = AutoFlag;
-	Announce.Private = false;
-
-	this.Announce.AnnounceList.push(Announce);
-
-	return true;
-}
-
-function DATA_RemoveAnnounce(AnnounceId)
-{
-	var i;
-
-	i = this.FindAnnounce(AnnounceId);
-
-	// No postpone challenge with id founded
-	if (i == null)
-	{
-		return null;
-	}
-
-	// Remove challenge from list
-	this.Announce.AnnounceList.splice(i, 1);
-
-	return "";
-
-}
-
-function DATA_FindAnnounce(AnnounceId)
-{
-	var i;
-
-	// If match id exists, find by match id
-	for (i=0 ; i < this.Announce.AnnounceList.length ; i++)
-	{
-		if (this.Announce.AnnounceList[i].Id == AnnounceId)
-		{
-			return i;
-		}
-	}
-
-	// Challenge not found
-	return null;
-	
-}
-
-function DATA_GetAnnounce(AnnounceId)
-{
-	var Pos = this.FindAnnounce(AnnounceId);
-	
-	if(Pos != null)
-	{
-		return this.Announce.AnnounceList[Pos];
-	}
-	else
-	{
-		return null;
-	}
-}
-*/
-/**
-* @brief		Remove all announce in 'AnnounceList'
-* @author 		Rubens Suguimoto
-* @return 		void
-*/
-/*
-function DATA_ClearAnnounces()
-{
-	var size = this.AnnounceList.length;
-	
-	this.AnnounceList.splice(0, size);
-
-	return "";
-}
-*/
-/*
-function DATA_GetAnnounceList()
-{
-	return this.Announce.AnnounceList;
-}
-*/
-/**********************************
- * METHODS - POSTPONE CHALLENGES  *
- **********************************/
-
-/**
-* @brief		Add a challenge in 'PosponeList'
-* @param		Oponent		The oponent
-* @param		Category	Game category
-* @param		Date		Date of adjourned match
-* @param		PostponeId	Adjourned game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
-*/
-/*
-function DATA_AddPostpone(Oponent, Category, Date, PostponeId)
-{
-	// Creating a new object
-	var Challenge = new Object();
-	var ChallengedObj = new Object();
-	var i;
-
-	i = this.FindPostpone(PostponeId);
-	
-	// Challenge already exist on structure
-	if (i != null)
-	{
-		return null;
-	}
-
-	ChallengedObj.Name  = Oponent.Name;
-	ChallengedObj.Time  = Oponent.Time;
-	ChallengedObj.Inc  = Oponent.Inc;
-	ChallengedObj.Color  = Oponent.Color;
-
-	// Setting atributes
-	Challenge.Id = PostponeId;
-	Challenge.Challenged = ChallengedObj;
-	Challenge.Category = Category;
-	Challenge.Private = false;
-
-	Challenge.Window = null;
-
-	this.Postpone.PostponeList.push(Challenge);
-
-	return true;
-}	
-/*
-* @brief		Find a postpone challenge in 'PostponeList'
-* @param		PostponeId	Adjourned game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
-*/
-/*
-function DATA_FindPostpone(PostponeId)
-{
-	var i;
-
-	// If match id exists, find by match id
-	for (i=0 ; i < this.Postpone.PostponeList.length ; i++)
-	{
-		if (this.Postpone.PostponeList[i].Id == PostponeId)
-		{
-			return i;
-		}
-	}
-
-	// Challenge not found
-	return null;
-	
-}
-
-/**
-* @brief		Remove a postpone challenge in 'PostponeList'
-* @param		Username	The oponent
-* @author 		Rubens Suguimoto
-* @return 		Boolean
-* @see			DATA_FindPostpone
-*/
-/*
-function DATA_RemovePostpone(PostponeId)
-{
-	var i;
-
-	i = this.FindPostpone(PostponeId);
-
-	// No postpone challenge with id founded
-	if (i == null)
-	{
-		return null;
-	}
-
-	// Remove challenge from list
-	this.Postpone.PostponeList.splice(i, 1);
-
-	return "";
-}
-
-function DATA_GetPostpone(PostponeId)
-{
-	var Pos = this.FindPostpone(PostponeId);
-
-	if (Pos != null) 
-	{
-		return this.Postpone.PostponeList[Pos];
-	}
-	else
-	{
-		return null;
-	}
-}
-
-function DATA_GetPostponeList()
-{
-	return this.Postpone.PostponeList;
-}
-*/
-/**********************************
  * METHODS - GAME                 *
  **********************************/
 
 /**
-* @brief		Set current game 
-* @param		Game	Game to set
-* @author 		Rubens Sugimoto
-* @return 		null
+* @brief	Set current game 
+* @param	Game	Game object to be a current game
+* @author 	Rubens Suguimoto
+* @return 	none
 */
 function DATA_SetCurrentGame(Game)
 {
@@ -2971,9 +3403,10 @@ function DATA_SetCurrentGame(Game)
 }
 
 /**
-* @brief		Get current game 
-* @author 		Rubens Sugimoto
-* @return 		Game object
+* @brief	Get current game 
+*
+* @return 	Current game object
+* @author 	Rubens Suguimoto
 */
 function DATA_GetCurrentGame()
 {
@@ -2981,27 +3414,22 @@ function DATA_GetCurrentGame()
 }
 
 /**
-* @brief		Add a game in 'GameList'
-* @param		Id 	  	   Game Id
-* @param		Player1	   Player name
-* @param		Player2	   Player name
-* @param		Color	   Your color on game
-* @param		GameDiv	   Interface information 
-* @author 		Rubens Sugimoto
-* @return 		New Game structure
-* @see			DATA_SetCurrentGame
+* @brief	Add a game
+*
+* @param	Id 		Game identification number (integer)
+* @param	Player1		First player's name
+* @param	Player2		Second player's name
+* @param	Color		Your color on game
+* @param	GameDiv		Board object
+* @return 	New Game structure
+*
+* @author 	Rubens Suguimoto
+* @see		DATA_SetCurrentGame
 */
 function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 {
 	var NewGame = new Object();
 
-	/*
-	if(this.GameList.length == 0)
-	{
-		this.SetCurrentGame(NewGame);
-	}
-	*/
-	
 	this.SetCurrentGame(NewGame);
 
 	NewGame.Id = Id;
@@ -3057,10 +3485,11 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 
 
 /**
-* @brief		Remove a game in 'GameList' by game id
-* @param		Id 	  	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		Removed Game structure
+* @brief		Remove a game
+*
+* @param		Id 	  Game identification number
+* @return 		Removed game item
+* @author 		Rubens Suguimoto
 * @see			DATA_FindGame DATA_SetCurrentGame 
 */
 function DATA_RemoveGame(Id)
@@ -3102,10 +3531,11 @@ function DATA_RemoveGame(Id)
 }
 
 /**
-* @brief		Find game in 'GameList' by game id
-* @param		Id 	  	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		Game index
+* @brief		Find game by game id
+*
+* @param		Id 	  Game identification
+* @return 		Game index or null (if not founded)
+* @author 		Rubens Suguimoto
 * @see			DATA_FindGame DATA_SetCurrentGame 
 */
 function DATA_FindGame(Id)
@@ -3126,15 +3556,17 @@ function DATA_FindGame(Id)
 }
 
 /**
-* @brief		Add a move in 'GameList[x].Moves' 
+* @brief		Add a move in game
+*
 * @param		BoardArray 	  Board Array
-* @param		Move		  Board after move
-* @param		ShortMove	  The move
-* @param		PWTime		  White player time
-* @param		PBTime		  Balck player time
+* @param		Move		  Game move done
+* @param		ShortMove	  Move done in short format
+* @param		PWTime		  White player's  time
+* @param		PBTime		  Balck player's time
 * @param		Turn		  Who did the move
-* @author 		Rubens Sugimoto
-* @return 		null
+* @return 		none
+*
+* @author 		Rubens Suguimoto
 */
 function DATA_AddGameMove(BoardArray, Move, ShortMove, PWTime, PBTime, Turn)
 {
@@ -3153,10 +3585,10 @@ function DATA_AddGameMove(BoardArray, Move, ShortMove, PWTime, PBTime, Turn)
 }
 
 /**
-* @brief		Set true, if is the player's turn
-* @param		TurnColor 	 The round color
-* @author 		Rubens Sugimoto
-* @return 		Boolean
+* @brief		Set your turn flag
+* @param		TurnColor 	 Player's color
+* @author 		Rubens Suguimoto
+* @return 		none
 */
 function DATA_SetTurnGame(TurnColor)
 {
@@ -3172,10 +3604,10 @@ function DATA_SetTurnGame(TurnColor)
 
 
 /**
-* @brief		Search for a game in GameList
-* @param		Id	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		The game structure
+* @brief		Get game item
+* @param		Id	   Game identification number
+* @author 		Rubens Suguimoto
+* @return 		Game item or null (if was not founded)
 */
 function DATA_GetGame(Id)
 {
@@ -3200,10 +3632,11 @@ function DATA_GetGame(Id)
 
 
 /**
-* @brief		Set current oldgame 
-* @param		Game	Game structure
-* @author 		Rubens Sugimoto
-* @return 		null
+* @brief	Set current oldgame
+*
+* @param	Game	Oldgame item
+* @author 	Rubens Suguimoto
+* @return 	none
 */
 function DATA_SetCurrentOldGame(Game)
 {
@@ -3218,9 +3651,10 @@ function DATA_SetCurrentOldGame(Game)
 }
 
 /**
-* @brief		Get current oldgame 
-* @author 		Rubens Sugimoto
-* @return 		Game Object
+* @brief		Get current oldgame
+*
+* @author 		Rubens Suguimoto
+* @return 		Oldgame item
 */
 function DATA_GetCurrentOldGame()
 {
@@ -3228,13 +3662,13 @@ function DATA_GetCurrentOldGame()
 }
 
 /**
-* @brief		Add a oldgame in 'OldGameList'
-* @param		PWName		  White player's name
-* @param		PBName		  Black player's name
-* @param		Color		  Your color on game
-* @param		GameDiv		  Div structure
-* @author 		Rubens Sugimoto
-* @return 		null
+* @brief		Add a oldgame 
+* @param		PWName	  White player's name
+* @param		PBName	  Black player's name
+* @param		Color	  Your color
+* @param		GameDiv	  Board object
+* @author 		Rubens Suguimoto
+* @return 		none
 * @see 			DATA_SetCurrentOldGame
 */
 function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
@@ -3277,11 +3711,11 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 
 
 /**
-* @brief		Remove a game in 'OldGameList' by game id
-* @param		Id	   	 The Game Id
-* @author 		Rubens Sugimoto
-* @return 		The game removed object
-* @see			DATA_SetCurrentOldGame
+* @brief	Remove a oldgame
+* @param	Id	  Oldgame identification
+* @author 	Rubens Suguimoto
+* @return 	Oldgame removed item
+* @see		DATA_SetCurrentOldGame
 */
 function DATA_RemoveOldGame(Id)
 {
@@ -3297,10 +3731,10 @@ function DATA_RemoveOldGame(Id)
 		RemovedOldGame = this.OldGame.OldGameList[GamePosition];
 		this.OldGame.OldGameList.splice(GamePosition, 1);
 /*
-		//Set next game on GameList to current game
+		//Set next game on GameList to current oldgame
 		MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition]);
-		//If next game is null, set previous game to current game, else
-		//there is no game on GameList
+		//If next game is null, set previous game to current oldgame, else
+		//there is no game on old game list
 		if(this.GetCurrentOldGame() == null)
 		{
 			MainData.SetCurrentOldGame(this.OldGame.OldGameList[GamePosition-1]);
@@ -3314,10 +3748,10 @@ function DATA_RemoveOldGame(Id)
 }
 
 /**
-* @brief		Search for a game in OldGameList
-* @param		Id	   Game Id
-* @author 		Rubens Sugimoto
-* @return 		The game structure
+* @brief	Get old game item
+* @param	Id	   Game identification number
+* @author 	Rubens Suguimoto
+* @return 	The game structure
 */
 function DATA_GetOldGame(Id)
 {
@@ -3340,11 +3774,12 @@ function DATA_GetOldGame(Id)
 
 
 /**
-* @brief		Set an old game as the current old game
-* @param		GameObj    		The old game object
-* @author 		Rubens Sugimoto
-* @return 		Game's position on OldGameList
-* @see			DATA_SetCurrentOldGame
+* @brief	Set a normal game as the current old game
+*
+* @param	GameObj    		The normal game object
+* @author 	Rubens Suguimoto
+* @return 	Oldgame position in old game list
+* @see		DATA_SetCurrentOldGame
 */
 function DATA_PushGameToOldGame(GameObj)
 {
@@ -3360,12 +3795,12 @@ function DATA_PushGameToOldGame(GameObj)
  **********************************/
 
 /**
-* @brief		Add search game window parameters
-* @param		Id		   Game ID
-* @param		Elements   
-* @param		User	   Username
-* @author		Danilo Yorinori
-* @return		boolean
+* @brief	Add search game window parameters
+* @param	Id		Game ID
+* @param	Elements   	HTML DOM elements list
+* @param	User	   	User's name
+* @author	Danilo Yorinori
+* @return	boolean
 */
 function DATA_AddSearchGameInfo(Id, Elements, User)
 {
@@ -3389,6 +3824,8 @@ function DATA_AddSearchGameInfo(Id, Elements, User)
 
 /**
 * @brief		Remove search game window
+*
+* @param		Id	Old game chess server identification number
 * @author		Danilo Yorinori
 * @return		boolean
 */
@@ -3397,13 +3834,17 @@ function DATA_RemoveSearchGameInfo(Id)
 	var i = this.FindSearchGameInfo(Id);
 
 	if (i != null)
+	{
 		this.SearchGameInfoList.splice(i,1);
+	}
 
 	return true;
 }
 
 /**
 * @brief		Find search game window
+*
+* @param		Id	Old game chess server identification number
 * @author		Danilo Yorinori
 * @return		Game's position
 */
@@ -3424,6 +3865,14 @@ function DATA_FindSearchGameInfo(Id)
 	return null
 }
 
+
+/*
+* @brief	Get search old game item
+*
+* @param	Id	Old game chess server identification number
+* @return 	Old game item or null (if not founded)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetSearchGameInfo(Id)
 {
 	var i=0;
@@ -3442,41 +3891,101 @@ function DATA_GetSearchGameInfo(Id)
 /**********************************
  * METHODS - PREFERENCES          *
  **********************************/
+
+/*
+* @brief	Set your password
+*
+* @param	NewPassword	New password string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetPassword(NewPassword)
 {
 	this.Preferences.Password = NewPassword;
 }
 
+
+/*
+* @brief	Get your password
+*
+* @return 	Password string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPassword()
 {
 	return this.Preferences.Password;
 }
 
+
+/*
+* @brief	Set your username
+*
+* @param	Username
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetMyUsername(Username)
 {
 	this.Preferences.Username = Username;
 }
 
+
+/*
+* @brief	Get your username
+*
+* @return	Your username string
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMyUsername()
 {
 	return this.Preferences.Username;
 }
 
+
+/*
+* @brief	Set your away counter limit
+*
+* @param	Counter number limit (seconds)
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetAwayCounter(Counter)
 {
 	this.Preferences.AwayCounter = Counter;
 }
 
+
+/*
+* @brief	Get away counter limit
+*
+* @return	Away counter limit
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAwayCounter()
 {
 	return this.Preferences.AwayCounter;
 }
 
+
+/*
+* @brief	Set away interval counter
+*
+* @param	Interval	Counter number pointer
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetAwayInterval(Interval)
 {
 	this.Preferences.AwayInterval = Interval;
 }
 
+
+/*
+* @brief	Get away interval counter
+*
+* @return	Counter number pointer
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAwayInterval()
 {
 	return this.Preferences.AwayInterval;
@@ -3486,7 +3995,11 @@ function DATA_GetAwayInterval()
  * METHODS - WINDOWS              *
  **********************************/
 /**
-* Add a WindowObject in WindowList
+* @brief	Add a WindowObject in WindowList
+*
+* @param	WindowObj	Window object
+* @return	none
+* @author	Rubens Suguimoto
 */
 function DATA_AddWindow(WindowObj)
 {
@@ -3498,7 +4011,11 @@ function DATA_AddWindow(WindowObj)
 }
 
 /**
-* Set Window Object Focus
+* @brief	Set Window Object in focus
+*
+* @param	WindowObj	Window object
+* @return 	Window Object 
+* @author	Rubens Suguimoto
 */
 function DATA_SetWindowFocus(WindowObj)
 {
@@ -3515,7 +4032,10 @@ function DATA_SetWindowFocus(WindowObj)
 }
 
 /*
-* Get Window Object Focus
+* @brief	Get Window Object in focus
+*
+* @return	Window object
+* @author	Rubens Suguimoto
 */
 function DATA_GetWindowFocus()
 {
@@ -3523,20 +4043,35 @@ function DATA_GetWindowFocus()
 }
 
 /*
-* Get Window Object List length
+* @brief	Get Window list length
+*
+* @return 	Window Object list length
+* @author	Rubens Suguimoto
 */
 function DATA_GetWindowListLength()
 {
 	return this.Windows.WindowList.length;
 }
 
+
+/*
+* @brief	Get window object
+*
+* @param	Index	Window object index in Window list
+* @return 	Window Object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetWindow(Index)
 {
 	return this.Windows.WindowList[Index];
 }
 
 /**
-* Remove a Window Object from WindowList
+* @brief	Remove a Window Object from WindowList
+*
+* @param	WindowObj	Window Object
+* @return	none
+* @author	Rubens Suguimoto
 */
 function DATA_RemoveWindow(WindowObj)
 {
@@ -3553,7 +4088,11 @@ function DATA_RemoveWindow(WindowObj)
 }
 
 /**
-* Private method used to find Window Object posiiton in WindowList
+* @brief	Find Window Object positon in WindowList
+*
+* @param	WindowObj	Window Object
+* @return	Window object position or null (if not founded)
+* @author	Rubens Suguimoto
 */
 function DATA_FindWindow(WindowObj)
 {
@@ -3573,11 +4112,26 @@ function DATA_FindWindow(WindowObj)
 /**********************************
  * METHODS - LOAD OBJECT          *
  **********************************/
+
+/*
+* @brief	Set load interface object
+*
+* @param	Obj	Load interface object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetLoadObj(Obj)
 {
 	this.LoadObj = Obj;
 }
 
+
+/*
+* @brief	Get load interface object
+*
+* @return	Load interface object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetLoadObj()
 {
 	return this.LoadObj;
@@ -3587,34 +4141,35 @@ function DATA_GetLoadObj()
  * METHODS - PROFILE              *
  **********************************/
 
+
+/*
+* @brief	Add profile
+*
+* @param	Jid		Jabber Id
+* @param	Username	User's name
+* @param	ProfileWindow	Window object with profile content
+* @return	none 
+* @author	Rubens Suguimoto
+*/
 function DATA_AddProfile(Jid, Username, ProfileWindow)
 {
 	var NewProfile = new Object();
 	// Data Id
 	NewProfile.Jid = Jid;
 	NewProfile.Profile = ProfileWindow;
-/*
-	// vCard Data
-	NewProfile.Fullname = "---";
-	NewProfile.Nickname = Username;
-	NewProfile.Desc = "---";
-	NewProfile.PhotoImg = "";
-	NewProfile.PhotoType = "";
 
-	// Chess Data
-	NewProfile.Rating = "---";
-	NewProfile.LastGame = "---";
-	NewProfile.OnlineTime = "---";
-	NewProfile.Title = "---";
-	NewProfile.TotalTime = "---";
-	NewProfile.Group = "---";
-	NewProfile.Warning = "";
-	NewProfile.GameInfo = null; //Table
-*/
 	this.ProfileList.push(NewProfile);
 
 }
 
+
+/*
+* @brief	Find profile
+*
+* @param	Jid	Jabber id
+* @return 	Profile position or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindProfile(Jid)
 {
 	var i=0;
@@ -3630,6 +4185,14 @@ function DATA_FindProfile(Jid)
 	return null;
 }
 
+
+/*
+* @brief	Remove profile
+*
+* @param	Jid	Jabber Id
+* @return 	True if removed or false (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveProfile(Jid)
 {
 	var ProfileIndex = this.FindProfile(Jid);
@@ -3646,6 +4209,14 @@ function DATA_RemoveProfile(Jid)
 
 }
 
+
+/*
+* @brief	Get profile item
+*
+* @param	Jid	Jabber Id
+* @return	Profile	Item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetProfile(Jid)
 {
 	var i=0;
@@ -3666,6 +4237,21 @@ function DATA_GetProfile(Jid)
 /**********************************
  * METHODS - MY PROFILE           *
  **********************************/
+
+/*
+* @brief	Set your profile
+*
+* This is used to edit your profile
+*
+* @param	Username	User's name
+* @param	Fullname	User's full name
+* @param	Desc		User's description
+* @param	ImgType		User's image type
+* @param	Img64		User's image in base64 
+*
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
 {
 	if(Username != "")
@@ -3700,7 +4286,7 @@ function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
 
 /**
 * @brief		Add search user window parameters
-* @param		Elements   
+* @param		Elements	HTML DOM elements
 * @author		Danilo Yorinori
 * @return		boolean
 */
@@ -3777,11 +4363,26 @@ function DATA_SortSearchUserByName()
 /**********************************
  * METHODS - GAMECENTER           *
  **********************************/
+
+/*
+* @brief	Set game center object
+*
+* @param	Obj	Game center object
+* @return 	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetGamecenter(Obj)
 {
 	this.Gamecenter.Gamecenter = Obj;
 }
 
+
+/*
+* @brief	Get game center object
+*
+* @return	Game center object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetGamecenter()
 {
 	return this.Gamecenter.Gamecenter;
@@ -3790,6 +4391,21 @@ function DATA_GetGamecenter()
 /*********************************************
  * METHODS - GAMECENTER ANNOUNCE CHALLENGES  *
  ********************************************/
+
+/*
+* @brief	Add announce
+*
+* @param	Player		Player object (Name, Color, Time, Inc)
+* @param	Rating		Rating current category value
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rated		Game rated flag
+* @param	Private		Game private flag
+* @param	AnnounceId	Game announce identification number 
+* @return 	Boolean (True)
+* @author	Rubens Suguimoto
+*/
 function DATA_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId)
 {
 	// Creating a new object
@@ -3820,6 +4436,14 @@ function DATA_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, A
 	return true;
 }
 
+
+/*
+* @brief	Remove announce 
+*
+* @param	AnnounceId	Announce identification number
+* @return 	Empty string
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveAnnounce(AnnounceId)
 {
 	var i;
@@ -3839,6 +4463,14 @@ function DATA_RemoveAnnounce(AnnounceId)
 
 }
 
+
+/*
+* @brief	Find announce
+*
+* @param	AnnounceId	Announce identification number
+* @return	Announce item index or null (if not founded)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindAnnounce(AnnounceId)
 {
 	var i;
@@ -3857,6 +4489,14 @@ function DATA_FindAnnounce(AnnounceId)
 	
 }
 
+
+/*
+* @brief	Get announce
+*
+* @param	AnnounceId	Announce identification number
+* @return 	Announce item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAnnounce(AnnounceId)
 {
 	var Pos = this.FindAnnounce(AnnounceId);
@@ -3871,6 +4511,13 @@ function DATA_GetAnnounce(AnnounceId)
 	}
 }
 
+
+/*
+* @brief	Get announce list
+*
+* @return	Announce list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAnnounceList()
 {
 	return this.Gamecenter.AnnounceList;
@@ -3880,13 +4527,17 @@ function DATA_GetAnnounceList()
  ********************************************/
 
 /**
-* @brief		Add a challenge in 'PosponeList'
-* @param		Oponent		The oponent
-* @param		Category	Game category
-* @param		Date		Date of adjourned match
-* @param		PostponeId	Adjourned game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
+* @brief	Add a postponed game
+* @param	Player		Oponent player's object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rating		Rating current category value
+* @param	Date		Date of adjourned match
+* @param	Status		Oponent player status
+* @param	PostponeId	Postponed game identification number
+* @author 	Rubens Suguimoto
+* @return 	Boolean
 */
 function DATA_AddPostpone(Player, Time, Inc, Category, Rating, Date, Status, PostponeId)
 {
@@ -3920,10 +4571,10 @@ function DATA_AddPostpone(Player, Time, Inc, Category, Rating, Date, Status, Pos
 	return true;
 }	
 /*
-* @brief		Find a postpone challenge in 'PostponeList'
-* @param		PostponeId	Adjourned game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
+* @brief	Find a postponed game
+* @param	PostponeId	Postponed game identification number
+* @author 	Rubens Suguimoto
+* @return 	Postponed game item or null (if not found)
 */
 function DATA_FindPostpone(PostponeId)
 {
@@ -3944,11 +4595,11 @@ function DATA_FindPostpone(PostponeId)
 }
 
 /**
-* @brief		Remove a postpone challenge in 'PostponeList'
-* @param		Username	The oponent
-* @author 		Rubens Suguimoto
-* @return 		Boolean
-* @see			DATA_FindPostpone
+* @brief	Remove a postpone challenge in 'PostponeList'
+* @param	PostponeId	Postponed game identification number
+* @author 	Rubens Suguimoto
+* @return 	Postponed game item or null (if not found)
+* @see		DATA_FindPostpone
 */
 function DATA_RemovePostpone(PostponeId)
 {
@@ -3968,6 +4619,14 @@ function DATA_RemovePostpone(PostponeId)
 	return "";
 }
 
+
+/*
+* @brief	Get postpone item
+*
+* @param	PostponeId	Postponed game identification number
+* @return 	Postponed item index or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPostpone(PostponeId)
 {
 	var Pos = this.FindPostpone(PostponeId);
@@ -3982,14 +4641,29 @@ function DATA_GetPostpone(PostponeId)
 	}
 }
 
+
+/*
+* @brief	Get postpone list
+*
+* @return	Postponed games list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPostponeList()
 {
 	return this.Gamecenter.PostponeList;
 }
 
+
+/*
+* @brief	Set postponed game oponent status
+*
+* @param	PostponeId	Postponed game identification number
+* @param	Status		Oponent status
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetPostponeStatus(PostponeId, Status)
 {
-	//TODO -> ARRUMA PRA MUDAR O STATUS DO JOGADOR!!!
 	var PostponeItem = this.GetPostpone(PostponeId);
 	PostponeItem.Status = Status;
 }
@@ -3999,13 +4673,19 @@ function DATA_SetPostponeStatus(PostponeId, Status)
  ********************************************/
 
 /**
-* @brief		Add a current games in 'CurrentGamesList'
-* @param		Oponent		The oponent
+* @brief		Add a current game
+*
+* @param		WPlayer		White player object
+* @param		WRating		White player rating
+* @param		BPlayer		Black player object
+* @param		BRating		Black player rating
 * @param		Category	Game category
-* @param		Date		Date of adjourned match
-* @param		CurrentGameId	Current game Id 
+* @param		Time		Game time
+* @param		Rated		Game rated flag
+* @param		Moves		Number of moves done
+* @param		CurrentGamesId	Current game identification number 
 * @author 		Rubens Suguimoto
-* @return 		Boolean
+* @return 		True if game was added or null(if current game already exist )
 */
 function DATA_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category, Time, Rated, Moves, CurrentGamesId)
 {
@@ -4037,10 +4717,11 @@ function DATA_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category, Time
 	return true;
 }	
 /*
-* @brief		Find a postpone challenge in 'CurrentGamesList'
-* @param		CurrentGamesId	Adjourned game Id 
+* @brief		Find a current game
+*
+* @param		CurrentGamesId	Current game identification number 
 * @author 		Rubens Suguimoto
-* @return 		Boolean
+* @return 		Current game index or null (if not found)
 */
 function DATA_FindCurrentGames(CurrentGamesId)
 {
@@ -4061,10 +4742,11 @@ function DATA_FindCurrentGames(CurrentGamesId)
 }
 
 /**
-* @brief		Remove a postpone challenge in 'CurrentGamesList'
-* @param		Username	The oponent
+* @brief		Remove a current game
+*
+* @param		CurrentGamesId	Current game identification number 
 * @author 		Rubens Suguimoto
-* @return 		Boolean
+* @return 		Empty string
 * @see			DATA_FindCurrentGames
 */
 function DATA_RemoveCurrentGames(CurrentGamesId)
@@ -4085,6 +4767,14 @@ function DATA_RemoveCurrentGames(CurrentGamesId)
 	return "";
 }
 
+
+/*
+* @brief	Get current game item
+*
+* @param	CurrentGamesId	Current game identification number 
+* @return	Current game item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetCurrentGames(CurrentGamesId)
 {
 	var Pos = this.FindCurrentGames(CurrentGamesId);
@@ -4099,6 +4789,13 @@ function DATA_GetCurrentGames(CurrentGamesId)
 	}
 }
 
+
+/*
+* @brief	Get current games list
+*
+* @return	Current games list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetCurrentGamesList()
 {
 	return this.Gamecenter.CurrentGamesList;
@@ -4108,13 +4805,17 @@ function DATA_GetCurrentGamesList()
  ********************************************/
 
 /**
-* @brief		Add a offered match in 'MatchOfferList'
-* @param		Oponent		The oponent
-* @param		Category	Game category
-* @param		Date		Date of adjourned match
-* @param		CurrentGameId	Current game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
+* @brief	Add a offered match
+*
+* @param	Player		Player object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rated		Rated game flag
+* @param	Private		Private game flag
+* @param	MatchOfferId	Offered match identification number
+* @author 	Rubens Suguimoto
+* @return 	True if game was added or null(if current game already exist )
 */
 function DATA_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchOfferId)
 {
@@ -4145,10 +4846,11 @@ function DATA_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchOf
 	return true;
 }	
 /*
-* @brief		Find a postpone challenge in 'MatchOfferList'
-* @param		MatchOfferId	Adjourned game Id 
-* @author 		Rubens Suguimoto
-* @return 		Boolean
+* @brief	Find a offered match
+*
+* @param	MatchOfferId	Offered match identification number
+* @author 	Rubens Suguimoto
+* @return 	Offered match index or null (if not found)
 */
 function DATA_FindMatchOffer(MatchOfferId)
 {
@@ -4169,11 +4871,12 @@ function DATA_FindMatchOffer(MatchOfferId)
 }
 
 /**
-* @brief		Remove a postpone challenge in 'MatchOfferList'
-* @param		Username	The oponent
-* @author 		Rubens Suguimoto
-* @return 		Boolean
-* @see			DATA_FindMatchOffer
+* @brief	Remove a offered match
+*
+* @param	MatchOfferId	Offered match identification number
+* @author 	Rubens Suguimoto
+* @return 	Empty string
+* @see		DATA_FindMatchOffer
 */
 function DATA_RemoveMatchOffer(MatchOfferId)
 {
@@ -4193,6 +4896,14 @@ function DATA_RemoveMatchOffer(MatchOfferId)
 	return "";
 }
 
+
+/*
+* @brief	Get a offered match
+*
+* @param	MatchOfferId	Offered match identification number
+* @return	Offered match item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMatchOffer(MatchOfferId)
 {
 	var Pos = this.FindMatchOffer(MatchOfferId);
@@ -4207,6 +4918,13 @@ function DATA_GetMatchOffer(MatchOfferId)
 	}
 }
 
+
+/*
+* @brief	Get offered matches list
+*
+* @return 	Offered matchs list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetMatchOfferList()
 {
 	return this.Gamecenter.MatchOfferList;
@@ -4215,11 +4933,26 @@ function DATA_GetMatchOfferList()
 /**********************************
  * METHODS - ADMINCENTER          *
  **********************************/
+
+/*
+* @brief	Set admin center object
+*
+* @param	Obj	Admin center object
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function DATA_SetAdmincenter(Obj)
 {
 	this.Admincenter.Admincenter = Obj;
 }
 
+
+/*
+* @brief	Get admin center object
+*
+* @return	Admin center object
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAdmincenter()
 {
 	return this.Admincenter.Admincenter;
@@ -4227,6 +4960,19 @@ function DATA_GetAdmincenter()
 /*********************************************
  * METHODS - GAMECENTER PUNISH LIST          *
  ********************************************/
+
+/*
+* @brief	Add punished player
+*
+* @param	Name		User's name
+* @param	Punish		Punish string
+* @param	Incident	Incident times
+* @param	Date		Punish date
+* @param	Period		Punish time interval
+* @param	Reason		Reason to punish string
+* @return 	True if game was added or null(if current game already exist )
+* @author	Rubens Suguimoto
+*/
 function DATA_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 {
 	// Creating a new object
@@ -4255,6 +5001,14 @@ function DATA_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	return true;
 
 }
+
+/*
+* @brief	Remove punished player
+*
+* @param	PunishId	Punish identification field
+* @return 	Empty string
+* @author	Rubens Suguimoto
+*/
 function DATA_RemovePunish(PunishId)
 {
 	var i;
@@ -4273,6 +5027,14 @@ function DATA_RemovePunish(PunishId)
 	return "";
 
 }
+
+/*
+* @brief	Find punished player
+*
+* @param	PunishId	Punish identification field
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_FindPunish(PunishId)
 {
 	var i;
@@ -4290,6 +5052,14 @@ function DATA_FindPunish(PunishId)
 	return null;
 	
 }
+
+/*
+* @brief	Get punish item
+*
+* @param	PunishId	Punish identification field
+* @return	Punish item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPunish(PunishId)
 {
 	var Pos = this.FindPunish(PunishId);
@@ -4304,11 +5074,27 @@ function DATA_GetPunish(PunishId)
 	}
 
 }
+
+/*
+* @brief	Get punished players list
+*
+* @return 	Punished players list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetPunishList()
 {
 	return this.Admincenter.PunishList;
 }
 /*ADMINCENTER OBJECT LEVEL LIST METHODS****************/
+
+/*
+* @brief	Add player level
+*
+* @param	Name	User's name
+* @param	Level	User's level
+* @return 	True if game was added or null(if current game already exist )
+* @author	Rubens Suguimoto
+*/
 function DATA_AddLevel(Name, Level)
 {
 	// Creating a new object
@@ -4334,6 +5120,14 @@ function DATA_AddLevel(Name, Level)
 	return true;
 
 }
+
+/*
+* @brief	Remove player level
+*
+* @param	LevelId		Player level identification field
+* @return 	Empty string
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveLevel(LevelId)
 {
 	var i;
@@ -4353,6 +5147,14 @@ function DATA_RemoveLevel(LevelId)
 
 
 }
+
+/*
+* @brief	Find player level
+*
+* @param	LevelId		Player level identification field
+* @return	Player level item index or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindLevel(LevelId)
 {
 	var i;
@@ -4370,6 +5172,14 @@ function DATA_FindLevel(LevelId)
 	return null;
 
 }
+
+/*
+* @brief	Get player level item
+*
+* @param	LevelId		Player level identification field
+* @return	Player level item
+* @author	Rubens Suguimoto
+*/
 function DATA_GetLevel(LevelId)
 {
 	var Pos = this.FindLevel(LevelId);
@@ -4384,11 +5194,27 @@ function DATA_GetLevel(LevelId)
 	}
 
 }
+
+/*
+* @brief	Get players level list
+*
+* @return	Players level list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetLevelList()
 {
 	return this.Admincenter.LevelList;
 }
 /*ADMINCENTER OBJECT ADMIN LEVEL LIST METHODS****************/
+
+/*
+* @brief	Add admin level
+*
+* @param	Name	User's name
+* @param	Level	User's level
+* @return 	True if game was added or null(if current game already exist )
+* @author	Rubens Suguimoto
+*/
 function DATA_AddAdminLevel(Name, Level)
 {
 	// Creating a new object
@@ -4415,6 +5241,14 @@ function DATA_AddAdminLevel(Name, Level)
 
 
 }
+
+/*
+* @brief	Remove admin level
+*
+* @param	AdminLevelId	Admin level identification field
+* @return	Empty string
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveAdminLevel(AdminLevelId)
 {
 	var i;
@@ -4434,6 +5268,14 @@ function DATA_RemoveAdminLevel(AdminLevelId)
 
 
 }
+
+/*
+* @brief	Find admin level
+*
+* @param	AdminLevelId	Admin level identification field
+* @return	Admin level item index or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindAdminLevel(AdminLevelId)
 {
 	var i;
@@ -4451,6 +5293,14 @@ function DATA_FindAdminLevel(AdminLevelId)
 	return null;
 
 }
+
+/*
+* @brief	Get admin level item
+*
+* @param	AdminLevelId	Admin level identification field
+* @return 	Admin level item
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAdminLevel(AdminLevelId)
 {
 	var Pos = this.FindAdminLevel(AdminLevelId);
@@ -4465,11 +5315,34 @@ function DATA_GetAdminLevel(AdminLevelId)
 	}
 
 }
+
+/*
+* @brief	Get admins level list
+*
+* @return	Admins level list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAdminLevelList()
 {
 	return this.Admincenter.AdminLevelList;
 }
 /*ADMINCENTER OBJECT ADJOURN LIST METHODS****************/
+
+/*
+* @brief	Add adjourned game
+*
+* @param	WName		White player's name
+* @param	WRating		White player's current category rating
+* @param	BName		Black player's name
+* @param	BRating		Black player's current category rating
+* @param	Category	Game category
+* @param	GameTime	Game time
+* @param	Inc		Game time increment
+* @param	Rated		Game rated flag
+* @param	AdjournId	Game adjourned game identification number
+* @return 	True if game was added or null(if current game already exist )
+* @author	Rubens Suguimoto
+*/
 function DATA_AddAdjourn(WName, WRating, BName, BRating, Category, GameTime, Inc, Rated, AdjournId)
 {
 	// Creating a new object
@@ -4501,6 +5374,14 @@ function DATA_AddAdjourn(WName, WRating, BName, BRating, Category, GameTime, Inc
 
 
 }
+
+/*
+* @brief	Remove adjourned game
+*
+* @param	AdjournId	Game adjourned game identification number
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveAdjourn(AdjournId)
 {
 	var i;
@@ -4518,6 +5399,14 @@ function DATA_RemoveAdjourn(AdjournId)
 
 	return "";
 }
+
+/*
+* @brief	Find adjourned game
+*
+* @param	AdjournId	Game adjourned game identification number
+* @return none
+* @author	Rubens Suguimoto
+*/
 function DATA_FindAdjourn(AdjournId)
 {
 	var i;
@@ -4535,6 +5424,14 @@ function DATA_FindAdjourn(AdjournId)
 	return null;
 
 }
+
+/*
+* @brief	Get adjourned game item
+*
+* @param	AdjournId	Game adjourned game identification number
+* @return	Adjourned game item
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAdjourn(AdjournId)
 {
 	var Pos = this.FindAdjourn(AdjournId);
@@ -4549,11 +5446,26 @@ function DATA_GetAdjourn(AdjournId)
 	}
 
 }
+
+/*
+* @brief	Get adjourned games list
+*
+* @return	Adjourned games list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetAdjournList()
 {
 	return this.Admincenter.AdjournList;
 }
 /*ADMINCENTER OBJECT WORDS LIST METHODS****************/
+
+/*
+* @brief	Add banned word
+*
+* @param	Word string	String baned
+* @return 	True if game was added or null(if current game already exist )
+* @author	Rubens Suguimoto
+*/
 function DATA_AddWords(WordString)
 {
 	// Creating a new object
@@ -4579,6 +5491,14 @@ function DATA_AddWords(WordString)
 
 
 }
+
+/*
+* @brief	Remove banned word
+*
+* @param	WordId		Word identification field
+* @return 	Empty string
+* @author	Rubens Suguimoto
+*/
 function DATA_RemoveWords(WordId)
 {
 	var i;
@@ -4596,6 +5516,14 @@ function DATA_RemoveWords(WordId)
 
 	return "";
 }
+
+/*
+* @brief	Find banned word
+*
+* @param	WordId		Word identification field
+* @return	Banned word list index or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function DATA_FindWords(WordId)
 {
 	var i;
@@ -4612,6 +5540,14 @@ function DATA_FindWords(WordId)
 	return null;
 
 }
+
+/*
+* @brief	Get banned word
+*
+* @param	WordId		Word identification field
+* @return	Banned word item
+* @author	Rubens Suguimoto
+*/
 function DATA_GetWords(WordId)
 {
 	var Pos = this.FindWords(WordId);
@@ -4626,6 +5562,13 @@ function DATA_GetWords(WordId)
 	}
 
 }
+
+/*
+* @brief	Get banned words list
+*
+* @return	Banned words list
+* @author	Rubens Suguimoto
+*/
 function DATA_GetWordsList()
 {
 	return this.Admincenter.WordsList;

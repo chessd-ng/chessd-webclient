@@ -1,3 +1,32 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+
+/**
+* @file		interface/gamecenter.js
+* @brief	Control interface game center
+*/
+
+/*
+* @class	GameCenter
+* @brief	Create gamecenter object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GameCenterObj()
 {
 	var GameCenter = INTERFACE_CreateGameCenter();
@@ -30,7 +59,13 @@ function GameCenterObj()
 }
 
 
-
+/*
+* @brief	Show game center object
+*
+* @param	element		html dom element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowGameCenter(Element)
 {
 	if(Element != null)
@@ -46,13 +81,24 @@ function INTERFACE_ShowGameCenter(Element)
 	this.GameCenterDivVisible = true;
 }
 
+/*
+* @brief	Hide game center object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideGameCenter()
 {
 	this.GameCenterDiv.style.display = "none";
 	this.GameCenterDivVisible = false;
 }
 
-
+/*
+* @brief	Create game center content
+*
+* @return	Gamecenter main Div and Gamecenter main content Div
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGameCenter()
 {
 	var Main = UTILS_CreateElement("div","GameCenter");
@@ -101,9 +147,13 @@ function INTERFACE_CreateGameCenter()
 	return {GameCenter:Main, Center:MainCenter}
 }
 
-/*******************************************/
-/*GAME CENTER ANNOUNCE OBJECT*/
-/*******************************************/
+//GAME CENTER ANNOUNCE OBJECT
+/*
+* @brief	Create game center interface announce object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function AnnounceObj()
 {
 	var Announce = INTERFACE_CreateGameCenterAnnounce();
@@ -127,6 +177,20 @@ function AnnounceObj()
 	this.hide= INTERFACE_HideAnnounceCenter;
 }
 
+/*
+* @brief	Add announced game
+*
+* @param	Player		Player's object
+* @param	Rating		Player's rating
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rated		Game rated flag
+* @param	Private		Game private flag
+* @param	MatchId		Announce game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
@@ -235,6 +299,13 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 	}
 }
 
+/*
+* @brief	Remove a announced game
+*
+* @param	MatchId		Announced game identification number
+* @return	True if removed or false if not founded
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveAnnounce(MatchId)
 {
 	var i=0;
@@ -268,6 +339,13 @@ function INTERFACE_RemoveAnnounce(MatchId)
 	return true;
 }
 
+/*
+* @brief	Show announce object
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAnnounceCenter(Element)
 {
 	if(Element != null)
@@ -279,26 +357,47 @@ function INTERFACE_ShowAnnounceCenter(Element)
 	this.AnnounceVisible = true;
 }
 
-
+/*
+* @brief	Hide announce object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideAnnounceCenter()
 {
 	this.AnnounceDiv.style.display = "none";
 	this.AnnounceVisible = false;
 }
 
+/*
+* @brief	Show no announced games text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoAnnounce()
 {
 	this.NoAnnounce.style.display = "block"; 
 }
 
+/*
+* @brief	Hide no announced games text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoAnnounce()
 {
 	this.NoAnnounce.style.display = "none"; 
 }
 
 
-/************************************************/
-
+/*
+* @brief	Create game center interface announce HTML DOM elements
+*
+* @return	Main center Div, main list and no announced text element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGameCenterAnnounce()
 {
 	var Center = UTILS_CreateElement("div", "CenterAnnounce");
@@ -433,7 +532,6 @@ function INTERFACE_CreateGameCenterAnnounce()
 //	ListOptions.appendChild(SeeGraphic);
 	ListOptions.appendChild(UpdateAnnounce);
 
-//	ListResultHeader.appendChild(PieceColor);
 	ListResultHeader.appendChild(AnnouncePlayer);
 	ListResultHeader.appendChild(Rating);
 	ListResultHeader.appendChild(Category);
@@ -441,7 +539,6 @@ function INTERFACE_CreateGameCenterAnnounce()
 	ListResultHeader.appendChild(Inc);
 	ListResultHeader.appendChild(Rated);
 	ListResultHeader.appendChild(Private);
-//	ListResultHeader.appendChild(Action);
 	
 	ListResultHeaderUl.appendChild(ListResultHeader);
 	ListResult.appendChild(NoAnnounce);
@@ -456,9 +553,13 @@ function INTERFACE_CreateGameCenterAnnounce()
 	return {Center:Center, AnnounceList:ListResult, NoAnnounce:NoAnnounce};
 }
 
-/*******************************************/
-/*GAME CENTER MATCHOFFER OBJECT*/
-/*******************************************/
+//GAME CENTER MATCHOFFER OBJECT
+/*
+* @brief	Create game center interface offered match object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function MatchOfferObj()
 {
 	var Match = INTERFACE_CreateGameCenterMatch();
@@ -482,7 +583,19 @@ function MatchOfferObj()
 	this.hide= INTERFACE_HideMatchCenter;
 }
 
-
+/*
+* @brief	Add offered match
+*
+* @param	Player		Player's object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rated		Game rated flag
+* @param	Private		Game private flag
+* @param	MatchId		Offered match identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
@@ -578,6 +691,13 @@ function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, Ma
 	}
 }
 
+/*
+* @brief	Remove a offered match
+*
+* @param	MatchId		Offered match identification number
+* @return	True if removed or false if not founded
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveMatchOffer(MatchId)
 {
 	var i=0;
@@ -611,6 +731,13 @@ function INTERFACE_RemoveMatchOffer(MatchId)
 	return true;
 }
 
+/*
+* @brief	Show offered match main div
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowMatchCenter(Element)
 {
 	if(Element != null)
@@ -622,26 +749,47 @@ function INTERFACE_ShowMatchCenter(Element)
 	this.MatchVisible = true;
 }
 
-
+/*
+* @brief	Hide offered match main div
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideMatchCenter()
 {
 	this.MatchDiv.style.display = "none";
 	this.MatchVisible = false;
 }
+/*
+* @brief	Show no offered match text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 
 function INTERFACE_ShowNoMatch()
 {
 	this.NoMatch.style.display = "block"; 
 }
 
+/*
+* @brief	Hide offered match text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoMatch()
 {
 	this.NoMatch.style.display = "none"; 
 }
 
 
-/************************************************/
-
+/*
+* @brief	Create game center interface offered match HTML DOM elements
+*
+* @return	Main center Div, main list and no offered match text element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGameCenterMatch()
 {
 	var Center = UTILS_CreateElement("div", "CenterMatch");
@@ -744,7 +892,6 @@ function INTERFACE_CreateGameCenterMatch()
 		CHALLENGE_ClearChallenges();
 	}
 	
-	//ListResultHeader.appendChild(PieceColor);
 	ListResultHeader.appendChild(MatchPlayer);
 	ListResultHeader.appendChild(Category);
 	ListResultHeader.appendChild(Time);
@@ -768,9 +915,13 @@ function INTERFACE_CreateGameCenterMatch()
 }
 
 
-/*******************************************/
-/*GAME CENTER POSTPONE OBJECT*/
-/*******************************************/
+//GAME CENTER POSTPONE OBJECT
+/*
+* @brief	Create game center interface postponed game object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function PostponeObj()
 {
 	var Postpone = INTERFACE_CreateGameCenterPostpone();
@@ -795,7 +946,19 @@ function PostponeObj()
 	this.hide= INTERFACE_HidePostponeCenter;
 }
 
-
+/*
+* @brief	Add announced game
+*
+* @param	Player		Player's object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Category	Game category
+* @param	Rating		Player's rating
+* @param	Date		Postponed game date
+* @param	PostponeId	Postponed game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, PostponeId)
 {
 	var Item;
@@ -896,6 +1059,13 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	}
 }
 
+/*
+* @brief	Remove a postponed game
+*
+* @param	PostponeId	Postponed game identification number
+* @return	True if removed or false if not founded
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemovePostpone(PostponeId)
 {
 	var i=0;
@@ -929,6 +1099,14 @@ function INTERFACE_RemovePostpone(PostponeId)
 	return true;
 }
 
+/*
+* @brief	Update postponed game status
+*
+* @param	OponentName	Oponent's name
+* @param	OponentStatu	Oponent's status
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
@@ -952,7 +1130,6 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			}
 			else
 			{
-				//Item.className = ItemObj.OponentColor;
 				Item.className = this.PostponeList[i].OponentColor;
 				Button.onclick = function(){
 					CHALLENGE_SendResumeGame(Id);
@@ -962,8 +1139,13 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 	}
 }
 
-
-
+/*
+* @brief	Show postpone object
+* 
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowPostponeCenter(Element)
 {
 	if(Element != null)
@@ -975,26 +1157,47 @@ function INTERFACE_ShowPostponeCenter(Element)
 	this.PostponeVisible = true;
 }
 
-
+/*
+* @brief	Hide postpone object
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HidePostponeCenter()
 {
 	this.PostponeDiv.style.display = "none";
 	this.PostponeVisible = false;
 }
 
+/*
+* @brief	Show no postponed games text
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoPostpone()
 {
 	this.NoPostpone.style.display = "block"; 
 }
 
+/*
+* @brief	Hide no postponed games text
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none"; 
 }
 
 
-/************************************************/
-
+/*
+* @brief	Create game center interface postponed HTML DOM Elements
+*
+* @return	Main center Div, main list and no postponed games text element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGameCenterPostpone()
 {
 	var Center = UTILS_CreateElement("div", "CenterPostpone");
@@ -1096,9 +1299,13 @@ function INTERFACE_CreateGameCenterPostpone()
 	return {Center:Center, PostponeList:ListResult, NoPostpone:NoPostpone};
 }
 
-/*******************************************/
-/*GAME CENTER CURRENTGAMES OBJECT*/
-/*******************************************/
+//GAME CENTER CURRENTGAMES OBJECT
+/*
+* @brief	Create game center interface current games object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function CurrentGamesObj()
 {
 	var CurrentGames = INTERFACE_CreateGameCenterCurrentGames();
@@ -1120,14 +1327,24 @@ function CurrentGamesObj()
 
 }
 
-
+/*
+* @brief	Add current game
+*
+* @param	WPlayer		White player's object
+* @param	WRating		White player's rating
+* @param	BPlayer		Black player's object
+* @param	BRating		Black player's rating
+* @param	Category	Game category
+* @param	GameTime	Game time
+* @param	Rated		Game rated flag
+* @param	Moves		Game moves done
+* @param	CurrentGamesId	Current game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category, GameTime, Rated, Moves, CurrentGamesId)
 {
 	var Item;
-	/*
-	var PWRating, PWName, PWTime;
-	var PBRating, PBName, PBTime;
-	*/
 	var GameCategory, PGameTime, GameMoves;
 	var PRated;
 	var Button;
@@ -1136,15 +1353,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 	var ItemObj = new Object();
 
 	Item = UTILS_CreateElement("li");
-/*
-	PWName = UTILS_CreateElement("p","wname",null,WPlayer.Name);
-	PWRating = UTILS_CreateElement("p","wrating",null,WRating);
-	PWTime = UTILS_CreateElement("p","wtime",null,WTime);
 
-	PBName = UTILS_CreateElement("p","bname",null,BPlayer.Name);
-	PBRating = UTILS_CreateElement("p","brating",null,BRating);
-	PBTime = UTILS_CreateElement("p","wtime",null,BTime);
-*/
 	var PW = UTILS_CreateElement("p","player","white",WRating+" - "+UTILS_ShortString(WPlayer.Name,10));
 	var PB = UTILS_CreateElement("p","player","black",UTILS_ShortString(BPlayer.Name,10)+" - "+BRating);
 	Category = UTILS_CreateElement("p","category",null,Category);
@@ -1175,11 +1384,9 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 		{
 			if((BPlayer.Name!= MyUsername) &&(WPlayer.Name != MyUsername))
 			{
-				//Buffer += GAME_StartObserverGame(CurrentGamesId, WPlayer, BPlayer);
-				// Send a message to check if this game
-				// exists;
-				// If exists, start observer... else show a
-				// error message
+				// Send a message to check if this game exists;
+				// If exists, start game in observer mode
+				// else show a error message
 				Buffer += MESSAGE_GameEnterRoom(CurrentGamesId);
 			}
 			else
@@ -1200,16 +1407,6 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 		CONNECTION_SendJabber(Buffer);
 	}
 
-	/*
-	Item.appendChild(PWRating);
-	Item.appendChild(PWName);
-	Item.appendChild(PWTime);
-
-	Item.appendChild(PBTime);
-	Item.appendChild(PBName);
-	Item.appendChild(PBRating);
-	*/
-	
 	Item.appendChild(PW);
 	Item.appendChild(PB);
 	Item.appendChild(Category);
@@ -1238,6 +1435,13 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 	}
 }
 
+/*
+* @brief	Remove a current game
+*
+* @param	CurrentGamesId	Current game identification number
+* @return	True if removed or false if not founded
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveCurrentGames(CurrentGamesId)
 {
 	var i=0;
@@ -1271,7 +1475,13 @@ function INTERFACE_RemoveCurrentGames(CurrentGamesId)
 	return true;
 }
 
-
+/*
+* @brief	Show current game main div
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowCurrentGamesCenter(Element)
 {
 	if(Element != null)
@@ -1286,25 +1496,46 @@ function INTERFACE_ShowCurrentGamesCenter(Element)
 	this.CurrentGamesVisible = true;
 }
 
+/*
+* @brief	Hide current game main div
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideCurrentGamesCenter()
 {
 	this.CurrentGamesDiv.style.display = "none";
 	this.CurrentGamesVisible = false;
 }
 
+/*
+* @brief	Show no current games text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoCurrentGames()
 {
 	this.NoCurrentGames.style.display = "block";
 }
 
+/*
+* @brief	Hide no current games text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoCurrentGames()
 {
 	this.NoCurrentGames.style.display = "none";
 }
 
-
-/*************************************************/
-
+/*
+* @brief	Create game center interface postponed HTML DOM Elements
+*
+* @return	Main center Div, main list and no current games text element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGameCenterCurrentGames()
 {
 	var Center = UTILS_CreateElement("div", "CenterCurrentGames");

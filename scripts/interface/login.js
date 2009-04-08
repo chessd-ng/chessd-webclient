@@ -16,20 +16,15 @@
 
 
 /**
-* Shows login screen to user
+* @file		interface/login.js
+* @brief	Shows login screen to user
 */
 
 /**
-* Global object that stores all data needed
-* by interface
-*/
-//var MainData;
-
-/**
-* Create elements and show login screen to user
+* @brief	Create login page elements and show to user
 *
-* @return void
-* @public
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_StartLogin(Lang)
 {
@@ -37,7 +32,6 @@ function INTERFACE_StartLogin(Lang)
 	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
 	var LoginMessage;
-	//var Lang;
 	var ConfTmp;
 
 	var ev; //Temp event
@@ -63,7 +57,7 @@ function INTERFACE_StartLogin(Lang)
 	//Internet Explorer Table
 	var TBody = document.createElement('tbody');
 
-	// Creating elements and setting properties
+	// Creating elements
 	LoginBoxDiv = UTILS_CreateElement("div", "LoginDiv");
 	LoginTextBoxDiv = UTILS_CreateElement("div", "TextDiv");
 	LoginFormBoxDiv = UTILS_CreateElement("div", "FormDiv");
@@ -85,12 +79,17 @@ function INTERFACE_StartLogin(Lang)
 	InputPasswd = UTILS_CreateElement("input", "password");
 	InputSubmit = UTILS_CreateElement("input", "login_button", "entrar");
 	CheckBox = UTILS_CreateElement("input", "checkbox", "checkbox");
+
+	//Setting elements attributes
 	InputLogin.type = "text";
 	InputPasswd.type = "password";
+
 	InputLogin.value = UTILS_ReadCookie("Username");
 	InputPasswd.value = UTILS_ReadCookie("Passwd");
+
 	InputSubmit.type = "submit";
 	InputSubmit.value = "";
+
 	CheckBox.type = "checkbox";
 	CheckBoxLabel = UTILS_CreateElement("label", null, null, UTILS_GetText("login_remember_pass"));
 	ErrorLabel = UTILS_CreateElement("span", "ErrorLabel", "error_label");
@@ -98,9 +97,13 @@ function INTERFACE_StartLogin(Lang)
 	Banner = UTILS_CreateElement("img", "BannerLogin");
 	Banner.src = "images/login/banner_login.gif";
 
+	// Check for cookies of username and password
 	if (UTILS_ReadCookie("RememberPass") == "true")
+	{
 		CheckBox.checked = true;
+	}
 
+	// Key events to start authentication
 	UTILS_AddListener(InputSubmit, "click", function() { LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); } , false);
 
 	UTILS_AddListener(InputLogin, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
@@ -159,8 +162,6 @@ function INTERFACE_StartLogin(Lang)
 	// Show webclient version
 	document.body.appendChild(Version);
 
-	// Setting document title
-//	document.title = UTILS_GetText("general_title").replace(/\t/g,"").replace(/\n/g,"");
 	document.title = UTILS_GetText("general_title");
 
 	// Block context menu
@@ -176,10 +177,10 @@ function INTERFACE_StartLogin(Lang)
 }
 
 /**
-* Remove login screen
+* @brief	Remove login screen
 *
-* @return void
-* @public
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_EndLogin()
 {
@@ -211,10 +212,9 @@ function INTERFACE_EndLogin()
 }
 
 /**
-* Remove login screen
+* @brief	Remove login screen
 *
-* @return Div elements with tags
-* @public
+* @return	Language HTML DOM Div element with languages tag
 */
 function INTERFACE_CreateLanguage()
 {
@@ -236,19 +236,17 @@ function INTERFACE_CreateLanguage()
 }
 
 /**
-* Create language links
+* @brief	Create language links
 *
-* @param Lang is language (i.e.: en_US, pt_BR, zh_CN,...)
-* @return List item
-* @private
+* @param	Lang	Language (i.e.: en_US, pt_BR, zh_CN,...)
+* @param	Name	Language word
+* @return	HTML DOM List element with languages
 */
 function INTERFACE_CreateLangItem(Lang, Name)
 {
 	var Li = UTILS_CreateElement("li");
-	//var Item = UTILS_CreateElement("img");
 	var Item = UTILS_CreateElement("span");
 
-	//Item.src = "images/lang/"+Lang+".png";
 	Item.innerHTML = UTILS_Capitalize(Name);
 	Li.appendChild(Item);
 	
@@ -261,9 +259,11 @@ function INTERFACE_CreateLangItem(Lang, Name)
 
 
 /**
- * @brief       Align main div in middle
- * @author      Rubens
- */
+* @brief	Align login main div in vertical middle
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 
 function INTERFACE_LoginVerticalAlignMiddle()
 {
@@ -279,9 +279,11 @@ function INTERFACE_LoginVerticalAlignMiddle()
 }
 
 /**
- *
- *
- */
+* @brief	Disable input fields
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_LoginDisableInput()
 {
 	var UsernameBox = document.getElementById("login");
@@ -295,6 +297,12 @@ function INTERFACE_LoginDisableInput()
 	OkButton.disabled = true;
 }
 
+/**
+* @brief	Enable input fields
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_LoginEnableInput()
 {
 	var UsernameBox = document.getElementById("login");
@@ -308,12 +316,25 @@ function INTERFACE_LoginEnableInput()
 	OkButton.disabled = false;
 }
 
+/**
+* @brief	Remove error messages text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ClearError()
 {	
 	var ErrorLabel = document.getElementById("ErrorLabel");
 	ErrorLabel.innerHTML = "";
 }
 
+/**
+* @brief	Show authentication login status message
+*
+* @param	Msg	Login status message to show
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowLoginMessage(Msg)
 {
 	var LoginMsg = document.getElementById("LoginMessage");
@@ -328,12 +349,24 @@ function INTERFACE_ShowLoginMessage(Msg)
 	LoginMsg.style.display = "block";
 }
 
+/**
+* @brief	Hide authentication login status message
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideLoginMessage()
 {
 	var LoginMsg = document.getElementById("LoginMessage");
 	LoginMsg.style.display = "none";
 }
 
+/**
+* @brief	Show error messages
+*
+* @return	Msg	Login error message to show
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowErrorMessage(Msg)
 {
 	var ErrorMsg = document.getElementById("ErrorLabel");
@@ -357,6 +390,12 @@ function INTERFACE_ShowErrorMessage(Msg)
 	return true;
 }
 
+/**
+* @brief	Hide error message
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideErrorMessage()
 {
 	var ErrorMsg = document.getElementById("ErrorLabel");

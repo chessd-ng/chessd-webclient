@@ -16,12 +16,21 @@
 
 
 /**
-* Handle users status
+* @file		contact/status.js
+* @brief	Handle user's status 
+*
+* Status types: "available", "unavailable", "busy", "away", "playing", "offline"
+* TODO --> Split change status to online list, rooms and contact lists
 */
 
-// TODO --> SEPARAR OS CHANGE STATUS PARA ONLINE, ROOM E CONTACT
+
 /**
-* Change User Status 
+* @brief 	Change User Status 
+*
+* @param	NewStatus	New user's status
+* @param	DontSend	Flag to send or just return XML
+* @return	XMPP message accordly to flag DontSend
+* @author	Rubens Suguimoto
 */
 function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
@@ -85,7 +94,12 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 }
 
 /**
-* Change status of 'Username' in structure and interface
+* @brief	Change status of 'Username' in structure and interface
+* 
+* @param	Username	User's name
+* @param	NewStatus	New user's status
+* @return	Empty String
+* @author	Rubens Suguimoto
 */
 function CONTACT_SetUserStatus(Username, NewStatus)
 {
@@ -93,14 +107,6 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
 
-	// Update new user status in data struct
-	/*
-	var User = MainData.GetUser(Username);
-	if(User != null)
-	{
-		User.SetStatus(NewStatus);
-	}
-	*/
 	// Find user in data struct 
 	ContactUser = MainData.GetContactUser(Username);
 
@@ -125,8 +131,11 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 }
 
 /**
- * Start away counter;
- */
+* @brief	Start away counter
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function CONTACT_StartAwayCounter()
 {
 	MainData.SetAwayCounter(300);
@@ -138,8 +147,11 @@ function CONTACT_StartAwayCounter()
 }
 
 /**
- * Countdown away counter, and set away status if away counter less than zero
- */ 
+* @brief	Countdown away counter, and set away status if away counter less than zero
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/ 
 function CONTACT_SetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
@@ -163,8 +175,11 @@ function CONTACT_SetAwayStatus()
 }
 
 /**
- * Reset away counter and set status to available
- */
+* @brief	Reset away counter and set status to available
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function CONTACT_ResetAwayStatus()
 {
 	var Select = document.getElementById("UserStatusSelect");
@@ -176,7 +191,6 @@ function CONTACT_ResetAwayStatus()
 	MainData.SetAwayCounter(300);
 
 	// Quick fix to solve the problem when remove events from body tag
-	// in CONTACT_StopAwayStatus();
 	if(MyUser != null)
 	{
 		MyUserStatus = MyUser.GetStatus();
@@ -192,8 +206,11 @@ function CONTACT_ResetAwayStatus()
 }
 
 /**
- * Stop away counter
- */
+* @brief	Stop away counter
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function CONTACT_StopAwayStatus()
 {
 	clearInterval(MainData.GetAwayInterval());

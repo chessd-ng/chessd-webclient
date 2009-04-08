@@ -16,9 +16,22 @@
 
 
 /**
-* Window Interface Object
+* @file		interface/window.js
+* @brief	Contais all window interface object functions
 */
 
+/*
+* @class	WindowObj
+* @brief	Create window object
+*
+* @param	Height		Window's height
+* @param	Width		Window's width
+* @param	Div		Window's content div
+* @param	Title		Window's title
+* @param	CloseCommands	Actions to put in close buttons
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WindowObj(Height, Width, Div, Title, CloseCommands)
 {
 	//Constructor and attribute
@@ -41,7 +54,15 @@ function WindowObj(Height, Width, Div, Title, CloseCommands)
 	this.pushEventButtons = WINDOW_ConcatEventButtons;
 }
 
-
+/*
+* @brief	Show window
+* 
+* @param	Element		HTML DOM element
+* @param	Top		Top position in pixels
+* @param	Left		Left position in pixels
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_ShowWindow(Element, Top, Left)
 {
 	var RandomTop, RandomLeft;
@@ -77,7 +98,8 @@ function WINDOW_ShowWindow(Element, Top, Left)
 			else
 			{
 				LeftTmp += (document.body.clientWidth/2) - (document.body.clientWidth/10) + RandomLeft;
-			}
+			
+}
 		}
 		else
 		{
@@ -107,6 +129,12 @@ function WINDOW_ShowWindow(Element, Top, Left)
 	}
 }
 
+/*
+* @brief	Close window
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_CloseWindow()
 {
 	if(this.window.parentNode != null)
@@ -115,22 +143,51 @@ function WINDOW_CloseWindow()
 	}
 }
 
+/*
+* @brief	Set window identification field
+* 
+* @param	Id	Window identification field
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetId(Id)
 {
 	this.window.id=Id;
 }
 
+/*
+* @brief	Set window size
+* 
+* @param	Width		Window width
+* @param	Height		Window height
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetSize(Width, Height)
 {
 	this.window.style.width = Width;
 	this.window.style.height = Height;
 }
 
+/*
+* @brief	Set window title
+* 
+* @param	Title		Window's title
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetTitle(Title)
 {
 	this.window.getElementById("Title").innerHTML = Title;
 }
 
+
+/*
+* @brief	Set windows focus
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetFocus()
 {
 	//Title
@@ -139,6 +196,12 @@ function WINDOW_SetFocus()
 	this.window.getElementsByTagName("div")[1].className = "focus";
 }
 
+/*
+* @brief	Remove windows focus
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetBlur()
 {
 	//Title
@@ -147,16 +210,40 @@ function WINDOW_SetBlur()
 	this.window.getElementsByTagName("div")[1].className = "";
 }
 
+
+/*
+* @brief	Set window ZIndex
+* 
+* Used to set wich window will be overlayed
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_SetZIndex(Index)
 {
 	this.window.style.zIndex = Index;
 }
 
+
+/*
+* @brief	Get window ZIndex
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_GetZIndex()
 {
 	return this.window.style.zIndex;
 }
 
+
+/*
+* @brief	Concatenate event event elements buttons
+* 
+* @param	ButtonsList	Array of HTML DOM elements
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WINDOW_ConcatEventButtons(ButtonsList)
 {
 	var i;
@@ -167,7 +254,17 @@ function WINDOW_ConcatEventButtons(ButtonsList)
 	}
 }
 
-/***************************************************/
+//////////////////////////////////////////////////////
+/*
+* @brief	Create window HTML DOM elements
+* 
+* @param	Height		Window's height
+* @param	Width		Window's width
+* @param	Div		Window's content div
+* @param	Title		Window's title
+* @return	Window main Div and close button element
+* @author	Rubens Suguimoto
+*/
 function WINDOW_CreateWindow(Height, Width, Div, Title)
 {
 	var WindowBox = document.createElement("div");
@@ -215,16 +312,6 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 
 	Close.push(TmpClose);
 
-	//Additional Commands when close a window
-	/*
-	if(CloseCommands != null)
-	{
-		UTILS_AddListener(TmpClose, "click", CloseCommands ,false);
-	}
-	*/
-//	Div.style.width = Width - 10+"px";
-
-
 	TitleBar.appendChild(TmpTitle);
 	TitleBar.appendChild(TmpClose);
 
@@ -237,21 +324,16 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 }
 
 
-/******************************************************
-*******************************************************
-*******************************************************
-*******************************************************
-*******************************************************
-******************************************************/
+////////////////////////////////////////////////////////
 
 
 /**
-*	Create elements of game alert window and returns div
+* @brief	Create elements of window alert content
 *
-* @param	Text	Text to display in confirm box
-* @return	Div; Array
+* @param	Text	Text to display in alert window
+* @return	Alert window content Div and Array of buttons elements
 * @see		WINDOW_Alert();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function WINDOW_CreateAlert(Text)
 {
@@ -288,14 +370,14 @@ function WINDOW_CreateAlert(Text)
 }
 
 /**
-*	Create elements of confirm request window and returns div
+* @brief	Create elements of confirm request window content
 *
 * @param	Text		Text to display in confirm box
-* @param 	Button1	Value and Fuction of Button1
-* @param 	Button2	Value and Fuction of Button2
-* @return	Div; Array
+* @param 	Button1		Value and Fuction of Button1
+* @param 	Button2		Value and Fuction of Button2
+* @return	Confirm window content Div and Array of buttons elements
 * @see		WINDOW_Confirm();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function WINDOW_CreateConfirm(Text, Button1, Button2)
 {
@@ -349,12 +431,10 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 }
 
 /**
-*	Create elements of send user image
+* @brief	Create elements of send user image window content
 *
-* @param	Text		Text to display in confirm box
-* @return	Div; Array
-* @see		WINDOW_Confirm();
-* @author	Rubens and Fabiano
+* @return	Send user's imagem window content div and array of buttons
+* @author	Rubens Suguimoto and Fabiano Kuss
 */
 function WINDOW_CreateImageSend()
 {

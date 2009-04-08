@@ -1,0 +1,248 @@
+\section{/home/www/rubens/webclient/scripts/chat/chat.js File Reference}
+\label{chat_2chat_8js}\index{/home/www/rubens/webclient/scripts/chat/chat.js@{/home/www/rubens/webclient/scripts/chat/chat.js}}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf CHAT\_\-HandleMessage} (XML)
+\item 
+function {\bf CHAT\_\-HandlePresence} (XML)
+\begin{CompactList}\small\item\em Parse and show user chat presence. \item\end{CompactList}\item 
+function {\bf CHAT\_\-HandleAnnounceMessage} (XML)
+\begin{CompactList}\small\item\em Show announcement messages. \item\end{CompactList}\item 
+function {\bf CHAT\_\-OpenChat} (Username)
+\begin{CompactList}\small\item\em Open a chat with some user. \item\end{CompactList}\item 
+function {\bf CHAT\_\-CloseChat} (Username)
+\begin{CompactList}\small\item\em Close a chat window with other user. \item\end{CompactList}\item 
+function {\bf CHAT\_\-ChangeChatState} (Username)
+\begin{CompactList}\small\item\em Change visibility of chat window. \item\end{CompactList}\item 
+function {\bf CHAT\_\-SendMessage} (Username, Message)
+\begin{CompactList}\small\item\em Send a chat message. \item\end{CompactList}\item 
+function {\bf CHAT\_\-ReceiveMessage} (Username, Message)
+\begin{CompactList}\small\item\em Show a message received from another user. \item\end{CompactList}\item 
+function {\bf CHAT\_\-ErrorMessageLength} (Username)
+\begin{CompactList}\small\item\em Show message length error notification. \item\end{CompactList}\item 
+function {\bf CHAT\_\-ChangeUserChatStatus} (Username, Status)
+\begin{CompactList}\small\item\em Change chat window title accordly user status. \item\end{CompactList}\item 
+function {\bf CHAT\_\-BlurChat} (Username)
+\begin{CompactList}\small\item\em Remove focus from chat window. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{chat/chat.js@{chat/chat.js}!CHAT\_\-BlurChat@{CHAT\_\-BlurChat}}
+\index{CHAT\_\-BlurChat@{CHAT\_\-BlurChat}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-BlurChat]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-BlurChat ( {\em Username})}\label{chat_2chat_8js_ff66224f1bef79c354a9da91143aed36}
+
+
+Remove focus from chat window. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), and MainData.
+
+Referenced by INTERFACE\_\-CreateChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-ChangeChatState@{CHAT\_\-ChangeChatState}}
+\index{CHAT\_\-ChangeChatState@{CHAT\_\-ChangeChatState}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-ChangeChatState]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-ChangeChatState ( {\em Username})}\label{chat_2chat_8js_029777c2341fa8d98c97500837a9b69b}
+
+
+Change visibility of chat window. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), and MainData.
+
+Referenced by INTERFACE\_\-CreateChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-ChangeUserChatStatus@{CHAT\_\-ChangeUserChatStatus}}
+\index{CHAT\_\-ChangeUserChatStatus@{CHAT\_\-ChangeUserChatStatus}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-ChangeUserChatStatus]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-ChangeUserChatStatus ( {\em Username}, \/   {\em Status})}\label{chat_2chat_8js_981a79b00b69194a04363d526da3d758}
+
+
+Change chat window title accordly user status. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \item[{\em Status}]User status (offline or others) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), and MainData.
+
+Referenced by CHAT\_\-HandlePresence().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-CloseChat@{CHAT\_\-CloseChat}}
+\index{CHAT\_\-CloseChat@{CHAT\_\-CloseChat}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-CloseChat]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-CloseChat ( {\em Username})}\label{chat_2chat_8js_c9f7e14cbc16fc2651af090c9897cd14}
+
+
+Close a chat window with other user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), and MainData.
+
+Referenced by INTERFACE\_\-CreateChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-ErrorMessageLength@{CHAT\_\-ErrorMessageLength}}
+\index{CHAT\_\-ErrorMessageLength@{CHAT\_\-ErrorMessageLength}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-ErrorMessageLength]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-ErrorMessageLength ( {\em Username})}\label{chat_2chat_8js_b2209d63183a617155f5107445aab070}
+
+
+Show message length error notification. 
+
+Show in window chat a message with length exceeded error
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Message with error notification \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), MainData, and UTILS\_\-GetText().
+
+Referenced by INTERFACE\_\-CreateChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-HandleAnnounceMessage@{CHAT\_\-HandleAnnounceMessage}}
+\index{CHAT\_\-HandleAnnounceMessage@{CHAT\_\-HandleAnnounceMessage}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-HandleAnnounceMessage]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-HandleAnnounceMessage ( {\em XML})}\label{chat_2chat_8js_615cd2e1ca89c4ebdf2708271d41f68d}
+
+
+Show announcement messages. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with announce message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with other XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData, UTILS\_\-GetNodeText(), and WINDOW\_\-Alert().
+
+Referenced by PARSER\_\-ParseChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-HandleMessage@{CHAT\_\-HandleMessage}}
+\index{CHAT\_\-HandleMessage@{CHAT\_\-HandleMessage}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-HandleMessage]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-HandleMessage ( {\em XML})}\label{chat_2chat_8js_1aabd0a9c0e5dd585f17ef11a3fa91ab}
+
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+References CHAT\_\-ReceiveMessage(), UTILS\_\-ConvertChatString(), and UTILS\_\-GetNodeText().
+
+Referenced by PARSER\_\-ParseChat().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-HandlePresence@{CHAT\_\-HandlePresence}}
+\index{CHAT\_\-HandlePresence@{CHAT\_\-HandlePresence}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-HandlePresence]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-HandlePresence ( {\em XML})}\label{chat_2chat_8js_c171e94a428c2f9d1f04070f69287d0c}
+
+
+Parse and show user chat presence. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with presence \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with other XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHAT\_\-ChangeUserChatStatus().
+
+Referenced by PARSER\_\-ParsePresence().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-OpenChat@{CHAT\_\-OpenChat}}
+\index{CHAT\_\-OpenChat@{CHAT\_\-OpenChat}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-OpenChat]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-OpenChat ( {\em Username})}\label{chat_2chat_8js_9750e8d94926a232f70cfac576e96850}
+
+
+Open a chat with some user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Chat window object \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References ChatObj(), MainData, UTILS\_\-GetText(), and WINDOW\_\-Alert().
+
+Referenced by CHAT\_\-ReceiveMessage(), CONTACT\_\-ShowUserMenu(), INTERFACE\_\-ShowPostponeWindow(), and WINDOW\_\-Challenge().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-ReceiveMessage@{CHAT\_\-ReceiveMessage}}
+\index{CHAT\_\-ReceiveMessage@{CHAT\_\-ReceiveMessage}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-ReceiveMessage]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-ReceiveMessage ( {\em Username}, \/   {\em Message})}\label{chat_2chat_8js_7f659442a1884818e52eb2d1a23022dd}
+
+
+Show a message received from another user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \item[{\em Message}]Message received \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References CHAT\_\-OpenChat(), ChatObj(), MainData, and UTILS\_\-BannedWords().
+
+Referenced by CHAT\_\-HandleMessage().\index{chat/chat.js@{chat/chat.js}!CHAT\_\-SendMessage@{CHAT\_\-SendMessage}}
+\index{CHAT\_\-SendMessage@{CHAT\_\-SendMessage}!chat/chat.js@{chat/chat.js}}
+\subsubsection[CHAT\_\-SendMessage]{\setlength{\rightskip}{0pt plus 5cm}function CHAT\_\-SendMessage ( {\em Username}, \/   {\em Message})}\label{chat_2chat_8js_ca2bf1915cb3b4cd64d41f6e8f229982}
+
+
+Send a chat message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]Name used by user \item[{\em Message}]Message to send \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References ChatObj(), CONNECTION\_\-SendJabber(), MainData, MESSAGE\_\-Chat(), UTILS\_\-BannedWords(), and UTILS\_\-ConvertChatString().
+
+Referenced by INTERFACE\_\-CreateChat().

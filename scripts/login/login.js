@@ -15,16 +15,16 @@
 */
 
 /*
-* Login Controller
-* This file has all functions that is used on Login
+* @file		login/login.js
+* @brief	This file has all functions that is used on login
 */
 
 
 /**
-* Make login on Jabber Server
+* @brief	Start login authentication on Jabber Server
 *
-* @return none
-* @public
+* @return	none
+* @author	Pedro Rocha, Ulyses Bomfim and Rubens Suguimoto
 */
 function LOGIN_Login(Username, Passwd, RememberPass)
 {
@@ -40,7 +40,6 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 	MainData.SetPassword(Passwd);
 
 	// Set connection status to conneting
-	//MainData.ConnectionStatus = 1;
 	MainData.SetConnectionStatus(1);
 
 	// Set new RID and reset SID
@@ -56,10 +55,13 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 
 	//TODO -> Fix to IE
 	if (RememberPass)
+	{
 		UTILS_CreateCookie("Passwd", Passwd, MainData.GetCookieValidity());
+	}
 	else
+	{
 		UTILS_DeleteCookie("Passwd");
-	
+	}
 	// Disable inputs
 	INTERFACE_LoginDisableInput();
 
@@ -69,48 +71,35 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 
 
 /**
-* Make logout 
+* @brief	Make logout 
 *
-* @return none
-* @public
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function LOGIN_Logout()
 {
 	var XMPP = "";
-	/*
-	var CurrentGame = MainData.GetCurrentGame();
-	var UpdateProfile = MainData.GetUpdateProfileTimer();
-	var UpdateRating = MainData.GetUpdateTimer(); 
-	*/
+
 	NoCache.DateTime = new Date();
+
 	// Setting structure as disconnected
-	//MainData.ConnectionStatus = -1;
 	MainData.SetConnectionStatus(-1);
 
 	// Logout from jabber
+	// TODO -> USE LOGIN_LeavePage function here
 	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
 	CONNECTION_SendJabber(XMPP);
-/*
-	//Stop game count timer of current game 
-	if(CurrentGame != null)
-	{
-		CurrentGame.Game.StopTimer();
-	}
 
-	if(UpdateProfile != null)
-	{
-		USER_StopUpdateUserProfile();
-	}
-	
-	if(UpdateRating != null)
-	{
-		USER_StopUpdateUserList();
-	}
-*/
 	START_Restart();
 }
 
 
+/**
+* @brief	Send a message to terminate connection with jabber 
+*
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function LOGIN_LeavePage()
 {
 	var XMPP = "";
@@ -119,15 +108,14 @@ function LOGIN_LeavePage()
 }
 
 /**
-* Make logout 
+* @brief	Make logout
 *
-* @return none
-* @public
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function LOGIN_Disconnected()
 {
 	// Setting structure as disconnected
-	//MainData.ConnectionStatus = -1;
 	MainData.SetConnectionStatus(-1);
 
 	INTERFACE_StopInterface();
@@ -148,10 +136,10 @@ function LOGIN_EndLogin()
 }
 
 /**
-* Show a error message on login
+* @brief	Show a error message on login steps
 *
-* @return none
-* @public
+* @return	none
+* @author	Rubens Suguimoto
 */
 function LOGIN_LoginFailed(Msg)
 {
@@ -166,11 +154,12 @@ function LOGIN_LoginFailed(Msg)
 }
 
 /**
- * Show a connection string when start login
- *
- * @param	Msg	Message string
- * @author	Rubens Suguimoto
- */
+* @brief	Show connection status string when start login
+*
+* @param	Msg	Message string
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function LOGIN_LoginMsg(Msg)
 {
 	INTERFACE_ShowLoginMessage(Msg);

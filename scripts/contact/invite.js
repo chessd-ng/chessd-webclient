@@ -16,12 +16,17 @@
 
 
 /**
-* Functions to add a user in your contact list
+* @file		contact/invite.js
+* @brief	Contais all functions to add a user in your contact list
 */
 
 
 /**
-* Send a invite message to 'Username'
+* @brief	Send a invite message to 'Username'
+* 
+* @param	Username	User's name
+* @return	none
+* @author	Ulysses Bomfim and Rubens Suguimoto
 */
 function CONTACT_InviteUser(Username)
 {
@@ -33,24 +38,21 @@ function CONTACT_InviteUser(Username)
 
 	// Insert user in structure and interface
 	CONTACT_AddUser(Username, "offline", "none", "default");
-/*
-	// Insert user in structure
-	MainData.AddContactUser(Username, "offline", "", "default");
-
-	// Insert user in interface
-	ContactObj.addUser("default",Username, "offline");
-*/
 
 	// Send it to jabber
 	CONNECTION_SendJabber(XML);
 
 	// Sort userlist
 	MainData.SortContactUserByNick();
-
-	return "";
 }
 
-
+/**
+* @brief	Send a message to remove 'Username'
+* 
+* @param	Username	User's name
+* @return	none
+* @author	Ulysses Bomfim and Rubens Suguimoto
+*/
 function CONTACT_SendRemoveUser(Username)
 {
 	var XML;
@@ -64,7 +66,11 @@ function CONTACT_SendRemoveUser(Username)
 
 
 /**
-* User has received a subscribe message
+* @brief	Handle subscribe message
+*
+* @param	Username	User's name
+* @return	Empty string
+* @author	Ulysses Bomfim and Rubens Suguimoto
 */
 function CONTACT_ReceiveSubscribe(Username)
 {
@@ -86,19 +92,13 @@ function CONTACT_ReceiveSubscribe(Username)
 			// Send a subscribe and a subscribed to user
 			XML += MESSAGE_InviteAccept(Username);
 			XML += MESSAGE_Invite(Username);
-
-			return XML;
 		}
 		// Last confirmation
 		else if (User.GetSubs() != "from")
 		{
 			// Send a subscribed to user
-			XML = MESSAGE_InviteAccept(Username);
-
-			return XML;
+			XML += MESSAGE_InviteAccept(Username);
 		}
-		else
-			return "";
 	}
 	// show window to confirm user invitation
 	else 
@@ -112,19 +112,17 @@ function CONTACT_ReceiveSubscribe(Username)
 		Button1 = new Object();
 		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
-			var XML = "";
-
-			// See data/data.js
-			//MainData.AddUser(Username, "offline", "from");
+			var TmpXML = "";
 
 			// See contact/contact.js
 			CONTACT_AddUser(Username, "offline","from","default");
 
 			// Send a subscribe and a subscribed to user
-			XML += MESSAGE_InviteAccept(Username);
-			XML += MESSAGE_Invite(Username);
+			// (accept invite and send a invite to add other user)
+			TmpXML += MESSAGE_InviteAccept(Username);
+			TmpXML += MESSAGE_Invite(Username);
 
-			CONNECTION_SendJabber(XML);
+			CONNECTION_SendJabber(TmpXML);
 		}
 
 		Button2 = new Object();
@@ -136,11 +134,15 @@ function CONTACT_ReceiveSubscribe(Username)
 
 		WINDOW_Confirm(Title, Text, Button1, Button2);
 	}
-	return "";
+	return XML;
 }
 
 /**
-* User has received a subscribed message
+* @brief	Handle subscribed message
+*
+* @param	Username	User's name
+* @return	XMPP message
+* @author	Ulysses Bomfim and Rubens Suguimoto
 */
 function CONTACT_ReceiveSubscribed(Username)
 {
@@ -148,8 +150,6 @@ function CONTACT_ReceiveSubscribed(Username)
 
 	// Setting user subscription state to 'both'
 	User.SetSubs("both")
-	//INTERFACE_AddContact(Username, "available");
-	//MainData.Contact.addUser(Username, "available");
 
 	// See contact/contact.js
 	CONTACT_AddUser(Username, "online","from","default");
@@ -159,7 +159,11 @@ function CONTACT_ReceiveSubscribed(Username)
 }
 
 /**
-* User has received a unsubscribed message
+* @brief	Handle unsubscribed message
+*
+* @param	Username	User's name
+* @return	XMPP message
+* @author	Ulysses Bomfim and Rubens Suguimoto
 */
 function CONTACT_ReceiveUnsubscribed(Username)
 {
@@ -169,23 +173,16 @@ function CONTACT_ReceiveUnsubscribed(Username)
 
 	User = MainData.GetContactUser(Username);
 
-	// If user is not in your list, something's wrong! =D
-/*
-	if (User == null)
-	{
-		return "";
-	}
-*/
 	// User has removed you, do nothing
 	if (User.GetSubs() == "both")
 	{
 		// Changing subscription state to none
 		User.SetSubs("none");
 
-		// Set user as offline
+		// Set user as offline in contact list
 		CONTACT_SetUserStatus(Username, "offline");
 	}
-	// Deny user invite
+	// Decline user's invite
 	else if (MainData.FindContactUser(Username) != null)
 	{
 		MainData.RemoveContactUser(Username);

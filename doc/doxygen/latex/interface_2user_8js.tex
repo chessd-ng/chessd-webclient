@@ -1,0 +1,533 @@
+\section{/home/www/rubens/webclient/scripts/interface/user.js File Reference}
+\label{interface_2user_8js}\index{/home/www/rubens/webclient/scripts/interface/user.js@{/home/www/rubens/webclient/scripts/interface/user.js}}
+Class defition for user list object and some functions assign. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf UserListObj} (Element)
+\item 
+function {\bf INTERFACE\_\-ShowUserList} ()
+\begin{CompactList}\small\item\em Show user list div. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-HideUserList} ()
+\begin{CompactList}\small\item\em Hide user list div. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-AddUser} (Username, Status, Rating, Type)
+\begin{CompactList}\small\item\em Add one user in list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-RemoveUser} (Username)
+\begin{CompactList}\small\item\em Remove user from list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-UpdateUser} (Username, NewStatus, Rating, NewType)
+\begin{CompactList}\small\item\em Update user status and rating in list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-FindUser} (Username)
+\begin{CompactList}\small\item\em Find user in user list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-SetSortUserFunction} (Func)
+\begin{CompactList}\small\item\em Set sort list by nick function to list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-SetSortRatingFunction} (Func)
+\begin{CompactList}\small\item\em Set sort list by rating function to list. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-HideSort} ()
+\begin{CompactList}\small\item\em Hide sort options. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowSort} ()
+\begin{CompactList}\small\item\em Show sort options. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-HideList} ()
+\begin{CompactList}\small\item\em Hide user list element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowList} ()
+\begin{CompactList}\small\item\em Show user list element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-FocusNick} ()
+\begin{CompactList}\small\item\em Focus sort nick button element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-BlurNick} ()
+\begin{CompactList}\small\item\em Blur sort nick button element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-FocusRating} ()
+\begin{CompactList}\small\item\em Focus sort rating button element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-BlurRating} ()
+\begin{CompactList}\small\item\em Blur sort rating button element. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CreateUserList} (Element)
+\begin{CompactList}\small\item\em Create user list in interface. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CreateUser} (Username, Status, Rating, Type)
+\begin{CompactList}\small\item\em Create a user item and return it. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowUserMenu} (Obj, Options)
+\begin{CompactList}\small\item\em Show user menu when click over user list item. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-HideUserMenu} ()
+\begin{CompactList}\small\item\em Hide user menu. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CreateUserElement} (Obj)
+\begin{CompactList}\small\item\em Create elements of an user. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowUserFullName} (Obj, UserName)
+\begin{CompactList}\small\item\em Create a hint showing complete name. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CloseUserFullName} ()
+\item 
+function {\bf INTERFACE\_\-ShowSearchUserWindow} ()
+\item 
+function {\bf INTERFACE\_\-SearchUserSetResult} (Result)
+\item 
+function {\bf INTERFACE\_\-SortSearchUserByNick} ()
+\begin{CompactList}\small\item\em Change sort order and display result list order by nick. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-SortSearchUserByName} ()
+\begin{CompactList}\small\item\em Change sort order and display result list order by name. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Class defition for user list object and some functions assign. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software
+
+Create a user list object used in rooms, contact list and online list 
+
+\subsection{Function Documentation}
+\index{interface/user.js@{interface/user.js}!INTERFACE\_\-AddUser@{INTERFACE\_\-AddUser}}
+\index{INTERFACE\_\-AddUser@{INTERFACE\_\-AddUser}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-AddUser]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddUser ( {\em Username}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type})}\label{interface_2user_8js_d7a687f54e26d5ea31cb324f54a28a5c}
+
+
+Add one user in list. 
+
+Add a user in user list creating a tr element and insert it in (this.users) array.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Status}]User's status \item[{\em Rating}]User's rating that will be show \item[{\em Type}]User's type (teacher, admin, robot, etc.) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{INTERFACE\_\-CreateUser}{p.}{interface_2user_8js_3fe155294f7207ada207ec4d4b8610d1} \end{Desc}
+
+
+References INTERFACE\_\-CreateUser().
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-BlurNick@{INTERFACE\_\-BlurNick}}
+\index{INTERFACE\_\-BlurNick@{INTERFACE\_\-BlurNick}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-BlurNick]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-BlurNick ()}\label{interface_2user_8js_0ebfdf6028605df34dfbd5a4d35c1963}
+
+
+Blur sort nick button element. 
+
+Show user list in interface
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-BlurRating@{INTERFACE\_\-BlurRating}}
+\index{INTERFACE\_\-BlurRating@{INTERFACE\_\-BlurRating}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-BlurRating]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-BlurRating ()}\label{interface_2user_8js_d254a3fd221990fca674f566bf62d384}
+
+
+Blur sort rating button element. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-CloseUserFullName@{INTERFACE\_\-CloseUserFullName}}
+\index{INTERFACE\_\-CloseUserFullName@{INTERFACE\_\-CloseUserFullName}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-CloseUserFullName]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CloseUserFullName ()}\label{interface_2user_8js_3316e283d13848908eedcead7b5c7882}
+
+
+
+
+Referenced by INTERFACE\_\-CreateUser(), INTERFACE\_\-CreateUserBox(), and INTERFACE\_\-CreateUserElement().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-CreateUser@{INTERFACE\_\-CreateUser}}
+\index{INTERFACE\_\-CreateUser@{INTERFACE\_\-CreateUser}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-CreateUser]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateUser ( {\em Username}, \/   {\em Status}, \/   {\em Rating}, \/   {\em Type})}\label{interface_2user_8js_3fe155294f7207ada207ec4d4b8610d1}
+
+
+Create a user item and return it. 
+
+Create a user tr element, contais username, status/type and rating, and return this element.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]The user's name \item[{\em Status}]The new user's status \item[{\em Rating}]The user's rating \item[{\em Type}]The new user's type\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto\end{Desc}
+\begin{Desc}
+\item[Returns:]Tr HTML element with username, status/type and rating \end{Desc}
+
+
+References CONTACT\_\-ShowUserMenu(), INTERFACE\_\-CloseUserFullName(), INTERFACE\_\-ShowUserFullName(), UTILS\_\-CreateElement(), and UTILS\_\-ShortString().
+
+Referenced by INTERFACE\_\-AddUser().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-CreateUserElement@{INTERFACE\_\-CreateUserElement}}
+\index{INTERFACE\_\-CreateUserElement@{INTERFACE\_\-CreateUserElement}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-CreateUserElement]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateUserElement ( {\em Obj})}\label{interface_2user_8js_27fbbf0491c22c7aefee7e5a8b82a92f}
+
+
+Create elements of an user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Obj}]User Object \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Tr HTML element \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
+
+
+References CONTACT\_\-ShowUserMenu(), INTERFACE\_\-CloseUserFullName(), INTERFACE\_\-ShowUserFullName(), UTILS\_\-CreateElement(), and UTILS\_\-ShortString().
+
+Referenced by INTERFACE\_\-SearchUserSetResult(), INTERFACE\_\-SortSearchUserByName(), and INTERFACE\_\-SortSearchUserByNick().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-CreateUserList@{INTERFACE\_\-CreateUserList}}
+\index{INTERFACE\_\-CreateUserList@{INTERFACE\_\-CreateUserList}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-CreateUserList]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateUserList ( {\em Element})}\label{interface_2user_8js_6240e6a678c2d51901acdbf00d5baddc}
+
+
+Create user list in interface. 
+
+Create user list HTML, and return div, list parent, sort span, sort rating option;
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Element}]Parent node of list main div\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[Returns:]Object that contains list main div, user list, sort span and sort rating option \end{Desc}
+
+
+References UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-FindUser@{INTERFACE\_\-FindUser}}
+\index{INTERFACE\_\-FindUser@{INTERFACE\_\-FindUser}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-FindUser]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FindUser ( {\em Username})}\label{interface_2user_8js_a6d213248e3cc9b2a9a45684efcd7242}
+
+
+Find user in user list. 
+
+Search user in array (this.users);
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[Returns:]null if user is not founded in list, else tr elemente if user item; \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-FocusNick@{INTERFACE\_\-FocusNick}}
+\index{INTERFACE\_\-FocusNick@{INTERFACE\_\-FocusNick}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-FocusNick]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FocusNick ()}\label{interface_2user_8js_6ae0326052e224986cb81092e604e0c8}
+
+
+Focus sort nick button element. 
+
+Show user list in interface
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-FocusRating@{INTERFACE\_\-FocusRating}}
+\index{INTERFACE\_\-FocusRating@{INTERFACE\_\-FocusRating}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-FocusRating]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-FocusRating ()}\label{interface_2user_8js_fec1f55e819268c0dcec6c4f4e88e9a4}
+
+
+Focus sort rating button element. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-HideList@{INTERFACE\_\-HideList}}
+\index{INTERFACE\_\-HideList@{INTERFACE\_\-HideList}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-HideList]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideList ()}\label{interface_2user_8js_17b9eb8df4cb65fcb27a6dde9ba226de}
+
+
+Hide user list element. 
+
+Hide user list in interface
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-HideSort@{INTERFACE\_\-HideSort}}
+\index{INTERFACE\_\-HideSort@{INTERFACE\_\-HideSort}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-HideSort]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideSort ()}\label{interface_2user_8js_69877293acf483a64698e9271747ca92}
+
+
+Hide sort options. 
+
+Hide sort span and option
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-HideUserList@{INTERFACE\_\-HideUserList}}
+\index{INTERFACE\_\-HideUserList@{INTERFACE\_\-HideUserList}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-HideUserList]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideUserList ()}\label{interface_2user_8js_e270d8b8e0e740f88f0492c3ce02cbba}
+
+
+Hide user list div. 
+
+Hide user list div changing element style display to none.
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-HideUserMenu@{INTERFACE\_\-HideUserMenu}}
+\index{INTERFACE\_\-HideUserMenu@{INTERFACE\_\-HideUserMenu}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-HideUserMenu]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideUserMenu ()}\label{interface_2user_8js_88f86ba0e4294ffc2d39ef96313a6761}
+
+
+Hide user menu. 
+
+Remove user menu from interface
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+Referenced by CONTACT\_\-ShowUserMenu().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-RemoveUser@{INTERFACE\_\-RemoveUser}}
+\index{INTERFACE\_\-RemoveUser@{INTERFACE\_\-RemoveUser}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-RemoveUser]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveUser ( {\em Username})}\label{interface_2user_8js_8c5e9f60ad82c01c5e83e493bbe4c70a}
+
+
+Remove user from list. 
+
+Remove a user from user list and remove from array.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[Returns:]false - User is not founded in list, true otherwise \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-SearchUserSetResult@{INTERFACE\_\-SearchUserSetResult}}
+\index{INTERFACE\_\-SearchUserSetResult@{INTERFACE\_\-SearchUserSetResult}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-SearchUserSetResult]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SearchUserSetResult ( {\em Result})}\label{interface_2user_8js_1b9b71b82486042004f55268127edde3}
+
+
+
+
+References INTERFACE\_\-CreateUserElement(), MainData, and UTILS\_\-GetText().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-SetSortRatingFunction@{INTERFACE\_\-SetSortRatingFunction}}
+\index{INTERFACE\_\-SetSortRatingFunction@{INTERFACE\_\-SetSortRatingFunction}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-SetSortRatingFunction]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SetSortRatingFunction ( {\em Func})}\label{interface_2user_8js_af959117d782016c4b673ae64d0a0b85}
+
+
+Set sort list by rating function to list. 
+
+Set sort by rating function when click in sort option
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Func}]Function that contais sort instructions\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References UTILS\_\-AddListener().
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-SetSortUserFunction@{INTERFACE\_\-SetSortUserFunction}}
+\index{INTERFACE\_\-SetSortUserFunction@{INTERFACE\_\-SetSortUserFunction}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-SetSortUserFunction]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SetSortUserFunction ( {\em Func})}\label{interface_2user_8js_31f800f0d6f2d8ef8b3edd3243433f2d}
+
+
+Set sort list by nick function to list. 
+
+Set sort by nick function when click in sort span
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Func}]Function that contais sort instructions\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References UTILS\_\-AddListener().
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowList@{INTERFACE\_\-ShowList}}
+\index{INTERFACE\_\-ShowList@{INTERFACE\_\-ShowList}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowList]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowList ()}\label{interface_2user_8js_69805285e497cf0559391a05e4593b89}
+
+
+Show user list element. 
+
+Show user list in interface
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowSearchUserWindow@{INTERFACE\_\-ShowSearchUserWindow}}
+\index{INTERFACE\_\-ShowSearchUserWindow@{INTERFACE\_\-ShowSearchUserWindow}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowSearchUserWindow]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowSearchUserWindow ()}\label{interface_2user_8js_fd507075270a105dd96872e2e6c3d2e6}
+
+
+
+
+References UTILS\_\-AddListener(), UTILS\_\-Capitalize(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by WINDOW\_\-SearchUser().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowSort@{INTERFACE\_\-ShowSort}}
+\index{INTERFACE\_\-ShowSort@{INTERFACE\_\-ShowSort}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowSort]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowSort ()}\label{interface_2user_8js_9f8ac5bba12c4960f0fca1a6436472af}
+
+
+Show sort options. 
+
+Show sort span and option
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowUserFullName@{INTERFACE\_\-ShowUserFullName}}
+\index{INTERFACE\_\-ShowUserFullName@{INTERFACE\_\-ShowUserFullName}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowUserFullName]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowUserFullName ( {\em Obj}, \/   {\em UserName})}\label{interface_2user_8js_84dc47eafffe6983c731c67d31adb6cd}
+
+
+Create a hint showing complete name. 
+
+Create a hint showing complete name of an user whose nick was shorted to fit in interface
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Obj}]HTML element Object \item[{\em UserName}]User's name string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+References MainData, UTILS\_\-CreateElement(), UTILS\_\-GetOffset(), and UTILS\_\-GetParentDiv().
+
+Referenced by INTERFACE\_\-CreateUser(), INTERFACE\_\-CreateUserBox(), and INTERFACE\_\-CreateUserElement().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowUserList@{INTERFACE\_\-ShowUserList}}
+\index{INTERFACE\_\-ShowUserList@{INTERFACE\_\-ShowUserList}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowUserList]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowUserList ()}\label{interface_2user_8js_16a0d2874aebf2c07bd86bc3c4b80f04}
+
+
+Show user list div. 
+
+Show user list div changing element style display to block.
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-ShowUserMenu@{INTERFACE\_\-ShowUserMenu}}
+\index{INTERFACE\_\-ShowUserMenu@{INTERFACE\_\-ShowUserMenu}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-ShowUserMenu]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowUserMenu ( {\em Obj}, \/   {\em Options})}\label{interface_2user_8js_29776ca97905ccbf968f56e17ab89bd2}
+
+
+Show user menu when click over user list item. 
+
+Create a menu and show options to challenge, view profile, add/remove contact, admin options, etc.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Obj}]User list item \item[{\em Options}]Array with user menu options;\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData, UTILS\_\-CreateElement(), UTILS\_\-GetOffset(), UTILS\_\-GetParentDiv(), and UTILS\_\-GetText().
+
+Referenced by CONTACT\_\-ShowUserMenu().\index{interface/user.js@{interface/user.js}!INTERFACE\_\-SortSearchUserByName@{INTERFACE\_\-SortSearchUserByName}}
+\index{INTERFACE\_\-SortSearchUserByName@{INTERFACE\_\-SortSearchUserByName}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-SortSearchUserByName]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SortSearchUserByName ()}\label{interface_2user_8js_b0375ad194fce7026186b85d5d88d83f}
+
+
+Change sort order and display result list order by name. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+References INTERFACE\_\-CreateUserElement(), and MainData.\index{interface/user.js@{interface/user.js}!INTERFACE\_\-SortSearchUserByNick@{INTERFACE\_\-SortSearchUserByNick}}
+\index{INTERFACE\_\-SortSearchUserByNick@{INTERFACE\_\-SortSearchUserByNick}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-SortSearchUserByNick]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-SortSearchUserByNick ()}\label{interface_2user_8js_d20cb22e408db9d79ff43a78fa2ef7fe}
+
+
+Change sort order and display result list order by nick. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+References INTERFACE\_\-CreateUserElement(), and MainData.\index{interface/user.js@{interface/user.js}!INTERFACE\_\-UpdateUser@{INTERFACE\_\-UpdateUser}}
+\index{INTERFACE\_\-UpdateUser@{INTERFACE\_\-UpdateUser}!interface/user.js@{interface/user.js}}
+\subsubsection[INTERFACE\_\-UpdateUser]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-UpdateUser ( {\em Username}, \/   {\em NewStatus}, \/   {\em Rating}, \/   {\em NewType})}\label{interface_2user_8js_82db9d7dc4900b3b84f06a9230dca3f9}
+
+
+Update user status and rating in list. 
+
+Update user status and rating in user list. Find the user and set his type status and, if exists rating, update rating;
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em NewStatus}]New user's status \item[{\em Rating}]User's rating \item[{\em NewType}]New user's type\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[Returns:]False if user was not founded in list, else True \end{Desc}
+
+
+Referenced by UserListObj().\index{interface/user.js@{interface/user.js}!UserListObj@{UserListObj}}
+\index{UserListObj@{UserListObj}!interface/user.js@{interface/user.js}}
+\subsubsection[UserListObj]{\setlength{\rightskip}{0pt plus 5cm}function {\bf UserListObj} ( {\em Element})}\label{interface_2user_8js_5a1f8526a0c8c41fd079fccf2f7bfb48}
+
+
+
+
+References INTERFACE\_\-AddUser(), INTERFACE\_\-BlurNick(), INTERFACE\_\-BlurRating(), INTERFACE\_\-CreateUserList(), INTERFACE\_\-FindUser(), INTERFACE\_\-FocusNick(), INTERFACE\_\-FocusRating(), INTERFACE\_\-HideList(), INTERFACE\_\-HideSort(), INTERFACE\_\-HideUserList(), INTERFACE\_\-RemoveUser(), INTERFACE\_\-SetSortRatingFunction(), INTERFACE\_\-SetSortUserFunction(), INTERFACE\_\-ShowList(), INTERFACE\_\-ShowSort(), INTERFACE\_\-ShowUserList(), and INTERFACE\_\-UpdateUser().
+
+Referenced by ContactObj(), ContactOnlineObj(), INTERFACE\_\-AddContactGroup(), and RoomObj().

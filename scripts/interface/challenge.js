@@ -15,15 +15,16 @@
 */
 
 /**
-* Create elements to challenge invite or challenge offer
+* @brief	Create elements to challenge invite or challenge offer
 *
-* @param Oponent					Oponent's nickname 
-* @param Rating						Oponent's current rating
-* @param GameParameters		Object that contains the game parameters of a received challenge
-* @param MatchId					Id of Match 
-* @return									Div; Array
-* @see										WINDOW_Challenge();
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @param	Oponent		Oponent's nickname 
+* @param	RatingObj	Rating object with types and respective value
+* @param 	GameParameters	Object that contains the game parameters of a received challenge
+* @param 	MatchId		Id of Match 
+* @param 	Rated		Rated game flag
+* @return			Challenge window content and Array with buttons
+* @see				WINDOW_Challenge();
+* @author			Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
@@ -808,11 +809,11 @@ function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated
 }
 
 /**
-* Hide challenge list menu
+* @brief	Hide challenge list menu
 *
-* @public
-* @return 	bool
-* @author 	Ulysses
+* @return 	True if hide or false (if challenge list not founded)
+* @author 	Ulysses Bomfim
+* @deprecated
 */
 function INTERFACE_HideChallengeList()
 {

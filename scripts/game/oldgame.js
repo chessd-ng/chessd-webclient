@@ -16,15 +16,16 @@
 
 
 /**
-* This file contains OldGame 
+* @file		game/oldgame.js
+* @brief	This file contains old game functions
 */
 
 /**
-* Handle Search Old Games Messages
+* @brief	Handle search old games messages
 *
-* @param        XML The xml that contains the string 'search_game' in xmlns attribute
-* @return       Buffer with the messages that must be send
-* @author       Rubens;
+* @param        XML	XMPP that contains search game data result
+* @return       XMPP to be send
+* @author       Rubens Suguimoto
 */
 function OLDGAME_HandleSearchOldGame(XML)
 {
@@ -89,8 +90,7 @@ function OLDGAME_HandleSearchOldGame(XML)
 	// Remove loading message
 	INTERFACE_HideOldgameLoading();
 
-//	WINDOW_OldGameResult(GameList);
-
+	// Show old game search result
 	SearchGameWindow.Elements.SetResult(Id, GameList, More);
 	SearchGameWindow.Elements.SetPlayer1(SearchGameWindow.P1);
 	SearchGameWindow.Elements.SetPlayer2(SearchGameWindow.P2);
@@ -102,13 +102,13 @@ function OLDGAME_HandleSearchOldGame(XML)
 }
 
 /** 
-* Start Game in OldGame Mode
-* 
-* @param        P1 = Player 1 Object (Name, Time, Color, Inc)
-* @param        P2 = Player 2 Object (Name, Time, Color, Inc)
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @brief	Start Game in OldGame Mode
+*
+* @param	OldGameId	Old game identification number (index) 
+* @param        P1 	First player object (Name, Time, Color, Inc)
+* @param        P2	Second player object (Name, Time, Color, Inc)
+* @return       XMPP to send 
+* @author       Rubens Suguimoto
 */
 function OLDGAME_StartOldGame(OldGameId, P1, P2)
 {
@@ -121,9 +121,6 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	var MyUsername = MainData.GetUsername();
 
 	var CurrentOldGame = MainData.GetCurrentOldGame();
-
-	// Remove welcome div
-	//INTERFACE_RemoveWelcome();
 
 	// Hide current game
 	if (CurrentOldGame != null)
@@ -173,12 +170,11 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 }
 
 /**
-* Handle Game State
-* It's a good ideia to read the server's documentation before reading the code above
+* @brief	Handle old game states
 *
-* @param 	XML The xml that contains the game state
-* @return 	void
-* @author 	Ulysses and Rubens
+* @param 	XML 	XMPP that contains the game state
+* @return 	XMPP to send
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function OLDGAME_FetchOldGame(XML)
 {
@@ -218,14 +214,14 @@ function OLDGAME_FetchOldGame(XML)
 }
 
 /**
-* Load all game history moves done in the game
+* @brief	Load all game history moves done in the game
 *
-* @param        GameId is the game identificator
-* @param        HistoryXml is a XML that contains all games states
-* @param        Player1 = Player 1 Object (Name, Time, Color, Inc)
-* @param        Player2 = Player 2 Object (Name, Time, Color, Inc)
-* @return       void
-* @author       Rubens
+* @param        GamePos		Game identification number (index)
+* @param        HistoryXml 	XML that contains all games states
+* @param        Player1 	First Player object (Name, Time, Color, Inc)
+* @param        Player2 	Second Player object (Name, Time, Color, Inc)
+* @return       XMPP to send
+* @author       Rubens Suguimoto
 */
 function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 {
@@ -292,16 +288,17 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 }
 
 /**
-* Update board in data struct and interface
+* @brief	Update board in data struct and interface
 *
-* @param        GameId = Game number
-* @param        BoardStr = Board status in a string
-* @param        Move = Chess Move (Piece/Orig-Dest)
-* @param        P1 = Player 1 Object (Name, Time, Color, Inc)
-* @param        P2 = Player 2 Object (Name, Time, Color, Inc)
-* @param        TurnColor = color ("white"/"black")
-* @return       void
-* @author       Rubens
+* @param        GamePos		Game identification number (index)
+* @param        BoardStr	Board status in a string
+* @param        Move		Chess game move (Piece/Orig-Dest)
+* @param	ShortMove	Move in short format
+* @param        P1		First player object (Name, Time, Color, Inc)
+* @param        P2 		Second player object (Name, Time, Color, Inc)
+* @param        TurnColor	Game turn color ("white"/"black")
+* @return       Empty string
+* @author       Rubens Suguimoto
 */
 function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 {
@@ -348,12 +345,11 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnCol
 
 
 /** 
-* Change board GameMode to OldGame Mode when game is over
+* @brief	Change board GameMode to OldGame Mode when game was over
 * 
-* @param        Id is Game ID  
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @param        Id	Game identification number
+* @return       none
+* @author       Rubens Suguimoto
 */
 function OLDGAME_EndGame(Id)
 {
@@ -404,11 +400,11 @@ function OLDGAME_EndGame(Id)
 
 
 /**
-* Handle Game Players Photo
+* @brief	Handle game players photos
 *
-* @param        XML The xml that contains vCard photo
-* @return       none
-* @author       Rubens
+* @param        XML	XMPP that contains vCard photo
+* @return       Empty string
+* @author       Rubens Suguimoto
 */
 function OLDGAME_HandleVCardPhoto(XML)
 {
@@ -458,12 +454,11 @@ function OLDGAME_HandleVCardPhoto(XML)
 
 
 /** 
-* Remove OldGame board from interface and OldGameList
+* @brief	Remove OldGame board from interface and OldGameList
 * 
-* @param        Index is array index of OldGame
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @param        Index	OldGame identification number (index)
+* @return       none
+* @author       Rubens Suguimoto
 */
 function OLDGAME_RemoveOldGame(Index)
 {
@@ -491,12 +486,10 @@ function OLDGAME_RemoveOldGame(Index)
 }
 
 /** 
-* Change current board to first game board
+* @brief	Change current board state to first game board state
 * 
-* @param        void
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @return       none 
+* @author       Rubens Suguimoto
 */
 function OLDGAME_FirstBoard()
 {
@@ -525,12 +518,10 @@ function OLDGAME_FirstBoard()
 }
 
 /** 
-* Change current board to previous game board
+* @brief	Change current board state to previous game board state
 * 
-* @param        void
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @return       False (if not found a previous state) or True otherwise
+* @author       Rubens Suguimoto 
 */
 function OLDGAME_PrevBoard()
 {
@@ -566,12 +557,10 @@ function OLDGAME_PrevBoard()
 }
 
 /** 
-* Change current board to next game board
+* @brief	Change current board state to next game board state
 * 
-* @param        void
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @return       False (if not found a next state) or True otherwise
+* @author       Rubens Suguimoto
 */
 function OLDGAME_NextBoard()
 {
@@ -608,12 +597,10 @@ function OLDGAME_NextBoard()
 }
 
 /** 
-* Change current board to last game board
+* @brief	Change current board state to last game board state
 * 
-* @param        void
-* @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @return       none
+* @author       Rubens Suguimoto
 */
 function OLDGAME_LastBoard()
 {
@@ -641,12 +628,11 @@ function OLDGAME_LastBoard()
 }
 
 /** 
-* Change current board to some game board
+* @brief	Change current board state to some game board state
 * 
-* @param        NumBoard in Board Number
+* @param        NumBoard	Board number state
 * @return       void 
-* @see		MainData methods and Game Interface Object;
-* @author       Rubens 
+* @author       Rubens Suguimoto 
 */
 function OLDGAME_GotoBoard(NumBoard)
 {
@@ -673,16 +659,18 @@ function OLDGAME_GotoBoard(NumBoard)
 }
 
 /**
-* Create search game info in data Struct and send old game search message
+* @brief	Create search old game window and get old game list
 *
-* @return       void
-* @author       Danilo
+* @return       none
+* @author       Danilo Yorinori
 */
 function OLDGAME_OpenOldGameWindow(User)
 {	
+	// Quick fix to check if search old game window exists
 	if (document.getElementById("OldGamesDiv"))
+	{
 		return;
-
+	}
 	var Elements;
 	var SearchInfo;
 	var Id = MainData.SearchGameMaxId; 
@@ -697,6 +685,7 @@ function OLDGAME_OpenOldGameWindow(User)
 
 	MainData.AddSearchGameInfo(Id, Elements, User);
 
+	// Get the first 10 old games from server
 	CONNECTION_SendJabber(MESSAGE_GetOldGames(Id,User,"",10,0));
 
 	SearchInfo = MainData.GetSearchGameInfo(Id);
@@ -706,70 +695,114 @@ function OLDGAME_OpenOldGameWindow(User)
 }
 
 /**
-* Remove Search Game Info in data struct and set new old game window max id count
+* @brief	Remove Search Game Info in data struct and set new old game window max id count
 *
-* @param				Id		Window's id
+* @param	Id		Window's id
 * @return       void
-* @author       Danilo
+* @author       Danilo Yorinori
 */
 function OLDGAME_CloseWindow(Id)
 {
 	MainData.RemoveSearchGameInfo(Id);
 
 	if (Id == MainData.SearchGameMaxId - 1)
+	{
 		MainData.SearchGameMaxId--;
+	}
 	else if (MainData.SearchGameInfoList.length == 0)
+	{
 		MainData.SearchGameMaxId = 0;
+	}
 }
 
 /**
-* Return apropriate result text according to result string 
+* @brief	Return apropriate result text according to old game result  
 *
-* @param Result Result's string
-* @return String
+* @param	Result		Result's string
+* @return	Result text string
 * @see OLDGAME_HandleSearchOldGame
-* @author Danilo
+* @author Danilo Yorinori
 */
 function OLDGAME_GameResult(Result)
 {
 	if ((Result == "") || (Result == null) || (Result == undefined))
+	{
 		return "";
+	}
 	else if (Result == "white-timeover")
+	{
 		return UTILS_GetText("game_result_white-timeover");
+	}
 	else if (Result == "black-timeover")
+	{
 		return UTILS_GetText("game_result_black-timeover");
+	}
 	else if (Result == "white-mated")
+	{
 		return UTILS_GetText("game_result_white-mated");
+	}
 	else if (Result == "black-mated")
+	{
 		return UTILS_GetText("game_result_black-mated");
+	}
 	else if (Result == "stalemate")
+	{
 		return UTILS_GetText("game_result_stalemate");
+	}
 	else if (Result == "white-resigned")
+	{
 		return UTILS_GetText("game_result_white-resigned");
+	}
 	else if (Result == "black-resigned")
+	{
 		return UTILS_GetText("game_result_black-resigned");
+	}
 	else if (Result == "draw-agreement")
+	{
 		return UTILS_GetText("game_result_draw-agreement");
+	}
 	else if (Result == "draw-repetition")
+	{
 		return UTILS_GetText("game_result_draw-repetition");
+	}
 	else if (Result == "draw-fifty-moves")
+	{
 		return UTILS_GetText("game_result_draw-fifty-moves");
+	}
 	else if (Result == "draw-impossible-mate")
+	{
 		return UTILS_GetText("game_result_draw-impossible-mate");
+	}
 	else if (Result == "draw-timeover")
+	{
 		return UTILS_GetText("game_result_draw-timeover");
+	}
 	else if (Result == "canceled-agreement")
+	{
 		return UTILS_GetText("game_result_canceled_agreement");
+	}
 	else if (Result == "canceled-timed-out")
+	{
 		return UTILS_GetText("game_result_canceled-timed-out");
+	}
 	else if (Result == "adjourned-agreement")
+	{
 		return UTILS_GetText("game_result_adjourned-agreement");
+	}
 	else if (Result == "adjourned-shutdown")
+	{
 		return UTILS_GetText("game_result_adjourned-shutdown");
+	}
 	else if (Result == "white-wo")
+	{
 		return UTILS_GetText("game_result_white-wo");
+	}
 	else if (Result == "black-wo")
+	{
 		return UTILS_GetText("game_result_black-wo");
+	}
 	else
+	{
 		return null;
+	}
 }

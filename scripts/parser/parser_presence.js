@@ -16,9 +16,17 @@
 
 
 /**
-* Parse presence messages received from jabber
+* @file		parser/parser_presence.js
+* @brief	Parse presence messages received from jabber
 */
 
+/*
+* @brief	Parse presence XMPP message
+*
+* @param	XML	XMPP message with presence
+* @return	XMPP to send
+* @author	Ulysses Bomfim
+*/
 function PARSER_ParsePresence(XML)
 {
 	var Jid, Show, NewStatus;
@@ -40,7 +48,6 @@ function PARSER_ParsePresence(XML)
 	if (Jid.match(Pattern) != null) {
 		Type = XML.getAttribute('type');
 		if (Type == "unavailable") {
-			//TODO || Put text in lang/pt_BR
 			WINDOW_Alert(UTILS_GetText("server_offline_title"),UTILS_GetText("server_offline"));
 		}
 		return Buffer;

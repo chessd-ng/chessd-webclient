@@ -16,21 +16,20 @@
 
 
 /**
-* Control rooms interface
+* @file		interface/room.js
+* @brief	Control rooms interface elements 
 */
 
 
 
-/*********************************************
- * FUNCTIONS - ROOM INTERFACE OBJECT
- *********************************************/
+// FUNCTIONS - ROOM INTERFACE OBJECT
 /*
-* Room Object
+* @class	RoomObj
+* @brief	Create room object
 *
-* @public
-* @params       
-* @return       void
-* @author       Rubens
+* @param	Roomname	Room's name 
+* @return       none
+* @author       Rubens Suguimoto
 */
 
 function RoomObj(Roomname)
@@ -61,17 +60,15 @@ function RoomObj(Roomname)
 	this.hideUserList = INTERFACE_HideRoomUserList;
 
 	this.hideUserList();
-//	this.showUserList();
 }
 
 
 /**
-* Create a room
+* @brief	Create a room HTML DOM elements
 * 
-* @private
-* @params	Room name;
-* @return 	RoomDiv, User list and Message list in this room
-* @authos	Pedro and Rubens
+* @param	RoomName	Room's name
+* @return 	Room main HTML DOM Div, Room messages HTML DOM List, Input text box and Show user HTML DOM span
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_CreateRoom(RoomName)
 {
@@ -114,6 +111,7 @@ function INTERFACE_CreateRoom(RoomName)
 		}
 	}
 
+	// Emoticons
 	Emoticon = UTILS_CreateElement("img", null, "emoticon");
 	Emoticon.src = "./images/emoticons/default.png";
 	Emoticon.onclick = function () {
@@ -140,12 +138,6 @@ function INTERFACE_CreateRoom(RoomName)
 		}
 	}
 
-	Emoticon = UTILS_CreateElement("img", null, "emoticon");
-	Emoticon.src = "./images/emoticons/default.png";
-	Emoticon.onclick = function () {
-		INTERFACE_ShowEmoticonList(RoomName);
-	}
-
 	RoomUserDiv.appendChild(UserListVisibility);
 
 	RoomInside.appendChild(RoomUserDiv);
@@ -158,6 +150,12 @@ function INTERFACE_CreateRoom(RoomName)
 	return {RoomDiv:RoomDiv, MsgList:MessageList, Input:Input, UserListButton:UserListVisibility};
 }
 
+/*
+* @brief	Show room
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowRoom()
 {
 	var RoomMain;
@@ -167,30 +165,53 @@ function INTERFACE_ShowRoom()
 	RoomMain = document.getElementById("Rooms");
 	if(this.room.parentNode != RoomMain)
 	{
-		//RoomMain = document.getElementById("Rooms");
 		RoomMain.appendChild(this.room);
 	}
 	
 	this.room.style.display = "block";
 }
 
+/*
+* @brief	Hide room
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideRoom()
 {
 	this.room.style.display = "none";
 }
 
+/*
+* @brief	Remove interface room
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveRoom()
 {
 	var RoomParent = this.room.parentNode;
 	RoomParent.removeChild(this.room);
 }
 
+/*
+* @brief	Focus room input text
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_FocusRoomInput()
 {
 	this.input.focus();
 }
 
 
+/*
+* @brief	Show room's user list
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowRoomUserList()
 {
 	this.userList.show();
@@ -200,6 +221,12 @@ function INTERFACE_ShowRoomUserList()
 	this.userListButton.className = "UserListVisibilityOn";
 }
 
+/*
+* @brief	Hide room's user list
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideRoomUserList()
 {
 	this.userList.hide();
@@ -208,6 +235,15 @@ function INTERFACE_HideRoomUserList()
 	this.userListButton.className = "UserListVisibility";
 }
 
+/*
+* @brief	Add message in room
+* 
+* @param	Username	User's name
+* @param	Msg		Message text
+* @param	TimeStamp	Time in timestamp format
+* @return	True
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 {
 	var Item;
@@ -236,6 +272,12 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 	return true;
 }
 
+/*
+* @brief	Show error messagem in room
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddMsgErrorInRoom(Msg)
 {
 	var Item;
@@ -246,12 +288,12 @@ function INTERFACE_AddMsgErrorInRoom(Msg)
 	this.msgList.scrollTop += Item.clientHeight + 1000;
 }
 
-/* Refresh room's occupants and online users number
+/*
+* @brief	Refresh room's occupants and online users number
 *
-* @param       RoomName
-*              Room's name
-* @return void
-* @author Danilo 
+* @param	RoomName	Room's name
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_RefreshOccupantsNumber(RoomName)
 {
@@ -268,8 +310,6 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 	}
 	else {
 		// else get name of focused room
-//		Focused = document.getElementById("RoomSecName").innerHTML;
-	
 		Focused = document.getElementById("Room_"+RoomName);
 
 		// If change of occupant's number occured in focused room
@@ -299,16 +339,14 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 	}
 }
 
-/*********************************************
- * FUNCTIONS - ROOM TOP MENU LIST 
- *********************************************/
+/////////////// * FUNCTIONS - ROOM TOP MENU LIST 
+
 /**
-* Show room list in the room menu, if it exists
+* @brief	Show room's list in the room menu
 *
-* @public
-* @params       Array of room names
-* @return       void
-* @author       Pedro
+* @param       Rooms	Array of room names
+* @return       none
+* @author       Pedro Rocha
 */
 function INTERFACE_ShowRoomList(Rooms)
 {
@@ -338,12 +376,10 @@ function INTERFACE_ShowRoomList(Rooms)
         return true;
 }
 /**
-* Hide room list menu
+* @brief	Hide room list menu
 *
-* @public
-* @params       void
-* @return       void
-* @author       Pedro
+* @return       True or false (if element list node not founded)
+* @author       Pedro Rocha
 */
 function INTERFACE_HideRoomList()
 {
@@ -355,17 +391,14 @@ function INTERFACE_HideRoomList()
         }
         Node.parentNode.removeChild(Node);
 
-				return true;
+	return true;
 }
 
-/********************************************
- * FUNCTIONS - ROOM GAME TOP MENU LIST 
- *********************************************/
+//////////// * FUNCTIONS - ROOM GAME TOP MENU LIST 
 /**
-* Hide game room list menu
+* @brief	Hide game room list menu
 *
-* @public
-* @return       bool
+* @return       True or false (if element list node not founded)
 * @author       Ulysses
 */
 function INTERFACE_HideGameRoomList()
@@ -382,14 +415,18 @@ function INTERFACE_HideGameRoomList()
 }
 
 /**
-* Show game room list in the room menu
+* @brief	Add a game room list in the room menu
 *
-* @param 	Rooms An Array with game rooms
-* @return 	bool
-* @author 	Ulysses
+* @param 	GameId		Current game identification field
+* @param	PW		White player object
+* @param	PB		Black player object
+* @param	GameType	Game category
+* @return       True or false (if element list node not founded)
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 {
+//TODO -> CHANGE THIS FUNCTION'S NAME TO "AddGameRoomList"
 	// Get game menu
 	var Node = document.getElementById("GameRoomMenuDiv");
 	var List;
@@ -444,7 +481,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 
 	// Insert item in current game list
 	List.appendChild(Room);
-	//List.style.visibility = "visible";
+
 	return true;
 }
 
@@ -454,7 +491,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 /** 
 * Show or hide list of user's rooms 
 * 
-* @public 
+* @return	True if visibile or false otherwise
 */ 
 function INTERFACE_ChangeRoomListVisibility() 
 { 
@@ -469,7 +506,7 @@ function INTERFACE_ChangeRoomListVisibility()
 	if (Menu != null) 
 	{ 
 		Menu.parentNode.removeChild(Menu); 
-		return true; 
+		return false;
 	} 
 	//else show (create) menu 
 	Div = UTILS_CreateElement("div", "RoomListMenu"); 
@@ -522,10 +559,10 @@ function INTERFACE_ChangeRoomListVisibility()
 
 
 /**
-* Remove a room from room list if RoomListMenu is opened
+* @brief	Remove a room from room list
 *
-* @param        Room name that will be removed from list
-* @return       void
+* @param        Room	Room name
+* @return       none
 * @author       Rubens
 */
 function INTERFACE_RemoveRoomFromList(Room)
@@ -554,17 +591,13 @@ function INTERFACE_RemoveRoomFromList(Room)
 	}
 }
 
-
-
-
-
-/**********************************
- * FUNCTIONS - EMOTICONS LIST
- ***********************************/
+////////////////// FUNCTIONS - EMOTICONS LIST
 /**
-* Show emoticon list
+* @brief	Show emoticon list
 *
-* @public
+* @param	RName	Room's name
+* @return	none
+* @author	Pedro Rocha
 */
 function INTERFACE_ShowEmoticonList(RName)
 {
@@ -616,9 +649,10 @@ function INTERFACE_ShowEmoticonList(RName)
 }
 
 /**
-* Hide emoticon list
+* @brief	Hide emoticon list
 *
-* @public
+* @return	True or null (if emoticon div exists)
+* @author	Pedro Rocha
 */
 function INTERFACE_HideEmoticonList()
 {
@@ -635,14 +669,14 @@ function INTERFACE_HideEmoticonList()
 
 
 
-/**********************************
- * FUNCTIONS - CHANGE ROOM BAR
- ***********************************/
+//// * FUNCTIONS - CHANGE ROOM BAR
 
 /**
-* Give focus to a room in change room bar
+* @brief	Give focus to a room in change room bar
 *
-* @public
+* @param	RoomName	Room's name
+* @return	True or null (if room was not founded)
+* @author	Pedro Rocha
 */
 function INTERFACE_FocusRoom(RoomName)
 {
@@ -698,15 +732,20 @@ function INTERFACE_FocusRoom(RoomName)
 	return true;
 }
 
-/* Rubens
- */
+/*
+* @brief	Create room in room change bar
+*
+* @param	RoomName	Room's name
+* @return	none
+* @author	Rubens Suguimoto and Danilo Yorinori
+*/
 function INTERFACE_CreateRoomInBar(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
 	var RoomItem, RoomClose, ShortName;
 	var RoomItemTitle, RoomOccupants;
 
-	//Create Room default
+	//Create Room Default (General room)
 	if(RoomList.childNodes.length == 1)
 	{
 		if (UTILS_GetText("room_default") > 4)
@@ -731,6 +770,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[0]);
 	}
+	// Create secondary room and others
 	else if(RoomList.childNodes.length == 2)
 	{
 		// Create a item and set focus to it
@@ -772,10 +812,11 @@ function INTERFACE_CreateRoomInBar(RoomName)
 }
 
 /**
-* Close the room that are displayed
-* as a secondary room 
+* @brief	Close the room that are displayed as a secondary room 
 *
-* @public
+* @param	RoomName	Room's name
+* @return	Room's name
+* @author	Pedro Rocha
 */
 function INTERFACE_CloseRoom(RoomName)
 {
@@ -802,13 +843,13 @@ function INTERFACE_CloseRoom(RoomName)
 
 
 
-/**********************************
- * FUNCTIONS - START INTERFACE
- ***********************************/
+//// * FUNCTIONS - START INTERFACE
+
 /**
-* Create rooms div
+* @brief	Create rooms HTML DOM Div element
 *
-* @private
+* @return	Rooms HTML DOM Div element
+* @author	Pedro Rocha
 */
 function INTERFACE_CreateRooms()
 {
@@ -832,7 +873,6 @@ function INTERFACE_CreateRooms()
 
 	RoomsDiv.appendChild(INTERFACE_CreateLoadingBox("room_loading",UTILS_GetText("room_loading")));
 	RoomsDiv.appendChild(RoomsList);
-	//RoomsDiv.appendChild(RoomDiv.RoomDiv);
 
 	return RoomsDiv;
 }
@@ -843,13 +883,12 @@ function INTERFACE_CreateRooms()
 
 
 /**
- * Create elements to create room window and return divs and array of buttons
- *
- * @ return     Div, Array 
- * @ see        WINDOW_CreateRoom();
- * @ author     Danilo Kiyoshi Simizu Yorinori
- */
-
+* @brief	Create HTML DOM elements to create room window content
+*
+* @return	Return divs and array of buttons
+* @see		WINDOW_CreateRoom();
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
 function INTERFACE_ShowCreateRoomWindow()
 {
 	var Div;
@@ -981,7 +1020,6 @@ function INTERFACE_ShowCreateRoomWindow()
 	Cancel.value = UTILS_GetText('window_cancel');
 
 	// Mount elements tree
-	
 	// Counter Div
 //	CounterDiv.appendChild(CounterInput);
 	CounterDiv.appendChild(CounterLabel);
@@ -1011,8 +1049,9 @@ function INTERFACE_ShowCreateRoomWindow()
 }
 
 /**
- * Create elements to cancel room creation window and return divs and array of buttons
+* Create elements to cancel room creation window and return divs and array of buttons
 *
+* TODO -> ACTIVE THIS FUNCTION 
 * @return     Div, Array 
 * @see        WINDOW_CancelRoom();
 * @author     Danilo Kiyoshi Simizu Yorinori

@@ -1,0 +1,361 @@
+\section{/home/www/rubens/webclient/scripts/interface/gamecenter.js File Reference}
+\label{interface_2gamecenter_8js}\index{/home/www/rubens/webclient/scripts/interface/gamecenter.js@{/home/www/rubens/webclient/scripts/interface/gamecenter.js}}
+Control interface game center. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf GameCenterObj} ()
+\item 
+function {\bf INTERFACE\_\-ShowGameCenter} (Element)
+\item 
+function {\bf INTERFACE\_\-HideGameCenter} ()
+\item 
+function {\bf INTERFACE\_\-CreateGameCenter} ()
+\item 
+function {\bf AnnounceObj} ()
+\item 
+function {\bf INTERFACE\_\-AddAnnounce} (Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
+\item 
+function {\bf INTERFACE\_\-RemoveAnnounce} (MatchId)
+\item 
+function {\bf INTERFACE\_\-ShowAnnounceCenter} (Element)
+\item 
+function {\bf INTERFACE\_\-HideAnnounceCenter} ()
+\item 
+function {\bf INTERFACE\_\-ShowNoAnnounce} ()
+\item 
+function {\bf INTERFACE\_\-HideNoAnnounce} ()
+\item 
+function {\bf INTERFACE\_\-CreateGameCenterAnnounce} ()
+\item 
+function {\bf MatchOfferObj} ()
+\item 
+function {\bf INTERFACE\_\-AddMatchOffer} (Player, Time, Inc, Category, Rated, Private, MatchId)
+\item 
+function {\bf INTERFACE\_\-RemoveMatchOffer} (MatchId)
+\item 
+function {\bf INTERFACE\_\-ShowMatchCenter} (Element)
+\item 
+function {\bf INTERFACE\_\-HideMatchCenter} ()
+\item 
+function {\bf INTERFACE\_\-ShowNoMatch} ()
+\item 
+function {\bf INTERFACE\_\-HideNoMatch} ()
+\item 
+function {\bf INTERFACE\_\-CreateGameCenterMatch} ()
+\item 
+function {\bf PostponeObj} ()
+\item 
+function {\bf INTERFACE\_\-AddPostpone} (Player, Time, Inc, Category, Rating, Date, PostponeId)
+\item 
+function {\bf INTERFACE\_\-RemovePostpone} (PostponeId)
+\item 
+function {\bf INTERFACE\_\-UpdatePostpone} (OponentName, OponentStatus)
+\item 
+function {\bf INTERFACE\_\-ShowPostponeCenter} (Element)
+\item 
+function {\bf INTERFACE\_\-HidePostponeCenter} ()
+\item 
+function {\bf INTERFACE\_\-ShowNoPostpone} ()
+\item 
+function {\bf INTERFACE\_\-HideNoPostpone} ()
+\item 
+function {\bf INTERFACE\_\-CreateGameCenterPostpone} ()
+\item 
+function {\bf CurrentGamesObj} ()
+\item 
+function {\bf INTERFACE\_\-AddCurrentGames} (WPlayer, WRating, BPlayer, BRating, Category, GameTime, Rated, Moves, CurrentGamesId)
+\item 
+function {\bf INTERFACE\_\-RemoveCurrentGames} (CurrentGamesId)
+\item 
+function {\bf INTERFACE\_\-ShowCurrentGamesCenter} (Element)
+\item 
+function {\bf INTERFACE\_\-HideCurrentGamesCenter} ()
+\item 
+function {\bf INTERFACE\_\-ShowNoCurrentGames} ()
+\item 
+function {\bf INTERFACE\_\-HideNoCurrentGames} ()
+\item 
+function {\bf INTERFACE\_\-CreateGameCenterCurrentGames} ()
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Control interface game center. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{interface/gamecenter.js@{interface/gamecenter.js}!AnnounceObj@{AnnounceObj}}
+\index{AnnounceObj@{AnnounceObj}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[AnnounceObj]{\setlength{\rightskip}{0pt plus 5cm}function AnnounceObj ()}\label{interface_2gamecenter_8js_0eb1eefa16f53a3ec226f2e03a4d5b62}
+
+
+
+
+References INTERFACE\_\-AddAnnounce(), INTERFACE\_\-CreateGameCenterAnnounce(), INTERFACE\_\-HideAnnounceCenter(), INTERFACE\_\-HideNoAnnounce(), INTERFACE\_\-RemoveAnnounce(), INTERFACE\_\-ShowAnnounceCenter(), and INTERFACE\_\-ShowNoAnnounce().
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!CurrentGamesObj@{CurrentGamesObj}}
+\index{CurrentGamesObj@{CurrentGamesObj}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[CurrentGamesObj]{\setlength{\rightskip}{0pt plus 5cm}function CurrentGamesObj ()}\label{interface_2gamecenter_8js_f07b82cf97a45480f7867b745050be32}
+
+
+
+
+References INTERFACE\_\-AddCurrentGames(), INTERFACE\_\-CreateGameCenterCurrentGames(), INTERFACE\_\-HideCurrentGamesCenter(), INTERFACE\_\-HideNoCurrentGames(), INTERFACE\_\-RemoveCurrentGames(), INTERFACE\_\-ShowCurrentGamesCenter(), and INTERFACE\_\-ShowNoCurrentGames().
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!GameCenterObj@{GameCenterObj}}
+\index{GameCenterObj@{GameCenterObj}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[GameCenterObj]{\setlength{\rightskip}{0pt plus 5cm}function GameCenterObj ()}\label{interface_2gamecenter_8js_abb9e01b8520f35e37e546cda42752fb}
+
+
+
+
+References AnnounceObj(), CurrentGamesObj(), INTERFACE\_\-CreateGameCenter(), INTERFACE\_\-HideGameCenter(), INTERFACE\_\-ShowGameCenter(), MatchOfferObj(), and PostponeObj().
+
+Referenced by GAMECENTER\_\-AnnounceSortByCategory(), GAMECENTER\_\-AnnounceSortByInc(), GAMECENTER\_\-AnnounceSortByPrivate(), GAMECENTER\_\-AnnounceSortByRated(), GAMECENTER\_\-AnnounceSortByRating(), GAMECENTER\_\-AnnounceSortByTime(), GAMECENTER\_\-AnnounceSortByUsername(), GAMECENTER\_\-ClearCurrentGames(), GAMECENTER\_\-CurrentGamesSortByBRating(), GAMECENTER\_\-CurrentGamesSortByCategory(), GAMECENTER\_\-CurrentGamesSortByMoves(), GAMECENTER\_\-CurrentGamesSortByRated(), GAMECENTER\_\-CurrentGamesSortByTime(), GAMECENTER\_\-CurrentGamesSortByWRating(), GAMECENTER\_\-HideGameCenter(), GAMECENTER\_\-MatchOfferSortByCategory(), GAMECENTER\_\-MatchOfferSortByInc(), GAMECENTER\_\-MatchOfferSortByPrivate(), GAMECENTER\_\-MatchOfferSortByRated(), GAMECENTER\_\-MatchOfferSortByRating(), GAMECENTER\_\-MatchOfferSortByTime(), GAMECENTER\_\-MatchOfferSortByUsername(), GAMECENTER\_\-PostponeSortByCategory(), GAMECENTER\_\-PostponeSortByDate(), GAMECENTER\_\-PostponeSortByInc(), GAMECENTER\_\-PostponeSortByRating(), GAMECENTER\_\-PostponeSortByTime(), GAMECENTER\_\-PostponeSortByUsername(), GAMECENTER\_\-ShowAnnounce(), GAMECENTER\_\-ShowCurrentGames(), GAMECENTER\_\-ShowGameCenter(), GAMECENTER\_\-ShowMatchOffer(), GAMECENTER\_\-ShowPostpone(), GAMECENTER\_\-ShowTourney(), and GAMECENTER\_\-StartGameCenter().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-AddAnnounce@{INTERFACE\_\-AddAnnounce}}
+\index{INTERFACE\_\-AddAnnounce@{INTERFACE\_\-AddAnnounce}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-AddAnnounce]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddAnnounce ( {\em Player}, \/   {\em Rating}, \/   {\em Time}, \/   {\em Inc}, \/   {\em Category}, \/   {\em Rated}, \/   {\em Private}, \/   {\em MatchId})}\label{interface_2gamecenter_8js_c9bb871b0d81e4172e41c31ce276dac9}
+
+
+
+
+References ANNOUNCE\_\-AcceptAnnounce(), ANNOUNCE\_\-CancelAnnounce(), MainData, UTILS\_\-CreateElement(), UTILS\_\-GetText(), and UTILS\_\-ShortString().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-AddCurrentGames@{INTERFACE\_\-AddCurrentGames}}
+\index{INTERFACE\_\-AddCurrentGames@{INTERFACE\_\-AddCurrentGames}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-AddCurrentGames]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddCurrentGames ( {\em WPlayer}, \/   {\em WRating}, \/   {\em BPlayer}, \/   {\em BRating}, \/   {\em Category}, \/   {\em GameTime}, \/   {\em Rated}, \/   {\em Moves}, \/   {\em CurrentGamesId})}\label{interface_2gamecenter_8js_bb4372454a59e84d8da29f567e0e5c5d}
+
+
+
+
+References CONNECTION\_\-SendJabber(), GAME\_\-StartGame(), MainData, MESSAGE\_\-GameEnterRoom(), MESSAGE\_\-Presence(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), UTILS\_\-ShortString(), and WINDOW\_\-Alert().
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-AddMatchOffer@{INTERFACE\_\-AddMatchOffer}}
+\index{INTERFACE\_\-AddMatchOffer@{INTERFACE\_\-AddMatchOffer}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-AddMatchOffer]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddMatchOffer ( {\em Player}, \/   {\em Time}, \/   {\em Inc}, \/   {\em Category}, \/   {\em Rated}, \/   {\em Private}, \/   {\em MatchId})}\label{interface_2gamecenter_8js_1dba5bfa61fbb54f93e0ee49b5828223}
+
+
+
+
+References CHALLENGE\_\-DeclineChallenge(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and UTILS\_\-ShortString().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-AddPostpone@{INTERFACE\_\-AddPostpone}}
+\index{INTERFACE\_\-AddPostpone@{INTERFACE\_\-AddPostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-AddPostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-AddPostpone ( {\em Player}, \/   {\em Time}, \/   {\em Inc}, \/   {\em Category}, \/   {\em Rating}, \/   {\em Date}, \/   {\em PostponeId})}\label{interface_2gamecenter_8js_d52ba3c0ac62535bd7f55cfeac8a5446}
+
+
+
+
+References UTILS\_\-CreateElement(), UTILS\_\-GetText(), and UTILS\_\-ShortString().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-CreateGameCenter@{INTERFACE\_\-CreateGameCenter}}
+\index{INTERFACE\_\-CreateGameCenter@{INTERFACE\_\-CreateGameCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-CreateGameCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGameCenter ()}\label{interface_2gamecenter_8js_f721e204da9747dcc4fda5a25c841705}
+
+
+
+
+References GAMECENTER\_\-ShowAnnounce(), GAMECENTER\_\-ShowCurrentGames(), GAMECENTER\_\-ShowMatchOffer(), GAMECENTER\_\-ShowPostpone(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-CreateGameCenterAnnounce@{INTERFACE\_\-CreateGameCenterAnnounce}}
+\index{INTERFACE\_\-CreateGameCenterAnnounce@{INTERFACE\_\-CreateGameCenterAnnounce}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-CreateGameCenterAnnounce]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGameCenterAnnounce ()}\label{interface_2gamecenter_8js_f49ab210046037712ea0b89b243c7791}
+
+
+
+
+References ANNOUNCE\_\-AcceptRandomAnnounce(), ANNOUNCE\_\-ClearAnnounce(), CONNECTION\_\-SendJabber(), GAMECENTER\_\-AnnounceSortByCategory(), GAMECENTER\_\-AnnounceSortByInc(), GAMECENTER\_\-AnnounceSortByPrivate(), GAMECENTER\_\-AnnounceSortByRated(), GAMECENTER\_\-AnnounceSortByRating(), GAMECENTER\_\-AnnounceSortByTime(), GAMECENTER\_\-AnnounceSortByUsername(), MESSAGE\_\-GetAnnounceMatch(), UTILS\_\-CreateElement(), UTILS\_\-GetText(), and WINDOW\_\-AnnounceWindow().
+
+Referenced by AnnounceObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-CreateGameCenterCurrentGames@{INTERFACE\_\-CreateGameCenterCurrentGames}}
+\index{INTERFACE\_\-CreateGameCenterCurrentGames@{INTERFACE\_\-CreateGameCenterCurrentGames}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-CreateGameCenterCurrentGames]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGameCenterCurrentGames ()}\label{interface_2gamecenter_8js_8a57c9d92b6341c7c0d8ca40ebdaca81}
+
+
+
+
+References CONNECTION\_\-SendJabber(), GAMECENTER\_\-ClearCurrentGames(), GAMECENTER\_\-CurrentGamesSortByBRating(), GAMECENTER\_\-CurrentGamesSortByCategory(), GAMECENTER\_\-CurrentGamesSortByMoves(), GAMECENTER\_\-CurrentGamesSortByRated(), GAMECENTER\_\-CurrentGamesSortByTime(), GAMECENTER\_\-CurrentGamesSortByWRating(), MESSAGE\_\-GameRoomList(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-CreateGameCenterMatch@{INTERFACE\_\-CreateGameCenterMatch}}
+\index{INTERFACE\_\-CreateGameCenterMatch@{INTERFACE\_\-CreateGameCenterMatch}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-CreateGameCenterMatch]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGameCenterMatch ()}\label{interface_2gamecenter_8js_cd46b547d2069b8e99477be9599a0fbb}
+
+
+
+
+References CHALLENGE\_\-ClearChallenges(), GAMECENTER\_\-MatchOfferSortByCategory(), GAMECENTER\_\-MatchOfferSortByInc(), GAMECENTER\_\-MatchOfferSortByPrivate(), GAMECENTER\_\-MatchOfferSortByRated(), GAMECENTER\_\-MatchOfferSortByRating(), GAMECENTER\_\-MatchOfferSortByTime(), GAMECENTER\_\-MatchOfferSortByUsername(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by MatchOfferObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-CreateGameCenterPostpone@{INTERFACE\_\-CreateGameCenterPostpone}}
+\index{INTERFACE\_\-CreateGameCenterPostpone@{INTERFACE\_\-CreateGameCenterPostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-CreateGameCenterPostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateGameCenterPostpone ()}\label{interface_2gamecenter_8js_12adac32e00e7303d9be30b584ba6e70}
+
+
+
+
+References GAMECENTER\_\-PostponeSortByCategory(), GAMECENTER\_\-PostponeSortByDate(), GAMECENTER\_\-PostponeSortByInc(), GAMECENTER\_\-PostponeSortByRating(), GAMECENTER\_\-PostponeSortByTime(), GAMECENTER\_\-PostponeSortByUsername(), UTILS\_\-CreateElement(), and UTILS\_\-GetText().
+
+Referenced by PostponeObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideAnnounceCenter@{INTERFACE\_\-HideAnnounceCenter}}
+\index{INTERFACE\_\-HideAnnounceCenter@{INTERFACE\_\-HideAnnounceCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideAnnounceCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideAnnounceCenter ()}\label{interface_2gamecenter_8js_18e5e8bf8108627e59aa95c9d8e64832}
+
+
+
+
+Referenced by AnnounceObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideCurrentGamesCenter@{INTERFACE\_\-HideCurrentGamesCenter}}
+\index{INTERFACE\_\-HideCurrentGamesCenter@{INTERFACE\_\-HideCurrentGamesCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideCurrentGamesCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideCurrentGamesCenter ()}\label{interface_2gamecenter_8js_f1d7bb35542a9a64341524682f4cc4ff}
+
+
+
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideGameCenter@{INTERFACE\_\-HideGameCenter}}
+\index{INTERFACE\_\-HideGameCenter@{INTERFACE\_\-HideGameCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideGameCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideGameCenter ()}\label{interface_2gamecenter_8js_1f6edca25d940c3367db3d2db977e204}
+
+
+
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideMatchCenter@{INTERFACE\_\-HideMatchCenter}}
+\index{INTERFACE\_\-HideMatchCenter@{INTERFACE\_\-HideMatchCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideMatchCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideMatchCenter ()}\label{interface_2gamecenter_8js_48ff5c7b048fbe5207e5ee8138592c23}
+
+
+
+
+Referenced by MatchOfferObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideNoAnnounce@{INTERFACE\_\-HideNoAnnounce}}
+\index{INTERFACE\_\-HideNoAnnounce@{INTERFACE\_\-HideNoAnnounce}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideNoAnnounce]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideNoAnnounce ()}\label{interface_2gamecenter_8js_e778c3ddca8651400433b5e08fd1e1be}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideNoCurrentGames@{INTERFACE\_\-HideNoCurrentGames}}
+\index{INTERFACE\_\-HideNoCurrentGames@{INTERFACE\_\-HideNoCurrentGames}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideNoCurrentGames]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideNoCurrentGames ()}\label{interface_2gamecenter_8js_72be20129f465f1c26de26e59130aded}
+
+
+
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideNoMatch@{INTERFACE\_\-HideNoMatch}}
+\index{INTERFACE\_\-HideNoMatch@{INTERFACE\_\-HideNoMatch}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideNoMatch]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideNoMatch ()}\label{interface_2gamecenter_8js_e362de03beabfc4ec8631c77832fdb3c}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HideNoPostpone@{INTERFACE\_\-HideNoPostpone}}
+\index{INTERFACE\_\-HideNoPostpone@{INTERFACE\_\-HideNoPostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HideNoPostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HideNoPostpone ()}\label{interface_2gamecenter_8js_6a249ade7e87b995730c75ff3605cb9c}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-HidePostponeCenter@{INTERFACE\_\-HidePostponeCenter}}
+\index{INTERFACE\_\-HidePostponeCenter@{INTERFACE\_\-HidePostponeCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-HidePostponeCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-HidePostponeCenter ()}\label{interface_2gamecenter_8js_7a4fe7f0305ec7519a4262a9edcf1f4b}
+
+
+
+
+Referenced by PostponeObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-RemoveAnnounce@{INTERFACE\_\-RemoveAnnounce}}
+\index{INTERFACE\_\-RemoveAnnounce@{INTERFACE\_\-RemoveAnnounce}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-RemoveAnnounce]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveAnnounce ( {\em MatchId})}\label{interface_2gamecenter_8js_0e436a735184ee1b225011a7093d6530}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-RemoveCurrentGames@{INTERFACE\_\-RemoveCurrentGames}}
+\index{INTERFACE\_\-RemoveCurrentGames@{INTERFACE\_\-RemoveCurrentGames}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-RemoveCurrentGames]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveCurrentGames ( {\em CurrentGamesId})}\label{interface_2gamecenter_8js_1bcb4397f52762ef137e5a41466e562b}
+
+
+
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-RemoveMatchOffer@{INTERFACE\_\-RemoveMatchOffer}}
+\index{INTERFACE\_\-RemoveMatchOffer@{INTERFACE\_\-RemoveMatchOffer}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-RemoveMatchOffer]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemoveMatchOffer ( {\em MatchId})}\label{interface_2gamecenter_8js_9fb78f4f972c2ff4915150001b2666ee}
+
+
+
+
+Referenced by MatchOfferObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-RemovePostpone@{INTERFACE\_\-RemovePostpone}}
+\index{INTERFACE\_\-RemovePostpone@{INTERFACE\_\-RemovePostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-RemovePostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-RemovePostpone ( {\em PostponeId})}\label{interface_2gamecenter_8js_0f8ca22049584083bef23ad9e90f323c}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowAnnounceCenter@{INTERFACE\_\-ShowAnnounceCenter}}
+\index{INTERFACE\_\-ShowAnnounceCenter@{INTERFACE\_\-ShowAnnounceCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowAnnounceCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowAnnounceCenter ( {\em Element})}\label{interface_2gamecenter_8js_179713266fedc7fc5e318b9156846cda}
+
+
+
+
+Referenced by AnnounceObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowCurrentGamesCenter@{INTERFACE\_\-ShowCurrentGamesCenter}}
+\index{INTERFACE\_\-ShowCurrentGamesCenter@{INTERFACE\_\-ShowCurrentGamesCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowCurrentGamesCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowCurrentGamesCenter ( {\em Element})}\label{interface_2gamecenter_8js_bf9fb52480e08bc4692c5d75b9ce7b13}
+
+
+
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowGameCenter@{INTERFACE\_\-ShowGameCenter}}
+\index{INTERFACE\_\-ShowGameCenter@{INTERFACE\_\-ShowGameCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowGameCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowGameCenter ( {\em Element})}\label{interface_2gamecenter_8js_7a5a52a0ac07181fa1068998c0eb5d70}
+
+
+
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowMatchCenter@{INTERFACE\_\-ShowMatchCenter}}
+\index{INTERFACE\_\-ShowMatchCenter@{INTERFACE\_\-ShowMatchCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowMatchCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowMatchCenter ( {\em Element})}\label{interface_2gamecenter_8js_473fec8de2fdcada89ca207314a80da4}
+
+
+
+
+Referenced by MatchOfferObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowNoAnnounce@{INTERFACE\_\-ShowNoAnnounce}}
+\index{INTERFACE\_\-ShowNoAnnounce@{INTERFACE\_\-ShowNoAnnounce}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowNoAnnounce]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowNoAnnounce ()}\label{interface_2gamecenter_8js_dc8a58706c26849876d04d42f09de72a}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowNoCurrentGames@{INTERFACE\_\-ShowNoCurrentGames}}
+\index{INTERFACE\_\-ShowNoCurrentGames@{INTERFACE\_\-ShowNoCurrentGames}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowNoCurrentGames]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowNoCurrentGames ()}\label{interface_2gamecenter_8js_a113324a9bc8e440810def3231951cfd}
+
+
+
+
+Referenced by CurrentGamesObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowNoMatch@{INTERFACE\_\-ShowNoMatch}}
+\index{INTERFACE\_\-ShowNoMatch@{INTERFACE\_\-ShowNoMatch}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowNoMatch]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowNoMatch ()}\label{interface_2gamecenter_8js_b564b475bbf4d609a0264419bd1b34f5}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowNoPostpone@{INTERFACE\_\-ShowNoPostpone}}
+\index{INTERFACE\_\-ShowNoPostpone@{INTERFACE\_\-ShowNoPostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowNoPostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowNoPostpone ()}\label{interface_2gamecenter_8js_7860dd8d674f065c1ffeb7c43df4c790}
+
+
+\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-ShowPostponeCenter@{INTERFACE\_\-ShowPostponeCenter}}
+\index{INTERFACE\_\-ShowPostponeCenter@{INTERFACE\_\-ShowPostponeCenter}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-ShowPostponeCenter]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowPostponeCenter ( {\em Element})}\label{interface_2gamecenter_8js_dd25336da21bb724a3d2b7ed52e6ad9a}
+
+
+
+
+Referenced by PostponeObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!INTERFACE\_\-UpdatePostpone@{INTERFACE\_\-UpdatePostpone}}
+\index{INTERFACE\_\-UpdatePostpone@{INTERFACE\_\-UpdatePostpone}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[INTERFACE\_\-UpdatePostpone]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-UpdatePostpone ( {\em OponentName}, \/   {\em OponentStatus})}\label{interface_2gamecenter_8js_336cd2c483da64e645103443b0ef917a}
+
+
+
+
+References CHALLENGE\_\-SendResumeGame().\index{interface/gamecenter.js@{interface/gamecenter.js}!MatchOfferObj@{MatchOfferObj}}
+\index{MatchOfferObj@{MatchOfferObj}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[MatchOfferObj]{\setlength{\rightskip}{0pt plus 5cm}function MatchOfferObj ()}\label{interface_2gamecenter_8js_896e0593dd0a895f48e3aa20145b9ff5}
+
+
+
+
+References INTERFACE\_\-AddMatchOffer(), INTERFACE\_\-CreateGameCenterMatch(), INTERFACE\_\-HideMatchCenter(), INTERFACE\_\-HideNoMatch(), INTERFACE\_\-RemoveMatchOffer(), INTERFACE\_\-ShowMatchCenter(), and INTERFACE\_\-ShowNoMatch().
+
+Referenced by GameCenterObj().\index{interface/gamecenter.js@{interface/gamecenter.js}!PostponeObj@{PostponeObj}}
+\index{PostponeObj@{PostponeObj}!interface/gamecenter.js@{interface/gamecenter.js}}
+\subsubsection[PostponeObj]{\setlength{\rightskip}{0pt plus 5cm}function PostponeObj ()}\label{interface_2gamecenter_8js_103f298318c72f6f6516a5b079748bde}
+
+
+
+
+References INTERFACE\_\-AddPostpone(), INTERFACE\_\-CreateGameCenterPostpone(), INTERFACE\_\-HideNoPostpone(), INTERFACE\_\-HidePostponeCenter(), INTERFACE\_\-RemovePostpone(), INTERFACE\_\-ShowNoPostpone(), INTERFACE\_\-ShowPostponeCenter(), and INTERFACE\_\-UpdatePostpone().
+
+Referenced by GameCenterObj().

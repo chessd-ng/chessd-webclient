@@ -14,16 +14,21 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		interface/postpone.js
+* @brief	Contains all functions to create and manage postpone elements
+*/
+
 /**
-* Create elements to challenge invite from a postpone game
+* @brief	Create elements to postpone invite window content
 *
-* @param Oponent					Oponent's nickname 
-* @param Rating						Oponent's current rating
-* @param GameParameters		Object that contains the game parameters of a received challenge
-* @param MatchId					Id of Match 
-* @return									Div; Array
-* @see										WINDOW_Challenge();
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @param	Oponent		Oponent's name
+* @param	RatingObj	Oponent's rating object
+* @param	GameParameters	Object that contains the game parameters 
+* @param	Rated		Rated game flag
+* @param	MatchId		Postponed game identification number
+* @return	Postpone window content Div and Buttons Array
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
@@ -537,22 +542,3 @@ function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters, Rated,
 	return {Div:Div, Buttons:Buttons}
 }
 
-/**
-* Hide challenge list menu
-*
-* @public
-* @return 	bool
-* @author 	Ulysses
-*/
-function INTERFACE_HideChallengeList()
-{
-	var Node = document.getElementById("ChallengeMenuDiv");
-	
-	if (!Node)
-	{
-		return false;
-	}
-	Node.parentNode.removeChild(Node);
-	
-	return true;
-}

@@ -13,16 +13,18 @@
 */              
           
 /***
-* Current game controller
+* @file		game/currentgame.js
+* @brief	Current game controlle with parse and functions
 */ 
 
 /**
-* Handle game room list, and resend a request for game information for each
-* game.
+* @brief	Handle game room list
 *
-* @param 	XML The xml that the server send's
-* @return 	void
-* @author 	Ulysses
+* For each current game, send a request to get game information
+*
+* @param 	XML	XMPP with game rooms
+* @return 	XMPP to send
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function CURRENTGAME_HandleGameRoomList(XML)
 {
@@ -38,24 +40,25 @@ function CURRENTGAME_HandleGameRoomList(XML)
 	// Get the ID 
 	ID = XML.getAttribute("id");
 
-	// XML with all games rooms
+	// XML with all rooms games
 	if (ID != Consts.IQ_ID_GetGamesList)
 	{
 		return XMPP;
 	}
 
 
-	// Get items in XML
+	// Get items from XML
 	Items = XML.getElementsByTagName("item");
 
 	if(Items.length == 0)
 	{
+		// There is no current games
 		// interface/top.js
 		INTERFACE_NoGamesInGameList();
 	}
 	else
 	{
-		// Get the player's names
+		// Get the rooms game jid's
 		for (i=0; i<Items.length; i++)
 		{
 
@@ -69,11 +72,13 @@ function CURRENTGAME_HandleGameRoomList(XML)
 }
 
 /**
-* Handle game room information. Get game room information and show in interface
+* @brief	Handle game room information
+* 
+* Get game room information and show in interface
 *
-* @param 	XML The xml that the server send's
-* @return 	void
-* @author 	Rubens
+* @param 	XML	XMPP with games rooms informations
+* @return 	XMPP to send
+* @author 	Rubens Suguimoto
 */
 function CURRENTGAME_HandleGameRoomInfoList(XML)
 {
@@ -96,18 +101,12 @@ function CURRENTGAME_HandleGameRoomInfoList(XML)
 	Jid = XML.getAttribute("from");
 	GameId = Jid.split("@")[0];
 
-
-	//Identity = XML.getElementsByTagName("identity")[0];
-	//Name = Identity.getAttribute("name");
-
 	Game = XML.getElementsByTagName("game")[0];
 	GameType = Game.getAttribute("category");
 	Moves = Game.getAttribute("moves");
 
 	Players = XML.getElementsByTagName("player");
 
-	//WName = Name.split(" x ")[0].split("@")[0].replace(" ","");
-	//BName = Name.split(" x ")[1].split("@")[0].replace(" ","");
 	if(Players[0].getAttribute("role") == "white")
 	{
 		PW.Name = Players[0].getAttribute("jid").split("@")[0];
@@ -145,17 +144,15 @@ function CURRENTGAME_HandleGameRoomInfoList(XML)
 		PBRating = 1500;
 	}
 
-	// If this message is used to check a exists game
-	// then enter to observer
+	// If this message is used to check a exist game
 	if(IqId == Consts.IQ_ID_GameEnterRoom)
 	{
+		// then enter to observer
 		Buffer += GAME_StartObserverGame(GameId, PW, PB);
 	}
 	else
 	// Result of get current games info
 	{
-		// interface/room.js
-		//INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType);
 		if(GameType != "untimed")
 		{
 			GameCenter.CurrentGames.add(PW, PWRating, PB, PBRating, GameType, Math.floor(PW.Time/60), "false", Moves, GameId);
@@ -172,11 +169,13 @@ function CURRENTGAME_HandleGameRoomInfoList(XML)
 }
 
 /**
-* Handle game room information. Get game room information and show in interface
+* @brief	Handle game room information
 *
-* @param 	XML The xml that the server send's
-* @return 	void
-* @author 	Rubens
+* Get game room information and show in interface
+*
+* @param 	XML	XMPP with game room erros
+* @return 	none
+* @author 	Rubens Suguimoto
 */
 function CURRENTGAME_HandleGameRoomInfoError(XML)
 {

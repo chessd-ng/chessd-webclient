@@ -16,17 +16,18 @@
 
 
 /**
-* This file contais all function used to decode/encode images to base64
+* @file		utils/images.js
+* @brief	This file contais all function used to decode/encode images to base64
 */
 
 
 /**
-* Create input file to user
+* @brief 	Create input file to user
 *
 * @param        FormId is Form identificator
 * @param 	Action is script source
 * @return       Form HTML element
-* @author       Fabiano and Rubens
+* @author       Fabiano Kuss and Rubens Suguimoto
 */
 function IMAGE_CreateFormToEncode(FormId, Action){
 	var Form, File;
@@ -45,10 +46,10 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 	Width.name = "width";
 	Width.value = "50";
 	Height = document.createElement("input");
-    Height.type = "hidden";
+	Height.type = "hidden";
 	Height.name = "height"
-    Height.value = "50";
-	
+	Height.value = "50";
+
 	Form.appendChild(Height);
 	Form.appendChild(Width);
 	Form.appendChild(File);
@@ -57,11 +58,11 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 
 
 /**
-* This function is used to show image base64 in IE6
+* @brief	This function is used to show image base64 in IE6
 *
 * @param 	ImgSrc is the image source in base64 Firefox standart
 * @return       Image base64 in IE Format
-* @author       Fabiano and Rubens
+* @author       Fabiano Kuss and Rubens Suguimoto
 */
 function IMAGE_ImageDecode(ImgSrc){
 	//DefaultPHP is loaded from conf.xml
@@ -69,11 +70,11 @@ function IMAGE_ImageDecode(ImgSrc){
 }
 
 /**
-* This function get image and convert to base64
+* @brief	This function get image and convert to base64
 *
 * @param        FormId is Form identificator
 * @return       void
-* @author       Fabiano and Rubens
+* @author       Fabiano Kuss and Rubens Suguimoto
 */
 function IMAGE_ImageEncode(FormId){
 	var Frame, Body, Form;
@@ -89,12 +90,12 @@ function IMAGE_ImageEncode(FormId){
 }
 
 /**
-* When image is loaded this function is called 
+* @brief	When image is loaded this function is called 
 *
 * @param        Image is the image base 64
 * @param        Type is the image type
 * @return       void
-* @author       Fabiano and Rubens
+* @author       Fabiano Kuss and Rubens Suguimoto
 */
 function IMAGE_B64Img(Image, Type){
 	var Profile;

@@ -15,9 +15,19 @@
 */
 
 /**
-* Interface function for chat
+* @file		interface/chat.js
+* @brief	Interface functions for chat
 */ 
 
+/*
+* @class	Chat
+* @brief	Create chat interface object
+*
+* @param	Username	User's name
+* @param	Position	Chat position index
+* @return	none	
+* @author	Rubens Suguimoto
+*/
 function ChatObj(Username, Position)
 {
 	var Tmp = INTERFACE_CreateChat(Username);
@@ -54,31 +64,11 @@ function ChatObj(Username, Position)
 
 
 /**
-* Create chat elements
-*/
-/*
-function INTERFACE_OpenChat(Username, Status)
-{
-	var Chat;
-	var Node;
-
-	Node = document.getElementById("ChatList");
-
-	if (!Node)
-	{
-		return false;
-	}
-
-	// Create chat elements
-	Chat = INTERFACE_CreateChat(Username, Status);
-	Node.appendChild(Chat.ChatItem);
-	Chat.Elements.InputFocus();
-
-	return true;
-}
-*/
-/**
-* Show chat window
+* @brief	Show chat window
+* 
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_ShowChat(Element)
 {
@@ -102,7 +92,10 @@ function INTERFACE_ShowChat(Element)
 }
 
 /**
-* Hide chat window
+* @brief	Hide chat window
+*
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_HideChat()
 {
@@ -110,7 +103,10 @@ function INTERFACE_HideChat()
 }
 
 /**
-* Close a chat
+* @brief	Close a chat
+*
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_CloseChat()
 {
@@ -118,7 +114,10 @@ function INTERFACE_CloseChat()
 }
 
 /**
-* Giving focus to a chat window
+* @brief	Giving focus to a chat window
+* 
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_FocusChat()
 {
@@ -126,13 +125,22 @@ function INTERFACE_FocusChat()
 }
 
 /**
-* Remove focus of a chat window
+* @brief	Remove focus of a chat window
+* 
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_BlurChat()
 {
 	this.chatTitle.className = "title";
 }
 
+/**
+* @brief	Minimize a chat window
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_MinimizeChat()
 {
 	this.chatInner.style.display = "none";
@@ -142,6 +150,12 @@ function INTERFACE_MinimizeChat()
 	this.chatList.style.display = "none";
 }
 
+/**
+* @brief	Maximize chat window
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_MaximizeChat()
 {
 	this.chatInner.style.display = "block";
@@ -152,7 +166,12 @@ function INTERFACE_MaximizeChat()
 }
 
 /**
-* Show a message in a open chat
+* @brief	Show a message in a open chat
+*
+* @param	Username	User's name
+* @param	Message		User's message text
+* @return	True
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_AddChatMessage(Username, Message)
 {
@@ -182,21 +201,35 @@ function INTERFACE_AddChatMessageError(Message)
 }
 
 /*
-* Set focus in input element 
-*
-* @author Danilo
+* @brief	Set focus in input element 
+* 
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_InputChatFocus()
 {
 	this.chatInput.focus();
 }
 
-
+/*
+* @brief	Set chat position
+* 
+* @param	Num	Position number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_SetChatPosition(Num)
 {
 	this.position = Num;
 }
 
+/*
+* @brief	Set chat title
+* 
+* @param	Str	Title text
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_SetChatTitle(Str)
 {
 	this.chatTitleText.innerHTML = Str;
@@ -204,7 +237,11 @@ function INTERFACE_SetChatTitle(Str)
 
 
 /**
-* Create chat elements
+* @brief	Create chat HTML DOM elements
+*
+* @param	Username	User's name
+* @return	Chat HTML DOM elements
+* @author	Rubens Suguimoto
 */
 function INTERFACE_CreateChat(Username)
 {
@@ -306,7 +343,10 @@ function INTERFACE_CreateChat(Username)
  * CHAT BOTTOM BAR
  * *********************************/
 /**
-* Create chat list elements
+* @brief	Create chat list elements
+*
+* @return	Chat HTML DOM Div
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_CreateChatList()
 {
@@ -326,7 +366,10 @@ function INTERFACE_CreateChatList()
 }
 
 /**
-* Positioning chat list
+* @brief	Set chat list position automatically when move scroll
+*
+* @return	True if moved or false if chat list not found
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_ChatListPositioning()
 {

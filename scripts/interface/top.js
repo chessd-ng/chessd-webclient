@@ -14,11 +14,17 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
-
-/**
-* Create element of top of the screen
+/*
+* @file		interface/top.js
+* @brief	Contais all top menu functions to create and manage top elements
 */
 
+/**
+* @brief	Create element of top of the screen
+* 
+* @return	Top HTML DOM Div
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function INTERFACE_CreateTop()
 {
 	var MainDiv, Logo, MenuDiv, MenuList, Item, ItemTitle;
@@ -59,7 +65,6 @@ function INTERFACE_CreateTop()
 	// Help
 	ItemTitle = UTILS_GetText("menu_help")
 	Help = UTILS_CreateElement("li", null, "help",ItemTitle);
-	//Item.title = ItemTitle;
 
 	UTILS_AddListener(Help,"click",function() { WINDOW_Help(); }, "false");
 
@@ -81,7 +86,6 @@ function INTERFACE_CreateTop()
 
 
 	
-//	MenuDiv.appendChild(IconsList);
 	MenuDiv.appendChild(MenuList);
 	MainDiv.appendChild(Logo);
 	MainDiv.appendChild(MenuDiv);
@@ -90,7 +94,11 @@ function INTERFACE_CreateTop()
 }
 
 /**
-* Show rooms menu
+* @brief	Show rooms list
+*
+* @param	OffsetLeft	Position off set left
+* @return	True if created menu with success or null (if room list was opened)
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
@@ -148,10 +156,12 @@ function INTERFACE_ShowRoomMenu(OffsetLeft)
 
 
 /**
-* Show rooms menu
+* @brief	Show rooms menu
+*
+* @param	OffsetLeft	Position off set left
+* @return	True if created menu with success or null (if room list was opened)
 * @see		room/room.js: ROOM_HandleGameRoomInfoList to load list itens
-* @return 	bool
-* @author 	Ulysses
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 {
@@ -193,6 +203,12 @@ function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 	return true;
 }
 
+/*
+* @brief	Create a loading box
+*
+* @return	Loading box HTML DOM Div
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowLoadBox()
 {
 	var Div = UTILS_CreateElement("div", "DivLoadBox");
@@ -204,6 +220,12 @@ function INTERFACE_ShowLoadBox()
 	return Div;
 }
 
+/*
+* @brief	Remove loading box
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveLoadBox()
 {
 	var Div = document.getElementById("DivLoadBox");
@@ -214,6 +236,12 @@ function INTERFACE_RemoveLoadBox()
 	}
 }
 
+/*
+* @brief	Create a no current games box
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_NoGamesInGameList()
 {
 	var GameList = document.getElementById("GameRoomMenuDiv");
@@ -228,6 +256,12 @@ function INTERFACE_NoGamesInGameList()
 	}
 }
 
+/*
+* @brief	Show admin icon 
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAdminIcon()
 {
 	var Item = document.getElementById("admin_icon");
@@ -242,56 +276,3 @@ function INTERFACE_ShowAdminIcon()
 	}
 }
 
-/**
-* Show challange menu
-*
-* @return 	bool
-* @author 	Ulysses
-*/
-/*
-function INTERFACE_ShowChallengeMenu(OffsetLeft)
-{
-	var Challenge, MenuDiv, ChallengeList, RoomItem;
-	var Node, Menu, Func, i, Hide = 0;
-
-	Node = document.getElementById("Page");
-	Menu = document.getElementById("ChallengeMenuDiv");
-
-	if (!Node || Menu)
-	{
-		return null;
-	}
-
-	Func = function () {
-		Hide += 1;
-		
-		if (Hide == 2)
-		{
-			UTILS_RemoveListener(document, "click", Func, false);
-
-			// Remove menu from screen
-			INTERFACE_HideChallengeList();
-		}
-	};
-
-	// Creating elements
-	MenuDiv = UTILS_CreateElement("div", "ChallengeMenuDiv");
-	ChallengeList = UTILS_CreateElement("ul", "ChallengeMenuList");
-
-	// Create elements and insert challenges
-	for (i=0; i < MainData.ChallengeList.length; i++)
-	{
-		Challenge = UTILS_CreateElement("li", null, null, "<img src='images/cancel.png' onclick='GAME_DeclineChallenge("+MainData.ChallengeList[i].Id+")' /> "+MainData.ChallengeList[i].Username); 
-		ChallengeList.appendChild(Challenge);
-	}
-
-	MenuDiv.style.left = (OffsetLeft-1)+"px";
-
-	MenuDiv.appendChild(ChallengeList);
-	Node.appendChild(MenuDiv);
-
-	UTILS_AddListener(document, "click", Func, false);
-
-	return true;
-}
-*/

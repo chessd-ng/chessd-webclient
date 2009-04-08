@@ -16,12 +16,16 @@
 
 
 /**
-* Control interface DOM objects
+* @file		interface/interface.js
+* @brief	Control interface DOM objects
 */
 
 
 /**
-* Create all object needed to start interface
+* @brief	Create all object needed to start game enviroment
+* 
+* @return	Start main Div
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_CreateInterface()
 {
@@ -33,9 +37,6 @@ function INTERFACE_CreateInterface()
 	Top = INTERFACE_CreateTop();
 	Left = INTERFACE_CreateLeft();
 	Chat = INTERFACE_CreateChatList();
-
-	// Create welcome window
-	//Center.appendChild(INTERFACE_CreateWelcome());
 
 	Main.appendChild(Left);
 	Main.appendChild(Center);
@@ -50,7 +51,11 @@ function INTERFACE_CreateInterface()
 }
 
 /**
-* Show interface in the user screen
+* @brief	Show interface in the user screen
+*
+* @param	Tree	HTML DOM element
+* @return	none
+* @author	Pedro Rocha
 */
 function INTERFACE_ShowInterface(Tree)
 {
@@ -59,7 +64,10 @@ function INTERFACE_ShowInterface(Tree)
 
 
 /**
-* Remove interface in the user screen
+* @brief	Remove start enviroment page
+*
+* @return	none
+* @author	Pedro Rocha
 */
 function INTERFACE_StopInterface()
 {
@@ -79,8 +87,12 @@ function INTERFACE_StopInterface()
 	}
 }
 
-
-
+/*
+* @brief	Create a generic loading box
+* 
+* @param	Id	Box identification name
+* @param	Text	Text string to show
+*/
 function INTERFACE_CreateLoadingBox(Id, Text)
 {
 	var Div = UTILS_CreateElement("div",Id,"loading_box");
@@ -92,9 +104,9 @@ function INTERFACE_CreateLoadingBox(Id, Text)
 }
 
 /**
- * @brief	
+ * @brief	Disable element selection
  *
- * @return	boolean
+ * @return	False
  * @author 	Danilo Yorinori
  */
 function INTERFACE_DisableSelect(e)
@@ -103,9 +115,9 @@ function INTERFACE_DisableSelect(e)
 }
 
 /**
- * @brief	
+ * @brief	Enabla element selection
  *
- * @return	boolean
+ * @return	True
  * @author 	Danilo Yorinori
  */
 function INTERFACE_ReEnableSelect()
@@ -114,15 +126,13 @@ function INTERFACE_ReEnableSelect()
 }
 
 /**
- *	@brief Create a hint to show full name
- * 
- *	@param	Obj
- *		Obj that have name shorted
- *	@param FullName
- *		String to be displayed
- *	@return void
- *	@author	Danilo
- */
+* @brief	Create a hint to show full name
+* 
+* @param	Obj		Obj that have name shorted
+* @param	FullName	String to be displayed
+* @return	none
+* @author	Danilo Yorinori
+*/
 function INTERFACE_ShowFullName(Obj,FullName)
 {
 	var Hint, Name, ParentNode, Pos, i;
@@ -134,7 +144,6 @@ function INTERFACE_ShowFullName(Obj,FullName)
 	Hint.appendChild(Name);
 	
 	// Get parent scrolling
-	
 	ParentNode = UTILS_GetParentDiv(Obj);
 
 	// Get position of user list item
@@ -147,14 +156,16 @@ function INTERFACE_ShowFullName(Obj,FullName)
 }
 
 /**
- *	@brief Close a hint created by INTERFACE_ShowFullName function
- * 
- *	@return void
- *	@author	Danilo
- */
+* @brief	Close hint box created by INTERFACE_ShowFullName function
+* 
+* @return	none
+* @author	Danilo Yorinori
+*/
 function INTERFACE_CloseFullName()
 {
 	var Hint = document.getElementById("FullNameDiv");
 	if (Hint)
+	{
 		document.body.removeChild(Hint);
+	}
 }

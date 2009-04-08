@@ -10,38 +10,39 @@
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
 */
 
 
 /**
- * @file	admin.js
- * @brief	Functions to parse messages to admin and send admin messages to server
- *
- * See interface functions to admin (script/interface/admin.js)
- */
+* @file	admin/admin.js
+* @brief Contains all parsers and actions to admin messages
+*
+* See interface functions to admin (script/interface/admin.js)
+*/
 
 /**
- * @brief	Parser admin messages for rooms
- *
-* Parser the admin messages with type 'set'
-* 
-* @param 	XML 	Xml with the messages
+* @brief	Parser admin messages for rooms
+*
+* @param 	XML 	XML with admin commands results
 * @return 	Buffer with other XMPP to send
-* @author 	Ulysses
+* @author 	Ulysses Bomfim
 */
 function ADMIN_HandleRoomAdmin(XML)
 {
+	//TODO 
 	var Buffer = "";
 	
 	return Buffer;
 }
 
 /**
- * @brief	Parser administrative messages for admin
- *
+* @brief	Parser administrative messages for admin
+*
 * Parser messages with administrative commands
 * 
-* @param 	XML 	Xml with the messages
+* @param 	XML 	XML with admin datas
 * @return 	Buffer with other XMPP to send
 * @author 	Rubens Suguimoto
 */
@@ -91,11 +92,11 @@ function ADMIN_HandleAdmin(XML)
 }
 
 /**
- * @brief	Parser administrative messages errors for admin
- *
+* @brief	Parser administrative messages errors for admin
+*
 * Parser messages with administrative commands result errors
 * 
-* @param 	XML 	Xml with the messages
+* @param 	XML 	XML with admin data erros
 * @return 	Buffer with other XMPP to send
 * @author 	Rubens Suguimoto
 */
@@ -145,12 +146,13 @@ function ADMIN_HandleAdminError(XML)
 }
 
 /**
- * @brief	Parser admin type.
- *
-* Parser admin type to show menu with administrative tools.
+* @brief	Parser user type to idenfify admin.
+*
+* Parser user type to show menu item to access administrative tools.
 * 
-* @param 	XML 	Xml with the messages
-* @return 	Buffer with other XMPP to send
+* @param 	XML 	XML with user type
+* @return 	Empty string
+* @see		INTERFACE_ShowAdminIcon
 * @author 	Rubens Suguimoto
 */
 function ADMIN_HandleInfo(XML)
@@ -158,8 +160,6 @@ function ADMIN_HandleInfo(XML)
 	var TypeNode = XML.getElementsByTagName("type");
 	var Type = TypeNode[0].getAttribute("type");
 	var MyUsername = MainData.GetUsername();
-	var i =0;
-	var Buffer = "";
 	var ProfileNode = XML.getElementsByTagName("profile")[0];
 	var Username = ProfileNode.getAttribute("jid").split("@")[0];
 
@@ -171,32 +171,16 @@ function ADMIN_HandleInfo(XML)
 		}
 	}
 
-	// Find user
-	/*
-	while((i < TypeNodes.length) &&(Username != MyUsername)
-	{
-		i++;
-	}
-	if( i != TypeNodes.length)
-	{
-		Type = TypeNodes[i].getAttribute("type");
-		if(Type == "admin")
-		{
-			INTERFACE_ShowAdminIcon();
-		}
-	}
-	*/
-
-	return Buffer;
+	return "";
 }
 
 /**
- * @brief	Parser and show notification of some action done by admin.
- *
+* @brief	Parser and show notification of some action done by admin.
+*
 * Parse admin message with result of some action done and show in interface.
 * 
 * @param 	XML 	Xml with the messages
-* @return 	Empty string;
+* @return 	Empty string
 * @author 	Rubens Suguimoto
 */
 function ADMIN_Notification(XML)
@@ -251,8 +235,8 @@ function ADMIN_HandleUserNotification(XML)
  *
  * Parse admin message with banned users and show as list in interface to admin.
 * 
-* @param 	XML 	Xml with banned users
-* @return 	Buffer with other XMPP to send;
+* @param 	XML 	XML with banned users
+* @return 	Buffer with other XMPP to send
 * @author 	Rubens Suguimoto
 */
 function ADMIN_HandleBanList(XML)
@@ -278,6 +262,13 @@ function ADMIN_HandleBanList(XML)
 	return Buffer;
 }
 
+/**
+* @brief	Handle banned words added notification
+*
+* @param	XML	XML with banned words notification
+* @return 	Empty string;
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_HandleAddWord(XML)
 {
 	var Words;
@@ -303,6 +294,13 @@ function ADMIN_HandleAddWord(XML)
 	return "";
 }
 
+/**
+* @brief	Handle banned words removed notification
+*
+* @param	XML	XML with banned words notification
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_HandleRemoveWord(XML)
 {
 	var Words;
@@ -328,6 +326,13 @@ function ADMIN_HandleRemoveWord(XML)
 	return "";
 }
 
+/**
+* @brief	Handle banned words list
+*
+* @param	XML	XML with banned words
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_HandleBannedWordsList(XML)
 {
 	var Words;
@@ -356,9 +361,9 @@ function ADMIN_HandleBannedWordsList(XML)
  *
  * Create and send message to kick some user and reason to kick him/her;
 * 
-* @param	Username	User name used by user;
-* @param	Reason		Reason to kick user;
-* @return 	Empty string;
+* @param	Username	User name used by user
+* @param	Reason		Reason to kick user
+* @return 	Empty string
 * @author 	Rubens Suguimoto
 */
 function ADMIN_KickUser(Username, Reason)
@@ -373,8 +378,8 @@ function ADMIN_KickUser(Username, Reason)
  *
  * Create and send message to ban some user and reason to ban him/her;
 * 
-* @param	Username	User name used by user;
-* @param	Reason		Reason to ban user;
+* @param	Username	User name used by user
+* @param	Reason		Reason to ban user
 * @return 	Empty string;
 * @author 	Rubens Suguimoto
 */
@@ -390,8 +395,8 @@ function ADMIN_BanUser(Username, Reason)
  *
  * Create and send message to unban some user and reason to unban him/her;
 * 
-* @param	Username	User name used by user;
-* @param	Reason		Reason to unban user;
+* @param	Username	User name used by user
+* @param	Reason		Reason to unban user
 * @return 	Empty string;
 * @author 	Rubens Suguimoto
 */
@@ -403,11 +408,10 @@ function ADMIN_UnbanUser(Username, Reason)
 }
 
 /**
- * @brief	Create and send message to get banned users's list;
+ * @brief	Create and send message to get banned users's list
  *
- * Create and send message to get all banned users from server; 
-* 
-* @return 	Empty string;
+ * Create and send message to get all banned users from server 
+* @return 	Empty string
 * @author 	Rubens Suguimoto
 */
 function ADMIN_GetBanList()
@@ -417,6 +421,15 @@ function ADMIN_GetBanList()
 	return "";
 }
 
+/**
+* @brief	Create and send message to ban some word
+*
+* Create and send message to ban some word 
+* 
+* @param 	Word 	String to ban
+* @return 	Empty string;
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_BanWord(Word)
 {
 	CONNECTION_SendJabber(MESSAGE_AddBannedWord(Word));
@@ -424,6 +437,15 @@ function ADMIN_BanWord(Word)
 	return "";
 }
 
+/**
+* @brief	Create and send message to unban some word
+*
+* Create and send message to unban some word 
+* 
+* @param 	Word 	String to ban
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_RemoveBannedWord(Word)
 {
 	CONNECTION_SendJabber(MESSAGE_RemoveBannedWord(Word));
@@ -431,6 +453,14 @@ function ADMIN_RemoveBannedWord(Word)
 	return "";
 }
 
+/**
+* @brief	Create and send message to get all banned words
+*
+* Create and send message to get all banned words
+*
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function ADMIN_GetBannedWords()
 {
 	CONNECTION_SendJabber(MESSAGE_GetBannedWords());
@@ -438,6 +468,17 @@ function ADMIN_GetBannedWords()
 	return "";
 }
 
+/************************
+ * ADMINCENTER - START
+ * **********************/
+
+/**
+* @brief	Start admin center object
+*
+* Create and show admin center object in interface. Get all banned words
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_StartAdminCenter()
 {
 	var ACenterObj = new AdminCenterObj();
@@ -448,6 +489,14 @@ function ADMINCENTER_StartAdminCenter()
 	ADMIN_GetBannedWords();
 }
 
+/**
+* @brief	Show punish tab in admin center object
+*
+* Show punished players tab in admin center object and hide others tabs
+* 
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ShowPunish()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -461,6 +510,14 @@ function ADMINCENTER_ShowPunish()
 	}
 }
 
+/**
+* @brief	Show admin level tab in admin center object
+*
+* Show admin level tab in admin center object and hide others tabs
+* 
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ShowAdminLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -474,6 +531,15 @@ function ADMINCENTER_ShowAdminLevel()
 	}
 }
 
+/**
+* @brief	Show player's level tab in admin center object
+*
+* Show player's level tab in admin center object and hide others tabs
+* 
+* @return	none 
+* @see		INTERFACE_CreateAdminCenter 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ShowLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -487,6 +553,15 @@ function ADMINCENTER_ShowLevel()
 	}
 }
 
+/**
+* @brief	Show adjourned games tab in admin center object
+*
+* Show adjourned games tab in admin center object and hide others tabs
+* 
+* @return	none 
+* @see		INTERFACE_CreateAdminCenter 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ShowAdjourn()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -500,6 +575,15 @@ function ADMINCENTER_ShowAdjourn()
 	}
 }
 
+/**
+* @brief	Show banned words tab in admin center object
+*
+* Show banned words tab in admin center object and hide others tabs
+* 
+* @return	none 
+* @see		INTERFACE_CreateAdminCenter 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ShowWords()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -513,6 +597,15 @@ function ADMINCENTER_ShowWords()
 	}
 }
 
+/**
+* @brief	Clear banned words list in admin center object
+*
+* Remove all words in banned words list inside admin center object
+* 
+* @return	none 
+* @see		INTERFACE_CreateAdminCenter 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ClearBannedWordsList()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -525,6 +618,15 @@ function ADMINCENTER_ClearBannedWordsList()
 	}
 }
 
+/**
+* @brief	Clear punished players list in admin center object
+*
+* Remove all players in punished players list inside admin center object
+* 
+* @return	none 
+* @see		INTERFACE_CreateAdminCenter 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_ClearPunishList()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -536,7 +638,17 @@ function ADMINCENTER_ClearPunishList()
 		AdminCenterObj.Punish.remove(Punish);
 	}
 }
-/////////////////////////////
+
+/*****************************
+ * ADMINCENTER - SORT FUNCTIONS
+ * ***************************/
+
+/**
+* @brief	Sort punished players list by username
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -555,6 +667,13 @@ function ADMINCENTER_PunishSortByUsername()
 		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
 	}
 }
+
+/**
+* @brief	Sort punished players list by punish
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByPunish()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -573,6 +692,13 @@ function ADMINCENTER_PunishSortByPunish()
 		AdminCenterObj.Punish.add(PunishItem.Username, PunishItem.Punish, PunishItem.Incident,  PunishItem.Date, PunishItem.Period, PunishItem.Reason );
 	}
 }
+
+/**
+* @brief	Sort punished players list by incident
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByIncident()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -592,6 +718,13 @@ function ADMINCENTER_PunishSortByIncident()
 	}
 
 }
+
+/**
+* @brief	Sort punished players list by date
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByDate()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -611,6 +744,13 @@ function ADMINCENTER_PunishSortByDate()
 	}
 
 }
+
+/**
+* @brief	Sort punished players list by period
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByPeriod()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -630,6 +770,12 @@ function ADMINCENTER_PunishSortByPeriod()
 	}
 
 }
+/**
+* @brief	Sort punished players list by reason
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_PunishSortByReason()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -649,7 +795,13 @@ function ADMINCENTER_PunishSortByReason()
 	}
 
 }
-/////////////////////////////////////
+
+/**
+* @brief	Sort admin level list by username
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdminLevelSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -668,6 +820,13 @@ function ADMINCENTER_AdminLevelSortByUsername()
 		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
 	}
 }
+
+/**
+* @brief	Sort admin level list by level
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdminLevelSortByLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -686,7 +845,13 @@ function ADMINCENTER_AdminLevelSortByLevel()
 		AdminCenterObj.AdminLevel.add(AdminLevelItem.Username, AdminLevelItem.Level );
 	}
 }
-//////////////////////////////////////
+
+/**
+* @brief	Sort level list by username
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_LevelSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -705,6 +870,13 @@ function ADMINCENTER_LevelSortByUsername()
 		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
 	}
 }
+
+/**
+* @brief	Sort level list by level
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_LevelSortByLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -723,7 +895,13 @@ function ADMINCENTER_LevelSortByLevel()
 		AdminCenterObj.Level.add(LevelItem.Username, LevelItem.Level );
 	}
 }
-//////////////////////////////////////////
+
+/**
+* @brief	Sort adjourn list by white player rating
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByWRating()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -742,6 +920,13 @@ function ADMINCENTER_AdjournSortByWRating()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by black player rating
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByBRating()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -760,6 +945,13 @@ function ADMINCENTER_AdjournSortByBRating()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by white player username
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByWUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -778,6 +970,13 @@ function ADMINCENTER_AdjournSortByWUsername()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by black player username
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByBUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -796,6 +995,13 @@ function ADMINCENTER_AdjournSortByBUsername()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by game category
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByCategory()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -814,6 +1020,13 @@ function ADMINCENTER_AdjournSortByCategory()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by game time
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByTime()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -832,6 +1045,13 @@ function ADMINCENTER_AdjournSortByTime()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by game time increment
+*
+* @return	none 
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByInc()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -850,6 +1070,13 @@ function ADMINCENTER_AdjournSortByInc()
 		AdminCenterObj.Adjourn.add(AdjournItem.WPlayer, AdjournItem.WRating, AdjournItem.BPlayer, AdjournItem.BRating, AdjournItem.Category, AdjournItem.Time, AdjournItem.Inc, AdjournItem.Rated, AdjournItem.Id );
 	}
 }
+
+/**
+* @brief	Sort adjourn list by game rated
+*
+* @return	none
+* @author 	Rubens Suguimoto
+*/
 function ADMINCENTER_AdjournSortByRated()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();

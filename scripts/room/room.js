@@ -1,4 +1,4 @@
-	/**
+/**
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -16,32 +16,30 @@
 
 
 /**
-* Room controller
+* @file		room/room.js
+* @brief	Room controller
 */
 
 
-/*********************************
- * FUNCTIONS - PARSERS
- *********************************/
+//////////////////////////////////
+// FUNCTIONS - PARSERS
+///////////////////////////////////
+
 /**
-* Handle all presence from a room;
+* @brief	Handle all presence from a room
 *
-* @param 	XML The xml come from server with tag presence
-* @return 	void
-* @author 	Ulysses
+* @param 	XML 	XML message from server with tag presence
+* @return 	XMPP to send
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function ROOM_HandleRoomPresence(XML)
 {
 	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo, NewRoom = false;
 	var Room;
 	var Buffer = "";
-
 	var Component;
-	
 	var LoadingBox;
-
 	var RoomNotFound;
-
 	var MyUsername = MainData.GetUsername();
 
 	// Get Attributes from XML
@@ -160,11 +158,11 @@ function ROOM_HandleRoomPresence(XML)
 
 
 /**
-* Handle group chat messages
+* @brief	Handle group chat messages
 *
-* @param 	XML The xml come from server with tag message
-* @return 	void
-* @author 	Ulysses
+* @param 	XML	XML message from server with tag message
+* @return 	Empty string
+* @author 	Ulysses Bomfim
 */
 function ROOM_HandleMessage(XML)
 {
@@ -201,11 +199,11 @@ function ROOM_HandleMessage(XML)
 }
 
 /**
-* Handle room list in top menu.
+* @brief	Handle room list in top menu
 *
-* @param 	XML The xml that the server send's
-* @return 	void
-* @author 	Ulysses
+* @param 	XML 	XML message with opened rooms
+* @return 	XMPP to send
+* @author 	Ulysses Bomfim
 */
 function ROOM_HandleRoomList(XML)
 {
@@ -254,6 +252,13 @@ function ROOM_HandleRoomList(XML)
 	return Buffer;
 }
 
+/*
+* @brief	Handle rooms informations and show in room list
+*
+* @param	XML	XML message with rooms informations
+* @return	Empty string
+* @author	Ulysses Bomfim and Rubens Suguimoto
+*/
 function ROOM_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode;
@@ -345,11 +350,11 @@ function ROOM_HandleInfo(XML)
 }
 
 /**
-* Send a message to room;
+* @brief	Send a chat message to room
 *
-* @param 	RoomName is the room name string
-* @param	Message is the message that will be send
-* @return 	void
+* @param 	RoomName 	Room's name
+* @param	Message		Chat message text that will be send
+* @return 	True if sucess or false if room not founded
 * @author 	Rubens
 */
 function ROOM_SendMessage(RoomName, Message)
@@ -371,16 +376,16 @@ function ROOM_SendMessage(RoomName, Message)
 	return true;
 }
 
-/******************************
- * FUNCTIONS - TOP MENU
- ******************************/
+///////////////////////////////
+// FUNCTIONS - TOP MENU
+////////////////////////////////
 
 /**
-* Get Room list from server and show in pop down in top menu
+* @brief	Get Room list from server and show in pop down in top menu
 *
-* @param 	OffsetLeft is the position where room menu will be show
-* @return 	void
-* @author 	Rubens
+* @param 	OffsetLeft	Offset left position in pixels
+* @return 	none
+* @author 	Rubens Suguimoto
 */
 
 function ROOM_ShowRoomList(OffsetLeft)
@@ -395,31 +400,11 @@ function ROOM_ShowRoomList(OffsetLeft)
 }
 
 /**
-* Get Game Room list from server and show in pop down top menu
+* @brief	Send presence to a room (enter in some room)
 *
-* @param 	offsetleft is the position where room menu will be show
-* @return 	void
-* @author 	ulysses
-*/
-/*
-function ROOM_ShowGameRoomList(OffsetLeft)
-{
-	var XML = MESSAGE_GameRoomList();
-
-	// Ask room list for jabber
-	CONNECTION_SendJabber(XML);
-
-	// Show menu on interface
-	INTERFACE_ShowGameRoomMenu(OffsetLeft)
-}
-*/
-
-/**
-* Send presence to a room (enter room)
-*
-* @param 	Room name is the name of room
-* @return 	string ""
-* @author 	Ulysses and Danilo
+* @param 	RoomName	Room's nama
+* @return 	Empty string
+* @author 	Ulysses Bomfim and Danilo Yorinori
 */
 function ROOM_EnterRoom(RoomName)
 {
@@ -449,17 +434,18 @@ function ROOM_EnterRoom(RoomName)
 }
 
 /**
-* Exit a room.
-* @param 	ReturnMsg is a flag to return XML or send Jabber(if ReturnMsg is null)
+* @brief	Exit a room.
+*
+* @param	RoomName	Room's name
 * @return	XMPP with presence unavailable to a room
-* @author	Pedro and Rubens
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function ROOM_ExitRoom(RoomName)
 {
-	// This function send a message to leave from room;
+	// This function send a message to leave a room;
 	// ROOM_RemoveRoom function remove room from data struct and interface,
-	// and ROOM_RemoveRoom function is called when parse presence
-	// type = unavailable
+	// and ROOM_RemoveRoom function is called when receive a presence
+	// type "unavailable"
 
 	var XML;
 	var Room = MainData.GetRoom(RoomName)
@@ -491,10 +477,15 @@ function ROOM_ExitRoom(RoomName)
 }
 
 /**
-* Send presence to a room game(enter room game)
+* @brief	Send presence to a room game(enter room game)
+*
+* @param	RoomName	Room's name
+* @return	True
+* @author	Rubens Suguimoto
 */
 function ROOM_EnterRoomGame(RoomName)
 {
+	//TODO -> MOVE THIS FUNCTION TO CURRENT GAME FILE
 	var XML, To;
 	var MyUsername = MainData.GetUsername();
 
@@ -507,8 +498,14 @@ function ROOM_EnterRoomGame(RoomName)
 	return true;
 }
 
-
-
+/*
+* @brief	Show message in room
+* 
+* @param	RoomName	Room's name
+* @param	From		User who send message
+* @param	Message		Message text
+* @param	Stamp		Message time stamp
+*/
 function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 {
 	var Room = MainData.GetRoom(RoomName);
@@ -524,6 +521,15 @@ function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 	return "";
 }
 
+/*
+* @brief	Show error length message
+*
+* This function is used, when you try to send a message with length greate than length defined in configuration file
+*
+* @param	RoomName	Room's name
+* @return	Empty string
+* @author	Rubens Suguimoto
+*/
 function ROOM_ErrorMessageLength(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
@@ -547,21 +553,23 @@ function ROOM_ErrorMessageLength(RoomName)
 }
 
 /** 
-* Insert user in room list 
+* @brief	Insert user in room list 
+*
+* @param	RoomName	Room's name
+* @param	Jid		User's name
+* @param	Status		User's status
+* @param	Role		User's room role status
+* @param	Affiliation	User's room affilitation status
+* @return	Empty string
+* @author	Pedro Rocha and Rubens Suguimoto
 */ 
 function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation) 
-{ 
+{
+	//TODO -> REMOVE VARIABLE "Buffer"
 	var Type = "user", Rating; 
 	var UserObj = MainData.GetUser(Jid);
 	var Buffer = "";
 	var Room;
-
-	/*
-	if(UserObj == null)
-	{
-		return null;
-	}
-	*/
 
 	Room = MainData.GetRoom(RoomName);
 	if(Room == null)
@@ -582,10 +590,6 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	// If not inserted, add user, else update information
 	if(Room.FindUser(Jid) == null)
 	{
-
-		// Get user rating and type information
-		//Buffer += MESSAGE_Info(Jid); 
-
 		//Add user in data struct
 		Room.AddUser(Jid, Status, Type, Role, Affiliation); 
 		Room.SortUserListNick(); 
@@ -603,6 +607,14 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	return Buffer; 
 }
 
+/*
+* @brief	Remove user from room's user list
+*
+* @param	RoomName	Room's name
+* @param	UserName	User's name
+* @return	Empty string
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function ROOM_RemoveUser(RoomName, UserName)
 {
 	var Room = MainData.GetRoom(RoomName);
@@ -615,6 +627,13 @@ function ROOM_RemoveUser(RoomName, UserName)
 	return "";
 }
 
+/*
+* @brief	Create room
+*
+* @param	RoomName	Room's name
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function ROOM_CreateRoom(RoomName)
 {
 	var Room;
@@ -631,6 +650,13 @@ function ROOM_CreateRoom(RoomName)
 	ROOM_FocusRoom(RoomName);
 }
 
+/*
+* @brief	Set focus to some room
+*
+* @param	RoomName	Room's name
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function ROOM_FocusRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
@@ -661,6 +687,13 @@ function ROOM_FocusRoom(RoomName)
 	}
 }
 
+/*
+* @brief	Remove room
+*
+* @param	RoomName	Room's name
+* @return	none
+* @autho	Pedro Rocha and Rubens Suguimoto
+*/
 function ROOM_RemoveRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
@@ -703,10 +736,15 @@ function ROOM_RemoveRoom(RoomName)
 	return RoomName;
 }
 
-//Sort all user in all rooms by nick name
-// TODO -> Change this function to get room parameter
+/*
+* @brief	Sort all user in all rooms by nick name
+*
+* @return	True if sucess or false if some room was not founded
+* @author	Rubens Suguimoto
+*/
 function ROOM_SortUsersByNick()
 {
+// TODO -> Change this function to get room parameter
 	var Room, RoomName;
 	var i, j;
 	var UserName, Status, Rating, Type;
@@ -717,6 +755,7 @@ function ROOM_SortUsersByNick()
 	for(j=0; j<RoomList.length; j++)
 	{
 		Room = RoomList[j];
+		//TODO -> REMOVE THE ABOVE IF - this case should'n happen
 		if(Room == null)
 		{
 			return false;
@@ -741,24 +780,7 @@ function ROOM_SortUsersByNick()
 			Status = User.Status;
 			Type = User.Type;
 			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
-/*
-			// Get rating
-			switch(Room.GetRoomCurrentRating())
-			{
-				case "blitz":
-					Rating = Room.UserList[i].Rating.Blitz;
-					break;
-				case "lightning":
-					Rating = Room.UserList[i].Rating.Lightning;
-					break;
-				case "standard":
-					Rating = Room.UserList[i].Rating.Standard;
-					break;
-				case "untimed":
-					Rating = Room.UserList[i].Rating.Untimed;
-					break;
-			}
-*/
+
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
 		}
@@ -773,7 +795,13 @@ function ROOM_SortUsersByNick()
 	return true;
 }
 
-//Sort all user in all rooms by rating name
+/*
+* @brief	Sort all user in all rooms by rating
+*
+* @param	Category	User's rating category
+* @return	True if sucess or false if some room was not founded
+* @author	Rubens Suguimoto
+*/
 function ROOM_SortUsersByRating(Category)
 {
 	var Room, RoomName;
@@ -811,24 +839,6 @@ function ROOM_SortUsersByRating(Category)
 			Status = User.Status;
 			Type = User.Type;
 			Rating = User.Rating.GetRatingValue(Room.GetRoomCurrentRating());
-/*
-			// Get rating
-			switch(Room.GetRoomCurrentRating())
-			{
-				case "blitz":
-					Rating = User.Rating.Blitz;
-					break;
-				case "lightning":
-					Rating = User.Rating.Lightning;
-					break;
-				case "standard":
-					Rating = User.Rating.Standard;
-					break;
-				case "untimed":
-					Rating = User.Rating.Untimed;
-					break;
-			}
-*/
 
 			Room.Room.userList.removeUser(UserName);
 			Room.Room.userList.addUser(UserName, Status, Rating, Type);
@@ -844,6 +854,13 @@ function ROOM_SortUsersByRating(Category)
 	return true;
 }
 
+/*
+* @brief	Hide user list of some room
+* 
+* @param	RoomName	Room's name
+* @return	True if sucess or false if room was not founded
+* @author	Rubens Suguimoto
+*/
 function ROOM_ShowHideUserList(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);

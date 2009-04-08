@@ -14,6 +14,18 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		interface/welcome.js
+* @brief	Contains all functions to create welcome text box
+* @deprecated
+*/
+
+/*
+* @brief	Create welcome window box
+* 
+* @return	Welcome main HTML DOM Div
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateWelcome()
 {
 	var WelcomeDiv, WelcomeCenterDiv;
@@ -72,6 +84,12 @@ function INTERFACE_CreateWelcome()
 	return WelcomeDiv;
 }
 
+/*
+* @brief	Remove welcome window box
+* 
+* @return	Empty string
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveWelcome()
 {
 	var WelcomeDiv = document.getElementById("Welcome");

@@ -1,0 +1,212 @@
+\section{/home/www/rubens/webclient/scripts/contact/user.js File Reference}
+\label{contact_2user_8js}\index{/home/www/rubens/webclient/scripts/contact/user.js@{/home/www/rubens/webclient/scripts/contact/user.js}}
+Handle user messages. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf USER\_\-HandleContactUserList} (XML)
+\begin{CompactList}\small\item\em Handle user list received from jabber with yours contacts to list of users. \item\end{CompactList}\item 
+function {\bf USER\_\-HandlePresence} (XML)
+\begin{CompactList}\small\item\em Handle user's presence to list of users. \item\end{CompactList}\item 
+function {\bf USER\_\-HandleRoomPresence} (XML)
+\begin{CompactList}\small\item\em Handle user's room presence to list of users. \item\end{CompactList}\item 
+function {\bf USER\_\-HandleInfo} (XML)
+\begin{CompactList}\small\item\em Handle user's chess informations. \item\end{CompactList}\item 
+function {\bf USER\_\-AddUser} (Username, Status)
+\begin{CompactList}\small\item\em Add some user in user list. \item\end{CompactList}\item 
+function {\bf USER\_\-StartUpdateUserList} ()
+\begin{CompactList}\small\item\em Start counter to update list of user's chess informations. \item\end{CompactList}\item 
+function {\bf USER\_\-StopUpdateUserList} ()
+\begin{CompactList}\small\item\em Stop counter to update list of user's chess informations. \item\end{CompactList}\item 
+function {\bf USER\_\-StartUpdateUserProfile} ()
+\begin{CompactList}\small\item\em Start counter to update list of user's jabber informations. \item\end{CompactList}\item 
+function {\bf USER\_\-StopUpdateUserProfile} ()
+\begin{CompactList}\small\item\em Stop counter to update list of user's jabber informations. \item\end{CompactList}\item 
+function {\bf USER\_\-UpdateUserList} ()
+\begin{CompactList}\small\item\em Send message to update list of users. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Handle user messages. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{contact/user.js@{contact/user.js}!USER\_\-AddUser@{USER\_\-AddUser}}
+\index{USER\_\-AddUser@{USER\_\-AddUser}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-AddUser]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-AddUser ( {\em Username}, \/   {\em Status})}\label{contact_2user_8js_4a5328ce623345e14d5cc5ff17c932d8}
+
+
+Add some user in user list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Status}]User's status \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-HandleAdjourn(), CONTACT\_\-ShowUserMenu(), PROFILE\_\-StartProfile(), START\_\-Webclient(), USER\_\-HandleContactUserList(), and USER\_\-HandlePresence().\index{contact/user.js@{contact/user.js}!USER\_\-HandleContactUserList@{USER\_\-HandleContactUserList}}
+\index{USER\_\-HandleContactUserList@{USER\_\-HandleContactUserList}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-HandleContactUserList]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-HandleContactUserList ( {\em XML})}\label{contact_2user_8js_44ccc2e2f9756dbfd5449002b0d2a69c}
+
+
+Handle user list received from jabber with yours contacts to list of users. 
+
+All functions listed in this file, access a list of users in main data. This struct store all online user's information.
+
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References USER\_\-AddUser().
+
+Referenced by PARSER\_\-ParseIq().\index{contact/user.js@{contact/user.js}!USER\_\-HandleInfo@{USER\_\-HandleInfo}}
+\index{USER\_\-HandleInfo@{USER\_\-HandleInfo}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-HandleInfo]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-HandleInfo ( {\em XML})}\label{contact_2user_8js_a36e9957d410602ff4b4d465a2ec6444}
+
+
+Handle user's chess informations. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with user's chess informations \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData, and UTILS\_\-ConvertTimeStamp().
+
+Referenced by PARSER\_\-ParseIq().\index{contact/user.js@{contact/user.js}!USER\_\-HandlePresence@{USER\_\-HandlePresence}}
+\index{USER\_\-HandlePresence@{USER\_\-HandlePresence}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-HandlePresence]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-HandlePresence ( {\em XML})}\label{contact_2user_8js_51a93598e63f7afe0a58d19de178e26f}
+
+
+Handle user's presence to list of users. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with presence \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References USER\_\-AddUser(), and UTILS\_\-GetNodeText().
+
+Referenced by PARSER\_\-ParsePresence().\index{contact/user.js@{contact/user.js}!USER\_\-HandleRoomPresence@{USER\_\-HandleRoomPresence}}
+\index{USER\_\-HandleRoomPresence@{USER\_\-HandleRoomPresence}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-HandleRoomPresence]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-HandleRoomPresence ( {\em XML})}\label{contact_2user_8js_79c97ea78a03cb57526fedbfd0f20fed}
+
+
+Handle user's room presence to list of users. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with room presence \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References UTILS\_\-GetNodeText().
+
+Referenced by PARSER\_\-ParsePresence().\index{contact/user.js@{contact/user.js}!USER\_\-StartUpdateUserList@{USER\_\-StartUpdateUserList}}
+\index{USER\_\-StartUpdateUserList@{USER\_\-StartUpdateUserList}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-StartUpdateUserList]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-StartUpdateUserList ()}\label{contact_2user_8js_e9ccdfaccc75f8e28d7779f093c91dfb}
+
+
+Start counter to update list of user's chess informations. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by START\_\-Webclient().\index{contact/user.js@{contact/user.js}!USER\_\-StartUpdateUserProfile@{USER\_\-StartUpdateUserProfile}}
+\index{USER\_\-StartUpdateUserProfile@{USER\_\-StartUpdateUserProfile}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-StartUpdateUserProfile]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-StartUpdateUserProfile ()}\label{contact_2user_8js_a5f4ccd58f4b047f483537f16c4aafba}
+
+
+Start counter to update list of user's jabber informations. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by START\_\-Webclient().\index{contact/user.js@{contact/user.js}!USER\_\-StopUpdateUserList@{USER\_\-StopUpdateUserList}}
+\index{USER\_\-StopUpdateUserList@{USER\_\-StopUpdateUserList}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-StopUpdateUserList]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-StopUpdateUserList ()}\label{contact_2user_8js_f6a9c34a7c08138de5e07909e4a90aad}
+
+
+Stop counter to update list of user's chess informations. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by START\_\-Restart().\index{contact/user.js@{contact/user.js}!USER\_\-StopUpdateUserProfile@{USER\_\-StopUpdateUserProfile}}
+\index{USER\_\-StopUpdateUserProfile@{USER\_\-StopUpdateUserProfile}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-StopUpdateUserProfile]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-StopUpdateUserProfile ()}\label{contact_2user_8js_ae48fc3e53aa36be8d8715a5acaf75c0}
+
+
+Stop counter to update list of user's jabber informations. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by START\_\-Restart().\index{contact/user.js@{contact/user.js}!USER\_\-UpdateUserList@{USER\_\-UpdateUserList}}
+\index{USER\_\-UpdateUserList@{USER\_\-UpdateUserList}!contact/user.js@{contact/user.js}}
+\subsubsection[USER\_\-UpdateUserList]{\setlength{\rightskip}{0pt plus 5cm}function USER\_\-UpdateUserList ()}\label{contact_2user_8js_0d2657b136cf49ba6ec0cff234c20091}
+
+
+Send message to update list of users. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), MainData, and MESSAGE\_\-InfoProfile().

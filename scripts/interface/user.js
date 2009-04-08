@@ -15,18 +15,21 @@
 */
 
 /**
-* @file user.js
-* @brief Class defition for user list object and some functions assign
+* @file 	interface/user.js
+* @brief	Class defition for user list object and some functions assign
 *
-* Create a user list object used in rooms, contact list, online list, etc.
+* Create a user list object used in rooms, contact list and online list
 */
 
 /**
-* @class UserListObj
-* @brief User list object that contais pointer to HTML elements, some methods to add/remove/update user, show/hide list  and show/hide sort options;
-* @see INTERFACE_CreateUserList
-* @param Element parent node, where user list object will be append
-* Class to organize the use of user lists;
+* @class 	UserListObj
+* @brief 	Create user list interface object
+*
+* This object contais pointer to HTML elements, some methods to add/remove/update user, show/hide list  and show/hide sort options
+*
+* @param 	Element		HTML DOM element 
+* @see	 	INTERFACE_CreateUserList
+* @author 	Rubens Suguimoto
 */
 function UserListObj(Element)
 {
@@ -72,24 +75,26 @@ function UserListObj(Element)
 
 
 /**
- * @brief	Show user list div
- * 
- * Show user list div changing element style display to block.
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Show user list div
+* 
+* Show user list div changing element style display to block.
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowUserList()
 {
 	this.mainDiv.style.display = "block";
 }
 
 /**
- * @brief	Hide user list div
- * 
- * Hide user list div changing element style display to none.
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Hide user list div
+* 
+* Hide user list div changing element style display to none.
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideUserList()
 {
 	this.mainDiv.style.display = "none";
@@ -97,17 +102,18 @@ function INTERFACE_HideUserList()
 
 
 /**
- * @brief	Add one user in list
- * 
- * Add a user in user list creating a tr element and insert it in (this.users) array.
- *
- * @param 	Username The user's name 
- * @param 	Status	The user's status
- * @param 	Rating	User's rating that will be show
- * @param 	Type	User's type (teacher, admin, robot, etc.)
- * @author	Rubens Suguimoto
- * @see		INTERFACE_CreateUser
- */
+* @brief	Add one user in list
+* 
+* Add a user in user list creating a tr element and insert it in (this.users) array.
+*
+* @param 	Username 	User's name 
+* @param 	Status		User's status
+* @param 	Rating		User's rating that will be show
+* @param 	Type		User's type (teacher, admin, robot, etc.)
+* @return	none
+* @author	Rubens Suguimoto
+* @see		INTERFACE_CreateUser
+*/
 function INTERFACE_AddUser(Username, Status, Rating, Type)
 {
 	var User;
@@ -128,15 +134,15 @@ function INTERFACE_AddUser(Username, Status, Rating, Type)
 }
 
 /**
- * @brief	Remove user from list
- * 
- * Remove a user from user list and remove from array. 
- *
- * @param 	Username The user's name 
- * 
- * @author	Rubens Suguimoto
- * @return	false - User is not founded in list, true otherwise
- */
+* @brief	Remove user from list
+* 
+* Remove a user from user list and remove from array. 
+*
+* @param 	Username	User's name 
+* 
+* @author	Rubens Suguimoto
+* @return	false - User is not founded in list, true otherwise
+*/
 function INTERFACE_RemoveUser(Username)
 {
 	var UserItem = this.findUser(Username);
@@ -168,18 +174,18 @@ function INTERFACE_RemoveUser(Username)
 }
 
 /**
- * @brief	Update user status and rating in list
- * 
- * Update user status and rating in user list. Find the user and set his type status and, if exists rating, update rating;
- *
- * @param 	Username The user's name
- * @param	Newstatus The new user's status
- * @param	Rating The user's rating
- * @param	NewType The new user's type
- * 
- * @author	Rubens Suguimoto
- * @return	false - User is not founded in list, true otherwise
- */
+* @brief	Update user status and rating in list
+* 
+* Update user status and rating in user list. Find the user and set his type status and, if exists rating, update rating;
+*
+* @param 	Username	User's name
+* @param	NewStatus	New user's status
+* @param	Rating		User's rating
+* @param	NewType		New user's type
+* 
+* @author	Rubens Suguimoto
+* @return	False if user was not founded in list, else True 
+*/
 function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 {
 	var Node = this.findUser(Username);
@@ -201,8 +207,6 @@ function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 	}
 	else
 	{
-//		if (NewType == "")
-//			NewType="user";
 		User.className = NewType+"_"+NewStatus;
 	}
 	
@@ -215,15 +219,15 @@ function INTERFACE_UpdateUser(Username, NewStatus, Rating, NewType)
 }
 
 /**
- * @brief	Find user in user list
- * 
- * Search user in array (this.users);
- *
- * @param 	Username	The user's name
- * 
- * @author	Rubens Suguimoto
- * @return	null if user is not founded in list, else tr elemente if user item;
- */
+* @brief	Find user in user list
+* 
+* Search user in array (this.users);
+*
+* @param 	Username	User's name
+* 
+* @author	Rubens Suguimoto
+* @return	null if user is not founded in list, else tr elemente if user item;
+*/
 function INTERFACE_FindUser(Username)
 {
 	var i=0;
@@ -245,14 +249,15 @@ function INTERFACE_FindUser(Username)
 
 
 /**
- * @brief	Set sort list by nick function to list
- * 
- * Set sort by nick function when click in sort span
- *
- * @param 	Func 	Function that contais sort instructions
- * 
- * @author	Rubens Suguimoto
- */
+* @brief	Set sort list by nick function to list
+* 
+* Set sort by nick function when click in sort span
+*
+* @param 	Func 	Function that contais sort instructions
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_SetSortUserFunction(Func)
 {
 	UTILS_AddListener(this.sortNick , "click", Func, false);
@@ -260,14 +265,15 @@ function INTERFACE_SetSortUserFunction(Func)
 
 
 /**
- * @brief	Set sort list by rating function to list
- * 
- * Set sort by rating function when click in sort option
- *
- * @param 	Func 	Function that contais sort instructions
- * 
- * @author	Rubens Suguimoto
- */
+* @brief	Set sort list by rating function to list
+* 
+* Set sort by rating function when click in sort option
+*
+* @param 	Func 	Function that contais sort instructions
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_SetSortRatingFunction(Func)
 {
 	var TmpFunc = Func;
@@ -277,12 +283,13 @@ function INTERFACE_SetSortRatingFunction(Func)
 }
 
 /**
- * @brief	Hide sort options
- * 
- * Hide sort span and option
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Hide sort options
+* 
+* Hide sort span and option
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideSort()
 {
 	this.sortNick.style.display = "none";
@@ -290,12 +297,13 @@ function INTERFACE_HideSort()
 }
 
 /**
- * @brief	Show sort options
- * 
- * Show sort span and option
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Show sort options
+* 
+* Show sort span and option
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowSort()
 {
 	this.sortNick.style.display = "block";
@@ -303,68 +311,91 @@ function INTERFACE_ShowSort()
 }
 
 /**
- * @brief	Hide user list element
- * 
- * Hide user list in interface
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Hide user list element
+* 
+* Hide user list in interface
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideList()
 {
 	this.userList.parentNode.style.display = "none";
 }
 
 /**
- * @brief	Show user list element
- * 
- * Show user list in interface
- *
- * @author	Rubens Suguimoto
- */
+* @brief	Show user list element
+* 
+* Show user list in interface
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowList()
 {
 	this.userList.parentNode.style.display = "block";
 }
 
-// focus span element
+/**
+* @brief	Focus sort nick button element
+* 
+* Show user list in interface
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_FocusNick()
 {
 	this.sortNick.className = "selected";
 }
 
-// blur focus span element
+/**
+* @brief	Blur sort nick button element
+* 
+* Show user list in interface
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_BlurNick()
 {
 	this.sortNick.className = "";
 }
 
-// focus rating option
+/**
+* @brief	Focus sort rating button element
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_FocusRating()
 {
 	this.sortRating.className = "selected";
 }
 
-// blur rating option
+/**
+* @brief	Blur sort rating button element
+* 
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_BlurRating()
 {
 	this.sortRating.className = "";
 }
 
 
-/**************************************
-**** FUNCTION - CREATE HTML LIST
-**************************************/
-
+///////////////////// FUNCTION - CREATE HTML LIST
 /**
- * @brief	Create user list in interface
- * 
- * Create user list HTML, and return div, list parent, sort span, sort rating option;
- *
- * @param	Element 	Parent node of list main div
- *
- * @author	Rubens Suguimoto
- * @return	Object that contains list main div, user list, sort span and sort rating option
- */
+* @brief	Create user list in interface
+* 
+* Create user list HTML, and return div, list parent, sort span, sort rating option;
+*
+* @param	Element 	Parent node of list main div
+*
+* @author	Rubens Suguimoto
+* @return	Object that contains list main div, user list, sort span and sort rating option
+*/
 function INTERFACE_CreateUserList(Element)
 {
 	var MainDiv;
@@ -438,19 +469,19 @@ function INTERFACE_CreateUserList(Element)
 
 
 /**
- * @brief	Create a user item and return it
- * 
- * Create a user tr element, contais username, status/type and rating, and return this element.
- *
- * @param 	Username	The user's name
- * @param	Status		The new user's status
- * @param	Rating		The user's rating
- * @param	Type		The new user's type
- *
- * @author	Rubens Suguimoto
- *
- * @return 	Tr HTML element with username, status/type and rating
- */
+* @brief	Create a user item and return it
+* 
+* Create a user tr element, contais username, status/type and rating, and return this element.
+*
+* @param 	Username	The user's name
+* @param	Status		The new user's status
+* @param	Rating		The user's rating
+* @param	Type		The new user's type
+*
+* @author	Rubens Suguimoto
+*
+* @return 	Tr HTML element with username, status/type and rating
+*/
 function INTERFACE_CreateUser(Username, Status, Rating, Type)
 {
 	var Tr, Td1, Td2;
@@ -476,27 +507,26 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 	}
 	Td2 = UTILS_CreateElement("td", null, "rating", Rating);
 
-	// Add onclick function to open user menu
-//	Td1.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	Tr.appendChild(Td1);
 	Tr.appendChild(Td2);
 
+	// Add onclick function to open user menu
 	Tr.onclick = function () { CONTACT_ShowUserMenu(this, Username); };
 	return Tr;
 }
 
 
 /**
- * @brief	Show user menu when click over user list item
- * 
- * Create a menu and show options to challenge, view profile, add/remove contact, admin options, etc.
- *
- * @param 	Obj	User list item
- * @param	Options	Array with user menu options;
- *
- * @author	Pedro
- *
- */
+* @brief	Show user menu when click over user list item
+* 
+* Create a menu and show options to challenge, view profile, add/remove contact, admin options, etc.
+*
+* @param 	Obj		User list item
+* @param	Options		Array with user menu options;
+*
+* @return	none
+* @author	Pedro Rocha
+*/
 function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i;
@@ -530,12 +560,12 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		Menu.appendChild(Option);
 	}
 	// Get parent scrolling
-	
 	ParentNode = UTILS_GetParentDiv(Obj);
 
 	if (MainData.GetBrowser() == 0)
 	{
-		// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+		// This a quick fix to contact list open user menu correctly 
+		// TODO fix this properly
 		if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 		{
 			ParentNode = UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode.parentNode);
@@ -546,7 +576,8 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 		}
 		Offset = 0;
 	}
-	// This a quick fix to contact list to open user menu correctly // TODO fix this properly
+	// This a quick fix to contact list open user menu correctly
+	 // TODO fix this properly
 	// Contact List
 	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
@@ -573,20 +604,18 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 	Menu.style.top = (Pos.Y+18-ParentNode.scrollTop-Offset)+"px";
 	Menu.style.left = Pos.X+Left+"px";
 	
-//	alert(ParentNode.scrollTop+" "+Pos.Y+" "+Offset+" "+Menu.style.top+"-"+Pos.X);
-
 	document.body.appendChild(Menu);
 }
 
 
 /**
- * @brief	Hide user menu
- * 
- * Remove user menu from interface;
- *
- * @author	Pedro
- *
- */
+* @brief	Hide user menu
+* 
+* Remove user menu from interface
+*
+* @return	none
+* @author	Pedro Rocha
+*/
 function INTERFACE_HideUserMenu()
 {
 	var Menu = document.getElementById("UserMenuDiv");
@@ -601,147 +630,13 @@ function INTERFACE_HideUserMenu()
 /*****************************
 *	FUNCTIONS - WINDOW
 ******************************/
-/**
-*	Create elements of search user window and returns div
-*
-* @return	Div; Array
-* @see		WINDOW_Invite();
-* @author Danilo Kiyoshi Simizu Yorinori
-*
-function INTERFACE_ShowSearchUserWindow()
-{
-	// Variables
-	var Div;
-
-	var FormDiv, Username,Input, Br;
-
-	var OptionDiv;
-	var OptionLabel, Br1;
-	var Name,NameLabel, User,UserLabel, Both, BothLabel;
-
-	var ButtonsDiv, Search, Cancel;
-
-	var Buttons = new Array();
-
-	// Main div
-	Div = UTILS_CreateElement('div', 'SearchUserDiv');
-
-	// FormDiv elements
-	FormDiv = UTILS_CreateElement('div', 'FormDiv');
-
-	Username = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_t"));
-	Br = UTILS_CreateElement('br');
-	Input = UTILS_CreateElement('input', 'SearchUserInput');
-	Input.size = "23";
-
-	// OptionDiv Elements
-	OptionDiv = UTILS_CreateElement('div','OptionDiv');
-
-	OptionLabel = UTILS_CreateElement('span',null,null,UTILS_GetText("contact_search_by"));
-	Br1 = UTILS_CreateElement('br');
-	
-	try
-	//Fix radio button for IE
-	{
-		Name = document.createElement('<input class="radio" type="radio" name="search_user" />');
-	}
-	catch(err) 
-	{
-		Name = UTILS_CreateElement('input',null,'radio');
-		Name.type = "radio";
-		Name.name = "search_user";
-	}
-	NameLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_name"));
-
-	try
-	//Fix radio button for IE
-	{
-		User = document.createElement('<input class="radio" type="radio" name="search_user" checked="checked" />');
-	}
-	catch(err) 
-	{
-		User= UTILS_CreateElement('input',null,'radio');
-		User.type = "radio";
-		User.name = "search_user";
-		User.checked = true;
-	}
-	UserLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_by_user"));
-
-	Both= UTILS_CreateElement('input');
-	Both.type = "radio";
-	Both.name = "search_user";
-	BothLabel = UTILS_CreateElement('span',null,'label',UTILS_GetText("contact_both"));
-
-
-	// ButtonsDiv elements
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Search = UTILS_CreateElement('input',null,'button');
-	Search.type = "button";
-	Search.value = UTILS_GetText("window_search");
-	UTILS_AddListener(Search,"click",	function() { 
-		var Option;
-		if (Name.checked == true)
-		{
-			Option = 0;
-		}
-		else if (User.checked == true)
-		{
-			Option = 1;
-		}
-		else if (Both.checked == true)
-		{
-			Option = 2;
-		}
-		else
-		{
-			Option = 2;
-		}
-		CONNECTION_SendJabber(MESSAGE_SearchUser(Input.value,Option)); }, "false");
-	Buttons.push(Search);
-
-	Cancel = UTILS_CreateElement('input',null,'button');
-	Cancel.type = "button";
-	Cancel.value = UTILS_GetText("window_cancel");
-	Buttons.push(Cancel);
-
-	// Mount elements tree
-	// ButtonsDiv elements
-	ButtonsDiv.appendChild(Search);
-	ButtonsDiv.appendChild(Cancel);
-
-	// OptionDiv
-	OptionDiv.appendChild(OptionLabel);
-	OptionDiv.appendChild(Br1);
-	OptionDiv.appendChild(User);
-	OptionDiv.appendChild(UserLabel);
-	OptionDiv.appendChild(Name);
-	OptionDiv.appendChild(NameLabel);
-
-//	OptionDiv.appendChild(Both);
-//	OptionDiv.appendChild(BothLabel);
-	
-	// FormDiv elements
-	FormDiv.appendChild(Username);
-	FormDiv.appendChild(Br);
-	FormDiv.appendChild(Input);
-
-	// Main div elements
-	Div.appendChild(FormDiv);
-	Div.appendChild(OptionDiv);
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
-*/
-
 
 /**
-*	Create elements of an user 
+* @brief	Create elements of an user 
 *
-* @param	Username	User that will be inserted
-* @return	Tr
-* @author Danilo Kiyoshi Simizu Yorinori
+* @param	Obj	User Object
+* @return	Tr HTML element
+* @author 	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_CreateUserElement(Obj)
 {
@@ -784,87 +679,14 @@ function INTERFACE_CreateUserElement(Obj)
 }
 
 /**
-*	Create elements of search user result window and returns div
+* @brief	Create a hint showing complete name.
 *
-* @param	UserList	List of users founded
-* @return	Div; Array
-* @see		WINDOW_Invite();
-* @author Danilo Kiyoshi Simizu Yorinori
+* Create a hint showing complete name of an user whose nick was shorted to fit in interface
 *
-function INTERFACE_ShowSearchUserResultWindow(UserList)
-{
-	// Variables
-	var Div;
-	var TopDiv;
-	var ListDiv, Label,Table, TBody, Tr, Item, Br;
-	var ButtonsDiv, Button;
-	var Buttons = new Array();
-	var i;
-
-	// Main Div
-	Div = UTILS_CreateElement('div', 'SearchUserDiv');
-
-	TopDiv = UTILS_CreateElement('div', 'TopDiv');
-
-	// Div of results
-	ListDiv = UTILS_CreateElement('div', 'ListDiv');
-
-	Table = UTILS_CreateElement('table');
-	TBody = UTILS_CreateElement('tbody');
-
-	if (UserList == null)
-	{
-		Label = UTILS_CreateElement('span', null, 'no_found', UTILS_GetText("contact_no_user_found"));
-	}
-	else
-	{
-		Label = UTILS_CreateElement('span', null, 'header', UTILS_GetText("contact_user_found"));
-		
-		for (i=0; i< UserList.length; i++)
-		{
-			// Insert each item of the user founded list in interface
-			Tr = INTERFACE_CreateUserElement(UserList[i]);
-			TBody.appendChild(Tr);
-		}
-	}
-	Table.appendChild(TBody);
-
-	Br = UTILS_CreateElement('br');
-
-	// ButtonsDiv
-	ButtonsDiv = UTILS_CreateElement('div','ButtonsDiv');
-
-	Button = UTILS_CreateElement('input',null,'button');
-	Button.type = "button";
-	Button.value = UTILS_GetText("window_close");
-	Buttons.push(Button);
-
-	// Mount tree elements
-	// ButtonsDiv elements
-	ButtonsDiv.appendChild(Button);
-	
-	// TopDiv elements
-	TopDiv.appendChild(Label);
-	
-	// Main div and result div elements
-	Div.appendChild(TopDiv);
-	Div.appendChild(Br);
-	if (UserList != null)
-	{
-		ListDiv.appendChild(Table);
-		Div.appendChild(ListDiv);
-	}
-	Div.appendChild(ButtonsDiv);
-
-	return {Div:Div, Buttons:Buttons};
-}
+* @param	Obj		HTML element Object
+* @param	UserName	User's name string
+* @author	Danilo Yorinori
 */
-/**
-*	Create a hint showing complete name of an user whose nick was shorted to fit in interface
-*
-* @author	Danilo
-*
- */
 function INTERFACE_ShowUserFullName(Obj,UserName)
 {
 	var Hint, Name, ParentNode, Pos, i;
@@ -944,9 +766,10 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 }
 
 /*
-*	Remove hint opened by INTERFACE_ShowUserFullName function
+* @brief	Remove hint opened by INTERFACE_ShowUserFullName function
 *
-*	@author Danilo Yorinori
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_CloseUserFullName()
 {
@@ -958,9 +781,9 @@ function INTERFACE_CloseUserFullName()
 }
 
 /*	
-*	Create elements of search user window and returns div, array of buttons and object of elements
+* @brief	Create elements of search user window
 *
-* @return	Div; Array; Elements
+* @return	Search window content main div, array of buttons and object of elements
 * @author Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowSearchUserWindow()
@@ -1196,12 +1019,12 @@ function INTERFACE_ShowSearchUserWindow()
 }
 
 /*
-*	Set result of a user search in window
+* @brief	Set result of a user search in window
 *
-*	@param Result	Array of usernames
-*	@see	CONTACT_HandleSearchUser;
-*	@return	void
-*	@author Danilo Yorinori
+* @param	Result		Array of user's name
+* @return	none
+* @author	Danilo Yorinori
+* @see		CONTACT_HandleSearchUser;
 */
 function INTERFACE_SearchUserSetResult(Result)
 {
@@ -1298,9 +1121,10 @@ function INTERFACE_SearchUserSetResult(Result)
 }
 
 /**
-* Change sort order and display result list order by nick
+* @brief	Change sort order and display result list order by nick
 *
-* @author Danilo Yorinori
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_SortSearchUserByNick() {
 	var Tr, i;
@@ -1335,8 +1159,9 @@ function INTERFACE_SortSearchUserByNick() {
 }
 
 /**
-* Change sort order and display result list order by name
+* @brief	Change sort order and display result list order by name
 *
+* @return	none
 * @author Danilo Yorinori
 */
 function INTERFACE_SortSearchUserByName() {

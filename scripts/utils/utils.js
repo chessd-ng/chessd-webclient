@@ -12,9 +12,9 @@
 * GNU General Public License for more details.
 */
 
-
 /**
-* Utils for webclient
+* @file		utils/utils.js
+* @brief	Utils and auxiliars functions 
 */
 
 
@@ -23,9 +23,11 @@
  ************************************/
 
 /**
-* Identify client web browser
+* @brief	Identify client web browser and return a value 
+*
+* @return	Browser Number (-1=Not identified,  0=IE, 1=FF2[gecko != 1.9], 2=FF3[gecko1.9])
+* @author 	Rubens Suguimoto
 */
-
 function UTILS_IdentifyBrowser()
 {
 	var BrowserValue;
@@ -101,6 +103,7 @@ function UTILS_IdentifyBrowser()
 	else if (BrowserName.match("Microsoft Internet Explorer"))
 	{
 		/*
+		// Check for different versions of IE
 		var IEv = navigator.userAgent.split(";")[1].replace(/ /g,"");
 		
 		if (IEv == "MSIE6.0")
@@ -123,7 +126,11 @@ function UTILS_IdentifyBrowser()
 }
 
 /**
-* Open a XML file and return XML DOM Tree
+* @brief	Open a XML file, create and return XML DOM Tree
+*
+* @param	Url	XML file path
+* @return	XML DOM tree
+* @author 	Rubens Suguimoto
 */
 function UTILS_OpenXMLFile(Url)
 {	
@@ -141,7 +148,7 @@ function UTILS_OpenXMLFile(Url)
 	}
 	else
 	{
-		alert('Seu navegador nao suporta XML DOM.');
+		alert('Your browser doesn\'t support XML DOM.');
 	}
 
 	XML.async = false;
@@ -152,7 +159,12 @@ function UTILS_OpenXMLFile(Url)
 
 
 /**
-* Return content of param
+* @brief	Find and return node in XML tree with TagName and return this node content
+*
+* @param	XML		XML tree
+* @param	TagName 	String used to find node
+* @return	Node content string
+* @author 	Rubens Suguimoto
 */
 function UTILS_GetTag(XML, TagName)
 {
@@ -174,7 +186,13 @@ function UTILS_GetTag(XML, TagName)
 
 
 /**
-* Get Text for internacionalization
+* @brief	 Get text from language selected.
+* If TagName was not founded in language seleted, then found in Default language text.
+* We assume that default language has all tags.
+*
+* @param	TagName 	Text tag
+* @return	Text content of node with TagName
+* @author 	Rubens Suguimoto
 */
 function UTILS_GetText(TagName)
 {
@@ -184,19 +202,6 @@ function UTILS_GetText(TagName)
 	if(Text == null)
 	{
 		Text = UTILS_GetTag(MainData.GetDefaultText(), TagName);
-		//Find tag name in log struct
-		/*
-		while( (!TagName.match(TranslationLog[i])) && (i< TranslationLog.length) )
-		{
-			i++;
-		}
-
-		//If not founded, push tagName in translation log array	
-		if(i == TranslationLog.length)
-		{
-			TranslationLog.push("<"+TagName+">");
-		}
-		*/
 	}
 
 	Text = Text.replace(/\t/g,"").replace(/\n/g,"");
@@ -206,7 +211,11 @@ function UTILS_GetText(TagName)
 
 
 /**
-* Get param name for any browser
+* @brief	Get element content in any browser
+*
+* @param	Node 	DOM element
+* @return	Node content string
+* @author 	Rubens Suguimoto
 */
 function UTILS_GetNodeText(Node)
 {
@@ -230,6 +239,16 @@ function UTILS_GetNodeText(Node)
  * FUNCTIONS - ELEMENT MANIPULATION
  ************************************/
 
+/**
+* @brief	Create a DOM element
+*
+* @param	Element		Element tag name
+* @param	Id		Element identification attribute
+* @param	ClassName	Element class name attribute
+* @param	Inner		Element content
+* @return	New element with some attributes set up
+* @author 	Pedro Rocha
+*/
 function UTILS_CreateElement(Element, Id, ClassName, Inner)
 {
 	try
@@ -259,7 +278,12 @@ function UTILS_CreateElement(Element, Id, ClassName, Inner)
  ************************************/
 
 /**
-* Create cookies
+* @brief	Create webclient cookies
+*
+* @param	CookieName	String
+* @param	CookieValue	Data to be store in cookie
+* @param	Days		Cookie expire period
+* @author 	Pedro Rocha
 */
 function UTILS_CreateCookie(CookieName, CookieValue, Days)
 {
@@ -278,7 +302,10 @@ function UTILS_CreateCookie(CookieName, CookieValue, Days)
 }
 
 /**
-* Read cookies
+* @brief	Read webclient cookies
+*
+* @param	CookieName 	String
+* @author 	Pedro Rocha
 */
 function UTILS_ReadCookie(CookieName)
 {
@@ -293,7 +320,10 @@ function UTILS_ReadCookie(CookieName)
 }
 
 /**
-* Erase cookies
+* @brief	Remove webclient cookies from browser
+*
+* @param	CookieName	String
+* @author 	Pedro Rocha
 */
 function UTILS_DeleteCookie(CookieName)
 {
@@ -305,7 +335,11 @@ function UTILS_DeleteCookie(CookieName)
  ************************************/
 
 /**
-* Validate username
+* @brief	Check if username is a valid checking characters
+*
+* @param	Username 	String
+* @return	True or False
+* @author 	Pedro Rocha
 */
 function UTILS_ValidateUsername(Username)
 {
@@ -320,7 +354,11 @@ function UTILS_ValidateUsername(Username)
 }
 
 /**
-* Capitalize a word
+* @brief Capitalize a word
+*
+* @param	 Word 	String
+* @return	 String with first character changed to upper case
+* @author Danilo Kiyoshi Simizu Yorinori
 */
 function UTILS_Capitalize(Word)
 {
@@ -331,15 +369,13 @@ function UTILS_Capitalize(Word)
 }
 
 /**
-* Put a <br /> tag at Obj.innerHTML if it pass the Width limit
+* @brief	 Set breaklines inside texts
+* Put a "<br />" tag at Obj.innerHTML if it pass the Width limit
 *
-* @param Obj
-* 	Cell table's object
-* @param Width
-* 	max Base object 
+* @param	 Obj 	Cell table's object
+* @param	 Width 	max Base object 
 * @return String
 * @author Danilo Kiyoshi Simizu Yorinori
-*
 */
 function UTILS_BreakString(Obj, Width)
 {
@@ -385,20 +421,28 @@ function UTILS_BreakString(Obj, Width)
 }
 
 /**
-* Short a word
+* @brief	 Remove NumChars characteres of Word
+*
+* If word has more than number of characteres defined in NumChars, remove excced characters, else do nothing;
+*
+* @param	Word		String with some text
+* @param	NumChars	Max numbers of characters
+* @return	New string with words changed
+* @author	Rubens Suguimoto
 */
 function UTILS_ShortString(Word, NumChars)
 {
 	var ShortWord;
 	var NumChs;
 
+	//Check if NumChars is defined. If not, use default value;
 	if(NumChars != null)
 	{
 		NumChs = NumChars;
 	}
 	else
 	{
-		NumChs = 5
+		NumChs = 5;
 	}
 
 	if(Word.length > NumChs)
@@ -413,6 +457,14 @@ function UTILS_ShortString(Word, NumChars)
 	return ShortWord;
 }
 
+/**
+* @brief	 Check if string has some banned words.
+* If exist replace all characters to '*' and return new string.
+*
+* @param	Str	String with some text
+* @return	New string with words changed
+* @author	Rubens Suguimoto
+*/
 function UTILS_BannedWords(Str)
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
@@ -421,6 +473,7 @@ function UTILS_BannedWords(Str)
 	var Tmp, Word;
 	var Expr;
 	
+	// Check if all words exists in string
 	for(i=0; i<AdminCenterObj.Words.WordsList.length; i++)
 	{
 		Tmp = "";
@@ -430,8 +483,9 @@ function UTILS_BannedWords(Str)
 		{
 			Tmp += "*";
 		}
-
+		
 		Expr = new RegExp("\\b"+Word+"\\b","gi");
+		// Replace banned word to new word with '*'
 		StrResult = StrResult.replace(Expr, Tmp);
 	}
 
@@ -443,9 +497,16 @@ function UTILS_BannedWords(Str)
  ************************************/
 
 /**
-* Add a Element event listener
-* SRC = http://snipplr.com/view/561/add-event-listener/
-* Cross-browser implementation of Element.addEventListener()
+* @brief	Add an event listener from element
+* Return true if event has added or false if event hasn't added
+* Code from: http://snipplr.com/view/561/add-event-listener/
+*
+* @param	Element	DOM element
+* @param	Type	Event type
+* @param	Expression	Function or action to add
+* @param	Bubbling	Transmite event to others elements overlayed
+* @return	True or false
+* @author	Rubens Suguimoto
 */
 function UTILS_AddListener(Element, Type, Expression, Bubbling)
 {
@@ -469,7 +530,15 @@ function UTILS_AddListener(Element, Type, Expression, Bubbling)
 }
 
 /**
-* Remove an event listener
+* @brief 	Remove an event listener from element
+* Return true if event has removed or false if event hasn't removed
+*
+* @param	Element	DOM element
+* @param	Type	Event type
+* @param	Expression	Function or action to remove
+* @param	Bubbling	Transmite event to others elements overlayed
+* @return	True or false
+* @author	Rubens Suguimoto
 */
 function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 {
@@ -483,7 +552,7 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 	else if(window.attachEvent) // IE
 	{
 		Element.detachEvent('on' + Type, Expression);
-		Element.cancelBubble = !(Bubbling); // ??? TODO -> precisa tirar isso?
+		Element.cancelBubble = !(Bubbling);
 		return true;
 	} 
 	else
@@ -497,6 +566,12 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
  * FUNCTIONS - CROSS BROWSER EVENT
  ************************************/
 
+/**
+* @brief	Check web browser type and return event object
+* @param	event	Javascript event
+* @return	Return event according to web browser
+* @author	Rubens Suguimoto
+*/
 function UTILS_ReturnEvent(event)
 {
 	if(MainData.GetBrowser() == 0) // IE
@@ -509,6 +584,12 @@ function UTILS_ReturnEvent(event)
 	}
 }
 
+/**
+* @brief Check web browser type and return event key code correctly
+* @param	event Javascript event
+* @return	Key code number (integer)
+* @author	Rubens Suguimoto
+*/
 function UTILS_ReturnKeyCode(event)
 {
 	var KeyNum;
@@ -529,8 +610,13 @@ function UTILS_ReturnKeyCode(event)
  ************************************/
 
 /**
-* Return time in format (XXhXX) from a given timestamp
-* If timestamp is null, return current time
+* @brief Convert timestamp format to new format (XXhXX).
+*
+* If timestamp is null, return current time.
+* 
+* @param	Timestamp	Timestamp integer value
+* @return	Timestamp in (XXhXX) format.
+* @author	Danilo Yorinori
 */
 function UTILS_GetTime(Timestamp)
 {
@@ -567,9 +653,10 @@ function UTILS_GetTime(Timestamp)
 }
 
 /**
-* Return the max_timestamp from rating to format(dd-mm-yyyy)
+* @brief	Return the max_timestamp from rating to format(dd-mm-yyyy)
 *
-* @return	String
+* @param	TimeStamp	Timestamp integer value
+* @return	String with date format in dd-mm-yyyy
 * @see		PROFILE_HandleRatings()
 * @author	Danilo Yorinori
 */
@@ -585,14 +672,10 @@ function UTILS_ConvertTimeStamp(TimeStamp)
 }
 
 /**
-* Return the date-time string to search old games 
-* input format  (dd/mm/yyyy)
-* output format (yyyy-mm-ddTnn:nn:nnZ)
+* @brief	Return the date-time string to search old games 
 *
-* @param	TimeStamp
-* 				Date string
-* @param	Type
-* 				begin or end
+* @param	TimeStamp	Date string (dd/mm/yyyy)
+* @param	Type		begin or end (yyyy-mm-ddTnn:nn:nnZ)
 * @return	String
 * @see		INTERFACE_SetSearchButton(Node)
 * @author	Danilo Yorinori
@@ -629,7 +712,10 @@ function UTILS_ConvertSearchDate(TimeStamp, Type)
  * FUNCTIONS - OBJECT OFFSETS       *
  ************************************/
 /*
-* Return object offsets (top and left)
+* @brief	Return object offsets (top and left)
+* @param	Obj	DOM element
+* @return	Tuple of X and Y (pixels) position
+* @author	Pedro Rocha
 */
 function UTILS_GetOffset(Obj)
 {
@@ -655,7 +741,10 @@ function UTILS_GetOffset(Obj)
 }
 
 /**
-* Get the first parent div in DOM tree
+* @brief	Get the first parent div in DOM tree, starting from some element
+* @param	Obj	DOM element
+* @return	First parent div in DOM tree
+* @author	Pedro Rocha 
 */
 function UTILS_GetParentDiv(Obj)
 {
@@ -670,9 +759,13 @@ function UTILS_GetParentDiv(Obj)
 }
 
 
-////HORIZONTAL INDEX CONVERT
-//If CharNum is char return respective number
-//If CharNum is number return respective char
+/**
+* @brief Convert horizontal board index. If param is a number convert to repesctive char else convert to respective number
+* 
+* @param	CharNum		Character or integer number
+* @return	Character or integer number (depend of param) 
+* @author Rubens Suguimoto
+*/
 function UTILS_HorizontalIndex(CharNum)
 {
 	var Row = new Array();
@@ -714,10 +807,10 @@ function UTILS_HorizontalIndex(CharNum)
 
 
 /**
-* Convert a string board to a array (8x8) board
-*
+* @brief Convert a string board to a array (8x8) board
+* 
 * @return Array x Array (8x8) of char
-* @private
+* @author Rubens Suguimoto
 */
 function UTILS_String2Board(BoardString)
 //BoardString is a array of char that contains chess board
@@ -755,11 +848,11 @@ function UTILS_String2Board(BoardString)
  ************************************/
 
 /**
-* Convert a chat string to a format that can't be interpretated
+* @brief Convert a chat string to a format that can't be interpretated
 *
-* @param 	str is string
+* @param 	Str	string to be some characters replace
 * @return 	string with '<' , '>', '&' and '"' replaced
-* @author	Rubens
+* @author	Rubens Suguimoto
 */
 function UTILS_ConvertChatString(Str)
 {
@@ -774,7 +867,11 @@ function UTILS_ConvertChatString(Str)
 }
 
 /**
-* Convert default lang to jabber lang
+* @brief Convert default lang to jabber lang format (lower case)
+*
+* @param 	Default Language in web browser format (ex: pt-BR)
+* @return 	Language in jabber format (ex: pt-br)
+* @author	Rubens Suguimoto
 */
 function UTILS_JabberLang(DefaultLang)
 {
@@ -785,11 +882,11 @@ function UTILS_JabberLang(DefaultLang)
 }
 
 /*
-* Convert time in seconds to days, hours, minuts.
+* @brief Convert time in seconds to days, hours, minuts.
 *
 * @param 	time number
 * @return 	time formated in string
-* @author	Rubens
+* @author	Rubens Suguimoto
 */
 function UTILS_ConvertTime(Seconds)
 {
@@ -871,15 +968,12 @@ function UTILS_ConvertTime(Seconds)
 }
 
 /*
-* Disable selection text inside a element
+* @brief Disable selection text inside a element
+* Code from: http://ajaxcookbook.org/disable-text-selection/
 *
 * @param 	Element	HTML elements
 * @return 	False	Aways return false to disable seletion
 * @author	Rubens Suguimoto
-*/
-
-/* Code from:
-*http://ajaxcookbook.org/disable-text-selection/
 */
 function UTILS_DisableSelection(Element)
 {
@@ -894,17 +988,15 @@ function UTILS_DisableSelection(Element)
 	
 	return false;
 }
+
 /************************************
  * FUNCTIONS - SORT FUNCTIONS       *
  ************************************/
 
 /**
 * Use to sort Userlist into ascendent order
-* If x < y return -1
-*    x > y return  1
-*    x = y return  0
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortByUsernameAsc(a, b) 
@@ -916,11 +1008,8 @@ function UTILS_SortByUsernameAsc(a, b)
 
 /**
 * Use to sort Userlist into descendent order
-* If x < y return  1
-*    x > y return -1
-*    x = y return  0
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortByUsernameDsc(a, b) 
@@ -930,13 +1019,24 @@ function UTILS_SortByUsernameDsc(a, b)
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
-
+/**
+* @brief Use to sort Online's userlist into descendent order by Rating
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Danilo Yorinori
+*/
 function UTILS_SortOnlineByRatingDsc(a, b) 
 {
 	var Category = MainData.GetOnlineCurrentRating();
 	return UTILS_SortByRatingDsc(Category, a, b); 
 }
 
+/**
+* @brief Use to sort Contact's userlist into descendent order by Rating
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Danilo Yorinori
+*/
 function UTILS_SortContactByRatingDsc(a, b) 
 {
 	var Category = MainData.GetContactCurrentRating();
@@ -944,12 +1044,9 @@ function UTILS_SortContactByRatingDsc(a, b)
 }
 
 /**
-* Use to sort Rooms's userlist into descendent order by Rating
-* If x < y return  1
-*    x > y return -1
-*    x = y return  0
+* @brief Use to sort Rooms's userlist into descendent order by Rating
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortRoomByRatingDsc(a, b) 
@@ -958,98 +1055,13 @@ function UTILS_SortRoomByRatingDsc(a, b)
 	var Category = Room.GetRoomCurrentRating();
 
 	return UTILS_SortByRatingDsc(Category, a, b); 
-/*
-	var x;
-	var y;
-	if (Type == "Lightning")
-	{
-		if (a.Rating.Lightning != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Lightning));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Lightning != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Lightning));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Blitz")
-	{
-		if (a.Rating.Blitz != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Blitz));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Blitz != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Blitz));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Standard")
-	{
-		if (a.Rating.Standard != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Standard));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Standard != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Standard));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Untimed")
-	{
-		if (a.Rating.Untimed != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Untimed));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Untimed != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Untimed));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-
-	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-*/
 }
 
 
 /**
-* Use to sort Userlist into ascendent order
-* If x < y return -1
-*    x > y return  1
-*    x = y return  0
+* @brief Use to sort Userlist into ascendent order
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortByFullnameAsc(a, b) 
@@ -1060,12 +1072,9 @@ function UTILS_SortByFullnameAsc(a, b)
 }
 
 /**
-* Use to sort Userlist into descendent order
-* If x < y return  1
-*    x > y return -1
-*    x = y return  0
+* @brief Use to sort Userlist into descendent order
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortByFullnameDsc(a, b) 
@@ -1076,12 +1085,9 @@ function UTILS_SortByFullnameDsc(a, b)
 }
 
 /**
-* Use to sort Userlist into descendent order by Rating
-* If x < y return  1
-*    x > y return -1
-*    x = y return  0
+* @brief Use to sort Userlist into descendent order by Rating
 *
-* @return integer	
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
 function UTILS_SortByRatingDsc(Category, a, b) 
@@ -1109,183 +1115,14 @@ function UTILS_SortByRatingDsc(Category, a, b)
 	{
 		y = parseInt(y);
 	}
-/*
-	if (Type == "Lightning")
-	{
-		if (a.Rating.Lightning != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Lightning));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Lightning != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Lightning));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Blitz")
-	{
-		if (a.Rating.Blitz != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Blitz));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Blitz != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Blitz));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Standard")
-	{
-		if (a.Rating.Standard != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Standard));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Standard != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Standard));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Untimed")
-	{
-		if (a.Rating.Untimed != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Untimed));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Untimed != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Untimed));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-*/
 	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
 }
 
 /**
-* Use to sort Rooms's userlist into descendent order by Rating
-* If x < y return  1
-*    x > y return -1
-*    x = y return  0
+* @brief Use to sort Userlist into descendent order by WPLayer attribute
 *
-* @return integer	
-* @author Danilo Yorinori
-*/
-/*
-function UTILS_SortRoomByRatingDsc(a, b) 
-{
-	var Room = MainData.GetCurrentRoom();
-	var Type = UTILS_Capitalize(Room.GetRoomCurrentRating());
-	var x;
-	var y;
-
-	if (Type == "Lightning")
-	{
-		if (a.Rating.Lightning != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Lightning));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Lightning != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Lightning));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Blitz")
-	{
-		if (a.Rating.Blitz != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Blitz));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Blitz != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Blitz));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Standard")
-	{
-		if (a.Rating.Standard != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Standard));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Standard != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Standard));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-	else if (Type == "Untimed")
-	{
-		if (a.Rating.Untimed != undefined)
-		{
-			x = parseInt(parseFloat(a.Rating.Untimed));
-		}
-		else
-		{
-			x = 0;
-		}
-		if (b.Rating.Untimed != undefined)
-		{
-			y = parseInt(parseFloat(b.Rating.Untimed));
-		}
-		else
-		{
-			y = 0;
-		}
-	}
-
-	return ((x < y) ? 1 : ((x > y) ? -1 : 0));
-}
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
 */
 function UTILS_SortByWUsername(a,b)
 {
@@ -1293,96 +1130,192 @@ function UTILS_SortByWUsername(a,b)
 	var y = b.WPlayer.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by BPLayer attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByBUsername(a,b)
 {
 	var x = a.BPlayer.toLowerCase();
 	var y = b.BPlayer.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Category attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByCategory(a,b)
 {
 	var x = a.Category.toLowerCase();
 	var y = b.Category.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Punish attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByPunish(a,b)
 {
 	var x = a.Punish.toLowerCase();
 	var y = b.Punish.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Incident attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByIncident(a,b)
 {
 	var x = a.Incident.toLowerCase();
 	var y = b.Incident.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Reason attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByReason(a,b)
 {
 	var x = a.Reason.toLowerCase();
 	var y = b.Reason.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Period attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByPeriod(a,b)
 {
 	var x = a.Period.toLowerCase();
 	var y = b.Period.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Level attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByLevel(a,b)
 {
 	var x = a.Level.toLowerCase();
 	var y = b.Level.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Date attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByDate(a,b)
 {
 	var x = a.Date.toLowerCase();
 	var y = b.Date.toLowerCase();
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Rating attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByRatingValue(a,b)
 {
 	var x = parseInt(a.Rating);
 	var y = parseInt(b.Rating);
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Time attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByTime(a,b)
 {
 	var x = parseInt(a.Time);
 	var y = parseInt(b.Time);
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Inc attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByInc(a,b)
 {
 	var x = parseInt(a.Inc);
 	var y = parseInt(b.Inc);
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Moves attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByMoves(a,b)
 {
 	var x = parseInt(a.Moves);
 	var y = parseInt(b.Moves);
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Rated attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByRated(a,b)
 {
 	var x = a.Rated;
 	var y = b.Rated;
 	return ((x != y) ? -1 : ((x == y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by Private attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByPrivate(a,b)
 {
 	var x = a.Private;
 	var y = b.Private;
 	return ((x != y) ? -1 : ((x == y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by WRating attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByWRatingValue(a,b)
 {
 	var x = parseInt(a.WRating);
 	var y = parseInt(b.WRating);
 	return ((x < y) ? -1 : ((x > y) ? 1 : 0));
 }
+/**
+* @brief Use to sort Userlist into descendent order by BRAting attribute
+*
+* @return integer. If x < y return  1, x > y return -1, x = y return  0
+* @author Rubens Suguimoto
+*/
 function UTILS_SortByBRatingValue(a,b)
 {
 	var x = parseInt(a.BRating);
@@ -1394,13 +1327,9 @@ function UTILS_SortByBRatingValue(a,b)
  * FUNCTIONS - BROWSER LANGUAGE     *
  ************************************/
 /*
-Code from:
-http://www.criarweb.com/faq/conseguir_idioma_navegador_cliente.html
-*/
-
-/* Detect browser language
+ * @brief Detect browser language
+ * Code from: http://www.criarweb.com/faq/conseguir_idioma_navegador_cliente.html
  *
- * @params void
  * @return Language string (i.e.: pt-BR, en-US, etc.)
  */
 function UTILS_GetLanguage()
@@ -1408,6 +1337,7 @@ function UTILS_GetLanguage()
 	var Lang
 	
 	Lang = navigator.browserLanguage;
+	// Check for web browser type
 	if (navigator.userAgent.indexOf("Opera")!=-1)
 	{
 		Lang=navigator.language;

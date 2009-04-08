@@ -16,16 +16,17 @@
 
 
 /**
-* This file will handle all kind of game massages
+* @file		game/game.js
+* @brief	This file will handle all kind of game massages
 */
 
 
 /**
-* Handle Game Messages
+* @brief	Handle Game Messages
 *
-* @param 	XML The xml that contains the string 'match' in xmlns attribute
-* @return 	Buffer with the messages that must be send
-* @author 	Ulysses
+* @param 	XML	XMPP with game messages
+* @return 	Buffer with XMPP that must be send
+* @author 	Ulysses	Bomfim and Rubens Suguimoto
 */
 function GAME_HandleGame(XML)
 {
@@ -76,8 +77,12 @@ function GAME_HandleGame(XML)
 }
 
 /**
- * Handle game presence
- */
+* @brief	Handle game presence
+*
+* @param 	XML	XMPP with game messages
+* @return 	Buffer with XMPP that must be send
+* @author	Rubens Suguimoto
+*/
 function GAME_HandlePresence(XML)
 {
 	var Username = XML.getAttribute("from").split("/")[1];
@@ -116,12 +121,11 @@ function GAME_HandlePresence(XML)
 }
 
 /**
-* Handle Game Move
-* It's a good ideia to read the server's documentation before reading the code above
+* @brief	Handle Game Move
 *
-* @param 	XML The xml that contains the game move
-* @return 	void
-* @author 	Ulysses
+* @param 	XML	The XMPP that contains the game move
+* @return 	none
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_Move(XML)
 {
@@ -144,7 +148,7 @@ function GAME_Move(XML)
 	Category = StateTag[0].getAttribute("category");
 
 
-	// Get the pgn of last move
+	// Get the PGN of last move
 	if(MoveTag != null)
 	{
 		Move = MoveTag[0].getAttribute("long");
@@ -156,6 +160,7 @@ function GAME_Move(XML)
 		ShortMove = "------";
 	}
 
+	//Get all game data
 	FullMoves = BoardTag[0].getAttribute("fullmoves");
 	Enpassant = BoardTag[0].getAttribute("enpassant");
 	Castle = BoardTag[0].getAttribute("castle");
@@ -163,26 +168,30 @@ function GAME_Move(XML)
 	Board = BoardTag[0].getAttribute("state");
 	Turn = BoardTag[0].getAttribute("turn");
 
+	// Get first player data
 	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
 	Player1.Color = PlayerTag[0].getAttribute('color');
 	Player1.Time = PlayerTag[0].getAttribute('time');
 	
+	// Get second player data
 	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
 	Player2.Inc = PlayerTag[1].getAttribute('inc');
 	Player2.Color = PlayerTag[1].getAttribute('color');
 	Player2.Time = PlayerTag[1].getAttribute('time');
 
-	
-	// If it's the first board of the game
+
+	//Find the game to update move	
 	if (MainData.FindGame(GameID) == null)
 	{
+		// If game was not founded, start a new game and show this move
 		Buffer += GAME_StartGame(GameID, Player1, Player2);
 
 		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
 	}
 	else
 	{
+		// Else show this move
 		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
 	}
 
@@ -190,10 +199,12 @@ function GAME_Move(XML)
 }
 
 /**
-* Handle Game IQ Result
+* @brief	Handle Game Result
+*
+* This code is used to parse games that player is playing. Used to enter automatically in some game that player is playing.
 *
 * @param 	XML	The xml that contains the game result
-* @return 	void
+* @return 	XMPP to be send
 * @author 	Rubens Suguimoto
 */
 function GAME_HandleGameResult(XML)
@@ -208,8 +219,6 @@ function GAME_HandleGameResult(XML)
 	var MyUsername = MainData.GetUsername();
 	var MyUser = MainData.GetUser(MyUsername);
 
-	// The code above is used to parse games that player is playing;
-	// 
 	if(Id == Consts.IQ_ID_SearchCurrentGame)
 	{
 		var GameTag = XML.getElementsByTagName("game");
@@ -229,12 +238,11 @@ function GAME_HandleGameResult(XML)
 }
 
 /**
-* Handle Game State
-* It's a good ideia to read the server's documentation before reading the code above
+* @brief	Handle Game State
 *
 * @param 	XML The xml that contains the game state
-* @return 	void
-* @author 	Ulysses and Rubens
+* @return 	XMPP to be send
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_State(XML)
 {
@@ -274,11 +282,13 @@ function GAME_State(XML)
 		}
 	}
 
+	// Get first player data
 	Player1.Name = PlayerTag[0].getAttribute('jid').replace(/@.*/,"");
 	Player1.Inc = PlayerTag[0].getAttribute('inc');
 	Player1.Color = PlayerTag[0].getAttribute('color');
 	Player1.Time = PlayerTag[0].getAttribute('time');
 		
+	// Get second player data
 	Player2.Name = PlayerTag[1].getAttribute('jid').replace(/@.*/,"");
 	Player2.Inc = PlayerTag[1].getAttribute('inc');
 	Player2.Color = PlayerTag[1].getAttribute('color');
@@ -310,11 +320,12 @@ function GAME_State(XML)
 	return Buffer;
 }
 /**
-* Handle Draw Request
+* @brief	Handle Draw Request
 *
-* @param 	XML The xml that contains the draw message
-* @return 	The message to accept or deny the draw request
-* @author 	Ulysses
+* @param 	XML 	Xml that contains the draw message
+* @param	Xmlns	Xml namespace string
+* @return 	Empty string
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_HandleDraw(XML, Xmlns)
 {
@@ -336,7 +347,7 @@ function GAME_HandleDraw(XML, Xmlns)
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
 	}
-	// User send a draw request
+	// Show a confirm window to accept or decline draw game request
 	else
 	{
 		Text = UTILS_GetText("game_draw_text");
@@ -366,11 +377,12 @@ function GAME_HandleDraw(XML, Xmlns)
 }
 
 /**
-* Handle Cancel Request
+* @brief	Handle Cancel Request
 *
-* @param 	XML The xml that contains the cancel message
-* @return 	The XML to accept or deny the cancel request
-* @author 	Ulysses
+* @param 	XML The xml that contains the cancel game message
+* @param	Xmlns	Xml namespace string
+* @return 	Empty string
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_HandleCancel(XML, Xmlns)
 {
@@ -380,7 +392,7 @@ function GAME_HandleCancel(XML, Xmlns)
 	var Text;
 	var Button1, Button2;
 
-	// If receive a draw decline message
+	// If receive a cancel game decline message
 	if (Xmlns.match(/-decline/))
 	{
 		Text = UTILS_GetText("game_abort_denied");
@@ -392,7 +404,7 @@ function GAME_HandleCancel(XML, Xmlns)
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
 	}
-	// User send a draw request
+	// Show a confirm window to accept or decline cancel game request
 	else
 	{
 		Text = UTILS_GetText("game_abort_text");
@@ -422,11 +434,14 @@ function GAME_HandleCancel(XML, Xmlns)
 }
 
 /**
-* Handle Adjourn Request
+* @brief	Handle Adjourn Request
+*
+* Assume adjourn and postpone the samething here
 *
 * @param 	XML The xml that contains the adjourn message
-* @return 	The XML to accept or deny the adjourn request
-* @author 	Ulysses
+* @param	Xmlns	Xml namespace string
+* @return 	Empty string
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_HandleAdjourn(XML, Xmlns)
 {
@@ -436,7 +451,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 	var Text;
 	var Button1, Button2;
 
-	// If receive a draw decline message
+	// If receive a adjourn decline message
 	if (Xmlns.match(/-decline/))
 	{
 		Text = UTILS_GetText("game_adjourn_denied");
@@ -448,7 +463,7 @@ function GAME_HandleAdjourn(XML, Xmlns)
 		// Show message as a default alert window
 		WINDOW_Alert(Title, Text);
 	}
-	// User send a draw request
+	// Show a confirm window to accept or declien adjourn
 	else
 	{
 		Text = UTILS_GetText("game_adjourn_text");
@@ -479,11 +494,11 @@ function GAME_HandleAdjourn(XML, Xmlns)
 
 
 /**
-* Game Over
+* @brief	Handle a game over message
 *
 * @param 	XML The xml that contains the ending game message
-* @return 	void
-* @author 	Ulysses
+* @return 	XMPP to send
+* @author 	Ulysses Bomfim and Rubens Suguimoto
 */
 function GAME_End(XML)
 {
@@ -547,6 +562,7 @@ function GAME_End(XML)
 	OLDGAME_EndGame(GameID);
 
 	// Set status avaialable for players
+	// TODO -> CHANGE THIS returns TO "BUFFER"
 	if (Playing)
 	{
 		return CONTACT_ChangeStatus("available", "return");
@@ -560,12 +576,11 @@ function GAME_End(XML)
 
 
 /**
-* Handle Game Error
+* @brief	Handle Game Error
 *
 * @param 	XML The xml that contains the error message
-* @param	GameID - Id of the game that receives the message
-* @return 	void
-* @author 	Pedro
+* @return 	XMPP to be send
+* @author 	Pedro Rocha and Rubens Suguimoto
 */
 function GAME_HandleGameError(XML)
 {
@@ -622,13 +637,13 @@ function GAME_HandleGameError(XML)
 }
 
 /**
-* Start Game
+* @brief	Start some game
 *
-* @param 	GameId = Game number
-* @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
-* @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
-* @return 	void
-* @author 	Rubens
+* @param 	GameId 	Game identification number
+* @param 	P1 	First Player Object (Name, Time, Color, Inc)
+* @param 	P2 	Second Player Object (Name, Time, Color, Inc)
+* @return 	XMPP to be send
+* @author 	Rubens Suguimoto
 */
 function GAME_StartGame(GameId, P1, P2)
 {
@@ -642,8 +657,6 @@ function GAME_StartGame(GameId, P1, P2)
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 
 	var MyUsername = MainData.GetUsername();
-	// Remove welcome div
-	//INTERFACE_RemoveWelcome();
 
 	// Cancel all announces
 	ANNOUNCE_CancelAllAnnounce();
@@ -653,7 +666,7 @@ function GAME_StartGame(GameId, P1, P2)
 	if (CurrentGame != null)
 	{
 
-		//Quickfix to leave room when observer
+		//Quickfix to leave room when you is observing some game
 		Room = MainData.GetRoom(CurrentGame.Id);
 		Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		CurrentGame.Game.Hide();
@@ -663,13 +676,14 @@ function GAME_StartGame(GameId, P1, P2)
 
 	if (CurrentOldGame != null)
 	{
-		//Quickfix to leave room when observer
+		//Quickfix to leave room when you is observing a old game
 		Room = MainData.GetRoom(CurrentOldGame.Id);
 		if(Room != null)
 		{
 			Buffer  += MESSAGE_Unavailable(Room.MsgTo);
 		}
 
+		//TODO -> CHANGE THE ABOVE CODE TO OLDGAME_RemoveOldGame
 		CurrentOldGame.Game.Hide();
 		// In this version, player can see only one oldgame
 		//MainData.RemoveOldGame(CurrentOldGame.Id);
@@ -685,6 +699,7 @@ function GAME_StartGame(GameId, P1, P2)
 	{
 		YourColor = P2.Color;
 	}
+
 	// 38 -> default piece size
 	GameDiv = new INTERFACE_GameBoardObj(GameId, P1, P2, YourColor, 38, false);
 
@@ -705,21 +720,23 @@ function GAME_StartGame(GameId, P1, P2)
 	CHALLENGE_ClearChallenges();
 
 	// Set status to playing
+	//TODO --> PUT THIS CHANGE STATUS IN BUFFER
 	return CONTACT_ChangeStatus("playing", "return") + Buffer;
 
 }
 
 /**
-* Start Game in Observer Mode
+* @brief	Start Game in Observer Mode
 *
-* @param 	GameId = Game number
-* @param 	PWName is player white name
-* @param 	PBName is player black name
-* @return 	void
-* @author 	Rubens
+* @param 	GameId	Game identification number
+* @param 	P1 	White player object
+* @param 	P2 	Black player object
+* @return 	none
+* @author 	Rubens Suguimoto
 */
 function GAME_StartObserverGame(GameId, P1, P2)
 {
+	//TODO -> CHANGE P1 TO PW AND P2 TO PB
 	var GameDiv;
 	var RoomPos;
 	var Buffer = "";
@@ -728,9 +745,6 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	var CurrentGame = MainData.GetCurrentGame();
 	var CurrentOldGame = MainData.GetCurrentOldGame();
 	var NewCurrentGame;
-
-	// Remove welcome div
-	//INTERFACE_RemoveWelcome();
 
 	// Hide gamecenter
 	GAMECENTER_HideGameCenter();
@@ -769,25 +783,24 @@ function GAME_StartObserverGame(GameId, P1, P2)
 	// Get players Photos
 	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_GamePhoto);
 	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_GamePhoto);
-
-	// Send message to leave from old game observer room;
 	CONNECTION_SendJabber(Buffer);
 
-	// Send a message to get game moves
+	// Get game's history moves when enter in game room
 	ROOM_EnterRoomGame(GameId)
 }
 
 /**
-* Update board in data struct and interface
+* @brief	Update board in data struct and interface
 *
-* @param 	GameId = Game number
-* @param 	BoardStr = Board status in a string
-* @param 	Move = Chess Move (Piece/Orig-Dest)
-* @param 	P1 = Player 1 Object (Name, Time, Color, Inc)
-* @param 	P2 = Player 2 Object (Name, Time, Color, Inc)
-* @param 	TurnColor = color ("white"/"black")
-* @return 	void
-* @author 	Rubens
+* @param 	GameId 		Game identification number
+* @param 	BoardStr 	Board status in a string
+* @param 	Move 		Chess Move (Piece/Orig-Dest)
+* @param	ShortMove	Move in short notation
+* @param 	P1 		First player object (Name, Time, Color, Inc)
+* @param 	P2 		Second player object (Name, Time, Color, Inc)
+* @param 	TurnColor 	Turn's Color("white"/"black")
+* @return 	Empty string
+* @author 	Rubens Suguimoto
 */
 function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 {
@@ -839,6 +852,7 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 		Game.Game.SetLastMove(Move);
 	}
 
+	//Quick fix to start counter timers
 	if (Game.Moves.length == 3)
 	{
 		Game.Game.StartTimer();
@@ -851,10 +865,11 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 }
 
 /**
-* Remove a game from data struct and interface
-* @param 	GameId is the game identificator
-* @return 	void
-* @author 	Rubens and Pedro
+* @brief	Remove a game from data struct and interface
+*
+* @param 	GameID 		Game identification number
+* @return 	none
+* @author 	Rubens Suguimoto and Pedro Rocha
 */
 function GAME_RemoveGame(GameID)
 {
@@ -862,6 +877,7 @@ function GAME_RemoveGame(GameID)
 
 	if (Game != null)
 	{
+		// TODO -> put comparation "== true"
 		if (Game.Finished)
 		{
 			// Remove game board from interface
@@ -885,14 +901,14 @@ function GAME_RemoveGame(GameID)
 }
 
 /**
-* Send a movement to server
+* @brief	Send a game movement to server
 *
-* @param 	OldLine is line of piece origin position
-* @param 	OldCol is column of piece origin position
-* @param 	NewLine is line of piece dest position
-* @param 	NewCol is line of piece dest position
-* @return 	void
-* @author	Pedro
+* @param 	OldLine		Line origin position
+* @param 	OldCol 		Column origin position
+* @param 	NewLine		Line dest position
+* @param 	NewCol 		Column dest position
+* @return 	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 {
@@ -925,9 +941,6 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 			{
 				Promotion = CurrentGame.Promotion;
 			}
-
-//		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[8-OldLine][OldCol-1] +"\n"+ Promotion +"\n"+CurrentBoard[8-OldLine])
-
 		}
 		else
 		{
@@ -935,8 +948,6 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 			{
 				Promotion = CurrentGame.Promotion;
 			}
-
-//		alert(CurrentBoard +"\n"+ (OldLine)+(OldCol)+(NewLine)+(NewCol) +"\n"+ CurrentBoard[OldLine-1][8-OldCol] +"\n"+Promotion+"\n"+CurrentBoard[OldLine-1])
 		}
 	}
 
@@ -945,11 +956,11 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 }
 
 /**
-* Send a draw message to oponent
+* @brief	Send a draw message request to oponent
 *
-* @param 	GameId is the game identificator
-* @return 	void
-* @author	Pedro
+* @param 	GameID		Game identification number
+* @return 	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function GAME_SendDraw(GameID)
 {
@@ -957,10 +968,10 @@ function GAME_SendDraw(GameID)
 }
 
 /**
-* Send a adjourn message to oponent
+* @brief	Send a adjourn message to oponent
 *
-* @param 	GameId is the game identificator
-* @return 	void
+* @param 	GameID		Game identification number
+* @return 	none
 * @author	Pedro
 */
 function GAME_SendCancel(GameID)
@@ -969,27 +980,35 @@ function GAME_SendCancel(GameID)
 }
 
 /**
-* Send a adjourn message to oponent
+* @brief	Send a adjourn message to oponent
 *
-* @param 	GameId is the game identificator
-* @return 	void
-* @author	Pedro
+* @param 	GameID		Game identification number
+* @return 	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function GAME_SendAdjourn(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestAdjourn(GameID));
 }
 
+/*
+* @brief	Send a message to get your current games
+*
+* This function is used to continue your game, if for some reason your game was interrupted
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_SearchCurrentGame()
 {
 	CONNECTION_SendJabber(MESSAGE_GameSearchCurrentGame());
 }
 
 /**
-* Change current game piece promotion
+* @brief	Change current game piece promotion
 *
-* @param 	Piece	Piece char
-* @return 	void
+* @param 	Piece	Piece character
+* @return 	none
 * @author	Rubens Suguimoto
 */
 function GAME_ChangePromotion(Piece)
@@ -999,11 +1018,11 @@ function GAME_ChangePromotion(Piece)
 }
 
 /**
-* Send a resign message to oponent
+* @brief	Send a resign message request to oponent
 *
-* @param 	GameId is the game identificator
-* @return 	void
-* @author	Pedro
+* @param 	GameID 	Game identification number
+* @return 	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function GAME_SendResign(GameID)
 {
@@ -1029,14 +1048,14 @@ function GAME_SendResign(GameID)
 }
 
 /**
-* Load all game history moves done in the game
+* @brief	Load all game history moves done in the game
 *
-* @param 	GameId is the game identificator
-* @param 	HistoryXml is a XML that contains all games states
-* @param 	Player1 = Player 1 Object (Name, Time, Color, Inc)
-* @param 	Player2 = Player 2 Object (Name, Time, Color, Inc)
-* @return 	void
-* @author	Rubens
+* @param 	GameID 		Game identification number
+* @param 	HistoryXml 	XML that contains all games states
+* @param 	Player1 	First player object (Name, Time, Color, Inc)
+* @param 	Player2 	Second player object (Name, Time, Color, Inc)
+* @return 	none
+* @author	Rubens Suguimoto
 */
 function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 {
@@ -1056,11 +1075,14 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 
 	StartP1Time = HistoryXml.getElementsByTagName("player")[0].getAttribute("time");
 	StartP2Time = HistoryXml.getElementsByTagName("player")[1].getAttribute("time");
+
+	// Get first player data
 	HPlayer1.Name = Player1.Name;
 	HPlayer1.Inc = Player1.Inc;
 	HPlayer1.Color = Player1.Color;
 	HPlayer1.Time = StartP1Time;
 
+	// Get second player data
 	HPlayer2.Name = Player2.Name;
 	HPlayer2.Inc = Player2.Inc;
 	HPlayer2.Color = Player2.Color;
@@ -1091,11 +1113,11 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 }
 
 /**
-* Handle Game Players Photo
+* @brief	Handle Game Players Photo
 *
-* @param 	XML The xml that contains vCard photo
+* @param 	XML 	XMPP that contains vCard photo
 * @return 	none
-* @author 	Rubens
+* @author 	Rubens Suguimoto
 */
 function GAME_HandleVCardPhoto(XML)
 {
@@ -1122,8 +1144,9 @@ function GAME_HandleVCardPhoto(XML)
 		return "";
 	}
 
-	// Get photo image 
+	// Get photo image type 
 	PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]); 
+	// Get photo image in base64
 	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]); 
 	Img = "data:"+PhotoType+";base64,"+Binval; 
 
@@ -1142,15 +1165,19 @@ function GAME_HandleVCardPhoto(XML)
 		CurrentGame.BPhoto = Img;
 		CurrentGame.Game.SetBPhoto(Img);
 	}
-	/*
-	else
-	{
-		//This case should not happen
-	}
-	*/
+
 	return "";
 }
 
+/*
+* @brief	Set remaining time to both players
+*
+* @param	GameID	Game identification number
+* @param	WTime	White player's remaining time
+* @param	BTime	Black player's remaining time
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_SetLeftTime(GameID, WTime, BTime)
 {
 	var Game = MainData.GetGame(GameID);
@@ -1165,6 +1192,13 @@ function GAME_SetLeftTime(GameID, WTime, BTime)
 	}
 }
 
+/*
+* @brief	Show loading move message
+*
+* @param	Id	Game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_ShowLoadingMove(Id)
 {
 	var Game = MainData.GetGame(Id)
@@ -1172,6 +1206,13 @@ function GAME_ShowLoadingMove(Id)
 	Game.Game.ShowLoadingMove();
 }
 
+/*
+* @brief	Hide loading move message
+*
+* @param	Id	Game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_HideLoadingMove(Id)
 {
 	var Game = MainData.GetGame(Id)
@@ -1179,6 +1220,14 @@ function GAME_HideLoadingMove(Id)
 	Game.Game.HideLoadingMove();
 }
 
+/*
+* @brief	Set a border around some block in current game board
+*
+* @param	Line	Block line
+* @param	Col	Block column
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_SetBlockBorder(Line, Col)
 {
 	var CurrentGame = MainData.GetCurrentGame();
@@ -1197,6 +1246,14 @@ function GAME_SetBlockBorder(Line, Col)
 	CurrentGame.Game.SetBlockBorder(BlockId);
 }
 
+/*
+* @brief	Set block class
+*
+* @param	Line	Block line
+* @param	Col	Block column
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_SetBlockClass(Line, Col)
 {
 	var Game = MainData.GetCurrentGame();
@@ -1215,6 +1272,14 @@ function GAME_SetBlockClass(Line, Col)
 	Game.Game.SetBlockClass(BlockId);
 }
 
+/*
+* @brief	Remove border around some block in current game board
+*
+* @param	Line	Block line
+* @param	Col	Block column
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_RemoveBlockBorder(Line, Col)
 {
 	var CurrentGame = MainData.GetCurrentGame();
@@ -1238,6 +1303,13 @@ function GAME_RemoveBlockBorder(Line, Col)
 	CurrentGame.Game.RemoveBlockBorder(BlockId);
 }
 
+/*
+* @brief	Get oponent's username
+*
+* @param	GameId	Game identification number
+* @return	Oponent's username string
+* @author	Rubens Suguimoto
+*/
 function GAME_GetOponent(GameId)
 {
 	var Game = MainData.GetGame(GameId);
@@ -1257,6 +1329,14 @@ function GAME_GetOponent(GameId)
 	}
 }
 
+/*
+* @brief	Remove block class
+*
+* @param	Line	Block line
+* @param	Col	Block column
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function GAME_RemoveBlockClass(Line, Col)
 {
 	var Game = MainData.GetCurrentGame();

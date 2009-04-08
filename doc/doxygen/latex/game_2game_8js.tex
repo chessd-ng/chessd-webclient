@@ -1,0 +1,607 @@
+\section{/home/www/rubens/webclient/scripts/game/game.js File Reference}
+\label{game_2game_8js}\index{/home/www/rubens/webclient/scripts/game/game.js@{/home/www/rubens/webclient/scripts/game/game.js}}
+This file will handle all kind of game massages. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf GAME\_\-HandleGame} (XML)
+\begin{CompactList}\small\item\em Handle Game Messages. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandlePresence} (XML)
+\begin{CompactList}\small\item\em Handle game presence. \item\end{CompactList}\item 
+function {\bf GAME\_\-Move} (XML)
+\begin{CompactList}\small\item\em Handle Game Move. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleGameResult} (XML)
+\begin{CompactList}\small\item\em Handle Game Result. \item\end{CompactList}\item 
+function {\bf GAME\_\-State} (XML)
+\begin{CompactList}\small\item\em Handle Game State. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleDraw} (XML, Xmlns)
+\begin{CompactList}\small\item\em Handle Draw Request. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleCancel} (XML, Xmlns)
+\begin{CompactList}\small\item\em Handle Cancel Request. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleAdjourn} (XML, Xmlns)
+\begin{CompactList}\small\item\em Handle Adjourn Request. \item\end{CompactList}\item 
+function {\bf GAME\_\-End} (XML)
+\begin{CompactList}\small\item\em Handle a game over message. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleGameError} (XML)
+\begin{CompactList}\small\item\em Handle Game Error. \item\end{CompactList}\item 
+function {\bf GAME\_\-StartGame} (GameId, P1, P2)
+\begin{CompactList}\small\item\em Start some game. \item\end{CompactList}\item 
+function {\bf GAME\_\-StartObserverGame} (GameId, P1, P2)
+\begin{CompactList}\small\item\em Start Game in Observer Mode. \item\end{CompactList}\item 
+function {\bf GAME\_\-UpdateBoard} (GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
+\begin{CompactList}\small\item\em Update board in data struct and interface. \item\end{CompactList}\item 
+function {\bf GAME\_\-RemoveGame} (GameID)
+\begin{CompactList}\small\item\em Remove a game from data struct and interface. \item\end{CompactList}\item 
+function {\bf GAME\_\-SendMove} (OldLine, OldCol, NewLine, NewCol)
+\begin{CompactList}\small\item\em Send a game movement to server. \item\end{CompactList}\item 
+function {\bf GAME\_\-SendDraw} (GameID)
+\begin{CompactList}\small\item\em Send a draw message request to oponent. \item\end{CompactList}\item 
+function {\bf GAME\_\-SendCancel} (GameID)
+\begin{CompactList}\small\item\em Send a adjourn message to oponent. \item\end{CompactList}\item 
+function {\bf GAME\_\-SendAdjourn} (GameID)
+\begin{CompactList}\small\item\em Send a adjourn message to oponent. \item\end{CompactList}\item 
+function {\bf GAME\_\-SearchCurrentGame} ()
+\item 
+function {\bf GAME\_\-ChangePromotion} (Piece)
+\begin{CompactList}\small\item\em Change current game piece promotion. \item\end{CompactList}\item 
+function {\bf GAME\_\-SendResign} (GameID)
+\begin{CompactList}\small\item\em Send a resign message request to oponent. \item\end{CompactList}\item 
+function {\bf GAME\_\-LoadGameHistory} (GameID, HistoryXml, Player1, Player2)
+\begin{CompactList}\small\item\em Load all game history moves done in the game. \item\end{CompactList}\item 
+function {\bf GAME\_\-HandleVCardPhoto} (XML)
+\begin{CompactList}\small\item\em Handle Game Players Photo. \item\end{CompactList}\item 
+function {\bf GAME\_\-SetLeftTime} (GameID, WTime, BTime)
+\item 
+function {\bf GAME\_\-ShowLoadingMove} (Id)
+\item 
+function {\bf GAME\_\-HideLoadingMove} (Id)
+\item 
+function {\bf GAME\_\-SetBlockBorder} (Line, Col)
+\item 
+function {\bf GAME\_\-SetBlockClass} (Line, Col)
+\item 
+function {\bf GAME\_\-RemoveBlockBorder} (Line, Col)
+\item 
+function {\bf GAME\_\-GetOponent} (GameId)
+\item 
+function {\bf GAME\_\-RemoveBlockClass} (Line, Col)
+\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+This file will handle all kind of game massages. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{game/game.js@{game/game.js}!GAME\_\-ChangePromotion@{GAME\_\-ChangePromotion}}
+\index{GAME\_\-ChangePromotion@{GAME\_\-ChangePromotion}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-ChangePromotion]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-ChangePromotion ( {\em Piece})}\label{game_2game_8js_eeef8e48cf12de7712a24dc77aaaddaa}
+
+
+Change current game piece promotion. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Piece}]Piece character \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by INTERFACE\_\-CreateGameOptions().\index{game/game.js@{game/game.js}!GAME\_\-End@{GAME\_\-End}}
+\index{GAME\_\-End@{GAME\_\-End}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-End]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-End ( {\em XML})}\label{game_2game_8js_b24990adb7161202ebeea265a206ec05}
+
+
+Handle a game over message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the ending game message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References CONTACT\_\-ChangeStatus(), MainData, OLDGAME\_\-EndGame(), UTILS\_\-GetText(), and WINDOW\_\-Alert().
+
+Referenced by GAME\_\-HandleGame().\index{game/game.js@{game/game.js}!GAME\_\-GetOponent@{GAME\_\-GetOponent}}
+\index{GAME\_\-GetOponent@{GAME\_\-GetOponent}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-GetOponent]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-GetOponent ( {\em GameId})}\label{game_2game_8js_cd8b0b4bccaf511c360f83a3bb9ea837}
+
+
+
+
+References MainData.
+
+Referenced by GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), and GAME\_\-HandleDraw().\index{game/game.js@{game/game.js}!GAME\_\-HandleAdjourn@{GAME\_\-HandleAdjourn}}
+\index{GAME\_\-HandleAdjourn@{GAME\_\-HandleAdjourn}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleAdjourn]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleAdjourn ( {\em XML}, \/   {\em Xmlns})}\label{game_2game_8js_90b065f83011d192e512558c12d68c00}
+
+
+Handle Adjourn Request. 
+
+Assume adjourn and postpone the samething here
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the adjourn message \item[{\em Xmlns}]Xml namespace string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), GAME\_\-GetOponent(), MESSAGE\_\-GameAdjournAccept(), MESSAGE\_\-GameAdjournDeny(), UTILS\_\-GetText(), WINDOW\_\-Alert(), and WINDOW\_\-Confirm().
+
+Referenced by GAME\_\-HandleGame().\index{game/game.js@{game/game.js}!GAME\_\-HandleCancel@{GAME\_\-HandleCancel}}
+\index{GAME\_\-HandleCancel@{GAME\_\-HandleCancel}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleCancel]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleCancel ( {\em XML}, \/   {\em Xmlns})}\label{game_2game_8js_b5fd476347e869125f280d74d4934c00}
+
+
+Handle Cancel Request. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the cancel game message \item[{\em Xmlns}]Xml namespace string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), GAME\_\-GetOponent(), MESSAGE\_\-GameCancelAccept(), MESSAGE\_\-GameCancelDeny(), UTILS\_\-GetText(), WINDOW\_\-Alert(), and WINDOW\_\-Confirm().
+
+Referenced by GAME\_\-HandleGame().\index{game/game.js@{game/game.js}!GAME\_\-HandleDraw@{GAME\_\-HandleDraw}}
+\index{GAME\_\-HandleDraw@{GAME\_\-HandleDraw}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleDraw]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleDraw ( {\em XML}, \/   {\em Xmlns})}\label{game_2game_8js_9862068c1a46affdc4f753f33a750554}
+
+
+Handle Draw Request. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]Xml that contains the draw message \item[{\em Xmlns}]Xml namespace string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), GAME\_\-GetOponent(), MESSAGE\_\-GameDrawAccept(), MESSAGE\_\-GameDrawDeny(), UTILS\_\-GetText(), WINDOW\_\-Alert(), and WINDOW\_\-Confirm().
+
+Referenced by GAME\_\-HandleGame().\index{game/game.js@{game/game.js}!GAME\_\-HandleGame@{GAME\_\-HandleGame}}
+\index{GAME\_\-HandleGame@{GAME\_\-HandleGame}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleGame]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleGame ( {\em XML})}\label{game_2game_8js_d47fcc29b4d2240a47bd8bc183f88b72}
+
+
+Handle Game Messages. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with game messages \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP that must be send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References GAME\_\-End(), GAME\_\-HandleAdjourn(), GAME\_\-HandleCancel(), GAME\_\-HandleDraw(), GAME\_\-Move(), and GAME\_\-State().
+
+Referenced by PARSER\_\-ParseIq().\index{game/game.js@{game/game.js}!GAME\_\-HandleGameError@{GAME\_\-HandleGameError}}
+\index{GAME\_\-HandleGameError@{GAME\_\-HandleGameError}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleGameError]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleGameError ( {\em XML})}\label{game_2game_8js_865985a861a92d6c67604d55addd09ac}
+
+
+Handle Game Error. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the error message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to be send \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References GAME\_\-HideLoadingMove(), MainData, OLDGAME\_\-EndGame(), UTILS\_\-GetText(), and WINDOW\_\-Alert().
+
+Referenced by PARSER\_\-ParseIq().\index{game/game.js@{game/game.js}!GAME\_\-HandleGameResult@{GAME\_\-HandleGameResult}}
+\index{GAME\_\-HandleGameResult@{GAME\_\-HandleGameResult}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleGameResult]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleGameResult ( {\em XML})}\label{game_2game_8js_a08f6f8448c74e8c6fcb62cd92002c5e}
+
+
+Handle Game Result. 
+
+This code is used to parse games that player is playing. Used to enter automatically in some game that player is playing.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the game result \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to be send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData, and MESSAGE\_\-Presence().
+
+Referenced by PARSER\_\-ParseIq().\index{game/game.js@{game/game.js}!GAME\_\-HandlePresence@{GAME\_\-HandlePresence}}
+\index{GAME\_\-HandlePresence@{GAME\_\-HandlePresence}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandlePresence]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandlePresence ( {\em XML})}\label{game_2game_8js_7b7dbe9fc7c90363f0ca724205ae89fc}
+
+
+Handle game presence. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP with game messages \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP that must be send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by PARSER\_\-ParsePresence().\index{game/game.js@{game/game.js}!GAME\_\-HandleVCardPhoto@{GAME\_\-HandleVCardPhoto}}
+\index{GAME\_\-HandleVCardPhoto@{GAME\_\-HandleVCardPhoto}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HandleVCardPhoto]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HandleVCardPhoto ( {\em XML})}\label{game_2game_8js_77a53c8ab241cb3beec3b1e2b7c2d009}
+
+
+Handle Game Players Photo. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP that contains vCard photo \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData, and UTILS\_\-GetNodeText().
+
+Referenced by PARSER\_\-ParseIq().\index{game/game.js@{game/game.js}!GAME\_\-HideLoadingMove@{GAME\_\-HideLoadingMove}}
+\index{GAME\_\-HideLoadingMove@{GAME\_\-HideLoadingMove}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-HideLoadingMove]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-HideLoadingMove ( {\em Id})}\label{game_2game_8js_8e14a3ee6855eda7a0abc2d2038ee171}
+
+
+
+
+References MainData.
+
+Referenced by GAME\_\-HandleGameError().\index{game/game.js@{game/game.js}!GAME\_\-LoadGameHistory@{GAME\_\-LoadGameHistory}}
+\index{GAME\_\-LoadGameHistory@{GAME\_\-LoadGameHistory}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-LoadGameHistory]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-LoadGameHistory ( {\em GameID}, \/   {\em HistoryXml}, \/   {\em Player1}, \/   {\em Player2})}\label{game_2game_8js_62aa80a6b39d1e8215c68e15949fe3c8}
+
+
+Load all game history moves done in the game. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \item[{\em HistoryXml}]XML that contains all games states \item[{\em Player1}]First player object (Name, Time, Color, Inc) \item[{\em Player2}]Second player object (Name, Time, Color, Inc) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References GAME\_\-UpdateBoard().
+
+Referenced by GAME\_\-State().\index{game/game.js@{game/game.js}!GAME\_\-Move@{GAME\_\-Move}}
+\index{GAME\_\-Move@{GAME\_\-Move}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-Move]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-Move ( {\em XML})}\label{game_2game_8js_b5ee71873dd8a6c90f56d6257f103cf1}
+
+
+Handle Game Move. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The XMPP that contains the game move \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References GAME\_\-StartGame(), GAME\_\-UpdateBoard(), and MainData.
+
+Referenced by GAME\_\-HandleGame(), and GAME\_\-State().\index{game/game.js@{game/game.js}!GAME\_\-RemoveBlockBorder@{GAME\_\-RemoveBlockBorder}}
+\index{GAME\_\-RemoveBlockBorder@{GAME\_\-RemoveBlockBorder}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-RemoveBlockBorder]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-RemoveBlockBorder ( {\em Line}, \/   {\em Col})}\label{game_2game_8js_520d50c8dafabdfe0e407be0f68462e9}
+
+
+
+
+References MainData, and UTILS\_\-HorizontalIndex().
+
+Referenced by UTILS\_\-StartDragPiece().\index{game/game.js@{game/game.js}!GAME\_\-RemoveBlockClass@{GAME\_\-RemoveBlockClass}}
+\index{GAME\_\-RemoveBlockClass@{GAME\_\-RemoveBlockClass}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-RemoveBlockClass]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-RemoveBlockClass ( {\em Line}, \/   {\em Col})}\label{game_2game_8js_b3a171a9d8af4728a48f6b2082e82b5b}
+
+
+
+
+References MainData, and UTILS\_\-HorizontalIndex().
+
+Referenced by UTILS\_\-StartDragPiece().\index{game/game.js@{game/game.js}!GAME\_\-RemoveGame@{GAME\_\-RemoveGame}}
+\index{GAME\_\-RemoveGame@{GAME\_\-RemoveGame}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-RemoveGame]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-RemoveGame ( {\em GameID})}\label{game_2game_8js_abf7ae56d940ce6fef08a06c7a6b0c3d}
+
+
+Remove a game from data struct and interface. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto and Pedro Rocha \end{Desc}
+
+
+References GAMECENTER\_\-ShowGameCenter(), MainData, ROOM\_\-ExitRoom(), UTILS\_\-GetText(), and WINDOW\_\-Alert().
+
+Referenced by GAME\_\-StartObserverGame(), and INTERFACE\_\-CreateGame().\index{game/game.js@{game/game.js}!GAME\_\-SearchCurrentGame@{GAME\_\-SearchCurrentGame}}
+\index{GAME\_\-SearchCurrentGame@{GAME\_\-SearchCurrentGame}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SearchCurrentGame]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SearchCurrentGame ()}\label{game_2game_8js_15cc2491c569a502201f0586d857fe03}
+
+
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-GameSearchCurrentGame().
+
+Referenced by START\_\-Webclient().\index{game/game.js@{game/game.js}!GAME\_\-SendAdjourn@{GAME\_\-SendAdjourn}}
+\index{GAME\_\-SendAdjourn@{GAME\_\-SendAdjourn}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SendAdjourn]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SendAdjourn ( {\em GameID})}\label{game_2game_8js_c716297838a73de6d2b9e05276c5ebcf}
+
+
+Send a adjourn message to oponent. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-GameRequestAdjourn().
+
+Referenced by INTERFACE\_\-CreateGameOptions().\index{game/game.js@{game/game.js}!GAME\_\-SendCancel@{GAME\_\-SendCancel}}
+\index{GAME\_\-SendCancel@{GAME\_\-SendCancel}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SendCancel]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SendCancel ( {\em GameID})}\label{game_2game_8js_bdbd4cd12806cbf1ac6a2af8c54c9c6e}
+
+
+Send a adjourn message to oponent. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-GameRequestCancel().
+
+Referenced by INTERFACE\_\-CreateGameOptions().\index{game/game.js@{game/game.js}!GAME\_\-SendDraw@{GAME\_\-SendDraw}}
+\index{GAME\_\-SendDraw@{GAME\_\-SendDraw}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SendDraw]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SendDraw ( {\em GameID})}\label{game_2game_8js_7539e1d3e3935f44f0ef08cdf7f2956d}
+
+
+Send a draw message request to oponent. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-GameRequestDraw().
+
+Referenced by INTERFACE\_\-CreateGameOptions().\index{game/game.js@{game/game.js}!GAME\_\-SendMove@{GAME\_\-SendMove}}
+\index{GAME\_\-SendMove@{GAME\_\-SendMove}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SendMove]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SendMove ( {\em OldLine}, \/   {\em OldCol}, \/   {\em NewLine}, \/   {\em NewCol})}\label{game_2game_8js_6c9721635c20c2b520a0b2c3fffb1aa8}
+
+
+Send a game movement to server. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em OldLine}]Line origin position \item[{\em OldCol}]Column origin position \item[{\em NewLine}]Line dest position \item[{\em NewCol}]Column dest position \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), MainData, MESSAGE\_\-GameMove(), and UTILS\_\-HorizontalIndex().
+
+Referenced by UTILS\_\-StartDragPiece().\index{game/game.js@{game/game.js}!GAME\_\-SendResign@{GAME\_\-SendResign}}
+\index{GAME\_\-SendResign@{GAME\_\-SendResign}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SendResign]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SendResign ( {\em GameID})}\label{game_2game_8js_93e89b99f4dcbb84d118661b5208a64e}
+
+
+Send a resign message request to oponent. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), MESSAGE\_\-GameResign(), UTILS\_\-GetText(), and WINDOW\_\-Confirm().
+
+Referenced by INTERFACE\_\-CreateGameOptions().\index{game/game.js@{game/game.js}!GAME\_\-SetBlockBorder@{GAME\_\-SetBlockBorder}}
+\index{GAME\_\-SetBlockBorder@{GAME\_\-SetBlockBorder}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SetBlockBorder]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SetBlockBorder ( {\em Line}, \/   {\em Col})}\label{game_2game_8js_64f9afc2706e6447bba5f2754535f9cf}
+
+
+
+
+References MainData, and UTILS\_\-HorizontalIndex().\index{game/game.js@{game/game.js}!GAME\_\-SetBlockClass@{GAME\_\-SetBlockClass}}
+\index{GAME\_\-SetBlockClass@{GAME\_\-SetBlockClass}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SetBlockClass]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SetBlockClass ( {\em Line}, \/   {\em Col})}\label{game_2game_8js_e7e4b9971b3b19ba961a5157c10628e9}
+
+
+
+
+References MainData, and UTILS\_\-HorizontalIndex().
+
+Referenced by UTILS\_\-StartDragPiece().\index{game/game.js@{game/game.js}!GAME\_\-SetLeftTime@{GAME\_\-SetLeftTime}}
+\index{GAME\_\-SetLeftTime@{GAME\_\-SetLeftTime}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-SetLeftTime]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-SetLeftTime ( {\em GameID}, \/   {\em WTime}, \/   {\em BTime})}\label{game_2game_8js_08312bdfab00c3105de6b5213249368d}
+
+
+
+
+References MainData.
+
+Referenced by GAME\_\-State().\index{game/game.js@{game/game.js}!GAME\_\-ShowLoadingMove@{GAME\_\-ShowLoadingMove}}
+\index{GAME\_\-ShowLoadingMove@{GAME\_\-ShowLoadingMove}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-ShowLoadingMove]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-ShowLoadingMove ( {\em Id})}\label{game_2game_8js_69251ba67f4faba48b572e46f7dfebf0}
+
+
+
+
+References MainData.
+
+Referenced by UTILS\_\-StartDragPiece().\index{game/game.js@{game/game.js}!GAME\_\-StartGame@{GAME\_\-StartGame}}
+\index{GAME\_\-StartGame@{GAME\_\-StartGame}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-StartGame]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-StartGame ( {\em GameId}, \/   {\em P1}, \/   {\em P2})}\label{game_2game_8js_4c24312a468dff77ec76873422def6d6}
+
+
+Start some game. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameId}]Game identification number \item[{\em P1}]First Player Object (Name, Time, Color, Inc) \item[{\em P2}]Second Player Object (Name, Time, Color, Inc) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to be send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References ANNOUNCE\_\-CancelAllAnnounce(), CHALLENGE\_\-ClearChallenges(), CONTACT\_\-ChangeStatus(), GAMECENTER\_\-HideGameCenter(), INTERFACE\_\-GameBoardObj(), MainData, MESSAGE\_\-GetProfile(), and MESSAGE\_\-Unavailable().
+
+Referenced by GAME\_\-Move(), GAME\_\-State(), INTERFACE\_\-AddCurrentGames(), and INTERFACE\_\-ShowGameRoomList().\index{game/game.js@{game/game.js}!GAME\_\-StartObserverGame@{GAME\_\-StartObserverGame}}
+\index{GAME\_\-StartObserverGame@{GAME\_\-StartObserverGame}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-StartObserverGame]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-StartObserverGame ( {\em GameId}, \/   {\em P1}, \/   {\em P2})}\label{game_2game_8js_4f0e773656189b3da2ed13b737bd4085}
+
+
+Start Game in Observer Mode. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameId}]Game identification number \item[{\em P1}]White player object \item[{\em P2}]Black player object \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), GAME\_\-RemoveGame(), GAMECENTER\_\-HideGameCenter(), INTERFACE\_\-GameBoardObj(), MainData, MESSAGE\_\-GetProfile(), OLDGAME\_\-RemoveOldGame(), and ROOM\_\-EnterRoomGame().
+
+Referenced by CURRENTGAME\_\-HandleGameRoomInfoList(), and INTERFACE\_\-ShowGameRoomList().\index{game/game.js@{game/game.js}!GAME\_\-State@{GAME\_\-State}}
+\index{GAME\_\-State@{GAME\_\-State}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-State]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-State ( {\em XML})}\label{game_2game_8js_7f2a8e4b530ce5baa73ebb3079e9ca73}
+
+
+Handle Game State. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]The xml that contains the game state \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to be send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim and Rubens Suguimoto \end{Desc}
+
+
+References GAME\_\-LoadGameHistory(), GAME\_\-Move(), GAME\_\-SetLeftTime(), GAME\_\-StartGame(), and MainData.
+
+Referenced by GAME\_\-HandleGame().\index{game/game.js@{game/game.js}!GAME\_\-UpdateBoard@{GAME\_\-UpdateBoard}}
+\index{GAME\_\-UpdateBoard@{GAME\_\-UpdateBoard}!game/game.js@{game/game.js}}
+\subsubsection[GAME\_\-UpdateBoard]{\setlength{\rightskip}{0pt plus 5cm}function GAME\_\-UpdateBoard ( {\em GameId}, \/   {\em BoardStr}, \/   {\em Move}, \/   {\em ShortMove}, \/   {\em P1}, \/   {\em P2}, \/   {\em TurnColor})}\label{game_2game_8js_551d1cb08ed611a572fb141a3bdfb9ef}
+
+
+Update board in data struct and interface. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameId}]Game identification number \item[{\em BoardStr}]Board status in a string \item[{\em Move}]Chess Move (Piece/Orig-Dest) \item[{\em ShortMove}]Move in short notation \item[{\em P1}]First player object (Name, Time, Color, Inc) \item[{\em P2}]Second player object (Name, Time, Color, Inc) \item[{\em TurnColor}]Turn's Color(\char`\"{}white\char`\"{}/\char`\"{}black\char`\"{}) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData, and UTILS\_\-String2Board().
+
+Referenced by GAME\_\-LoadGameHistory(), and GAME\_\-Move().

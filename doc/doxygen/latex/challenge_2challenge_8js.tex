@@ -1,0 +1,261 @@
+\section{/home/www/rubens/webclient/scripts/challenge/challenge.js File Reference}
+\label{challenge_2challenge_8js}\index{/home/www/rubens/webclient/scripts/challenge/challenge.js@{/home/www/rubens/webclient/scripts/challenge/challenge.js}}
+Functions to parse challenges offered and receive. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf CHALLENGE\_\-HandleChallenge} (XML)
+\begin{CompactList}\small\item\em Handle challenge messages from server. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-HandleErrorChallenge} (XML)
+\begin{CompactList}\small\item\em Handle errors challenge messages from server. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-HandleOffer} (XML)
+\begin{CompactList}\small\item\em Parse challenge offer message. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-HandleAccept} (XML)
+\begin{CompactList}\small\item\em Parse challenge accept. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-HandleDecline} (XML)
+\begin{CompactList}\small\item\em Parse challenge decline. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-ChallengeError} (XML)
+\begin{CompactList}\small\item\em Parse challenge errors. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-SendChallenge} (Oponent, Color, Time, Inc, Category, Rated)
+\begin{CompactList}\small\item\em Send a challenge message to other user. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-SendReChallenge} (Oponent, Color, Time, Inc, Category, Rated, MatchID)
+\begin{CompactList}\small\item\em Send a rematch to oponent and update challenge information in main data. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-AcceptChallenge} (MatchID)
+\begin{CompactList}\small\item\em Accept the challenge with the specified MatchID. \item\end{CompactList}\item 
+function {\bf CHALLENGE\_\-DeclineChallenge} (MatchID)
+\item 
+function {\bf CHALLENGE\_\-ClearChallenges} ()
+\begin{CompactList}\small\item\em Remove all challenges from main data and interface. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Functions to parse challenges offered and receive. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software
+
+See interface challenge menu (\doxyref{scripts/interface/challengemenu.js}{p.}{challengemenu_8js}), data methods to challenge list (\doxyref{scripts/data/data.js}{p.}{data_8js}) and window challenge (\doxyref{scripts/window/window.js}{p.}{window_2window_8js}). 
+
+\subsection{Function Documentation}
+\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-AcceptChallenge@{CHALLENGE\_\-AcceptChallenge}}
+\index{CHALLENGE\_\-AcceptChallenge@{CHALLENGE\_\-AcceptChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-AcceptChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-AcceptChallenge ( {\em MatchID})}\label{challenge_2challenge_8js_8e0e8d74040297ef055ce894500192c7}
+
+
+Accept the challenge with the specified MatchID. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em MatchID}]Id of the match to be accepted \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-ChallengeAccept().
+
+Referenced by INTERFACE\_\-ShowChallengeWindow(), and INTERFACE\_\-ShowPostponeWindow().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-ChallengeError@{CHALLENGE\_\-ChallengeError}}
+\index{CHALLENGE\_\-ChallengeError@{CHALLENGE\_\-ChallengeError}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-ChallengeError]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-ChallengeError ( {\em XML})}\label{challenge_2challenge_8js_2526a255fbf2ae9bcd7522216f0c109e}
+
+
+Parse challenge errors. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-HandleChallenge(), CHALLENGE\_\-HandleErrorChallenge(), and CHALLENGE\_\-HandleOffer().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-ClearChallenges@{CHALLENGE\_\-ClearChallenges}}
+\index{CHALLENGE\_\-ClearChallenges@{CHALLENGE\_\-ClearChallenges}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-ClearChallenges]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-ClearChallenges ()}\label{challenge_2challenge_8js_83ced13013a7ca3c3eab27e02146b4f0}
+
+
+Remove all challenges from main data and interface. 
+
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHALLENGE\_\-DeclineChallenge(), and MainData.
+
+Referenced by GAME\_\-StartGame(), and INTERFACE\_\-CreateGameCenterMatch().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-DeclineChallenge@{CHALLENGE\_\-DeclineChallenge}}
+\index{CHALLENGE\_\-DeclineChallenge@{CHALLENGE\_\-DeclineChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-DeclineChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-DeclineChallenge ( {\em MatchID})}\label{challenge_2challenge_8js_32d036ef1575150be79dd38f5f1905d5}
+
+
+Decline the challenge with the specified MatchID
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em MatchID}]Id of the match to be declined \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), and MESSAGE\_\-ChallengeDecline().
+
+Referenced by CHALLENGE\_\-ClearChallenges(), INTERFACE\_\-AddMatchOffer(), INTERFACE\_\-ShowPostponeWindow(), WINDOW\_\-Challenge(), and WINDOW\_\-Postpone().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-HandleAccept@{CHALLENGE\_\-HandleAccept}}
+\index{CHALLENGE\_\-HandleAccept@{CHALLENGE\_\-HandleAccept}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-HandleAccept]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleAccept ( {\em XML})}\label{challenge_2challenge_8js_d708c03522f1cf434f5be85adb4d050f}
+
+
+Parse challenge accept. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData, and MESSAGE\_\-ChangeStatus().
+
+Referenced by CHALLENGE\_\-HandleChallenge().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-HandleChallenge@{CHALLENGE\_\-HandleChallenge}}
+\index{CHALLENGE\_\-HandleChallenge@{CHALLENGE\_\-HandleChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-HandleChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleChallenge ( {\em XML})}\label{challenge_2challenge_8js_d1536c92a3aa3a8a6d4a0d2645cffec7}
+
+
+Handle challenge messages from server. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References CHALLENGE\_\-ChallengeError(), CHALLENGE\_\-HandleAccept(), CHALLENGE\_\-HandleDecline(), and CHALLENGE\_\-HandleOffer().
+
+Referenced by PARSER\_\-ParseIq().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-HandleDecline@{CHALLENGE\_\-HandleDecline}}
+\index{CHALLENGE\_\-HandleDecline@{CHALLENGE\_\-HandleDecline}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-HandleDecline]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleDecline ( {\em XML})}\label{challenge_2challenge_8js_f0bb0d2c0d9ab605d938c5179661d071}
+
+
+Parse challenge decline. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData, WINDOW\_\-RemoveWindow(), and WindowObj().
+
+Referenced by CHALLENGE\_\-HandleChallenge().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-HandleErrorChallenge@{CHALLENGE\_\-HandleErrorChallenge}}
+\index{CHALLENGE\_\-HandleErrorChallenge@{CHALLENGE\_\-HandleErrorChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-HandleErrorChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleErrorChallenge ( {\em XML})}\label{challenge_2challenge_8js_64b114ead627b8b08de178a2fed8cd10}
+
+
+Handle errors challenge messages from server. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer with XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CHALLENGE\_\-ChallengeError(), UTILS\_\-GetText(), and WINDOW\_\-Alert().
+
+Referenced by PARSER\_\-ParseIq().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-HandleOffer@{CHALLENGE\_\-HandleOffer}}
+\index{CHALLENGE\_\-HandleOffer@{CHALLENGE\_\-HandleOffer}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-HandleOffer]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-HandleOffer ( {\em XML})}\label{challenge_2challenge_8js_1818c2e0f87034cb8cf8c44fc0e97538}
+
+
+Parse challenge offer message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XML with challenge parameters \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Buffer Buffer with XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References CHALLENGE\_\-ChallengeError(), MainData, WINDOW\_\-Challenge(), and WINDOW\_\-Postpone().
+
+Referenced by CHALLENGE\_\-HandleChallenge().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-SendChallenge@{CHALLENGE\_\-SendChallenge}}
+\index{CHALLENGE\_\-SendChallenge@{CHALLENGE\_\-SendChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-SendChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-SendChallenge ( {\em Oponent}, \/   {\em Color}, \/   {\em Time}, \/   {\em Inc}, \/   {\em Category}, \/   {\em Rated})}\label{challenge_2challenge_8js_b8d29866ccfd1ec6b1fa62bf182e0f55}
+
+
+Send a challenge message to other user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Oponent}]Oponent username \item[{\em Color}]Your color \item[{\em Time}]Game time \item[{\em Inc}]Game time increment \item[{\em Category}]Game category \item[{\em Rated}]Rated match (boolean) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), MainData, and MESSAGE\_\-Challenge().
+
+Referenced by INTERFACE\_\-ShowChallengeWindow().\index{challenge/challenge.js@{challenge/challenge.js}!CHALLENGE\_\-SendReChallenge@{CHALLENGE\_\-SendReChallenge}}
+\index{CHALLENGE\_\-SendReChallenge@{CHALLENGE\_\-SendReChallenge}!challenge/challenge.js@{challenge/challenge.js}}
+\subsubsection[CHALLENGE\_\-SendReChallenge]{\setlength{\rightskip}{0pt plus 5cm}function CHALLENGE\_\-SendReChallenge ( {\em Oponent}, \/   {\em Color}, \/   {\em Time}, \/   {\em Inc}, \/   {\em Category}, \/   {\em Rated}, \/   {\em MatchID})}\label{challenge_2challenge_8js_3bcf7b38497100eeabe30d7cb466c783}
+
+
+Send a rematch to oponent and update challenge information in main data. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Oponent}]Oponent username \item[{\em Color}]Your color \item[{\em Time}]Game time \item[{\em Inc}]Game time increment \item[{\em Category}]Game category \item[{\em Rated}]Rated match (boolean) \item[{\em MatchID}]Match identificator \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References CONNECTION\_\-SendJabber(), MainData, and MESSAGE\_\-Challenge().
+
+Referenced by INTERFACE\_\-ShowChallengeWindow().

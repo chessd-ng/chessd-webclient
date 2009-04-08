@@ -16,14 +16,14 @@
 
 
 /**
-* Handle contacts and user status
+* @file		contact/contact.js
+* @brief	Handle all messages and functions to user's contact list
 */
 
 /**
- * @brief	Show contact list Div
- *
- * Create contact list object and hide contact list.
+* @brief	Create contact list object and hide contact list.
 *
+* @return	none
 * @author Rubens Suguimoto
 */
 function CONTACT_StartContactList()
@@ -41,12 +41,10 @@ function CONTACT_StartContactList()
 *************************************/
 
 /**
- * @brief	Handle user contact list
- *
- * Handle user list received from jabber with yours contacts.
+* @brief	Handle user list received from jabber with yours contacts.
 *
-* @return string
-*
+* @param	XML 	XML response with user's contact list
+* @return 	XMPP message
 * @author Ulysses Bonfim
 */
 function CONTACT_HandleContactUserList(XML)
@@ -106,24 +104,15 @@ function CONTACT_HandleContactUserList(XML)
 		}
 	}
 
-//	CONNECTION_SendJabber(MESSAGE_UserListInfo());
-
-	// two eggs
-	// a cup of milk 
-	// a spoon of sugar
-	// a 'tea spoon' of yeast
-	// two cups of flour
 	return Pending;
 }
 
 
 /**
- * @brief	Handle user contact receive subscribe
- *
- * Handle user list received from jabber with yours contacts.
+* @brief	Handle receive subscribe from other user
 *
-* @return string
-*
+* @param	XML 	XML message with contact list information
+* @return 	XMPP message
 * @author Ulysses Bonfim
 */
 function CONTACT_HandleSetSubscribe(XML)
@@ -157,23 +146,18 @@ function CONTACT_HandleSetSubscribe(XML)
 		}
 	}
 
-	// two eggs
-	// a cup of milk 
-	// a spoon of sugar
-	// a 'tea spoon' of yeast
-	// two cups of flour
 	return Pending;
 }
 
 
 
 /**
- * @brief	Handle a user presence
- *
- * Handle user presence for accept or decline invite to contact list and user status.
+* @brief	Handle a invite from some user and check his/her status
 *
-* @return string
+* Handle for accept or decline invite from some user and check user's status
 *
+* @param	XML 	XML message with contact list information
+* @return 	XMPP message
 * @author Ulysses Bonfim
 */
 
@@ -188,7 +172,6 @@ function CONTACT_HandleUserPresence(XML)
 	Type = XML.getAttribute('type');
 
 	/* HANDLE INVITE TO CONTACT LIST */
-	
 	// User is offline
 	if (Type == "unavailable")
 	{
@@ -215,7 +198,6 @@ function CONTACT_HandleUserPresence(XML)
 	}
 
 	/* HANDLE USER STATUS */
-
 	// Searching for the user status
 	Show = XML.getElementsByTagName('show');
 	if (Show.length > 0)
@@ -238,15 +220,16 @@ function CONTACT_HandleUserPresence(XML)
 }
 
 /**
- * @brief	Add user in contact list
- *
- * Add user in MainData contact list, sort and show this user in interface.
+* @brief	Add user in contact list
 *
-* @param 	User	User's name
-* @param	Status	User's status
-* @param	Subs	User's subscribe status
-* @param	Group	User's group in contact list
-* @author Pedro Rocha
+* Add user in MainData contact list, sort and show this user in interface.
+*
+* @param 	Username	User's name
+* @param	Status		User's status
+* @param	Subs		User's subscribe status
+* @param	Group		User's group in contact list
+* @return 	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function CONTACT_AddUser(Username, Status, Subs, Group)
 {
@@ -293,11 +276,16 @@ function CONTACT_AddUser(Username, Status, Subs, Group)
 }
 
 /**
-* Remove user form your list
+* @brief	Remove user from your list
+*
+* @param 	Username	User's name
+* @author	Rubens Suguimoto
+* @return 	True
 */
 function CONTACT_RemoveUser(Username)
 {
 	var ContactObj = MainData.GetContactObj();
+
 	// Remove user from data structure
 	MainData.RemoveContactUser(Username);
 
@@ -308,14 +296,15 @@ function CONTACT_RemoveUser(Username)
 }
 
 /**
- * @brief	Show user menu options
- *
- * Show user menu to send private message, match, view profile, etc.
+* @brief	Show user menu options
 *
-* @param 	Obj 	Object with menu options and functions
+* Show user menu to send private message, match, view profile, etc.
+*
+* @param 	Obj 		DOM element to get position to show user menu
 * @param	Username	User's name
+* @return 	none
 *
-* @author Pedro Rocha
+* @author Pedro Rocha and Rubens Suguimoto
 */
 function CONTACT_ShowUserMenu(Obj, Username)
 {
@@ -343,7 +332,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 	/**
 	* Setting options
 	*/
-
 	// If isn't your name
 	if (MyUsername != Username)
 	{
@@ -397,7 +385,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 		i += 1;
 
 		// Add or remove contact
-		//if (MainData.IsContact(Username))
 		if(CONTACT_IsContact(Username) == true)
 		{
 			Options[i] = new Object();
@@ -435,7 +422,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_disconnect_user");
 			Options[i].Func = function () {
-				//ADMIN_KickUser(Username)
 				WINDOW_KickUser(Username);
 			};
 			i += 1;
@@ -444,7 +430,6 @@ function CONTACT_ShowUserMenu(Obj, Username)
 			Options[i] = new Object();
 			Options[i].Name = UTILS_GetText("usermenu_ban");
 			Options[i].Func = function () {
-				//ADMIN_BanUser(Username)
 				WINDOW_BanUser(Username);
 			};
 			i += 1;
@@ -482,10 +467,9 @@ function CONTACT_ShowUserMenu(Obj, Username)
 }
 
 /**
- * @brief	Load contact list in interface
- *
- * Load user contact list in interface.
+* @brief	Load contact list in interface
 *
+* @return 	none
 * @author Rubens Suguimoto
 */
 function CONTACT_LoadUserContactList()
@@ -520,12 +504,13 @@ function CONTACT_LoadUserContactList()
 *** FUNCTIONS - SORT CONTACT LIST
 *************************************/
 /**
- * @brief 	Sort user contact list by nick name
- * 
- * Sort user online list by nick name. Sort in MainData and for each user in MainData online user, remove and insert it.
- *
- * @author	Rubens Suguimoto and Danilo Yorinori
- */
+* @brief 	Sort user contact list by nick name
+* 
+* Sort user online list by nick name. Sort in MainData and for each user in MainData online user, remove and insert it.
+*
+* @return 	none
+* @author	Rubens Suguimoto and Danilo Yorinori
+*/
 function CONTACT_SortUsersByNick()
 {
 	var i;
@@ -544,40 +529,24 @@ function CONTACT_SortUsersByNick()
 	for(i=0; i<ContactUserList.length; i++)
 	{
 		User = ContactUserList[i];
-		
+	
+		//Get rating	
 		Rating = User.Rating.GetRatingValue(MainData.GetContactCurrentRating());
-/*
-		switch(MainData.GetContactCurrentRating())
-		{
 
-			case "blitz":
-				Rating = User.Rating.Blitz;
-				break;
-			case "lightning":
-				Rating = User.Rating.Lightning;
-				break;
-			case "standard":
-				Rating = User.Rating.Standard;
-				break;	
-			case "untimed":
-				Rating = User.Rating.Untimed;
-				break;	
-		}
-*/
 		ContactObj.removeUser(User.Username);
 		ContactObj.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
 	}
 }
 
 /**
- * @brief 	Sort user contact list by rating category
- * 
- * Sort user contact list by rating. Sort in MainData and for each user in MainData online user, remove and insert it.
- *
- * @param	Category	Chess game category
- *
- * @author	Rubens Suguimoto and Danilo Yorinori
- */
+* @brief 	Sort user contact list by rating category
+* 
+* Sort user contact list by rating. Sort in MainData and for each user in MainData online user, remove and insert it.
+*
+* @param	Category	Game category
+* @return	none
+* @author	Rubens Suguimoto and Danilo Yorinori
+*/
 function CONTACT_SortUsersByRating(Category)
 {
 	var i;
@@ -587,12 +556,7 @@ function CONTACT_SortUsersByRating(Category)
 	var ContactObj = MainData.GetContactObj();
 	var ContactUserList = MainData.GetContactUserList();
 
-	// Test the current order mode
-	// If ordered into ascending order, change to descending order
-	// other modes, change to ascending order
 	MainData.SetContactCurrentRating(Category);
-
-//	MainData.SetContactOrderBy((MainData.GetContactOrderBy() + 1) % 2);
 
 	MainData.SortContactUserByRating();
 
@@ -601,29 +565,19 @@ function CONTACT_SortUsersByRating(Category)
 		User = ContactUserList[i];
 		
 		Rating = User.Rating.GetRatingValue(MainData.GetContactCurrentRating());
-/*
-		switch(MainData.GetContactCurrentRating())
-		{
 
-			case "blitz":
-				break;
-			case "lightning":
-				Rating = User.Rating.Lightning;
-				break;
-			case "standard":
-				Rating = User.Rating.Standard;
-				break;	
-			case "untimed":
-				Rating = User.Rating.Untimed;
-				break;	
-		}
-*/
 		ContactObj.removeUser(User.Username);
 		ContactObj.addUser(User.Group, User.Username, User.Status, Rating, User.Type);
 	}
 }
 
-
+/**
+* @brief 	Check if some user is in your contact list
+* 
+* @param	Username	User's name
+* @return	True or False
+* @author	Rubens Suguimoto and Danilo Yorinori
+*/
 function CONTACT_IsContact(Username)
 {
 	var User = MainData.GetContactUser(Username);

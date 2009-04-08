@@ -14,21 +14,21 @@
 
 
 /**
-* Register window functions
+* @file		register/register.js
+* @brief	Register window functions
 */
 
-
+// XMLHTTPRequest object variable
 var HttpRequest;
-
 //Necessary to persist the RID and SID
 var RegisterData;
 
 
 /*
-* Register Object with Host, SID and RID
-* @parameter	void
-* @return	void
-* @author	Fabiano
+* @brief	Register Object with Host, SID and RID
+
+* @return	none
+* @author	Fabiano Kuss
 */
 function REGISTER_RegisterData(){
 	this.Host = REGISTER_GetHost();
@@ -37,10 +37,11 @@ function REGISTER_RegisterData(){
 }
 
 /*
-* Create XMPP Bosh message
-* @parameter	Msg is XMPP message
+* @brief	Create XMPP Bosh message
+*
+* @param	Msg 	XMPP message to send
 * @return	XMPP Bosh
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_MakeXMPP(Msg){
 
@@ -52,10 +53,10 @@ function REGISTER_MakeXMPP(Msg){
 }
 
 /*
-* Validate fields and send message to open a stream for new register
-* @parameter	void
-* @return	void
-* @author	Fabiano
+* @brief	Validate fields and send message to open a stream for new register
+*
+* @return	none
+* @author	Fabiano Kuss
 */
 function REGISTER_Post()
 {
@@ -86,10 +87,11 @@ function REGISTER_Post()
 
 
 /*
-* Get error in register user 
-* @parameter	var err int error code
-* @return 	string error description
-* @author	Fabiano
+* @brief	Get error in register user 
+
+* @param	err 	Integer error code
+* @return 	String error description
+* @author	Fabiano Kuss
 */
 
 function REGISTER_GetError(err)
@@ -109,15 +111,14 @@ function REGISTER_GetError(err)
 }
 
 /*
-* Validate date before send
-* @parameter	User - user name 
-* @parameter	Mail - user mail
-* @parameter	Pwd - user password
-* @parameter	ConfPW - user password confirmation
-* @return	0 is sucess or error code
-* @author	Fabiano
+* @brief	Validate date before send
+* @param	User 	User's name 
+* @param	Mail	User's  mail
+* @param	Pwd	User's password
+* @param	ConfPW	User's password confirmation
+* @return	0 if sucess or other number if some error occurs
+* @author	Fabiano Kuss
 */
-
 function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 {
 	//RE = regular expression	
@@ -151,18 +152,14 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 	return 0;
 }
  
-
-
 /*
-* Send data to register in jabber
-* @params	Msg is XMPP message that contais register instructions
-* @author	Fabiano
+* @brief	Send data to register in jabber
+* @param	Msg 	XMPP message that contais register instructions
+* @author	Fabiano Kuss
 */
-
 function REGISTER_SendData(Msg)
 {
-
-// Create XMLHttpRequest
+	// Create XMLHttpRequest
 	if (window.XMLHttpRequest)
 	{
 		// Mozilla, Opera, Galeon
@@ -204,10 +201,10 @@ function REGISTER_SendData(Msg)
 
 
 /**
-* Check and parse the XMPP register response
-* @public
+* @brief	Check and parse the XMPP register response
+*
 * @return 	none
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_ReceiveXml()
 {
@@ -224,10 +221,10 @@ function REGISTER_ReceiveXml()
 }
 
 /**
-* Process the XMPP register response
-* @public
+* @brief	Process the XMPP register response
+*
 * @return 	none
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_ProcessMessage(XmlDoc){
 
@@ -276,10 +273,10 @@ function REGISTER_ProcessMessage(XmlDoc){
 }
 
 /**
-* Show a alert box to sucess register
-* @public
+* @brief	Show a alert box to sucess register
+*
 * @return 	none
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_SucessMessage(){
 
@@ -291,10 +288,10 @@ function REGISTER_SucessMessage(){
 }
 
 /**
-* Show a alert box to error in register
-* @public
+* @brief	Show a alert box to error in register
+*
 * @return 	none
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_ParseError(code){
 
@@ -310,10 +307,11 @@ function REGISTER_ParseError(code){
 }
 
 /*
-* get language parameter
-* @parameter	string page url
-* @return	string language xml file
-* @author	Fabiano
+* @brief	Get language parameter
+
+* @parameter	URL	string page url
+* @return	String language URL file
+* @author	Fabiano Kuss
 */
 function REGISTER_GetLanguage(URL)
 {
@@ -332,24 +330,20 @@ function REGISTER_GetLanguage(URL)
 }
 
 /*
-* Get host from configuration file
-* @parameter	void
+* @brief	Get host from configuration file
+*
 * @return	Host string
-* @author	Fabiano
+* @author	Fabiano Kuss
 */
 function REGISTER_GetHost(){
-	
 	return this.Host = window.location.href.split("/")[2].split(":")[0];
-//	var CONF = UTILS_OpenXMLFile("scripts/data/conf.xml");
-//	return UTILS_GetTag(CONF, "host");
-
 }
 
 /*
-* Change fields label language
-* @parameter	void
-* @return	void
-* @author	Fabiano
+* @brief	Change fields label language
+*
+* @return	none
+* @author	Fabiano Kuss
 */
 function REGISTER_Labels()
 {
@@ -399,9 +393,11 @@ function REGISTER_Labels()
 }
 
 /**
- * @brief	Align main div in middle
- * @author	Rubens
- */
+* @brief	Align main div in middle
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 
 function REGISTER_VerticalAlignMiddle()
 {
@@ -415,14 +411,16 @@ function REGISTER_VerticalAlignMiddle()
 	}
 }
 
-/**************************************
-***************** PHP *****************
-**************************************/
+///////////////////////////////////////
+///////////////// PHP /////////////////
+///////////////////////////////////////
 /**
-* Send register data to a PHP file (used if jabber don't support user register)
-* @return none
-* @public
-* @author	Fabiano
+* @brief	Send register data to a PHP file
+*
+* This function is used if jabber doesn't support user registration
+*
+* @return 	none
+* @author	Fabiano Kuss
 *
 * @deprecated
 */
@@ -466,10 +464,10 @@ function REGISTER_SendDataPHP(User, Mail, Pwd)
 }
 
 /**
-* Receive response from PHP file
-* @return none
-* @public
-* @author	Fabiano
+* @brief	Receive response from PHP file
+*
+* @return	none
+* @author	Fabiano Kuss
 * @deprecated
 */
 function REGISTER_ReceiveXmlPHP()
@@ -498,10 +496,10 @@ function REGISTER_ReceiveXmlPHP()
 }
 
 /**
-* Show a alert with error
-* @return none
-* @public
-* @author	Fabiano
+* @brief	Show a alert with error
+*
+* @return	none
+* @author	Fabian Kuss
 * @deprecated
 */
 function REGISTER_GetDatabaseError(Msg)

@@ -14,13 +14,17 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		profile/profile.js
+* @brief	Contains all profile management functions
+*/
+
 /**
-* Handle Jabber vCard User
+* @brief	Handle Jabber vCard User
 *
-* @public
 * @param        XML is the xml that contais vCard information
-* @return       void
-* @author       Rubens
+* @return       Empty string
+* @author       Rubens Suguimoto
 */
 function PROFILE_HandleVCardProfile(XML)
 {
@@ -52,7 +56,6 @@ function PROFILE_HandleVCardProfile(XML)
 		Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
 		if(((Binval == undefined) && (PhotoType == undefined)) || ((Binval == "") || (PhotoType == "")))
 		{
-//			Img = "images/no_photo.png";
 			Img = null;
 		}
 		else
@@ -103,12 +106,11 @@ function PROFILE_HandleVCardProfile(XML)
 }
 
 /**
-* Handle info profile user
+* @brief	Handle info profile user
 *
-* @public
 * @param        XML is the xml that contais profile informations
-* @return       void
-* @author       Rubens
+* @return       Empty string
+* @author       Rubens Suguimoto
 */
 function PROFILE_HandleInfoProfile(XML)
 {
@@ -130,7 +132,6 @@ function PROFILE_HandleInfoProfile(XML)
 	User = MainData.GetUser(From);
 
 	// Profile window opened
-	//if (MainData.ProfileList.length > 0)
 	if( User != null)
 	{
 		if(UptimeNode != null)
@@ -182,28 +183,30 @@ function PROFILE_HandleInfoProfile(XML)
 
 
 /**
-* Create an array with ratings and return it
+* @brief	Create an array with ratings and return it
 *
-* @param RatingNodes	Array of ratings with data
-* @return		Array in format:
-* 						each line is a rating type
-* 						[1] lightning
-* 						[2] blitz
-* 						[3] Standard
-* 						each column is a data
-* 						[1] category
-* 						[2] current rating
-* 						[3] max rating
-* 						[4] max rating date
-* 						[5] number of games in category
-* 						[6] number of wins
-* 						[7] number of losses
-* 						[8] numeber of draws
-* @see 			CONTACT_HandleInfo(XML);	
-* @author		Danilo Yorinori
+* @param	Username	User's name
+* @param	RatingNodes	Array of ratings with data
+* @return	Array in format:
+* 		each line is a rating type
+* 			[1] lightning
+* 			[2] blitz
+* 			[3] Standard
+* 		each column is a data
+* 			[1] category
+* 			[2] current rating
+* 			[3] max rating
+* 			[4] max rating date
+* 			[5] number of games in category
+* 			[6] number of wins
+* 			[7] number of losses
+* 			[8] numeber of draws
+* @see 		CONTACT_HandleInfo(XML);	
+* @author	Danilo Yorinori
 */
 function PROFILE_HandleRatings(Username, RatingNodes)
 {
+//TODO -> REMOVE USERNAME. THIS PARAM WAS USED TO UPDATE RATING IN DATA STRUCT
 	var Rating = new Array();
 	var Category, TimeStamp, Index;
 	var i,j;
@@ -275,27 +278,6 @@ function PROFILE_HandleRatings(Username, RatingNodes)
 		Rating[Index][6] = TotalDraw;
 		Rating[Index][7] = TotalLosses;
 
-		/*
-		User = MainData.GetUser(Username);
-		// Update in data struct 
-		if(User != null)
-		{
-			if(User.Rating.FindRating(Category) == null)
-			{
-				User.Rating.AddRating(Category, RatingValue, RecordValue, RecordTime,
-					       TotalWin, TotalDraw, TotalLosses);
-			}
-			else
-			{
-				User.Rating.SetRatingValue( Category, RatingValue);
-				User.Rating.SetRecordValue( Category, RecordValue);
-				User.Rating.SetRecordTime(  Category, RecordTime);
-				User.Rating.SetRatingWin(   Category, TotalWin);
-				User.Rating.SetRatingDraw(  Category, TotalDraw);
-				User.Rating.SetRatingLosses(Category, TotalLosses);
-			}
-		}
-		*/
 	}
 
 	// return array of rating to show in profile window
@@ -303,12 +285,11 @@ function PROFILE_HandleRatings(Username, RatingNodes)
 }
 
 /**
-* Create profile in data Struct and show Profile window
+* @brief	Create profile in data Struct and show Profile window
 *
-* @public
-* @param        Username is the jabber username
-* @return       boolean
-* @author       Rubens
+* @param        Username	User's name
+* @return       True
+* @author       Rubens Suguimoto
 */
 function PROFILE_StartProfile(Username)
 {
@@ -391,12 +372,11 @@ function PROFILE_StartProfile(Username)
 }
 
 /**
-* Remove Profile from data struct 
+* @brief	Remove Profile from data struct 
 *
-* @public
-* @param        Username is the jabber username
-* @return       void
-* @author       Rubens
+* @param        Username 	User's name
+* @return       none
+* @author       Rubens Suguimoto
 */
 function PROFILE_RemoveProfile(Username)
 {
@@ -414,12 +394,10 @@ function PROFILE_RemoveProfile(Username)
 }
 
 /**
-* Save changes of profile
+* @brief	Save changes of your profile
 *
-* @public
-* @param        Username is the jabber username
-* @return       boolean
-* @author       Rubens
+* @return       True if success or false if some field was not correctly
+* @author       Rubens Suguimoto
 */
 function PROFILE_SaveMyProfile()
 {
@@ -447,9 +425,10 @@ function PROFILE_SaveMyProfile()
 }
 
 /**
-* Return a default message to create a basic profile
-* @return       XMPP set profile message
-* @author       Pedro
+* @brief	Return a default message to create a profile
+*
+* @return       XMPP message to set profile
+* @author       Pedro Rocha
 */
 function PROFILE_CreateProfile()
 {
@@ -457,6 +436,14 @@ function PROFILE_CreateProfile()
 	return MESSAGE_SetProfile("", MyUsername, "", "", "");
 }
 
+/*
+* @brief	Reset update profile flag
+*
+* This flag is used to refresh user's profile in certain interval of time
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function PROFILE_ResetUpdateProfile()
 {
 	var User;
@@ -473,7 +460,13 @@ function PROFILE_ResetUpdateProfile()
 	}
 }
 
-
+/*
+* @brief	Convert user's rating in data struct to profile ratings format
+* 
+* @param	RatingList	User's rating object
+* @return	Rating in profile format
+* @author	Rubens Suguimoto
+*/
 function PROFILE_ConvertUserRatingList(RatingList)
 {
 	var Rating = new Array();
@@ -545,11 +538,11 @@ function PROFILE_ConvertUserRatingList(RatingList)
 }
 
 /**
-* Verify if any change occurs in profile's data
+* @brief	Verify if any change occurs in profile's data
 *
-* @param Elements	Profile window's Object
-* @return		boolean
-* @author		Danilo Yorinori
+* @param	Elements	Profile window content elements object
+* @return	True if is there some change or false	
+* @author	Danilo Yorinori
 */
 function PROFILE_ChangeVerification(Elements) {
 	// Verify only editable data

@@ -16,17 +16,17 @@
 
 
 /**
-* Handle user messages
+* @file		contact/user.js
+* @brief	Handle user messages
 */
 
 /**
- * @brief	Handle user contact list
- *
- * Handle user list received from jabber with yours contacts.
+* @brief	Handle user list received from jabber with yours contacts to list of users
 *
-* @return string
+* All functions listed in this file, access a list of users in main data. This struct store all online user's information. 
 *
-* @author Ulysses Bonfim
+* @return 	Empty string
+* @author 	Rubens Suguimoto
 */
 function USER_HandleContactUserList(XML)
 {
@@ -44,7 +44,13 @@ function USER_HandleContactUserList(XML)
 	return "";
 }
 
-
+/**
+* @brief	Handle user's presence to list of users
+*
+* @param	XML	XMPP with presence
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function USER_HandlePresence(XML)
 {
 	var From, Username, Type, Item, Show, Status;
@@ -96,7 +102,13 @@ function USER_HandlePresence(XML)
 	return "";
 }
 
-
+/**
+* @brief	Handle user's room presence to list of users
+*
+* @param	XML	XMPP with room presence
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function USER_HandleRoomPresence(XML)
 {
 	var From, Username, Type, Item, Show, Status;
@@ -142,6 +154,13 @@ function USER_HandleRoomPresence(XML)
 	return "";
 }
 
+/**
+* @brief	Handle user's chess informations
+*
+* @param	XML	XMPP with user's chess informations
+* @return 	Empty string
+* @author 	Rubens Suguimoto
+*/
 function USER_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode, ProfileNode;
@@ -235,59 +254,17 @@ function USER_HandleInfo(XML)
 		User.SetUpdateRating(false);
 	}
 
-
-	// Update contacts
-	/*
-	USER_HandleRating(RatingNodes);
-	USER_HandleType(TypeNodes);
-	*/
 	return "";
 
 }
 
 /**
-* Handle user rating, update the structure and interface
-*/
-/*
-function USER_HandleRating(NodeList)
-{
-	var Username, Rating, Category, i;
-
-	// Getting ratings
-	for (i=0 ; i<NodeList.length ; i++)
-	{
-		Username = NodeList[i].getAttribute('jid').replace(/@.*/
-//,"");
-/*
-		Category = NodeList[i].getAttribute('category');
-		Rating = NodeList[i].getAttribute('rating');
-
-		// Set rating on structure
-		USER_SetUserRating(Username, Category, Rating);
-	}
-}
-*/
-
-/**
-* Handle user types, update the structure and interface
-*/
-/*
-function USER_HandleType(NodeList)
-{
-	var Jid, Type, i;
-
-	// Getting user type
-	for (i=0 ; i<NodeList.length ; i++)
-	{
-		Jid = NodeList[i].getAttribute('jid').replace(/@.*/
-//,"");
-/*
-		Type = NodeList[i].getAttribute('type');
-
-		// Set type on sctructure
-		USER_SetUserType(Jid, Type);
-	}
-}
+* @brief	Add some user in user list
+*
+* @param	Username	User's name
+* @param	Status		User's status
+* @return 	none
+* @author 	Rubens Suguimoto
 */
 function USER_AddUser(Username, Status)
 {
@@ -300,52 +277,10 @@ function USER_AddUser(Username, Status)
 }
 
 /**
-* Change type of 'Username' in structure and interface
-*/
-/*
-function USER_SetUserType(Username, NewType)
-{
-	var Rating;
-	
-	var User = MainData.GetUser(Username);
-
-	// update on interface
-	if(User == null)
-	{
-		USER_AddUser(Username, "offline");
-		User = MainData.GetUser(Username);
-	}
-	// Update in data struct
-	User.SetType(NewType);
-}
-*/
-/**
-* Change rating of 'Username' in structure and interface
-*/
-/*
-function USER_SetUserRating(Username, Category, Rating)
-{
-	var User = MainData.GetUser(Username);
-
-	// update on interface
-	if(User == null)
-	{
-		USER_AddUser(Username, "offline");
-		User = MainData.GetUser(Username);
-	}
-
-	// Update in data struct
-	if(User.Rating.FindRating(Category) == null)
-	{
-		User.Rating.AddRating(Category, Rating);
-	}
-	else
-	{
-		User.Rating.SetRatingValue(Category, Rating);
-	}
-
-	return "";
-}
+* @brief	Start counter to update list of user's chess informations
+*
+* @return 	none
+* @author 	Rubens Suguimoto
 */
 function USER_StartUpdateUserList()
 {
@@ -353,24 +288,48 @@ function USER_StartUpdateUserList()
 	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", Time*1000));
 }
 
+/**
+* @brief	Stop counter to update list of user's chess informations
+*
+* @return 	none
+* @author 	Rubens Suguimoto
+*/
 function USER_StopUpdateUserList()
 {
 	clearInterval(MainData.GetUpdateTimer());
 	MainData.SetUpdateTimer(null);
 }
 
+/**
+* @brief	Start counter to update list of user's jabber informations
+*
+* @return 	none
+* @author 	Rubens Suguimoto
+*/
 function USER_StartUpdateUserProfile()
 {
 	//Wait for 30 minutes to get profile again
 	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",90000));
 }
 
+/**
+* @brief	Stop counter to update list of user's jabber informations
+*
+* @return 	none
+* @author 	Rubens Suguimoto
+*/
 function USER_StopUpdateUserProfile()
 {
 	clearInterval(MainData.GetUpdateProfileTimer());
 	MainData.SetUpdateProfileTimer(null);
 }
 
+/**
+* @brief	Send message to update list of users
+*
+* @return 	none
+* @author 	Rubens Suguimoto
+*/
 function USER_UpdateUserList()
 {
 	var i,j;
@@ -397,7 +356,6 @@ function USER_UpdateUserList()
 	for(j=0; j<NameList.length; j++)
 	{
 		Username = NameList[j];
-		//XML += MESSAGE_Info(Username);
 		XML += MESSAGE_InfoProfile(Username);
 	}
 

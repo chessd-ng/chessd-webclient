@@ -15,7 +15,8 @@
 */
 
 /**
-* Append initial files
+* @file		inital_files.js
+* @brief	This file contains all functions to initialize login page
 */
 
 // Create NoCache object
@@ -31,12 +32,12 @@ NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
 NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
 
 /* 
- * @brief	Create script or link element and append file in head element
- *
- * @param	FileType	File's type
- * @param	Addr	File's address
- * @return	void
- * @author	Danilo Yorinori
+* @brief	Create script or link element and append file in head element
+*
+* @param	FileType	File's type
+* @param	Addr		File's address
+* @return	none
+* @author	Danilo Yorinori
  */
 function INITIAL_AppendFiles(FileType,Addr)
 {
@@ -70,11 +71,13 @@ function INITIAL_AppendFiles(FileType,Addr)
 }
 
 /* 
- * @brief	Create list of scripts to be load
- *
- * @return	void
- * @author	Rubens Suguimoto
- */
+* @brief	Start to load initial scripts
+*
+* Load all initial scripts necessary to authenticate and open load box
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INITIAL_LoadScripts()
 {
 	var ScriptList = new Array();
@@ -92,12 +95,6 @@ function INITIAL_LoadScripts()
 	// Append favicon
 	INITIAL_AppendFiles("favicon","images/favicon.ico");
 
-	// Append css files
-	/*
-	INITIAL_AppendFiles("css","css/Main.css");
-	INITIAL_AppendFiles("css","css/Login.css");
-	INITIAL_AppendFiles("css","css/Load.css");
-	*/
 	// Append script files
 	ScriptList.push("scripts/utils/utils.js");
 	ScriptList.push("scripts/data/data.js");
@@ -116,17 +113,17 @@ function INITIAL_LoadScripts()
 }
 
 /* 
- * @brief	Select last script in script list and load it.
- * 
- * Select the last script file name in script list that will be loaded. When
- * script has already loaded, remove last script from script list and call
- * this function again.
- *
- * @param	ScriptList	List of script url
- * @param	NumFiles	Total number of files to be load
- * @return	void
- * @author	Rubens Suguimoto
- */
+* @brief	Append and load script file
+* 
+* Select the last script file name in script list that will be loaded. When
+* script was already loaded, remove last script from script list and call
+* this function again.
+*
+* @param	ScriptList	List of script url
+* @param	NumFiles	Total number of files to be load
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INITIAL_AppendScript(ScriptList, NumFiles)
 {
 	var Script;
@@ -183,7 +180,7 @@ function INITIAL_AppendScript(ScriptList, NumFiles)
  * @brief	Change progress text
  *
  * @param	Text	Text string
- * @return	void
+ * @return	none
  * @author	Rubens Suguimoto
  */
 function INITIAL_SetProgressText(Text)
@@ -199,7 +196,7 @@ function INITIAL_SetProgressText(Text)
 /* 
  * @brief	Remove loading and progress text;
  *
- * @return	void
+ * @return	none
  * @author	Rubens Suguimoto
  */
 function INITIAL_RemoveTexts()

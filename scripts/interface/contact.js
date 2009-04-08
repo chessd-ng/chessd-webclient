@@ -16,13 +16,19 @@
 
 
 /**
-* Control interface of contact list
+* @file		interface/contact.js
+* @brief	Control interface contact list
 */
 
 /*******************************************
  ******* FUNCTIONS - CONTACT OBJECT
  * ***************************************/
-
+/*
+* @brief	Create contact interface object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function ContactObj()
 {
 	var ContactContent = INTERFACE_CreateContactContent();
@@ -58,6 +64,13 @@ function ContactObj()
 	this.hideLoading = INTERFACE_HideContactLoading;
 }
 
+/*
+* @brief	Add a group in contact list
+*
+* @param	GroupName	Group's name
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddContactGroup(GroupName)
 {
 	//TODO -> Create contact Group object in other file
@@ -108,6 +121,13 @@ function INTERFACE_AddContactGroup(GroupName)
 	this.listDiv.appendChild(GroupInterface.GroupDiv);
 }
 
+/*
+* @brief	Create group HTML DOM elements
+*
+* @param	GroupName	Group's name
+* @return	Group HTML DOM elements
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateGroup(GroupName)
 {
 	var GroupDiv;
@@ -135,6 +155,13 @@ function INTERFACE_CreateGroup(GroupName)
 	return {GroupDiv:GroupDiv, Online:GroupOnline, Offline:GroupOffline, Title:GroupTitle };
 }
 
+/*
+* @brief	Remove group in contact list
+*
+* @param	GroupName	Group's name
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveContactGroup(GroupName)
 {
 	var GroupPos = this.findGroup(GroupName);
@@ -147,6 +174,13 @@ function INTERFACE_RemoveContactGroup(GroupName)
 
 }
 
+/*
+* @brief	Find a group in contact list
+*
+* @param	GroupName	Group's name
+* @return	Group position number in group list or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_FindContactGroup(GroupName)
 {
 	var i=0;
@@ -166,13 +200,26 @@ function INTERFACE_FindContactGroup(GroupName)
 	}
 }
 
+/*
+* @brief	Get a group in contact list
+*
+* @param	GroupName	Group's name
+* @return	Group item
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_GetContactGroup(GroupName)
 {
 	var GroupPos = this.findGroup(GroupName);
 	return this.groups[GroupPos];
 }
 
-
+/*
+* @brief	Find group by username
+*
+* @param	UserName	User's name
+* @return	Group item or null (if not found)
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_FindContactUserGroup(UserName)
 {
 	var i=0;
@@ -195,7 +242,17 @@ function INTERFACE_FindContactUserGroup(UserName)
 	return null;
 }
 
-
+/*
+* @brief	Add a contact user
+*
+* @param	GroupName	Group's name
+* @param	UserName	User's name
+* @param	Status		User's status
+* @param	Rating		User's rating
+* @param	Type		User's type
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddContactUser(GroupName, UserName, Status, Rating, Type)
 {
 	var Group = this.getGroup(GroupName);
@@ -216,6 +273,13 @@ function INTERFACE_AddContactUser(GroupName, UserName, Status, Rating, Type)
 	}
 }
 
+/*
+* @brief	Remove some user from contact list
+*
+* @param	UserName	User's name
+* @return	Removed user's name
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveContactUser(UserName)
 {
 	var Group = this.findUserGroup(UserName);
@@ -238,6 +302,16 @@ function INTERFACE_RemoveContactUser(UserName)
 	return UserName;
 }
 
+/*
+* @brief	Update information of some user in contact list
+*
+* @param	UserName	User's name
+* @param	Status		User's status
+* @param	Rating		User's rating
+* @param	Type		User's type
+* @return	Username or null (if user was not founded)
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
 {
 	var Group = this.findUserGroup(UserName);
@@ -282,7 +356,13 @@ function INTERFACE_UpdateContactUser(UserName, Status, Rating, Type)
 }
 
 
-
+/*
+* @brief	Show contact list HTML DOM Div
+*
+* @param	GroupName	Group's name
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowContactList()
 {
 	var ParentTmp;
@@ -299,16 +379,34 @@ function INTERFACE_ShowContactList()
 	this.div.style.display = "block";
 }
 
+/*
+* @brief	Hide contact list HTML DOM Div
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideContactList()
 {
 	this.div.style.display = "none";
 }
 
+/*
+* @brief	Show contact list loading text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowContactLoading()
 {
 	this.loadingDiv.style.display = "block";
 }
 
+/*
+* @brief	Hide contact list loading text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideContactLoading()
 {
 	this.loadingDiv.style.display = "none";
@@ -319,7 +417,12 @@ function INTERFACE_HideContactLoading()
  ******* FUNCTIONS - CONTACT ONLINE OBJECT
  * ***************************************/
 
-// Contact Online Object
+/*
+* @brief	Create contact online interface object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function ContactOnlineObj()
 {
 	var ContactOnline = INTERFACE_CreateOnlineContent();
@@ -338,7 +441,12 @@ function ContactOnlineObj()
 	this.hideLoading = INTERFACE_HideContactLoading;
 }
 
-
+/*
+* @brief	Show contact online HTML DOM Div
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowOnlineList()
 {
 	var ParentTmp;
@@ -355,6 +463,12 @@ function INTERFACE_ShowOnlineList()
 	this.div.style.display = "block";
 }
 
+/*
+* @brief	Hide contact online HTML DOM Div
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideOnlineList()
 {
 	this.div.style.display = "none";
@@ -362,9 +476,12 @@ function INTERFACE_HideOnlineList()
 
 
 /**
-* Show or hide contact groups
+* @brief	Show or hide contact groups
 *
-* @private
+* @param	Obj	HTML DOM element
+* @param	Id 	Group identification field
+* @return	True or False (if group not founded)
+* @author 	Rubens Suguimoto
 */
 function INTERFACE_ChangeGroupVisibility(Obj, Id)
 {
@@ -391,9 +508,10 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 
 
 /**
-* Create contact list
+* @brief	Create contact and online HTML DOM div
 *
-* @private
+* @return	HTML DOM Div
+* @author	Rubens Suguimoto
 */
 function INTERFACE_CreateContact()
 {
@@ -450,11 +568,16 @@ function INTERFACE_CreateContact()
 
 	ContactDiv.appendChild(ContactTitle);
 	ContactDiv.appendChild(Lists);
-//	ContactDiv.appendChild(INTERFACE_CreateContactContent());
 
 	return ContactDiv;
 }
 
+/*
+* @brief	Create contact list content
+*
+* @return	Contact Div, Contact list and Loading element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateContactContent()
 {
 	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
@@ -469,7 +592,6 @@ function INTERFACE_CreateContactContent()
 	ListDiv = UTILS_CreateElement("div", "ListDiv");
 
 	// Search user
-//	Search = UTILS_CreateElement("a", null, null, UTILS_GetText("menu_search_user"));
 	SearchP = UTILS_CreateElement("p",null,"contact_search_user_p");
 	SearchS = UTILS_CreateElement("span","contact_search_user", null, UTILS_GetText("menu_search_user"));
 	UTILS_AddListener(SearchP, "click", function() { WINDOW_SearchUser(); }, "false");
@@ -492,9 +614,10 @@ function INTERFACE_CreateContactContent()
 
 
 /**
-* Create contact online list
+* @brief	Create contact online list
 *
-* @private
+* @return	Contact online Div and Loading element
+* @author	Rubens Suguimoto
 */
 function INTERFACE_CreateOnlineContent()
 {
@@ -531,12 +654,11 @@ function INTERFACE_CreateOnlineContent()
 	return { Div:ContactInside, LoadingDiv:LoadingDiv};
 }
 
-/* Refresh room's occupants number
+/*
+* @brief	Refresh contact online users number
 *
-* @param       RoomName
-*              Room's name
-* @return void
-* @author Danilo 
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_RefreshContactOnlineNumber()
 {

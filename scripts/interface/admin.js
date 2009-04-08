@@ -15,20 +15,21 @@
 */
 
 /**
-* @file admin.js
+* @file		interface/admin.js
 * @brief Create window content to show admin options
 *
 * Create window contents to admins for ban, kick, unban, etc.
 */
 
 /**
- * @brief Create temporary unban window content
- *
- * Create temporary unban window content with a input user name who will be unbaned.
- *
- * @author 	Rubens Suguimoto
- * @see 	WINDOW_UnbanUser
- */
+* @brief Create temporary unban window content
+*
+* Create temporary unban window content with a input user name who will be unbaned.
+*
+* @return	Content div, Buttons elements and Elements will receive event
+* @author 	Rubens Suguimoto
+* @see 	WINDOW_UnbanUser
+*/
 function INTERFACE_UnbanUserWindow()
 {
 	var Div;
@@ -75,13 +76,15 @@ function INTERFACE_UnbanUserWindow()
 }
 
 /**
- * @brief Create temporary ban window content
- *
- * Create temporary ban user window content with a input reason.
- *
- * @author 	Rubens Suguimoto
- * @see 	WINDOW_BanUser
- */
+* @brief Create temporary ban window content
+*
+* Create temporary ban user window content with a input reason.
+*
+* @param	Username	User's name
+* @return	Content div, Buttons elements and Elements will receive event
+* @author 	Rubens Suguimoto
+* @see 		WINDOW_BanUser
+*/
 function INTERFACE_BanUserWindow(Username)
 {
 	var Div;
@@ -128,13 +131,15 @@ function INTERFACE_BanUserWindow(Username)
 }
 
 /**
- * @brief Create temporary kick window content
- *
- * Create temporary kick user window content with a input reason.
- *
- * @author 	Rubens Suguimoto
- * @see 	WINDOW_BanUser
- */
+* @brief Create temporary kick window content
+*
+* Create temporary kick user window content with a input reason.
+*
+* @param	Username	User's name
+* @return	Content div, Buttons elements and Elements will receive event
+* @author 	Rubens Suguimoto
+* @see 	WINDOW_BanUser
+*/
 function INTERFACE_KickUserWindow(Username)
 {
 	var Div;
@@ -182,13 +187,14 @@ function INTERFACE_KickUserWindow(Username)
 
 
 /**
- * @brief Create admin window with administrative tools
- *
- * Create window content with administrative tools.
- *
- * @author 	Rubens Suguimoto
- * @see 	WINDOW_AdminWindow
- */
+* @brief	Create admin window with administrative tools
+*
+* Create window content with administrative tools.
+*
+* @return	Content div and Buttons elements
+* @author 	Rubens Suguimoto
+* @see 	WINDOW_AdminWindow
+*/
 function INTERFACE_CreateAdminWindow()
 {
 	var Div;
@@ -209,12 +215,18 @@ function INTERFACE_CreateAdminWindow()
 	ButtonsDiv.appendChild(Close);
 
 	Div.appendChild(UnbanList);
-	//Div.appendChild(ButtonsDiv);
 
 	return {Div:Div, Buttons:Buttons};
 }
 
-
+/**
+* @brief	Add a banned user in banned list
+*
+* @return	True if added or false if list not founded
+* @author 	Rubens Suguimoto
+* @deprecated
+* @see 	WINDOW_AdminWindow
+*/
 function INTERFACE_AddBannedUser(Username)
 {
 	var List = document.getElementById("AdminUnbanList");

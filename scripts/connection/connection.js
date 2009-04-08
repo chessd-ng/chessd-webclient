@@ -15,13 +15,13 @@
 */
 
 /**
-* @file	connection.js
+* @file		connection/connection.js
 * @brief	This file has all functions that is used to provide a connection
 * 		with a Jabber Server.
 */
 
 /**
-* @brief	 Start connection to Jabber server
+* @brief	Open connection with Jabber server
 *
 * @return 	Empty string;
 * @author	Pedro Rocha
@@ -64,7 +64,8 @@ function CONNECTION_ConnectJabber(XML)
 /**
 * @brief	Send a XML post
 *
-* @param	XMPP	XMPP messages;
+* You can pass more than one XML message as parameter
+*
 * @return	Empty string
 * @author	Pedro Rocha
 */
@@ -80,7 +81,6 @@ function CONNECTION_SendJabber()
 	}
 
 	// Check if connection status == "disconnected" or SID not initialized
-	//if ((MainData.SID != -1) && (MainData.ConnectionStatus != -1))
 	if ((MainData.GetSID() != -1) && (MainData.GetConnectionStatus() != -1))
 	{
 		Post = MESSAGE_MakeXMPP(Post);
@@ -107,23 +107,20 @@ function CONNECTION_SendJabber()
 		}
 	}
 
-	// Avoid browser caching
+	// This variable is used to avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	//HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/http-bind?id='+DT , true);
 	HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/jabber?id='+DT , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 	
-	// Normal parse messages
-	//if (MainData.ConnectionStatus == 0)
+	// Normal parse messages responses
 	if (MainData.GetConnectionStatus() == 0)
 	{
 		HttpRequest.onreadystatechange = function(){
 			CONNECTION_ReceiveXml(HttpRequest);
 		}
 	}
-	// Conection parse messages
-	//else if (MainData.ConnectionStatus > 0)
+	// Conection parse messages responses
 	else if (MainData.GetConnectionStatus() > 0)
 	{
 		HttpRequest.onreadystatechange = function(){
@@ -139,7 +136,6 @@ function CONNECTION_SendJabber()
 
 	// Add Post in data Struct
 	MainData.AddHttpPost(HttpRequest);
-
 
 	// Increment RID
 	MainData.SetRID(MainData.GetRID()+1);
@@ -259,15 +255,11 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 						}
 						else //if(IqType == "result")
 						{
-							// Send a message to bosh, to
-							// wait while loading scripts, css and images
-							//CONNECTION_SendJabber(MESSAGE_Wait());
 							/******** LOAD FILES**********/
 							// Start load scripts, css and images
 							LOAD_StartLoad();
 
 							// Set connected status
-							//MainData.ConnectionStatus = 0;
 							MainData.SetConnectionStatus(0);
 
 							CONNECTION_SendJabber(MESSAGE_Wait());
@@ -288,10 +280,12 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 		{
 			LOGIN_LoginFailed(UTILS_GetText("login_server_down"));
 		}
+		// Server not founded
 		else if (HttpRequest.status == 404)
 		{
 			LOGIN_LoginFailed(UTILS_GetText("login_server_not_founded"));
 		}
+		// Server offline
 		else
 		{	
 			LOGIN_LoginFailed(UTILS_GetText("login_server_down"));
@@ -315,15 +309,7 @@ function CONNECTION_ReceiveXml(HttpRequest)
 	var XML, Buffer = "";
 	var State, Status;
 
-	//Check if HttpRequest Object exists
-	/*
-	if((MainData == null) || (MainData.HttpRequest == null))
-	{
-		return "";
-	}
-	*/
 	// User was disconnected 
-	//if (MainData.ConnectionStatus == -1)
 	if (MainData.GetConnectionStatus() == -1)
 	{
 		return "";
@@ -349,13 +335,12 @@ function CONNECTION_ReceiveXml(HttpRequest)
 			XML = HttpRequest.responseXML;
 
 			// User disconnected 
-			//if (MainData.ConnectionStatus == -1)
 			if (MainData.GetConnectionStatus() == -1)
 			{
 				return "";
 			}
 
-			// Forward XML to parser
+			// Forward XML to parser functions
 			Buffer = PARSER_ParseXml(XML);
 
 			// Parser returned some xml: send it
@@ -389,7 +374,6 @@ function CONNECTION_ReceiveXml(HttpRequest)
 		else if (HttpRequest.status == 503)
 		{
 			// Show this message if user is connected
-			//if(MainData.ConnectionStatus == 0)
 			if(MainData.GetConnectionStatus() == 0)
 			{
 				alert(UTILS_GetText("error_disconnected"));

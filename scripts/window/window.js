@@ -16,14 +16,24 @@
 
 
 /**
-* Control Windows
+* @file		window/window.js
+* @brief	Control Windows
 */
 
-//Window Object is defined in interface/windows.js
 
 /**
+* @brief	Create new window element
 *
-* @author Rubens
+* Window Object is defined in interface/windows.js
+*
+* @param	WinSize 	Window width
+* @param	Div		Window content div
+* @param	DivButtons	Window content buttons
+* @param	Title		Window Title
+* @param	Top		Window top position
+* @param	Left		Window left position
+* @return	Window object
+* @author	Rubens Suguimoto
 */
 function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 {
@@ -67,8 +77,11 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 }
 
 /**
+* @brief	Set focus to some window
 *
-* @author Rubens
+* @param	WindowObj	Window object
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_Focus(WindowObj)
 {
@@ -101,8 +114,11 @@ function WINDOW_Focus(WindowObj)
 }
 
 /**
+* @brief	Remove window
 *
-* @author Rubens
+* @param	WindowObj	Window Object
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_RemoveWindow(WindowObj)
 {
@@ -123,16 +139,16 @@ function WINDOW_RemoveWindow(WindowObj)
 	WindowObj.close();
 }
 
-/*************************************************
-**************************************************
-**************************************************
-*************************************************/
+//////////////////////////////////////////////////
+//////////////////////////////////////////////////
 
 /**
-* Open Alert window
+* @brief	Open Alert window
 *
-* @return void
-* @author Danilo
+* @param	Title		Window title
+* @param	Text		Window text
+* @return 	none
+* @author	Danilo Yorinori
 */
 function WINDOW_Alert(Title,Text)
 {
@@ -150,9 +166,14 @@ function WINDOW_Alert(Title,Text)
 }
 
 /**
-* Open Confirm Window
+* @brief	Open Confirm Window
 *
-* @author Danilo
+* @param	Title		Window title
+* @param	Text		Window text
+* @param	Button1		First button action
+* @param	Button2		Second button action
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_Confirm(Title, Text, Button1, Button2)
 {
@@ -171,9 +192,15 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 }
 
 /**
-* Open Challenge window
+* @brief	Open Challenge window
 *
-* @author Danilo
+* @param	User		User's name
+* @param	RatingObj	Rating object with all ratings
+* @param	GameParameters	Challenge parameters
+* @param	Rated		Rated game flag
+* @param	MatchId		Challenge identification number
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 {
@@ -227,9 +254,10 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 }
 
 /**
-* Open Create Room window
+* @brief	Open Create Room window
 *
-* @author Danilo
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_CreateRoom()
 {
@@ -293,9 +321,11 @@ function WINDOW_CancelRoom()
 }
 
 /**
-* Open Invite User window
+* @brief	Open Invite User window
 *
-* @author Danilo
+* @param	User	User's name
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_Invite(User)
 {
@@ -314,9 +344,10 @@ function WINDOW_Invite(User)
 }
 
 /**
-* Open Search User window
+* @brief	Open Search User window
 *
-* @author Danilo
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_SearchUser()
 {
@@ -346,27 +377,11 @@ function WINDOW_SearchUser()
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ MainData.RemoveSearchUserInfo(); WINDOW_RemoveWindow(WindowObj);}, false);
 }
 
-/*
-function WINDOW_SearchUserResult(UserList)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowSearchUserResultWindow(UserList);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(200, Div.Div, Div.Buttons, UTILS_GetText('contact_search_user'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Add Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
-*/
-
 /**
-* Open Profile window
+* @brief	Open Profile window
 *
-*	@return Elements	Profile's object
-* @author Danilo
+* @return	Elements	Profile's HTML DOM elements array
+* @author	Danilo Yorinori
 */
 function WINDOW_Profile(Profile)
 {
@@ -433,13 +448,20 @@ function WINDOW_Profile(Profile)
 }
 
 /**
-* Open Profile Close Confirmation window
-* 	Open if any changes occurs in user's profile
+* @brief	Open Profile Close Confirmation window
 *
-* @author Danilo
+* Open if any changes occurs in user's profile
+* 
+*
+* @param	WinObj		Paraent window object
+* @param	Profile		Profile window confirm content
+* @param	Elements	HTML DOM elements array
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
 {
+	// TODO -> EXPLAIN BETTER THIS PARAMETERS
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowProfileConfirmWindow();
 
@@ -459,8 +481,10 @@ function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
 }
 
 /**
+* @brief	Open change profile image
 *
-* @author Rubens
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_ProfileImage()
 {
@@ -479,11 +503,11 @@ function WINDOW_ProfileImage()
 }
 
 /*
-* Open Oldgame window
+* @brief	Open Oldgame window
 *
-*	@param Id Window's Id (in case of more than one oldgame windows are opened)
-* @return	Elements Oldgame window's object
-* @author Danilo
+* @param	Id	Window's Id (in case of more than one oldgame windows are opened)
+* @return	Elements	Oldgame window's HTML DOM elements
+* @author	Danilo Yorinori
 */
 function WINDOW_OldGame(Id)
 {
@@ -513,8 +537,10 @@ function WINDOW_OldGame(Id)
 }
 
 /*
+* @brief	Open unban user window
 *
-* @author Rubens
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_UnbanUser()
 {
@@ -542,8 +568,11 @@ function WINDOW_UnbanUser()
 }
 
 /*
+* @brief	Open ban user window
 *
-* @author Rubens
+* @param	Username	User's name
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_BanUser(Username)
 {
@@ -571,8 +600,10 @@ function WINDOW_BanUser(Username)
 }
 
 /*
+* @brief	Open kick user window
 *
-* @author Rubens
+* @param	Username	User's name
+* @author	Rubens Suguimoto
 */
 function WINDOW_KickUser(Username)
 {
@@ -600,8 +631,10 @@ function WINDOW_KickUser(Username)
 }
 
 /*
+* @brief	Open admin window
 *
-* @author Rubens
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_AdminWindow()
 {
@@ -624,8 +657,12 @@ function WINDOW_AdminWindow()
 }
 
 /*
-*
-* @author Rubens
+* @brief	Open a send announce window 
+* 
+* @param	Username	User's name
+* @param	Rating		User's rating
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_AnnounceWindow(Username, Rating)
 {
@@ -650,9 +687,10 @@ function WINDOW_AnnounceWindow(Username, Rating)
 }
 
 /*
-* Open Help window
+* @brief	Open Help window
 *
-* @author Danilo
+* @return 	none
+* @author	Danilo Yorinori
 */
 function WINDOW_Help()
 {
@@ -675,8 +713,15 @@ function WINDOW_Help()
 }
 
 /*
+* @brief	Open a continue postponed game 
 *
-* @author Rubens
+* @param	User		User's name
+* @param	RatingObj	User's rating object
+* @param	GameParameters	Postponed game parameters
+* @param	Rated		Game rated flag
+* @param	MatchId		Postponed game identification number
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 {
@@ -703,10 +748,10 @@ function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 }
 
 /*
-* Open Create Tourney window
+* @brief	Open Create Tourney window
 *
-* @return	Elements Create Tourney window's object
-* @author Danilo
+* @return	none
+* @author	Danilo Yorinori
 */
 function WINDOW_CreateTourney()
 {
@@ -730,10 +775,10 @@ function WINDOW_CreateTourney()
 }
 
 /*
-* Open Admin tools window
+* @brief	Open Admin tools window
 *
-* @return	Elements Create Tourney window's object
-* @author Rubens
+* @return	none
+* @author	Rubens Suguimoto
 */
 function WINDOW_CreateAdminCenter()
 {

@@ -15,12 +15,16 @@
 */
 
 /**
-* Load images, scripts and css used in the interface
-* from server
+* @file		load/load.js
+*
+* @brief	Load scripts and css used in the interface from server
 */
 
 /**
-* Show load screen to user, and begin to load scripts
+* @brief	Show load screen to user, and begin to load scripts
+* 
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function LOAD_StartLoad()
 {
@@ -28,53 +32,37 @@ function LOAD_StartLoad()
 	LOGIN_EndLogin();
 
 	// Show load screen to user
-	//INTERFACE_StartLoad();
 	MainData.SetLoadObj(new LoadObj());
 
 	// Loading css files
-	//INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_css"), 2);
 	LOAD_LoadFiles();
 }
 
 /**
-* Remove load box from screen
+* @brief	Remove load box from screen
+* 
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function LOAD_EndLoad()
 {
 	var LoadObj = MainData.GetLoadObj();
-	//INTERFACE_EndLoad();
+
 	LoadObj.remove();
 	delete(LoadObj);
 }
 
 /**
-* Load scripts files while interface is loading
+* @brief	Build scripts and css files array and start load 
+*
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function LOAD_LoadFiles()
 {
 	var Files = new Array();
 	var NumFiles;
 	
-	// Images Files to be loaded
-	/*
-	Files.push("images/logochessd.png");
-	Files.push("images/pieces/bbishop.png");
-	Files.push("images/pieces/bknight.png");
-	Files.push("images/pieces/bqueen.png");
-	Files.push("images/pieces/bking.png");
-	Files.push("images/pieces/bpawn.png");
-	Files.push("images/pieces/bbrook.png");
-	Files.push("images/pieces/wbishop.png");
-	Files.push("images/pieces/wknight.png");
-	Files.push("images/pieces/wqueen.png");
-	Files.push("images/pieces/wking.png");
-	Files.push("images/pieces/wpawn.png");
-	Files.push("images/pieces/wbrook.png");
-	Files.push("images/board/square_black.png");
-	Files.push("images/board/square_white.png");
-	Files.push("images/board/square_select.png");
-	*/
-
 	// CSS Files to be loaded
 	Files.push("css/Top.css");
 	Files.push("css/Left.css");
@@ -157,8 +145,13 @@ function LOAD_LoadFiles()
 }
 
 /*
- * Load all files when log in jabber
- */
+* @brief 	Append script or css files in interface
+*
+* @param	Files		Array of files
+* @param	NumFiles	Number of files to load
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
+*/
 function LOAD_AppendFiles(Files, NumFiles)
 {
 	var FileType;
@@ -231,7 +224,16 @@ function LOAD_AppendFiles(Files, NumFiles)
 	}
 
 }
-
+/*
+* @brief	Get next file in array of files to load
+*
+* This function update loading bar and loading text in load box
+*
+* @param	Files		Array of files
+* @param	NumFiles	Number of files to load
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function LOAD_NextFile(Files, NumFiles)
 {
 	var LoadObj = MainData.GetLoadObj();
@@ -244,6 +246,14 @@ function LOAD_NextFile(Files, NumFiles)
 	LOAD_AppendFiles(Files, NumFiles);
 }
 
+/*
+* @brief	Start game enviroment after load last file
+*
+* @param	Files		Array of files
+* @param	NumFiles	Number of files to load
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function LOAD_EndFile(Files, NumFiles)
 {
 	var LoadObj = MainData.GetLoadObj();
@@ -256,9 +266,13 @@ function LOAD_EndFile(Files, NumFiles)
 }
 
 /*
- * @brief Reload script, css files 
- *
- */
+* @brief	Reload script and css files 
+*
+* This function is used to reload scripts to avoid cache
+*
+* @return	none
+* @author	Danilo Yorinori
+*/
 function LOAD_ReloadFiles()
 {
 	var Head = document.getElementsByTagName("head")[0];
@@ -303,6 +317,12 @@ function LOAD_ReloadFiles()
 
 }
 
+/*
+* @brief	Function used to load Internet Explorer CSS
+*
+* @return	none
+* @author	Danilo Yorinori
+*/
 function LOAD_IECssFile()
 {
 	var Head = document.getElementsByTagName("head")[0];

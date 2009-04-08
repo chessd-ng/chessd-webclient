@@ -14,11 +14,16 @@
 
 
 /**
-* Parse XMPP received from jabber
+* @file		parser/parser.js
+* @brief	Parse XMPP received from jabber
 */
 
 /**
-* Receive and forward XML to controllers
+* @brief	Receive and forward XML to controllers
+*
+* @param	XML	XMPP message
+* @return	XMPP to send
+* @author	Ulysses Bomfim
 */
 function PARSER_ParseXml(XML)
 {
@@ -78,12 +83,6 @@ function PARSER_ParseXml(XML)
 
 			default: break;
 		}
-		/*
-		if(Buffer.match("undefined"))
-		{
-			alert(XMLTag.tagName+"\n"+XMLTag.getAttribute("xmlns")+"\n"+Buffer);
-		}
-		*/
 	}
 	return Buffer;
 }

@@ -14,6 +14,18 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		interface/load.js
+* @brief	This file contains all functions to manage scripts to be load
+*/
+
+/*
+* @class	LoadObj
+* @brief	Create interface load object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function LoadObj() 
 {
 	var Load = INTERFACE_StartLoad();
@@ -36,12 +48,14 @@ function LoadObj()
 }
 
 /**
-* Shows load screen to user
+* @brief	Create load box HTML DOM elements
+* 
+* @return	Load main HTML DOM Div, load file text HTML DOM P and load bar HTML DOM Div element
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function INTERFACE_StartLoad()
 {
 	var LoadDiv, LoadHeader, WaitLabel, LoadingLabel;
-	var LoadList, Item, Img, i;
 	var BarBorder;
 
 	// Creating elements
@@ -52,25 +66,12 @@ function INTERFACE_StartLoad()
 	
 	BarBorder = UTILS_CreateElement("div","BarBorder");
 
-	/*
-	LoadList = UTILS_CreateElement("ul", "LoadList");
-	// Creating balls
-	for (i=1; i<=5; i++)
-	{
-		Item = UTILS_CreateElement("li", "LoadingBall"+i, "grey_ball");
-		LoadList.appendChild(Item);
-	}
-	*/
 	// Creating tree
 	LoadDiv.appendChild(LoadHeader);
 	LoadDiv.appendChild(WaitLabel);
 	LoadDiv.appendChild(LoadingLabel);
-	//LoadDiv.appendChild(LoadList);
 
 	LoadDiv.appendChild(BarBorder);
-
-	// Setting first message in the loading box
-	//INTERFACE_SetLoadPhrase(UTILS_GetText("login_load_start"), 1);
 
 	return {LoadDiv:LoadDiv, LoadLabel:LoadingLabel, BarBorder:BarBorder}
 }
@@ -78,7 +79,10 @@ function INTERFACE_StartLoad()
 
 
 /** 
-* Show load screen
+* @brief	Show load box
+*
+* @return	none 
+* @author	Rubens Suguimoto
 */ 
 function INTERFACE_ShowLoad()
 {
@@ -90,7 +94,10 @@ function INTERFACE_ShowLoad()
 }
 
 /** 
-* Hide load screen
+* @brief	Hide load box
+*
+* @return	none 
+* @author	Rubens Suguimoto
 */ 
 function INTERFACE_HideLoading()
 {
@@ -98,7 +105,10 @@ function INTERFACE_HideLoading()
 }
 
 /** 
-* Remove load screen
+* @brief	Remove load box
+*
+* @return	none 
+* @author	Rubens Suguimoto
 */ 
 function INTERFACE_RemoveLoad()
 {
@@ -106,44 +116,24 @@ function INTERFACE_RemoveLoad()
 }
 
 /** 
-* Show wich files will be load
+* @brief	Set load file text
+*
+* @return	none 
+* @author	Rubens Suguimoto
 */ 
 function INTERFACE_SetLabel(Str)
 {
 	this.LoadLabel.innerHTML = Str;
 }
 
-/**
-* Show phrase in the load box and paint next ball
-*/
+///////LOADING BAR OBJECT
 /*
-function INTERFACE_SetLoadPhrase(Phrase, Num)
-{
-	var Node = document.getElementById('LoadingLabel');
-	var Ball = document.getElementById('LoadingBall'+Num);
-
-	// Setting phrease
-	if (Node)
-	{
-		Node.innerHTML = Phrase;
-		
-		// Changing ball color
-		if (Ball)
-		{
-			Ball.className = "green_ball";
-		}
-		return Phrase;
-	}
-	else
-	{
-		return null;
-	}
-}
+* @class	LoadingBarObj
+* @brief	Create interface loading bar object
+*
+* @return	none
+* @author	Rubens Suguimoto
 */
-/************************
- * Loading Bar Object
- ************************/
-
 function LoadingBar()
 {
 	// Attributes
@@ -159,22 +149,27 @@ function LoadingBar()
 	this.remove = INTERFACE_RemoveLoadingBar;
 }
 
+/*
+* @brief	Create loading bar HTML DOM element
+*
+* @return	Loading bar Div element
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateBar(Id)
 {
 	var Bar = document.createElement("div");
 
 	Bar.id = Id;
 
-	/*
-	Bar.style.height = "15px";
-	Bar.style.width = "0px";
-	Bar.style.backgroundColor = "#000";
-	Bar.style.position = "relative";
-	*/
-
 	return Bar;
 }
 
+/*
+* @brief	Add some value to loading bar
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddValue(Num)
 {
 	if((this.CurrentValue + Num) > this.MaxValue)
@@ -189,6 +184,12 @@ function INTERFACE_AddValue(Num)
 	this.ProgressBar.style.width = this.CurrentValue+"px";
 }
 
+/*
+* @brief	Subtract some value from loading bar
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_SubValue(Num)
 {
 	if((this.CurrentValue - Num) < 0)
@@ -203,6 +204,13 @@ function INTERFACE_SubValue(Num)
 	this.ProgressBar.style.width = this.CurrentValue+"px";
 }
 
+/*
+* @brief	Show loading bar
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowLoadingBar(Element)
 {
 	if(Element != null)
@@ -217,11 +225,23 @@ function INTERFACE_ShowLoadingBar(Element)
 	this.ProgressBar.style.display = "block";
 }
 
-function INTERFACE_HideLoadingBar(Element)
+/*
+* @brief	Hide loading bar
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_HideLoadingBar()
 {
 	this.ProgressBar.style.display = "none";
 }
 
+/*
+* @brief	Remove loading bar
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveLoadingBar()
 {
 	this.ProgressBar.parendNode.removeChild(this.ProgressBar);

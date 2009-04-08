@@ -10,21 +10,29 @@
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 * GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
 */
 
 
 /**
-* Drag board pieces 
+* @file		utils/dragpiece.js
+* @brief	Drag and drop game board pieces 
 */
 
 //This variable is used to save original position of piece when move it
 var OldPos;
+//TODO -> REMOVE THIS VARIABLE AND DEFINE INSIDE THE FUNCTION BELOW
 
 /**
-* Start drag a piece when click or click and hold button a button over a piece.
-* If click for second time, when click without hold button, then release piece
-* and send move to server. If click and hold button was set and release the button
-* drop piece and send move to server;
+* @brief	Drag and drop piece board 
+* Start drag a piece when click or click and hold button a button over a piece. If click for second time(without hold button) then release piece and send move to server. If click and hold button was set and release the button drop piece and send move to server;
+*
+* @param	Obj	DOM Element
+* @param	Size	Piece size
+* @param	event	Javascript Event
+* @return	True of False
+* @author	Rubens Suguimoto
 */
 function UTILS_StartDragPiece(Obj, Size, event)
 {
@@ -237,7 +245,11 @@ function UTILS_StartDragPiece(Obj, Size, event)
 
 
 /**
-* Return mouse coords
+* @brief 	Get mouse coords 
+*
+* @param        ev 	Javascript Event
+* @return       Tuple with X and Y position (in pixels)
+* @author       Rubens Suguimoto and Pedro Rocha
 */
 function UTILS_GetMouseCoords(ev)
 {

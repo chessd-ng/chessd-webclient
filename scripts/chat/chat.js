@@ -15,20 +15,20 @@
 */
 
 
-/**
- * @file	chat.js
- * @brief	Functions to parse chat messages.
- *
- * See interface chat (scripts/interface/chat.js).
+/*
+* @file		chat/chat.js
+* @brief	Functions to parse chat messages
+*
+* See interface chat (scripts/interface/chat.js)
 */
 
 
-/**
- * @brief 	Parse and show ordinary users messages
- *
- * @param	XML	XML with message
- * @return	Buffer with other XMPP to send
- * @author	Pedro Rocha
+/*
+* @brief 	Parse and show ordinary users messages
+*
+* @param	XML	XML with message
+* @return	Buffer with other XMPP to send
+* @author	Pedro Rocha
 */
 function CHAT_HandleMessage(XML)
 {
@@ -48,18 +48,18 @@ function CHAT_HandleMessage(XML)
 	}
 
 	// Show the message on interface
-	// UTILS_ConvertChatString -> Replace < and >
+	// UTILS_ConvertChatString -> To replace HTML characters
 	CHAT_ReceiveMessage(From, UTILS_ConvertChatString(Message));
 
 	return Buffer;
 }
 
 /**
- * @brief 	Parse and show user chat presence
- *
- * @param	XML	XML with presence
- * @return	Buffer with other XMPP to send
- * @author	Rubens Suguimoto
+* @brief 	Parse and show user chat presence
+*
+* @param	XML	XML with presence
+* @return	Buffer with other XMPP to send
+* @author	Rubens Suguimoto
 */
 function CHAT_HandlePresence(XML)
 {
@@ -93,11 +93,11 @@ function CHAT_HandlePresence(XML)
 }
 
 /**
- * @brief 	Show announcement users messages
- *
- * @param	XML	XML with announce message
- * @return	Buffer with other XMPP to send
- * @author	Pedro Rocha
+* @brief 	Show announcement messages
+*
+* @param	XML	XML with announce message
+* @return	Buffer with other XMPP to send
+* @author	Pedro Rocha
 */
 function CHAT_HandleAnnounceMessage(XML)
 {
@@ -109,34 +109,34 @@ function CHAT_HandleAnnounceMessage(XML)
 
 	// Show Annouce message only if sender is host server
 	if (From != MainData.GetHost())
+	{
 		return "";
+	}
 
 	// Announce's subject
 	Subject = UTILS_GetNodeText(XML.getElementsByTagName("subject")[0]);
 
 	Body = XML.getElementsByTagName("body");
 
-	// If there is a body
+	// If there is a body tag, Get the message
 	if (Body.length > 0)
 	{
-		// Get the message
 		Message = UTILS_GetNodeText(Body[0]);
 	}
 
-	// Show the message on interface
+	// Show the message on interface in an alert window
 	WINDOW_Alert(Subject,Message);
 
 	return Buffer;
 }
 
 /**
- * @brief 	Open a chat with some user
- *
- * @param	Username	Name used by user
- * @return	Empty string
- * @author	Pedro Rocha
+* @brief 	Open a chat with some user
+*
+* @param	Username	Name used by user
+* @return	Chat window object
+* @author	Pedro Rocha and Rubens Suguimoto
 */
-
 function CHAT_OpenChat(Username)
 {
 	var Title, Msg;
@@ -211,11 +211,11 @@ function CHAT_OpenChat(Username)
 }
 
 /**
- * @brief 	Close a chat with user
- *
- * @param	Username	Name used by user
- * @return	Empty string
- * @author	Pedro Rocha
+* @brief 	Close a chat window with other user
+*
+* @param	Username	Name used by user
+* @return	Empty string
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function CHAT_CloseChat(Username)
 {
@@ -239,14 +239,11 @@ function CHAT_CloseChat(Username)
 
 
 /**
- * @brief 	Change  visibility of chat window
- *
- * @param	Username	Name used by user
- * @param	Obj1		Chat item
- * @param	Obj2		Chat item inner content
- * @param	State		Chat status (show/hidden)
- * @return	Empty string
- * @author	Pedro Rocha
+* @brief 	Change  visibility of chat window
+*
+* @param	Username	Name used by user
+* @return	Empty string
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function CHAT_ChangeChatState(Username)
 {
@@ -295,18 +292,18 @@ function CHAT_ChangeChatState(Username)
 
 
 /**
- * @brief 	Send a chat message
- *
- * @param	Username	Name used by user
- * @param	Message		Message to send
- * @return	Empty string
- * @author	Pedro Rocha
+* @brief 	Send a chat message
+*
+* @param	Username	Name used by user
+* @param	Message		Message to send
+* @return	Empty string
+* @author	Pedro Rocha
 */
 function CHAT_SendMessage(Username, Message)
 {
 	var ChatObj;
 	//Replace < and  >
-	var Msg = UTILS_ConvertChatString(Message)
+	var Msg = UTILS_ConvertChatString(Message);
 	var XML = MESSAGE_Chat(Username, Msg);
 
 	var MyUsername = MainData.GetUsername();
@@ -319,7 +316,6 @@ function CHAT_SendMessage(Username, Message)
 		ChatObj = MainData.GetChat(Username);
 
 		// Show message in chat list
-		//INTERFACE_ShowChatMessage(Username, Msg, true);
 		ChatObj.Chat.addMessage(MyUsername, UTILS_BannedWords(UTILS_ConvertChatString(Message)));
 	}
 
@@ -327,12 +323,12 @@ function CHAT_SendMessage(Username, Message)
 }
 
 /**
- * @brief 	Show a message received from another user
- *
- * @param	Username	Name used by user
- * @param	Message		Message received
- * @return	Empty string
- * @author	Pedro Rocha
+* @brief 	Show a message received from another user
+*
+* @param	Username	Name used by user
+* @param	Message		Message received
+* @return	Empty string
+* @author	Pedro Rocha
 */
 function CHAT_ReceiveMessage(Username, Message)
 {
@@ -360,6 +356,15 @@ function CHAT_ReceiveMessage(Username, Message)
 	return "";
 }
 
+/**
+* @brief 	Show message length error notification 
+*
+* Show in window chat a message with length exceeded error
+*
+* @param	Username	Name used by user
+* @return	Message with error notification
+* @author	Rubens Suguimoto
+*/
 function CHAT_ErrorMessageLength(Username)
 {
 	var ChatPos = MainData.FindChat(Username);
@@ -381,6 +386,7 @@ function CHAT_ErrorMessageLength(Username)
 	Message = UTILS_GetText("room_error_message_length");
 	if (Message != null)
 	{
+		// Replace "%s" string by Limit value
 		Message = Message.replace(/%s/,Limit);
 	}
 
@@ -389,6 +395,14 @@ function CHAT_ErrorMessageLength(Username)
 	return Message;
 }
 
+/**
+* @brief 	Change chat window title accordly user status
+*
+* @param	Username	Name used by user
+* @param	Status		User status (offline or others)
+* @return	Empty string
+* @author	Rubens Suguimoto
+*/
 function CHAT_ChangeUserChatStatus(Username, Status)
 {
 	var ChatObj;
@@ -410,6 +424,13 @@ function CHAT_ChangeUserChatStatus(Username, Status)
 	return "";
 }
 
+/**
+* @brief 	Remove focus from chat window
+*
+* @param	Username	Name used by user
+* @return	Empty string
+* @author	Rubens Suguimoto
+*/
 function CHAT_BlurChat(Username)
 {
 	var ChatObj;

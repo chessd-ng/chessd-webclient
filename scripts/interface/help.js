@@ -15,18 +15,17 @@
 */
 
 /**
-* @file help.js
-* @brief Create window content to show help content and auxiliar functions
-*
+* @file 	interface/help.js
+* @brief	Create window content to show help and auxiliar functions
 */
 
 /**
- * @brief Create temporary help window content
- *
- * @return	void
- * @author 	Danilo Yorinori
- * @see	Texts (lang), WINDOW_Help();
- */
+* @brief Create temporary help window content
+*
+* @return	Main Div content and Buttons array
+* @author 	Danilo Yorinori
+* @see	Texts (lang), WINDOW_Help();
+*/
 function INTERFACE_HelpWindow()
 {
 	var Div;
@@ -264,13 +263,13 @@ function INTERFACE_HelpWindow()
 }
 
 /**
- * @brief Create help content div and set text passed as parameter
- *
- * @param	Text	Text to be insert in div content
- * @return	HTML Div Element
- * @see INTERFACE_HelpWindow
- * @author 	Danilo Yorinori
- */
+* @brief	Create help content div and set text passed as parameter
+*
+* @param	Text	Text to be insert in div content
+* @return	HTML DOM Div Element
+* @author 	Danilo Yorinori
+* @see INTERFACE_HelpWindow
+*/
 function INTERFACE_CreateHelpContent(Text)
 {
 	var TextContent;
@@ -283,13 +282,13 @@ function INTERFACE_CreateHelpContent(Text)
 }
 
 /**
- * @brief Show or hide help content of section with Id passed as parameter
- *
- * @param	ObjId	Section's Id
- * @return	boolean
- * @see INTERFACE_HelpDisplay
- * @author 	Danilo Yorinori
- */
+* @brief Show or hide help content of section with Id passed as parameter
+*
+* @param	ObjId	Section's Id
+* @return	True if sucess or false if not found ObjId
+* @author 	Danilo Yorinori
+* @see INTERFACE_HelpDisplay
+*/
 function INTERFACE_ShowHideHelpContent(ObjId)
 {
 	var Node = document.getElementById(ObjId+"T");
@@ -333,13 +332,13 @@ function INTERFACE_ShowHideHelpContent(ObjId)
 }
 
 /**
- * @brief Show help content of linked section with Id passed as parameter
- *
- * @param	ObjId	Section's Id
- * @return	boolean
- * @see INTERFACE_HelpWindow
- * @author 	Danilo Yorinori
- */
+* @brief	Show help content of linked section with Id passed as parameter
+*
+* @param	ObjId	Section's Id
+* @return	True if sucess or false if not found ObjId
+* @author 	Danilo Yorinori
+* @see INTERFACE_HelpWindow
+*/
 function INTERFACE_ShowLinkContent(ObjId)
 {
 	var Node = document.getElementById(ObjId+"T");
@@ -369,14 +368,14 @@ function INTERFACE_ShowLinkContent(ObjId)
 }
 
 /**
- * @brief	Set help section title element action to open content and not be selected when clicked 
- *
- * @param	Obj	Help section title element
- * @param Id	Section's Id
- * @return	void
- * @see INTERFACE_HelpWindow
- * @author 	Danilo Yorinori
- */
+* @brief	Set help section title element action to open content and not be selected when clicked 
+*
+* @param	Obj	Help section title element
+* @param	Id	Section's Id
+* @return	none
+* @author 	Danilo Yorinori
+* @see INTERFACE_HelpWindow
+*/
 function INTERFACE_HelpDisplay(Obj,Id)
 {
 	Obj.onselectstart = function() { return false; }

@@ -1,3 +1,31 @@
+/**
+* CHESSD - WebClient
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* C3SL - Center for Scientific Computing and Free Software
+*/
+
+
+/**
+* @file		game/gamecenter.js
+* @brief	This file has all function related to gamecenter
+*/
+
+/**
+* @brief	Start game center object and show in web interface
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_StartGameCenter()
 {
 	var GCenterObj = new GameCenterObj();
@@ -11,6 +39,12 @@ function GAMECENTER_StartGameCenter()
 	ANNOUNCE_GetAnnounceGames();
 }
 
+/**
+* @brief	Show game center object
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowGameCenter()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -19,12 +53,24 @@ function GAMECENTER_ShowGameCenter()
 	GameCenterObj.show(Center);
 }
 
+/**
+* @brief	Hide game center object
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_HideGameCenter()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	GameCenterObj.hide();
 }
 
+/**
+* @brief	Show announced games in game center object and hide others tabs
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowAnnounce()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -45,6 +91,12 @@ function GAMECENTER_ShowAnnounce()
 	}
 }
 
+/**
+* @brief	Show postponed games in game center object and hide others tabs
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowPostpone()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -63,6 +115,12 @@ function GAMECENTER_ShowPostpone()
 	}
 }
 
+/**
+* @brief	Show received and send challenges in game center object and hide others tabs
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowMatchOffer()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -76,6 +134,12 @@ function GAMECENTER_ShowMatchOffer()
 	}
 }
 
+/**
+* @brief	Show tourneys created in game center object and hide others tabs
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowTourney()
 {
 	var GameCenterObj = MainDataGet.Gamecenter();
@@ -89,6 +153,12 @@ function GAMECENTER_ShowTourney()
 	}
 }
 
+/**
+* @brief	Show playing games in game center object and hide others tabs
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ShowCurrentGames()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -109,7 +179,12 @@ function GAMECENTER_ShowCurrentGames()
 
 }
 
-//Temporary function to clear all current games
+/**
+* @brief	Remove all playing games in game center object
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_ClearCurrentGames()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -124,7 +199,12 @@ function GAMECENTER_ClearCurrentGames()
 
 }
 
-//Sort functions
+/**
+* @brief	Sort announced games by username
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -143,6 +223,12 @@ function GAMECENTER_AnnounceSortByUsername()
 	}
 
 }
+/**
+* @brief	Sort announced games by category
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -160,6 +246,12 @@ function GAMECENTER_AnnounceSortByCategory()
 		GameCenterObj.Announce.add(AnnounceItem.Player, AnnounceItem.Rating, (AnnounceItem.Time/60), AnnounceItem.Inc, AnnounceItem.Category, AnnounceItem.Rated, AnnounceItem.Private, AnnounceItem.Id);
 	}
 }
+/**
+* @brief	Sort announced games by user's rating
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -177,6 +269,12 @@ function GAMECENTER_AnnounceSortByRating()
 		GameCenterObj.Announce.add(AnnounceItem.Player, AnnounceItem.Rating, (AnnounceItem.Time/60), AnnounceItem.Inc, AnnounceItem.Category, AnnounceItem.Rated, AnnounceItem.Private, AnnounceItem.Id);
 	}
 }
+/**
+* @brief	Sort announced games by game time
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -194,6 +292,12 @@ function GAMECENTER_AnnounceSortByTime()
 		GameCenterObj.Announce.add(AnnounceItem.Player, AnnounceItem.Rating, (AnnounceItem.Time/60), AnnounceItem.Inc, AnnounceItem.Category, AnnounceItem.Rated, AnnounceItem.Private, AnnounceItem.Id);
 	}
 }
+/**
+* @brief	Sort announced games by game increment
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -211,6 +315,12 @@ function GAMECENTER_AnnounceSortByInc()
 		GameCenterObj.Announce.add(AnnounceItem.Player, AnnounceItem.Rating, (AnnounceItem.Time/60), AnnounceItem.Inc, AnnounceItem.Category, AnnounceItem.Rated, AnnounceItem.Private, AnnounceItem.Id);
 	}
 }
+/**
+* @brief	Sort announced games by game rated
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -228,6 +338,12 @@ function GAMECENTER_AnnounceSortByRated()
 		GameCenterObj.Announce.add(AnnounceItem.Player, AnnounceItem.Rating, (AnnounceItem.Time/60), AnnounceItem.Inc, AnnounceItem.Category, AnnounceItem.Rated, AnnounceItem.Private, AnnounceItem.Id);
 	}
 }
+/**
+* @brief	Sort announced games by game private
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_AnnounceSortByPrivate()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -246,8 +362,12 @@ function GAMECENTER_AnnounceSortByPrivate()
 	}
 }
 
-////////
-
+/**
+* @brief	Sort postponed games by username
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -269,6 +389,12 @@ function GAMECENTER_PostponeSortByUsername()
 
 }
 
+/**
+* @brief	Sort postponed games by user's rating
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -289,6 +415,12 @@ function GAMECENTER_PostponeSortByRating()
 	}
 }
 
+/**
+* @brief	Sort postponed games by game category
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -310,6 +442,12 @@ function GAMECENTER_PostponeSortByCategory()
 
 
 }
+/**
+* @brief	Sort postponed games by game time
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -329,6 +467,12 @@ function GAMECENTER_PostponeSortByTime()
 		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
 	}
 }
+/**
+* @brief	Sort postponed games by game increment
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -349,6 +493,12 @@ function GAMECENTER_PostponeSortByInc()
 	}
 }
 
+/**
+* @brief	Sort postponed games by game postpone date
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_PostponeSortByDate()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -368,7 +518,13 @@ function GAMECENTER_PostponeSortByDate()
 		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
 	}
 }
-///////////////
+
+/**
+* @brief	Sort current games by white player's rating
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByWRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -387,6 +543,12 @@ function GAMECENTER_CurrentGamesSortByWRating()
 	}
 }
 
+/**
+* @brief	Sort current games by black player's rating
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByBRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -404,6 +566,12 @@ function GAMECENTER_CurrentGamesSortByBRating()
 		GameCenterObj.CurrentGames.add(CurrentGamesItem.WPlayer, CurrentGamesItem.WRating, CurrentGamesItem.BPlayer,  CurrentGamesItem.BRating, CurrentGamesItem.Category, CurrentGamesItem.Time, CurrentGamesItem.Rated, CurrentGamesItem.Moves, CurrentGamesItem.Id);
 	}
 }
+/**
+* @brief	Sort current games by game category
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -421,6 +589,12 @@ function GAMECENTER_CurrentGamesSortByCategory()
 		GameCenterObj.CurrentGames.add(CurrentGamesItem.WPlayer, CurrentGamesItem.WRating, CurrentGamesItem.BPlayer,  CurrentGamesItem.BRating, CurrentGamesItem.Category, CurrentGamesItem.Time, CurrentGamesItem.Rated, CurrentGamesItem.Moves, CurrentGamesItem.Id);
 	}
 }
+/**
+* @brief	Sort current games by game time
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -438,6 +612,12 @@ function GAMECENTER_CurrentGamesSortByTime()
 		GameCenterObj.CurrentGames.add(CurrentGamesItem.WPlayer, CurrentGamesItem.WRating, CurrentGamesItem.BPlayer,  CurrentGamesItem.BRating, CurrentGamesItem.Category, CurrentGamesItem.Time, CurrentGamesItem.Rated, CurrentGamesItem.Moves, CurrentGamesItem.Id);
 	}
 }
+/**
+* @brief	Sort current games by players moves done
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByMoves()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -455,6 +635,12 @@ function GAMECENTER_CurrentGamesSortByMoves()
 		GameCenterObj.CurrentGames.add(CurrentGamesItem.WPlayer, CurrentGamesItem.WRating, CurrentGamesItem.BPlayer,  CurrentGamesItem.BRating, CurrentGamesItem.Category, CurrentGamesItem.Time, CurrentGamesItem.Rated, CurrentGamesItem.Moves, CurrentGamesItem.Id);
 	}
 }
+/**
+* @brief	Sort current games by game rated
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_CurrentGamesSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -472,7 +658,13 @@ function GAMECENTER_CurrentGamesSortByRated()
 		GameCenterObj.CurrentGames.add(CurrentGamesItem.WPlayer, CurrentGamesItem.WRating, CurrentGamesItem.BPlayer,  CurrentGamesItem.BRating, CurrentGamesItem.Category, CurrentGamesItem.Time, CurrentGamesItem.Rated, CurrentGamesItem.Moves, CurrentGamesItem.Id);
 	}
 }
-////////
+
+/**
+* @brief	Sort challenges by username
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -497,6 +689,13 @@ function GAMECENTER_MatchOfferSortByUsername()
 		}
 	}
 }
+
+/**
+* @brief	Sort challenges by game time
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -522,6 +721,12 @@ function GAMECENTER_MatchOfferSortByTime()
 
 	}
 }
+/**
+* @brief	Sort challenges by game increment
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -548,6 +753,12 @@ function GAMECENTER_MatchOfferSortByInc()
 
 	}
 }
+/**
+* @brief	Sort challenges by game category
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -573,6 +784,12 @@ function GAMECENTER_MatchOfferSortByCategory()
 
 	}
 }
+/**
+* @brief	Sort challenges by user's rating
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -598,6 +815,12 @@ function GAMECENTER_MatchOfferSortByRating()
 
 	}
 }
+/**
+* @brief	Sort challenges by game rated
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
@@ -622,6 +845,12 @@ function GAMECENTER_MatchOfferSortByRated()
 		}
 	}
 }
+/**
+* @brief	Sort challenges by game private
+*
+* @return       none
+* @author       Rubens
+*/
 function GAMECENTER_MatchOfferSortByPrivate()
 {
 	var GameCenterObj = MainData.GetGamecenter();

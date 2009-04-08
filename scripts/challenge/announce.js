@@ -15,8 +15,8 @@
 */      
 
 /**
- * @file 	announce.js
- * @brief	Functions to parse announces offered and receive.
+ * @file 	challenge/announce.js
+ * @brief	Functions to parse announces offered and receive
  *
  * See interface announce window (scripts/interface/announce.js), data
  * methods to announce list (scripts/data/data.js) and window announce
@@ -24,7 +24,11 @@
  */
 
 /**
- * Handle announce list
+ * @brief 	Parse XML with announced games list and show in interface
+ *
+ * @param	XML	XML with adjourned games
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_HandleAnnounce(XML)
 {
@@ -116,14 +120,20 @@ function ANNOUNCE_HandleAnnounce(XML)
 }
 
 /**
- * Handle announce start game
+ * @brief 	Parse XML with start announced game 
+ *
+ * Parse XML with announced game and start game with some player
+ *
+ * @param	XML	XML with start announced game
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_HandleAnnounceGame(XML)
 {
 	var Id = XML.getAttribute("id");
 
 	var GameRoomTag, Room;
-
+	var GameRoom;
 	var Buffer = "";
 	var MyUsername = MainData.GetUsername();
 
@@ -138,8 +148,12 @@ function ANNOUNCE_HandleAnnounceGame(XML)
 
 	return Buffer;
 }
-/*
- * Handle announce error messages
+/**
+ * @brief 	Parse XML with announces errors
+ *
+ * @param	XML	XML with announce errors
+ * @return	Buffer with other XMPP to send
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_HandleAnnounceError(XML)
 {
@@ -161,7 +175,6 @@ function ANNOUNCE_HandleAnnounceError(XML)
 		switch(Type)
 		{
 			case "modify":
-				//WINDOW_Alert("Announce error","Announce non exists anymore");
 				WINDOW_Alert(UTILS_GetText("announce_accept_error"),UTILS_GetText("announce_non_exist"));
 				// Remove announce
 				ANNOUNCE_RemoveAnnounce(AnnounceId);
@@ -171,8 +184,17 @@ function ANNOUNCE_HandleAnnounceError(XML)
 }
 
 /*
- * Send a message to create a announce with players parameters
- */
+ * @brief	Send a message to create a announce with players parameters
+ * @param	Username	Username string
+ * @param	Color		Player Color (white, black or random)
+ * @param	Time		Game time in minutes
+ * @param	Inc		Game increment time in seconds
+ * @param	Rated		Flag to set rated game
+ * @param	Min		Minimun rating interval
+ * @param	Max		Maximun rating interval
+ * @return	Boolean		True and false
+ * @author	Rubens Suguimoto
+*/
 function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min, Max)
 {
 	var Autoflag = "true";
@@ -212,8 +234,11 @@ function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min,
 }
 
 /*
- * Send a message to get announced games
- */
+ * @brief	Send a message to get announced games
+ * @return	none
+ * @author	Rubens Suguimoto
+*/
+
 function ANNOUNCE_GetAnnounceGames()
 {
 	var XMPP = "";
@@ -233,12 +258,20 @@ function ANNOUNCE_GetAnnounceGames()
 }
 
 /*
- * Add a announce in data struct and show in challenge menu
+ * @brief	Add a announce in data struct and show in challenge menu
+ * @param	Username	Username string
+ * @param	Color		Player Color (white, black or random)
+ * @param	Time		Game time in minutes
+ * @param	Inc		Game increment time in seconds
+ * @param	Rated		Flag to set rated game
+ * @param	Private		Flag to set private game
+ * @param	AnnounceId	Announce identification number (integer)
+ * @return	none
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Private, AnnounceId)
 {
 	var Player = new Object();
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
 	var Rating;
 
@@ -254,18 +287,16 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Priva
 		if(Rating == null)
 		{
 			Rating = 1500;
-		}	
+		}
 	
 		MainData.AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId)
 		if(Category != "untimed")
 		{
-			//ChallengeMenu.addAnnounce(Player, Time/60, Inc, Rated, "true", AnnounceId);
 			GameCenter.Announce.add(Player, Rating, Time/60, Inc, Category, Rated, Private, AnnounceId);
 		}
 		else
 		{
 			// Infinit symbol
-			//ChallengeMenu.addAnnounce(Player, "&#8734", Inc, Rated, "true", AnnounceId);
 			GameCenter.Announce.add(Player, Rating, "&#8734", Inc, Category, Rated, Private, AnnounceId);
 		}
 
@@ -273,21 +304,28 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Priva
 }
 
 /*
- * Remove a announce in data struct and challenge menu using announce id
- * but don't send a message to cancel anounce
+ * @brief Remove a announce from interface
+ *
+ * Remomve announce from interface using announce id but don't send a message to cancel announce in the server
+ *
+ * @param	Id	Announce identification number (integer)
+ * @return	none
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_RemoveAnnounce(Id)
 {
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
 
 	MainData.RemoveAnnounce(Id);
-//	ChallengeMenu.removeAnnounce(Id);
 	GameCenter.Announce.remove(Id);
 }
 
 /*
- * Sena a message to cancel announce using announce id
+ * @brief	Remove announce from interface and send a message to cancel announce
+ *
+ * @param	Id	Announce identification number (integer)
+ * @return	none
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_CancelAnnounce(Id)
 {
@@ -301,7 +339,10 @@ function ANNOUNCE_CancelAnnounce(Id)
 }
 
 /*
- * Send a message to accept some announce using announce id
+ * @brief	Send a message to accept some announce using announce id
+ * @param	Id	Announce identification number (integer)
+ * @return	none
+ * @author	Rubens Suguimoto
  */
 function ANNOUNCE_AcceptAnnounce(Id)
 {
@@ -312,35 +353,12 @@ function ANNOUNCE_AcceptAnnounce(Id)
 	CONNECTION_SendJabber(XMPP);
 }
 
-/*
-function ANNOUNCE_ShowLoadingAnnounce()
-{	
-//	var ChallengeMenu = MainData.GetChallengeMenu();
-//	ChallengeMenu.showLoadingAnnounce();
-}
-
-function ANNOUNCE_HideLoadingAnnounce()
-{
-//	var ChallengeMenu = MainData.GetChallengeMenu();
-//	ChallengeMenu.hideLoadingAnnounce();
-}
-
-function ANNOUNCE_ShowNoAnnounce()
-{
-	var ChallengeMenu = MainData.GetChallengeMenu();
-	ChallengeMenu.showNoAnnounce();
-}
-
-function ANNOUNCE_HideNoAnnounce()
-{
-//	var ChallengeMenu = MainData.GetChallengeMenu();
-//	ChallengeMenu.hideNoAnnounce();
-}
-*/
 /**
  * @brief	Remove all announces from main data and interface
+ * 
+ * Don't send a message to cancel all announce
  *
- * @return	Empty string
+ * @return	none
  * @author	Rubens Suguimoto
  */
 function ANNOUNCE_ClearAnnounce()
@@ -364,17 +382,21 @@ function ANNOUNCE_ClearAnnounce()
 	}
 }
 
+/**
+ * @brief	Cancel all announces made by you
+ * @return	none
+ * @author	Rubens Suguimoto
+ */
 function ANNOUNCE_CancelAllAnnounce()
 {
 	var i;
 	var AnnounceId;
 	var AnnounceList = MainData.GetAnnounceList();
 
-	// Remove all announce from challenge menu and data struct
+	// Cancel all announces from interface
 	for(i=AnnounceList.length-1;i>= 0; i--)
 	{
 		AnnounceId = AnnounceList[i].Id;
-		//ChallengeWindow = AnnounceList[i].Window;
 
 		if(AnnounceId != null)
 		{
@@ -385,7 +407,12 @@ function ANNOUNCE_CancelAllAnnounce()
 	}
 }
 
-// Accept a random announce in announce list;
+/*
+ * @brief	Accept a random announced game to play
+ * 
+ * @return	none
+ * @author	Rubens Suguimoto
+*/
 function ANNOUNCE_AcceptRandomAnnounce()
 {
 	var AnnounceList = MainData.GetAnnounceList();
@@ -394,6 +421,8 @@ function ANNOUNCE_AcceptRandomAnnounce()
 	var TmpAnnounceList = new Array();
 	
 	// Get all others players announces in announce list
+	// This is necessary because your announce and others players
+	// announce are put in the same array
 	i=0;
 	for(i=0; i<AnnounceList.length ; i++)
 	{
@@ -415,6 +444,7 @@ function ANNOUNCE_AcceptRandomAnnounce()
 		{
 			i = (Math.floor(Math.random()*10) % TmpAnnounceList.length)
 		}
+		//TODO -> set language XML here
 		WINDOW_Alert(i, "Iniciando jogo com: "+TmpAnnounceList[i].Player.Name);
 		ANNOUNCE_AcceptAnnounce(TmpAnnounceList[i].Id)
 	}

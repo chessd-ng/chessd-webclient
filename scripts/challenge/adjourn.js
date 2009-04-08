@@ -16,7 +16,7 @@
 
 
 /**
- * @file 	adjourn.js
+ * @file 	challenge/adjourn.js
  * @brief	Functions to parse adjourned games message and show result
  * 		in interface
  *
@@ -27,7 +27,7 @@
 */
 
 /**
- * @brief 	Parse XML with adjourned games list and show in challenge menu
+ * @brief 	Parse XML with adjourned games list and show in interface
  *
  * @param	XML	XML with adjourned games
  * @return	Buffer with other XMPP to send
@@ -36,14 +36,12 @@
 function CHALLENGE_HandleAdjourn(XML)
 {
 	var Query = XML.getElementsByTagName("query");
-	var Xmlns;
 	var Buffer = "";
 	
 	var AdjournList = XML.getElementsByTagName("game");
 	var Game, Players;
 	var Player1, Player2;
 	var AdjournId, Category, Date;
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
 	var Status;
 
@@ -118,8 +116,7 @@ function CHALLENGE_HandleAdjourn(XML)
 				// Add in main data postpone list
 				MainData.AddPostpone(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, Status, AdjournId);
 
-				// Add in challenge menu
-				//ChallengeMenu.addPostpone(Player2, Category, Date, AdjournId);
+				// Show this postpone game in interface
 				GameCenter.Postpone.add(Player2, Player2.Time, Player2.Inc, Category, P2Rating, Date, AdjournId);
 
 
@@ -141,17 +138,13 @@ function CHALLENGE_HandleAdjourn(XML)
 				// Add in main data postpone list
 				MainData.AddPostpone(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, Status, AdjournId);
 
-				// Add in challenge menu
-				//ChallengeMenu.addPostpone(Player1, Category, Date, AdjournId);
+				// Show this postpone game in interface
 				GameCenter.Postpone.add(Player1, Player1.Time, Player1.Inc, Category, P1Rating, Date, AdjournId);
 
 				CHALLENGE_PostponePresence(Player1.Name, Status);
 			}
 		}
 	}
-
-	// Show postpone games
-	//ChallengeMenu.showPostpone();
 
 	return Buffer;
 }
@@ -176,7 +169,6 @@ function CHALLENGE_HandlePresence(XML)
 	Username = XML.getAttribute("from").split("/")[1];
 	StatusType = XML.getAttribute("type");
 
-	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
 	if(StatusType == "unavailable")
 	{
 		Status = "offline";
@@ -199,23 +191,21 @@ function CHALLENGE_HandlePresence(XML)
  * @brief	Update status of user in postpone list
  *
  * @param	Username	Name used by user
+ * @param	PresenceType	User status (offline or others status)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
 function CHALLENGE_PostponePresence(Username, PresenceType)
 {
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
-	//FIX -> CHANGE PRESENCE TYPE "offline" TO "unavailable"
+
 	//If user is founded, set adjourn game to available, else unavailable
 	if(PresenceType == "offline")
 	{
-//		ChallengeMenu.updatePostpone(Username, "offline");
 		GameCenter.Postpone.update(Username, "offline");
 	}
 	else
 	{
-//		ChallengeMenu.updatePostpone(Username, "online");
 		GameCenter.Postpone.update(Username, "online");
 	}
 	return "";
@@ -299,11 +289,9 @@ function CHALLENGE_GetAdjournGames()
 
 function CHALLENGE_RemovePostpone(Id)
 {
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
 
 	MainData.RemovePostpone(Id);
-	//ChallengeMenu.removePostpone(Id);
 	GameCenter.Postpone.remove(Id);
 
 	return "";

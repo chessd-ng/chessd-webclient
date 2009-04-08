@@ -16,10 +16,17 @@
 
 
 /**
-* Parse chat messages received from jabber
+* @file		parser/parser_chat.js
+* @brief	Parse chat messages received from jabber
 */
 
-
+/*
+* @brief	Parse a chat XMPP message
+*
+* @param	XML	XMPP with chat message
+* @return	XMPP message to send
+* @author	Ulysses Bomfim
+*/
 function PARSER_ParseChat(XML)
 {
 	var Type = XML.getAttribute("type");

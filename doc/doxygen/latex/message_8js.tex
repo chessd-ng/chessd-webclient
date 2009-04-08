@@ -1,0 +1,1264 @@
+\section{/home/www/rubens/webclient/scripts/xmpp\_\-messages/message.js File Reference}
+\label{message_8js}\index{/home/www/rubens/webclient/scripts/xmpp\_\-messages/message.js@{/home/www/rubens/webclient/scripts/xmpp\_\-messages/message.js}}
+Contain all functions to create XMPP messages. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf MESSAGE\_\-MakeXMPP} (Msg)
+\begin{CompactList}\small\item\em Append XMPP body to messages (used to BOSH control). \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-EndConnection} (Unavailable)
+\begin{CompactList}\small\item\em Create a terminate connection with BOSH message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Wait} ()
+\begin{CompactList}\small\item\em Create a wait message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-StartConnection} ()
+\begin{CompactList}\small\item\em Create first message to open a connection with Jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-SendUsername} ()
+\begin{CompactList}\small\item\em Create message with first authentication step. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-SendPasswd} ()
+\begin{CompactList}\small\item\em Create message with second authentication step. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-UserList} ()
+\begin{CompactList}\small\item\em Create a messate to ask for user's jabber contact list. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-RoomList} ()
+\begin{CompactList}\small\item\em Create a message to ask for room list to jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Presence} (To)
+\begin{CompactList}\small\item\em Create a message with Jabber presence. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-ChangeStatus} (NewStatus, RoomName)
+\begin{CompactList}\small\item\em Create a message to change user's status. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Unavailable} (RoomName)
+\begin{CompactList}\small\item\em Create message to logout on jabber or leave from some room. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Chat} (To, Message)
+\begin{CompactList}\small\item\em Create a chat message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GroupChat} (To, Message)
+\begin{CompactList}\small\item\em Create a groupchat message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Info} (User)
+\begin{CompactList}\small\item\em Create message to get user's ratings. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-InfoProfile} (User)
+\begin{CompactList}\small\item\em Create message to get user's ratings profile. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Invite} (To)
+\begin{CompactList}\small\item\em Create message to send a invite to add some user to contact list. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-InviteAccept} (To)
+\begin{CompactList}\small\item\em Create message to send a accept invite to other user. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-InviteDeny} (To)
+\begin{CompactList}\small\item\em Create message to send a resign invite to other user. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-RemoveContact} (User)
+\begin{CompactList}\small\item\em Create message to remove user from your contact list. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-Challenge} (ChallengeID, Category, Rated, Players, MatchID)
+\begin{CompactList}\small\item\em Create message to send a challenge message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-ChallengeAccept} (ChallengeID)
+\begin{CompactList}\small\item\em Create a accept a challenge message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-ChallengeDecline} (ChallengeID)
+\begin{CompactList}\small\item\em Create a decline a challenge message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-ChallengeGetAdjournList} (Num, Offset)
+\begin{CompactList}\small\item\em Create a message to get a adjourn games list. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-ChallengeResumeGame} (Id, ChallengeId)
+\begin{CompactList}\small\item\em Create a message to resume some adjourned game. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRoomList} ()
+\begin{CompactList}\small\item\em Create message to get the list of all games been played. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRoomInfoList} (Room)
+\begin{CompactList}\small\item\em Create message to get the list information of all games been played. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameEnterRoom} (Room)
+\begin{CompactList}\small\item\em Create message used to check if some game exists. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameMove} (Move, GameID, Promotion)
+\begin{CompactList}\small\item\em Create a message to send a game move. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRequestDraw} (GameID)
+\begin{CompactList}\small\item\em Make a draw request. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRequestCancel} (GameID)
+\begin{CompactList}\small\item\em Make a cancel request. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRequestAdjourn} (GameID)
+\begin{CompactList}\small\item\em Make a adjourn request. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameResign} (GameID)
+\begin{CompactList}\small\item\em Make a resign message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameRequests} (Action, GameID)
+\begin{CompactList}\small\item\em Create the game action requests messages to opponent. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameDrawAccept} (GameID)
+\begin{CompactList}\small\item\em Make a draw accept. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameDrawDeny} (GameID)
+\begin{CompactList}\small\item\em Make a draw deny. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameCancelAccept} (GameID)
+\begin{CompactList}\small\item\em Make a cancel accept. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameCancelDeny} (GameID)
+\begin{CompactList}\small\item\em Make a cancel deny. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameAdjournAccept} (GameID)
+\begin{CompactList}\small\item\em Make a adjourn accept. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameAdjournDeny} (GameID)
+\begin{CompactList}\small\item\em Make a adjourn deny. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameResponse} (Action, GameID, Response)
+\begin{CompactList}\small\item\em Create the game actions response messages. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GameSearchCurrentGame} ()
+\begin{CompactList}\small\item\em Create message to search for your's current games. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-SearchUser} (Username, Option)
+\begin{CompactList}\small\item\em Make a search user message. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-KickUserRoom} (Room, To, Role, Reason)
+\begin{CompactList}\small\item\em Create a message to admin kick a user from some room. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-KickUser} (Username, Reason)
+\begin{CompactList}\small\item\em Create a message to kick a user from jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-BanUser} (Username, Reason)
+\begin{CompactList}\small\item\em Create a message to ban a user from jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-UnbanUser} (Username, Reason)
+\begin{CompactList}\small\item\em Create message to unban user from jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GetBanList} ()
+\begin{CompactList}\small\item\em Create message to get a list of all banned users. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GetBannedWords} ()
+\begin{CompactList}\small\item\em Create message to get a list of banned words. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-AddBannedWord} (Word)
+\begin{CompactList}\small\item\em Create a message to ban one word. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-RemoveBannedWord} (Word)
+\begin{CompactList}\small\item\em Create a message to unban some word. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GetProfile} (Username, Id)
+\begin{CompactList}\small\item\em Create a message to get profile of some user. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-SetProfile} (Username, FullName, Desc, ImgType, Img64)
+\begin{CompactList}\small\item\em Create a message to set your profile in Jabber. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GetOldGames} (Id, Jid1, Jid2, NumGames, Offset, Color, To, From)
+\begin{CompactList}\small\item\em Create a message to get old games list with some filters. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-FetchOldGame} (OldGameId)
+\begin{CompactList}\small\item\em Create a message to see some old game. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-AnnounceMatch} (Player, Rated, Category, Min, Max, Autoflag)
+\begin{CompactList}\small\item\em Create a message to announce a match. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-GetAnnounceMatch} (Offset, NumResult, MinTime, MaxTime, Category, User)
+\begin{CompactList}\small\item\em Create a message get announced matchs list with some parameters. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-RemoveAnnounceMatch} (Id)
+\begin{CompactList}\small\item\em Create a message cancel one of your announced match. \item\end{CompactList}\item 
+function {\bf MESSAGE\_\-AcceptAnnounceMatch} (Id)
+\begin{CompactList}\small\item\em Create a message accept some announced match. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Contain all functions to create XMPP messages. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software
+
+Create all messages used both Jabber and Chess Server (see Chess server XMPP protocol) 
+
+\subsection{Function Documentation}
+\index{message.js@{message.js}!MESSAGE\_\-AcceptAnnounceMatch@{MESSAGE\_\-AcceptAnnounceMatch}}
+\index{MESSAGE\_\-AcceptAnnounceMatch@{MESSAGE\_\-AcceptAnnounceMatch}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-AcceptAnnounceMatch]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-AcceptAnnounceMatch ( {\em Id})}\label{message_8js_3e9b8f97d1fc201e5408feedb3edfc0b}
+
+
+Create a message accept some announced match. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Id}]Announce match identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ANNOUNCE\_\-AcceptAnnounce().\index{message.js@{message.js}!MESSAGE\_\-AddBannedWord@{MESSAGE\_\-AddBannedWord}}
+\index{MESSAGE\_\-AddBannedWord@{MESSAGE\_\-AddBannedWord}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-AddBannedWord]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-AddBannedWord ( {\em Word})}\label{message_8js_2d4c710cfc9fc0974d761c28c7972ca8}
+
+
+Create a message to ban one word. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Word}]Word string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-BanWord().\index{message.js@{message.js}!MESSAGE\_\-AnnounceMatch@{MESSAGE\_\-AnnounceMatch}}
+\index{MESSAGE\_\-AnnounceMatch@{MESSAGE\_\-AnnounceMatch}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-AnnounceMatch]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-AnnounceMatch ( {\em Player}, \/   {\em Rated}, \/   {\em Category}, \/   {\em Min}, \/   {\em Max}, \/   {\em Autoflag})}\label{message_8js_b8988109d79215d99b079fd3cd1a2dc1}
+
+
+Create a message to announce a match. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Player}]Player Object(Username, color, time, increment) \item[{\em Rated}]Rated game flag \item[{\em Category}]Game category \item[{\em Min}]Minimum rating interval \item[{\em Max}]Maximun rating interval \item[{\em Autoflag}]Flag to set game over when some player time's end \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ANNOUNCE\_\-SendAnnounce().\index{message.js@{message.js}!MESSAGE\_\-BanUser@{MESSAGE\_\-BanUser}}
+\index{MESSAGE\_\-BanUser@{MESSAGE\_\-BanUser}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-BanUser]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-BanUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_39fee462e2b3bd9e308e56f977ac1277}
+
+
+Create a message to ban a user from jabber. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Reason}]Reason to ban this user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-BanUser().\index{message.js@{message.js}!MESSAGE\_\-Challenge@{MESSAGE\_\-Challenge}}
+\index{MESSAGE\_\-Challenge@{MESSAGE\_\-Challenge}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Challenge]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Challenge ( {\em ChallengeID}, \/   {\em Category}, \/   {\em Rated}, \/   {\em Players}, \/   {\em MatchID})}\label{message_8js_fa4a7be62c8d23923afafc7ba646763f}
+
+
+Create message to send a challenge message. 
+
+Should be extended to support Bughouse with more two players. The Player's structure has the following fields:\begin{itemize}
+\item Name\item Color\item Inc\item Time The 'Color' field must contain just the first letter of color\end{itemize}
+
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ChallengeID}]Challenge identification number (integer) \item[{\em Category}]Game cateory \item[{\em Rated}]Game rated flag \item[{\em Players}]List of Players Object(with username, color, increment, time) \item[{\em MatchID}]Match identification number (integer) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-SendChallenge(), and CHALLENGE\_\-SendReChallenge().\index{message.js@{message.js}!MESSAGE\_\-ChallengeAccept@{MESSAGE\_\-ChallengeAccept}}
+\index{MESSAGE\_\-ChallengeAccept@{MESSAGE\_\-ChallengeAccept}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-ChallengeAccept]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-ChallengeAccept ( {\em ChallengeID})}\label{message_8js_b117674f09b9b6995025849ecb244911}
+
+
+Create a accept a challenge message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ChallengeID}]Challenge identification number (integer) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-AcceptChallenge().\index{message.js@{message.js}!MESSAGE\_\-ChallengeDecline@{MESSAGE\_\-ChallengeDecline}}
+\index{MESSAGE\_\-ChallengeDecline@{MESSAGE\_\-ChallengeDecline}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-ChallengeDecline]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-ChallengeDecline ( {\em ChallengeID})}\label{message_8js_0c419de4ae9cb41e2f41500b2fc8539b}
+
+
+Create a decline a challenge message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em ChallengeID}]Challenge identification number (integer) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-DeclineChallenge().\index{message.js@{message.js}!MESSAGE\_\-ChallengeGetAdjournList@{MESSAGE\_\-ChallengeGetAdjournList}}
+\index{MESSAGE\_\-ChallengeGetAdjournList@{MESSAGE\_\-ChallengeGetAdjournList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-ChallengeGetAdjournList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-ChallengeGetAdjournList ( {\em Num}, \/   {\em Offset})}\label{message_8js_164d9de6f1c3ca9cc7998ac269ef5146}
+
+
+Create a message to get a adjourn games list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Num}]Number of adjourned games to get (integer) \item[{\em Offset}]Offset base of adjourn list \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-GetAdjournGames(), and GAMECENTER\_\-ShowPostpone().\index{message.js@{message.js}!MESSAGE\_\-ChallengeResumeGame@{MESSAGE\_\-ChallengeResumeGame}}
+\index{MESSAGE\_\-ChallengeResumeGame@{MESSAGE\_\-ChallengeResumeGame}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-ChallengeResumeGame]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-ChallengeResumeGame ( {\em Id}, \/   {\em ChallengeId})}\label{message_8js_7d5928e100fb325ca3a7d03ca1b6aa90}
+
+
+Create a message to resume some adjourned game. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Id}]Adjourned game identification number (integer) \item[{\em ChallengeId}]XMPP challenge identification number (integer) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-SendResumeGame().\index{message.js@{message.js}!MESSAGE\_\-ChangeStatus@{MESSAGE\_\-ChangeStatus}}
+\index{MESSAGE\_\-ChangeStatus@{MESSAGE\_\-ChangeStatus}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-ChangeStatus]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-ChangeStatus ( {\em NewStatus}, \/   {\em RoomName})}\label{message_8js_9ff04c171b60310cde9893678ce48e31}
+
+
+Create a message to change user's status. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em NewStatus}]New user's status \item[{\em RoomName}]Room's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[See also:]\doxyref{scripts/contact/status.js}{p.}{status_8js} for user's status types \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by CHALLENGE\_\-HandleAccept(), and CONTACT\_\-ChangeStatus().\index{message.js@{message.js}!MESSAGE\_\-Chat@{MESSAGE\_\-Chat}}
+\index{MESSAGE\_\-Chat@{MESSAGE\_\-Chat}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Chat]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Chat ( {\em To}, \/   {\em Message})}\label{message_8js_b3979c65a74441123f88ed7b5d2eb8c1}
+
+
+Create a chat message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]Message user destiny \item[{\em Message}]Chat text \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CHAT\_\-SendMessage().\index{message.js@{message.js}!MESSAGE\_\-EndConnection@{MESSAGE\_\-EndConnection}}
+\index{MESSAGE\_\-EndConnection@{MESSAGE\_\-EndConnection}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-EndConnection]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-EndConnection ( {\em Unavailable})}\label{message_8js_a93a1d9b906948900cc3e3b71af2dd2a}
+
+
+Create a terminate connection with BOSH message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Unavailable}]Message with presence unavailable to Jabber or rooms \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData.
+
+Referenced by LOGIN\_\-LeavePage(), and LOGIN\_\-Logout().\index{message.js@{message.js}!MESSAGE\_\-FetchOldGame@{MESSAGE\_\-FetchOldGame}}
+\index{MESSAGE\_\-FetchOldGame@{MESSAGE\_\-FetchOldGame}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-FetchOldGame]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-FetchOldGame ( {\em OldGameId})}\label{message_8js_5110bb74988f8fde9525ce39ced0672c}
+
+
+Create a message to see some old game. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em OldGameId}]Oldgame identification number (integer) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by INTERFACE\_\-AddOldGameResult().\index{message.js@{message.js}!MESSAGE\_\-GameAdjournAccept@{MESSAGE\_\-GameAdjournAccept}}
+\index{MESSAGE\_\-GameAdjournAccept@{MESSAGE\_\-GameAdjournAccept}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameAdjournAccept]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameAdjournAccept ( {\em GameID})}\label{message_8js_1508987c3371805c2aa02a18f49b577e}
+
+
+Make a adjourn accept. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleAdjourn().\index{message.js@{message.js}!MESSAGE\_\-GameAdjournDeny@{MESSAGE\_\-GameAdjournDeny}}
+\index{MESSAGE\_\-GameAdjournDeny@{MESSAGE\_\-GameAdjournDeny}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameAdjournDeny]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameAdjournDeny ( {\em GameID})}\label{message_8js_cf5356e9ffd3a13619379fac964c3cd6}
+
+
+Make a adjourn deny. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleAdjourn().\index{message.js@{message.js}!MESSAGE\_\-GameCancelAccept@{MESSAGE\_\-GameCancelAccept}}
+\index{MESSAGE\_\-GameCancelAccept@{MESSAGE\_\-GameCancelAccept}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameCancelAccept]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameCancelAccept ( {\em GameID})}\label{message_8js_a3a5c8e15b6523a7cfa5d04673a48168}
+
+
+Make a cancel accept. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleCancel().\index{message.js@{message.js}!MESSAGE\_\-GameCancelDeny@{MESSAGE\_\-GameCancelDeny}}
+\index{MESSAGE\_\-GameCancelDeny@{MESSAGE\_\-GameCancelDeny}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameCancelDeny]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameCancelDeny ( {\em GameID})}\label{message_8js_c23da492ade5343d942818a50eccf9ff}
+
+
+Make a cancel deny. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleCancel().\index{message.js@{message.js}!MESSAGE\_\-GameDrawAccept@{MESSAGE\_\-GameDrawAccept}}
+\index{MESSAGE\_\-GameDrawAccept@{MESSAGE\_\-GameDrawAccept}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameDrawAccept]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameDrawAccept ( {\em GameID})}\label{message_8js_afa3baa6baaf9dbec7c7553f1ed8c520}
+
+
+Make a draw accept. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleDraw().\index{message.js@{message.js}!MESSAGE\_\-GameDrawDeny@{MESSAGE\_\-GameDrawDeny}}
+\index{MESSAGE\_\-GameDrawDeny@{MESSAGE\_\-GameDrawDeny}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameDrawDeny]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameDrawDeny ( {\em GameID})}\label{message_8js_c74885a34eb815f0be92a7f01561a3a1}
+
+
+Make a draw deny. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameResponse().
+
+Referenced by GAME\_\-HandleDraw().\index{message.js@{message.js}!MESSAGE\_\-GameEnterRoom@{MESSAGE\_\-GameEnterRoom}}
+\index{MESSAGE\_\-GameEnterRoom@{MESSAGE\_\-GameEnterRoom}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameEnterRoom]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameEnterRoom ( {\em Room})}\label{message_8js_fb7b6a70059458b6ad7f015c61329d3f}
+
+
+Create message used to check if some game exists. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Room}]Room's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by INTERFACE\_\-AddCurrentGames().\index{message.js@{message.js}!MESSAGE\_\-GameMove@{MESSAGE\_\-GameMove}}
+\index{MESSAGE\_\-GameMove@{MESSAGE\_\-GameMove}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameMove]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameMove ( {\em Move}, \/   {\em GameID}, \/   {\em Promotion})}\label{message_8js_3ee8a8d74618398a77539f1c438e14c0}
+
+
+Create a message to send a game move. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Move}]Chess Move \item[{\em GameID}]Game room name Identification \item[{\em Promotion}]Promotion piece used to change pawn \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by GAME\_\-SendMove().\index{message.js@{message.js}!MESSAGE\_\-GameRequestAdjourn@{MESSAGE\_\-GameRequestAdjourn}}
+\index{MESSAGE\_\-GameRequestAdjourn@{MESSAGE\_\-GameRequestAdjourn}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRequestAdjourn]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRequestAdjourn ( {\em GameID})}\label{message_8js_235e0d28f2b35b8d957c34dbd887a080}
+
+
+Make a adjourn request. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameRequests().
+
+Referenced by GAME\_\-SendAdjourn().\index{message.js@{message.js}!MESSAGE\_\-GameRequestCancel@{MESSAGE\_\-GameRequestCancel}}
+\index{MESSAGE\_\-GameRequestCancel@{MESSAGE\_\-GameRequestCancel}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRequestCancel]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRequestCancel ( {\em GameID})}\label{message_8js_e57513b17c82c43bd2dcd6fc29df4c39}
+
+
+Make a cancel request. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameRequests().
+
+Referenced by GAME\_\-SendCancel().\index{message.js@{message.js}!MESSAGE\_\-GameRequestDraw@{MESSAGE\_\-GameRequestDraw}}
+\index{MESSAGE\_\-GameRequestDraw@{MESSAGE\_\-GameRequestDraw}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRequestDraw]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRequestDraw ( {\em GameID})}\label{message_8js_b679a2a5fef5e42e10c96d2ab998be89}
+
+
+Make a draw request. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameRequests().
+
+Referenced by GAME\_\-SendDraw().\index{message.js@{message.js}!MESSAGE\_\-GameRequests@{MESSAGE\_\-GameRequests}}
+\index{MESSAGE\_\-GameRequests@{MESSAGE\_\-GameRequests}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRequests]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRequests ( {\em Action}, \/   {\em GameID})}\label{message_8js_de3312d721855b900f6aab37cf50dc0f}
+
+
+Create the game action requests messages to opponent. 
+
+Action can be \char`\"{}Draw\char`\"{}, \char`\"{}Cancel\char`\"{}, \char`\"{}Adjourn\char`\"{} and \char`\"{}Resign\char`\"{}.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Action}]String with action to do when playing some game \item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by MESSAGE\_\-GameRequestAdjourn(), MESSAGE\_\-GameRequestCancel(), MESSAGE\_\-GameRequestDraw(), and MESSAGE\_\-GameResign().\index{message.js@{message.js}!MESSAGE\_\-GameResign@{MESSAGE\_\-GameResign}}
+\index{MESSAGE\_\-GameResign@{MESSAGE\_\-GameResign}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameResign]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameResign ( {\em GameID})}\label{message_8js_881abd486d12e2add61b68c3f24b61cc}
+
+
+Make a resign message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em GameID}]Game room name Identification \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MESSAGE\_\-GameRequests().
+
+Referenced by GAME\_\-SendResign().\index{message.js@{message.js}!MESSAGE\_\-GameResponse@{MESSAGE\_\-GameResponse}}
+\index{MESSAGE\_\-GameResponse@{MESSAGE\_\-GameResponse}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameResponse]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameResponse ( {\em Action}, \/   {\em GameID}, \/   {\em Response})}\label{message_8js_d8ca95a0f368586405a8e6c1dfee11c0}
+
+
+Create the game actions response messages. 
+
+Action can be \char`\"{}Draw\char`\"{}, \char`\"{}Cancel\char`\"{} and \char`\"{}Adjourn\char`\"{}.
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Action}]String with action to do when playing some game \item[{\em GameID}]Game room name Identification \item[{\em Response}]Create a response with accept ou decline (\char`\"{}\char`\"{} = accept or \char`\"{}-decline\char`\"{} = decline) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by MESSAGE\_\-GameAdjournAccept(), MESSAGE\_\-GameAdjournDeny(), MESSAGE\_\-GameCancelAccept(), MESSAGE\_\-GameCancelDeny(), MESSAGE\_\-GameDrawAccept(), and MESSAGE\_\-GameDrawDeny().\index{message.js@{message.js}!MESSAGE\_\-GameRoomInfoList@{MESSAGE\_\-GameRoomInfoList}}
+\index{MESSAGE\_\-GameRoomInfoList@{MESSAGE\_\-GameRoomInfoList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRoomInfoList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRoomInfoList ( {\em Room})}\label{message_8js_dd6b44b9bff1e4a0e0bb6b7231a43495}
+
+
+Create message to get the list information of all games been played. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Room}]Room's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CURRENTGAME\_\-HandleGameRoomList().\index{message.js@{message.js}!MESSAGE\_\-GameRoomList@{MESSAGE\_\-GameRoomList}}
+\index{MESSAGE\_\-GameRoomList@{MESSAGE\_\-GameRoomList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameRoomList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameRoomList ()}\label{message_8js_873a668f45ffa58e81aeb1a7073add17}
+
+
+Create message to get the list of all games been played. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by GAMECENTER\_\-ShowCurrentGames(), and INTERFACE\_\-CreateGameCenterCurrentGames().\index{message.js@{message.js}!MESSAGE\_\-GameSearchCurrentGame@{MESSAGE\_\-GameSearchCurrentGame}}
+\index{MESSAGE\_\-GameSearchCurrentGame@{MESSAGE\_\-GameSearchCurrentGame}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GameSearchCurrentGame]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GameSearchCurrentGame ()}\label{message_8js_af5be28a98de656c9852cdaff9f0e6e9}
+
+
+Create message to search for your's current games. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by GAME\_\-SearchCurrentGame().\index{message.js@{message.js}!MESSAGE\_\-GetAnnounceMatch@{MESSAGE\_\-GetAnnounceMatch}}
+\index{MESSAGE\_\-GetAnnounceMatch@{MESSAGE\_\-GetAnnounceMatch}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GetAnnounceMatch]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetAnnounceMatch ( {\em Offset}, \/   {\em NumResult}, \/   {\em MinTime}, \/   {\em MaxTime}, \/   {\em Category}, \/   {\em User})}\label{message_8js_499ee857db034ddfac572be08a7a92f4}
+
+
+Create a message get announced matchs list with some parameters. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Offset}]List off set of announced matchs \item[{\em NumResult}]Number of announced matchs to be get \item[{\em Category}]Game category \item[{\em MinTime}]Minimum time interval \item[{\em MaxTime}]Maximun time interval \item[{\em User}]Flag to check if you want to get your's own announces \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ANNOUNCE\_\-GetAnnounceGames(), and INTERFACE\_\-CreateGameCenterAnnounce().\index{message.js@{message.js}!MESSAGE\_\-GetBanList@{MESSAGE\_\-GetBanList}}
+\index{MESSAGE\_\-GetBanList@{MESSAGE\_\-GetBanList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GetBanList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetBanList ()}\label{message_8js_aa016847bea4c6fa02d3a6c09960a3b7}
+
+
+Create message to get a list of all banned users. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-GetBanList().\index{message.js@{message.js}!MESSAGE\_\-GetBannedWords@{MESSAGE\_\-GetBannedWords}}
+\index{MESSAGE\_\-GetBannedWords@{MESSAGE\_\-GetBannedWords}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GetBannedWords]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetBannedWords ()}\label{message_8js_303a745f1963c5bebe2c355ce00768ce}
+
+
+Create message to get a list of banned words. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-GetBannedWords().\index{message.js@{message.js}!MESSAGE\_\-GetOldGames@{MESSAGE\_\-GetOldGames}}
+\index{MESSAGE\_\-GetOldGames@{MESSAGE\_\-GetOldGames}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GetOldGames]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetOldGames ( {\em Id}, \/   {\em Jid1}, \/   {\em Jid2}, \/   {\em NumGames}, \/   {\em Offset}, \/   {\em Color}, \/   {\em To}, \/   {\em From})}\label{message_8js_a79486f0b21d18c02627efae77438930}
+
+
+Create a message to get old games list with some filters. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Id}]Oldgame window Id (Quick fix) \item[{\em Jid1}]First player username \item[{\em Jid2}]Second player username \item[{\em NumGames}]Number of games to be search \item[{\em Offset}]List off set of old games \item[{\em Color}]First player color (if not defined, search for all colors) \item[{\em From}]Date begin interval (if not defined, is considerate infinit) \item[{\em To}]Date end interval (if not defined, is considerate infinit) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto and Danilo Yorinori \end{Desc}
+
+
+References MainData.
+
+Referenced by INTERFACE\_\-SetNextButton(), INTERFACE\_\-SetPrevButton(), INTERFACE\_\-SetSearchButton(), and OLDGAME\_\-OpenOldGameWindow().\index{message.js@{message.js}!MESSAGE\_\-GetProfile@{MESSAGE\_\-GetProfile}}
+\index{MESSAGE\_\-GetProfile@{MESSAGE\_\-GetProfile}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GetProfile]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GetProfile ( {\em Username}, \/   {\em Id})}\label{message_8js_2928ced3ca9dd98762c75a408effff70}
+
+
+Create a message to get profile of some user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Id}]XMPP identification attribute \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by GAME\_\-StartGame(), GAME\_\-StartObserverGame(), OLDGAME\_\-StartOldGame(), PROFILE\_\-SaveMyProfile(), PROFILE\_\-StartProfile(), and START\_\-Webclient().\index{message.js@{message.js}!MESSAGE\_\-GroupChat@{MESSAGE\_\-GroupChat}}
+\index{MESSAGE\_\-GroupChat@{MESSAGE\_\-GroupChat}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-GroupChat]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-GroupChat ( {\em To}, \/   {\em Message})}\label{message_8js_c3a5f3886e2464a3b19a2a7e84377409}
+
+
+Create a groupchat message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]Room's JID \item[{\em Message}]Room chat text \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ROOM\_\-SendMessage().\index{message.js@{message.js}!MESSAGE\_\-Info@{MESSAGE\_\-Info}}
+\index{MESSAGE\_\-Info@{MESSAGE\_\-Info}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Info]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Info ( {\em User})}\label{message_8js_9f2082d232bc6a1b397b938b75076d79}
+
+
+Create message to get user's ratings. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em User}]User's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+\begin{Desc}
+\item[{\bf Deprecated}]\end{Desc}
+
+
+References MainData.
+
+Referenced by CONTACT\_\-ReceiveSubscribed().\index{message.js@{message.js}!MESSAGE\_\-InfoProfile@{MESSAGE\_\-InfoProfile}}
+\index{MESSAGE\_\-InfoProfile@{MESSAGE\_\-InfoProfile}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-InfoProfile]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-InfoProfile ( {\em User})}\label{message_8js_0f77d2437c9ea785addf3af0cabe7ad3}
+
+
+Create message to get user's ratings profile. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em User}]User's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by PROFILE\_\-StartProfile(), and USER\_\-UpdateUserList().\index{message.js@{message.js}!MESSAGE\_\-Invite@{MESSAGE\_\-Invite}}
+\index{MESSAGE\_\-Invite@{MESSAGE\_\-Invite}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Invite]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Invite ( {\em To})}\label{message_8js_8196fc17784a1cbe57b15374489e968a}
+
+
+Create message to send a invite to add some user to contact list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]User's name to invite destiny \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by CONTACT\_\-InviteUser(), and CONTACT\_\-ReceiveSubscribe().\index{message.js@{message.js}!MESSAGE\_\-InviteAccept@{MESSAGE\_\-InviteAccept}}
+\index{MESSAGE\_\-InviteAccept@{MESSAGE\_\-InviteAccept}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-InviteAccept]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-InviteAccept ( {\em To})}\label{message_8js_38c20265261147a3daef7ddee50e5d03}
+
+
+Create message to send a accept invite to other user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]User's name to accept invite \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by CONTACT\_\-HandleContactUserList(), and CONTACT\_\-ReceiveSubscribe().\index{message.js@{message.js}!MESSAGE\_\-InviteDeny@{MESSAGE\_\-InviteDeny}}
+\index{MESSAGE\_\-InviteDeny@{MESSAGE\_\-InviteDeny}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-InviteDeny]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-InviteDeny ( {\em To})}\label{message_8js_be68b85a09b1c0a76b90176932599018}
+
+
+Create message to send a resign invite to other user. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]User's name to resign invite \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by CONTACT\_\-ReceiveSubscribe().\index{message.js@{message.js}!MESSAGE\_\-KickUser@{MESSAGE\_\-KickUser}}
+\index{MESSAGE\_\-KickUser@{MESSAGE\_\-KickUser}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-KickUser]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-KickUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_95846811122fe413726bb66df200f60e}
+
+
+Create a message to kick a user from jabber. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Reason}]Reason to kick this user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-KickUser().\index{message.js@{message.js}!MESSAGE\_\-KickUserRoom@{MESSAGE\_\-KickUserRoom}}
+\index{MESSAGE\_\-KickUserRoom@{MESSAGE\_\-KickUserRoom}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-KickUserRoom]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-KickUserRoom ( {\em Room}, \/   {\em To}, \/   {\em Role}, \/   {\em Reason})}\label{message_8js_7fb936c7e483ba2350e7e2bcbca6e004}
+
+
+Create a message to admin kick a user from some room. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Room}]The room that the target user is \item[{\em To}]Nick name of the target user in room \item[{\em Role}]User's privilege in room \item[{\em Reason}]Why the user will be kicked \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.\index{message.js@{message.js}!MESSAGE\_\-MakeXMPP@{MESSAGE\_\-MakeXMPP}}
+\index{MESSAGE\_\-MakeXMPP@{MESSAGE\_\-MakeXMPP}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-MakeXMPP]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-MakeXMPP ( {\em Msg})}\label{message_8js_1a1435f616518adc5e22aa6bb86e85f2}
+
+
+Append XMPP body to messages (used to BOSH control). 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Msg}]XMPP message to send\end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message with body tag \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData.
+
+Referenced by CONNECTION\_\-SendJabber().\index{message.js@{message.js}!MESSAGE\_\-Presence@{MESSAGE\_\-Presence}}
+\index{MESSAGE\_\-Presence@{MESSAGE\_\-Presence}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Presence]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Presence ( {\em To})}\label{message_8js_3bb7bb18332a004726dfb10110751f60}
+
+
+Create a message with Jabber presence. 
+
+If 'To' isn't passed, send your presence to jabber, otherwise send presence to 'To' destiny
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em To}]Room's JID \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by ANNOUNCE\_\-HandleAnnounceGame(), GAME\_\-HandleGameResult(), INTERFACE\_\-AddCurrentGames(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowGameRoomList(), ROOM\_\-EnterRoom(), ROOM\_\-EnterRoomGame(), and START\_\-Webclient().\index{message.js@{message.js}!MESSAGE\_\-RemoveAnnounceMatch@{MESSAGE\_\-RemoveAnnounceMatch}}
+\index{MESSAGE\_\-RemoveAnnounceMatch@{MESSAGE\_\-RemoveAnnounceMatch}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-RemoveAnnounceMatch]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-RemoveAnnounceMatch ( {\em Id})}\label{message_8js_a24001a1689f2bd7358400078baa1b65}
+
+
+Create a message cancel one of your announced match. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Id}]Announce match identification number \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ANNOUNCE\_\-CancelAnnounce().\index{message.js@{message.js}!MESSAGE\_\-RemoveBannedWord@{MESSAGE\_\-RemoveBannedWord}}
+\index{MESSAGE\_\-RemoveBannedWord@{MESSAGE\_\-RemoveBannedWord}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-RemoveBannedWord]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-RemoveBannedWord ( {\em Word})}\label{message_8js_2fa1f25d83ff91b8a9656a62fc1f07d3}
+
+
+Create a message to unban some word. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Word}]Word string \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-RemoveBannedWord().\index{message.js@{message.js}!MESSAGE\_\-RemoveContact@{MESSAGE\_\-RemoveContact}}
+\index{MESSAGE\_\-RemoveContact@{MESSAGE\_\-RemoveContact}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-RemoveContact]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-RemoveContact ( {\em User})}\label{message_8js_5b29bed72344c0159f083aa66131b4f3}
+
+
+Create message to remove user from your contact list. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em User}]User's name to resign invite \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by CONTACT\_\-ReceiveUnsubscribed(), and CONTACT\_\-SendRemoveUser().\index{message.js@{message.js}!MESSAGE\_\-RoomList@{MESSAGE\_\-RoomList}}
+\index{MESSAGE\_\-RoomList@{MESSAGE\_\-RoomList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-RoomList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-RoomList ()}\label{message_8js_ef360931a5464a8943d5c54e307f471e}
+
+
+Create a message to ask for room list to jabber. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ROOM\_\-ShowRoomList().\index{message.js@{message.js}!MESSAGE\_\-SearchUser@{MESSAGE\_\-SearchUser}}
+\index{MESSAGE\_\-SearchUser@{MESSAGE\_\-SearchUser}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-SearchUser]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-SearchUser ( {\em Username}, \/   {\em Option})}\label{message_8js_0dc7d04f4adad7682abfd5f8d2ea2065}
+
+
+Make a search user message. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Option}]Option to select by username or full name(0 = username or 1 = full name) \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Kiyoshi Simizu Yorinori \end{Desc}
+
+
+References MainData.\index{message.js@{message.js}!MESSAGE\_\-SendPasswd@{MESSAGE\_\-SendPasswd}}
+\index{MESSAGE\_\-SendPasswd@{MESSAGE\_\-SendPasswd}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-SendPasswd]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-SendPasswd ()}\label{message_8js_38edc1faa161a94261c9889be9695322}
+
+
+Create message with second authentication step. 
+
+Send username again, password and resource.
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData.
+
+Referenced by CONNECTION\_\-ConnectJabber().\index{message.js@{message.js}!MESSAGE\_\-SendUsername@{MESSAGE\_\-SendUsername}}
+\index{MESSAGE\_\-SendUsername@{MESSAGE\_\-SendUsername}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-SendUsername]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-SendUsername ()}\label{message_8js_0fe67255634f10aace8677f3c0032407}
+
+
+Create message with first authentication step. 
+
+This message contais the first message to authenticate a user. Send username.
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData.
+
+Referenced by CONNECTION\_\-ConnectJabber().\index{message.js@{message.js}!MESSAGE\_\-SetProfile@{MESSAGE\_\-SetProfile}}
+\index{MESSAGE\_\-SetProfile@{MESSAGE\_\-SetProfile}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-SetProfile]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-SetProfile ( {\em Username}, \/   {\em FullName}, \/   {\em Desc}, \/   {\em ImgType}, \/   {\em Img64})}\label{message_8js_71574c53190de54b8f5af49ec0962647}
+
+
+Create a message to set your profile in Jabber. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em FullName}]User's full name \item[{\em Desc}]User's description \item[{\em ImgType}]User's image type (png, jpg, bmp...) \item[{\em Img64}]User's image in base 64 \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by PROFILE\_\-CreateProfile(), and PROFILE\_\-SaveMyProfile().\index{message.js@{message.js}!MESSAGE\_\-StartConnection@{MESSAGE\_\-StartConnection}}
+\index{MESSAGE\_\-StartConnection@{MESSAGE\_\-StartConnection}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-StartConnection]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-StartConnection ()}\label{message_8js_aedc2d2c40817924ec72ddfac77802c3}
+
+
+Create first message to open a connection with Jabber. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+References MainData.
+
+Referenced by CONNECTION\_\-ConnectJabber().\index{message.js@{message.js}!MESSAGE\_\-Unavailable@{MESSAGE\_\-Unavailable}}
+\index{MESSAGE\_\-Unavailable@{MESSAGE\_\-Unavailable}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Unavailable]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Unavailable ( {\em RoomName})}\label{message_8js_6162db70b1ce3069a5e90a5dabdfd6ae}
+
+
+Create message to logout on jabber or leave from some room. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em RoomName}]Room's name \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References MainData.
+
+Referenced by GAME\_\-StartGame(), LOGIN\_\-LeavePage(), LOGIN\_\-Logout(), and ROOM\_\-ExitRoom().\index{message.js@{message.js}!MESSAGE\_\-UnbanUser@{MESSAGE\_\-UnbanUser}}
+\index{MESSAGE\_\-UnbanUser@{MESSAGE\_\-UnbanUser}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-UnbanUser]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-UnbanUser ( {\em Username}, \/   {\em Reason})}\label{message_8js_52c33b07805ba6e270643bff9cf121e8}
+
+
+Create message to unban user from jabber. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Username}]User's name \item[{\em Reason}]Reason to unban this user \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by ADMIN\_\-UnbanUser().\index{message.js@{message.js}!MESSAGE\_\-UserList@{MESSAGE\_\-UserList}}
+\index{MESSAGE\_\-UserList@{MESSAGE\_\-UserList}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-UserList]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-UserList ()}\label{message_8js_3eb5826c67297b03256070aa19f775af}
+
+
+Create a messate to ask for user's jabber contact list. 
+
+\begin{Desc}
+\item[Returns:]XMPP message \end{Desc}
+\begin{Desc}
+\item[Author:]Rubens Suguimoto \end{Desc}
+
+
+References MainData.
+
+Referenced by START\_\-Webclient().\index{message.js@{message.js}!MESSAGE\_\-Wait@{MESSAGE\_\-Wait}}
+\index{MESSAGE\_\-Wait@{MESSAGE\_\-Wait}!message.js@{message.js}}
+\subsubsection[MESSAGE\_\-Wait]{\setlength{\rightskip}{0pt plus 5cm}function MESSAGE\_\-Wait ()}\label{message_8js_3c7e3da01d208b95bf9cfffc85d79dd8}
+
+
+Create a wait message. 
+
+This message is used to make a pesistent conection to BOSH. In certain interval of time, this message is send to notificate BOSH that client is still connected.
+
+\begin{Desc}
+\item[Returns:]Empty string \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+Referenced by CONNECTION\_\-ReceiveConnection(), and CONNECTION\_\-ReceiveXml().

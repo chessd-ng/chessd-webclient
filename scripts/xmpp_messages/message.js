@@ -16,14 +16,22 @@
 
 
 /**
-* Create xmpp messages
+* @file		message.js
+* @brief	Contain all functions to create XMPP messages
+*
+* Create all messages used both Jabber and Chess Server (see Chess server XMPP protocol)
+*
 */
 
 
 /**
-* Append xmpp body to messages
+* @brief	Append XMPP body to messages (used to BOSH control)
+* @param	Msg	XMPP message to send
+*
+* @return	XMPP message with body tag
+* @author	Pedro Rocha
 */
-function MESSAGE_MakeXMPP(Msg, Type)
+function MESSAGE_MakeXMPP(Msg)
 {
 	var XMPP;
 	
@@ -40,9 +48,27 @@ function MESSAGE_MakeXMPP(Msg, Type)
 	return XMPP;
 }
 
+/**
+* @brief	Create a terminate connection with BOSH message
+*
+* @param	Unavailable	Message with presence unavailable to Jabber or rooms
+* @return	XMPP message
+* @author	Pedro Rocha
+*/
+function MESSAGE_EndConnection(Unavailable)
+{
+	var XMPP = "<body type='terminate' rid='"+MainData.GetRID()+"' sid='"+MainData.GetSID()+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
+
+	return XMPP;
+}
 
 /**
-* Make a wait message
+* @brief	Create a wait message
+*
+* This message is used to make a pesistent conection to BOSH. In certain interval of time, this message is send to notificate BOSH that client is still connected.
+*
+* @return	Empty string
+* @author	Pedro Rocha
 */
 function MESSAGE_Wait()
 {
@@ -55,7 +81,10 @@ function MESSAGE_Wait()
  **********************************/
 
 /**
-* Get an SID from bind
+* @brief	Create first message to open a connection with Jabber
+*
+* @return	XMPP message
+* @author	Pedro Rocha
 */
 function MESSAGE_StartConnection()
 {
@@ -65,17 +94,12 @@ function MESSAGE_StartConnection()
 }
 
 /**
-* End connection
-*/
-function MESSAGE_EndConnection(Unavailable)
-{
-	var XMPP = "<body type='terminate' rid='"+MainData.GetRID()+"' sid='"+MainData.GetSID()+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
-
-	return XMPP;
-}
-
-/**
-* Send username to jabber
+* @brief	Create message with first authentication step
+*
+* This message contais the first message to authenticate a user. Send username.
+*
+* @return	XMPP message
+* @author	Pedro Rocha
 */
 function MESSAGE_SendUsername()
 {
@@ -91,7 +115,12 @@ function MESSAGE_SendUsername()
 }
 
 /**
-* Send password to jabber
+* @brief	Create message with second authentication step
+*
+* Send username again, password and resource.
+*
+* @return	XMPP message
+* @author	Pedro Rocha
 */
 function MESSAGE_SendPasswd()
 {
@@ -107,13 +136,15 @@ function MESSAGE_SendPasswd()
 	return XMPP;
 }
 
-
 /**********************************
  * MESSAGES - USER AND ROOM LIST
  **********************************/
 
 /**
-* Ask contact list to jabber
+* @brief	Create a messate to ask for user's jabber contact list
+*
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_UserList()
 {
@@ -128,7 +159,10 @@ function MESSAGE_UserList()
 }
 
 /**
-* Ask room list to jabber
+* @brief	Create a message to ask for room list to jabber
+*
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_RoomList()
 {
@@ -146,8 +180,13 @@ function MESSAGE_RoomList()
  **********************************/
 	
 /**
-* If 'To' isn't passed, send your presence to jabber,
-* otherwise send presence to 'To'
+* @brief	Create a message with Jabber presence
+*
+* If 'To' isn't passed, send your presence to jabber, otherwise send presence to 'To' destiny
+*
+* @param	To		Room's JID
+* @return	XMPP message
+* @author	Ulysses Bomfim
 */
 function MESSAGE_Presence(To)
 {
@@ -177,14 +216,20 @@ function MESSAGE_Presence(To)
 }
 
 /**
-* Change Status
+* @brief	Create a message to change user's status
+*
+* @param	NewStatus	New user's status
+* @param	RoomName	Room's name 
+* @return	XMPP message
+* @see		scripts/contact/status.js for user's status types
+* @author	Ulysses Bomfim
 */
 function MESSAGE_ChangeStatus(NewStatus, RoomName)
 {
 	var XMPP;
 	var MyUsername = MainData.GetUsername();
 
-	// Message to room
+	// Message to room - Change status in some room
 	if (RoomName)
 	{
 		if (NewStatus == "available")
@@ -214,7 +259,11 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 
 
 /**
-* Set offline on jabber or exit a room
+* @brief	Create message to logout on jabber or leave from some room
+*
+* @param	RoomName	Room's name 
+* @return	XMPP message
+* @author	Ulysses Bomfim
 */
 function MESSAGE_Unavailable(RoomName)
 {
@@ -238,7 +287,12 @@ function MESSAGE_Unavailable(RoomName)
  **********************************/
 
 /**
-* Create a chat message
+* @brief	Create a chat message
+*
+* @param	To		Message user destiny
+* @param	Message		Chat text
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_Chat(To, Message)
 {
@@ -252,7 +306,12 @@ function MESSAGE_Chat(To, Message)
 }
 
 /**
-* Create a groupchat message
+* @brief	Create a groupchat message
+*
+* @param	To		Room's JID
+* @param	Message		Room chat text
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_GroupChat(To, Message)
 {
@@ -270,8 +329,11 @@ function MESSAGE_GroupChat(To, Message)
  **********************************/
 
 /**
-* Message to get users ratings
+* @brief	Create message to get user's ratings
 *
+* @param	User	User's name
+* @return	XMPP message
+* @author	Rubens Suguimoto
 * @deprecated
 */
 function MESSAGE_Info(User)
@@ -290,8 +352,11 @@ function MESSAGE_Info(User)
 }
 
 /**
-* Message to get users ratings profile
+* @brief	Create message to get user's ratings profile
 *
+* @param	User	User's name
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_InfoProfile(User)
 {
@@ -313,7 +378,11 @@ function MESSAGE_InfoProfile(User)
  **********************************/
 
 /**
-* Send a invite to user
+* @brief 	Create message to send a invite to add some user to contact list
+* 
+* @param	To	User's name to invite destiny
+* @return	XMPP message
+* @author	Ulysses Bomfim
 */
 function MESSAGE_Invite(To)
 {
@@ -321,7 +390,11 @@ function MESSAGE_Invite(To)
 }
 
 /**
-* Send a subscribed to user
+* @brief	Create message to send a accept invite to other user
+* 
+* @param	To	User's name to accept invite
+* @return	XMPP message
+* @author	Ulysses Bomfim
 */
 function MESSAGE_InviteAccept(To)
 {
@@ -329,7 +402,11 @@ function MESSAGE_InviteAccept(To)
 }
 
 /**
-* Send a unsubscribed to user
+* @brief	Create message to send a resign invite to other user
+* 
+* @param	To	User's name to resign invite
+* @return	XMPP message
+* @author	Ulysses Bomfim
 */
 function MESSAGE_InviteDeny(To)
 {
@@ -337,7 +414,10 @@ function MESSAGE_InviteDeny(To)
 }
 
 /**
-* Remove user from yout contact list
+* @brief	Create message to remove user from your contact list
+* @param	User	User's name to resign invite
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_RemoveContact(User)
 {
@@ -357,7 +437,7 @@ function MESSAGE_RemoveContact(User)
  **********************************/
 
 /**
-* Send a Challenge message
+* @brief 	Create message to send a challenge message
 *
 * Should be extended to support Bughouse with more two players.
 * The Player's structure has the following fields:
@@ -365,8 +445,15 @@ function MESSAGE_RemoveContact(User)
 *  - Color
 *  - Inc
 *  - Time
+* The 'Color' field must contain just the first letter of color
 *
-* The 'Color' field must content just the first letter
+* @param	ChallengeID	Challenge identification number (integer)
+* @param	Category	Game cateory
+* @param	Rated		Game rated flag
+* @param 	Players		List of Players Object(with username, color, increment, time)
+* @param	MatchID		Match identification number (integer)
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 {
@@ -375,6 +462,7 @@ function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 	var XMPP = "";
 
 	var Consts = MainData.GetConst();
+
 	// Setting iq's id
 	if(ChallengeID == null)
 	{
@@ -420,7 +508,11 @@ function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 
 
 /**
-* Accept a challange 
+* @brief	Create a accept a challenge message
+*
+* @param	ChallengeID	Challenge identification number (integer)
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_ChallengeAccept(ChallengeID)
 {
@@ -437,7 +529,11 @@ function MESSAGE_ChallengeAccept(ChallengeID)
 
 
 /**
-* Decline a challange 
+* @brief	Create a decline a challenge message
+*
+* @param	ChallengeID	Challenge identification number (integer)
+* @return	XMPP message
+* @author	Rubens Suguimoto
 */
 function MESSAGE_ChallengeDecline(ChallengeID)
 {
@@ -452,7 +548,14 @@ function MESSAGE_ChallengeDecline(ChallengeID)
 	return XMPP;
 }
 
-
+/**
+* @brief	Create a message to get a adjourn games list
+*
+* @param	Num		Number of adjourned games to get (integer)
+* @param	Offset		Offset base of adjourn list
+* @return	XMPP message
+* @author	Rubens Suguimoto
+*/
 function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 {
 	var XMPP="";
@@ -465,6 +568,13 @@ function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message to resume some adjourned game
+* @param	Id		Adjourned game identification number (integer)
+* @param	ChallengeId	XMPP challenge identification number (integer)
+* @return	XMPP message
+* @author	Rubens Suguimoto
+*/
 function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
 {
 	var XMPP = "";
@@ -481,10 +591,10 @@ function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
  **********************************/
 
 /**
-* Get the list of all games been played
+* @brief	Create message to get the list of all games been played
 * 
-* @return 	XMPP with iq to get all games been played
-* @author 	Ulysses
+* @return	XMPP message
+* @author 	Ulysses Bomfim
 */
 function MESSAGE_GameRoomList()
 {
@@ -498,10 +608,11 @@ function MESSAGE_GameRoomList()
 }
 
 /**
-* Get the list information of all games  been played
+* @brief	Create message to get the list information of all games  been played
 * 
-* @return 	XMPP with iq to get all games been played with respective info
-* @author 	Rubens
+* @param	Room	Room's name
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameRoomInfoList(Room)
 {
@@ -515,10 +626,11 @@ function MESSAGE_GameRoomInfoList(Room)
 }
 
 /**
-* Message used to check if some game exists
+* @brief	Create message used to check if some game exists
 * 
-* @return 	XMPP with iq to get information about some game
-* @author 	Rubens
+* @param	Room	Room's name
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameEnterRoom(Room)
 {
@@ -532,7 +644,13 @@ function MESSAGE_GameEnterRoom(Room)
 }
 
 /**
-* Send a game moviment
+* @brief	Create a message to send a game move
+*
+* @param	Move		Chess Move
+* @param	GameID		Game room name Identification
+* @param	Promotion	Promotion piece used to change pawn
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameMove(Move, GameID, Promotion)
 {
@@ -548,7 +666,11 @@ function MESSAGE_GameMove(Move, GameID, Promotion)
 }
 
 /**
-* Make a draw request
+* @brief	Make a draw request
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameRequestDraw (GameID)
 {
@@ -556,7 +678,11 @@ function MESSAGE_GameRequestDraw (GameID)
 }
 
 /**
-* Make a cancel request
+* @brief	Make a cancel request
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameRequestCancel (GameID)
 {
@@ -564,7 +690,11 @@ function MESSAGE_GameRequestCancel (GameID)
 }
 
 /**
-* Make a adjourn request
+* @brief	Make a adjourn request
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameRequestAdjourn (GameID)
 {
@@ -572,7 +702,11 @@ function MESSAGE_GameRequestAdjourn (GameID)
 }
 
 /**
-* Make a resign message
+* @brief	Make a resign message
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameResign (GameID)
 {
@@ -580,7 +714,14 @@ function MESSAGE_GameResign (GameID)
 }
 
 /**
-* Create the game requests messages
+* @brief	Create the game action requests messages to opponent
+*
+* Action can be "Draw", "Cancel", "Adjourn" and "Resign".
+*
+* @param	Action		String with action to do when playing some game
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
 function MESSAGE_GameRequests(Action, GameID)
 {
@@ -620,57 +761,89 @@ function MESSAGE_GameRequests(Action, GameID)
 
 
 /**
-* Make a draw accept
+* @brief	Make a draw accept
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameDrawAccept (RoomID)
+function MESSAGE_GameDrawAccept (GameID)
 {
-	return (MESSAGE_GameResponse("Draw", RoomID, ""));
+	return (MESSAGE_GameResponse("Draw", GameID, ""));
 }
 
 /**
-* Make a draw deny
+* @brief	Make a draw deny
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameDrawDeny (RoomID)
+function MESSAGE_GameDrawDeny (GameID)
 {
-	return (MESSAGE_GameResponse("Draw", RoomID, "-decline"));
+	return (MESSAGE_GameResponse("Draw", GameID, "-decline"));
 }
 
 /**
-* Make a cancel accept
+* @brief	Make a cancel accept
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameCancelAccept (RoomID)
+function MESSAGE_GameCancelAccept (GameID)
 {
-	return (MESSAGE_GameResponse("Cancel", RoomID, ""));
+	return (MESSAGE_GameResponse("Cancel", GameID, ""));
 }
 
 /**
-* Make a cancel deny
+* @brief	Make a cancel deny
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameCancelDeny (RoomID)
+function MESSAGE_GameCancelDeny (GameID)
 {
-	return (MESSAGE_GameResponse("Cancel", RoomID, "-decline"));
+	return (MESSAGE_GameResponse("Cancel", GameID, "-decline"));
 }
 
 /**
-* Make a adjourn accept
+* @brief	Make a adjourn accept
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameAdjournAccept (RoomID)
+function MESSAGE_GameAdjournAccept (GameID)
 {
-	return (MESSAGE_GameResponse("Adjourn", RoomID, ""));
+	return (MESSAGE_GameResponse("Adjourn", GameID, ""));
 }
 
 /**
-* Make a adjourn deny
+* @brief	Make a adjourn deny
+*
+* @param	GameID		Game room name Identification
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameAdjournDeny (RoomID)
+function MESSAGE_GameAdjournDeny (GameID)
 {
-	return (MESSAGE_GameResponse("Adjourn", RoomID, "-decline"));
+	return (MESSAGE_GameResponse("Adjourn", GameID, "-decline"));
 }
 
 /**
-* Create the game response messages
+* @brief	Create the game actions response messages
+*
+* Action can be "Draw", "Cancel" and "Adjourn".
+*
+* @param	Action		String with action to do when playing some game
+* @param	GameID		Game room name Identification
+* @param	Response	Create a response with accept ou decline ("" = accept or "-decline" = decline)
+* @return	XMPP message
+* @author 	Rubens Suguimoto
 */
-function MESSAGE_GameResponse(Action, RoomID, Response)
+function MESSAGE_GameResponse(Action, GameID, Response)
 {
 	var XMPP="";
 	var Consts = MainData.GetConst();
@@ -678,17 +851,17 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+RoomID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#game#draw"+Response+"'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+RoomID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#game#cancel"+Response+"'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+RoomID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd#game#adjourn"+Response+"'>";
 			break;
 	
@@ -702,9 +875,11 @@ function MESSAGE_GameResponse(Action, RoomID, Response)
 }
 
 /**
- * Search for user current games.
- */
-
+* @brief	Create message to search for your's current games
+*
+* @return	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_GameSearchCurrentGame()
 {
 	var XMPP = "";
@@ -726,29 +901,15 @@ function MESSAGE_GameSearchCurrentGame()
  * MESSAGES - SEARCH USER
  **********************************/
 
-/**
-*
-*	Make search user message
-*
-*	@return	String with search user message
-*	@author	Danilo Kiyoshi Simizu Yorinori
 
-
-function MESSAGE_SearchUser()
-{
-	var XMPP;
-	
-	XMPP = "<iq type='get' to='"+MainData.GetSearchComponent()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_SearchUser+"'><query xmlns='jabber:iq:search'/></iq>";
-
-	return MESSAGE_MakeXMPP(XMPP);
-}
 
 /**
+* @brief	Make a search user message
 *
-*	Make search user message
-*
-*	@return	String with search user message
-*	@author	Danilo Kiyoshi Simizu Yorinori
+* @param	Username	User's name
+* @param	Option		Option to select by username or full name(0 = username or 1 = full name)
+* @return 	XMPP message
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function MESSAGE_SearchUser(Username, Option)
 {
@@ -770,7 +931,7 @@ function MESSAGE_SearchUser(Username, Option)
 		XMPP += "<value>"+Username+"*</value>";
 		XMPP +=	"</field>";
 	}
-	/* Fields that could be used
+	/*Fields that could be used
 		<field type="text-single" var="given" >
 		<value></value>
 		</field>
@@ -813,14 +974,14 @@ function MESSAGE_SearchUser(Username, Option)
  **********************************/
 
 /**
-* Moderator kicks an accupant
+* @brief	Create a message to admin kick a user from some room
 * 
 * @param 	Room 	The room that the target user is
-* @param 	To 		Nick name of the target user in room
+* @param 	To 	Nick name of the target user in room
 * @param 	Role 	User's privilege in room
 * @param 	Reason 	Why the user will be kicked
-* @return 	string
-* @author 	Ulysses
+* @return 	XMPP message
+* @author 	Ulysses Bomfim
 */
 function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 {
@@ -837,13 +998,13 @@ function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 }
 
 /**
- * @brief Message to kick a user from jabber
- *
- * Create message to kick user from jabber.
- *
- * @param 	Username	User's name
- * @author 	Rubens Suguimoto
- */
+* @brief	Create a message to kick a user from jabber
+*
+* @param 	Username	User's name
+* @param	Reason		Reason to kick this user
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
@@ -857,13 +1018,13 @@ function MESSAGE_KickUser(Username, Reason)
 }
 
 /**
- * @brief Message to ban a user from jabber
- *
- * Create message to ban user from jabber.
- *
- * @param 	Username	User's name
- * @author 	Rubens Suguimoto
- */
+* @brief	Create a message to ban a user from jabber
+*
+* @param 	Username	User's name
+* @param	Reason		Reason to ban this user
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
@@ -877,13 +1038,13 @@ function MESSAGE_BanUser(Username, Reason)
 }
 
 /**
- * @brief Message to unban a user from jabber
- *
- * Create message to unban user from jabber.
- *
- * @param 	Username	User's name
- * @author 	Rubens Suguimoto
- */
+* @brief 	Create message to unban user from jabber.
+*
+* @param 	Username	User's name
+* @param	Reason		Reason to unban this user
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
@@ -897,12 +1058,11 @@ function MESSAGE_UnbanUser(Username, Reason)
 }
 
 /**
- * @brief Message to get list off banned users
- *
- * Create message to get a list of all banned users
- *
- * @author 	Rubens Suguimoto
- */
+* @brief	 Create message to get a list of all banned users
+*
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_GetBanList()
 {
 	var XMPP = "";
@@ -915,7 +1075,12 @@ function MESSAGE_GetBanList()
 	return XMPP;
 }
 
-
+/**
+* @brief	 Create message to get a list of banned words
+*
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_GetBannedWords()
 {
 	var XMPP = "";
@@ -929,6 +1094,13 @@ function MESSAGE_GetBannedWords()
 	return XMPP;
 }
 
+/**
+* @brief	Create a message to ban one word
+*
+* @param	Word		Word string
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_AddBannedWord(Word)
 {
 	var XMPP = "";
@@ -943,6 +1115,13 @@ function MESSAGE_AddBannedWord(Word)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message to unban some word
+*
+* @param	Word		Word string
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/
 function MESSAGE_RemoveBannedWord(Word)
 {
 	var XMPP = "";
@@ -959,7 +1138,15 @@ function MESSAGE_RemoveBannedWord(Word)
 /**********************************
  * MESSAGES - PROFILE - vCard
 **********************************/
-  
+
+/**
+* @brief	Create a message to get profile of some user
+*
+* @param	Username	User's name
+* @param	Id		XMPP identification attribute
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_GetProfile(Username, Id)
 {
 	var XMPP = "";
@@ -977,6 +1164,17 @@ function MESSAGE_GetProfile(Username, Id)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message to set your profile in Jabber
+*
+* @param	Username	User's name
+* @param	FullName	User's full name
+* @param	Desc		User's description
+* @param	ImgType		User's image type (png, jpg, bmp...)
+* @param	Img64		User's image in base 64
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 {
 	var XMPP = "";
@@ -995,7 +1193,20 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 /**********************************
  * MESSAGES - SEARCH OLDGAME
  **********************************/
-
+/**
+* @brief	Create a message to get old games list with some filters
+*
+* @param 	Id		Oldgame window Id (Quick fix)
+* @param	Jid1		First player username
+* @param	Jid2		Second player username
+* @param	NumGames	Number of games to be search
+* @param	Offset		List off set of old games
+* @param	Color		First player color (if not defined, search for all colors)
+* @param	From		Date begin interval (if not defined, is considerate infinit)
+* @param	To		Date end interval (if not defined, is considerate infinit)
+* @return 	XMPP message
+* @author 	Rubens Suguimoto and Danilo Yorinori
+*/ 
 function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
 {
 	var XMPP = "";
@@ -1036,6 +1247,13 @@ function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message to see some old game
+*
+* @param 	OldGameId		Oldgame identification number (integer)
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_FetchOldGame(OldGameId)
 {
 	var XMPP = "";
@@ -1050,7 +1268,18 @@ function MESSAGE_FetchOldGame(OldGameId)
 /**********************************
  * MESSAGES - ANNOUNCE CHALLENGES
  **********************************/
-//Player object
+/**
+* @brief	Create a message to announce a match
+*
+* @param	Player		Player Object(Username, color, time, increment)
+* @param	Rated		Rated game flag
+* @param	Category	Game category
+* @param	Min		Minimum rating interval
+* @param	Max		Maximun rating interval
+* @param	Autoflag	Flag to set game over when some player time's end
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 {
 	var XMPP = "";
@@ -1083,6 +1312,18 @@ function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message get announced matchs list with some parameters
+*
+* @param	Offset		List off set of announced matchs
+* @param	NumResult	Number of announced matchs to be get
+* @param	Category	Game category
+* @param	MinTime		Minimum time interval
+* @param	MaxTime		Maximun time interval
+* @param	User		Flag to check if you want to get your's own announces
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User)
 {
 	var XMPP = "";
@@ -1121,6 +1362,13 @@ function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category,
 	return XMPP;
 }
 
+/**
+* @brief	Create a message cancel one of your announced match
+*
+* @param	Id		Announce match identification number
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_RemoveAnnounceMatch(Id)
 {
 	var XMPP = "";
@@ -1134,6 +1382,13 @@ function MESSAGE_RemoveAnnounceMatch(Id)
 	return XMPP;
 }
 
+/**
+* @brief	Create a message accept some announced match
+*
+* @param	Id		Announce match identification number
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
 function MESSAGE_AcceptAnnounceMatch(Id)
 {
 	var XMPP = "";

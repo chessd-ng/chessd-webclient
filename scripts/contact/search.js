@@ -16,16 +16,17 @@
 
 
 /**
-* Handle search user
+* @file		contact/search.js
+* @brief	Handle search user
 */
 
 
 /**
-* Handle search user
+* @brief	Handle search user
 *
-* @param XML XML received from jabber server
-* @return
-* @author	Danilo
+* @param 	XML	XML received from jabber server
+* @return	Empty string
+* @author	Danilo Yorinori
 */
 function CONTACT_HandleSearchUser(XML)
 {

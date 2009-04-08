@@ -1,0 +1,82 @@
+\section{/home/www/rubens/webclient/scripts/start.js File Reference}
+\label{start_8js}\index{/home/www/rubens/webclient/scripts/start.js@{/home/www/rubens/webclient/scripts/start.js}}
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf START\_\-StartPage} ()
+\item 
+function {\bf START\_\-ChangeLanguage} (Lang)
+\item 
+function {\bf START\_\-Webclient} ()
+\begin{CompactList}\small\item\em Clear Login window and start interface. \item\end{CompactList}\item 
+function {\bf START\_\-Restart} ()
+\end{CompactItemize}
+\subsection*{Variables}
+\begin{CompactItemize}
+\item 
+var {\bf MainData}
+\item 
+var {\bf TranslationLog} = new Array()
+\end{CompactItemize}
+
+
+\subsection{Function Documentation}
+\index{start.js@{start.js}!START\_\-ChangeLanguage@{START\_\-ChangeLanguage}}
+\index{START\_\-ChangeLanguage@{START\_\-ChangeLanguage}!start.js@{start.js}}
+\subsubsection[START\_\-ChangeLanguage]{\setlength{\rightskip}{0pt plus 5cm}function START\_\-ChangeLanguage ( {\em Lang})}\label{start_8js_2cb0a9dca5d144d34f5f442e36bceffe}
+
+
+
+
+References INTERFACE\_\-EndLogin(), INTERFACE\_\-StartLogin(), MainData, UTILS\_\-CreateCookie(), and UTILS\_\-OpenXMLFile().
+
+Referenced by INTERFACE\_\-CreateLangItem().\index{start.js@{start.js}!START\_\-Restart@{START\_\-Restart}}
+\index{START\_\-Restart@{START\_\-Restart}!start.js@{start.js}}
+\subsubsection[START\_\-Restart]{\setlength{\rightskip}{0pt plus 5cm}function START\_\-Restart ()}\label{start_8js_36fd0c258d7df562702d2e68eba4dabb}
+
+
+
+
+References CONTACT\_\-StopAwayStatus(), INTERFACE\_\-StopInterface(), LOAD\_\-IECssFile(), LOAD\_\-ReloadFiles(), MainData, USER\_\-StopUpdateUserList(), and USER\_\-StopUpdateUserProfile().
+
+Referenced by CONNECTION\_\-ReceiveXml(), LOGIN\_\-Logout(), and PARSER\_\-ParseXml().\index{start.js@{start.js}!START\_\-StartPage@{START\_\-StartPage}}
+\index{START\_\-StartPage@{START\_\-StartPage}!start.js@{start.js}}
+\subsubsection[START\_\-StartPage]{\setlength{\rightskip}{0pt plus 5cm}function START\_\-StartPage ()}\label{start_8js_fe03f5d8f997138001a342d01348b971}
+
+
+
+
+References DATA(), INTERFACE\_\-StartLogin(), MainData, UTILS\_\-GetTag(), UTILS\_\-OpenXMLFile(), and UTILS\_\-ReadCookie().\index{start.js@{start.js}!START\_\-Webclient@{START\_\-Webclient}}
+\index{START\_\-Webclient@{START\_\-Webclient}!start.js@{start.js}}
+\subsubsection[START\_\-Webclient]{\setlength{\rightskip}{0pt plus 5cm}function START\_\-Webclient ()}\label{start_8js_f49d704e6b35d240e8d0c89251a6e7c4}
+
+
+Clear Login window and start interface. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References ADMINCENTER\_\-StartAdminCenter(), CONNECTION\_\-SendJabber(), CONTACT\_\-LoadUserContactList(), CONTACT\_\-StartAwayCounter(), CONTACT\_\-StartContactList(), GAME\_\-SearchCurrentGame(), GAMECENTER\_\-StartGameCenter(), INTERFACE\_\-CreateInterface(), INTERFACE\_\-ShowInterface(), LOAD\_\-EndLoad(), MainData, MESSAGE\_\-GetProfile(), MESSAGE\_\-Presence(), MESSAGE\_\-UserList(), ONLINE\_\-StartOnlineList(), USER\_\-AddUser(), USER\_\-StartUpdateUserList(), and USER\_\-StartUpdateUserProfile().
+
+\subsection{Variable Documentation}
+\index{start.js@{start.js}!MainData@{MainData}}
+\index{MainData@{MainData}!start.js@{start.js}}
+\subsubsection[MainData]{\setlength{\rightskip}{0pt plus 5cm}var {\bf MainData}}\label{start_8js_be4e3545ee0ac3ff17e7aecaff4fce1a}
+
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+Referenced by ADMIN\_\-HandleAddWord(), ADMIN\_\-HandleAdmin(), ADMIN\_\-HandleAdminError(), ADMIN\_\-HandleBanList(), ADMIN\_\-HandleBannedWordsList(), ADMIN\_\-HandleInfo(), ADMIN\_\-HandleRemoveWord(), ADMINCENTER\_\-AdjournSortByBRating(), ADMINCENTER\_\-AdjournSortByBUsername(), ADMINCENTER\_\-AdjournSortByCategory(), ADMINCENTER\_\-AdjournSortByInc(), ADMINCENTER\_\-AdjournSortByRated(), ADMINCENTER\_\-AdjournSortByTime(), ADMINCENTER\_\-AdjournSortByWRating(), ADMINCENTER\_\-AdjournSortByWUsername(), ADMINCENTER\_\-AdminLevelSortByLevel(), ADMINCENTER\_\-AdminLevelSortByUsername(), ADMINCENTER\_\-ClearBannedWordsList(), ADMINCENTER\_\-ClearPunishList(), ADMINCENTER\_\-LevelSortByLevel(), ADMINCENTER\_\-LevelSortByUsername(), ADMINCENTER\_\-PunishSortByDate(), ADMINCENTER\_\-PunishSortByIncident(), ADMINCENTER\_\-PunishSortByPeriod(), ADMINCENTER\_\-PunishSortByPunish(), ADMINCENTER\_\-PunishSortByReason(), ADMINCENTER\_\-PunishSortByUsername(), ADMINCENTER\_\-ShowAdjourn(), ADMINCENTER\_\-ShowAdminLevel(), ADMINCENTER\_\-ShowLevel(), ADMINCENTER\_\-ShowPunish(), ADMINCENTER\_\-ShowWords(), ADMINCENTER\_\-StartAdminCenter(), ANNOUNCE\_\-AcceptRandomAnnounce(), ANNOUNCE\_\-AddAnnounce(), ANNOUNCE\_\-CancelAllAnnounce(), ANNOUNCE\_\-ClearAnnounce(), ANNOUNCE\_\-HandleAnnounce(), ANNOUNCE\_\-HandleAnnounceError(), ANNOUNCE\_\-HandleAnnounceGame(), ANNOUNCE\_\-RemoveAnnounce(), CHALLENGE\_\-ChallengeError(), CHALLENGE\_\-ClearChallenges(), CHALLENGE\_\-HandleAccept(), CHALLENGE\_\-HandleAdjourn(), CHALLENGE\_\-HandleDecline(), CHALLENGE\_\-HandleOffer(), CHALLENGE\_\-HandlePresence(), CHALLENGE\_\-PostponePresence(), CHALLENGE\_\-RemovePostpone(), CHALLENGE\_\-SendChallenge(), CHALLENGE\_\-SendReChallenge(), CHALLENGE\_\-SendResumeGame(), CHAT\_\-BlurChat(), CHAT\_\-ChangeChatState(), CHAT\_\-ChangeUserChatStatus(), CHAT\_\-CloseChat(), CHAT\_\-ErrorMessageLength(), CHAT\_\-HandleAnnounceMessage(), CHAT\_\-OpenChat(), CHAT\_\-ReceiveMessage(), CHAT\_\-SendMessage(), CONNECTION\_\-ConnectJabber(), CONNECTION\_\-ReceiveConnection(), CONNECTION\_\-ReceiveXml(), CONNECTION\_\-SendJabber(), CONTACT\_\-AddUser(), CONTACT\_\-ChangeStatus(), CONTACT\_\-HandleContactUserList(), CONTACT\_\-HandleInfo(), CONTACT\_\-HandleSearchUser(), CONTACT\_\-InviteUser(), CONTACT\_\-IsContact(), CONTACT\_\-LoadUserContactList(), CONTACT\_\-ReceiveSubscribe(), CONTACT\_\-ReceiveSubscribed(), CONTACT\_\-ReceiveUnsubscribed(), CONTACT\_\-RemoveUser(), CONTACT\_\-ResetAwayStatus(), CONTACT\_\-SetAwayStatus(), CONTACT\_\-SetUserRating(), CONTACT\_\-SetUserStatus(), CONTACT\_\-SetUserType(), CONTACT\_\-ShowUserMenu(), CONTACT\_\-SortUsersByNick(), CONTACT\_\-SortUsersByRating(), CONTACT\_\-StartAwayCounter(), CONTACT\_\-StartContactList(), CONTACT\_\-StopAwayStatus(), CURRENTGAME\_\-HandleGameRoomInfoError(), CURRENTGAME\_\-HandleGameRoomInfoList(), CURRENTGAME\_\-HandleGameRoomList(), DATA\_\-AddGame(), DATA\_\-AddOldGame(), DATA\_\-AddUserInRoom(), DATA\_\-GetContactUser(), DATA\_\-GetOnlineUser(), DATA\_\-GetUserRatingInRoom(), DATA\_\-PushGameToOldGame(), DATA\_\-RemoveContactUser(), DATA\_\-RemoveGame(), DATA\_\-RemoveOldGame(), DATA\_\-RemoveOnlineUser(), DATA\_\-SetRoomInformation(), GAME\_\-ChangePromotion(), GAME\_\-End(), GAME\_\-GetOponent(), GAME\_\-HandleGameError(), GAME\_\-HandleGameResult(), GAME\_\-HandlePresence(), GAME\_\-HandleVCardPhoto(), GAME\_\-HideLoadingMove(), GAME\_\-Move(), GAME\_\-RemoveBlockBorder(), GAME\_\-RemoveBlockClass(), GAME\_\-RemoveGame(), GAME\_\-SendMove(), GAME\_\-SetBlockBorder(), GAME\_\-SetBlockClass(), GAME\_\-SetLeftTime(), GAME\_\-ShowLoadingMove(), GAME\_\-StartGame(), GAME\_\-StartObserverGame(), GAME\_\-State(), GAME\_\-UpdateBoard(), GAMECENTER\_\-AnnounceSortByCategory(), GAMECENTER\_\-AnnounceSortByInc(), GAMECENTER\_\-AnnounceSortByPrivate(), GAMECENTER\_\-AnnounceSortByRated(), GAMECENTER\_\-AnnounceSortByRating(), GAMECENTER\_\-AnnounceSortByTime(), GAMECENTER\_\-AnnounceSortByUsername(), GAMECENTER\_\-ClearCurrentGames(), GAMECENTER\_\-CurrentGamesSortByBRating(), GAMECENTER\_\-CurrentGamesSortByCategory(), GAMECENTER\_\-CurrentGamesSortByMoves(), GAMECENTER\_\-CurrentGamesSortByRated(), GAMECENTER\_\-CurrentGamesSortByTime(), GAMECENTER\_\-CurrentGamesSortByWRating(), GAMECENTER\_\-HideGameCenter(), GAMECENTER\_\-MatchOfferSortByCategory(), GAMECENTER\_\-MatchOfferSortByInc(), GAMECENTER\_\-MatchOfferSortByPrivate(), GAMECENTER\_\-MatchOfferSortByRated(), GAMECENTER\_\-MatchOfferSortByRating(), GAMECENTER\_\-MatchOfferSortByTime(), GAMECENTER\_\-MatchOfferSortByUsername(), GAMECENTER\_\-PostponeSortByCategory(), GAMECENTER\_\-PostponeSortByDate(), GAMECENTER\_\-PostponeSortByInc(), GAMECENTER\_\-PostponeSortByRating(), GAMECENTER\_\-PostponeSortByTime(), GAMECENTER\_\-PostponeSortByUsername(), GAMECENTER\_\-ShowAnnounce(), GAMECENTER\_\-ShowCurrentGames(), GAMECENTER\_\-ShowGameCenter(), GAMECENTER\_\-ShowMatchOffer(), GAMECENTER\_\-ShowPostpone(), GAMECENTER\_\-StartGameCenter(), IMAGE\_\-B64Img(), IMAGE\_\-ImageDecode(), INTERFACE\_\-AddAnnounce(), INTERFACE\_\-AddCurrentGames(), INTERFACE\_\-AddMove(), INTERFACE\_\-AddOldGameResult(), INTERFACE\_\-AnnounceWindow(), INTERFACE\_\-ChangeRoomListVisibility(), INTERFACE\_\-CreateChat(), INTERFACE\_\-CreateContact(), INTERFACE\_\-CreateRoom(), INTERFACE\_\-CreateRoomInBar(), INTERFACE\_\-CreateUserBox(), INTERFACE\_\-CreateWelcome(), INTERFACE\_\-DecreaseTime(), INTERFACE\_\-FocusRoom(), INTERFACE\_\-GameBoardObj(), INTERFACE\_\-NewPiece(), INTERFACE\_\-OldGameSetTable(), INTERFACE\_\-ProfileSetDesc(), INTERFACE\_\-RefreshContactOnlineNumber(), INTERFACE\_\-RefreshOccupantsNumber(), INTERFACE\_\-RemoveGame(), INTERFACE\_\-SearchUserSetResult(), INTERFACE\_\-ShowChallengeMenu(), INTERFACE\_\-ShowChallengeWindow(), INTERFACE\_\-ShowCreateAdminCenterWindow(), INTERFACE\_\-ShowCreateRoomWindow(), INTERFACE\_\-ShowEmoticonList(), INTERFACE\_\-ShowGameRoomList(), INTERFACE\_\-ShowOldGameWindow(), INTERFACE\_\-ShowPostponeWindow(), INTERFACE\_\-ShowProfileWindow(), INTERFACE\_\-ShowUserFullName(), INTERFACE\_\-ShowUserMenu(), INTERFACE\_\-SortSearchUserByName(), INTERFACE\_\-SortSearchUserByNick(), INTERFACE\_\-StartLogin(), INTERFACE\_\-UndoMove(), LOAD\_\-AppendFiles(), LOAD\_\-EndFile(), LOAD\_\-EndLoad(), LOAD\_\-LoadFiles(), LOAD\_\-NextFile(), LOAD\_\-StartLoad(), LOGIN\_\-Disconnected(), LOGIN\_\-Login(), LOGIN\_\-Logout(), MESSAGE\_\-AcceptAnnounceMatch(), MESSAGE\_\-AddBannedWord(), MESSAGE\_\-AnnounceMatch(), MESSAGE\_\-BanUser(), MESSAGE\_\-Challenge(), MESSAGE\_\-ChallengeAccept(), MESSAGE\_\-ChallengeDecline(), MESSAGE\_\-ChallengeGetAdjournList(), MESSAGE\_\-ChallengeResumeGame(), MESSAGE\_\-ChangeStatus(), MESSAGE\_\-Chat(), MESSAGE\_\-EndConnection(), MESSAGE\_\-FetchOldGame(), MESSAGE\_\-GameEnterRoom(), MESSAGE\_\-GameMove(), MESSAGE\_\-GameRequests(), MESSAGE\_\-GameResponse(), MESSAGE\_\-GameRoomInfoList(), MESSAGE\_\-GameRoomList(), MESSAGE\_\-GameSearchCurrentGame(), MESSAGE\_\-GetAnnounceMatch(), MESSAGE\_\-GetBanList(), MESSAGE\_\-GetBannedWords(), MESSAGE\_\-GetOldGames(), MESSAGE\_\-GetProfile(), MESSAGE\_\-GroupChat(), MESSAGE\_\-Info(), MESSAGE\_\-InfoProfile(), MESSAGE\_\-Invite(), MESSAGE\_\-InviteAccept(), MESSAGE\_\-InviteDeny(), MESSAGE\_\-KickUser(), MESSAGE\_\-KickUserRoom(), MESSAGE\_\-MakeXMPP(), MESSAGE\_\-Presence(), MESSAGE\_\-RemoveAnnounceMatch(), MESSAGE\_\-RemoveBannedWord(), MESSAGE\_\-RemoveContact(), MESSAGE\_\-RoomList(), MESSAGE\_\-SearchUser(), MESSAGE\_\-SendPasswd(), MESSAGE\_\-SendUsername(), MESSAGE\_\-SetProfile(), MESSAGE\_\-StartConnection(), MESSAGE\_\-Unavailable(), MESSAGE\_\-UnbanUser(), MESSAGE\_\-UserList(), OLDGAME\_\-CloseWindow(), OLDGAME\_\-EndGame(), OLDGAME\_\-FirstBoard(), OLDGAME\_\-GotoBoard(), OLDGAME\_\-HandleSearchOldGame(), OLDGAME\_\-HandleVCardPhoto(), OLDGAME\_\-LastBoard(), OLDGAME\_\-LoadGameHistory(), OLDGAME\_\-NextBoard(), OLDGAME\_\-OpenOldGameWindow(), OLDGAME\_\-PrevBoard(), OLDGAME\_\-RemoveOldGame(), OLDGAME\_\-StartOldGame(), OLDGAME\_\-UpdateBoard(), ONLINE\_\-AddUser(), ONLINE\_\-HandleInfo(), ONLINE\_\-HandleOnlinePresence(), ONLINE\_\-RemoveUser(), ONLINE\_\-SetUserRating(), ONLINE\_\-SetUserType(), ONLINE\_\-SortUserByNick(), ONLINE\_\-SortUserByRating(), ONLINE\_\-StartOnlineList(), PARSER\_\-ParseIq(), PARSER\_\-ParseIqById(), PARSER\_\-ParsePresence(), PARSER\_\-ParseXml(), PROFILE\_\-ChangeVerification(), PROFILE\_\-CreateProfile(), PROFILE\_\-HandleInfoProfile(), PROFILE\_\-HandleVCardProfile(), PROFILE\_\-RemoveProfile(), PROFILE\_\-ResetUpdateProfile(), PROFILE\_\-SaveMyProfile(), PROFILE\_\-StartProfile(), ROOM\_\-AddUser(), ROOM\_\-CreateRoom(), ROOM\_\-EnterRoom(), ROOM\_\-EnterRoomGame(), ROOM\_\-ErrorMessageLength(), ROOM\_\-ExitRoom(), ROOM\_\-FocusRoom(), ROOM\_\-HandleInfo(), ROOM\_\-HandleRoomList(), ROOM\_\-HandleRoomPresence(), ROOM\_\-RemoveRoom(), ROOM\_\-RemoveUser(), ROOM\_\-SendMessage(), ROOM\_\-ShowHideUserList(), ROOM\_\-ShowMessage(), ROOM\_\-SortUsersByNick(), ROOM\_\-SortUsersByRating(), START\_\-ChangeLanguage(), START\_\-Restart(), START\_\-StartPage(), START\_\-Webclient(), USER\_\-AddUser(), USER\_\-HandleInfo(), USER\_\-StartUpdateUserList(), USER\_\-StartUpdateUserProfile(), USER\_\-StopUpdateUserList(), USER\_\-StopUpdateUserProfile(), USER\_\-UpdateUserList(), UTILS\_\-BannedWords(), UTILS\_\-BreakString(), UTILS\_\-GetText(), UTILS\_\-ReturnEvent(), UTILS\_\-ReturnKeyCode(), UTILS\_\-StartDragPiece(), WINDOW\_\-Challenge(), WINDOW\_\-CreateImageSend(), WINDOW\_\-Focus(), WINDOW\_\-NewWindow(), WINDOW\_\-Postpone(), WINDOW\_\-RemoveWindow(), WINDOW\_\-SearchUser(), and WINDOW\_\-ShowWindow().\index{start.js@{start.js}!TranslationLog@{TranslationLog}}
+\index{TranslationLog@{TranslationLog}!start.js@{start.js}}
+\subsubsection[TranslationLog]{\setlength{\rightskip}{0pt plus 5cm}var {\bf TranslationLog} = new Array()}\label{start_8js_d4057b977a01abfa4f10098f1ffed0f1}
+
+

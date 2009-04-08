@@ -14,13 +14,18 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		interface/profile.js
+* @brief	Contais all functions to create and manage profile elements
+*/
+
 /**
-* Create elements to profile window
+* @brief	Create elements to profile window content object
 *
-* @param Profile					Object with profile data	 
-* @return									Div; Array
-* @see										WINDOW_Profile();
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @param	Profile		Object with profile data	 
+* @return	Profile main Div and Buttons Array
+* @see		WINDOW_Profile();
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowProfileWindow(Profile)
 {
@@ -441,9 +446,9 @@ function INTERFACE_ShowProfileWindow(Profile)
 }
 
 /**
-*	Create elements of confirm profile close window and returns div
+* @brief	Create confirm profile close window content
 *
-* @return	Div; Array
+* @return	Profile confirm main Div and Buttons Array
 * @see		WINDOW_ProfileConfirm();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
@@ -468,7 +473,7 @@ function INTERFACE_ShowProfileConfirmWindow()
 	Discard = UTILS_CreateElement("input", null,"button_big");
 	Discard.type = "button";
 	Discard.value = UTILS_GetText('profile_discard');
-	//TODO 
+	//TODO
 	//insert discard functions
 
 	Save = UTILS_CreateElement("input", null,"button_big");
@@ -509,8 +514,11 @@ function INTERFACE_ShowProfileConfirmWindow()
 
 //METHODS
 /**
+* @brief	Set profile username
 *
-* @author Rubens
+* @param	Username	User's name
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetUser(Username)
 {
@@ -525,8 +533,10 @@ function INTERFACE_ProfileSetUser(Username)
 }
 
 /**
+* @brief	Get profile username
 *
-* @author Rubens
+* @return	User's name
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileGetUser()
 {
@@ -534,8 +544,10 @@ function INTERFACE_ProfileGetUser()
 }
 
 /**
+* @brief	Set profile user's image
 *
-* @author Rubens
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetUserImg(Img)
 {
@@ -559,8 +571,10 @@ function INTERFACE_ProfileSetUserImg(Img)
 }
 
 /**
+* @brief	Set nick name
 *
-* @author Rubens
+* @param	Nick	User's nickname
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetNick(Nick)
 {
@@ -568,8 +582,11 @@ function INTERFACE_ProfileSetNick(Nick)
 }
 
 /**
+* @brief	Set description
 *
-* @author Rubens
+* @param	Desc	User's description
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetDesc(Desc)
 {
@@ -605,8 +622,10 @@ function INTERFACE_ProfileSetDesc(Desc)
 }
 
 /**
+* @brief	Get user's description
 *
-* @author Rubens
+* @return	User's desciption string
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileGetDesc()
 {
@@ -614,8 +633,11 @@ function INTERFACE_ProfileGetDesc()
 }
 
 /**
+* @brief	Set rating lists
 *
-* @author Rubens
+* @param	Ratings		Rating's list
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetRatings(Ratings)
 {
@@ -637,8 +659,11 @@ function INTERFACE_ProfileSetRatings(Ratings)
 }
 
 /**
+* @brief	Set total online time
 *
-* @author Rubens
+* @param	Time	Time seconds
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetTotalTime(Time)
 {
@@ -653,8 +678,11 @@ function INTERFACE_ProfileSetTotalTime(Time)
 }
 
 /**
+* @brief	Set online time
 *
-* @author Rubens
+* @param	Time	Time seconds
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetOnlineTime(Time)
 {
@@ -669,8 +697,10 @@ function INTERFACE_ProfileSetOnlineTime(Time)
 }
 
 /**
+* @brief	Set user's level
 *
-* @author Rubens
+* @param	Title	User's level
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetTitle(Title)
 {
@@ -678,8 +708,10 @@ function INTERFACE_ProfileSetTitle(Title)
 }
 
 /**
+* @brief	Set user's type image
 *
-* @author Rubens
+* @param	Group	User's type
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetTitleImg(Group)
 {
@@ -703,11 +735,11 @@ function INTERFACE_ProfileSetTitleImg(Group)
 }
 
 /**
-*	Set Group Label in Profile Window of user
+* @brief	Set user's  Group
 *
-*	@param	Group	User's Group
-*	@return	void
-* @author Danilo Yorinori
+* @param	Group	User's Group
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_ProfileSetGroup(Group)
 {
@@ -731,8 +763,11 @@ function INTERFACE_ProfileSetGroup(Group)
 }
 
 /**
+* @brief	Set user's profile image type
 *
-* @author Rubens
+* @param	ImgType		Image's type
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetImgType(ImgType)
 {
@@ -740,8 +775,10 @@ function INTERFACE_ProfileSetImgType(ImgType)
 }
 
 /**
-*
-* @author Rubens
+* @brief	Get user's profile image type
+* 
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileGetImgType()
 {
@@ -749,8 +786,11 @@ function INTERFACE_ProfileGetImgType()
 }
 
 /**
+* @brief	Set user's image in base64
 *
-* @author Rubens
+* @param	Img64	Image string in base64
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileSetImg64(Img64)
 {
@@ -758,8 +798,10 @@ function INTERFACE_ProfileSetImg64(Img64)
 }
 
 /**
+* @brief	Get profile user's image
 *
-* @author Rubens
+* @return	User's image string in base64
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ProfileGetImg64()
 {
@@ -767,12 +809,11 @@ function INTERFACE_ProfileGetImg64()
 }
 
 /**
-*	Set status of close confirm window
-*	true - opened
-*	false - closed
+* @brief	Set status of close confirm window
 *
-* @param Bool boolean
-* @author Danilo
+* @param 	Bool (true is window confirm opened or false is window confirm closed)
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_ProfileSetClose(Bool)
 {
@@ -780,11 +821,11 @@ function INTERFACE_ProfileSetClose(Bool)
 }
 
 /**
-* Get CloseConfirm value
+* @brief	Get CloseConfirm value
 *
-* @return Bool
+* @return 	Boolean (true is window confirm opened or false is window confirm closed)
 * @see INTERFACE_ProfileSetClose
-* @author Danilo
+* @author	Danilo Yorinori
 */
 function INTERFACE_ProfileGetClose()
 {
@@ -792,9 +833,10 @@ function INTERFACE_ProfileGetClose()
 }
 	
 /**
-* Set Profile window buttons as available
+* @brief	Set Profile window buttons as available
 *
-* @author Danilo
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_ProfileSetAvailable()
 {
@@ -807,9 +849,10 @@ function INTERFACE_ProfileSetAvailable()
 }
 
 /**
-* Set Profile window buttons as unavailable
+* @brief	Set Profile window buttons as unavailable
 *
-* @author Danilo
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_ProfileSetUnavailable()
 {

@@ -19,12 +19,16 @@
 *****************************/
 
 /**
-* Creating game div and set all attributes
+* @brief	Creating game div and set all attributes
 *
-* @constructor
-* @param	void
-* @return	void
-* @author	Rubens and Pedro
+* @param	GameId		Game identification field
+* @param	WName		White user's name
+* @param	BName		Black user's name
+* @param	MyColor		Your color
+* @param	PieceSize	Size of piece in board
+* @param	Observer	Observer mode flag
+* @return	Game board elements
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer)
 {
@@ -117,15 +121,14 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer
 /***************************
  * INTERFACE AUX FUNCTIONS
  **************************/
-
 /**
-* Create a board
+* @brief	Create a game board
 *
-* @param 	MyColor is player color in the game
-* @param 	PieceSize is the board piece size
-* @param 	Observer is true if game will be observed, false if game will be played
-* @return	board html div
-* @author	Rubens and Pedro
+* @param 	MyColor 	Your player color in the game
+* @param 	PieceSize 	Board piece size
+* @param 	Observer 	Observer mode flag
+* @return	Board HTML DOM Div
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 {
@@ -190,10 +193,10 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 }
 
 /**
-* Remove mouse event associated to board blocks
-
-* @return	void
-* @author	Danilo
+* @brief	Remove mouse event associated to board blocks
+*
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_RemoveBlockEvents()
 {
@@ -208,11 +211,10 @@ function INTERFACE_RemoveBlockEvents()
 }
 
 /**
-* Create timer elements
+* @brief	Create timer elements
 *
-* @param 	void
-* @return	Timer html div, White Timer html span and Black Timer html span
-* @author	Rubens and Pedro
+* @return	Timer div, White Timer span and Black Timer span
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateTimer()
 {
@@ -230,11 +232,11 @@ function INTERFACE_CreateTimer()
 }
 
 /**
-* Create game options
+* @brief	Create game options
 *
-* @param 	GameId is game id string
-* @return	Options html div and Array of html elements
-* @author	Rubens and Pedro
+* @param 	GameID		Game identification
+* @return	Options Div and Array of html elements (game options)
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateGameOptions(GameID)
 {
@@ -325,11 +327,10 @@ function INTERFACE_CreateGameOptions(GameID)
 }
 
 /**
-* Create a move list
+* @brief	Create a move list
 *
-* @param 	void
-* @return	MoveListDiv html div and MoveList html list
-* @author	Rubens and Pedro
+* @return	MoveListDiv HTML DOM Div and MoveList HTML DOM List
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateMoveList()
 {
@@ -341,12 +342,12 @@ function INTERFACE_CreateMoveList()
 }
 
 /**
-* Create photo images and names
+* @brief	Create photo images and names
 *
-* @param 	WhitePlayer is White player name
-* @param 	BlackPlayer is Black player name
+* @param 	WhitePlayer 	White player's name
+* @param 	BlackPlayer 	Black player's  name
 * @return	Photo html div, WPhoto html img, BPhoto html img, WName html span and BName html span
-* @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 {
@@ -377,12 +378,12 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 }
 
 /**
-* Create tabs with 2 divs
+* @brief	Create tabs with 2 divs
 *
-* @param 	Div1 is first div in tab
-* @param 	Div2 is second div in tab
-* @return	Tab html Div
-* @author	Rubens and Pedro
+* @param 	Div1 	First div in tab
+* @param 	Div2 	Second div in tab
+* @return	Tab HTML DOM Div
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateTab(Div1, Div2)
 {
@@ -422,12 +423,12 @@ function INTERFACE_CreateTab(Div1, Div2)
 }
 
 /**
-* Create vertical indexes of board
+* @brief	Create vertical indexes of board
 *
-* @param 	Color is the board color
-* @param 	Size is size of blocks of each block in board
-* @return	Vertical index html list
-* @author	Rubens and Pedro
+* @param 	Color 		Your color
+* @param 	Size 		Size of blocks of each block in board
+* @return	Vertical index HTML DOM list
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateVerticalIndex(Color, Size)
 {
@@ -459,12 +460,12 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 }
 
 /**
-* Create horizontal indexes of board
+* @brief	Create horizontal indexes of board
 *
-* @param 	Color is the board color
-* @param 	Size is size of blocks of each block in board
-* @return	Horizontal index html list
-* @author	Rubens and Pedro
+* @param 	Color 		Your color
+* @param 	Size 		Size of blocks of each block in board
+* @return	Horizontal index HTML DOM List
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateHorizontalIndex(Color, Size)
 {
@@ -496,13 +497,13 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 }
 
 /**
-* Create a new piece, with drag listener in 'PLayerColor' pieces
+* @brief	Create a new piece, with drag listener in pieces
 *
-* @param 	Piece is piece char
-* @param 	PlayerColor is the current player color
-* @param 	Size is size of blocks of each block in board
-* @return	Piece html img
-* @author	Rubens and Pedro
+* @param 	Piece		Piece character
+* @param 	PlayerColor 	Your color
+* @param 	Size 		Size of blocks of each block in board
+* @return	Piece HTML DOM img
+* @author	Rubens Suguimoto and Pedro Rocha
 */ 
 function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 {
@@ -636,11 +637,10 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
  * OLD GAME MOVE LIST
 ***********************************************/
 /**
-* Create OldGame move list with buttons to review all game moves
+* @brief	Create OldGame move list with buttons to review all game moves
 *
-* @param 	void
 * @return	MoveListDiv html div and MoveList html list
-* @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateOldGameMoveList()
 {
@@ -682,11 +682,11 @@ function INTERFACE_CreateOldGameMoveList()
 }
 
 /**
-* Create tab with 1 div(this should be used in Observer and OldGame mode)
+* @brief	Create tab with 1 div(this should be used in Observer and OldGame mode)
 *
-* @param 	Div1 is first div in tab
+* @param 	DivMoves 	Div in tab that contais history moves
 * @return	Tab html Div
-* @author	Rubens and Pedro
+* @author	Rubens Suguimoto and Pedro Rocha
 */
 function INTERFACE_CreateOldGameTab(DivMoves)
 {
@@ -701,11 +701,11 @@ function INTERFACE_CreateOldGameTab(DivMoves)
 }
 
 /**
-* Change board to last move done
+* @brief	Change board to last move done
 *
-* @param 	Move string (i.e: a2a3)
-* @return	void
-* @author	Rubens
+* @param 	Move 	Move string (i.e: a2a3)
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_LastMove(Move)
 {
@@ -761,11 +761,11 @@ function INTERFACE_LastMove(Move)
 }
 
 /**
-* Find a block with parameter Identificator
+* @brief	Find a block with parameter Identificator
 *
-* @param 	id is the block identificator
-* @return	null ou Block HTML div element
-* @author	Rubens
+* @param 	id 	Block identificator
+* @return	Block HTML div element of null (if block not found)
+* @author	Rubens Suguimoto
 */
 function INTERFACE_FindBlock(id)
 {
@@ -788,9 +788,9 @@ function INTERFACE_FindBlock(id)
 }
 
 /**
-* Show loading move box
+* @brief	Show loading move box
 *
-* @return	void
+* @return	none
 * @author	Rubens Suguimoto
 */
 function INTERFACE_ShowLoadingMove()
@@ -798,9 +798,9 @@ function INTERFACE_ShowLoadingMove()
 	this.LoadingMove.style.display = "block";
 }
 /**
-* Hide loading move box
+* @brief	Hide loading move box
 *
-* @return	void
+* @return	none
 * @author	Rubens Suguimoto
 */
 function INTERFACE_HideLoadingMove()
@@ -809,9 +809,9 @@ function INTERFACE_HideLoadingMove()
 }
 
 /**
-* Show leave user from game message
+* @brief	Show leave user from game message
 *
-* @return	void
+* @return	none
 * @author	Rubens Suguimoto
 */
 function INTERFACE_ShowLeaveUser(Color)
@@ -828,9 +828,9 @@ function INTERFACE_ShowLeaveUser(Color)
 }
 
 /**
-* Hide leave user from game message
+* @brief	Hide leave user from game message
 *
-* @return	void
+* @return	none
 * @author	Rubens Suguimoto
 */
 function INTERFACE_HideLeaveUser()
@@ -839,11 +839,11 @@ function INTERFACE_HideLeaveUser()
 }
 
 /**
-* Set a border to block
+* @brief	Set a border to block
 *
-*	@param Block - block element
-* @return void
-* @author Danilo
+* @param	Block 	Block Div element
+* @return 	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_SetBlockBorder(Block)
 {
@@ -855,11 +855,11 @@ function INTERFACE_SetBlockBorder(Block)
 }
 
 /**
-* Set block class as selected
+* @brief	Set block class as selected
 *
-*	@param BlockId - Id of block to search and change
-* @return void
-* @author Danilo
+* @param	BlockId 	Id of block to search and change
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_SetBlockClass(BlockId)
 {
@@ -869,11 +869,11 @@ function INTERFACE_SetBlockClass(BlockId)
 }
 
 /**
-* Remove border from block
+* @brief	Remove border from block
 *
-*	@param Block - block element
-* @return void
-* @author Danilo
+* @param	Block 	Block element
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_RemoveBlockBorder(Block)
 {
@@ -884,11 +884,11 @@ function INTERFACE_RemoveBlockBorder(Block)
 }
 
 /**
-* Remove select class from block and set its real color (black/white)
+* @brief	Remove select class from block and set its real color (black/white)
 *
-*	@param BlockId - Id of block to search and change
-* @return void
-* @author Danilo
+* @param	BlockId 	Id of block to search and change
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_RemoveBlockClass(BlockId)
 {

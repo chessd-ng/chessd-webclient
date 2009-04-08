@@ -14,6 +14,19 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+
+/*
+* @file		interface/challengemenu.js
+* @brief	Create a interface challenge menu object
+* @deprecated
+*/
+
+/*
+* @brief	Create Challenge menu object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function ChallengeMenuObj()
 {
 	var Challenge = INTERFACE_CreateChallengeMenu();
@@ -73,6 +86,12 @@ function ChallengeMenuObj()
 	this.hideLoadingAnnounce();
 }
 
+/*
+* @brief	Create Challenge menu HTML DOM elements
+*
+* @return	Challenge menu HTML DOM Div, Challenges HTML DOM Lists and Texts HTML DOM texts
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateChallengeMenu()
 {
 	var ChallengeDiv = UTILS_CreateElement("div","ChallengeMenu");
@@ -114,6 +133,19 @@ function INTERFACE_CreateChallengeMenu()
 	return { Div:ChallengeDiv,  MatchList:MatchOfferList, AnnounceList:AnnounceList, PostponeList:PostponeList, NoMatch:NoMatch, NoAnnounce:NoAnnounce, NoPostpone:NoPostpone, LoadingAnnounce:LoadingAnnounce};
 }
 
+
+/*
+* @brief	Add a match offer
+*
+* @param	Oponent		Oponent player object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Rated		Game rated flag
+* @param	Private		Game private flag
+* @param	MatchId		Match offer identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 {
 	var Item;
@@ -247,7 +279,18 @@ function INTERFACE_RemoveMatch(MatchId)
 }
 
 
-
+/*
+* @brief	Add a announced challenge
+*
+* @param	Player		Player object
+* @param	Time		Game time
+* @param	Inc		Game time increment
+* @param	Rated		Game rated flag
+* @param	Private		Game private flag
+* @param	MatchId		Announce identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 {
 	var Item;
@@ -351,6 +394,13 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	}
 }
 
+/*
+* @brief	Remove announce
+*
+* @param	MatchId		Match offer identification number
+* @return	True if removed, false if not found
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveAnnounce(MatchId)
 {
 	var i=0;
@@ -385,7 +435,16 @@ function INTERFACE_RemoveAnnounce(MatchId)
 }
 
 
-
+/*
+* @brief	Add a postponed game
+*
+* @param	Oponent		Oponent player object
+* @param	Category	Game category
+* @param	Date		Postponed game date
+* @param	PostponeId	Postpone identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	var Item;
@@ -439,6 +498,13 @@ function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	}
 }
 
+/*
+* @brief	Remove postponed game
+*
+* @param	PostponeId	Postponed game identification number
+* @return	True if removed, false if not found
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemovePostpone(PostponeId)
 {
 	var i=0;
@@ -472,6 +538,14 @@ function INTERFACE_RemovePostpone(PostponeId)
 	return true;
 }
 
+/*
+* @brief	Update a postponed game status
+*
+* @param	OponentName	Oponent's name
+* @param	OponentStatus	Oponent's presence status
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
@@ -517,6 +591,14 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 	}
 }
 
+/*
+* @brief	Update a postpone game action button status
+*
+* @param	Button		HTML DOM button
+* @param	AdjournId	Postponed game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_UpdatePostponeItem(Button, AdjournId)
 {
 	Button.onmousedown = function() {
@@ -524,6 +606,14 @@ function INTERFACE_UpdatePostponeItem(Button, AdjournId)
 	}	
 }
 
+/*
+* @brief	Show challenge menu in interface
+*
+* @param	Left	Left position in pixels
+* @param	Top	Top position in pixels
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowChallengeMenu(Left, Top)
 {
 	if(this.Menu.parentNode != document.body)
@@ -554,43 +644,84 @@ function INTERFACE_ShowChallengeMenu(Left, Top)
 	this.MenuVisible = true;
 }
 
+/*
+* @brief	Show offered matches list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowMatchOfferList()
 {
 	this.MatchOfferUl.style.display = "block";
 	this.MatchVisible = true;
 }
 
+/*
+* @brief	Show announced games list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAnnounceList()
 {
 	this.AnnounceUl.style.display = "block";
 	this.AnnounceVisible = true;
 }
 
+/*
+* @brief	Show postponed games list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowPostponeList()
 {
 	this.PostponeUl.style.display = "block";
 	this.PostponeVisible = true;
 }
 
-
+/*
+* @brief	Hide challenge menu
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideChallengeMenu()
 {
 	this.Menu.style.display = "none";
 	this.MenuVisible = false;
 }
 
+/*
+* @brief	Hide offered matches list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideMatchOfferList()
 {
 	this.MatchOfferUl.style.display = "none";
 	this.MatchVisible = false;
 }
 
+/*
+* @brief	Hide announced games list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideAnnounceList()
 {
 	this.AnnounceUl.style.display = "none";
 	this.AnnounceVisible = false;
 }
 
+/*
+* @brief	Hide postponed games list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HidePostponeList()
 {
 	this.PostponeUl.style.display = "none";
@@ -598,41 +729,89 @@ function INTERFACE_HidePostponeList()
 }
 
 
+/*
+* @brief	Hide no offered matches
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoMatch()
 {
 	this.NoMatch.style.display = "block";
 }
 
+/*
+* @brief	Hide no offered matches
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoMatch()
 {
 	this.NoMatch.style.display = "none";
 }
 
+/*
+* @brief	Show no announced games
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoAnnounce()
 {
 	this.NoAnnounce.style.display = "block"; 
 }
 
+/*
+* @brief	Hide no announced games
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoAnnounce()
 {
 	this.NoAnnounce.style.display = "none"; 
 }
 
+/*
+* @brief	Show no postponed games
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoPostpone()
 {
 	this.NoPostpone.style.display = "block";
 }
 
+/*
+* @brief	Hide no postoned games
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none";
 }
 
+/*
+* @brief	Show loading announces
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowLoadingAnnounce()
 {
 	this.LoadingAnnounce.style.display = "block";
 }
 
+/*
+* @brief	Hide loading announces
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideLoadingAnnounce()
 {
 	this.LoadingAnnounce.style.display = "none";

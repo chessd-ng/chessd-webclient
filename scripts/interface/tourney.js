@@ -14,11 +14,16 @@
 * C3SL - Center for Scientific Computing and Free Software
 */
 
+/*
+* @file		interface/tourney.js
+* @brief	Contains all functions to create and manage tourney elements
+*/
+
 /**
-* Create elements to create tourney
+* @brief	Create elements to create tourney window content
 *
-* @return									Div; Array
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @return	Tourney main HTML DOM Div and Buttons array
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowCreateTourneyWindow()
 {

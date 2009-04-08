@@ -16,19 +16,18 @@
 
 /**
 * @file admincenter.js
-* @brief 
-*
-* Create window content object to admin tools
+* @brief Create window content object to admin tools
 */
 
 /**
- * @brief Create admin center window
- *
- * Create temporary admin tools window content.
- *
- * @author 	Rubens Suguimoto
- * @see 	WINDOW_CreateAdminCenter()
- */
+* @brief	Create admin center window
+*
+* Create temporary admin tools window content.
+*
+* @return	Div element, Buttons elements and Elements that receive event
+* @author 	Rubens Suguimoto
+* @see 	WINDOW_CreateAdminCenter()
+*/
 function INTERFACE_ShowCreateAdminCenterWindow()
 {
 	var Div;
@@ -66,6 +65,12 @@ function INTERFACE_ShowCreateAdminCenterWindow()
 
 }
 
+/*
+* @brief	Create admin center object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function AdminCenterObj()
 {
 	var AdminCenter = INTERFACE_CreateAdminCenter();
@@ -98,7 +103,13 @@ function AdminCenterObj()
 }
 
 
-
+/*
+* @brief	Show admin center window
+*
+* @param	Element		HTML DOM element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAdminCenter(Element)
 {
 	if(Element != null)
@@ -113,14 +124,24 @@ function INTERFACE_ShowAdminCenter(Element)
 	this.AdminCenterDiv.style.display = "block";
 	this.AdminCenterDivVisible = true;
 }
-
+/*
+* @brief	Hide admin center window
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideAdminCenter()
 {
 	this.AdminCenterDiv.style.display = "none";
 	this.AdminCenterDivVisible = false;
 }
 
-
+/*
+* @brief	Create admin center window content
+*
+* @return	Window content and admincenter content
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenter()
 {
 	var Main = UTILS_CreateElement("div","AdminCenter");
@@ -175,6 +196,12 @@ function INTERFACE_CreateAdminCenter()
 /*******************************************/
 /*ADMIN CENTER PUNISH OBJECT*/
 /*******************************************/
+/*
+* @brief	Create punish tab content
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function PunishObj()
 {
 	var Punish = INTERFACE_CreateAdminCenterPunish();
@@ -198,7 +225,18 @@ function PunishObj()
 	this.hide= INTERFACE_HidePunishCenter;
 }
 
-
+/*
+* @brief	Add a punish in punish content list
+*
+* @param	Name		User's name
+* @param	Punish		Punish type
+* @param	Incident	Number of incidences
+* @param	Date		Punish date
+* @param	Period		Punish interval
+* @param	Reason		Reason to punish text
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 {
 	var Item;
@@ -230,23 +268,8 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 		PPrivate = UTILS_CreateElement("p","private","true");
 		PPrivate.title = "Privado";
 	}
-	*/
-/*
-	if(Player.Name == MainData.Username)
-	{
-		PButton = UTILS_CreateElement("p","button","decline");
-		PButton.onclick = function(){
-			ANNOUNCE_RemovePunish(Id);
-		}
-	}
-	else
-	{
-		PButton = UTILS_CreateElement("p","button","accept");
-		PButton.onclick = function(){
-			ANNOUNCE_AcceptPunish(Id);
-		}
-	}
 */
+
 	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
 	PButton.onclick = function(){
 		ADMIN_UnbanUser(Name,"Acquit - absolvido");
@@ -272,6 +295,13 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	}
 }
 
+/*
+* @brief	Remove punish
+*
+* @param	User's name
+* @return	True if removed or False if not found user
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemovePunish(Name)
 {
 	var i=0;
@@ -305,6 +335,13 @@ function INTERFACE_RemovePunish(Name)
 	return true;
 }
 
+/*
+* @brief	Show punish tab
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowPunishCenter(Element)
 {
 	if(Element != null)
@@ -316,26 +353,44 @@ function INTERFACE_ShowPunishCenter(Element)
 	this.PunishVisible = true;
 }
 
-
+/*
+* @brief	Hide punish tab
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HidePunishCenter()
 {
 	this.PunishDiv.style.display = "none";
 	this.PunishVisible = false;
 }
-
+/*
+* @brief	Show no punish text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoPunish()
 {
 	this.NoPunish.style.display = "block"; 
 }
-
+/*
+* @brief	Hide no punish text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoPunish()
 {
 	this.NoPunish.style.display = "none"; 
 }
 
-
-/************************************************/
-
+/*
+* @brief	Create punish HTML DOM elements
+*
+* @return	Admincenter content, content list and element with no elements in list text
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenterPunish()
 {
 	var Center = UTILS_CreateElement("div", "CenterPunish");
@@ -442,6 +497,12 @@ function INTERFACE_CreateAdminCenterPunish()
 /*******************************************/
 /*ADMIN CENTER ADMINLEVEL OBJECT*/
 /*******************************************/
+/*
+* @brief	Create admin's level object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function AdminLevelObj()
 {
 	var AdminLevel = INTERFACE_CreateAdminCenterAdminLevel();
@@ -465,7 +526,14 @@ function AdminLevelObj()
 	this.hide= INTERFACE_HideAdminLevelCenter;
 }
 
-
+/*
+* @brief	Add admin level
+*
+* @param	Name		Admin's name
+* @param	AdminLevel	Admin's level
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddAdminLevel(Name, AdminLevel)
 {
 	var Item;
@@ -498,9 +566,16 @@ function INTERFACE_AddAdminLevel(Name, AdminLevel)
 		this.hideNoAdminLevel();
 	}
 }
-
+/*
+* @brief	Remove admin level
+*
+* @param	MatchId		Admin's name	
+* @return	True if removed or False if not found user
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveAdminLevel(MatchId)
 {
+	//TODO -> CHANGE MatchId TO name
 	var i=0;
 	var Item;
 	
@@ -531,7 +606,13 @@ function INTERFACE_RemoveAdminLevel(MatchId)
 
 	return true;
 }
-
+/*
+* @brief	Show admin level tab
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAdminLevelCenter(Element)
 {
 	if(Element != null)
@@ -543,18 +624,33 @@ function INTERFACE_ShowAdminLevelCenter(Element)
 	this.AdminLevelVisible = true;
 }
 
-
+/*
+* @brief	Hide admin level tab
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideAdminLevelCenter()
 {
 	this.AdminLevelDiv.style.display = "none";
 	this.AdminLevelVisible = false;
 }
-
+/*
+* @brief	Show no admin level text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoAdminLevel()
 {
 	this.NoAdminLevel.style.display = "block"; 
 }
-
+/*
+* @brief	Hide no admin level text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoAdminLevel()
 {
 	this.NoAdminLevel.style.display = "none"; 
@@ -562,7 +658,12 @@ function INTERFACE_HideNoAdminLevel()
 
 
 /************************************************/
-
+/*
+* @brief	Create admin level HTML DOM elements
+*
+* @return	Admincenter content, content list and element with no elements in list text
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenterAdminLevel()
 {
 	var Center = UTILS_CreateElement("div", "CenterAdminLevel");
@@ -609,6 +710,12 @@ function INTERFACE_CreateAdminCenterAdminLevel()
 /*******************************************/
 /*ADMIN CENTER LEVEL OBJECT*/
 /*******************************************/
+/*
+* @brief	Create user's level object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function LevelObj()
 {
 	var Level = INTERFACE_CreateAdminCenterLevel();
@@ -632,7 +739,14 @@ function LevelObj()
 	this.hide= INTERFACE_HideLevelCenter;
 }
 
-
+/*
+* @brief	Add user's level
+*
+* @param	Name		User's name
+* @param	Level		User's level
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddLevel(Name, Level)
 {
 	var Item;
@@ -666,9 +780,16 @@ function INTERFACE_AddLevel(Name, Level)
 		this.hideNoLevel();
 	}
 }
-
+/*
+* @brief	Remove user's level
+*
+* @param	MatchId		User's name
+* @return	True if removed or False if not found user
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveLevel(MatchId)
 {
+	//TODO -> CHANGE MatchId TO Name
 	var i=0;
 	var Item;
 	
@@ -699,7 +820,13 @@ function INTERFACE_RemoveLevel(MatchId)
 
 	return true;
 }
-
+/*
+* @brief	Show user's level tab
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowLevelCenter(Element)
 {
 	if(Element != null)
@@ -711,18 +838,33 @@ function INTERFACE_ShowLevelCenter(Element)
 	this.LevelVisible = true;
 }
 
-
+/*
+* @brief	Hide user's level tab
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideLevelCenter()
 {
 	this.LevelDiv.style.display = "none";
 	this.LevelVisible = false;
 }
-
+/*
+* @brief	Show no user's level text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoLevel()
 {
 	this.NoLevel.style.display = "block"; 
 }
-
+/*
+* @brief	Hide no user's level text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoLevel()
 {
 	this.NoLevel.style.display = "none"; 
@@ -730,7 +872,12 @@ function INTERFACE_HideNoLevel()
 
 
 /************************************************/
-
+/*
+* @brief	Create user's level HTML DOM Elements
+*
+* @return	Admincenter content, content list and element with no elements in list text
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenterLevel()
 {
 	var Center = UTILS_CreateElement("div", "CenterLevel");
@@ -777,6 +924,12 @@ function INTERFACE_CreateAdminCenterLevel()
 /*******************************************/
 /*ADMIN CENTER ADJOURN OBJECT*/
 /*******************************************/
+/*
+* @brief	Create adjourn object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function AdjournObj()
 {
 	var Adjourn = INTERFACE_CreateAdminCenterAdjourn();
@@ -798,7 +951,21 @@ function AdjournObj()
 
 }
 
-
+/*
+* @brief	Add adjourned game
+*
+* @param	WPlayerName	White player's name
+* @param	WRating		White plauer's rating
+* @param	BPlayerName	Bhite player's name
+* @param	BRating		Bhite plauer's rating
+* @param	Category	Game category
+* @param	GameTime	Game time
+* @param	Inc		Game time increment
+* @param	Rated		Game rated flag
+* @param	AdjournId	Adjourned game identification number
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddAdjourn(WPlayerName, WRating, BPlayerName, BRating, Category, GameTime, Inc, Rated, AdjournId)
 {
 	var Item = UTILS_CreateElement("li");
@@ -860,7 +1027,13 @@ function INTERFACE_AddAdjourn(WPlayerName, WRating, BPlayerName, BRating, Catego
 		this.hideNoAdjourn();
 	}
 }
-
+/*
+* @brief	Remove adjourned game
+*
+* @para		AdjournId	Adjourn game identification number
+* @return	True if removed or False if not found user
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveAdjourn(AdjournId)
 {
 	var i=0;
@@ -894,7 +1067,13 @@ function INTERFACE_RemoveAdjourn(AdjournId)
 	return true;
 }
 
-
+/*
+* @brief	Show adjourned games tab
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowAdjournCenter(Element)
 {
 	if(Element != null)
@@ -908,26 +1087,44 @@ function INTERFACE_ShowAdjournCenter(Element)
 	this.AdjournDiv.style.display = "block";
 	this.AdjournVisible = true;
 }
-
+/*
+* @brief	Hide adjourned game tab
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideAdjournCenter()
 {
 	this.AdjournDiv.style.display = "none";
 	this.AdjournVisible = false;
 }
-
+/*
+* @brief	Show no adjourned game text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoAdjourn()
 {
 	this.NoAdjourn.style.display = "block";
 }
-
+/*
+* @brief	Hide no adjourned game text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoAdjourn()
 {
 	this.NoAdjourn.style.display = "none";
 }
 
-
-/*************************************************/
-
+/*
+* @brief	Create adjourned games HTML DOM elements
+*
+* @return	Admincenter content, content list and element with no elements in list text
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenterAdjourn()
 {
 	var Center = UTILS_CreateElement("div", "CenterAdjourn");
@@ -1075,6 +1272,12 @@ function INTERFACE_CreateAdminCenterAdjourn()
 /*******************************************/
 /*ADMIN CENTER WORDS OBJECT*/
 /*******************************************/
+/*
+* @brief	Create banned words object
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function WordsObj()
 {
 	var Words = INTERFACE_CreateAdminCenterWords();
@@ -1098,7 +1301,13 @@ function WordsObj()
 	this.hide= INTERFACE_HideWordsCenter;
 }
 
-
+/*
+* @brief	Add banned word
+*
+* @param	Word	Banned word
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_AddWords(Word)
 {
 	var Item;
@@ -1132,9 +1341,16 @@ function INTERFACE_AddWords(Word)
 		this.hideNoWords();
 	}
 }
-
+/*
+* @brief	Remove a banned word
+*
+* @param	MatchId		Word identification field
+* @return	True if removed or False if not found user
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_RemoveWords(MatchId)
 {
+	//TODO -> CHANGE MatchId TO Word
 	var i=0;
 	var Item;
 	
@@ -1165,7 +1381,13 @@ function INTERFACE_RemoveWords(MatchId)
 
 	return true;
 }
-
+/*
+* @brief	Show banned words tab
+*
+* @param	Element		HTML DOM Element
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowWordsCenter(Element)
 {
 	if(Element != null)
@@ -1177,26 +1399,44 @@ function INTERFACE_ShowWordsCenter(Element)
 	this.WordsVisible = true;
 }
 
-
+/*
+* @brief	Hide banned words tab
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideWordsCenter()
 {
 	this.WordsDiv.style.display = "none";
 	this.WordsVisible = false;
 }
-
+/*
+* @brief	Show no banned words text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_ShowNoWords()
 {
 	this.NoWords.style.display = "block"; 
 }
-
+/*
+* @brief	Hide no banned words text
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_HideNoWords()
 {
 	this.NoWords.style.display = "none"; 
 }
 
-
-/************************************************/
-
+/*
+* @brief	Create banned words HTML DOM Elements
+*
+* @return	Admincenter content, content list and element with no elements in list text
+* @author	Rubens Suguimoto
+*/
 function INTERFACE_CreateAdminCenterWords()
 {
 	var Center = UTILS_CreateElement("div", "CenterWords");
@@ -1240,5 +1480,3 @@ function INTERFACE_CreateAdminCenterWords()
 
 	return {Center:Center, WordsList:ListResult, NoWords:NoWords};
 }
-
-

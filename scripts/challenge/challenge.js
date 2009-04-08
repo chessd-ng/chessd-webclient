@@ -15,8 +15,8 @@
 */
 
 /**
- * @file 	challenge.js
- * @brief	Functions to parse challenges offered and receive.
+ * @file 	challenge/challenge.js
+ * @brief	Functions to parse challenges offered and receive
  *
  * See interface challenge menu (scripts/interface/challengemenu.js), data
  * methods to challenge list (scripts/data/data.js) and window challenge
@@ -107,20 +107,6 @@ function CHALLENGE_HandleErrorChallenge (XML)
 				break;
 		}
 	}
-	/*
-	else if (Xmlns.match(/\/chessd#match#accept/))
-	{
-		Buffer = CHALLENGE_HandleAccept(XML);
-	}
-	else if (Xmlns.match(/\/chessd#match#decline/))
-	{
-		Buffer = CHALLENGE_HandleDecline(XML);
-	}
-	else if (Xmlns.match(/\/chessd#match#error/))
-	{
-		Buffer = CHALLENGE_HandleError(XML);
-	}
-	*/	
 
 	Buffer = CHALLENGE_ChallengeError(XML);
 	return Buffer;
@@ -128,7 +114,7 @@ function CHALLENGE_HandleErrorChallenge (XML)
 
 
 /**
- * @brief	Parse challenge offered
+ * @brief	Parse challenge offer message
  *
  * @param	XML	XML with challenge parameters
  * @return	Buffer	Buffer with XMPP to send
@@ -144,7 +130,6 @@ function CHALLENGE_HandleOffer(XML)
 	var Buffer = "";
 	var ChallengeID;
 	var ChallengeObj;
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var ChallengedPlayer;
 	var Room, User;
 	var MyUsername = MainData.GetUsername();
@@ -195,16 +180,6 @@ function CHALLENGE_HandleOffer(XML)
 		Player2.Name = Players[1].getAttribute('jid').replace(/@.*/,"");
 		Player2.Inc = Players[1].getAttribute('inc');
 		Player2.Color = Players[1].getAttribute('color');
-		/*
-		if(Players[1].getAttribute("time") == "untimed")
-		{
-			Player2.Time = Players[1].getAttribute('time');
-		}
-		else
-		{
-			Player2.Time = parseInt(Players[1].getAttribute('time')) / 60;
-		}
-		*/
 
 		// Get players time
 		if(Category == "untimed")
@@ -228,8 +203,8 @@ function CHALLENGE_HandleOffer(XML)
 			else // Receive a re-match
 			{
 				MainData.UpdateChallenge(ChallengeID, Player2, Player1, Category, Rated, MatchID);
-				// Remove offer from challenge menu
-				//ChallengeMenu.removeMatch(MatchID);
+
+				// Remove offer from interface
 				GameCenter.MatchOffer.remove(MatchID);
 				MainData.RemoveMatchOffer(MatchID);
 			}
@@ -264,8 +239,8 @@ function CHALLENGE_HandleOffer(XML)
 			else // Receive a re-match
 			{
 				MainData.UpdateChallenge(ChallengeID, Player1, Player2, Category, Rated, MatchID);
-				// Remove offer from challenge menu
-				//ChallengeMenu.removeMatch(MatchID);
+
+				// Remove offer from interface 
 				GameCenter.MatchOffer.remove(MatchID);
 				MainData.RemoveMatchOffer(MatchID);
 			}
@@ -302,21 +277,19 @@ function CHALLENGE_HandleOffer(XML)
 		// Set match id in challenge
 		MainData.UpdateChallenge(ChallengeID, null, null, null, null, MatchID);
 
-		// Add offered challenge in challenge menu
+		// Add offered challenge in interface
 		ChallengeObj = MainData.GetChallenge(ChallengeID,MatchID);
 		ChallengedPlayer = ChallengeObj.Challenged;
 	
 		// Check challenge time if category is untimed or not	
 		if(ChallengeObj.Category != "untimed")
 		{
-			//ChallengeMenu.addMatch(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 			GameCenter.MatchOffer.add(ChallengedPlayer, Math.floor(ChallengedPlayer.Time/60), ChallengedPlayer.Inc, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 			MainData.AddMatchOffer(ChallengedPlayer, ChallengedPlayer.Time, ChallengedPlayer.Inc, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
 		else
 		{
-			// Put a infinit symbol
-			//ChallengeMenu.addMatch(ChallengedPlayer, "&#8734", ChallengedPlayer.Inc, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
+			// Put a infinit symbol to untimed
 			GameCenter.MatchOffer.add(ChallengedPlayer, "&#8734",0, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 			MainData.AddMatchOffer(ChallengedPlayer, "&#8734",0, ChallengeObj.Category, ChallengeObj.Rated, ChallengeObj.Private, MatchID);
 		}
@@ -328,7 +301,7 @@ function CHALLENGE_HandleOffer(XML)
 
 
 /**
- * @brief	Parse challenge accept
+ * @brief	Parse challenge accept 
  *
  * @param	XML	XML with challenge parameters
  * @return	Buffer with XMPP to send
@@ -352,8 +325,7 @@ function CHALLENGE_HandleAccept (XML)
 	Match = MatchTag[0];
 	MatchID = Match.getAttribute("id");
 
-	// Remove this match from challenge list
-	// and game center
+	// Remove this match from interface
 	MainData.RemoveChallenge(MatchID, MatchID);
 	MainData.RemoveMatchOfer(MatchID);
 	GameCenter.MatchOffer.remove(MatchID);
@@ -383,10 +355,9 @@ function CHALLENGE_HandleDecline (XML)
 	var Match, MatchID, WindowObj,i;
 	var Buffer = "";
 	var ChallengeObj;
-//	var ChallengeMenu = MainData.GetChallengeMenu();
 	var GameCenter = MainData.GetGamecenter();
 
-	// If there's no match, there's nothing to do (again)
+	// If there's no match, do nothing
 	Match = XML.getElementsByTagName('match')[0];
 	if(Match == null)
 	{
@@ -417,12 +388,8 @@ function CHALLENGE_HandleDecline (XML)
 		MainData.RemoveChallenge(null, MatchID);
 
 		// Remove from challenge menu
-		//ChallengeMenu.removeMatch(MatchID);
 		MainData.RemoveMatchOffer(MatchID);
 		GameCenter.MatchOffer.remove(MatchID);
-
-		// TODO -> ?
-		// Warn the interface that the challenge was declined
 	}
 	return Buffer;
 }
@@ -448,12 +415,12 @@ function CHALLENGE_ChallengeError (XML)
 /**
  * @brief	Send a challenge message to other user
  *
- * @param	Oponent	Oponent username
- * @param	Color	Your color
- * @param	Time	Game time
- * @param	Inc	Game time increment
+ * @param	Oponent		Oponent username
+ * @param	Color		Your color
+ * @param	Time		Game time
+ * @param	Inc		Game time increment
  * @param	Category	Game category
- * @param	Rated	Rated match (boolean)
+ * @param	Rated		Rated match (boolean)
  * @return	Empty string
  * @author	Rubens Suguimoto
  */
@@ -503,7 +470,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 	Players[1] = Player2;
 
 	// Set ChallengeID, this id is used temporary to identify challenge
-	// in challenge list when match id is not defined yet
+	// in challenge list when match id was not defined yet
 	ChallengeSeq = MainData.GetChallengeSequence();
 	ChallengeID = "Challenge_"+ChallengeSeq;
 	MainData.SetChallengeSequence(ChallengeSeq+1);
@@ -523,13 +490,13 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 /**
  * @brief	Send a rematch to oponent and update challenge information in main data
  *
- * @param	Oponent	Oponent username
- * @param	Color	Your color
- * @param	Time	Game time
- * @param	Inc	Game time increment
+ * @param	Oponent		Oponent username
+ * @param	Color		Your color
+ * @param	Time		Game time
+ * @param	Inc		Game time increment
  * @param	Category	Game category
- * @param	Rated	Rated match (boolean)
- * @param	MatchId	Match identificator
+ * @param	Rated		Rated match (boolean)
+ * @param	MatchID		Match identificator
  * @return	Empty string
  * @author	Rubens Suguimoto
  */
@@ -596,8 +563,8 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 * @brief 	Accept the challenge with the specified MatchID
 *
 * @param	MatchID 	Id of the match to be accepted
-* @return 	void
-* @author 	Pedro
+* @return 	none
+* @author 	Pedro Rocha
 */
 function CHALLENGE_AcceptChallenge(MatchID)
 {
@@ -613,8 +580,8 @@ function CHALLENGE_AcceptChallenge(MatchID)
 * Decline the challenge with the specified MatchID
 *
 * @param	MatchID 	Id of the match to be declined
-* @return 	void
-* @author 	Pedro
+* @return 	none
+* @author 	Pedro Rocha
 */
 function CHALLENGE_DeclineChallenge(MatchID)
 {
@@ -626,186 +593,26 @@ function CHALLENGE_DeclineChallenge(MatchID)
 	CONNECTION_SendJabber(XML);
 }
 
-/*******************************
- * CHALLENGE MENU
- * ****************************/
-
-/*
- * @brief 	Initialize Challenge menu object
- *
- * Create challenge menu in main data
- *
- * @return	Empty string
- * @see		scripts/interface/challengemenu.js
- * @author	Rubens Suguimoto
- */
-/*
-function CHALLENGE_StartChallenge()
-{
-	var ChallengeMenu = new ChallengeMenuObj();
-	MainData.SetChallengeMenu(ChallengeMenu);
-
-	ChallengeMenu.hideMenu();
-	ChallengeMenu.showMatch();
-	ChallengeMenu.showAnnounce();
-	ChallengeMenu.hidePostpone();
-
-	//Get adjourned games list -> see adjourn.js
-	//CHALLENGE_GetAdjournGames();
-	
-	return "";
-}
-*/
-
-/*
- * @brief	Show challenge menu, set menu position and click function to hide it.
- *
- * @param	Left	Left position of challenge menu
- * @param	Top	Top position of challenge menu
- * @return	Empty string
- * @author	Rubens Suguimoto
- */
-/*
-function CHALLENGE_ShowChallengeMenu(Left, Top)
-{
-	var Func;
-	var Hide = 0;
-	var ChallengeMenu = MainData.GetChallengeMenu();
-
-	// This function is used to hide challenge menu
-	// TODO -> need fix
-	Func = function(){
-		//Hide += 1;
-
-		if(ChallengeMenu.MenuVisible == true)
-		//if(Hide == 2)
-		{
-			UTILS_RemoveListener(document,"mousedown",Func,false);
-
-			// Hide Challenge menu from screen
-			CHALLENGE_HideChallengeMenu();
-		}
-	}
-
-	UTILS_AddListener(document, "mousedown",Func,false);
-
-	// TODO - Quick fix - but this will be removed
-	var Exit = document.getElementById("ExitButton");
-	UTILS_AddListener(Exit,"click", function() {UTILS_RemoveListener(document,"click",Func,false) }, false);
-
-	ChallengeMenu.showMenu(Left-80, Top+20);
-
-	ANNOUNCE_ClearAnnounce();
-	ANNOUNCE_HideNoAnnounce();
-	ANNOUNCE_ShowLoadingAnnounce();
-
-	// Get adjourn games list
-	/*
-	CHALLENGE_GetAdjournGames();
-	ANNOUNCE_GetAnnounceGames();
-	*/
-/*
-	CONNECTION_SendJabber(MESSAGE_ChallengeGetAdjournList(10,0),MESSAGE_GetAnnounceMatch(0,10,"","","",true),MESSAGE_GetAnnounceMatch(0,10,"","","",false));
-
-	return "";
-}
-*/
 /**
- * @brief	Hide challenge menu from screen
- *
- * @return	Empty string
- * @author	Rubens Suguimoto
- */
-/*
-function CHALLENGE_HideChallengeMenu()
-{
-	var ChallengeMenu = MainData.GetChallengeMenu();
-
-	ChallengeMenu.hideMenu();
-
-	return "";
-}
+* @brief	Remove all challenges from main data and interface
+*
+* @return	Empty string
+* @author	Rubens Suguimoto
 */
-/**
- * @brief	Remove all challenges from main data and interface
- *
- * @return	Empty string
- * @author	Rubens Suguimoto
- */
 function CHALLENGE_ClearChallenges()
 {
 	var i;
 	var MatchId;
-//	var ChallengeWindow;
 	var ChallengeList = MainData.GetChallengeList();
-//	var ChallengeMenu = MainData.GetChallengeMenu();
-//	var GameCenter = MainData.GetGamecenter();
-//	var XMPP = "";
 
 	// Remove all challenges from challenge menu and challenge list
 	for(i=ChallengeList.length-1 ; i>=0; i--)
 	{
 		MatchId = ChallengeList[i].MatchId;
-		/*
-		ChallengeWindow = ChallengeList[i].Window;
-		
-		// This commands is done when receive response from
-		// decline messsage
-		if(MatchId != null)
-		{
-			//CHALLENGE_DeclineChallenge(MatchID);
-			//ChallengeMenu.removeMatch(MatchId);
-			GameCenter.MatchOffer.remove(MatchId);
-			MainData.RemoveChallenge(MatchId, MatchId);
-		}
-
-		// Close all challenge window, if exists
-		if(ChallengeWindow != null)
-		{
-			WINDOW_RemoveWindow(ChallengeWindow);
-		}
-		*/
 		
 		//Send a message to decline challenges
 		CHALLENGE_DeclineChallenge(MatchId);
 	}
-
-	// Remove all challenges from main data
-	//MainData.ClearChallenges();
 	
 	return "";
 }
-
-/**
- * @brief	Remove all announces from main data and interface
- *
- * @return	Empty string
- * @author	Rubens Suguimoto
- */
-/*
-function CHALLENGE_ClearAnnounce()
-{
-	var i;
-	var AnnounceId;
-	var ChallengeWindow;
-	var ChallengeMenu = MainData.GetChallengeMenu();
-
-	// Remove all challenges from challenge menu
-	for(i=0;i<MainData.AnnounceList.length; i++)
-	{
-		AnnounceId = MainData.AnnounceList[i].Id;
-		ChallengeWindow = MainData.AnnounceList[i].Window;
-
-		if(AnnounceId != null)
-		{
-			//CHALLENGE_DeclineChallenge(MatchID);
-			ChallengeMenu.removeAnnounce(AnnounceId);
-		}
-
-	}
-
-	// Remove all announces from main data
-	MainData.ClearAnnounces();
-
-}
-*/

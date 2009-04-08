@@ -1,0 +1,42 @@
+\section{/home/www/rubens/webclient/scripts/parser/parser.js File Reference}
+\label{parser_8js}\index{/home/www/rubens/webclient/scripts/parser/parser.js@{/home/www/rubens/webclient/scripts/parser/parser.js}}
+Parse XMPP received from jabber. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf PARSER\_\-ParseXml} (XML)
+\begin{CompactList}\small\item\em Receive and forward XML to controllers. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Parse XMPP received from jabber. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. 
+
+\subsection{Function Documentation}
+\index{parser.js@{parser.js}!PARSER\_\-ParseXml@{PARSER\_\-ParseXml}}
+\index{PARSER\_\-ParseXml@{PARSER\_\-ParseXml}!parser.js@{parser.js}}
+\subsubsection[PARSER\_\-ParseXml]{\setlength{\rightskip}{0pt plus 5cm}function PARSER\_\-ParseXml ( {\em XML})}\label{parser_8js_c7931012d8fb83037a53d1c1b50d541e}
+
+
+Receive and forward XML to controllers. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em XML}]XMPP message \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]XMPP to send \end{Desc}
+\begin{Desc}
+\item[Author:]Ulysses Bomfim \end{Desc}
+
+
+References LOGIN\_\-Disconnected(), MainData, PARSER\_\-ParseChat(), PARSER\_\-ParseIq(), PARSER\_\-ParsePresence(), START\_\-Restart(), and UTILS\_\-GetText().
+
+Referenced by CONNECTION\_\-ReceiveXml().

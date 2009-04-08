@@ -16,18 +16,19 @@
 
 
 /**
+* @file		interface/oldgame.js
+* @brief	Contains all function to create and manage oldgame elements
 */
 
-/*****************************
-*	FUNCTIONS - WINDOW
-******************************/
+////////// FUNCTIONS - WINDOW
 
 /**
-*	Create elements of search old games window and returns div
+* @brief	Create elements of search old games window content object
 *
-* @return	Div; Array
+* @param	Id	Window content identification name
+* @return	Oldgame window content Div and Buttons array
 * @see		WINDOW_OpeOldGameWindow();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ShowOldGameWindow(Id)
 {
@@ -411,65 +412,12 @@ function INTERFACE_ShowOldGameWindow(Id)
 	return {Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
-/**
-*	Set result table of old games search
-*
-* @param	GameList	Array of old games
-* @return	boolean
-* @see		WINDOW_SetResult();
-* @author Danilo Kiyoshi Simizu Yorinori
-*/
-function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
-{
-	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, P, Span, Img, i;
-	var CurrentGame = MainData.GetCurrentGame();
-	
-	Tr = UTILS_CreateElement('tr');
-		Td1 = UTILS_CreateElement('td',null,null,White);
-		Tr.appendChild(Td1);
-		Td2 = UTILS_CreateElement('td',null,null,Black);
-		Tr.appendChild(Td2);
-		Td3 = UTILS_CreateElement('td',null,null,Date);
-		Tr.appendChild(Td3);
-		Td4 = UTILS_CreateElement('td',null,null,GameType);
-		Tr.appendChild(Td4);
-		Td5 = UTILS_CreateElement('td',null,'resulttd',WinType);
-		Tr.appendChild(Td5);
-		Td6 = UTILS_CreateElement('td',null,'examine');
-
-			P=UTILS_CreateElement("p");
-			Span = UTILS_CreateElement('span',null,'examine_text',UTILS_GetText("oldgame_analyze"));
-			Span.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
-			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
-				UTILS_AddListener(Span, "click", function()
-					{
-						if(CurrentGame == null)
-						{
-							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
-						}
-						else
-						{
-							WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
-						}
-					}, false);
-
-			P.appendChild(Span);
-			Td6.appendChild(P);
-		
-		Tr.appendChild(Td6);
-	
-	Tr.onmouseover = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
-	Tr.onmouseout = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
-
-	return(Tr);
-}
-
 /*
-* Set the player 1 input
+* @brief	Set the player 1 input
 *
-* @param User	String to be set
-* @return void
-* @author Danilo
+* @param	User	String to be set
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_Player1Input(User) 
 {
@@ -477,11 +425,11 @@ function INTERFACE_Player1Input(User)
 }
 
 /*
-* Set the player 2 input
+* @brief	Set the player 2 input
 *
-* @param User	String to be set
-* @return void
-* @author Danilo
+* @param	User	String to be set
+* @return	none
+* @author 	Danilo Yorinori
 */
 function INTERFACE_Player2Input(User)
 {
@@ -489,11 +437,11 @@ function INTERFACE_Player2Input(User)
 }
 
 /*
-* Check the appropriate color's checkbox
+* @brief	Check the appropriate color's checkbox
 *
-* @param Color Color's checkbox to be checked
-* @return void
-* @author Danilo
+* @param	Color	Color's checkbox to be checked
+* @return	none
+* @author 	Danilo Yorinori
 */
 function INTERFACE_Color(Color)
 {
@@ -518,11 +466,11 @@ function INTERFACE_Color(Color)
 }
 
 /*
-* Set the From input
+* @brief	Set the From input
 *
-* @param From	String to be set
-* @return void
-* @author Danilo
+* @param	From	String to be set
+* @return 	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_FromInput(From)
 {
@@ -537,11 +485,11 @@ function INTERFACE_FromInput(From)
 }
 
 /*
-* Set the To input
+* @brief	Set the To input
 *
-* @param To	String to be set
-* @return void
-* @author Danilo
+* @param	To	String to be set
+* @return	none
+* @author	Danilo Yorinori
 */
 function INTERFACE_ToInput(To)
 {
@@ -556,12 +504,14 @@ function INTERFACE_ToInput(To)
 }
 
 /**
-*	Display result of a old game search 
+* @brief	Display result of a old game search 
 *
+* @param	Id		Window content identification name
 * @param	GameList	Array of old games
-* @return	boolean
+* @param	More		More flag to check if exist more oldgames to search
+* @return	True
 * @see		OLDGAME_HandleSearchOldGame();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_OldGameSetResult(Id, GameList, More)
 {
@@ -591,12 +541,14 @@ function INTERFACE_OldGameSetResult(Id, GameList, More)
 }
 
 /**
-*	Set result table of old games search
+* @brief	Set result table of old games search
 *
+* @param	Id		Window content identification name
 * @param	GameList	Array of old games
-* @return	boolean
+* @param	More		More flag to check if exist more oldgames to search
+* @return	True
 * @see		WINDOW_SetResult();
-* @author Danilo Kiyoshi Simizu Yorinori
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_OldGameSetTable(Id, GameList, More)
 {
@@ -636,6 +588,7 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		this.TBody.rows[i].childNodes[5].childNodes[0].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
 	}
 	this.Page.innerHTML = Start+" - "+End;
+
 	// Set buttons class
 	if (SearchInfo.Offset == 0)
 	{
@@ -645,6 +598,7 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 	{
 		SearchInfo.Elements.Prev.className = "button";
 	}
+
 	if (!More)
 	{
 		SearchInfo.Elements.Next.className = "button_disabled";
@@ -657,12 +611,11 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 }
 
 /**
-*	Set function associated to previous button
+* @brief	Set function associated to previous button
 *
-* @param	Node	
-* 				Oldgame object
-* @void	
-* @author Danilo Kiyoshi Simizu Yorinori
+* @param	Node		Oldgame object
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_SetPrevButton(Node)
 {
@@ -677,12 +630,11 @@ function INTERFACE_SetPrevButton(Node)
 }
 
 /**
-*	Set function associated to next button
+* @brief	Set function associated to next button
 *
-* @param	Node	
-* 				Oldgame object
-* @void	
-* @author Danilo Kiyoshi Simizu Yorinori
+* @param	Node		Oldgame object
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_SetNextButton(Node)
 {
@@ -697,12 +649,11 @@ function INTERFACE_SetNextButton(Node)
 }
 
 /**
-*	Set function associated to search button
+* @brief	Set function associated to search button
 *
-* @param	Node	
-* 				Oldgame object
-* @void
-* @author Danilo Kiyoshi Simizu Yorinori
+* @param	Node		Oldgame object
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_SetSearchButton(Node)
 {
@@ -748,7 +699,69 @@ function INTERFACE_SetSearchButton(Node)
 }
 
 /**
-* @author Rubens
+* @brief	Add a old games in oldgame search list
+*
+* @param	White		White player
+* @param	Black		Black player
+* @param	Date		Game date and time
+* @param	GameType	Game category
+* @param	WinType		Win type
+* @param	Id		Oldgame identification number
+* @return	Tr HTML DOM element with oldgame information
+* @see		WINDOW_SetResult();
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
+{
+//TODO -> CHANGE THIS FUNCTION NAME TO "CreateOldGameResultItem"
+	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, P, Span, Img, i;
+	var CurrentGame = MainData.GetCurrentGame();
+	
+	Tr = UTILS_CreateElement('tr');
+		Td1 = UTILS_CreateElement('td',null,null,White);
+		Tr.appendChild(Td1);
+		Td2 = UTILS_CreateElement('td',null,null,Black);
+		Tr.appendChild(Td2);
+		Td3 = UTILS_CreateElement('td',null,null,Date);
+		Tr.appendChild(Td3);
+		Td4 = UTILS_CreateElement('td',null,null,GameType);
+		Tr.appendChild(Td4);
+		Td5 = UTILS_CreateElement('td',null,'resulttd',WinType);
+		Tr.appendChild(Td5);
+		Td6 = UTILS_CreateElement('td',null,'examine');
+
+			P=UTILS_CreateElement("p");
+			Span = UTILS_CreateElement('span',null,'examine_text',UTILS_GetText("oldgame_analyze"));
+			Span.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
+			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
+				UTILS_AddListener(Span, "click", function()
+					{
+						if(CurrentGame == null)
+						{
+							CONNECTION_SendJabber(MESSAGE_FetchOldGame(Id));
+						}
+						else
+						{
+							WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_oldgame_alert"));
+						}
+					}, false);
+
+			P.appendChild(Span);
+			Td6.appendChild(P);
+		
+		Tr.appendChild(Td6);
+	
+	Tr.onmouseover = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
+	Tr.onmouseout = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
+
+	return(Tr);
+}
+
+/**
+* @brief	Show loading search old game message
+* 
+* @return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_ShowOldgameLoading()
 {
@@ -761,7 +774,10 @@ function INTERFACE_ShowOldgameLoading()
 }
 
 /**
-* @author Rubens
+* @brief	Hide loading search old game message
+*
+* return	none
+* @author	Rubens Suguimoto
 */
 function INTERFACE_HideOldgameLoading()
 {

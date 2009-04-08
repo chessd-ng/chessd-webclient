@@ -16,18 +16,15 @@
 
 
 /**
-* Handle Online list users
+* @file		contact/online.js
+* @brief	Handle all messages and functions to user's online list
 */
 
 
-//TODO --> MUDAR AS CHAMADAS DAS FUNCOES DE ORDENAR NOS OUTROS CONTROLADORES E ARQUIVOS DE INTERFACE
-//TODO --> MUDAR AS FUNCOES PARA ACESSAREM O USERLIST (OBTENCAO DE RATING, STATUS, TYPE)
-
 /**
- * @brief	Show online list Div
- *
- * Create online list object and show online list .
+* @brief	Create online list object and show online list.
 *
+* @return	none
 * @author Rubens Suguimoto
 */
 function ONLINE_StartOnlineList()
@@ -44,18 +41,17 @@ function ONLINE_StartOnlineList()
 *** FUNCTIONS - ONLINE LIST
 *************************************/
 /**
- * @brief	Handle presence to online list
- *
-* Handle all presence from online list (General room);
+* @brief	Handle all presence to online list
+*
+* Handle general room  messages for check online user's
 *
 * @param        XML The xml come from server with tag presence
-*
+* @return	Empty string
 * @author       Ulysses Bonfim
 */
 function ONLINE_HandleOnlinePresence(XML)
 {
 	var From, User, Type, Show, Status;
-	var Buffer = "";
 	var OnlineObj = MainData.GetOnlineObj();
 	var RoomName;
 
@@ -82,10 +78,10 @@ function ONLINE_HandleOnlinePresence(XML)
 	// Status of user
 	if (Show.length > 0)
 	{
-		// Get status name
+		// Get status type
 		Status = UTILS_GetNodeText(Show[0]);
 
-		// Any different status, status = away
+		// Any different status from defined status list (see contact/status.js), status = away
 		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
 		{
 			Status = "away";
@@ -102,7 +98,6 @@ function ONLINE_HandleOnlinePresence(XML)
 	if (Type == "unavailable")
 	{	
 		// Remove from online list in interface
-		//OnlineObj.userList.removeUser(User);
 		ONLINE_RemoveUser(User);	
 	}
 	else
@@ -111,19 +106,17 @@ function ONLINE_HandleOnlinePresence(XML)
 		ONLINE_AddUser(User, Status);	
 	}
 
-	return Buffer;
+	return "";
 }
 
 /**
- * @brief 	Add user in the online list
- * 
- * Add a user with status in online list.
- *
- * @param 	User 	Username
- * @param	Status	User's status
- *
- * @author	Rubens Suguimoto
- */
+* @brief 	Add a user with status in online list.
+*
+* @param 	User 	User's name
+* @param	Status	User's status
+*
+* @author	Rubens Suguimoto
+*/
 function ONLINE_AddUser(User, Status)
 {
 	var Rating;
@@ -131,21 +124,6 @@ function ONLINE_AddUser(User, Status)
 	var OnlineObj = MainData.GetOnlineObj();
 	var UserObj = MainData.GetUser(User);
 	var OnlineUser;
-
-	// Find user in online user struct == find in General user list
-/*
-	var Room = MainData.GetRoom(MainData.GetRoomDefault());
-	var UserPos;
-	UserPos = Room.FindUser(User);
-*/
-	// If user object was not founded;
-	// --> This case shouldn't happen 
-	/*
-	if(UserObj == null)
-	{
-		return;
-	}
-	*/
 
 	// Get user Type and Current rating
 	UserType = UserObj.GetType();
@@ -160,8 +138,7 @@ function ONLINE_AddUser(User, Status)
 		Rating = null;
 	}
 	
-	// if user is not founded, add to online list	
-	//if( OnlineObj.userList.findUser(User) == null)
+	// if user was not founded, add to online list	
 	if( MainData.FindOnlineUser(User) == null)
 	{
 		// Add in data struct
@@ -185,7 +162,13 @@ function ONLINE_AddUser(User, Status)
 	OnlineObj.hideLoading();
 }
 
-
+/**
+* @brief 	Remove some user from online list.
+*
+* @param 	Username	User's name
+* @return	none
+* @author	Rubens Suguimoto
+*/
 function ONLINE_RemoveUser(Username)
 {
 	var OnlineObj = MainData.GetOnlineObj();
@@ -195,12 +178,13 @@ function ONLINE_RemoveUser(Username)
 }
 
 /**
- * @brief 	Sort online list by nick name
- * 
- * Sort on line user list by nick name. Sort in MainData and for each user in MainData online user, remove and insert it.
- *
- * @author	Rubens Suguimoto
- */
+* @brief 	Sort online list by nick name
+* 
+* Sort in MainData before and for each user in MainData online user list, remove and insert it.
+*
+* @return	True
+* @author	Rubens Suguimoto
+*/
 function ONLINE_SortUserByNick()
 {
 	var Room, RoomName;
@@ -209,26 +193,14 @@ function ONLINE_SortUserByNick()
 	var OnlineObj = MainData.GetOnlineObj();
 	var OnlineUserList = MainData.GetOnlineUserList();
 
-	// General room
-	/*
-	Room = MainData.GetRoom(MainData.GetRoomDefault());
+	// TODO -> Make this sort in function
+	// Sort user list by nick name in data struct
+	MainData.SortOnlineUserByNick();
 
-	if(Room == null)
-	{
-		return false;
-	}
-	*/
-	
 	// Test the current order mode 
 	// If ordered into ascending order, change to descending order
 	// other modes, change to ascending order
-	/*Room.OrderBy = (Room.OrderBy + 1) % 2;*/
 	MainData.SetOnlineOrderBy( (MainData.GetOnlineOrderBy() + 1) % 2 );
-
-	// Sort user list by nick name in data struct
-	//Room.SortUserListNick();
-	MainData.SortOnlineUserByNick();
-	
 
 	// Show new user list sorted
 	for(i=0; i<OnlineUserList.length; i++)
@@ -237,26 +209,9 @@ function ONLINE_SortUserByNick()
 		Status = OnlineUserList[i].Status;
 		Type = OnlineUserList[i].Type;
 
+		// Get user's rating in online list
 		Rating = OnlineUserList[i].Rating.GetRatingValue(MainData.GetOnlineCurrentRating());
 
-		// Get rating
-	/*
-		switch(Room.GetRoomCurrentRating())
-		{
-			case "blitz":
-				Rating = Room.UserList[i].Rating.Blitz;
-				break;
-			case "lightning":
-				Rating = Room.UserList[i].Rating.Lightning;
-				break;
-			case "standard":
-				Rating = Room.UserList[i].Rating.Standard;
-				break;
-			case "untimed":
-				Rating = Room.UserList[i].Rating.Untimed;
-				break;
-		}
-	*/
 		//Show in contact online list
 		OnlineObj.userList.removeUser(UserName);
 		OnlineObj.userList.addUser(UserName, Status, Rating, Type);
@@ -268,10 +223,10 @@ function ONLINE_SortUserByNick()
 /**
  * @brief 	Sort online list by rating category
  * 
- * Sort on line user list by rating. Sort in MainData and for each user in MainData online user, remove and insert it.
+ * Sort in MainData before and for each user in MainData online user, remove and insert it.
  *
- * @param	Category	Chess game category
- *
+ * @param	Category	Rating game category
+ * @return	True
  * @author	Rubens Suguimoto
  */
 function ONLINE_SortUserByRating(Category)
@@ -283,25 +238,14 @@ function ONLINE_SortUserByRating(Category)
 	var OnlineUserList = MainData.GetOnlineUserList();
 	var RoomTmp;
 
-//	Room = MainData.GetRoom(MainData.GetRoomDefault());
-//	Room.SetRoomCurrentRating(Category);
-
+	// TODO -> Make this sort in function
 	MainData.SetOnlineCurrentRating(Category);
-	/*
-	if(Room == null)
-	{
-		return false;
-	}
-	*/
+
 	// Test the current order mode (order == sort)
 	// If ordered into ascending order, change to descending order
-	//Room.OrderBy = (Room.OrderBy + 1) % 2;
 	MainData.SetOnlineOrderBy( (MainData.GetOnlineOrderBy() + 1) % 2 );
 	
-	//RoomName = Room.Name;
 	// Sort user list by nick name in data struct
-	//Room.SortUserListRating();
-
 	MainData.SortOnlineUserByRating();
 
 	// Show new user list sorted
@@ -311,25 +255,9 @@ function ONLINE_SortUserByRating(Category)
 		Status = OnlineUserList[i].Status;
 		Type = OnlineUserList[i].Type;
 
-		Rating = OnlineUserList[i].Rating.GetRatingValue(MainData.GetOnlineCurrentRating());
 		// Get rating
-/*
-		switch(Room.GetRoomCurrentRating())
-		{
-			case "blitz":
-				Rating = Room.UserList[i].Rating.Blitz;
-				break;
-			case "lightning":
-				Rating = Room.UserList[i].Rating.Lightning;
-				break;
-			case "standard":
-				Rating = Room.UserList[i].Rating.Standard;
-				break;
-			case "untimed":
-				Rating = Room.UserList[i].Rating.Untimed;
-				break;
-		}
-*/
+		Rating = OnlineUserList[i].Rating.GetRatingValue(MainData.GetOnlineCurrentRating());
+
 		//Show in contact online list
 		OnlineObj.userList.removeUser(UserName);
 		OnlineObj.userList.addUser(UserName, Status, Rating, Type);

@@ -1,0 +1,152 @@
+\section{/home/www/rubens/webclient/scripts/interface/interface.js File Reference}
+\label{interface_8js}\index{/home/www/rubens/webclient/scripts/interface/interface.js@{/home/www/rubens/webclient/scripts/interface/interface.js}}
+Control interface DOM objects. 
+
+\subsection*{Functions}
+\begin{CompactItemize}
+\item 
+function {\bf INTERFACE\_\-CreateInterface} ()
+\begin{CompactList}\small\item\em Create all object needed to start game enviroment. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowInterface} (Tree)
+\begin{CompactList}\small\item\em Show interface in the user screen. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-StopInterface} ()
+\begin{CompactList}\small\item\em Remove start enviroment page. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CreateLoadingBox} (Id, Text)
+\item 
+function {\bf INTERFACE\_\-DisableSelect} (e)
+\begin{CompactList}\small\item\em Disable element selection. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ReEnableSelect} ()
+\begin{CompactList}\small\item\em Enabla element selection. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-ShowFullName} (Obj, FullName)
+\begin{CompactList}\small\item\em Create a hint to show full name. \item\end{CompactList}\item 
+function {\bf INTERFACE\_\-CloseFullName} ()
+\begin{CompactList}\small\item\em Close hint box created by INTERFACE\_\-ShowFullName function. \item\end{CompactList}\end{CompactItemize}
+
+
+\subsection{Detailed Description}
+Control interface DOM objects. 
+
+CHESSD - WebClient
+
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+C3SL - Center for Scientific Computing and Free Software 
+
+\subsection{Function Documentation}
+\index{interface.js@{interface.js}!INTERFACE\_\-CloseFullName@{INTERFACE\_\-CloseFullName}}
+\index{INTERFACE\_\-CloseFullName@{INTERFACE\_\-CloseFullName}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-CloseFullName]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CloseFullName ()}\label{interface_8js_bfe3ce71dbaf1b9f38e481e35610a5a5}
+
+
+Close hint box created by INTERFACE\_\-ShowFullName function. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+Referenced by INTERFACE\_\-AddAnnounce(), INTERFACE\_\-AddMatchOffer(), INTERFACE\_\-AddPostpone(), INTERFACE\_\-CreateRoomInBar(), and INTERFACE\_\-FocusRoom().\index{interface.js@{interface.js}!INTERFACE\_\-CreateInterface@{INTERFACE\_\-CreateInterface}}
+\index{INTERFACE\_\-CreateInterface@{INTERFACE\_\-CreateInterface}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-CreateInterface]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateInterface ()}\label{interface_8js_ecaef5274c46c0a69d1f326629fcd66a}
+
+
+Create all object needed to start game enviroment. 
+
+\begin{Desc}
+\item[Returns:]Start main Div \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha and Rubens Suguimoto \end{Desc}
+
+
+References INTERFACE\_\-CreateChatList(), INTERFACE\_\-CreateLeft(), INTERFACE\_\-CreateTop(), and UTILS\_\-CreateElement().
+
+Referenced by START\_\-Webclient().\index{interface.js@{interface.js}!INTERFACE\_\-CreateLoadingBox@{INTERFACE\_\-CreateLoadingBox}}
+\index{INTERFACE\_\-CreateLoadingBox@{INTERFACE\_\-CreateLoadingBox}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-CreateLoadingBox]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-CreateLoadingBox ( {\em Id}, \/   {\em Text})}\label{interface_8js_a2b8a7be1b4f4e21bd3362812922522b}
+
+
+
+
+References UTILS\_\-CreateElement().
+
+Referenced by INTERFACE\_\-CreateContactContent(), INTERFACE\_\-CreateOnlineContent(), INTERFACE\_\-CreateRooms(), and INTERFACE\_\-ShowOldGameWindow().\index{interface.js@{interface.js}!INTERFACE\_\-DisableSelect@{INTERFACE\_\-DisableSelect}}
+\index{INTERFACE\_\-DisableSelect@{INTERFACE\_\-DisableSelect}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-DisableSelect]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-DisableSelect ( {\em e})}\label{interface_8js_309034c5965ab2448ad1934cac080c18}
+
+
+Disable element selection. 
+
+\begin{Desc}
+\item[Returns:]False \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+Referenced by INTERFACE\_\-HelpDisplay().\index{interface.js@{interface.js}!INTERFACE\_\-ReEnableSelect@{INTERFACE\_\-ReEnableSelect}}
+\index{INTERFACE\_\-ReEnableSelect@{INTERFACE\_\-ReEnableSelect}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-ReEnableSelect]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ReEnableSelect ()}\label{interface_8js_276d3ccc18b080387ece750f3cdcec03}
+
+
+Enabla element selection. 
+
+\begin{Desc}
+\item[Returns:]True \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+Referenced by INTERFACE\_\-HelpDisplay().\index{interface.js@{interface.js}!INTERFACE\_\-ShowFullName@{INTERFACE\_\-ShowFullName}}
+\index{INTERFACE\_\-ShowFullName@{INTERFACE\_\-ShowFullName}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-ShowFullName]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowFullName ( {\em Obj}, \/   {\em FullName})}\label{interface_8js_bcb5b20122bebb3a18b2ede66110d954}
+
+
+Create a hint to show full name. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Obj}]Obj that have name shorted \item[{\em FullName}]String to be displayed \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Danilo Yorinori \end{Desc}
+
+
+References UTILS\_\-CreateElement(), UTILS\_\-GetOffset(), and UTILS\_\-GetParentDiv().
+
+Referenced by INTERFACE\_\-AddAnnounce(), INTERFACE\_\-AddMatchOffer(), INTERFACE\_\-AddPostpone(), INTERFACE\_\-CreateRoomInBar(), and INTERFACE\_\-FocusRoom().\index{interface.js@{interface.js}!INTERFACE\_\-ShowInterface@{INTERFACE\_\-ShowInterface}}
+\index{INTERFACE\_\-ShowInterface@{INTERFACE\_\-ShowInterface}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-ShowInterface]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-ShowInterface ( {\em Tree})}\label{interface_8js_e3cc5b666e93acdd2f85cee061a5ed65}
+
+
+Show interface in the user screen. 
+
+\begin{Desc}
+\item[Parameters:]
+\begin{description}
+\item[{\em Tree}]HTML DOM element \end{description}
+\end{Desc}
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+Referenced by START\_\-Webclient().\index{interface.js@{interface.js}!INTERFACE\_\-StopInterface@{INTERFACE\_\-StopInterface}}
+\index{INTERFACE\_\-StopInterface@{INTERFACE\_\-StopInterface}!interface.js@{interface.js}}
+\subsubsection[INTERFACE\_\-StopInterface]{\setlength{\rightskip}{0pt plus 5cm}function INTERFACE\_\-StopInterface ()}\label{interface_8js_9140670d04ba65dc1eeba2dd11979e04}
+
+
+Remove start enviroment page. 
+
+\begin{Desc}
+\item[Returns:]none \end{Desc}
+\begin{Desc}
+\item[Author:]Pedro Rocha \end{Desc}
+
+
+Referenced by LOGIN\_\-Disconnected(), and START\_\-Restart().

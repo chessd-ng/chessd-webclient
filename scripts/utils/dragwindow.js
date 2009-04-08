@@ -15,15 +15,17 @@
 */
 
 /*
-* Drag and Drog div Element used in window
+* @file		utils/dragwindow.js
+* @brief	Drag and Drop div Element used in window
 */
 
 /**
+* @brief	Drag and drop Window element inside interface
 * Start drag window when mouse is clicked over a element, and drop when release button.
 *
-* @param        ev is event
-* @param	Obj is element object
-* @return       boolean
+* @param        ev	Javascript Event
+* @param	Obj 	DOM element object
+* @return       false
 * @author       Rubens
 */
 function UTILS_StartDragWindow(ev, Obj)

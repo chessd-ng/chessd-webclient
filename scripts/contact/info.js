@@ -15,11 +15,17 @@
 */
 
 /**
-* Control user information (rating an type)
+* @file		contact/info.js
+* @brief	Handle user information to contact list(rating an type)
+*
 */
 
 /**
-* Receive a info message and set it in user list
+* @brief	Receive a info message and update new information in contact list
+*
+* @param	XML	XMPP with chess server user's info
+* @return	Empty string
+* @author	Rubens Suguimoto
 */
 function CONTACT_HandleInfo(XML)
 {
@@ -29,20 +35,13 @@ function CONTACT_HandleInfo(XML)
 	var Jid, Type, Rating;
 	var User;
 	var From;
-	//Rating variables
+
 	var i;
         var RatingValue;
         var RecordValue, RecordTime;
 	var TimeStamp;
 	var Category;
 
-	/*
-	var OnlineNode, UptimeNode;
-	var OnlineTime, UpTime;
-        var TotalWin,TotalDraw,TotalLosses, TotalGames;
-	OnlineNode = XML.getElementsByTagName('online_time')[0];
-	UptimeNode = XML.getElementsByTagName('uptime')[0];
-	*/
 	ProfileNode = XML.getElementsByTagName('profile')[0];
 
 	RatingNodes = XML.getElementsByTagName('rating');
@@ -54,25 +53,7 @@ function CONTACT_HandleInfo(XML)
 
 	if(User != null)
 	{
-		/*
-		if(UptimeNode != null)
-		{
-			UpTime = UptimeNode.getAttribute("seconds");
-		}
-		else
-		{
-			UpTime = null;
-		}
 
-		if(OnlineNode != null)
-		{
-			OnlineTime = OnlineNode.getAttribute("seconds");
-		}
-		else
-		{
-			OnlineTime = null;
-		}
-		*/
 		if(TypeNode != null)
 		{
 			Type = TypeNode.getAttribute('type');
@@ -81,15 +62,8 @@ function CONTACT_HandleInfo(XML)
 		{
 			Type = 'user';
 		}
-		/*
-		// Set user uptime
-		User.SetOnlineTime(UpTime);
-		// Set user total uptime
-		User.SetTotalTime(OnlineTime);
-		*/
 
 		// Set user type
-		//User.SetType(Type);
 		CONTACT_SetUserType(From, Type);
 
 		// Set rating	
@@ -98,114 +72,44 @@ function CONTACT_HandleInfo(XML)
                 	Category = RatingNodes[i].getAttribute('category');
 
 			RatingValue = RatingNodes[i].getAttribute('rating');
-			/*
-			RecordValue = RatingNodes[i].getAttribute('max_rating');
-			TotalWin   = parseInt(RatingNodes[i].getAttribute('wins'));
-			TotalDraw  = parseInt(RatingNodes[i].getAttribute('draws'));
-			TotalLosses= parseInt(RatingNodes[i].getAttribute('losses'));
-			TimeStamp = RatingNodes[i].getAttribute('max_timestamp');
-			RecordTime= UTILS_ConvertTimeStamp(TimeStamp);
-			*/
+
 			CONTACT_SetUserRating(From, Category, RatingValue);
-
-			/*
-			if(User.Rating.FindRating(Category) == null)
-			{
-				User.Rating.AddRating(Category, RatingValue);
-			}
-			else
-			{
-				User.Rating.SetRatingValue( Category, RatingValue);
-				User.Rating.SetRecordValue( Category, RecordValue);
-				User.Rating.SetRecordTime(  Category, RecordTime);
-				User.Rating.SetRatingWin(   Category, TotalWin);
-				User.Rating.SetRatingDraw(  Category, TotalDraw);
-				User.Rating.SetRatingLosses(Category, TotalLosses);
-			}
-
-			*/
 		}
 	
 	}
-
-	/*
-	// Update contacts 
-	CONTACT_HandleRating(RatingNodes);
-	CONTACT_HandleType(TypeNodes);
-	*/
 
 	return "";
 }
 
 /**
-* Handle user rating, update the structure and interface
-*/
-/*
-function CONTACT_HandleRating(NodeList)
-{
-	var Username, Rating, Category, i;
-
-	// Getting ratings
-	for (i=0 ; i<NodeList.length ; i++)
-	{
-		Username = NodeList[i].getAttribute('jid').replace(/@.*/
-//,"");
-/*
-		Category = NodeList[i].getAttribute('category');
-		Rating = NodeList[i].getAttribute('rating');
-
-		// Set rating on structure
-		CONTACT_SetUserRating(Username, Category, Rating);
-	}
-}
-*/
-/**
-* Handle user types, update the structure and interface
-*/
-/*
-function CONTACT_HandleType(NodeList)
-{
-	var Jid, Type, i;
-
-	// Getting user type
-	for (i=0 ; i<NodeList.length ; i++)
-	{
-		Jid = NodeList[i].getAttribute('jid').replace(/@.*/
-//,"");
-/*
-		Type = NodeList[i].getAttribute('type');
-
-		// Set type on sctructure
-		CONTACT_SetUserType(Jid, Type);
-	}
-}
-*/
-/**
-* Change type of 'Username' in structure and interface
+* @brief	Change user's type of some user in contact list
+* 
+* @param	Username	User's name
+* @param	NewType		New user's type
+* @return	none
+* @author	Rubens Suguimoto
 */
 function CONTACT_SetUserType(Username, NewType)
 {
 	var Room;
 	var Status, Rating;
 	
-	//var Room = MainData.GetRoom(MainData.GetRoomDefault());
 	var User = MainData.GetUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
 
-	// update on interface
 	if(User != null)
 	{
 		Status = User.Status;
 
+		// Update in data struct
 		ContactUser = MainData.GetContactUser(Username);
 
 		if(ContactUser != null)
 		{
 			ContactUser.SetType(NewType);
 
-			// Update type in contact online and contact list
-			//MainData.ContactOnline.userList.updateUser(Username,Status, null, NewType);
+			// Update type in contact list object
 			ContactObj.updateUser(Username,Status, null, NewType);
 		}
 		// Offline user
@@ -214,39 +118,42 @@ function CONTACT_SetUserType(Username, NewType)
 			StatusList = "offline";
 
 			MainData.Contact.updateUser(Username, StatusList, null, NewType);
+			// Refresh user's type in contact list
 			Status = "offline";
 			ContactObj.updateUser(Username,Status, null, NewType);
 		}
 	}
-	return true;
 }
 
 /**
-* Change rating of 'Username' in structure and interface
+* @brief	Change user's rating of some user in contact list
+* 
+* @param	Username	User's name
+* @param	Category	Rating game category
+* @param	Rating		Rating value to be update
+* @return	none
+* @author	Rubens Suguimoto
 */
 function CONTACT_SetUserRating(Username, Category, Rating)
 {
 	var Status, Type;
-	//var User;
 	
-	//var Room = MainData.GetRoom(MainData.GetRoomDefault());
 	var User = MainData.GetContactUser(Username);
 	var ContactUser;
 	var ContactObj = MainData.GetContactObj();
 
-	// update on interface
-	//if(MainData.SetRating(Username, Category, Rating))
 	if(User != null)
 	{
 		Type = User.Type;
 
+		// Update in data struct
 		ContactUser = MainData.GetContactUser(Username);
 
 		if(ContactUser != null)
 		{
 			Status = User.Status;
 
-			// Update in data struct
+			// Update in contact list object
 			if(ContactUser.Rating.FindRating(Category) == null)
 			{
 				ContactUser.Rating.AddRating(Category, Rating);
@@ -264,10 +171,9 @@ function CONTACT_SetUserRating(Username, Category, Rating)
 
 		if (Category == MainData.GetContactCurrentRating())
 		{
-			// Update type in contact online and contact list
+			// Refresh user's rating in contact list
 			ContactObj.updateUser(Username,Status, Rating, Type);
 		}
 
 	}
-	return "";
 }

@@ -15,13 +15,11 @@
 */
 
 /*
-* Start MainData and show login page
+* @file		start.js
+* @brief	Start MainData and show login page
 */
 
-/**
-* Global object that stores all data needed
-* by interface
-*/
+//Global object that stores all data needed by interface
 var MainData;
 var TranslationLog = new Array();
 
@@ -30,6 +28,7 @@ var TranslationLog = new Array();
 * 
 * Start page, initialize MainData and show page
 *
+* @return	none
 * @author 	Rubens Suguimoto
 */
 function START_StartPage()
@@ -64,6 +63,7 @@ function START_StartPage()
 * Set new language in main data and show login page with new language selected
 *
 * @param 	Lang	Language in ISO 639 and ISO 3166 format standard.
+* @return	none
 * @author 	Rubens Suguimoto
 */
 function START_ChangeLanguage(Lang)
@@ -72,8 +72,6 @@ function START_ChangeLanguage(Lang)
 	INTERFACE_EndLogin();
 
 	// Reload MainData with configurations and new language selected
-//	MainData = new DATA("scripts/data/conf.xml", "scripts/lang/"+Lang+".xml");
-//	MainData = new DATA("data/conf.xml?"+NoCache.TimeStamp, "lang/"+Lang+".xml?"+NoCache.TimeStamp);
 	MainData.SetText(UTILS_OpenXMLFile("lang/"+Lang+".xml?"+NoCache.TimeStamp))
 
 	// Create cookie for new language
@@ -89,10 +87,10 @@ function START_ChangeLanguage(Lang)
 
 
 /**
-* Clear Login window and start interface 
+* @brief	Clear Login window and start interface 
 *
-* @return none
-* @public
+* @return	none
+* @author	Pedro Rocha and Rubens Suguimoto
 */
 function START_Webclient()
 {
@@ -155,9 +153,10 @@ function START_Webclient()
 }
 
 /*
-*	@brief Stop interface and reload files
+* @brief	Stop interface and reload files
 *
-*	@author Danilo Yorinori
+* @return	none
+* @author	Danilo Yorinori
 */
 function START_Restart()
 {

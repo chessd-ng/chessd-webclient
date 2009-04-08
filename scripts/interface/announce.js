@@ -15,10 +15,10 @@
 */
 
 /**
-* Create elements to announce a match 
+* @brief	Create elements to announce a match window content 
 *
-* @return									Div; Array
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @return	Div content for announce window and Buttons elements
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_AnnounceWindow()
 {

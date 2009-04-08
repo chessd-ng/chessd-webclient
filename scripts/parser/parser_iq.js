@@ -12,11 +12,17 @@
 * GNU General Public License for more details.
 */
 
+/*
+* @file		parser/parser_iq.js
+* @brief	Parser Iq messages received from jabber
+*/
 
 /**
-* Parse Iq's received from jabber
+* @brief	Parse Iq's received from jabber
 *
-* @return string
+* @param	XML	XMPP with Iq message
+* @return 	XMPP message to send
+* @author	Ulysses Bomfim
 */
 function PARSER_ParseIq(XML)
 {
@@ -220,9 +226,11 @@ function PARSER_ParseIq(XML)
 }
 
 /**
-* Parse Iq's received from jabber by iq id
+* @brief	Parse Iq's messages by Iq id
 *
-* @return string
+* @param	XML	XMPP messages with Iq tag
+* @return 	XMPP message to send
+* @author	Rubens Suguimoto
 */
 function PARSER_ParseIqById(XML)
 {
