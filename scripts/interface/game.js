@@ -91,6 +91,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, 
 	this.name = new Object();
 	this.photo = new Object();
 	this.EventButtons = new Array();
+	this.WCapturedList = new Array();
+	this.BCapturedList = new Array();
 
 	// Attributes
 	this.Game = Tmp.GameDiv;
@@ -107,6 +109,8 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, 
 	this.LeaveUser = Tmp.LeaveUserDiv;
 	this.LeaveUserText = Tmp.LeaveUserText;
 	this.tab = Tmp.Tab;
+	this.PWCapturedList = Tmp.PWCapturedList;
+	this.PBCapturedList = Tmp.PBCapturedList;
 
 	this.Timer = null; // used to set interval
 	this.Turn = "white";
@@ -160,6 +164,11 @@ function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, 
 	this.RemoveBlockBorder = INTERFACE_RemoveBlockBorder;
 	this.RemoveBlockClass = INTERFACE_RemoveBlockClass;
 	this.RemoveBlockEvents = INTERFACE_RemoveBlockEvents;
+
+	this.AddCapturedWPiece = INTERFACE_AddCapturedWPiece;
+	this.AddCapturedBPiece = INTERFACE_AddCapturedBPiece;
+	this.PopCapturedWPiece = INTERFACE_PopCapturedWPiece;
+	this.PopCapturedBPiece = INTERFACE_PopCapturedBPiece;
 
 	this.ShowLoadingMove = INTERFACE_ShowLoadingMove;
 	this.HideLoadingMove = INTERFACE_HideLoadingMove;
@@ -801,5 +810,125 @@ function INTERFACE_RemoveMove()
 	this.MoveList.removeChild(this.MoveList.lastChild);
 }
 
+/**
+* @brief	Add a white captured piece in black player's captured list
+* 
+* @param	Piece	Piece character
+* @return	none
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_AddCapturedWPiece(Piece)
+{
+	var TmpPiece = Piece.toLowerCase();
 
+	var PieceType="W";
+	var PieceElement;
+
+	switch(TmpPiece)
+	{
+		case "p":
+			PieceType += "pawn"
+			break;
+		case "k":
+			PieceType += "knight"
+			break;
+		case "b":
+			PieceType += "bishop"
+			break;
+		case "r":
+			PieceType += "rook"
+			break;
+		case "q":
+			PieceType += "queen"
+			break;
+	}
+
+	// Create captured piece element
+	PieceElement = UTILS_CreateElement("li",PieceType);
+
+	// Add to Black player captured array
+	this.BCapturedList.push(PieceElement);
+
+	// Append piece in captured list 
+	this.PBCapturedList.appendChild(PieceElement);
+}
+
+/**
+* @brief	Add a black captured piece in white player's captured list
+* 
+* @param	Piece	Piece character
+* @return	none
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_AddCapturedBPiece(Piece)
+{
+	var TmpPiece = Piece.toLowerCase();
+
+	var PieceType="B";
+	var PieceElement;
+
+	switch(TmpPiece)
+	{
+		case "p":
+			PieceType += "pawn"
+			break;
+		case "k":
+			PieceType += "knight"
+			break;
+		case "b":
+			PieceType += "bishop"
+			break;
+		case "r":
+			PieceType += "rook"
+			break;
+		case "q":
+			PieceType += "queen"
+			break;
+	}
+
+	// Create captured piece element
+	PieceElement = UTILS_CreateElement("li",PieceType);
+	
+	// Add to White player captured array
+	this.WCapturedList.push(PieceElement);
+
+	// Append piece in captured list 
+	this.PWCapturedList.appendChild(PieceElement);
+}
+
+/*
+* @brief	Remove last piece from white captured pieces list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_PopCapturedWPiece()
+{
+	var Piece;
+	var PieceParent;
+	if(this.BCapturedList.length != 0)
+	{
+		Piece = this.BCapturedList.pop();
+		PieceParent = Piece.parentNode;
+		PieceParent.removeChild(Piece);
+	}
+}
+
+/*
+* @brief	Remove last piece from black captured pieces list
+*
+* @return	none
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_PopCapturedBPiece()
+{
+	var Piece;
+	var PieceParent;
+	if(this.WCapturedList.length != 0)
+	{
+		Piece = this.WCapturedList.pop();
+		PieceParent = Piece.parentNode;
+		PieceParent.removeChild(Piece);
+	}
+}
 

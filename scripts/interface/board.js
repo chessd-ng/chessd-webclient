@@ -48,6 +48,9 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer
 	// Timers for both players
 	var Timer = INTERFACE_CreateTimer();
 
+	// Captured pieces list for both players
+	var CapturedPieces = INTERFACE_CreateCapturedPieces();
+
 	// Game options
 	var Options = INTERFACE_CreateGameOptions(GameId);
 	
@@ -89,6 +92,7 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer
 
 	GameInfo.appendChild(Photo.Div);
 	GameInfo.appendChild(Timer.Div);
+	GameInfo.appendChild(CapturedPieces.Div);
 	GameTab.appendChild(Tab);
 	GameInfo.appendChild(GameTab);
 	GameInfo.appendChild(GameClose);
@@ -113,6 +117,8 @@ function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer
 		LoadingMove:LoadingMoveDiv,
 		LeaveUserDiv:LeaveUserDiv,
 		LeaveUserText:LeaveUserSpan,
+		PWCapturedList: CapturedPieces.PWCapturedList,
+		PBCapturedList: CapturedPieces.PBCapturedList,
 		OptionsButtons:Options.ButtonList,
 		GameClose:GameClose
 	}
@@ -902,4 +908,22 @@ function INTERFACE_RemoveBlockClass(BlockId)
 	{
 		Block.className = "white";
 	}
+}
+
+/*
+* @brief	Create captured pieces list HTML DOM elements 
+*
+* @return	Captures Div box, white player captured pieces list and black player captured pieces list;
+* @author	Rubens Suguimoto
+*/
+function INTERFACE_CreateCapturedPieces()
+{
+	var CapturedDiv = UTILS_CreateElement("div","CapturedDiv");
+	var PWCapturedList = UTILS_CreateElement("ul","PWCapturedList");
+	var PBCapturedList = UTILS_CreateElement("ul","PBCapturedList");
+	
+	CapturedDiv.appendChild(PWCapturedList);
+	CapturedDiv.appendChild(PBCapturedList);
+
+	return {Div:CapturedDiv, PWCapturedList:PWCapturedList, PBCapturedList:PBCapturedList}
 }
