@@ -144,19 +144,20 @@
 {
 	position		: relative;
 	/*width			: 53mm;*/
-	width			: 170px;
+	/*width			: 170px;*/
 	/*height		: 30mm;*/
-	height			: 95px;;
+	/*height			: 95px;;*/
 	font-size		: 14px;
 	color			: #216778;
 
-	padding-top		: 15px;
-	padding-right		: 10px;
-	padding-bottom		: 0px;
-	padding-left		: 10px;
+	padding-top		: 7px;
+	padding-right		: 0px;
+	padding-bottom		: 7px;
+	padding-left		: 0px;
 }
 
-#PhotoDiv #PWPhoto
+#PhotoDiv #PWPhoto,
+#PhotoDiv #PBPhoto
 {
 	background-color	: #fff;
 	
@@ -164,48 +165,26 @@
 	position		: absolute;
 	left			: 8mm;
 	top			: 5mm;
+	float			: left;
 	*/
 	width			: 50px;
 	height			: 60px;
 	border-style		: solid;
 	border-width		: 1px;
-	float			: left;
 
-	margin-left		: 5px;
-}
+	display			: inline-table;	
 
-#PhotoDiv #PBPhoto
-{
-	background-color	: #fff;
-
-	/*
-	position		: absolute;
-	right			: 8mm;
-	top			: 5mm;
-	*/
-	width			: 50px;
-	height			: 60px;
-
-	border-style		: solid;
-	border-width		: 1px;
-	float			: left;
+	margin			: 0px 14px;
 }
 
 
-#PhotoDiv #PWName
-{
-	position		: absolute;
-	left			: 0px;
-	bottom			: 0px;
-	margin-left		: 10px;
-}
-
+#PhotoDiv #PWName,
 #PhotoDiv #PBName
 {
-	position		: absolute;
-	right			: 0px;
-	bottom			: 0px;
-	margin-right		: 12px;
+	position		: relative;
+	display			: inline-table;
+	width			: 88px;
+	text-align		: center;
 }
 
 #PhotoDiv #PWPawn
@@ -217,8 +196,8 @@
 	top			: 13.5mm;
 	left			: 3.5mm;
 	*/
-	top			: 55px;
-	left			: 0px;
+	top			: 40px;
+	left			: -5px;
 
 	width			: 35px;
 	height			: 35px;
@@ -232,8 +211,8 @@
 	top			: 13.5mm;
 	right			: 3.5mm;
 	*/
-	top			: 55px;
-	right			: 7px;
+	top			: 40px;
+	right			: -5px;
 
 	width			: 35px;
 	height			: 35px;
@@ -246,14 +225,15 @@
 	right			: 50%;
 	left			: 50%;
 	top			: 40mm;
-	*/
 	top			: 20px;
 	float			: left;
+	*/
+	display			: inline-table;
 
-	margin-left		: 20px;
-	margin-right		: 20px;
-	margin-top		: 10px;
-	margin-bottom		: 10px;
+	margin-left		: 5px;
+	margin-right		: 5px;
+	margin-top		: 0px;
+	margin-bottom		: 0px;
 }
 
 /*Timers*/
@@ -261,10 +241,10 @@
 {
 
 	position		: relative;
-
+/*
+	padding			: 5px 0px;
 	width			: 180px;
 	height			: 35px;
-/*
 	width			: 53mm;
 	height			: 10mm;
 	border-style		: solid;
@@ -287,14 +267,15 @@
 /*	top			: 1mm;*/
 
 	text-align		: center;
+	display			: inline-table;
 
 	border-style		: solid;
 	border-width		: 1px;
 	border-color		: #ffa200;
 
-	float			: left;
+/*	float			: left;*/
 
-	margin			: 6px 14px;
+	margin			: 0px 13px;
 }
 /*
 #PBTimer
@@ -633,3 +614,77 @@
 {
 	border			: 2px solid #FFA200;
 }
+
+/*CAPTURE LISTS*/
+
+#CapturedDiv
+{
+	padding			: 5px 0px;
+	position		: relative;
+	height			: 35px;
+}
+
+/*#PWCapturedList,
+#PBCapturedList*/
+#CapturedDiv ul
+{
+	width			: 87px;
+	height			: 35px;
+	position		: relative;
+	list-style		: none;
+	float			: left;
+}
+
+#CapturedDiv li
+{
+	width			: 10px;
+	height			: 14px;
+	margin			: 1px;
+	float			: left;
+}
+
+#CapturedDiv #Wpawn
+{
+	background-image	: url("../images/pieces/mini_wpawn.png");
+	height			: 12px;
+}
+#CapturedDiv #Wknight
+{
+	background-image	: url("../images/pieces/mini_wknight.png");
+}
+#CapturedDiv #Wbishop
+{
+	background-image	: url("../images/pieces/mini_wbishop.png");
+}
+#CapturedDiv #Wrook
+{
+	background-image	: url("../images/pieces/mini_wrook.png");
+}
+#CapturedDiv #Wqueen
+{
+	background-image	: url("../images/pieces/mini_wqueen.png");
+}
+
+#CapturedDiv #Bpawn
+{
+	background-image	: url("../images/pieces/mini_bpawn.png");
+	height			: 13px;
+}
+#CapturedDiv #Bknight
+{
+	background-image	: url("../images/pieces/mini_bknight.png");
+}
+#CapturedDiv #Bbishop
+{
+	background-image	: url("../images/pieces/mini_bbishop.png");
+}
+#CapturedDiv #Brook
+{
+	background-image	: url("../images/pieces/mini_brook.png");
+}
+#CapturedDiv #Bqueen
+{
+	background-image	: url("../images/pieces/mini_bqueen.png");
+}
+
+

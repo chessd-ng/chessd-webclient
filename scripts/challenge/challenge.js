@@ -327,7 +327,7 @@ function CHALLENGE_HandleAccept (XML)
 
 	// Remove this match from interface
 	MainData.RemoveChallenge(MatchID, MatchID);
-	MainData.RemoveMatchOfer(MatchID);
+	MainData.RemoveMatchOffer(MatchID);
 	GameCenter.MatchOffer.remove(MatchID);
 
 	// Get the game room name
