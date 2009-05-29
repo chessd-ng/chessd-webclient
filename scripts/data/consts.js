@@ -64,6 +64,7 @@ function DATA_SetConsts()
 	Const.IQ_ID_GetBannedWords = "GetBannedWords";
 	Const.IQ_ID_AddBannedWords = "AddBannedWords";
 	Const.IQ_ID_RemoveBannedWords = "RemoveBannedWords";
+	Const.IQ_ID_CreateTourney = "CreateTourney";
 
 	
 	// Login errors

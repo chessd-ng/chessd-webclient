@@ -86,9 +86,9 @@ function INTERFACE_ShowCreateTourneyWindow()
 	var ToLeftDiv, ToRightDiv;
 	var ToLabel,ToInput, ToBr, FormatLabel2;
 
-	var RestrictDiv;
-	var RestrictRightDiv, RestrictLeftDiv;
-	var RestrictLabel, RestrictCheckbox, RestrictInput, RestrictPasswd;
+	var PasswordDiv;
+	var PasswordRightDiv, PasswordLeftDiv;
+	var PasswordLabel, PasswordCheckbox, PasswordInput, PasswordPasswd;
 
 	var WaitTimeDiv;
 	var WaitTimeRightDiv, WaitTimeLeftDiv;
@@ -431,7 +431,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 	}
 	IntervalLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_rating_interval'));
 
-	// DateInit Form
+	// Interval Form
 	FromDiv = UTILS_CreateElement('div','FromDiv');
 	FromRightDiv = UTILS_CreateElement('div','FromRightDiv');
 	FromLeftDiv = UTILS_CreateElement('div','FromLeftDiv');
@@ -499,44 +499,44 @@ function INTERFACE_ShowCreateTourneyWindow()
 		}
 	}
 
-	// RestrictDiv
-	RestrictDiv = UTILS_CreateElement('div','RestrictDiv');
-	RestrictRightDiv = UTILS_CreateElement('div','RestrictRightDiv');
-	RestrictLeftDiv = UTILS_CreateElement('div','RestrictLeftDiv');
-	RestrictInput = UTILS_CreateElement('input');
-	RestrictInput.type = "text";
-	RestrictInput.disabled = true;
-	RestrictInput.size = 10; 
-	RestrictInput.style.marginLeft = "5px";
-	RestrictInput.className = "disabled";
+	// PasswordDiv
+	PasswordDiv = UTILS_CreateElement('div','PasswordDiv');
+	PasswordRightDiv = UTILS_CreateElement('div','PasswordRightDiv');
+	PasswordLeftDiv = UTILS_CreateElement('div','PasswordLeftDiv');
+	PasswordInput = UTILS_CreateElement('input');
+	PasswordInput.type = "text";
+	PasswordInput.disabled = true;
+	PasswordInput.size = 10; 
+	PasswordInput.style.marginLeft = "5px";
+	PasswordInput.className = "disabled";
 	try
 	{
-		RestrictCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subscribe' />");
+		PasswordCheckbox = document.createElement("<input class='checkbox' type='checkbox' name='subscribe' />");
 	}
 	catch(err)
 	{
-		RestrictCheckbox =	UTILS_CreateElement('input', null);
-		RestrictCheckbox.type = "checkbox";
-		RestrictCheckbox.className = "checkbox";
-		RestrictCheckbox.name = "subscribe";
-		RestrictCheckbox.checked = false;
+		PasswordCheckbox =	UTILS_CreateElement('input', null);
+		PasswordCheckbox.type = "checkbox";
+		PasswordCheckbox.className = "checkbox";
+		PasswordCheckbox.name = "subscribe";
+		PasswordCheckbox.checked = false;
 	}
-	RestrictLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_restrict'));
-	RestrictPasswd = UTILS_CreateElement('span',null,'advopt_disabled',UTILS_GetText('tourney_passwd'));
+	PasswordLabel = UTILS_CreateElement('span',null,'advopt_enabled',UTILS_GetText('tourney_password'));
+	PasswordPasswd = UTILS_CreateElement('span',null,'advopt_disabled',UTILS_GetText('tourney_passwd'));
 
-	RestrictCheckbox.onchange = function () {
+	PasswordCheckbox.onchange = function () {
 		if (this.checked == true)
 		{
-			RestrictInput.disabled = false;
-			RestrictPasswd.className = "advopt_enabled";
-			RestrictInput.className = "enabled";
+			PasswordInput.disabled = false;
+			PasswordPasswd.className = "advopt_enabled";
+			PasswordInput.className = "enabled";
 		}
 		else
 		{
-			RestrictInput.disabled = true;
-			RestrictInput.value = "";
-			RestrictInput.className = "disabled";
-			RestrictPasswd.className = "advopt_disabled";
+			PasswordInput.disabled = true;
+			PasswordInput.value = "";
+			PasswordInput.className = "disabled";
+			PasswordPasswd.className = "advopt_disabled";
 		}
 	}
 
@@ -766,11 +766,11 @@ function INTERFACE_ShowCreateTourneyWindow()
 
 			SPToLabel.className = "advopt_enabled";
 
-			SPFromHourInputH.value = "00";
-			SPFromHourInputM.value = "00";
+			SPFromHourInputH.value = "__";
+			SPFromHourInputM.value = "__";
 
-			SPToHourInputH.value = "23";
-			SPToHourInputM.value = "59";
+			SPToHourInputH.value = "__";
+			SPToHourInputM.value = "__";
 
 			SPFromDateFormatLabel.className = 'format_enabled';
 			SPFromHourFormatLabel.className = 'format_enabled';
@@ -1016,11 +1016,11 @@ function INTERFACE_ShowCreateTourneyWindow()
 		Td = UTILS_CreateElement('td',null, 'enable', "Rodada " + RNumber);
 		Tr.appendChild(Td)
 
-		DInput = UTILS_CreateElement('input',null, 'no_board_en');
-		MInput = UTILS_CreateElement('input',null,'no_board_en');
-		YInput = UTILS_CreateElement('input',null,'no_board_en');
-		HInput = UTILS_CreateElement('input',null,'no_board_en');
-		MiInput = UTILS_CreateElement('input',null,'no_board_en');
+		var DInput = UTILS_CreateElement('input',null, 'no_board_en');
+		var MInput = UTILS_CreateElement('input',null,'no_board_en');
+		var YInput = UTILS_CreateElement('input',null,'no_board_en');
+		var HInput = UTILS_CreateElement('input',null,'no_board_en');
+		var MiInput = UTILS_CreateElement('input',null,'no_board_en');
 
 		Td = UTILS_CreateElement('td');
 		DInput.type = "text";
@@ -1336,6 +1336,94 @@ function INTERFACE_ShowCreateTourneyWindow()
 	Create = UTILS_CreateElement('input', null, 'button');
 	Create.value = UTILS_GetText("tourney_create");
 	Create.type = "button";
+	// 1cr
+	Create.onclick = function() {
+		var Name;
+		var Time;
+		var Subscribe;
+		var WaitTime = 3;
+		var RatingInterval = null;
+		var Password = null;
+		var SubmitPeriod = null;
+		var Rounds = null;
+		var SeqRounds = "true";
+		var Error = false;
+
+		Name = INTERFACE_ValidateTourneyName(TNameInput.value);
+		if (Name == "")
+		{
+			Error = true;
+		}
+		// Validate Tourney Fields;
+		if (Error == false)
+		{
+			Time = INTERFACE_ValidateInitDate(DateInputD, DateInputM, DateInputY, HourInputH, HourInputM);
+		}
+
+		if(Time != 0)
+		{
+			if(SubscribeCheckbox.checked == true)
+			{
+				Subscribe = INTERFACE_ValidateSubscribe(SubscribeInput);
+				if(!Subscribe)
+				{
+					Error = true;
+				}
+			}
+			if((IntervalCheckbox.checked == true) && (Error == false))
+			{
+				RatingInterval = INTERFACE_ValidateRatingInterval(FromInput, ToInput);
+				if(!RatingInterval)
+				{
+					Error = true;
+				}
+			}
+			if((PasswordCheckbox.checked == true) && (Error == false))
+			{
+				Password = INTERFACE_ValidatePassword(PasswordInput);
+				if (Password == "")
+				{
+					Error = true;
+				}
+			}
+			if((WaitTimeCheckbox.checked == true) && (Error == false))
+			{
+				WaitTime = INTERFACE_ValidateWaitTime(WaitTimeInput);
+				if (WaitTime == 0)
+				{
+					Error = true;
+				}
+			}
+			if((SubmitPeriodCheckbox.checked == true) && (Error == false))
+			{
+				SubmitPeriod = INTERFACE_ValidateSubmitPeriod(SPFromDateInputD, SPFromDateInputM, SPFromDateInputY, SPFromHourInputH, SPFromHourInputM, SPToDateInputD, SPToDateInputM, SPToDateInputY, SPToHourInputH, SPToHourInputM,Time);
+				if (SubmitPeriod != null)
+				{
+					Error = true;
+				}
+			}
+			if((RoundCheckbox.checked == false) && (Error == false))
+			{
+				if((SequencedRoundCheckbox.checked == false) && (Error == false))
+				{
+					Rounds = INTERFACE_ValidateSequencedRounds(TBody, Time, TimeSelect.value, WaitTime);
+					if (Rounds == null)
+					{
+						Error = true;
+					}
+					else
+					{
+						SeqRounds = "false";
+					}
+				}
+			}
+			if (Error == false)
+			{
+				// TODO Send Message
+				//alert(MESSAGE_CreateTourney(Name, CatSelect.value, TimeSelect.value, Time, Subscribe, RatingInterval, Password, WaitTime, SeqRounds, SubmitPeriod, DescTextArea.value, Rounds));
+			}
+		}
+	}
 	
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('window_cancel');
@@ -1480,17 +1568,17 @@ function INTERFACE_ShowCreateTourneyWindow()
 	IntervalDiv.appendChild(IntervalLeftDiv);
 	IntervalDiv.appendChild(IntervalRightDiv);
 
-	// RestrictLeftDiv
-	RestrictLeftDiv.appendChild(RestrictCheckbox);
-	RestrictLeftDiv.appendChild(RestrictLabel);
+	// PasswordLeftDiv
+	PasswordLeftDiv.appendChild(PasswordCheckbox);
+	PasswordLeftDiv.appendChild(PasswordLabel);
 
-	// RestrictRightDiv
-	RestrictRightDiv.appendChild(RestrictPasswd);
-	RestrictRightDiv.appendChild(RestrictInput);
+	// PasswordRightDiv
+	PasswordRightDiv.appendChild(PasswordPasswd);
+	PasswordRightDiv.appendChild(PasswordInput);
 	
-	// RestrictDiv
-	RestrictDiv.appendChild(RestrictLeftDiv);
-	RestrictDiv.appendChild(RestrictRightDiv);
+	// PasswordDiv
+	PasswordDiv.appendChild(PasswordLeftDiv);
+	PasswordDiv.appendChild(PasswordRightDiv);
 
 	// WaitTimeLeftDiv
 	WaitTimeLeftDiv.appendChild(WaitTimeCheckbox);
@@ -1593,7 +1681,7 @@ function INTERFACE_ShowCreateTourneyWindow()
 	AdvancedDiv.appendChild(DescDiv);
 	AdvancedDiv.appendChild(SubscribeDiv);
 	AdvancedDiv.appendChild(IntervalDiv);
-	AdvancedDiv.appendChild(RestrictDiv);
+	AdvancedDiv.appendChild(PasswordDiv);
 	AdvancedDiv.appendChild(WaitTimeDiv);
 	AdvancedDiv.appendChild(SubmitPeriodDiv);
 
@@ -1656,8 +1744,8 @@ function INTERFACE_ShowCreateTourneyWindow()
 *
 * @param	Field	Current Field
 * @param	NextField Field to be jumped
-* @return									none
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_NextField(Field,NextField)
 {
@@ -1678,8 +1766,8 @@ function INTERFACE_NextField(Field,NextField)
 * Clear field passed by parameter
 *
 * @param Field Field to be cleared
-* @return									none
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_ClearField(Field) 
 {
@@ -1693,8 +1781,8 @@ function INTERFACE_ClearField(Field)
 * If Fields leaves empty then it will be filled
 *
 * @param Field Field to be filled
-* @return									none
-* @author									Danilo Kiyoshi Simizu Yorinori
+* @return	none
+* @author	Danilo Kiyoshi Simizu Yorinori
 */
 function INTERFACE_FillField(Field) 
 { 
@@ -1709,4 +1797,440 @@ function INTERFACE_FillField(Field)
 			Field.value = "____";
 		}
 	}
+}
+		
+/**
+* Validate name of tourney 
+*
+* @param Name	Input element of tourney's name
+* @return	String
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateTourneyName(Name) {
+	if (UTILS_ValidateTourneyName(Name))
+	{
+		return Name; // Valid tourney name
+	}
+	else
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_name"),UTILS_GetText("tourney_invalid_name_str"));
+		return "";
+	}
+}
+
+/**
+* Validate initial date of tourney 
+*
+* @param DateD	Input element of day
+* @param DateM	Input element of month
+* @param DateY	Input element of year
+* @param HourH	Input element of hour
+* @param HourM	Input element of minute
+* @return	integer
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateInitDate(DateD, DateM, DateY, HourH, HourM) {
+	var Test = UTILS_ValidateDate(DateD.value, DateM.value, DateY.value,  HourH.value, HourM.value);
+	var Today = new Date;
+
+	if (Test == 1)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_day"));
+		return 0;
+	}
+	else if (Test == 2)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_mon"));
+		return 0;
+	}
+	else if (Test == 3)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_year"));
+		return 0;
+	}
+	else if (Test == 4)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_hour"));
+		return 0;
+	}
+	else if (Test == 5)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_min"));
+		return 0;
+	}
+	else if(Test < Today.getTime())
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_idate"),UTILS_GetText("tourney_invalid_idate_init"));
+		return 0;
+	}
+	else
+	{
+		return Test;
+	}
+}
+
+/**
+* Validate sequence rounds 
+*
+* @param	TBody TBody element
+* @param	InitTime	Initial date of tourney
+* @param	MatchTime	Time of matchs of tourney
+* @param	WaitTime	Maximum time to wait for a player before start the match
+* @return	Array
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateSequencedRounds(TBody, InitTime, MatchTime, WaitTime) {
+	var Tam = TBody.rows.length;
+	var Today = new Date();
+	var NextTime, Day, Month, Year, Hour, Minute;
+	var i=1;
+	var error = false;
+	var Time = InitTime;
+	var Rounds = new Array();
+	var Text;
+
+	MatchTime = parseInt(MatchTime);
+	WaitTime = parseInt(WaitTime);
+
+	Rounds.push(InitTime);
+
+//	alert(Tam+" "+Time+" "+MatchTime);
+
+	// If tourney has more than one round
+	if (Tam>1)
+	{
+		while ((i<Tam) && (error == false))
+		{
+			Day = TBody.rows[i].childNodes[2].childNodes[0].value;
+			Month = TBody.rows[i].childNodes[2].childNodes[2].value;
+			Year = TBody.rows[i].childNodes[2].childNodes[4].value;
+			Hour = TBody.rows[i].childNodes[3].childNodes[0].value;
+			Minute = TBody.rows[i].childNodes[3].childNodes[2].value;
+			NextTime = UTILS_ValidateDate(Day, Month, Year,  Hour, Minute);
+			if (NextTime == 1)
+			{
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),UTILS_GetText("tourney_invalid_rdate_day"));
+				error = true;
+			}
+			else if (NextTime == 2)
+			{
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),UTILS_GetText("tourney_invalid_rdate_mon"));
+				error = true;
+			}
+			else if (NextTime == 3)
+			{
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),UTILS_GetText("tourney_invalid_rdate_year"));
+				error = true;
+			}
+			else if (NextTime == 4)
+			{
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),UTILS_GetText("tourney_invalid_rdate_hour"));
+				error = true;
+			}
+			else if (NextTime == 5)
+			{
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),UTILS_GetText("tourney_invalid_rdate_min"));
+				error = true;
+			}
+			else if(NextTime < Today.getTime())
+			{
+				Text = UTILS_GetText("tourney_invalid_rdate_init");
+				if (Text != null)
+				{
+					Text = Text.replace(/%s/,(i+1));
+				}
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),Text);
+				error = true;
+			}
+			else if (NextTime <Time)
+			{
+				Text = UTILS_GetText("tourney_invalid_rdate_prev");
+				if (Text != null)
+				{
+					Text = Text.replace(/%s/,(i+1));
+					Text = Text.replace(/%p/,i);
+				}
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),Text);
+				error = true;
+			}
+			else if (parseInt(Time+(parseInt(MatchTime*60000) + (parseInt(WaitTime)*60000))) > NextTime)
+			{
+				Text = UTILS_GetText("tourney_invalid_rdate_interval");
+				if (Text != null)
+				{
+					Text = Text.replace(/%s/,(i+1));
+					Text = Text.replace(/%p/,i);
+					Text = Text.replace(/%t/,(MatchTime+WaitTime));
+				}
+				WINDOW_Alert(UTILS_GetText("tourney_invalid_rdate"),Text);
+				error = true;
+			}
+			else
+			{
+				Time = NextTime;
+				Rounds.push(Time);
+				i++;
+			}
+		}
+	}
+
+	if (error == true)
+	{
+		return null;
+	}
+	else
+	{
+		return Rounds;
+	}
+}
+
+/**
+* Validate maximum of subscriptions to tourney
+*
+* @param Input	Input element
+* @return	Integer
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateSubscribe(Input) {
+	if (Input.value > 3)
+	{
+		return parseInt(Input.value);
+	}
+	else
+	{ // TODO elaborate better text error
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_max_players"),UTILS_GetText("tourney_invalid_max_players_number"));
+		return 0;
+	}
+}
+
+/**
+* Validate rating interval
+*
+* @param From	Input element 
+* @param To	Input element 
+* @return	Object
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateRatingInterval(From,To) {
+	var Interval = new Object();
+	if (From.value == "")
+	{
+		Interval.From = 0;
+	}
+	else
+	{
+		Interval.From = Number(From.value);
+	}
+	
+	if (To.value == "")
+	{
+		Interval.To = 1000000;
+	}
+	else
+	{
+		Interval.To = Number(To.value);
+	}
+
+	if (isNaN(Interval.From))	
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_rating"),UTILS_GetText("tourney_invalid_rating_from"));
+		return 0;
+	}
+	else if (isNaN(Interval.To))
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_rating"),UTILS_GetText("tourney_invalid_rating_to"));
+		return 0;
+	}
+	else {
+		if (Interval.From <= Interval.To)
+		{
+			return Interval;
+		}
+		else
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_rating"),UTILS_GetText("tourney_invalid_rating_interval"));
+			return 0;
+		}
+	}
+}
+
+/**
+* Validate tourney password 
+*
+* @param Restrcit	Input element 
+* @return	String
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidatePassword(Password) {
+	var Test = UTILS_ValidateTourneyPassword(Password.value);
+
+	if (Test < 0)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_password"),UTILS_GetText("tourney_invalid_password_len"));
+		return "";
+	}
+	else if (Test == 0)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_password"),UTILS_GetText("tourney_invalid_password_char"));
+		return "";
+	}
+	else if (Test == 1)
+	{
+		return Password.value;
+	}
+	else
+	{
+		return "";
+	}
+}
+
+/**
+* Validate maximum wait time to start a tourney match 
+*
+* @param WaitTime	Input element 
+* @return	Integer 
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateWaitTime(WaitTime) {
+	var tV;
+	if (WaitTime.value == "")
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_wait"),UTILS_GetText("tourney_invalid_wait_str"));
+		return 0;
+	}
+	else
+	{
+		tV = Number(WaitTime.value);
+	}
+
+	if(isNaN(tV))
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_wait"),UTILS_GetText("tourney_invalid_wait_str"));
+		return 0;
+	}
+	else
+	{
+		if ((tV >= 3) && (tV <= 5))
+		{
+			return tV;
+		}
+		else
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_wait"),UTILS_GetText("tourney_invalid_wait_str"));
+			return 0;
+		}
+	}
+}
+
+/**
+* Validate submit period 
+*
+* @param FInDD	Input element 
+* @param FInDM	Input element 
+* @param FInDY	Input element 
+* @param FInHH	Input element 
+* @param FInHM	Input element 
+* @param TInDD	Input element 
+* @param TInDM	Input element 
+* @param TInDY	Input element 
+* @param TInHH	Input element 
+* @param TInHM	Input element 
+* @param Time	Initial time of tourney
+* @return	Object
+* @author	Danilo Kiyoshi Simizu Yorinori
+*/
+function INTERFACE_ValidateSubmitPeriod(FInDD, FInDM, FInDY, FInHH, FInHM, TInDD, TInDM, TInDY, TInHH, TInHM, Time) {
+
+	var From = UTILS_ValidateDate(FInDD.value, FInDM.value, FInDY.value,  FInHH.value, FInHM.value);
+	var To = UTILS_ValidateDate(TInDD.value, TInDM.value, TInDY.value,  TInHH.value, TInHM.value);
+	var Today = new Date();
+	var Interval = new Object();
+
+	if ((FInDD.value == "__") && (FInDM.value == "__") && (FInDY.value == "____") && (FInHH.value == "__") && (FInHM.value == "__"))
+	{
+		From = Today.getTime();
+	}
+	else
+	{
+		From = UTILS_ValidateDate(FInDD.value, FInDM.value, FInDY.value,  FInHH.value, FInHM.value);
+	}
+
+	if ((TInDD.value == "__") && (TInDM.value == "__") && (TInDY.value == "____") && (TInHH.value == "__") && (TInHM.value == "__"))
+	{
+		To = Time;
+	}
+	else
+	{
+		To = UTILS_ValidateDate(TInDD.value, TInDM.value, TInDY.value,  TInHH.value, TInHM.value);
+	}
+
+	if (From < 5)
+	{
+		if (From == 1)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_day"));
+		}
+		else if (From == 2)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_mon"));
+		}
+		else if (From == 3)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_year"));
+		}
+		else if (From == 4)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_hour"));
+		}
+		else if (From == 5)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_min"));
+		}
+	}
+	else if (From < Today.getTime())
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_init"));
+	}
+	else if (From > Time)
+	{
+		WINDOW_Alert(UTILS_GetText("tourney_invalid_sfdate"),UTILS_GetText("tourney_invalid_sfdate_end"));
+	}
+	else if (To < 5)
+	{
+		if (To == 1)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_day"));
+		}
+		else if (To == 2)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_mon"));
+		}
+		else if (To == 3)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_year"));
+		}
+		else if (To == 4)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_hour"));
+		}
+		else if (To == 5)
+		{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_min"));
+		}
+	}
+	else if (From > To) 	
+	{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_sdate"),UTILS_GetText("tourney_invalid_sdate_interval"));
+	}
+	else if (To > Time)
+	{
+			WINDOW_Alert(UTILS_GetText("tourney_invalid_stdate"),UTILS_GetText("tourney_invalid_stdate_end"));
+	}
+	else
+	{
+		Interval.From = From;
+		Interval.To = To;
+		return Interval;
+	}
+	return null;
 }

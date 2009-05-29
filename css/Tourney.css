@@ -67,8 +67,8 @@
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #ToLeftDiv,
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #FromRightDiv,
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv #IntervalRightDiv #FromLeftDiv,
-#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictRightDiv,
-#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictLeftDiv,
+#CreateTourneyDiv #AdvancedDiv #PasswordDiv #PasswordRightDiv,
+#CreateTourneyDiv #AdvancedDiv #PasswordDiv #PasswordLeftDiv,
 #CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeRightDiv,
 #CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeLeftDiv,
 #CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodLeftDiv,
@@ -138,7 +138,7 @@
 }
 
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv,
-#CreateTourneyDiv #AdvancedDiv #RestrictDiv,
+#CreateTourneyDiv #AdvancedDiv #PasswordDiv,
 #CreateTourneyDiv #AdvancedDiv #WaitTimeDiv,
 #CreateTourneyDiv #AdvancedDiv #AddRoundDiv {
 	height : 30px;
@@ -150,7 +150,7 @@
 
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv #FromLeftDiv,
 #CreateTourneyDiv #AdvancedDiv #IntervalDiv #ToLeftDiv,
-#CreateTourneyDiv #AdvancedDiv #RestrictDiv #RestrictRightDiv,
+#CreateTourneyDiv #AdvancedDiv #PasswordDiv #PasswordRightDiv,
 #CreateTourneyDiv #AdvancedDiv #WaitTimeDiv #WaitTimeRightDiv,
 #CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv,
 #CreateTourneyDiv #AdvancedDiv #SubmitPeriodDiv #SubmitPeriodRightDiv  #SPFromRightDiv,

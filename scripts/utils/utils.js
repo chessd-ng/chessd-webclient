@@ -1367,4 +1367,130 @@ function UTILS_GetLanguage()
 	}
 }
 
+/************************************
+ * FUNCTIONS - TOURNEY              *
+ ************************************/
+/**
+* @brief	Validate dates
+*
+* @param	Day	Day's number
+* @param	Month	Month's number
+* @param	Year	Year's number
+* @param	Hour	Hour's number
+* @param	Minutes	Minutes's number
+* @return	integer
+* @author	Danilo Yorinori
+*/
+function UTILS_ValidateDate(Day,Month,Year,Hour,Minutes) 
+{
+	var Time = new Date();
 
+	if ((Day == "") || (isNaN(Number(Day))))
+	{
+		return 1; // day error
+	}
+	else if ((Month == "") || (isNaN(Number(Month))))
+	{
+		return 2; // month error
+	}
+	else if ((Year == "") || (isNaN(Number(Year))))
+	{
+		return 3; // year error
+	}
+	else if ((Hour == "") || (isNaN(Number(Hour))))
+	{
+		return 4;// hour error
+	}
+	else if ((Minutes == "") || (isNaN(Number(Minutes))))
+	{
+		return 5; // minute error
+	}
+	else
+	{
+		Time.setFullYear(Year*1, Month-1, Day*1);
+		Time.setHours(Hour, Minutes, 0, 0);
+
+		if(Time.getMinutes() == Minutes)
+		{
+			if(Time.getHours() == Hour)
+			{
+				if(Time.getDate() == Day)
+				{
+					if(Time.getMonth() == Month-1)
+					{
+						if(Time.getFullYear() == Year)
+						{
+							return Time.getTime(); // valid date
+						}
+						else
+						{
+							return 3 // year error
+						}
+					}
+					else
+					{
+						return 2; // month error
+					}
+				}
+				else
+				{
+					return 1; // day error
+				}
+			}
+			else
+			{
+				return 4; // hour error
+			}
+		}
+		else
+		{
+			return 5; // minute error
+		}
+	}
+}
+
+/**
+* @brief	Validate Tourney password
+*
+* @param	Password	String of password
+* @return	integer
+* @author	Danilo Yorinori
+*/
+function UTILS_ValidateTourneyPassword(Password)
+{
+	// Password length must be between 5 and 11
+	if ((Password.length > 5) && (Password.length < 11))
+	{
+		if (Password.match(/[^0-9a-zA-Z-_.]{1,}/))
+		{
+			return 0; // invalid characters
+		}
+		else
+		{
+			return 1; // valid password
+		}
+	}
+	else
+	{
+		return -1; // invalid length
+	}
+}
+
+/**
+* @brief	Validate Tourney nme
+*
+* @param	Password	String of password
+* @return	String
+* @author	Danilo Yorinori
+*/
+function UTILS_ValidateTourneyName(Name)
+{
+	if (Name.match(/[^0-9a-zA-Z-_.]{1,}/))
+	{
+		return ""; // Invalid name
+	}
+	else
+	{
+		return Name; // Valid name
+	}
+}
