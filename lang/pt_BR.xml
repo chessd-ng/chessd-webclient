@@ -1310,9 +1310,9 @@
 		<tourney_rating_interval>
 			Intervalo de rating:
 		</tourney_rating_interval>
-		<tourney_restrict>
+		<tourney_password>
 			Acesso restrito:
-		</tourney_restrict>
+		</tourney_password>
 		<tourney_passwd>
 			Senha:
 		</tourney_passwd>
@@ -1331,6 +1331,144 @@
 		<tourney_remove_round>
 			Remover
 		</tourney_remove_round>
+		<tourney_invalid_name>
+			Nome do torneio inválido
+		</tourney_invalid_name>
+		<tourney_invalid_name_str>
+			Nome do torneio inválido. Use somente caracteres, números, sem espaços, '-', '.' e '_'.
+		</tourney_invalid_name_str>
+		<tourney_invalid_rating>
+			Intervalo de rating inválido
+		</tourney_invalid_rating>
+		<tourney_invalid_rating_from>
+			Início do intervalo de rating inválido.
+		</tourney_invalid_rating_from>
+		<tourney_invalid_rating_to>
+			Final do intervalo de rating inválido.
+		</tourney_invalid_rating_to>
+		<tourney_invalid_rating_interval>
+			Intervalo de rating inválido.
+		</tourney_invalid_rating_interval>
+		<tourney_invalid_idate>
+			Data de início do torneio inválida
+		</tourney_invalid_idate>
+		<tourney_invalid_idate_day>
+			Dia do início do torneio inválido.
+		</tourney_invalid_idate_day>
+		<tourney_invalid_idate_mon>
+			Mês do início do torneio inválido.
+		</tourney_invalid_idate_mon>
+		<tourney_invalid_idate_year>
+			Ano do início do torneio inválido.
+		</tourney_invalid_idate_year>
+		<tourney_invalid_idate_hour>
+			Hora de início do torneio inválida.
+		</tourney_invalid_idate_hour>
+		<tourney_invalid_idate_min>
+			Minutos da hora inicial do torneio inválido.
+		</tourney_invalid_idate_min>
+		<tourney_invalid_idate_init>
+			Data inicial do torneio anterior a data atual.
+		</tourney_invalid_idate_init>
+		<tourney_invalid_rdate>
+			Data de início de rodada inválida
+		</tourney_invalid_rdate>
+		<tourney_invalid_rdate_day>
+			Dia do início da rodada %s inválido.
+		</tourney_invalid_rdate_day>
+		<tourney_invalid_rdate_mon>
+			Mês do início da rodada %s inválido.
+		</tourney_invalid_rdate_mon>
+		<tourney_invalid_rdate_year>
+			Ano do início da rodada %s inválido.
+		</tourney_invalid_rdate_year>
+		<tourney_invalid_rdate_hour>
+			Hora de início da rodada %s inválida.
+		</tourney_invalid_rdate_hour>
+		<tourney_invalid_rdate_min>
+			Minutos da hora inicial da rodada %s inválidos.
+		</tourney_invalid_rdate_min>
+		<tourney_invalid_rdate_init>
+			Data inicial da rodada %s anterior a data atual.
+		</tourney_invalid_rdate_init>
+		<tourney_invalid_rdate_prev>
+			Data de início da rodada %s anterior a data da rodada %p.
+		</tourney_invalid_rdate_prev>
+		<tourney_invalid_rdate_interval>
+			Intervalo pequeno entre as rodadas: %p e %s. Intervalo mínimo : %t minuto(s).
+		</tourney_invalid_rdate_interval>
+		<tourney_invalid_max_players>
+			Número máximo de inscritos inválido
+		</tourney_invalid_max_players>
+		<tourney_invalid_max_players_number>
+			Número máximo de inscritos inválido, insira um número maior que 3.
+		</tourney_invalid_max_players_number>
+		<tourney_invalid_password>
+			Senha de acesso ao torneio inválida
+		</tourney_invalid_password>
+		<tourney_invalid_password_len>
+			Tamanho da senha de acesso ao torneio inválida. Insira uma senha com 6 a 10 caracteres.
+		</tourney_invalid_password_len>
+		<tourney_invalid_password_char>
+			Caracteres na senha de acesso ao torneio inválida. Use somente caracteres, números, sem espaços, '-', '.' e '_'.
+		</tourney_invalid_password_char>
+		<tourney_invalid_wait>
+			Tempo de tolerância inválido
+		</tourney_invalid_wait>
+		<tourney_invalid_wait_str>
+			Insira um tempo de espera entre 3 a 5 minutos.
+		</tourney_invalid_wait_str>
+		<tourney_invalid_sfdate>
+			Data de início das inscrições inválido
+		</tourney_invalid_sfdate>
+		<tourney_invalid_sfdate_day>
+			Dia do início das inscrições para o torneio inválido.
+		</tourney_invalid_sfdate_day>
+		<tourney_invalid_sfdate_mon>
+			Mês do início das inscrições para o torneio inválido.
+		</tourney_invalid_sfdate_mon>
+		<tourney_invalid_sfdate_year>
+			Ano do início das inscrições para o torneio inválido.
+		</tourney_invalid_sfdate_year>
+		<tourney_invalid_sfdate_hour>
+			Hora do início das inscrições para o torneio inválida.
+		</tourney_invalid_sfdate_hour>
+		<tourney_invalid_sfdate_min>
+			Minutos da hora inicial para inscrição do torneio inválidos
+		</tourney_invalid_sfdate_min>
+		<tourney_invalid_sfdate_init>
+			Data de início do torneio anterior a data atual.
+		</tourney_invalid_sfdate_init>
+		<tourney_invalid_sfdate_end>
+			Data de início das inscrições após a data de início do torneio.
+		</tourney_invalid_sfdate_end>
+		<tourney_invalid_stdate>
+			Data final das inscrições inválida
+		</tourney_invalid_stdate>
+		<tourney_invalid_stdate_day>
+			Dia do final das inscrições para o torneio inválido.
+		</tourney_invalid_stdate_day>
+		<tourney_invalid_stdate_mon>
+			Mês do final das inscrições para o torneio inválido.
+		</tourney_invalid_stdate_mon>
+		<tourney_invalid_stdate_year>
+			Ano do final das inscrições para o torneio inválido.
+		</tourney_invalid_stdate_year>
+		<tourney_invalid_stdate_hour>
+			Hora do final das inscrições para o torneio inválida.
+		</tourney_invalid_stdate_hour>
+		<tourney_invalid_stdate_min>
+			Minutos da hora final para inscrição do torneio inválidos
+		</tourney_invalid_stdate_min>
+		<tourney_invalid_stdate_end>
+			Data final das inscrições após a data de início do torneio.
+		</tourney_invalid_stdate_end>
+		<tourney_invalid_sdate>
+			Período de inscrições inválido
+		</tourney_invalid_sdate>
+		<tourney_invalid_sdate_interval>
+			Data final das inscrições anterior a data inicial.
+		</tourney_invalid_sdate_interval>
 	</tourney>
 	<admincenter>
 		<admincenter_punish_button>
