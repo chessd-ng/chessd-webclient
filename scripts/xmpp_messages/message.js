@@ -1402,3 +1402,78 @@ function MESSAGE_AcceptAnnounceMatch(Id)
 	return XMPP;
 }
 
+/**********************************
+ * MESSAGES - TOURNEY
+ **********************************/
+/**
+* @brief	Create a message to create a tourney
+*
+* @param	Name String of tourney Namen
+* @param	Category String of game category
+* @param	GameTime Number of time of games
+* @param	StartTime	Number of tourney StartTime
+* @param	MaxPlayers	Number of maximum players
+* @param	RatingInterval	Object contains min and max ratings
+* @param	Password	String of password
+* @param	WaitTime	Number of minutes to wait a player before match start
+* @param	SeqRounds	String 
+* @param	SubmitPeriod	Object
+* @param	Desc	String with tourney description
+* @param	Rounds	Array with start time of rounds
+* @return 	XMPP message
+* @author 	Rubens Suguimoto
+*/ 
+function MESSAGE_CreateTourney(Name, Category, GameTime, StartTime, MaxPlayers, RatingInterval, Password, WaitTime, SeqRounds, SubmitPeriod, Desc, Rounds)
+{
+	var XMPP = "";
+	var Consts = MainData.GetConst();
+	var i;
+
+	// TODO verify server/host
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_CreateTourney+"'>";
+	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd#tourney'>";
+	XMPP += "<tourney name='"+Name+"' category='"+Category+"' game_time='"+GameTime+"' start_time='"+StartTime+"'";
+	if (MaxPlayers != null)
+	{
+		XMPP += " max_players='"+MaxPlayers+"'";
+	}
+	// Set rating interval
+	if (RatingInterval != null)
+	{
+		XMPP += " min_rating='"+RatingInterval.From+"' max_rating='"+RatingInterval.To+"'";
+	}
+	// Set tourney password
+	if (Password != null)
+	{
+		XMPP += " password='"+Password+"'";
+	}
+	// Set wait time
+	if (WaitTime != null)
+	{
+		XMPP += " delay='"+WaitTime+"'";
+	}
+	// Set sequence rounds (true,false)
+	XMPP += " sequence_rounds='"+SeqRounds+"'";
+	// Set subscription period
+	if (SubmitPeriod != null)
+	{
+		XMPP += " start_subscription='"+SubmitPeriod.From+"' end_subscription='"+SubmitPeriod.To+"'";
+	}
+	XMPP += " >";
+	// Set tourney's description
+	if (Desc != "")
+	{
+		XMPP += "<description>"+Desc+"</description>";
+	}
+	// Set rounds
+	if ((SeqRounds == false) && (Rounds != null))
+	{
+		for (i=0; i<Rounds.length; i++)
+		{
+			XMPP += "<round start_time='"+Rounds[i]+"' />";
+		}
+	}
+	XMPP += "</tourney>";
+	XMPP += "</create></iq>";
+	return XMPP;
+}
