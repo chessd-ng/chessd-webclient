@@ -130,31 +130,28 @@ function UTILS_IdentifyBrowser()
 *
 * @param	Url	XML file path
 * @return	XML DOM tree
-* @author 	Rubens Suguimoto
+* @author 	Rubens Suguimoto & Danilo Yorinori
 */
 function UTILS_OpenXMLFile(Url)
 {	
-	var XML, Parser;
-
-	// Code for IE
-	if (window.ActiveXObject)
+	var XML;
+	if (window.XMLHttpRequest)
 	{
-		XML = new ActiveXObject("Microsoft.XMLDOM");
+		XML=new window.XMLHttpRequest();
+		XML.open("GET",Url,false);
+		XML.send("");
+		return XML.responseXML;
 	}
-	// Code for Mozilla, Firefox, Opera, etc.
-	else if (document.implementation && document.implementation.createDocument)
+	// IE 5 and IE 6
+	else if (ActiveXObject("Microsoft.XMLDOM"))
 	{
-		XML = document.implementation.createDocument("","",null);
+		XML=new ActiveXObject("Microsoft.XMLDOM");
+		XML.async=false;
+		XML.load(Url);
+		return XML;
 	}
-	else
-	{
-		alert('Your browser doesn\'t support XML DOM.');
-	}
-
-	XML.async = false;
-	XML.load(Url);
-
-	return(XML);
+	alert('Your browser doesn\'t support XML DOM.');
+	return null;
 }
 
 
