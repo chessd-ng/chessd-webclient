@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <conf>
 	<general>
-		<version>Alpha 0.8</version>
+		<version>Alpha 0.9</version>
 		<cookie-validity>10</cookie-validity>
 		<room-default>general</room-default>
 		<max-rooms>100</max-rooms>
