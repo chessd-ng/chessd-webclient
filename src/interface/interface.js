@@ -1,3 +1,13 @@
+import { INTERFACE_CreateTop } from 'interface/top.js';
+import { INTERFACE_CreateChatList } from 'interface/chat.js';
+import {
+	UTILS_CreateElement,
+	UTILS_GetParentDiv,
+	UTILS_GetOffset,
+} from 'utils/utils.js';
+import { INTERFACE_CreateLeft } from 'interface/left.js';
+import { LOGIN_LeavePage } from 'login/login.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +37,7 @@
 * @return	Start main Div
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_CreateInterface()
+export function INTERFACE_CreateInterface()
 {
 	var Page, Main, Chat, Top, Left, Center;
 	
@@ -57,7 +67,7 @@ function INTERFACE_CreateInterface()
 * @return	none
 * @author	Pedro Rocha
 */
-function INTERFACE_ShowInterface(Tree)
+export function INTERFACE_ShowInterface(Tree)
 {
 	document.body.appendChild(Tree);
 }
@@ -69,7 +79,7 @@ function INTERFACE_ShowInterface(Tree)
 * @return	none
 * @author	Pedro Rocha
 */
-function INTERFACE_StopInterface()
+export function INTERFACE_StopInterface()
 {
 	var Page = document.getElementById("Page");
 	var Windows = document.getElementsByTagName("div");
@@ -93,7 +103,7 @@ function INTERFACE_StopInterface()
 * @param	Id	Box identification name
 * @param	Text	Text string to show
 */
-function INTERFACE_CreateLoadingBox(Id, Text)
+export function INTERFACE_CreateLoadingBox(Id, Text)
 {
 	var Div = UTILS_CreateElement("div",Id,"loading_box");
 	var Span = UTILS_CreateElement("Span",null,null,Text);
@@ -109,7 +119,7 @@ function INTERFACE_CreateLoadingBox(Id, Text)
  * @return	False
  * @author 	Danilo Yorinori
  */
-function INTERFACE_DisableSelect(e)
+export function INTERFACE_DisableSelect(e)
 {
 	return false;
 }
@@ -120,7 +130,7 @@ function INTERFACE_DisableSelect(e)
  * @return	True
  * @author 	Danilo Yorinori
  */
-function INTERFACE_ReEnableSelect()
+export function INTERFACE_ReEnableSelect()
 {
 	return true;
 }
@@ -133,7 +143,7 @@ function INTERFACE_ReEnableSelect()
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_ShowFullName(Obj,FullName)
+export function INTERFACE_ShowFullName(Obj,FullName)
 {
 	var Hint, Name, ParentNode, Pos, i;
 
@@ -161,7 +171,7 @@ function INTERFACE_ShowFullName(Obj,FullName)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_CloseFullName()
+export function INTERFACE_CloseFullName()
 {
 	var Hint = document.getElementById("FullNameDiv");
 	if (Hint)

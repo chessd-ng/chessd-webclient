@@ -1,3 +1,9 @@
+import { UTILS_GetText } from 'utils/utils.js';
+import { MESSAGE_GameRoomInfoList } from 'xmpp_messages/message.js';
+import { GAME_StartObserverGame } from 'game/game.js';
+import { WINDOW_Alert } from 'window/window.js';
+import { INTERFACE_NoGamesInGameList } from 'interface/top.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +32,7 @@
 * @return 	XMPP to send
 * @author 	Ulysses Bomfim and Rubens Suguimoto
 */
-function CURRENTGAME_HandleGameRoomList(XML)
+export function CURRENTGAME_HandleGameRoomList(XML)
 {
 	var Items, i;
 	var Rooms = new Array();
@@ -80,7 +86,7 @@ function CURRENTGAME_HandleGameRoomList(XML)
 * @return 	XMPP to send
 * @author 	Rubens Suguimoto
 */
-function CURRENTGAME_HandleGameRoomInfoList(XML)
+export function CURRENTGAME_HandleGameRoomInfoList(XML)
 {
 	var PW = new Object();
 	var PB = new Object();
@@ -177,7 +183,7 @@ function CURRENTGAME_HandleGameRoomInfoList(XML)
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function CURRENTGAME_HandleGameRoomInfoError(XML)
+export function CURRENTGAME_HandleGameRoomInfoError(XML)
 {
 	var IqId = XML.getAttribute("id");
 	var Consts = MainData.GetConst();

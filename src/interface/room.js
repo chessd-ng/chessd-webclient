@@ -1,3 +1,39 @@
+import {
+	WINDOW_CreateRoom,
+	WINDOW_Alert,
+	WINDOW_CancelRoom,
+} from 'window/window.js';
+import { MESSAGE_Presence } from 'xmpp_messages/message.js';
+import {
+	UTILS_CreateElement,
+	UTILS_ReturnKeyCode,
+	UTILS_GetText,
+	UTILS_Capitalize,
+	UTILS_ConvertChatString,
+	UTILS_ShortString,
+	UTILS_GetTime,
+	UTILS_AddListener,
+	UTILS_RemoveListener,
+} from 'utils/utils.js';
+import {
+	ROOM_ErrorMessageLength,
+	ROOM_SortUsersByNick,
+	ROOM_SortUsersByRating,
+	ROOM_SendMessage,
+	ROOM_EnterRoom,
+	ROOM_ExitRoom,
+	ROOM_FocusRoom,
+	ROOM_ShowHideUserList,
+} from 'room/room.js';
+import { UserListObj } from 'interface/user.js';
+import { GAME_StartObserverGame, GAME_StartGame } from 'game/game.js';
+import {
+	INTERFACE_ShowFullName,
+	INTERFACE_CloseFullName,
+	INTERFACE_CreateLoadingBox,
+} from 'interface/interface.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -32,7 +68,7 @@
 * @author       Rubens Suguimoto
 */
 
-function RoomObj(Roomname)
+export function RoomObj(Roomname)
 {
 	var Room = INTERFACE_CreateRoom(Roomname);
 	
@@ -295,7 +331,7 @@ function INTERFACE_AddMsgErrorInRoom(Msg)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_RefreshOccupantsNumber(RoomName)
+export function INTERFACE_RefreshOccupantsNumber(RoomName)
 {
 	var N_Occupants;
 	var Focused;
@@ -348,7 +384,7 @@ function INTERFACE_RefreshOccupantsNumber(RoomName)
 * @return       none
 * @author       Pedro Rocha
 */
-function INTERFACE_ShowRoomList(Rooms)
+export function INTERFACE_ShowRoomList(Rooms)
 {
         var Node = document.getElementById("RoomMenuList");
         var Room, i;
@@ -381,7 +417,7 @@ function INTERFACE_ShowRoomList(Rooms)
 * @return       True or false (if element list node not founded)
 * @author       Pedro Rocha
 */
-function INTERFACE_HideRoomList()
+export function INTERFACE_HideRoomList()
 {
         var Node = document.getElementById("RoomMenuDiv");
 
@@ -401,7 +437,7 @@ function INTERFACE_HideRoomList()
 * @return       True or false (if element list node not founded)
 * @author       Ulysses
 */
-function INTERFACE_HideGameRoomList()
+export function INTERFACE_HideGameRoomList()
 {
 	var Node = document.getElementById("GameRoomMenuDiv");
 
@@ -568,7 +604,7 @@ function INTERFACE_ChangeRoomListVisibility()
 * @return       none
 * @author       Rubens
 */
-function INTERFACE_RemoveRoomFromList(Room)
+export function INTERFACE_RemoveRoomFromList(Room)
 {
 	var Menu = document.getElementById("RoomListMenu");
 	var ListItens;
@@ -681,7 +717,7 @@ function INTERFACE_HideEmoticonList()
 * @return	True or null (if room was not founded)
 * @author	Pedro Rocha
 */
-function INTERFACE_FocusRoom(RoomName)
+export function INTERFACE_FocusRoom(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
 	var RoomItem, RoomClose, Current, NewRoom, Node, ShortName;
@@ -742,7 +778,7 @@ function INTERFACE_FocusRoom(RoomName)
 * @return	none
 * @author	Rubens Suguimoto and Danilo Yorinori
 */
-function INTERFACE_CreateRoomInBar(RoomName)
+export function INTERFACE_CreateRoomInBar(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
 	var RoomItem, RoomClose, ShortName;
@@ -821,7 +857,7 @@ function INTERFACE_CreateRoomInBar(RoomName)
 * @return	Room's name
 * @author	Pedro Rocha
 */
-function INTERFACE_CloseRoom(RoomName)
+export function INTERFACE_CloseRoom(RoomName)
 {
 	var NodeParent, Node, Div;
 
@@ -854,7 +890,7 @@ function INTERFACE_CloseRoom(RoomName)
 * @return	Rooms HTML DOM Div element
 * @author	Pedro Rocha
 */
-function INTERFACE_CreateRooms()
+export function INTERFACE_CreateRooms()
 {
 	var RoomDiv, RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
 
@@ -892,7 +928,7 @@ function INTERFACE_CreateRooms()
 * @see		WINDOW_CreateRoom();
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowCreateRoomWindow()
+export function INTERFACE_ShowCreateRoomWindow()
 {
 	var Div;
 
@@ -1059,7 +1095,7 @@ function INTERFACE_ShowCreateRoomWindow()
 * @see        WINDOW_CancelRoom();
 * @author     Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowCancelRoomWindow()
+export function INTERFACE_ShowCancelRoomWindow()
 {
 	var Div;
 

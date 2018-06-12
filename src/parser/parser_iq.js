@@ -1,3 +1,44 @@
+import {
+	PROFILE_HandleInfoProfile,
+	PROFILE_CreateProfile,
+	PROFILE_HandleVCardProfile,
+} from 'profile/profile.js';
+import { CHALLENGE_HandleAdjourn } from 'challenge/adjourn.js';
+import {
+	GAME_HandleGame,
+	GAME_HandleGameError,
+	GAME_HandleGameResult,
+	GAME_HandleVCardPhoto,
+} from 'game/game.js';
+import { CONTACT_HandleSearchUser } from 'contact/search.js';
+import {
+	ANNOUNCE_HandleAnnounceGame,
+	ANNOUNCE_HandleAnnounceError,
+	ANNOUNCE_HandleAnnounce,
+} from 'challenge/announce.js';
+import {
+	ADMIN_HandleInfo,
+	ADMIN_HandleAdminError,
+	ADMIN_HandleAdmin,
+	ADMIN_HandleRoomAdmin,
+	ADMIN_HandleUserNotification,
+} from 'admin/admin.js';
+import { ROOM_HandleRoomList, ROOM_HandleInfo } from 'room/room.js';
+import {
+	OLDGAME_HandleSearchOldGame,
+	OLDGAME_HandleVCardPhoto,
+	OLDGAME_FetchOldGame,
+} from 'game/oldgame.js';
+import { USER_HandleContactUserList, USER_HandleInfo } from 'contact/user.js';
+import { ONLINE_HandleInfo } from 'contact/online_info.js';
+import { CONTACT_HandleInfo } from 'contact/info.js';
+import { CONTACT_HandleContactUserList, CONTACT_HandleSetSubscribe } from 'contact/contact.js';
+import {
+	CURRENTGAME_HandleGameRoomInfoList,
+	CURRENTGAME_HandleGameRoomInfoError,
+	CURRENTGAME_HandleGameRoomList,
+} from 'game/currentgame.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -24,7 +65,7 @@
 * @return 	XMPP message to send
 * @author	Ulysses Bomfim
 */
-function PARSER_ParseIq(XML)
+export function PARSER_ParseIq(XML)
 {
 	//XML = iq tag
 	var Type = XML.getAttribute("type");

@@ -1,3 +1,6 @@
+import { UTILS_GetNodeText } from 'utils/utils.js';
+import { ContactOnlineObj } from 'interface/contact.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +30,7 @@
 * @return	none
 * @author Rubens Suguimoto
 */
-function ONLINE_StartOnlineList()
+export function ONLINE_StartOnlineList()
 {
 	var OnlineObj = new ContactOnlineObj();
 
@@ -49,7 +52,7 @@ function ONLINE_StartOnlineList()
 * @return	Empty string
 * @author       Ulysses Bonfim
 */
-function ONLINE_HandleOnlinePresence(XML)
+export function ONLINE_HandleOnlinePresence(XML)
 {
 	var From, User, Type, Show, Status;
 	var OnlineObj = MainData.GetOnlineObj();
@@ -185,7 +188,7 @@ function ONLINE_RemoveUser(Username)
 * @return	True
 * @author	Rubens Suguimoto
 */
-function ONLINE_SortUserByNick()
+export function ONLINE_SortUserByNick()
 {
 	var Room, RoomName;
 	var i, j;
@@ -229,7 +232,7 @@ function ONLINE_SortUserByNick()
  * @return	True
  * @author	Rubens Suguimoto
  */
-function ONLINE_SortUserByRating(Category)
+export function ONLINE_SortUserByRating(Category)
 {
 	var Room, RoomName;
 	var i, j;

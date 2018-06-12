@@ -1,3 +1,17 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_Capitalize,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+	UTILS_ShortString,
+	UTILS_GetParentDiv,
+	UTILS_GetOffset,
+} from 'utils/utils.js';
+import { CONTACT_HandleSearchUser } from 'contact/search.js';
+import { CONTACT_ShowUserMenu } from 'contact/contact.js';
+import { MESSAGE_SearchUser } from 'xmpp_messages/message.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -31,7 +45,7 @@
 * @see	 	INTERFACE_CreateUserList
 * @author 	Rubens Suguimoto
 */
-function UserListObj(Element)
+export function UserListObj(Element)
 {
 	// Create HTML elements to user list
 	var UserList = INTERFACE_CreateUserList(Element);
@@ -527,7 +541,7 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 * @return	none
 * @author	Pedro Rocha
 */
-function INTERFACE_ShowUserMenu(Obj, Options)
+export function INTERFACE_ShowUserMenu(Obj, Options)
 {
 	var Menu, Option, ParentNode, Pos, i;
 	var Offset = 9;
@@ -616,7 +630,7 @@ function INTERFACE_ShowUserMenu(Obj, Options)
 * @return	none
 * @author	Pedro Rocha
 */
-function INTERFACE_HideUserMenu()
+export function INTERFACE_HideUserMenu()
 {
 	var Menu = document.getElementById("UserMenuDiv");
 
@@ -687,7 +701,7 @@ function INTERFACE_CreateUserElement(Obj)
 * @param	UserName	User's name string
 * @author	Danilo Yorinori
 */
-function INTERFACE_ShowUserFullName(Obj,UserName)
+export function INTERFACE_ShowUserFullName(Obj,UserName)
 {
 	var Hint, Name, ParentNode, Pos, i;
 	var Offset = 9;
@@ -771,7 +785,7 @@ function INTERFACE_ShowUserFullName(Obj,UserName)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_CloseUserFullName()
+export function INTERFACE_CloseUserFullName()
 {
 	var Hint = document.getElementById("UserFullNameDiv");
 	if (Hint)
@@ -786,7 +800,7 @@ function INTERFACE_CloseUserFullName()
 * @return	Search window content main div, array of buttons and object of elements
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowSearchUserWindow()
+export function INTERFACE_ShowSearchUserWindow()
 {
 	// Variables
 	var Div;

@@ -1,3 +1,16 @@
+import {
+	UTILS_ReturnKeyCode,
+	UTILS_CreateElement,
+	UTILS_GetTime,
+} from 'utils/utils.js';
+import {
+	CHAT_CloseChat,
+	CHAT_SendMessage,
+	CHAT_ChangeChatState,
+	CHAT_ErrorMessageLength,
+	CHAT_BlurChat,
+} from 'chat/chat.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +41,7 @@
 * @return	none	
 * @author	Rubens Suguimoto
 */
-function ChatObj(Username, Position)
+export function ChatObj(Username, Position)
 {
 	var Tmp = INTERFACE_CreateChat(Username);
 	// Attributes
@@ -348,7 +361,7 @@ function INTERFACE_CreateChat(Username)
 * @return	Chat HTML DOM Div
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_CreateChatList()
+export function INTERFACE_CreateChatList()
 {
 	var ChatDiv, ChatList;
 	var ScreenHeight = document.documentElement.clientHeight;

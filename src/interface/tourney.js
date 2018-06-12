@@ -1,3 +1,13 @@
+import {
+	UTILS_ValidateDate,
+	UTILS_GetText,
+	UTILS_ValidateTourneyName,
+	UTILS_CreateElement,
+	UTILS_ValidateTourneyPassword,
+} from 'utils/utils.js';
+import { WINDOW_Alert } from 'window/window.js';
+import { MESSAGE_CreateTourney } from 'xmpp_messages/message.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -25,7 +35,7 @@
 * @return	Tourney main HTML DOM Div and Buttons array
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowCreateTourneyWindow()
+export function INTERFACE_ShowCreateTourneyWindow()
 {
 	// Variables
 	var Div;

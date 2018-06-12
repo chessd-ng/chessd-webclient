@@ -1,3 +1,6 @@
+import { UTILS_JabberLang } from 'utils/utils.js';
+import { MainData } from 'index.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -31,7 +34,7 @@
 * @return	XMPP message with body tag
 * @author	Pedro Rocha
 */
-function MESSAGE_MakeXMPP(Msg)
+export function MESSAGE_MakeXMPP(Msg)
 {
 	var XMPP;
 	
@@ -55,7 +58,7 @@ function MESSAGE_MakeXMPP(Msg)
 * @return	XMPP message
 * @author	Pedro Rocha
 */
-function MESSAGE_EndConnection(Unavailable)
+export function MESSAGE_EndConnection(Unavailable)
 {
 	var XMPP = "<body type='terminate' rid='"+MainData.GetRID()+"' sid='"+MainData.GetSID()+"' xmlns='http://jabber.org/protocol/httpbind' >"+Unavailable+"</body>";
 
@@ -70,7 +73,7 @@ function MESSAGE_EndConnection(Unavailable)
 * @return	Empty string
 * @author	Pedro Rocha
 */
-function MESSAGE_Wait()
+export function MESSAGE_Wait()
 {
     return "";
 }
@@ -86,7 +89,7 @@ function MESSAGE_Wait()
 * @return	XMPP message
 * @author	Pedro Rocha
 */
-function MESSAGE_StartConnection()
+export function MESSAGE_StartConnection()
 {
 	var XMPP = "<body hold='1' rid='"+MainData.GetRID()+"' to='"+MainData.GetHost()+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
 
@@ -101,7 +104,7 @@ function MESSAGE_StartConnection()
 * @return	XMPP message
 * @author	Pedro Rocha
 */
-function MESSAGE_SendUsername()
+export function MESSAGE_SendUsername()
 {
 	var XMPP;
 	var MyUsername = MainData.GetUsername();
@@ -122,7 +125,7 @@ function MESSAGE_SendUsername()
 * @return	XMPP message
 * @author	Pedro Rocha
 */
-function MESSAGE_SendPasswd()
+export function MESSAGE_SendPasswd()
 {
 	var XMPP;
 	var MyUsername = MainData.GetUsername();
@@ -146,7 +149,7 @@ function MESSAGE_SendPasswd()
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_UserList()
+export function MESSAGE_UserList()
 {
 	var XMPP;
 	
@@ -164,7 +167,7 @@ function MESSAGE_UserList()
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_RoomList()
+export function MESSAGE_RoomList()
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -188,7 +191,7 @@ function MESSAGE_RoomList()
 * @return	XMPP message
 * @author	Ulysses Bomfim
 */
-function MESSAGE_Presence(To)
+export function MESSAGE_Presence(To)
 {
 	var XMPP;
 	var MyUsername = MainData.GetUsername();
@@ -224,7 +227,7 @@ function MESSAGE_Presence(To)
 * @see		scripts/contact/status.js for user's status types
 * @author	Ulysses Bomfim
 */
-function MESSAGE_ChangeStatus(NewStatus, RoomName)
+export function MESSAGE_ChangeStatus(NewStatus, RoomName)
 {
 	var XMPP;
 	var MyUsername = MainData.GetUsername();
@@ -265,7 +268,7 @@ function MESSAGE_ChangeStatus(NewStatus, RoomName)
 * @return	XMPP message
 * @author	Ulysses Bomfim
 */
-function MESSAGE_Unavailable(RoomName)
+export function MESSAGE_Unavailable(RoomName)
 {
 	var XMPP = "";
 	var Type = null;
@@ -294,7 +297,7 @@ function MESSAGE_Unavailable(RoomName)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_Chat(To, Message)
+export function MESSAGE_Chat(To, Message)
 {
 	var XMPP;
 
@@ -313,7 +316,7 @@ function MESSAGE_Chat(To, Message)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_GroupChat(To, Message)
+export function MESSAGE_GroupChat(To, Message)
 {
 	var XMPP;
 
@@ -336,7 +339,7 @@ function MESSAGE_GroupChat(To, Message)
 * @author	Rubens Suguimoto
 * @deprecated
 */
-function MESSAGE_Info(User)
+export function MESSAGE_Info(User)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -358,7 +361,7 @@ function MESSAGE_Info(User)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_InfoProfile(User)
+export function MESSAGE_InfoProfile(User)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -384,7 +387,7 @@ function MESSAGE_InfoProfile(User)
 * @return	XMPP message
 * @author	Ulysses Bomfim
 */
-function MESSAGE_Invite(To)
+export function MESSAGE_Invite(To)
 {
 	 return "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='subscribe' to='"+To+"@"+MainData.GetHost()+"' />"; 
 }
@@ -396,7 +399,7 @@ function MESSAGE_Invite(To)
 * @return	XMPP message
 * @author	Ulysses Bomfim
 */
-function MESSAGE_InviteAccept(To)
+export function MESSAGE_InviteAccept(To)
 {
 	return "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='subscribed' to='"+To+"@"+MainData.GetHost()+"' />";
 }
@@ -408,7 +411,7 @@ function MESSAGE_InviteAccept(To)
 * @return	XMPP message
 * @author	Ulysses Bomfim
 */
-function MESSAGE_InviteDeny(To)
+export function MESSAGE_InviteDeny(To)
 {
 	return "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='unsubscribed' to='"+To+"@"+MainData.GetHost()+"' />";
 }
@@ -419,7 +422,7 @@ function MESSAGE_InviteDeny(To)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_RemoveContact(User)
+export function MESSAGE_RemoveContact(User)
 {
 	var XMPP;
 
@@ -455,7 +458,7 @@ function MESSAGE_RemoveContact(User)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
+export function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 {
 	var i;
 	var Id;
@@ -514,7 +517,7 @@ function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_ChallengeAccept(ChallengeID)
+export function MESSAGE_ChallengeAccept(ChallengeID)
 {
 	var XMPP="";
 	var Consts = MainData.GetConst();
@@ -535,7 +538,7 @@ function MESSAGE_ChallengeAccept(ChallengeID)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_ChallengeDecline(ChallengeID)
+export function MESSAGE_ChallengeDecline(ChallengeID)
 {
 	var XMPP="";
 	var Consts = MainData.GetConst();
@@ -556,7 +559,7 @@ function MESSAGE_ChallengeDecline(ChallengeID)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_ChallengeGetAdjournList(Num, Offset)
+export function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 {
 	var XMPP="";
 
@@ -575,7 +578,7 @@ function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 * @return	XMPP message
 * @author	Rubens Suguimoto
 */
-function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
+export function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
 {
 	var XMPP = "";
 	XMPP += "<iq to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='set' id='"+ChallengeId+"'>";
@@ -596,7 +599,7 @@ function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
 * @return	XMPP message
 * @author 	Ulysses Bomfim
 */
-function MESSAGE_GameRoomList()
+export function MESSAGE_GameRoomList()
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -614,7 +617,7 @@ function MESSAGE_GameRoomList()
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameRoomInfoList(Room)
+export function MESSAGE_GameRoomInfoList(Room)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -632,7 +635,7 @@ function MESSAGE_GameRoomInfoList(Room)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameEnterRoom(Room)
+export function MESSAGE_GameEnterRoom(Room)
 {
 	var XMPP;
 	var Consts = MainData.GetConst();
@@ -652,7 +655,7 @@ function MESSAGE_GameEnterRoom(Room)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameMove(Move, GameID, Promotion)
+export function MESSAGE_GameMove(Move, GameID, Promotion)
 {
 	var XMPP="";
 	var Consts = MainData.GetConst();
@@ -880,7 +883,7 @@ function MESSAGE_GameResponse(Action, GameID, Response)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameSearchCurrentGame()
+export function MESSAGE_GameSearchCurrentGame()
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -911,7 +914,7 @@ function MESSAGE_GameSearchCurrentGame()
 * @return 	XMPP message
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function MESSAGE_SearchUser(Username, Option)
+export function MESSAGE_SearchUser(Username, Option)
 {
 	var XMPP="";
 	var Consts = MainData.GetConst();
@@ -1005,7 +1008,7 @@ function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_KickUser(Username, Reason)
+export function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1025,7 +1028,7 @@ function MESSAGE_KickUser(Username, Reason)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_BanUser(Username, Reason)
+export function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1045,7 +1048,7 @@ function MESSAGE_BanUser(Username, Reason)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_UnbanUser(Username, Reason)
+export function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1063,7 +1066,7 @@ function MESSAGE_UnbanUser(Username, Reason)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GetBanList()
+export function MESSAGE_GetBanList()
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1081,7 +1084,7 @@ function MESSAGE_GetBanList()
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GetBannedWords()
+export function MESSAGE_GetBannedWords()
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1101,7 +1104,7 @@ function MESSAGE_GetBannedWords()
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_AddBannedWord(Word)
+export function MESSAGE_AddBannedWord(Word)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1122,7 +1125,7 @@ function MESSAGE_AddBannedWord(Word)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_RemoveBannedWord(Word)
+export function MESSAGE_RemoveBannedWord(Word)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1147,7 +1150,7 @@ function MESSAGE_RemoveBannedWord(Word)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_GetProfile(Username, Id)
+export function MESSAGE_GetProfile(Username, Id)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1175,7 +1178,7 @@ function MESSAGE_GetProfile(Username, Id)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
+export function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 {
 	var XMPP = "";
 	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' >";
@@ -1207,7 +1210,7 @@ function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto and Danilo Yorinori
 */ 
-function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
+export function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1254,7 +1257,7 @@ function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, From)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_FetchOldGame(OldGameId)
+export function MESSAGE_FetchOldGame(OldGameId)
 {
 	var XMPP = "";
 	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='get' id='get_rating'>";
@@ -1280,7 +1283,7 @@ function MESSAGE_FetchOldGame(OldGameId)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
+export function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1324,7 +1327,7 @@ function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autoflag)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User)
+export function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category, User)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1369,7 +1372,7 @@ function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Category,
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_RemoveAnnounceMatch(Id)
+export function MESSAGE_RemoveAnnounceMatch(Id)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1389,7 +1392,7 @@ function MESSAGE_RemoveAnnounceMatch(Id)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_AcceptAnnounceMatch(Id)
+export function MESSAGE_AcceptAnnounceMatch(Id)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
@@ -1423,7 +1426,7 @@ function MESSAGE_AcceptAnnounceMatch(Id)
 * @return 	XMPP message
 * @author 	Rubens Suguimoto
 */ 
-function MESSAGE_CreateTourney(Name, Category, GameTime, StartTime, MaxPlayers, RatingInterval, Password, WaitTime, SeqRounds, SubmitPeriod, Desc, Rounds)
+export function MESSAGE_CreateTourney(Name, Category, GameTime, StartTime, MaxPlayers, RatingInterval, Password, WaitTime, SeqRounds, SubmitPeriod, Desc, Rounds)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();

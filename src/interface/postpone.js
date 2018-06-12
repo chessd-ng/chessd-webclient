@@ -1,3 +1,7 @@
+import { UTILS_GetText, UTILS_CreateElement } from 'utils/utils.js';
+import { CHAT_OpenChat } from 'chat/chat.js';
+import { CHALLENGE_AcceptChallenge, CHALLENGE_DeclineChallenge } from 'challenge/challenge.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +34,7 @@
 * @return	Postpone window content Div and Buttons Array
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
+export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
 	var Div;
 

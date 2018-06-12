@@ -1,3 +1,37 @@
+import {
+	UTILS_SortByIncident,
+	UTILS_SortByTime,
+	UTILS_GetNodeText,
+	UTILS_SortByDate,
+	UTILS_SortByCategory,
+	UTILS_SortByBUsername,
+	UTILS_GetText,
+	UTILS_SortByReason,
+	UTILS_SortByPunish,
+	UTILS_SortByWUsername,
+	UTILS_SortByRated,
+	UTILS_SortByInc,
+	UTILS_SortByPeriod,
+	UTILS_SortByLevel,
+	UTILS_SortByUsernameAsc,
+	UTILS_SortByWRatingValue,
+	UTILS_SortByBRatingValue,
+} from 'utils/utils.js';
+import {
+	MESSAGE_UnbanUser,
+	MESSAGE_RemoveBannedWord,
+	MESSAGE_GetBannedWords,
+	MESSAGE_GetBanList,
+	MESSAGE_KickUser,
+	MESSAGE_AddBannedWord,
+	MESSAGE_BanUser,
+} from 'xmpp_messages/message.js';
+import { INTERFACE_AddBannedUser } from 'interface/admin.js';
+import { AdminCenterObj, INTERFACE_CreateAdminCenter } from 'interface/admincenter.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { WINDOW_Alert } from 'window/window.js';
+import { INTERFACE_ShowAdminIcon } from 'interface/top.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -29,7 +63,7 @@
 * @return 	Buffer with other XMPP to send
 * @author 	Ulysses Bomfim
 */
-function ADMIN_HandleRoomAdmin(XML)
+export function ADMIN_HandleRoomAdmin(XML)
 {
 	//TODO 
 	var Buffer = "";
@@ -46,7 +80,7 @@ function ADMIN_HandleRoomAdmin(XML)
 * @return 	Buffer with other XMPP to send
 * @author 	Rubens Suguimoto
 */
-function ADMIN_HandleAdmin(XML)
+export function ADMIN_HandleAdmin(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Buffer = "";
@@ -100,7 +134,7 @@ function ADMIN_HandleAdmin(XML)
 * @return 	Buffer with other XMPP to send
 * @author 	Rubens Suguimoto
 */
-function ADMIN_HandleAdminError(XML)
+export function ADMIN_HandleAdminError(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Buffer = "";
@@ -155,7 +189,7 @@ function ADMIN_HandleAdminError(XML)
 * @see		INTERFACE_ShowAdminIcon
 * @author 	Rubens Suguimoto
 */
-function ADMIN_HandleInfo(XML)
+export function ADMIN_HandleInfo(XML)
 {
 	var TypeNode = XML.getElementsByTagName("type");
 	var Type = TypeNode[0].getAttribute("type");
@@ -211,7 +245,7 @@ function ADMIN_Notification(XML)
 * @return 	Buffer with other XMPP to send;
 * @author 	Rubens Suguimoto
 */
-function ADMIN_HandleUserNotification(XML)
+export function ADMIN_HandleUserNotification(XML)
 {	
 	var Node = XML.firstChild;
 	var ReasonTag = XML.getElementsByTagName("reason")[0];
@@ -366,7 +400,7 @@ function ADMIN_HandleBannedWordsList(XML)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function ADMIN_KickUser(Username, Reason)
+export function ADMIN_KickUser(Username, Reason)
 {
 	CONNECTION_SendJabber(MESSAGE_KickUser(Username,Reason));
 
@@ -383,7 +417,7 @@ function ADMIN_KickUser(Username, Reason)
 * @return 	Empty string;
 * @author 	Rubens Suguimoto
 */
-function ADMIN_BanUser(Username, Reason)
+export function ADMIN_BanUser(Username, Reason)
 {
 	CONNECTION_SendJabber(MESSAGE_BanUser(Username, Reason));
 
@@ -400,7 +434,7 @@ function ADMIN_BanUser(Username, Reason)
 * @return 	Empty string;
 * @author 	Rubens Suguimoto
 */
-function ADMIN_UnbanUser(Username, Reason)
+export function ADMIN_UnbanUser(Username, Reason)
 {
 	CONNECTION_SendJabber(MESSAGE_UnbanUser(Username, Reason));
 
@@ -414,7 +448,7 @@ function ADMIN_UnbanUser(Username, Reason)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function ADMIN_GetBanList()
+export function ADMIN_GetBanList()
 {
 	CONNECTION_SendJabber(MESSAGE_GetBanList());
 	
@@ -430,7 +464,7 @@ function ADMIN_GetBanList()
 * @return 	Empty string;
 * @author 	Rubens Suguimoto
 */
-function ADMIN_BanWord(Word)
+export function ADMIN_BanWord(Word)
 {
 	CONNECTION_SendJabber(MESSAGE_AddBannedWord(Word));
 
@@ -446,7 +480,7 @@ function ADMIN_BanWord(Word)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function ADMIN_RemoveBannedWord(Word)
+export function ADMIN_RemoveBannedWord(Word)
 {
 	CONNECTION_SendJabber(MESSAGE_RemoveBannedWord(Word));
 
@@ -461,7 +495,7 @@ function ADMIN_RemoveBannedWord(Word)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function ADMIN_GetBannedWords()
+export function ADMIN_GetBannedWords()
 {
 	CONNECTION_SendJabber(MESSAGE_GetBannedWords());
 
@@ -479,7 +513,7 @@ function ADMIN_GetBannedWords()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_StartAdminCenter()
+export function ADMINCENTER_StartAdminCenter()
 {
 	var ACenterObj = new AdminCenterObj();
 	
@@ -497,7 +531,7 @@ function ADMINCENTER_StartAdminCenter()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ShowPunish()
+export function ADMINCENTER_ShowPunish()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 
@@ -518,7 +552,7 @@ function ADMINCENTER_ShowPunish()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ShowAdminLevel()
+export function ADMINCENTER_ShowAdminLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 
@@ -540,7 +574,7 @@ function ADMINCENTER_ShowAdminLevel()
 * @see		INTERFACE_CreateAdminCenter 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ShowLevel()
+export function ADMINCENTER_ShowLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 
@@ -562,7 +596,7 @@ function ADMINCENTER_ShowLevel()
 * @see		INTERFACE_CreateAdminCenter 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ShowAdjourn()
+export function ADMINCENTER_ShowAdjourn()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 
@@ -584,7 +618,7 @@ function ADMINCENTER_ShowAdjourn()
 * @see		INTERFACE_CreateAdminCenter 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ShowWords()
+export function ADMINCENTER_ShowWords()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 
@@ -606,7 +640,7 @@ function ADMINCENTER_ShowWords()
 * @see		INTERFACE_CreateAdminCenter 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ClearBannedWordsList()
+export function ADMINCENTER_ClearBannedWordsList()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var Word;
@@ -627,7 +661,7 @@ function ADMINCENTER_ClearBannedWordsList()
 * @see		INTERFACE_CreateAdminCenter 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_ClearPunishList()
+export function ADMINCENTER_ClearPunishList()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var Punish;
@@ -649,7 +683,7 @@ function ADMINCENTER_ClearPunishList()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByUsername()
+export function ADMINCENTER_PunishSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -674,7 +708,7 @@ function ADMINCENTER_PunishSortByUsername()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByPunish()
+export function ADMINCENTER_PunishSortByPunish()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -699,7 +733,7 @@ function ADMINCENTER_PunishSortByPunish()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByIncident()
+export function ADMINCENTER_PunishSortByIncident()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -725,7 +759,7 @@ function ADMINCENTER_PunishSortByIncident()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByDate()
+export function ADMINCENTER_PunishSortByDate()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -751,7 +785,7 @@ function ADMINCENTER_PunishSortByDate()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByPeriod()
+export function ADMINCENTER_PunishSortByPeriod()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -776,7 +810,7 @@ function ADMINCENTER_PunishSortByPeriod()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_PunishSortByReason()
+export function ADMINCENTER_PunishSortByReason()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var PunishList = MainData.GetPunishList();
@@ -802,7 +836,7 @@ function ADMINCENTER_PunishSortByReason()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdminLevelSortByUsername()
+export function ADMINCENTER_AdminLevelSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdminLevelList = MainData.GetAdminLevelList();
@@ -827,7 +861,7 @@ function ADMINCENTER_AdminLevelSortByUsername()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdminLevelSortByLevel()
+export function ADMINCENTER_AdminLevelSortByLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdminLevelList = MainData.GetAdminLevelList();
@@ -852,7 +886,7 @@ function ADMINCENTER_AdminLevelSortByLevel()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_LevelSortByUsername()
+export function ADMINCENTER_LevelSortByUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var LevelList = MainData.GetLevelList();
@@ -877,7 +911,7 @@ function ADMINCENTER_LevelSortByUsername()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_LevelSortByLevel()
+export function ADMINCENTER_LevelSortByLevel()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var LevelList = MainData.GetLevelList();
@@ -902,7 +936,7 @@ function ADMINCENTER_LevelSortByLevel()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByWRating()
+export function ADMINCENTER_AdjournSortByWRating()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -927,7 +961,7 @@ function ADMINCENTER_AdjournSortByWRating()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByBRating()
+export function ADMINCENTER_AdjournSortByBRating()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -977,7 +1011,7 @@ function ADMINCENTER_AdjournSortByWUsername()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByBUsername()
+export function ADMINCENTER_AdjournSortByBUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -1002,7 +1036,7 @@ function ADMINCENTER_AdjournSortByBUsername()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByCategory()
+export function ADMINCENTER_AdjournSortByCategory()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -1027,7 +1061,7 @@ function ADMINCENTER_AdjournSortByCategory()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByTime()
+export function ADMINCENTER_AdjournSortByTime()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -1052,7 +1086,7 @@ function ADMINCENTER_AdjournSortByTime()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByInc()
+export function ADMINCENTER_AdjournSortByInc()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();
@@ -1077,7 +1111,7 @@ function ADMINCENTER_AdjournSortByInc()
 * @return	none
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByRated()
+export function ADMINCENTER_AdjournSortByRated()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();

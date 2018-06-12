@@ -1,3 +1,30 @@
+import {
+	UTILS_GetNodeText,
+	UTILS_GetText,
+	UTILS_AddListener,
+	UTILS_RemoveListener,
+} from 'utils/utils.js';
+import {
+	WINDOW_KickUser,
+	WINDOW_Confirm,
+	WINDOW_BanUser,
+	WINDOW_Challenge,
+} from 'window/window.js';
+import { MESSAGE_InviteAccept } from 'xmpp_messages/message.js';
+import { INTERFACE_ShowUserMenu, INTERFACE_HideUserMenu } from 'interface/user.js';
+import {
+	CONTACT_ReceiveSubscribed,
+	CONTACT_SendRemoveUser,
+	CONTACT_ReceiveSubscribe,
+	CONTACT_InviteUser,
+	CONTACT_ReceiveUnsubscribed,
+} from 'contact/invite.js';
+import { USER_AddUser } from 'contact/user.js';
+import { CONTACT_SetUserStatus } from 'contact/status.js';
+import { PROFILE_StartProfile } from 'profile/profile.js';
+import { CHAT_OpenChat } from 'chat/chat.js';
+import { ContactObj } from 'interface/contact.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +53,7 @@
 * @return	none
 * @author Rubens Suguimoto
 */
-function CONTACT_StartContactList()
+export function CONTACT_StartContactList()
 {
 	var ContactObjTmp = new ContactObj()
 
@@ -47,7 +74,7 @@ function CONTACT_StartContactList()
 * @return 	XMPP message
 * @author Ulysses Bonfim
 */
-function CONTACT_HandleContactUserList(XML)
+export function CONTACT_HandleContactUserList(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
 	var Group;
@@ -115,7 +142,7 @@ function CONTACT_HandleContactUserList(XML)
 * @return 	XMPP message
 * @author Ulysses Bonfim
 */
-function CONTACT_HandleSetSubscribe(XML)
+export function CONTACT_HandleSetSubscribe(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
 	var Group;
@@ -161,7 +188,7 @@ function CONTACT_HandleSetSubscribe(XML)
 * @author Ulysses Bonfim
 */
 
-function CONTACT_HandleUserPresence(XML)
+export function CONTACT_HandleUserPresence(XML)
 {
 	var Jid, Type, Show, NewStatus;
 	var Buffer = "";
@@ -231,7 +258,7 @@ function CONTACT_HandleUserPresence(XML)
 * @return 	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function CONTACT_AddUser(Username, Status, Subs, Group)
+export function CONTACT_AddUser(Username, Status, Subs, Group)
 {
 	var ContactObj = MainData.GetContactObj();
 	var User = MainData.GetUser(Username);
@@ -306,7 +333,7 @@ function CONTACT_RemoveUser(Username)
 *
 * @author Pedro Rocha and Rubens Suguimoto
 */
-function CONTACT_ShowUserMenu(Obj, Username)
+export function CONTACT_ShowUserMenu(Obj, Username)
 {
 	var Func, Options = new Array();
 	var i = 0, Hide = 0;
@@ -472,7 +499,7 @@ function CONTACT_ShowUserMenu(Obj, Username)
 * @return 	none
 * @author Rubens Suguimoto
 */
-function CONTACT_LoadUserContactList()
+export function CONTACT_LoadUserContactList()
 {
 	var i;
 	var User;
@@ -511,7 +538,7 @@ function CONTACT_LoadUserContactList()
 * @return 	none
 * @author	Rubens Suguimoto and Danilo Yorinori
 */
-function CONTACT_SortUsersByNick()
+export function CONTACT_SortUsersByNick()
 {
 	var i;
 	var User;
@@ -547,7 +574,7 @@ function CONTACT_SortUsersByNick()
 * @return	none
 * @author	Rubens Suguimoto and Danilo Yorinori
 */
-function CONTACT_SortUsersByRating(Category)
+export function CONTACT_SortUsersByRating(Category)
 {
 	var i;
 	var User;

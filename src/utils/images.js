@@ -1,3 +1,6 @@
+import { WINDOW_Alert } from 'window/window.js';
+import { UTILS_GetText } from 'utils/utils.js';
+
 /*
 * CHESSD - WebClient
 *
@@ -29,7 +32,7 @@
 * @return       Form HTML element
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
-function IMAGE_CreateFormToEncode(FormId, Action){
+export function IMAGE_CreateFormToEncode(FormId, Action){
 	var Form, File;
 
 	Form = document.createElement("Form");
@@ -64,7 +67,7 @@ function IMAGE_CreateFormToEncode(FormId, Action){
 * @return       Image base64 in IE Format
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
-function IMAGE_ImageDecode(ImgSrc){
+export function IMAGE_ImageDecode(ImgSrc){
 	//DefaultPHP is loaded from conf.xml
 	return "php/base64_decode."+MainData.GetDefaultPHP()+"?"+ImgSrc.slice(5);
 }
@@ -76,7 +79,7 @@ function IMAGE_ImageDecode(ImgSrc){
 * @return       void
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
-function IMAGE_ImageEncode(FormId){
+export function IMAGE_ImageEncode(FormId){
 	var Frame, Body, Form;
 	
 	Frame = document.createElement("iFrame");

@@ -1,3 +1,5 @@
+import { ContactObj } from 'interface/contact.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +29,7 @@
 * @return	Empty string
 * @author	Rubens Suguimoto
 */
-function CONTACT_HandleInfo(XML)
+export function CONTACT_HandleInfo(XML)
 {
 
 	var RatingNodes, TypeNode;

@@ -1,3 +1,13 @@
+import {
+	UTILS_DisableSelection,
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+} from 'utils/utils.js';
+import { IMAGE_ImageEncode, IMAGE_CreateFormToEncode } from 'utils/images.js';
+import { WINDOW_Confirm, WINDOW_Alert } from 'window/window.js';
+import { UTILS_StartDragWindow } from 'utils/dragwindow.js';
+
 /*
 * CHESSD - WebClient
 *
@@ -32,7 +42,7 @@
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WindowObj(Height, Width, Div, Title, CloseCommands)
+export function WindowObj(Height, Width, Div, Title, CloseCommands)
 {
 	//Constructor and attribute
 	var tmp = WINDOW_CreateWindow(Height, Width, Div, Title, CloseCommands);
@@ -335,7 +345,7 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 * @see		WINDOW_Alert();
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function WINDOW_CreateAlert(Text)
+export function WINDOW_CreateAlert(Text)
 {
 	var Div;
 
@@ -379,7 +389,7 @@ function WINDOW_CreateAlert(Text)
 * @see		WINDOW_Confirm();
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function WINDOW_CreateConfirm(Text, Button1, Button2)
+export function WINDOW_CreateConfirm(Text, Button1, Button2)
 {
 	var Div;
 
@@ -436,7 +446,7 @@ function WINDOW_CreateConfirm(Text, Button1, Button2)
 * @return	Send user's imagem window content div and array of buttons
 * @author	Rubens Suguimoto and Fabiano Kuss
 */
-function WINDOW_CreateImageSend()
+export function WINDOW_CreateImageSend()
 {
 	var Div;
 

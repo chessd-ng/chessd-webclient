@@ -1,3 +1,42 @@
+import {
+	ADMINCENTER_PunishSortByDate,
+	ADMIN_GetBanList,
+	ADMINCENTER_PunishSortByPunish,
+	ADMINCENTER_ClearBannedWordsList,
+	ADMINCENTER_PunishSortByUsername,
+	ADMIN_BanWord,
+	ADMINCENTER_AdjournSortByBUsername,
+	ADMINCENTER_AdjournSortByTime,
+	ADMIN_RemoveBannedWord,
+	ADMINCENTER_PunishSortByPeriod,
+	ADMINCENTER_AdminLevelSortByLevel,
+	ADMINCENTER_ShowPunish,
+	ADMINCENTER_AdjournSortByRated,
+	ADMINCENTER_ShowLevel,
+	ADMINCENTER_LevelSortByLevel,
+	ADMINCENTER_LevelSortByUsername,
+	ADMINCENTER_AdjournSortByInc,
+	ADMINCENTER_AdminLevelSortByUsername,
+	ADMIN_UnbanUser,
+	ADMINCENTER_ShowAdjourn,
+	ADMIN_GetBannedWords,
+	ADMINCENTER_PunishSortByReason,
+	ADMINCENTER_AdjournSortByBRating,
+	ADMINCENTER_ShowAdminLevel,
+	ADMINCENTER_PunishSortByIncident,
+	ADMINCENTER_ShowWords,
+	ADMINCENTER_AdjournSortByCategory,
+	ADMINCENTER_ClearPunishList,
+	ADMINCENTER_AdjournSortByWRating,
+} from 'admin/admin.js';
+import {
+	UTILS_CreateElement,
+	UTILS_GetText,
+	UTILS_ShortString,
+} from 'utils/utils.js';
+import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
+import { WINDOW_CreateAdminCenter } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +67,7 @@
 * @author 	Rubens Suguimoto
 * @see 	WINDOW_CreateAdminCenter()
 */
-function INTERFACE_ShowCreateAdminCenterWindow()
+export function INTERFACE_ShowCreateAdminCenterWindow()
 {
 	var Div;
 	var Buttons = new Array();
@@ -71,7 +110,7 @@ function INTERFACE_ShowCreateAdminCenterWindow()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function AdminCenterObj()
+export function AdminCenterObj()
 {
 	var AdminCenter = INTERFACE_CreateAdminCenter();
 
@@ -142,7 +181,7 @@ function INTERFACE_HideAdminCenter()
 * @return	Window content and admincenter content
 * @author	Rubens Suguimoto
 */
-function INTERFACE_CreateAdminCenter()
+export function INTERFACE_CreateAdminCenter()
 {
 	var Main = UTILS_CreateElement("div","AdminCenter");
 
@@ -202,7 +241,7 @@ function INTERFACE_CreateAdminCenter()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function PunishObj()
+export function PunishObj()
 {
 	var Punish = INTERFACE_CreateAdminCenterPunish();
 

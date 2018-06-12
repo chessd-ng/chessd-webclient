@@ -1,3 +1,5 @@
+import { WINDOW_CreateTourney } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *

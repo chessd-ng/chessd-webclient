@@ -1,3 +1,16 @@
+import {
+	UTILS_GetText,
+	UTILS_Capitalize,
+	UTILS_CreateElement,
+	UTILS_OpenXMLFile,
+	UTILS_GetNodeText,
+	UTILS_ReturnEvent,
+	UTILS_AddListener,
+	UTILS_ReadCookie,
+} from 'utils/utils.js';
+import { START_ChangeLanguage } from 'index.js';
+import { LOGIN_Login } from 'login/login.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -20,15 +33,6 @@
 * @brief	Shows login screen to user
 */
 
-import {
-  UTILS_CreateElement,
-  UTILS_GetText,
-  UTILS_ReadCookie,
-  UTILS_AddListener,
-  UTILS_OpenXMLFile,
-  UTILS_GetNodeText,
-  UTILS_Capitalize,
-} from 'utils/utils.js';
 import { MainData } from 'index.js';
 import { LanguageNames } from 'langs';
 
@@ -196,7 +200,7 @@ export function INTERFACE_StartLogin(Lang)
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_EndLogin()
+export function INTERFACE_EndLogin()
 {
 	var Div = document.getElementById("LoginDiv");
 	var Banner = document.getElementById("BannerLogin");
@@ -298,7 +302,7 @@ function INTERFACE_LoginVerticalAlignMiddle()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_LoginDisableInput()
+export function INTERFACE_LoginDisableInput()
 {
 	var UsernameBox = document.getElementById("login");
 	var PassWBox = document.getElementById("password");
@@ -317,7 +321,7 @@ function INTERFACE_LoginDisableInput()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_LoginEnableInput()
+export function INTERFACE_LoginEnableInput()
 {
 	var UsernameBox = document.getElementById("login");
 	var PassWBox = document.getElementById("password");
@@ -336,7 +340,7 @@ function INTERFACE_LoginEnableInput()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ClearError()
+export function INTERFACE_ClearError()
 {	
 	var ErrorLabel = document.getElementById("ErrorLabel");
 	ErrorLabel.innerHTML = "";
@@ -349,7 +353,7 @@ function INTERFACE_ClearError()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowLoginMessage(Msg)
+export function INTERFACE_ShowLoginMessage(Msg)
 {
 	var LoginMsg = document.getElementById("LoginMessage");
 	if(Msg != null)
@@ -369,7 +373,7 @@ function INTERFACE_ShowLoginMessage(Msg)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideLoginMessage()
+export function INTERFACE_HideLoginMessage()
 {
 	var LoginMsg = document.getElementById("LoginMessage");
 	LoginMsg.style.display = "none";
@@ -381,7 +385,7 @@ function INTERFACE_HideLoginMessage()
 * @return	Msg	Login error message to show
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowErrorMessage(Msg)
+export function INTERFACE_ShowErrorMessage(Msg)
 {
 	var ErrorMsg = document.getElementById("ErrorLabel");
 

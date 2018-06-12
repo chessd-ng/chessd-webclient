@@ -1,3 +1,17 @@
+import { PROFILE_SaveMyProfile } from 'profile/profile.js';
+import {
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_ConvertTime,
+} from 'utils/utils.js';
+import { OLDGAME_OpenOldGameWindow } from 'game/oldgame.js';
+import { IMAGE_ImageDecode } from 'utils/images.js';
+import {
+	WINDOW_ProfileConfirm,
+	WINDOW_Profile,
+	WINDOW_ProfileImage,
+} from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +41,7 @@
 * @see		WINDOW_Profile();
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowProfileWindow(Profile)
+export function INTERFACE_ShowProfileWindow(Profile)
 {
 	// Variables
 	var Div;
@@ -452,7 +466,7 @@ function INTERFACE_ShowProfileWindow(Profile)
 * @see		WINDOW_ProfileConfirm();
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowProfileConfirmWindow()
+export function INTERFACE_ShowProfileConfirmWindow()
 {
 	// Variables
 	var Div;

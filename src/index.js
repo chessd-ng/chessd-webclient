@@ -1,3 +1,43 @@
+import {
+	UTILS_CreateCookie,
+	UTILS_GetLanguage,
+	UTILS_OpenXMLFile,
+	UTILS_GetTag,
+	UTILS_ReadCookie,
+} from 'utils/utils.js';
+import {
+	MESSAGE_Presence,
+	MESSAGE_GetProfile,
+	MESSAGE_UserList,
+} from 'xmpp_messages/message.js';
+import { DATA } from 'data/data.js';
+import { CONTACT_StopAwayStatus, CONTACT_StartAwayCounter } from 'contact/status.js';
+import { INTERFACE_EndLogin, INTERFACE_StartLogin } from 'interface/login.js';
+import {
+	INTERFACE_StopInterface,
+	INTERFACE_CreateInterface,
+	INTERFACE_ShowInterface,
+} from 'interface/interface.js';
+import {
+	USER_StopUpdateUserList,
+	USER_StartUpdateUserList,
+	USER_StartUpdateUserProfile,
+	USER_StopUpdateUserProfile,
+	USER_AddUser,
+} from 'contact/user.js';
+import { CONTACT_StartContactList, CONTACT_LoadUserContactList } from 'contact/contact.js';
+import {
+	LOAD_ReloadFiles,
+	LOAD_EndLoad,
+	LOAD_IECssFile,
+} from 'load/load.js';
+import { GAME_SearchCurrentGame } from 'game/game.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { ADMINCENTER_StartAdminCenter } from 'admin/admin.js';
+import { INITIAL_LoadScripts } from 'initial_files.js';
+import { ONLINE_StartOnlineList } from 'contact/online.js';
+import { GAMECENTER_StartGameCenter } from 'gamecenter/gamecenter.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -22,16 +62,9 @@
 import 'css/Main.css';
 import 'css/Login.css';
 import 'css/Load.css';
-
 import { languages } from 'langs';
-
-import { INITIAL_LoadScripts, NoCache } from 'initial_files.js';
-import { UTILS_ReadCookie, UTILS_OpenXMLFile, UTILS_GetTag } from 'utils/utils.js';
-import { DATA } from 'data/data.js';
-import { INTERFACE_StartLogin } from 'interface/login.js';
-
 import conf from 'conf/conf.xml';
-
+import { NoCache } from 'initial_files.js';
 
 //Global object that stores all data needed by interface
 export let MainData;
@@ -45,7 +78,7 @@ var TranslationLog = new Array();
 * @return	none
 * @author 	Rubens Suguimoto
 */
-function START_StartPage()
+export function START_StartPage()
 {
 	var Lang;
 	var ConfTmp;
@@ -80,7 +113,7 @@ function START_StartPage()
 * @return	none
 * @author 	Rubens Suguimoto
 */
-function START_ChangeLanguage(Lang)
+export function START_ChangeLanguage(Lang)
 {
 	// Close login div
 	INTERFACE_EndLogin();
@@ -106,7 +139,7 @@ function START_ChangeLanguage(Lang)
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function START_Webclient()
+export function START_Webclient()
 {
 	var All;
 	var XMPP = "";
@@ -172,7 +205,7 @@ function START_Webclient()
 * @return	none
 * @author	Danilo Yorinori
 */
-function START_Restart()
+export function START_Restart()
 {
         var CurrentGame = MainData.GetCurrentGame();
         var UpdateProfile = MainData.GetUpdateProfileTimer();

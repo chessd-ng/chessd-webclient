@@ -1,3 +1,5 @@
+
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +32,7 @@
 * @return	Empty string
 * @author	Rubens Suguimoto
 */
-function ONLINE_HandleInfo(XML)
+export function ONLINE_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode;
 	var Jid, Type, Rating;

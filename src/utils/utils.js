@@ -1,3 +1,7 @@
+import { AdminCenterObj } from 'interface/admincenter.js';
+import { PROFILE_HandleRatings } from 'profile/profile.js';
+import { INTERFACE_SetSearchButton } from 'interface/oldgame.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -119,7 +123,7 @@ export function UTILS_IdentifyBrowser()
 	// Other
 	else
 	{
-		alert("Seu navegador pode n„o funcionar corretamente nesse site");
+		alert("Seu navegador pode n√£o funcionar corretamente nesse site");
 		BrowserValue = -1;
 	}
 
@@ -283,7 +287,7 @@ export function UTILS_CreateElement(Element, Id, ClassName, Inner)
 * @param	Days		Cookie expire period
 * @author 	Pedro Rocha
 */
-function UTILS_CreateCookie(CookieName, CookieValue, Days)
+export function UTILS_CreateCookie(CookieName, CookieValue, Days)
 {
 	var Expires, Data;
 
@@ -323,7 +327,7 @@ export function UTILS_ReadCookie(CookieName)
 * @param	CookieName	String
 * @author 	Pedro Rocha
 */
-function UTILS_DeleteCookie(CookieName)
+export function UTILS_DeleteCookie(CookieName)
 {
 	UTILS_CreateCookie(CookieName,"",-1);
 }
@@ -339,7 +343,7 @@ function UTILS_DeleteCookie(CookieName)
 * @return	True or False
 * @author 	Pedro Rocha
 */
-function UTILS_ValidateUsername(Username)
+export function UTILS_ValidateUsername(Username)
 {
 	if (Username.match(/[^0-9a-z-_.]{1,}/))
 	{
@@ -375,7 +379,7 @@ export function UTILS_Capitalize(Word)
 * @return String
 * @author Danilo Kiyoshi Simizu Yorinori
 */
-function UTILS_BreakString(Obj, Width)
+export function UTILS_BreakString(Obj, Width)
 {
 	var Text = Obj.innerHTML;
 	var ObjWidth, TrWidth;
@@ -428,7 +432,7 @@ function UTILS_BreakString(Obj, Width)
 * @return	New string with words changed
 * @author	Rubens Suguimoto
 */
-function UTILS_ShortString(Word, NumChars)
+export function UTILS_ShortString(Word, NumChars)
 {
 	var ShortWord;
 	var NumChs;
@@ -463,7 +467,7 @@ function UTILS_ShortString(Word, NumChars)
 * @return	New string with words changed
 * @author	Rubens Suguimoto
 */
-function UTILS_BannedWords(Str)
+export function UTILS_BannedWords(Str)
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var i,j;
@@ -538,7 +542,7 @@ export function UTILS_AddListener(Element, Type, Expression, Bubbling)
 * @return	True or false
 * @author	Rubens Suguimoto
 */
-function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
+export function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 {
 	Bubbling = Bubbling || false;
 
@@ -570,7 +574,7 @@ function UTILS_RemoveListener(Element, Type, Expression, Bubbling)
 * @return	Return event according to web browser
 * @author	Rubens Suguimoto
 */
-function UTILS_ReturnEvent(event)
+export function UTILS_ReturnEvent(event)
 {
 	if(MainData.GetBrowser() == 0) // IE
 	{
@@ -588,7 +592,7 @@ function UTILS_ReturnEvent(event)
 * @return	Key code number (integer)
 * @author	Rubens Suguimoto
 */
-function UTILS_ReturnKeyCode(event)
+export function UTILS_ReturnKeyCode(event)
 {
 	var KeyNum;
 
@@ -616,7 +620,7 @@ function UTILS_ReturnKeyCode(event)
 * @return	Timestamp in (XXhXX) format.
 * @author	Danilo Yorinori
 */
-function UTILS_GetTime(Timestamp)
+export function UTILS_GetTime(Timestamp)
 {
 	var Offset, Time, Hour, Min, Now, NewTime;
 
@@ -658,7 +662,7 @@ function UTILS_GetTime(Timestamp)
 * @see		PROFILE_HandleRatings()
 * @author	Danilo Yorinori
 */
-function UTILS_ConvertTimeStamp(TimeStamp)
+export function UTILS_ConvertTimeStamp(TimeStamp)
 {
 	var DateTime = TimeStamp.split("T")[0];
 	var Year = DateTime.split("-")[0];
@@ -678,7 +682,7 @@ function UTILS_ConvertTimeStamp(TimeStamp)
 * @see		INTERFACE_SetSearchButton(Node)
 * @author	Danilo Yorinori
 */
-function UTILS_ConvertSearchDate(TimeStamp, Type)
+export function UTILS_ConvertSearchDate(TimeStamp, Type)
 {
 	var Day, Month, Year;
 	var SDate = "";
@@ -715,7 +719,7 @@ function UTILS_ConvertSearchDate(TimeStamp, Type)
 * @return	Tuple of X and Y (pixels) position
 * @author	Pedro Rocha
 */
-function UTILS_GetOffset(Obj)
+export function UTILS_GetOffset(Obj)
 {
 	var Curleft, Curtop;
 
@@ -744,7 +748,7 @@ function UTILS_GetOffset(Obj)
 * @return	First parent div in DOM tree
 * @author	Pedro Rocha 
 */
-function UTILS_GetParentDiv(Obj)
+export function UTILS_GetParentDiv(Obj)
 {
 	do
 	{
@@ -764,7 +768,7 @@ function UTILS_GetParentDiv(Obj)
 * @return	Character or integer number (depend of param) 
 * @author Rubens Suguimoto
 */
-function UTILS_HorizontalIndex(CharNum)
+export function UTILS_HorizontalIndex(CharNum)
 {
 	var Row = new Array();
 	var i=1;
@@ -810,7 +814,7 @@ function UTILS_HorizontalIndex(CharNum)
 * @return Array x Array (8x8) of char
 * @author Rubens Suguimoto
 */
-function UTILS_String2Board(BoardString)
+export function UTILS_String2Board(BoardString)
 //BoardString is a array of char that contains chess board
 {
         var Lin1, Lin2, Lin3, Lin4, Lin5, Lin6, Lin7, Lin8;
@@ -852,7 +856,7 @@ function UTILS_String2Board(BoardString)
 * @return 	string with '<' , '>', '&' and '"' replaced
 * @author	Rubens Suguimoto
 */
-function UTILS_ConvertChatString(Str)
+export function UTILS_ConvertChatString(Str)
 {
 	var StrTmp;
 
@@ -871,7 +875,7 @@ function UTILS_ConvertChatString(Str)
 * @return 	Language in jabber format (ex: pt-br)
 * @author	Rubens Suguimoto
 */
-function UTILS_JabberLang(DefaultLang)
+export function UTILS_JabberLang(DefaultLang)
 {
 	if (DefaultLang)
 		return DefaultLang.substr(0, 2)+"-"+DefaultLang.substr(3, 5).toLowerCase();
@@ -886,7 +890,7 @@ function UTILS_JabberLang(DefaultLang)
 * @return 	time formated in string
 * @author	Rubens Suguimoto
 */
-function UTILS_ConvertTime(Seconds)
+export function UTILS_ConvertTime(Seconds)
 {
 	var Day, Month, Year;
 	var Sec, Min, Hour;
@@ -973,7 +977,7 @@ function UTILS_ConvertTime(Seconds)
 * @return 	False	Aways return false to disable seletion
 * @author	Rubens Suguimoto
 */
-function UTILS_DisableSelection(Element)
+export function UTILS_DisableSelection(Element)
 {
 	// IE disable selection method
 	Element.onselectstart = function() {
@@ -997,7 +1001,7 @@ function UTILS_DisableSelection(Element)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortByUsernameAsc(a, b) 
+export function UTILS_SortByUsernameAsc(a, b) 
 {
 	var x = a.Username.toLowerCase();
 	var y = b.Username.toLowerCase();
@@ -1010,7 +1014,7 @@ function UTILS_SortByUsernameAsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortByUsernameDsc(a, b) 
+export function UTILS_SortByUsernameDsc(a, b) 
 {
 	var x = a.Username.toLowerCase();
 	var y = b.Username.toLowerCase();
@@ -1023,7 +1027,7 @@ function UTILS_SortByUsernameDsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortOnlineByRatingDsc(a, b) 
+export function UTILS_SortOnlineByRatingDsc(a, b) 
 {
 	var Category = MainData.GetOnlineCurrentRating();
 	return UTILS_SortByRatingDsc(Category, a, b); 
@@ -1035,7 +1039,7 @@ function UTILS_SortOnlineByRatingDsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortContactByRatingDsc(a, b) 
+export function UTILS_SortContactByRatingDsc(a, b) 
 {
 	var Category = MainData.GetContactCurrentRating();
 	return UTILS_SortByRatingDsc(Category, a, b); 
@@ -1047,7 +1051,7 @@ function UTILS_SortContactByRatingDsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortRoomByRatingDsc(a, b) 
+export function UTILS_SortRoomByRatingDsc(a, b) 
 {
 	var Room = MainData.GetCurrentRoom();
 	var Category = Room.GetRoomCurrentRating();
@@ -1062,7 +1066,7 @@ function UTILS_SortRoomByRatingDsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortByFullnameAsc(a, b) 
+export function UTILS_SortByFullnameAsc(a, b) 
 {
 	var x = a.Fullname.toLowerCase();
 	var y = b.Fullname.toLowerCase();
@@ -1075,7 +1079,7 @@ function UTILS_SortByFullnameAsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortByFullnameDsc(a, b) 
+export function UTILS_SortByFullnameDsc(a, b) 
 {
 	var x = a.Fullname.toLowerCase();
 	var y = b.Fullname.toLowerCase();
@@ -1088,7 +1092,7 @@ function UTILS_SortByFullnameDsc(a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Danilo Yorinori
 */
-function UTILS_SortByRatingDsc(Category, a, b) 
+export function UTILS_SortByRatingDsc(Category, a, b) 
 {
 	var x;
 	var y;
@@ -1122,7 +1126,7 @@ function UTILS_SortByRatingDsc(Category, a, b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByWUsername(a,b)
+export function UTILS_SortByWUsername(a,b)
 {
 	var x = a.WPlayer.toLowerCase();
 	var y = b.WPlayer.toLowerCase();
@@ -1134,7 +1138,7 @@ function UTILS_SortByWUsername(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByBUsername(a,b)
+export function UTILS_SortByBUsername(a,b)
 {
 	var x = a.BPlayer.toLowerCase();
 	var y = b.BPlayer.toLowerCase();
@@ -1146,7 +1150,7 @@ function UTILS_SortByBUsername(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByCategory(a,b)
+export function UTILS_SortByCategory(a,b)
 {
 	var x = a.Category.toLowerCase();
 	var y = b.Category.toLowerCase();
@@ -1158,7 +1162,7 @@ function UTILS_SortByCategory(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByPunish(a,b)
+export function UTILS_SortByPunish(a,b)
 {
 	var x = a.Punish.toLowerCase();
 	var y = b.Punish.toLowerCase();
@@ -1170,7 +1174,7 @@ function UTILS_SortByPunish(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByIncident(a,b)
+export function UTILS_SortByIncident(a,b)
 {
 	var x = a.Incident.toLowerCase();
 	var y = b.Incident.toLowerCase();
@@ -1182,7 +1186,7 @@ function UTILS_SortByIncident(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByReason(a,b)
+export function UTILS_SortByReason(a,b)
 {
 	var x = a.Reason.toLowerCase();
 	var y = b.Reason.toLowerCase();
@@ -1194,7 +1198,7 @@ function UTILS_SortByReason(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByPeriod(a,b)
+export function UTILS_SortByPeriod(a,b)
 {
 	var x = a.Period.toLowerCase();
 	var y = b.Period.toLowerCase();
@@ -1206,7 +1210,7 @@ function UTILS_SortByPeriod(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByLevel(a,b)
+export function UTILS_SortByLevel(a,b)
 {
 	var x = a.Level.toLowerCase();
 	var y = b.Level.toLowerCase();
@@ -1218,7 +1222,7 @@ function UTILS_SortByLevel(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByDate(a,b)
+export function UTILS_SortByDate(a,b)
 {
 	var x = a.Date.toLowerCase();
 	var y = b.Date.toLowerCase();
@@ -1230,7 +1234,7 @@ function UTILS_SortByDate(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByRatingValue(a,b)
+export function UTILS_SortByRatingValue(a,b)
 {
 	var x = parseInt(a.Rating);
 	var y = parseInt(b.Rating);
@@ -1242,7 +1246,7 @@ function UTILS_SortByRatingValue(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByTime(a,b)
+export function UTILS_SortByTime(a,b)
 {
 	var x = parseInt(a.Time);
 	var y = parseInt(b.Time);
@@ -1254,7 +1258,7 @@ function UTILS_SortByTime(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByInc(a,b)
+export function UTILS_SortByInc(a,b)
 {
 	var x = parseInt(a.Inc);
 	var y = parseInt(b.Inc);
@@ -1266,7 +1270,7 @@ function UTILS_SortByInc(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByMoves(a,b)
+export function UTILS_SortByMoves(a,b)
 {
 	var x = parseInt(a.Moves);
 	var y = parseInt(b.Moves);
@@ -1278,7 +1282,7 @@ function UTILS_SortByMoves(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByRated(a,b)
+export function UTILS_SortByRated(a,b)
 {
 	var x = a.Rated;
 	var y = b.Rated;
@@ -1290,7 +1294,7 @@ function UTILS_SortByRated(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByPrivate(a,b)
+export function UTILS_SortByPrivate(a,b)
 {
 	var x = a.Private;
 	var y = b.Private;
@@ -1302,7 +1306,7 @@ function UTILS_SortByPrivate(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByWRatingValue(a,b)
+export function UTILS_SortByWRatingValue(a,b)
 {
 	var x = parseInt(a.WRating);
 	var y = parseInt(b.WRating);
@@ -1314,7 +1318,7 @@ function UTILS_SortByWRatingValue(a,b)
 * @return integer. If x < y return  1, x > y return -1, x = y return  0
 * @author Rubens Suguimoto
 */
-function UTILS_SortByBRatingValue(a,b)
+export function UTILS_SortByBRatingValue(a,b)
 {
 	var x = parseInt(a.BRating);
 	var y = parseInt(b.BRating);
@@ -1330,7 +1334,7 @@ function UTILS_SortByBRatingValue(a,b)
  *
  * @return Language string (i.e.: pt-BR, en-US, etc.)
  */
-function UTILS_GetLanguage()
+export function UTILS_GetLanguage()
 {
 	var Lang
 	
@@ -1379,7 +1383,7 @@ function UTILS_GetLanguage()
 * @return	integer
 * @author	Danilo Yorinori
 */
-function UTILS_ValidateDate(Day,Month,Year,Hour,Minutes) 
+export function UTILS_ValidateDate(Day,Month,Year,Hour,Minutes) 
 {
 	var Time = new Date();
 
@@ -1454,7 +1458,7 @@ function UTILS_ValidateDate(Day,Month,Year,Hour,Minutes)
 * @return	integer
 * @author	Danilo Yorinori
 */
-function UTILS_ValidateTourneyPassword(Password)
+export function UTILS_ValidateTourneyPassword(Password)
 {
 	// Password length must be between 5 and 11
 	if ((Password.length > 5) && (Password.length < 11))
@@ -1481,7 +1485,7 @@ function UTILS_ValidateTourneyPassword(Password)
 * @return	String
 * @author	Danilo Yorinori
 */
-function UTILS_ValidateTourneyName(Name)
+export function UTILS_ValidateTourneyName(Name)
 {
 	if (Name.match(/[^0-9a-zA-Z-_.]{1,}/))
 	{

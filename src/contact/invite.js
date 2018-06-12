@@ -1,3 +1,17 @@
+import {
+	MESSAGE_InviteDeny,
+	MESSAGE_Invite,
+	MESSAGE_Info,
+	MESSAGE_InviteAccept,
+	MESSAGE_RemoveContact,
+} from 'xmpp_messages/message.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { UTILS_GetText, UTILS_Capitalize } from 'utils/utils.js';
+import { CONTACT_AddUser } from 'contact/contact.js';
+import { WINDOW_Confirm } from 'window/window.js';
+import { ContactObj } from 'interface/contact.js';
+import { CONTACT_SetUserStatus } from 'contact/status.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +42,7 @@
 * @return	none
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function CONTACT_InviteUser(Username)
+export function CONTACT_InviteUser(Username)
 {
 	var XML;
 	var ContactObj = MainData.GetContactObj();
@@ -53,7 +67,7 @@ function CONTACT_InviteUser(Username)
 * @return	none
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function CONTACT_SendRemoveUser(Username)
+export function CONTACT_SendRemoveUser(Username)
 {
 	var XML;
 
@@ -72,7 +86,7 @@ function CONTACT_SendRemoveUser(Username)
 * @return	Empty string
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function CONTACT_ReceiveSubscribe(Username)
+export function CONTACT_ReceiveSubscribe(Username)
 {
 	var XML = "";
 	var User;
@@ -144,7 +158,7 @@ function CONTACT_ReceiveSubscribe(Username)
 * @return	XMPP message
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function CONTACT_ReceiveSubscribed(Username)
+export function CONTACT_ReceiveSubscribed(Username)
 {
 	var User = MainData.GetContactUser(Username);
 
@@ -165,7 +179,7 @@ function CONTACT_ReceiveSubscribed(Username)
 * @return	XMPP message
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function CONTACT_ReceiveUnsubscribed(Username)
+export function CONTACT_ReceiveUnsubscribed(Username)
 {
 	var XML = "";
 	var User;

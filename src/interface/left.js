@@ -1,3 +1,17 @@
+import { CONTACT_ChangeStatus } from 'contact/status.js';
+import { INTERFACE_CreateRooms } from 'interface/room.js';
+import { INTERFACE_ShowUserFullName, INTERFACE_CloseUserFullName } from 'interface/user.js';
+import {
+	UTILS_GetText,
+	UTILS_Capitalize,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+	UTILS_ShortString,
+} from 'utils/utils.js';
+import { INTERFACE_CreateContact } from 'interface/contact.js';
+import { IMAGE_ImageDecode } from 'utils/images.js';
+import { PROFILE_StartProfile } from 'profile/profile.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +42,7 @@
 * @return	Left box HTML DOM Div
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_CreateLeft()
+export function INTERFACE_CreateLeft()
 {
 	var Left, UserBox, Rooms, ContactList;
 
@@ -138,7 +152,7 @@ function INTERFACE_CreateUserBox()
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_SetUserImage(Img)
+export function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 

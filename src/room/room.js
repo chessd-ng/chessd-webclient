@@ -1,3 +1,28 @@
+import {
+	RoomObj,
+	INTERFACE_RemoveRoomFromList,
+	INTERFACE_CloseRoom,
+	INTERFACE_ShowRoomList,
+	INTERFACE_CreateRoomInBar,
+	INTERFACE_RefreshOccupantsNumber,
+	INTERFACE_FocusRoom,
+} from 'interface/room.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_BannedWords,
+	UTILS_ConvertChatString,
+	UTILS_GetNodeText,
+} from 'utils/utils.js';
+import { INTERFACE_RemoveLoadBox, INTERFACE_ShowRoomMenu } from 'interface/top.js';
+import {
+	MESSAGE_RoomList,
+	MESSAGE_Presence,
+	MESSAGE_Unavailable,
+	MESSAGE_GroupChat,
+} from 'xmpp_messages/message.js';
+import { WINDOW_Alert } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -32,7 +57,7 @@
 * @return 	XMPP to send
 * @author 	Ulysses Bomfim and Rubens Suguimoto
 */
-function ROOM_HandleRoomPresence(XML)
+export function ROOM_HandleRoomPresence(XML)
 {
 	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo, NewRoom = false;
 	var Room;
@@ -164,7 +189,7 @@ function ROOM_HandleRoomPresence(XML)
 * @return 	Empty string
 * @author 	Ulysses Bomfim
 */
-function ROOM_HandleMessage(XML)
+export function ROOM_HandleMessage(XML)
 {
 	var From, RoomName, Message, Body, X, Stamp = null;
 
@@ -205,7 +230,7 @@ function ROOM_HandleMessage(XML)
 * @return 	XMPP to send
 * @author 	Ulysses Bomfim
 */
-function ROOM_HandleRoomList(XML)
+export function ROOM_HandleRoomList(XML)
 {
 	var Items, Rooms, Room, RoomName, ID, i;
 	var Buffer = "";
@@ -259,7 +284,7 @@ function ROOM_HandleRoomList(XML)
 * @return	Empty string
 * @author	Ulysses Bomfim and Rubens Suguimoto
 */
-function ROOM_HandleInfo(XML)
+export function ROOM_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode;
 
@@ -357,7 +382,7 @@ function ROOM_HandleInfo(XML)
 * @return 	True if sucess or false if room not founded
 * @author 	Rubens
 */
-function ROOM_SendMessage(RoomName, Message)
+export function ROOM_SendMessage(RoomName, Message)
 {
 	var To, Room;
 
@@ -388,7 +413,7 @@ function ROOM_SendMessage(RoomName, Message)
 * @author 	Rubens Suguimoto
 */
 
-function ROOM_ShowRoomList(OffsetLeft)
+export function ROOM_ShowRoomList(OffsetLeft)
 {
 	var XML = MESSAGE_RoomList();
 
@@ -406,7 +431,7 @@ function ROOM_ShowRoomList(OffsetLeft)
 * @return 	Empty string
 * @author 	Ulysses Bomfim and Danilo Yorinori
 */
-function ROOM_EnterRoom(RoomName)
+export function ROOM_EnterRoom(RoomName)
 {
 	var XML, To;
 
@@ -440,7 +465,7 @@ function ROOM_EnterRoom(RoomName)
 * @return	XMPP with presence unavailable to a room
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function ROOM_ExitRoom(RoomName)
+export function ROOM_ExitRoom(RoomName)
 {
 	// This function send a message to leave a room;
 	// ROOM_RemoveRoom function remove room from data struct and interface,
@@ -483,7 +508,7 @@ function ROOM_ExitRoom(RoomName)
 * @return	True
 * @author	Rubens Suguimoto
 */
-function ROOM_EnterRoomGame(RoomName)
+export function ROOM_EnterRoomGame(RoomName)
 {
 	//TODO -> MOVE THIS FUNCTION TO CURRENT GAME FILE
 	var XML, To;
@@ -530,7 +555,7 @@ function ROOM_ShowMessage(RoomName, From, Message, Stamp)
 * @return	Empty string
 * @author	Rubens Suguimoto
 */
-function ROOM_ErrorMessageLength(RoomName)
+export function ROOM_ErrorMessageLength(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	var Message;
@@ -657,7 +682,7 @@ function ROOM_CreateRoom(RoomName)
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function ROOM_FocusRoom(RoomName)
+export function ROOM_FocusRoom(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	var Login = false;
@@ -742,7 +767,7 @@ function ROOM_RemoveRoom(RoomName)
 * @return	True if sucess or false if some room was not founded
 * @author	Rubens Suguimoto
 */
-function ROOM_SortUsersByNick()
+export function ROOM_SortUsersByNick()
 {
 // TODO -> Change this function to get room parameter
 	var Room, RoomName;
@@ -802,7 +827,7 @@ function ROOM_SortUsersByNick()
 * @return	True if sucess or false if some room was not founded
 * @author	Rubens Suguimoto
 */
-function ROOM_SortUsersByRating(Category)
+export function ROOM_SortUsersByRating(Category)
 {
 	var Room, RoomName;
 	var i, j;
@@ -861,7 +886,7 @@ function ROOM_SortUsersByRating(Category)
 * @return	True if sucess or false if room was not founded
 * @author	Rubens Suguimoto
 */
-function ROOM_ShowHideUserList(RoomName)
+export function ROOM_ShowHideUserList(RoomName)
 {
 	var Room = MainData.GetRoom(RoomName);
 

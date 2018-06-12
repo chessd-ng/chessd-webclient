@@ -1,3 +1,19 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_BreakString,
+	UTILS_ConvertSearchDate,
+	UTILS_CreateElement,
+	UTILS_ConvertTimeStamp,
+	UTILS_AddListener,
+	UTILS_GetParentDiv,
+} from 'utils/utils.js';
+import { INTERFACE_CreateLoadingBox } from 'interface/interface.js';
+import { WindowObj } from 'interface/window.js';
+import { MESSAGE_GetOldGames, MESSAGE_FetchOldGame } from 'xmpp_messages/message.js';
+import { WINDOW_Alert, WINDOW_RemoveWindow } from 'window/window.js';
+import { OLDGAME_HandleSearchOldGame, OLDGAME_CloseWindow } from 'game/oldgame.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +46,7 @@
 * @see		WINDOW_OpeOldGameWindow();
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowOldGameWindow(Id)
+export function INTERFACE_ShowOldGameWindow(Id)
 {
 	// Variables
 	var Div;
@@ -677,7 +693,7 @@ function INTERFACE_SetNextButton(Node)
 * @return	none
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_SetSearchButton(Node)
+export function INTERFACE_SetSearchButton(Node)
 {
 	UTILS_AddListener(this.Search,"click",	
 		function() { 
@@ -801,7 +817,7 @@ function INTERFACE_ShowOldgameLoading()
 * return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideOldgameLoading()
+export function INTERFACE_HideOldgameLoading()
 {
 	var LoadingBoxTr = document.getElementById("OldgameLoadingBox");
 

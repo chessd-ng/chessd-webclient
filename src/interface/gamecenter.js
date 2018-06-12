@@ -1,3 +1,61 @@
+import {
+	MESSAGE_GameEnterRoom,
+	MESSAGE_Presence,
+	MESSAGE_GameRoomList,
+	MESSAGE_GetAnnounceMatch,
+} from 'xmpp_messages/message.js';
+import {
+	GAMECENTER_AnnounceSortByTime,
+	GAMECENTER_MatchOfferSortByCategory,
+	GAMECENTER_AnnounceSortByCategory,
+	GAMECENTER_MatchOfferSortByPrivate,
+	GAMECENTER_ShowCurrentGames,
+	GAMECENTER_AnnounceSortByUsername,
+	GAMECENTER_ClearCurrentGames,
+	GAMECENTER_PostponeSortByTime,
+	GAMECENTER_CurrentGamesSortByRated,
+	GAMECENTER_MatchOfferSortByInc,
+	GAMECENTER_AnnounceSortByRated,
+	GAMECENTER_CurrentGamesSortByBRating,
+	GAMECENTER_CurrentGamesSortByWRating,
+	GAMECENTER_MatchOfferSortByRated,
+	GAMECENTER_ShowAnnounce,
+	GAMECENTER_CurrentGamesSortByCategory,
+	GAMECENTER_MatchOfferSortByUsername,
+	GAMECENTER_MatchOfferSortByTime,
+	GAMECENTER_PostponeSortByInc,
+	GAMECENTER_PostponeSortByUsername,
+	GAMECENTER_AnnounceSortByInc,
+	GAMECENTER_AnnounceSortByRating,
+	GAMECENTER_ShowMatchOffer,
+	GAMECENTER_PostponeSortByDate,
+	GAMECENTER_CurrentGamesSortByMoves,
+	GAMECENTER_PostponeSortByCategory,
+	GAMECENTER_ShowTourney,
+	GAMECENTER_MatchOfferSortByRating,
+	GAMECENTER_CurrentGamesSortByTime,
+	GAMECENTER_PostponeSortByRating,
+	GAMECENTER_ShowPostpone,
+	GAMECENTER_AnnounceSortByPrivate,
+} from 'gamecenter/gamecenter.js';
+import {
+	UTILS_CreateElement,
+	UTILS_GetText,
+	UTILS_ShortString,
+} from 'utils/utils.js';
+import { CHALLENGE_DeclineChallenge, CHALLENGE_ClearChallenges } from 'challenge/challenge.js';
+import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
+import {
+	ANNOUNCE_AcceptRandomAnnounce,
+	ANNOUNCE_RemoveAnnounce,
+	ANNOUNCE_ClearAnnounce,
+	ANNOUNCE_AcceptAnnounce,
+	ANNOUNCE_CancelAnnounce,
+} from 'challenge/announce.js';
+import { WINDOW_AnnounceWindow, WINDOW_Alert } from 'window/window.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { GAME_StartGame } from 'game/game.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +85,7 @@
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GameCenterObj()
+export function GameCenterObj()
 {
 	var GameCenter = INTERFACE_CreateGameCenter();
 
@@ -191,7 +249,7 @@ function AnnounceObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
+export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -306,7 +364,7 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 * @return	True if removed or false if not founded
 * @author	Rubens Suguimoto
 */
-function INTERFACE_RemoveAnnounce(MatchId)
+export function INTERFACE_RemoveAnnounce(MatchId)
 {
 	var i=0;
 	var Item;
@@ -375,7 +433,7 @@ function INTERFACE_HideAnnounceCenter()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowNoAnnounce()
+export function INTERFACE_ShowNoAnnounce()
 {
 	this.NoAnnounce.style.display = "block"; 
 }
@@ -386,7 +444,7 @@ function INTERFACE_ShowNoAnnounce()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideNoAnnounce()
+export function INTERFACE_HideNoAnnounce()
 {
 	this.NoAnnounce.style.display = "none"; 
 }
@@ -596,7 +654,7 @@ function MatchOfferObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchId)
+export function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -767,7 +825,7 @@ function INTERFACE_HideMatchCenter()
 * @author	Rubens Suguimoto
 */
 
-function INTERFACE_ShowNoMatch()
+export function INTERFACE_ShowNoMatch()
 {
 	this.NoMatch.style.display = "block"; 
 }
@@ -778,7 +836,7 @@ function INTERFACE_ShowNoMatch()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideNoMatch()
+export function INTERFACE_HideNoMatch()
 {
 	this.NoMatch.style.display = "none"; 
 }
@@ -959,7 +1017,7 @@ function PostponeObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, PostponeId)
+export function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, PostponeId)
 {
 	var Item;
 
@@ -1066,7 +1124,7 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 * @return	True if removed or false if not founded
 * @author	Rubens Suguimoto
 */
-function INTERFACE_RemovePostpone(PostponeId)
+export function INTERFACE_RemovePostpone(PostponeId)
 {
 	var i=0;
 	var Item;
@@ -1107,7 +1165,7 @@ function INTERFACE_RemovePostpone(PostponeId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
+export function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
 	var Item, Button;
@@ -1175,7 +1233,7 @@ function INTERFACE_HidePostponeCenter()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowNoPostpone()
+export function INTERFACE_ShowNoPostpone()
 {
 	this.NoPostpone.style.display = "block"; 
 }
@@ -1186,7 +1244,7 @@ function INTERFACE_ShowNoPostpone()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideNoPostpone()
+export function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none"; 
 }

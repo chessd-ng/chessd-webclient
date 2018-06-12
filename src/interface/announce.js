@@ -1,3 +1,10 @@
+import { UTILS_GetText, UTILS_CreateElement } from 'utils/utils.js';
+import {
+	ANNOUNCE_GetAnnounceGames,
+	ANNOUNCE_ClearAnnounce,
+	ANNOUNCE_SendAnnounce,
+} from 'challenge/announce.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -20,7 +27,7 @@
 * @return	Div content for announce window and Buttons elements
 * @author	Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_AnnounceWindow()
+export function INTERFACE_AnnounceWindow()
 {
 	var Div;
 

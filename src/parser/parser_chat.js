@@ -1,3 +1,6 @@
+import { CHAT_HandleAnnounceMessage, CHAT_HandleMessage } from 'chat/chat.js';
+import { ROOM_HandleMessage } from 'room/room.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +30,7 @@
 * @return	XMPP message to send
 * @author	Ulysses Bomfim
 */
-function PARSER_ParseChat(XML)
+export function PARSER_ParseChat(XML)
 {
 	var Type = XML.getAttribute("type");
 

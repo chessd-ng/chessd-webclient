@@ -1,3 +1,24 @@
+import {
+	UTILS_ValidateUsername,
+	UTILS_CreateCookie,
+	UTILS_DeleteCookie,
+	UTILS_GetText,
+} from 'utils/utils.js';
+import { CONNECTION_SendJabber, CONNECTION_ConnectJabber } from 'connection/connection.js';
+import {
+	INTERFACE_ShowLoginMessage,
+	INTERFACE_ShowErrorMessage,
+	INTERFACE_EndLogin,
+	INTERFACE_LoginDisableInput,
+	INTERFACE_HideLoginMessage,
+	INTERFACE_ClearError,
+	INTERFACE_LoginEnableInput,
+} from 'interface/login.js';
+import { INTERFACE_StopInterface } from 'interface/interface.js';
+import { START_Restart } from 'index.js';
+import { MESSAGE_Unavailable, MESSAGE_EndConnection } from 'xmpp_messages/message.js';
+import { MainData } from 'index.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +47,7 @@
 * @return	none
 * @author	Pedro Rocha, Ulyses Bomfim and Rubens Suguimoto
 */
-function LOGIN_Login(Username, Passwd, RememberPass)
+export function LOGIN_Login(Username, Passwd, RememberPass)
 {
 	// Pre-validation
 	if (!UTILS_ValidateUsername(Username))
@@ -76,7 +97,7 @@ function LOGIN_Login(Username, Passwd, RememberPass)
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function LOGIN_Logout()
+export function LOGIN_Logout()
 {
 	var XMPP = "";
 
@@ -100,7 +121,7 @@ function LOGIN_Logout()
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function LOGIN_LeavePage()
+export function LOGIN_LeavePage()
 {
 	var XMPP = "";
 	XMPP += MESSAGE_EndConnection(MESSAGE_Unavailable());
@@ -113,7 +134,7 @@ function LOGIN_LeavePage()
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function LOGIN_Disconnected()
+export function LOGIN_Disconnected()
 {
 	// Setting structure as disconnected
 	MainData.SetConnectionStatus(-1);
@@ -127,7 +148,7 @@ function LOGIN_Disconnected()
 * @return none
 * @public
 */
-function LOGIN_EndLogin()
+export function LOGIN_EndLogin()
 {
 	INTERFACE_EndLogin();
 
@@ -141,7 +162,7 @@ function LOGIN_EndLogin()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function LOGIN_LoginFailed(Msg)
+export function LOGIN_LoginFailed(Msg)
 {
 	//Show error message
 	INTERFACE_ShowErrorMessage(Msg);
@@ -160,7 +181,7 @@ function LOGIN_LoginFailed(Msg)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function LOGIN_LoginMsg(Msg)
+export function LOGIN_LoginMsg(Msg)
 {
 	INTERFACE_ShowLoginMessage(Msg);
 }

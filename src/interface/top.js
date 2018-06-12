@@ -1,3 +1,21 @@
+import {
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+	UTILS_GetOffset,
+	UTILS_RemoveListener,
+} from 'utils/utils.js';
+import { OLDGAME_OpenOldGameWindow } from 'game/oldgame.js';
+import {
+	WINDOW_Help,
+	WINDOW_CreateRoom,
+	WINDOW_Alert,
+	WINDOW_CreateAdminCenter,
+} from 'window/window.js';
+import { INTERFACE_HideGameRoomList, INTERFACE_HideRoomList } from 'interface/room.js';
+import { ROOM_ShowRoomList } from 'room/room.js';
+import { LOGIN_Logout } from 'login/login.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -25,7 +43,7 @@
 * @return	Top HTML DOM Div
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_CreateTop()
+export function INTERFACE_CreateTop()
 {
 	var MainDiv, Logo, MenuDiv, MenuList, Item, ItemTitle;
 	var Pos;
@@ -98,7 +116,7 @@ function INTERFACE_CreateTop()
 * @return	True if created menu with success or null (if room list was opened)
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function INTERFACE_ShowRoomMenu(OffsetLeft)
+export function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
 	var MenuDiv, RoomList, RoomItem, CreateP, Create;
 	var Node, Menu, Func, i, Hide = 0;
@@ -224,7 +242,7 @@ function INTERFACE_ShowLoadBox()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_RemoveLoadBox()
+export function INTERFACE_RemoveLoadBox()
 {
 	var Div = document.getElementById("DivLoadBox");
 
@@ -240,7 +258,7 @@ function INTERFACE_RemoveLoadBox()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_NoGamesInGameList()
+export function INTERFACE_NoGamesInGameList()
 {
 	var GameList = document.getElementById("GameRoomMenuDiv");
 	var Div = UTILS_CreateElement("div", "DivNoGames");
@@ -260,7 +278,7 @@ function INTERFACE_NoGamesInGameList()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowAdminIcon()
+export function INTERFACE_ShowAdminIcon()
 {
 	var Item = document.getElementById("admin_icon");
 	var ItemTitle;

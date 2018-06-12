@@ -1,3 +1,5 @@
+import { UTILS_GetMouseCoords } from 'utils/dragpiece.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +30,7 @@
 * @return       false
 * @author       Rubens
 */
-function UTILS_StartDragWindow(ev, Obj)
+export function UTILS_StartDragWindow(ev, Obj)
 {
 	var MousePos, OldPos;
 	var OffsetLeft, OffsetTop;

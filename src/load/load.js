@@ -1,3 +1,8 @@
+import { LoadObj } from 'interface/load.js';
+import { UTILS_CreateElement } from 'utils/utils.js';
+import { START_Webclient } from 'index.js';
+import { LOGIN_EndLogin } from 'login/login.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +31,7 @@
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function LOAD_StartLoad()
+export function LOAD_StartLoad()
 {
 	// Remove login screen
 	LOGIN_EndLogin();
@@ -44,12 +49,12 @@ function LOAD_StartLoad()
 * @return	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function LOAD_EndLoad()
+export function LOAD_EndLoad()
 {
 	var LoadObj = MainData.GetLoadObj();
 
 	LoadObj.remove();
-	delete(LoadObj);
+  // delete(LoadObj);
 }
 
 /**
@@ -274,7 +279,7 @@ function LOAD_EndFile(Files, NumFiles)
 * @return	none
 * @author	Danilo Yorinori
 */
-function LOAD_ReloadFiles()
+export function LOAD_ReloadFiles()
 {
 	var Head = document.getElementsByTagName("head")[0];
 
@@ -324,7 +329,7 @@ function LOAD_ReloadFiles()
 * @return	none
 * @author	Danilo Yorinori
 */
-function LOAD_IECssFile()
+export function LOAD_IECssFile()
 {
 	var Head = document.getElementsByTagName("head")[0];
 	var File;

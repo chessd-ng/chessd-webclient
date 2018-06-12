@@ -1,3 +1,9 @@
+import {
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_GetNodeText,
+} from 'utils/utils.js';
+
 /*
 * CHESSD - WebClient
 *

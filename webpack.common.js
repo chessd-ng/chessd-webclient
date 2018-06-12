@@ -40,12 +40,23 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|gif|xml)$/,
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 8192,
+              name: '[name]-[hash].[ext]',
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(xml)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
               name: '[name]-[hash].[ext]',
             }
           }

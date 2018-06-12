@@ -1,3 +1,7 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { USER_AddUser } from 'contact/user.js';
+import { MESSAGE_ChallengeResumeGame, MESSAGE_ChallengeGetAdjournList } from 'xmpp_messages/message.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -33,7 +37,7 @@
  * @return	Buffer with other XMPP to send
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_HandleAdjourn(XML)
+export function CHALLENGE_HandleAdjourn(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Buffer = "";
@@ -159,7 +163,7 @@ function CHALLENGE_HandleAdjourn(XML)
  * @return	Buffer with other XMPP to send
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_HandlePresence(XML)
+export function CHALLENGE_HandlePresence(XML)
 {
 	var GeneralRoom = XML.getAttribute("from").split("@")[0];
 	var StatusType, Username;
@@ -195,7 +199,7 @@ function CHALLENGE_HandlePresence(XML)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_PostponePresence(Username, PresenceType)
+export function CHALLENGE_PostponePresence(Username, PresenceType)
 {
 	var GameCenter = MainData.GetGamecenter();
 
@@ -219,7 +223,7 @@ function CHALLENGE_PostponePresence(Username, PresenceType)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_SendResumeGame(AdjournId)
+export function CHALLENGE_SendResumeGame(AdjournId)
 {
 	var XMPP = "";
 	

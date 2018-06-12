@@ -1,3 +1,17 @@
+import { LOAD_StartLoad } from 'load/load.js';
+import { PARSER_ParseXml } from 'parser/parser.js';
+import { UTILS_GetText } from 'utils/utils.js';
+import {
+	MESSAGE_MakeXMPP,
+	MESSAGE_Wait,
+	MESSAGE_SendUsername,
+	MESSAGE_SendPasswd,
+	MESSAGE_StartConnection,
+} from 'xmpp_messages/message.js';
+import { START_Restart } from 'index.js';
+import { LOGIN_LoginMsg, LOGIN_LoginFailed } from 'login/login.js';
+import { MainData } from 'index.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +40,7 @@
 * @return 	Empty string;
 * @author	Pedro Rocha
 */
-function CONNECTION_ConnectJabber(XML)
+export function CONNECTION_ConnectJabber(XML)
 {
 	if(XML == null)
 	{
@@ -69,7 +83,7 @@ function CONNECTION_ConnectJabber(XML)
 * @return	Empty string
 * @author	Pedro Rocha
 */
-function CONNECTION_SendJabber()
+export function CONNECTION_SendJabber()
 {
 	var Post = "", DT, i;
 	var HttpRequest;

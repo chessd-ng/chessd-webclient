@@ -1,3 +1,24 @@
+import { PunishObj } from 'interface/admincenter.js';
+import { RoomObj } from 'interface/room.js';
+import {
+	UTILS_SortOnlineByRatingDsc,
+	UTILS_SortByFullnameDsc,
+	UTILS_OpenXMLFile,
+	UTILS_SortByUsernameAsc,
+	UTILS_GetTag,
+	UTILS_IdentifyBrowser,
+	UTILS_SortByUsernameDsc,
+	UTILS_SortByRatingDsc,
+	UTILS_SortRoomByRatingDsc,
+	UTILS_SortByFullnameAsc,
+	UTILS_SortContactByRatingDsc,
+} from 'utils/utils.js';
+import { DATA_SetConsts } from 'data/consts.js';
+import { WindowObj } from 'interface/window.js';
+import { LoadObj } from 'interface/load.js';
+import { ChatObj } from 'interface/chat.js';
+import { MainData } from 'index.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -23,11 +44,7 @@
 * structure
 */
 
-import { UTILS_OpenXMLFile, UTILS_IdentifyBrowser, UTILS_GetTag } from 'utils/utils.js';
-import { DATA_SetConsts } from 'data/consts';
-
 import { languages } from 'langs';
-
 
 /**
 * @class DATA
@@ -56,7 +73,7 @@ export function DATA(ConfFile, LangFile)
 	this.Conf = new Object();
 	// Get Host from url
 	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
-	this.Conf.HostPost = window.location.href.split("/")[2];
+	this.Conf.HostPost = UTILS_GetTag(Params, "host") || window.location.href.split("/")[2];
 	this.Conf.Browser = UTILS_IdentifyBrowser();
 	this.Conf.Resource = UTILS_GetTag(Params, "resource");
 	this.Conf.Server = UTILS_GetTag(Params,"server");

@@ -1,3 +1,15 @@
+import { CONTACT_ChangeStatus } from 'contact/status.js';
+import {
+	MESSAGE_GetAnnounceMatch,
+	MESSAGE_Presence,
+	MESSAGE_AnnounceMatch,
+	MESSAGE_RemoveAnnounceMatch,
+	MESSAGE_AcceptAnnounceMatch,
+} from 'xmpp_messages/message.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { UTILS_GetText } from 'utils/utils.js';
+import { WINDOW_Alert } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +42,7 @@
  * @return	Buffer with other XMPP to send
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_HandleAnnounce(XML)
+export function ANNOUNCE_HandleAnnounce(XML)
 {
 	var i;
 	var Id = XML.getAttribute("id");
@@ -128,7 +140,7 @@ function ANNOUNCE_HandleAnnounce(XML)
  * @return	Buffer with other XMPP to send
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_HandleAnnounceGame(XML)
+export function ANNOUNCE_HandleAnnounceGame(XML)
 {
 	var Id = XML.getAttribute("id");
 
@@ -155,7 +167,7 @@ function ANNOUNCE_HandleAnnounceGame(XML)
  * @return	Buffer with other XMPP to send
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_HandleAnnounceError(XML)
+export function ANNOUNCE_HandleAnnounceError(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Error;
@@ -195,7 +207,7 @@ function ANNOUNCE_HandleAnnounceError(XML)
  * @return	Boolean		True and false
  * @author	Rubens Suguimoto
 */
-function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min, Max)
+export function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min, Max)
 {
 	var Autoflag = "true";
 	var Player = new Object();
@@ -239,7 +251,7 @@ function ANNOUNCE_SendAnnounce(Username, Color, Time, Inc, Category, Rated, Min,
  * @author	Rubens Suguimoto
 */
 
-function ANNOUNCE_GetAnnounceGames()
+export function ANNOUNCE_GetAnnounceGames()
 {
 	var XMPP = "";
 
@@ -312,7 +324,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Priva
  * @return	none
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_RemoveAnnounce(Id)
+export function ANNOUNCE_RemoveAnnounce(Id)
 {
 	var GameCenter = MainData.GetGamecenter();
 
@@ -327,7 +339,7 @@ function ANNOUNCE_RemoveAnnounce(Id)
  * @return	none
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_CancelAnnounce(Id)
+export function ANNOUNCE_CancelAnnounce(Id)
 {
 	var XMPP = "";
 	
@@ -344,7 +356,7 @@ function ANNOUNCE_CancelAnnounce(Id)
  * @return	none
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_AcceptAnnounce(Id)
+export function ANNOUNCE_AcceptAnnounce(Id)
 {
 	var XMPP = "";
 	
@@ -361,7 +373,7 @@ function ANNOUNCE_AcceptAnnounce(Id)
  * @return	none
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_ClearAnnounce()
+export function ANNOUNCE_ClearAnnounce()
 {
 	var i;
 	var AnnounceId;
@@ -387,7 +399,7 @@ function ANNOUNCE_ClearAnnounce()
  * @return	none
  * @author	Rubens Suguimoto
  */
-function ANNOUNCE_CancelAllAnnounce()
+export function ANNOUNCE_CancelAllAnnounce()
 {
 	var i;
 	var AnnounceId;
@@ -413,7 +425,7 @@ function ANNOUNCE_CancelAllAnnounce()
  * @return	none
  * @author	Rubens Suguimoto
 */
-function ANNOUNCE_AcceptRandomAnnounce()
+export function ANNOUNCE_AcceptRandomAnnounce()
 {
 	var AnnounceList = MainData.GetAnnounceList();
 	var i;

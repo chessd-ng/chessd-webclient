@@ -1,3 +1,11 @@
+import { UTILS_GetText, UTILS_CreateElement } from 'utils/utils.js';
+import {
+	CHALLENGE_SendReChallenge,
+	CHALLENGE_AcceptChallenge,
+	CHALLENGE_SendChallenge,
+} from 'challenge/challenge.js';
+import { WINDOW_Challenge } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +34,7 @@
 * @see				WINDOW_Challenge();
 * @author			Danilo Kiyoshi Simizu Yorinori
 */
-function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
+export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters, Rated, MatchId)
 {
 	var Div;
 

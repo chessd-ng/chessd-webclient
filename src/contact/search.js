@@ -1,3 +1,5 @@
+import { UTILS_GetNodeText } from 'utils/utils.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +30,7 @@
 * @return	Empty string
 * @author	Danilo Yorinori
 */
-function CONTACT_HandleSearchUser(XML)
+export function CONTACT_HandleSearchUser(XML)
 {
 	var Itens;
 	var Result, Fields, Item;

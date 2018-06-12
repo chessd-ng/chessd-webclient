@@ -1,3 +1,12 @@
+import {
+	GAME_RemoveBlockClass,
+	GAME_ShowLoadingMove,
+	GAME_RemoveBlockBorder,
+	GAME_SetBlockClass,
+	GAME_SendMove,
+} from 'game/game.js';
+import { UTILS_GetOffset } from 'utils/utils.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -34,7 +43,7 @@ var OldPos;
 * @return	True of False
 * @author	Rubens Suguimoto
 */
-function UTILS_StartDragPiece(Obj, Size, event)
+export function UTILS_StartDragPiece(Obj, Size, event)
 {
 	var MousePos;
 	var Offset, OffsetLeft, OffsetTop, OffsetBoard;
@@ -167,7 +176,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 				// If game time over while making a move, remove block class from selected block
 				GAME_RemoveBlockClass(OldLine, OldCol);
 
-				delete OldPos;
+        // delete OldPos;
 
 				return false;
 			}
@@ -236,7 +245,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 		// Remove block class of origin
 		GAME_RemoveBlockClass(OldLine, OldCol);
 
-		delete OldPos;
+    // delete OldPos;
 
 		return false;
 	}
@@ -251,7 +260,7 @@ function UTILS_StartDragPiece(Obj, Size, event)
 * @return       Tuple with X and Y position (in pixels)
 * @author       Rubens Suguimoto and Pedro Rocha
 */
-function UTILS_GetMouseCoords(ev)
+export function UTILS_GetMouseCoords(ev)
 {
 	var X, Y;
 	ev = ev || window.event;

@@ -1,3 +1,20 @@
+import {
+	MESSAGE_GetProfile,
+	MESSAGE_SetProfile,
+	MESSAGE_InfoProfile,
+} from 'xmpp_messages/message.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_GetNodeText,
+	UTILS_ConvertTimeStamp,
+} from 'utils/utils.js';
+import { DATA } from 'data/data.js';
+import { INTERFACE_SetUserImage } from 'interface/left.js';
+import { WINDOW_Alert, WINDOW_Profile } from 'window/window.js';
+import { USER_AddUser } from 'contact/user.js';
+import { CONTACT_HandleInfo } from 'contact/info.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +43,7 @@
 * @return       Empty string
 * @author       Rubens Suguimoto
 */
-function PROFILE_HandleVCardProfile(XML)
+export function PROFILE_HandleVCardProfile(XML)
 {
 	var FullName;
 	var Photo, PhotoType="", Binval="";
@@ -112,7 +129,7 @@ function PROFILE_HandleVCardProfile(XML)
 * @return       Empty string
 * @author       Rubens Suguimoto
 */
-function PROFILE_HandleInfoProfile(XML)
+export function PROFILE_HandleInfoProfile(XML)
 {
 	var RatingNodes, TypeNode, ProfileNode;
 	var OnlineNode, UptimeNode;
@@ -204,7 +221,7 @@ function PROFILE_HandleInfoProfile(XML)
 * @see 		CONTACT_HandleInfo(XML);	
 * @author	Danilo Yorinori
 */
-function PROFILE_HandleRatings(Username, RatingNodes)
+export function PROFILE_HandleRatings(Username, RatingNodes)
 {
 //TODO -> REMOVE USERNAME. THIS PARAM WAS USED TO UPDATE RATING IN DATA STRUCT
 	var Rating = new Array();
@@ -291,7 +308,7 @@ function PROFILE_HandleRatings(Username, RatingNodes)
 * @return       True
 * @author       Rubens Suguimoto
 */
-function PROFILE_StartProfile(Username)
+export function PROFILE_StartProfile(Username)
 {
 	var User = MainData.GetUser(Username);
 
@@ -378,7 +395,7 @@ function PROFILE_StartProfile(Username)
 * @return       none
 * @author       Rubens Suguimoto
 */
-function PROFILE_RemoveProfile(Username)
+export function PROFILE_RemoveProfile(Username)
 {
 	/*
 	var Jid = Username+"@"+MainData.GetHost();
@@ -399,7 +416,7 @@ function PROFILE_RemoveProfile(Username)
 * @return       True if success or false if some field was not correctly
 * @author       Rubens Suguimoto
 */
-function PROFILE_SaveMyProfile()
+export function PROFILE_SaveMyProfile()
 {
 	var FN, Desc, PhotoType, Binval;
 	var MyProfile;
@@ -430,7 +447,7 @@ function PROFILE_SaveMyProfile()
 * @return       XMPP message to set profile
 * @author       Pedro Rocha
 */
-function PROFILE_CreateProfile()
+export function PROFILE_CreateProfile()
 {
 	var MyUsername = MainData.GetUsername();
 	return MESSAGE_SetProfile("", MyUsername, "", "", "");
@@ -444,7 +461,7 @@ function PROFILE_CreateProfile()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function PROFILE_ResetUpdateProfile()
+export function PROFILE_ResetUpdateProfile()
 {
 	var User;
 	var UserList = MainData.GetUserList();
@@ -544,7 +561,7 @@ function PROFILE_ConvertUserRatingList(RatingList)
 * @return	True if is there some change or false	
 * @author	Danilo Yorinori
 */
-function PROFILE_ChangeVerification(Elements) {
+export function PROFILE_ChangeVerification(Elements) {
 	// Verify only editable data
 	var FN, Desc, PhotoType, Binval;
 	var MyUsername = MainData.GetUsername();

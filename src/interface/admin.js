@@ -1,3 +1,19 @@
+import {
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+} from 'utils/utils.js';
+import {
+	WINDOW_AdminWindow,
+	WINDOW_UnbanUser,
+	WINDOW_BanUser,
+} from 'window/window.js';
+import {
+	ADMIN_UnbanUser,
+	ADMIN_KickUser,
+	ADMIN_BanUser,
+} from 'admin/admin.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +46,7 @@
 * @author 	Rubens Suguimoto
 * @see 	WINDOW_UnbanUser
 */
-function INTERFACE_UnbanUserWindow()
+export function INTERFACE_UnbanUserWindow()
 {
 	var Div;
 	var Buttons = new Array();
@@ -85,7 +101,7 @@ function INTERFACE_UnbanUserWindow()
 * @author 	Rubens Suguimoto
 * @see 		WINDOW_BanUser
 */
-function INTERFACE_BanUserWindow(Username)
+export function INTERFACE_BanUserWindow(Username)
 {
 	var Div;
 	var Buttons = new Array();
@@ -140,7 +156,7 @@ function INTERFACE_BanUserWindow(Username)
 * @author 	Rubens Suguimoto
 * @see 	WINDOW_BanUser
 */
-function INTERFACE_KickUserWindow(Username)
+export function INTERFACE_KickUserWindow(Username)
 {
 	var Div;
 	var Buttons = new Array();
@@ -195,7 +211,7 @@ function INTERFACE_KickUserWindow(Username)
 * @author 	Rubens Suguimoto
 * @see 	WINDOW_AdminWindow
 */
-function INTERFACE_CreateAdminWindow()
+export function INTERFACE_CreateAdminWindow()
 {
 	var Div;
 	var UnbanList;
@@ -227,7 +243,7 @@ function INTERFACE_CreateAdminWindow()
 * @deprecated
 * @see 	WINDOW_AdminWindow
 */
-function INTERFACE_AddBannedUser(Username)
+export function INTERFACE_AddBannedUser(Username)
 {
 	var List = document.getElementById("AdminUnbanList");
 	var Item;

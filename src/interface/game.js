@@ -1,3 +1,31 @@
+import {
+	INTERFACE_SetBlockClass,
+	INTERFACE_HideLoadingMove,
+	INTERFACE_HideLeaveUser,
+	INTERFACE_CreateMoveList,
+	INTERFACE_LastMove,
+	INTERFACE_ShowLoadingMove,
+	INTERFACE_CreateOldGameMoveList,
+	INTERFACE_FindBlock,
+	INTERFACE_RemoveBlockClass,
+	INTERFACE_RemoveBlockBorder,
+	INTERFACE_RemoveBlockEvents,
+	INTERFACE_CreateOldGameTab,
+	INTERFACE_NewPiece,
+	INTERFACE_CreateGame,
+	INTERFACE_SetBlockBorder,
+	INTERFACE_ShowLeaveUser,
+} from 'interface/board.js';
+import { IMAGE_ImageDecode } from 'utils/images.js';
+import {
+	UTILS_CreateElement,
+	UTILS_GetText,
+	UTILS_HorizontalIndex,
+	UTILS_AddListener,
+} from 'utils/utils.js';
+import { OLDGAME_GotoBoard } from 'game/oldgame.js';
+import { WINDOW_Alert } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -32,7 +60,7 @@
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, Observer)
+export function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, PieceSize, Observer)
 {
 	var Tmp;
 	var MyUsername = MainData.GetUsername();

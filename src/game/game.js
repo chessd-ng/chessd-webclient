@@ -1,3 +1,26 @@
+import { CONTACT_ChangeStatus } from 'contact/status.js';
+import { ROOM_EnterRoomGame, ROOM_ExitRoom } from 'room/room.js';
+import {
+	MESSAGE_Presence,
+	MESSAGE_GetProfile,
+	MESSAGE_GameSearchCurrentGame,
+	MESSAGE_GameMove,
+	MESSAGE_Unavailable,
+} from 'xmpp_messages/message.js';
+import { INTERFACE_GameBoardObj } from 'interface/game.js';
+import {
+	UTILS_GetNodeText,
+	UTILS_GetText,
+	UTILS_HorizontalIndex,
+	UTILS_String2Board,
+} from 'utils/utils.js';
+import { GAMECENTER_HideGameCenter, GAMECENTER_ShowGameCenter } from 'gamecenter/gamecenter.js';
+import { CHALLENGE_ClearChallenges } from 'challenge/challenge.js';
+import { ANNOUNCE_CancelAllAnnounce } from 'challenge/announce.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { OLDGAME_RemoveOldGame, OLDGAME_EndGame } from 'game/oldgame.js';
+import { WINDOW_Confirm, WINDOW_Alert } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +51,7 @@
 * @return 	Buffer with XMPP that must be send
 * @author 	Ulysses	Bomfim and Rubens Suguimoto
 */
-function GAME_HandleGame(XML)
+export function GAME_HandleGame(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
@@ -83,7 +106,7 @@ function GAME_HandleGame(XML)
 * @return 	Buffer with XMPP that must be send
 * @author	Rubens Suguimoto
 */
-function GAME_HandlePresence(XML)
+export function GAME_HandlePresence(XML)
 {
 	var Username = XML.getAttribute("from").split("/")[1];
 	var GameId = XML.getAttribute("from").split("@")[0];
@@ -207,7 +230,7 @@ function GAME_Move(XML)
 * @return 	XMPP to be send
 * @author 	Rubens Suguimoto
 */
-function GAME_HandleGameResult(XML)
+export function GAME_HandleGameResult(XML)
 {
 	var Id = XML.getAttribute("id");
 	var Buffer = "";
@@ -582,7 +605,7 @@ function GAME_End(XML)
 * @return 	XMPP to be send
 * @author 	Pedro Rocha and Rubens Suguimoto
 */
-function GAME_HandleGameError(XML)
+export function GAME_HandleGameError(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
@@ -645,7 +668,7 @@ function GAME_HandleGameError(XML)
 * @return 	XMPP to be send
 * @author 	Rubens Suguimoto
 */
-function GAME_StartGame(GameId, P1, P2)
+export function GAME_StartGame(GameId, P1, P2)
 {
 	var GameDiv;
 	var YourColor;
@@ -734,7 +757,7 @@ function GAME_StartGame(GameId, P1, P2)
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function GAME_StartObserverGame(GameId, P1, P2)
+export function GAME_StartObserverGame(GameId, P1, P2)
 {
 	//TODO -> CHANGE P1 TO PW AND P2 TO PB
 	var GameDiv;
@@ -871,7 +894,7 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 * @return 	none
 * @author 	Rubens Suguimoto and Pedro Rocha
 */
-function GAME_RemoveGame(GameID)
+export function GAME_RemoveGame(GameID)
 {
 	var Game = MainData.GetGame(GameID);
 
@@ -910,7 +933,7 @@ function GAME_RemoveGame(GameID)
 * @return 	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
+export function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 {
 	var Move;
 	var Promotion = "";
@@ -962,7 +985,7 @@ function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 * @return 	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function GAME_SendDraw(GameID)
+export function GAME_SendDraw(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestDraw(GameID));
 }
@@ -974,7 +997,7 @@ function GAME_SendDraw(GameID)
 * @return 	none
 * @author	Pedro
 */
-function GAME_SendCancel(GameID)
+export function GAME_SendCancel(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestCancel(GameID));
 }
@@ -986,7 +1009,7 @@ function GAME_SendCancel(GameID)
 * @return 	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function GAME_SendAdjourn(GameID)
+export function GAME_SendAdjourn(GameID)
 {
 	CONNECTION_SendJabber(MESSAGE_GameRequestAdjourn(GameID));
 }
@@ -999,7 +1022,7 @@ function GAME_SendAdjourn(GameID)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_SearchCurrentGame()
+export function GAME_SearchCurrentGame()
 {
 	CONNECTION_SendJabber(MESSAGE_GameSearchCurrentGame());
 }
@@ -1011,7 +1034,7 @@ function GAME_SearchCurrentGame()
 * @return 	none
 * @author	Rubens Suguimoto
 */
-function GAME_ChangePromotion(Piece)
+export function GAME_ChangePromotion(Piece)
 {
 	var CurrentGame = MainData.GetCurrentGame();
 	CurrentGame.Promotion = Piece;
@@ -1024,7 +1047,7 @@ function GAME_ChangePromotion(Piece)
 * @return 	none
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function GAME_SendResign(GameID)
+export function GAME_SendResign(GameID)
 {
 	var Title = UTILS_GetText("game_resign");
 	var Text;
@@ -1119,7 +1142,7 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function GAME_HandleVCardPhoto(XML)
+export function GAME_HandleVCardPhoto(XML)
 {
 	var Photo;
 	var Player;
@@ -1199,7 +1222,7 @@ function GAME_SetLeftTime(GameID, WTime, BTime)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_ShowLoadingMove(Id)
+export function GAME_ShowLoadingMove(Id)
 {
 	var Game = MainData.GetGame(Id)
 
@@ -1254,7 +1277,7 @@ function GAME_SetBlockBorder(Line, Col)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_SetBlockClass(Line, Col)
+export function GAME_SetBlockClass(Line, Col)
 {
 	var Game = MainData.GetCurrentGame();
 	var BlockId;
@@ -1280,7 +1303,7 @@ function GAME_SetBlockClass(Line, Col)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_RemoveBlockBorder(Line, Col)
+export function GAME_RemoveBlockBorder(Line, Col)
 {
 	var CurrentGame = MainData.GetCurrentGame();
 	var BlockId;
@@ -1337,7 +1360,7 @@ function GAME_GetOponent(GameId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_RemoveBlockClass(Line, Col)
+export function GAME_RemoveBlockClass(Line, Col)
 {
 	var Game = MainData.GetCurrentGame();
 	var BlockId;

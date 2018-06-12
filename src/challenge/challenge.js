@@ -1,3 +1,19 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { UTILS_GetText } from 'utils/utils.js';
+import {
+	MESSAGE_ChallengeDecline,
+	MESSAGE_ChangeStatus,
+	MESSAGE_ChallengeAccept,
+	MESSAGE_Challenge,
+} from 'xmpp_messages/message.js';
+import { WindowObj } from 'interface/window.js';
+import {
+	WINDOW_Alert,
+	WINDOW_Postpone,
+	WINDOW_RemoveWindow,
+	WINDOW_Challenge,
+} from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -424,7 +440,7 @@ function CHALLENGE_ChallengeError (XML)
  * @return	Empty string
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
+export function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
 {
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
@@ -501,7 +517,7 @@ function CHALLENGE_SendChallenge(Oponent, Color, Time, Inc, Category, Rated)
  * @author	Rubens Suguimoto
  */
 
-function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, MatchID)
+export function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, MatchID)
 {
 	var XML, Player1, Player2, OpColor;
 	var Players = new Array();
@@ -566,7 +582,7 @@ function CHALLENGE_SendReChallenge(Oponent, Color, Time, Inc, Category, Rated, M
 * @return 	none
 * @author 	Pedro Rocha
 */
-function CHALLENGE_AcceptChallenge(MatchID)
+export function CHALLENGE_AcceptChallenge(MatchID)
 {
 	var XML;
 	
@@ -583,7 +599,7 @@ function CHALLENGE_AcceptChallenge(MatchID)
 * @return 	none
 * @author 	Pedro Rocha
 */
-function CHALLENGE_DeclineChallenge(MatchID)
+export function CHALLENGE_DeclineChallenge(MatchID)
 {
 	var XML;
 
@@ -599,7 +615,7 @@ function CHALLENGE_DeclineChallenge(MatchID)
 * @return	Empty string
 * @author	Rubens Suguimoto
 */
-function CHALLENGE_ClearChallenges()
+export function CHALLENGE_ClearChallenges()
 {
 	var i;
 	var MatchId;

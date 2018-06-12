@@ -1,3 +1,35 @@
+import {
+	PROFILE_RemoveProfile,
+	PROFILE_SaveMyProfile,
+	PROFILE_ChangeVerification,
+} from 'profile/profile.js';
+import {
+	INTERFACE_BanUserWindow,
+	INTERFACE_KickUserWindow,
+	INTERFACE_UnbanUserWindow,
+	INTERFACE_CreateAdminWindow,
+} from 'interface/admin.js';
+import {
+	WINDOW_CreateImageSend,
+	WINDOW_CreateConfirm,
+	WINDOW_CreateAlert,
+	WindowObj,
+} from 'interface/window.js';
+import { CHALLENGE_DeclineChallenge } from 'challenge/challenge.js';
+import { INTERFACE_ShowCreateAdminCenterWindow } from 'interface/admincenter.js';
+import { OLDGAME_CloseWindow } from 'game/oldgame.js';
+import { INTERFACE_ShowProfileConfirmWindow, INTERFACE_ShowProfileWindow } from 'interface/profile.js';
+import { UTILS_GetText, UTILS_AddListener } from 'utils/utils.js';
+import { INTERFACE_ShowCancelRoomWindow, INTERFACE_ShowCreateRoomWindow } from 'interface/room.js';
+import { INTERFACE_AnnounceWindow } from 'interface/announce.js';
+import { INTERFACE_ShowPostponeWindow } from 'interface/postpone.js';
+import { INTERFACE_ShowOldGameWindow } from 'interface/oldgame.js';
+import { INTERFACE_HelpWindow } from 'interface/help.js';
+import { INTERFACE_ShowSearchUserWindow } from 'interface/user.js';
+import { INTERFACE_ShowChallengeWindow } from 'interface/challenge.js';
+import { CHAT_OpenChat } from 'chat/chat.js';
+import { INTERFACE_ShowCreateTourneyWindow } from 'interface/tourney.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -120,7 +152,7 @@ function WINDOW_Focus(WindowObj)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_RemoveWindow(WindowObj)
+export function WINDOW_RemoveWindow(WindowObj)
 {
 	var i;
 	var WindowTmp;
@@ -150,7 +182,7 @@ function WINDOW_RemoveWindow(WindowObj)
 * @return 	none
 * @author	Danilo Yorinori
 */
-function WINDOW_Alert(Title,Text)
+export function WINDOW_Alert(Title,Text)
 {
 	// Return Div and Buttons;
 	var Div = WINDOW_CreateAlert(Text);
@@ -175,7 +207,7 @@ function WINDOW_Alert(Title,Text)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_Confirm(Title, Text, Button1, Button2)
+export function WINDOW_Confirm(Title, Text, Button1, Button2)
 {
 	// Return Div and Buttons;
 	var Div = WINDOW_CreateConfirm(Text, Button1, Button2);
@@ -202,7 +234,7 @@ function WINDOW_Confirm(Title, Text, Button1, Button2)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
+export function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowChallengeWindow(User, RatingObj, GameParameters, Rated, MatchId);
@@ -259,7 +291,7 @@ function WINDOW_Challenge(User, RatingObj, GameParameters, Rated, MatchId)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_CreateRoom()
+export function WINDOW_CreateRoom()
 {
 	// If another create room window is opened, exit function
 	if (document.getElementById("CreateRoomDiv"))
@@ -304,7 +336,7 @@ function WINDOW_CreateRoom()
 *
 * @author Danilo
 */
-function WINDOW_CancelRoom()
+export function WINDOW_CancelRoom()
 {
 	//Return Div and Buttons;
 	var Div = INTERFACE_ShowCancelRoomWindow();
@@ -349,7 +381,7 @@ function WINDOW_Invite(User)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_SearchUser()
+export function WINDOW_SearchUser()
 {
 	// If another search user window is opened, do nothing
 	if (document.getElementById("SearchUserDiv"))
@@ -383,7 +415,7 @@ function WINDOW_SearchUser()
 * @return	Elements	Profile's HTML DOM elements array
 * @author	Danilo Yorinori
 */
-function WINDOW_Profile(Profile)
+export function WINDOW_Profile(Profile)
 {
 	//Return Div, Buttons and Elements;
 	var Div = INTERFACE_ShowProfileWindow(Profile);
@@ -459,7 +491,7 @@ function WINDOW_Profile(Profile)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
+export function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
 {
 	// TODO -> EXPLAIN BETTER THIS PARAMETERS
 	//Return Div and Buttons;
@@ -486,7 +518,7 @@ function WINDOW_ProfileConfirm(WinObj, Profile, Elements)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_ProfileImage()
+export function WINDOW_ProfileImage()
 {
 	//Return Div and Buttons;
 	var Div = WINDOW_CreateImageSend();
@@ -509,7 +541,7 @@ function WINDOW_ProfileImage()
 * @return	Elements	Oldgame window's HTML DOM elements
 * @author	Danilo Yorinori
 */
-function WINDOW_OldGame(Id)
+export function WINDOW_OldGame(Id)
 {
 	// Verify if exist old game window opened
 	if (document.getElementById("OldGamesDiv"))
@@ -542,7 +574,7 @@ function WINDOW_OldGame(Id)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_UnbanUser()
+export function WINDOW_UnbanUser()
 {
 	if(document.getElementById("UnbanDiv")!=null)
 	{
@@ -574,7 +606,7 @@ function WINDOW_UnbanUser()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_BanUser(Username)
+export function WINDOW_BanUser(Username)
 {
 	if(document.getElementById("BanDiv")!=null)
 	{
@@ -605,7 +637,7 @@ function WINDOW_BanUser(Username)
 * @param	Username	User's name
 * @author	Rubens Suguimoto
 */
-function WINDOW_KickUser(Username)
+export function WINDOW_KickUser(Username)
 {
 	if(document.getElementById("BanDiv")!=null)
 	{
@@ -636,7 +668,7 @@ function WINDOW_KickUser(Username)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_AdminWindow()
+export function WINDOW_AdminWindow()
 {
 	if(document.getElementById("AdminDiv")!=null)
 	{
@@ -664,7 +696,7 @@ function WINDOW_AdminWindow()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_AnnounceWindow(Username, Rating)
+export function WINDOW_AnnounceWindow(Username, Rating)
 {
 	if(document.getElementById("AnnounceDiv")!=null)
 	{
@@ -692,7 +724,7 @@ function WINDOW_AnnounceWindow(Username, Rating)
 * @return 	none
 * @author	Danilo Yorinori
 */
-function WINDOW_Help()
+export function WINDOW_Help()
 {
 	if(document.getElementById("HelpDiv")!=null)
 	{
@@ -723,7 +755,7 @@ function WINDOW_Help()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
+export function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 {
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowPostponeWindow(User, RatingObj, GameParameters, Rated, MatchId);
@@ -753,7 +785,7 @@ function WINDOW_Postpone(User, RatingObj, GameParameters, Rated, MatchId)
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_CreateTourney()
+export function WINDOW_CreateTourney()
 {
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowCreateTourneyWindow();
@@ -784,7 +816,7 @@ function WINDOW_CreateTourney()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function WINDOW_CreateAdminCenter()
+export function WINDOW_CreateAdminCenter()
 {
 	// Return Div and Buttons;
 	var Div = INTERFACE_ShowCreateAdminCenterWindow();

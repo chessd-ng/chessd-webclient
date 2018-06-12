@@ -1,3 +1,13 @@
+import { USER_HandlePresence, USER_HandleRoomPresence } from 'contact/user.js';
+import { GAME_HandlePresence } from 'game/game.js';
+import { UTILS_GetText } from 'utils/utils.js';
+import { CHAT_HandlePresence } from 'chat/chat.js';
+import { WINDOW_Alert } from 'window/window.js';
+import { ONLINE_HandleOnlinePresence } from 'contact/online.js';
+import { ROOM_HandleRoomPresence } from 'room/room.js';
+import { CONTACT_HandleUserPresence } from 'contact/contact.js';
+import { CHALLENGE_HandlePresence } from 'challenge/adjourn.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +37,7 @@
 * @return	XMPP to send
 * @author	Ulysses Bomfim
 */
-function PARSER_ParsePresence(XML)
+export function PARSER_ParsePresence(XML)
 {
 	var Jid, Show, NewStatus;
 	var Buffer = "";

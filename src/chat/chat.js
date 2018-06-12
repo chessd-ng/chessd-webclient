@@ -1,3 +1,14 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_BannedWords,
+	UTILS_ConvertChatString,
+	UTILS_GetNodeText,
+} from 'utils/utils.js';
+import { MESSAGE_Chat } from 'xmpp_messages/message.js';
+import { WINDOW_Alert } from 'window/window.js';
+import { ChatObj } from 'interface/chat.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +41,7 @@
 * @return	Buffer with other XMPP to send
 * @author	Pedro Rocha
 */
-function CHAT_HandleMessage(XML)
+export function CHAT_HandleMessage(XML)
 {
 	var From, Message, Body;
 	var Buffer = "";
@@ -61,7 +72,7 @@ function CHAT_HandleMessage(XML)
 * @return	Buffer with other XMPP to send
 * @author	Rubens Suguimoto
 */
-function CHAT_HandlePresence(XML)
+export function CHAT_HandlePresence(XML)
 {
 	var From;
 	var Status;
@@ -99,7 +110,7 @@ function CHAT_HandlePresence(XML)
 * @return	Buffer with other XMPP to send
 * @author	Pedro Rocha
 */
-function CHAT_HandleAnnounceMessage(XML)
+export function CHAT_HandleAnnounceMessage(XML)
 {
 	var From, Subject, Message, Body;
 	var Buffer = "";
@@ -137,7 +148,7 @@ function CHAT_HandleAnnounceMessage(XML)
 * @return	Chat window object
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function CHAT_OpenChat(Username)
+export function CHAT_OpenChat(Username)
 {
 	var Title, Msg;
 	var Status;
@@ -217,7 +228,7 @@ function CHAT_OpenChat(Username)
 * @return	Empty string
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function CHAT_CloseChat(Username)
+export function CHAT_CloseChat(Username)
 {
 	var ChatObj;
 
@@ -245,7 +256,7 @@ function CHAT_CloseChat(Username)
 * @return	Empty string
 * @author	Pedro Rocha and Rubens Suguimoto
 */
-function CHAT_ChangeChatState(Username)
+export function CHAT_ChangeChatState(Username)
 {
 	var i = MainData.FindChat(Username);
 	var ChatObj;
@@ -299,7 +310,7 @@ function CHAT_ChangeChatState(Username)
 * @return	Empty string
 * @author	Pedro Rocha
 */
-function CHAT_SendMessage(Username, Message)
+export function CHAT_SendMessage(Username, Message)
 {
 	var ChatObj;
 	//Replace < and  >
@@ -365,7 +376,7 @@ function CHAT_ReceiveMessage(Username, Message)
 * @return	Message with error notification
 * @author	Rubens Suguimoto
 */
-function CHAT_ErrorMessageLength(Username)
+export function CHAT_ErrorMessageLength(Username)
 {
 	var ChatPos = MainData.FindChat(Username);
 	var ChatObj;
@@ -431,7 +442,7 @@ function CHAT_ChangeUserChatStatus(Username, Status)
 * @return	Empty string
 * @author	Rubens Suguimoto
 */
-function CHAT_BlurChat(Username)
+export function CHAT_BlurChat(Username)
 {
 	var ChatObj;
 

@@ -1,3 +1,18 @@
+import { CONTACT_ChangeStatus } from 'contact/status.js';
+import { MESSAGE_GetProfile, MESSAGE_GetOldGames } from 'xmpp_messages/message.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_GetNodeText,
+	UTILS_ConvertTimeStamp,
+	UTILS_String2Board,
+} from 'utils/utils.js';
+import { ROOM_ExitRoom } from 'room/room.js';
+import { INTERFACE_GameBoardObj } from 'interface/game.js';
+import { INTERFACE_HideOldgameLoading } from 'interface/oldgame.js';
+import { GAMECENTER_HideGameCenter, GAMECENTER_ShowGameCenter } from 'gamecenter/gamecenter.js';
+import { WINDOW_Alert, WINDOW_OldGame } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -27,7 +42,7 @@
 * @return       XMPP to be send
 * @author       Rubens Suguimoto
 */
-function OLDGAME_HandleSearchOldGame(XML)
+export function OLDGAME_HandleSearchOldGame(XML)
 {
 	var Games, GameList;
 	var i;
@@ -173,7 +188,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 * @return 	XMPP to send
 * @author 	Ulysses Bomfim and Rubens Suguimoto
 */
-function OLDGAME_FetchOldGame(XML)
+export function OLDGAME_FetchOldGame(XML)
 {
 	var GameTag;
 	var GamePos, PlayerTag;
@@ -348,7 +363,7 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnCol
 * @return       none
 * @author       Rubens Suguimoto
 */
-function OLDGAME_EndGame(Id)
+export function OLDGAME_EndGame(Id)
 {
 	var EndedGame;
 	var PWName, PBName, Color;
@@ -403,7 +418,7 @@ function OLDGAME_EndGame(Id)
 * @return       Empty string
 * @author       Rubens Suguimoto
 */
-function OLDGAME_HandleVCardPhoto(XML)
+export function OLDGAME_HandleVCardPhoto(XML)
 {
 	var Photo;
 	var Player;
@@ -457,7 +472,7 @@ function OLDGAME_HandleVCardPhoto(XML)
 * @return       none
 * @author       Rubens Suguimoto
 */
-function OLDGAME_RemoveOldGame(Index)
+export function OLDGAME_RemoveOldGame(Index)
 {
 	var Room;
 	var Buffer = "";
@@ -488,7 +503,7 @@ function OLDGAME_RemoveOldGame(Index)
 * @return       none 
 * @author       Rubens Suguimoto
 */
-function OLDGAME_FirstBoard()
+export function OLDGAME_FirstBoard()
 {
 	var Color, Board;
 	var WTime, BTime;
@@ -520,7 +535,7 @@ function OLDGAME_FirstBoard()
 * @return       False (if not found a previous state) or True otherwise
 * @author       Rubens Suguimoto 
 */
-function OLDGAME_PrevBoard()
+export function OLDGAME_PrevBoard()
 {
 	var Color, OldBoard, Board;
 	var WTime, BTime;
@@ -559,7 +574,7 @@ function OLDGAME_PrevBoard()
 * @return       False (if not found a next state) or True otherwise
 * @author       Rubens Suguimoto
 */
-function OLDGAME_NextBoard()
+export function OLDGAME_NextBoard()
 {
 	var Color, OldBoard, Board;
 
@@ -599,7 +614,7 @@ function OLDGAME_NextBoard()
 * @return       none
 * @author       Rubens Suguimoto
 */
-function OLDGAME_LastBoard()
+export function OLDGAME_LastBoard()
 {
 	var Color, Board;
 	var WTime, BTime;
@@ -631,7 +646,7 @@ function OLDGAME_LastBoard()
 * @return       void 
 * @author       Rubens Suguimoto 
 */
-function OLDGAME_GotoBoard(NumBoard)
+export function OLDGAME_GotoBoard(NumBoard)
 {
 	var Color, Board;
 	var WTime, BTime;
@@ -661,7 +676,7 @@ function OLDGAME_GotoBoard(NumBoard)
 * @return       none
 * @author       Danilo Yorinori
 */
-function OLDGAME_OpenOldGameWindow(User)
+export function OLDGAME_OpenOldGameWindow(User)
 {	
 	// Quick fix to check if search old game window exists
 	if (document.getElementById("OldGamesDiv"))
@@ -698,7 +713,7 @@ function OLDGAME_OpenOldGameWindow(User)
 * @return       void
 * @author       Danilo Yorinori
 */
-function OLDGAME_CloseWindow(Id)
+export function OLDGAME_CloseWindow(Id)
 {
 	MainData.RemoveSearchGameInfo(Id);
 

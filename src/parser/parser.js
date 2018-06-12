@@ -1,3 +1,10 @@
+import { UTILS_GetText } from 'utils/utils.js';
+import { PARSER_ParseIq } from 'parser/parser_iq.js';
+import { START_Restart } from 'index.js';
+import { LOGIN_Disconnected } from 'login/login.js';
+import { PARSER_ParsePresence } from 'parser/parser_presence.js';
+import { PARSER_ParseChat } from 'parser/parser_chat.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -25,7 +32,7 @@
 * @return	XMPP to send
 * @author	Ulysses Bomfim
 */
-function PARSER_ParseXml(XML)
+export function PARSER_ParseXml(XML)
 {
 	var XMLTag, Body, i;
 	var Buffer = "";

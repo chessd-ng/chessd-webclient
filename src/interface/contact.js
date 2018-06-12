@@ -1,3 +1,14 @@
+import {
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_AddListener,
+} from 'utils/utils.js';
+import { INTERFACE_CreateLoadingBox } from 'interface/interface.js';
+import { ONLINE_SortUserByRating, ONLINE_SortUserByNick } from 'contact/online.js';
+import { CONTACT_SortUsersByNick, CONTACT_SortUsersByRating } from 'contact/contact.js';
+import { UserListObj } from 'interface/user.js';
+import { WINDOW_SearchUser } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -29,7 +40,7 @@
 * @return	none
 * @author	Rubens Suguimoto
 */
-function ContactObj()
+export function ContactObj()
 {
 	var ContactContent = INTERFACE_CreateContactContent();
 	// Attributes
@@ -423,7 +434,7 @@ function INTERFACE_HideContactLoading()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function ContactOnlineObj()
+export function ContactOnlineObj()
 {
 	var ContactOnline = INTERFACE_CreateOnlineContent();
 	this.div = ContactOnline.Div;
@@ -513,7 +524,7 @@ function INTERFACE_ChangeGroupVisibility(Obj, Id)
 * @return	HTML DOM Div
 * @author	Rubens Suguimoto
 */
-function INTERFACE_CreateContact()
+export function INTERFACE_CreateContact()
 {
 	var ContactDiv, ContactTitle;
 	var ContactTitleOnline, ContactTitleContacts;
@@ -660,7 +671,7 @@ function INTERFACE_CreateOnlineContent()
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_RefreshContactOnlineNumber()
+export function INTERFACE_RefreshContactOnlineNumber()
 {
 	var N_Occupants=0;
 	var ListLength, i;

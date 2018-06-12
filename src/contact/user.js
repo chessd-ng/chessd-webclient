@@ -1,3 +1,8 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { PROFILE_ResetUpdateProfile } from 'profile/profile.js';
+import { UTILS_GetNodeText, UTILS_ConvertTimeStamp } from 'utils/utils.js';
+import { MESSAGE_InfoProfile } from 'xmpp_messages/message.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -28,7 +33,7 @@
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function USER_HandleContactUserList(XML)
+export function USER_HandleContactUserList(XML)
 {
 	var Users, Username, i;
 
@@ -51,7 +56,7 @@ function USER_HandleContactUserList(XML)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function USER_HandlePresence(XML)
+export function USER_HandlePresence(XML)
 {
 	var From, Username, Type, Item, Show, Status;
 	var User;
@@ -109,7 +114,7 @@ function USER_HandlePresence(XML)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function USER_HandleRoomPresence(XML)
+export function USER_HandleRoomPresence(XML)
 {
 	var From, Username, Type, Item, Show, Status;
 	var User;
@@ -161,7 +166,7 @@ function USER_HandleRoomPresence(XML)
 * @return 	Empty string
 * @author 	Rubens Suguimoto
 */
-function USER_HandleInfo(XML)
+export function USER_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode, ProfileNode;
 	var OnlineNode, UptimeNode;
@@ -266,7 +271,7 @@ function USER_HandleInfo(XML)
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function USER_AddUser(Username, Status)
+export function USER_AddUser(Username, Status)
 {
 	var User = MainData.GetUser(Username)
 
@@ -282,7 +287,7 @@ function USER_AddUser(Username, Status)
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function USER_StartUpdateUserList()
+export function USER_StartUpdateUserList()
 {
 	var Time = MainData.GetUpdateRatingInterval();
 	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", Time*1000));
@@ -294,7 +299,7 @@ function USER_StartUpdateUserList()
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function USER_StopUpdateUserList()
+export function USER_StopUpdateUserList()
 {
 	clearInterval(MainData.GetUpdateTimer());
 	MainData.SetUpdateTimer(null);
@@ -306,7 +311,7 @@ function USER_StopUpdateUserList()
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function USER_StartUpdateUserProfile()
+export function USER_StartUpdateUserProfile()
 {
 	//Wait for 30 minutes to get profile again
 	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",90000));
@@ -318,7 +323,7 @@ function USER_StartUpdateUserProfile()
 * @return 	none
 * @author 	Rubens Suguimoto
 */
-function USER_StopUpdateUserProfile()
+export function USER_StopUpdateUserProfile()
 {
 	clearInterval(MainData.GetUpdateProfileTimer());
 	MainData.SetUpdateProfileTimer(null);

@@ -1,3 +1,22 @@
+import { MESSAGE_GameRoomList, MESSAGE_ChallengeGetAdjournList } from 'xmpp_messages/message.js';
+import {
+	UTILS_SortByTime,
+	UTILS_SortByInc,
+	UTILS_SortByRatingValue,
+	UTILS_SortByUsernameAsc,
+	UTILS_SortByPrivate,
+	UTILS_SortByMoves,
+	UTILS_SortByBRatingValue,
+	UTILS_SortByDate,
+	UTILS_SortByWRatingValue,
+	UTILS_SortByRated,
+	UTILS_SortByCategory,
+} from 'utils/utils.js';
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import { ANNOUNCE_GetAnnounceGames } from 'challenge/announce.js';
+import { CHALLENGE_PostponePresence } from 'challenge/adjourn.js';
+import { GameCenterObj } from 'interface/gamecenter.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +45,7 @@
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_StartGameCenter()
+export function GAMECENTER_StartGameCenter()
 {
 	var GCenterObj = new GameCenterObj();
 	var Center = document.getElementById("Center");
@@ -45,7 +64,7 @@ function GAMECENTER_StartGameCenter()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowGameCenter()
+export function GAMECENTER_ShowGameCenter()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var Center = document.getElementById("Center");
@@ -59,7 +78,7 @@ function GAMECENTER_ShowGameCenter()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_HideGameCenter()
+export function GAMECENTER_HideGameCenter()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	GameCenterObj.hide();
@@ -71,7 +90,7 @@ function GAMECENTER_HideGameCenter()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowAnnounce()
+export function GAMECENTER_ShowAnnounce()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var Offset = 0;
@@ -97,7 +116,7 @@ function GAMECENTER_ShowAnnounce()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowPostpone()
+export function GAMECENTER_ShowPostpone()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MaxPostpone = 10;
@@ -121,7 +140,7 @@ function GAMECENTER_ShowPostpone()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowMatchOffer()
+export function GAMECENTER_ShowMatchOffer()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 
@@ -140,7 +159,7 @@ function GAMECENTER_ShowMatchOffer()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowTourney()
+export function GAMECENTER_ShowTourney()
 {
 	var GameCenterObj = MainDataGet.Gamecenter();
 
@@ -159,7 +178,7 @@ function GAMECENTER_ShowTourney()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ShowCurrentGames()
+export function GAMECENTER_ShowCurrentGames()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 
@@ -185,7 +204,7 @@ function GAMECENTER_ShowCurrentGames()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_ClearCurrentGames()
+export function GAMECENTER_ClearCurrentGames()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var GamesList = GameCenterObj.CurrentGames.CurrentGamesList;
@@ -205,7 +224,7 @@ function GAMECENTER_ClearCurrentGames()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByUsername()
+export function GAMECENTER_AnnounceSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -229,7 +248,7 @@ function GAMECENTER_AnnounceSortByUsername()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByCategory()
+export function GAMECENTER_AnnounceSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -252,7 +271,7 @@ function GAMECENTER_AnnounceSortByCategory()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByRating()
+export function GAMECENTER_AnnounceSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -275,7 +294,7 @@ function GAMECENTER_AnnounceSortByRating()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByTime()
+export function GAMECENTER_AnnounceSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -298,7 +317,7 @@ function GAMECENTER_AnnounceSortByTime()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByInc()
+export function GAMECENTER_AnnounceSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -321,7 +340,7 @@ function GAMECENTER_AnnounceSortByInc()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByRated()
+export function GAMECENTER_AnnounceSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -344,7 +363,7 @@ function GAMECENTER_AnnounceSortByRated()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_AnnounceSortByPrivate()
+export function GAMECENTER_AnnounceSortByPrivate()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var AnnounceList = MainData.GetAnnounceList();
@@ -368,7 +387,7 @@ function GAMECENTER_AnnounceSortByPrivate()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByUsername()
+export function GAMECENTER_PostponeSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -395,7 +414,7 @@ function GAMECENTER_PostponeSortByUsername()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByRating()
+export function GAMECENTER_PostponeSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -421,7 +440,7 @@ function GAMECENTER_PostponeSortByRating()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByCategory()
+export function GAMECENTER_PostponeSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -448,7 +467,7 @@ function GAMECENTER_PostponeSortByCategory()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByTime()
+export function GAMECENTER_PostponeSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -473,7 +492,7 @@ function GAMECENTER_PostponeSortByTime()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByInc()
+export function GAMECENTER_PostponeSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -499,7 +518,7 @@ function GAMECENTER_PostponeSortByInc()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_PostponeSortByDate()
+export function GAMECENTER_PostponeSortByDate()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var PostponeList = MainData.GetPostponeList();
@@ -525,7 +544,7 @@ function GAMECENTER_PostponeSortByDate()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByWRating()
+export function GAMECENTER_CurrentGamesSortByWRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -549,7 +568,7 @@ function GAMECENTER_CurrentGamesSortByWRating()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByBRating()
+export function GAMECENTER_CurrentGamesSortByBRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -572,7 +591,7 @@ function GAMECENTER_CurrentGamesSortByBRating()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByCategory()
+export function GAMECENTER_CurrentGamesSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -595,7 +614,7 @@ function GAMECENTER_CurrentGamesSortByCategory()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByTime()
+export function GAMECENTER_CurrentGamesSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -618,7 +637,7 @@ function GAMECENTER_CurrentGamesSortByTime()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByMoves()
+export function GAMECENTER_CurrentGamesSortByMoves()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -641,7 +660,7 @@ function GAMECENTER_CurrentGamesSortByMoves()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_CurrentGamesSortByRated()
+export function GAMECENTER_CurrentGamesSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var CurrentGamesList = MainData.GetCurrentGamesList();
@@ -665,7 +684,7 @@ function GAMECENTER_CurrentGamesSortByRated()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByUsername()
+export function GAMECENTER_MatchOfferSortByUsername()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -696,7 +715,7 @@ function GAMECENTER_MatchOfferSortByUsername()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByTime()
+export function GAMECENTER_MatchOfferSortByTime()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -727,7 +746,7 @@ function GAMECENTER_MatchOfferSortByTime()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByInc()
+export function GAMECENTER_MatchOfferSortByInc()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -759,7 +778,7 @@ function GAMECENTER_MatchOfferSortByInc()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByCategory()
+export function GAMECENTER_MatchOfferSortByCategory()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -790,7 +809,7 @@ function GAMECENTER_MatchOfferSortByCategory()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByRating()
+export function GAMECENTER_MatchOfferSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -821,7 +840,7 @@ function GAMECENTER_MatchOfferSortByRating()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByRated()
+export function GAMECENTER_MatchOfferSortByRated()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
@@ -851,7 +870,7 @@ function GAMECENTER_MatchOfferSortByRated()
 * @return       none
 * @author       Rubens
 */
-function GAMECENTER_MatchOfferSortByPrivate()
+export function GAMECENTER_MatchOfferSortByPrivate()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();

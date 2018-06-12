@@ -1,3 +1,12 @@
+import { CONNECTION_SendJabber } from 'connection/connection.js';
+import {
+	UTILS_GetText,
+	UTILS_Capitalize,
+	UTILS_CreateElement,
+} from 'utils/utils.js';
+import { MESSAGE_ChangeStatus } from 'xmpp_messages/message.js';
+import { ContactObj, INTERFACE_RefreshContactOnlineNumber } from 'interface/contact.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -32,7 +41,7 @@
 * @return	XMPP message accordly to flag DontSend
 * @author	Rubens Suguimoto
 */
-function CONTACT_ChangeStatus(NewStatus, DontSend)
+export function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
 	var i, XML, Status, StatusItem;
 	var Select;
@@ -103,7 +112,7 @@ function CONTACT_ChangeStatus(NewStatus, DontSend)
 * @return	Empty String
 * @author	Rubens Suguimoto
 */
-function CONTACT_SetUserStatus(Username, NewStatus)
+export function CONTACT_SetUserStatus(Username, NewStatus)
 {
 	var Rating, Type;
 	var ContactUser;
@@ -138,7 +147,7 @@ function CONTACT_SetUserStatus(Username, NewStatus)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function CONTACT_StartAwayCounter()
+export function CONTACT_StartAwayCounter()
 {
 	MainData.SetAwayCounter(300);
 
@@ -213,7 +222,7 @@ function CONTACT_ResetAwayStatus()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function CONTACT_StopAwayStatus()
+export function CONTACT_StopAwayStatus()
 {
 	clearInterval(MainData.GetAwayInterval());
 	MainData.SetAwayInterval(null);

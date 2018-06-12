@@ -1,3 +1,5 @@
+import { START_StartPage } from 'index.js';
+
 /**
 * CHESSD - WebClient
 *

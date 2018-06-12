@@ -1,3 +1,5 @@
+import { UTILS_GetText, UTILS_CreateElement } from 'utils/utils.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -26,7 +28,7 @@
 * @return	none
 * @author	Rubens Suguimoto
 */
-function LoadObj() 
+export function LoadObj() 
 {
 	var Load = INTERFACE_StartLoad();
 

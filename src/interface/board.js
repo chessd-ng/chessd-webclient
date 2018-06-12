@@ -1,3 +1,28 @@
+import {
+	UTILS_DisableSelection,
+	UTILS_GetText,
+	UTILS_CreateElement,
+	UTILS_HorizontalIndex,
+	UTILS_AddListener,
+	UTILS_ShortString,
+} from 'utils/utils.js';
+import {
+	GAME_SendResign,
+	GAME_SendAdjourn,
+	GAME_RemoveGame,
+	GAME_SendDraw,
+	GAME_SendCancel,
+	GAME_ChangePromotion,
+} from 'game/game.js';
+import { UTILS_StartDragPiece } from 'utils/dragpiece.js';
+import {
+	OLDGAME_NextBoard,
+	OLDGAME_LastBoard,
+	OLDGAME_PrevBoard,
+	OLDGAME_FirstBoard,
+} from 'game/oldgame.js';
+import { WINDOW_Alert } from 'window/window.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -30,7 +55,7 @@
 * @return	Game board elements
 * @author	Rubens Suguimoto and Pedro Rocha
 */
-function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer)
+export function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, Observer)
 {
 	var GameDiv = UTILS_CreateElement("div","GameDiv");
 	var GameInfo = UTILS_CreateElement("div","GameInfoDiv");
@@ -204,7 +229,7 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_RemoveBlockEvents()
+export function INTERFACE_RemoveBlockEvents()
 {
 	var i;
 
@@ -338,7 +363,7 @@ function INTERFACE_CreateGameOptions(GameID)
 * @return	MoveListDiv HTML DOM Div and MoveList HTML DOM List
 * @author	Rubens Suguimoto and Pedro Rocha
 */
-function INTERFACE_CreateMoveList()
+export function INTERFACE_CreateMoveList()
 {
 	var MoveListDiv = UTILS_CreateElement("div", "MoveListDiv");
 	var MoveList = UTILS_CreateElement("ul", "MoveList");
@@ -511,7 +536,7 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 * @return	Piece HTML DOM img
 * @author	Rubens Suguimoto and Pedro Rocha
 */ 
-function INTERFACE_NewPiece(Piece, PlayerColor, Size)
+export function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 {
 	var PieceImg;
 	var PieceName, PieceTitle;
@@ -648,7 +673,7 @@ function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 * @return	MoveListDiv html div and MoveList html list
 * @author	Rubens Suguimoto and Pedro Rocha
 */
-function INTERFACE_CreateOldGameMoveList()
+export function INTERFACE_CreateOldGameMoveList()
 {
 	var MoveListDiv = UTILS_CreateElement("div", "MoveListDiv", null, null);
 	var MoveList = UTILS_CreateElement("ul", "MoveList", "oldgame", null);
@@ -694,7 +719,7 @@ function INTERFACE_CreateOldGameMoveList()
 * @return	Tab html Div
 * @author	Rubens Suguimoto and Pedro Rocha
 */
-function INTERFACE_CreateOldGameTab(DivMoves)
+export function INTERFACE_CreateOldGameTab(DivMoves)
 {
 	var Tab = UTILS_CreateElement("div", "InfoTab", null, null);
 
@@ -713,7 +738,7 @@ function INTERFACE_CreateOldGameTab(DivMoves)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_LastMove(Move)
+export function INTERFACE_LastMove(Move)
 {
 	var PosOrig = Move.charAt(0)+Move.charAt(1);
 	var PosDest = Move.charAt(2)+Move.charAt(3);
@@ -773,7 +798,7 @@ function INTERFACE_LastMove(Move)
 * @return	Block HTML div element of null (if block not found)
 * @author	Rubens Suguimoto
 */
-function INTERFACE_FindBlock(id)
+export function INTERFACE_FindBlock(id)
 {
 	var i = 0;
 	var Blocks = this.BoardBlocks.getElementsByTagName("div");
@@ -799,7 +824,7 @@ function INTERFACE_FindBlock(id)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowLoadingMove()
+export function INTERFACE_ShowLoadingMove()
 {
 	this.LoadingMove.style.display = "block";
 }
@@ -809,7 +834,7 @@ function INTERFACE_ShowLoadingMove()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideLoadingMove()
+export function INTERFACE_HideLoadingMove()
 {
 	this.LoadingMove.style.display = "none";
 }
@@ -820,7 +845,7 @@ function INTERFACE_HideLoadingMove()
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_ShowLeaveUser(Color)
+export function INTERFACE_ShowLeaveUser(Color)
 {
 	if(Color == "white")
 	{
@@ -839,7 +864,7 @@ function INTERFACE_ShowLeaveUser(Color)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideLeaveUser()
+export function INTERFACE_HideLeaveUser()
 {
 	this.LeaveUser.style.display = "none";
 }
@@ -851,7 +876,7 @@ function INTERFACE_HideLeaveUser()
 * @return 	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_SetBlockBorder(Block)
+export function INTERFACE_SetBlockBorder(Block)
 {
 	var Border = UTILS_CreateElement("div","BlockBoard");
 
@@ -867,7 +892,7 @@ function INTERFACE_SetBlockBorder(Block)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_SetBlockClass(BlockId)
+export function INTERFACE_SetBlockClass(BlockId)
 {
 	var Block = this.FindBlock(BlockId);
 
@@ -881,7 +906,7 @@ function INTERFACE_SetBlockClass(BlockId)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_RemoveBlockBorder(Block)
+export function INTERFACE_RemoveBlockBorder(Block)
 {
 	if(Block.firstChild != null)
 	{
@@ -896,7 +921,7 @@ function INTERFACE_RemoveBlockBorder(Block)
 * @return	none
 * @author	Danilo Yorinori
 */
-function INTERFACE_RemoveBlockClass(BlockId)
+export function INTERFACE_RemoveBlockClass(BlockId)
 {
 	var Block = this.FindBlock(BlockId);
 

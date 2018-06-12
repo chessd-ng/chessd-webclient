@@ -1,3 +1,9 @@
+import {
+	UTILS_GetTag,
+	UTILS_GetText,
+	UTILS_OpenXMLFile,
+} from 'utils/utils.js';
+
 /**
 * CHESSD - WebClient
 *
