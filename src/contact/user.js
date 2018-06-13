@@ -315,7 +315,7 @@ export function USER_StopUpdateUserList()
 export function USER_StartUpdateUserProfile()
 {
 	//Wait for 30 minutes to get profile again
-	MainData.SetUpdateProfileTimer(setInterval("PROFILE_ResetUpdateProfile()",90000));
+	MainData.SetUpdateProfileTimer(setInterval(PROFILE_ResetUpdateProfile,90000));
 }
 
 /**
