@@ -45,6 +45,13 @@ export function PARSER_ParsePresence(XML)
 	var Type;
 	var Pattern;
 
+  Type = XML.getAttribute('type');
+
+  if (Type == 'error') {
+    console.log(XML);
+    return;
+  }
+
 	// Get Jid
 	try 
 	{
@@ -56,15 +63,14 @@ export function PARSER_ParsePresence(XML)
 	}
 
 	Pattern = new RegExp("^"+MainData.GetServer()+"."+MainData.GetHost()+"$");
-	if (Jid.match(Pattern) != null) {
-		Type = XML.getAttribute('type');
+	if (Jid && Jid.match(Pattern) != null) {
 		if (Type == "unavailable") {
 			WINDOW_Alert(UTILS_GetText("server_offline_title"),UTILS_GetText("server_offline"));
 		}
 		return Buffer;
 	}
 	// Room presence
-	else if (Jid.match(MainData.GetConferenceComponent()) || (Jid.match(MainData.GetServer())))
+	else if (Jid && (Jid.match(MainData.GetConferenceComponent()) || (Jid.match(MainData.GetServer()))))
 	{
 		// This try is used when user has connection replaced.
 		// When finish connection steps, jabber send a replaced

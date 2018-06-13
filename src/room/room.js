@@ -94,6 +94,10 @@ export function ROOM_HandleRoomPresence(XML)
 		return Buffer;
 	}
 
+  if (Type === 'unavailable') {
+    return Buffer;
+  }
+
 	if(Item.length > 0)
 	{
 		Role = Item[0].getAttribute("role");
@@ -216,9 +220,9 @@ export function ROOM_HandleMessage(XML)
 	{
 		// Get the message
 		Message = UTILS_GetNodeText(Body[0]);
-	}
-
-  console.log(Message);
+  } else {
+    return "";
+  }
 
 	// Show message on interface
 	ROOM_ShowMessage(RoomName, From, Message, Stamp);

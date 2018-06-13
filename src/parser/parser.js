@@ -5,6 +5,8 @@ import { LOGIN_Disconnected } from 'login/login.js';
 import { PARSER_ParsePresence } from 'parser/parser_presence.js';
 import { PARSER_ParseChat } from 'parser/parser_chat.js';
 
+import { MainData } from 'start.js';
+
 /**
 * CHESSD - WebClient
 *

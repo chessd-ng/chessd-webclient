@@ -34,8 +34,12 @@ import {
 } from 'interface/interface.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 
+import { MainData } from 'start.js';
+
 import ImageEmoticonDefault from 'images/emoticons/default.png';
 import ImageRoomArrow from 'images/room_arrow.png';
+
+import ImageCloseChat from 'images/close_chat.png';
 
 import ImageEmoticon0 from 'images/emoticons/0.png';
 import ImageEmoticon1 from 'images/emoticons/1.png';
@@ -737,7 +741,7 @@ function INTERFACE_ShowEmoticonList(RName)
 	{
 		Item = UTILS_CreateElement("li");
 		Img = UTILS_CreateElement("img", null, i);
-		Img.src = "./images/emoticons/"+i+".png";
+    Img.src = Emoticons[i.toString()];
 		Img.onclick = function () {
 			var Node = document.getElementById("Input_"+RoomName);
 			var Num = i;
@@ -910,14 +914,7 @@ export function INTERFACE_CreateRoomInBar(RoomName)
 		}
 
 		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
-		if (MainData.GetBrowser() == 0)
-		{
-			RoomClose.src = "./images/ie/close_chat.gif";
-		}
-		else
-		{
-			RoomClose.src = "./images/close_chat.png";
-		}
+    RoomClose.src = ImageCloseChat;
 		RoomClose.onclick = function() { ROOM_ExitRoom(RoomName); };
 		RoomItem.appendChild(RoomClose);
 

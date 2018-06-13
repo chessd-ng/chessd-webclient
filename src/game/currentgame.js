@@ -45,7 +45,7 @@ export function CURRENTGAME_HandleGameRoomList(XML)
 	Rooms = new Array();
 
 	// Get the ID 
-	ID = XML.getAttribute("id");
+	var ID = XML.getAttribute("id");
 
 	// XML with all rooms games
 	if (ID != Consts.IQ_ID_GetGamesList)
