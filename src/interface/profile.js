@@ -12,6 +12,15 @@ import {
 	WINDOW_ProfileImage,
 } from 'window/window.js';
 
+import { MainData } from 'start.js';
+
+import ImageNoPhoto from 'images/no_photo.png';
+import ImageAdminAvailable from 'images/admin_available.png';
+import ImageTeacherAvailable from 'images/teacher_available.png';
+import ImageUserAvailable from 'images/user_available.png';
+import ImageRobotAvailable from 'images/robot_available.png';
+
+
 /**
 * CHESSD - WebClient
 *
@@ -136,7 +145,7 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	PhotoDiv = UTILS_CreateElement('div','ProfPhotoDiv');
 
 	Photo = UTILS_CreateElement('img');
-	Photo.src = "images/no_photo.png";
+  Photo.src = ImageNoPhoto;
 	
 	Br = UTILS_CreateElement('br');
 	
@@ -258,13 +267,13 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	switch(Profile.Group)
 	{
 		case 'admin':
-			TypeImg.src = "images/admin_available.png";
+      TypeImg.src = ImageAdminAvailable;
 			break;
 		case 'teacher':
-			TypeImg.src = "images/teacher_available.png";
+      TypeImg.src = ImageTeacherAvailable;
 			break;
 		default:
-			TypeImg.src = "images/user_available.png";
+      TypeImg.src = ImageUserAvailable;
 	}
 
 	// Time Div <Online Time, Total Time>
@@ -574,12 +583,12 @@ function INTERFACE_ProfileSetUserImg(Img)
 		}
 		catch(err)
 		{
-			this.UserImg.src = "images/no_photo.png";
+      this.UserImg.src = ImageNoPhoto;
 		}
 	}
 	else
 	{
-		this.UserImg.src = "images/no_photo.png";
+    this.UserImg.src = ImageNoPhoto;
 	}
 
 }
@@ -732,19 +741,19 @@ function INTERFACE_ProfileSetTitleImg(Group)
 	switch(Group)
 	{
 		case 'admin':
-			this.TitleImg.src = "images/admin_available.png";
+      this.TitleImg.src = ImageAdminAvailable;
 			break;
 		case 'teacher':
-			this.TitleImg.src = "images/teacher_available.png";
+      this.TitleImg.src = ImageTeacherAvailable;
 			break;
 		case 'user':
-			this.TitleImg.src = "images/user_available.png";
+      this.TitleImg.src = ImageUserAvailable;
 			break;
 		case 'robot':
-			this.TitleImg.src = "images/robot_available.png";
+      this.TitleImg.src = ImageRobotAvailable;
 			break;
 		default:
-			this.TitleImg.src = "images/user_available.png";
+      this.TitleImg.src = ImageUserAvailable;
 	}
 }
 

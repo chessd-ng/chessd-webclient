@@ -8,6 +8,7 @@ import { ONLINE_SortUserByRating, ONLINE_SortUserByNick } from 'contact/online.j
 import { CONTACT_SortUsersByNick, CONTACT_SortUsersByRating } from 'contact/contact.js';
 import { UserListObj } from 'interface/user.js';
 import { WINDOW_SearchUser } from 'window/window.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient

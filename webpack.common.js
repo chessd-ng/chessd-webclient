@@ -4,15 +4,23 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    bundle: './src/index.js',
+    index: './src/index.js',
+    register: './src/register/register.js',
   },
   output: {
     path: path.join(__dirname, './build'),
-    filename: 'bundle.js',
+    filename: '[name].js',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
+      filename: 'index.html',
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'src/register.html'),
+      filename: 'register.html',
+      chunks: ['register'],
     })
   ],
   module: {

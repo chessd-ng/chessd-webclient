@@ -1,7 +1,31 @@
 import { LoadObj } from 'interface/load.js';
 import { UTILS_CreateElement } from 'utils/utils.js';
-import { START_Webclient } from 'index.js';
+import { START_Webclient } from 'start.js';
 import { LOGIN_EndLogin } from 'login/login.js';
+import { MainData } from 'start.js';
+import { NoCache } from 'initial_files.js';
+
+import "css/Top.css";
+import "css/Left.css";
+import "css/Contacts.css";
+import "css/Rooms.css";
+import "css/Window.css";
+import "css/TopMenus.css";
+import "css/Challenge.css";
+import "css/Board.css";
+import "css/Game.css";
+import "css/Chat.css";
+import "css/Profile.css";
+import "css/Oldgame.css";
+import "css/Welcome.css";
+import "css/User.css";
+import "css/Admin.css";
+import "css/ChallengeMenu.css";
+import "css/Announce.css";
+import "css/Help.css";
+import "css/GameCenter.css";
+import "css/Tourney.css";
+import "css/AdminCenter.css";
 
 /**
 * CHESSD - WebClient
@@ -68,84 +92,6 @@ function LOAD_LoadFiles()
 	var Files = new Array();
 	var NumFiles;
 	
-	// CSS Files to be loaded
-	Files.push("css/Top.css");
-	Files.push("css/Left.css");
-	Files.push("css/Contacts.css");
-	Files.push("css/Rooms.css");
-	Files.push("css/Window.css");
-	Files.push("css/TopMenus.css");
-	Files.push("css/Challenge.css");
-	Files.push("css/Board.css");
-	Files.push("css/Game.css");
-	Files.push("css/Chat.css");
-	Files.push("css/Profile.css");
-	Files.push("css/Oldgame.css");
-	Files.push("css/Welcome.css");
-	Files.push("css/User.css");
-	Files.push("css/Admin.css");
-	Files.push("css/ChallengeMenu.css");
-	Files.push("css/Announce.css");
-	Files.push("css/Help.css");
-	Files.push("css/GameCenter.css");
-	Files.push("css/Tourney.css");
-	Files.push("css/AdminCenter.css");
-
-	if(MainData.GetBrowser() == 0) //IE
-	{
-		Files.push("css/IEFix.css");
-	}
-
-	// Scripts Files to be loaded
-	Files.push("scripts/parser/parser_iq.js");
-	Files.push("scripts/parser/parser_chat.js");
-	Files.push("scripts/admin/admin.js");
-	Files.push("scripts/contact/contact.js");
-	Files.push("scripts/chat/chat.js");
-	Files.push("scripts/challenge/challenge.js");
-	Files.push("scripts/challenge/adjourn.js");
-	Files.push("scripts/challenge/announce.js");
-	Files.push("scripts/contact/status.js");
-	Files.push("scripts/contact/invite.js");
-	Files.push("scripts/contact/info.js");
-	Files.push("scripts/contact/search.js");
-	Files.push("scripts/interface/interface.js");
-	Files.push("scripts/interface/top.js");
-	Files.push("scripts/interface/left.js");
-	Files.push("scripts/interface/room.js");
-	Files.push("scripts/interface/contact.js");
-	Files.push("scripts/interface/chat.js");
-	Files.push("scripts/interface/window.js");
-//	Files.push("scripts/interface/challengemenu.js");
-	Files.push("scripts/interface/challenge.js");
-	Files.push("scripts/interface/oldgame.js");
-	Files.push("scripts/interface/welcome.js");
-	Files.push("scripts/interface/user.js");
-	Files.push("scripts/interface/admin.js");
-	Files.push("scripts/interface/announce.js");
-	Files.push("scripts/interface/profile.js");
-	Files.push("scripts/interface/board.js");
-	Files.push("scripts/interface/game.js");
-	Files.push("scripts/interface/postpone.js");
-	Files.push("scripts/profile/profile.js");
-	Files.push("scripts/room/room.js");
-	Files.push("scripts/window/window.js");
-	Files.push("scripts/utils/dragpiece.js");
-	Files.push("scripts/utils/images.js");
-	Files.push("scripts/utils/dragwindow.js");
-	Files.push("scripts/game/oldgame.js");
-	Files.push("scripts/game/game.js");
-	Files.push("scripts/interface/help.js");
-	Files.push("scripts/contact/online.js");
-	Files.push("scripts/contact/online_info.js");
-	Files.push("scripts/contact/user.js");
-	Files.push("scripts/interface/gamecenter.js");
-	Files.push("scripts/gamecenter/gamecenter.js");
-	Files.push("scripts/tourney/tourney.js");
-	Files.push("scripts/interface/tourney.js");
-	Files.push("scripts/interface/admincenter.js");
-	Files.push("scripts/game/currentgame.js");
-
 	NumFiles = Files.length;
 	LOAD_AppendFiles(Files, NumFiles);
 }
@@ -268,7 +214,7 @@ function LOAD_EndFile(Files, NumFiles)
 	LoadObj.LoadBar.add(Num)
 
 	// Start Webclient chess environment
-	setTimeout("START_Webclient()", 1500);
+	setTimeout(START_Webclient, 1);
 }
 
 /*

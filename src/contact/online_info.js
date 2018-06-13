@@ -1,4 +1,4 @@
-
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient

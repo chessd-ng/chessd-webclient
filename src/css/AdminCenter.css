@@ -353,13 +353,13 @@ td, li{
 	width		: 10px;
 	height		: 10px;
 	margin		: 0px 15px;
-	background-image: url('../images/gamecenter/rated.png');
+	background-image: url('~images/gamecenter/rated.png');
 	background-repeat: no-repeat;
 }
 
 #CenterAdjourn #CenterAdminResult li #rated.disable
 {
-	background-image: url('../images/gamecenter/rated_disable.png');
+	background-image: url('~images/gamecenter/rated_disable.png');
 }
 #CenterAdjourn #CenterAdminResult li #inc
 {

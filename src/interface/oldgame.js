@@ -14,6 +14,16 @@ import { MESSAGE_GetOldGames, MESSAGE_FetchOldGame } from 'xmpp_messages/message
 import { WINDOW_Alert, WINDOW_RemoveWindow } from 'window/window.js';
 import { OLDGAME_HandleSearchOldGame, OLDGAME_CloseWindow } from 'game/oldgame.js';
 
+import { MainData } from 'start.js';
+
+import ImageInviteWhitePawn from 'images/invite_white_pawn.png';
+import ImageInviteBlackPawn from 'images/invite_black_pawn.png';
+import ImageRandom from 'images/random.png';
+
+import ImageIEInviteWhitePawn from 'images/ie/invite_white_pawn.gif';
+import ImageIEInviteBlackPawn from 'images/ie/invite_black_pawn.gif';
+import ImageIERandom from 'images/ie/random.gif';
+
 /**
 * CHESSD - WebClient
 *
@@ -172,15 +182,15 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	// Set imagens according to browser type
 	if (MainData.GetBrowser() == 0)
 	{
-		WImg.src = "images/ie/invite_white_pawn.gif";
-		BImg.src = "images/ie/invite_black_pawn.gif";
-		RImg.src = "images/ie/random.gif";
+    WImg.src = ImageIEInviteWhitePawn;
+    BImg.src = ImageIEInviteBlackPawn;
+    RImg.src = ImageIERandom;
 	}
 	else
 	{
-		WImg.src = "images/invite_white_pawn.png";
-		BImg.src = "images/invite_black_pawn.png";
-		RImg.src = "images/random.png";
+    WImg.src = ImageInviteWhitePawn;
+    BImg.src = ImageInviteBlackPawn;
+    RImg.src = ImageRandom;
 	}
 
 	// End Pieces Form

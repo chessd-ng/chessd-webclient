@@ -1,6 +1,6 @@
 import { UTILS_GetText } from 'utils/utils.js';
 import { PARSER_ParseIq } from 'parser/parser_iq.js';
-import { START_Restart } from 'index.js';
+import { START_Restart } from 'start.js';
 import { LOGIN_Disconnected } from 'login/login.js';
 import { PARSER_ParsePresence } from 'parser/parser_presence.js';
 import { PARSER_ParseChat } from 'parser/parser_chat.js';

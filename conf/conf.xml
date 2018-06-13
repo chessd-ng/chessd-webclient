@@ -19,5 +19,6 @@
 		<search-component>vjud</search-component>
 		<server>chessd</server>
 		<conference-component>conference</conference-component>
+		<host>192.168.1.253:8082</host>
 	</jabber>
 </conf>

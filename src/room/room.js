@@ -22,6 +22,7 @@ import {
 	MESSAGE_GroupChat,
 } from 'xmpp_messages/message.js';
 import { WINDOW_Alert } from 'window/window.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -216,6 +217,8 @@ export function ROOM_HandleMessage(XML)
 		// Get the message
 		Message = UTILS_GetNodeText(Body[0]);
 	}
+
+  console.log(Message);
 
 	// Show message on interface
 	ROOM_ShowMessage(RoomName, From, Message, Stamp);

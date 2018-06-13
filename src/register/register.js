@@ -3,6 +3,11 @@ import {
 	UTILS_GetText,
 	UTILS_OpenXMLFile,
 } from 'utils/utils.js';
+import {
+  START_MainData,
+  MainData
+} from 'start.js';
+import 'css/Register.css';
 
 /**
 * CHESSD - WebClient
@@ -37,7 +42,7 @@ var RegisterData;
 * @author	Fabiano Kuss
 */
 function REGISTER_RegisterData(){
-	this.Host = REGISTER_GetHost();
+	this.Host = MainData.GetHostPost();
 	this.SID = "";
 	this.RID = parseInt(Math.random()*1000000000);
 }
@@ -87,7 +92,7 @@ function REGISTER_Post()
 
 	RegisterData = new REGISTER_RegisterData();
 
-   	Msg = "<body hold='1' rid='"+RegisterData.RID+"' to='"+RegisterData.Host+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
+  Msg = "<body content='text/xml; charset=utf-8' hold='1' rid='"+RegisterData.RID+"' to='"+MainData.GetHost()+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
 	REGISTER_SendData(Msg);
 }
 
@@ -102,7 +107,7 @@ function REGISTER_Post()
 
 function REGISTER_GetError(err)
 {
-	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+  var XML = MainData.GetText();
 	switch(err)
 	{
 		case 1: 
@@ -190,7 +195,7 @@ function REGISTER_SendData(Msg)
 	}
 
 	// Avoid browser caching
-	DT = Math.floor(Math.random()*10000);
+	var DT = Math.floor(Math.random()*10000);
 
 	HttpRequest.open('POST', 'http://'+RegisterData.Host+'/jabber?id='+DT , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -249,7 +254,7 @@ function REGISTER_ProcessMessage(XmlDoc){
 	if(TestIq.length == 0)
 	{
 		RegisterData.SID = XmlDoc.getElementsByTagName("body")[0].getAttribute("sid");
-		Msg = "<iq type='get' id='reg1' to='"+RegisterData.Host+"'><query xmlns='jabber:iq:register'/></iq>";
+		Msg = "<iq type='get' id='reg1' to='"+MainData.GetHost()+"'><query xmlns='jabber:iq:register'/></iq>";
 		Msg = REGISTER_MakeXMPP(Msg);
 		REGISTER_SendData(Msg);
 	}
@@ -286,7 +291,7 @@ function REGISTER_ProcessMessage(XmlDoc){
 */
 function REGISTER_SucessMessage(){
 
-	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+  var XML = MainData.GetText();
 
 	alert(UTILS_GetTag(XML, "register_sucess_message"));
 
@@ -301,7 +306,7 @@ function REGISTER_SucessMessage(){
 */
 function REGISTER_ParseError(code){
 
-	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+  var XML = MainData.GetText();
 
 	switch(code)
 	{
@@ -313,36 +318,13 @@ function REGISTER_ParseError(code){
 }
 
 /*
-* @brief	Get language parameter
-
-* @parameter	URL	string page url
-* @return	String language URL file
-* @author	Fabiano Kuss
-*/
-function REGISTER_GetLanguage(URL)
-{
-	var QString = URL.split('?');
-
-	if(QString[1])
-	{
-		QString = URL.split('=');
-		if(QString[1])
-		{
-			return "./lang/"+QString[1];
-		}
-	}
-
-	return "./lang/pt_BR.xml"
-}
-
-/*
 * @brief	Get host from configuration file
 *
 * @return	Host string
 * @author	Fabiano Kuss
 */
 function REGISTER_GetHost(){
-	return this.Host = window.location.href.split("/")[2].split(":")[0];
+	return window.location.href.split("/")[2].split(":")[0];
 }
 
 /*
@@ -354,7 +336,7 @@ function REGISTER_GetHost(){
 function REGISTER_Labels()
 {
 
-	var XML = UTILS_OpenXMLFile(REGISTER_GetLanguage(window.location.href));
+  var XML = MainData.GetText();
 	var Inf = document.getElementById("register_inf");
 	var Login = document.getElementById("register_login");
 	var MaxChar = document.getElementById("register_max_char");
@@ -392,8 +374,10 @@ function REGISTER_Labels()
 
 	Title.innerHTML = UTILS_GetTag(XML, "register_title");
 
-	BtConfirm.value = UTILS_GetTag(XML, "register_bt_confirm");
-	BtCancel.value = UTILS_GetTag(XML, "window_cancel");
+	BtConfirm.value = UTILS_GetTag(XML, "register_bt_confirm").trim();
+	BtCancel.value = UTILS_GetTag(XML, "window_cancel").trim();
+
+  BtConfirm.onclick = REGISTER_Post;
 
 
 }
@@ -458,7 +442,7 @@ function REGISTER_SendDataPHP(User, Mail, Pwd)
 	}
 
 	// Avoid browser caching
-	DT = Math.floor(Math.random()*10000);
+	var DT = Math.floor(Math.random()*10000);
 
 	HttpRequest.open('POST','php/register.php?jabber?id='+DT , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -520,3 +504,7 @@ function REGISTER_GetDatabaseError(Msg)
 }
 
 
+// init
+START_MainData();
+REGISTER_Labels();
+REGISTER_VerticalAlignMiddle();

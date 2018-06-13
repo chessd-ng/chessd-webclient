@@ -11,13 +11,13 @@
 }
 
 #WindowBox #HelpDiv li.unselected {
-	list-style-image: url('../images/arrow_down.png');
+	list-style-image: url('~images/arrow_down.png');
 	cursor : pointer;
 	color : #216778; 
 }
 
 #WindowBox #HelpDiv li.selected {
-	list-style-image: url('../images/arrow_right.png');
+	list-style-image: url('~images/arrow_right.png');
 	cursor : pointer;
 	color : #FFA200; 
 }

@@ -11,6 +11,9 @@ import {
 import { INTERFACE_CreateContact } from 'interface/contact.js';
 import { IMAGE_ImageDecode } from 'utils/images.js';
 import { PROFILE_StartProfile } from 'profile/profile.js';
+import { MainData } from 'start.js';
+
+import ImageNoPhoto from 'images/no_photo.png';
 
 /**
 * CHESSD - WebClient
@@ -89,7 +92,7 @@ function INTERFACE_CreateUserBox()
 	UserImageLink = User.GetPhoto();
 	if (UserImageLink == null)
 	{
-		UserImg.src = "images/no_photo.png";
+    UserImg.src = ImageNoPhoto;
 	}
 	else
 	{
@@ -156,7 +159,7 @@ export function INTERFACE_SetUserImage(Img)
 {
 	var UserImg = document.getElementById("UserImg");
 
-	if ((UserImg != null) && (Img != "images/no_photo.png"))
+	if ((UserImg != null) && (Img != ImageNoPhoto))
 	{
 		UserImg.src = IMAGE_ImageDecode(Img);
 	}

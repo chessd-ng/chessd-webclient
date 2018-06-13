@@ -13,6 +13,8 @@ import { INTERFACE_HideOldgameLoading } from 'interface/oldgame.js';
 import { GAMECENTER_HideGameCenter, GAMECENTER_ShowGameCenter } from 'gamecenter/gamecenter.js';
 import { WINDOW_Alert, WINDOW_OldGame } from 'window/window.js';
 
+import { MainData } from 'start.js';
+
 /**
 * CHESSD - WebClient
 *

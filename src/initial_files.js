@@ -1,4 +1,4 @@
-import { START_StartPage } from 'index.js';
+import { START_StartPage } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -84,21 +84,15 @@ export function INITIAL_LoadScripts()
 {
 	var ScriptList = new Array();
 
-  console.log("start");
-
 	var ProgressText = document.createElement("p");
 	var LoadingText = document.createElement("p");
 	ProgressText.setAttribute("id","ProgressText");
 	LoadingText.setAttribute("id","LoadingText");
 	LoadingText.innerHTML = "Loading...";
 
-  console.log("before append");
-
 	// Create Loading progress text
 	document.body.appendChild(LoadingText);
 	document.body.appendChild(ProgressText);
-
-  console.log("after append");
 
 	// Append favicon
 	INITIAL_AppendFiles("favicon","images/favicon.ico");

@@ -1,5 +1,5 @@
 import { UTILS_JabberLang } from 'utils/utils.js';
-import { MainData } from 'index.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -91,7 +91,7 @@ export function MESSAGE_Wait()
 */
 export function MESSAGE_StartConnection()
 {
-	var XMPP = "<body hold='1' rid='"+MainData.GetRID()+"' to='"+MainData.GetHost()+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind'/>";
+	var XMPP = "<body content='text/xml; charset=utf-8' hold='1' rid='"+MainData.GetRID()+"' to='"+MainData.GetHost()+"' ver='1.6' wait='10' xml:lang='en' xmlns='http://jabber.org/protocol/httpbind' xmlns:xmpp='urn:xmpp:xbosh' xmpp:version='1.0'/>";
 
 	return XMPP;
 }
@@ -1181,7 +1181,7 @@ export function MESSAGE_GetProfile(Username, Id)
 export function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 {
 	var XMPP = "";
-	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' >";
+	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' id='set-vcard'>";
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0'>";
 	XMPP += "<FN>"+FullName+"</FN>";
 	XMPP += "<DESC>"+Desc+"</DESC>";

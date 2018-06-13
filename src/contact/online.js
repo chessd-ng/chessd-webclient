@@ -1,5 +1,6 @@
 import { UTILS_GetNodeText } from 'utils/utils.js';
 import { ContactOnlineObj } from 'interface/contact.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient

@@ -30,6 +30,8 @@ import { INTERFACE_ShowChallengeWindow } from 'interface/challenge.js';
 import { CHAT_OpenChat } from 'chat/chat.js';
 import { INTERFACE_ShowCreateTourneyWindow } from 'interface/tourney.js';
 
+import { MainData } from 'start.js';
+
 /**
 * CHESSD - WebClient
 *

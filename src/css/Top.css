@@ -7,7 +7,7 @@
 	float			: left;
 	width			: 165px;
 	height			: 95px;
-	background		: url('../images/logo.png') no-repeat;
+	background		: url('~images/logo.png') no-repeat;
 	text-indent		: -9999px;
 	overflow		: hidden;
 	margin			: 4px 4px 4px 45px;
@@ -43,7 +43,7 @@
 }
 
 #Top .menu .exit {
-	background		: url('../images/exit.png') no-repeat;
+	background		: url('~images/exit.png') no-repeat;
 	width			: 56px;
 	color			: #216778;
 	border-right		: 0px;
@@ -53,7 +53,7 @@
 }
 
 #Top .menu .exit:hover {
-	background		: url('../images/exit_selec.png') no-repeat;
+	background		: url('~images/exit_selec.png') no-repeat;
 	color			: #FFF;
 }
 

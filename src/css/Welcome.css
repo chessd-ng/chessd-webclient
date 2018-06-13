@@ -44,7 +44,7 @@
 }
 
 #WelcomeImage{
-	background-image: url("../images/welcome/welcome_board.png");
+	background-image: url("~images/welcome/welcome_board.png");
 	background-repeat: no-repeat;
 
 	height		: 240px;
@@ -63,7 +63,7 @@
 }
 
 #WelcomeInstruction ul {
-	list-style-image: url("../images/welcome/welcome_dot.png");
+	list-style-image: url("~images/welcome/welcome_dot.png");
 }
 
 #WelcomeInstruction li{

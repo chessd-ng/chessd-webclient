@@ -8,9 +8,9 @@ import {
 	MESSAGE_SendPasswd,
 	MESSAGE_StartConnection,
 } from 'xmpp_messages/message.js';
-import { START_Restart } from 'index.js';
-import { LOGIN_LoginMsg, LOGIN_LoginFailed } from 'login/login.js';
-import { MainData } from 'index.js';
+import { START_Restart } from 'start.js';
+import { LOGIN_LoginMsg, LOGIN_LoginFailed, LOGIN_EndLogin } from 'login/login.js';
+import { MainData, START_Webclient } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -124,8 +124,7 @@ export function CONNECTION_SendJabber()
 	// This variable is used to avoid browser caching
 	DT = Math.floor(Math.random()*10000);
 
-	HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/jabber?id='+DT , true);
-	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/jabber' , true);
 	
 	// Normal parse messages responses
 	if (MainData.GetConnectionStatus() == 0)
@@ -269,9 +268,9 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 						}
 						else //if(IqType == "result")
 						{
-							/******** LOAD FILES**********/
-							// Start load scripts, css and images
-							LOAD_StartLoad();
+
+              LOGIN_EndLogin();
+              START_Webclient()
 
 							// Set connected status
 							MainData.SetConnectionStatus(0);

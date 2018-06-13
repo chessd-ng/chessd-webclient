@@ -8,7 +8,7 @@ import {
 	UTILS_AddListener,
 	UTILS_ReadCookie,
 } from 'utils/utils.js';
-import { START_ChangeLanguage } from 'index.js';
+import { START_ChangeLanguage } from 'start.js';
 import { LOGIN_Login } from 'login/login.js';
 
 /**
@@ -33,7 +33,7 @@ import { LOGIN_Login } from 'login/login.js';
 * @brief	Shows login screen to user
 */
 
-import { MainData } from 'index.js';
+import { MainData } from 'start.js';
 import { LanguageNames } from 'langs';
 
 import banner_login_gif from "images/login/banner_login.gif";

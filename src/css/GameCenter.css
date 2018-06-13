@@ -24,7 +24,7 @@
 #MenuDiv #MenuList li
 {
 	background-color: #216778;
-	background-image: url("../images/left_title_bg_inactive.png");
+	background-image: url("~images/left_title_bg_inactive.png");
 	color		: #FFFFFF;
 	float		: left;
 	margin-right	: 2px;
@@ -39,7 +39,7 @@
 #MenuDiv #MenuList li:hover
 {
 	background-color: #FFA200;
-	background-image: url("../images/left_title_bg.png");
+	background-image: url("~images/left_title_bg.png");
 }
 
 #MenuDiv #MenuList li.disable
@@ -178,7 +178,7 @@
 	width		: 9px;
 	height		: 9px;
 	margin		: 0px 2px;
-	background-image: url('../images/gamecenter/abusive.png');
+	background-image: url('~images/gamecenter/abusive.png');
 	background-repeat: no-repeat;
 }
 #CenterAnnounce #CenterResult li #abusive.disable
@@ -211,13 +211,13 @@
 	width		: 10px;
 	height		: 10px;
 	margin		: 0px 15px;
-	background-image: url('../images/gamecenter/rated.png');
+	background-image: url('~images/gamecenter/rated.png');
 	background-repeat: no-repeat;
 }
 
 #CenterAnnounce #CenterResult li #rated.disable
 {
-	background-image: url('../images/gamecenter/rated_disable.png');
+	background-image: url('~images/gamecenter/rated_disable.png');
 }
 
 #CenterAnnounce #CenterResult li #private
@@ -225,13 +225,13 @@
 	width		: 25px;
 	height		: 15px;
 	margin		: 0px 25px;
-	background-image: url('../images/gamecenter/observer.png');
+	background-image: url('~images/gamecenter/observer.png');
 	background-repeat: no-repeat;
 }
 
 #CenterAnnounce #CenterResult li #private.disable
 {
-	background-image: url('../images/gamecenter/observer_disable.png');
+	background-image: url('~images/gamecenter/observer_disable.png');
 }
 
 #CenterAnnounce #CenterResult li #action
@@ -300,7 +300,7 @@
 
 #CenterAnnounce #CenterResult li #white
 {
-	background-image: url('../images/challenge_menu/white_enable.png');
+	background-image: url('~images/challenge_menu/white_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -309,7 +309,7 @@
 
 #CenterAnnounce #CenterResult li #black
 {
-	background-image: url('../images/challenge_menu/black_enable.png');
+	background-image: url('~images/challenge_menu/black_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -318,7 +318,7 @@
 
 #CenterAnnounce #CenterResult li #random
 {
-	background-image: url('../images/challenge_menu/random.png');
+	background-image: url('~images/challenge_menu/random.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -407,7 +407,7 @@
 	width		: 9px;
 	height		: 9px;
 	margin		: 0px 2px;
-	background-image: url('../images/gamecenter/abusive.png');
+	background-image: url('~images/gamecenter/abusive.png');
 	background-repeat: no-repeat;
 }
 #CenterMatch #CenterResult li #abusive.disable
@@ -435,13 +435,13 @@
 	width		: 10px;
 	height		: 10px;
 	margin		: 0px 15px;
-	background-image: url('../images/gamecenter/rated.png');
+	background-image: url('~images/gamecenter/rated.png');
 	background-repeat: no-repeat;
 }
 
 #CenterMatch #CenterResult li #rated.disable
 {
-	background-image: url('../images/gamecenter/rated_disable.png');
+	background-image: url('~images/gamecenter/rated_disable.png');
 }
 
 #CenterMatch #CenterResult li #private
@@ -449,13 +449,13 @@
 	width		: 25px;
 	height		: 15px;
 	margin		: 0px 25px;
-	background-image: url('../images/gamecenter/observer.png');
+	background-image: url('~images/gamecenter/observer.png');
 	background-repeat: no-repeat;
 }
 
 #CenterMatch #CenterResult li #private.disable
 {
-	background-image: url('../images/gamecenter/observer_disable.png');
+	background-image: url('~images/gamecenter/observer_disable.png');
 }
 
 #CenterMatch #CenterResult li #action
@@ -509,7 +509,7 @@
 
 #CenterMatch #CenterResult li #white
 {
-	background-image: url('../images/challenge_menu/white_enable.png');
+	background-image: url('~images/challenge_menu/white_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -518,7 +518,7 @@
 
 #CenterMatch #CenterResult li #black
 {
-	background-image: url('../images/challenge_menu/black_enable.png');
+	background-image: url('~images/challenge_menu/black_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -527,7 +527,7 @@
 
 #CenterMatch #CenterResult li #random
 {
-	background-image: url('../images/challenge_menu/random.png');
+	background-image: url('~images/challenge_menu/random.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -628,7 +628,7 @@
 	width		: 9px;
 	height		: 9px;
 	margin		: 0px 2px;
-	background-image: url('../images/gamecenter/abusive.png');
+	background-image: url('~images/gamecenter/abusive.png');
 	background-repeat: no-repeat;
 }
 #CenterPostpone #CenterResult li #abusive.disable
@@ -713,7 +713,7 @@
 
 #CenterPostpone #CenterResult li #white
 {
-	background-image: url('../images/challenge_menu/white_enable.png');
+	background-image: url('~images/challenge_menu/white_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -722,7 +722,7 @@
 
 #CenterPostpone #CenterResult li #black
 {
-	background-image: url('../images/challenge_menu/black_enable.png');
+	background-image: url('~images/challenge_menu/black_enable.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -731,7 +731,7 @@
 
 #CenterPostpone #CenterResult li #random
 {
-	background-image: url('../images/challenge_menu/random.png');
+	background-image: url('~images/challenge_menu/random.png');
 	background-repeat: no-repeat;
 	width		: 25px;
 	height		: 25px;
@@ -839,13 +839,13 @@
 	width		: 10px;
 	height		: 10px;
 	margin		: 0px 15px;
-	background-image: url('../images/gamecenter/rated.png');
+	background-image: url('~images/gamecenter/rated.png');
 	background-repeat: no-repeat;
 }
 
 #CenterCurrentGames #CenterResult li #rated.disable
 {
-	background-image: url('../images/gamecenter/rated_disable.png');
+	background-image: url('~images/gamecenter/rated_disable.png');
 }
 #CenterCurrentGames #CenterResult li #moves
 {

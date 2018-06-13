@@ -8,11 +8,11 @@
 
 #TitleBar.focus{
 	border-color	: #FFA200;
-	background-image: url('../images/window_title_bg.png');
+	background-image: url('~images/window_title_bg.png');
 }
 
 #TitleBar{
-	background-image: url('../images/window_title_bg_inactive.png');
+	background-image: url('~images/window_title_bg_inactive.png');
 /*	background-repeat		: repeat-x;
 	background-image		: none;
 	background-color		: #216778;*/
@@ -54,7 +54,7 @@
 	border-style	: solid;
 	border-width	: 0px 2px 2px 2px;
 	border-color	: #216778;
-	background		: url('../images/window_content_bg.png') repeat-X;
+	background		: url('~images/window_content_bg.png') repeat-X;
 	background-color: #FFFFFF;
 }
 

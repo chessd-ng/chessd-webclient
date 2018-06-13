@@ -23,6 +23,8 @@ import {
 } from 'game/oldgame.js';
 import { WINDOW_Alert } from 'window/window.js';
 
+import ImageNoPhoto from 'images/no_photo.png';
+
 /**
 * CHESSD - WebClient
 *
@@ -391,8 +393,8 @@ function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 	var PWPawn = UTILS_CreateElement("div", "PWPawn");
 	var PBPawn = UTILS_CreateElement("div", "PBPawn");
 	
-	PWPhoto.src = "./images/no_photo.png";
-	PBPhoto.src = "./images/no_photo.png";
+  PWPhoto.src = ImageNoPhoto;
+  PBPhoto.src = ImageNoPhoto;
 
 	PhotoDiv.appendChild(PWPhoto);
 	PhotoDiv.appendChild(VS);

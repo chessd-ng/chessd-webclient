@@ -9,6 +9,7 @@ import {
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { UTILS_GetText } from 'utils/utils.js';
 import { WINDOW_Alert } from 'window/window.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient

@@ -1,12 +1,10 @@
 <html>
 
-<link rel="stylesheet" type="text/css" href="css/Register.css" />
-
-<script type="text/javascript" src="scripts/register/register.js"></script>
-<script type="text/javascript" src="scripts/utils/utils.js"></script>
+<head>
+</head>
 
 
-<body onload="REGISTER_Labels()" onresize="REGISTER_VerticalAlignMiddle()">
+<body>
 	<div id="mainDiv">
 		<h1 id="register_title"></h1>
 		<p id="register_inf"></p>
@@ -19,13 +17,10 @@
 		<p><b id="register_passwd_confirm1"><span class="mitalic" id="register_passwd_confirm2"></span></b><input type="password" class="pwd" id="confpwd"></p>
 		</div>
 		<p class="special">
-		<input type="button" class="enter" value="Cadastrar" id="register" onclick="REGISTER_Post()">
+		<input type="button" class="enter" value="Cadastrar" id="register">
 		<input type="button" class="enter" value="Cancelar" id="cancel" onclick="window.location.href='./'">
 		</p>
 
 	</div>
-
-	<!-- Vertical align in middle  -->
-	<script>REGISTER_VerticalAlignMiddle();</script>
 </body>
 </html>

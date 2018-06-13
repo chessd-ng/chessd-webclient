@@ -34,6 +34,81 @@ import {
 } from 'interface/interface.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 
+import ImageEmoticonDefault from 'images/emoticons/default.png';
+import ImageRoomArrow from 'images/room_arrow.png';
+
+import ImageEmoticon0 from 'images/emoticons/0.png';
+import ImageEmoticon1 from 'images/emoticons/1.png';
+import ImageEmoticon2 from 'images/emoticons/2.png';
+import ImageEmoticon3 from 'images/emoticons/3.png';
+import ImageEmoticon4 from 'images/emoticons/4.png';
+import ImageEmoticon5 from 'images/emoticons/5.png';
+import ImageEmoticon6 from 'images/emoticons/6.png';
+import ImageEmoticon7 from 'images/emoticons/7.png';
+import ImageEmoticon8 from 'images/emoticons/8.png';
+import ImageEmoticon9 from 'images/emoticons/9.png';
+import ImageEmoticon10 from 'images/emoticons/10.png';
+import ImageEmoticon11 from 'images/emoticons/11.png';
+import ImageEmoticon12 from 'images/emoticons/12.png';
+import ImageEmoticon13 from 'images/emoticons/13.png';
+import ImageEmoticon14 from 'images/emoticons/14.png';
+import ImageEmoticon15 from 'images/emoticons/15.png';
+import ImageEmoticon16 from 'images/emoticons/16.png';
+import ImageEmoticon17 from 'images/emoticons/17.png';
+import ImageEmoticon18 from 'images/emoticons/18.png';
+import ImageEmoticon19 from 'images/emoticons/19.png';
+import ImageEmoticon20 from 'images/emoticons/20.png';
+import ImageEmoticon21 from 'images/emoticons/21.png';
+import ImageEmoticon22 from 'images/emoticons/22.png';
+import ImageEmoticon23 from 'images/emoticons/23.png';
+import ImageEmoticon24 from 'images/emoticons/24.png';
+import ImageEmoticon25 from 'images/emoticons/25.png';
+import ImageEmoticon26 from 'images/emoticons/26.png';
+import ImageEmoticon27 from 'images/emoticons/27.png';
+import ImageEmoticon28 from 'images/emoticons/28.png';
+import ImageEmoticon29 from 'images/emoticons/29.png';
+import ImageEmoticon30 from 'images/emoticons/30.png';
+import ImageEmoticon31 from 'images/emoticons/31.png';
+import ImageEmoticon32 from 'images/emoticons/32.png';
+import ImageEmoticon33 from 'images/emoticons/33.png';
+
+var Emoticons = {
+  '0': ImageEmoticon0,
+  '1': ImageEmoticon1,
+  '2': ImageEmoticon2,
+  '3': ImageEmoticon3,
+  '4': ImageEmoticon4,
+  '5': ImageEmoticon5,
+  '6': ImageEmoticon6,
+  '7': ImageEmoticon7,
+  '8': ImageEmoticon8,
+  '9': ImageEmoticon0,
+  '10': ImageEmoticon10,
+  '11': ImageEmoticon11,
+  '12': ImageEmoticon12,
+  '13': ImageEmoticon13,
+  '14': ImageEmoticon14,
+  '15': ImageEmoticon15,
+  '16': ImageEmoticon16,
+  '17': ImageEmoticon17,
+  '18': ImageEmoticon18,
+  '19': ImageEmoticon10,
+  '20': ImageEmoticon20,
+  '21': ImageEmoticon21,
+  '22': ImageEmoticon22,
+  '23': ImageEmoticon23,
+  '24': ImageEmoticon24,
+  '25': ImageEmoticon25,
+  '26': ImageEmoticon26,
+  '27': ImageEmoticon27,
+  '28': ImageEmoticon28,
+  '29': ImageEmoticon20,
+  '30': ImageEmoticon30,
+  '31': ImageEmoticon31,
+  '32': ImageEmoticon32,
+  '33': ImageEmoticon33,
+};
+
 /**
 * CHESSD - WebClient
 *
@@ -149,7 +224,7 @@ function INTERFACE_CreateRoom(RoomName)
 
 	// Emoticons
 	Emoticon = UTILS_CreateElement("img", null, "emoticon");
-	Emoticon.src = "./images/emoticons/default.png";
+  Emoticon.src = ImageEmoticonDefault;
 	Emoticon.onclick = function () {
 		INTERFACE_ShowEmoticonList(RoomName);
 	}
@@ -293,7 +368,7 @@ function INTERFACE_AddMsgInRoom(Username, Msg, Timestamp)
 		EmoticonNum = Msg.match(/\[img{\d*}\]/)[0];
 		EmoticonNum = EmoticonNum.match(/\d+/);
 		
-		Msg = Msg.replace(/\[img{\d*}\]/, "<img src='./images/emoticons/"+EmoticonNum+".png' />");
+		Msg = Msg.replace(/\[img{\d*}\]/, "<img src='" + Emoticons[EmoticonNum] + "' />");
 	}
 
 	// Get time from a given timestamp
@@ -903,7 +978,7 @@ export function INTERFACE_CreateRooms()
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
 	Arrow = UTILS_CreateElement("img");
-	Arrow.src = "images/room_arrow.png";
+	Arrow.src = ImageRoomArrow;
 
 	// Creating DOM tree
 	RoomsListArrow.appendChild(Arrow);

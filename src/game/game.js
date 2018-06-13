@@ -21,6 +21,8 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { OLDGAME_RemoveOldGame, OLDGAME_EndGame } from 'game/oldgame.js';
 import { WINDOW_Confirm, WINDOW_Alert } from 'window/window.js';
 
+import { MainData } from 'start.js';
+
 /**
 * CHESSD - WebClient
 *

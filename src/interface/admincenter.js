@@ -37,6 +37,9 @@ import {
 import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
 import { WINDOW_CreateAdminCenter } from 'window/window.js';
 
+import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png'
+import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png'
+
 /**
 * CHESSD - WebClient
 *
@@ -1282,8 +1285,8 @@ function INTERFACE_CreateAdminCenterAdjourn()
 	// No Announce element
 	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adjourn"));
 
-	WPiece.src = "./images/challenge_menu/white_enable.png";
-	BPiece.src = "./images/challenge_menu/black_enable.png";
+  WPiece.src = ImageChallengeMenuWhiteEnable;
+  BPiece.src = ImageChallengeMenuBlackEnable;
 	
 	ListResultHeader.appendChild(WRating);
 	ListResultHeader.appendChild(WPiece);

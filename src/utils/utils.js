@@ -21,7 +21,7 @@ import { INTERFACE_SetSearchButton } from 'interface/oldgame.js';
 * @brief	Utils and auxiliars functions 
 */
 
-import { MainData } from 'index.js'
+import { MainData } from 'start.js'
 
 /**********************************
  * FUNCTIONS - XML SEARCH
@@ -858,6 +858,9 @@ export function UTILS_String2Board(BoardString)
 */
 export function UTILS_ConvertChatString(Str)
 {
+  if (!Str) {
+    return '';
+  }
 	var StrTmp;
 
 	StrTmp = Str.replace(/&/g,"&amp;");

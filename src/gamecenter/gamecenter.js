@@ -16,6 +16,7 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { ANNOUNCE_GetAnnounceGames } from 'challenge/announce.js';
 import { CHALLENGE_PostponePresence } from 'challenge/adjourn.js';
 import { GameCenterObj } from 'interface/gamecenter.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient

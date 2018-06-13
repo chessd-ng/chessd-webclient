@@ -55,6 +55,12 @@ import {
 import { WINDOW_AnnounceWindow, WINDOW_Alert } from 'window/window.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { GAME_StartGame } from 'game/game.js';
+import { MainData } from 'start.js';
+
+import ImageChallengeMenuRandom from 'images/challenge_menu/random.png';
+
+import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png'
+import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png'
 
 /**
 * CHESSD - WebClient
@@ -266,11 +272,15 @@ export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated
 
 	if(Player.Color == "")	
 	{
-		PPieceColor.src = "images/challenge_menu/random.png";
+    PPieceColor.src = ImageChallengeMenuRandom;
 	}
 	else
 	{
-		PPieceColor.src = "images/challenge_menu/"+Player.Color+"_enable.png";
+    if (Player.Color === 'white') {
+      PPieceColor.src = ImageChallengeMenuWhiteEnable;
+    } else {
+      PPieceColor.src = ImageChallengeMenuBlackEnable;
+    }
 	}
 
 	if(Player.Abusive == "true")
@@ -671,11 +681,15 @@ export function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Priv
 
 	if(Player.Color == "")	
 	{
-		PPieceColor.src = "images/challenge_menu/random.png";
+    PPieceColor.src = ImageChallengeMenuRandom;
 	}
 	else
 	{
-		PPieceColor.src = "images/challenge_menu/"+Player.Color+"_enable.png";
+    if (Player.Color === 'white') {
+      PPieceColor.src = ImageChallengeMenuWhiteEnable;
+    } else {
+      PPieceColor.src = ImageChallengeMenuBlackEnable;
+    }
 	}
 
 	if(Player.Abusive == "true")
@@ -1051,11 +1065,15 @@ export function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date,
 
 	if(Player.Color == "")	
 	{
-		PPieceColor.src = "images/challenge_menu/random.png";
+    PPieceColor.src = ImageChallengeMenuRandom;
 	}
 	else
 	{
-		PPieceColor.src = "images/challenge_menu/"+Player.Color+"_enable.png";
+    if (Player.Color === 'white') {
+      PPieceColor.src = ImageChallengeMenuWhiteEnable;
+    } else {
+      PPieceColor.src = ImageChallengeMenuBlackEnable;
+    }
 	}
 
 	if(Player.Abusive == "true")
@@ -1706,8 +1724,8 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		CONNECTION_SendJabber(MESSAGE_GameRoomList());
 	}
 	
-	WPiece.src = "./images/challenge_menu/white_enable.png";
-	BPiece.src = "./images/challenge_menu/black_enable.png";
+  WPiece.src = ImageChallengeMenuWhiteEnable;
+  BPiece.src = ImageChallengeMenuBlackEnable;
 	
 	ListResultHeader.appendChild(WRating);
 	ListResultHeader.appendChild(WPiece);

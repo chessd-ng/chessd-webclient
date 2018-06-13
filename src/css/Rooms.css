@@ -21,7 +21,7 @@
 	display			: table;
 	position		: relative;
 	left			: -2px;
-	background-image: url('../images/left_title_bg_inactive.png');
+	background-image: url('~images/left_title_bg_inactive.png');
 }
 
 #Main #Left #Rooms #RoomUserDiv {
@@ -66,7 +66,7 @@
 	font-weight		: bold;
 	font-size		: 11px;
 	color			: #FFF;
-	background-image: url('../images/left_title_bg_inactive.png');
+	background-image: url('~images/left_title_bg_inactive.png');
 	border-right		: 1px solid #FFF;
 	cursor			: pointer;
 }
@@ -82,7 +82,7 @@
 }
 
 #Main #Left #Rooms #RoomList .room_selec {
-	background-image: url('../images/left_title_bg.png');
+	background-image: url('~images/left_title_bg.png');
 }
 
 #Main #Left #Rooms #RoomList .room_arrow {

@@ -6,6 +6,7 @@ import {
 } from 'utils/utils.js';
 import { MESSAGE_ChangeStatus } from 'xmpp_messages/message.js';
 import { ContactObj, INTERFACE_RefreshContactOnlineNumber } from 'interface/contact.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -151,10 +152,10 @@ export function CONTACT_StartAwayCounter()
 {
 	MainData.SetAwayCounter(300);
 
-	MainData.SetAwayInterval(setInterval("CONTACT_SetAwayStatus()", 1000));
+	MainData.SetAwayInterval(setInterval(CONTACT_SetAwayStatus, 1000));
 
-	document.body.setAttribute("onmousedown","CONTACT_ResetAwayStatus()");
-	document.body.setAttribute("onkeypress","CONTACT_ResetAwayStatus()");
+	document.body.setAttribute("onmousedown",CONTACT_ResetAwayStatus);
+	document.body.setAttribute("onkeypress",CONTACT_ResetAwayStatus);
 }
 
 /**

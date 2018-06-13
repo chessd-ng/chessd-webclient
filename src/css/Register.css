@@ -4,13 +4,13 @@
 }
 
 body {
-	background		:transparent url(../images/fundo_interface.png) repeat-x scroll 0%;
+	background		:transparent url(~images/fundo_interface.png) repeat-x scroll 0%;
 	margin			: 0px;
 	min-height		: 500px;
 }
 
 #MainDiv {
-	background		: transparent url(../images/register/register_box_fundo.png) repeat-x scroll 0% 50%;
+	background		: transparent url(~images/register/register_box_fundo.png) repeat-x scroll 0% 50%;
 	width			: 500px;
 	border			: 2px solid  #FFA200;
 	padding			: 10px 30px 30px 30px;
@@ -94,13 +94,13 @@ input {
 	color			: #FFF;
 	border 			: 0px;
 	font-style		: bold;
-	background-image	: url(../images/register/botaoconfirmar.png) ;
+	background-image	: url(~images/register/botaoconfirmar.png) ;
 	position		: relative;
 	left			: 180px;
 }
 
 .enter:hover {
-	background-image	: url(../images/register/sobrebotaoconfirmar.png) ;
+	background-image	: url(~images/register/sobrebotaoconfirmar.png) ;
 }
 
 .name{

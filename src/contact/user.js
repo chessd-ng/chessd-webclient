@@ -2,6 +2,7 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { PROFILE_ResetUpdateProfile } from 'profile/profile.js';
 import { UTILS_GetNodeText, UTILS_ConvertTimeStamp } from 'utils/utils.js';
 import { MESSAGE_InfoProfile } from 'xmpp_messages/message.js';
+import { MainData } from 'start.js';
 
 /**
 * CHESSD - WebClient
@@ -290,7 +291,7 @@ export function USER_AddUser(Username, Status)
 export function USER_StartUpdateUserList()
 {
 	var Time = MainData.GetUpdateRatingInterval();
-	MainData.SetUpdateTimer(setInterval("USER_UpdateUserList()", Time*1000));
+	MainData.SetUpdateTimer(setInterval(USER_UpdateUserList, Time*1000));
 }
 
 /**

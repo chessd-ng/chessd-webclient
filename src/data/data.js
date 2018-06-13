@@ -17,7 +17,9 @@ import { DATA_SetConsts } from 'data/consts.js';
 import { WindowObj } from 'interface/window.js';
 import { LoadObj } from 'interface/load.js';
 import { ChatObj } from 'interface/chat.js';
-import { MainData } from 'index.js';
+import { MainData } from 'start.js';
+
+import ImageNoPhoto from 'images/no_photo.png';
 
 /**
 * CHESSD - WebClient
@@ -73,7 +75,7 @@ export function DATA(ConfFile, LangFile)
 	this.Conf = new Object();
 	// Get Host from url
 	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
-	this.Conf.HostPost = UTILS_GetTag(Params, "host") || window.location.href.split("/")[2];
+  this.Conf.HostPost = UTILS_GetTag(Params, "host");
 	this.Conf.Browser = UTILS_IdentifyBrowser();
 	this.Conf.Resource = UTILS_GetTag(Params, "resource");
 	this.Conf.Server = UTILS_GetTag(Params,"server");
@@ -3487,8 +3489,8 @@ function DATA_AddGame(Id, Player1, Player2, Color, GameDiv)
 		}
 	}
 
-	NewGame.WPhoto = "./images/no_photo.png";
-	NewGame.BPhoto = "./images/no_photo.png";
+  NewGame.WPhoto = ImageNoPhoto;
+  NewGame.BPhoto = ImageNoPhoto;
 
 	NewGame.Game = GameDiv;
 	NewGame.Finished = false;
@@ -3715,8 +3717,8 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 	NewOldGame.Moves = new Array();
 
 
-	NewOldGame.WPhoto = "./images/no_photo.png";
-	NewOldGame.BPhoto = "./images/no_photo.png";
+  NewOldGame.WPhoto = ImageNoPhoto;
+  NewOldGame.BPhoto = ImageNoPhoto;
 
 	NewOldGame.SetTurn = this.SetTurn;
 	NewOldGame.AddMove = this.AddGameMove;

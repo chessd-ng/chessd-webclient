@@ -39,19 +39,19 @@
 }
 
 #Board .black {
-	background-image	: url('../images/board/square_black.png');
+	background-image	: url('~images/board/square_black.png');
 }
 
 #Board .white {
-	background-image	: url('../images/board/square_white.png');
+	background-image	: url('~images/board/square_white.png');
 }
 
 #Board .select {
-	background-image	: url('../images/board/square_select.png');
+	background-image	: url('~images/board/square_select.png');
 }
 
 /*#Board div:hover {
-	background-image	: url('../images/board/square_select.png');
+	background-image	: url('~images/board/square_select.png');
 }*/
 
 
@@ -189,7 +189,7 @@
 
 #PhotoDiv #PWPawn
 {
-	background-image	: url("../images/pieces/wpawn.png");
+	background-image	: url("~images/pieces/wpawn.png");
 
 	position		: absolute;
 	/*
@@ -204,7 +204,7 @@
 }
 #PhotoDiv #PBPawn
 {
-	background-image	: url("../images/pieces/bpawn.png");
+	background-image	: url("~images/pieces/bpawn.png");
 
 	position		: absolute;
 	/*
@@ -538,35 +538,35 @@
 
 /*Move List Buttons*/
 #MoveListFirst{
-	background-image	: url("../images/board/first.png");
+	background-image	: url("~images/board/first.png");
 }
 
 #MoveListFirst:hover {
-	background-image	: url("../images/board/first_active.png");
+	background-image	: url("~images/board/first_active.png");
 }
 
 #MoveListPrev{
-	background-image	: url("../images/board/prev.png");
+	background-image	: url("~images/board/prev.png");
 }
 
 #MoveListPrev:hover {
-	background-image	: url("../images/board/prev_active.png");
+	background-image	: url("~images/board/prev_active.png");
 }
 
 #MoveListNext{
-	background-image	: url("../images/board/next.png");
+	background-image	: url("~images/board/next.png");
 }
 
 #MoveListNext:hover {
-	background-image	: url("../images/board/next_active.png");
+	background-image	: url("~images/board/next_active.png");
 }
 
 #MoveListLast{
-	background-image	: url("../images/board/last.png");
+	background-image	: url("~images/board/last.png");
 }
 
 #MoveListLast:hover {
-	background-image	: url("../images/board/last_active.png");
+	background-image	: url("~images/board/last_active.png");
 }
 
 #GameLoadingMove
@@ -645,46 +645,46 @@
 
 #CapturedDiv #Wpawn
 {
-	background-image	: url("../images/pieces/mini_wpawn.png");
+	background-image	: url("~images/pieces/mini_wpawn.png");
 	height			: 12px;
 }
 #CapturedDiv #Wknight
 {
-	background-image	: url("../images/pieces/mini_wknight.png");
+	background-image	: url("~images/pieces/mini_wknight.png");
 }
 #CapturedDiv #Wbishop
 {
-	background-image	: url("../images/pieces/mini_wbishop.png");
+	background-image	: url("~images/pieces/mini_wbishop.png");
 }
 #CapturedDiv #Wrook
 {
-	background-image	: url("../images/pieces/mini_wrook.png");
+	background-image	: url("~images/pieces/mini_wrook.png");
 }
 #CapturedDiv #Wqueen
 {
-	background-image	: url("../images/pieces/mini_wqueen.png");
+	background-image	: url("~images/pieces/mini_wqueen.png");
 }
 
 #CapturedDiv #Bpawn
 {
-	background-image	: url("../images/pieces/mini_bpawn.png");
+	background-image	: url("~images/pieces/mini_bpawn.png");
 	height			: 13px;
 }
 #CapturedDiv #Bknight
 {
-	background-image	: url("../images/pieces/mini_bknight.png");
+	background-image	: url("~images/pieces/mini_bknight.png");
 }
 #CapturedDiv #Bbishop
 {
-	background-image	: url("../images/pieces/mini_bbishop.png");
+	background-image	: url("~images/pieces/mini_bbishop.png");
 }
 #CapturedDiv #Brook
 {
-	background-image	: url("../images/pieces/mini_brook.png");
+	background-image	: url("~images/pieces/mini_brook.png");
 }
 #CapturedDiv #Bqueen
 {
-	background-image	: url("../images/pieces/mini_bqueen.png");
+	background-image	: url("~images/pieces/mini_bqueen.png");
 }
 
 
