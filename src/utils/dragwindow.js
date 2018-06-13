@@ -74,7 +74,7 @@ export function UTILS_StartDragWindow(ev, Obj)
 		document.body.onmouseup = null;
 
 		return false;
-	}
+	};
 
 	return false;
 }

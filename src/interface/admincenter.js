@@ -37,8 +37,8 @@ import {
 import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
 import { WINDOW_CreateAdminCenter } from 'window/window.js';
 
-import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png'
-import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png'
+import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png';
+import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png';
 
 /**
 * CHESSD - WebClient
@@ -103,7 +103,7 @@ export function INTERFACE_ShowCreateAdminCenterWindow()
 
 	Elements.CloseButton = CloseButton;
 
-	return{Div:Div, Buttons:Buttons, Elements:Elements}
+	return{Div:Div, Buttons:Buttons, Elements:Elements};
 
 }
 
@@ -203,21 +203,21 @@ export function INTERFACE_CreateAdminCenter()
 		ADMINCENTER_ShowPunish();
 		ADMINCENTER_ClearPunishList();
 		ADMIN_GetBanList();
-	}
+	};
 	AdminLvlButton.onclick = function(){
 		ADMINCENTER_ShowAdminLevel();
-	}
+	};
 	LevelButton.onclick = function(){
 		ADMINCENTER_ShowLevel();
-	}
+	};
 	AdjournButton.onclick = function(){
 		ADMINCENTER_ShowAdjourn();
-	}
+	};
 	WordsButton.onclick = function(){
 		ADMINCENTER_ShowWords();
 		ADMINCENTER_ClearBannedWordsList();
 		ADMIN_GetBannedWords();
-	}
+	};
 
 	MenuList.appendChild(PunishButton);
 	MenuList.appendChild(AdminLvlButton);
@@ -231,7 +231,7 @@ export function INTERFACE_CreateAdminCenter()
 	Main.appendChild(MainCenter);
 
 
-	return {AdminCenter:Main, Center:MainCenter}
+	return {AdminCenter:Main, Center:MainCenter};
 }
 
 
@@ -315,12 +315,12 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
 	PButton.onclick = function(){
 		ADMIN_UnbanUser(Name,"Acquit - absolvido");
-	}
+	};
 
 	Item.appendChild(PName);
 	Item.appendChild(PPunish);
 	Item.appendChild(PInc);
-	Item.appendChild(PDate)
+	Item.appendChild(PDate);
 	Item.appendChild(PPeriod);
 	Item.appendChild(PReason);
 	Item.appendChild(PButton);
@@ -440,7 +440,7 @@ function INTERFACE_CreateAdminCenterPunish()
 
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -461,7 +461,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Period.className = "";
 		Reason.className = "";
 		ADMINCENTER_PunishSortByUsername();
-	}
+	};
 
 	Punish.onclick = function(){
 		PunishedPlayer.className = "";
@@ -471,7 +471,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Period.className = "";
 		Reason.className = "";
 		ADMINCENTER_PunishSortByPunish();
-	}
+	};
 	Inc.onclick = function(){
 		PunishedPlayer.className = "";
 		Punish.className = "";
@@ -481,7 +481,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Reason.className = "";
 		ADMINCENTER_PunishSortByIncident();
 
-	}
+	};
 	Date.onclick = function(){
 		PunishedPlayer.className = "";
 		Punish.className = "";
@@ -491,7 +491,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Reason.className = "";
 
 		ADMINCENTER_PunishSortByDate();
-	}
+	};
 	Period.onclick = function(){
 		PunishedPlayer.className = "";
 		Punish.className = "";
@@ -501,7 +501,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Reason.className = "";
 
 		ADMINCENTER_PunishSortByPeriod();
-	}
+	};
 	Reason.onclick = function(){
 		PunishedPlayer.className = "";
 		Punish.className = "";
@@ -510,7 +510,7 @@ function INTERFACE_CreateAdminCenterPunish()
 		Period.className = "";
 		Reason.className = "selected";
 		ADMINCENTER_PunishSortByReason();
-	}
+	};
 
 	// No Punish element
 	var NoPunish = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_punish"));
@@ -713,7 +713,7 @@ function INTERFACE_CreateAdminCenterAdminLevel()
 
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -728,12 +728,12 @@ function INTERFACE_CreateAdminCenterAdminLevel()
 		Player.className = "selected";
 		AdminLevel.className = "";
 		ADMINCENTER_AdminLevelSortByUsername();
-	}
+	};
 	AdminLevel.onclick = function(){
 		Player.className = "";
 		AdminLevel.className = "selected";
 		ADMINCENTER_AdminLevelSortByLevel();
-	}
+	};
 
 	ListResultHeader.appendChild(Player);
 	ListResultHeader.appendChild(AdminLevel);
@@ -927,7 +927,7 @@ function INTERFACE_CreateAdminCenterLevel()
 
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -942,12 +942,12 @@ function INTERFACE_CreateAdminCenterLevel()
 		Player.className = "selected";
 		Level.className = "";
 		ADMINCENTER_LevelSortByUsername();
-	}
+	};
 	Level.onclick = function(){
 		Player.className = "";
 		Level.className = "selected";
 		ADMINCENTER_LevelSortByLevel();
-	}
+	};
 
 	ListResultHeader.appendChild(Player);
 	ListResultHeader.appendChild(Level);
@@ -977,7 +977,7 @@ function AdjournObj()
 	var Adjourn = INTERFACE_CreateAdminCenterAdjourn();
 
 	// Attributes
-	this.AdjournDiv = Adjourn.Center
+	this.AdjournDiv = Adjourn.Center;
 	this.AdjournUl = Adjourn.AdjournList;
 	this.NoAdjourn = Adjourn.NoAdjourn;
 	this.AdjournVisible = false;
@@ -1173,7 +1173,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 	var CenterResult = UTILS_CreateElement("div", "CenterAdminResult");
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -1203,7 +1203,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Inc.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByWRating();
-	}
+	};
 	BRating.onclick = function(){
 		WRating.className = "";
 		BRating.className = "selected";
@@ -1214,7 +1214,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Inc.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByBRating();
-	}
+	};
 	WPiece.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1225,7 +1225,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Inc.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortWUsername();
-	}
+	};
 	BPiece.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1236,7 +1236,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Inc.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByBUsername();
-	}
+	};
 	Category.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1247,7 +1247,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Inc.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByCategory();
-	}
+	};
 	Inc.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1258,7 +1258,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Time.className = "";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByInc();
-	}
+	};
 	Time.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1269,7 +1269,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Time.className = "selected";
 		Rated.className = "";
 		ADMINCENTER_AdjournSortByTime();
-	}
+	};
 	Rated.onclick = function(){
 		WRating.className = "";
 		BRating.className = "";
@@ -1280,7 +1280,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Time.className = "";
 		Rated.className = "selected";
 		ADMINCENTER_AdjournSortByRated();
-	}
+	};
 
 	// No Announce element
 	var NoResult = UTILS_CreateElement("p",null,null, UTILS_GetText("admincenter_no_adjourn"));
@@ -1367,7 +1367,7 @@ function INTERFACE_AddWords(Word)
 
 	PButton.onclick = function(){
 		ADMIN_RemoveBannedWord(Word);
-	}
+	};
 
 	Item.appendChild(PWord);
 	Item.appendChild(PButton);
@@ -1490,7 +1490,7 @@ function INTERFACE_CreateAdminCenterWords()
 	var InputButton = UTILS_CreateElement("div","InputButton",null,UTILS_GetText("admincenter_add_word"));
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -1503,7 +1503,7 @@ function INTERFACE_CreateAdminCenterWords()
 
 	InputButton.onclick = function() {
 		ADMIN_BanWord(InputBox.value);
-	}
+	};
 
 	InputDiv.appendChild(InputLabel);
 	InputDiv.appendChild(InputBox);

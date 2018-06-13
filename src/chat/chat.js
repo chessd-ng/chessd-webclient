@@ -178,7 +178,7 @@ export function CHAT_OpenChat(Username)
 		}
 		else
 		{
-			Status = "online"
+			Status = "online";
 		}
 	}
 
@@ -191,7 +191,7 @@ export function CHAT_OpenChat(Username)
 
 		if(Status != "offline")
 		{
-			ChatObject.setTitle(Username)
+			ChatObject.setTitle(Username);
 		}
 		else
 		{
@@ -199,7 +199,7 @@ export function CHAT_OpenChat(Username)
 		}
 
 		// Add chat in main data structure
-		MainData.AddChat(Username, ChatObject)
+		MainData.AddChat(Username, ChatObject);
 
 		// Show window maximized
 		ChatObject.maximize();

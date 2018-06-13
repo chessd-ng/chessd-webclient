@@ -137,14 +137,14 @@ export function CONTACT_ReceiveSubscribe(Username)
 			TmpXML += MESSAGE_Invite(Username);
 
 			CONNECTION_SendJabber(TmpXML);
-		}
+		};
 
 		Button2 = new Object();
 		Button2.Name = UTILS_GetText("window_cancel");
 		Button2.Func = function () {
 			// Send a deny to user
 			CONNECTION_SendJabber(MESSAGE_InviteDeny(Username));
-		}
+		};
 
 		WINDOW_Confirm(Title, Text, Button1, Button2);
 	}
@@ -163,7 +163,7 @@ export function CONTACT_ReceiveSubscribed(Username)
 	var User = MainData.GetContactUser(Username);
 
 	// Setting user subscription state to 'both'
-	User.SetSubs("both")
+	User.SetSubs("both");
 
 	// See contact/contact.js
 	CONTACT_AddUser(Username, "online","from","default");

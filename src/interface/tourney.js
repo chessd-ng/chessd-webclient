@@ -104,7 +104,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	var WaitTimeRightDiv, WaitTimeLeftDiv;
 	var WaitTimeLabel, WaitTimeCheckbox, WaitTimeInput, WaitTimeHelpImg, WaitTimeMinLabel;
 
-	var SubmitPeriodDiv
+	var SubmitPeriodDiv;
 	var SubmitPeriodLeftDiv;
 	var SubmitPeriodCheckbox, SubmitPeriodLabel;
 
@@ -170,7 +170,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	TNameInput.onkeyup = function () {
 		TNameCharCount.innerHTML = UTILS_GetText("window_character");
 		TNameCharCount.innerHTML = TNameCharCount.innerHTML.replace(/%s/,TNameInput.textLength);
-	}
+	};
 
 	// CatTimeDiv
 	CatTimeDiv = UTILS_CreateElement('div', 'CatTimeDiv');
@@ -259,7 +259,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			TimeOpt.value = 190;
 			TimeSelect.appendChild(TimeOpt);
 		}
-	}
+	};
 
 	TimeLeftDiv = UTILS_CreateElement('div','TimeLeftDiv');
 	TimeLabel =	UTILS_CreateElement('p',null,null,UTILS_GetText('challenge_time_label'));
@@ -360,9 +360,9 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			AdvancedDiv.style.display = "block";
 			AdvancedLabel.innerHTML = UTILS_GetText("tourney_hide_advanced");
 		}
-	}
-	AdvancedLabel.onmouseover = function () { this.style.color = "#FFA200"; this.style.borderBottomColor = "#FFA200"; }
-	AdvancedLabel.onmouseout = function () { this.style.color = "#216678"; this.style.borderBottomColor = "#216678"; }
+	};
+	AdvancedLabel.onmouseover = function () { this.style.color = "#FFA200"; this.style.borderBottomColor = "#FFA200"; };
+	AdvancedLabel.onmouseout = function () { this.style.color = "#216678"; this.style.borderBottomColor = "#216678"; };
 
 	// Description Div
 	DescDiv = UTILS_CreateElement('div','DescDiv');
@@ -384,7 +384,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 		}
 		DescCounterLabel.innerHTML = UTILS_GetText("window_character");
 		DescCounterLabel.innerHTML = DescCounterLabel.innerHTML.replace(/%s/,200 - DescTextArea.value.length);
-	}
+	};
 
 	// SubscribeDiv
 	SubscribeDiv = UTILS_CreateElement('div','SubscribeDiv');
@@ -421,7 +421,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			SubscribeInput.value = "";
 			SubscribeInput.className = "disabled";
 		}
-	}
+	};
 
 	// IntervalDiv
 	IntervalDiv = UTILS_CreateElement('div','IntervalDiv');
@@ -507,7 +507,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			FormatLabel1.className = "format_disabled";
 			FormatLabel2.className = "format_disabled";
 		}
-	}
+	};
 
 	// PasswordDiv
 	PasswordDiv = UTILS_CreateElement('div','PasswordDiv');
@@ -548,7 +548,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			PasswordInput.className = "disabled";
 			PasswordPasswd.className = "advopt_disabled";
 		}
-	}
+	};
 
 	// WaiTimeDiv
 	WaitTimeDiv = UTILS_CreateElement('div','WaitTimeDiv');
@@ -590,7 +590,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			WaitTimeInput.className = "disabled";
 			WaitTimeMinLabel.className = "min_disabled";
 		}
-	}
+	};
 
 	// SubmitPeriodDiv
 	SubmitPeriodDiv = UTILS_CreateElement('div','SubmitPeriodDiv');
@@ -866,7 +866,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			SPToDateBar2.className = "disabled";
 			SPToHourColon.className = "disabled";
 		}
-	}
+	};
 	
 	SPBr = UTILS_CreateElement("br");
 	
@@ -921,11 +921,11 @@ export function INTERFACE_ShowCreateTourneyWindow()
 		Checkbox.disabled = true;
 	}
 	Td.appendChild(Checkbox);
-	Tr.appendChild(Td)
+	Tr.appendChild(Td);
 
 	RNumber = TBody.rows.length + 1;
 	RoundTd = UTILS_CreateElement('td',null, 'disable',"Rodada " + RNumber);
-	Tr.appendChild(RoundTd)
+	Tr.appendChild(RoundTd);
 
 	Td = UTILS_CreateElement('td');
 	RoundDInput = UTILS_CreateElement('input',null, 'no_board_dis');
@@ -1020,11 +1020,11 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			Checkbox.className = "checkbox";
 		}
 		Td.appendChild(Checkbox);
-		Tr.appendChild(Td)
+		Tr.appendChild(Td);
 
 		var RNumber = TBody.rows.length + 1;
 		Td = UTILS_CreateElement('td',null, 'enable', "Rodada " + RNumber);
-		Tr.appendChild(Td)
+		Tr.appendChild(Td);
 
 		var DInput = UTILS_CreateElement('input',null, 'no_board_en');
 		var MInput = UTILS_CreateElement('input',null,'no_board_en');
@@ -1043,14 +1043,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			{
 				DInput.value="";
 			}
-		}
+		};
 		DInput.onblur = function () 
 		{ 
 			if (DInput.value == "")
 			{
 				DInput.value="__";
 			}
-		}
+		};
 		MInput.type = "text";
 		MInput.size = "1";
 		MInput.maxLength="2";
@@ -1061,14 +1061,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			{
 				MInput.value="";
 			}
-		}
+		};
 		MInput.onblur = function () 
 		{ 
 			if (MInput.value == "")
 			{
 				MInput.value="__";
 			}
-		}
+		};
 		YInput.type= "text";
 		YInput.size = "3";
 		YInput.maxLength="4";
@@ -1079,14 +1079,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			{
 				YInput.value="";
 			}
-		}
+		};
 		YInput.onblur = function () 
 		{ 
 			if (YInput.value == "")
 			{
 				YInput.value="____";
 			}
-		}
+		};
 		Span1 = UTILS_CreateElement("span",null,'enable',"/");
 		Span2 = UTILS_CreateElement("span",null,'enable',"/");
 		DInput.onkeyup = function () 
@@ -1102,7 +1102,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 					MInput.select();
 				}
 			}
-		}
+		};
 		MInput.onkeyup = function () 
 		{
 			if (MInput.value.length == MInput.maxLength)
@@ -1116,7 +1116,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 					YInput.select();
 				}
 			}
-		}
+		};
 		YInput.onkeyup = function () 
 		{
 			if (YInput.value.length == YInput.maxLength)
@@ -1130,7 +1130,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 					HInput.select();
 				}
 			}
-		}
+		};
 		Td.appendChild(DInput);
 		Td.appendChild(Span1);
 		Td.appendChild(MInput);
@@ -1149,14 +1149,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			{
 				HInput.value="";
 			}
-		}
+		};
 		HInput.onblur = function () 
 		{ 
 			if (HInput.value == "")
 			{
 				HInput.value="__";
 			}
-		}
+		};
 		MiInput.type = "text";
 		MiInput.size = "1";
 		MiInput.maxLength="2";
@@ -1167,14 +1167,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			{
 				MiInput.value="";
 			}
-		}
+		};
 		MiInput.onblur = function () 
 		{ 
 			if (MiInput.value == "")
 			{
 				MiInput.value="__";
 			}
-		}
+		};
 		Span1 = UTILS_CreateElement("span",null,'enable',":");
 		HInput.onkeyup = function () 
 		{
@@ -1189,14 +1189,14 @@ export function INTERFACE_ShowCreateTourneyWindow()
 					MiInput.select();
 				}
 			}
-		}
+		};
 		Td.appendChild(HInput);
 		Td.appendChild(Span1);
 		Td.appendChild(MiInput);
 		Tr.appendChild(Td);
 
 		TBody.appendChild(Tr);
-	}
+	};
 	
 	RemoveButton = UTILS_CreateElement('input', null, 'button_disabled');
 	RemoveButton.value = UTILS_GetText("tourney_remove_round");
@@ -1226,7 +1226,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			RNumber = i+1;
 			Row[i].childNodes[1].innerHTML = "Rodada "+ RNumber;
 		}
-	}
+	};
 	
 	SequencedRoundCheckbox.onchange = function () {
 		if (this.checked == true)
@@ -1279,7 +1279,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			AddButton.className = "button";
 			RemoveButton.className = "button";
 		}
-	}
+	};
 	
 	RoundCheckbox.onchange = function () {
 		if (this.checked == true)
@@ -1338,7 +1338,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			AddButton.className = "button";
 			RemoveButton.className = "button";
 		}
-	}
+	};
 
 	// ButtonsDiv	
 	ButtonsDiv =	UTILS_CreateElement('div', 'ButtonsDiv');
@@ -1433,7 +1433,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 				//alert(MESSAGE_CreateTourney(Name, CatSelect.value, TimeSelect.value, Time, Subscribe, RatingInterval, Password, WaitTime, SeqRounds, SubmitPeriod, DescTextArea.value, Rounds));
 			}
 		}
-	}
+	};
 	
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('window_cancel');
@@ -1490,8 +1490,8 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	DateRightDiv.appendChild(DateFormatLabel);
 
 	// DateDiv
-	DateDiv.appendChild(DateLeftDiv)
-	DateDiv.appendChild(DateRightDiv)
+	DateDiv.appendChild(DateLeftDiv);
+	DateDiv.appendChild(DateRightDiv);
 
 	// HourLeftDiv
 	HourLeftDiv.appendChild(HourLabel);
@@ -1505,12 +1505,12 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	HourRightDiv.appendChild(HourFormatLabel);
 
 	// HourDiv
-	HourDiv.appendChild(HourLeftDiv)
-	HourDiv.appendChild(HourRightDiv)
+	HourDiv.appendChild(HourLeftDiv);
+	HourDiv.appendChild(HourRightDiv);
 
 	// DateInitRightDiv
-	DateInitRightDiv.appendChild(DateDiv)
-	DateInitRightDiv.appendChild(HourDiv)
+	DateInitRightDiv.appendChild(DateDiv);
+	DateInitRightDiv.appendChild(HourDiv);
 
 	// DateInitDiv
 	DateInitDiv.appendChild(DateInitLeftDiv);
@@ -1746,7 +1746,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	Elements.ClearField = INTERFACE_ClearField;
 	Elements.FillField = INTERFACE_FillField;
 
-	return {Div:Div, Buttons:Buttons, Elements:Elements}
+	return {Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 /**

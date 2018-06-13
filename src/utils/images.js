@@ -40,7 +40,7 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 	Form.action = Action;
 	Form.method = "post";
 	Form.name = FormId;
-	Form.enctype="multipart/Form-data"
+	Form.enctype="multipart/Form-data";
 	File = document.createElement("input");
 	File.type = "file";
 	File.name = "image";
@@ -50,7 +50,7 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 	Width.value = "50";
 	Height = document.createElement("input");
 	Height.type = "hidden";
-	Height.name = "height"
+	Height.name = "height";
 	Height.value = "50";
 
 	Form.appendChild(Height);

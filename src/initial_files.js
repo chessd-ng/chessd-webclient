@@ -131,7 +131,7 @@ function INITIAL_AppendScript(ScriptList, NumFiles)
 	var Script;
 	var Head = document.getElementsByTagName("head")[0];
 	var ProgressText, LoadingText;
-	var ScriptFile
+	var ScriptFile;
 	var Perc;
 
 	if(ScriptList.length > 0)
@@ -149,7 +149,7 @@ function INITIAL_AppendScript(ScriptList, NumFiles)
 			INITIAL_AppendScript(ScriptList, NumFiles);
 			Perc = (NumFiles-ScriptList.length)/NumFiles;
 			INITIAL_SetProgressText(Math.round(Perc*100)+"% - "+ScriptFile);
-		}
+		};
 
 		Script.onreadystatechange = function(){
 			if(Script.readyState == "loaded")
@@ -158,7 +158,7 @@ function INITIAL_AppendScript(ScriptList, NumFiles)
 				Perc = (NumFiles-ScriptList.length)/NumFiles;
 				INITIAL_SetProgressText(Math.round(Perc*100)+"% - "+ScriptFile);
 			}
-		}
+		};
 
 /*
 		Script.onerror = function(){

@@ -85,7 +85,7 @@ export function PARSER_ParsePresence(XML)
 			if(Jid.split("@")[0] == MainData.GetRoomDefault())
 			{
 				// Add user to UserList
-				Buffer += USER_HandleRoomPresence(XML)
+				Buffer += USER_HandleRoomPresence(XML);
 
 				Buffer += ONLINE_HandleOnlinePresence(XML);
 				Buffer += CHALLENGE_HandlePresence(XML);
@@ -94,7 +94,7 @@ export function PARSER_ParsePresence(XML)
 			else if(Jid.match(MainData.GetServer()))
 			{
 				// Add user to UserList
-				Buffer += USER_HandlePresence(XML)
+				Buffer += USER_HandlePresence(XML);
 
 				Buffer += GAME_HandlePresence(XML);
 			}

@@ -131,14 +131,14 @@ export function CONNECTION_SendJabber()
 	{
 		HttpRequest.onreadystatechange = function(){
 			CONNECTION_ReceiveXml(HttpRequest);
-		}
+		};
 	}
 	// Conection parse messages responses
 	else if (MainData.GetConnectionStatus() > 0)
 	{
 		HttpRequest.onreadystatechange = function(){
 			CONNECTION_ReceiveConnection(HttpRequest);
-		}
+		};
 	}
 
 	// Send request to server
@@ -270,7 +270,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 						{
 
               LOGIN_EndLogin();
-              START_Webclient()
+              START_Webclient();
 
 							// Set connected status
 							MainData.SetConnectionStatus(0);

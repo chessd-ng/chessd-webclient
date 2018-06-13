@@ -101,7 +101,7 @@ export function START_ChangeLanguage(Lang)
 	INTERFACE_EndLogin();
 
 	// Reload MainData with configurations and new language selected
-	MainData.SetText(UTILS_OpenXMLFile("lang/"+Lang+".xml?"+NoCache.TimeStamp))
+	MainData.SetText(UTILS_OpenXMLFile("lang/"+Lang+".xml?"+NoCache.TimeStamp));
 
 	// Create cookie for new language
 	UTILS_CreateCookie("lang", Lang, MainData.GetCookieValidity());

@@ -75,7 +75,7 @@ function INTERFACE_StartLoad()
 
 	LoadDiv.appendChild(BarBorder);
 
-	return {LoadDiv:LoadDiv, LoadLabel:LoadingLabel, BarBorder:BarBorder}
+	return {LoadDiv:LoadDiv, LoadLabel:LoadingLabel, BarBorder:BarBorder};
 }
 
 

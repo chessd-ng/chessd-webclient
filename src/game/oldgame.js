@@ -169,7 +169,7 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 	GameDiv.OldGameMode();
 
 	//Change "X" close board button function when clicked
-	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
+	GameDiv.EventButtons[GameDiv.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index);};
 
 	Buffer += MESSAGE_GetProfile(P1.Name,Consts.IQ_ID_OldGamePhoto);
 	Buffer += MESSAGE_GetProfile(P2.Name,Consts.IQ_ID_OldGamePhoto);
@@ -291,7 +291,7 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 				HPlayer1.Time = HTime;
 			}
 
-			Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn)
+			Buffer += OLDGAME_UpdateBoard(GamePos, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn);
 		}
 
 		OLDGAME_FirstBoard();
@@ -397,7 +397,7 @@ export function OLDGAME_EndGame(Id)
 	NewOldGame.OldGameMode();
 
 	//Change "X" close board button function when clicked
-	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index)};
+	NewOldGame.EventButtons[NewOldGame.EventButtons.length-1].onclick = function(){ OLDGAME_RemoveOldGame(Index);};
 	
 	OLDGAME_LastBoard();
 	
@@ -406,7 +406,7 @@ export function OLDGAME_EndGame(Id)
 	{
 		MoveObj = CurrentOldGame.Moves[i];
 		// i+1 is a QuickFix
-		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime)
+		NewOldGame.AddMove((i+1), MoveObj.Move, MoveObj.ShortMove, MoveObj.PWTime, MoveObj.PBTime);
 	}
 
 	NewOldGame.HideLoadingMove();

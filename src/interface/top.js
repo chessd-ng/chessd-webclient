@@ -65,23 +65,23 @@ export function INTERFACE_CreateTop()
 	Room.onclick = function () {
 		Pos = UTILS_GetOffset(this);
 		ROOM_ShowRoomList(Pos.X);
-	}
+	};
 
 	// Search game
-	ItemTitle = UTILS_GetText("menu_search_game")
+	ItemTitle = UTILS_GetText("menu_search_game");
 	Game = UTILS_CreateElement("li", null, "search_game",ItemTitle);
 	UTILS_AddListener(Game,"click",function() { OLDGAME_OpenOldGameWindow(); }, "false");
 
 	// Preferences
-	ItemTitle = UTILS_GetText("menu_preferences")
+	ItemTitle = UTILS_GetText("menu_preferences");
 	Pref = UTILS_CreateElement("li", null, "preferences",ItemTitle);
 
 	Pref.onclick = function () {
 		WINDOW_Alert(UTILS_GetText("not_implemented_title"),UTILS_GetText("not_implemented"));
-	}
+	};
 
 	// Help
-	ItemTitle = UTILS_GetText("menu_help")
+	ItemTitle = UTILS_GetText("menu_help");
 	Help = UTILS_CreateElement("li", null, "help",ItemTitle);
 
 	UTILS_AddListener(Help,"click",function() { WINDOW_Help(); }, "false");
@@ -92,7 +92,7 @@ export function INTERFACE_CreateTop()
 	ExitText = UTILS_CreateElement("p","ExitText", null, ItemTitle);
 	Exit.onclick = function () { 
 		LOGIN_Logout();
-	}
+	};
 	Exit.appendChild(ExitText);
 
 	MenuList.appendChild(Exit);
@@ -153,7 +153,7 @@ export function INTERFACE_ShowRoomMenu(OffsetLeft)
 	Create = UTILS_CreateElement("span", "createRoom", null, UTILS_GetText("room_create_rooms"));
 	Create.onclick = function () {
 		WINDOW_CreateRoom();
-	}
+	};
 	
 	// Show loading message
 	MenuDiv.appendChild(INTERFACE_ShowLoadBox());
@@ -285,7 +285,7 @@ export function INTERFACE_ShowAdminIcon()
 
 	if(Item != null)
 	{
-		ItemTitle = UTILS_GetText("menu_adjourn")
+		ItemTitle = UTILS_GetText("menu_adjourn");
 		Item.innerHTML = ItemTitle;
 		Item.className = "admin";
 		UTILS_AddListener(Item,"click",function() { WINDOW_CreateAdminCenter(); }, "false");

@@ -203,7 +203,7 @@ function INTERFACE_CreateRoom(RoomName)
 	UserListVisibility = UTILS_CreateElement("span",null,"UserListVisibility",UTILS_GetText("room_show_user_list"));
 	UserListVisibility.onclick = function(){
 		ROOM_ShowHideUserList(RoomName);
-	}
+	};
 
 
 	// MessageList
@@ -224,14 +224,14 @@ function INTERFACE_CreateRoom(RoomName)
 				ROOM_ErrorMessageLength(RoomName);
 			}
 		}
-	}
+	};
 
 	// Emoticons
 	Emoticon = UTILS_CreateElement("img", null, "emoticon");
   Emoticon.src = ImageEmoticonDefault;
 	Emoticon.onclick = function () {
 		INTERFACE_ShowEmoticonList(RoomName);
-	}
+	};
 
 	// MessageList
 	MessageList = UTILS_CreateElement("ul", RoomName+"_Messages", "MessageList");
@@ -251,7 +251,7 @@ function INTERFACE_CreateRoom(RoomName)
 				ROOM_ErrorMessageLength(RoomName);
 			}
 		}
-	}
+	};
 
 	RoomUserDiv.appendChild(UserListVisibility);
 
@@ -485,7 +485,7 @@ export function INTERFACE_ShowRoomList(Rooms)
                 Room = UTILS_CreateElement("li", Rooms[i].Id, null, Rooms[i].Name);
                 Room.onclick = function () {
 									ROOM_EnterRoom(this.id);
-                }
+                };
                 Node.appendChild(Room);
         }
         return true;
@@ -584,7 +584,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(GameId, PW, PB);
 				To = GameId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
-				Buffer += MESSAGE_Presence(To)
+				Buffer += MESSAGE_Presence(To);
 			}
 		}
 		else
@@ -592,7 +592,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 			WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));
 		}
 		CONNECTION_SendJabber(Buffer);
-	}
+	};
 
 	// Insert item in current game list
 	List.appendChild(Room);
@@ -656,7 +656,7 @@ function INTERFACE_ChangeRoomListVisibility()
 				ROOM_FocusRoom(RoomName); 
 			}
 			INTERFACE_ChangeRoomListVisibility(); 
-		} 
+		}; 
 		List.appendChild(Item); 
 	} 
 
@@ -754,7 +754,7 @@ function INTERFACE_ShowEmoticonList(RName)
 			Node.focus();
 
 			return true;
-		}
+		};
 
 		Item.appendChild(Img);
 		List.appendChild(Item);
@@ -828,14 +828,14 @@ export function INTERFACE_FocusRoom(RoomName)
 
 		Node.parentNode.onclick = function () {
 			ROOM_FocusRoom(RoomName);
-		}
+		};
 
 		if(RoomName.length > 4)
 		{
 			ShortName = UTILS_ShortString(RoomName, 4);
 			Node.innerHTML = ShortName;
-			Node.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
-			Node.onmouseout = function() { INTERFACE_CloseFullName(); }
+			Node.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); };
+			Node.onmouseout = function() { INTERFACE_CloseFullName(); };
 		}
 		else
 		{
@@ -869,8 +869,8 @@ export function INTERFACE_CreateRoomInBar(RoomName)
 		if (UTILS_GetText("room_default") > 4)
 		{
 			RoomItemTitle = UTILS_CreateElement("span",null,null,UTILS_GetText("room_default"));
-			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, UTILS_GetText("room_default")); }
-			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, UTILS_GetText("room_default")); };
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); };
 		}
 		else
 		{
@@ -884,7 +884,7 @@ export function INTERFACE_CreateRoomInBar(RoomName)
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
-		}
+		};
 
 		RoomList.insertBefore(RoomItem, RoomList.childNodes[0]);
 	}
@@ -896,8 +896,8 @@ export function INTERFACE_CreateRoomInBar(RoomName)
 		{
 			ShortName = UTILS_ShortString(RoomName, 4);
 			RoomItemTitle = UTILS_CreateElement("span","RoomSecName",null,ShortName);
-			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); }
-			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); }
+			RoomItemTitle.onmouseover = function() { INTERFACE_ShowFullName(this, RoomName); };
+			RoomItemTitle.onmouseout = function() { INTERFACE_CloseFullName(); };
 		}
 		else
 		{
@@ -911,7 +911,7 @@ export function INTERFACE_CreateRoomInBar(RoomName)
 
 		RoomItem.onclick = function () {
 			ROOM_FocusRoom(RoomName);
-		}
+		};
 
 		RoomClose = UTILS_CreateElement("img", "CloseRoom", "close");
     RoomClose.src = ImageCloseChat;
@@ -1079,7 +1079,7 @@ export function INTERFACE_ShowCreateRoomWindow()
 		CounterLabel.innerHTML = UTILS_GetText("window_character");
 		CounterLabel.innerHTML = CounterLabel.innerHTML.replace(/%s/,30 - Input.value.length);
 		Input.value = Input.value.toLowerCase();
-	}
+	};
 	
 	// TODO - not implemented
 	// Room Description Input 

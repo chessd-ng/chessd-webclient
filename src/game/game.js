@@ -212,12 +212,12 @@ function GAME_Move(XML)
 		// If game was not founded, start a new game and show this move
 		Buffer += GAME_StartGame(GameID, Player1, Player2);
 
-		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn);
 	}
 	else
 	{
 		// Else show this move
-		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn)
+		Buffer += GAME_UpdateBoard(GameID, Board, Move, ShortMove, Player1, Player2, Turn);
 	}
 
 	return Buffer;
@@ -332,13 +332,13 @@ function GAME_State(XML)
 			Buffer += GAME_StartGame(GameID, Player1, Player2);
 			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
 			// Set time left for each player
-			Buffer += GAME_SetLeftTime(GameID, WTime, BTime)
+			Buffer += GAME_SetLeftTime(GameID, WTime, BTime);
 		}
 		else
 		{
 			Buffer += GAME_LoadGameHistory(GameID, History, Player1, Player2);
 			// Set time left for each player
-			Buffer += GAME_SetLeftTime(GameID, WTime, BTime)
+			Buffer += GAME_SetLeftTime(GameID, WTime, BTime);
 		}
 	}
 
@@ -387,13 +387,13 @@ function GAME_HandleDraw(XML, Xmlns)
 		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameDrawAccept(GameID));
-		}
+		};
 
 		// Cancel button
 		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameDrawDeny(GameID));
-		}
+		};
 
 		// Show message as a default confirm window
 		WINDOW_Confirm(Title, Text, Button1, Button2);
@@ -444,13 +444,13 @@ function GAME_HandleCancel(XML, Xmlns)
 		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameCancelAccept(GameID));
-		}
+		};
 
 		// Cancel button
 		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameCancelDeny(GameID));
-		}
+		};
 
 		// Show message as a default confirm window
 		WINDOW_Confirm(Title, Text, Button1, Button2);
@@ -503,13 +503,13 @@ function GAME_HandleAdjourn(XML, Xmlns)
 		Button1.Name = UTILS_GetText("window_accept");
 		Button1.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameAdjournAccept(GameID));
-		}
+		};
 
 		// Cancel button
 		Button2.Name = UTILS_GetText("window_decline");
 		Button2.Func = function () {
 			CONNECTION_SendJabber(MESSAGE_GameAdjournDeny(GameID));
-		}
+		};
 
 		// Show message as a default confirm window
 		WINDOW_Confirm(Title, Text, Button1, Button2);
@@ -811,7 +811,7 @@ export function GAME_StartObserverGame(GameId, P1, P2)
 	CONNECTION_SendJabber(Buffer);
 
 	// Get game's history moves when enter in game room
-	ROOM_EnterRoomGame(GameId)
+	ROOM_EnterRoomGame(GameId);
 }
 
 /**
@@ -913,7 +913,7 @@ export function GAME_RemoveGame(GameID)
 			MainData.RemoveGame(GameID);
 
 			// Send message to leave room
-			ROOM_ExitRoom(GameID)
+			ROOM_ExitRoom(GameID);
 
 			// Show gamecenter again
 			GAMECENTER_ShowGameCenter();
@@ -1063,7 +1063,7 @@ export function GAME_SendResign(GameID)
 	Button1.Name = UTILS_GetText("window_ok");
 	Button1.Func = function () {
 		CONNECTION_SendJabber(MESSAGE_GameResign(GameID));
-	}
+	};
 
 	// Cancel button
 	Button2.Name = UTILS_GetText("window_cancel");
@@ -1131,7 +1131,7 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 			HPlayer1.Time = HTime;
 		}
 
-		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn)
+		Buffer += GAME_UpdateBoard(GameID, HBoard, HMove, HShortMove, HPlayer1, HPlayer2, HTurn);
 	}
 
 	return Buffer;
@@ -1226,7 +1226,7 @@ function GAME_SetLeftTime(GameID, WTime, BTime)
 */
 export function GAME_ShowLoadingMove(Id)
 {
-	var Game = MainData.GetGame(Id)
+	var Game = MainData.GetGame(Id);
 
 	Game.Game.ShowLoadingMove();
 }
@@ -1240,7 +1240,7 @@ export function GAME_ShowLoadingMove(Id)
 */
 function GAME_HideLoadingMove(Id)
 {
-	var Game = MainData.GetGame(Id)
+	var Game = MainData.GetGame(Id);
 
 	Game.Game.HideLoadingMove();
 }

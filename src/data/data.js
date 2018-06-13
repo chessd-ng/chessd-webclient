@@ -84,7 +84,7 @@ export function DATA(ConfFile, LangFile)
 	this.Conf.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.Conf.Lang = "";
 	//Default php version - php4 or php5
-	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php")
+	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php");
 	this.Conf.UpdateRatingInterval = UTILS_GetTag(Params, "update-rating-interval");
 	this.Conf.UpdateGetMaxProfiles = UTILS_GetTag(Params, "update-get-max-profiles");
 
@@ -111,7 +111,7 @@ export function DATA(ConfFile, LangFile)
 
 	/************************ CHAT DATA************************/
 	this.Chat = new Object();
-	this.Chat.ChatList = new Array()
+	this.Chat.ChatList = new Array();
 	this.Chat.ShowChat = new Array();
 	this.Chat.MaxChats = UTILS_GetTag(Params, "max-chats");
 	// Max chat input length
@@ -445,7 +445,7 @@ function DATA_RemoveHttpPost(PostObj)
 {
 	var i;
 
-	i = this.FindHttpPost(PostObj)
+	i = this.FindHttpPost(PostObj);
 
 	if(i != null)
 	{
@@ -835,7 +835,7 @@ function DATA_AddContactUser(Username, Status, Subs, Group)
 */
 function DATA_RemoveContactUser(Username)
 {
-	var Pos = MainData.FindContactUser(Username)
+	var Pos = MainData.FindContactUser(Username);
 	
 	if(Pos != null)
 	{
@@ -1057,7 +1057,7 @@ function DATA_AddOnlineUser(Username, Status, Type)
 */
 function DATA_RemoveOnlineUser(Username)
 {
-	var Pos = MainData.FindOnlineUser(Username)
+	var Pos = MainData.FindOnlineUser(Username);
 	
 	if(Pos != null)
 	{
@@ -2671,7 +2671,7 @@ function DATA_GetUserInRoom(Username)
 */
 function DATA_SetUserInfoInRoom(Username, Status, Role, Affiliation)
 {
-	var User = this.GetUser(Username)
+	var User = this.GetUser(Username);
 
 	if (User == null)
 	{
@@ -2706,7 +2706,7 @@ function DATA_SetUserInfoInRoom(Username, Status, Role, Affiliation)
 */
 function DATA_RemoveUserInRoom(Username)
 {
-	var i = this.FindUser(Username)
+	var i = this.FindUser(Username);
 
 	if (i == null)
 	{
@@ -2830,7 +2830,7 @@ function DATA_GetRoom(RoomName)
 
 	if(RoomPos == null)
 	{
-		return null
+		return null;
 	}
 
 	return this.Room.RoomList[RoomPos];
@@ -3572,7 +3572,7 @@ function DATA_FindGame(Id)
 	}
 
 	//If game Id is not found
-	return null
+	return null;
 }
 
 /**
@@ -3637,7 +3637,7 @@ function DATA_GetGame(Id)
 	{
 		if(this.Game.GameList[i].Id == Id)
 		{
-			return(this.Game.GameList[i])
+			return(this.Game.GameList[i]);
 		}
 		i++;
 	}
@@ -3702,7 +3702,7 @@ function DATA_AddOldGame(PWName, PBName, Color, GameDiv)
 
 	NewOldGame.Game = GameDiv;
 	NewOldGame.YourColor = Color;
-	NewOldGame.BoardColor = Color
+	NewOldGame.BoardColor = Color;
 	NewOldGame.IsYourTurn = false;
 	NewOldGame.Moves = new Array();
 	NewOldGame.PW = PWName;
@@ -3882,7 +3882,7 @@ function DATA_FindSearchGameInfo(Id)
 	}
 
 	//If game Id is not found
-	return null
+	return null;
 }
 
 
@@ -4219,7 +4219,7 @@ function DATA_RemoveProfile(Jid)
 
 	if (ProfileIndex == null)
 	{
-		return false
+		return false;
 	}
 
 	//Remove Profile from ProfileList

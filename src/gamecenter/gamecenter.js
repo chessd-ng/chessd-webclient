@@ -214,7 +214,7 @@ export function GAMECENTER_ClearCurrentGames()
 	
 	for(i=GamesList.length-1; i>=0; i--)
 	{
-		GameCenterObj.CurrentGames.remove(GamesList[i].Id)
+		GameCenterObj.CurrentGames.remove(GamesList[i].Id);
 	}
 
 }
@@ -404,7 +404,7 @@ export function GAMECENTER_PostponeSortByUsername()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 
 }
@@ -431,7 +431,7 @@ export function GAMECENTER_PostponeSortByRating()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 }
 
@@ -457,7 +457,7 @@ export function GAMECENTER_PostponeSortByCategory()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 
 
@@ -484,7 +484,7 @@ export function GAMECENTER_PostponeSortByTime()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 }
 /**
@@ -509,7 +509,7 @@ export function GAMECENTER_PostponeSortByInc()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 }
 
@@ -535,7 +535,7 @@ export function GAMECENTER_PostponeSortByDate()
 		GameCenterObj.Postpone.remove(PostponeItem.Id);
 		GameCenterObj.Postpone.add(PostponeItem.Player, PostponeItem.Time, PostponeItem.Inc, PostponeItem.Category, PostponeItem.Rating, PostponeItem.Date, PostponeItem.Id);
 
-		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status)
+		CHALLENGE_PostponePresence(PostponeItem.Username, PostponeItem.Status);
 	}
 }
 

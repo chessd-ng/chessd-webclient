@@ -178,7 +178,7 @@ export function INTERFACE_ShowProfileWindow(Profile)
 		
 		CounterDiv = UTILS_CreateElement('div', 'CounterDiv');
 		CounterInput = UTILS_CreateElement("input",null,"counter_input");
-		CounterInput.type = "text"
+		CounterInput.type = "text";
 		CounterInput.value = 200;
 		CounterInput.setAttribute("size",3);
 		CounterInput.readOnly = true;
@@ -197,7 +197,7 @@ export function INTERFACE_ShowProfileWindow(Profile)
 			CounterInput.value = 200 - WhoAmIUser.value.length;
 			CounterLabel.innerHTML = UTILS_GetText("window_character");
 			CounterLabel.innerHTML = CounterLabel.innerHTML.replace(/%s/,200 - WhoAmIUser.value.length);
-		}
+		};
 	
 		SaveProfile = UTILS_CreateElement('input',null,'button_big');
 		SaveProfile.type = "button";
@@ -465,7 +465,7 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	Elements.SetButtonsAvailable = INTERFACE_ProfileSetAvailable;
 	Elements.SetButtonsUnavailable = INTERFACE_ProfileSetUnavailable;
 
-	return {Div:Div, Buttons:Buttons, Elements:Elements}
+	return {Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 /**
@@ -507,7 +507,7 @@ export function INTERFACE_ShowProfileConfirmWindow()
 	Save.onclick = function() {
 		// Send messages with changes
 		PROFILE_SaveMyProfile();
-	}
+	};
 
 	Cancel = UTILS_CreateElement("input", null,"button_big");
 	Cancel.type = "button";
@@ -884,5 +884,5 @@ function INTERFACE_ProfileSetUnavailable()
 	this.Desc.disabled = true;
 	this.Username.disabled = true;
 	this.PhotoLabel.className = "edit_photo_disabled";
-	this.PhotoLabel.onclick = function() { return false };
+	this.PhotoLabel.onclick = function() { return false; };
 }

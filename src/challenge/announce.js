@@ -302,7 +302,7 @@ function ANNOUNCE_AddAnnounce(Username, Color, Time, Inc, Category, Rated, Priva
 			Rating = 1500;
 		}
 	
-		MainData.AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId)
+		MainData.AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, AnnounceId);
 		if(Category != "untimed")
 		{
 			GameCenter.Announce.add(Player, Rating, Time/60, Inc, Category, Rated, Private, AnnounceId);
@@ -452,13 +452,13 @@ export function ANNOUNCE_AcceptRandomAnnounce()
 	}
 	else
 	{
-		i = (Math.floor(Math.random()*10) % TmpAnnounceList.length)
+		i = (Math.floor(Math.random()*10) % TmpAnnounceList.length);
 		while(TmpAnnounceList[i].Player.Name == MyUsername)
 		{
-			i = (Math.floor(Math.random()*10) % TmpAnnounceList.length)
+			i = (Math.floor(Math.random()*10) % TmpAnnounceList.length);
 		}
 		//TODO -> set language XML here
 		WINDOW_Alert(i, "Iniciando jogo com: "+TmpAnnounceList[i].Player.Name);
-		ANNOUNCE_AcceptAnnounce(TmpAnnounceList[i].Id)
+		ANNOUNCE_AcceptAnnounce(TmpAnnounceList[i].Id);
 	}
 }

@@ -88,7 +88,7 @@ export function INTERFACE_UnbanUserWindow()
 	Elements.OkButton = OkButton;
 	Elements.CancelButton = CancelButton;
 
-	return{Div:Div, Buttons:Buttons, Elements:Elements}
+	return{Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 /**
@@ -143,7 +143,7 @@ export function INTERFACE_BanUserWindow(Username)
 	Elements.OkButton = OkButton;
 	Elements.CancelButton = CancelButton;
 
-	return{Div:Div, Buttons:Buttons, Elements:Elements}
+	return{Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 /**
@@ -198,7 +198,7 @@ export function INTERFACE_KickUserWindow(Username)
 	Elements.OkButton = OkButton;
 	Elements.CancelButton = CancelButton;
 
-	return{Div:Div, Buttons:Buttons, Elements:Elements}
+	return{Div:Div, Buttons:Buttons, Elements:Elements};
 }
 
 
@@ -257,7 +257,7 @@ export function INTERFACE_AddBannedUser(Username)
 	Item.onclick = function (){
 		ADMIN_UnbanUser(Username);
 		List.removeChild(this);
-	}
+	};
 
 	List.appendChild(Item);
 

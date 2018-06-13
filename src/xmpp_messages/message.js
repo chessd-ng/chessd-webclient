@@ -301,7 +301,7 @@ export function MESSAGE_Chat(To, Message)
 {
 	var XMPP;
 
-	XMPP  = "<message xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+To+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' type='chat'>"
+	XMPP  = "<message xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+To+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' type='chat'>";
 	XMPP += "<body>"+Message+"</body>";
 	XMPP += "</message>";
 
@@ -320,7 +320,7 @@ export function MESSAGE_GroupChat(To, Message)
 {
 	var XMPP;
 
-	XMPP  = "<message xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+To+"' type='groupchat'>"
+	XMPP  = "<message xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+To+"' type='groupchat'>";
 	XMPP += "<body>"+Message+"</body>";
 	XMPP += "</message>";
 
@@ -1071,9 +1071,9 @@ export function MESSAGE_GetBanList()
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 
-	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBanList+"'>"
-	XMPP += "<banned-list xmlns='"+MainData.GetXmlns()+"/chessd/admin'/>"
-	XMPP += "</iq>"
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBanList+"'>";
+	XMPP += "<banned-list xmlns='"+MainData.GetXmlns()+"/chessd/admin'/>";
+	XMPP += "</iq>";
 
 	return XMPP;
 }
@@ -1185,9 +1185,9 @@ export function MESSAGE_SetProfile(Username, FullName, Desc, ImgType, Img64)
 	XMPP += "<vCard xmlns='vcard-temp' prodid='-//HandGen//NONSGML vGen v1.0//EN' version='2.0'>";
 	XMPP += "<FN>"+FullName+"</FN>";
 	XMPP += "<DESC>"+Desc+"</DESC>";
-	XMPP += "<PHOTO>"
-	XMPP += "<TYPE>"+ImgType+"</TYPE>"
-	XMPP += "<BINVAL>"+Img64+"</BINVAL>"
+	XMPP += "<PHOTO>";
+	XMPP += "<TYPE>"+ImgType+"</TYPE>";
+	XMPP += "<BINVAL>"+Img64+"</BINVAL>";
 	XMPP += "</PHOTO></vCard></iq>";
 
 	return XMPP;

@@ -18,7 +18,7 @@
 * @brief	Utils and auxiliars functions 
 */
 
-import { MainData } from 'main_data.js'
+import { MainData } from 'main_data.js';
 
 /**********************************
  * FUNCTIONS - XML SEARCH
@@ -256,7 +256,7 @@ export function UTILS_CreateElement(Element, Id, ClassName, Inner)
 	}
 	catch(e)
 	{
-		return null
+		return null;
 	}
 
 	if (Id != null)
@@ -725,8 +725,8 @@ export function UTILS_GetOffset(Obj)
 		Obj = Obj.offsetParent;
 		while (Obj)
 		{
-			Curleft += Obj.offsetLeft
-			Curtop += Obj.offsetTop
+			Curleft += Obj.offsetLeft;
+			Curtop += Obj.offsetTop;
 			Obj = Obj.offsetParent;
 		}
 		return {X:Curleft, Y:Curtop};
@@ -1334,7 +1334,7 @@ export function UTILS_SortByBRatingValue(a,b)
  */
 export function UTILS_GetLanguage()
 {
-	var Lang
+	var Lang;
 	
 	Lang = navigator.browserLanguage;
 	// Check for web browser type
@@ -1424,7 +1424,7 @@ export function UTILS_ValidateDate(Day,Month,Year,Hour,Minutes)
 						}
 						else
 						{
-							return 3 // year error
+							return 3; // year error
 						}
 					}
 					else

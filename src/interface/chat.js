@@ -293,12 +293,12 @@ function INTERFACE_CreateChat(Username)
 	// Show/hide chat
 	State.onclick = function () {
 		CHAT_ChangeChatState(Username);
-	}
+	};
 
 	// Close chat
 	Close.onclick = function () {
 		CHAT_CloseChat(Username);
-	}
+	};
 
 	Input = UTILS_CreateElement("input");
 	Input.type = "text";
@@ -318,18 +318,18 @@ function INTERFACE_CreateChat(Username)
 				CHAT_ErrorMessageLength(Username);
 			}
 		}
-	}
+	};
 	
 	// Remove focus
 	ChatItem.onclick = function(){
 		CHAT_BlurChat(Username);
-	}
+	};
 	ChatInner.onclick = function(){
 		CHAT_BlurChat(Username);
-	}
+	};
 	Input.onfocus = function(){
 		CHAT_BlurChat(Username);
-	}
+	};
 
 	ChatTitle.appendChild(TitleSpan);
 	ChatTitle.appendChild(State);
@@ -345,7 +345,7 @@ function INTERFACE_CreateChat(Username)
 
 	ChatItem.appendChild(ChatInside);
 
-	return {ChatWindow:ChatItem, ChatInner:ChatInner, ChatList:ChatMessages, ChatTitle:ChatTitle, ChatTitleSpan:TitleSpan, ChatInput:Input, MinMax:State}
+	return {ChatWindow:ChatItem, ChatInner:ChatInner, ChatList:ChatMessages, ChatTitle:ChatTitle, ChatTitleSpan:TitleSpan, ChatInput:Input, MinMax:State};
 }
 
 

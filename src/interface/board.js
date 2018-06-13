@@ -148,7 +148,7 @@ export function INTERFACE_CreateGame(GameId, WName, BName, MyColor, PieceSize, O
 		PBCapturedList: CapturedPieces.PBCapturedList,
 		OptionsButtons:Options.ButtonList,
 		GameClose:GameClose
-	}
+	};
 }
 
 /***************************
@@ -187,8 +187,8 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 				// If not observer, set block to change color if mouse is over or out of its
 				if(!Observer)
 				{
-					Block.onmouseover = function() { this.className = "select" };
-					Block.onmouseout = function() { this.className = "black" };
+					Block.onmouseover = function() { this.className = "select"; };
+					Block.onmouseout = function() { this.className = "black"; };
 				}
 			}
 			else
@@ -197,8 +197,8 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 				// If not observer, set block to change color if mouse is over or out of its
 				if(!Observer)
 				{
-					Block.onmouseover = function() { this.className = "select" };
-					Block.onmouseout = function() { this.className = "white" };
+					Block.onmouseover = function() { this.className = "select"; };
+					Block.onmouseout = function() { this.className = "white"; };
 				}
 			}
 			
@@ -323,10 +323,10 @@ function INTERFACE_CreateGameOptions(GameID)
 	UTILS_AddListener(OptionGiveTime, "mouseout", function() { this.className = "press";}, false);
 	UTILS_AddListener(OptionGiveTime, "mouseover", function() { this.className = "release";}, false);
 	
-	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); }
-	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); }
-	OptionSelectB.onclick = function (){ GAME_ChangePromotion("b"); }
-	OptionSelectN.onclick = function (){ GAME_ChangePromotion("n"); }
+	OptionSelectQ.onclick = function (){ GAME_ChangePromotion("q"); };
+	OptionSelectR.onclick = function (){ GAME_ChangePromotion("r"); };
+	OptionSelectB.onclick = function (){ GAME_ChangePromotion("b"); };
+	OptionSelectN.onclick = function (){ GAME_ChangePromotion("n"); };
 
 	var ButtonList = new Array();
 
@@ -468,7 +468,7 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 	var IndexV, IndexItem;
 	var i;
 
-	IndexV = UTILS_CreateElement("ul", "IndexV", "IndexV")
+	IndexV = UTILS_CreateElement("ul", "IndexV", "IndexV");
 
 	for (i=1; i<=8; i++)
 	{
@@ -502,7 +502,7 @@ function INTERFACE_CreateVerticalIndex(Color, Size)
 */
 function INTERFACE_CreateHorizontalIndex(Color, Size)
 {
-	var IndexH = UTILS_CreateElement("ul", "IndexH", "IndexH")
+	var IndexH = UTILS_CreateElement("ul", "IndexH", "IndexH");
 	var IndexItem;
 	var i;
 	
@@ -697,10 +697,10 @@ export function INTERFACE_CreateOldGameMoveList()
 	ButtonLast.type = "button";
 	
 	/***********************************/
-	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();}
-	ButtonPrev.onclick  = function(){OLDGAME_PrevBoard(); }
-	ButtonNext.onclick  = function(){OLDGAME_NextBoard(); }
-	ButtonLast.onclick  = function(){OLDGAME_LastBoard(); }
+	ButtonFirst.onclick = function(){OLDGAME_FirstBoard();};
+	ButtonPrev.onclick  = function(){OLDGAME_PrevBoard(); };
+	ButtonNext.onclick  = function(){OLDGAME_NextBoard(); };
+	ButtonLast.onclick  = function(){OLDGAME_LastBoard(); };
 	/***********************************/
 
 	MoveListButtons.appendChild(ButtonFirst);
@@ -952,5 +952,5 @@ function INTERFACE_CreateCapturedPieces()
 	CapturedDiv.appendChild(PWCapturedList);
 	CapturedDiv.appendChild(PBCapturedList);
 
-	return {Div:CapturedDiv, PWCapturedList:PWCapturedList, PBCapturedList:PBCapturedList}
+	return {Div:CapturedDiv, PWCapturedList:PWCapturedList, PBCapturedList:PBCapturedList};
 }

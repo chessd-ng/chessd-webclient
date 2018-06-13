@@ -170,7 +170,7 @@ function CONTACT_SetAwayStatus()
 	var MyUsername = MainData.GetUsername();
 	var MyUser = MainData.GetUser(MyUsername);
 	var MyUserStatus = MyUser.GetStatus();
-	var AwayCounter = MainData.GetAwayCounter()
+	var AwayCounter = MainData.GetAwayCounter();
 
 	MainData.SetAwayCounter(AwayCounter - 1);
 

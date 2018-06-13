@@ -83,7 +83,7 @@ function WINDOW_NewWindow(WinSize, Div, DivButtons, Title, Top, Left)
 	Win = new WindowObj(Height, Width, Div, Title);
 
 	// Window Focus Event
-	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_Focus(Win)},false);
+	UTILS_AddListener(Win.window ,"mousedown", function(){ WINDOW_Focus(Win);},false);
 
 	// Show Windows on browser
 	// param: Parent Node, Top in pixels, Left in pixels
@@ -427,13 +427,13 @@ export function WINDOW_Profile(Profile)
 	var Elements = Div.Elements;
 
 	// Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User);}, false);
 
 	// If Profile window isn't User's profile
 	if (Div.Buttons.length < 2)
 	{
 		// Close Button
-		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User)}, false);
+		UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj); PROFILE_RemoveProfile(Profile.User);}, false);
 	}
 	// If Profile window is User's profile
 	else
@@ -456,7 +456,7 @@ export function WINDOW_Profile(Profile)
 						else // Close profile window
 						{
 							WINDOW_RemoveWindow(WindowObj); 
-							PROFILE_RemoveProfile(Profile.User)
+							PROFILE_RemoveProfile(Profile.User);
 						}
 					}
 				}

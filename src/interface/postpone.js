@@ -111,7 +111,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />")
+		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />");
 	}
 	catch(err)
 	{ //FF
@@ -126,7 +126,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />")
+		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />");
 	}
 	catch(err)
 	{ //FF
@@ -403,7 +403,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	{
 		try
 		{
-			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />")
+			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />");
 		}
 		catch(err)
 		{
@@ -438,7 +438,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	Accept.type = "button";
 	Accept.onclick = function () {
 		CHALLENGE_AcceptChallenge(MatchId);
-	}	
+	};	
 
 	// SET CHAT EVENT
 	Chat = UTILS_CreateElement('input',null,'button');
@@ -446,7 +446,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	Chat.type = "button";
 	Chat.onclick = function () {
 		CHAT_OpenChat(Oponent);
-	}
+	};
 
 	// SET DECLINE EVENT
 	Decline = UTILS_CreateElement('input',null,'button');
@@ -454,7 +454,7 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	Decline.type = "button";
 	Decline.onclick = function () {
 		CHALLENGE_DeclineChallenge(MatchId);
-	}	
+	};	
 
 	// DISABLE INPUTS
 	TimeSelect.disabled = true;
@@ -543,6 +543,6 @@ export function INTERFACE_ShowPostponeWindow(Oponent, RatingObj, GameParameters,
 	Div.appendChild(Br3);
 	Div.appendChild(ButtonsDiv);
 
-	return {Div:Div, Buttons:Buttons}
+	return {Div:Div, Buttons:Buttons};
 }
 

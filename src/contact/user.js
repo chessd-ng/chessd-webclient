@@ -91,7 +91,7 @@ export function USER_HandlePresence(XML)
 	}
 	else
 	{
-		Status = "unavailable"
+		Status = "unavailable";
 	}
 	
 	User.GetUser(Username);
@@ -274,7 +274,7 @@ export function USER_HandleInfo(XML)
 */
 export function USER_AddUser(Username, Status)
 {
-	var User = MainData.GetUser(Username)
+	var User = MainData.GetUser(Username);
 
 	if( User == null)
 	{

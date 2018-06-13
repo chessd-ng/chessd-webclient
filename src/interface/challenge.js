@@ -89,7 +89,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	Accept.type = "button";
 	Accept.onclick = function () {
 		CHALLENGE_AcceptChallenge(MatchId);
-	}	
+	};	
 
 	// Layer1 Elements
 
@@ -129,7 +129,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	try
 	//Fix radio button for IE
 	{
-		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />")
+		ColorOptB = document.createElement("<input class='radio' type='radio' name='color' />");
 	}
 	catch(err)
 	{ //FF
@@ -144,7 +144,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	try
 	//Fix radio button for IE
 	{
-		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />")
+		AutoColorOpt = document.createElement("<input class='radio' type='radio' name='color' />");
 	}
 	catch(err)
 	{ //FF
@@ -332,10 +332,10 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 		if (GameParameters != undefined)
 		{
 			Accept.className = "button_disabled";
-			Accept.onclick = function () { return false } ;
+			Accept.onclick = function () { return false; } ;
 			Accept.disabled = true;
 		}
-	}
+	};
 
 	//* End Layer1 Right Elements*
 	
@@ -554,7 +554,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	{
 		try
 		{
-			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />")
+			RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating' />");
 		}
 		catch(err)
 		{
@@ -612,7 +612,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 
 		// Create and send the chellenge message
 		CHALLENGE_SendChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated);
-	}
+	};
 
 	NewParameters = UTILS_CreateElement('input',null,'button');
 	NewParameters.value = UTILS_GetText('challenge_new_parameters');
@@ -643,7 +643,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 		}
 
 		CHALLENGE_SendReChallenge(Oponent, Color, TimeSelect.value, IncSelect.value, CatSelect.value, Rated, MatchId);
-	}
+	};
 
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('window_cancel');
@@ -718,32 +718,32 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 			Accept.disabled = true;
 			Accept.onclick = function () {
 				return false;
-			}
-		}	
+			};
+		};	
 
 		RatingCheckbox.onclick = function() {
 			Accept.className = "button_disabled";
 			Accept.disabled = true;
 			Accept.onclick = function () {
 				return false;
-			}
-		}	
+			};
+		};	
 
 		IncSelect.onchange = function() {
 			Accept.className = "button_disabled";
 			Accept.disabled = true;
 			Accept.onclick = function () {
 				return false;
-			}
-		}	
+			};
+		};	
 
 		TimeSelect.onchange = function() {
 			Accept.className = "button_disabled";
 			Accept.disabled = true;
 			Accept.onclick = function () {
 				return false;
-			}
-		}	
+			};
+		};	
 
 		AutoColorOpt.onclick = function() {
 			if (AutoColorOpt.checked == true)
@@ -752,9 +752,9 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 				Accept.disabled = true;
 				Accept.onclick = function () {
 					return false;
-				}
+				};
 			}
-		}	
+		};	
 
 		ColorOptB.onclick = function() {
 			if (ColorOptB.checked == true)
@@ -763,9 +763,9 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 				Accept.disabled = true;
 				Accept.onclick = function () {
 					return false;
-				}
+				};
 			}
-		}	
+		};	
 
 		ColorOptW.onclick = function() {
 			if (ColorOptW.checked == true)
@@ -774,9 +774,9 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 				Accept.disabled = true;
 				Accept.onclick = function () {
 					return false;
-				}
+				};
 			}
-		}	
+		};	
 
 		ButtonsDiv.appendChild(Accept);
 		Buttons.push(Accept);
@@ -813,7 +813,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	Div.appendChild(Br3);
 	Div.appendChild(ButtonsDiv);
 
-	return {Div:Div, Buttons:Buttons}
+	return {Div:Div, Buttons:Buttons};
 }
 
 /**

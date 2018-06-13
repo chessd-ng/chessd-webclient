@@ -55,7 +55,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 	DateInputD.onfocus = function() 
 	{
 		Elements.ClearField(DateInputD);
-	}
+	};
 	DateInputD.onblur = function()
 	{
 		Elements.FillField(DateInputD);
@@ -66,7 +66,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 				TBody.rows[0].childNodes[2].childNodes[0].value = "__";
 			}
 		}
-	}
+	};
 	DateInputD.onkeyup = function()
 	{
 		Elements.NextField(DateInputD, DateInputM);
@@ -74,12 +74,12 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			TBody.rows[0].childNodes[2].childNodes[0].value = DateInputD.value;
 		}
-	}
+	};
 
 	DateInputM.onfocus = function() 
 	{
 		Elements.ClearField(DateInputM);
-	}
+	};
 	DateInputM.onblur = function()
 	{
 		Elements.FillField(DateInputM);
@@ -90,7 +90,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 				TBody.rows[0].childNodes[2].childNodes[2].value = "__";
 			}
 		}
-	}
+	};
 	DateInputM.onkeyup = function()
 	{
 		Elements.NextField(DateInputM, DateInputY);
@@ -98,12 +98,12 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			TBody.rows[0].childNodes[2].childNodes[2].value = DateInputM.value;
 		}
-	}
+	};
 
 	DateInputY.onfocus = function() 
 	{
 		Elements.ClearField(DateInputY);
-	}
+	};
 	DateInputY.onblur = function()
 	{
 		Elements.FillField(DateInputY);
@@ -114,7 +114,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 				TBody.rows[0].childNodes[2].childNodes[4].value = "____";
 			}
 		}
-	}
+	};
 	DateInputY.onkeyup = function()
 	{
 		Elements.NextField(DateInputY, HourInputH);
@@ -122,12 +122,12 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			TBody.rows[0].childNodes[2].childNodes[4].value = DateInputY.value;
 		}
-	}
+	};
 
 	HourInputH.onfocus = function() 
 	{
 		Elements.ClearField(HourInputH);
-	}
+	};
 	HourInputH.onblur = function()
 	{
 		Elements.FillField(HourInputH);
@@ -138,7 +138,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 				TBody.rows[0].childNodes[3].childNodes[0].value = "__";
 			}
 		}
-	}
+	};
 	HourInputH.onkeyup = function()
 	{
 		Elements.NextField(HourInputH, HourInputM);
@@ -146,12 +146,12 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			TBody.rows[0].childNodes[3].childNodes[0].value = HourInputH.value;
 		}
-	}
+	};
 
 	HourInputM.onfocus = function() 
 	{
 		Elements.ClearField(HourInputM);
-	}
+	};
 	HourInputM.onblur = function()
 	{
 		Elements.FillField(HourInputM);
@@ -162,7 +162,7 @@ function TOURNEY_OpenCreateTourneyWindow()
 				TBody.rows[0].childNodes[3].childNodes[2].value = "__";
 			}
 		}
-	}
+	};
 
 	HourInputM.onkeyup = function()
 	{
@@ -170,13 +170,13 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			TBody.rows[0].childNodes[3].childNodes[2].value = HourInputM.value;
 		}
-	}
+	};
 
 	// First Row
 	RoundDInput.onfocus = function() 
 	{
 		Elements.ClearField(RoundDInput);
-	}
+	};
 	RoundDInput.onblur = function()
 	{
 		Elements.FillField(RoundDInput);
@@ -184,17 +184,17 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			DateInputD.value = "__";
 		}
-	}
+	};
 	RoundDInput.onkeyup = function()
 	{
 		Elements.NextField(RoundDInput, RoundMInput);
 		DateInputD.value = RoundDInput.value;
-	}
+	};
 
 	RoundMInput.onfocus = function() 
 	{
 		Elements.ClearField(RoundMInput);
-	}
+	};
 	RoundMInput.onblur = function()
 	{
 		Elements.FillField(RoundMInput);
@@ -202,17 +202,17 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			DateInputM.value = "__";
 		}
-	}
+	};
 	RoundMInput.onkeyup = function()
 	{
 		Elements.NextField(RoundMInput, RoundYInput);
 		DateInputM.value = RoundMInput.value;
-	}
+	};
 
 	RoundYInput.onfocus = function() 
 	{
 		Elements.ClearField(RoundYInput);
-	}
+	};
 	RoundYInput.onblur = function()
 	{
 		Elements.FillField(RoundYInput);
@@ -220,17 +220,17 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			DateInputY.value = "____";
 		}
-	}
+	};
 	RoundYInput.onkeyup = function()
 	{
 		Elements.NextField(RoundYInput, RoundHInput);
 		DateInputY.value = RoundYInput.value;
-	}
+	};
 
 	RoundHInput.onfocus = function() 
 	{
 		Elements.ClearField(RoundHInput);
-	}
+	};
 	RoundHInput.onblur = function()
 	{
 		Elements.FillField(RoundHInput);
@@ -238,17 +238,17 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			HourInputH.value = "__";
 		}
-	}
+	};
 	RoundHInput.onkeyup = function()
 	{
 		Elements.NextField(RoundHInput, RoundMiInput);
 		HourInputH.value = RoundHInput.value;
-	}
+	};
 
 	RoundMiInput.onfocus = function() 
 	{
 		Elements.ClearField(RoundMiInput);
-	}
+	};
 	RoundMiInput.onblur = function()
 	{
 		Elements.FillField(RoundMiInput);
@@ -256,136 +256,136 @@ function TOURNEY_OpenCreateTourneyWindow()
 		{
 			HourInputM.value = "__";
 		}
-	}
+	};
 
 	RoundMiInput.onkeyup = function()
 	{
 		HourInputM.value = RoundMiInput.value;
-	}
+	};
 
 	// Subscribe From
 	SPFromDateInputD.onfocus = function() 
 	{
 		Elements.ClearField(SPFromDateInputD);
-	}
+	};
 	SPFromDateInputD.onblur = function()
 	{
 		Elements.FillField(SPFromDateInputD);
-	}
+	};
 	SPFromDateInputD.onkeyup = function()
 	{
 		Elements.NextField(SPFromDateInputD, SPFromDateInputM);
-	}
+	};
 
 	SPFromDateInputM.onfocus = function() 
 	{
 		Elements.ClearField(SPFromDateInputM);
-	}
+	};
 	SPFromDateInputM.onblur = function()
 	{
 		Elements.FillField(SPFromDateInputM);
-	}
+	};
 	SPFromDateInputM.onkeyup = function()
 	{
 		Elements.NextField(SPFromDateInputM, SPFromDateInputY);
-	}
+	};
 
 	SPFromDateInputY.onfocus = function() 
 	{
 		Elements.ClearField(SPFromDateInputY);
-	}
+	};
 	SPFromDateInputY.onblur = function()
 	{
 		Elements.FillField(SPFromDateInputY);
-	}
+	};
 	SPFromDateInputY.onkeyup = function()
 	{
 		Elements.NextField(SPFromDateInputY, SPFromHourInputH);
-	}
+	};
 
 	SPFromHourInputH.onfocus = function() 
 	{
 		Elements.ClearField(SPFromHourInputH);
-	}
+	};
 	SPFromHourInputH.onblur = function()
 	{
 		Elements.FillField(SPFromHourInputH);
-	}
+	};
 	SPFromHourInputH.onkeyup = function()
 	{
 		Elements.NextField(SPFromHourInputH, SPFromHourInputM);
-	}
+	};
 
 	SPFromHourInputM.onfocus = function() 
 	{
 		Elements.ClearField(SPFromHourInputM);
-	}
+	};
 	SPFromHourInputM.onblur = function()
 	{
 		Elements.FillField(SPFromHourInputM);
-	}
+	};
 
 	// Subscribe To
 	SPToDateInputD.onfocus = function() 
 	{
 		Elements.ClearField(SPToDateInputD);
-	}
+	};
 	SPToDateInputD.onblur = function()
 	{
 		Elements.FillField(SPToDateInputD);
-	}
+	};
 	SPToDateInputD.onkeyup = function()
 	{
 		Elements.NextField(SPToDateInputD, SPToDateInputM);
-	}
+	};
 
 	SPToDateInputM.onfocus = function() 
 	{
 		Elements.ClearField(SPToDateInputM);
-	}
+	};
 	SPToDateInputM.onblur = function()
 	{
 		Elements.FillField(SPToDateInputM);
-	}
+	};
 	SPToDateInputM.onkeyup = function()
 	{
 		Elements.NextField(SPToDateInputM, SPToDateInputY);
-	}
+	};
 
 	SPToDateInputY.onfocus = function() 
 	{
 		Elements.ClearField(SPToDateInputY);
-	}
+	};
 	SPToDateInputY.onblur = function()
 	{
 		Elements.FillField(SPToDateInputY);
-	}
+	};
 	SPToDateInputY.onkeyup = function()
 	{
 		Elements.NextField(SPToDateInputY, SPToHourInputH);
-	}
+	};
 
 	SPToHourInputH.onfocus = function() 
 	{
 		Elements.ClearField(SPToHourInputH);
-	}
+	};
 	SPToHourInputH.onblur = function()
 	{
 		Elements.FillField(SPToHourInputH);
-	}
+	};
 	SPToHourInputH.onkeyup = function()
 	{
 		Elements.NextField(SPToHourInputH, SPToHourInputM);
-	}
+	};
 
 	SPToHourInputM.onfocus = function() 
 	{
 		Elements.ClearField(SPToHourInputM);
-	}
+	};
 	SPToHourInputM.onblur = function()
 	{
 		Elements.FillField(SPToHourInputM);
-	}
+	};
 
 	Elements.TNameInput.focus();
 }

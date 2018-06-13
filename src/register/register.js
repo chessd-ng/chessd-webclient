@@ -135,7 +135,7 @@ function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 	//RE = regular expression	
 	var REMail = /^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/;
 	//var REUsername = /^\w{1,}$/
-	var REUsername = /^[a-z0-9-._]+$/
+	var REUsername = /^[a-z0-9-._]+$/;
 
 	if(!REUsername.test(User))
 	{
@@ -205,7 +205,7 @@ function REGISTER_SendData(Msg)
 	HttpRequest.onreadystatechange = REGISTER_ReceiveXml;
 
 	// Send request to server
-	HttpRequest.send(Msg)
+	HttpRequest.send(Msg);
 
 }
 
@@ -263,7 +263,7 @@ function REGISTER_ProcessMessage(XmlDoc){
 	{
 			Uname = "<username>"+document.getElementById("username").value+"</username>";
 			Passwd = "<password>"+document.getElementById("pwd").value+"</password>";
-			Msg = "<iq type='set' id='reg2'><query xmlns='jabber:iq:register'>"
+			Msg = "<iq type='set' id='reg2'><query xmlns='jabber:iq:register'>";
 			Msg += Uname + Passwd + "</query></iq>";
 			Msg = REGISTER_MakeXMPP(Msg);
 			REGISTER_SendData(Msg);
@@ -494,7 +494,7 @@ function REGISTER_ReceiveXmlPHP()
 */
 function REGISTER_GetDatabaseError(Msg)
 {
-	var ErrMsg = /violates unique constraint/
+	var ErrMsg = /violates unique constraint/;
 
 	if(ErrMsg.test(Msg))
 	{

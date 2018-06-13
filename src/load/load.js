@@ -117,7 +117,7 @@ function LOAD_AppendFiles(Files, NumFiles)
 		FileType = Files[0].split("/")[0];
 		
 		//Show file to be load
-		LoadObj.setLabel(Files[0])
+		LoadObj.setLabel(Files[0]);
 			
 		switch(FileType)
 		{
@@ -163,11 +163,11 @@ function LOAD_AppendFiles(Files, NumFiles)
 		}
 		else // FF2 / FF3
 		{
-			File.onload = function(){LOAD_NextFile(Files, NumFiles)};
+			File.onload = function(){LOAD_NextFile(Files, NumFiles);};
 		}
 
-		File.onerror = function(){LOAD_NextFile(Files, NumFiles)};
-		File.onabort = function(){LOAD_NextFile(Files, NumFiles)};
+		File.onerror = function(){LOAD_NextFile(Files, NumFiles);};
+		File.onabort = function(){LOAD_NextFile(Files, NumFiles);};
 	}
 	// All files has been loaded
 	else 
@@ -191,7 +191,7 @@ function LOAD_NextFile(Files, NumFiles)
 	var LoadObj = MainData.GetLoadObj();
 	var Num = (1/ NumFiles)*300;
 	// Fill the loading bar progress
-	LoadObj.LoadBar.add(Num)
+	LoadObj.LoadBar.add(Num);
 
 	// Remove first file from list and load next file
 	Files.splice(0,1);
@@ -211,7 +211,7 @@ function LOAD_EndFile(Files, NumFiles)
 	var LoadObj = MainData.GetLoadObj();
 	var Num = (1/ NumFiles)*300;
 	// Complete load bar
-	LoadObj.LoadBar.add(Num)
+	LoadObj.LoadBar.add(Num);
 
 	// Start Webclient chess environment
 	setTimeout(START_Webclient, 1);

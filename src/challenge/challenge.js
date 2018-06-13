@@ -119,7 +119,7 @@ function CHALLENGE_HandleErrorChallenge (XML)
 				break;
 
 			case "cancel":
-				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"))
+				WINDOW_Alert(UTILS_GetText("challenge_error"),UTILS_GetText("challenge_offer_user_offline"));
 				break;
 		}
 	}

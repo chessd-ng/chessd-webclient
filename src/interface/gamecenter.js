@@ -59,8 +59,8 @@ import { MainData } from 'main_data.js';
 
 import ImageChallengeMenuRandom from 'images/challenge_menu/random.png';
 
-import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png'
-import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png'
+import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png';
+import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png';
 
 /**
 * CHESSD - WebClient
@@ -180,13 +180,13 @@ function INTERFACE_CreateGameCenter()
 
 	AnnounceButton.onclick = function(){
 		GAMECENTER_ShowAnnounce();
-	}
+	};
 	PostponeButton.onclick = function(){
 		GAMECENTER_ShowPostpone();
-	}
+	};
 	MatchOfferButton.onclick = function(){
 		GAMECENTER_ShowMatchOffer();
-	}
+	};
 	/*
 	TourneyButton.onclick = function(){
 		GAMECENTER_ShowTourney();
@@ -194,7 +194,7 @@ function INTERFACE_CreateGameCenter()
 	*/
 	CurrentGamesButton.onclick = function(){
 		GAMECENTER_ShowCurrentGames();
-	}
+	};
 
 	MenuList.appendChild(AnnounceButton);
 	MenuList.appendChild(TourneyButton);
@@ -208,7 +208,7 @@ function INTERFACE_CreateGameCenter()
 	Main.appendChild(MainCenter);
 
 
-	return {GameCenter:Main, Center:MainCenter}
+	return {GameCenter:Main, Center:MainCenter};
 }
 
 //GAME CENTER ANNOUNCE OBJECT
@@ -255,7 +255,7 @@ function AnnounceObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
+function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -333,14 +333,14 @@ export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated
 		PButton.onclick = function(){
 			//ANNOUNCE_RemoveAnnounce(Id);
 			ANNOUNCE_CancelAnnounce(Id);
-		}
+		};
 	}
 	else
 	{
 		PButton = UTILS_CreateElement("p","button","accept",UTILS_GetText("window_play"));
 		PButton.onclick = function(){
 			ANNOUNCE_AcceptAnnounce(Id);
-		}
+		};
 	}
 
 
@@ -348,7 +348,7 @@ export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated
 	Item.appendChild(PName);
 	Item.appendChild(PAbusive);
 	Item.appendChild(PRating);
-	Item.appendChild(PCategory)
+	Item.appendChild(PCategory);
 	Item.appendChild(PTime);
 	Item.appendChild(PInc);
 	Item.appendChild(PRated);
@@ -374,7 +374,7 @@ export function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated
 * @return	True if removed or false if not founded
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_RemoveAnnounce(MatchId)
+function INTERFACE_RemoveAnnounce(MatchId)
 {
 	var i=0;
 	var Item;
@@ -443,7 +443,7 @@ function INTERFACE_HideAnnounceCenter()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_ShowNoAnnounce()
+function INTERFACE_ShowNoAnnounce()
 {
 	this.NoAnnounce.style.display = "block"; 
 }
@@ -454,7 +454,7 @@ export function INTERFACE_ShowNoAnnounce()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoAnnounce()
+function INTERFACE_HideNoAnnounce()
 {
 	this.NoAnnounce.style.display = "none"; 
 }
@@ -475,7 +475,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 	var ListOptions = UTILS_CreateElement("ul","ListOptions");
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -492,7 +492,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 
 	// Options list
 	var AcceptRandom = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_play_now"));
-	var AnnounceMatch = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_announce_match"))
+	var AnnounceMatch = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_announce_match"));
 //	var SeeGraphic = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecnter_see_graphic"));
 	var UpdateAnnounce = UTILS_CreateElement("li",null,null,UTILS_GetText("gamecenter_update"));
 
@@ -508,7 +508,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "";
 		Rated.className = "";
-	}
+	};
 	Inc.onclick = function(){
 		GAMECENTER_AnnounceSortByInc();
 		AnnouncePlayer.className = "";
@@ -518,7 +518,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "";
 		Rated.className = "";
-	}
+	};
 	Category.onclick = function(){
 		GAMECENTER_AnnounceSortByCategory();
 		AnnouncePlayer.className = "";
@@ -528,7 +528,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "";
 		Rated.className = "";
-	}
+	};
 
 	Time.onclick = function(){
 		GAMECENTER_AnnounceSortByTime();
@@ -539,7 +539,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "";
 		Rated.className = "";
-	}
+	};
 	Rating.onclick = function(){
 		GAMECENTER_AnnounceSortByRating();
 		AnnouncePlayer.className = "";
@@ -549,7 +549,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "selected";
 		Private.className = "";
 		Rated.className = "";
-	}
+	};
 	Rated.onclick = function(){
 		GAMECENTER_AnnounceSortByRated();
 		AnnouncePlayer.className = "";
@@ -559,7 +559,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "";
 		Rated.className = "selected";
-	}
+	};
 	Private.onclick = function(){
 		GAMECENTER_AnnounceSortByPrivate();
 		AnnouncePlayer.className = "";
@@ -569,15 +569,15 @@ function INTERFACE_CreateGameCenterAnnounce()
 		Rating.className = "";
 		Private.className = "selected";
 		Rated.className = "";
-	}
+	};
 
 	AcceptRandom.onclick = function(){
 		ANNOUNCE_AcceptRandomAnnounce();
-	}
+	};
 
 	AnnounceMatch.onclick = function(){
 		WINDOW_AnnounceWindow();
-	}
+	};
 
 	UpdateAnnounce.onclick = function(){
 		var Offset = 0;
@@ -590,7 +590,7 @@ function INTERFACE_CreateGameCenterAnnounce()
 
 		//Get your announces and announce from others users
 		CONNECTION_SendJabber(MESSAGE_GetAnnounceMatch(Offset, MaxAnnounce, MinTime, MaxTime, Category, true),MESSAGE_GetAnnounceMatch(Offset, MaxAnnounce, MinTime, MaxTime, Category, false));
-	}
+	};
 	
 	//Disable see graphic option
 	//SeeGraphic.className = "disable";
@@ -664,7 +664,7 @@ function MatchOfferObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchId)
+function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -739,12 +739,12 @@ export function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Priv
 	
 	PButton.onclick = function(){
 		CHALLENGE_DeclineChallenge(Id);
-	}
+	};
 
 	Item.appendChild(PPieceColor);
 	Item.appendChild(PName);
 	Item.appendChild(PAbusive);
-	Item.appendChild(PCategory)
+	Item.appendChild(PCategory);
 	Item.appendChild(PTime);
 	Item.appendChild(PInc);
 	Item.appendChild(PRated);
@@ -839,7 +839,7 @@ function INTERFACE_HideMatchCenter()
 * @author	Rubens Suguimoto
 */
 
-export function INTERFACE_ShowNoMatch()
+function INTERFACE_ShowNoMatch()
 {
 	this.NoMatch.style.display = "block"; 
 }
@@ -850,7 +850,7 @@ export function INTERFACE_ShowNoMatch()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoMatch()
+function INTERFACE_HideNoMatch()
 {
 	this.NoMatch.style.display = "none"; 
 }
@@ -871,7 +871,7 @@ function INTERFACE_CreateGameCenterMatch()
 	var ListOptions = UTILS_CreateElement("ul","ListOptions");
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -898,7 +898,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "";
 		Private.className = "";		
-	}
+	};
 	Time.onclick = function(){
 		GAMECENTER_MatchOfferSortByTime();
 		MatchPlayer.className = "";
@@ -908,7 +908,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "";
 		Private.className = "";		
-	}
+	};
 	Inc.onclick = function(){
 		GAMECENTER_MatchOfferSortByInc();
 		MatchPlayer.className = "";
@@ -918,7 +918,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "";
 		Private.className = "";		
-	}
+	};
 	Category.onclick = function(){
 		GAMECENTER_MatchOfferSortByCategory();
 		MatchPlayer.className = "";
@@ -928,7 +928,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "";
 		Private.className = "";		
-	}
+	};
 	Rating.onclick = function(){
 		GAMECENTER_MatchOfferSortByRating();
 		MatchPlayer.className = "";
@@ -938,7 +938,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "selected";
 		Rated.className = "";
 		Private.className = "";		
-	}
+	};
 	Rated.onclick = function(){
 		GAMECENTER_MatchOfferSortByRated();
 		MatchPlayer.className = "";
@@ -948,7 +948,7 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "selected";
 		Private.className = "";		
-	}
+	};
 	Private.onclick = function(){
 		GAMECENTER_MatchOfferSortByPrivate();
 		MatchPlayer.className = "";
@@ -958,11 +958,11 @@ function INTERFACE_CreateGameCenterMatch()
 		Rating.className = "";
 		Rated.className = "";
 		Private.className = "selected";		
-	}
+	};
 
 	CancelMatches.onclick = function(){
 		CHALLENGE_ClearChallenges();
-	}
+	};
 	
 	ListResultHeader.appendChild(MatchPlayer);
 	ListResultHeader.appendChild(Category);
@@ -1031,7 +1031,7 @@ function PostponeObj()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, PostponeId)
+function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, PostponeId)
 {
 	var Item;
 
@@ -1115,7 +1115,7 @@ export function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date,
 	Item.appendChild(PPieceColor);
 	Item.appendChild(PName);
 	Item.appendChild(PRating);
-	Item.appendChild(PCategory)
+	Item.appendChild(PCategory);
 	Item.appendChild(PTime);
 	Item.appendChild(PInc);
 	Item.appendChild(PDate);
@@ -1142,7 +1142,7 @@ export function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date,
 * @return	True if removed or false if not founded
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_RemovePostpone(PostponeId)
+function INTERFACE_RemovePostpone(PostponeId)
 {
 	var i=0;
 	var Item;
@@ -1183,7 +1183,7 @@ export function INTERFACE_RemovePostpone(PostponeId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
+function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
 	var Item, Button;
@@ -1251,7 +1251,7 @@ function INTERFACE_HidePostponeCenter()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_ShowNoPostpone()
+function INTERFACE_ShowNoPostpone()
 {
 	this.NoPostpone.style.display = "block"; 
 }
@@ -1262,7 +1262,7 @@ export function INTERFACE_ShowNoPostpone()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoPostpone()
+function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none"; 
 }
@@ -1283,7 +1283,7 @@ function INTERFACE_CreateGameCenterPostpone()
 	var ListOptions = UTILS_CreateElement("ul","ListOptions");
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -1304,7 +1304,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "";
 		Inc.className = "";
 		Date.className = "";
-	}
+	};
 	Rating.onclick = function(){
 		GAMECENTER_PostponeSortByRating();
 		PostponePlayer.className = "";
@@ -1313,7 +1313,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "";
 		Inc.className = "";
 		Date.className = "";
-	}
+	};
 	Category.onclick = function(){
 		GAMECENTER_PostponeSortByCategory();
 		PostponePlayer.className = "";
@@ -1322,7 +1322,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "";
 		Inc.className = "";
 		Date.className = "";
-	}
+	};
 	Time.onclick = function(){
 		GAMECENTER_PostponeSortByTime();
 		PostponePlayer.className = "";
@@ -1331,7 +1331,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "selected";
 		Inc.className = "";
 		Date.className = "";
-	}
+	};
 	Inc.onclick = function(){
 		GAMECENTER_PostponeSortByInc();
 		PostponePlayer.className = "";
@@ -1340,7 +1340,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "";
 		Inc.className = "selected";
 		Date.className = "";
-	}
+	};
 	Date.onclick = function(){
 		GAMECENTER_PostponeSortByDate();
 		PostponePlayer.className = "";
@@ -1349,7 +1349,7 @@ function INTERFACE_CreateGameCenterPostpone()
 		Time.className = "";
 		Inc.className = "";
 		Date.className = "selected";
-	}
+	};
 
 	// No Postpone element
 	var NoPostpone = UTILS_CreateElement("p",null,null, UTILS_GetText("gamecenter_no_postpone"));
@@ -1387,7 +1387,7 @@ function CurrentGamesObj()
 	var CurrentGames = INTERFACE_CreateGameCenterCurrentGames();
 
 	// Attributes
-	this.CurrentGamesDiv = CurrentGames.Center
+	this.CurrentGamesDiv = CurrentGames.Center;
 	this.CurrentGamesUl = CurrentGames.CurrentGamesList;
 	this.NoCurrentGames = CurrentGames.NoCurrentGames;
 	this.CurrentGamesVisible = false;
@@ -1473,7 +1473,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(CurrentGamesId, WPlayer, BPlayer);
 				To = CurrentGamesId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
-				Buffer += MESSAGE_Presence(To)
+				Buffer += MESSAGE_Presence(To);
 			}
 		}
 		else
@@ -1481,7 +1481,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 			WINDOW_Alert(UTILS_GetText("game_observer_alert_title"), UTILS_GetText("game_observer_alert"));
 		}
 		CONNECTION_SendJabber(Buffer);
-	}
+	};
 
 	Item.appendChild(PW);
 	Item.appendChild(PB);
@@ -1621,7 +1621,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 	var ListOptions = UTILS_CreateElement("ul","ListOptions");
 
 	var ListResult = UTILS_CreateElement("ul","ListResult");
-	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader")
+	var ListResultHeaderUl = UTILS_CreateElement("ul","ListResultHeader");
 	var ListResultHeader = UTILS_CreateElement("li",null,"header");
 
 	// Result headers
@@ -1651,7 +1651,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	WPiece.onclick = function (){
 		GAMECENTER_CurrentGamesSortByWRating();
 		WRating.className = "selected";
@@ -1660,7 +1660,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	BRating.onclick = function (){
 		GAMECENTER_CurrentGamesSortByBRating();
 		WRating.className = "";
@@ -1669,7 +1669,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	BPiece.onclick = function (){
 		GAMECENTER_CurrentGamesSortByBRating();
 		WRating.className = "";
@@ -1678,7 +1678,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	Category.onclick = function (){
 		GAMECENTER_CurrentGamesSortByCategory();
 		WRating.className = "";
@@ -1687,7 +1687,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	Time.onclick = function (){
 		GAMECENTER_CurrentGamesSortByTime();
 		WRating.className = "";
@@ -1696,7 +1696,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "selected";
 		Moves.className = "";
 		Rated.className = "";
-	}
+	};
 	Moves.onclick = function (){
 		GAMECENTER_CurrentGamesSortByMoves();
 		WRating.className = "";
@@ -1705,7 +1705,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "selected";
 		Rated.className = "";
-	}
+	};
 	Rated.onclick = function (){
 		GAMECENTER_CurrentGamesSortByRated();
 		WRating.className = "";
@@ -1714,7 +1714,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		Time.className = "";
 		Moves.className = "";
 		Rated.className = "selected";
-	}
+	};
 
 	UpdateList.onclick = function(){
 		// Remove all current games
@@ -1722,7 +1722,7 @@ function INTERFACE_CreateGameCenterCurrentGames()
 		
 		// Get current games list
 		CONNECTION_SendJabber(MESSAGE_GameRoomList());
-	}
+	};
 	
   WPiece.src = ImageChallengeMenuWhiteEnable;
   BPiece.src = ImageChallengeMenuBlackEnable;

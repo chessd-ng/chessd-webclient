@@ -66,7 +66,7 @@ export function CHALLENGE_HandleAdjourn(XML)
 
 		if(MainData.FindPostpone(AdjournId) == null)
 		{
-			Players = Game.getElementsByTagName("player")
+			Players = Game.getElementsByTagName("player");
 
 			Player1 = new Object();
 			Player2 = new Object();

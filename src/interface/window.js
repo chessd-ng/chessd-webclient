@@ -332,7 +332,7 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 	WindowBox.appendChild(TitleBar);
 	WindowBox.appendChild(SubWindowBox);
 
-	return {Div:WindowBox, Close:Close}
+	return {Div:WindowBox, Close:Close};
 }
 
 
@@ -468,7 +468,7 @@ export function WINDOW_CreateImageSend()
 	Ok = UTILS_CreateElement("input", null,"button");
 	Ok.type = "button";
 	Ok.value = UTILS_GetText("window_ok");
-	Ok.onclick = function (){ IMAGE_ImageEncode("ImageForm")};
+	Ok.onclick = function (){ IMAGE_ImageEncode("ImageForm");};
 
 	Cancel = UTILS_CreateElement("input", null,"button");
 	Cancel.type = "button";

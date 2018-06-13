@@ -1,18 +1,4 @@
 import {
-	INTERFACE_HideNoPostpone,
-	INTERFACE_HideNoMatch,
-	INTERFACE_AddPostpone,
-	INTERFACE_ShowNoPostpone,
-	INTERFACE_RemoveAnnounce,
-	INTERFACE_ShowNoAnnounce,
-	INTERFACE_RemovePostpone,
-	INTERFACE_HideNoAnnounce,
-	INTERFACE_UpdatePostpone,
-	INTERFACE_ShowNoMatch,
-	INTERFACE_AddMatchOffer,
-	INTERFACE_AddAnnounce,
-} from 'interface/gamecenter.js';
-import {
 	UTILS_CreateElement,
 	UTILS_GetText,
 	UTILS_ShortString,
@@ -52,7 +38,7 @@ import { WINDOW_AnnounceWindow } from 'window/window.js';
 * @return	none
 * @author	Rubens Suguimoto
 */
-function ChallengeMenuObj()
+export function ChallengeMenuObj()
 {
 	var Challenge = INTERFACE_CreateChallengeMenu();
 
@@ -139,7 +125,7 @@ function INTERFACE_CreateChallengeMenu()
 
 	AnnounceButton.onmousedown = function(){
 		WINDOW_AnnounceWindow();
-	}
+	};
 
 	MatchOfferList.appendChild(MatchOfferTitle);
 	MatchOfferList.appendChild(NoMatch);
@@ -171,7 +157,7 @@ function INTERFACE_CreateChallengeMenu()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
+function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -191,8 +177,8 @@ export function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, Matc
 	if (Oponent.Name.length > 9)
 	{
 		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,7));
-		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
-		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); };
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); };
 	}
 	else
 	{
@@ -232,13 +218,13 @@ export function INTERFACE_AddMatchOffer(Oponent, Time, Inc, Rated, Private, Matc
 
 	PButton = UTILS_CreateElement("p");
 	Button = UTILS_CreateElement('span',"button","active",UTILS_GetText("window_cancel"));
-	Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
-	Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
+	Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; };
+	Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; };
 	PButton.appendChild(Button);
 
 	PButton.onmousedown = function(){
 		CHALLENGE_DeclineChallenge(MatchId);
-	}
+	};
 
 
 
@@ -316,7 +302,7 @@ function INTERFACE_RemoveMatch(MatchId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
+function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 {
 	var Item;
 
@@ -339,8 +325,8 @@ export function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId
 	if (Player.Name.length > 9)
 	{
 		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Player.Name,6));
-		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Player.Name); }
-		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Player.Name); };
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); };
 	}
 	else
 	{
@@ -381,22 +367,22 @@ export function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId
 	{
 		PButton = UTILS_CreateElement("p");
 		Button = UTILS_CreateElement('span',"button","active",UTILS_GetText("window_cancel"));
-		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
-		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
+		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; };
+		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; };
 		Button.onmousedown = function(){
 			ANNOUNCE_CancelAnnounce(Id);
-		}
+		};
 		PButton.appendChild(Button);
 	}
 	else
 	{
 		PButton = UTILS_CreateElement("p");
 		Button = UTILS_CreateElement('span',"button","active",UTILS_GetText("window_play"));
-		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
-		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
+		Button.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; };
+		Button.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; };
 		Button.onmousedown = function(){
 			ANNOUNCE_AcceptAnnounce(Id);
-		}
+		};
 		PButton.appendChild(Button);
 	}
 
@@ -426,7 +412,7 @@ export function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId
 * @return	True if removed, false if not found
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_RemoveAnnounce(MatchId)
+function INTERFACE_RemoveAnnounce(MatchId)
 {
 	var i=0;
 	var Item;
@@ -470,7 +456,7 @@ export function INTERFACE_RemoveAnnounce(MatchId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
+function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 {
 	var Item;
 	var PName, PCategory, PDate, PButton, Button;
@@ -481,8 +467,8 @@ export function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	if (Oponent.Name.length > 9)
 	{
 		PName = UTILS_CreateElement("p","name", null, UTILS_ShortString(Oponent.Name,6));
-		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); }
-		PName.onmouseout = function() { INTERFACE_CloseFullName(); }
+		PName.onmouseover = function() { INTERFACE_ShowFullName(this, Oponent.Name); };
+		PName.onmouseout = function() { INTERFACE_CloseFullName(); };
 	}
 	else
 	{
@@ -492,9 +478,9 @@ export function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 	PDate = UTILS_CreateElement("p","date",null,Date);
 	PButton = UTILS_CreateElement("p");
 	Button = UTILS_CreateElement('span',"button","inactive",UTILS_GetText("window_continue"));
-	Button.onmouseover = function() { this.className = "inactive"; }
-	Button.onmouseout = function() { this.className = "inactive"; }
-	Button.onmousedown = function() { return false; }
+	Button.onmouseover = function() { this.className = "inactive"; };
+	Button.onmouseout = function() { this.className = "inactive"; };
+	Button.onmousedown = function() { return false; };
 	PButton.appendChild(Button);
 
 	/*
@@ -530,7 +516,7 @@ export function INTERFACE_AddPostpone(Oponent, Category, Date, PostponeId)
 * @return	True if removed, false if not found
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_RemovePostpone(PostponeId)
+function INTERFACE_RemovePostpone(PostponeId)
 {
 	var i=0;
 	var Item;
@@ -571,7 +557,7 @@ export function INTERFACE_RemovePostpone(PostponeId)
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
+function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
 	var Item, Button;
@@ -591,17 +577,17 @@ export function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 			{
 				Item.className = "offline";
 				Button.className = "inactive";
-				Button.onmouseover = function() { this.className = "inactive"; }
-				Button.onmouseout = function() { this.className = "inactive"; }
-				Button.onmousedown = function() { return false; }
+				Button.onmouseover = function() { this.className = "inactive"; };
+				Button.onmouseout = function() { this.className = "inactive"; };
+				Button.onmousedown = function() { return false; };
 			}
 			else
 			{
 				//Item.className = ItemObj.OponentColor;
 				Item.className = this.PostponeList[i].OponentColor;
 				Button.className = "active";
-				Button.onmouseover = function() { this.className = "over"; }
-				Button.onmouseout = function() { this.className = "out"; }
+				Button.onmouseover = function() { this.className = "over"; };
+				Button.onmouseout = function() { this.className = "out"; };
 				/*
 				Button.onmousedown = function() {
 					CHALLENGE_SendResumeGame(Id);
@@ -628,7 +614,7 @@ function INTERFACE_UpdatePostponeItem(Button, AdjournId)
 {
 	Button.onmousedown = function() {
 		CHALLENGE_SendResumeGame(AdjournId);
-	}	
+	};	
 }
 
 /*
@@ -760,7 +746,7 @@ function INTERFACE_HidePostponeList()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_ShowNoMatch()
+function INTERFACE_ShowNoMatch()
 {
 	this.NoMatch.style.display = "block";
 }
@@ -771,7 +757,7 @@ export function INTERFACE_ShowNoMatch()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoMatch()
+function INTERFACE_HideNoMatch()
 {
 	this.NoMatch.style.display = "none";
 }
@@ -782,7 +768,7 @@ export function INTERFACE_HideNoMatch()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_ShowNoAnnounce()
+function INTERFACE_ShowNoAnnounce()
 {
 	this.NoAnnounce.style.display = "block"; 
 }
@@ -793,7 +779,7 @@ export function INTERFACE_ShowNoAnnounce()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoAnnounce()
+function INTERFACE_HideNoAnnounce()
 {
 	this.NoAnnounce.style.display = "none"; 
 }
@@ -804,7 +790,7 @@ export function INTERFACE_HideNoAnnounce()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_ShowNoPostpone()
+function INTERFACE_ShowNoPostpone()
 {
 	this.NoPostpone.style.display = "block";
 }
@@ -815,7 +801,7 @@ export function INTERFACE_ShowNoPostpone()
 * @return	none
 * @author	Rubens Suguimoto
 */
-export function INTERFACE_HideNoPostpone()
+function INTERFACE_HideNoPostpone()
 {
 	this.NoPostpone.style.display = "none";
 }

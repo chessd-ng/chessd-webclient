@@ -243,7 +243,7 @@ export function INTERFACE_AnnounceWindow()
 			TimeSelect.appendChild(TimeOpt);
 
 		}
-	}
+	};
 
 	//* End Layer1 Right Elements*
 	
@@ -314,7 +314,7 @@ export function INTERFACE_AnnounceWindow()
 	
 	try
 	{
-		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>")
+		RatingCheckbox = document.createElement("<input class='rating_radio' checked='checked'  type='checkbox' name='rating'/>");
 	}
 	catch(err)
 	{
@@ -402,7 +402,7 @@ export function INTERFACE_AnnounceWindow()
 			ToInput.className = "disabled";
 			ToInput.value = "";
 		}
-	}
+	};
 	
 	//*End Layer 3 Elements*
 
@@ -446,7 +446,7 @@ export function INTERFACE_AnnounceWindow()
 
 		// Refresh announce list
 		ANNOUNCE_GetAnnounceGames();
-	}
+	};
 
 	Cancel = UTILS_CreateElement('input',null,'button');
 	Cancel.value = UTILS_GetText('window_cancel');
@@ -535,5 +535,5 @@ export function INTERFACE_AnnounceWindow()
 	Div.appendChild(Br3);
 	Div.appendChild(ButtonsDiv);
 
-	return {Div:Div, Buttons:Buttons}
+	return {Div:Div, Buttons:Buttons};
 }

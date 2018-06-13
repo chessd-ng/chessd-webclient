@@ -295,7 +295,7 @@ export function ROOM_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode;
 
-        var Username, Rating, Category
+        var Username, Rating, Category;
 	var i,j;
 	var Room;
 	var Status, Rating;
@@ -480,7 +480,7 @@ export function ROOM_ExitRoom(RoomName)
 	// type "unavailable"
 
 	var XML;
-	var Room = MainData.GetRoom(RoomName)
+	var Room = MainData.GetRoom(RoomName);
 	var CurrentGame = MainData.GetCurrentGame();
 	
 	// If RoomName isn't in sctructure
@@ -632,7 +632,7 @@ function ROOM_AddUser(RoomName, Jid, Status, Role, Affiliation)
 	else
 	{
 		//Update user information in data struct
-		Room.SetUserInformation(Jid, Status, Role, Affiliation) 
+		Room.SetUserInformation(Jid, Status, Role, Affiliation); 
 		//Update user information in interface
 		Room.Room.userList.updateUser(Jid, Status); 
 	} 
@@ -651,7 +651,7 @@ function ROOM_RemoveUser(RoomName, UserName)
 {
 	var Room = MainData.GetRoom(RoomName);
 	
-	Room.RemoveUser(UserName)
+	Room.RemoveUser(UserName);
 	
 	// Remove user from interface
 	Room.Room.userList.removeUser(UserName);
@@ -757,7 +757,7 @@ function ROOM_RemoveRoom(RoomName)
 		//Show next room in interface
 		INTERFACE_CreateRoomInBar(NextRoom.Name);
 		INTERFACE_RefreshOccupantsNumber(NextRoom.Name);
-		ROOM_FocusRoom(NextRoom.Name)
+		ROOM_FocusRoom(NextRoom.Name);
 	}
 	else
 	{
@@ -866,7 +866,7 @@ export function ROOM_SortUsersByRating(Category)
 		// Show new user list sorted
 		for(j=0; j<Room.UserList.length; j++)
 		{
-			User = Room.UserList[j]
+			User = Room.UserList[j];
 			UserName = User.Username;
 			Status = User.Status;
 			Type = User.Type;

@@ -56,7 +56,7 @@ import { MainData } from 'main_data.js';
 */
 export function CONTACT_StartContactList()
 {
-	var ContactObjTmp = new ContactObj()
+	var ContactObjTmp = new ContactObj();
 
 	//Hide user contact list and show online list
 	ContactObjTmp.hide();
@@ -271,7 +271,7 @@ export function CONTACT_AddUser(Username, Status, Subs, Group)
 	if(MainData.FindContactUser(Username) == null)
 	{
 		//Add in data struct
-		MainData.AddContactUser(Username, Status, Subs, Group)
+		MainData.AddContactUser(Username, Status, Subs, Group);
 		MainData.SortContactUserByNick();
 
 		//Show in interface
@@ -291,7 +291,7 @@ export function CONTACT_AddUser(Username, Status, Subs, Group)
 			{
 				if(ContactUser.Rating.FindRating(UserRatingList[i].Category) == null)
 				{
-					ContactUser.Rating.AddRating(UserRatingList[i].Category, UserRatingList[i].Value)
+					ContactUser.Rating.AddRating(UserRatingList[i].Category, UserRatingList[i].Value);
 				}
 				else
 				{
@@ -387,7 +387,7 @@ export function CONTACT_ShowUserMenu(Obj, Username)
 		}
 		Options[i].Func = function () {
 			CHAT_OpenChat(Username);
-		}
+		};
 		i += 1;
 
 		// Match user
@@ -421,7 +421,7 @@ export function CONTACT_ShowUserMenu(Obj, Username)
 				Button1.Name = UTILS_GetText("window_yes");
 				Button1.Func = function () {
 					CONTACT_SendRemoveUser(Username);
-				}
+				};
 				Button2.Name = UTILS_GetText("window_cancel");
 				Button2.Func = null;
 				var Text = UTILS_GetText("contact_remove_text");

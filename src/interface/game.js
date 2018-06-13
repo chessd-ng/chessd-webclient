@@ -175,7 +175,7 @@ export function INTERFACE_GameBoardObj(GameID, Player1, Player2, YourColor, Piec
 	this.InsertPiece = INTERFACE_InsertPiece;
 
 	this.SetBoard = INTERFACE_SetBoard;
-	this.ClearBoard = INTERFACE_ClearBoard
+	this.ClearBoard = INTERFACE_ClearBoard;
 
 	this.SetWPhoto = INTERFACE_SetWPhoto;
 	this.SetBPhoto = INTERFACE_SetBPhoto;
@@ -275,7 +275,7 @@ function INTERFACE_RemoveGame()
 		// if board isn't opened, do nothing.
 		if(Board == null)
 		{
-			return false
+			return false;
 		}
 		// else if game is no finished, show message.
 		else if (GameObj.Finished == false)
@@ -855,19 +855,19 @@ function INTERFACE_AddCapturedWPiece(Piece)
 	switch(TmpPiece)
 	{
 		case "p":
-			PieceType += "pawn"
+			PieceType += "pawn";
 			break;
 		case "k":
-			PieceType += "knight"
+			PieceType += "knight";
 			break;
 		case "b":
-			PieceType += "bishop"
+			PieceType += "bishop";
 			break;
 		case "r":
-			PieceType += "rook"
+			PieceType += "rook";
 			break;
 		case "q":
-			PieceType += "queen"
+			PieceType += "queen";
 			break;
 	}
 
@@ -898,19 +898,19 @@ function INTERFACE_AddCapturedBPiece(Piece)
 	switch(TmpPiece)
 	{
 		case "p":
-			PieceType += "pawn"
+			PieceType += "pawn";
 			break;
 		case "k":
-			PieceType += "knight"
+			PieceType += "knight";
 			break;
 		case "b":
-			PieceType += "bishop"
+			PieceType += "bishop";
 			break;
 		case "r":
-			PieceType += "rook"
+			PieceType += "rook";
 			break;
 		case "q":
-			PieceType += "queen"
+			PieceType += "queen";
 			break;
 	}
 

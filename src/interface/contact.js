@@ -110,24 +110,24 @@ function INTERFACE_AddContactGroup(GroupName)
 			this.display = "block";
 			this.online.showList();
 			this.offline.showList();
-			this.title.onclick = function() { Group.hide() };
+			this.title.onclick = function() { Group.hide(); };
 		}
-	}
+	};
 	Group.hide = function() {
 		if(this.display == "block")
 		{
 			this.display = "none";
 			this.online.hideList();
 			this.offline.hideList();
-			this.title.onclick = function() { Group.show() };
+			this.title.onclick = function() { Group.show(); };
 		}
-	}
+	};
 
 	Group.remove = function(){
 		this.mainDiv.parentNode.removeChild(this.mainDiv);
 	};
 
-	Group.title.onclick = function() { Group.hide() }
+	Group.title.onclick = function() { Group.hide(); };
 
 	this.groups.push(Group);
 	this.listDiv.appendChild(GroupInterface.GroupDiv);

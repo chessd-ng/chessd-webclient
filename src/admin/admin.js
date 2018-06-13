@@ -103,7 +103,7 @@ export function ADMIN_HandleAdmin(XML)
 
 		// Show a window alert with unbanned user confirmation 
 		case Consts.IQ_ID_UnbanUser:
-			ADMIN_Notification(XML)
+			ADMIN_Notification(XML);
 			break;
 
 		// Show a window alert with kiked user confirmation 
@@ -113,13 +113,13 @@ export function ADMIN_HandleAdmin(XML)
 			break;
 		*/
 		case Consts.IQ_ID_AddBannedWords:
-			ADMIN_HandleAddWord(XML)
+			ADMIN_HandleAddWord(XML);
 			break;
 		case Consts.IQ_ID_RemoveBannedWords:
-			ADMIN_HandleRemoveWord(XML)
+			ADMIN_HandleRemoveWord(XML);
 			break;
 		case Consts.IQ_ID_GetBannedWords:
-			ADMIN_HandleBannedWordsList(XML)
+			ADMIN_HandleBannedWordsList(XML);
 			break;
 	}
 	
@@ -157,7 +157,7 @@ export function ADMIN_HandleAdminError(XML)
 
 		// Show a window alert with unbanned user confirmation 
 		case Consts.IQ_ID_UnbanUser:
-			ADMIN_Notification(XML)
+			ADMIN_Notification(XML);
 			break;
 
 		// Show a window alert with kiked user confirmation 
@@ -167,13 +167,13 @@ export function ADMIN_HandleAdminError(XML)
 			break;
 		*/
 		case Consts.IQ_ID_AddBannedWords:
-			ADMIN_HandleAddWord(XML)
+			ADMIN_HandleAddWord(XML);
 			break;
 		case Consts.IQ_ID_RemoveBannedWords:
-			ADMIN_HandleRemoveWord(XML)
+			ADMIN_HandleRemoveWord(XML);
 			break;
 		case Consts.IQ_ID_GetBannedWords:
-			ADMIN_HandleBannedWordsList(XML)
+			ADMIN_HandleBannedWordsList(XML);
 			break;
 	}
 	

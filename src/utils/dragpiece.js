@@ -179,9 +179,9 @@ export function UTILS_StartDragPiece(Obj, Size, event)
         // delete OldPos;
 
 				return false;
-			}
+			};
 			return false;
-		}
+		};
 	}
 	else // Stop drag when click for second time
 	{

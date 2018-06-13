@@ -103,8 +103,8 @@ function INTERFACE_CreateUserBox()
 	if (MyUsername.length > 10)
 	{
 		Name = UTILS_CreateElement("h2", null, null, UTILS_ShortString(MyUsername,10));
-		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MyUsername); }
-		Name.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+		Name.onmouseover = function () { INTERFACE_ShowUserFullName(this, MyUsername); };
+		Name.onmouseout = function () { INTERFACE_CloseUserFullName(); };
 	}
 	else
 	{
@@ -132,7 +132,7 @@ function INTERFACE_CreateUserBox()
 	StatusItem.value = "away";
 	Status.appendChild(StatusItem);
 
-	Status.onchange = function () { CONTACT_ChangeStatus(this.value) };
+	Status.onchange = function () { CONTACT_ChangeStatus(this.value); };
 
 	ProfileP = UTILS_CreateElement("p");
 	Profile = UTILS_CreateElement("span",null,null,UTILS_GetText("contact_change_profile"));

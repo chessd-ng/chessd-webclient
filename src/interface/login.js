@@ -128,7 +128,7 @@ export function INTERFACE_StartLogin(Lang)
 
 	UTILS_AddListener(InputPasswd, "keypress", function(event) { ev = UTILS_ReturnEvent(event); if (ev.keyCode == 13) LOGIN_Login(InputLogin.value,InputPasswd.value,CheckBox.checked); }, false);
 
-	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html?lang="+Lang+".xml"})
+	UTILS_AddListener(SignIn, "click", function() { window.location.href="register.html?lang="+Lang+".xml";});
 	
 	// Creating tree
 	LoginTextBoxDiv.appendChild(Title);
@@ -191,7 +191,7 @@ export function INTERFACE_StartLogin(Lang)
 	INTERFACE_LoginVerticalAlignMiddle();
 	
 	// Focus to login input
-	InputLogin.focus()
+	InputLogin.focus();
 }
 
 /**
@@ -270,7 +270,7 @@ function INTERFACE_CreateLangItem(Lang, Name)
 	
 	Li.onclick = function(){
 		START_ChangeLanguage(Lang);
-	}
+	};
 
 	return Li;
 }

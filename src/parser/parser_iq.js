@@ -234,7 +234,7 @@ export function PARSER_ParseIq(XML)
 			break;
 
 		case "error": 
-      console.log("IQ error: ", XML)
+      console.log("IQ error: ", XML);
 			if (Xmlns.match(/\/chessd#match_announcement/))
 			{
 				Buffer += ANNOUNCE_HandleAnnounceError(XML);

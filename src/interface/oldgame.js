@@ -247,7 +247,7 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	NewSearch	= UTILS_CreateElement('input',null,'button');
 	NewSearch.type = "button";
 	NewSearch.value = UTILS_GetText("oldgame_new_search");
-	UTILS_AddListener(NewSearch,"click",	function() { Player1Input.value = ""; Player2Input.value = ""; RRadio.checked = true; FromInput.value = ""; ToInput.value = "" }, "false");
+	UTILS_AddListener(NewSearch,"click",	function() { Player1Input.value = ""; Player2Input.value = ""; RRadio.checked = true; FromInput.value = ""; ToInput.value = ""; }, "false");
 	// End ButtonsDiv;
 
 	// Result Div
@@ -431,7 +431,7 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	Elements.From = FromInput;
 	Elements.To = ToInput;
 	Elements.TBody = TBody;
-	Elements.Table = Table
+	Elements.Table = Table;
 	Elements.TFoot = TFoot;
 	Elements.Page = PageLabel;
 	Elements.TableDiv = TableDiv;
@@ -633,7 +633,7 @@ function INTERFACE_OldGameSetTable(Id, GameList, More)
 		// Break string if its break table result layout - Black Player
 		UTILS_BreakString(this.TBody.rows[i].childNodes[1],P2Width);
 
-		this.TBody.rows[i].childNodes[5].childNodes[0].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); }
+		this.TBody.rows[i].childNodes[5].childNodes[0].onclick = function() { WINDOW_RemoveWindow(SearchInfo.Elements.WindowObj); OLDGAME_CloseWindow(Id); };
 	}
 	this.Page.innerHTML = Start+" - "+End;
 
@@ -780,8 +780,8 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 
 			P=UTILS_CreateElement("p");
 			Span = UTILS_CreateElement('span',null,'examine_text',UTILS_GetText("oldgame_analyze"));
-			Span.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; }
-			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; }
+			Span.onmouseover = function() { this.style.color = "#FFA200"; this.style.borderBottom = "1px solid #FFA200"; };
+			Span.onmouseout = function() { this.style.color = "#216778"; this.style.borderBottom = "1px solid #216778"; };
 				UTILS_AddListener(Span, "click", function()
 					{
 						if(CurrentGame == null)
@@ -799,8 +799,8 @@ function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 		
 		Tr.appendChild(Td6);
 	
-	Tr.onmouseover = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
-	Tr.onmouseout = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
+	Tr.onmouseover = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; };
+	Tr.onmouseout = function() { for (i=0; i<6; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF"; };
 
 	return(Tr);
 }

@@ -138,7 +138,7 @@ function INTERFACE_AddUser(Username, Status, Rating, Type)
 	var UserObj = new Object();
 
 	// Create tr element
-	User = INTERFACE_CreateUser(Username, Status, Rating, Type)
+	User = INTERFACE_CreateUser(Username, Status, Rating, Type);
 
 	// Add user in users struct
 	UserObj.Id = Username;
@@ -295,7 +295,7 @@ function INTERFACE_SetSortRatingFunction(Func)
 	var TmpFunc = Func;
 
 	// Get category to sort
-	UTILS_AddListener(this.sortRating, "change", function(){ TmpFunc(this.value)}, false);
+	UTILS_AddListener(this.sortRating, "change", function(){ TmpFunc(this.value);}, false);
 }
 
 /**
@@ -514,8 +514,8 @@ function INTERFACE_CreateUser(Username, Status, Rating, Type)
 	if (Username.length > 10)
 	{
 		Td1 = UTILS_CreateElement("td", null, Type+"_"+Status, UTILS_ShortString(Username,8));
-		Td1.onmouseover = function () { INTERFACE_ShowUserFullName(this, Username); }
-		Td1.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+		Td1.onmouseover = function () { INTERFACE_ShowUserFullName(this, Username); };
+		Td1.onmouseout = function () { INTERFACE_CloseUserFullName(); };
 	}
 	else
 	{
@@ -663,8 +663,8 @@ function INTERFACE_CreateUserElement(Obj)
 	if (Obj.Username.length > 14)
 	{
 		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Obj.Username,14));
-		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Username); }
-		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Username); };
+		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); };
 	}
 	else
 	{
@@ -677,8 +677,8 @@ function INTERFACE_CreateUserElement(Obj)
 	if (Obj.Fullname.length > 14)
 	{
 		Td = UTILS_CreateElement("td", null, null, UTILS_ShortString(Obj.Fullname,14));
-		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Fullname); }
-		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); }
+		Td.onmouseover = function () { INTERFACE_ShowUserFullName(this, Obj.Fullname); };
+		Td.onmouseout = function () { INTERFACE_CloseUserFullName(); };
 	}
 	else
 	{
@@ -688,8 +688,8 @@ function INTERFACE_CreateUserElement(Obj)
 	Td.onclick = function () { CONTACT_ShowUserMenu(this, Obj.Username); };
 	Tr.appendChild(Td);
 
-	Tr.onmouseover = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; }
-	Tr.onmouseout = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF" }
+	Tr.onmouseover = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#DAF3F5"; };
+	Tr.onmouseout = function() { for (i=0; i<2; i++) this.childNodes[i].style.backgroundColor = "#FFFFFF"; };
 
 	return Tr;
 }
@@ -973,9 +973,9 @@ export function INTERFACE_ShowSearchUserWindow()
 	// OptionDiv
 	TypeDiv.appendChild(SearchLabel);
 	TypeDiv.appendChild(Br2);
-	TypeDiv.appendChild(NickRadio)
+	TypeDiv.appendChild(NickRadio);
 	TypeDiv.appendChild(NickLabel);
-	TypeDiv.appendChild(NameRadio)
+	TypeDiv.appendChild(NameRadio);
 	TypeDiv.appendChild(NameLabel);
 
 //	OptionDiv.appendChild(Both);
@@ -1082,12 +1082,12 @@ function INTERFACE_SearchUserSetResult(Result)
 		this.OrderNick.onclick = function()
 		{
 			return false;
-		}
+		};
 
 		this.OrderName.onclick = function()
 		{
 			return false;
-		}
+		};
 	}
 	else 
 	{
@@ -1127,12 +1127,12 @@ function INTERFACE_SearchUserSetResult(Result)
 		this.OrderNick.onclick = function()
 		{
 			Obj.SortByNick();
-		}
+		};
 
 		this.OrderName.onclick = function()
 		{
 			Obj.SortByName();
-		}
+		};
 	}
 }
 

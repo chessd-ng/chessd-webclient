@@ -263,7 +263,7 @@ export function INTERFACE_HelpWindow()
 	Div.appendChild(HowDiv);
 	Div.appendChild(ButtonDiv);
 
-	return{Div:Div, Buttons:Buttons}
+	return{Div:Div, Buttons:Buttons};
 }
 
 /**
@@ -382,14 +382,14 @@ function INTERFACE_ShowLinkContent(ObjId)
 */
 function INTERFACE_HelpDisplay(Obj,Id)
 {
-	Obj.onselectstart = function() { return false; }
+	Obj.onselectstart = function() { return false; };
 	if (window.sidebar) 
 	{
 		Obj.onmousedown = INTERFACE_DisableSelect;
-		Obj.onclick = function() { INTERFACE_ShowHideHelpContent(Id); INTERFACE_ReEnableSelect; }
+		Obj.onclick = function() { INTERFACE_ShowHideHelpContent(Id); INTERFACE_ReEnableSelect; };
 	}
 	else
 	{
-		Obj.onclick = function() { INTERFACE_ShowHideHelpContent(Id); INTERFACE_ReEnableSelect; }
+		Obj.onclick = function() { INTERFACE_ShowHideHelpContent(Id); INTERFACE_ReEnableSelect; };
 	}
 }
