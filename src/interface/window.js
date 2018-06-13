@@ -5,7 +5,6 @@ import {
 	UTILS_AddListener,
 } from 'utils/utils.js';
 import { IMAGE_ImageEncode, IMAGE_CreateFormToEncode } from 'utils/images.js';
-import { WINDOW_Confirm, WINDOW_Alert } from 'window/window.js';
 import { UTILS_StartDragWindow } from 'utils/dragwindow.js';
 
 import { MainData } from 'main_data.js';
@@ -291,8 +290,6 @@ function WINDOW_CreateWindow(Height, Width, Div, Title)
 	//Array of buttons;
 	var Close = new Array();
 
-	var i;
-	
 	WindowBox.id ="WindowBox";
 	WindowBox.style.width = Width+"px";
 	if(Height != null)

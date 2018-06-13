@@ -32,7 +32,7 @@ import { UTILS_GetMouseCoords } from 'utils/dragpiece.js';
 */
 export function UTILS_StartDragWindow(ev, Obj)
 {
-	var MousePos, OldPos;
+	var MousePos;
 	var OffsetLeft, OffsetTop;
 
 	Obj.style.position = "absolute";

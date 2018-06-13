@@ -8,7 +8,6 @@ import {
 	UTILS_GetParentDiv,
 	UTILS_GetOffset,
 } from 'utils/utils.js';
-import { CONTACT_HandleSearchUser } from 'contact/search.js';
 import { CONTACT_ShowUserMenu } from 'contact/contact.js';
 import { MESSAGE_SearchUser } from 'xmpp_messages/message.js';
 
@@ -593,7 +592,7 @@ export function INTERFACE_ShowUserMenu(Obj, Options)
 		Offset = 0;
 	}
 	// This a quick fix to contact list open user menu correctly
-	 // TODO fix this properly
+  // TODO fix this properly
 	// Contact List
 	else if (UTILS_GetParentDiv(ParentNode.parentNode.parentNode.parentNode).className.match("Group") != null)
 	{
@@ -705,7 +704,7 @@ function INTERFACE_CreateUserElement(Obj)
 */
 export function INTERFACE_ShowUserFullName(Obj,UserName)
 {
-	var Hint, Name, ParentNode, Pos, i;
+	var Hint, Name, ParentNode, Pos;
 	var Offset = 9;
 	var Left = 0;
 
@@ -828,7 +827,6 @@ export function INTERFACE_ShowSearchUserWindow()
 	var OrderNick, OrderName;
 	var Tr,Td;
 	var TableResultDiv;
-	var HrTop, HrBottom;
 	var BorderDiv;
 	var Table, TBody;
 	
@@ -949,9 +947,7 @@ export function INTERFACE_ShowSearchUserWindow()
 
 	// BorderDiv elements
 	BorderDiv = UTILS_CreateElement('div','BorderDiv');
-	HrTop = UTILS_CreateElement('hr','TopBorder');
 	TableResultDiv = UTILS_CreateElement('div','TableResultDiv');
-	HrBottom = UTILS_CreateElement('hr','BottomBorder');
 
 	// TableResultDiv elements
 	Table = UTILS_CreateElement('table');

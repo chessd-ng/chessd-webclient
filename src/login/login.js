@@ -101,8 +101,6 @@ export function LOGIN_Logout()
 {
 	var XMPP = "";
 
-	NoCache.DateTime = new Date();
-
 	// Setting structure as disconnected
 	MainData.SetConnectionStatus(-1);
 

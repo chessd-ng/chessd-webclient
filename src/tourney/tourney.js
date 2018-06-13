@@ -16,7 +16,7 @@ import { WINDOW_CreateTourney } from 'window/window.js';
 * C3SL - Center for Scientific Computing and Free Software
 */
 
-function TOURNEY_OpenCreateTourneyWindow()
+export function TOURNEY_OpenCreateTourneyWindow()
 {
 	if (document.getElementById("CreateTourneyDiv"))
 		return;

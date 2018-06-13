@@ -36,13 +36,9 @@ import { MainData } from 'main_data.js';
 export function CURRENTGAME_HandleGameRoomList(XML)
 {
 	var Items, i;
-	var Rooms = new Array();
-	var Name, WName, BName, Jid, GameId;
-	var P1, P2;
+	var Jid, GameId;
 	var XMPP="";
 	var Consts = MainData.GetConst();
-
-	Rooms = new Array();
 
 	// Get the ID 
 	var ID = XML.getAttribute("id");
@@ -93,7 +89,6 @@ export function CURRENTGAME_HandleGameRoomInfoList(XML)
 	var PB = new Object();
 
 	var Game, GameType;
-	var WName, BName;
 	var Jid, GameId;
 	var Players;
 	var GameCenter = MainData.GetGamecenter();

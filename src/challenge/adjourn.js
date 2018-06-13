@@ -2,6 +2,8 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { USER_AddUser } from 'contact/user.js';
 import { MESSAGE_ChallengeResumeGame, MESSAGE_ChallengeGetAdjournList } from 'xmpp_messages/message.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -39,7 +41,6 @@ import { MESSAGE_ChallengeResumeGame, MESSAGE_ChallengeGetAdjournList } from 'xm
  */
 export function CHALLENGE_HandleAdjourn(XML)
 {
-	var Query = XML.getElementsByTagName("query");
 	var Buffer = "";
 	
 	var AdjournList = XML.getElementsByTagName("game");
@@ -165,7 +166,6 @@ export function CHALLENGE_HandleAdjourn(XML)
  */
 export function CHALLENGE_HandlePresence(XML)
 {
-	var GeneralRoom = XML.getAttribute("from").split("@")[0];
 	var StatusType, Username;
 	var Status;
 	var Buffer = "";
@@ -271,7 +271,7 @@ export function CHALLENGE_SendResumeGame(AdjournId)
  * @return	Empty string;
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_GetAdjournGames()
+export function CHALLENGE_GetAdjournGames()
 {
 	var XMPP;
 	var Num = 10; // Get just 10 adjourned games

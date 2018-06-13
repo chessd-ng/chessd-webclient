@@ -5,7 +5,7 @@ import {
 	UTILS_CreateElement,
 } from 'utils/utils.js';
 import { MESSAGE_ChangeStatus } from 'xmpp_messages/message.js';
-import { ContactObj, INTERFACE_RefreshContactOnlineNumber } from 'interface/contact.js';
+import { INTERFACE_RefreshContactOnlineNumber } from 'interface/contact.js';
 import { MainData } from 'main_data.js';
 
 /**
@@ -44,7 +44,7 @@ import { MainData } from 'main_data.js';
 */
 export function CONTACT_ChangeStatus(NewStatus, DontSend)
 {
-	var i, XML, Status, StatusItem;
+	var i, XML, StatusItem;
 	var Select;
 		
 	var RoomList = MainData.GetRoomList();

@@ -9,10 +9,9 @@ import {
 	UTILS_GetParentDiv,
 } from 'utils/utils.js';
 import { INTERFACE_CreateLoadingBox } from 'interface/interface.js';
-import { WindowObj } from 'interface/window.js';
 import { MESSAGE_GetOldGames, MESSAGE_FetchOldGame } from 'xmpp_messages/message.js';
 import { WINDOW_Alert, WINDOW_RemoveWindow } from 'window/window.js';
-import { OLDGAME_HandleSearchOldGame, OLDGAME_CloseWindow } from 'game/oldgame.js';
+import { OLDGAME_CloseWindow } from 'game/oldgame.js';
 
 import { MainData } from 'main_data.js';
 
@@ -69,7 +68,7 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	var L1LeftDiv;
 	var Player1Label,Player1Input;
 	var L1RightDiv;
-	var PiecesLabel, WRadio, WImg, BRadio, BImg, RRadio, ALabel, RImg;
+	var PiecesLabel, WRadio, WImg, BRadio, BImg, RRadio, RImg;
 
 	var Layer2Div;
 	var L2LeftDiv;
@@ -100,10 +99,7 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	var Buttons = new Array();
 	var Elements = new Object();
 
-	var Who;
-
 	var LoadingBox;
-	var NotFounded;
 
 	// Main Div
 	Div = UTILS_CreateElement('div','OldGamesDiv');
@@ -762,7 +758,7 @@ export function INTERFACE_SetSearchButton(Node)
 function INTERFACE_AddOldGameResult(White, Black, Date, GameType, WinType,  Id)
 {
 //TODO -> CHANGE THIS FUNCTION NAME TO "CreateOldGameResultItem"
-	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, P, Span, Img, i;
+	var Tr, Td1, Td2, Td3, Td4, Td5, Td6, P, Span, i;
 	var CurrentGame = MainData.GetCurrentGame();
 	
 	Tr = UTILS_CreateElement('tr');

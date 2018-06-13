@@ -1,7 +1,5 @@
 import {
 	UTILS_GetTag,
-	UTILS_GetText,
-	UTILS_OpenXMLFile,
 } from 'utils/utils.js';
 import {
   START_MainData,
@@ -133,7 +131,7 @@ function REGISTER_GetError(err)
 function REGISTER_DateValidate(User, Mail, Pwd, ConfPW)
 {
 	//RE = regular expression	
-	var REMail = /^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/;
+	var REMail = /^[A-Za-z0-9_\-.]+@[A-Za-z0-9_\-.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/;
 	//var REUsername = /^\w{1,}$/
 	var REUsername = /^[a-z0-9-._]+$/;
 
@@ -239,7 +237,7 @@ function REGISTER_ReceiveXml()
 */
 function REGISTER_ProcessMessage(XmlDoc){
 
-	var Msg, Uname, Passwd, TestBody, TestIq, RID, SID;
+	var Msg, Uname, Passwd, TestBody, TestIq;
 		
 	TestIq = XmlDoc.getElementsByTagName("iq");
 	TestBody = XmlDoc.getElementsByTagName("body");
@@ -318,16 +316,6 @@ function REGISTER_ParseError(code){
 }
 
 /*
-* @brief	Get host from configuration file
-*
-* @return	Host string
-* @author	Fabiano Kuss
-*/
-function REGISTER_GetHost(){
-	return window.location.href.split("/")[2].split(":")[0];
-}
-
-/*
 * @brief	Change fields label language
 *
 * @return	none
@@ -400,109 +388,6 @@ function REGISTER_VerticalAlignMiddle()
 		MainDiv.style.top = ((WindowHeight / 2) - 200) + "px";
 	}
 }
-
-///////////////////////////////////////
-///////////////// PHP /////////////////
-///////////////////////////////////////
-/**
-* @brief	Send register data to a PHP file
-*
-* This function is used if jabber doesn't support user registration
-*
-* @return 	none
-* @author	Fabiano Kuss
-*
-* @deprecated
-*/
-function REGISTER_SendDataPHP(User, Mail, Pwd)
-{
-
-	var Post = "username="+User+"&mail="+Mail+"&pwd="+Pwd;
-	// Create XMLHttpRequest
-	if (window.XMLHttpRequest)
-	{
-		// Mozilla, Opera, Galeon
-		HttpRequest = new XMLHttpRequest();
-		if (HttpRequest.overrideMimeType)
-		{
-			HttpRequest.overrideMimeType("text/xml");
-		}
-	}
-	else if (window.ActiveXObject)
-	{
-		// Internet Explorer
-		try
-		{
-			HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		catch(e)
-		{
-			HttpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-	}
-
-	// Avoid browser caching
-	var DT = Math.floor(Math.random()*10000);
-
-	HttpRequest.open('POST','php/register.php?jabber?id='+DT , true);
-	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-
-	HttpRequest.onreadystatechange = REGISTER_ReceiveXmlPHP;
-
-	// Send request to server
-	HttpRequest.send(Post);
-}
-
-/**
-* @brief	Receive response from PHP file
-*
-* @return	none
-* @author	Fabiano Kuss
-* @deprecated
-*/
-function REGISTER_ReceiveXmlPHP()
-{
-	var XmlDoc;
-	var Sql;
-	var User;
-
-	if (HttpRequest.readyState == 4)
-	{
-		if (HttpRequest.status == 200)
-		{
-			XmlDoc = HttpRequest.responseXML;
-			Sql = XmlDoc.getElementsByTagName("sql_result")[0].childNodes[0].nodeValue;
-			User = XmlDoc.getElementsByTagName("username")[0].childNodes[0].nodeValue;
-			if(Sql != "ok")
-			{
-				alert(REGISTER_GetDatabaseError(Sql));
-			}
-			else
-			{	
-				window.location=(".");
-			}
-		}
-	}
-}
-
-/**
-* @brief	Show a alert with error
-*
-* @return	none
-* @author	Fabian Kuss
-* @deprecated
-*/
-function REGISTER_GetDatabaseError(Msg)
-{
-	var ErrMsg = /violates unique constraint/;
-
-	if(ErrMsg.test(Msg))
-	{
-		return UTILS_GetText("register_error_409");
-	}
-	return Msg;
-}
-
 
 // init
 START_MainData();

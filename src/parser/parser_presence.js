@@ -40,7 +40,7 @@ import { MainData } from 'main_data.js';
 */
 export function PARSER_ParsePresence(XML)
 {
-	var Jid, Show, NewStatus;
+	var Jid;
 	var Buffer = "";
 	var Type;
 	var Pattern;

@@ -11,6 +11,8 @@ import {
 	CHAT_BlurChat,
 } from 'chat/chat.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -85,8 +87,6 @@ export function ChatObj(Username, Position)
 */
 function INTERFACE_ShowChat(Element)
 {
-	var Pos = this.position;
-
 	if(Element != null)
 	{
 		Element.appendChild(this.chatWindow);

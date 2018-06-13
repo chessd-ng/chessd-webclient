@@ -155,7 +155,7 @@ export function MESSAGE_UserList()
 	
 	var Consts = MainData.GetConst();
 
-   	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetUserList+"'>";
+  XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetUserList+"'>";
 	XMPP += "<query xmlns='jabber:iq:roster'/></iq>";
 
 	return XMPP;
@@ -172,7 +172,7 @@ export function MESSAGE_RoomList()
 	var XMPP;
 	var Consts = MainData.GetConst();
 
-   	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetRoomList+"' to='"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"'>";
+  XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetRoomList+"' to='"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return XMPP;
@@ -271,7 +271,6 @@ export function MESSAGE_ChangeStatus(NewStatus, RoomName)
 export function MESSAGE_Unavailable(RoomName)
 {
 	var XMPP = "";
-	var Type = null;
 
 	// Exit from a room
 	if (RoomName)
@@ -389,7 +388,7 @@ export function MESSAGE_InfoProfile(User)
 */
 export function MESSAGE_Invite(To)
 {
-	 return "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='subscribe' to='"+To+"@"+MainData.GetHost()+"' />"; 
+  return "<presence xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='subscribe' to='"+To+"@"+MainData.GetHost()+"' />"; 
 }
 
 /**
@@ -604,7 +603,7 @@ export function MESSAGE_GameRoomList()
 	var XMPP;
 	var Consts = MainData.GetConst();
 
-   	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetGamesList+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"'>";
+  XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetGamesList+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return XMPP;
@@ -675,7 +674,7 @@ export function MESSAGE_GameMove(Move, GameID, Promotion)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameRequestDraw (GameID)
+export function MESSAGE_GameRequestDraw (GameID)
 {
 	return (MESSAGE_GameRequests("Draw", GameID));
 }
@@ -687,7 +686,7 @@ function MESSAGE_GameRequestDraw (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameRequestCancel (GameID)
+export function MESSAGE_GameRequestCancel (GameID)
 {
 	return (MESSAGE_GameRequests("Cancel", GameID));
 }
@@ -699,7 +698,7 @@ function MESSAGE_GameRequestCancel (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameRequestAdjourn (GameID)
+export function MESSAGE_GameRequestAdjourn (GameID)
 {
 	return (MESSAGE_GameRequests("Adjourn", GameID));
 }
@@ -711,7 +710,7 @@ function MESSAGE_GameRequestAdjourn (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameResign (GameID)
+export function MESSAGE_GameResign (GameID)
 {
 	return (MESSAGE_GameRequests("Resign", GameID));
 }
@@ -770,7 +769,7 @@ function MESSAGE_GameRequests(Action, GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameDrawAccept (GameID)
+export function MESSAGE_GameDrawAccept(GameID)
 {
 	return (MESSAGE_GameResponse("Draw", GameID, ""));
 }
@@ -782,7 +781,7 @@ function MESSAGE_GameDrawAccept (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameDrawDeny (GameID)
+export function MESSAGE_GameDrawDeny(GameID)
 {
 	return (MESSAGE_GameResponse("Draw", GameID, "-decline"));
 }
@@ -794,7 +793,7 @@ function MESSAGE_GameDrawDeny (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameCancelAccept (GameID)
+export function MESSAGE_GameCancelAccept(GameID)
 {
 	return (MESSAGE_GameResponse("Cancel", GameID, ""));
 }
@@ -806,7 +805,7 @@ function MESSAGE_GameCancelAccept (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameCancelDeny (GameID)
+export function MESSAGE_GameCancelDeny(GameID)
 {
 	return (MESSAGE_GameResponse("Cancel", GameID, "-decline"));
 }
@@ -818,7 +817,7 @@ function MESSAGE_GameCancelDeny (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameAdjournAccept (GameID)
+export function MESSAGE_GameAdjournAccept(GameID)
 {
 	return (MESSAGE_GameResponse("Adjourn", GameID, ""));
 }
@@ -830,7 +829,7 @@ function MESSAGE_GameAdjournAccept (GameID)
 * @return	XMPP message
 * @author 	Rubens Suguimoto
 */
-function MESSAGE_GameAdjournDeny (GameID)
+export function MESSAGE_GameAdjournDeny(GameID)
 {
 	return (MESSAGE_GameResponse("Adjourn", GameID, "-decline"));
 }
@@ -986,7 +985,7 @@ export function MESSAGE_SearchUser(Username, Option)
 * @return 	XMPP message
 * @author 	Ulysses Bomfim
 */
-function MESSAGE_KickUserRoom (Room, To, Role, Reason)
+export function MESSAGE_KickUserRoom (Room, To, Role, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();

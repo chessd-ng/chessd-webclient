@@ -50,7 +50,6 @@ export function INTERFACE_StartLogin(Lang)
 	var Title, TitleEnd, Text, Link, Text2, Text3, Banner, Version;
 	var LoginLabel, PasswdLabel, InputLogin, InputPasswd, InputSubmit, CheckBox, CheckBoxLabel, ErrorLabel, SignIn;
 	var LoginMessage;
-	var ConfTmp;
 
 	var ev; //Temp event
 
@@ -414,7 +413,7 @@ export function INTERFACE_ShowErrorMessage(Msg)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function INTERFACE_HideErrorMessage()
+export function INTERFACE_HideErrorMessage()
 {
 	var ErrorMsg = document.getElementById("ErrorLabel");
 

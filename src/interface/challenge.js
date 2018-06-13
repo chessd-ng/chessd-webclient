@@ -4,7 +4,8 @@ import {
 	CHALLENGE_AcceptChallenge,
 	CHALLENGE_SendChallenge,
 } from 'challenge/challenge.js';
-import { WINDOW_Challenge } from 'window/window.js';
+
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient
@@ -43,7 +44,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 
 	var Layer1Div;
 	var L1LeftDiv;
-	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
+	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, RandomColorOptImg, BrR;
 	var L1RightDiv;
 	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt, CatOptUt;
 	var Br1;
@@ -55,13 +56,11 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	var IncLabel, IncSelect, IncOpt, IncLabelSeg,IncBr;
 	var Br2;
 
-	var ChalRightDiv;
-
 	var Layer3Div;
 	var Layer3IDiv;
-	var RatingCheckbox, RatingLabel;
+	var RatingCheckbox;
 	var PrivateCheckbox, PrivateLabel;
-	var AutoFlagCheckbox, AutoFlagLabel;
+	var AutoFlagCheckbox;
 	var Br3, Br4;
 
 	var ButtonsDiv;
@@ -571,7 +570,6 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	AutoFlagCheckbox.type = "checkbox";
 	AutoFlagCheckbox.name = "autoflag";
 	AutoFlagCheckbox.disabled = true;
-	AutoFlagLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_auto_flag'));
 
 	Br3 = UTILS_CreateElement('br');
 	Br4 = UTILS_CreateElement('br');
@@ -823,7 +821,7 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 * @author 	Ulysses Bomfim
 * @deprecated
 */
-function INTERFACE_HideChallengeList()
+export function INTERFACE_HideChallengeList()
 {
 	var Node = document.getElementById("ChallengeMenuDiv");
 	

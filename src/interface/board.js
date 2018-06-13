@@ -23,6 +23,8 @@ import {
 } from 'game/oldgame.js';
 import { WINDOW_Alert } from 'window/window.js';
 
+import { MainData } from 'main_data.js';
+
 import ImageNoPhoto from 'images/no_photo.png';
 
 /**
@@ -167,7 +169,7 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 {
 	var Board = UTILS_CreateElement("div", "Board");
 	var X, Y;
-	var Block, color;
+	var Block;
 	var Line, Col;
 
 
@@ -541,9 +543,9 @@ function INTERFACE_CreateHorizontalIndex(Color, Size)
 export function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 {
 	var PieceImg;
-	var PieceName, PieceTitle;
-	var DragPieceW, DrawPieceB;
+	var DragPieceW;
 	var PieceDir, Extension;
+  var DragPieceB;
 
 	if(MainData.GetBrowser() == 0) //IE
 	{

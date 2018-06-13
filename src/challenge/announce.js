@@ -48,7 +48,6 @@ export function ANNOUNCE_HandleAnnounce(XML)
 	var i;
 	var Id = XML.getAttribute("id");
 	var Category;
-	var AutoFlag;
 	var AnnounceId;
 	var Rated;
 
@@ -82,7 +81,6 @@ export function ANNOUNCE_HandleAnnounce(XML)
 			for(i=0; i< Announces.length ; i++)
 			{
 				Category = Announces[i].getAttribute("category");
-				AutoFlag = Announces[i].getAttribute("autoflag");
 				AnnounceId = parseInt(Announces[i].getAttribute("id"));
 				Rated = Announces[i].getAttribute("rated");
 
@@ -143,9 +141,7 @@ export function ANNOUNCE_HandleAnnounce(XML)
  */
 export function ANNOUNCE_HandleAnnounceGame(XML)
 {
-	var Id = XML.getAttribute("id");
-
-	var GameRoomTag, Room;
+	var Room;
 	var GameRoom;
 	var Buffer = "";
 	var MyUsername = MainData.GetUsername();

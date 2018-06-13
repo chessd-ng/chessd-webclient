@@ -7,6 +7,8 @@ import {
 } from 'game/game.js';
 import { UTILS_GetOffset } from 'utils/utils.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -87,7 +89,7 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 	// Add half of the piece size and others elements margin and borders
 	OffsetTop = OffsetBoard.Y + Offset + 38 + BoardPieceOffset.y;
 	OffsetLeft = OffsetBoard.X + Offset - 257 + BoardPieceOffset.x;
-	
+
 	//alert(OffsetTop +" = " +OffsetBoard.Y +" + "+ Offset+" + 38 + "+BoardPieceOffset.y +"\n"+OffsetLeft +" = " +OffsetBoard.X +" + "+ Offset+" + 257 + "+BoardPieceOffset.x);
 
 	// Drag piece
@@ -117,7 +119,7 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 			document.body.onmouseup = function(evt){
 				var NewPos = new Object();
 				var NewCol, NewLine, OldCol, OldLine;
-				var CurrentGame = MainData.GetCurrentGame();
+				CurrentGame = MainData.GetCurrentGame();
 
 				// Getting mouse coord
 				MousePos = UTILS_GetMouseCoords(evt);
@@ -187,7 +189,7 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 	{
 		var NewPos = new Object();
 		var NewCol, NewLine, OldCol, OldLine;
-		var CurrentGame = MainData.GetCurrentGame();
+		CurrentGame = MainData.GetCurrentGame();
 
 		// Getting mouse coord
 		MousePos = UTILS_GetMouseCoords(event);

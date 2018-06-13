@@ -146,7 +146,6 @@ export function CONTACT_HandleContactUserList(XML)
 export function CONTACT_HandleSetSubscribe(XML)
 {
 	var Users, Jid, Subs, i, Pending = "";
-	var Group;
 
 	Users = XML.getElementsByTagName("item");
 
@@ -155,15 +154,6 @@ export function CONTACT_HandleSetSubscribe(XML)
 		Jid = Users[i].getAttribute("jid").match(/[^@]+/)[0];
 		Subs = Users[i].getAttribute ("subscription"); 
 		
-		if(Users[i].getElementsByTagName("group")[0] != null)
-		{
-			Group = UTILS_GetNodeText(Users[i].getElementsByTagName("group")[0]);
-		}
-		else
-		{
-			Group = "default";
-		}
-
 		// Check subscription state of users
 		switch (Subs)
 		{

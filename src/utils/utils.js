@@ -61,13 +61,13 @@ export function UTILS_IdentifyBrowser()
 		else if (/Epiphany[\/\s](\d+\.\d+)/.test(navigator.userAgent)||
 		        (/Galeon[\/\s](\d+\.\d+)/.test(navigator.userAgent)))
 		*/ 
-		if (
-		   (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
-		   (/Iceweasel[\/\s](\d+\.\d+)/.test(navigator.userAgent))||
-		   (/Epiphany[\/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
-		   (/Galeon[\/\s](\d+\.\d+)/.test(navigator.userAgent))
-		   )
-		{
+    if (
+      (/Firefox[/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
+      (/Iceweasel[/\s](\d+\.\d+)/.test(navigator.userAgent))||
+      (/Epiphany[/\s](\d+\.\d+)/.test(navigator.userAgent)) ||
+      (/Galeon[/\s](\d+\.\d+)/.test(navigator.userAgent))
+    )
+    {
 			var geckoVersion;
 			var UserAgent = navigator.userAgent.split(" ");
 			var i=0;
@@ -196,7 +196,6 @@ export function UTILS_GetTag(XML, TagName)
 export function UTILS_GetText(TagName)
 {
 	var Text = UTILS_GetTag(MainData.GetText(), TagName);
-	var i=0;
 
 	if(Text == null)
 	{
@@ -379,7 +378,7 @@ export function UTILS_Capitalize(Word)
 export function UTILS_BreakString(Obj, Width)
 {
 	var Text = Obj.innerHTML;
-	var ObjWidth, TrWidth;
+	var TrWidth;
 	var Broke = false;
 	var Old;
 	var i;

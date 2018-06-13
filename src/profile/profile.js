@@ -9,11 +9,9 @@ import {
 	UTILS_GetNodeText,
 	UTILS_ConvertTimeStamp,
 } from 'utils/utils.js';
-import { DATA } from 'data/data.js';
 import { INTERFACE_SetUserImage } from 'interface/left.js';
 import { WINDOW_Alert, WINDOW_Profile } from 'window/window.js';
 import { USER_AddUser } from 'contact/user.js';
-import { CONTACT_HandleInfo } from 'contact/info.js';
 import { MainData } from 'main_data.js';
 
 /**
@@ -48,7 +46,7 @@ export function PROFILE_HandleVCardProfile(XML)
 {
 	var FullName;
 	var Photo, PhotoType="", Binval="";
-	var Birthday, NickName, Desc;
+	var NickName, Desc;
 
 	var From = XML.getAttribute("from");
 	var UserFrom = From.split("@")[0];
@@ -62,8 +60,6 @@ export function PROFILE_HandleVCardProfile(XML)
 	FullName = UTILS_GetNodeText(XML.getElementsByTagName("FN")[0]);
 	NickName = UTILS_GetNodeText(XML.getElementsByTagName("NICKNAME")[0]);
 	Desc = UTILS_GetNodeText(XML.getElementsByTagName("DESC")[0]);
-
-	Birthday = UTILS_GetNodeText(XML.getElementsByTagName("BDAY")[0]);
 
 	Photo = XML.getElementsByTagName("PHOTO")[0];
 
@@ -228,7 +224,6 @@ export function PROFILE_HandleRatings(Username, RatingNodes)
 	var Rating = new Array();
 	var Category, TimeStamp, Index;
 	var i,j;
-	var User;
 	var RatingValue;
 	var TotalWin,TotalDraw,TotalLosses, TotalGames;
 	var RecordValue, RecordTime;
@@ -314,8 +309,6 @@ export function PROFILE_StartProfile(Username)
 	var User = MainData.GetUser(Username);
 
 	var ProfileInfo = new Object();
-
-	var Jid = Username+"@"+MainData.GetHost();
 
 	var ProfileObj;
 	

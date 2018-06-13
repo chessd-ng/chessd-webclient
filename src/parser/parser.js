@@ -96,3 +96,7 @@ export function PARSER_ParseXml(XML)
 	return Buffer;
 }
 
+function PARSER_ParseError(XML) {
+  console.log(XML);
+  return "";
+}

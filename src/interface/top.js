@@ -45,7 +45,7 @@ import { LOGIN_Logout } from 'login/login.js';
 */
 export function INTERFACE_CreateTop()
 {
-	var MainDiv, Logo, MenuDiv, MenuList, Item, ItemTitle;
+	var MainDiv, Logo, MenuDiv, MenuList, ItemTitle;
 	var Pos;
 	var ExitText;
 	var Admin, Room, Pref, Game, Help;
@@ -118,8 +118,8 @@ export function INTERFACE_CreateTop()
 */
 export function INTERFACE_ShowRoomMenu(OffsetLeft)
 {
-	var MenuDiv, RoomList, RoomItem, CreateP, Create;
-	var Node, Menu, Func, i, Hide = 0;
+	var MenuDiv, RoomList, CreateP, Create;
+	var Node, Menu, Func, Hide = 0;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("RoomMenuDiv");
@@ -179,10 +179,10 @@ export function INTERFACE_ShowRoomMenu(OffsetLeft)
 * @see		room/room.js: ROOM_HandleGameRoomInfoList to load list itens
 * @author 	Ulysses Bomfim and Rubens Suguimoto
 */
-function INTERFACE_ShowGameRoomMenu(OffsetLeft)
+export function INTERFACE_ShowGameRoomMenu(OffsetLeft)
 {
-	var MenuDiv, RoomItem;
-	var Node, Menu, Func, i, Hide = 0;
+	var MenuDiv;
+	var Node, Menu, Func, Hide = 0;
 
 	Node = document.getElementById("Page");
 	Menu = document.getElementById("GameRoomMenuDiv");

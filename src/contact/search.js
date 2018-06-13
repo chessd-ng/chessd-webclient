@@ -1,5 +1,7 @@
 import { UTILS_GetNodeText } from 'utils/utils.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *

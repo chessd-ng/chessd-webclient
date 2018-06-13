@@ -1,5 +1,3 @@
-import { ContactObj } from 'interface/contact.js';
-
 import { MainData } from 'main_data.js';
 
 /**
@@ -36,14 +34,12 @@ export function CONTACT_HandleInfo(XML)
 
 	var RatingNodes, TypeNode;
 	var ProfileNode;
-	var Jid, Type, Rating;
+	var Jid, Type;
 	var User;
 	var From;
 
 	var i;
-        var RatingValue;
-        var RecordValue, RecordTime;
-	var TimeStamp;
+  var RatingValue;
 	var Category;
 
 	ProfileNode = XML.getElementsByTagName('profile')[0];
@@ -73,7 +69,7 @@ export function CONTACT_HandleInfo(XML)
 		// Set rating	
 		for(i=0; i< RatingNodes.length; i++)
 		{
-                	Category = RatingNodes[i].getAttribute('category');
+      Category = RatingNodes[i].getAttribute('category');
 
 			RatingValue = RatingNodes[i].getAttribute('rating');
 
@@ -95,8 +91,7 @@ export function CONTACT_HandleInfo(XML)
 */
 function CONTACT_SetUserType(Username, NewType)
 {
-	var Room;
-	var Status, Rating;
+	var Status;
 	
 	var User = MainData.GetUser(Username);
 	var ContactUser;
@@ -119,7 +114,7 @@ function CONTACT_SetUserType(Username, NewType)
 		// Offline user
 		else
 		{
-			StatusList = "offline";
+			var StatusList = "offline";
 
 			MainData.Contact.updateUser(Username, StatusList, null, NewType);
 			// Refresh user's type in contact list

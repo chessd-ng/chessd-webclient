@@ -495,7 +495,7 @@ function INTERFACE_HideOnlineList()
 * @return	True or False (if group not founded)
 * @author 	Rubens Suguimoto
 */
-function INTERFACE_ChangeGroupVisibility(Obj, Id)
+export function INTERFACE_ChangeGroupVisibility(Obj, Id)
 {
 	var Node = document.getElementById(Id);
 	
@@ -592,8 +592,7 @@ export function INTERFACE_CreateContact()
 */
 function INTERFACE_CreateContactContent()
 {
-	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
-	var OrderNick, OrderRating, OrderRatingOpt, Search;
+	var ContactInside;
 	var Hr;
 	var SearchP, SearchS;
 	var ListDiv;
@@ -633,11 +632,7 @@ function INTERFACE_CreateContactContent()
 */
 function INTERFACE_CreateOnlineContent()
 {
-	var ContactDiv, ContactsDiv, ContactTitle, ContactInside, ContactOnlineDiv, ContactOfflineDiv, ContactOnline, ContactOffline;
-	var ContactsOnline, ContactsOffline;
-	var OnlineTable, OnlineTbody;
-	var OfflineTable, OfflineTbody;
-	var OrderNick, OrderRating, OrderRatingOpt, Search;
+	var ContactInside;
 	var Hr;
 	var SearchP, SearchS;
 	var LoadingDiv;

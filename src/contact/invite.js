@@ -9,8 +9,9 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { UTILS_GetText, UTILS_Capitalize } from 'utils/utils.js';
 import { CONTACT_AddUser } from 'contact/contact.js';
 import { WINDOW_Confirm } from 'window/window.js';
-import { ContactObj } from 'interface/contact.js';
 import { CONTACT_SetUserStatus } from 'contact/status.js';
+
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient
@@ -45,7 +46,6 @@ import { CONTACT_SetUserStatus } from 'contact/status.js';
 export function CONTACT_InviteUser(Username)
 {
 	var XML;
-	var ContactObj = MainData.GetContactObj();
 
 	// Create a invite message
 	XML = MESSAGE_Invite(Username);
@@ -183,7 +183,6 @@ export function CONTACT_ReceiveUnsubscribed(Username)
 {
 	var XML = "";
 	var User;
-	var ContactObj = MainData.GetContactObj();
 
 	User = MainData.GetContactUser(Username);
 

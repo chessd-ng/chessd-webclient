@@ -1,16 +1,12 @@
 import {
 	UTILS_CreateCookie,
-	UTILS_GetLanguage,
 	UTILS_OpenXMLFile,
-	UTILS_GetTag,
-	UTILS_ReadCookie,
 } from 'utils/utils.js';
 import {
 	MESSAGE_Presence,
 	MESSAGE_GetProfile,
 	MESSAGE_UserList,
 } from 'xmpp_messages/message.js';
-import { DATA } from 'data/data.js';
 import { CONTACT_StopAwayStatus, CONTACT_StartAwayCounter } from 'contact/status.js';
 import { INTERFACE_EndLogin, INTERFACE_StartLogin } from 'interface/login.js';
 import {
@@ -28,7 +24,6 @@ import {
 import { CONTACT_StartContactList, CONTACT_LoadUserContactList } from 'contact/contact.js';
 import {
 	LOAD_ReloadFiles,
-	LOAD_EndLoad,
 	LOAD_IECssFile,
 } from 'load/load.js';
 import { GAME_SearchCurrentGame } from 'game/game.js';
@@ -66,7 +61,7 @@ import 'css/Load.css';
 import { NoCache } from 'initial_files.js';
 
 //Global object that stores all data needed by interface
-var TranslationLog = new Array();
+// var TranslationLog = new Array();
 
 /*
 * @brief	Start main data and show login page
@@ -78,9 +73,6 @@ var TranslationLog = new Array();
 */
 export function START_StartPage()
 {
-	var Lang;
-	var ConfTmp;
-
   START_MainData();
 	
 	INTERFACE_StartLogin(MainData.GetLang());

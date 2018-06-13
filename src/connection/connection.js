@@ -1,4 +1,3 @@
-import { LOAD_StartLoad } from 'load/load.js';
 import { PARSER_ParseXml } from 'parser/parser.js';
 import { UTILS_GetText } from 'utils/utils.js';
 import {
@@ -85,7 +84,7 @@ export function CONNECTION_ConnectJabber(XML)
 */
 export function CONNECTION_SendJabber()
 {
-	var Post = "", DT, i;
+	var Post = "", i;
 	var HttpRequest;
 
 	// If receive too many parameters, merge then
@@ -120,9 +119,6 @@ export function CONNECTION_SendJabber()
 			HttpRequest = new ActiveXObject("Msxml2.XMLHTTP");
 		}
 	}
-
-	// This variable is used to avoid browser caching
-	DT = Math.floor(Math.random()*10000);
 
 	HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/jabber' , true);
 	
@@ -165,7 +161,7 @@ export function CONNECTION_SendJabber()
 */
 function CONNECTION_ReceiveConnection(HttpRequest)
 {
-	var XML, XMLBuffer;
+	var XML;
 	var Error, ErrorCode;
 	var BodyType;
 	var Iq, IqType;
@@ -201,7 +197,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 			//switch (MainData.ConnectionStatus)
 			switch (MainData.GetConnectionStatus())
 			{
-				 case (1):
+        case (1):
 					if(XML.getElementsByTagName("body")[0].getAttribute("sid") == null)
 					{
 						LOGIN_LoginFailed(UTILS_GetText("login_connection_refused"));
@@ -320,7 +316,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 function CONNECTION_ReceiveXml(HttpRequest)
 {
 	var XML, Buffer = "";
-	var State, Status;
+	var Status;
 
 	// User was disconnected 
 	if (MainData.GetConnectionStatus() == -1)

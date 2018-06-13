@@ -26,8 +26,7 @@ import {
 	MESSAGE_AddBannedWord,
 	MESSAGE_BanUser,
 } from 'xmpp_messages/message.js';
-import { INTERFACE_AddBannedUser } from 'interface/admin.js';
-import { AdminCenterObj, INTERFACE_CreateAdminCenter } from 'interface/admincenter.js';
+import { AdminCenterObj } from 'interface/admincenter.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { WINDOW_Alert } from 'window/window.js';
 import { INTERFACE_ShowAdminIcon } from 'interface/top.js';
@@ -64,7 +63,7 @@ import { MainData } from 'main_data.js';
 * @return 	Buffer with other XMPP to send
 * @author 	Ulysses Bomfim
 */
-export function ADMIN_HandleRoomAdmin(XML)
+export function ADMIN_HandleRoomAdmin()
 {
 	//TODO 
 	var Buffer = "";
@@ -646,7 +645,7 @@ export function ADMINCENTER_ClearBannedWordsList()
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var Word;
 	
-	for(i=AdminCenterObj.Words.WordsList.length-1; i>=0; i--)
+	for(var i=AdminCenterObj.Words.WordsList.length-1; i>=0; i--)
 	{
 		Word = AdminCenterObj.Words.WordsList[i].Id;
 		AdminCenterObj.Words.remove(Word);
@@ -667,7 +666,7 @@ export function ADMINCENTER_ClearPunishList()
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var Punish;
 	
-	for(i=AdminCenterObj.Punish.PunishList.length-1; i>=0; i--)
+	for(var i=AdminCenterObj.Punish.PunishList.length-1; i>=0; i--)
 	{
 		Punish = AdminCenterObj.Punish.PunishList[i].Id;
 		AdminCenterObj.Punish.remove(Punish);
@@ -987,7 +986,7 @@ export function ADMINCENTER_AdjournSortByBRating()
 * @return	none 
 * @author 	Rubens Suguimoto
 */
-function ADMINCENTER_AdjournSortByWUsername()
+export function ADMINCENTER_AdjournSortByWUsername()
 {
 	var AdminCenterObj = MainData.GetAdmincenter();
 	var AdjournList = MainData.GetAdjournList();

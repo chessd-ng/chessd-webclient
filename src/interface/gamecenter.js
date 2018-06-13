@@ -31,7 +31,6 @@ import {
 	GAMECENTER_PostponeSortByDate,
 	GAMECENTER_CurrentGamesSortByMoves,
 	GAMECENTER_PostponeSortByCategory,
-	GAMECENTER_ShowTourney,
 	GAMECENTER_MatchOfferSortByRating,
 	GAMECENTER_CurrentGamesSortByTime,
 	GAMECENTER_PostponeSortByRating,
@@ -47,7 +46,6 @@ import { CHALLENGE_DeclineChallenge, CHALLENGE_ClearChallenges } from 'challenge
 import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
 import {
 	ANNOUNCE_AcceptRandomAnnounce,
-	ANNOUNCE_RemoveAnnounce,
 	ANNOUNCE_ClearAnnounce,
 	ANNOUNCE_AcceptAnnounce,
 	ANNOUNCE_CancelAnnounce,
@@ -110,7 +108,7 @@ export function GameCenterObj()
 	this.Postpone = new PostponeObj;
 	this.MatchOffer = new MatchOfferObj;
 	this.Tourney = null;
-	this.CurrentGames = new CurrentGamesObj;;
+	this.CurrentGames = new CurrentGamesObj;
 
 
 	this.CurrentDiv = this.Announce;
@@ -297,7 +295,7 @@ function INTERFACE_AddAnnounce(Player, Rating, Time, Inc, Category, Rated, Priva
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name, 10));
 	PRating = UTILS_CreateElement("p","rating", null, Rating);
 	PTime = UTILS_CreateElement("p","time", null, Time+"\"");
-	PInc = UTILS_CreateElement("p","inc", null, Inc+"\'");
+	PInc = UTILS_CreateElement("p","inc", null, Inc+"'");
 	PCategory = UTILS_CreateElement("p","category", null, Category);
 
 	/*// This feature is not implemented yet
@@ -704,7 +702,7 @@ function INTERFACE_AddMatchOffer(Player, Time, Inc, Category, Rated, Private, Ma
 	PAbusive.title = UTILS_GetText("gamecenter_abusive");
 
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Player.Name,10));
-	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
+	PTime = UTILS_CreateElement("p","time", null, Time+"'");
 	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
 	PCategory = UTILS_CreateElement("p","category", null, Category);
 
@@ -1039,7 +1037,6 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	var PName, PTime, PInc, PCategory, PRating, PButton;
 	var PDate;
 	var ItemObj = new Object();
-	var Id = PostponeId;
 	var PAbusive;
 	var TmpTime = "";
 	var TimeMin, TimeSec;
@@ -1050,7 +1047,7 @@ function INTERFACE_AddPostpone(Player, Time, Inc, Category, Rating, Date, Postpo
 	
 	if(TimeMin != 0)
 	{
-		TmpTime += TimeMin+"\'";
+		TmpTime += TimeMin+"'";
 	}
 
 	if(TimeSec != 0)
@@ -1187,7 +1184,6 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
 	var Item, Button;
-	var ItemObj;
 	var Id;
 	
 	for(i=0; i< this.PostponeList.length; i++)
@@ -1196,7 +1192,6 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 		{
 			Item = this.PostponeList[i].Item;
 			Button = this.PostponeList[i].Button;
-			ItemObj = this.PostponeList[i];
 			Id = this.PostponeList[i].Id;
 
 			if(OponentStatus == "offline")
@@ -1421,11 +1416,10 @@ function CurrentGamesObj()
 function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category, GameTime, Rated, Moves, CurrentGamesId)
 {
 	var Item;
-	var GameCategory, PGameTime, GameMoves;
+	var PGameTime, GameMoves;
 	var PRated;
 	var Button;
 
-	var Id = CurrentGamesId;
 	var ItemObj = new Object();
 
 	Item = UTILS_CreateElement("li");

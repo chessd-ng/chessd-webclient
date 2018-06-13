@@ -4,11 +4,6 @@ import {
 	UTILS_AddListener,
 } from 'utils/utils.js';
 import {
-	WINDOW_AdminWindow,
-	WINDOW_UnbanUser,
-	WINDOW_BanUser,
-} from 'window/window.js';
-import {
 	ADMIN_UnbanUser,
 	ADMIN_KickUser,
 	ADMIN_BanUser,

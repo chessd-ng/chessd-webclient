@@ -130,7 +130,6 @@ function INITIAL_AppendScript(ScriptList, NumFiles)
 {
 	var Script;
 	var Head = document.getElementsByTagName("head")[0];
-	var ProgressText, LoadingText;
 	var ScriptFile;
 	var Perc;
 

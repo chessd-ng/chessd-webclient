@@ -314,10 +314,11 @@ export function WINDOW_CreateRoom()
 	// Create Button
 	UTILS_AddListener(WindowObj.eventButtons[1],"click", 
 		function() { 
-				if (Input.value == '' || Input.value == null)
+				if (Input.value == '' || Input.value == null) {
 					return;
-				else
-					 WINDOW_RemoveWindow(WindowObj);
+        } else {
+          WINDOW_RemoveWindow(WindowObj);
+        }
 	}, false);
 	// Cancel Button
 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
@@ -325,10 +326,11 @@ export function WINDOW_CreateRoom()
 	UTILS_AddListener(WindowObj.eventButtons[3],"keypress", 
 		function(event) { 
 			if(event.keyCode == 13 ) {
-				if (Input.value == '' || Input.value == null)
+				if (Input.value == '' || Input.value == null) {
 					return;
-				else
-					 WINDOW_RemoveWindow(WindowObj);
+        } else {
+          WINDOW_RemoveWindow(WindowObj);
+        }
 			} 
 	}, false);
 }
@@ -361,21 +363,21 @@ export function WINDOW_CancelRoom()
 * @return	none
 * @author	Danilo Yorinori
 */
-function WINDOW_Invite(User)
-{
-	//Return Div and Buttons;
-	var Div = INTERFACE_ShowInviteWindow(User);
-
-	//Create New Window
-	var WindowObj = WINDOW_NewWindow(310, Div.Div, Div.Buttons, UTILS_GetText('contact_invite'));
-
-	//Close Button (X)
-	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Auth Button
-	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-	// Decline Button
-	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
-}
+// export function WINDOW_Invite(User)
+// {
+// 	//Return Div and Buttons;
+// 	var Div = INTERFACE_ShowInviteWindow(User);
+// 
+// 	//Create New Window
+// 	var WindowObj = WINDOW_NewWindow(310, Div.Div, Div.Buttons, UTILS_GetText('contact_invite'));
+// 
+// 	//Close Button (X)
+// 	UTILS_AddListener(WindowObj.eventButtons[0],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+// 	// Auth Button
+// 	UTILS_AddListener(WindowObj.eventButtons[1],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+// 	// Decline Button
+// 	UTILS_AddListener(WindowObj.eventButtons[2],"click", function(){ WINDOW_RemoveWindow(WindowObj);}, false);
+// }
 
 /**
 * @brief	Open Search User window
@@ -441,7 +443,7 @@ export function WINDOW_Profile(Profile)
 		// Close Button
 		UTILS_AddListener(WindowObj.eventButtons[1],"click", 
 			function(){
-		 		// If Close confirm window is closed	
+        // If Close confirm window is closed	
 				if (!Elements.GetClose())
 				{
 					if (Elements.Desc.value.length <= 200) 
@@ -465,7 +467,7 @@ export function WINDOW_Profile(Profile)
 		// Save Profile Button
 		UTILS_AddListener(WindowObj.eventButtons[2],"click", 
 			function(){ 
-		 		// If Close confirm window is closed	
+        // If Close confirm window is closed	
 				if (!Elements.GetClose())
 				{
 					// Save profile changes and close window

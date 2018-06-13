@@ -1,0 +1,27 @@
+{
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+	    "impliedStrict": true,
+        }
+    },
+    "rules": {
+        "semi": 2,
+	"no-console": 'off'
+    },
+    "globals": {
+        "window": true,
+        "document": true,
+        "alert": true,
+        "navigator": true,
+	"ActiveXObject": true,
+	"XMLHttpRequest": true,
+	"console": true,
+	"setTimeout": true,
+	"setInterval": true,
+	"clearInterval": true,
+    }
+}

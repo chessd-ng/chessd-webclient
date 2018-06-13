@@ -9,6 +9,8 @@ import { MESSAGE_Chat } from 'xmpp_messages/message.js';
 import { WINDOW_Alert } from 'window/window.js';
 import { ChatObj } from 'interface/chat.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -153,7 +155,7 @@ export function CHAT_OpenChat(Username)
 	var Title, Msg;
 	var Status;
 	var ChatObject = null;
-	var Position, ChatPos;
+	var Position;
 	var User = MainData.GetUser(Username);
 	var Chat;
 

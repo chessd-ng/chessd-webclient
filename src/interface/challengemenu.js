@@ -9,6 +9,8 @@ import { ANNOUNCE_AcceptAnnounce, ANNOUNCE_CancelAnnounce } from 'challenge/anno
 import { INTERFACE_ShowFullName, INTERFACE_CloseFullName } from 'interface/interface.js';
 import { WINDOW_AnnounceWindow } from 'window/window.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -332,7 +334,7 @@ function INTERFACE_AddAnnounce(Player, Time, Inc, Rated, Private, MatchId)
 	{
 		PName = UTILS_CreateElement("p","name", null, Player.Name);
 	}
-	PTime = UTILS_CreateElement("p","time", null, Time+"\'");
+	PTime = UTILS_CreateElement("p","time", null, Time+"'");
 	PTime.title = UTILS_GetText("challenge_time");
 	PInc = UTILS_CreateElement("p","inc", null, Inc+"\"");
 	PInc.title = UTILS_GetText("challenge_inc");
@@ -561,7 +563,6 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 {
 	var i=0;
 	var Item, Button;
-	var ItemObj;
 	var Id;
 
 	for(i=0; i< this.PostponeList.length; i++)
@@ -570,7 +571,6 @@ function INTERFACE_UpdatePostpone(OponentName, OponentStatus)
 		{
 			Item = this.PostponeList[i].Item;
 			Button = this.PostponeList[i].Button;
-			ItemObj = this.PostponeList[i];
 			Id = parseInt(this.PostponeList[i].Id);
 
 			if(OponentStatus == "offline")

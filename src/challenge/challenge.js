@@ -6,13 +6,14 @@ import {
 	MESSAGE_ChallengeAccept,
 	MESSAGE_Challenge,
 } from 'xmpp_messages/message.js';
-import { WindowObj } from 'interface/window.js';
 import {
 	WINDOW_Alert,
 	WINDOW_Postpone,
 	WINDOW_RemoveWindow,
 	WINDOW_Challenge,
 } from 'window/window.js';
+
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient
@@ -46,7 +47,7 @@ import {
  * @return	Buffer with XMPP to send
  * @author	Ulysses Bomfim
  */
-function CHALLENGE_HandleChallenge (XML)
+export function CHALLENGE_HandleChallenge(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
@@ -89,7 +90,7 @@ function CHALLENGE_HandleChallenge (XML)
  * @return	Buffer with XMPP to send
  * @author	Rubens Suguimoto
  */
-function CHALLENGE_HandleErrorChallenge (XML)
+export function CHALLENGE_HandleErrorChallenge(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
@@ -147,7 +148,7 @@ function CHALLENGE_HandleOffer(XML)
 	var ChallengeID;
 	var ChallengeObj;
 	var ChallengedPlayer;
-	var Room, User;
+	var User;
 	var MyUsername = MainData.GetUsername();
 	var MatchType;
 	var GameCenter = MainData.GetGamecenter();
@@ -368,7 +369,7 @@ function CHALLENGE_HandleAccept (XML)
  */
 function CHALLENGE_HandleDecline (XML)
 {
-	var Match, MatchID, WindowObj,i;
+	var Match, MatchID, WindowObj;
 	var Buffer = "";
 	var ChallengeObj;
 	var GameCenter = MainData.GetGamecenter();

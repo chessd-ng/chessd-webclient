@@ -1,11 +1,21 @@
 import { CONTACT_ChangeStatus } from 'contact/status.js';
 import { ROOM_EnterRoomGame, ROOM_ExitRoom } from 'room/room.js';
 import {
-	MESSAGE_Presence,
-	MESSAGE_GetProfile,
-	MESSAGE_GameSearchCurrentGame,
 	MESSAGE_GameMove,
+	MESSAGE_GameSearchCurrentGame,
+	MESSAGE_GetProfile,
+	MESSAGE_Presence,
 	MESSAGE_Unavailable,
+  MESSAGE_GameCancelAccept,
+  MESSAGE_GameDrawAccept,
+  MESSAGE_GameDrawDeny,
+  MESSAGE_GameCancelDeny,
+  MESSAGE_GameAdjournAccept,
+  MESSAGE_GameAdjournDeny,
+  MESSAGE_GameRequestDraw,
+  MESSAGE_GameRequestCancel,
+  MESSAGE_GameRequestAdjourn,
+  MESSAGE_GameResign,
 } from 'xmpp_messages/message.js';
 import { INTERFACE_GameBoardObj } from 'interface/game.js';
 import {
@@ -154,24 +164,18 @@ export function GAME_HandlePresence(XML)
 */
 function GAME_Move(XML)
 {
-	var StateTag, Category, GameID;
-	var BoardTag, FullMoves, Enpassant, Castle, Halfmoves, Board, Turn;
-	var PlayerTag, MoveTag, Move, ShortMove, Type;
+	var GameID;
+	var BoardTag, Board, Turn;
+	var PlayerTag, MoveTag, Move, ShortMove;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
 
-	Type = XML.getAttribute('type');
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
-	StateTag = XML.getElementsByTagName("state");
 	BoardTag = XML.getElementsByTagName("board");
 	PlayerTag = XML.getElementsByTagName("player");
 	MoveTag = XML.getElementsByTagName("move");
-
-	// Get game move history
-	Category = StateTag[0].getAttribute("category");
-
 
 	// Get the PGN of last move
 	if(MoveTag != null)
@@ -186,10 +190,6 @@ function GAME_Move(XML)
 	}
 
 	//Get all game data
-	FullMoves = BoardTag[0].getAttribute("fullmoves");
-	Enpassant = BoardTag[0].getAttribute("enpassant");
-	Castle = BoardTag[0].getAttribute("castle");
-	Halfmoves = BoardTag[0].getAttribute("halfmoves");
 	Board = BoardTag[0].getAttribute("state");
 	Turn = BoardTag[0].getAttribute("turn");
 
@@ -246,7 +246,7 @@ export function GAME_HandleGameResult(XML)
 
 	if(Id == Consts.IQ_ID_SearchCurrentGame)
 	{
-		var GameTag = XML.getElementsByTagName("game");
+		GameTag = XML.getElementsByTagName("game");
 
 		if(GameTag.length != 0)
 		{
@@ -279,7 +279,6 @@ function GAME_State(XML)
 	var HistoryStates;
 
 	var SPlayer;
-	var State;
 	var WTime, BTime;
 
 
@@ -291,7 +290,6 @@ function GAME_State(XML)
 	HistoryStates = History.getElementsByTagName("state");
 
 	// Get players time left
-	State = XML.getElementsByTagName("state")[0];
 	SPlayer = XML.getElementsByTagName("player");
 	if(SPlayer != null)
 	{
@@ -527,11 +525,10 @@ function GAME_HandleAdjourn(XML, Xmlns)
 */
 function GAME_End(XML)
 {
-	var PlayerTag, EndTag, Result;
-	var Game, GameID, Reason, Player, Winner;
+	var EndTag, Result;
+  var Game, GameID;
 	var Title = UTILS_GetText("game_end_game");
 	var Playing;
-	var Text;
 	var CurrentGame = MainData.GetCurrentGame();
 
 	var MyUsername = MainData.GetUsername();
@@ -611,8 +608,7 @@ export function GAME_HandleGameError(XML)
 {
 	var Query = XML.getElementsByTagName("query");
 	var Xmlns;
-	var Buffer = "";
-	var Game, GameID, Move;
+	var Game, GameID;
 	var Invalid, Over;
 
 	// Getting query xmlns
@@ -763,7 +759,6 @@ export function GAME_StartObserverGame(GameId, P1, P2)
 {
 	//TODO -> CHANGE P1 TO PW AND P2 TO PB
 	var GameDiv;
-	var RoomPos;
 	var Buffer = "";
 
 	var Consts = MainData.GetConst();
@@ -941,7 +936,6 @@ export function GAME_SendMove(OldLine, OldCol, NewLine, NewCol)
 	var Promotion = "";
 
 	var CurrentGame = MainData.GetCurrentGame();
-	var GameID = CurrentGame.Id;
 	var CurrentMove = CurrentGame.CurrentMove;
 	var CurrentBoard = CurrentGame.Moves[CurrentMove].Board;
 
@@ -1085,7 +1079,7 @@ export function GAME_SendResign(GameID)
 function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 {
 	var i;
-	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShort, HShortMove;
+	var StartP1Time, StartP2Time, HTurn, HTime, HBoard, HMove, HShortMove;
 	var HPlayer1 = new Object();
 	var HPlayer2 = new Object();
 	var HistoryMoves;
@@ -1253,7 +1247,7 @@ function GAME_HideLoadingMove(Id)
 * @return	none
 * @author	Rubens Suguimoto
 */
-function GAME_SetBlockBorder(Line, Col)
+export function GAME_SetBlockBorder(Line, Col)
 {
 	var CurrentGame = MainData.GetCurrentGame();
 	var BlockId;

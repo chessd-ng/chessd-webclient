@@ -26,6 +26,8 @@ import {
 import { OLDGAME_GotoBoard } from 'game/oldgame.js';
 import { WINDOW_Alert } from 'window/window.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -764,7 +766,7 @@ function INTERFACE_SetBPhoto(Img)
 * @return	none
 * @author	Rubens Suguimoto and Pedro Rocha
 */
-function INTERFACE_AddMove(NumTurn, Move, ShortMove, WTime, BTime)
+function INTERFACE_AddMove(NumTurn, Move, ShortMove)
 {
 	var ScrollTop, ScrollHeight, ClientHeight;
 	var Num;

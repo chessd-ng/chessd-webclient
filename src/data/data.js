@@ -6,7 +6,6 @@ import {
 	UTILS_GetTag,
 	UTILS_IdentifyBrowser,
 	UTILS_SortByUsernameDsc,
-	UTILS_SortByRatingDsc,
 	UTILS_SortRoomByRatingDsc,
 	UTILS_SortByFullnameAsc,
 	UTILS_SortContactByRatingDsc,
@@ -1816,7 +1815,7 @@ function DATA_RemoveRating(Category)
 
 	if(Pos != null)
 	{
-		this.RatingList.splice(Pos,i);
+		this.RatingList.splice(Pos,0);
 	}
 }
 
@@ -2577,9 +2576,6 @@ function DATA_GetCurrentRoom()
 function DATA_AddUserInRoom(Username, Status, Type, Role, Affiliation)
 {
 	var User = new Object();
-	var UserPos = MainData.FindUser(Username);
-	var Room;
-	var UserObj;
 
 	User.Username = Username;
 	User.Status = Status;
@@ -2734,7 +2730,7 @@ function DATA_RemoveUserInRoom(Username)
 */
 function DATA_GetUserRatingInRoom(Username, Category)
 {
-	var RatingList, Rating, PosRoom;
+	var RatingList, Rating;
 
 	var User = this.GetUser(Username);
 
@@ -2901,7 +2897,6 @@ function DATA_GetRoomCurrentRating()
 function DATA_AddChat (Username, ChatObj)
 {
 	var Chat = new Object();
-	var i;
 
 	// Setting atributes
 	Chat.Username = Username;
@@ -4023,11 +4018,8 @@ function DATA_GetAwayInterval()
 */
 function DATA_AddWindow(WindowObj)
 {
-	var WindowListLen = this.Windows.WindowList.length;
-
 	this.Windows.WindowList.push(WindowObj);
 	this.Windows.Focus = WindowObj;
-
 }
 
 /**
@@ -4171,7 +4163,7 @@ function DATA_GetLoadObj()
 * @return	none 
 * @author	Rubens Suguimoto
 */
-function DATA_AddProfile(Jid, Username, ProfileWindow)
+export function DATA_AddProfile(Jid, Username, ProfileWindow)
 {
 	var NewProfile = new Object();
 	// Data Id
@@ -4190,7 +4182,7 @@ function DATA_AddProfile(Jid, Username, ProfileWindow)
 * @return 	Profile position or null (if not found)
 * @author	Rubens Suguimoto
 */
-function DATA_FindProfile(Jid)
+export function DATA_FindProfile(Jid)
 {
 	var i=0;
 
@@ -4213,7 +4205,7 @@ function DATA_FindProfile(Jid)
 * @return 	True if removed or false (if not found)
 * @author	Rubens Suguimoto
 */
-function DATA_RemoveProfile(Jid)
+export function DATA_RemoveProfile(Jid)
 {
 	var ProfileIndex = this.FindProfile(Jid);
 
@@ -4237,7 +4229,7 @@ function DATA_RemoveProfile(Jid)
 * @return	Profile	Item or null (if not found)
 * @author	Rubens Suguimoto
 */
-function DATA_GetProfile(Jid)
+export function DATA_GetProfile(Jid)
 {
 	var i=0;
 
@@ -4272,7 +4264,7 @@ function DATA_GetProfile(Jid)
 * @return none
 * @author	Rubens Suguimoto
 */
-function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
+export function DATA_SetMyProfile(Username, FullName, Desc, ImgType, Img64)
 {
 	if(Username != "")
 	{
@@ -5118,7 +5110,6 @@ function DATA_GetPunishList()
 function DATA_AddLevel(Name, Level)
 {
 	// Creating a new object
-	var Punish = new Object();
 	var i;
 	var LevelId = Name;
 
@@ -5238,7 +5229,7 @@ function DATA_GetLevelList()
 function DATA_AddAdminLevel(Name, Level)
 {
 	// Creating a new object
-	var AdminLvl = new Object();
+	var AdminLevel = new Object();
 	var i;
 	var AdminLevelId = Name;
 	

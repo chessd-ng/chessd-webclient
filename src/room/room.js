@@ -60,7 +60,7 @@ import { MainData } from 'main_data.js';
 */
 export function ROOM_HandleRoomPresence(XML)
 {
-	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo, NewRoom = false;
+	var From, RoomName, Jid, Type, Item, Role, Affiliation, Show, Status, MsgTo;
 	var Room;
 	var Buffer = "";
 	var Component;
@@ -239,7 +239,7 @@ export function ROOM_HandleMessage(XML)
 */
 export function ROOM_HandleRoomList(XML)
 {
-	var Items, Rooms, Room, RoomName, ID, i;
+	var Items, Rooms, Room, ID, i;
 	var Buffer = "";
 	var Exp = new RegExp("^"+MainData.GetRoomDefault()+"$");
 	var Consts = MainData.GetConst();
@@ -266,7 +266,7 @@ export function ROOM_HandleRoomList(XML)
 			Room = new Object();
 
 			Room.Id = Items[i].getAttribute("jid").split("@")[0];
-			Room.Name = Items[i].getAttribute("name").replace(/ /,"");;
+			Room.Name = Items[i].getAttribute("name").replace(/ /,"");
 
 			Rooms[i] = Room;
 
@@ -298,12 +298,11 @@ export function ROOM_HandleInfo(XML)
         var Username, Rating, Category;
 	var i,j;
 	var Room;
-	var Status, Rating;
+	var Status;
 	var User;
 	var NewType, Type;
 
 	var RoomList = MainData.GetRoomList();
-	var Room;
 	var ProfileNode;
 
 	RatingNodes = XML.getElementsByTagName('rating');
@@ -777,7 +776,7 @@ function ROOM_RemoveRoom(RoomName)
 export function ROOM_SortUsersByNick()
 {
 // TODO -> Change this function to get room parameter
-	var Room, RoomName;
+	var Room;
 	var i, j;
 	var UserName, Status, Rating, Type;
 	var User;
@@ -797,8 +796,6 @@ export function ROOM_SortUsersByNick()
 		// If ordered into ascending order, change to descending order
 		// other modes, change to ascending order
 		Room.SetOrderBy((Room.GetOrderBy() + 1) % 2);
-
-		RoomName = Room.Name;
 
 		// Sort user list by nick name in data struct
 		Room.SortUserListNick();
@@ -836,7 +833,7 @@ export function ROOM_SortUsersByNick()
 */
 export function ROOM_SortUsersByRating(Category)
 {
-	var Room, RoomName;
+	var Room;
 	var i, j;
 	var UserName, Status, Rating, Type;
 	var User;
@@ -859,7 +856,6 @@ export function ROOM_SortUsersByRating(Category)
 		
 		Room.SetRoomCurrentRating(Category);
 
-		RoomName = Room.Name;
 		// Sort user list by nick name in data struct
 		Room.SortUserListRating();
 

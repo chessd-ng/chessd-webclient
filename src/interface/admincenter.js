@@ -6,6 +6,7 @@ import {
 	ADMINCENTER_PunishSortByUsername,
 	ADMIN_BanWord,
 	ADMINCENTER_AdjournSortByBUsername,
+  ADMINCENTER_AdjournSortByWUsername,
 	ADMINCENTER_AdjournSortByTime,
 	ADMIN_RemoveBannedWord,
 	ADMINCENTER_PunishSortByPeriod,
@@ -34,8 +35,8 @@ import {
 	UTILS_GetText,
 	UTILS_ShortString,
 } from 'utils/utils.js';
-import { CHALLENGE_SendResumeGame } from 'challenge/adjourn.js';
-import { WINDOW_CreateAdminCenter } from 'window/window.js';
+
+import { MainData } from 'main_data.js';
 
 import ImageChallengeMenuWhiteEnable from 'images/challenge_menu/white_enable.png';
 import ImageChallengeMenuBlackEnable from 'images/challenge_menu/black_enable.png';
@@ -77,8 +78,6 @@ export function INTERFACE_ShowCreateAdminCenterWindow()
 	var Elements = new Object();
 	
 	var ACenterObj = MainData.GetAdmincenter();
-
-	var Input;
 
 	var ButtonsDiv;
 	var CloseButton;
@@ -132,7 +131,7 @@ export function AdminCenterObj()
 	this.AdminLevel = new AdminLevelObj;
 	this.Level = new LevelObj;
 	this.Adjourn = new AdjournObj;
-	this.Words = new WordsObj;;
+	this.Words = new WordsObj;
 
 	this.CurrentDiv = this.Punish;
 
@@ -290,7 +289,7 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 
 	// Random color
 
-	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Name, 10));
+	var PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Name, 10));
 	PPunish = UTILS_CreateElement("p","punish", null, Punish);
 	PInc = UTILS_CreateElement("p","incidence", null, Incident);
 	PDate = UTILS_CreateElement("p","date", null, Date);
@@ -312,7 +311,7 @@ function INTERFACE_AddPunish(Name, Punish, Incident, Date, Period, Reason)
 	}
 */
 
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
+	var PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_acquit"));
 	PButton.onclick = function(){
 		ADMIN_UnbanUser(Name,"Acquit - absolvido");
 	};
@@ -590,7 +589,7 @@ function INTERFACE_AddAdminLevel(Name, AdminLevel)
 	PName = UTILS_CreateElement("p","player", null, UTILS_ShortString(Name, 10));
 	PAdminLevel = UTILS_CreateElement("p","level", null, AdminLevel);
 
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
+	var PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
 
 
 	Item.appendChild(PName);
@@ -804,7 +803,7 @@ function INTERFACE_AddLevel(Name, Level)
 	PLevel = UTILS_CreateElement("p","level", null, Level);
 
 
-	PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
+	var PButton = UTILS_CreateElement("p","action","accept",UTILS_GetText("admincenter_edit"));
 
 
 	Item.appendChild(PName);
@@ -1011,7 +1010,7 @@ function AdjournObj()
 function INTERFACE_AddAdjourn(WPlayerName, WRating, BPlayerName, BRating, Category, GameTime, Inc, Rated, AdjournId)
 {
 	var Item = UTILS_CreateElement("li");
-	var GameCategory, GameTime, GameInc, GameMoves;
+	var GameInc;
 	var PRated;
 	var Button;
 
@@ -1224,7 +1223,7 @@ function INTERFACE_CreateAdminCenterAdjourn()
 		Category.className = "";
 		Inc.className = "";
 		Rated.className = "";
-		ADMINCENTER_AdjournSortWUsername();
+		ADMINCENTER_AdjournSortByWUsername();
 	};
 	BPiece.onclick = function(){
 		WRating.className = "";
@@ -1363,7 +1362,7 @@ function INTERFACE_AddWords(Word)
 
 	PWord = UTILS_CreateElement("p","word", null, Word);
 
-	PButton = UTILS_CreateElement("p","action",null,UTILS_GetText("admincenter_remove_word"));
+	var PButton = UTILS_CreateElement("p","action",null,UTILS_GetText("admincenter_remove_word"));
 
 	PButton.onclick = function(){
 		ADMIN_RemoveBannedWord(Word);

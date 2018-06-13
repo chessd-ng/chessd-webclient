@@ -6,7 +6,6 @@ import {
 	UTILS_ValidateTourneyPassword,
 } from 'utils/utils.js';
 import { WINDOW_Alert } from 'window/window.js';
-import { MESSAGE_CreateTourney } from 'xmpp_messages/message.js';
 
 /**
 * CHESSD - WebClient
@@ -50,12 +49,11 @@ export function INTERFACE_ShowCreateTourneyWindow()
 
 	var CatTimeDiv;
 	var CatLeftDiv, CatRightDiv;
-	var CatLabel, CatOptLi, CatOptBl, CatOptSt, CatOptUt, CatSelect;
+	var CatLabel, CatOptLi, CatOptBl, CatOptSt, CatSelect;
 	var TimeLeftDiv, TimeRightDiv;
 	var TimeLabel, TimeLabelMin, TimeSelect, TimeOpt;
 
 	var RoundDiv;
-	var RoundRightDiv, RoundLeftDiv;
 	var RoundLabel;
 	var RoundHelpImg;
 
@@ -66,12 +64,11 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	var DateDiv;
 	var DateRightDiv, DateLeftDiv;
 	var DateRightInputDiv, HourRightInputDiv;
-	var DateLabel, DateInputD, DateInputM, DateInputY, DateBarSpan1, DateBarSpan2, DateBr, DateFormatLabel;
+	var DateLabel, DateInputD, DateInputM, DateInputY, DateBarSpan1, DateBarSpan2, DateFormatLabel;
 
 	var HourDiv;
 	var HourRightDiv, HourLeftDiv;
-	var HourightInputDiv;
-	var HourLabel, HourInputH, HourInputM, HourColonSpan, HourBr, HourFormatLabel;
+	var HourInputH, HourInputM, HourColonSpan, HourFormatLabel;
 	
 	var AdvancedLabelDiv;
 	var AdvancedLabel;
@@ -113,7 +110,6 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	var SPFromLeftDiv, SPFromRightDiv;
 	var SPFromLabel;
 	var SPFromDateDiv, SPFromHourDiv;
-	var SPFromDateRightDiv, SPFromHourRightDiv;
 	var SPFromDateInputD, SPFromDateInputM, SPFromDateInputY, SPFromDateFormatLabel;
 	var SPFromHourInputH, SPFromHourInputM, SPFromHourFormatLabel;
 	var SPFromDateBar1, SPFromDateBar2, SPFromHourColon, SPFromDateInputDiv, SPFromHourInputDiv;
@@ -122,7 +118,6 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	var SPToLeftDiv, SPToRightDiv;
 	var SPToLabel;
 	var SPToDateDiv, SPToHourDiv;
-	var SPToDateRightDiv, SPToHourRightDiv;
 	var SPToDateInputD, SPToDateInputM, SPToDateInputY, SPToDateFormatLabel;
 	var SPToHourInputH, SPToHourInputM, SPToHourFormatLabel;
 	var SPToDateBar1, SPToDateBar2, SPToHourColon, SPToHourInputDiv, SPToDateInputDiv;
@@ -135,7 +130,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 
 	var THead, TBody;
 	var RoundTd, RoundDInput, RoundMInput, RoundYInput, RoundHInput, RoundMiInput, RoundSpan1, RoundSpan2, RoundColon;
-	var DInput, MInput, YInput, HInput, MiInput, Span1, Span2;
+	var Span1, Span2;
 
 	var RoundButtonDiv;
 	var AddButton, RemoveButton;
@@ -191,6 +186,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	CatSelect.appendChild(CatOptLi);
 	CatSelect.appendChild(CatOptBl);
 	CatSelect.appendChild(CatOptSt);
+
 	
 	CatSelect.onchange = function () 
 	{
@@ -324,12 +320,10 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	DateInputY.size = "3";
 	DateInputY.maxLength = "4";
 	DateInputY.value = "____";
-	DateBr = UTILS_CreateElement("br");
 	DateFormatLabel = UTILS_CreateElement('span',null,'format_enabled',UTILS_GetText('tourney_day_format'));
 
 	HourDiv = UTILS_CreateElement('div','HourDiv');
 	HourLeftDiv = UTILS_CreateElement('div','HourLeftDiv');
-	HourLabel = UTILS_CreateElement('p', null,null,UTILS_GetText('tourney_hour'));
 	HourRightDiv = UTILS_CreateElement('div','HourRightDiv');
 	HourRightInputDiv = UTILS_CreateElement('div','HourRightInputDiv');
 	HourInputH = UTILS_CreateElement('input', null, 'no_board');
@@ -341,7 +335,6 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	HourInputM.size = "1";
 	HourInputM.maxLength = "2";
 	HourInputM.value = "__";
-	HourBr = UTILS_CreateElement("br");
 	HourFormatLabel = UTILS_CreateElement('span',null,'format_enabled',UTILS_GetText('tourney_hour_format'));
 	
 	// AdvancedDiv
@@ -1207,8 +1200,8 @@ export function INTERFACE_ShowCreateTourneyWindow()
 		}
 
 		var i, tam, Row, RNumber;
-	 	tam	= TBody.rows.length;
-	 	Row = TBody.rows;
+    tam	= TBody.rows.length;
+    Row = TBody.rows;
 
 		// Remove checked rows
 		for (i=tam-1; i>=0; i--)
@@ -1218,7 +1211,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 				TBody.removeChild(Row[i]);
 			}
 		}
-	 	
+
 		// Fix round numbers
 		tam	= TBody.rows.length;
 		for (i=tam-1; i>=0; i--)
@@ -1249,7 +1242,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			AddButton.className = "button_disabled";
 			RemoveButton.className = "button_disabled";
 		
-			var i, tam, Row, RNumber;
+			var i, tam, Row;
 			tam	= TBody.rows.length;
 			Row = TBody.rows;
 
@@ -1305,7 +1298,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 			AddButton.className = "button_disabled";
 			RemoveButton.className = "button_disabled";
 		
-			var i, tam, Row, RNumber;
+			var i, tam, Row;
 			tam	= TBody.rows.length;
 			Row = TBody.rows;
 
@@ -1356,7 +1349,6 @@ export function INTERFACE_ShowCreateTourneyWindow()
 		var Password = null;
 		var SubmitPeriod = null;
 		var Rounds = null;
-		var SeqRounds = "true";
 		var Error = false;
 
 		Name = INTERFACE_ValidateTourneyName(TNameInput.value);
@@ -1423,7 +1415,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 					}
 					else
 					{
-						SeqRounds = "false";
+            // SeqRounds = "false";
 					}
 				}
 			}
@@ -1494,6 +1486,7 @@ export function INTERFACE_ShowCreateTourneyWindow()
 	DateDiv.appendChild(DateRightDiv);
 
 	// HourLeftDiv
+	var HourLabel = UTILS_CreateElement('p', null,null,UTILS_GetText('tourney_hour'));
 	HourLeftDiv.appendChild(HourLabel);
 	
 	// HourRightDiv

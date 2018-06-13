@@ -1,6 +1,8 @@
 import { WINDOW_Alert } from 'window/window.js';
 import { UTILS_GetText } from 'utils/utils.js';
 
+import { MainData } from 'main_data.js';
+
 /*
 * CHESSD - WebClient
 *
@@ -44,11 +46,11 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 	File = document.createElement("input");
 	File.type = "file";
 	File.name = "image";
-	Width = document.createElement("input");
+	var Width = document.createElement("input");
 	Width.type = "hidden";
 	Width.name = "width";
 	Width.value = "50";
-	Height = document.createElement("input");
+	var Height = document.createElement("input");
 	Height.type = "hidden";
 	Height.name = "height";
 	Height.value = "50";
@@ -100,7 +102,7 @@ export function IMAGE_ImageEncode(FormId){
 * @return       void
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
-function IMAGE_B64Img(Image, Type){
+export function IMAGE_B64Img(Image, Type){
 	var Profile;
 	var Img;
 

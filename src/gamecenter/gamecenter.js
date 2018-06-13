@@ -94,10 +94,6 @@ export function GAMECENTER_HideGameCenter()
 export function GAMECENTER_ShowAnnounce()
 {
 	var GameCenterObj = MainData.GetGamecenter();
-	var Offset = 0;
-	var MaxAnnounce = 10;
-	var MaxTime = "", MinTime = "";
-	var Category = ""; //All category
 
 	if (GameCenterObj.CurrentDiv != GameCenterObj.Announce)
 	{
@@ -162,7 +158,7 @@ export function GAMECENTER_ShowMatchOffer()
 */
 export function GAMECENTER_ShowTourney()
 {
-	var GameCenterObj = MainDataGet.Gamecenter();
+	var GameCenterObj = MainData.GetGamecenter();
 
 	if(GameCenterObj.CurrentDiv != GameCenterObj.Torney)
 	{
@@ -814,7 +810,7 @@ export function GAMECENTER_MatchOfferSortByRating()
 {
 	var GameCenterObj = MainData.GetGamecenter();
 	var MatchOfferList = MainData.GetMatchOfferList();
-	var SortMethod = UTILS_SortByRating;
+	var SortMethod = UTILS_SortByRatingValue;
 	var i;
 	var MatchOfferItem;
 	

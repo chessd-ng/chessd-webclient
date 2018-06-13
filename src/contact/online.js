@@ -56,7 +56,6 @@ export function ONLINE_StartOnlineList()
 export function ONLINE_HandleOnlinePresence(XML)
 {
 	var From, User, Type, Show, Status;
-	var OnlineObj = MainData.GetOnlineObj();
 	var RoomName;
 
 	// Get Attributes from XML
@@ -191,8 +190,7 @@ function ONLINE_RemoveUser(Username)
 */
 export function ONLINE_SortUserByNick()
 {
-	var Room, RoomName;
-	var i, j;
+	var i;
 	var UserName, Status, Rating, Type;
 	var OnlineObj = MainData.GetOnlineObj();
 	var OnlineUserList = MainData.GetOnlineUserList();
@@ -235,12 +233,10 @@ export function ONLINE_SortUserByNick()
  */
 export function ONLINE_SortUserByRating(Category)
 {
-	var Room, RoomName;
-	var i, j;
+	var i;
 	var UserName, Status, Rating, Type;
 	var OnlineObj = MainData.GetOnlineObj();
 	var OnlineUserList = MainData.GetOnlineUserList();
-	var RoomTmp;
 
 	// TODO -> Make this sort in function
 	MainData.SetOnlineCurrentRating(Category);

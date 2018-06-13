@@ -6,7 +6,6 @@ import {
 	UTILS_GetOffset,
 } from 'utils/utils.js';
 import { INTERFACE_CreateLeft } from 'interface/left.js';
-import { LOGIN_LeavePage } from 'login/login.js';
 
 /**
 * CHESSD - WebClient
@@ -119,7 +118,7 @@ export function INTERFACE_CreateLoadingBox(Id, Text)
  * @return	False
  * @author 	Danilo Yorinori
  */
-export function INTERFACE_DisableSelect(e)
+export function INTERFACE_DisableSelect()
 {
 	return false;
 }
@@ -145,7 +144,7 @@ export function INTERFACE_ReEnableSelect()
 */
 export function INTERFACE_ShowFullName(Obj,FullName)
 {
-	var Hint, Name, ParentNode, Pos, i;
+	var Hint, Name, ParentNode, Pos;
 
 	Hint = UTILS_CreateElement("div", "FullNameDiv");
 

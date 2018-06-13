@@ -59,11 +59,10 @@ export function USER_HandleContactUserList(XML)
 */
 export function USER_HandlePresence(XML)
 {
-	var From, Username, Type, Item, Show, Status;
+	var From, Username, Type, Show, Status;
 	var User;
 
 	// Get Attributes from XML
-	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
 	From = XML.getAttribute('from');
 	Type = XML.getAttribute('type');
@@ -117,14 +116,12 @@ export function USER_HandlePresence(XML)
 */
 export function USER_HandleRoomPresence(XML)
 {
-	var From, Username, Type, Item, Show, Status;
+	var From, Username, Show, Status;
 	var User;
 
 	// Get Attributes from XML
-	Item = XML.getElementsByTagName("item");
 	Show = XML.getElementsByTagName("show");
 	From = XML.getAttribute('from');
-	Type = XML.getAttribute('type');
 	Username = From.replace(/.*\//, "");
 
 	// Status of user
@@ -171,14 +168,14 @@ export function USER_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode, ProfileNode;
 	var OnlineNode, UptimeNode;
-	var Jid, Profile, Type, Rating;
+	var Jid, Type;
 	var OnlineTime, UpTime;
 	var User;
 	var From;
 	//Rating variables
 	var i;
         var RatingValue;
-        var TotalWin,TotalDraw,TotalLosses, TotalGames;
+        var TotalWin,TotalDraw,TotalLosses;
         var RecordValue, RecordTime;
 	var TimeStamp;
 	var Category;
@@ -231,7 +228,7 @@ export function USER_HandleInfo(XML)
 		// Set rating	
 		for(i=0; i< RatingNodes.length; i++)
 		{
-                	Category = RatingNodes[i].getAttribute('category');
+      Category = RatingNodes[i].getAttribute('category');
 
 			RatingValue = RatingNodes[i].getAttribute('rating');
 			RecordValue = RatingNodes[i].getAttribute('max_rating');

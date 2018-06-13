@@ -17,6 +17,10 @@ import {
 	ANNOUNCE_HandleAnnounce,
 } from 'challenge/announce.js';
 import {
+	CHALLENGE_HandleChallenge,
+  CHALLENGE_HandleErrorChallenge,
+} from 'challenge/challenge.js';
+import {
 	ADMIN_HandleInfo,
 	ADMIN_HandleAdminError,
 	ADMIN_HandleAdmin,
@@ -204,6 +208,7 @@ export function PARSER_ParseIq(XML)
 				}
 				catch(e)
 				{
+          console.log(e);
 				}
 
 			}
@@ -261,7 +266,6 @@ export function PARSER_ParseIq(XML)
 
 
 			break;
-		    
 		default: break;
 	}
 
@@ -277,7 +281,6 @@ export function PARSER_ParseIq(XML)
 */
 function PARSER_ParseIqById(XML)
 {
-	var Type = XML.getAttribute("type");
 	var ID = XML.getAttribute("id");
 	var Buffer = "";
 

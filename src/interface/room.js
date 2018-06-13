@@ -1,7 +1,5 @@
 import {
-	WINDOW_CreateRoom,
 	WINDOW_Alert,
-	WINDOW_CancelRoom,
 } from 'window/window.js';
 import { MESSAGE_Presence } from 'xmpp_messages/message.js';
 import {
@@ -75,6 +73,7 @@ import ImageEmoticon30 from 'images/emoticons/30.png';
 import ImageEmoticon31 from 'images/emoticons/31.png';
 import ImageEmoticon32 from 'images/emoticons/32.png';
 import ImageEmoticon33 from 'images/emoticons/33.png';
+import ImageEmoticon34 from 'images/emoticons/34.png';
 
 var Emoticons = {
   '0': ImageEmoticon0,
@@ -86,7 +85,7 @@ var Emoticons = {
   '6': ImageEmoticon6,
   '7': ImageEmoticon7,
   '8': ImageEmoticon8,
-  '9': ImageEmoticon0,
+  '9': ImageEmoticon9,
   '10': ImageEmoticon10,
   '11': ImageEmoticon11,
   '12': ImageEmoticon12,
@@ -96,7 +95,7 @@ var Emoticons = {
   '16': ImageEmoticon16,
   '17': ImageEmoticon17,
   '18': ImageEmoticon18,
-  '19': ImageEmoticon10,
+  '19': ImageEmoticon19,
   '20': ImageEmoticon20,
   '21': ImageEmoticon21,
   '22': ImageEmoticon22,
@@ -106,11 +105,12 @@ var Emoticons = {
   '26': ImageEmoticon26,
   '27': ImageEmoticon27,
   '28': ImageEmoticon28,
-  '29': ImageEmoticon20,
+  '29': ImageEmoticon29,
   '30': ImageEmoticon30,
   '31': ImageEmoticon31,
   '32': ImageEmoticon32,
   '33': ImageEmoticon33,
+  '34': ImageEmoticon34,
 };
 
 /**
@@ -539,13 +539,13 @@ export function INTERFACE_HideGameRoomList()
 * @return       True or false (if element list node not founded)
 * @author 	Ulysses Bomfim and Rubens Suguimoto
 */
-function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
+export function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 {
 //TODO -> CHANGE THIS FUNCTION'S NAME TO "AddGameRoomList"
 	// Get game menu
 	var Node = document.getElementById("GameRoomMenuDiv");
 	var List;
-	var Room, i;
+	var Room;
 	var MyUsername = MainData.GetUsername();
 
 	if (Node == null)
@@ -610,7 +610,7 @@ function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 */ 
 function INTERFACE_ChangeRoomListVisibility() 
 { 
-	var Div, List, Node, Item, i; 
+	var Div, List, Item, i; 
 	var Menu = document.getElementById('RoomListMenu'); 
 	var Node = document.getElementById('RoomList'); 
 
@@ -628,7 +628,7 @@ function INTERFACE_ChangeRoomListVisibility()
 	List = UTILS_CreateElement('ul'); 
 
 	Div.style.position = "absolute"; 
-	 
+
 	// Population list with user's rooms 
 	for (i=0; i < RoomList.length; i++) 
 	{ 
@@ -744,7 +744,6 @@ function INTERFACE_ShowEmoticonList(RName)
     Img.src = Emoticons[i.toString()];
 		Img.onclick = function () {
 			var Node = document.getElementById("Input_"+RoomName);
-			var Num = i;
 
 			if (!Node)
 			{
@@ -799,7 +798,7 @@ function INTERFACE_HideEmoticonList()
 export function INTERFACE_FocusRoom(RoomName)
 {
 	var RoomList = document.getElementById("RoomList");
-	var RoomItem, RoomClose, Current, NewRoom, Node, ShortName;
+	var RoomClose, Node, ShortName;
 
 	if (RoomList == null)
 	{
@@ -964,13 +963,12 @@ export function INTERFACE_CloseRoom(RoomName)
 */
 export function INTERFACE_CreateRooms()
 {
-	var RoomDiv, RoomsDiv, RoomsList, RoomsListGeneral, RoomsListArrow, Arrow;
+	var RoomsDiv, RoomsList, RoomsListArrow, Arrow;
 
 
 	// Room list
 	RoomsDiv = UTILS_CreateElement("div", "Rooms");
 	RoomsList = UTILS_CreateElement("ul", "RoomList");
-	RoomsListGeneral = UTILS_CreateElement("li", null, "room_selec", UTILS_GetText("room_default"));
 
 	RoomsListArrow = UTILS_CreateElement("li", null, "room_arrow");
 	RoomsListArrow.onclick = function () { INTERFACE_ChangeRoomListVisibility(); };
@@ -1006,7 +1004,7 @@ export function INTERFACE_ShowCreateRoomWindow()
 
 	var OptionsDiv;
 	var Label, Input, Br;
-	var Description, Textarea;
+	var Textarea;
 
 	var CounterDiv;
 	var CounterInput, CounterLabel;
@@ -1083,7 +1081,6 @@ export function INTERFACE_ShowCreateRoomWindow()
 	
 	// TODO - not implemented
 	// Room Description Input 
-	Description = UTILS_CreateElement('p',null,null,UTILS_GetText('room_description'));
 	Textarea = UTILS_CreateElement('textarea','CreateRoomTextarea');
 	Textarea.rows = "3";
 	Textarea.cols = "20";
@@ -1177,7 +1174,6 @@ export function INTERFACE_ShowCancelRoomWindow()
 	var ButtonsDiv;
 	var Yes, No;
 
-	var RoomName;
 	var Buttons = new Array();
 
 	// Main Div

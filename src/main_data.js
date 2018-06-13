@@ -1,5 +1,4 @@
 import {
-	UTILS_GetLanguage,
 	UTILS_OpenXMLFile,
 	UTILS_GetTag,
 	UTILS_ReadCookie,

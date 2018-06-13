@@ -35,7 +35,7 @@ import { MainData } from 'main_data.js';
 export function ONLINE_HandleInfo(XML)
 {
 	var RatingNodes, TypeNode;
-	var Jid, Type, Rating;
+	var Jid, Type;
 	var User;
 	var From;
 
@@ -69,7 +69,7 @@ export function ONLINE_HandleInfo(XML)
 		// Set rating	
 		for(i=0; i< RatingNodes.length; i++)
 		{
-                	Category = RatingNodes[i].getAttribute('category');
+      Category = RatingNodes[i].getAttribute('category');
 
 			RatingValue = RatingNodes[i].getAttribute('rating');
 

@@ -5,6 +5,8 @@ import {
 	ANNOUNCE_SendAnnounce,
 } from 'challenge/announce.js';
 
+import { MainData } from 'main_data.js';
+
 /**
 * CHESSD - WebClient
 *
@@ -33,7 +35,7 @@ export function INTERFACE_AnnounceWindow()
 
 	var Layer1Div;
 	var L1LeftDiv;
-	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, AutoColorLabel, RandomColorOptImg, BrR;
+	var ColorLabel, ColorOptW,BrW, ColorOptWImg, ColorOptB, ColorOptBImg,BrB, AutoColorOpt, RandomColorOptImg, BrR;
 	var L1RightDiv;
 	var CatLabel, CatSelect, CatOptLi, CatOptBl, CatOptSt, CatOptUt;
 	var Br1;
@@ -49,7 +51,7 @@ export function INTERFACE_AnnounceWindow()
 	var L3RightDiv, L3LeftDiv;
 	var RatingCheckbox, RatingLabel;
 	var PrivateCheckbox, PrivateLabel;
-	var AutoFlagCheckbox, AutoFlagLabel;
+	var AutoFlagCheckbox;
 	var Br3, Br4, Br5, Br6;
 	var IntervalCheckbox, IntervalLabel, FromLabel, FromInput, ToLabel, ToInput;
 	var FromDiv, ToDiv;
@@ -330,7 +332,6 @@ export function INTERFACE_AnnounceWindow()
 	AutoFlagCheckbox.type = "checkbox";
 	AutoFlagCheckbox.name = "autoflag";
 	AutoFlagCheckbox.disabled = true;
-	AutoFlagLabel = UTILS_CreateElement('span',null,'cx',UTILS_GetText('challenge_auto_flag'));
 
 	Br3 = UTILS_CreateElement('br');
 	Br4 = UTILS_CreateElement('br');

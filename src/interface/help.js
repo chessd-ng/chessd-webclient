@@ -1,6 +1,5 @@
 import { INTERFACE_ReEnableSelect, INTERFACE_DisableSelect } from 'interface/interface.js';
 import { UTILS_GetText, UTILS_CreateElement } from 'utils/utils.js';
-import { WINDOW_Help } from 'window/window.js';
 
 /**
 * CHESSD - WebClient
@@ -43,8 +42,6 @@ export function INTERFACE_HelpWindow()
 
 	var ButtonDiv;
 	var CloseButton;
-
-	var Anchor;
 
 	// Main Div
 	Div = UTILS_CreateElement("div","HelpDiv");
@@ -343,7 +340,7 @@ function INTERFACE_ShowHideHelpContent(ObjId)
 * @author 	Danilo Yorinori
 * @see INTERFACE_HelpWindow
 */
-function INTERFACE_ShowLinkContent(ObjId)
+export function INTERFACE_ShowLinkContent(ObjId)
 {
 	var Node = document.getElementById(ObjId+"T");
 	var NodeText;

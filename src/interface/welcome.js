@@ -4,6 +4,8 @@ import {
 	UTILS_GetNodeText,
 } from 'utils/utils.js';
 
+import { MainData } from 'main_data.js';
+
 /*
 * CHESSD - WebClient
 *
@@ -32,7 +34,7 @@ import {
 * @return	Welcome main HTML DOM Div
 * @author	Rubens Suguimoto
 */
-function INTERFACE_CreateWelcome()
+export function INTERFACE_CreateWelcome()
 {
 	var WelcomeDiv, WelcomeCenterDiv;
 	var WelcomeImageDiv, WelcomeInstructionDiv;

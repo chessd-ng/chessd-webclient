@@ -1,4 +1,3 @@
-import { CONTACT_ChangeStatus } from 'contact/status.js';
 import { MESSAGE_GetProfile, MESSAGE_GetOldGames } from 'xmpp_messages/message.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import {
@@ -7,7 +6,6 @@ import {
 	UTILS_ConvertTimeStamp,
 	UTILS_String2Board,
 } from 'utils/utils.js';
-import { ROOM_ExitRoom } from 'room/room.js';
 import { INTERFACE_GameBoardObj } from 'interface/game.js';
 import { INTERFACE_HideOldgameLoading } from 'interface/oldgame.js';
 import { GAMECENTER_HideGameCenter, GAMECENTER_ShowGameCenter } from 'gamecenter/gamecenter.js';
@@ -46,16 +44,14 @@ import { MainData } from 'main_data.js';
 */
 export function OLDGAME_HandleSearchOldGame(XML)
 {
-	var Games, GameList;
+	var Games;
 	var i;
 	var Buffer="";
 	var GameList = new Array();
 	var GameInfoTmp;
 	var Players;
-	var Result;
 	var More;
 	var Id, SearchGameWindow;
-	var LoadingBox;
 
 
 	// Get window's Id
@@ -192,14 +188,11 @@ function OLDGAME_StartOldGame(OldGameId, P1, P2)
 */
 export function OLDGAME_FetchOldGame(XML)
 {
-	var GameTag;
 	var GamePos, PlayerTag;
 	var Player1 = new Object();
 	var Player2 = new Object();
 	var Buffer = "";
 	var History;
-
-	GameTag = XML.getElementsByTagName("game")[0];
 
 	//GamePos = MainData.OldGameList.length;
 	GamePos = 0;
@@ -317,7 +310,6 @@ function OLDGAME_LoadGameHistory(GamePos, HistoryXml, Player1, Player2)
 function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 {
 	var NewBoardArray = UTILS_String2Board(BoardStr);
-	var CurrentBoardArray;
 	var Game;
 
 	// Get game from GameList
@@ -325,16 +317,6 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnCol
 	// In this version, user can only see one OldGame
 	Game = MainData.GetCurrentOldGame();
 	
-	if (Game.CurrentMove != null)
-	{
-		CurrentBoardArray = Game.Moves[Game.CurrentMove].Board;
-	}
-	// If there's no previous moves
-	else
-	{
-		CurrentBoardArray = new Array("--------","--------","--------","--------","--------","--------","--------","--------");
-	}
-
 	// Update data sctructure
 	if (P1.Color == "white")
 	{
@@ -368,7 +350,6 @@ function OLDGAME_UpdateBoard(GamePos, BoardStr, Move, ShortMove, P1, P2, TurnCol
 export function OLDGAME_EndGame(Id)
 {
 	var EndedGame;
-	var PWName, PBName, Color;
 	var NewOldGame;
 	var i;
 	var MoveObj;
@@ -389,9 +370,6 @@ export function OLDGAME_EndGame(Id)
 	// Remove on mouse over and on mouse out events from blocks
 	CurrentOldGame.Game.RemoveBlockEvents();
 
-	PWName = CurrentOldGame.PW;
-	PBName = CurrentOldGame.PB;
-	Color = CurrentOldGame.BoardColor;
 
 	NewOldGame = CurrentOldGame.Game;
 	NewOldGame.OldGameMode();
@@ -476,22 +454,12 @@ export function OLDGAME_HandleVCardPhoto(XML)
 */
 export function OLDGAME_RemoveOldGame(Index)
 {
-	var Room;
-	var Buffer = "";
 	var OldGame;
 
 	OldGame = MainData.GetOldGame(Index);
 
 	//Remove Board from interface
 	OldGame.Game.Remove();
-
-	//Exit room if is there some room affiliated with oldgame;
-	Room = MainData.GetRoom(OldGame.Id);
-	if(Room != null)
-	{
-		// Send a message to leave from room
-		Buffer += ROOM_ExitRoom(Room.Name);
-	}
 
 	MainData.RemoveOldGame(Index);
 
@@ -512,7 +480,6 @@ export function OLDGAME_FirstBoard()
 	var Move;
 
 	var CurrentOldGame = MainData.GetCurrentOldGame();
-	var MovePos = CurrentOldGame.CurrentMove;
 
 	Color = CurrentOldGame.BoardColor;
 	Board = CurrentOldGame.Moves[0].Board;

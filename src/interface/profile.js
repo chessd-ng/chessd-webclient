@@ -7,8 +7,6 @@ import {
 import { OLDGAME_OpenOldGameWindow } from 'game/oldgame.js';
 import { IMAGE_ImageDecode } from 'utils/images.js';
 import {
-	WINDOW_ProfileConfirm,
-	WINDOW_Profile,
 	WINDOW_ProfileImage,
 } from 'window/window.js';
 
@@ -100,10 +98,8 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	
 	var TimeDiv;
 
-	var TimeLeftDiv;
 	var OnlineTimeLabel;
 
-	var TimeRightDiv;
 	var TotalTimeLabel;
 
 	var OldGamesDiv;
@@ -117,10 +113,9 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	var TotalTimeSpan;
 	var OnlineTimeSpan;
 	var TitleSpan;
-	var TitleImg;
 
 	var Buttons = new Array();
-	var i,j, Time;
+	var Time;
 	var MyUser;
 	var Elements = new Object();
 
@@ -279,9 +274,6 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	// Time Div <Online Time, Total Time>
 	TimeDiv = UTILS_CreateElement('div','TimeDiv');
 
-	// Left Div <Online Time>
-	TimeLeftDiv = UTILS_CreateElement('div','TimeLeftDiv');
-
 	if (Profile.OnlineTime == null)
 	{
 		Time = "Off-line";
@@ -296,7 +288,6 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	OnlineTimeLabel.appendChild(OnlineTimeSpan);
 
 	// Time Div <Total Time>
-	TimeRightDiv = UTILS_CreateElement('div','TimeRightDiv');
 	TotalTimeLabel = UTILS_CreateElement('p',null,null,UTILS_GetText('profile_total_time'));
 	TotalTimeSpan = UTILS_CreateElement('span',null,'value');
 	
@@ -418,7 +409,7 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	// IE Fix
 	if (MainData.GetBrowser() == 0)
 	{
-		var Br = UTILS_CreateElement("br");
+		Br = UTILS_CreateElement("br");
 		Div.appendChild(Br);
 	}
 
