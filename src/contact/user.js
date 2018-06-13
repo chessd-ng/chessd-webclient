@@ -2,7 +2,7 @@ import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { PROFILE_ResetUpdateProfile } from 'profile/profile.js';
 import { UTILS_GetNodeText, UTILS_ConvertTimeStamp } from 'utils/utils.js';
 import { MESSAGE_InfoProfile } from 'xmpp_messages/message.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

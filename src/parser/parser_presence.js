@@ -7,7 +7,7 @@ import { ONLINE_HandleOnlinePresence } from 'contact/online.js';
 import { ROOM_HandleRoomPresence } from 'room/room.js';
 import { CONTACT_HandleUserPresence } from 'contact/contact.js';
 import { CHALLENGE_HandlePresence } from 'challenge/adjourn.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

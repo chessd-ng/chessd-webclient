@@ -12,7 +12,7 @@ import {
 	WINDOW_ProfileImage,
 } from 'window/window.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageNoPhoto from 'images/no_photo.png';
 import ImageAdminAvailable from 'images/admin_available.png';

@@ -8,7 +8,7 @@ import { IMAGE_ImageEncode, IMAGE_CreateFormToEncode } from 'utils/images.js';
 import { WINDOW_Confirm, WINDOW_Alert } from 'window/window.js';
 import { UTILS_StartDragWindow } from 'utils/dragwindow.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /*
 * CHESSD - WebClient

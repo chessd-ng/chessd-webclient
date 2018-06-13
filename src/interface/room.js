@@ -34,7 +34,7 @@ import {
 } from 'interface/interface.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageEmoticonDefault from 'images/emoticons/default.png';
 import ImageRoomArrow from 'images/room_arrow.png';

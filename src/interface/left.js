@@ -11,7 +11,7 @@ import {
 import { INTERFACE_CreateContact } from 'interface/contact.js';
 import { IMAGE_ImageDecode } from 'utils/images.js';
 import { PROFILE_StartProfile } from 'profile/profile.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageNoPhoto from 'images/no_photo.png';
 

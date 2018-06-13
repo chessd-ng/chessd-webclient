@@ -22,7 +22,7 @@ import {
 	MESSAGE_GroupChat,
 } from 'xmpp_messages/message.js';
 import { WINDOW_Alert } from 'window/window.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

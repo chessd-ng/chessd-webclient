@@ -31,7 +31,7 @@ import { AdminCenterObj, INTERFACE_CreateAdminCenter } from 'interface/admincent
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { WINDOW_Alert } from 'window/window.js';
 import { INTERFACE_ShowAdminIcon } from 'interface/top.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

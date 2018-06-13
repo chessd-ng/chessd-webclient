@@ -1,6 +1,6 @@
 import { ContactObj } from 'interface/contact.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

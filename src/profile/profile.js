@@ -14,7 +14,7 @@ import { INTERFACE_SetUserImage } from 'interface/left.js';
 import { WINDOW_Alert, WINDOW_Profile } from 'window/window.js';
 import { USER_AddUser } from 'contact/user.js';
 import { CONTACT_HandleInfo } from 'contact/info.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

@@ -37,6 +37,7 @@ import { ADMINCENTER_StartAdminCenter } from 'admin/admin.js';
 import { INITIAL_LoadScripts } from 'initial_files.js';
 import { ONLINE_StartOnlineList } from 'contact/online.js';
 import { GAMECENTER_StartGameCenter } from 'gamecenter/gamecenter.js';
+import { MainData, START_MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient
@@ -62,36 +63,10 @@ import { GAMECENTER_StartGameCenter } from 'gamecenter/gamecenter.js';
 import 'css/Main.css';
 import 'css/Login.css';
 import 'css/Load.css';
-import { languages } from 'langs';
-import conf from 'conf/conf.xml';
 import { NoCache } from 'initial_files.js';
 
 //Global object that stores all data needed by interface
-export let MainData;
 var TranslationLog = new Array();
-
-function GetLang() {
-	// What language show?
-	// Find lang in cookie
-	var Lang = UTILS_ReadCookie("lang");
-	// if language is not found in cookie
-	if (Lang == "") {
-		// Get from browser language
-		//Lang = UTILS_GetLanguage();
-		
-		// Get default lang from configuration file
-		var ConfTmp = UTILS_OpenXMLFile(conf+'?'+NoCache.TimeStamp);
-		Lang = UTILS_GetTag(ConfTmp, "default-lang");
-	}
-  return Lang;
-}
-
-export function START_MainData() {
-  var Lang = GetLang();
-	// Read xml config files and starting data structure
-	MainData = new DATA(conf+'?'+NoCache.TimeStamp, languages[Lang]+'?'+NoCache.TimeStamp);
-	MainData.SetLang(Lang);
-}
 
 /*
 * @brief	Start main data and show login page

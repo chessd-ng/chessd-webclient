@@ -14,7 +14,7 @@ import { MESSAGE_GetOldGames, MESSAGE_FetchOldGame } from 'xmpp_messages/message
 import { WINDOW_Alert, WINDOW_RemoveWindow } from 'window/window.js';
 import { OLDGAME_HandleSearchOldGame, OLDGAME_CloseWindow } from 'game/oldgame.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageInviteWhitePawn from 'images/invite_white_pawn.png';
 import ImageInviteBlackPawn from 'images/invite_black_pawn.png';

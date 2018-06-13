@@ -12,7 +12,7 @@ import { CONTACT_HandleSearchUser } from 'contact/search.js';
 import { CONTACT_ShowUserMenu } from 'contact/contact.js';
 import { MESSAGE_SearchUser } from 'xmpp_messages/message.js';
 
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

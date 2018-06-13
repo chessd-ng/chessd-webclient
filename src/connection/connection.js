@@ -8,9 +8,9 @@ import {
 	MESSAGE_SendPasswd,
 	MESSAGE_StartConnection,
 } from 'xmpp_messages/message.js';
-import { START_Restart } from 'start.js';
+import { START_Restart, START_Webclient } from 'start.js';
 import { LOGIN_LoginMsg, LOGIN_LoginFailed, LOGIN_EndLogin } from 'login/login.js';
-import { MainData, START_Webclient } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

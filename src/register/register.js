@@ -6,7 +6,7 @@ import {
 import {
   START_MainData,
   MainData
-} from 'start.js';
+} from 'main_data.js';
 import 'css/Register.css';
 
 /**

@@ -24,7 +24,7 @@ import { CONTACT_SetUserStatus } from 'contact/status.js';
 import { PROFILE_StartProfile } from 'profile/profile.js';
 import { CHAT_OpenChat } from 'chat/chat.js';
 import { ContactObj } from 'interface/contact.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

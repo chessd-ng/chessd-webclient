@@ -1,6 +1,3 @@
-import { AdminCenterObj } from 'interface/admincenter.js';
-import { PROFILE_HandleRatings } from 'profile/profile.js';
-import { INTERFACE_SetSearchButton } from 'interface/oldgame.js';
 
 /**
 * CHESSD - WebClient
@@ -21,7 +18,7 @@ import { INTERFACE_SetSearchButton } from 'interface/oldgame.js';
 * @brief	Utils and auxiliars functions 
 */
 
-import { MainData } from 'start.js'
+import { MainData } from 'main_data.js'
 
 /**********************************
  * FUNCTIONS - XML SEARCH
@@ -659,7 +656,6 @@ export function UTILS_GetTime(Timestamp)
 *
 * @param	TimeStamp	Timestamp integer value
 * @return	String with date format in dd-mm-yyyy
-* @see		PROFILE_HandleRatings()
 * @author	Danilo Yorinori
 */
 export function UTILS_ConvertTimeStamp(TimeStamp)
@@ -679,7 +675,6 @@ export function UTILS_ConvertTimeStamp(TimeStamp)
 * @param	TimeStamp	Date string (dd/mm/yyyy)
 * @param	Type		begin or end (yyyy-mm-ddTnn:nn:nnZ)
 * @return	String
-* @see		INTERFACE_SetSearchButton(Node)
 * @author	Danilo Yorinori
 */
 export function UTILS_ConvertSearchDate(TimeStamp, Type)

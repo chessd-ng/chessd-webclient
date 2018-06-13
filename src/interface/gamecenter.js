@@ -55,7 +55,7 @@ import {
 import { WINDOW_AnnounceWindow, WINDOW_Alert } from 'window/window.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { GAME_StartGame } from 'game/game.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageChallengeMenuRandom from 'images/challenge_menu/random.png';
 

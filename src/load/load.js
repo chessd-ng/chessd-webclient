@@ -2,7 +2,7 @@ import { LoadObj } from 'interface/load.js';
 import { UTILS_CreateElement } from 'utils/utils.js';
 import { START_Webclient } from 'start.js';
 import { LOGIN_EndLogin } from 'login/login.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 import { NoCache } from 'initial_files.js';
 
 import "css/Top.css";

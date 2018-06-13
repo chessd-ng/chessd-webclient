@@ -17,7 +17,7 @@ import {
 import { INTERFACE_StopInterface } from 'interface/interface.js';
 import { START_Restart } from 'start.js';
 import { MESSAGE_Unavailable, MESSAGE_EndConnection } from 'xmpp_messages/message.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient

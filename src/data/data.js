@@ -1,5 +1,3 @@
-import { PunishObj } from 'interface/admincenter.js';
-import { RoomObj } from 'interface/room.js';
 import {
 	UTILS_SortOnlineByRatingDsc,
 	UTILS_SortByFullnameDsc,
@@ -14,10 +12,7 @@ import {
 	UTILS_SortContactByRatingDsc,
 } from 'utils/utils.js';
 import { DATA_SetConsts } from 'data/consts.js';
-import { WindowObj } from 'interface/window.js';
-import { LoadObj } from 'interface/load.js';
-import { ChatObj } from 'interface/chat.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 import ImageNoPhoto from 'images/no_photo.png';
 

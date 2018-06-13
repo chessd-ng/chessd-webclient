@@ -6,7 +6,7 @@ import {
 } from 'utils/utils.js';
 import { MESSAGE_ChangeStatus } from 'xmpp_messages/message.js';
 import { ContactObj, INTERFACE_RefreshContactOnlineNumber } from 'interface/contact.js';
-import { MainData } from 'start.js';
+import { MainData } from 'main_data.js';
 
 /**
 * CHESSD - WebClient
