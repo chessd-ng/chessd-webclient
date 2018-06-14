@@ -77,7 +77,7 @@ export function USER_HandlePresence(XML)
 			Status = UTILS_GetNodeText(Show[0]);
 
 			// Any different status, status = away
-			if ((Status != "busy") && (Status != "away") && (Status != "playing"))
+			if ((Status != "busy") && (Status != "away") && (Status != "dnd"))
 			{
 				Status = "away";
 			}
@@ -131,7 +131,7 @@ export function USER_HandleRoomPresence(XML)
 		Status = UTILS_GetNodeText(Show[0]);
 
 		// Any different status, status = away
-		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "dnd"))
 		{
 			Status = "away";
 		}

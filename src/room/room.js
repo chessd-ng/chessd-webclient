@@ -127,7 +127,7 @@ export function ROOM_HandleRoomPresence(XML)
 		Status = UTILS_GetNodeText(Show[0]);
 
 		// Any different status, status = away
-		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "dnd"))
 		{
 			Status = "away";
 		}

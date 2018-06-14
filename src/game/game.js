@@ -79,31 +79,31 @@ export function GAME_HandleGame(XML)
 		return "";
 	}
 
-	if (Xmlns.match(/\/chessd#game#state/))
+	if (Xmlns.match(/\/chessd\/game\/state/))
 	{
 		Buffer += GAME_State(XML);
 	}
-	else if (Xmlns.match(/\/chessd#game#move/))
+	else if (Xmlns.match(/\/chessd\/game\/move/))
 	{
 		Buffer += GAME_Move(XML);
 	}
-	else if (Xmlns.match(/\/chessd#game#canceled/))
+	else if (Xmlns.match(/\/chessd\/game\/canceled/))
 	{
 		Buffer += GAME_End(XML);
 	}
-	else if (Xmlns.match(/\/chessd#game#end/))
+	else if (Xmlns.match(/\/chessd\/game\/end/))
 	{
 		Buffer += GAME_End(XML);
 	}
-	else if (Xmlns.match(/\/chessd#game#cancel/))
+	else if (Xmlns.match(/\/chessd\/game\/cancel/))
 	{
 		Buffer += GAME_HandleCancel(XML, Xmlns);
 	}
-	else if (Xmlns.match(/\/chessd#game#draw/))
+	else if (Xmlns.match(/\/chessd\/game\/draw/))
 	{
 		Buffer += GAME_HandleDraw (XML, Xmlns);
 	}
-	else if (Xmlns.match(/\/chessd#game#adjourn/))
+	else if (Xmlns.match(/\/chessd\/game\/adjourn/))
 	{
 		Buffer += GAME_HandleAdjourn(XML, Xmlns);
 	}
@@ -226,7 +226,7 @@ function GAME_Move(XML)
 /**
 * @brief	Handle Game Result
 *
-* This code is used to parse games that player is playing. Used to enter automatically in some game that player is playing.
+* This code is used to parse games that player is dnd. Used to enter automatically in some game that player is playing.
 *
 * @param 	XML	The xml that contains the game result
 * @return 	XMPP to be send
@@ -253,7 +253,7 @@ export function GAME_HandleGameResult(XML)
 			for(i=0; i< GameTag.length; i++)
 			{
 				Room = GameTag[i].getAttribute("room");
-				MyUser.SetStatus("playing");
+				MyUser.SetStatus("dnd");
 				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
@@ -624,7 +624,7 @@ export function GAME_HandleGameError(XML)
 	// Getting game id
 	GameID = XML.getAttribute("from").replace(/@.*/,"");
 
-	if (Xmlns.match(/\/chessd#game#move/))
+	if (Xmlns.match(/\/chessd\/game\/move/))
 	{
 		Invalid = XML.getElementsByTagName('invalid-move');
 		Over = XML.getElementsByTagName('game-over');
@@ -740,9 +740,9 @@ export function GAME_StartGame(GameId, P1, P2)
 	// Remove all challenges
 	CHALLENGE_ClearChallenges();
 
-	// Set status to playing
+	// Set status to dnd
 	//TODO --> PUT THIS CHANGE STATUS IN BUFFER
-	return CONTACT_ChangeStatus("playing", "return") + Buffer;
+	return CONTACT_ChangeStatus("dnd", "return") + Buffer;
 
 }
 

@@ -81,6 +81,8 @@ export function PARSER_ParseIq(XML)
 
 	var Consts = MainData.GetConst();
 
+  console.log(XML);
+
 	if(FirstNode != undefined)
 	{
 		Xmlns = FirstNode.getAttribute("xmlns");
@@ -118,7 +120,7 @@ export function PARSER_ParseIq(XML)
 
 			// Receive information of user list
 			/*
-			else if (Xmlns.match(/\/chessd#info/))
+			else if (Xmlns.match(/\/chessd\/info/))
 			{
 				Buffer += ADMIN_HandleInfo(XML);
 				// contact/info.js
@@ -126,7 +128,7 @@ export function PARSER_ParseIq(XML)
 			}
 			*/
 			// Receive profile information of user
-			else if (Xmlns.match(/\/chessd#profile/))
+			else if (Xmlns.match(/\/chessd\/profile/))
 			{
 				Buffer += USER_HandleInfo(XML);
 				Buffer += ADMIN_HandleInfo(XML);
@@ -136,12 +138,12 @@ export function PARSER_ParseIq(XML)
 				Buffer += ONLINE_HandleInfo(XML);
 				Buffer += PROFILE_HandleInfoProfile(XML);
 			}
-			else if (Xmlns.match(/\/chessd#match_announcement/))
+			else if (Xmlns.match(/\/chessd\/match_announcement/))
 			{
 				Buffer += ANNOUNCE_HandleAnnounce(XML);
 			}
 			// Challenge accept confirmation
-			else if (Xmlns.match(/\/chessd#match/))
+			else if (Xmlns.match(/\/chessd\/match/))
 			{
 				Buffer += CHALLENGE_HandleChallenge(XML);
 			}
@@ -151,20 +153,20 @@ export function PARSER_ParseIq(XML)
 				Buffer += CONTACT_HandleSearchUser(XML);
 			}
 			// Search Old Game
-			else if (Xmlns.match(/\/chessd#search_game/))
+			else if (Xmlns.match(/\/chessd\/search_game/))
 			{
 				Buffer += OLDGAME_HandleSearchOldGame(XML);
 			}
-			else if (Xmlns.match(/\/chessd#fetch_game/))
+			else if (Xmlns.match(/\/chessd\/fetch_game/))
 			{
 				Buffer += OLDGAME_FetchOldGame(XML);
 			}
-			else if (Xmlns.match(/\/chessd#adjourned#list/))
+			else if (Xmlns.match(/\/chessd\/adjourned\/list/))
 			{
 				Buffer += CHALLENGE_HandleAdjourn(XML);
 			}
 			// Game messages
-			else if (Xmlns.match(/\/chessd#game/))
+			else if (Xmlns.match(/\/chessd\/game/))
 			{
 				Buffer += GAME_HandleGameResult(XML);
 			}
@@ -182,23 +184,27 @@ export function PARSER_ParseIq(XML)
 					Buffer += PROFILE_HandleVCardProfile(XML);
 				}
 			}
-			else if (Xmlns.match(/\/chessd#admin/))
+			else if (Xmlns.match(/\/chessd\/admin/))
 			{
 				Buffer += ADMIN_HandleAdmin(XML);
 			}
 			else if (Xmlns == "")
 			{
 				Buffer += PARSER_ParseIqById(XML);
-			}
+      }
+      else
+      {
+        console.log('Unhandled IQ:', XML);
+      }
 			break;
 
 		case "set":
-			if (Xmlns.match(/\/chessd#match_announcement/))
+			if (Xmlns.match(/\/chessd\/match_announcement/))
 			{
 				Buffer += ANNOUNCE_HandleAnnounceGame(XML);
 			}
 			// Challenge messages
-			else if (Xmlns.match(/\/chessd#match/))
+			else if (Xmlns.match(/\/chessd\/match/))
 			{
 				// Quick fix to avoid error when login in
 				// enviroment and has a pendent challenge;
@@ -214,7 +220,7 @@ export function PARSER_ParseIq(XML)
 			}
 
 			// Game messages
-			else if (Xmlns.match(/\/chessd#game/))
+			else if (Xmlns.match(/\/chessd\/game/))
 			{
 				Buffer += GAME_HandleGame(XML);
 			}
@@ -226,7 +232,7 @@ export function PARSER_ParseIq(XML)
 			}
 
 			// Admin notification
-			else if (Xmlns.match(/\/chessd#admin/))
+			else if (Xmlns.match(/\/chessd\/admin/))
 			{
 				Buffer += ADMIN_HandleUserNotification(XML);
 			}
@@ -236,33 +242,41 @@ export function PARSER_ParseIq(XML)
 			{
 				Buffer += CONTACT_HandleSetSubscribe(XML);
 			}
+      else
+      {
+        console.log('Unhandled IQ:', XML);
+      }
 			break;
 
 		case "error": 
       console.log("IQ error: ", XML);
-			if (Xmlns.match(/\/chessd#match_announcement/))
+			if (Xmlns.match(/\/chessd\/match_announcement/))
 			{
 				Buffer += ANNOUNCE_HandleAnnounceError(XML);
 			}
 			// Challenge messages
-			else if (Xmlns.match(/\/chessd#match/))
+			else if (Xmlns.match(/\/chessd\/match/))
 			{
 				Buffer += CHALLENGE_HandleErrorChallenge(XML);
 			}
 			// Game messages
-			else if (Xmlns.match(/\/chessd#game/))
+			else if (Xmlns.match(/\/chessd\/game/))
 			{
 				Buffer += GAME_HandleGameError(XML);
 			}
 			// Receive room info -> used to running games
-			else if (Xmlns.match(/disco#info/))
+			else if (Xmlns.match(/disco\/info/))
 			{
 				Buffer += CURRENTGAME_HandleGameRoomInfoError(XML);
 			}
-				else if (Xmlns.match(/\/chessd#admin/))
+      else if (Xmlns.match(/\/chessd\/admin/))
 			{
 				Buffer += ADMIN_HandleAdminError(XML);
 			}
+      else
+      {
+        console.log('Unhandled IQ:', XML);
+      }
 
 
 			break;

@@ -152,7 +152,7 @@ export function ANNOUNCE_HandleAnnounceGame(XML)
 	Room = GameRoom.getAttribute("jid");
 	Room += "/"+MyUsername;
 
-	Buffer += CONTACT_ChangeStatus("playing", false);
+	Buffer += CONTACT_ChangeStatus("dnd", false);
 	Buffer += MESSAGE_Presence(Room);
 
 	return Buffer;

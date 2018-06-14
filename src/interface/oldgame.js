@@ -19,10 +19,6 @@ import ImageInviteWhitePawn from 'images/invite_white_pawn.png';
 import ImageInviteBlackPawn from 'images/invite_black_pawn.png';
 import ImageRandom from 'images/random.png';
 
-import ImageIEInviteWhitePawn from 'images/ie/invite_white_pawn.gif';
-import ImageIEInviteBlackPawn from 'images/ie/invite_black_pawn.gif';
-import ImageIERandom from 'images/ie/random.gif';
-
 /**
 * CHESSD - WebClient
 *
@@ -176,18 +172,9 @@ export function INTERFACE_ShowOldGameWindow(Id)
 	RImg = UTILS_CreateElement('img');
 
 	// Set imagens according to browser type
-	if (MainData.GetBrowser() == 0)
-	{
-    WImg.src = ImageIEInviteWhitePawn;
-    BImg.src = ImageIEInviteBlackPawn;
-    RImg.src = ImageIERandom;
-	}
-	else
-	{
-    WImg.src = ImageInviteWhitePawn;
-    BImg.src = ImageInviteBlackPawn;
-    RImg.src = ImageRandom;
-	}
+  WImg.src = ImageInviteWhitePawn;
+  BImg.src = ImageInviteBlackPawn;
+  RImg.src = ImageRandom;
 
 	// End Pieces Form
 

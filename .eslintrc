@@ -23,5 +23,6 @@
 	"setTimeout": true,
 	"setInterval": true,
 	"clearInterval": true,
+	"DOMParser": true,
     }
 }

@@ -23,9 +23,21 @@ import {
 } from 'game/oldgame.js';
 import { WINDOW_Alert } from 'window/window.js';
 
-import { MainData } from 'main_data.js';
-
 import ImageNoPhoto from 'images/no_photo.png';
+
+import ImagePiecesBRook from 'images/pieces/brook.png';
+import ImagePiecesBKnight from 'images/pieces/bknight.png';
+import ImagePiecesBBishop from 'images/pieces/bbishop.png';
+import ImagePiecesBQueen from 'images/pieces/bqueen.png';
+import ImagePiecesBKing from 'images/pieces/bking.png';
+import ImagePiecesBPawn from 'images/pieces/bpawn.png';
+
+import ImagePiecesWRook from 'images/pieces/wrook.png';
+import ImagePiecesWKnight from 'images/pieces/wknight.png';
+import ImagePiecesWBishop from 'images/pieces/wbishop.png';
+import ImagePiecesWQueen from 'images/pieces/wqueen.png';
+import ImagePiecesWKing from 'images/pieces/wking.png';
+import ImagePiecesWPawn from 'images/pieces/wpawn.png';
 
 /**
 * CHESSD - WebClient
@@ -544,19 +556,8 @@ export function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 {
 	var PieceImg;
 	var DragPieceW;
-	var PieceDir, Extension;
   var DragPieceB;
 
-	if(MainData.GetBrowser() == 0) //IE
-	{
-		PieceDir = "images/ie/pieces";
-		Extension = ".gif";
-	}
-	else
-	{
-		PieceDir = "images/pieces";
-		Extension = ".png";
-	}
 	if (PlayerColor == "white")
 	{
 		DragPieceW = function (event) { UTILS_StartDragPiece(this, Size, event); return false; };
@@ -573,84 +574,84 @@ export function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 	{
 		// White Rook
 		case 'R':
-			PieceImg.src = PieceDir+"/wrook"+Extension;
+      PieceImg.src = ImagePiecesWRook;
 			PieceImg.title = UTILS_GetText("game_white_rook");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Knight
 		case 'N':
-			PieceImg.src = PieceDir+"/wknight"+Extension;
+      PieceImg.src = ImagePiecesWKnight;
 			PieceImg.title = UTILS_GetText("game_white_knight");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Bishop  
 		case 'B':
-			PieceImg.src = PieceDir+"/wbishop"+Extension;
+      PieceImg.src = ImagePiecesWBishop;
 			PieceImg.title = UTILS_GetText("game_white_bishop");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Queen
 		case 'Q':
-			PieceImg.src = PieceDir+"/wqueen"+Extension;
+      PieceImg.src = ImagePiecesWQueen;
 			PieceImg.title = UTILS_GetText("game_white_queen");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White King
 		case 'K':
-			PieceImg.src = PieceDir+"/wking"+Extension;
+      PieceImg.src = ImagePiecesWKing;
 			PieceImg.title = UTILS_GetText("game_white_king");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// White Pawn
 		case 'P':
-			PieceImg.src = PieceDir+"/wpawn"+Extension;	
+      PieceImg.src = ImagePiecesWPawn;
 			PieceImg.title = UTILS_GetText("game_white_pawn");
 			PieceImg.onmousedown = DragPieceW;
 			break;
 
 		// Black Rook
 		case 'r':
-			PieceImg.src = PieceDir+"/brook"+Extension;
+      PieceImg.src = ImagePiecesBRook;
 			PieceImg.title = UTILS_GetText("game_black_rook");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Knight
 		case 'n':
-			PieceImg.src = PieceDir+"/bknight"+Extension;
+      PieceImg.src = ImagePiecesBKnight;
 			PieceImg.title = UTILS_GetText("game_black_knight");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Bishop
 		case 'b':
-			PieceImg.src = PieceDir+"/bbishop"+Extension;
+      PieceImg.src = ImagePiecesBBishop;
 			PieceImg.title = UTILS_GetText("game_black_bishop");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black King
 		case 'q':
-			PieceImg.src = PieceDir+"/bqueen"+Extension;
+      PieceImg.src = ImagePiecesBKing;
 			PieceImg.title = UTILS_GetText("game_black_queen");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Queen
 		case 'k':
-			PieceImg.src = PieceDir+"/bking"+Extension;
+      PieceImg.src = ImagePiecesBQueen;
 			PieceImg.title = UTILS_GetText("game_black_king");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Pawn
 		case 'p':
-			PieceImg.src = PieceDir+"/bpawn"+Extension;
+      PieceImg.src = ImagePiecesBPawn;
 			PieceImg.title = UTILS_GetText("game_black_pawn");
 			PieceImg.onmousedown = DragPieceB;
 			break;

@@ -223,7 +223,7 @@ export function CONTACT_HandleUserPresence(XML)
 		// Get status name
 		NewStatus = UTILS_GetNodeText(Show[0]);
 
-		if ((NewStatus == "busy") || (NewStatus == "away") || (NewStatus == "unavailable") || (NewStatus == "playing"))
+		if ((NewStatus == "busy") || (NewStatus == "away") || (NewStatus == "unavailable") || (NewStatus == "dnd"))
 		{
 			CONTACT_SetUserStatus(Jid, NewStatus);
 		}
@@ -389,7 +389,7 @@ export function CONTACT_ShowUserMenu(Obj, Username)
 		// isn't playing a game
 		UserStatus = User.GetStatus();
 		MyUserStatus = MyUser.GetStatus();
-		if ( ((UserStatus != "offline") && (UserStatus != "playing") && (UserStatus != "unavailable")) && (MyUserStatus != "playing"))
+		if ( ((UserStatus != "offline") && (UserStatus != "dnd") && (UserStatus != "unavailable")) && (MyUserStatus != "dnd"))
 		{
 			Options[i].Func = function () {
 				Rating = User.GetRatingList(); // Get user rating object

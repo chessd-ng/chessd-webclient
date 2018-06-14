@@ -63,22 +63,24 @@ export function CHALLENGE_HandleChallenge(XML)
 		return Buffer;
 	}
 
-	if (Xmlns.match(/\/chessd#match#offer/))
+	if (Xmlns.match(/\/chessd\/match\/offer/))
 	{ 
 		Buffer = CHALLENGE_HandleOffer(XML);
 	}
-	else if (Xmlns.match(/\/chessd#match#accept/))
+	else if (Xmlns.match(/\/chessd\/match\/accept/))
 	{
 		Buffer = CHALLENGE_HandleAccept(XML);
 	}
-	else if (Xmlns.match(/\/chessd#match#decline/))
+	else if (Xmlns.match(/\/chessd\/match\/decline/))
 	{
 		Buffer = CHALLENGE_HandleDecline(XML);
 	}
-	else if (Xmlns.match(/\/chessd#match#error/))
+	else if (Xmlns.match(/\/chessd\/match\/error/))
 	{
 		Buffer = CHALLENGE_ChallengeError(XML);
-	}
+  } else {
+    console.log('Unhandled match request: ', XML);
+  }
 		
 	return Buffer;
 }
@@ -108,7 +110,7 @@ export function CHALLENGE_HandleErrorChallenge(XML)
 		return Buffer;
 	}
 
-	if (Xmlns.match(/\/chessd#match#offer/))
+	if (Xmlns.match(/\/chessd\/match\/offer/))
 	{ 
 		ErrorTag = XML.getElementsByTagName("error")[0];
 		ErrorType = ErrorTag.getAttribute("type");
@@ -354,7 +356,7 @@ function CHALLENGE_HandleAccept (XML)
 	// Warn the player's interface
 
 	// Send a presence to GameRoom with playing status
-	Buffer += MESSAGE_ChangeStatus("playing",GameRoom);	
+	Buffer += MESSAGE_ChangeStatus("dnd",GameRoom);	
 
 	return Buffer;	
 }
@@ -367,7 +369,7 @@ function CHALLENGE_HandleAccept (XML)
  * @return	Buffer with XMPP to send
  * @author	Ulysses Bomfim
  */
-function CHALLENGE_HandleDecline (XML)
+function CHALLENGE_HandleDecline(XML)
 {
 	var Match, MatchID, WindowObj;
 	var Buffer = "";

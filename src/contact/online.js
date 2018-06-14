@@ -85,7 +85,7 @@ export function ONLINE_HandleOnlinePresence(XML)
 		Status = UTILS_GetNodeText(Show[0]);
 
 		// Any different status from defined status list (see contact/status.js), status = away
-		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "playing"))
+		if ((Status != "busy") && (Status != "away") && (Status != "unavailable") && (Status != "dnd"))
 		{
 			Status = "away";
 		}

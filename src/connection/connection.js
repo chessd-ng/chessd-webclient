@@ -90,7 +90,9 @@ export function CONNECTION_SendJabber()
 	// If receive too many parameters, merge then
 	for (i=0; i<arguments.length; i++)
 	{
-		Post += arguments[i];
+    if (arguments[i]) {
+      Post += arguments[i];
+    }
 	}
 
 	// Check if connection status == "disconnected" or SID not initialized
@@ -98,6 +100,21 @@ export function CONNECTION_SendJabber()
 	{
 		Post = MESSAGE_MakeXMPP(Post);
 	}
+
+
+  // debug
+  {
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(Post,"text/xml");
+    var body = xmlDoc.getElementsByTagName('body');
+    var children = body[0].childNodes;
+    if (children) {
+      for (i = 0; i < children.length; i++) {
+        console.log('Sending: ', children[i]);
+      }
+    }
+    
+  }
 
 	// Create XMLHttpRequest
 	if (window.XMLHttpRequest) 

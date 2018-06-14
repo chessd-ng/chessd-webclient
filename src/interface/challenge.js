@@ -5,7 +5,9 @@ import {
 	CHALLENGE_SendChallenge,
 } from 'challenge/challenge.js';
 
-import { MainData } from 'main_data.js';
+import ImageInviteWhitePawn from 'images/invite_white_pawn.png';
+import ImageInviteBlackPawn from 'images/invite_black_pawn.png';
+import ImageRandom from 'images/random.png';
 
 /**
 * CHESSD - WebClient
@@ -157,18 +159,9 @@ export function INTERFACE_ShowChallengeWindow(Oponent, RatingObj, GameParameters
 	BrR = UTILS_CreateElement('br');
 	
 	// Set imagens according to browser type
-	if (MainData.GetBrowser() == 0)
-	{
-		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
-		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";
-		RandomColorOptImg.src = "images/ie/random.gif";
-	}
-	else
-	{
-		ColorOptWImg.src = "images/invite_white_pawn.png";
-		ColorOptBImg.src = "images/invite_black_pawn.png";
-		RandomColorOptImg.src = "images/random.png";
-	}
+  ColorOptWImg.src = ImageInviteWhitePawn;
+  ColorOptBImg.src = ImageInviteBlackPawn;
+  RandomColorOptImg.src = ImageRandom;
 //	AutoColorLabel= UTILS_CreateElement("span",null,null,UTILS_GetText("challenge_color_auto"));
 
 	// Select player color

@@ -5,6 +5,10 @@ import {
 	ANNOUNCE_SendAnnounce,
 } from 'challenge/announce.js';
 
+import ImageInviteWhitePawn from 'images/invite_white_pawn.png';
+import ImageInviteBlackPawn from 'images/invite_black_pawn.png';
+import ImageRandom from 'images/random.png';
+
 import { MainData } from 'main_data.js';
 
 /**
@@ -133,18 +137,9 @@ export function INTERFACE_AnnounceWindow()
 	AutoColorOpt.setAttribute("defaultChecked", "true");
 	
 	// Set imagens according to browser type
-	if (MainData.GetBrowser() == 0)
-	{
-		ColorOptWImg.src = "images/ie/invite_white_pawn.gif";
-		ColorOptBImg.src = "images/ie/invite_black_pawn.gif";
-		RandomColorOptImg.src = "images/ie/random.gif";
-	}
-	else
-	{
-		ColorOptWImg.src = "images/invite_white_pawn.png";
-		ColorOptBImg.src = "images/invite_black_pawn.png";
-		RandomColorOptImg.src = "images/random.png";
-	}
+  ColorOptWImg.src = ImageInviteWhitePawn;
+  ColorOptBImg.src = ImageInviteBlackPawn;
+  RandomColorOptImg.src = ImageRandom;
 	//*End Layer 1 Left Elements*
 	
 	// Layer 1 Right Elements

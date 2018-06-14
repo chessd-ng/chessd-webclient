@@ -29,7 +29,7 @@ import { MainData } from 'main_data.js';
 * @file		contact/status.js
 * @brief	Handle user's status 
 *
-* Status types: "available", "unavailable", "busy", "away", "playing", "offline"
+* Status types: "available", "unavailable", "busy", "away", "dnd", "offline"
 * TODO --> Split change status to online list, rooms and contact lists
 */
 
@@ -67,8 +67,8 @@ export function CONTACT_ChangeStatus(NewStatus, DontSend)
 	// Change status in select menu
 	Select = document.getElementById("UserStatusSelect");
 
-	// If new status is playing, create new item in select box, select it and disabled select box
-	if (NewStatus == "playing")
+	// If new status is dnd, create new item in select box, select it and disabled select box
+	if (NewStatus == "dnd")
 	{
 		// Playing
 		StatusItem = UTILS_CreateElement("option", 'status_playing_op', MainData.UserType+"_playing", "("+UTILS_Capitalize(UTILS_GetText("status_playing"))+")");
@@ -81,7 +81,7 @@ export function CONTACT_ChangeStatus(NewStatus, DontSend)
 	}
 	// If current status is playing, remove playing option from
 	// select box, enable select box and  select avaiable status(Index 0)
-	else if (MyUserStatus == "playing")
+	else if (MyUserStatus == "dnd")
 	{
 		Select.disabled = false;
 		Select.className = "enabled";
@@ -176,7 +176,7 @@ function CONTACT_SetAwayStatus()
 
 	if(AwayCounter-1 == 0)
 	{
-		if((MyUserStatus != "playing")&&(MyUserStatus != "unavailable"))
+		if((MyUserStatus != "dnd")&&(MyUserStatus != "unavailable"))
 		{
 			CONTACT_ChangeStatus("away");
 			
