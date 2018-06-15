@@ -577,7 +577,7 @@ function INTERFACE_DecreaseTime()
 	}
 	else
 	{
-		alert("Game error - Current game is null, no timer to decrease");
+		console.log("Game error - Current game is null, no timer to decrease");
 	}
 }
 

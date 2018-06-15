@@ -873,10 +873,11 @@ function GAME_UpdateBoard(GameId, BoardStr, Move, ShortMove, P1, P2, TurnColor)
 	}
 
 	//Quick fix to start counter timers
-	if (Game.Moves.length == 3)
+	if (Game.Moves.length >= 3)
 	{
+    Game.Game.StopTimer();
 		Game.Game.StartTimer();
-	}
+  }
 
 	// Hide loading div
 	Game.Game.HideLoadingMove();
