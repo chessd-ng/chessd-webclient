@@ -198,23 +198,16 @@ function INTERFACE_CreateBoard(MyColor, PieceSize, Observer)
 			if ((X+Y) % 2 == 1)
 			{
 				Block = UTILS_CreateElement("div", null, "black");
-				// If not observer, set block to change color if mouse is over or out of its
-				if(!Observer)
-				{
-					Block.onmouseover = function() { this.className = "select"; };
-					Block.onmouseout = function() { this.className = "black"; };
-				}
 			}
 			else
 			{
 				Block = UTILS_CreateElement("div", null, "white");
-				// If not observer, set block to change color if mouse is over or out of its
-				if(!Observer)
-				{
-					Block.onmouseover = function() { this.className = "select"; };
-					Block.onmouseout = function() { this.className = "white"; };
-				}
 			}
+      // If not observer, set block to change color if mouse is over or out of its
+      if(!Observer)
+      {
+        Block.className += ' board-cell';
+      }
 			
 			// Blocks size
 			Block.style.height = PieceSize+"px";
@@ -636,16 +629,16 @@ export function INTERFACE_NewPiece(Piece, PlayerColor, Size)
 			break;
 
 		// Black King
-		case 'q':
+		case 'k':
       PieceImg.src = ImagePiecesBKing;
-			PieceImg.title = UTILS_GetText("game_black_queen");
+			PieceImg.title = UTILS_GetText("game_black_king");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 
 		// Black Queen
-		case 'k':
+		case 'q':
       PieceImg.src = ImagePiecesBQueen;
-			PieceImg.title = UTILS_GetText("game_black_king");
+			PieceImg.title = UTILS_GetText("game_black_queen");
 			PieceImg.onmousedown = DragPieceB;
 			break;
 

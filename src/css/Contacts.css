@@ -199,7 +199,7 @@
 }
 
 /* playing */
-#Main #Left .user_playing {
+#Main #Left .user_dnd {
 	background		: url('~images/user_playing.png') no-repeat;
 }
 

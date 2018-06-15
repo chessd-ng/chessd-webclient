@@ -70,8 +70,7 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
 export function IMAGE_ImageDecode(ImgSrc){
-	//DefaultPHP is loaded from conf.xml
-	return "php/base64_decode."+MainData.GetDefaultPHP()+"?"+ImgSrc.slice(5);
+  return 'data:image/png;base64,' + ImgSrc;
 }
 
 /**

@@ -1140,6 +1140,7 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 */
 export function GAME_HandleVCardPhoto(XML)
 {
+  console.log('vcard: ', XML);
 	var Photo;
 	var Player;
 	var Binval;
@@ -1158,7 +1159,7 @@ export function GAME_HandleVCardPhoto(XML)
 	Photo = XML.getElementsByTagName("PHOTO")[0]; 
 
 	// If player don't use any image, do nothing
-	if(Photo == null) 
+	if(!Photo) 
 	{ 
 		return "";
 	}
@@ -1167,6 +1168,11 @@ export function GAME_HandleVCardPhoto(XML)
 	PhotoType = UTILS_GetNodeText(Photo.getElementsByTagName("TYPE")[0]); 
 	// Get photo image in base64
 	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]); 
+
+  if (!Binval) {
+    return "";
+  }
+
 	Img = "data:"+PhotoType+";base64,"+Binval; 
 
 	Player = XML.getAttribute("from").split("@")[0];

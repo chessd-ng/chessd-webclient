@@ -48,9 +48,8 @@ var OldPos;
 export function UTILS_StartDragPiece(Obj, Size, event)
 {
 	var MousePos;
-	var Offset, OffsetLeft, OffsetTop, OffsetBoard;
+	var OffsetLeft, OffsetTop, OffsetBoard;
 	
-	var BoardPieceOffset;
 	var CurrentGame = MainData.GetCurrentGame();
 
 	if(CurrentGame == null)
@@ -66,8 +65,11 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 
 	//Obj.style.position = "absolute";
 
+	// Getting offsets
+	OffsetBoard = UTILS_GetOffset(CurrentGame.Game.Board);
+  //
 	// Set BoardPiece OffSet
-	BoardPieceOffset = new Object;
+	var BoardPieceOffset = new Object;
 
 	// PS: FF3 use same values as IE to drag piece
 	if(MainData.GetBrowser() != 1) //is not FF2
@@ -82,13 +84,14 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 	}
 
 	// Getting offsets
-	Offset = Size / 2;
+  var Offset = Size / 2;
 	OffsetBoard = UTILS_GetOffset(CurrentGame.Game.Board);
 
 
 	// Add half of the piece size and others elements margin and borders
-	OffsetTop = OffsetBoard.Y + Offset + 38 + BoardPieceOffset.y;
-	OffsetLeft = OffsetBoard.X + Offset - 257 + BoardPieceOffset.x;
+	OffsetTop = OffsetBoard.Y + BoardPieceOffset.y;
+	OffsetLeft = OffsetBoard.X + BoardPieceOffset.x;
+
 
 	//alert(OffsetTop +" = " +OffsetBoard.Y +" + "+ Offset+" + 38 + "+BoardPieceOffset.y +"\n"+OffsetLeft +" = " +OffsetBoard.X +" + "+ Offset+" + 257 + "+BoardPieceOffset.x);
 
@@ -97,8 +100,10 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 	{
 		// Get Obj position
 		OldPos = new Object();
-		OldPos.x = Obj.style.left.replace(/px/, "");
-		OldPos.y = Obj.style.top.replace(/px/, "");
+		OldPos.x = parseInt(Obj.style.left.replace(/px/, ""));
+		OldPos.y = parseInt(Obj.style.top.replace(/px/, ""));
+
+    Obj.style.pointerEvents = 'none';
 
 		// Set block class of origin
 		GAME_SetBlockClass((8 - OldPos.y/Size), (OldPos.x/Size + 1));
@@ -106,8 +111,8 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 		document.body.onmousemove = function (ev) {
 			MousePos = UTILS_GetMouseCoords(ev);
 
-			Obj.style.top = (MousePos.y-OffsetTop)+"px";
-			Obj.style.left = (MousePos.x-OffsetLeft)+"px";
+      Obj.style.top = (MousePos.y-Offset-OffsetTop)+"px";
+      Obj.style.left = (MousePos.x-Offset-OffsetLeft)+"px";
 
 			// Change cursor to move
 			document.body.style.cursor = "move";
@@ -123,12 +128,8 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 
 				// Getting mouse coord
 				MousePos = UTILS_GetMouseCoords(evt);
-				MousePos.x = MousePos.x - OffsetLeft + (Size/2);
-				MousePos.y = MousePos.y - OffsetTop + (Size/2);
-				/*
-				MousePos.x += Size/2;
-				MousePos.y += Size/2;
-				*/
+				MousePos.x = MousePos.x - OffsetLeft;
+				MousePos.y = MousePos.y - OffsetTop;
 				// If release outside the board
 				if (MousePos.x < 0 || MousePos.x > 8*Size || MousePos.y < 0 || MousePos.y > 8*Size)
 				{
@@ -149,13 +150,14 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 				NewCol = (NewPos.x / Size) + 1;
 
 				// Set object in the new position
-				Obj.style.top =  NewPos.y +"px";
-				Obj.style.left = NewPos.x +"px";
+        Obj.style.top =  (NewPos.y) +"px";
+        Obj.style.left = (NewPos.x) +"px";
 
 				// Remove listener
 				//Obj.onmouseup = null;
 				document.body.onmousemove = null;
 				document.body.onmouseup = null;
+        Obj.style.pointerEvents = 'inherit';
 
 				if (CurrentGame != null)
 				{
@@ -166,8 +168,8 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 						GAME_SendMove(OldLine, OldCol, NewLine, NewCol);
 						// Show loading move message
 						GAME_ShowLoadingMove(CurrentGame.Id);
-					}
-				}
+          }
+        }
 
 				// Return to deafult cursor
 				document.body.style.cursor = "default";
@@ -178,7 +180,7 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 				// If game time over while making a move, remove block class from selected block
 				GAME_RemoveBlockClass(OldLine, OldCol);
 
-        // delete OldPos;
+        OldPos = undefined;
 
 				return false;
 			};
@@ -193,12 +195,8 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 
 		// Getting mouse coord
 		MousePos = UTILS_GetMouseCoords(event);
-		MousePos.x = MousePos.x - OffsetLeft + (Size/2);
-		MousePos.y = MousePos.y - OffsetTop + (Size/2);
-		/*
-		MousePos.x += Size/2;
-		MousePos.y += Size/2;
-		*/
+		MousePos.x = MousePos.x - OffsetLeft;
+		MousePos.y = MousePos.y - OffsetTop;
 		// If release outside the board
 		if (MousePos.x < 0 || MousePos.x > 8*Size || MousePos.y < 0 || MousePos.y > 8*Size)
 		{
@@ -221,6 +219,7 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 		// Set object in the new position
 		Obj.style.top =  NewPos.y +"px";
 		Obj.style.left = NewPos.x +"px";
+    Obj.style.pointerEvents = 'inherit';
 
 		// Remove listener
 		//Obj.onmouseup = null;
@@ -241,13 +240,13 @@ export function UTILS_StartDragPiece(Obj, Size, event)
 			}
 		}
 
-		// Return to deafult cursor
+		// Return to default cursor
 		document.body.style.cursor = "default";
 
 		// Remove block class of origin
 		GAME_RemoveBlockClass(OldLine, OldCol);
 
-    // delete OldPos;
+    OldPos = undefined;
 
 		return false;
 	}
