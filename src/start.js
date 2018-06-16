@@ -7,31 +7,47 @@ import {
 	MESSAGE_GetProfile,
 	MESSAGE_UserList,
 } from 'xmpp_messages/message.js';
-import { CONTACT_StopAwayStatus, CONTACT_StartAwayCounter } from 'contact/status.js';
+import { CONTACT_StartAwayCounter } from 'contact/status.js';
 import { INTERFACE_EndLogin, INTERFACE_StartLogin } from 'interface/login.js';
 import {
-	INTERFACE_StopInterface,
 	INTERFACE_CreateInterface,
 	INTERFACE_ShowInterface,
 } from 'interface/interface.js';
 import {
-	USER_StopUpdateUserList,
 	USER_StartUpdateUserList,
 	USER_StartUpdateUserProfile,
-	USER_StopUpdateUserProfile,
 	USER_AddUser,
 } from 'contact/user.js';
 import { CONTACT_StartContactList, CONTACT_LoadUserContactList } from 'contact/contact.js';
-import {
-	LOAD_ReloadFiles,
-} from 'load/load.js';
 import { GAME_SearchCurrentGame } from 'game/game.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
 import { ADMINCENTER_StartAdminCenter } from 'admin/admin.js';
-import { INITIAL_LoadScripts } from 'initial_files.js';
 import { ONLINE_StartOnlineList } from 'contact/online.js';
 import { GAMECENTER_StartGameCenter } from 'gamecenter/gamecenter.js';
 import { MainData, START_MainData } from 'main_data.js';
+
+import "css/Top.css";
+import "css/Left.css";
+import "css/Contacts.css";
+import "css/Rooms.css";
+import "css/Window.css";
+import "css/TopMenus.css";
+import "css/Challenge.css";
+import "css/Board.css";
+import "css/Game.css";
+import "css/Chat.css";
+import "css/Profile.css";
+import "css/Oldgame.css";
+import "css/Welcome.css";
+import "css/User.css";
+import "css/Admin.css";
+import "css/ChallengeMenu.css";
+import "css/Announce.css";
+import "css/Help.css";
+import "css/GameCenter.css";
+import "css/Tourney.css";
+import "css/AdminCenter.css";
+
 
 /**
 * CHESSD - WebClient
@@ -177,32 +193,5 @@ export function START_Webclient()
 */
 export function START_Restart()
 {
-  var CurrentGame = MainData.GetCurrentGame();
-  var UpdateProfile = MainData.GetUpdateProfileTimer();
-  var UpdateRating = MainData.GetUpdateTimer();
-
-  INTERFACE_StopInterface();
-
-  //Stop game count timer of current game 
-  if(CurrentGame != null)
-  {
-    CurrentGame.Game.StopTimer();
-  }
-
-  //Stop profile update interval
-  if(UpdateProfile != null)
-  {
-    USER_StopUpdateUserProfile();
-  }
-
-  //Stop rating update interval
-  if(UpdateRating != null)
-  {
-    USER_StopUpdateUserList();
-  }
-
-  //Stop away counter interval
-  CONTACT_StopAwayStatus();
-
-  START_StartPage();
+  location.reload();
 }

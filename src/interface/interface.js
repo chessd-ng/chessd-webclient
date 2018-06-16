@@ -5,6 +5,9 @@ import {
 	UTILS_GetParentDiv,
 	UTILS_GetOffset,
 } from 'utils/utils.js';
+import {
+  LOGIN_LeavePage
+} from 'login/login.js';
 import { INTERFACE_CreateLeft } from 'interface/left.js';
 
 /**
@@ -54,7 +57,7 @@ export function INTERFACE_CreateInterface()
 	Page.appendChild(Main);
 
 	// Logout from jabber when close or reload page;
-	document.body.setAttribute("onbeforeunload","LOGIN_LeavePage()");
+	document.body.setAttribute("onbeforeunload",LOGIN_LeavePage);
 
 	return Page;
 }
