@@ -24,7 +24,6 @@ import {
 import { CONTACT_StartContactList, CONTACT_LoadUserContactList } from 'contact/contact.js';
 import {
 	LOAD_ReloadFiles,
-	LOAD_IECssFile,
 } from 'load/load.js';
 import { GAME_SearchCurrentGame } from 'game/game.js';
 import { CONNECTION_SendJabber } from 'connection/connection.js';
@@ -178,54 +177,32 @@ export function START_Webclient()
 */
 export function START_Restart()
 {
-        var CurrentGame = MainData.GetCurrentGame();
-        var UpdateProfile = MainData.GetUpdateProfileTimer();
-        var UpdateRating = MainData.GetUpdateTimer();
+  var CurrentGame = MainData.GetCurrentGame();
+  var UpdateProfile = MainData.GetUpdateProfileTimer();
+  var UpdateRating = MainData.GetUpdateTimer();
 
-	INTERFACE_StopInterface();
+  INTERFACE_StopInterface();
 
-	//Stop game count timer of current game 
-	if(CurrentGame != null)
-	{
-		CurrentGame.Game.StopTimer();
-	}
+  //Stop game count timer of current game 
+  if(CurrentGame != null)
+  {
+    CurrentGame.Game.StopTimer();
+  }
 
-	//Stop profile update interval
-	if(UpdateProfile != null)
-	{
-		USER_StopUpdateUserProfile();
-	}
+  //Stop profile update interval
+  if(UpdateProfile != null)
+  {
+    USER_StopUpdateUserProfile();
+  }
 
-	//Stop rating update interval
-	if(UpdateRating != null)
-	{
-		USER_StopUpdateUserList();
-	}
+  //Stop rating update interval
+  if(UpdateRating != null)
+  {
+    USER_StopUpdateUserList();
+  }
 
-	//Stop away counter interval
-	CONTACT_StopAwayStatus();
+  //Stop away counter interval
+  CONTACT_StopAwayStatus();
 
-	// Clear MainData
-  MainData = undefined;
-
-	// Get new timestamp
-	NoCache.TimeStamp = "";
-	NoCache.TimeStamp += NoCache.DateTime.getMonth();
-	NoCache.TimeStamp += "/"+NoCache.DateTime.getDate();
-	NoCache.TimeStamp += "/"+NoCache.DateTime.getFullYear();
-	NoCache.TimeStamp += "-"+NoCache.DateTime.getHours();
-	NoCache.TimeStamp += ":"+NoCache.DateTime.getMinutes();
-	NoCache.TimeStamp += ":"+NoCache.DateTime.getSeconds();
-
-	// Reload Scripts
-	LOAD_ReloadFiles();
-
-	//START_StartPage();
-	INITIAL_LoadScripts();
-
-	// Verify browser and if IE then append related css file
-	if(MainData.GetBrowser() == 0)
-	{
-		LOAD_IECssFile();
-	}
+  START_StartPage();
 }
