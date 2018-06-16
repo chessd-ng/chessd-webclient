@@ -81,8 +81,6 @@ export function PARSER_ParseIq(XML)
 
 	var Consts = MainData.GetConst();
 
-  console.log(XML);
-
 	if(FirstNode != undefined)
 	{
 		Xmlns = FirstNode.getAttribute("xmlns");
