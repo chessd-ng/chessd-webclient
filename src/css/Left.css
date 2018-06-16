@@ -13,11 +13,15 @@
 	height			: 70px;	
 }
 
-#Main #Left #User img {
+#Main #Left #User #UserImg {
 	float			: left;
 	margin			: 4px;
 	width			: 50px;
 	height			: 60px;
+	background-position: center center;
+	background-size: cover;
+	border-style		: solid;
+	border-width		: 1px;
 }
 
 #Main #Left #User #UserInf {

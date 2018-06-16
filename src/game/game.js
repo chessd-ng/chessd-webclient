@@ -1141,7 +1141,6 @@ function GAME_LoadGameHistory(GameID, HistoryXml, Player1, Player2)
 */
 export function GAME_HandleVCardPhoto(XML)
 {
-  console.log('vcard: ', XML);
 	var Photo;
 	var Player;
 	var Binval;

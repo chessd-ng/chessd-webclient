@@ -82,8 +82,6 @@ export function DATA(ConfFile, LangFile)
 	this.Conf.Version = UTILS_GetTag(Params, "version");
 	this.Conf.CookieValidity = UTILS_GetTag(Params, "cookie-validity");
 	this.Conf.Lang = "";
-	//Default php version - php4 or php5
-	this.Conf.DefaultPHP = UTILS_GetTag(Params, "default-php");
 	this.Conf.UpdateRatingInterval = UTILS_GetTag(Params, "update-rating-interval");
 	this.Conf.UpdateGetMaxProfiles = UTILS_GetTag(Params, "update-get-max-profiles");
 
@@ -209,7 +207,6 @@ DATA.prototype.GetVersion = DATA_GetVersion;
 DATA.prototype.GetCookieValidity = DATA_GetCookieValidity;
 DATA.prototype.GetLang = DATA_GetLang;
 DATA.prototype.SetLang = DATA_SetLang;
-DATA.prototype.GetDefaultPHP = DATA_GetDefaultPHP;
 DATA.prototype.GetUpdateRatingInterval = DATA_GetUpdateRatingInterval;
 DATA.prototype.GetUpdateGetMaxProfiles = DATA_GetUpdateGetMaxProfiles;
 
@@ -746,17 +743,6 @@ function DATA_GetLang()
 function DATA_SetLang(Lang)
 {
 	this.Conf.Lang = Lang;
-}
-
-/*
-* @brief	Get default PHP extension
-*
-* @return 	PHP extension string
-* @author	Rubens Suguimoto
-*/
-function DATA_GetDefaultPHP()
-{
-	return this.Conf.DefaultPHP;
 }
 
 

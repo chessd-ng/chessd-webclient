@@ -740,7 +740,7 @@ function INTERFACE_SetBTime()
 */
 function INTERFACE_SetWPhoto(Img)
 {
-	this.photo.wphoto.src = IMAGE_ImageDecode(Img);
+	this.photo.wphoto.style.backgroundImage = 'url("' + Img + '")';
 }
 
 /**
@@ -752,7 +752,7 @@ function INTERFACE_SetWPhoto(Img)
 */
 function INTERFACE_SetBPhoto(Img)
 {
-	this.photo.bphoto.src = IMAGE_ImageDecode(Img);
+	this.photo.bphoto.style.backgroundImage = 'url("' + Img + '")';
 }
 
 /**

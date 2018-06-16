@@ -392,16 +392,16 @@ export function INTERFACE_CreateMoveList()
 function INTERFACE_CreatePhoto(WhitePlayer, BlackPlayer)
 {
 	var PhotoDiv = UTILS_CreateElement("div", "PhotoDiv");
-	var PWPhoto = UTILS_CreateElement("img", "PWPhoto");
-	var PBPhoto = UTILS_CreateElement("img", "PBPhoto");
+	var PWPhoto = UTILS_CreateElement("div", "PWPhoto");
+	var PBPhoto = UTILS_CreateElement("div", "PBPhoto");
 	var VS = UTILS_CreateElement("span", "vs", null, "x");
 	var PWName = UTILS_CreateElement("span", "PWName", null, UTILS_ShortString(WhitePlayer,8));
 	var PBName = UTILS_CreateElement("span", "PBName", null, UTILS_ShortString(BlackPlayer,8));
 	var PWPawn = UTILS_CreateElement("div", "PWPawn");
 	var PBPawn = UTILS_CreateElement("div", "PBPawn");
 	
-  PWPhoto.src = ImageNoPhoto;
-  PBPhoto.src = ImageNoPhoto;
+  PWPhoto.style.backgroundImage = 'url("' + ImageNoPhoto + '")';
+  PBPhoto.style.backgroundImage = 'url("' + ImageNoPhoto + '")';
 
 	PhotoDiv.appendChild(PWPhoto);
 	PhotoDiv.appendChild(VS);

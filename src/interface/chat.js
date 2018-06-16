@@ -13,6 +13,9 @@ import {
 
 import { MainData } from 'main_data.js';
 
+import ImageMinimizeChat from 'images/minimize_chat.png';
+import ImageCloseChat from 'images/close_chat.png';
+
 /**
 * CHESSD - WebClient
 *
@@ -279,16 +282,8 @@ function INTERFACE_CreateChat(Username)
 
 	Close = UTILS_CreateElement("img",null,"close");
 
-	if (MainData.GetBrowser() == 0)
-	{
-		State.src = "./images/ie/minimize_chat.gif";
-		Close.src = "./images/ie/close_chat.gif";
-	}
-	else
-	{
-		State.src = "./images/minimize_chat.png";
-		Close.src = "./images/close_chat.png";
-	}
+  State.src = ImageMinimizeChat;
+  Close.src = ImageCloseChat;
 
 	// Show/hide chat
 	State.onclick = function () {

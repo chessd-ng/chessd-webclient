@@ -11,6 +11,9 @@ import { ChatObj } from 'interface/chat.js';
 
 import { MainData } from 'main_data.js';
 
+import ImageMinimizeChat from 'images/minimize_chat.png';
+import ImageMaximizeChat from 'images/maximize_chat.png';
+
 /**
 * CHESSD - WebClient
 *
@@ -276,28 +279,14 @@ export function CHAT_ChangeChatState(Username)
 		ChatObj.Chat.maximize();
 		ChatObj.Chat.visible == true;
 		ChatObj.Chat.minmax.className = "minimize";
-		if(MainData.GetBrowser() == 0)
-		{
-			ChatObj.Chat.minmax.src = "./images/ie/minimize_chat.gif";
-		}
-		else
-		{
-			ChatObj.Chat.minmax.src = "./images/minimize_chat.png";
-		}
+    ChatObj.Chat.minmax.src = ImageMinimizeChat;
 	}
 	else
 	{
 		ChatObj.Chat.minimize();
 		ChatObj.Chat.visible == false;
 		ChatObj.Chat.minmax.className = "maximize";
-		if(MainData.GetBrowser() == 0)
-		{
-			ChatObj.Chat.minmax.src = "./images/ie/maximize_chat.gif";
-		}
-		else
-		{
-			ChatObj.Chat.minmax.src = "./images/maximize_chat.png";
-		}
+    ChatObj.Chat.minmax.src = ImageMaximizeChat;
 	}
 	
 	return "";

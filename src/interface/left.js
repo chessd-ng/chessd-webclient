@@ -9,13 +9,12 @@ import {
 	UTILS_ShortString,
 } from 'utils/utils.js';
 import { INTERFACE_CreateContact } from 'interface/contact.js';
-import { IMAGE_ImageDecode } from 'utils/images.js';
 import { PROFILE_StartProfile } from 'profile/profile.js';
 import { MainData } from 'main_data.js';
 
 import ImageNoPhoto from 'images/no_photo.png';
 
-/**
+/*o
 * CHESSD - WebClient
 *
 * This program is free software; you can redistribute it and/or modify
@@ -86,17 +85,17 @@ function INTERFACE_CreateUserBox()
 	}
  
 	UserDiv = UTILS_CreateElement("div", "User");
-	UserImg = UTILS_CreateElement("img","UserImg");
+	UserImg = UTILS_CreateElement("div","UserImg");
 	UserImg.title = User.GetUsername();
 
 	UserImageLink = User.GetPhoto();
 	if (UserImageLink == null)
 	{
-    UserImg.src = ImageNoPhoto;
+    UserImg.style.backgroundImage = 'url("' + ImageNoPhoto + '")';
 	}
 	else
 	{
-		UserImg.src = UserImageLink;
+		UserImg.style.backgroundImage = UserImageLink;
 	}
 
 	UserInf = UTILS_CreateElement("div", "UserInf");
@@ -161,6 +160,6 @@ export function INTERFACE_SetUserImage(Img)
 
 	if ((UserImg != null) && (Img != ImageNoPhoto))
 	{
-		UserImg.src = IMAGE_ImageDecode(Img);
+		UserImg.style.backgroundImage = 'url("' + Img + '")';
 	}
 }

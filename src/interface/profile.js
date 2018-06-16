@@ -5,7 +5,6 @@ import {
 	UTILS_ConvertTime,
 } from 'utils/utils.js';
 import { OLDGAME_OpenOldGameWindow } from 'game/oldgame.js';
-import { IMAGE_ImageDecode } from 'utils/images.js';
 import {
 	WINDOW_ProfileImage,
 } from 'window/window.js';
@@ -139,10 +138,8 @@ export function INTERFACE_ShowProfileWindow(Profile)
 	// Photo Div
 	PhotoDiv = UTILS_CreateElement('div','ProfPhotoDiv');
 
-	Photo = UTILS_CreateElement('img');
-  Photo.src = ImageNoPhoto;
-	
-	Br = UTILS_CreateElement('br');
+	Photo = UTILS_CreateElement('div');
+  Photo.style.backgroundImage = 'url("' + ImageNoPhoto + '")';
 	
 	// Top Right Div <User,Name>
 	TopRightDiv = UTILS_CreateElement('div','TopRightDiv');
@@ -335,7 +332,6 @@ export function INTERFACE_ShowProfileWindow(Profile)
 
 	// Photo Div elements
 	PhotoDiv.appendChild(Photo);
-	PhotoDiv.appendChild(Br);
 	PhotoDiv.appendChild(EditPhotoLabel);
 	
 	// TopRight Left elements
@@ -568,18 +564,11 @@ function INTERFACE_ProfileSetUserImg(Img)
 	//No user image
 	if(Img != null)
 	{
-		try
-		{
-			this.UserImg.src = IMAGE_ImageDecode(Img);
-		}
-		catch(err)
-		{
-      this.UserImg.src = ImageNoPhoto;
-		}
+    this.UserImg.style.backgroundImage = 'url("' + Img + '")';
 	}
 	else
 	{
-    this.UserImg.src = ImageNoPhoto;
+    this.UserImg.style.backgroundImage = 'url("' + ImageNoPhoto+ '")';
 	}
 
 }

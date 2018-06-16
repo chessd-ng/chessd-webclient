@@ -179,6 +179,8 @@
 	display			: inline-table;	
 
 	margin			: 0px 14px;
+	background-position: center center;
+	background-size: cover;
 }
 
 

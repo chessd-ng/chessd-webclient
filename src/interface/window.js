@@ -481,7 +481,7 @@ export function WINDOW_CreateImageSend()
 	TextDiv.appendChild(Label);
 
 	Div.appendChild(TextDiv);
-	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm", "php/base64."+MainData.GetDefaultPHP()));
+	Div.appendChild(IMAGE_CreateFormToEncode("ImageForm"));
 	Div.appendChild(ButtonsDiv);
 	
 	return {Div:Div, Buttons:Buttons};

@@ -46,6 +46,7 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 	File = document.createElement("input");
 	File.type = "file";
 	File.name = "image";
+  File.id = 'file_upload';
 	var Width = document.createElement("input");
 	Width.type = "hidden";
 	Width.name = "width";
@@ -70,7 +71,7 @@ export function IMAGE_CreateFormToEncode(FormId, Action){
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
 export function IMAGE_ImageDecode(ImgSrc){
-  return 'data:image/png;base64,' + ImgSrc;
+  return ImgSrc;
 }
 
 /**
@@ -80,17 +81,32 @@ export function IMAGE_ImageDecode(ImgSrc){
 * @return       void
 * @author       Fabiano Kuss and Rubens Suguimoto
 */
-export function IMAGE_ImageEncode(FormId){
-	var Frame, Body, Form;
-	
-	Frame = document.createElement("iFrame");
-	Frame.name = "nda";
-	Frame.setAttribute("style","width: 0; height: 0; border: none;");
-	Body = document.getElementsByTagName("body")[0];
-	Body.appendChild(Frame);
-	Form = document.getElementById(FormId);
-	Form.target = Frame.name;
-	Form.submit();
+export function IMAGE_ImageEncode() {
+  var el = document.getElementById('file_upload');
+  if (!el) {
+    console.log('No file_upload element');
+    return;
+  }
+  var files = document.getElementById('file_upload').files;
+  if (files.length === 0) {
+    return;
+  }
+
+  var file = files[0];
+
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = function () {
+    var m = reader.result.match(/data:(.*);base64,(.*)/);
+    if (!m || m.length < 3) {
+      console.log('Failed to parse date URI: ', m);
+      return;
+    }
+    IMAGE_B64Img(m[2], m[1]);
+  };
+  reader.onerror = function (error) {
+    console.log('Error: ', error);
+  };
 }
 
 /**

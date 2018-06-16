@@ -24,5 +24,6 @@
 	"setInterval": true,
 	"clearInterval": true,
 	"DOMParser": true,
+	"FileReader": true,
     }
 }

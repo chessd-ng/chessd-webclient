@@ -427,6 +427,10 @@ export function OLDGAME_HandleVCardPhoto(XML)
 	Binval = UTILS_GetNodeText(Photo.getElementsByTagName("BINVAL")[0]);
 	Img = "data:"+PhotoType+";base64,"+Binval;
 
+  if (!Binval) {
+    return "";
+  }
+
 	Player = XML.getAttribute("from").split("@")[0];
 
 	// Update current old game player image
