@@ -16,7 +16,6 @@ import {
 	INTERFACE_SetBlockBorder,
 	INTERFACE_ShowLeaveUser,
 } from 'interface/board.js';
-import { IMAGE_ImageDecode } from 'utils/images.js';
 import {
 	UTILS_CreateElement,
 	UTILS_GetText,
