@@ -195,7 +195,7 @@ function REGISTER_SendData(Msg)
 	// Avoid browser caching
 	var DT = Math.floor(Math.random()*10000);
 
-	HttpRequest.open('POST', 'http://'+RegisterData.Host+'/jabber?id='+DT , true);
+	HttpRequest.open('POST', 'https://'+RegisterData.Host+'/jabber?id='+DT , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
 	// ReceiveXml is used to register direct in Jabber, but now

@@ -137,7 +137,7 @@ export function CONNECTION_SendJabber()
 		}
 	}
 
-	HttpRequest.open('POST','http://'+MainData.GetHostPost()+'/jabber' , true);
+	HttpRequest.open('POST','https://'+MainData.GetHostPost()+'/jabber' , true);
 	
 	// Normal parse messages responses
 	if (MainData.GetConnectionStatus() == 0)
