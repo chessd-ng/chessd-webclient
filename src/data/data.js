@@ -68,8 +68,8 @@ export function DATA(ConfFile, LangFile)
 	/************************ CONFIGURATION DATA ************************/
 	this.Conf = new Object();
 	// Get Host from url
-	this.Conf.Host = window.location.href.split("/")[2].split(":")[0];
-  this.Conf.HostPost = UTILS_GetTag(Params, "host");
+  this.Conf.Host = UTILS_GetTag(Params, "host");
+  this.Conf.HostPost = UTILS_GetTag(Params, "url");
 	this.Conf.Browser = UTILS_IdentifyBrowser();
 	this.Conf.Resource = UTILS_GetTag(Params, "resource");
 	this.Conf.Server = UTILS_GetTag(Params,"server");

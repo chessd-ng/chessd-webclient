@@ -40,7 +40,6 @@ var RegisterData;
 * @author	Fabiano Kuss
 */
 function REGISTER_RegisterData(){
-	this.Host = MainData.GetHostPost();
 	this.SID = "";
 	this.RID = parseInt(Math.random()*1000000000);
 }
@@ -192,10 +191,7 @@ function REGISTER_SendData(Msg)
 		}
 	}
 
-	// Avoid browser caching
-	var DT = Math.floor(Math.random()*10000);
-
-	HttpRequest.open('POST', 'https://'+RegisterData.Host+'/jabber?id='+DT , true);
+	HttpRequest.open('POST', RegisterData.GetHostPost() , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
 	// ReceiveXml is used to register direct in Jabber, but now

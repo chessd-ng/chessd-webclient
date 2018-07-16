@@ -3,9 +3,10 @@ import { UTILS_GetText } from 'utils/utils.js';
 import {
 	MESSAGE_MakeXMPP,
 	MESSAGE_Wait,
-	MESSAGE_SendUsername,
-	MESSAGE_SendPasswd,
 	MESSAGE_StartConnection,
+  MESSAGE_RestartConnection,
+  MESSAGE_SendPlaintext,
+  MESSAGE_SendResource,
 } from 'xmpp_messages/message.js';
 import { START_Restart, START_Webclient } from 'start.js';
 import { LOGIN_LoginMsg, LOGIN_LoginFailed, LOGIN_EndLogin } from 'login/login.js';
@@ -47,22 +48,37 @@ export function CONNECTION_ConnectJabber(XML)
 		switch (MainData.GetConnectionStatus())
 		{
 			// Start connection, open stream with bosh
-			case (1):
+			case 1:
 				CONNECTION_SendJabber(MESSAGE_StartConnection());
 				LOGIN_LoginMsg(UTILS_GetText("login_connection_start"));
 				break;
 
-			// Send Username
-			case (2):
-				CONNECTION_SendJabber(MESSAGE_SendUsername());
+      // Wait for stream features
+      case 2:
+        break;
+
+			// Send challenge response
+			case 3: {
+        let username = MainData.GetUsername();
+        let password = MainData.GetPassword();
+        let host = MainData.GetHost();
+				CONNECTION_SendJabber(MESSAGE_SendPlaintext(username, host, password));
 				LOGIN_LoginMsg(UTILS_GetText("login_connection_user"));
 				break;
+      }
 
-			// Send password and resource to login
-			case (3):
-				CONNECTION_SendJabber(MESSAGE_SendPasswd());
+      case 4: {
+        CONNECTION_PostData(MESSAGE_RestartConnection());
+        break;
+      }
+
+      case 5: {
+        let resource = MainData.GetResource();
+
+				CONNECTION_SendJabber(MESSAGE_SendResource(resource));
 				LOGIN_LoginMsg(UTILS_GetText("login_connection_passwd"));
 				break;
+      }
 		}
 	}
 	else
@@ -74,42 +90,18 @@ export function CONNECTION_ConnectJabber(XML)
 	return "";
 }
 
-/**
-* @brief	Send a XML post
-*
-* You can pass more than one XML message as parameter
-*
-* @return	Empty string
-* @author	Pedro Rocha
-*/
-export function CONNECTION_SendJabber()
+export function CONNECTION_PostData(data)
 {
-	var Post = "", i;
 	var HttpRequest;
-
-	// If receive too many parameters, merge then
-	for (i=0; i<arguments.length; i++)
-	{
-    if (arguments[i]) {
-      Post += arguments[i];
-    }
-	}
-
-	// Check if connection status == "disconnected" or SID not initialized
-	if ((MainData.GetSID() != -1) && (MainData.GetConnectionStatus() != -1))
-	{
-		Post = MESSAGE_MakeXMPP(Post);
-	}
-
 
   // debug
   {
     var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(Post,"text/xml");
+    var xmlDoc = parser.parseFromString(data,"text/xml");
     var body = xmlDoc.getElementsByTagName('body');
     var children = body[0].childNodes;
     if (children) {
-      for (i = 0; i < children.length; i++) {
+      for (let i = 0; i < children.length; i++) {
         console.log('Sending: ', children[i]);
       }
     }
@@ -137,7 +129,7 @@ export function CONNECTION_SendJabber()
 		}
 	}
 
-	HttpRequest.open('POST','https://'+MainData.GetHostPost()+'/jabber' , true);
+	HttpRequest.open('POST',MainData.GetHostPost() , true);
 	
 	// Normal parse messages responses
 	if (MainData.GetConnectionStatus() == 0)
@@ -155,10 +147,10 @@ export function CONNECTION_SendJabber()
 	}
 
 	// Send request to server
-	HttpRequest.send(Post);
+	HttpRequest.send(data);
 
 	// Save last post in Data Struct
-	MainData.LastXML = Post;
+	MainData.LastXML = data;
 
 	// Add Post in data Struct
 	MainData.AddHttpPost(HttpRequest);
@@ -167,6 +159,27 @@ export function CONNECTION_SendJabber()
 	MainData.SetRID(MainData.GetRID()+1);
 
 	return "";
+}
+
+export function CONNECTION_SendJabber()
+{
+	var Post = "", i;
+
+	// If receive too many parameters, merge then
+	for (i=0; i<arguments.length; i++)
+	{
+    if (arguments[i]) {
+      Post += arguments[i];
+    }
+	}
+
+	// Check if connection status == "disconnected" or SID not initialized
+	if ((MainData.GetSID() != -1) && (MainData.GetConnectionStatus() != -1))
+	{
+		Post = MESSAGE_MakeXMPP(Post);
+	}
+
+  return CONNECTION_PostData(Post);
 }
 
 
@@ -179,25 +192,21 @@ export function CONNECTION_SendJabber()
 function CONNECTION_ReceiveConnection(HttpRequest)
 {
 	var XML;
-	var Error, ErrorCode;
 	var BodyType;
-	var Iq, IqType;
+	var IqType;
 	var Status;
 
 	// Check ready state of HTTP Request
-	if (HttpRequest.readyState == 4 )
-	{
-		try
-		{
+	if (HttpRequest.readyState == 4) {
+
+		try {
 			Status = HttpRequest.status;
-		}
-		catch(e)
-		{
+		} catch(e) {
 			return "";
 		}	
 
-		if(Status == 200)
-		{
+		if(Status == 200) {
+
 			XML = HttpRequest.responseXML;
 
 			// Check Bosh connection 
@@ -212,8 +221,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 			}
 
 			//switch (MainData.ConnectionStatus)
-			switch (MainData.GetConnectionStatus())
-			{
+			switch (MainData.GetConnectionStatus()) {
         case (1):
 					if(XML.getElementsByTagName("body")[0].getAttribute("sid") == null)
 					{
@@ -228,59 +236,55 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 						//MainData.ConnectionStatus++;
 						MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
 
-						// Send second step connection
-						CONNECTION_ConnectJabber();
+						// Wait for features
+            return CONNECTION_ReceiveConnection(HttpRequest);
 					}
-					break;
 
-				case(2):
-					Iq = XML.getElementsByTagName("iq")[0];
-					if(Iq != null)
-					{
-						IqType = Iq.getAttribute("type");
-						if(IqType == "result")
-						{
-							//MainData.ConnectionStatus++;
-							MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
-							// Send third step connection
-							CONNECTION_ConnectJabber();
-						}
-					}
-					// this case should happen when server is very slow to response authentication;
-					else
-					{
-						// Send wait to bosh until server response the first message of authentication
+				case(2): {
+					let features = XML.getElementsByTagName("stream:features")[0];
+					if(features != null) {
+            MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
+            CONNECTION_ConnectJabber();
+					} else {
 						CONNECTION_ConnectJabber(MESSAGE_Wait());
 					}
 					break;
+        }
 
-				case(3):
-					Iq = XML.getElementsByTagName("iq")[0];
-					if(Iq != null)
-					{
+				case(3): {
+					let success = XML.getElementsByTagName("success")[0];
+          if (success) {
+            MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
+            CONNECTION_ConnectJabber();
+            break;
+          }
+					let failure = XML.getElementsByTagName("failure")[0];
+          if (failure) {
+            LOGIN_LoginFailed(UTILS_GetText("login_invalid_user"));
+            break;
+          }
+					let abort = XML.getElementsByTagName("abort")[0];
+          if (abort) {
+            LOGIN_LoginFailed(UTILS_GetText("login_invalid_user"));
+            break;
+          }
+          break;
+        }
+
+        case 4: {
+          MainData.SetConnectionStatus(MainData.GetConnectionStatus() + 1);
+          CONNECTION_ConnectJabber();
+          break;
+        }
+
+        case 5: {
+
+					let Iq = XML.getElementsByTagName("iq")[0];
+					if(Iq != null) {
+
 						IqType = Iq.getAttribute("type");
 						// Check errors in username and passwd authentication
-						if(IqType == "error")
-						{
-							Error = XML.getElementsByTagName("error")[0];
-							if (Error != null)
-							{
-								ErrorCode = Error.getAttribute("code");
-								switch(ErrorCode)
-								{
-									// Username and passwd invalid
-									case "401":
-										LOGIN_LoginFailed(UTILS_GetText("login_invalid_user"));
-										break;
-									// User was banned by admin
-									case "405":
-										LOGIN_LoginFailed(UTILS_GetText("login_banned_user"));
-										break;
-								}
-							}
-						}
-						else //if(IqType == "result")
-						{
+						if(IqType == "result") {
 
               LOGIN_EndLogin();
               START_Webclient();
@@ -289,6 +293,9 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 							MainData.SetConnectionStatus(0);
 
 							CONNECTION_SendJabber(MESSAGE_Wait());
+            } else { 
+              // Unknown error, falls back to invalid user
+              LOGIN_LoginFailed(UTILS_GetText("login_invalid_user"));
 						}
 					}
 					// this case should happen when server is very slow to response authentication;
@@ -299,6 +306,7 @@ function CONNECTION_ReceiveConnection(HttpRequest)
 					}
 
 					break;
+        }
 			}
 		}
 		// Server offline

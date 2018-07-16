@@ -1,5 +1,6 @@
 import { UTILS_JabberLang } from 'utils/utils.js';
 import { MainData } from 'main_data.js';
+import { Base64 } from 'js-base64';
 
 /**
 * CHESSD - WebClient
@@ -96,6 +97,11 @@ export function MESSAGE_StartConnection()
 	return XMPP;
 }
 
+export function MESSAGE_RestartConnection()
+{
+  return '<body rid="'+MainData.GetRID()+'" sid="'+MainData.GetSID()+'" to="' + MainData.GetHost() + '" xml:lang="'+UTILS_JabberLang(MainData.GetLang())+'" xmpp:restart="true" xmlns="http://jabber.org/protocol/httpbind" xmlns:xmpp="urn:xmpp:xbosh"/>';
+}
+
 /**
 * @brief	Create message with first authentication step
 *
@@ -114,6 +120,24 @@ export function MESSAGE_SendUsername()
 	XMPP += "<username>"+MyUsername+"</username>";
 	XMPP += "</query></iq>";
 
+	return XMPP;
+}
+
+export function MESSAGE_SendPlaintext(username, host, password) {
+
+  let encoded = Base64.encode(username +"@" + host + "\0" + username + "\0" + password);
+
+  return "<auth xmlns='urn:ietf:params:xml:ns:xmpp-sasl' mechanism='PLAIN'>" + encoded + "</auth>";
+}
+
+export function MESSAGE_SendResource(resource)
+{
+	let XMPP;
+	
+  XMPP = "<iq id='bind_1' type='set' xmlns='jabber:client'>";
+  XMPP += "<bind xmlns='urn:ietf:params:xml:ns:xmpp-bind'>";
+  XMPP += "<resource>"+resource+"</resource>";
+  XMPP += "</bind></iq>";
 	return XMPP;
 }
 
