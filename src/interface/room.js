@@ -583,7 +583,7 @@ export function INTERFACE_ShowGameRoomList(GameId, PW, PB, GameType)
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(GameId, PW, PB);
-				To = GameId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
+				To = GameId+"@"+MainData.GetServer()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}

@@ -1466,7 +1466,7 @@ function INTERFACE_AddCurrentGames(WPlayer, WRating, BPlayer, BRating, Category,
 			{
 				//Open game board and enter game in room
 				Buffer += GAME_StartGame(CurrentGamesId, WPlayer, BPlayer);
-				To = CurrentGamesId+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
+				To = CurrentGamesId+"@"+MainData.GetServer()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}

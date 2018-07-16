@@ -520,7 +520,7 @@ export function ROOM_EnterRoomGame(RoomName)
 	var XML, To;
 	var MyUsername = MainData.GetUsername();
 
-	To = RoomName+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
+	To = RoomName+"@"+MainData.GetServer()+"/"+MyUsername;
 
 	XML = MESSAGE_Presence(To);
 

@@ -62,7 +62,7 @@ export function PARSER_ParsePresence(XML)
 		return Buffer;
 	}
 
-	Pattern = new RegExp("^"+MainData.GetServer()+"."+MainData.GetHost()+"$");
+	Pattern = new RegExp("^"+MainData.GetServer()+"$");
 	if (Jid && Jid.match(Pattern) != null) {
 		if (Type == "unavailable") {
 			WINDOW_Alert(UTILS_GetText("server_offline_title"),UTILS_GetText("server_offline"));

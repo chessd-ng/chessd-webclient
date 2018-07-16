@@ -254,7 +254,7 @@ export function GAME_HandleGameResult(XML)
 			{
 				Room = GameTag[i].getAttribute("room");
 				MyUser.SetStatus("dnd");
-				To = Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MyUsername;
+				To = Room+"@"+MainData.GetServer()+"/"+MyUsername;
 				Buffer += MESSAGE_Presence(To);
 			}
 		}

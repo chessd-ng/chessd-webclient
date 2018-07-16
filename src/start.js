@@ -147,7 +147,7 @@ export function START_Webclient()
 	// get my profile and presence to chessd server, jabber and
 	// general room
 	XMPP += MESSAGE_UserList();
-	XMPP += MESSAGE_Presence(MainData.GetServer()+"."+MainData.GetHost());
+	XMPP += MESSAGE_Presence(MainData.GetServer());
 	XMPP += MESSAGE_GetProfile(MyUsername, Consts.IQ_ID_GetMyProfile);
 	XMPP += MESSAGE_Presence();
 	XMPP += MESSAGE_Presence("general@"+MainData.GetConferenceComponent()+"."+MainData.GetHost()+"/"+MyUsername);
