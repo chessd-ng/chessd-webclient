@@ -368,7 +368,7 @@ export function MESSAGE_Info(User)
 	var Consts = MainData.GetConst();
 	var MyUsername = MainData.GetUsername();
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GetRating+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/info'>";
 	XMPP += "<rating jid='"+User+"@"+MainData.GetHost()+"' />";
 	XMPP += "<type jid='"+User+"@"+MainData.GetHost()+"' />";
@@ -390,7 +390,7 @@ export function MESSAGE_InfoProfile(User)
 	var Consts = MainData.GetConst();
 	var MyUsername = MainData.GetUsername();
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetRating+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' from='"+MyUsername+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GetRating+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/profile'>";
 	XMPP += "<profile jid='"+User+"@"+MainData.GetHost()+"' />";
 	XMPP += "</query></iq>";
@@ -500,7 +500,7 @@ export function MESSAGE_Challenge(ChallengeID, Category, Rated, Players, MatchID
 	}
 
 	// Tag the id with the challenged player's name
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Id+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"' id='"+Id+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/match/offer'>";
 
 	// Game offer
@@ -545,7 +545,7 @@ export function MESSAGE_ChallengeAccept(ChallengeID)
 	var XMPP="";
 	var Consts = MainData.GetConst();
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_Challenge+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_Challenge+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/match/accept'>";
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
@@ -566,7 +566,7 @@ export function MESSAGE_ChallengeDecline(ChallengeID)
 	var XMPP="";
 	var Consts = MainData.GetConst();
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_Challenge+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_Challenge+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/match/decline'>";
 	XMPP += "<match id='"+ChallengeID+"'>";
 	XMPP += "</match></query></iq>";
@@ -586,7 +586,7 @@ export function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 {
 	var XMPP="";
 
-	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='get_adj'>";
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"' id='get_adj'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/adjourned/list'>";
 	XMPP += "<search results='"+Num+"' offset='"+Offset+"'/>";
 	XMPP += "</query></iq>";
@@ -604,7 +604,7 @@ export function MESSAGE_ChallengeGetAdjournList(Num, Offset)
 export function MESSAGE_ChallengeResumeGame(Id, ChallengeId)
 {
 	var XMPP = "";
-	XMPP += "<iq to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='set' id='"+ChallengeId+"'>";
+	XMPP += "<iq to='"+MainData.GetServer()+"' type='set' id='"+ChallengeId+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/match/offer'>";
 	XMPP += "<match adjourned_id='"+Id+"'/>";
 	XMPP += "</query></iq>";
@@ -627,7 +627,7 @@ export function MESSAGE_GameRoomList()
 	var XMPP;
 	var Consts = MainData.GetConst();
 
-  XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetGamesList+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"'>";
+  XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_GetGamesList+"' to='"+MainData.GetServer()+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#items'/></iq>";
 
 	return XMPP;
@@ -645,7 +645,7 @@ export function MESSAGE_GameRoomInfoList(Room)
 	var XMPP;
 	var Consts = MainData.GetConst();
 
-	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameInfo+"'>";
+	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameInfo+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
 
 	return XMPP;
@@ -663,7 +663,7 @@ export function MESSAGE_GameEnterRoom(Room)
 	var XMPP;
 	var Consts = MainData.GetConst();
 
-	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameEnterRoom+"'>";
+	XMPP  = "<iq type='get' to='"+Room+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameEnterRoom+"'>";
 	XMPP += "<query xmlns='http://jabber.org/protocol/disco#info'/></iq>";
 
 	return XMPP;
@@ -683,7 +683,7 @@ export function MESSAGE_GameMove(Move, GameID, Promotion)
 	var XMPP="";
 	var Consts = MainData.GetConst();
 
-	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameMove+"'>";
+	XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameMove+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/move'>";
 	XMPP += "<move long='"+Move+Promotion+"'>";
 	XMPP += "</move></query></iq>";
@@ -757,22 +757,22 @@ function MESSAGE_GameRequests(Action, GameID)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/draw'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/cancel'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/adjourn'>";
 			break;
 	
 		case "Resign":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameResign+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameResign+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/resign'>";
 			break;
 	
@@ -877,17 +877,17 @@ function MESSAGE_GameResponse(Action, GameID, Response)
 	switch (Action) 
 	{
 		case "Draw":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameDraw+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/draw"+Response+"'>";
 			break;
 
 		case "Cancel":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameCancel+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/cancel"+Response+"'>";
 			break;
 
 		case "Adjourn":
-			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
+			XMPP  = "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='set' to='"+GameID+"@"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GameAdjourn+"'>";
 			XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/game/adjourn"+Response+"'>";
 			break;
 	
@@ -912,7 +912,7 @@ export function MESSAGE_GameSearchCurrentGame()
 	var Consts = MainData.GetConst();
 	var MyUsername = MainData.GetUsername();
 
-	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_SearchCurrentGame+"'>";
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_SearchCurrentGame+"'>";
 	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd/game'>";
 	XMPP += "<game>";
 
@@ -1035,7 +1035,7 @@ export function MESSAGE_KickUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_KickUser+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_KickUser+"'>";
 	XMPP += "<kick xmlns='"+MainData.GetXmlns()+"/chessd/admin' jid='"+Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</kick></iq>";
@@ -1055,7 +1055,7 @@ export function MESSAGE_BanUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.GetResource()+"' id='"+Consts.IQ_ID_BanUser+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"/"+MainData.GetResource()+"' id='"+Consts.IQ_ID_BanUser+"'>";
 	XMPP += "<ban xmlns='"+MainData.GetXmlns()+"/chessd/admin' jid='"+Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</ban></iq>";
@@ -1075,7 +1075,7 @@ export function MESSAGE_UnbanUser(Username, Reason)
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"/"+MainData.GetResource()+"' id='"+Consts.IQ_ID_UnbanUser+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"/"+MainData.GetResource()+"' id='"+Consts.IQ_ID_UnbanUser+"'>";
 	XMPP += "<unban xmlns='"+MainData.GetXmlns()+"/chessd/admin' jid='"+Username+"@"+MainData.GetHost()+"/"+MainData.GetResource()+"'>";
 	XMPP += "<reason>"+Reason+"</reason>";
 	XMPP += "</unban></iq>";
@@ -1094,7 +1094,7 @@ export function MESSAGE_GetBanList()
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 
-	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBanList+"'>";
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GetBanList+"'>";
 	XMPP += "<banned-list xmlns='"+MainData.GetXmlns()+"/chessd/admin'/>";
 	XMPP += "</iq>";
 
@@ -1113,7 +1113,7 @@ export function MESSAGE_GetBannedWords()
 	var Consts = MainData.GetConst();
 
 
-	XMPP += "<iq type='get' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetBannedWords+"'>";
+	XMPP += "<iq type='get' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GetBannedWords+"'>";
 	XMPP += "<banned-words-list xmlns='"+MainData.GetXmlns()+"/chessd/admin'/>";
 	XMPP += "</iq>";
 
@@ -1132,7 +1132,7 @@ export function MESSAGE_AddBannedWord(Word)
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 	
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_AddBannedWords+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_AddBannedWords+"'>";
 	XMPP += "<ban-word xmlns='"+MainData.GetXmlns()+"/chessd/admin'>";
 	XMPP += "<word word='"+Word+"' />";
 	XMPP += "</ban-word>";
@@ -1153,7 +1153,7 @@ export function MESSAGE_RemoveBannedWord(Word)
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 	
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_RemoveBannedWords+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_RemoveBannedWords+"'>";
 	XMPP += "<unban-word xmlns='"+MainData.GetXmlns()+"/chessd/admin'>";
 	XMPP += "<word word='"+Word+"'/>";
 	XMPP += "</unban-word></iq>";
@@ -1237,7 +1237,7 @@ export function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, 
 {
 	var XMPP = "";
 	var Consts = MainData.GetConst();
-	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_OldGameSearch+"-"+Id+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"'>";
+	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' type='get' id='"+Consts.IQ_ID_OldGameSearch+"-"+Id+"' to='"+MainData.GetServer()+"'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/search_game'>";
 	XMPP += "<search results='"+NumGames+"' offset='"+Offset+"'>";
 	if (Jid1 != "")
@@ -1283,7 +1283,7 @@ export function MESSAGE_GetOldGames(Id,Jid1, Jid2, NumGames, Offset, Color, To, 
 export function MESSAGE_FetchOldGame(OldGameId)
 {
 	var XMPP = "";
-	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' type='get' id='get_rating'>";
+	XMPP += "<iq xml:lang='"+UTILS_JabberLang(MainData.GetLang())+"' to='"+MainData.GetServer()+"' type='get' id='get_rating'>";
 	XMPP += "<query xmlns='"+MainData.GetXmlns()+"/chessd/fetch_game'>";
 	XMPP += "<game id='"+OldGameId+"'/>";
 	XMPP += "</query></iq>";
@@ -1311,7 +1311,7 @@ export function MESSAGE_AnnounceMatch(Player, Rated, Category, Min, Max, Autofla
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_AnnounceMatch+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_AnnounceMatch+"'>";
 	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd/match_announcement'>";
 	XMPP += "<announcement rated='"+Rated+"' category='"+Category+"' autoflag='"+Autoflag+"' ";
 	if (Min != "")
@@ -1356,7 +1356,7 @@ export function MESSAGE_GetAnnounceMatch(Offset, NumResult, MinTime, MaxTime, Ca
 	var Consts = MainData.GetConst();
 	var MyUsername = MainData.GetUsername();
 
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_GetAnnounceMatch+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_GetAnnounceMatch+"'>";
 	XMPP += "<search xmlns='http://c3sl.ufpr.br/chessd/match_announcement'>";
 	XMPP += "<parameters offset='"+Offset+"' results='"+NumResult+"' ";
 	
@@ -1400,7 +1400,7 @@ export function MESSAGE_RemoveAnnounceMatch(Id)
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_RemoveAnnounceMatch+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_RemoveAnnounceMatch+"'>";
 	XMPP += "<delete xmlns='http://c3sl.ufpr.br/chessd/match_announcement'>";
 	XMPP += "<announcement id='"+Id+"'/>";
 	XMPP += "</delete></iq>";
@@ -1420,7 +1420,7 @@ export function MESSAGE_AcceptAnnounceMatch(Id)
 	var XMPP = "";
 	var Consts = MainData.GetConst();
 
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_AcceptAnnounceMatch+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_AcceptAnnounceMatch+"'>";
 	XMPP += "<accept xmlns='http://c3sl.ufpr.br/chessd/match_announcement'>";
 	XMPP += "<announcement id='"+Id+"'/>";
 	XMPP += "</accept></iq>";
@@ -1456,7 +1456,7 @@ export function MESSAGE_CreateTourney(Name, Category, GameTime, StartTime, MaxPl
 	var i;
 
 	// TODO verify server/host
-	XMPP += "<iq type='set' to='"+MainData.GetServer()+"."+MainData.GetHost()+"' id='"+Consts.IQ_ID_CreateTourney+"'>";
+	XMPP += "<iq type='set' to='"+MainData.GetServer()+"' id='"+Consts.IQ_ID_CreateTourney+"'>";
 	XMPP += "<create xmlns='http://c3sl.ufpr.br/chessd/tourney'>";
 	XMPP += "<tourney name='"+Name+"' category='"+Category+"' game_time='"+GameTime+"' start_time='"+StartTime+"'";
 	if (MaxPlayers != null)

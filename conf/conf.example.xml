@@ -17,8 +17,9 @@
 		<Xmlns>http://c3sl.ufpr.br</Xmlns>
 		<resource>ChessD</resource>
 		<search-component>vjud</search-component>
-		<server>chessd</server>
+		<server>chessd.localhost</server>
 		<conference-component>conference</conference-component>
-		<host>192.168.0.1</host>
+		<host>localhost</host>
+		<url>http://localhost:5280/jabber</url>
 	</jabber>
 </conf>
