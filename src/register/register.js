@@ -191,7 +191,7 @@ function REGISTER_SendData(Msg)
 		}
 	}
 
-	HttpRequest.open('POST', RegisterData.GetHostPost() , true);
+	HttpRequest.open('POST', MainData.GetHostPost() , true);
 	HttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 
 	// ReceiveXml is used to register direct in Jabber, but now
