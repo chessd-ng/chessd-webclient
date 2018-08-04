@@ -1,544 +1,429 @@
-/**************************
-*{
-        margin                  : 0px;
-        padding                 : 0px;
-
-}
-td, li{
-	font-family	: arial, sans-serif, Trebuchet MS, arial;
-	color		: #216778;
+#AdminCenter {
+    padding: 22px;
 }
-*************************/
 
-#AdminCenter
-{
-	padding: 22px;
+#AdminCenter #MenuDiv {
+    width: 560px;
 }
 
-#AdminCenter #MenuDiv 
-{
-	width		: 560px;
+#AdminCenter #MenuDiv #MenuList {
+    list-style: none;
+    height: 20px;
 }
-#AdminCenter #MenuDiv #MenuList
-{
-	list-style	: none;
-	height		: 20px;
-	
-}
 
-#AdminCenter #MenuDiv #MenuList li
-{
-	background-color: #216778;
-	color		: #FFFFFF;
-	float		: left;
-	margin-right	: 2px;
-	height		: 10px;
-	padding		: 5px 10px;
-
-	font-weight	: bold;
-	font-size	: 10px;
-	cursor		: pointer;
-	text-align	: center;
+#AdminCenter #MenuDiv #MenuList li {
+    background-color: #216778;
+    color: #FFFFFF;
+    float: left;
+    margin-right: 2px;
+    height: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 10px;
+    cursor: pointer;
+    text-align: center;
 }
 
-#AdminCenter #MenuDiv #MenuList li:hover
-{
-	background-color: #FFA200;
+#AdminCenter #MenuDiv #MenuList li:hover {
+    background-color: #FFA200;
 }
 
-#AdminCenter #MenuDiv #MenuList li.disable
-{
-	cursor		: default;
-	background-color: #666;
-	color		: #999;
+#AdminCenter #MenuDiv #MenuList li.disable {
+    cursor: default;
+    background-color: #666;
+    color: #999;
 }
 
-#AdminCenter #MenuDiv #MenuList #punish
-{
-	width		: 100px;
+#AdminCenter #MenuDiv #MenuList #punish {
+    width: 100px;
 }
 
-#AdminCenter #MenuDiv #MenuList #adminlvl
-{
-	width		: 40px;
+#AdminCenter #MenuDiv #MenuList #adminlvl {
+    width: 40px;
 }
 
-#AdminCenter #MenuDiv #MenuList #level
-{
-	width		: 80px;
+#AdminCenter #MenuDiv #MenuList #level {
+    width: 80px;
 }
 
-#AdminCenter #MenuDiv #MenuList #adjourn
-{
-	width		: 115px;
+#AdminCenter #MenuDiv #MenuList #adjourn {
+    width: 115px;
 }
 
-#AdminCenter #MenuDiv #MenuList #words
-{
-	width		: 111px;
-	margin-right	: 0px;
+#AdminCenter #MenuDiv #MenuList #words {
+    width: 111px;
+    margin-right: 0px;
 }
-
-/**************************/
 
-#CenterPunish,
-#CenterAdminLevel,
-#CenterLevel,
-#CenterAdjourn,
-#CenterWords
-{
-	width		: 530px;
-	/*height		: 310px;*/
-	border		: 2px solid #216778;
-	border-top	: 0px;
-	padding		: 10px 10px 10px 10px;
-	
-	overflow	: hidden;
-	background-color: #FFF;
+#CenterPunish, #CenterAdminLevel, #CenterLevel, #CenterAdjourn, #CenterWords {
+    width: 530px;
+    border: 2px solid #216778;
+    border-top: 0px;
+    padding: 10px 10px 10px 10px;
+    overflow: hidden;
+    background-color: #FFF;
 }
 
-#CenterAdminResult
-{
-	width		: 510px;
-	height		: 250px;
-	padding		: 5px 8px 5px 8px;
-	/*border		: 2px solid #216778;*/
-	background-color: #FFF;
+#CenterAdminResult {
+    width: 510px;
+    height: 250px;
+    padding: 5px 8px 5px 8px;
+    background-color: #FFF;
 }
 
-/*********************************************/
-/*PUNISH RESULT*/
-#CenterPunish #CenterAdminResult ul
-{
-	width		: 510px;
-	list-style	: none;
-	font-size	: 11px;
+#CenterPunish #CenterAdminResult ul {
+    width: 510px;
+    list-style: none;
+    font-size: 11px;
 }
 
-#CenterPunish #CenterAdminResult ul li
-{
-	height		: 17px;
-	text-align	: center;
-	margin-top	: 1px;
+#CenterPunish #CenterAdminResult ul li {
+    height: 17px;
+    text-align: center;
+    margin-top: 1px;
 }
 
-#CenterPunish #CenterAdminResult li p
-{
-	float		: left;
+#CenterPunish #CenterAdminResult li p {
+    float: left;
 }
 
-#CenterPunish #CenterAdminResult li p.selected
-{
-	color		: #ffa200;
+#CenterPunish #CenterAdminResult li p.selected {
+    color: #ffa200;
 }
 
-#CenterPunish #CenterAdminResult li #player
-{
-	width		: 80px;
-	text-align	: left;
+#CenterPunish #CenterAdminResult li #player {
+    width: 80px;
+    text-align: left;
 }
 
-#CenterPunish #CenterAdminResult li #punish
-{
-	width		: 70px;
+#CenterPunish #CenterAdminResult li #punish {
+    width: 70px;
 }
 
-#CenterPunish #CenterAdminResult li #incidence
-{
-	width		: 60px;
-	text-align	: center;
+#CenterPunish #CenterAdminResult li #incidence {
+    width: 60px;
+    text-align: center;
 }
 
-#CenterPunish #CenterAdminResult li #date
-{
-	width		: 80px;
+#CenterPunish #CenterAdminResult li #date {
+    width: 80px;
 }
 
-#CenterPunish #CenterAdminResult li #period
-{
-	width		: 40px;
+#CenterPunish #CenterAdminResult li #period {
+    width: 40px;
 }
 
-#CenterPunish #CenterAdminResult li #reason
-{
-	width		: 110px;
+#CenterPunish #CenterAdminResult li #reason {
+    width: 110px;
 }
 
-#CenterPunish #CenterAdminResult li #action
-{
-	cursor		: pointer;
-	text-decoration	: underline;
-	font-style	: italic;
-	width		: 45px;
-
+#CenterPunish #CenterAdminResult li #action {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    width: 45px;
 }
 
-#CenterPunish #CenterAdminResult li.header p
-{
-	font-weight	: bold;
-	cursor		: pointer;
+#CenterPunish #CenterAdminResult li.header p {
+    font-weight: bold;
+    cursor: pointer;
 }
 
-#CenterPunish #CenterAdminResult #ListResult
-{
-	height		: 225px;
-	overflow-y	: auto;
-	border-width	: 1px 0px;
-	border-style	: solid;
-	border-color	: #ffa200;
+#CenterPunish #CenterAdminResult #ListResult {
+    height: 225px;
+    overflow-y: auto;
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #ffa200;
 }
-#CenterPunish #CenterAdminResult #ListResult li
-{
-	height		: 25px;
-	margin		: 5px 0px 0px 0px;
-}
-
 
-/*********************************************/
-/*LEVEL and ADMIN LEVEL RESULT*/
-#CenterAdminLevel #CenterAdminResult ul,
-#CenterLevel #CenterAdminResult ul
-{
-	width		: 510px;
-	list-style	: none;
-	font-size	: 11px;
+#CenterPunish #CenterAdminResult #ListResult li {
+    height: 25px;
+    margin: 5px 0px 0px 0px;
 }
 
-#CenterAdminLevel #CenterAdminResult ul li,
-#CenterLevel #CenterAdminResult ul li
-{
-	height		: 17px;
-	text-align	: center;
-	margin-top	: 1px;
+#CenterAdminLevel #CenterAdminResult ul, #CenterLevel #CenterAdminResult ul {
+    width: 510px;
+    list-style: none;
+    font-size: 11px;
 }
 
-#CenterAdminLevel #CenterAdminResult li p,
-#CenterLevel #CenterAdminResult li p
-{
-	float		: left;
+#CenterAdminLevel #CenterAdminResult ul li, #CenterLevel #CenterAdminResult ul li {
+    height: 17px;
+    text-align: center;
+    margin-top: 1px;
 }
 
-#CenterAdminLevel #CenterAdminResult li p.selected,
-#CenterLevel #CenterAdminResult li p.selected
-{
-	color		: #ffa200;
+#CenterAdminLevel #CenterAdminResult li p, #CenterLevel #CenterAdminResult li p {
+    float: left;
 }
 
-#CenterAdminLevel #CenterAdminResult li #player,
-#CenterLevel #CenterAdminResult li #player
-{
-	width		: 170px;
+#CenterAdminLevel #CenterAdminResult li p.selected, #CenterLevel #CenterAdminResult li p.selected {
+    color: #ffa200;
 }
 
-#CenterAdminLevel #CenterAdminResult li #level,
-#CenterLevel #CenterAdminResult li #level
-{
-	width		: 170px;
+#CenterAdminLevel #CenterAdminResult li #player, #CenterLevel #CenterAdminResult li #player {
+    width: 170px;
 }
 
-#CenterAdminLevel #CenterAdminResult li #action,
-#CenterLevel #CenterAdminResult li #action
-{
-	cursor		: pointer;
-	text-decoration	: underline;
-	font-style	: italic;
-	width		: 140px;
-
+#CenterAdminLevel #CenterAdminResult li #level, #CenterLevel #CenterAdminResult li #level {
+    width: 170px;
 }
 
-#CenterAdminLevel #CenterAdminResult li.header p,
-#CenterLevel #CenterAdminResult li.header p
-{
-	font-weight	: bold;
-	cursor		: pointer;
+#CenterAdminLevel #CenterAdminResult li #action, #CenterLevel #CenterAdminResult li #action {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    width: 140px;
 }
 
-#CenterAdminLevel #CenterAdminResult #ListResult,
-#CenterLevel #CenterAdminResult #ListResult
-{
-	height		: 225px;
-	overflow-y	: auto;
-	border-width	: 1px 0px;
-	border-style	: solid;
-	border-color	: #ffa200;
+#CenterAdminLevel #CenterAdminResult li.header p, #CenterLevel #CenterAdminResult li.header p {
+    font-weight: bold;
+    cursor: pointer;
 }
-#CenterAdminLevel #CenterAdminResult #ListResult li,
-#CenterLevel #CenterAdminResult #ListResult li
-{
-	height		: 25px;
-	margin		: 5px 0px 0px 0px;
-}
 
-/*********************************************/
-/*OPTIONS*/
-#CenterAdjourn #CenterOptions ul
-{
-	list-style	: none;
-	width		: 530px;
+#CenterAdminLevel #CenterAdminResult #ListResult, #CenterLevel #CenterAdminResult #ListResult {
+    height: 225px;
+    overflow-y: auto;
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #ffa200;
 }
 
-#CenterAdjourn #CenterOptions ul li
-{
-	float 		: left;
-	text-align	: center;
-	font-size	: 11px;
-	cursor		: pointer;
-	width		: 530px;
-	font-style	: italic;
-	text-decoration	: underline;
+#CenterAdminLevel #CenterAdminResult #ListResult li, #CenterLevel #CenterAdminResult #ListResult li {
+    height: 25px;
+    margin: 5px 0px 0px 0px;
 }
-/*RESULT*/
-#CenterAdjourn #CenterAdminResult ul
-{
-	width		: 510px;
-	list-style	: none;
-	font-size	: 11px;
+
+#CenterAdjourn #CenterOptions ul {
+    list-style: none;
+    width: 530px;
 }
 
-#CenterAdjourn #CenterAdminResult ul li
-{
-	height		: 17px;
-	text-align	: center;
-	margin-top	: 1px;
+#CenterAdjourn #CenterOptions ul li {
+    float: left;
+    text-align: center;
+    font-size: 11px;
+    cursor: pointer;
+    width: 530px;
+    font-style: italic;
+    text-decoration: underline;
 }
 
-#CenterAdjourn #CenterAdminResult li p
-{
-	float		: left;
+#CenterAdjourn #CenterAdminResult ul {
+    width: 510px;
+    list-style: none;
+    font-size: 11px;
 }
 
-#CenterAdjourn #CenterAdminResult li p.selected
-{
-	color		: #ffa200;
+#CenterAdjourn #CenterAdminResult ul li {
+    height: 17px;
+    text-align: center;
+    margin-top: 1px;
 }
 
-#CenterAdjourn #CenterAdminResult li img
-{
-	float		: left;
-	width		: 16px;
-	height		: 17px;
-	position	: relative;
-	top		: -5px;
+#CenterAdjourn #CenterAdminResult li p {
+    float: left;
 }
 
-#CenterAdjourn #CenterAdminResult li #wrating,
-#CenterAdjourn #CenterAdminResult li #brating
-{
-	width		: 50px;
+#CenterAdjourn #CenterAdminResult li p.selected {
+    color: #ffa200;
 }
-#CenterAdjourn #CenterAdminResult li #wtime,
-#CenterAdjourn #CenterAdminResult li #btime
-{
-	width		: 60px;
+
+#CenterAdjourn #CenterAdminResult li img {
+    float: left;
+    width: 16px;
+    height: 17px;
+    position: relative;
+    top: -5px;
 }
 
-#CenterAdjourn #CenterAdminResult li #vs
-{
-	font-size	: 12px;
-	font-weight	: bold;
-	width		: 80px;
+#CenterAdjourn #CenterAdminResult li #wrating, #CenterAdjourn #CenterAdminResult li #brating {
+    width: 50px;
 }
-#CenterAdjourn #CenterAdminResult li #category
-{
-	width		: 70px;
+
+#CenterAdjourn #CenterAdminResult li #wtime, #CenterAdjourn #CenterAdminResult li #btime {
+    width: 60px;
 }
 
-#CenterAdjourn #CenterAdminResult li #time
-{
-	width		: 45px;
+#CenterAdjourn #CenterAdminResult li #vs {
+    font-size: 12px;
+    font-weight: bold;
+    width: 80px;
 }
 
-#CenterAdjourn #CenterAdminResult li #rated
-{
-	width		: 10px;
-	height		: 10px;
-	margin		: 0px 15px;
-	background-image: url('~images/gamecenter/rated.png');
-	background-repeat: no-repeat;
+#CenterAdjourn #CenterAdminResult li #category {
+    width: 70px;
 }
 
-#CenterAdjourn #CenterAdminResult li #rated.disable
-{
-	background-image: url('~images/gamecenter/rated_disable.png');
+#CenterAdjourn #CenterAdminResult li #time {
+    width: 45px;
 }
-#CenterAdjourn #CenterAdminResult li #inc
-{
-	width		: 55px;
+
+#CenterAdjourn #CenterAdminResult li #rated {
+    width: 10px;
+    height: 10px;
+    margin: 0px 15px;
+    background-image: url('~images/gamecenter/rated.png');
+    background-repeat: no-repeat;
 }
-#CenterAdjourn #CenterAdminResult li #action
-{
-	cursor		: pointer;
-	text-decoration	: underline;
-	font-style	: italic;
-	width		: 70px;
+
+#CenterAdjourn #CenterAdminResult li #rated.disable {
+    background-image: url('~images/gamecenter/rated_disable.png');
 }
 
-#CenterAdjourn #CenterAdminResult li.header p,
-#CenterAdjourn #CenterAdminResult li.header img
-{
-	font-weight	: bold;
-	cursor		: pointer;
+#CenterAdjourn #CenterAdminResult li #inc {
+    width: 55px;
 }
-#CenterAdjourn #CenterAdminResult li.header #category
-{
-	width		: 65px;
+
+#CenterAdjourn #CenterAdminResult li #action {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    width: 70px;
 }
 
-#CenterAdjourn #CenterAdminResult li.header #rated
-{
-	width		: 45px;
-	background-image: none;
-	margin		: 0px;
+#CenterAdjourn #CenterAdminResult li.header p, #CenterAdjourn #CenterAdminResult li.header img {
+    font-weight: bold;
+    cursor: pointer;
 }
 
-#CenterAdjourn #CenterAdminResult li.header #time
-{
-	width		: 45px;
+#CenterAdjourn #CenterAdminResult li.header #category {
+    width: 65px;
 }
 
-#CenterAdjourn #CenterAdminResult li.header #inc
-{
-	width		: 55px;
+#CenterAdjourn #CenterAdminResult li.header #rated {
+    width: 45px;
+    background-image: none;
+    margin: 0px;
 }
 
-#CenterAdjourn #CenterAdminResult li.disable
-{
-	color		: #999;
+#CenterAdjourn #CenterAdminResult li.header #time {
+    width: 45px;
 }
 
-#CenterAdjourn #CenterAdminResult #ListResult
-{
-	height		: 225px;
-	overflow-y	: auto;
-	border-width	: 1px 0px;
-	border-style	: solid;
-	border-color	: #ffa200;
+#CenterAdjourn #CenterAdminResult li.header #inc {
+    width: 55px;
 }
 
-#CenterAdjourn #CenterAdminResult #ListResult li #player
-{
-	width		: 98px;
+#CenterAdjourn #CenterAdminResult li.disable {
+    color: #999;
 }
-#CenterAdjourn #CenterAdminResult #ListResult li #player.white
-{
-	text-align	: right;
+
+#CenterAdjourn #CenterAdminResult #ListResult {
+    height: 225px;
+    overflow-y: auto;
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #ffa200;
 }
-#CenterAdjourn #CenterAdminResult #ListResult li #player.black
-{
-	margin-left	: 15px;
-	text-align	: left;
+
+#CenterAdjourn #CenterAdminResult #ListResult li #player {
+    width: 98px;
 }
 
-/*********************************************/
-/* RESULT*/
-#CenterWords #InputDiv
-{
-	width		: 350px;
-	height		: 25px;
-	padding		: 0px 80px;
-	font-family	: arial, sans-serif, Trebuchet MS, arial;
+#CenterAdjourn #CenterAdminResult #ListResult li #player.white {
+    text-align: right;
 }
-#CenterWords #InputDiv p
-{
-	float		: left;
-	color		: #216778;
-	font-weight	: bold;
-	font-size	: 12px;
-	position	: relative;
-	top		: 1px;
+
+#CenterAdjourn #CenterAdminResult #ListResult li #player.black {
+    margin-left: 15px;
+    text-align: left;
 }
 
-#CenterWords #InputDiv #InputBox
-{
-	height		: 16px;
-	border		: 1px solid #216778;
-	width		: 165px;	
-	float		: left;
-	margin		: 0px 10px;
-	font-size	: 11px;
+#CenterWords #InputDiv {
+    width: 350px;
+    height: 25px;
+    padding: 0px 80px;
+    font-family: arial, sans-serif, Trebuchet MS, arial;
 }
 
-#CenterWords #InputDiv #InputButton
-{
-	width		: 115px;
-	height		: 14px;
-	border		: 1px solid #216778;
-	background-color: #216778;
-	color		: #fff;
-	font-size	: 11px;
-	text-align	: center;
-	font-weight	: bold;
-	float		: left;
-	cursor		: pointer;
+#CenterWords #InputDiv p {
+    float: left;
+    color: #216778;
+    font-weight: bold;
+    font-size: 12px;
+    position: relative;
+    top: 1px;
 }
 
-#CenterWords #CenterResultWords
-{
-	padding		: 0px 80px;
+#CenterWords #InputDiv #InputBox {
+    height: 16px;
+    border: 1px solid #216778;
+    width: 165px;
+    float: left;
+    margin: 0px 10px;
+    font-size: 11px;
 }
 
-#CenterWords #CenterResultWords ul
-{
-	width		: 350px;
-	list-style	: none;
-	font-size	: 11px;
+#CenterWords #InputDiv #InputButton {
+    width: 115px;
+    height: 14px;
+    border: 1px solid #216778;
+    background-color: #216778;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    font-weight: bold;
+    float: left;
+    cursor: pointer;
 }
 
-#CenterWords #CenterResultWords ul li
-{
-	height		: 17px;
-	text-align	: center;
-	margin-top	: 1px;
+#CenterWords #CenterResultWords {
+    padding: 0px 80px;
 }
 
-#CenterWords #CenterResultWords li p
-{
-	float		: left;
+#CenterWords #CenterResultWords ul {
+    width: 350px;
+    list-style: none;
+    font-size: 11px;
 }
 
-#CenterWords #CenterResultWords li #words
-{
-	width		: 300px;
-	text-align	: left;
+#CenterWords #CenterResultWords ul li {
+    height: 17px;
+    text-align: center;
+    margin-top: 1px;
 }
 
-#CenterWords #CenterResultWords li #word
-{
-	width		: 170px;
+#CenterWords #CenterResultWords li p {
+    float: left;
 }
 
-#CenterWords #CenterResultWords li #action
-{
-	cursor		: pointer;
-	text-decoration	: underline;
-	font-style	: italic;
-	width		: 140px;
+#CenterWords #CenterResultWords li #words {
+    width: 300px;
+    text-align: left;
+}
 
+#CenterWords #CenterResultWords li #word {
+    width: 170px;
 }
 
-#CenterWords #CenterResultWords li.header
-{
-	font-weight	: bold;
+#CenterWords #CenterResultWords li #action {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    width: 140px;
 }
 
-#CenterWords #CenterResultWords #ListResult
-{
-	height		: 215px;
-	overflow-y	: auto;
-	border-width	: 1px 0px;
-	border-style	: solid;
-	border-color	: #ffa200;
+#CenterWords #CenterResultWords li.header {
+    font-weight: bold;
 }
-#CenterWords #CenterResultWords #ListResult li
-{
-	height		: 25px;
-	margin		: 5px 0px 0px 0px;
+
+#CenterWords #CenterResultWords #ListResult {
+    height: 215px;
+    overflow-y: auto;
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #ffa200;
 }
 
+#CenterWords #CenterResultWords #ListResult li {
+    height: 25px;
+    margin: 5px 0px 0px 0px;
+}
 
-/*ADMIN CENTER WINDOW CSS*/
-#AdminCenterWindowDiv #ButtonsDiv
-{
-	position	: relative;
-	text-align	: center;
+#AdminCenterWindowDiv #ButtonsDiv {
+    position: relative;
+    text-align: center;
 }
+

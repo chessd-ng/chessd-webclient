@@ -1,172 +1,160 @@
-#WindowBox{
-	/*left			: 40%;*/
-	float			: left;
-	/*top				: 50mm;*/
-	/*padding			: 0 5mm 6mm 5mm;*/
-	position	: absolute;	
+#WindowBox {
+    float: left;
+    position: absolute;
 }
 
-#TitleBar.focus{
-	border-color	: #FFA200;
-	background-image: url('~images/window_title_bg.png');
+#TitleBar.focus {
+    border-color: #FFA200;
+    background-image: url('~images/window_title_bg.png');
 }
 
-#TitleBar{
-	background-image: url('~images/window_title_bg_inactive.png');
-/*	background-repeat		: repeat-x;
-	background-image		: none;
-	background-color		: #216778;*/
-	width				: 100px;
-	height				: 21px;
-	position			: relative;
-	/*left		: 2px;*/
-
-	border-style			: solid;
-	border-width			: 0px 2px 0px 2px;
-	border-color			: #216778;
-
-	font-weight			: bold;
-	font-size			: 13px;
-	color				: #FFF;
-	text-align			: center;
+#TitleBar {
+    background-image: url('~images/window_title_bg_inactive.png');
+    width: 100px;
+    height: 21px;
+    position: relative;
+    border-style: solid;
+    border-width: 0px 2px 0px 2px;
+    border-color: #216778;
+    font-weight: bold;
+    font-size: 13px;
+    color: #FFF;
+    text-align: center;
 }
 
-#TitleBar #Close{
-	position	: absolute;
-	right		: 5px;
-	top				: 2px;
-	cursor	: pointer;
-	font-weight			: bold;
+#TitleBar #Close {
+    position: absolute;
+    right: 5px;
+    top: 2px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-#TitleBar #Title{
-	font-weight			: bold;
-	position	: relative;
-	top				: 2px;
+#TitleBar #Title {
+    font-weight: bold;
+    position: relative;
+    top: 2px;
 }
 
-
-#SubWindowBox.focus{
-	border-color	: #ffa200;
+#SubWindowBox.focus {
+    border-color: #ffa200;
 }
 
-#SubWindowBox{
-	border-style	: solid;
-	border-width	: 0px 2px 2px 2px;
-	border-color	: #216778;
-	background		: url('~images/window_content_bg.png') repeat-X;
-	background-color: #FFFFFF;
+#SubWindowBox {
+    border-style: solid;
+    border-width: 0px 2px 2px 2px;
+    border-color: #216778;
+    background: url('~images/window_content_bg.png') repeat-X;
+    background-color: #FFFFFF;
 }
 
-#SubWindowBox #Content{
-	position		: relative;
+#SubWindowBox #Content {
+    position: relative;
 }
 
 #WindowBox .button {
-	padding-bottom	: 5px;
-	border					: 0px;
-	font-weight			: bold;
-	font-size			: 10px;
-	color						: #FFF;
-	cursor					: pointer;
-	margin					: 0px 0px 5px 2px;
-	padding					: 1px 2px;
-	position				: relative;
-	bottom					: 10px;
-	background			: #216778;
-	width						: 70px;
+    padding-bottom: 5px;
+    border: 0px;
+    font-weight: bold;
+    font-size: 10px;
+    color: #FFF;
+    cursor: pointer;
+    margin: 0px 0px 5px 2px;
+    padding: 1px 2px;
+    position: relative;
+    bottom: 10px;
+    background: #216778;
+    width: 70px;
 }
 
 #WindowBox .button_disabled {
-	padding-bottom	: 5px;
-	border					: 0px;
-	font-weight			: bold;
-	border-color : #C0C0C0;
-	background-color: #C0C0C0;
-	font-size			: 10px;
-	color						: #FFF;
-	cursor					: default;
-	margin					: 0px 0px 5px 2px;
-	padding					: 1px 2px;
-	position				: relative;
-	bottom					: 10px;
-	background			: #C0C0C0;
-	width						: 70px;
+    padding-bottom: 5px;
+    border: 0px;
+    font-weight: bold;
+    border-color: #C0C0C0;
+    background-color: #C0C0C0;
+    font-size: 10px;
+    color: #FFF;
+    cursor: default;
+    margin: 0px 0px 5px 2px;
+    padding: 1px 2px;
+    position: relative;
+    bottom: 10px;
+    background: #C0C0C0;
+    width: 70px;
 }
 
 #WindowBox .button:hover {
-	background		: #FFA200;
+    background: #FFA200;
 }
 
 #WindowBox p {
-	font-size			: 11px;
-	color			: #216778;
+    font-size: 11px;
+    color: #216778;
 }
 
-#WindowBox b,
-#WindowBox strong {
-	font-weight : bold;
+#WindowBox b, #WindowBox strong {
+    font-weight: bold;
 }
 
-#WindowBox input,
-#WindowBox textarea,
-#WindowBox select {
-	font-size		: 11px;
-	border			: 1px solid #216778;
-	color			: #216778;
-	background-color : #FFF;
+#WindowBox input, #WindowBox textarea, #WindowBox select {
+    font-size: 11px;
+    border: 1px solid #216778;
+    color: #216778;
+    background-color: #FFF;
 }
 
 #AlertDiv #TextDiv {
-	padding : 30px 35px 0px 35px;
-	position			:	relative;
-	text-align		: justify;
+    padding: 30px 35px 0px 35px;
+    position: relative;
+    text-align: justify;
 }
 
 #AlertDiv #ButtonsDiv {
-	position		:	relative;
-	padding-top	: 40px;
-	padding-bottom	: 5px;
-	text-align	: center;
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 5px;
+    text-align: center;
 }
 
 #ConfirmDiv {
-	padding-top	:	10px;
-	text-align	: center;
-	position		: relative;
+    padding-top: 10px;
+    text-align: center;
+    position: relative;
 }
 
 #ConfirmDiv #TextDiv {
-	padding : 30px 35px 0px 35px;
-	position			:	relative;
-	text-align		: justify;
+    padding: 30px 35px 0px 35px;
+    position: relative;
+    text-align: justify;
 }
 
 #ConfirmDiv #ButtonsDiv {
-	position		:	relative;
-	padding-top	: 40px;
-	padding-bottom	: 25px;
-	text-align	: center;
+    position: relative;
+    padding-top: 40px;
+    padding-bottom: 25px;
+    text-align: center;
 }
 
 #ConfirmDiv #ButtonsDiv .button {
-	bottom			:	5px;
+    bottom: 5px;
 }
 
-#ChangeImageDiv #ButtonsDiv{
-	position			: relative;
-	text-align	: center;
-	padding-top		:	25px;
+#ChangeImageDiv #ButtonsDiv {
+    position: relative;
+    text-align: center;
+    padding-top: 25px;
 }
 
-#ChangeImageDiv #TextDiv{
-	padding-top		:	10px;
-	position			:	relative;
-	text-align		: center;
+#ChangeImageDiv #TextDiv {
+    padding-top: 10px;
+    position: relative;
+    text-align: center;
 }
 
-#ChangeImageDiv #ImageForm{
-	position			: relative;
-	text-align	: center;
-	padding-top		:	15px;
+#ChangeImageDiv #ImageForm {
+    position: relative;
+    text-align: center;
+    padding-top: 15px;
 }
+

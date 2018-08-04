@@ -1,79 +1,79 @@
 #Top {
-	display			: table;
-	width			: 100%;
+    display: table;
+    width: 100%;
 }
 
 #Top h1 {
-	float			: left;
-	width			: 165px;
-	height			: 95px;
-	background		: url('~images/logo.png') no-repeat;
-	text-indent		: -9999px;
-	overflow		: hidden;
-	margin			: 4px 4px 4px 45px;
+    float: left;
+    width: 165px;
+    height: 95px;
+    background: url('~images/logo.png') no-repeat;
+    text-indent: -9999px;
+    overflow: hidden;
+    margin: 4px 4px 4px 45px;
 }
 
 #Top #TopMenu {
-	float			: right;
-	position		: relative;
-	top			: 25px;
+    float: right;
+    position: relative;
+    top: 25px;
 }
 
 #Top ul {
-	display			: block;
+    display: block;
 }
 
 #Top li {
-	float 			: left;
-	list-style		: none;
-	cursor			: pointer;
+    float: left;
+    list-style: none;
+    cursor: pointer;
 }
 
-#Top #ExitText
-{
-	cursor			: pointer;
-	text-align		: center;
-	font-weight		: bold;
-	font-size		: 11px;
-	/*font-size		: 2.8mm;*/
-	position		: relative;
-	top			: 2px;
-	width			: 45px;
+#Top #ExitText {
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    font-size: 11px;
+    position: relative;
+    top: 2px;
+    width: 45px;
 }
 
 #Top .menu .exit {
-	background		: url('~images/exit.png') no-repeat;
-	width			: 56px;
-	color			: #216778;
-	border-right		: 0px;
-	height			: 20px;
-	position		: relative;
-	top			: -5px;
+    background: url('~images/exit.png') no-repeat;
+    width: 56px;
+    color: #216778;
+    border-right: 0px;
+    height: 20px;
+    position: relative;
+    top: -5px;
 }
 
 #Top .menu .exit:hover {
-	background		: url('~images/exit_selec.png') no-repeat;
-	color			: #FFF;
+    background: url('~images/exit_selec.png') no-repeat;
+    color: #FFF;
 }
 
 #Top .menu {
-	position		: relative;
-	right			: 0mm;
+    position: relative;
+    right: 0mm;
 }
 
 #Top .menu li {
-	font-size		: 11px;
-	color			: #216778;
-	border-right		: 1px solid #216778;
-	min-width		: 120px;
-	text-align		: center;
-	float			: right;
+    font-size: 11px;
+    color: #216778;
+    border-right: 1px solid #216778;
+    min-width: 120px;
+    text-align: center;
+    float: right;
 }
 
 #Top .menu li.help {
-	border-right		: 0px;
-	width			: 80px;
+    border-right: 0px;
+    width: 80px;
 }
+
 #Top .menu li:hover {
-	color			: #FFA200;
+    color: #FFA200;
 }
+

@@ -1,20 +1,12 @@
-#UnbanDiv,
-#BanDiv,
-#KickDiv
-{
-	width		: 230px;
+#UnbanDiv, #BanDiv, #KickDiv {
+    width: 230px;
 }
 
-#UnbanDiv #UnbanInput,
-#BanDiv #BanInput,
-#KickDiv #KickInput
-{
-	margin		: 5px;
+#UnbanDiv #UnbanInput, #BanDiv #BanInput, #KickDiv #KickInput {
+    margin: 5px;
 }
 
-#UnbanDiv #ButtonsDiv,
-#BanDiv #ButtonsDiv,
-#KickDiv #ButtonsDiv
-{
-	margin-top	: 15px;
+#UnbanDiv #ButtonsDiv, #BanDiv #ButtonsDiv, #KickDiv #ButtonsDiv {
+    margin-top: 15px;
 }
+
