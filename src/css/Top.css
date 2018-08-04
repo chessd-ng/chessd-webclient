@@ -15,7 +15,6 @@
 
 #Top #TopMenu {
 	float			: right;
-	width			: 560px;
 	position		: relative;
 	top			: 25px;
 }
@@ -66,7 +65,7 @@
 	font-size		: 11px;
 	color			: #216778;
 	border-right		: 1px solid #216778;
-	width			: 100px;
+	min-width		: 120px;
 	text-align		: center;
 	float			: right;
 }
